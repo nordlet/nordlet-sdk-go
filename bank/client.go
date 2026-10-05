@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1BankAccountsCreate(
+func (c *Client) AccountsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsCreateRequest,
+	request *nordlet.AccountsCreateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankAccountsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankAccountsCreate(
+) (*nordlet.AccountsCreateBankResponse, error) {
+	response, err := c.WithRawResponse.AccountsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1BankAccountsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankAccountsList(
+func (c *Client) AccountsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsListRequest,
+	request *nordlet.AccountsListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankAccountsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankAccountsList(
+) (*nordlet.AccountsListBankResponse, error) {
+	response, err := c.WithRawResponse.AccountsList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1BankAccountsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankAccountsUpdate(
+func (c *Client) AccountsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsUpdateRequest,
+	request *nordlet.AccountsUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankAccountsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankAccountsUpdate(
+) (*nordlet.AccountsUpdateBankResponse, error) {
+	response, err := c.WithRawResponse.AccountsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1BankAccountsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankTransactionsImport(
+func (c *Client) TransactionsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsImportRequest,
+	request *nordlet.TransactionsImportBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankTransactionsImportResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankTransactionsImport(
+) (*nordlet.TransactionsImportBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsImport(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1BankTransactionsImport(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankStatementsImport(
+func (c *Client) StatementsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankStatementsImportRequest,
+	request *nordlet.StatementsImportBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankStatementsImportResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankStatementsImport(
+) (*nordlet.StatementsImportBankResponse, error) {
+	response, err := c.WithRawResponse.StatementsImport(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1BankStatementsImport(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankTransactionsList(
+func (c *Client) TransactionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsListRequest,
+	request *nordlet.TransactionsListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankTransactionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankTransactionsList(
+) (*nordlet.TransactionsListBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsList(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1BankTransactionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankTransactionsMatch(
+func (c *Client) TransactionsMatch(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsMatchRequest,
+	request *nordlet.TransactionsMatchBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankTransactionsMatchResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankTransactionsMatch(
+) (*nordlet.TransactionsMatchBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsMatch(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,13 @@ func (c *Client) PostV1BankTransactionsMatch(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankTransactionsRecord(
+// Undo a match. A payment matched to an invoice, or a line posted by an import template, gets a reversing journal transaction dated date (default: today) and the invoice paid amount and payment status are restored; a line linked to a payment-provider settlement is only unlinked. The line returns to status new.
+func (c *Client) TransactionsUnmatch(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsRecordRequest,
+	request *nordlet.TransactionsUnmatchBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankTransactionsRecordResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankTransactionsRecord(
+) (*nordlet.TransactionsUnmatchBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsUnmatch(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +163,12 @@ func (c *Client) PostV1BankTransactionsRecord(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankPaymentsExport(
+func (c *Client) TransactionsRecord(
 	ctx context.Context,
-	request *nordlet.PostV1BankPaymentsExportRequest,
+	request *nordlet.TransactionsRecordBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankPaymentsExportResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankPaymentsExport(
+) (*nordlet.TransactionsRecordBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsRecord(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +179,12 @@ func (c *Client) PostV1BankPaymentsExport(
 	return response.Body, nil
 }
 
-func (c *Client) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+func (c *Client) PaymentsExport(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesCreateRequest,
+	request *nordlet.PaymentsExportBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankImportTemplatesCreateResponse, error) {
-	response, err := c.WithRawResponse.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+) (*nordlet.PaymentsExportBankResponse, error) {
+	response, err := c.WithRawResponse.PaymentsExport(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +195,12 @@ func (c *Client) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldLi
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankImportTemplatesUpdate(
+func (c *Client) ImportTemplatesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesUpdateRequest,
+	request *nordlet.ImportTemplatesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankImportTemplatesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankImportTemplatesUpdate(
+) (*nordlet.ImportTemplatesCreateBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesCreate(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +211,12 @@ func (c *Client) PostV1BankImportTemplatesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankImportTemplatesDelete(
+func (c *Client) ImportTemplatesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesDeleteRequest,
+	request *nordlet.ImportTemplatesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankImportTemplatesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankImportTemplatesDelete(
+) (*nordlet.ImportTemplatesUpdateBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +227,12 @@ func (c *Client) PostV1BankImportTemplatesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankImportTemplatesGet(
+func (c *Client) ImportTemplatesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesGetRequest,
+	request *nordlet.ImportTemplatesDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankImportTemplatesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankImportTemplatesGet(
+) (*nordlet.ImportTemplatesDeleteBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesDelete(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +243,12 @@ func (c *Client) PostV1BankImportTemplatesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankImportTemplatesList(
+func (c *Client) ImportTemplatesGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesListRequest,
+	request *nordlet.ImportTemplatesGetBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankImportTemplatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankImportTemplatesList(
+) (*nordlet.ImportTemplatesGetBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesGet(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +259,12 @@ func (c *Client) PostV1BankImportTemplatesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMatchRulesCreate(
+func (c *Client) ImportTemplatesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesCreateRequest,
+	request *nordlet.ImportTemplatesListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMatchRulesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMatchRulesCreate(
+) (*nordlet.ImportTemplatesListBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesList(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +275,12 @@ func (c *Client) PostV1BankMatchRulesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMatchRulesUpdate(
+func (c *Client) MatchRulesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesUpdateRequest,
+	request *nordlet.MatchRulesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMatchRulesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMatchRulesUpdate(
+) (*nordlet.MatchRulesCreateBankResponse, error) {
+	response, err := c.WithRawResponse.MatchRulesCreate(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +291,12 @@ func (c *Client) PostV1BankMatchRulesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMatchRulesDelete(
+func (c *Client) MatchRulesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesDeleteRequest,
+	request *nordlet.MatchRulesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMatchRulesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMatchRulesDelete(
+) (*nordlet.MatchRulesUpdateBankResponse, error) {
+	response, err := c.WithRawResponse.MatchRulesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +307,12 @@ func (c *Client) PostV1BankMatchRulesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMatchRulesList(
+func (c *Client) MatchRulesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesListRequest,
+	request *nordlet.MatchRulesDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMatchRulesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMatchRulesList(
+) (*nordlet.MatchRulesDeleteBankResponse, error) {
+	response, err := c.WithRawResponse.MatchRulesDelete(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +323,12 @@ func (c *Client) PostV1BankMatchRulesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMandatesCreate(
+func (c *Client) MatchRulesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesCreateRequest,
+	request *nordlet.MatchRulesListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMandatesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMandatesCreate(
+) (*nordlet.MatchRulesListBankResponse, error) {
+	response, err := c.WithRawResponse.MatchRulesList(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +339,12 @@ func (c *Client) PostV1BankMandatesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMandatesUpdate(
+func (c *Client) MandatesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesUpdateRequest,
+	request *nordlet.MandatesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMandatesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMandatesUpdate(
+) (*nordlet.MandatesCreateBankResponse, error) {
+	response, err := c.WithRawResponse.MandatesCreate(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +355,12 @@ func (c *Client) PostV1BankMandatesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMandatesCancel(
+func (c *Client) MandatesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesCancelRequest,
+	request *nordlet.MandatesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMandatesCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMandatesCancel(
+) (*nordlet.MandatesUpdateBankResponse, error) {
+	response, err := c.WithRawResponse.MandatesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -370,12 +371,12 @@ func (c *Client) PostV1BankMandatesCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMandatesGet(
+func (c *Client) MandatesCancel(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesGetRequest,
+	request *nordlet.MandatesCancelBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMandatesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMandatesGet(
+) (*nordlet.MandatesCancelBankResponse, error) {
+	response, err := c.WithRawResponse.MandatesCancel(
 		ctx,
 		request,
 		opts...,
@@ -386,12 +387,12 @@ func (c *Client) PostV1BankMandatesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankMandatesList(
+func (c *Client) MandatesGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesListRequest,
+	request *nordlet.MandatesGetBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankMandatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankMandatesList(
+) (*nordlet.MandatesGetBankResponse, error) {
+	response, err := c.WithRawResponse.MandatesGet(
 		ctx,
 		request,
 		opts...,
@@ -402,12 +403,12 @@ func (c *Client) PostV1BankMandatesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankDirectDebitsExport(
+func (c *Client) MandatesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankDirectDebitsExportRequest,
+	request *nordlet.MandatesListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankDirectDebitsExportResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankDirectDebitsExport(
+) (*nordlet.MandatesListBankResponse, error) {
+	response, err := c.WithRawResponse.MandatesList(
 		ctx,
 		request,
 		opts...,
@@ -418,12 +419,12 @@ func (c *Client) PostV1BankDirectDebitsExport(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankTransactionsSuggestMatches(
+func (c *Client) DirectDebitsExport(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsSuggestMatchesRequest,
+	request *nordlet.DirectDebitsExportBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankTransactionsSuggestMatchesResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankTransactionsSuggestMatches(
+) (*nordlet.DirectDebitsExportBankResponse, error) {
+	response, err := c.WithRawResponse.DirectDebitsExport(
 		ctx,
 		request,
 		opts...,
@@ -434,12 +435,12 @@ func (c *Client) PostV1BankTransactionsSuggestMatches(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankSettlementsImport(
+func (c *Client) TransactionsSuggestMatches(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsImportRequest,
+	request *nordlet.TransactionsSuggestMatchesBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsImportResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsImport(
+) (*nordlet.TransactionsSuggestMatchesBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsSuggestMatches(
 		ctx,
 		request,
 		opts...,
@@ -450,12 +451,12 @@ func (c *Client) PostV1BankSettlementsImport(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankSettlementsList(
+func (c *Client) SettlementsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsListRequest,
+	request *nordlet.SettlementsImportBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsList(
+) (*nordlet.SettlementsImportBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsImport(
 		ctx,
 		request,
 		opts...,
@@ -466,12 +467,12 @@ func (c *Client) PostV1BankSettlementsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankSettlementsGet(
+func (c *Client) SettlementsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsGetRequest,
+	request *nordlet.SettlementsListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsGet(
+) (*nordlet.SettlementsListBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsList(
 		ctx,
 		request,
 		opts...,
@@ -482,12 +483,28 @@ func (c *Client) PostV1BankSettlementsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankSettlementsMatch(
+func (c *Client) SettlementsGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsMatchRequest,
+	request *nordlet.SettlementsGetBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsMatchResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsMatch(
+) (*nordlet.SettlementsGetBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) SettlementsMatch(
+	ctx context.Context,
+	request *nordlet.SettlementsMatchBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SettlementsMatchBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsMatch(
 		ctx,
 		request,
 		opts...,
@@ -499,12 +516,12 @@ func (c *Client) PostV1BankSettlementsMatch(
 }
 
 // A line with its own rate or amount is split with that value when the batch is posted. A line without one falls back to the commissionPercent given to the posting call, and without that the amount goes to the suspense account. Send both fields as null to clear the line back to the fallback.
-func (c *Client) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+func (c *Client) SettlementsCommission(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsCommissionRequest,
+	request *nordlet.SettlementsCommissionBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsCommissionResponse, error) {
-	response, err := c.WithRawResponse.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+) (*nordlet.SettlementsCommissionBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsCommission(
 		ctx,
 		request,
 		opts...,
@@ -516,12 +533,12 @@ func (c *Client) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmo
 }
 
 // Attach the incoming bank-statement line that carries this payout to the settlement batch.
-func (c *Client) PostV1BankSettlementsLink(
+func (c *Client) SettlementsLink(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsLinkRequest,
+	request *nordlet.SettlementsLinkBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsLinkResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsLink(
+) (*nordlet.SettlementsLinkBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsLink(
 		ctx,
 		request,
 		opts...,
@@ -533,12 +550,12 @@ func (c *Client) PostV1BankSettlementsLink(
 }
 
 // Detach the bank-statement line from the settlement batch and return the line to unmatched.
-func (c *Client) PostV1BankSettlementsUnlink(
+func (c *Client) SettlementsUnlink(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsUnlinkRequest,
+	request *nordlet.SettlementsUnlinkBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsUnlinkResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsUnlink(
+) (*nordlet.SettlementsUnlinkBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsUnlink(
 		ctx,
 		request,
 		opts...,
@@ -549,12 +566,12 @@ func (c *Client) PostV1BankSettlementsUnlink(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankSettlementsPost(
+func (c *Client) SettlementsPost(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsPostRequest,
+	request *nordlet.SettlementsPostBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankSettlementsPostResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankSettlementsPost(
+) (*nordlet.SettlementsPostBankResponse, error) {
+	response, err := c.WithRawResponse.SettlementsPost(
 		ctx,
 		request,
 		opts...,
@@ -565,12 +582,12 @@ func (c *Client) PostV1BankSettlementsPost(
 	return response.Body, nil
 }
 
-func (c *Client) ListThePsd2BanksAspsPsAvailableToConnect(
+func (c *Client) FeedsBanksList(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsBanksListRequest,
+	request *nordlet.FeedsBanksListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsBanksListResponse, error) {
-	response, err := c.WithRawResponse.ListThePsd2BanksAspsPsAvailableToConnect(
+) (*nordlet.FeedsBanksListBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsBanksList(
 		ctx,
 		request,
 		opts...,
@@ -581,12 +598,12 @@ func (c *Client) ListThePsd2BanksAspsPsAvailableToConnect(
 	return response.Body, nil
 }
 
-func (c *Client) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+func (c *Client) FeedsConnectionsStart(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsStartRequest,
+	request *nordlet.FeedsConnectionsStartBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsConnectionsStartResponse, error) {
-	response, err := c.WithRawResponse.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+) (*nordlet.FeedsConnectionsStartBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsConnectionsStart(
 		ctx,
 		request,
 		opts...,
@@ -597,12 +614,12 @@ func (c *Client) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 	return response.Body, nil
 }
 
-func (c *Client) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+func (c *Client) FeedsConnectionsComplete(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsCompleteRequest,
+	request *nordlet.FeedsConnectionsCompleteBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsConnectionsCompleteResponse, error) {
-	response, err := c.WithRawResponse.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+) (*nordlet.FeedsConnectionsCompleteBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsConnectionsComplete(
 		ctx,
 		request,
 		opts...,
@@ -613,12 +630,12 @@ func (c *Client) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExpo
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankFeedsConnectionsGet(
+func (c *Client) FeedsConnectionsGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsGetRequest,
+	request *nordlet.FeedsConnectionsGetBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsConnectionsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankFeedsConnectionsGet(
+) (*nordlet.FeedsConnectionsGetBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsConnectionsGet(
 		ctx,
 		request,
 		opts...,
@@ -629,12 +646,12 @@ func (c *Client) PostV1BankFeedsConnectionsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BankFeedsConnectionsList(
+func (c *Client) FeedsConnectionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsListRequest,
+	request *nordlet.FeedsConnectionsListBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsConnectionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BankFeedsConnectionsList(
+) (*nordlet.FeedsConnectionsListBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsConnectionsList(
 		ctx,
 		request,
 		opts...,
@@ -645,12 +662,12 @@ func (c *Client) PostV1BankFeedsConnectionsList(
 	return response.Body, nil
 }
 
-func (c *Client) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+func (c *Client) FeedsConnectionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsDeleteRequest,
+	request *nordlet.FeedsConnectionsDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsConnectionsDeleteResponse, error) {
-	response, err := c.WithRawResponse.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+) (*nordlet.FeedsConnectionsDeleteBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsConnectionsDelete(
 		ctx,
 		request,
 		opts...,
@@ -661,12 +678,12 @@ func (c *Client) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
 	return response.Body, nil
 }
 
-func (c *Client) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+func (c *Client) FeedsAccountsLink(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsAccountsLinkRequest,
+	request *nordlet.FeedsAccountsLinkBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsAccountsLinkResponse, error) {
-	response, err := c.WithRawResponse.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+) (*nordlet.FeedsAccountsLinkBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsAccountsLink(
 		ctx,
 		request,
 		opts...,
@@ -677,12 +694,12 @@ func (c *Client) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBe
 	return response.Body, nil
 }
 
-func (c *Client) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+func (c *Client) FeedsAccountsConfigure(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsAccountsConfigureRequest,
+	request *nordlet.FeedsAccountsConfigureBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsAccountsConfigureResponse, error) {
-	response, err := c.WithRawResponse.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+) (*nordlet.FeedsAccountsConfigureBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsAccountsConfigure(
 		ctx,
 		request,
 		opts...,
@@ -693,12 +710,12 @@ func (c *Client) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSync
 	return response.Body, nil
 }
 
-func (c *Client) PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+func (c *Client) FeedsSync(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsSyncRequest,
+	request *nordlet.FeedsSyncBankRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BankFeedsSyncResponse, error) {
-	response, err := c.WithRawResponse.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+) (*nordlet.FeedsSyncBankResponse, error) {
+	response, err := c.WithRawResponse.FeedsSync(
 		ctx,
 		request,
 		opts...,

@@ -7,11 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1WebhooksDeliveriesListRequest(t *testing.T) {
+func TestSettersDeliveriesListWebhooksRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -19,7 +20,7 @@ func TestSettersPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -27,23 +28,23 @@ func TestSettersPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequest{}
-		var fernTestValueSort []*PostV1WebhooksDeliveriesListRequestSortItem
+		obj := &DeliveriesListWebhooksRequest{}
+		var fernTestValueSort []*DeliveriesListWebhooksRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequest{}
-		var fernTestValueFilter []*PostV1WebhooksDeliveriesListRequestFilterItem
+		obj := &DeliveriesListWebhooksRequest{}
+		var fernTestValueFilter []*DeliveriesListWebhooksRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -52,11 +53,11 @@ func TestSettersPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesListWebhooksRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -87,7 +88,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -118,8 +119,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequest{}
-		var fernTestValueSort []*PostV1WebhooksDeliveriesListRequestSortItem
+		obj := &DeliveriesListWebhooksRequest{}
+		var fernTestValueSort []*DeliveriesListWebhooksRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -149,8 +150,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequest{}
-		var fernTestValueFilter []*PostV1WebhooksDeliveriesListRequestFilterItem
+		obj := &DeliveriesListWebhooksRequest{}
+		var fernTestValueFilter []*DeliveriesListWebhooksRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -180,7 +181,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequest{}
+		obj := &DeliveriesListWebhooksRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -210,9 +211,9 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesRedeliverRequest(t *testing.T) {
+func TestSettersDeliveriesRedeliverWebhooksRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesRedeliverRequest{}
+		obj := &DeliveriesRedeliverWebhooksRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -221,11 +222,11 @@ func TestSettersPostV1WebhooksDeliveriesRedeliverRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesRedeliverRequest(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesRedeliverWebhooksRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverRequest{}
+		obj := &DeliveriesRedeliverWebhooksRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -255,9 +256,9 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesRedeliverRequest(t *testing.
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsCreateRequest(t *testing.T) {
+func TestSettersSubscriptionsCreateWebhooksRequest(t *testing.T) {
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
+		obj := &SubscriptionsCreateWebhooksRequest{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -265,15 +266,15 @@ func TestSettersPostV1WebhooksSubscriptionsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetEvents", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
-		var fernTestValueEvents []string
+		obj := &SubscriptionsCreateWebhooksRequest{}
+		var fernTestValueEvents []SubscriptionsCreateWebhooksRequestEventsItem
 		obj.SetEvents(fernTestValueEvents)
 		assert.Equal(t, fernTestValueEvents, obj.Events)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSecret", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
+		obj := &SubscriptionsCreateWebhooksRequest{}
 		var fernTestValueSecret *string
 		obj.SetSecret(fernTestValueSecret)
 		assert.Equal(t, fernTestValueSecret, obj.Secret)
@@ -282,11 +283,11 @@ func TestSettersPostV1WebhooksSubscriptionsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsCreateWebhooksRequest(t *testing.T) {
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
+		obj := &SubscriptionsCreateWebhooksRequest{}
 		var fernTestValueURL string
 
 		// Act
@@ -317,8 +318,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateRequest(t *testing.
 	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
-		var fernTestValueEvents []string
+		obj := &SubscriptionsCreateWebhooksRequest{}
+		var fernTestValueEvents []SubscriptionsCreateWebhooksRequestEventsItem
 
 		// Act
 		obj.SetEvents(fernTestValueEvents)
@@ -348,7 +349,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateRequest(t *testing.
 	t.Run("SetSecret_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateRequest{}
+		obj := &SubscriptionsCreateWebhooksRequest{}
 		var fernTestValueSecret *string
 
 		// Act
@@ -378,9 +379,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateRequest(t *testing.
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsDeleteRequest(t *testing.T) {
+func TestSettersSubscriptionsDeleteWebhooksRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsDeleteRequest{}
+		obj := &SubscriptionsDeleteWebhooksRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -389,11 +390,11 @@ func TestSettersPostV1WebhooksSubscriptionsDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsDeleteRequest(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsDeleteWebhooksRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsDeleteRequest{}
+		obj := &SubscriptionsDeleteWebhooksRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -423,9 +424,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsDeleteRequest(t *testing.
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsListRequest(t *testing.T) {
+func TestSettersSubscriptionsListWebhooksRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -433,7 +434,7 @@ func TestSettersPostV1WebhooksSubscriptionsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -441,23 +442,23 @@ func TestSettersPostV1WebhooksSubscriptionsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
-		var fernTestValueSort []*PostV1WebhooksSubscriptionsListRequestSortItem
+		obj := &SubscriptionsListWebhooksRequest{}
+		var fernTestValueSort []*SubscriptionsListWebhooksRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
-		var fernTestValueFilter []*PostV1WebhooksSubscriptionsListRequestFilterItem
+		obj := &SubscriptionsListWebhooksRequest{}
+		var fernTestValueFilter []*SubscriptionsListWebhooksRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -466,11 +467,11 @@ func TestSettersPostV1WebhooksSubscriptionsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsListWebhooksRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -501,7 +502,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T)
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -532,8 +533,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T)
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
-		var fernTestValueSort []*PostV1WebhooksSubscriptionsListRequestSortItem
+		obj := &SubscriptionsListWebhooksRequest{}
+		var fernTestValueSort []*SubscriptionsListWebhooksRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -563,8 +564,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T)
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
-		var fernTestValueFilter []*PostV1WebhooksSubscriptionsListRequestFilterItem
+		obj := &SubscriptionsListWebhooksRequest{}
+		var fernTestValueFilter []*SubscriptionsListWebhooksRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -594,7 +595,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T)
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequest{}
+		obj := &SubscriptionsListWebhooksRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -624,9 +625,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsUpdateRequest(t *testing.T) {
+func TestSettersSubscriptionsUpdateWebhooksRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -634,7 +635,7 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueURL *string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -642,15 +643,15 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetEvents", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
-		var fernTestValueEvents []string
+		obj := &SubscriptionsUpdateWebhooksRequest{}
+		var fernTestValueEvents []SubscriptionsUpdateWebhooksRequestEventsItem
 		obj.SetEvents(fernTestValueEvents)
 		assert.Equal(t, fernTestValueEvents, obj.Events)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueIsActive *bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -659,11 +660,11 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsUpdateWebhooksRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -694,7 +695,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateRequest(t *testing.
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueURL *string
 
 		// Act
@@ -725,8 +726,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateRequest(t *testing.
 	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
-		var fernTestValueEvents []string
+		obj := &SubscriptionsUpdateWebhooksRequest{}
+		var fernTestValueEvents []SubscriptionsUpdateWebhooksRequestEventsItem
 
 		// Act
 		obj.SetEvents(fernTestValueEvents)
@@ -756,7 +757,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateRequest(t *testing.
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateRequest{}
+		obj := &SubscriptionsUpdateWebhooksRequest{}
 		var fernTestValueIsActive *bool
 
 		// Act
@@ -786,9 +787,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateRequest(t *testing.
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestSettersDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -796,16 +797,16 @@ func TestSettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var fernTestValueOp PostV1WebhooksDeliveriesListRequestFilterItemOp
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var fernTestValueOp DeliveriesListWebhooksRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var fernTestValueValue *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var fernTestValueValue *DeliveriesListWebhooksRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -813,11 +814,11 @@ func TestSettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestGettersDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -827,7 +828,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj *DeliveriesListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -840,8 +841,8 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var expected PostV1WebhooksDeliveriesListRequestFilterItemOp
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var expected DeliveriesListWebhooksRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -850,7 +851,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj *DeliveriesListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -863,8 +864,8 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var expected *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var expected *DeliveriesListWebhooksRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -874,7 +875,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -883,7 +884,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj *DeliveriesListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -895,11 +896,11 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -930,8 +931,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestFilterItem(t *tes
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var fernTestValueOp PostV1WebhooksDeliveriesListRequestFilterItemOp
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var fernTestValueOp DeliveriesListWebhooksRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -961,8 +962,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestFilterItem(t *tes
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
-		var fernTestValueValue *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
+		var fernTestValueValue *DeliveriesListWebhooksRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -991,11 +992,11 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestFilterItem(t *tes
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T) {
+func TestGettersDeliveriesListWebhooksRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValue{}
+		obj := &DeliveriesListWebhooksRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -1005,7 +1006,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		var obj *DeliveriesListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1018,7 +1019,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValue{}
+		obj := &DeliveriesListWebhooksRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -1028,7 +1029,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		var obj *DeliveriesListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1041,7 +1042,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValue{}
+		obj := &DeliveriesListWebhooksRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -1051,7 +1052,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		var obj *DeliveriesListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1061,46 +1062,46 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValue(t *testing.T)
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValue{}
-		var expected []*PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem
-		obj.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList = expected
+		obj := &DeliveriesListWebhooksRequestFilterItemValue{}
+		var expected []*DeliveriesListWebhooksRequestFilterItemValueThreeItem
+		obj.DeliveriesListWebhooksRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValue{}
-		obj.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList = nil
+		obj := &DeliveriesListWebhooksRequestFilterItemValue{}
+		obj.DeliveriesListWebhooksRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValue
+		var obj *DeliveriesListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersDeliveriesListWebhooksRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -1110,7 +1111,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem(t *t
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem
+		var obj *DeliveriesListWebhooksRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1123,7 +1124,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem(t *t
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -1133,7 +1134,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem(t *t
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem
+		var obj *DeliveriesListWebhooksRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1145,9 +1146,9 @@ func TestGettersPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem(t *t
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestSettersDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -1155,8 +1156,8 @@ func TestSettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
-		var fernTestValueDir *PostV1WebhooksDeliveriesListRequestSortItemDir
+		obj := &DeliveriesListWebhooksRequestSortItem{}
+		var fernTestValueDir *DeliveriesListWebhooksRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -1164,11 +1165,11 @@ func TestSettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestGettersDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -1178,7 +1179,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestSortItem
+		var obj *DeliveriesListWebhooksRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1191,8 +1192,8 @@ func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
-		var expected *PostV1WebhooksDeliveriesListRequestSortItemDir
+		obj := &DeliveriesListWebhooksRequestSortItem{}
+		var expected *DeliveriesListWebhooksRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -1202,7 +1203,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -1211,7 +1212,7 @@ func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestSortItem
+		var obj *DeliveriesListWebhooksRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1223,11 +1224,11 @@ func TestGettersPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -1258,8 +1259,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestSortItem(t *testi
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
-		var fernTestValueDir *PostV1WebhooksDeliveriesListRequestSortItemDir
+		obj := &DeliveriesListWebhooksRequestSortItem{}
+		var fernTestValueDir *DeliveriesListWebhooksRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -1288,17 +1289,17 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListRequestSortItem(t *testi
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestSettersDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponse{}
-		var fernTestValueRows []*PostV1WebhooksDeliveriesListResponseRowsItem
+		obj := &DeliveriesListWebhooksResponse{}
+		var fernTestValueRows []*DeliveriesListWebhooksResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1306,7 +1307,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1314,7 +1315,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -1322,7 +1323,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1331,12 +1332,12 @@ func TestSettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestGettersDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
-		var expected []*PostV1WebhooksDeliveriesListResponseRowsItem
+		obj := &DeliveriesListWebhooksResponse{}
+		var expected []*DeliveriesListWebhooksResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -1346,7 +1347,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -1355,7 +1356,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1368,7 +1369,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -1378,7 +1379,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1391,7 +1392,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -1401,7 +1402,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1414,7 +1415,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -1424,7 +1425,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1437,7 +1438,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -1448,7 +1449,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -1457,7 +1458,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1469,12 +1470,12 @@ func TestGettersPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
-		var fernTestValueRows []*PostV1WebhooksDeliveriesListResponseRowsItem
+		obj := &DeliveriesListWebhooksResponse{}
+		var fernTestValueRows []*DeliveriesListWebhooksResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -1504,7 +1505,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -1535,7 +1536,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -1566,7 +1567,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -1597,7 +1598,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -1627,9 +1628,9 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestSettersDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1637,7 +1638,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSubscriptionID", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueSubscriptionID string
 		obj.SetSubscriptionID(fernTestValueSubscriptionID)
 		assert.Equal(t, fernTestValueSubscriptionID, obj.SubscriptionID)
@@ -1645,7 +1646,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEventType", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueEventType string
 		obj.SetEventType(fernTestValueEventType)
 		assert.Equal(t, fernTestValueEventType, obj.EventType)
@@ -1653,15 +1654,15 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueStatus PostV1WebhooksDeliveriesListResponseRowsItemStatus
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueStatus DeliveriesListWebhooksResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -1669,7 +1670,7 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetLastError", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueLastError *string
 		obj.SetLastError(fernTestValueLastError)
 		assert.Equal(t, fernTestValueLastError, obj.LastError)
@@ -1677,16 +1678,16 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDeliveredAt", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueDeliveredAt *string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueDeliveredAt *time.Time
 		obj.SetDeliveredAt(fernTestValueDeliveredAt)
 		assert.Equal(t, fernTestValueDeliveredAt, obj.DeliveredAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -1694,11 +1695,11 @@ func TestSettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestGettersDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -1708,7 +1709,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1721,7 +1722,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetSubscriptionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var expected string
 		obj.SubscriptionID = expected
 
@@ -1731,7 +1732,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSubscriptionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1744,7 +1745,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetEventType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var expected string
 		obj.EventType = expected
 
@@ -1754,7 +1755,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEventType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1767,8 +1768,8 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var expected PostV1WebhooksDeliveriesListResponseRowsItemStatus
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var expected DeliveriesListWebhooksResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -1777,7 +1778,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1790,7 +1791,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -1800,7 +1801,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1813,7 +1814,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetLastError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var expected *string
 		obj.LastError = expected
 
@@ -1824,7 +1825,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetLastError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		obj.LastError = nil
 
 		// Act & Assert
@@ -1833,7 +1834,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetLastError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1846,8 +1847,8 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var expected string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -1856,7 +1857,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1869,8 +1870,8 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetDeliveredAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var expected *string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var expected *time.Time
 		obj.DeliveredAt = expected
 
 		// Act & Assert
@@ -1880,7 +1881,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 	t.Run("GetDeliveredAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		obj.DeliveredAt = nil
 
 		// Act & Assert
@@ -1889,7 +1890,7 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDeliveredAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1901,11 +1902,11 @@ func TestGettersPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -1936,7 +1937,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetSubscriptionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueSubscriptionID string
 
 		// Act
@@ -1967,7 +1968,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetEventType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueEventType string
 
 		// Act
@@ -1998,8 +1999,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueStatus PostV1WebhooksDeliveriesListResponseRowsItemStatus
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueStatus DeliveriesListWebhooksResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -2029,7 +2030,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -2060,7 +2061,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetLastError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		var fernTestValueLastError *string
 
 		// Act
@@ -2091,8 +2092,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2122,8 +2123,8 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 	t.Run("SetDeliveredAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
-		var fernTestValueDeliveredAt *string
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
+		var fernTestValueDeliveredAt *time.Time
 
 		// Act
 		obj.SetDeliveredAt(fernTestValueDeliveredAt)
@@ -2152,9 +2153,9 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesListResponseRowsItem(t *test
 
 }
 
-func TestSettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestSettersDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2162,7 +2163,7 @@ func TestSettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var fernTestValueStatus string
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
@@ -2171,11 +2172,11 @@ func TestSettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestGettersDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2185,7 +2186,7 @@ func TestGettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesRedeliverResponse
+		var obj *DeliveriesRedeliverWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2198,7 +2199,7 @@ func TestGettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var expected string
 		obj.Status = expected
 
@@ -2208,7 +2209,7 @@ func TestGettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesRedeliverResponse
+		var obj *DeliveriesRedeliverWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2220,11 +2221,11 @@ func TestGettersPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestSettersMarkExplicitDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2255,7 +2256,7 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesRedeliverResponse(t *testing
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		var fernTestValueStatus string
 
 		// Act
@@ -2285,9 +2286,9 @@ func TestSettersMarkExplicitPostV1WebhooksDeliveriesRedeliverResponse(t *testing
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestSettersSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2295,7 +2296,7 @@ func TestSettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -2303,7 +2304,7 @@ func TestSettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetEvents", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueEvents []string
 		obj.SetEvents(fernTestValueEvents)
 		assert.Equal(t, fernTestValueEvents, obj.Events)
@@ -2311,23 +2312,55 @@ func TestSettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConsecutiveFailures", func(t *testing.T) {
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueConsecutiveFailures int64
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+		assert.Equal(t, fernTestValueConsecutiveFailures, obj.ConsecutiveFailures)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryStatus", func(t *testing.T) {
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsCreateWebhooksResponseLastDeliveryStatus
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+		assert.Equal(t, fernTestValueLastDeliveryStatus, obj.LastDeliveryStatus)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryAt", func(t *testing.T) {
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueLastDeliveryAt *time.Time
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+		assert.Equal(t, fernTestValueLastDeliveryAt, obj.LastDeliveryAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPausedAt", func(t *testing.T) {
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValuePausedAt *time.Time
+		obj.SetPausedAt(fernTestValuePausedAt)
+		assert.Equal(t, fernTestValuePausedAt, obj.PausedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSecret", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueSecret string
 		obj.SetSecret(fernTestValueSecret)
 		assert.Equal(t, fernTestValueSecret, obj.Secret)
@@ -2336,11 +2369,11 @@ func TestSettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestGettersSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2350,7 +2383,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2363,7 +2396,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	t.Run("GetURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var expected string
 		obj.URL = expected
 
@@ -2373,7 +2406,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2386,7 +2419,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	t.Run("GetEvents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var expected []string
 		obj.Events = expected
 
@@ -2397,7 +2430,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	t.Run("GetEvents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		obj.Events = nil
 
 		// Act & Assert
@@ -2406,7 +2439,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetEvents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2419,7 +2452,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -2429,7 +2462,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2439,11 +2472,133 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 		_ = obj.GetIsActive() // Should return zero value
 	})
 
+	t.Run("GetConsecutiveFailures", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var expected int64
+		obj.ConsecutiveFailures = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConsecutiveFailures(), "getter should return the property value")
+	})
+
+	t.Run("GetConsecutiveFailures_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsCreateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConsecutiveFailures() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var expected *SubscriptionsCreateWebhooksResponseLastDeliveryStatus
+		obj.LastDeliveryStatus = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		obj.LastDeliveryStatus = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryStatus(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsCreateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryStatus() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var expected *time.Time
+		obj.LastDeliveryAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryAt(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		obj.LastDeliveryAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsCreateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryAt() // Should return zero value
+	})
+
+	t.Run("GetPausedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var expected *time.Time
+		obj.PausedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPausedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetPausedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		obj.PausedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPausedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPausedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsCreateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPausedAt() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
-		var expected string
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2452,7 +2607,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2465,7 +2620,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 	t.Run("GetSecret", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var expected string
 		obj.Secret = expected
 
@@ -2475,7 +2630,7 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 	t.Run("GetSecret_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2487,11 +2642,11 @@ func TestGettersPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2522,7 +2677,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueURL string
 
 		// Act
@@ -2553,7 +2708,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueEvents []string
 
 		// Act
@@ -2584,7 +2739,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueIsActive bool
 
 		// Act
@@ -2612,11 +2767,135 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConsecutiveFailures_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueConsecutiveFailures int64
+
+		// Act
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsCreateWebhooksResponseLastDeliveryStatus
+
+		// Act
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueLastDeliveryAt *time.Time
+
+		// Act
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPausedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValuePausedAt *time.Time
+
+		// Act
+		obj.SetPausedAt(fernTestValuePausedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsCreateWebhooksResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2646,7 +2925,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 	t.Run("SetSecret_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		var fernTestValueSecret string
 
 		// Act
@@ -2676,9 +2955,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsCreateResponse(t *testing
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestSettersSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2687,11 +2966,11 @@ func TestSettersPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestGettersSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2701,7 +2980,7 @@ func TestGettersPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsDeleteResponse
+		var obj *SubscriptionsDeleteWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2713,11 +2992,11 @@ func TestGettersPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2747,9 +3026,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsDeleteResponse(t *testing
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestSettersSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -2757,16 +3036,16 @@ func TestSettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var fernTestValueOp PostV1WebhooksSubscriptionsListRequestFilterItemOp
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var fernTestValueOp SubscriptionsListWebhooksRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var fernTestValueValue *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var fernTestValueValue *SubscriptionsListWebhooksRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -2774,11 +3053,11 @@ func TestSettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -2788,7 +3067,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj *SubscriptionsListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2801,8 +3080,8 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var expected PostV1WebhooksSubscriptionsListRequestFilterItemOp
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var expected SubscriptionsListWebhooksRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -2811,7 +3090,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj *SubscriptionsListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2824,8 +3103,8 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var expected *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var expected *SubscriptionsListWebhooksRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -2835,7 +3114,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -2844,7 +3123,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj *SubscriptionsListWebhooksRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2856,11 +3135,11 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -2891,8 +3170,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestFilterItem(t *
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var fernTestValueOp PostV1WebhooksSubscriptionsListRequestFilterItemOp
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var fernTestValueOp SubscriptionsListWebhooksRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -2922,8 +3201,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestFilterItem(t *
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
-		var fernTestValueValue *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
+		var fernTestValueValue *SubscriptionsListWebhooksRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -2952,11 +3231,11 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestFilterItem(t *
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValue{}
+		obj := &SubscriptionsListWebhooksRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -2966,7 +3245,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		var obj *SubscriptionsListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2979,7 +3258,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValue{}
+		obj := &SubscriptionsListWebhooksRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -2989,7 +3268,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		var obj *SubscriptionsListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3002,7 +3281,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValue{}
+		obj := &SubscriptionsListWebhooksRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -3012,7 +3291,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		var obj *SubscriptionsListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3022,46 +3301,46 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValue(t *testing
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValue{}
-		var expected []*PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem
-		obj.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList = expected
+		obj := &SubscriptionsListWebhooksRequestFilterItemValue{}
+		var expected []*SubscriptionsListWebhooksRequestFilterItemValueThreeItem
+		obj.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValue{}
-		obj.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList = nil
+		obj := &SubscriptionsListWebhooksRequestFilterItemValue{}
+		obj.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValue
+		var obj *SubscriptionsListWebhooksRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -3071,7 +3350,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem(t
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem
+		var obj *SubscriptionsListWebhooksRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3084,7 +3363,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem(t
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -3094,7 +3373,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem(t
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem
+		var obj *SubscriptionsListWebhooksRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3106,9 +3385,9 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem(t
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestSettersSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -3116,8 +3395,8 @@ func TestSettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
-		var fernTestValueDir *PostV1WebhooksSubscriptionsListRequestSortItemDir
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
+		var fernTestValueDir *SubscriptionsListWebhooksRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -3125,11 +3404,11 @@ func TestSettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -3139,7 +3418,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj *SubscriptionsListWebhooksRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3152,8 +3431,8 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
-		var expected *PostV1WebhooksSubscriptionsListRequestSortItemDir
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
+		var expected *SubscriptionsListWebhooksRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -3163,7 +3442,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -3172,7 +3451,7 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj *SubscriptionsListWebhooksRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3184,11 +3463,11 @@ func TestGettersPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -3219,8 +3498,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestSortItem(t *te
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
-		var fernTestValueDir *PostV1WebhooksSubscriptionsListRequestSortItemDir
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
+		var fernTestValueDir *SubscriptionsListWebhooksRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -3249,17 +3528,17 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListRequestSortItem(t *te
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestSettersSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
-		var fernTestValueRows []*PostV1WebhooksSubscriptionsListResponseRowsItem
+		obj := &SubscriptionsListWebhooksResponse{}
+		var fernTestValueRows []*SubscriptionsListWebhooksResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -3267,7 +3546,7 @@ func TestSettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -3275,7 +3554,7 @@ func TestSettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -3283,7 +3562,7 @@ func TestSettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -3292,12 +3571,12 @@ func TestSettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
-		var expected []*PostV1WebhooksSubscriptionsListResponseRowsItem
+		obj := &SubscriptionsListWebhooksResponse{}
+		var expected []*SubscriptionsListWebhooksResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -3307,7 +3586,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -3316,7 +3595,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3329,7 +3608,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -3339,7 +3618,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3352,7 +3631,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -3362,7 +3641,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3375,7 +3654,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -3385,7 +3664,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3398,7 +3677,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -3409,7 +3688,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -3418,7 +3697,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3430,12 +3709,12 @@ func TestGettersPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
-		var fernTestValueRows []*PostV1WebhooksSubscriptionsListResponseRowsItem
+		obj := &SubscriptionsListWebhooksResponse{}
+		var fernTestValueRows []*SubscriptionsListWebhooksResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -3465,7 +3744,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -3496,7 +3775,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -3527,7 +3806,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -3558,7 +3837,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -3588,9 +3867,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponse(t *testing.T
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestSettersSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3598,7 +3877,7 @@ func TestSettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -3606,7 +3885,7 @@ func TestSettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEvents", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueEvents []string
 		obj.SetEvents(fernTestValueEvents)
 		assert.Equal(t, fernTestValueEvents, obj.Events)
@@ -3614,16 +3893,48 @@ func TestSettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConsecutiveFailures", func(t *testing.T) {
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueConsecutiveFailures int64
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+		assert.Equal(t, fernTestValueConsecutiveFailures, obj.ConsecutiveFailures)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryStatus", func(t *testing.T) {
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+		assert.Equal(t, fernTestValueLastDeliveryStatus, obj.LastDeliveryStatus)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryAt", func(t *testing.T) {
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueLastDeliveryAt *time.Time
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+		assert.Equal(t, fernTestValueLastDeliveryAt, obj.LastDeliveryAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPausedAt", func(t *testing.T) {
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValuePausedAt *time.Time
+		obj.SetPausedAt(fernTestValuePausedAt)
+		assert.Equal(t, fernTestValuePausedAt, obj.PausedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -3631,11 +3942,11 @@ func TestSettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestGettersSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -3645,7 +3956,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3658,7 +3969,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var expected string
 		obj.URL = expected
 
@@ -3668,7 +3979,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3681,7 +3992,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEvents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var expected []string
 		obj.Events = expected
 
@@ -3692,7 +4003,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEvents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		obj.Events = nil
 
 		// Act & Assert
@@ -3701,7 +4012,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEvents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3714,7 +4025,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -3724,7 +4035,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3734,11 +4045,133 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetIsActive() // Should return zero value
 	})
 
+	t.Run("GetConsecutiveFailures", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var expected int64
+		obj.ConsecutiveFailures = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConsecutiveFailures(), "getter should return the property value")
+	})
+
+	t.Run("GetConsecutiveFailures_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsListWebhooksResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConsecutiveFailures() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var expected *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus
+		obj.LastDeliveryStatus = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		obj.LastDeliveryStatus = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryStatus(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsListWebhooksResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryStatus() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var expected *time.Time
+		obj.LastDeliveryAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryAt(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		obj.LastDeliveryAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsListWebhooksResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryAt() // Should return zero value
+	})
+
+	t.Run("GetPausedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var expected *time.Time
+		obj.PausedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPausedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetPausedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		obj.PausedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPausedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPausedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsListWebhooksResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPausedAt() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
-		var expected string
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -3747,7 +4180,7 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3759,11 +4192,11 @@ func TestGettersPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -3794,7 +4227,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *t
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueURL string
 
 		// Act
@@ -3825,7 +4258,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *t
 	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueEvents []string
 
 		// Act
@@ -3856,11 +4289,135 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *t
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		var fernTestValueIsActive bool
 
 		// Act
 		obj.SetIsActive(fernTestValueIsActive)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConsecutiveFailures_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueConsecutiveFailures int64
+
+		// Act
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus
+
+		// Act
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueLastDeliveryAt *time.Time
+
+		// Act
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPausedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValuePausedAt *time.Time
+
+		// Act
+		obj.SetPausedAt(fernTestValuePausedAt)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3887,8 +4444,8 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *t
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3917,9 +4474,9 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsListResponseRowsItem(t *t
 
 }
 
-func TestSettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestSettersSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3927,7 +4484,7 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -3935,7 +4492,7 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetEvents", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueEvents []string
 		obj.SetEvents(fernTestValueEvents)
 		assert.Equal(t, fernTestValueEvents, obj.Events)
@@ -3943,16 +4500,48 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConsecutiveFailures", func(t *testing.T) {
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueConsecutiveFailures int64
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+		assert.Equal(t, fernTestValueConsecutiveFailures, obj.ConsecutiveFailures)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryStatus", func(t *testing.T) {
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+		assert.Equal(t, fernTestValueLastDeliveryStatus, obj.LastDeliveryStatus)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLastDeliveryAt", func(t *testing.T) {
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueLastDeliveryAt *time.Time
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+		assert.Equal(t, fernTestValueLastDeliveryAt, obj.LastDeliveryAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPausedAt", func(t *testing.T) {
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValuePausedAt *time.Time
+		obj.SetPausedAt(fernTestValuePausedAt)
+		assert.Equal(t, fernTestValuePausedAt, obj.PausedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -3960,11 +4549,11 @@ func TestSettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestGettersSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -3974,7 +4563,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3987,7 +4576,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	t.Run("GetURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var expected string
 		obj.URL = expected
 
@@ -3997,7 +4586,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 	t.Run("GetURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4010,7 +4599,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	t.Run("GetEvents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var expected []string
 		obj.Events = expected
 
@@ -4021,7 +4610,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	t.Run("GetEvents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		obj.Events = nil
 
 		// Act & Assert
@@ -4030,7 +4619,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 	t.Run("GetEvents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4043,7 +4632,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -4053,7 +4642,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4063,11 +4652,133 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 		_ = obj.GetIsActive() // Should return zero value
 	})
 
+	t.Run("GetConsecutiveFailures", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var expected int64
+		obj.ConsecutiveFailures = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConsecutiveFailures(), "getter should return the property value")
+	})
+
+	t.Run("GetConsecutiveFailures_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsUpdateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConsecutiveFailures() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var expected *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus
+		obj.LastDeliveryStatus = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		obj.LastDeliveryStatus = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryStatus(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsUpdateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryStatus() // Should return zero value
+	})
+
+	t.Run("GetLastDeliveryAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var expected *time.Time
+		obj.LastDeliveryAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastDeliveryAt(), "getter should return the property value")
+	})
+
+	t.Run("GetLastDeliveryAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		obj.LastDeliveryAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastDeliveryAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastDeliveryAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsUpdateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastDeliveryAt() // Should return zero value
+	})
+
+	t.Run("GetPausedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var expected *time.Time
+		obj.PausedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPausedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetPausedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		obj.PausedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPausedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPausedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionsUpdateWebhooksResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPausedAt() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
-		var expected string
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4076,7 +4787,7 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4088,11 +4799,11 @@ func TestGettersPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4123,7 +4834,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueURL string
 
 		// Act
@@ -4154,7 +4865,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing
 	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueEvents []string
 
 		// Act
@@ -4185,7 +4896,7 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		var fernTestValueIsActive bool
 
 		// Act
@@ -4213,11 +4924,135 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConsecutiveFailures_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueConsecutiveFailures int64
+
+		// Act
+		obj.SetConsecutiveFailures(fernTestValueConsecutiveFailures)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueLastDeliveryStatus *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus
+
+		// Act
+		obj.SetLastDeliveryStatus(fernTestValueLastDeliveryStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLastDeliveryAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueLastDeliveryAt *time.Time
+
+		// Act
+		obj.SetLastDeliveryAt(fernTestValueLastDeliveryAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPausedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValuePausedAt *time.Time
+
+		// Act
+		obj.SetPausedAt(fernTestValuePausedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &SubscriptionsUpdateWebhooksResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -4246,11 +5081,11 @@ func TestSettersMarkExplicitPostV1WebhooksSubscriptionsUpdateResponse(t *testing
 
 }
 
-func TestJSONMarshalingPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4259,31 +5094,31 @@ func TestJSONMarshalingPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksDeliveriesListRequestFilterItem
+		var unmarshaled DeliveriesListWebhooksRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj DeliveriesListWebhooksRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj DeliveriesListWebhooksRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4292,31 +5127,31 @@ func TestJSONMarshalingPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksDeliveriesListRequestSortItem
+		var unmarshaled DeliveriesListWebhooksRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListRequestSortItem
+		var obj DeliveriesListWebhooksRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListRequestSortItem
+		var obj DeliveriesListWebhooksRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestJSONMarshalingDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4325,31 +5160,31 @@ func TestJSONMarshalingPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksDeliveriesListResponse
+		var unmarshaled DeliveriesListWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListResponse
+		var obj DeliveriesListWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListResponse
+		var obj DeliveriesListWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4358,31 +5193,31 @@ func TestJSONMarshalingPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksDeliveriesListResponseRowsItem
+		var unmarshaled DeliveriesListWebhooksResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj DeliveriesListWebhooksResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj DeliveriesListWebhooksResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestJSONMarshalingDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4391,31 +5226,31 @@ func TestJSONMarshalingPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksDeliveriesRedeliverResponse
+		var unmarshaled DeliveriesRedeliverWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesRedeliverResponse
+		var obj DeliveriesRedeliverWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksDeliveriesRedeliverResponse
+		var obj DeliveriesRedeliverWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestJSONMarshalingSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4424,31 +5259,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsCreateResponse
+		var unmarshaled SubscriptionsCreateWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsCreateResponse
+		var obj SubscriptionsCreateWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsCreateResponse
+		var obj SubscriptionsCreateWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestJSONMarshalingSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4457,31 +5292,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsDeleteResponse
+		var unmarshaled SubscriptionsDeleteWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsDeleteResponse
+		var obj SubscriptionsDeleteWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsDeleteResponse
+		var obj SubscriptionsDeleteWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4490,31 +5325,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsListRequestFilterItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsListRequestFilterItem
+		var unmarshaled SubscriptionsListWebhooksRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj SubscriptionsListWebhooksRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj SubscriptionsListWebhooksRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4523,31 +5358,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsListRequestSortItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsListRequestSortItem
+		var unmarshaled SubscriptionsListWebhooksRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj SubscriptionsListWebhooksRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj SubscriptionsListWebhooksRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestJSONMarshalingSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4556,31 +5391,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsListResponse
+		var unmarshaled SubscriptionsListWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListResponse
+		var obj SubscriptionsListWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListResponse
+		var obj SubscriptionsListWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4589,31 +5424,31 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsListResponseRowsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsListResponseRowsItem
+		var unmarshaled SubscriptionsListWebhooksResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj SubscriptionsListWebhooksResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj SubscriptionsListWebhooksResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -4622,268 +5457,268 @@ func TestJSONMarshalingPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1WebhooksSubscriptionsUpdateResponse
+		var unmarshaled SubscriptionsUpdateWebhooksResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsUpdateResponse
+		var obj SubscriptionsUpdateWebhooksResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1WebhooksSubscriptionsUpdateResponse
+		var obj SubscriptionsUpdateWebhooksResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestStringDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj *DeliveriesListWebhooksRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestStringDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestSortItem
+		var obj *DeliveriesListWebhooksRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestStringDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestStringDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestStringDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesRedeliverResponse
+		var obj *DeliveriesRedeliverWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestStringSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestStringSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsDeleteResponse
+		var obj *SubscriptionsDeleteWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestStringSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj *SubscriptionsListWebhooksRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestStringSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj *SubscriptionsListWebhooksRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestStringSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestStringSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestStringSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1WebhooksDeliveriesListRequestFilterItemOp(t *testing.T) {
+func TestEnumDeliveriesListWebhooksRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("eq")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("ne")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("contains")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("gte")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("lte")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("in")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString("eq")
+		val, err := NewDeliveriesListWebhooksRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -4891,28 +5726,28 @@ func TestEnumPostV1WebhooksDeliveriesListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1WebhooksDeliveriesListRequestSortItemDir(t *testing.T) {
+func TestEnumDeliveriesListWebhooksRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestSortItemDirFromString("asc")
+		val, err := NewDeliveriesListWebhooksRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListRequestSortItemDirFromString("desc")
+		val, err := NewDeliveriesListWebhooksRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1WebhooksDeliveriesListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewDeliveriesListWebhooksRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1WebhooksDeliveriesListRequestSortItemDirFromString("asc")
+		val, err := NewDeliveriesListWebhooksRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -4920,35 +5755,35 @@ func TestEnumPostV1WebhooksDeliveriesListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1WebhooksDeliveriesListResponseRowsItemStatus(t *testing.T) {
+func TestEnumDeliveriesListWebhooksResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString("pending")
+		val, err := NewDeliveriesListWebhooksResponseRowsItemStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListResponseRowsItemStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksResponseRowsItemStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_delivered", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString("delivered")
+		val, err := NewDeliveriesListWebhooksResponseRowsItemStatusFromString("delivered")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListResponseRowsItemStatus("delivered"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksResponseRowsItemStatus("delivered"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString("failed")
+		val, err := NewDeliveriesListWebhooksResponseRowsItemStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksDeliveriesListResponseRowsItemStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DeliveriesListWebhooksResponseRowsItemStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDeliveriesListWebhooksResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString("pending")
+		val, err := NewDeliveriesListWebhooksResponseRowsItemStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -4956,56 +5791,387 @@ func TestEnumPostV1WebhooksDeliveriesListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1WebhooksSubscriptionsListRequestFilterItemOp(t *testing.T) {
+func TestEnumSubscriptionsCreateWebhooksRequestEventsItem(t *testing.T) {
+	t.Run("NewFromString_agreement_invoice_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("agreement.invoice_generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("agreement.invoice_generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank_feed_synced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("bank_feed.synced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("bank_feed.synced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_filing_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("filing.failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("filing.failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_filing_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("filing.rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("filing.rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_goods_receipt_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("goods_receipt.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("goods_receipt.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_intercompany_invoice_mirrored", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("intercompany.invoice_mirrored")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("intercompany.invoice_mirrored"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("item.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("item.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("item.deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("item.deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("item.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("item.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lead_converted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("lead.converted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("lead.converted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lead_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("lead.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("lead.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_partner_inquiry_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("partner_inquiry.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("partner_inquiry.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_payroll_run_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("payroll_run.approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("payroll_run.approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pos_report_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("pos_report.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("pos_report.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_price_list_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("price_list.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("price_list.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_invoice_paid", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("purchase_invoice.paid")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("purchase_invoice.paid"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_invoice_registered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("purchase_invoice.registered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("purchase_invoice.registered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_order_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("purchase_order.approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("purchase_order.approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_order_received", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("purchase_order.received")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("purchase_order.received"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_refund_liability_actual", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("refund_liability.actual")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("refund_liability.actual"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_refund_liability_trued_up", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("refund_liability.trued_up")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("refund_liability.trued_up"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_report_completed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("report.completed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("report.completed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_report_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("report.failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("report.failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_recognition_modified", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("revenue_recognition.modified")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("revenue_recognition.modified"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_recognition_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("revenue_recognition.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("revenue_recognition.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_einvoice_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.einvoice_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.einvoice_sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_issued", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.issued")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.issued"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_paid", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.paid")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.paid"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_peppol_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.peppol_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.peppol_sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sales_order_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sales_order.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sales_order.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sales_order_fulfilled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sales_order.fulfilled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sales_order.fulfilled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_imported", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("settlement.imported")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("settlement.imported"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("settlement.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("settlement.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("settlement.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("settlement.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_stock_changed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("stock.changed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("stock.changed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_stock_reorder_needed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("stock.reorder_needed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("stock.reorder_needed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vat_review_opened", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("vat_review.opened")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("vat_review.opened"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vat_review_resolved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("vat_review.resolved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("vat_review.resolved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_*", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("*")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("*"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("agreement.invoice_generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubscriptionsCreateWebhooksResponseLastDeliveryStatus(t *testing.T) {
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksResponseLastDeliveryStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_delivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString("delivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksResponseLastDeliveryStatus("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString("failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksResponseLastDeliveryStatus("failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubscriptionsListWebhooksRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("eq")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("ne")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("contains")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("gte")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("lte")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("in")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString("eq")
+		val, err := NewSubscriptionsListWebhooksRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -5013,28 +6179,28 @@ func TestEnumPostV1WebhooksSubscriptionsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1WebhooksSubscriptionsListRequestSortItemDir(t *testing.T) {
+func TestEnumSubscriptionsListWebhooksRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestSortItemDirFromString("asc")
+		val, err := NewSubscriptionsListWebhooksRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1WebhooksSubscriptionsListRequestSortItemDirFromString("desc")
+		val, err := NewSubscriptionsListWebhooksRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1WebhooksSubscriptionsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionsListWebhooksRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1WebhooksSubscriptionsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewSubscriptionsListWebhooksRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1WebhooksSubscriptionsListRequestSortItemDirFromString("asc")
+		val, err := NewSubscriptionsListWebhooksRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -5042,10 +6208,377 @@ func TestEnumPostV1WebhooksSubscriptionsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksDeliveriesListRequestFilterItem(t *testing.T) {
+func TestEnumSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus(t *testing.T) {
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_delivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString("delivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString("failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus("failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubscriptionsUpdateWebhooksRequestEventsItem(t *testing.T) {
+	t.Run("NewFromString_agreement_invoice_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("agreement.invoice_generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("agreement.invoice_generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank_feed_synced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("bank_feed.synced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("bank_feed.synced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_filing_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("filing.failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("filing.failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_filing_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("filing.rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("filing.rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_goods_receipt_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("goods_receipt.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("goods_receipt.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_intercompany_invoice_mirrored", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("intercompany.invoice_mirrored")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("intercompany.invoice_mirrored"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("item.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("item.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("item.deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("item.deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_item_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("item.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("item.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lead_converted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("lead.converted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("lead.converted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lead_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("lead.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("lead.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_partner_inquiry_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("partner_inquiry.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("partner_inquiry.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_payroll_run_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("payroll_run.approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("payroll_run.approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pos_report_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("pos_report.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("pos_report.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_price_list_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("price_list.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("price_list.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_invoice_paid", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("purchase_invoice.paid")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("purchase_invoice.paid"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_invoice_registered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("purchase_invoice.registered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("purchase_invoice.registered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_order_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("purchase_order.approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("purchase_order.approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase_order_received", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("purchase_order.received")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("purchase_order.received"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_refund_liability_actual", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("refund_liability.actual")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("refund_liability.actual"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_refund_liability_trued_up", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("refund_liability.trued_up")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("refund_liability.trued_up"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_report_completed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("report.completed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("report.completed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_report_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("report.failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("report.failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_recognition_modified", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("revenue_recognition.modified")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("revenue_recognition.modified"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_recognition_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("revenue_recognition.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("revenue_recognition.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_einvoice_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.einvoice_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.einvoice_sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_issued", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.issued")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.issued"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_paid", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.paid")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.paid"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_peppol_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.peppol_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.peppol_sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sales_order_created", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sales_order.created")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sales_order.created"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sales_order_fulfilled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sales_order.fulfilled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sales_order.fulfilled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_imported", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("settlement.imported")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("settlement.imported"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_posted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("settlement.posted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("settlement.posted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_settlement_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("settlement.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("settlement.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_stock_changed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("stock.changed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("stock.changed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_stock_reorder_needed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("stock.reorder_needed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("stock.reorder_needed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vat_review_opened", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("vat_review.opened")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("vat_review.opened"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vat_review_resolved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("vat_review.resolved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("vat_review.resolved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_*", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("*")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("*"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("agreement.invoice_generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubscriptionsUpdateWebhooksResponseLastDeliveryStatus(t *testing.T) {
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksResponseLastDeliveryStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_delivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString("delivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksResponseLastDeliveryStatus("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString("failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksResponseLastDeliveryStatus("failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString("pending")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestExtraPropertiesDeliveriesListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListRequestFilterItem{}
+		obj := &DeliveriesListWebhooksRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5059,16 +6592,16 @@ func TestExtraPropertiesPostV1WebhooksDeliveriesListRequestFilterItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestFilterItem
+		var obj *DeliveriesListWebhooksRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesDeliveriesListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListRequestSortItem{}
+		obj := &DeliveriesListWebhooksRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5082,16 +6615,16 @@ func TestExtraPropertiesPostV1WebhooksDeliveriesListRequestSortItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListRequestSortItem
+		var obj *DeliveriesListWebhooksRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksDeliveriesListResponse(t *testing.T) {
+func TestExtraPropertiesDeliveriesListWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListResponse{}
+		obj := &DeliveriesListWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5105,16 +6638,16 @@ func TestExtraPropertiesPostV1WebhooksDeliveriesListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponse
+		var obj *DeliveriesListWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesDeliveriesListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesListResponseRowsItem{}
+		obj := &DeliveriesListWebhooksResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5128,16 +6661,16 @@ func TestExtraPropertiesPostV1WebhooksDeliveriesListResponseRowsItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesListResponseRowsItem
+		var obj *DeliveriesListWebhooksResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) {
+func TestExtraPropertiesDeliveriesRedeliverWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksDeliveriesRedeliverResponse{}
+		obj := &DeliveriesRedeliverWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5151,16 +6684,16 @@ func TestExtraPropertiesPostV1WebhooksDeliveriesRedeliverResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksDeliveriesRedeliverResponse
+		var obj *DeliveriesRedeliverWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) {
+func TestExtraPropertiesSubscriptionsCreateWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsCreateResponse{}
+		obj := &SubscriptionsCreateWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5174,16 +6707,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsCreateResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsCreateResponse
+		var obj *SubscriptionsCreateWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) {
+func TestExtraPropertiesSubscriptionsDeleteWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsDeleteResponse{}
+		obj := &SubscriptionsDeleteWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5197,16 +6730,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsDeleteResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsDeleteResponse
+		var obj *SubscriptionsDeleteWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesSubscriptionsListWebhooksRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListRequestFilterItem{}
+		obj := &SubscriptionsListWebhooksRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5220,16 +6753,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsListRequestFilterItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestFilterItem
+		var obj *SubscriptionsListWebhooksRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesSubscriptionsListWebhooksRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListRequestSortItem{}
+		obj := &SubscriptionsListWebhooksRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5243,16 +6776,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsListRequestSortItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListRequestSortItem
+		var obj *SubscriptionsListWebhooksRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
+func TestExtraPropertiesSubscriptionsListWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListResponse{}
+		obj := &SubscriptionsListWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5266,16 +6799,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponse
+		var obj *SubscriptionsListWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesSubscriptionsListWebhooksResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsListResponseRowsItem{}
+		obj := &SubscriptionsListWebhooksResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5289,16 +6822,16 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsListResponseRowsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsListResponseRowsItem
+		var obj *SubscriptionsListWebhooksResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesSubscriptionsUpdateWebhooksResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1WebhooksSubscriptionsUpdateResponse{}
+		obj := &SubscriptionsUpdateWebhooksResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -5312,7 +6845,7 @@ func TestExtraPropertiesPostV1WebhooksSubscriptionsUpdateResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1WebhooksSubscriptionsUpdateResponse
+		var obj *SubscriptionsUpdateWebhooksResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

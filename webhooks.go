@@ -7,21 +7,22 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1WebhooksDeliveriesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1WebhooksDeliveriesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1WebhooksDeliveriesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1WebhooksDeliveriesListRequestFieldTotals   = big.NewInt(1 << 4)
+	deliveriesListWebhooksRequestFieldPage     = big.NewInt(1 << 0)
+	deliveriesListWebhooksRequestFieldPageSize = big.NewInt(1 << 1)
+	deliveriesListWebhooksRequestFieldSort     = big.NewInt(1 << 2)
+	deliveriesListWebhooksRequestFieldFilter   = big.NewInt(1 << 3)
+	deliveriesListWebhooksRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1WebhooksDeliveriesListRequest struct {
-	Page     *int64                                           `json:"page,omitempty" url:"-"`
-	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1WebhooksDeliveriesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1WebhooksDeliveriesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type DeliveriesListWebhooksRequest struct {
+	Page     *int64                                     `json:"page,omitempty" url:"-"`
+	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
+	Sort     []*DeliveriesListWebhooksRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*DeliveriesListWebhooksRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -29,238 +30,238 @@ type PostV1WebhooksDeliveriesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksDeliveriesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesListWebhooksRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1WebhooksDeliveriesListRequestFieldPage)
+func (d *DeliveriesListWebhooksRequest) SetPage(page *int64) {
+	d.Page = page
+	d.require(deliveriesListWebhooksRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1WebhooksDeliveriesListRequestFieldPageSize)
+func (d *DeliveriesListWebhooksRequest) SetPageSize(pageSize *int64) {
+	d.PageSize = pageSize
+	d.require(deliveriesListWebhooksRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequest) SetSort(sort []*PostV1WebhooksDeliveriesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1WebhooksDeliveriesListRequestFieldSort)
+func (d *DeliveriesListWebhooksRequest) SetSort(sort []*DeliveriesListWebhooksRequestSortItem) {
+	d.Sort = sort
+	d.require(deliveriesListWebhooksRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequest) SetFilter(filter []*PostV1WebhooksDeliveriesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1WebhooksDeliveriesListRequestFieldFilter)
+func (d *DeliveriesListWebhooksRequest) SetFilter(filter []*DeliveriesListWebhooksRequestFilterItem) {
+	d.Filter = filter
+	d.require(deliveriesListWebhooksRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1WebhooksDeliveriesListRequestFieldTotals)
+func (d *DeliveriesListWebhooksRequest) SetTotals(totals []string) {
+	d.Totals = totals
+	d.require(deliveriesListWebhooksRequestFieldTotals)
 }
 
-func (p *PostV1WebhooksDeliveriesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesListRequest
+func (d *DeliveriesListWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesListWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesListRequest(body)
+	*d = DeliveriesListWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesListRequest
+func (d *DeliveriesListWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesListWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksDeliveriesRedeliverRequestFieldID = big.NewInt(1 << 0)
+	deliveriesRedeliverWebhooksRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1WebhooksDeliveriesRedeliverRequest struct {
+type DeliveriesRedeliverWebhooksRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesRedeliverWebhooksRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesRedeliverRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksDeliveriesRedeliverRequestFieldID)
+func (d *DeliveriesRedeliverWebhooksRequest) SetID(id string) {
+	d.ID = id
+	d.require(deliveriesRedeliverWebhooksRequestFieldID)
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesRedeliverRequest
+func (d *DeliveriesRedeliverWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesRedeliverWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesRedeliverRequest(body)
+	*d = DeliveriesRedeliverWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesRedeliverRequest
+func (d *DeliveriesRedeliverWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesRedeliverWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksSubscriptionsCreateRequestFieldURL    = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsCreateRequestFieldEvents = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsCreateRequestFieldSecret = big.NewInt(1 << 2)
+	subscriptionsCreateWebhooksRequestFieldURL    = big.NewInt(1 << 0)
+	subscriptionsCreateWebhooksRequestFieldEvents = big.NewInt(1 << 1)
+	subscriptionsCreateWebhooksRequestFieldSecret = big.NewInt(1 << 2)
 )
 
-type PostV1WebhooksSubscriptionsCreateRequest struct {
-	URL    string   `json:"url" url:"-"`
-	Events []string `json:"events" url:"-"`
-	Secret *string  `json:"secret,omitempty" url:"-"`
+type SubscriptionsCreateWebhooksRequest struct {
+	URL    string                                         `json:"url" url:"-"`
+	Events []SubscriptionsCreateWebhooksRequestEventsItem `json:"events" url:"-"`
+	Secret *string                                        `json:"secret,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsCreateWebhooksRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateRequest) SetURL(url string) {
-	p.URL = url
-	p.require(postV1WebhooksSubscriptionsCreateRequestFieldURL)
+func (s *SubscriptionsCreateWebhooksRequest) SetURL(url string) {
+	s.URL = url
+	s.require(subscriptionsCreateWebhooksRequestFieldURL)
 }
 
 // SetEvents sets the Events field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateRequest) SetEvents(events []string) {
-	p.Events = events
-	p.require(postV1WebhooksSubscriptionsCreateRequestFieldEvents)
+func (s *SubscriptionsCreateWebhooksRequest) SetEvents(events []SubscriptionsCreateWebhooksRequestEventsItem) {
+	s.Events = events
+	s.require(subscriptionsCreateWebhooksRequestFieldEvents)
 }
 
 // SetSecret sets the Secret field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateRequest) SetSecret(secret *string) {
-	p.Secret = secret
-	p.require(postV1WebhooksSubscriptionsCreateRequestFieldSecret)
+func (s *SubscriptionsCreateWebhooksRequest) SetSecret(secret *string) {
+	s.Secret = secret
+	s.require(subscriptionsCreateWebhooksRequestFieldSecret)
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsCreateRequest
+func (s *SubscriptionsCreateWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsCreateWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsCreateRequest(body)
+	*s = SubscriptionsCreateWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsCreateRequest
+func (s *SubscriptionsCreateWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsCreateWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksSubscriptionsDeleteRequestFieldID = big.NewInt(1 << 0)
+	subscriptionsDeleteWebhooksRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1WebhooksSubscriptionsDeleteRequest struct {
+type SubscriptionsDeleteWebhooksRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsDeleteWebhooksRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsDeleteRequestFieldID)
+func (s *SubscriptionsDeleteWebhooksRequest) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsDeleteWebhooksRequestFieldID)
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsDeleteRequest
+func (s *SubscriptionsDeleteWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsDeleteWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsDeleteRequest(body)
+	*s = SubscriptionsDeleteWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsDeleteRequest
+func (s *SubscriptionsDeleteWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsDeleteWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksSubscriptionsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1WebhooksSubscriptionsListRequestFieldTotals   = big.NewInt(1 << 4)
+	subscriptionsListWebhooksRequestFieldPage     = big.NewInt(1 << 0)
+	subscriptionsListWebhooksRequestFieldPageSize = big.NewInt(1 << 1)
+	subscriptionsListWebhooksRequestFieldSort     = big.NewInt(1 << 2)
+	subscriptionsListWebhooksRequestFieldFilter   = big.NewInt(1 << 3)
+	subscriptionsListWebhooksRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1WebhooksSubscriptionsListRequest struct {
-	Page     *int64                                              `json:"page,omitempty" url:"-"`
-	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1WebhooksSubscriptionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1WebhooksSubscriptionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type SubscriptionsListWebhooksRequest struct {
+	Page     *int64                                        `json:"page,omitempty" url:"-"`
+	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
+	Sort     []*SubscriptionsListWebhooksRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*SubscriptionsListWebhooksRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -268,152 +269,152 @@ type PostV1WebhooksSubscriptionsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsListWebhooksRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1WebhooksSubscriptionsListRequestFieldPage)
+func (s *SubscriptionsListWebhooksRequest) SetPage(page *int64) {
+	s.Page = page
+	s.require(subscriptionsListWebhooksRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1WebhooksSubscriptionsListRequestFieldPageSize)
+func (s *SubscriptionsListWebhooksRequest) SetPageSize(pageSize *int64) {
+	s.PageSize = pageSize
+	s.require(subscriptionsListWebhooksRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequest) SetSort(sort []*PostV1WebhooksSubscriptionsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1WebhooksSubscriptionsListRequestFieldSort)
+func (s *SubscriptionsListWebhooksRequest) SetSort(sort []*SubscriptionsListWebhooksRequestSortItem) {
+	s.Sort = sort
+	s.require(subscriptionsListWebhooksRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequest) SetFilter(filter []*PostV1WebhooksSubscriptionsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1WebhooksSubscriptionsListRequestFieldFilter)
+func (s *SubscriptionsListWebhooksRequest) SetFilter(filter []*SubscriptionsListWebhooksRequestFilterItem) {
+	s.Filter = filter
+	s.require(subscriptionsListWebhooksRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1WebhooksSubscriptionsListRequestFieldTotals)
+func (s *SubscriptionsListWebhooksRequest) SetTotals(totals []string) {
+	s.Totals = totals
+	s.require(subscriptionsListWebhooksRequestFieldTotals)
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsListRequest
+func (s *SubscriptionsListWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsListWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsListRequest(body)
+	*s = SubscriptionsListWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsListRequest
+func (s *SubscriptionsListWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsListWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksSubscriptionsUpdateRequestFieldID       = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsUpdateRequestFieldURL      = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsUpdateRequestFieldEvents   = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsUpdateRequestFieldIsActive = big.NewInt(1 << 3)
+	subscriptionsUpdateWebhooksRequestFieldID       = big.NewInt(1 << 0)
+	subscriptionsUpdateWebhooksRequestFieldURL      = big.NewInt(1 << 1)
+	subscriptionsUpdateWebhooksRequestFieldEvents   = big.NewInt(1 << 2)
+	subscriptionsUpdateWebhooksRequestFieldIsActive = big.NewInt(1 << 3)
 )
 
-type PostV1WebhooksSubscriptionsUpdateRequest struct {
-	ID       string   `json:"id" url:"-"`
-	URL      *string  `json:"url,omitempty" url:"-"`
-	Events   []string `json:"events,omitempty" url:"-"`
-	IsActive *bool    `json:"isActive,omitempty" url:"-"`
+type SubscriptionsUpdateWebhooksRequest struct {
+	ID       string                                         `json:"id" url:"-"`
+	URL      *string                                        `json:"url,omitempty" url:"-"`
+	Events   []SubscriptionsUpdateWebhooksRequestEventsItem `json:"events,omitempty" url:"-"`
+	IsActive *bool                                          `json:"isActive,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsUpdateWebhooksRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsUpdateRequestFieldID)
+func (s *SubscriptionsUpdateWebhooksRequest) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsUpdateWebhooksRequestFieldID)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) SetURL(url *string) {
-	p.URL = url
-	p.require(postV1WebhooksSubscriptionsUpdateRequestFieldURL)
+func (s *SubscriptionsUpdateWebhooksRequest) SetURL(url *string) {
+	s.URL = url
+	s.require(subscriptionsUpdateWebhooksRequestFieldURL)
 }
 
 // SetEvents sets the Events field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) SetEvents(events []string) {
-	p.Events = events
-	p.require(postV1WebhooksSubscriptionsUpdateRequestFieldEvents)
+func (s *SubscriptionsUpdateWebhooksRequest) SetEvents(events []SubscriptionsUpdateWebhooksRequestEventsItem) {
+	s.Events = events
+	s.require(subscriptionsUpdateWebhooksRequestFieldEvents)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) SetIsActive(isActive *bool) {
-	p.IsActive = isActive
-	p.require(postV1WebhooksSubscriptionsUpdateRequestFieldIsActive)
+func (s *SubscriptionsUpdateWebhooksRequest) SetIsActive(isActive *bool) {
+	s.IsActive = isActive
+	s.require(subscriptionsUpdateWebhooksRequestFieldIsActive)
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsUpdateRequest
+func (s *SubscriptionsUpdateWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsUpdateWebhooksRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsUpdateRequest(body)
+	*s = SubscriptionsUpdateWebhooksRequest(body)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsUpdateRequest
+func (s *SubscriptionsUpdateWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsUpdateWebhooksRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1WebhooksDeliveriesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1WebhooksDeliveriesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	deliveriesListWebhooksRequestFilterItemFieldField = big.NewInt(1 << 0)
+	deliveriesListWebhooksRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	deliveriesListWebhooksRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1WebhooksDeliveriesListRequestFilterItem struct {
-	Field string                                              `json:"field" url:"field"`
-	Op    PostV1WebhooksDeliveriesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1WebhooksDeliveriesListRequestFilterItemValue `json:"value" url:"value"`
+type DeliveriesListWebhooksRequestFilterItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Op    DeliveriesListWebhooksRequestFilterItemOp     `json:"op" url:"op"`
+	Value *DeliveriesListWebhooksRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -422,312 +423,312 @@ type PostV1WebhooksDeliveriesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) GetOp() PostV1WebhooksDeliveriesListRequestFilterItemOp {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItem) GetOp() DeliveriesListWebhooksRequestFilterItemOp {
+	if d == nil {
 		return ""
 	}
-	return p.Op
+	return d.Op
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) GetValue() *PostV1WebhooksDeliveriesListRequestFilterItemValue {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItem) GetValue() *DeliveriesListWebhooksRequestFilterItemValue {
+	if d == nil {
 		return nil
 	}
-	return p.Value
+	return d.Value
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesListWebhooksRequestFilterItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1WebhooksDeliveriesListRequestFilterItemFieldField)
+func (d *DeliveriesListWebhooksRequestFilterItem) SetField(field string) {
+	d.Field = field
+	d.require(deliveriesListWebhooksRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) SetOp(op PostV1WebhooksDeliveriesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1WebhooksDeliveriesListRequestFilterItemFieldOp)
+func (d *DeliveriesListWebhooksRequestFilterItem) SetOp(op DeliveriesListWebhooksRequestFilterItemOp) {
+	d.Op = op
+	d.require(deliveriesListWebhooksRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) SetValue(value *PostV1WebhooksDeliveriesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1WebhooksDeliveriesListRequestFilterItemFieldValue)
+func (d *DeliveriesListWebhooksRequestFilterItem) SetValue(value *DeliveriesListWebhooksRequestFilterItemValue) {
+	d.Value = value
+	d.require(deliveriesListWebhooksRequestFilterItemFieldValue)
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesListRequestFilterItem
+func (d *DeliveriesListWebhooksRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesListWebhooksRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeliveriesListWebhooksRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesListRequestFilterItem
+func (d *DeliveriesListWebhooksRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesListWebhooksRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItem) String() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1WebhooksDeliveriesListRequestFilterItemOp string
+type DeliveriesListWebhooksRequestFilterItemOp string
 
 const (
-	PostV1WebhooksDeliveriesListRequestFilterItemOpEq       PostV1WebhooksDeliveriesListRequestFilterItemOp = "eq"
-	PostV1WebhooksDeliveriesListRequestFilterItemOpNe       PostV1WebhooksDeliveriesListRequestFilterItemOp = "ne"
-	PostV1WebhooksDeliveriesListRequestFilterItemOpContains PostV1WebhooksDeliveriesListRequestFilterItemOp = "contains"
-	PostV1WebhooksDeliveriesListRequestFilterItemOpGte      PostV1WebhooksDeliveriesListRequestFilterItemOp = "gte"
-	PostV1WebhooksDeliveriesListRequestFilterItemOpLte      PostV1WebhooksDeliveriesListRequestFilterItemOp = "lte"
-	PostV1WebhooksDeliveriesListRequestFilterItemOpIn       PostV1WebhooksDeliveriesListRequestFilterItemOp = "in"
+	DeliveriesListWebhooksRequestFilterItemOpEq       DeliveriesListWebhooksRequestFilterItemOp = "eq"
+	DeliveriesListWebhooksRequestFilterItemOpNe       DeliveriesListWebhooksRequestFilterItemOp = "ne"
+	DeliveriesListWebhooksRequestFilterItemOpContains DeliveriesListWebhooksRequestFilterItemOp = "contains"
+	DeliveriesListWebhooksRequestFilterItemOpGte      DeliveriesListWebhooksRequestFilterItemOp = "gte"
+	DeliveriesListWebhooksRequestFilterItemOpLte      DeliveriesListWebhooksRequestFilterItemOp = "lte"
+	DeliveriesListWebhooksRequestFilterItemOpIn       DeliveriesListWebhooksRequestFilterItemOp = "in"
 )
 
-func NewPostV1WebhooksDeliveriesListRequestFilterItemOpFromString(s string) (PostV1WebhooksDeliveriesListRequestFilterItemOp, error) {
+func NewDeliveriesListWebhooksRequestFilterItemOpFromString(s string) (DeliveriesListWebhooksRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpEq, nil
+		return DeliveriesListWebhooksRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpNe, nil
+		return DeliveriesListWebhooksRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpContains, nil
+		return DeliveriesListWebhooksRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpGte, nil
+		return DeliveriesListWebhooksRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpLte, nil
+		return DeliveriesListWebhooksRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1WebhooksDeliveriesListRequestFilterItemOpIn, nil
+		return DeliveriesListWebhooksRequestFilterItemOpIn, nil
 	}
-	var t PostV1WebhooksDeliveriesListRequestFilterItemOp
+	var t DeliveriesListWebhooksRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1WebhooksDeliveriesListRequestFilterItemOp) Ptr() *PostV1WebhooksDeliveriesListRequestFilterItemOp {
-	return &p
+func (d DeliveriesListWebhooksRequestFilterItemOp) Ptr() *DeliveriesListWebhooksRequestFilterItemOp {
+	return &d
 }
 
-type PostV1WebhooksDeliveriesListRequestFilterItemValue struct {
-	String                                                          string
-	Double                                                          float64
-	Boolean                                                         bool
-	PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList []*PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem
+type DeliveriesListWebhooksRequestFilterItemValue struct {
+	String                                                    string
+	Double                                                    float64
+	Boolean                                                   bool
+	DeliveriesListWebhooksRequestFilterItemValueThreeItemList []*DeliveriesListWebhooksRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValue) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValue) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValue) GetBoolean() bool {
+	if d == nil {
 		return false
 	}
-	return p.Boolean
+	return d.Boolean
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) GetPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList() []*PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValue) GetDeliveriesListWebhooksRequestFilterItemValueThreeItemList() []*DeliveriesListWebhooksRequestFilterItemValueThreeItem {
+	if d == nil {
 		return nil
 	}
-	return p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList
+	return d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (d *DeliveriesListWebhooksRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		d.typ = "Boolean"
+		d.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList []*PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList"
-		p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList = valuePostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList
+	var valueDeliveriesListWebhooksRequestFilterItemValueThreeItemList []*DeliveriesListWebhooksRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueDeliveriesListWebhooksRequestFilterItemValueThreeItemList); err == nil {
+		d.typ = "DeliveriesListWebhooksRequestFilterItemValueThreeItemList"
+		d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList = valueDeliveriesListWebhooksRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1WebhooksDeliveriesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DeliveriesListWebhooksRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return json.Marshal(d.Boolean)
 	}
-	if p.typ == "PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList" || p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList)
+	if d.typ == "DeliveriesListWebhooksRequestFilterItemValueThreeItemList" || d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1WebhooksDeliveriesListRequestFilterItemValueVisitor interface {
+type DeliveriesListWebhooksRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList([]*PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) error
+	VisitDeliveriesListWebhooksRequestFilterItemValueThreeItemList([]*DeliveriesListWebhooksRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValue) Accept(visitor PostV1WebhooksDeliveriesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DeliveriesListWebhooksRequestFilterItemValue) Accept(visitor DeliveriesListWebhooksRequestFilterItemValueVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return visitor.VisitBoolean(d.Boolean)
 	}
-	if p.typ == "PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList" || p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList(p.PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemList)
+	if d.typ == "DeliveriesListWebhooksRequestFilterItemValueThreeItemList" || d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitDeliveriesListWebhooksRequestFilterItemValueThreeItemList(d.DeliveriesListWebhooksRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem struct {
+type DeliveriesListWebhooksRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValueThreeItem) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (d *DeliveriesListWebhooksRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DeliveriesListWebhooksRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemVisitor interface {
+type DeliveriesListWebhooksRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItem) Accept(visitor PostV1WebhooksDeliveriesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DeliveriesListWebhooksRequestFilterItemValueThreeItem) Accept(visitor DeliveriesListWebhooksRequestFilterItemValueThreeItemVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
 var (
-	postV1WebhooksDeliveriesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	deliveriesListWebhooksRequestSortItemFieldField = big.NewInt(1 << 0)
+	deliveriesListWebhooksRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1WebhooksDeliveriesListRequestSortItem struct {
-	Field string                                          `json:"field" url:"field"`
-	Dir   *PostV1WebhooksDeliveriesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type DeliveriesListWebhooksRequestSortItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Dir   *DeliveriesListWebhooksRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -736,126 +737,126 @@ type PostV1WebhooksDeliveriesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) GetField() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestSortItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) GetDir() *PostV1WebhooksDeliveriesListRequestSortItemDir {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestSortItem) GetDir() *DeliveriesListWebhooksRequestSortItemDir {
+	if d == nil {
 		return nil
 	}
-	return p.Dir
+	return d.Dir
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesListWebhooksRequestSortItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1WebhooksDeliveriesListRequestSortItemFieldField)
+func (d *DeliveriesListWebhooksRequestSortItem) SetField(field string) {
+	d.Field = field
+	d.require(deliveriesListWebhooksRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) SetDir(dir *PostV1WebhooksDeliveriesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1WebhooksDeliveriesListRequestSortItemFieldDir)
+func (d *DeliveriesListWebhooksRequestSortItem) SetDir(dir *DeliveriesListWebhooksRequestSortItemDir) {
+	d.Dir = dir
+	d.require(deliveriesListWebhooksRequestSortItemFieldDir)
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesListRequestSortItem
+func (d *DeliveriesListWebhooksRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesListWebhooksRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeliveriesListWebhooksRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesListRequestSortItem
+func (d *DeliveriesListWebhooksRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesListWebhooksRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksDeliveriesListRequestSortItem) String() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksRequestSortItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1WebhooksDeliveriesListRequestSortItemDir string
+type DeliveriesListWebhooksRequestSortItemDir string
 
 const (
-	PostV1WebhooksDeliveriesListRequestSortItemDirAsc  PostV1WebhooksDeliveriesListRequestSortItemDir = "asc"
-	PostV1WebhooksDeliveriesListRequestSortItemDirDesc PostV1WebhooksDeliveriesListRequestSortItemDir = "desc"
+	DeliveriesListWebhooksRequestSortItemDirAsc  DeliveriesListWebhooksRequestSortItemDir = "asc"
+	DeliveriesListWebhooksRequestSortItemDirDesc DeliveriesListWebhooksRequestSortItemDir = "desc"
 )
 
-func NewPostV1WebhooksDeliveriesListRequestSortItemDirFromString(s string) (PostV1WebhooksDeliveriesListRequestSortItemDir, error) {
+func NewDeliveriesListWebhooksRequestSortItemDirFromString(s string) (DeliveriesListWebhooksRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1WebhooksDeliveriesListRequestSortItemDirAsc, nil
+		return DeliveriesListWebhooksRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1WebhooksDeliveriesListRequestSortItemDirDesc, nil
+		return DeliveriesListWebhooksRequestSortItemDirDesc, nil
 	}
-	var t PostV1WebhooksDeliveriesListRequestSortItemDir
+	var t DeliveriesListWebhooksRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1WebhooksDeliveriesListRequestSortItemDir) Ptr() *PostV1WebhooksDeliveriesListRequestSortItemDir {
-	return &p
+func (d DeliveriesListWebhooksRequestSortItemDir) Ptr() *DeliveriesListWebhooksRequestSortItemDir {
+	return &d
 }
 
 var (
-	postV1WebhooksDeliveriesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1WebhooksDeliveriesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1WebhooksDeliveriesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1WebhooksDeliveriesListResponseFieldTotals   = big.NewInt(1 << 4)
+	deliveriesListWebhooksResponseFieldRows     = big.NewInt(1 << 0)
+	deliveriesListWebhooksResponseFieldPage     = big.NewInt(1 << 1)
+	deliveriesListWebhooksResponseFieldPageSize = big.NewInt(1 << 2)
+	deliveriesListWebhooksResponseFieldTotal    = big.NewInt(1 << 3)
+	deliveriesListWebhooksResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1WebhooksDeliveriesListResponse struct {
-	Rows     []*PostV1WebhooksDeliveriesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                           `json:"page" url:"page"`
-	PageSize int64                                           `json:"pageSize" url:"pageSize"`
-	Total    int64                                           `json:"total" url:"total"`
-	Totals   map[string]string                               `json:"totals,omitempty" url:"totals,omitempty"`
+type DeliveriesListWebhooksResponse struct {
+	Rows     []*DeliveriesListWebhooksResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                     `json:"page" url:"page"`
+	PageSize int64                                     `json:"pageSize" url:"pageSize"`
+	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -864,152 +865,152 @@ type PostV1WebhooksDeliveriesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetRows() []*PostV1WebhooksDeliveriesListResponseRowsItem {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetRows() []*DeliveriesListWebhooksResponseRowsItem {
+	if d == nil {
 		return nil
 	}
-	return p.Rows
+	return d.Rows
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetPage() int64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetPage() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Page
+	return d.Page
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetPageSize() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.PageSize
+	return d.PageSize
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetTotal() int64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetTotal() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Total
+	return d.Total
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetTotals() map[string]string {
+	if d == nil {
 		return nil
 	}
-	return p.Totals
+	return d.Totals
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesListWebhooksResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponse) SetRows(rows []*PostV1WebhooksDeliveriesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1WebhooksDeliveriesListResponseFieldRows)
+func (d *DeliveriesListWebhooksResponse) SetRows(rows []*DeliveriesListWebhooksResponseRowsItem) {
+	d.Rows = rows
+	d.require(deliveriesListWebhooksResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1WebhooksDeliveriesListResponseFieldPage)
+func (d *DeliveriesListWebhooksResponse) SetPage(page int64) {
+	d.Page = page
+	d.require(deliveriesListWebhooksResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1WebhooksDeliveriesListResponseFieldPageSize)
+func (d *DeliveriesListWebhooksResponse) SetPageSize(pageSize int64) {
+	d.PageSize = pageSize
+	d.require(deliveriesListWebhooksResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1WebhooksDeliveriesListResponseFieldTotal)
+func (d *DeliveriesListWebhooksResponse) SetTotal(total int64) {
+	d.Total = total
+	d.require(deliveriesListWebhooksResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1WebhooksDeliveriesListResponseFieldTotals)
+func (d *DeliveriesListWebhooksResponse) SetTotals(totals map[string]string) {
+	d.Totals = totals
+	d.require(deliveriesListWebhooksResponseFieldTotals)
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesListResponse
+func (d *DeliveriesListWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesListWebhooksResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeliveriesListWebhooksResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesListResponse
+func (d *DeliveriesListWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesListWebhooksResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksDeliveriesListResponse) String() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1WebhooksDeliveriesListResponseRowsItemFieldID             = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldSubscriptionID = big.NewInt(1 << 1)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldEventType      = big.NewInt(1 << 2)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldStatus         = big.NewInt(1 << 3)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldAttempts       = big.NewInt(1 << 4)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldLastError      = big.NewInt(1 << 5)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 6)
-	postV1WebhooksDeliveriesListResponseRowsItemFieldDeliveredAt    = big.NewInt(1 << 7)
+	deliveriesListWebhooksResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	deliveriesListWebhooksResponseRowsItemFieldSubscriptionID = big.NewInt(1 << 1)
+	deliveriesListWebhooksResponseRowsItemFieldEventType      = big.NewInt(1 << 2)
+	deliveriesListWebhooksResponseRowsItemFieldStatus         = big.NewInt(1 << 3)
+	deliveriesListWebhooksResponseRowsItemFieldAttempts       = big.NewInt(1 << 4)
+	deliveriesListWebhooksResponseRowsItemFieldLastError      = big.NewInt(1 << 5)
+	deliveriesListWebhooksResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 6)
+	deliveriesListWebhooksResponseRowsItemFieldDeliveredAt    = big.NewInt(1 << 7)
 )
 
-type PostV1WebhooksDeliveriesListResponseRowsItem struct {
-	ID             string                                             `json:"id" url:"id"`
-	SubscriptionID string                                             `json:"subscriptionId" url:"subscriptionId"`
-	EventType      string                                             `json:"eventType" url:"eventType"`
-	Status         PostV1WebhooksDeliveriesListResponseRowsItemStatus `json:"status" url:"status"`
-	Attempts       int64                                              `json:"attempts" url:"attempts"`
-	LastError      *string                                            `json:"lastError,omitempty" url:"lastError,omitempty"`
-	CreatedAt      string                                             `json:"createdAt" url:"createdAt"`
-	DeliveredAt    *string                                            `json:"deliveredAt,omitempty" url:"deliveredAt,omitempty"`
+type DeliveriesListWebhooksResponseRowsItem struct {
+	ID             string                                       `json:"id" url:"id"`
+	SubscriptionID string                                       `json:"subscriptionId" url:"subscriptionId"`
+	EventType      string                                       `json:"eventType" url:"eventType"`
+	Status         DeliveriesListWebhooksResponseRowsItemStatus `json:"status" url:"status"`
+	Attempts       int64                                        `json:"attempts" url:"attempts"`
+	LastError      *string                                      `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt      time.Time                                    `json:"createdAt" url:"createdAt"`
+	DeliveredAt    *time.Time                                   `json:"deliveredAt,omitempty" url:"deliveredAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1018,205 +1019,217 @@ type PostV1WebhooksDeliveriesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetSubscriptionID() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetSubscriptionID() string {
+	if d == nil {
 		return ""
 	}
-	return p.SubscriptionID
+	return d.SubscriptionID
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetEventType() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetEventType() string {
+	if d == nil {
 		return ""
 	}
-	return p.EventType
+	return d.EventType
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetStatus() PostV1WebhooksDeliveriesListResponseRowsItemStatus {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetStatus() DeliveriesListWebhooksResponseRowsItemStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetAttempts() int64 {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetAttempts() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Attempts
+	return d.Attempts
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetLastError() *string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetLastError() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LastError
+	return d.LastError
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DeliveriesListWebhooksResponseRowsItem) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetDeliveredAt() *string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetDeliveredAt() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DeliveredAt
+	return d.DeliveredAt
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesListWebhooksResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldID)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetID(id string) {
+	d.ID = id
+	d.require(deliveriesListWebhooksResponseRowsItemFieldID)
 }
 
 // SetSubscriptionID sets the SubscriptionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetSubscriptionID(subscriptionID string) {
-	p.SubscriptionID = subscriptionID
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldSubscriptionID)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetSubscriptionID(subscriptionID string) {
+	d.SubscriptionID = subscriptionID
+	d.require(deliveriesListWebhooksResponseRowsItemFieldSubscriptionID)
 }
 
 // SetEventType sets the EventType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetEventType(eventType string) {
-	p.EventType = eventType
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldEventType)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetEventType(eventType string) {
+	d.EventType = eventType
+	d.require(deliveriesListWebhooksResponseRowsItemFieldEventType)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetStatus(status PostV1WebhooksDeliveriesListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldStatus)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetStatus(status DeliveriesListWebhooksResponseRowsItemStatus) {
+	d.Status = status
+	d.require(deliveriesListWebhooksResponseRowsItemFieldStatus)
 }
 
 // SetAttempts sets the Attempts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetAttempts(attempts int64) {
-	p.Attempts = attempts
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldAttempts)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetAttempts(attempts int64) {
+	d.Attempts = attempts
+	d.require(deliveriesListWebhooksResponseRowsItemFieldAttempts)
 }
 
 // SetLastError sets the LastError field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetLastError(lastError *string) {
-	p.LastError = lastError
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldLastError)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetLastError(lastError *string) {
+	d.LastError = lastError
+	d.require(deliveriesListWebhooksResponseRowsItemFieldLastError)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldCreatedAt)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(deliveriesListWebhooksResponseRowsItemFieldCreatedAt)
 }
 
 // SetDeliveredAt sets the DeliveredAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) SetDeliveredAt(deliveredAt *string) {
-	p.DeliveredAt = deliveredAt
-	p.require(postV1WebhooksDeliveriesListResponseRowsItemFieldDeliveredAt)
+func (d *DeliveriesListWebhooksResponseRowsItem) SetDeliveredAt(deliveredAt *time.Time) {
+	d.DeliveredAt = deliveredAt
+	d.require(deliveriesListWebhooksResponseRowsItemFieldDeliveredAt)
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DeliveriesListWebhooksResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		DeliveredAt *internal.DateTime `json:"deliveredAt,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeliveriesListWebhooksResponseRowsItem(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.DeliveredAt = unmarshaler.DeliveredAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesListResponseRowsItem
+func (d *DeliveriesListWebhooksResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesListWebhooksResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		DeliveredAt *internal.DateTime `json:"deliveredAt,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:       embed(*d),
+		CreatedAt:   internal.NewDateTime(d.CreatedAt),
+		DeliveredAt: internal.NewOptionalDateTime(d.DeliveredAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksDeliveriesListResponseRowsItem) String() string {
-	if p == nil {
+func (d *DeliveriesListWebhooksResponseRowsItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1WebhooksDeliveriesListResponseRowsItemStatus string
+type DeliveriesListWebhooksResponseRowsItemStatus string
 
 const (
-	PostV1WebhooksDeliveriesListResponseRowsItemStatusPending   PostV1WebhooksDeliveriesListResponseRowsItemStatus = "pending"
-	PostV1WebhooksDeliveriesListResponseRowsItemStatusDelivered PostV1WebhooksDeliveriesListResponseRowsItemStatus = "delivered"
-	PostV1WebhooksDeliveriesListResponseRowsItemStatusFailed    PostV1WebhooksDeliveriesListResponseRowsItemStatus = "failed"
+	DeliveriesListWebhooksResponseRowsItemStatusPending   DeliveriesListWebhooksResponseRowsItemStatus = "pending"
+	DeliveriesListWebhooksResponseRowsItemStatusDelivered DeliveriesListWebhooksResponseRowsItemStatus = "delivered"
+	DeliveriesListWebhooksResponseRowsItemStatusFailed    DeliveriesListWebhooksResponseRowsItemStatus = "failed"
 )
 
-func NewPostV1WebhooksDeliveriesListResponseRowsItemStatusFromString(s string) (PostV1WebhooksDeliveriesListResponseRowsItemStatus, error) {
+func NewDeliveriesListWebhooksResponseRowsItemStatusFromString(s string) (DeliveriesListWebhooksResponseRowsItemStatus, error) {
 	switch s {
 	case "pending":
-		return PostV1WebhooksDeliveriesListResponseRowsItemStatusPending, nil
+		return DeliveriesListWebhooksResponseRowsItemStatusPending, nil
 	case "delivered":
-		return PostV1WebhooksDeliveriesListResponseRowsItemStatusDelivered, nil
+		return DeliveriesListWebhooksResponseRowsItemStatusDelivered, nil
 	case "failed":
-		return PostV1WebhooksDeliveriesListResponseRowsItemStatusFailed, nil
+		return DeliveriesListWebhooksResponseRowsItemStatusFailed, nil
 	}
-	var t PostV1WebhooksDeliveriesListResponseRowsItemStatus
+	var t DeliveriesListWebhooksResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1WebhooksDeliveriesListResponseRowsItemStatus) Ptr() *PostV1WebhooksDeliveriesListResponseRowsItemStatus {
-	return &p
+func (d DeliveriesListWebhooksResponseRowsItemStatus) Ptr() *DeliveriesListWebhooksResponseRowsItemStatus {
+	return &d
 }
 
 var (
-	postV1WebhooksDeliveriesRedeliverResponseFieldID     = big.NewInt(1 << 0)
-	postV1WebhooksDeliveriesRedeliverResponseFieldStatus = big.NewInt(1 << 1)
+	deliveriesRedeliverWebhooksResponseFieldID     = big.NewInt(1 << 0)
+	deliveriesRedeliverWebhooksResponseFieldStatus = big.NewInt(1 << 1)
 )
 
-type PostV1WebhooksDeliveriesRedeliverResponse struct {
+type DeliveriesRedeliverWebhooksResponse struct {
 	ID     string `json:"id" url:"id"`
 	Status string `json:"status" url:"status"`
 
@@ -1227,106 +1240,251 @@ type PostV1WebhooksDeliveriesRedeliverResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) GetID() string {
-	if p == nil {
+func (d *DeliveriesRedeliverWebhooksResponse) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) GetStatus() string {
-	if p == nil {
+func (d *DeliveriesRedeliverWebhooksResponse) GetStatus() string {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeliveriesRedeliverWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeliveriesRedeliverWebhooksResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksDeliveriesRedeliverResponseFieldID)
+func (d *DeliveriesRedeliverWebhooksResponse) SetID(id string) {
+	d.ID = id
+	d.require(deliveriesRedeliverWebhooksResponseFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) SetStatus(status string) {
-	p.Status = status
-	p.require(postV1WebhooksDeliveriesRedeliverResponseFieldStatus)
+func (d *DeliveriesRedeliverWebhooksResponse) SetStatus(status string) {
+	d.Status = status
+	d.require(deliveriesRedeliverWebhooksResponseFieldStatus)
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksDeliveriesRedeliverResponse
+func (d *DeliveriesRedeliverWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeliveriesRedeliverWebhooksResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksDeliveriesRedeliverResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeliveriesRedeliverWebhooksResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksDeliveriesRedeliverResponse
+func (d *DeliveriesRedeliverWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed DeliveriesRedeliverWebhooksResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksDeliveriesRedeliverResponse) String() string {
-	if p == nil {
+func (d *DeliveriesRedeliverWebhooksResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
+}
+
+// An event type, or "*" for every event
+type SubscriptionsCreateWebhooksRequestEventsItem string
+
+const (
+	SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated   SubscriptionsCreateWebhooksRequestEventsItem = "agreement.invoice_generated"
+	SubscriptionsCreateWebhooksRequestEventsItemBankFeedSynced              SubscriptionsCreateWebhooksRequestEventsItem = "bank_feed.synced"
+	SubscriptionsCreateWebhooksRequestEventsItemFilingFailed                SubscriptionsCreateWebhooksRequestEventsItem = "filing.failed"
+	SubscriptionsCreateWebhooksRequestEventsItemFilingRejected              SubscriptionsCreateWebhooksRequestEventsItem = "filing.rejected"
+	SubscriptionsCreateWebhooksRequestEventsItemGoodsReceiptPosted          SubscriptionsCreateWebhooksRequestEventsItem = "goods_receipt.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemIntercompanyInvoiceMirrored SubscriptionsCreateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
+	SubscriptionsCreateWebhooksRequestEventsItemItemCreated                 SubscriptionsCreateWebhooksRequestEventsItem = "item.created"
+	SubscriptionsCreateWebhooksRequestEventsItemItemDeleted                 SubscriptionsCreateWebhooksRequestEventsItem = "item.deleted"
+	SubscriptionsCreateWebhooksRequestEventsItemItemUpdated                 SubscriptionsCreateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemLeadConverted               SubscriptionsCreateWebhooksRequestEventsItem = "lead.converted"
+	SubscriptionsCreateWebhooksRequestEventsItemLeadCreated                 SubscriptionsCreateWebhooksRequestEventsItem = "lead.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsCreateWebhooksRequestEventsItem = "partner_inquiry.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated            SubscriptionsCreateWebhooksRequestEventsItem = "pos_report.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsCreateWebhooksRequestEventsItem = "price_list.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.paid"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered   SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved       SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.approved"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived       SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual       SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.actual"
+	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityTruedUp      SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.trued_up"
+	SubscriptionsCreateWebhooksRequestEventsItemReportCompleted             SubscriptionsCreateWebhooksRequestEventsItem = "report.completed"
+	SubscriptionsCreateWebhooksRequestEventsItemReportFailed                SubscriptionsCreateWebhooksRequestEventsItem = "report.failed"
+	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionModified  SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.modified"
+	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionPosted    SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent     SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceIssued           SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.issued"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePaid             SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.paid"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent       SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent             SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated           SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.created"
+	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled         SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.fulfilled"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementImported          SubscriptionsCreateWebhooksRequestEventsItem = "settlement.imported"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementPosted            SubscriptionsCreateWebhooksRequestEventsItem = "settlement.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementUpdated           SubscriptionsCreateWebhooksRequestEventsItem = "settlement.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemStockChanged                SubscriptionsCreateWebhooksRequestEventsItem = "stock.changed"
+	SubscriptionsCreateWebhooksRequestEventsItemStockReorderNeeded          SubscriptionsCreateWebhooksRequestEventsItem = "stock.reorder_needed"
+	SubscriptionsCreateWebhooksRequestEventsItemVatReviewOpened             SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.opened"
+	SubscriptionsCreateWebhooksRequestEventsItemVatReviewResolved           SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.resolved"
+	SubscriptionsCreateWebhooksRequestEventsItemAll                         SubscriptionsCreateWebhooksRequestEventsItem = "*"
+)
+
+func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (SubscriptionsCreateWebhooksRequestEventsItem, error) {
+	switch s {
+	case "agreement.invoice_generated":
+		return SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated, nil
+	case "bank_feed.synced":
+		return SubscriptionsCreateWebhooksRequestEventsItemBankFeedSynced, nil
+	case "filing.failed":
+		return SubscriptionsCreateWebhooksRequestEventsItemFilingFailed, nil
+	case "filing.rejected":
+		return SubscriptionsCreateWebhooksRequestEventsItemFilingRejected, nil
+	case "goods_receipt.posted":
+		return SubscriptionsCreateWebhooksRequestEventsItemGoodsReceiptPosted, nil
+	case "intercompany.invoice_mirrored":
+		return SubscriptionsCreateWebhooksRequestEventsItemIntercompanyInvoiceMirrored, nil
+	case "item.created":
+		return SubscriptionsCreateWebhooksRequestEventsItemItemCreated, nil
+	case "item.deleted":
+		return SubscriptionsCreateWebhooksRequestEventsItemItemDeleted, nil
+	case "item.updated":
+		return SubscriptionsCreateWebhooksRequestEventsItemItemUpdated, nil
+	case "lead.converted":
+		return SubscriptionsCreateWebhooksRequestEventsItemLeadConverted, nil
+	case "lead.created":
+		return SubscriptionsCreateWebhooksRequestEventsItemLeadCreated, nil
+	case "partner_inquiry.created":
+		return SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated, nil
+	case "payroll_run.approved":
+		return SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved, nil
+	case "pos_report.created":
+		return SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated, nil
+	case "price_list.updated":
+		return SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated, nil
+	case "purchase_invoice.paid":
+		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid, nil
+	case "purchase_invoice.registered":
+		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered, nil
+	case "purchase_order.approved":
+		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved, nil
+	case "purchase_order.received":
+		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived, nil
+	case "refund_liability.actual":
+		return SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual, nil
+	case "refund_liability.trued_up":
+		return SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityTruedUp, nil
+	case "report.completed":
+		return SubscriptionsCreateWebhooksRequestEventsItemReportCompleted, nil
+	case "report.failed":
+		return SubscriptionsCreateWebhooksRequestEventsItemReportFailed, nil
+	case "revenue_recognition.modified":
+		return SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionModified, nil
+	case "revenue_recognition.posted":
+		return SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionPosted, nil
+	case "sale_invoice.einvoice_sent":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent, nil
+	case "sale_invoice.issued":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceIssued, nil
+	case "sale_invoice.paid":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePaid, nil
+	case "sale_invoice.peppol_sent":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
+	case "sale_invoice.sent":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent, nil
+	case "sales_order.created":
+		return SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated, nil
+	case "sales_order.fulfilled":
+		return SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled, nil
+	case "settlement.imported":
+		return SubscriptionsCreateWebhooksRequestEventsItemSettlementImported, nil
+	case "settlement.posted":
+		return SubscriptionsCreateWebhooksRequestEventsItemSettlementPosted, nil
+	case "settlement.updated":
+		return SubscriptionsCreateWebhooksRequestEventsItemSettlementUpdated, nil
+	case "stock.changed":
+		return SubscriptionsCreateWebhooksRequestEventsItemStockChanged, nil
+	case "stock.reorder_needed":
+		return SubscriptionsCreateWebhooksRequestEventsItemStockReorderNeeded, nil
+	case "vat_review.opened":
+		return SubscriptionsCreateWebhooksRequestEventsItemVatReviewOpened, nil
+	case "vat_review.resolved":
+		return SubscriptionsCreateWebhooksRequestEventsItemVatReviewResolved, nil
+	case "*":
+		return SubscriptionsCreateWebhooksRequestEventsItemAll, nil
+	}
+	var t SubscriptionsCreateWebhooksRequestEventsItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsCreateWebhooksRequestEventsItem) Ptr() *SubscriptionsCreateWebhooksRequestEventsItem {
+	return &s
 }
 
 var (
-	postV1WebhooksSubscriptionsCreateResponseFieldID        = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsCreateResponseFieldURL       = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsCreateResponseFieldEvents    = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsCreateResponseFieldIsActive  = big.NewInt(1 << 3)
-	postV1WebhooksSubscriptionsCreateResponseFieldCreatedAt = big.NewInt(1 << 4)
-	postV1WebhooksSubscriptionsCreateResponseFieldSecret    = big.NewInt(1 << 5)
+	subscriptionsCreateWebhooksResponseFieldID                  = big.NewInt(1 << 0)
+	subscriptionsCreateWebhooksResponseFieldURL                 = big.NewInt(1 << 1)
+	subscriptionsCreateWebhooksResponseFieldEvents              = big.NewInt(1 << 2)
+	subscriptionsCreateWebhooksResponseFieldIsActive            = big.NewInt(1 << 3)
+	subscriptionsCreateWebhooksResponseFieldConsecutiveFailures = big.NewInt(1 << 4)
+	subscriptionsCreateWebhooksResponseFieldLastDeliveryStatus  = big.NewInt(1 << 5)
+	subscriptionsCreateWebhooksResponseFieldLastDeliveryAt      = big.NewInt(1 << 6)
+	subscriptionsCreateWebhooksResponseFieldPausedAt            = big.NewInt(1 << 7)
+	subscriptionsCreateWebhooksResponseFieldCreatedAt           = big.NewInt(1 << 8)
+	subscriptionsCreateWebhooksResponseFieldSecret              = big.NewInt(1 << 9)
 )
 
-type PostV1WebhooksSubscriptionsCreateResponse struct {
-	ID        string   `json:"id" url:"id"`
-	URL       string   `json:"url" url:"url"`
-	Events    []string `json:"events" url:"events"`
-	IsActive  bool     `json:"isActive" url:"isActive"`
-	CreatedAt string   `json:"createdAt" url:"createdAt"`
-	Secret    string   `json:"secret" url:"secret"`
+type SubscriptionsCreateWebhooksResponse struct {
+	ID                  string                                                 `json:"id" url:"id"`
+	URL                 string                                                 `json:"url" url:"url"`
+	Events              []string                                               `json:"events" url:"events"`
+	IsActive            bool                                                   `json:"isActive" url:"isActive"`
+	ConsecutiveFailures int64                                                  `json:"consecutiveFailures" url:"consecutiveFailures"`
+	LastDeliveryStatus  *SubscriptionsCreateWebhooksResponseLastDeliveryStatus `json:"lastDeliveryStatus,omitempty" url:"lastDeliveryStatus,omitempty"`
+	LastDeliveryAt      *time.Time                                             `json:"lastDeliveryAt,omitempty" url:"lastDeliveryAt,omitempty"`
+	PausedAt            *time.Time                                             `json:"pausedAt,omitempty" url:"pausedAt,omitempty"`
+	CreatedAt           time.Time                                              `json:"createdAt" url:"createdAt"`
+	Secret              string                                                 `json:"secret" url:"secret"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1335,151 +1493,248 @@ type PostV1WebhooksSubscriptionsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetID() string {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ID
+	return s.ID
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetURL() string {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) GetURL() string {
+	if s == nil {
 		return ""
 	}
-	return p.URL
+	return s.URL
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetEvents() []string {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) GetEvents() []string {
+	if s == nil {
 		return nil
 	}
-	return p.Events
+	return s.Events
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetIsActive() bool {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) GetIsActive() bool {
+	if s == nil {
 		return false
 	}
-	return p.IsActive
+	return s.IsActive
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (s *SubscriptionsCreateWebhooksResponse) GetConsecutiveFailures() int64 {
+	if s == nil {
+		return 0
 	}
-	return p.CreatedAt
+	return s.ConsecutiveFailures
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetSecret() string {
-	if p == nil {
-		return ""
-	}
-	return p.Secret
-}
-
-func (p *PostV1WebhooksSubscriptionsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) GetLastDeliveryStatus() *SubscriptionsCreateWebhooksResponseLastDeliveryStatus {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.LastDeliveryStatus
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsCreateWebhooksResponse) GetLastDeliveryAt() *time.Time {
+	if s == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return s.LastDeliveryAt
+}
+
+func (s *SubscriptionsCreateWebhooksResponse) GetPausedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.PausedAt
+}
+
+func (s *SubscriptionsCreateWebhooksResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubscriptionsCreateWebhooksResponse) GetSecret() string {
+	if s == nil {
+		return ""
+	}
+	return s.Secret
+}
+
+func (s *SubscriptionsCreateWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscriptionsCreateWebhooksResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldID)
+func (s *SubscriptionsCreateWebhooksResponse) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsCreateWebhooksResponseFieldID)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetURL(url string) {
-	p.URL = url
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldURL)
+func (s *SubscriptionsCreateWebhooksResponse) SetURL(url string) {
+	s.URL = url
+	s.require(subscriptionsCreateWebhooksResponseFieldURL)
 }
 
 // SetEvents sets the Events field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetEvents(events []string) {
-	p.Events = events
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldEvents)
+func (s *SubscriptionsCreateWebhooksResponse) SetEvents(events []string) {
+	s.Events = events
+	s.require(subscriptionsCreateWebhooksResponseFieldEvents)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldIsActive)
+func (s *SubscriptionsCreateWebhooksResponse) SetIsActive(isActive bool) {
+	s.IsActive = isActive
+	s.require(subscriptionsCreateWebhooksResponseFieldIsActive)
+}
+
+// SetConsecutiveFailures sets the ConsecutiveFailures field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsCreateWebhooksResponse) SetConsecutiveFailures(consecutiveFailures int64) {
+	s.ConsecutiveFailures = consecutiveFailures
+	s.require(subscriptionsCreateWebhooksResponseFieldConsecutiveFailures)
+}
+
+// SetLastDeliveryStatus sets the LastDeliveryStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsCreateWebhooksResponse) SetLastDeliveryStatus(lastDeliveryStatus *SubscriptionsCreateWebhooksResponseLastDeliveryStatus) {
+	s.LastDeliveryStatus = lastDeliveryStatus
+	s.require(subscriptionsCreateWebhooksResponseFieldLastDeliveryStatus)
+}
+
+// SetLastDeliveryAt sets the LastDeliveryAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsCreateWebhooksResponse) SetLastDeliveryAt(lastDeliveryAt *time.Time) {
+	s.LastDeliveryAt = lastDeliveryAt
+	s.require(subscriptionsCreateWebhooksResponseFieldLastDeliveryAt)
+}
+
+// SetPausedAt sets the PausedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsCreateWebhooksResponse) SetPausedAt(pausedAt *time.Time) {
+	s.PausedAt = pausedAt
+	s.require(subscriptionsCreateWebhooksResponseFieldPausedAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldCreatedAt)
+func (s *SubscriptionsCreateWebhooksResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(subscriptionsCreateWebhooksResponseFieldCreatedAt)
 }
 
 // SetSecret sets the Secret field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsCreateResponse) SetSecret(secret string) {
-	p.Secret = secret
-	p.require(postV1WebhooksSubscriptionsCreateResponseFieldSecret)
+func (s *SubscriptionsCreateWebhooksResponse) SetSecret(secret string) {
+	s.Secret = secret
+	s.require(subscriptionsCreateWebhooksResponseFieldSecret)
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (s *SubscriptionsCreateWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type embed SubscriptionsCreateWebhooksResponse
+	var unmarshaler = struct {
+		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsCreateWebhooksResponse(unmarshaler.embed)
+	s.LastDeliveryAt = unmarshaler.LastDeliveryAt.TimePtr()
+	s.PausedAt = unmarshaler.PausedAt.TimePtr()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsCreateResponse
+func (s *SubscriptionsCreateWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsCreateWebhooksResponse
 	var marshaler = struct {
 		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:          embed(*s),
+		LastDeliveryAt: internal.NewOptionalDateTime(s.LastDeliveryAt),
+		PausedAt:       internal.NewOptionalDateTime(s.PausedAt),
+		CreatedAt:      internal.NewDateTime(s.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsCreateResponse) String() string {
-	if p == nil {
+func (s *SubscriptionsCreateWebhooksResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubscriptionsCreateWebhooksResponseLastDeliveryStatus string
+
+const (
+	SubscriptionsCreateWebhooksResponseLastDeliveryStatusPending   SubscriptionsCreateWebhooksResponseLastDeliveryStatus = "pending"
+	SubscriptionsCreateWebhooksResponseLastDeliveryStatusDelivered SubscriptionsCreateWebhooksResponseLastDeliveryStatus = "delivered"
+	SubscriptionsCreateWebhooksResponseLastDeliveryStatusFailed    SubscriptionsCreateWebhooksResponseLastDeliveryStatus = "failed"
+)
+
+func NewSubscriptionsCreateWebhooksResponseLastDeliveryStatusFromString(s string) (SubscriptionsCreateWebhooksResponseLastDeliveryStatus, error) {
+	switch s {
+	case "pending":
+		return SubscriptionsCreateWebhooksResponseLastDeliveryStatusPending, nil
+	case "delivered":
+		return SubscriptionsCreateWebhooksResponseLastDeliveryStatusDelivered, nil
+	case "failed":
+		return SubscriptionsCreateWebhooksResponseLastDeliveryStatusFailed, nil
+	}
+	var t SubscriptionsCreateWebhooksResponseLastDeliveryStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsCreateWebhooksResponseLastDeliveryStatus) Ptr() *SubscriptionsCreateWebhooksResponseLastDeliveryStatus {
+	return &s
 }
 
 var (
-	postV1WebhooksSubscriptionsDeleteResponseFieldID = big.NewInt(1 << 0)
+	subscriptionsDeleteWebhooksResponseFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1WebhooksSubscriptionsDeleteResponse struct {
+type SubscriptionsDeleteWebhooksResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1489,86 +1744,86 @@ type PostV1WebhooksSubscriptionsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) GetID() string {
-	if p == nil {
+func (s *SubscriptionsDeleteWebhooksResponse) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ID
+	return s.ID
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsDeleteWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsDeleteWebhooksResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsDeleteResponseFieldID)
+func (s *SubscriptionsDeleteWebhooksResponse) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsDeleteWebhooksResponseFieldID)
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsDeleteResponse
+func (s *SubscriptionsDeleteWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsDeleteWebhooksResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsDeleteWebhooksResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsDeleteResponse
+func (s *SubscriptionsDeleteWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsDeleteWebhooksResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsDeleteResponse) String() string {
-	if p == nil {
+func (s *SubscriptionsDeleteWebhooksResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1WebhooksSubscriptionsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	subscriptionsListWebhooksRequestFilterItemFieldField = big.NewInt(1 << 0)
+	subscriptionsListWebhooksRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	subscriptionsListWebhooksRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1WebhooksSubscriptionsListRequestFilterItem struct {
-	Field string                                                 `json:"field" url:"field"`
-	Op    PostV1WebhooksSubscriptionsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1WebhooksSubscriptionsListRequestFilterItemValue `json:"value" url:"value"`
+type SubscriptionsListWebhooksRequestFilterItem struct {
+	Field string                                           `json:"field" url:"field"`
+	Op    SubscriptionsListWebhooksRequestFilterItemOp     `json:"op" url:"op"`
+	Value *SubscriptionsListWebhooksRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1577,312 +1832,312 @@ type PostV1WebhooksSubscriptionsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItem) GetField() string {
+	if s == nil {
 		return ""
 	}
-	return p.Field
+	return s.Field
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) GetOp() PostV1WebhooksSubscriptionsListRequestFilterItemOp {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItem) GetOp() SubscriptionsListWebhooksRequestFilterItemOp {
+	if s == nil {
 		return ""
 	}
-	return p.Op
+	return s.Op
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) GetValue() *PostV1WebhooksSubscriptionsListRequestFilterItemValue {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItem) GetValue() *SubscriptionsListWebhooksRequestFilterItemValue {
+	if s == nil {
 		return nil
 	}
-	return p.Value
+	return s.Value
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsListWebhooksRequestFilterItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1WebhooksSubscriptionsListRequestFilterItemFieldField)
+func (s *SubscriptionsListWebhooksRequestFilterItem) SetField(field string) {
+	s.Field = field
+	s.require(subscriptionsListWebhooksRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) SetOp(op PostV1WebhooksSubscriptionsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1WebhooksSubscriptionsListRequestFilterItemFieldOp)
+func (s *SubscriptionsListWebhooksRequestFilterItem) SetOp(op SubscriptionsListWebhooksRequestFilterItemOp) {
+	s.Op = op
+	s.require(subscriptionsListWebhooksRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) SetValue(value *PostV1WebhooksSubscriptionsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1WebhooksSubscriptionsListRequestFilterItemFieldValue)
+func (s *SubscriptionsListWebhooksRequestFilterItem) SetValue(value *SubscriptionsListWebhooksRequestFilterItemValue) {
+	s.Value = value
+	s.require(subscriptionsListWebhooksRequestFilterItemFieldValue)
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsListRequestFilterItem
+func (s *SubscriptionsListWebhooksRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsListWebhooksRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsListWebhooksRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsListRequestFilterItem
+func (s *SubscriptionsListWebhooksRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsListWebhooksRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItem) String() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1WebhooksSubscriptionsListRequestFilterItemOp string
+type SubscriptionsListWebhooksRequestFilterItemOp string
 
 const (
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpEq       PostV1WebhooksSubscriptionsListRequestFilterItemOp = "eq"
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpNe       PostV1WebhooksSubscriptionsListRequestFilterItemOp = "ne"
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpContains PostV1WebhooksSubscriptionsListRequestFilterItemOp = "contains"
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpGte      PostV1WebhooksSubscriptionsListRequestFilterItemOp = "gte"
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpLte      PostV1WebhooksSubscriptionsListRequestFilterItemOp = "lte"
-	PostV1WebhooksSubscriptionsListRequestFilterItemOpIn       PostV1WebhooksSubscriptionsListRequestFilterItemOp = "in"
+	SubscriptionsListWebhooksRequestFilterItemOpEq       SubscriptionsListWebhooksRequestFilterItemOp = "eq"
+	SubscriptionsListWebhooksRequestFilterItemOpNe       SubscriptionsListWebhooksRequestFilterItemOp = "ne"
+	SubscriptionsListWebhooksRequestFilterItemOpContains SubscriptionsListWebhooksRequestFilterItemOp = "contains"
+	SubscriptionsListWebhooksRequestFilterItemOpGte      SubscriptionsListWebhooksRequestFilterItemOp = "gte"
+	SubscriptionsListWebhooksRequestFilterItemOpLte      SubscriptionsListWebhooksRequestFilterItemOp = "lte"
+	SubscriptionsListWebhooksRequestFilterItemOpIn       SubscriptionsListWebhooksRequestFilterItemOp = "in"
 )
 
-func NewPostV1WebhooksSubscriptionsListRequestFilterItemOpFromString(s string) (PostV1WebhooksSubscriptionsListRequestFilterItemOp, error) {
+func NewSubscriptionsListWebhooksRequestFilterItemOpFromString(s string) (SubscriptionsListWebhooksRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpEq, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpNe, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpContains, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpGte, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpLte, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1WebhooksSubscriptionsListRequestFilterItemOpIn, nil
+		return SubscriptionsListWebhooksRequestFilterItemOpIn, nil
 	}
-	var t PostV1WebhooksSubscriptionsListRequestFilterItemOp
+	var t SubscriptionsListWebhooksRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1WebhooksSubscriptionsListRequestFilterItemOp) Ptr() *PostV1WebhooksSubscriptionsListRequestFilterItemOp {
-	return &p
+func (s SubscriptionsListWebhooksRequestFilterItemOp) Ptr() *SubscriptionsListWebhooksRequestFilterItemOp {
+	return &s
 }
 
-type PostV1WebhooksSubscriptionsListRequestFilterItemValue struct {
-	String                                                             string
-	Double                                                             float64
-	Boolean                                                            bool
-	PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList []*PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem
+type SubscriptionsListWebhooksRequestFilterItemValue struct {
+	String                                                       string
+	Double                                                       float64
+	Boolean                                                      bool
+	SubscriptionsListWebhooksRequestFilterItemValueThreeItemList []*SubscriptionsListWebhooksRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) GetString() string {
+	if s == nil {
 		return ""
 	}
-	return p.String
+	return s.String
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) GetDouble() float64 {
+	if s == nil {
 		return 0
 	}
-	return p.Double
+	return s.Double
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) GetBoolean() bool {
+	if s == nil {
 		return false
 	}
-	return p.Boolean
+	return s.Boolean
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) GetPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList() []*PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) GetSubscriptionsListWebhooksRequestFilterItemValueThreeItemList() []*SubscriptionsListWebhooksRequestFilterItemValueThreeItem {
+	if s == nil {
 		return nil
 	}
-	return p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList
+	return s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		s.typ = "String"
+		s.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		s.typ = "Double"
+		s.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		s.typ = "Boolean"
+		s.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList []*PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList"
-		p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList = valuePostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList
+	var valueSubscriptionsListWebhooksRequestFilterItemValueThreeItemList []*SubscriptionsListWebhooksRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueSubscriptionsListWebhooksRequestFilterItemValueThreeItemList); err == nil {
+		s.typ = "SubscriptionsListWebhooksRequestFilterItemValueThreeItemList"
+		s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList = valueSubscriptionsListWebhooksRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
-func (p PostV1WebhooksSubscriptionsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (s SubscriptionsListWebhooksRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if s.typ == "Boolean" || s.Boolean != false {
+		return json.Marshal(s.Boolean)
 	}
-	if p.typ == "PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList" || p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList)
+	if s.typ == "SubscriptionsListWebhooksRequestFilterItemValueThreeItemList" || s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1WebhooksSubscriptionsListRequestFilterItemValueVisitor interface {
+type SubscriptionsListWebhooksRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList([]*PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) error
+	VisitSubscriptionsListWebhooksRequestFilterItemValueThreeItemList([]*SubscriptionsListWebhooksRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValue) Accept(visitor PostV1WebhooksSubscriptionsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (s *SubscriptionsListWebhooksRequestFilterItemValue) Accept(visitor SubscriptionsListWebhooksRequestFilterItemValueVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if s.typ == "Boolean" || s.Boolean != false {
+		return visitor.VisitBoolean(s.Boolean)
 	}
-	if p.typ == "PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList" || p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList(p.PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemList)
+	if s.typ == "SubscriptionsListWebhooksRequestFilterItemValueThreeItemList" || s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitSubscriptionsListWebhooksRequestFilterItemValueThreeItemList(s.SubscriptionsListWebhooksRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem struct {
+type SubscriptionsListWebhooksRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValueThreeItem) GetString() string {
+	if s == nil {
 		return ""
 	}
-	return p.String
+	return s.String
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if s == nil {
 		return 0
 	}
-	return p.Double
+	return s.Double
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (s *SubscriptionsListWebhooksRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		s.typ = "String"
+		s.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		s.typ = "Double"
+		s.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
-func (p PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (s SubscriptionsListWebhooksRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemVisitor interface {
+type SubscriptionsListWebhooksRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItem) Accept(visitor PostV1WebhooksSubscriptionsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (s *SubscriptionsListWebhooksRequestFilterItemValueThreeItem) Accept(visitor SubscriptionsListWebhooksRequestFilterItemValueThreeItemVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
 var (
-	postV1WebhooksSubscriptionsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	subscriptionsListWebhooksRequestSortItemFieldField = big.NewInt(1 << 0)
+	subscriptionsListWebhooksRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1WebhooksSubscriptionsListRequestSortItem struct {
-	Field string                                             `json:"field" url:"field"`
-	Dir   *PostV1WebhooksSubscriptionsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type SubscriptionsListWebhooksRequestSortItem struct {
+	Field string                                       `json:"field" url:"field"`
+	Dir   *SubscriptionsListWebhooksRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1891,126 +2146,126 @@ type PostV1WebhooksSubscriptionsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) GetField() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestSortItem) GetField() string {
+	if s == nil {
 		return ""
 	}
-	return p.Field
+	return s.Field
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) GetDir() *PostV1WebhooksSubscriptionsListRequestSortItemDir {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestSortItem) GetDir() *SubscriptionsListWebhooksRequestSortItemDir {
+	if s == nil {
 		return nil
 	}
-	return p.Dir
+	return s.Dir
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsListWebhooksRequestSortItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1WebhooksSubscriptionsListRequestSortItemFieldField)
+func (s *SubscriptionsListWebhooksRequestSortItem) SetField(field string) {
+	s.Field = field
+	s.require(subscriptionsListWebhooksRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) SetDir(dir *PostV1WebhooksSubscriptionsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1WebhooksSubscriptionsListRequestSortItemFieldDir)
+func (s *SubscriptionsListWebhooksRequestSortItem) SetDir(dir *SubscriptionsListWebhooksRequestSortItemDir) {
+	s.Dir = dir
+	s.require(subscriptionsListWebhooksRequestSortItemFieldDir)
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsListRequestSortItem
+func (s *SubscriptionsListWebhooksRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsListWebhooksRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsListWebhooksRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsListRequestSortItem
+func (s *SubscriptionsListWebhooksRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsListWebhooksRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsListRequestSortItem) String() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksRequestSortItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1WebhooksSubscriptionsListRequestSortItemDir string
+type SubscriptionsListWebhooksRequestSortItemDir string
 
 const (
-	PostV1WebhooksSubscriptionsListRequestSortItemDirAsc  PostV1WebhooksSubscriptionsListRequestSortItemDir = "asc"
-	PostV1WebhooksSubscriptionsListRequestSortItemDirDesc PostV1WebhooksSubscriptionsListRequestSortItemDir = "desc"
+	SubscriptionsListWebhooksRequestSortItemDirAsc  SubscriptionsListWebhooksRequestSortItemDir = "asc"
+	SubscriptionsListWebhooksRequestSortItemDirDesc SubscriptionsListWebhooksRequestSortItemDir = "desc"
 )
 
-func NewPostV1WebhooksSubscriptionsListRequestSortItemDirFromString(s string) (PostV1WebhooksSubscriptionsListRequestSortItemDir, error) {
+func NewSubscriptionsListWebhooksRequestSortItemDirFromString(s string) (SubscriptionsListWebhooksRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1WebhooksSubscriptionsListRequestSortItemDirAsc, nil
+		return SubscriptionsListWebhooksRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1WebhooksSubscriptionsListRequestSortItemDirDesc, nil
+		return SubscriptionsListWebhooksRequestSortItemDirDesc, nil
 	}
-	var t PostV1WebhooksSubscriptionsListRequestSortItemDir
+	var t SubscriptionsListWebhooksRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1WebhooksSubscriptionsListRequestSortItemDir) Ptr() *PostV1WebhooksSubscriptionsListRequestSortItemDir {
-	return &p
+func (s SubscriptionsListWebhooksRequestSortItemDir) Ptr() *SubscriptionsListWebhooksRequestSortItemDir {
+	return &s
 }
 
 var (
-	postV1WebhooksSubscriptionsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1WebhooksSubscriptionsListResponseFieldTotals   = big.NewInt(1 << 4)
+	subscriptionsListWebhooksResponseFieldRows     = big.NewInt(1 << 0)
+	subscriptionsListWebhooksResponseFieldPage     = big.NewInt(1 << 1)
+	subscriptionsListWebhooksResponseFieldPageSize = big.NewInt(1 << 2)
+	subscriptionsListWebhooksResponseFieldTotal    = big.NewInt(1 << 3)
+	subscriptionsListWebhooksResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1WebhooksSubscriptionsListResponse struct {
-	Rows     []*PostV1WebhooksSubscriptionsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                              `json:"page" url:"page"`
-	PageSize int64                                              `json:"pageSize" url:"pageSize"`
-	Total    int64                                              `json:"total" url:"total"`
-	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
+type SubscriptionsListWebhooksResponse struct {
+	Rows     []*SubscriptionsListWebhooksResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                        `json:"page" url:"page"`
+	PageSize int64                                        `json:"pageSize" url:"pageSize"`
+	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2019,146 +2274,154 @@ type PostV1WebhooksSubscriptionsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetRows() []*PostV1WebhooksSubscriptionsListResponseRowsItem {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetRows() []*SubscriptionsListWebhooksResponseRowsItem {
+	if s == nil {
 		return nil
 	}
-	return p.Rows
+	return s.Rows
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetPage() int64 {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetPage() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.Page
+	return s.Page
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetPageSize() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.PageSize
+	return s.PageSize
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetTotal() int64 {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetTotal() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.Total
+	return s.Total
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetTotals() map[string]string {
+	if s == nil {
 		return nil
 	}
-	return p.Totals
+	return s.Totals
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsListWebhooksResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponse) SetRows(rows []*PostV1WebhooksSubscriptionsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1WebhooksSubscriptionsListResponseFieldRows)
+func (s *SubscriptionsListWebhooksResponse) SetRows(rows []*SubscriptionsListWebhooksResponseRowsItem) {
+	s.Rows = rows
+	s.require(subscriptionsListWebhooksResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1WebhooksSubscriptionsListResponseFieldPage)
+func (s *SubscriptionsListWebhooksResponse) SetPage(page int64) {
+	s.Page = page
+	s.require(subscriptionsListWebhooksResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1WebhooksSubscriptionsListResponseFieldPageSize)
+func (s *SubscriptionsListWebhooksResponse) SetPageSize(pageSize int64) {
+	s.PageSize = pageSize
+	s.require(subscriptionsListWebhooksResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1WebhooksSubscriptionsListResponseFieldTotal)
+func (s *SubscriptionsListWebhooksResponse) SetTotal(total int64) {
+	s.Total = total
+	s.require(subscriptionsListWebhooksResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1WebhooksSubscriptionsListResponseFieldTotals)
+func (s *SubscriptionsListWebhooksResponse) SetTotals(totals map[string]string) {
+	s.Totals = totals
+	s.require(subscriptionsListWebhooksResponseFieldTotals)
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsListResponse
+func (s *SubscriptionsListWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsListWebhooksResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsListWebhooksResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsListResponse
+func (s *SubscriptionsListWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsListWebhooksResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponse) String() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1WebhooksSubscriptionsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsListResponseRowsItemFieldURL       = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsListResponseRowsItemFieldEvents    = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsListResponseRowsItemFieldIsActive  = big.NewInt(1 << 3)
-	postV1WebhooksSubscriptionsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+	subscriptionsListWebhooksResponseRowsItemFieldID                  = big.NewInt(1 << 0)
+	subscriptionsListWebhooksResponseRowsItemFieldURL                 = big.NewInt(1 << 1)
+	subscriptionsListWebhooksResponseRowsItemFieldEvents              = big.NewInt(1 << 2)
+	subscriptionsListWebhooksResponseRowsItemFieldIsActive            = big.NewInt(1 << 3)
+	subscriptionsListWebhooksResponseRowsItemFieldConsecutiveFailures = big.NewInt(1 << 4)
+	subscriptionsListWebhooksResponseRowsItemFieldLastDeliveryStatus  = big.NewInt(1 << 5)
+	subscriptionsListWebhooksResponseRowsItemFieldLastDeliveryAt      = big.NewInt(1 << 6)
+	subscriptionsListWebhooksResponseRowsItemFieldPausedAt            = big.NewInt(1 << 7)
+	subscriptionsListWebhooksResponseRowsItemFieldCreatedAt           = big.NewInt(1 << 8)
 )
 
-type PostV1WebhooksSubscriptionsListResponseRowsItem struct {
-	ID        string   `json:"id" url:"id"`
-	URL       string   `json:"url" url:"url"`
-	Events    []string `json:"events" url:"events"`
-	IsActive  bool     `json:"isActive" url:"isActive"`
-	CreatedAt string   `json:"createdAt" url:"createdAt"`
+type SubscriptionsListWebhooksResponseRowsItem struct {
+	ID                  string                                                       `json:"id" url:"id"`
+	URL                 string                                                       `json:"url" url:"url"`
+	Events              []string                                                     `json:"events" url:"events"`
+	IsActive            bool                                                         `json:"isActive" url:"isActive"`
+	ConsecutiveFailures int64                                                        `json:"consecutiveFailures" url:"consecutiveFailures"`
+	LastDeliveryStatus  *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus `json:"lastDeliveryStatus,omitempty" url:"lastDeliveryStatus,omitempty"`
+	LastDeliveryAt      *time.Time                                                   `json:"lastDeliveryAt,omitempty" url:"lastDeliveryAt,omitempty"`
+	PausedAt            *time.Time                                                   `json:"pausedAt,omitempty" url:"pausedAt,omitempty"`
+	CreatedAt           time.Time                                                    `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2167,146 +2430,388 @@ type PostV1WebhooksSubscriptionsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ID
+	return s.ID
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetURL() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetURL() string {
+	if s == nil {
 		return ""
 	}
-	return p.URL
+	return s.URL
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetEvents() []string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetEvents() []string {
+	if s == nil {
 		return nil
 	}
-	return p.Events
+	return s.Events
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetIsActive() bool {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetIsActive() bool {
+	if s == nil {
 		return false
 	}
-	return p.IsActive
+	return s.IsActive
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetConsecutiveFailures() int64 {
+	if s == nil {
+		return 0
 	}
-	return p.CreatedAt
+	return s.ConsecutiveFailures
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetLastDeliveryStatus() *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.LastDeliveryStatus
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetLastDeliveryAt() *time.Time {
+	if s == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return s.LastDeliveryAt
+}
+
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetPausedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.PausedAt
+}
+
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubscriptionsListWebhooksResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscriptionsListWebhooksResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsListResponseRowsItemFieldID)
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldID)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) SetURL(url string) {
-	p.URL = url
-	p.require(postV1WebhooksSubscriptionsListResponseRowsItemFieldURL)
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetURL(url string) {
+	s.URL = url
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldURL)
 }
 
 // SetEvents sets the Events field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) SetEvents(events []string) {
-	p.Events = events
-	p.require(postV1WebhooksSubscriptionsListResponseRowsItemFieldEvents)
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetEvents(events []string) {
+	s.Events = events
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldEvents)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1WebhooksSubscriptionsListResponseRowsItemFieldIsActive)
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetIsActive(isActive bool) {
+	s.IsActive = isActive
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldIsActive)
+}
+
+// SetConsecutiveFailures sets the ConsecutiveFailures field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetConsecutiveFailures(consecutiveFailures int64) {
+	s.ConsecutiveFailures = consecutiveFailures
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldConsecutiveFailures)
+}
+
+// SetLastDeliveryStatus sets the LastDeliveryStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetLastDeliveryStatus(lastDeliveryStatus *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus) {
+	s.LastDeliveryStatus = lastDeliveryStatus
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldLastDeliveryStatus)
+}
+
+// SetLastDeliveryAt sets the LastDeliveryAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetLastDeliveryAt(lastDeliveryAt *time.Time) {
+	s.LastDeliveryAt = lastDeliveryAt
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldLastDeliveryAt)
+}
+
+// SetPausedAt sets the PausedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetPausedAt(pausedAt *time.Time) {
+	s.PausedAt = pausedAt
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldPausedAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1WebhooksSubscriptionsListResponseRowsItemFieldCreatedAt)
+func (s *SubscriptionsListWebhooksResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(subscriptionsListWebhooksResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed SubscriptionsListWebhooksResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsListWebhooksResponseRowsItem(unmarshaler.embed)
+	s.LastDeliveryAt = unmarshaler.LastDeliveryAt.TimePtr()
+	s.PausedAt = unmarshaler.PausedAt.TimePtr()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsListResponseRowsItem
+func (s *SubscriptionsListWebhooksResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsListWebhooksResponseRowsItem
 	var marshaler = struct {
 		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:          embed(*s),
+		LastDeliveryAt: internal.NewOptionalDateTime(s.LastDeliveryAt),
+		PausedAt:       internal.NewOptionalDateTime(s.PausedAt),
+		CreatedAt:      internal.NewDateTime(s.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsListResponseRowsItem) String() string {
-	if p == nil {
+func (s *SubscriptionsListWebhooksResponseRowsItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus string
+
+const (
+	SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusPending   SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus = "pending"
+	SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusDelivered SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus = "delivered"
+	SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFailed    SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus = "failed"
+)
+
+func NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString(s string) (SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus, error) {
+	switch s {
+	case "pending":
+		return SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusPending, nil
+	case "delivered":
+		return SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusDelivered, nil
+	case "failed":
+		return SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFailed, nil
+	}
+	var t SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus) Ptr() *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus {
+	return &s
+}
+
+// An event type, or "*" for every event
+type SubscriptionsUpdateWebhooksRequestEventsItem string
+
+const (
+	SubscriptionsUpdateWebhooksRequestEventsItemAgreementInvoiceGenerated   SubscriptionsUpdateWebhooksRequestEventsItem = "agreement.invoice_generated"
+	SubscriptionsUpdateWebhooksRequestEventsItemBankFeedSynced              SubscriptionsUpdateWebhooksRequestEventsItem = "bank_feed.synced"
+	SubscriptionsUpdateWebhooksRequestEventsItemFilingFailed                SubscriptionsUpdateWebhooksRequestEventsItem = "filing.failed"
+	SubscriptionsUpdateWebhooksRequestEventsItemFilingRejected              SubscriptionsUpdateWebhooksRequestEventsItem = "filing.rejected"
+	SubscriptionsUpdateWebhooksRequestEventsItemGoodsReceiptPosted          SubscriptionsUpdateWebhooksRequestEventsItem = "goods_receipt.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemIntercompanyInvoiceMirrored SubscriptionsUpdateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemCreated                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.deleted"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted               SubscriptionsUpdateWebhooksRequestEventsItem = "lead.converted"
+	SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated                 SubscriptionsUpdateWebhooksRequestEventsItem = "lead.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsUpdateWebhooksRequestEventsItem = "partner_inquiry.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated            SubscriptionsUpdateWebhooksRequestEventsItem = "pos_report.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsUpdateWebhooksRequestEventsItem = "price_list.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.paid"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered   SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved       SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.approved"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived       SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual       SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.actual"
+	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityTruedUp      SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.trued_up"
+	SubscriptionsUpdateWebhooksRequestEventsItemReportCompleted             SubscriptionsUpdateWebhooksRequestEventsItem = "report.completed"
+	SubscriptionsUpdateWebhooksRequestEventsItemReportFailed                SubscriptionsUpdateWebhooksRequestEventsItem = "report.failed"
+	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionModified  SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.modified"
+	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionPosted    SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent     SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceIssued           SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.issued"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePaid             SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.paid"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent       SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent             SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated           SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled         SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.fulfilled"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementImported          SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.imported"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementPosted            SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementUpdated           SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemStockChanged                SubscriptionsUpdateWebhooksRequestEventsItem = "stock.changed"
+	SubscriptionsUpdateWebhooksRequestEventsItemStockReorderNeeded          SubscriptionsUpdateWebhooksRequestEventsItem = "stock.reorder_needed"
+	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewOpened             SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.opened"
+	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewResolved           SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.resolved"
+	SubscriptionsUpdateWebhooksRequestEventsItemAll                         SubscriptionsUpdateWebhooksRequestEventsItem = "*"
+)
+
+func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (SubscriptionsUpdateWebhooksRequestEventsItem, error) {
+	switch s {
+	case "agreement.invoice_generated":
+		return SubscriptionsUpdateWebhooksRequestEventsItemAgreementInvoiceGenerated, nil
+	case "bank_feed.synced":
+		return SubscriptionsUpdateWebhooksRequestEventsItemBankFeedSynced, nil
+	case "filing.failed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemFilingFailed, nil
+	case "filing.rejected":
+		return SubscriptionsUpdateWebhooksRequestEventsItemFilingRejected, nil
+	case "goods_receipt.posted":
+		return SubscriptionsUpdateWebhooksRequestEventsItemGoodsReceiptPosted, nil
+	case "intercompany.invoice_mirrored":
+		return SubscriptionsUpdateWebhooksRequestEventsItemIntercompanyInvoiceMirrored, nil
+	case "item.created":
+		return SubscriptionsUpdateWebhooksRequestEventsItemItemCreated, nil
+	case "item.deleted":
+		return SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted, nil
+	case "item.updated":
+		return SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated, nil
+	case "lead.converted":
+		return SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted, nil
+	case "lead.created":
+		return SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated, nil
+	case "partner_inquiry.created":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated, nil
+	case "payroll_run.approved":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved, nil
+	case "pos_report.created":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated, nil
+	case "price_list.updated":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated, nil
+	case "purchase_invoice.paid":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid, nil
+	case "purchase_invoice.registered":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered, nil
+	case "purchase_order.approved":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved, nil
+	case "purchase_order.received":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived, nil
+	case "refund_liability.actual":
+		return SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual, nil
+	case "refund_liability.trued_up":
+		return SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityTruedUp, nil
+	case "report.completed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemReportCompleted, nil
+	case "report.failed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemReportFailed, nil
+	case "revenue_recognition.modified":
+		return SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionModified, nil
+	case "revenue_recognition.posted":
+		return SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionPosted, nil
+	case "sale_invoice.einvoice_sent":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent, nil
+	case "sale_invoice.issued":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceIssued, nil
+	case "sale_invoice.paid":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePaid, nil
+	case "sale_invoice.peppol_sent":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
+	case "sale_invoice.sent":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent, nil
+	case "sales_order.created":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated, nil
+	case "sales_order.fulfilled":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled, nil
+	case "settlement.imported":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSettlementImported, nil
+	case "settlement.posted":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSettlementPosted, nil
+	case "settlement.updated":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSettlementUpdated, nil
+	case "stock.changed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemStockChanged, nil
+	case "stock.reorder_needed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemStockReorderNeeded, nil
+	case "vat_review.opened":
+		return SubscriptionsUpdateWebhooksRequestEventsItemVatReviewOpened, nil
+	case "vat_review.resolved":
+		return SubscriptionsUpdateWebhooksRequestEventsItemVatReviewResolved, nil
+	case "*":
+		return SubscriptionsUpdateWebhooksRequestEventsItemAll, nil
+	}
+	var t SubscriptionsUpdateWebhooksRequestEventsItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsUpdateWebhooksRequestEventsItem) Ptr() *SubscriptionsUpdateWebhooksRequestEventsItem {
+	return &s
 }
 
 var (
-	postV1WebhooksSubscriptionsUpdateResponseFieldID        = big.NewInt(1 << 0)
-	postV1WebhooksSubscriptionsUpdateResponseFieldURL       = big.NewInt(1 << 1)
-	postV1WebhooksSubscriptionsUpdateResponseFieldEvents    = big.NewInt(1 << 2)
-	postV1WebhooksSubscriptionsUpdateResponseFieldIsActive  = big.NewInt(1 << 3)
-	postV1WebhooksSubscriptionsUpdateResponseFieldCreatedAt = big.NewInt(1 << 4)
+	subscriptionsUpdateWebhooksResponseFieldID                  = big.NewInt(1 << 0)
+	subscriptionsUpdateWebhooksResponseFieldURL                 = big.NewInt(1 << 1)
+	subscriptionsUpdateWebhooksResponseFieldEvents              = big.NewInt(1 << 2)
+	subscriptionsUpdateWebhooksResponseFieldIsActive            = big.NewInt(1 << 3)
+	subscriptionsUpdateWebhooksResponseFieldConsecutiveFailures = big.NewInt(1 << 4)
+	subscriptionsUpdateWebhooksResponseFieldLastDeliveryStatus  = big.NewInt(1 << 5)
+	subscriptionsUpdateWebhooksResponseFieldLastDeliveryAt      = big.NewInt(1 << 6)
+	subscriptionsUpdateWebhooksResponseFieldPausedAt            = big.NewInt(1 << 7)
+	subscriptionsUpdateWebhooksResponseFieldCreatedAt           = big.NewInt(1 << 8)
 )
 
-type PostV1WebhooksSubscriptionsUpdateResponse struct {
-	ID        string   `json:"id" url:"id"`
-	URL       string   `json:"url" url:"url"`
-	Events    []string `json:"events" url:"events"`
-	IsActive  bool     `json:"isActive" url:"isActive"`
-	CreatedAt string   `json:"createdAt" url:"createdAt"`
+type SubscriptionsUpdateWebhooksResponse struct {
+	ID                  string                                                 `json:"id" url:"id"`
+	URL                 string                                                 `json:"url" url:"url"`
+	Events              []string                                               `json:"events" url:"events"`
+	IsActive            bool                                                   `json:"isActive" url:"isActive"`
+	ConsecutiveFailures int64                                                  `json:"consecutiveFailures" url:"consecutiveFailures"`
+	LastDeliveryStatus  *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus `json:"lastDeliveryStatus,omitempty" url:"lastDeliveryStatus,omitempty"`
+	LastDeliveryAt      *time.Time                                             `json:"lastDeliveryAt,omitempty" url:"lastDeliveryAt,omitempty"`
+	PausedAt            *time.Time                                             `json:"pausedAt,omitempty" url:"pausedAt,omitempty"`
+	CreatedAt           time.Time                                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2315,128 +2820,225 @@ type PostV1WebhooksSubscriptionsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetID() string {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ID
+	return s.ID
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetURL() string {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) GetURL() string {
+	if s == nil {
 		return ""
 	}
-	return p.URL
+	return s.URL
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetEvents() []string {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) GetEvents() []string {
+	if s == nil {
 		return nil
 	}
-	return p.Events
+	return s.Events
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetIsActive() bool {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) GetIsActive() bool {
+	if s == nil {
 		return false
 	}
-	return p.IsActive
+	return s.IsActive
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (s *SubscriptionsUpdateWebhooksResponse) GetConsecutiveFailures() int64 {
+	if s == nil {
+		return 0
 	}
-	return p.CreatedAt
+	return s.ConsecutiveFailures
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) GetLastDeliveryStatus() *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.LastDeliveryStatus
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SubscriptionsUpdateWebhooksResponse) GetLastDeliveryAt() *time.Time {
+	if s == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return s.LastDeliveryAt
+}
+
+func (s *SubscriptionsUpdateWebhooksResponse) GetPausedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.PausedAt
+}
+
+func (s *SubscriptionsUpdateWebhooksResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubscriptionsUpdateWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscriptionsUpdateWebhooksResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1WebhooksSubscriptionsUpdateResponseFieldID)
+func (s *SubscriptionsUpdateWebhooksResponse) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsUpdateWebhooksResponseFieldID)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) SetURL(url string) {
-	p.URL = url
-	p.require(postV1WebhooksSubscriptionsUpdateResponseFieldURL)
+func (s *SubscriptionsUpdateWebhooksResponse) SetURL(url string) {
+	s.URL = url
+	s.require(subscriptionsUpdateWebhooksResponseFieldURL)
 }
 
 // SetEvents sets the Events field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) SetEvents(events []string) {
-	p.Events = events
-	p.require(postV1WebhooksSubscriptionsUpdateResponseFieldEvents)
+func (s *SubscriptionsUpdateWebhooksResponse) SetEvents(events []string) {
+	s.Events = events
+	s.require(subscriptionsUpdateWebhooksResponseFieldEvents)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1WebhooksSubscriptionsUpdateResponseFieldIsActive)
+func (s *SubscriptionsUpdateWebhooksResponse) SetIsActive(isActive bool) {
+	s.IsActive = isActive
+	s.require(subscriptionsUpdateWebhooksResponseFieldIsActive)
+}
+
+// SetConsecutiveFailures sets the ConsecutiveFailures field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsUpdateWebhooksResponse) SetConsecutiveFailures(consecutiveFailures int64) {
+	s.ConsecutiveFailures = consecutiveFailures
+	s.require(subscriptionsUpdateWebhooksResponseFieldConsecutiveFailures)
+}
+
+// SetLastDeliveryStatus sets the LastDeliveryStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsUpdateWebhooksResponse) SetLastDeliveryStatus(lastDeliveryStatus *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus) {
+	s.LastDeliveryStatus = lastDeliveryStatus
+	s.require(subscriptionsUpdateWebhooksResponseFieldLastDeliveryStatus)
+}
+
+// SetLastDeliveryAt sets the LastDeliveryAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsUpdateWebhooksResponse) SetLastDeliveryAt(lastDeliveryAt *time.Time) {
+	s.LastDeliveryAt = lastDeliveryAt
+	s.require(subscriptionsUpdateWebhooksResponseFieldLastDeliveryAt)
+}
+
+// SetPausedAt sets the PausedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsUpdateWebhooksResponse) SetPausedAt(pausedAt *time.Time) {
+	s.PausedAt = pausedAt
+	s.require(subscriptionsUpdateWebhooksResponseFieldPausedAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1WebhooksSubscriptionsUpdateResponseFieldCreatedAt)
+func (s *SubscriptionsUpdateWebhooksResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(subscriptionsUpdateWebhooksResponseFieldCreatedAt)
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1WebhooksSubscriptionsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (s *SubscriptionsUpdateWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type embed SubscriptionsUpdateWebhooksResponse
+	var unmarshaler = struct {
+		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1WebhooksSubscriptionsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SubscriptionsUpdateWebhooksResponse(unmarshaler.embed)
+	s.LastDeliveryAt = unmarshaler.LastDeliveryAt.TimePtr()
+	s.PausedAt = unmarshaler.PausedAt.TimePtr()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1WebhooksSubscriptionsUpdateResponse
+func (s *SubscriptionsUpdateWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsUpdateWebhooksResponse
 	var marshaler = struct {
 		embed
+		LastDeliveryAt *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt       *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt      *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:          embed(*s),
+		LastDeliveryAt: internal.NewOptionalDateTime(s.LastDeliveryAt),
+		PausedAt:       internal.NewOptionalDateTime(s.PausedAt),
+		CreatedAt:      internal.NewDateTime(s.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1WebhooksSubscriptionsUpdateResponse) String() string {
-	if p == nil {
+func (s *SubscriptionsUpdateWebhooksResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubscriptionsUpdateWebhooksResponseLastDeliveryStatus string
+
+const (
+	SubscriptionsUpdateWebhooksResponseLastDeliveryStatusPending   SubscriptionsUpdateWebhooksResponseLastDeliveryStatus = "pending"
+	SubscriptionsUpdateWebhooksResponseLastDeliveryStatusDelivered SubscriptionsUpdateWebhooksResponseLastDeliveryStatus = "delivered"
+	SubscriptionsUpdateWebhooksResponseLastDeliveryStatusFailed    SubscriptionsUpdateWebhooksResponseLastDeliveryStatus = "failed"
+)
+
+func NewSubscriptionsUpdateWebhooksResponseLastDeliveryStatusFromString(s string) (SubscriptionsUpdateWebhooksResponseLastDeliveryStatus, error) {
+	switch s {
+	case "pending":
+		return SubscriptionsUpdateWebhooksResponseLastDeliveryStatusPending, nil
+	case "delivered":
+		return SubscriptionsUpdateWebhooksResponseLastDeliveryStatusDelivered, nil
+	case "failed":
+		return SubscriptionsUpdateWebhooksResponseLastDeliveryStatusFailed, nil
+	}
+	var t SubscriptionsUpdateWebhooksResponseLastDeliveryStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsUpdateWebhooksResponseLastDeliveryStatus) Ptr() *SubscriptionsUpdateWebhooksResponseLastDeliveryStatus {
+	return &s
 }

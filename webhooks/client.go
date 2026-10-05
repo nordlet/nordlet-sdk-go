@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1WebhooksSubscriptionsCreate(
+func (c *Client) SubscriptionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsCreateRequest,
+	request *nordlet.SubscriptionsCreateWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksSubscriptionsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksSubscriptionsCreate(
+) (*nordlet.SubscriptionsCreateWebhooksResponse, error) {
+	response, err := c.WithRawResponse.SubscriptionsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1WebhooksSubscriptionsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1WebhooksSubscriptionsList(
+func (c *Client) SubscriptionsList(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsListRequest,
+	request *nordlet.SubscriptionsListWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksSubscriptionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksSubscriptionsList(
+) (*nordlet.SubscriptionsListWebhooksResponse, error) {
+	response, err := c.WithRawResponse.SubscriptionsList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1WebhooksSubscriptionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1WebhooksSubscriptionsUpdate(
+func (c *Client) SubscriptionsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsUpdateRequest,
+	request *nordlet.SubscriptionsUpdateWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksSubscriptionsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksSubscriptionsUpdate(
+) (*nordlet.SubscriptionsUpdateWebhooksResponse, error) {
+	response, err := c.WithRawResponse.SubscriptionsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1WebhooksSubscriptionsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1WebhooksSubscriptionsDelete(
+func (c *Client) SubscriptionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsDeleteRequest,
+	request *nordlet.SubscriptionsDeleteWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksSubscriptionsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksSubscriptionsDelete(
+) (*nordlet.SubscriptionsDeleteWebhooksResponse, error) {
+	response, err := c.WithRawResponse.SubscriptionsDelete(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1WebhooksSubscriptionsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1WebhooksDeliveriesList(
+func (c *Client) DeliveriesList(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksDeliveriesListRequest,
+	request *nordlet.DeliveriesListWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksDeliveriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksDeliveriesList(
+) (*nordlet.DeliveriesListWebhooksResponse, error) {
+	response, err := c.WithRawResponse.DeliveriesList(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1WebhooksDeliveriesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1WebhooksDeliveriesRedeliver(
+func (c *Client) DeliveriesRedeliver(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksDeliveriesRedeliverRequest,
+	request *nordlet.DeliveriesRedeliverWebhooksRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1WebhooksDeliveriesRedeliverResponse, error) {
-	response, err := c.WithRawResponse.PostV1WebhooksDeliveriesRedeliver(
+) (*nordlet.DeliveriesRedeliverWebhooksResponse, error) {
+	response, err := c.WithRawResponse.DeliveriesRedeliver(
 		ctx,
 		request,
 		opts...,

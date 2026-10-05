@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1DeclarationsLtIntrastatCompute(
+func (c *Client) LtIntrastatCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIntrastatComputeRequest,
+	request *nordlet.LtIntrastatComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIntrastatComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIntrastatCompute(
+) (*nordlet.LtIntrastatComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIntrastatCompute(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1DeclarationsLtIntrastatCompute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtIvazGenerate(
+func (c *Client) LtIvazGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazGenerateRequest,
+	request *nordlet.LtIvazGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIvazGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIvazGenerate(
+) (*nordlet.LtIvazGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIvazGenerate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1DeclarationsLtIvazGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtIntrastatObligation(
+func (c *Client) LtIntrastatObligation(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIntrastatObligationRequest,
+	request *nordlet.LtIntrastatObligationDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIntrastatObligationResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIntrastatObligation(
+) (*nordlet.LtIntrastatObligationDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIntrastatObligation(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1DeclarationsLtIntrastatObligation(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtIsafGenerate(
+func (c *Client) LtIsafGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIsafGenerateRequest,
+	request *nordlet.LtIsafGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIsafGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIsafGenerate(
+) (*nordlet.LtIsafGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIsafGenerate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1DeclarationsLtIsafGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtFr0600Compute(
+func (c *Client) LtFr0600Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtFr0600ComputeRequest,
+	request *nordlet.LtFr0600ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtFr0600ComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtFr0600Compute(
+) (*nordlet.LtFr0600ComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtFr0600Compute(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1DeclarationsLtFr0600Compute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtGpm313Compute(
+func (c *Client) LtGpm313Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtGpm313ComputeRequest,
+	request *nordlet.LtGpm313ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtGpm313ComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtGpm313Compute(
+) (*nordlet.LtGpm313ComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtGpm313Compute(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1DeclarationsLtGpm313Compute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtSamCompute(
+func (c *Client) LtSamCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSamComputeRequest,
+	request *nordlet.LtSamComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtSamComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtSamCompute(
+) (*nordlet.LtSamComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtSamCompute(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1DeclarationsLtSamCompute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtSdGenerate(
+func (c *Client) LtSdGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSdGenerateRequest,
+	request *nordlet.LtSdGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtSdGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtSdGenerate(
+) (*nordlet.LtSdGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtSdGenerate(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1DeclarationsLtSdGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtSaftGenerate(
+func (c *Client) LtSaftGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSaftGenerateRequest,
+	request *nordlet.LtSaftGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtSaftGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtSaftGenerate(
+) (*nordlet.LtSaftGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtSaftGenerate(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1DeclarationsLtSaftGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtIvazAmend(
+func (c *Client) LtIvazAmend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazAmendRequest,
+	request *nordlet.LtIvazAmendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIvazAmendResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIvazAmend(
+) (*nordlet.LtIvazAmendDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIvazAmend(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1DeclarationsLtIvazAmend(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtIvazCancel(
+func (c *Client) LtIvazCancel(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazCancelRequest,
+	request *nordlet.LtIvazCancelDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtIvazCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtIvazCancel(
+) (*nordlet.LtIvazCancelDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtIvazCancel(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1DeclarationsLtIvazCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtFr0564Compute(
+func (c *Client) LtFr0564Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtFr0564ComputeRequest,
+	request *nordlet.LtFr0564ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtFr0564ComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtFr0564Compute(
+) (*nordlet.LtFr0564ComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtFr0564Compute(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1DeclarationsLtFr0564Compute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtGpm312Compute(
+func (c *Client) LtGpm312Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtGpm312ComputeRequest,
+	request *nordlet.LtGpm312ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtGpm312ComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtGpm312Compute(
+) (*nordlet.LtGpm312ComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtGpm312Compute(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1DeclarationsLtGpm312Compute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsLtPln204Compute(
+func (c *Client) LtPln204Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtPln204ComputeRequest,
+	request *nordlet.LtPln204ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtPln204ComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtPln204Compute(
+) (*nordlet.LtPln204ComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtPln204Compute(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1DeclarationsLtPln204Compute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuOssCompute(
+func (c *Client) EuOssCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuOssComputeRequest,
+	request *nordlet.EuOssComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuOssComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuOssCompute(
+) (*nordlet.EuOssComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuOssCompute(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1DeclarationsEuOssCompute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuIossCompute(
+func (c *Client) EuIossCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuIossComputeRequest,
+	request *nordlet.EuIossComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuIossComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuIossCompute(
+) (*nordlet.EuIossComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuIossCompute(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1DeclarationsEuIossCompute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuDistanceSalesThresholdGet(
+func (c *Client) EuDistanceSalesThresholdGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetRequest,
+	request *nordlet.EuDistanceSalesThresholdGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuDistanceSalesThresholdGet(
+) (*nordlet.EuDistanceSalesThresholdGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuDistanceSalesThresholdGet(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1DeclarationsEuDistanceSalesThresholdGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuUnionTurnoverGet(
+func (c *Client) EuUnionTurnoverGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuUnionTurnoverGetRequest,
+	request *nordlet.EuUnionTurnoverGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuUnionTurnoverGet(
+) (*nordlet.EuUnionTurnoverGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuUnionTurnoverGet(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1DeclarationsEuUnionTurnoverGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuSmeCrossBorderReportCompute(
+func (c *Client) EuSmeCrossBorderReportCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeRequest,
+	request *nordlet.EuSmeCrossBorderReportComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeCrossBorderReportCompute(
+) (*nordlet.EuSmeCrossBorderReportComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuSmeCrossBorderReportCompute(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1DeclarationsEuSmeCrossBorderReportCompute(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuSmeThresholdsList(
+func (c *Client) EuSmeThresholdsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeThresholdsListRequest,
+	request *nordlet.EuSmeThresholdsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuSmeThresholdsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeThresholdsList(
+) (*nordlet.EuSmeThresholdsListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuSmeThresholdsList(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +354,12 @@ func (c *Client) PostV1DeclarationsEuSmeThresholdsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuSmeThresholdGet(
+func (c *Client) EuSmeThresholdGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeThresholdGetRequest,
+	request *nordlet.EuSmeThresholdGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuSmeThresholdGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeThresholdGet(
+) (*nordlet.EuSmeThresholdGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuSmeThresholdGet(
 		ctx,
 		request,
 		opts...,
@@ -370,12 +370,12 @@ func (c *Client) PostV1DeclarationsEuSmeThresholdGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuVatReturnPacksList(
+func (c *Client) EuVatReturnPacksList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuVatReturnPacksListRequest,
+	request *nordlet.EuVatReturnPacksListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuVatReturnPacksListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuVatReturnPacksList(
+) (*nordlet.EuVatReturnPacksListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuVatReturnPacksList(
 		ctx,
 		request,
 		opts...,
@@ -386,12 +386,12 @@ func (c *Client) PostV1DeclarationsEuVatReturnPacksList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsEuVatReturnCompute(
+func (c *Client) EuVatReturnCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuVatReturnComputeRequest,
+	request *nordlet.EuVatReturnComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEuVatReturnComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEuVatReturnCompute(
+) (*nordlet.EuVatReturnComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuVatReturnCompute(
 		ctx,
 		request,
 		opts...,
@@ -403,12 +403,12 @@ func (c *Client) PostV1DeclarationsEuVatReturnCompute(
 }
 
 // Generate the Polish JPK_V7M(3) file (VAT declaration with evidence) for a month, per the MF schema in force since February 2026. Amounts must already be in PLN; rows are marked BFK until a KSeF integration supplies invoice numbers. Review the warnings before submitting via e-dokumenty.mf.gov.pl.
-func (c *Client) PostV1DeclarationsPlJpkV7MGenerate(
+func (c *Client) PlJpkV7MGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest,
+	request *nordlet.PlJpkV7MGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlJpkV7MGenerate(
+) (*nordlet.PlJpkV7MGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlJpkV7MGenerate(
 		ctx,
 		request,
 		opts...,
@@ -420,12 +420,12 @@ func (c *Client) PostV1DeclarationsPlJpkV7MGenerate(
 }
 
 // Build the rows of the Polish recapitulative statement VAT-UE for a month: section C intra-Community supplies of goods, section D intra-Community acquisitions, section E services taxed where the customer is established. Amounts are full złoty per counterparty. The VAT-UE(5) file itself goes out from the EU sales list deadline in the calendar.
-func (c *Client) PostV1DeclarationsPlVatUeGenerate(
+func (c *Client) PlVatUeGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlVatUeGenerateRequest,
+	request *nordlet.PlVatUeGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlVatUeGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlVatUeGenerate(
+) (*nordlet.PlVatUeGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlVatUeGenerate(
 		ctx,
 		request,
 		opts...,
@@ -437,12 +437,12 @@ func (c *Client) PostV1DeclarationsPlVatUeGenerate(
 }
 
 // Build the rows of the Polish INTRASTAT declaration for a month, arrivals or dispatches, grouped by CN code, partner country, country of origin, partner VAT number, nature of transaction, transport and delivery terms. Values are whole złoty converted at the invoice rate; credit notes with goods lines are returns (code 21). Goods without a CN code are left out and named in the warnings. The IST message itself goes out from the Intrastat deadline in the calendar.
-func (c *Client) PostV1DeclarationsPlIntrastatGenerate(
+func (c *Client) PlIntrastatGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlIntrastatGenerateRequest,
+	request *nordlet.PlIntrastatGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlIntrastatGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlIntrastatGenerate(
+) (*nordlet.PlIntrastatGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlIntrastatGenerate(
 		ctx,
 		request,
 		opts...,
@@ -454,12 +454,12 @@ func (c *Client) PostV1DeclarationsPlIntrastatGenerate(
 }
 
 // List the invoices KSeF holds for this company as the buyer, for a window of acquisition timestamps. Each row carries the KSeF number and, when the document number matches a registered purchase invoice, the invoice it belongs to.
-func (c *Client) PostV1DeclarationsPlKsefReceivedList(
+func (c *Client) PlKsefReceivedList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceivedListRequest,
+	request *nordlet.PlKsefReceivedListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlKsefReceivedListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlKsefReceivedList(
+) (*nordlet.PlKsefReceivedListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlKsefReceivedList(
 		ctx,
 		request,
 		opts...,
@@ -471,12 +471,12 @@ func (c *Client) PostV1DeclarationsPlKsefReceivedList(
 }
 
 // Read one invoice out of KSeF by its national number. With a purchase invoice given, the KSeF number is written onto that invoice, which is what makes the purchase row of JPK_V7M carry NrKSeF instead of the BFK marker.
-func (c *Client) PostV1DeclarationsPlKsefReceivedFetch(
+func (c *Client) PlKsefReceivedFetch(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceivedFetchRequest,
+	request *nordlet.PlKsefReceivedFetchDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlKsefReceivedFetchResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlKsefReceivedFetch(
+) (*nordlet.PlKsefReceivedFetchDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlKsefReceivedFetch(
 		ctx,
 		request,
 		opts...,
@@ -488,12 +488,12 @@ func (c *Client) PostV1DeclarationsPlKsefReceivedFetch(
 }
 
 // The UPO for a KSeF session. KSeF issues one receipt per session rather than per invoice, so the session reference number from the send is what identifies it.
-func (c *Client) PostV1DeclarationsPlKsefReceipt(
+func (c *Client) PlKsefReceipt(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceiptRequest,
+	request *nordlet.PlKsefReceiptDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlKsefReceiptResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlKsefReceipt(
+) (*nordlet.PlKsefReceiptDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlKsefReceipt(
 		ctx,
 		request,
 		opts...,
@@ -505,12 +505,12 @@ func (c *Client) PostV1DeclarationsPlKsefReceipt(
 }
 
 // The differences between the accounting result and the taxable profit: non-deductible expenses, income added to or left out of the tax base, extra deductible expenses, donations, losses carried forward, reliefs and tax credits. The annual corporate income tax return is built from them.
-func (c *Client) TaxAdjustmentsRecordedForATaxYear(
+func (c *Client) TaxAdjustmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsListRequest,
+	request *nordlet.TaxAdjustmentsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxAdjustmentsListResponse, error) {
-	response, err := c.WithRawResponse.TaxAdjustmentsRecordedForATaxYear(
+) (*nordlet.TaxAdjustmentsListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxAdjustmentsList(
 		ctx,
 		request,
 		opts...,
@@ -521,12 +521,12 @@ func (c *Client) TaxAdjustmentsRecordedForATaxYear(
 	return response.Body, nil
 }
 
-func (c *Client) RecordATaxAdjustmentForATaxYear(
+func (c *Client) TaxAdjustmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequest,
+	request *nordlet.TaxAdjustmentsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxAdjustmentsCreateResponse, error) {
-	response, err := c.WithRawResponse.RecordATaxAdjustmentForATaxYear(
+) (*nordlet.TaxAdjustmentsCreateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxAdjustmentsCreate(
 		ctx,
 		request,
 		opts...,
@@ -537,12 +537,12 @@ func (c *Client) RecordATaxAdjustmentForATaxYear(
 	return response.Body, nil
 }
 
-func (c *Client) ChangeARecordedTaxAdjustment(
+func (c *Client) TaxAdjustmentsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsUpdateRequest,
+	request *nordlet.TaxAdjustmentsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxAdjustmentsUpdateResponse, error) {
-	response, err := c.WithRawResponse.ChangeARecordedTaxAdjustment(
+) (*nordlet.TaxAdjustmentsUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxAdjustmentsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -553,12 +553,12 @@ func (c *Client) ChangeARecordedTaxAdjustment(
 	return response.Body, nil
 }
 
-func (c *Client) RemoveARecordedTaxAdjustment(
+func (c *Client) TaxAdjustmentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsDeleteRequest,
+	request *nordlet.TaxAdjustmentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxAdjustmentsDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveARecordedTaxAdjustment(
+) (*nordlet.TaxAdjustmentsDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxAdjustmentsDelete(
 		ctx,
 		request,
 		opts...,
@@ -570,12 +570,12 @@ func (c *Client) RemoveARecordedTaxAdjustment(
 }
 
 // What the company has paid the administration towards a tax before the return is filed: payments on account, tax withheld at source by others, a final settlement, and a refund received. Returns report these on their own lines, so the amount they ask for is the balance.
-func (c *Client) PaymentsAlreadyMadeTowardsATaxOfAYear(
+func (c *Client) TaxPaymentsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsListRequest,
+	request *nordlet.TaxPaymentsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxPaymentsListResponse, error) {
-	response, err := c.WithRawResponse.PaymentsAlreadyMadeTowardsATaxOfAYear(
+) (*nordlet.TaxPaymentsListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxPaymentsList(
 		ctx,
 		request,
 		opts...,
@@ -586,12 +586,12 @@ func (c *Client) PaymentsAlreadyMadeTowardsATaxOfAYear(
 	return response.Body, nil
 }
 
-func (c *Client) RecordAPaymentMadeTowardsATax(
+func (c *Client) TaxPaymentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsCreateRequest,
+	request *nordlet.TaxPaymentsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxPaymentsCreateResponse, error) {
-	response, err := c.WithRawResponse.RecordAPaymentMadeTowardsATax(
+) (*nordlet.TaxPaymentsCreateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxPaymentsCreate(
 		ctx,
 		request,
 		opts...,
@@ -602,12 +602,12 @@ func (c *Client) RecordAPaymentMadeTowardsATax(
 	return response.Body, nil
 }
 
-func (c *Client) ChangeARecordedTaxPayment(
+func (c *Client) TaxPaymentsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsUpdateRequest,
+	request *nordlet.TaxPaymentsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxPaymentsUpdateResponse, error) {
-	response, err := c.WithRawResponse.ChangeARecordedTaxPayment(
+) (*nordlet.TaxPaymentsUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxPaymentsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -618,12 +618,12 @@ func (c *Client) ChangeARecordedTaxPayment(
 	return response.Body, nil
 }
 
-func (c *Client) RemoveARecordedTaxPayment(
+func (c *Client) TaxPaymentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsDeleteRequest,
+	request *nordlet.TaxPaymentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsTaxPaymentsDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveARecordedTaxPayment(
+) (*nordlet.TaxPaymentsDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.TaxPaymentsDelete(
 		ctx,
 		request,
 		opts...,
@@ -635,12 +635,12 @@ func (c *Client) RemoveARecordedTaxPayment(
 }
 
 // Whether the general meeting adopted the annual accounts and on which date, the date the accounts were prepared, and which directors signed them. The annual accounts filed with the trade register are built from these facts.
-func (c *Client) AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
+func (c *Client) AnnualAccountsGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsGetRequest,
+	request *nordlet.AnnualAccountsGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsGetResponse, error) {
-	response, err := c.WithRawResponse.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
+) (*nordlet.AnnualAccountsGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsGet(
 		ctx,
 		request,
 		opts...,
@@ -651,12 +651,12 @@ func (c *Client) AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
 	return response.Body, nil
 }
 
-func (c *Client) RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
+func (c *Client) AnnualAccountsSet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSetRequest,
+	request *nordlet.AnnualAccountsSetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsSetResponse, error) {
-	response, err := c.WithRawResponse.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
+) (*nordlet.AnnualAccountsSetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsSet(
 		ctx,
 		request,
 		opts...,
@@ -667,12 +667,12 @@ func (c *Client) RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 	return response.Body, nil
 }
 
-func (c *Client) RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
+func (c *Client) AnnualAccountsSignaturesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequest,
+	request *nordlet.AnnualAccountsSignaturesCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateResponse, error) {
-	response, err := c.WithRawResponse.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
+) (*nordlet.AnnualAccountsSignaturesCreateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsSignaturesCreate(
 		ctx,
 		request,
 		opts...,
@@ -683,12 +683,12 @@ func (c *Client) RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 	return response.Body, nil
 }
 
-func (c *Client) ChangeARecordedDirectorSignature(
+func (c *Client) AnnualAccountsSignaturesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequest,
+	request *nordlet.AnnualAccountsSignaturesUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateResponse, error) {
-	response, err := c.WithRawResponse.ChangeARecordedDirectorSignature(
+) (*nordlet.AnnualAccountsSignaturesUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsSignaturesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -699,12 +699,12 @@ func (c *Client) ChangeARecordedDirectorSignature(
 	return response.Body, nil
 }
 
-func (c *Client) RemoveARecordedDirectorSignature(
+func (c *Client) AnnualAccountsSignaturesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteRequest,
+	request *nordlet.AnnualAccountsSignaturesDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveARecordedDirectorSignature(
+) (*nordlet.AnnualAccountsSignaturesDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsSignaturesDelete(
 		ctx,
 		request,
 		opts...,
@@ -715,12 +715,12 @@ func (c *Client) RemoveARecordedDirectorSignature(
 	return response.Body, nil
 }
 
-func (c *Client) RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(
+func (c *Client) AnnualAccountsDistributionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequest,
+	request *nordlet.AnnualAccountsDistributionsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateResponse, error) {
-	response, err := c.WithRawResponse.RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(
+) (*nordlet.AnnualAccountsDistributionsCreateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsDistributionsCreate(
 		ctx,
 		request,
 		opts...,
@@ -731,12 +731,12 @@ func (c *Client) RecordADecisionToDistributeProfitADividendAnInterimDividendOrAP
 	return response.Body, nil
 }
 
-func (c *Client) ChangeARecordedProfitDistribution(
+func (c *Client) AnnualAccountsDistributionsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequest,
+	request *nordlet.AnnualAccountsDistributionsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateResponse, error) {
-	response, err := c.WithRawResponse.ChangeARecordedProfitDistribution(
+) (*nordlet.AnnualAccountsDistributionsUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsDistributionsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -747,12 +747,12 @@ func (c *Client) ChangeARecordedProfitDistribution(
 	return response.Body, nil
 }
 
-func (c *Client) RemoveARecordedProfitDistribution(
+func (c *Client) AnnualAccountsDistributionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteRequest,
+	request *nordlet.AnnualAccountsDistributionsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveARecordedProfitDistribution(
+) (*nordlet.AnnualAccountsDistributionsDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsDistributionsDelete(
 		ctx,
 		request,
 		opts...,
@@ -764,12 +764,12 @@ func (c *Client) RemoveARecordedProfitDistribution(
 }
 
 // Links a file uploaded through files/upload (its storageKey) to the annual accounts of the year as the notes, the management report, the auditor statement, the profit appropriation resolution, the approval certificate, the general data sheet, the full report as a pdf, or another document. Deposits that must carry these documents take them from here.
-func (c *Client) AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
+func (c *Client) AnnualAccountsAttachmentsAdd(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequest,
+	request *nordlet.AnnualAccountsAttachmentsAddDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddResponse, error) {
-	response, err := c.WithRawResponse.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
+) (*nordlet.AnnualAccountsAttachmentsAddDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsAttachmentsAdd(
 		ctx,
 		request,
 		opts...,
@@ -780,12 +780,12 @@ func (c *Client) AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 	return response.Body, nil
 }
 
-func (c *Client) RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
+func (c *Client) AnnualAccountsAttachmentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteRequest,
+	request *nordlet.AnnualAccountsAttachmentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
+) (*nordlet.AnnualAccountsAttachmentsDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AnnualAccountsAttachmentsDelete(
 		ctx,
 		request,
 		opts...,
@@ -797,12 +797,12 @@ func (c *Client) RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
 }
 
 // Compute the company income tax return TD4 of a tax year from the ledger and the recorded tax adjustments: the accounting profit, the add-backs, deductions, capital allowances and losses brought forward, the chargeable income, the corporation tax at the rate of the year and the double tax relief, as the fields the company keys into TAXISnet or Tax For All. The Tax Department publishes no upload layout for the TD4; the XML is a working file.
-func (c *Client) PostV1DeclarationsCyTd4Generate(
+func (c *Client) CyTd4Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCyTd4GenerateRequest,
+	request *nordlet.CyTd4GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsCyTd4GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsCyTd4Generate(
+) (*nordlet.CyTd4GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.CyTd4Generate(
 		ctx,
 		request,
 		opts...,
@@ -814,12 +814,12 @@ func (c *Client) PostV1DeclarationsCyTd4Generate(
 }
 
 // Build the annual return HE32 of a year: the figures the Registrar’s e-filing screens ask for (company number, registered office, made-up-to date, share capital, register of members, directors and secretary, annual general meeting date, the accounts summary), the working file, and the printed form HE32(I) filled in as a PDF for signing and for keying into the Registrar’s system, which takes the return only through its own screens.
-func (c *Client) PostV1DeclarationsCyHe32Generate(
+func (c *Client) CyHe32Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCyHe32GenerateRequest,
+	request *nordlet.CyHe32GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsCyHe32GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsCyHe32Generate(
+) (*nordlet.CyHe32GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.CyHe32Generate(
 		ctx,
 		request,
 		opts...,
@@ -831,12 +831,12 @@ func (c *Client) PostV1DeclarationsCyHe32Generate(
 }
 
 // Build one of the German returns that ELSTER accepts only through a licensed ERiC transmission (E-Bilanz, Körperschaftsteuer, Gewerbesteuer with its Zerlegungserklärung, annual VAT return, Lohnsteuer-Anmeldung, Lohnsteuerbescheinigung) for the company to send through its own ELSTER-capable program. The period is the year, or YYYY-MM for the monthly Lohnsteuer-Anmeldung.
-func (c *Client) PostV1DeclarationsDeReturnsGenerate(
+func (c *Client) DeReturnsGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnsGenerateRequest,
+	request *nordlet.DeReturnsGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDeReturnsGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDeReturnsGenerate(
+) (*nordlet.DeReturnsGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DeReturnsGenerate(
 		ctx,
 		request,
 		opts...,
@@ -848,12 +848,12 @@ func (c *Client) PostV1DeclarationsDeReturnsGenerate(
 }
 
 // The facts of one year that the German annual returns (Körperschaftsteuer, Gewerbesteuer, Umsatzsteuererklärung) need and the ledger does not hold: changes of shareholders, contracts with shareholders, the tax contribution account, loss carry-back, the donation carry-forward, the business premises with the municipalities for the apportionment of the trade tax, the land values or property tax and the participations for the trade tax additions and reductions, the foreign income per country for the Anlage AESt, the date of leaving the small-business scheme and the Anlage UN answers of a company seated abroad. A key that is absent has not been answered.
-func (c *Client) PostV1DeclarationsDeReturnFactsGet(
+func (c *Client) DeReturnFactsGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnFactsGetRequest,
+	request *nordlet.DeReturnFactsGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDeReturnFactsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDeReturnFactsGet(
+) (*nordlet.DeReturnFactsGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DeReturnFactsGet(
 		ctx,
 		request,
 		opts...,
@@ -865,12 +865,12 @@ func (c *Client) PostV1DeclarationsDeReturnFactsGet(
 }
 
 // Replace the facts of one year for the German annual returns. The returns built afterwards read them; a key left out stays unanswered.
-func (c *Client) PostV1DeclarationsDeReturnFactsSet(
+func (c *Client) DeReturnFactsSet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnFactsSetRequest,
+	request *nordlet.DeReturnFactsSetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDeReturnFactsSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDeReturnFactsSet(
+) (*nordlet.DeReturnFactsSetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DeReturnFactsSet(
 		ctx,
 		request,
 		opts...,
@@ -882,12 +882,12 @@ func (c *Client) PostV1DeclarationsDeReturnFactsSet(
 }
 
 // Build the DEÜV notifications of a month (Anmeldung for every start, Abmeldung for every leaving, in December the Jahresmeldung for everyone employed on 31 December) as DSME records with the DBME, DBNA, DBGB and DBAN blocks of Anlage 4 in force from 2026, from the approved payroll runs and the employee record, for the company's own transmission channel.
-func (c *Client) PostV1DeclarationsDeDeuevGenerate(
+func (c *Client) DeDeuevGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeDeuevGenerateRequest,
+	request *nordlet.DeDeuevGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDeDeuevGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDeDeuevGenerate(
+) (*nordlet.DeDeuevGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DeDeuevGenerate(
 		ctx,
 		request,
 		opts...,
@@ -899,12 +899,12 @@ func (c *Client) PostV1DeclarationsDeDeuevGenerate(
 }
 
 // Build the monthly contribution statement to the health insurers (Beitragsnachweis) from the payroll run: one fixed-length record BW02 per insurer, in the record layout in force from 2026, ready for the company's own transmission channel.
-func (c *Client) PostV1DeclarationsDeBeitragsnachweisGenerate(
+func (c *Client) DeBeitragsnachweisGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateRequest,
+	request *nordlet.DeBeitragsnachweisGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDeBeitragsnachweisGenerate(
+) (*nordlet.DeBeitragsnachweisGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DeBeitragsnachweisGenerate(
 		ctx,
 		request,
 		opts...,
@@ -916,12 +916,12 @@ func (c *Client) PostV1DeclarationsDeBeitragsnachweisGenerate(
 }
 
 // Compute the oplysningsskema for selskaber (selskabsselvangivelsen) of an income year from the ledger and the recorded tax adjustments: accounting result before tax, tax adjustments, losses carried forward, taxable income, the 22 % corporation tax, reliefs and the balance, as the rubrikker the company keys into TastSelv Selskabsskat (DIAS). Skatteforvaltningen publishes no file format for the return; the XML is a working file.
-func (c *Client) PostV1DeclarationsDkSelskabsskatGenerate(
+func (c *Client) DkSelskabsskatGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDkSelskabsskatGenerateRequest,
+	request *nordlet.DkSelskabsskatGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsDkSelskabsskatGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsDkSelskabsskatGenerate(
+) (*nordlet.DkSelskabsskatGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.DkSelskabsskatGenerate(
 		ctx,
 		request,
 		opts...,
@@ -933,12 +933,12 @@ func (c *Client) PostV1DeclarationsDkSelskabsskatGenerate(
 }
 
 // Send one employment register (töötamise register) entry for an employment contract to e-MTA over X-tee: the start of work, or its end with the reason recorded on the contract.
-func (c *Client) PostV1DeclarationsEeEmploymentRegisterSend(
+func (c *Client) EeEmploymentRegisterSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequest,
+	request *nordlet.EeEmploymentRegisterSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEeEmploymentRegisterSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEeEmploymentRegisterSend(
+) (*nordlet.EeEmploymentRegisterSendDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EeEmploymentRegisterSend(
 		ctx,
 		request,
 		opts...,
@@ -950,12 +950,12 @@ func (c *Client) PostV1DeclarationsEeEmploymentRegisterSend(
 }
 
 // Nordlet's declaración responsable for its VERI*FACTU invoicing system (Orden HAC/1177/2024, art. 15), as a PDF and as plain text.
-func (c *Client) PostV1DeclarationsEsVerifactuDeclaracionResponsable(
+func (c *Client) EsVerifactuDeclaracionResponsable(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableRequest,
+	request *nordlet.EsVerifactuDeclaracionResponsableDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsEsVerifactuDeclaracionResponsable(
+) (*nordlet.EsVerifactuDeclaracionResponsableDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EsVerifactuDeclaracionResponsable(
 		ctx,
 		request,
 		opts...,
@@ -967,12 +967,12 @@ func (c *Client) PostV1DeclarationsEsVerifactuDeclaracionResponsable(
 }
 
 // Build the Form CT1 of an accounting year as the ROS version 26 XML and the accompanying financial statements as inline XBRL on the FRS 102 Irish Extension 2026 taxonomy Revenue accepts, both from the ledger, the recorded tax adjustments, the annual accounts record and the officers, for upload through the company’s own ROS account. Says whether the company is above the iXBRL deferral limits (balance sheet total €4.4 million, turnover €8.8 million, 50 employees).
-func (c *Client) PostV1DeclarationsIeCt1Generate(
+func (c *Client) IeCt1Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsIeCt1GenerateRequest,
+	request *nordlet.IeCt1GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsIeCt1GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsIeCt1Generate(
+) (*nordlet.IeCt1GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.IeCt1Generate(
 		ctx,
 		request,
 		opts...,
@@ -984,12 +984,12 @@ func (c *Client) PostV1DeclarationsIeCt1Generate(
 }
 
 // Build the working paper for the Form B1 annual return of a financial year — company details, registered office, directors and secretary from Settings → Officers, the members from Settings → Shareholders, the issued share capital and the figures of the financial statements — in the order the CORE screens ask for them. The CRO publishes no file format for the B1, so it is keyed into CORE.
-func (c *Client) PostV1DeclarationsIeB1Generate(
+func (c *Client) IeB1Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsIeB1GenerateRequest,
+	request *nordlet.IeB1GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsIeB1GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsIeB1Generate(
+) (*nordlet.IeB1GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.IeB1Generate(
 		ctx,
 		request,
 		opts...,
@@ -1001,12 +1001,12 @@ func (c *Client) PostV1DeclarationsIeB1Generate(
 }
 
 // Build the TD16-TD19 integration document for a registered purchase invoice and send it to the Sistema di Interscambio. Since July 2022 a purchase from a supplier established abroad is reported this way instead of the esterometro. The Italian VAT rate to self-assess is a judgement about the supply: pass vatRatePercent unless the purchase lines already carry it, otherwise the request is refused rather than guessed.
-func (c *Client) PostV1DeclarationsItSdiPurchaseSend(
+func (c *Client) ItSdiPurchaseSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsItSdiPurchaseSendRequest,
+	request *nordlet.ItSdiPurchaseSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsItSdiPurchaseSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsItSdiPurchaseSend(
+) (*nordlet.ItSdiPurchaseSendDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.ItSdiPurchaseSend(
 		ctx,
 		request,
 		opts...,
@@ -1018,12 +1018,12 @@ func (c *Client) PostV1DeclarationsItSdiPurchaseSend(
 }
 
 // Render the TD16-TD19 integration document for a registered purchase invoice without sending it, so the rate and the document type can be checked first.
-func (c *Client) PostV1DeclarationsItSdiPurchasePreview(
+func (c *Client) ItSdiPurchasePreview(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsItSdiPurchasePreviewRequest,
+	request *nordlet.ItSdiPurchasePreviewDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsItSdiPurchasePreviewResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsItSdiPurchasePreview(
+) (*nordlet.ItSdiPurchasePreviewDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.ItSdiPurchasePreview(
 		ctx,
 		request,
 		opts...,
@@ -1034,13 +1034,13 @@ func (c *Client) PostV1DeclarationsItSdiPurchasePreview(
 	return response.Body, nil
 }
 
-// Upload the SAF-T file to i.SAF-T over the iSAFTUploaderService web service and start its processing. The submission itself is confirmed separately, because after confirmation the file can no longer be corrected.
-func (c *Client) PostV1DeclarationsLtSaftSend(
+// Upload the SAF-T file to i.SAF-T over the iSAFTUploaderService web service and start its processing. The file, the case reference and the status are kept as a declaration submission (submissionId), whose outcome Nordlet then checks with i.SAF-T. The submission itself is confirmed separately, because after confirmation the file can no longer be corrected. A range and data type already sent is sent again only with amend: true.
+func (c *Client) LtSaftSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSaftSendRequest,
+	request *nordlet.LtSaftSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtSaftSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtSaftSend(
+) (*nordlet.LtSaftSendDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtSaftSend(
 		ctx,
 		request,
 		opts...,
@@ -1052,12 +1052,12 @@ func (c *Client) PostV1DeclarationsLtSaftSend(
 }
 
 // Render the Sodra 1-SD or 2-SD notice for the contracts starting or ending in the range as an .ffdata document for EDAS.
-func (c *Client) PostV1DeclarationsLtSdFfdata(
+func (c *Client) LtSdFfdata(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSdFfdataRequest,
+	request *nordlet.LtSdFfdataDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtSdFfdataResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtSdFfdata(
+) (*nordlet.LtSdFfdataDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtSdFfdata(
 		ctx,
 		request,
 		opts...,
@@ -1069,12 +1069,12 @@ func (c *Client) PostV1DeclarationsLtSdFfdata(
 }
 
 // Render the annual corporate income tax return PLN204 as an .ffdata document, including the PLN204S and PLN204Z annexes, from the ledger and the tax adjustments recorded for that year.
-func (c *Client) PostV1DeclarationsLtPln204Ffdata(
+func (c *Client) LtPln204Ffdata(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtPln204FfdataRequest,
+	request *nordlet.LtPln204FfdataDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLtPln204FfdataResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLtPln204Ffdata(
+) (*nordlet.LtPln204FfdataDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LtPln204Ffdata(
 		ctx,
 		request,
 		opts...,
@@ -1086,12 +1086,12 @@ func (c *Client) PostV1DeclarationsLtPln204Ffdata(
 }
 
 // Compute the company income tax return and self-assessment of a year of assessment from the ledger and the recorded tax adjustments: the accounting profit before tax, the add-backs and deductions, the approved donations, capital allowances and losses carried forward, the chargeable income, the 35 % charge, the relief against the tax and the allocation of the distributable profit to the five tax accounts. The Malta Tax and Customs Administration issues the return as a personalised spreadsheet to the registered tax practitioner and publishes no layout, so the XML is a working file and the figures are keyed into that spreadsheet.
-func (c *Client) PostV1DeclarationsMtCompanyTaxGenerate(
+func (c *Client) MtCompanyTaxGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsMtCompanyTaxGenerateRequest,
+	request *nordlet.MtCompanyTaxGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsMtCompanyTaxGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsMtCompanyTaxGenerate(
+) (*nordlet.MtCompanyTaxGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.MtCompanyTaxGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1103,12 +1103,12 @@ func (c *Client) PostV1DeclarationsMtCompanyTaxGenerate(
 }
 
 // Build the annual return of a year: the company number, registered office and made-up-to date, the share capital, the register of members, the directors and the company secretary and the accounts summary, as the figures the Malta Business Registry asks for on its own screens, plus the printed Annual Return Form of the Seventh Schedule filled in as a PDF for signing.
-func (c *Client) PostV1DeclarationsMtAnnualReturnGenerate(
+func (c *Client) MtAnnualReturnGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsMtAnnualReturnGenerateRequest,
+	request *nordlet.MtAnnualReturnGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsMtAnnualReturnGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsMtAnnualReturnGenerate(
+) (*nordlet.MtAnnualReturnGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.MtAnnualReturnGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1120,12 +1120,12 @@ func (c *Client) PostV1DeclarationsMtAnnualReturnGenerate(
 }
 
 // Generate JPK_FA(4), the on-demand structure with every sales invoice issued in a period, its VAT bases per rate and one row per invoice line. Filed only when the tax office asks for it.
-func (c *Client) PostV1DeclarationsPlJpkFaGenerate(
+func (c *Client) PlJpkFaGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkFaGenerateRequest,
+	request *nordlet.PlJpkFaGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlJpkFaGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlJpkFaGenerate(
+) (*nordlet.PlJpkFaGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlJpkFaGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1137,12 +1137,12 @@ func (c *Client) PostV1DeclarationsPlJpkFaGenerate(
 }
 
 // Generate JPK_KR(1), the on-demand structure with the chart of accounts and its opening balances and turnover, the journal and the double entries behind it. Filed only when the tax office asks for it.
-func (c *Client) PostV1DeclarationsPlJpkKrGenerate(
+func (c *Client) PlJpkKrGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkKrGenerateRequest,
+	request *nordlet.PlJpkKrGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlJpkKrGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlJpkKrGenerate(
+) (*nordlet.PlJpkKrGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlJpkKrGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1154,12 +1154,12 @@ func (c *Client) PostV1DeclarationsPlJpkKrGenerate(
 }
 
 // Generate JPK_MAG(2), the on-demand structure with the warehouse documents of one warehouse: goods received from outside (PZ) or internally (PW) and issued to a customer (WZ) or internally (RW). Filed only when the tax office asks for it.
-func (c *Client) PostV1DeclarationsPlJpkMagGenerate(
+func (c *Client) PlJpkMagGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkMagGenerateRequest,
+	request *nordlet.PlJpkMagGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlJpkMagGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlJpkMagGenerate(
+) (*nordlet.PlJpkMagGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlJpkMagGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1171,12 +1171,12 @@ func (c *Client) PostV1DeclarationsPlJpkMagGenerate(
 }
 
 // Generate PIT-11(29) for every person on the payroll of one year: the pay, the deductible costs, the advance withheld and the social and health contributions taken off it. One document per person, because that is how the form is filed.
-func (c *Client) PostV1DeclarationsPlPit11Generate(
+func (c *Client) PlPit11Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlPit11GenerateRequest,
+	request *nordlet.PlPit11GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlPit11GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlPit11Generate(
+) (*nordlet.PlPit11GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlPit11Generate(
 		ctx,
 		request,
 		opts...,
@@ -1188,12 +1188,12 @@ func (c *Client) PostV1DeclarationsPlPit11Generate(
 }
 
 // Generate CIT-8(34), the annual corporate income tax return, from the ledger of the year and the recorded tax adjustments. The tax office code and the small-taxpayer setting come from the e-Deklaracje compliance settings, the seat address from the JPK gateway settings. Names the annexes the figures would need, which are not produced.
-func (c *Client) PostV1DeclarationsPlCit8Generate(
+func (c *Client) PlCit8Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlCit8GenerateRequest,
+	request *nordlet.PlCit8GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlCit8GenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlCit8Generate(
+) (*nordlet.PlCit8GenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlCit8Generate(
 		ctx,
 		request,
 		opts...,
@@ -1205,12 +1205,12 @@ func (c *Client) PostV1DeclarationsPlCit8Generate(
 }
 
 // Compute the monthly ZUS DRA settlement from the payroll run of one month: the pension, disability, sickness, accident and health insurance contributions and the Labour Fund, Solidarity Fund and guaranteed benefits fund charges, each split between the insured person and the payer. The amounts are carried into Płatnik or ePłatnik by hand.
-func (c *Client) PostV1DeclarationsPlZusDraCompute(
+func (c *Client) PlZusDraCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraComputeRequest,
+	request *nordlet.PlZusDraComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlZusDraComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlZusDraCompute(
+) (*nordlet.PlZusDraComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlZusDraCompute(
 		ctx,
 		request,
 		opts...,
@@ -1222,12 +1222,12 @@ func (c *Client) PostV1DeclarationsPlZusDraCompute(
 }
 
 // Build the KEDU file for one month: the ZUS DRA settlement and one ZUS RCA report per person on the payroll, in the schema kedu_5_4 that Płatnik and ePłatnik import. The payer REGON, short name and declaration deadline code come from the ZUS compliance settings; the insurance title code and working time of each person from the employee record.
-func (c *Client) PostV1DeclarationsPlZusDraKedu(
+func (c *Client) PlZusDraKedu(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraKeduRequest,
+	request *nordlet.PlZusDraKeduDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlZusDraKeduResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlZusDraKedu(
+) (*nordlet.PlZusDraKeduDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlZusDraKedu(
 		ctx,
 		request,
 		opts...,
@@ -1239,12 +1239,12 @@ func (c *Client) PostV1DeclarationsPlZusDraKedu(
 }
 
 // Fill the published ZUS DRA form for one month and return it as a PDF. The amounts, the payer identity and the deadline code are the same ones the KEDU file carries; blocks the payroll does not hold (paid benefits, bridging pensions, income declaration of a self-paying person) stay empty.
-func (c *Client) PostV1DeclarationsPlZusDraPdf(
+func (c *Client) PlZusDraPdf(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraPdfRequest,
+	request *nordlet.PlZusDraPdfDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsPlZusDraPdfResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsPlZusDraPdf(
+) (*nordlet.PlZusDraPdfDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.PlZusDraPdf(
 		ctx,
 		request,
 		opts...,
@@ -1256,12 +1256,12 @@ func (c *Client) PostV1DeclarationsPlZusDraPdf(
 }
 
 // Build the RO e-Transport declaration for an issued waybill: goods with their tariff codes and masses, the commercial partner, the route and the vehicle. The XML follows the ANAF eTransport v2 schema and is kept as a file on the waybill. Anything listed in blockers has to be filled in before /etransport/send will accept it.
-func (c *Client) PostV1DeclarationsRoEtransportBuild(
+func (c *Client) RoEtransportBuild(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportBuildRequest,
+	request *nordlet.RoEtransportBuildDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsRoEtransportBuildResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsRoEtransportBuild(
+) (*nordlet.RoEtransportBuildDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.RoEtransportBuild(
 		ctx,
 		request,
 		opts...,
@@ -1273,12 +1273,12 @@ func (c *Client) PostV1DeclarationsRoEtransportBuild(
 }
 
 // Hand the RO e-Transport declaration for an issued waybill to ANAF under the SPV OAuth token in compliance settings, and return the upload index the UIT is read back with. Answers 422 while any field the ANAF validator requires is still missing.
-func (c *Client) PostV1DeclarationsRoEtransportSubmit(
+func (c *Client) RoEtransportSubmit(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportSubmitRequest,
+	request *nordlet.RoEtransportSubmitDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsRoEtransportSubmitResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsRoEtransportSubmit(
+) (*nordlet.RoEtransportSubmitDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.RoEtransportSubmit(
 		ctx,
 		request,
 		opts...,
@@ -1290,12 +1290,12 @@ func (c *Client) PostV1DeclarationsRoEtransportSubmit(
 }
 
 // Read the outcome of an e-Transport declaration from ANAF by its upload index, under the SPV OAuth token in compliance settings. Returns the UIT code once the declaration validates.
-func (c *Client) PostV1DeclarationsRoEtransportStatus(
+func (c *Client) RoEtransportStatus(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportStatusRequest,
+	request *nordlet.RoEtransportStatusDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsRoEtransportStatusResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsRoEtransportStatus(
+) (*nordlet.RoEtransportStatusDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.RoEtransportStatus(
 		ctx,
 		request,
 		opts...,
@@ -1307,12 +1307,12 @@ func (c *Client) PostV1DeclarationsRoEtransportStatus(
 }
 
 // Build the annual wage declaration (Lohndeklaration) to the AHV-IV-FAK from the approved payroll runs of the year as the CSV that AHVeasy imports under Lohndeklaration → CSV-Import der Lohndaten: one row per employee with the 18 columns of the AHVeasy template, the AHV-liable wage and the ALV wage.
-func (c *Client) PostV1DeclarationsLiLohndeklarationGenerate(
+func (c *Client) LiLohndeklarationGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLiLohndeklarationGenerateRequest,
+	request *nordlet.LiLohndeklarationGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLiLohndeklarationGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLiLohndeklarationGenerate(
+) (*nordlet.LiLohndeklarationGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LiLohndeklarationGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1324,12 +1324,12 @@ func (c *Client) PostV1DeclarationsLiLohndeklarationGenerate(
 }
 
 // Build the annual wage list (Lohnliste) of a Liechtenstein employer from the approved payroll runs of the year as the XLSX file the tax administration's eLohnausweis / eLohnlisten application imports: one row per employee with PEID, name, birth date, address, gross wage, wage tax withheld and the settlement period.
-func (c *Client) PostV1DeclarationsLiLohnlistenGenerate(
+func (c *Client) LiLohnlistenGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLiLohnlistenGenerateRequest,
+	request *nordlet.LiLohnlistenGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsLiLohnlistenGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsLiLohnlistenGenerate(
+) (*nordlet.LiLohnlistenGenerateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.LiLohnlistenGenerate(
 		ctx,
 		request,
 		opts...,
@@ -1340,12 +1340,12 @@ func (c *Client) PostV1DeclarationsLiLohnlistenGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsConfigsList(
+func (c *Client) ConfigsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsConfigsListRequest,
+	request *nordlet.ConfigsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsConfigsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsConfigsList(
+) (*nordlet.ConfigsListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.ConfigsList(
 		ctx,
 		request,
 		opts...,
@@ -1356,12 +1356,12 @@ func (c *Client) PostV1DeclarationsConfigsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsConfigsUpdate(
+func (c *Client) ConfigsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsConfigsUpdateRequest,
+	request *nordlet.ConfigsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsConfigsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsConfigsUpdate(
+) (*nordlet.ConfigsUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.ConfigsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -1372,12 +1372,12 @@ func (c *Client) PostV1DeclarationsConfigsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
+func (c *Client) CertificatesUpload(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesUploadRequest,
+	request *nordlet.CertificatesUploadDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsCertificatesUploadResponse, error) {
-	response, err := c.WithRawResponse.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
+) (*nordlet.CertificatesUploadDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.CertificatesUpload(
 		ctx,
 		request,
 		opts...,
@@ -1388,12 +1388,12 @@ func (c *Client) StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsCertificatesList(
+func (c *Client) CertificatesList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesListRequest,
+	request *nordlet.CertificatesListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsCertificatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsCertificatesList(
+) (*nordlet.CertificatesListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.CertificatesList(
 		ctx,
 		request,
 		opts...,
@@ -1404,12 +1404,12 @@ func (c *Client) PostV1DeclarationsCertificatesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsCertificatesDelete(
+func (c *Client) CertificatesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesDeleteRequest,
+	request *nordlet.CertificatesDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsCertificatesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsCertificatesDelete(
+) (*nordlet.CertificatesDeleteDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.CertificatesDelete(
 		ctx,
 		request,
 		opts...,
@@ -1420,12 +1420,12 @@ func (c *Client) PostV1DeclarationsCertificatesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(
+func (c *Client) AutomationList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAutomationListRequest,
+	request *nordlet.AutomationListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAutomationListResponse, error) {
-	response, err := c.WithRawResponse.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(
+) (*nordlet.AutomationListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AutomationList(
 		ctx,
 		request,
 		opts...,
@@ -1436,12 +1436,12 @@ func (c *Client) WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSw
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsAutomationUpdate(
+func (c *Client) AutomationUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAutomationUpdateRequest,
+	request *nordlet.AutomationUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsAutomationUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsAutomationUpdate(
+) (*nordlet.AutomationUpdateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.AutomationUpdate(
 		ctx,
 		request,
 		opts...,
@@ -1452,12 +1452,12 @@ func (c *Client) PostV1DeclarationsAutomationUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(
+func (c *Client) SubmissionsRetry(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsRetryRequest,
+	request *nordlet.SubmissionsRetryDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsSubmissionsRetryResponse, error) {
-	response, err := c.WithRawResponse.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(
+) (*nordlet.SubmissionsRetryDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.SubmissionsRetry(
 		ctx,
 		request,
 		opts...,
@@ -1468,12 +1468,12 @@ func (c *Client) SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGener
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsSubmissionsCreate(
+func (c *Client) SubmissionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsCreateRequest,
+	request *nordlet.SubmissionsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsSubmissionsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsSubmissionsCreate(
+) (*nordlet.SubmissionsCreateDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.SubmissionsCreate(
 		ctx,
 		request,
 		opts...,
@@ -1484,12 +1484,12 @@ func (c *Client) PostV1DeclarationsSubmissionsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsSubmissionsMark(
+func (c *Client) SubmissionsMark(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsMarkRequest,
+	request *nordlet.SubmissionsMarkDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsSubmissionsMarkResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsSubmissionsMark(
+) (*nordlet.SubmissionsMarkDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.SubmissionsMark(
 		ctx,
 		request,
 		opts...,
@@ -1500,12 +1500,12 @@ func (c *Client) PostV1DeclarationsSubmissionsMark(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1DeclarationsSubmissionsList(
+func (c *Client) SubmissionsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsListRequest,
+	request *nordlet.SubmissionsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1DeclarationsSubmissionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DeclarationsSubmissionsList(
+) (*nordlet.SubmissionsListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.SubmissionsList(
 		ctx,
 		request,
 		opts...,

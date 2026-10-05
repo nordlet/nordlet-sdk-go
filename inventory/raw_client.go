@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1InventorySettingsGet(
+func (r *RawClient) SettingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1InventorySettingsGetRequest,
+	request *nordlet.SettingsGetInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventorySettingsGetResponse], error) {
+) (*core.Response[*nordlet.SettingsGetInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1InventorySettingsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventorySettingsGetResponse
+	var response *nordlet.SettingsGetInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1InventorySettingsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventorySettingsGetResponse]{
+	return &core.Response[*nordlet.SettingsGetInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventorySettingsUpdate(
+func (r *RawClient) SettingsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1InventorySettingsUpdateRequest,
+	request *nordlet.SettingsUpdateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventorySettingsUpdateResponse], error) {
+) (*core.Response[*nordlet.SettingsUpdateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1InventorySettingsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventorySettingsUpdateResponse
+	var response *nordlet.SettingsUpdateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1InventorySettingsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventorySettingsUpdateResponse]{
+	return &core.Response[*nordlet.SettingsUpdateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryWarehousesCreate(
+func (r *RawClient) WarehousesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryWarehousesCreateRequest,
+	request *nordlet.WarehousesCreateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryWarehousesCreateResponse], error) {
+) (*core.Response[*nordlet.WarehousesCreateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1InventoryWarehousesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryWarehousesCreateResponse
+	var response *nordlet.WarehousesCreateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1InventoryWarehousesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryWarehousesCreateResponse]{
+	return &core.Response[*nordlet.WarehousesCreateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryWarehousesList(
+func (r *RawClient) WarehousesList(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryWarehousesListRequest,
+	request *nordlet.WarehousesListInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryWarehousesListResponse], error) {
+) (*core.Response[*nordlet.WarehousesListInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1InventoryWarehousesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryWarehousesListResponse
+	var response *nordlet.WarehousesListInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1InventoryWarehousesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryWarehousesListResponse]{
+	return &core.Response[*nordlet.WarehousesListInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockReceive(
+func (r *RawClient) StockReceive(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockReceiveRequest,
+	request *nordlet.StockReceiveInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockReceiveResponse], error) {
+) (*core.Response[*nordlet.StockReceiveInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1InventoryStockReceive(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockReceiveResponse
+	var response *nordlet.StockReceiveInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1InventoryStockReceive(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockReceiveResponse]{
+	return &core.Response[*nordlet.StockReceiveInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockWriteOff(
+func (r *RawClient) StockWriteOff(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockWriteOffRequest,
+	request *nordlet.StockWriteOffInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockWriteOffResponse], error) {
+) (*core.Response[*nordlet.StockWriteOffInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1InventoryStockWriteOff(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockWriteOffResponse
+	var response *nordlet.StockWriteOffInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1InventoryStockWriteOff(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockWriteOffResponse]{
+	return &core.Response[*nordlet.StockWriteOffInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockTransfer(
+func (r *RawClient) StockTransfer(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockTransferRequest,
+	request *nordlet.StockTransferInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockTransferResponse], error) {
+) (*core.Response[*nordlet.StockTransferInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1InventoryStockTransfer(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockTransferResponse
+	var response *nordlet.StockTransferInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1InventoryStockTransfer(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockTransferResponse]{
+	return &core.Response[*nordlet.StockTransferInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockTake(
+func (r *RawClient) StockTake(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockTakeRequest,
+	request *nordlet.StockTakeInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockTakeResponse], error) {
+) (*core.Response[*nordlet.StockTakeInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1InventoryStockTake(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockTakeResponse
+	var response *nordlet.StockTakeInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1InventoryStockTake(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockTakeResponse]{
+	return &core.Response[*nordlet.StockTakeInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockLevels(
+func (r *RawClient) StockLevels(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockLevelsRequest,
+	request *nordlet.StockLevelsInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockLevelsResponse], error) {
+) (*core.Response[*nordlet.StockLevelsInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1InventoryStockLevels(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockLevelsResponse
+	var response *nordlet.StockLevelsInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1InventoryStockLevels(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockLevelsResponse]{
+	return &core.Response[*nordlet.StockLevelsInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryStockMovementsList(
+func (r *RawClient) StockMovementsList(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryStockMovementsListRequest,
+	request *nordlet.StockMovementsListInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryStockMovementsListResponse], error) {
+) (*core.Response[*nordlet.StockMovementsListInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1InventoryStockMovementsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryStockMovementsListResponse
+	var response *nordlet.StockMovementsListInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1InventoryStockMovementsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryStockMovementsListResponse]{
+	return &core.Response[*nordlet.StockMovementsListInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLotsList(
+func (r *RawClient) LotsList(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLotsListRequest,
+	request *nordlet.LotsListInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLotsListResponse], error) {
+) (*core.Response[*nordlet.LotsListInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1InventoryLotsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLotsListResponse
+	var response *nordlet.LotsListInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1InventoryLotsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLotsListResponse]{
+	return &core.Response[*nordlet.LotsListInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLotsGet(
+func (r *RawClient) LotsGet(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLotsGetRequest,
+	request *nordlet.LotsGetInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLotsGetResponse], error) {
+) (*core.Response[*nordlet.LotsGetInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1InventoryLotsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLotsGetResponse
+	var response *nordlet.LotsGetInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1InventoryLotsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLotsGetResponse]{
+	return &core.Response[*nordlet.LotsGetInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLotsUpdate(
+func (r *RawClient) LotsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLotsUpdateRequest,
+	request *nordlet.LotsUpdateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLotsUpdateResponse], error) {
+) (*core.Response[*nordlet.LotsUpdateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1InventoryLotsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLotsUpdateResponse
+	var response *nordlet.LotsUpdateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +597,18 @@ func (r *RawClient) PostV1InventoryLotsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLotsUpdateResponse]{
+	return &core.Response[*nordlet.LotsUpdateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLandedCostsCreate(
+func (r *RawClient) LandedCostsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLandedCostsCreateRequest,
+	request *nordlet.LandedCostsCreateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLandedCostsCreateResponse], error) {
+) (*core.Response[*nordlet.LandedCostsCreateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +621,7 @@ func (r *RawClient) PostV1InventoryLandedCostsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLandedCostsCreateResponse
+	var response *nordlet.LandedCostsCreateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +641,18 @@ func (r *RawClient) PostV1InventoryLandedCostsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLandedCostsCreateResponse]{
+	return &core.Response[*nordlet.LandedCostsCreateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLandedCostsGet(
+func (r *RawClient) LandedCostsGet(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLandedCostsGetRequest,
+	request *nordlet.LandedCostsGetInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLandedCostsGetResponse], error) {
+) (*core.Response[*nordlet.LandedCostsGetInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +665,7 @@ func (r *RawClient) PostV1InventoryLandedCostsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLandedCostsGetResponse
+	var response *nordlet.LandedCostsGetInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +685,18 @@ func (r *RawClient) PostV1InventoryLandedCostsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLandedCostsGetResponse]{
+	return &core.Response[*nordlet.LandedCostsGetInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryLandedCostsList(
+func (r *RawClient) LandedCostsList(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryLandedCostsListRequest,
+	request *nordlet.LandedCostsListInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryLandedCostsListResponse], error) {
+) (*core.Response[*nordlet.LandedCostsListInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +709,7 @@ func (r *RawClient) PostV1InventoryLandedCostsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryLandedCostsListResponse
+	var response *nordlet.LandedCostsListInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +729,18 @@ func (r *RawClient) PostV1InventoryLandedCostsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryLandedCostsListResponse]{
+	return &core.Response[*nordlet.LandedCostsListInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryReorderRulesCreate(
+func (r *RawClient) ReorderRulesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryReorderRulesCreateRequest,
+	request *nordlet.ReorderRulesCreateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryReorderRulesCreateResponse], error) {
+) (*core.Response[*nordlet.ReorderRulesCreateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +753,7 @@ func (r *RawClient) PostV1InventoryReorderRulesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryReorderRulesCreateResponse
+	var response *nordlet.ReorderRulesCreateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +773,18 @@ func (r *RawClient) PostV1InventoryReorderRulesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryReorderRulesCreateResponse]{
+	return &core.Response[*nordlet.ReorderRulesCreateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryReorderRulesUpdate(
+func (r *RawClient) ReorderRulesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryReorderRulesUpdateRequest,
+	request *nordlet.ReorderRulesUpdateInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryReorderRulesUpdateResponse], error) {
+) (*core.Response[*nordlet.ReorderRulesUpdateInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +797,7 @@ func (r *RawClient) PostV1InventoryReorderRulesUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryReorderRulesUpdateResponse
+	var response *nordlet.ReorderRulesUpdateInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +817,18 @@ func (r *RawClient) PostV1InventoryReorderRulesUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryReorderRulesUpdateResponse]{
+	return &core.Response[*nordlet.ReorderRulesUpdateInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryReorderRulesDelete(
+func (r *RawClient) ReorderRulesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryReorderRulesDeleteRequest,
+	request *nordlet.ReorderRulesDeleteInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryReorderRulesDeleteResponse], error) {
+) (*core.Response[*nordlet.ReorderRulesDeleteInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +841,7 @@ func (r *RawClient) PostV1InventoryReorderRulesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryReorderRulesDeleteResponse
+	var response *nordlet.ReorderRulesDeleteInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +861,18 @@ func (r *RawClient) PostV1InventoryReorderRulesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryReorderRulesDeleteResponse]{
+	return &core.Response[*nordlet.ReorderRulesDeleteInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryReorderRulesList(
+func (r *RawClient) ReorderRulesList(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryReorderRulesListRequest,
+	request *nordlet.ReorderRulesListInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryReorderRulesListResponse], error) {
+) (*core.Response[*nordlet.ReorderRulesListInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +885,7 @@ func (r *RawClient) PostV1InventoryReorderRulesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryReorderRulesListResponse
+	var response *nordlet.ReorderRulesListInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +905,18 @@ func (r *RawClient) PostV1InventoryReorderRulesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryReorderRulesListResponse]{
+	return &core.Response[*nordlet.ReorderRulesListInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1InventoryReorderRulesCheck(
+func (r *RawClient) ReorderRulesCheck(
 	ctx context.Context,
-	request *nordlet.PostV1InventoryReorderRulesCheckRequest,
+	request *nordlet.ReorderRulesCheckInventoryRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1InventoryReorderRulesCheckResponse], error) {
+) (*core.Response[*nordlet.ReorderRulesCheckInventoryResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +929,7 @@ func (r *RawClient) PostV1InventoryReorderRulesCheck(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1InventoryReorderRulesCheckResponse
+	var response *nordlet.ReorderRulesCheckInventoryResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,7 +949,7 @@ func (r *RawClient) PostV1InventoryReorderRulesCheck(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1InventoryReorderRulesCheckResponse]{
+	return &core.Response[*nordlet.ReorderRulesCheckInventoryResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -10,1722 +10,9 @@ import (
 	time "time"
 )
 
-func TestSettersPostV1TransportWaybillsCancelRequest(t *testing.T) {
+func TestSettersWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsCancelRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCancelRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsCreateRequest(t *testing.T) {
-	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueConsigneePartnerID string
-		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
-		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueTransporterPartnerID *string
-		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
-		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDocumentDate *string
-		obj.SetDocumentDate(fernTestValueDocumentDate)
-		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDispatchAt time.Time
-		obj.SetDispatchAt(fernTestValueDispatchAt)
-		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueEstimatedArrivalAt *time.Time
-		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
-		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueVehiclePlate *string
-		obj.SetVehiclePlate(fernTestValueVehiclePlate)
-		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueTrailerPlate *string
-		obj.SetTrailerPlate(fernTestValueTrailerPlate)
-		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDriverName *string
-		obj.SetDriverName(fernTestValueDriverName)
-		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDriverSurname *string
-		obj.SetDriverSurname(fernTestValueDriverSurname)
-		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLoadWarehouseID *string
-		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
-		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLoadAddress string
-		obj.SetLoadAddress(fernTestValueLoadAddress)
-		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueUnloadAddress string
-		obj.SetUnloadAddress(fernTestValueUnloadAddress)
-		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueValueEur *string
-		obj.SetValueEur(fernTestValueValueEur)
-		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueSaleInvoiceID *string
-		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
-		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueNotes *string
-		obj.SetNotes(fernTestValueNotes)
-		assert.Equal(t, fernTestValueNotes, obj.Notes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueSeries *string
-		obj.SetSeries(fernTestValueSeries)
-		assert.Equal(t, fernTestValueSeries, obj.Series)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLines []*PostV1TransportWaybillsCreateRequestLinesItem
-		obj.SetLines(fernTestValueLines)
-		assert.Equal(t, fernTestValueLines, obj.Lines)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequest(t *testing.T) {
-	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueConsigneePartnerID string
-
-		// Act
-		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueTransporterPartnerID *string
-
-		// Act
-		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDocumentDate *string
-
-		// Act
-		obj.SetDocumentDate(fernTestValueDocumentDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDispatchAt time.Time
-
-		// Act
-		obj.SetDispatchAt(fernTestValueDispatchAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueEstimatedArrivalAt *time.Time
-
-		// Act
-		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueVehiclePlate *string
-
-		// Act
-		obj.SetVehiclePlate(fernTestValueVehiclePlate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueTrailerPlate *string
-
-		// Act
-		obj.SetTrailerPlate(fernTestValueTrailerPlate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDriverName *string
-
-		// Act
-		obj.SetDriverName(fernTestValueDriverName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueDriverSurname *string
-
-		// Act
-		obj.SetDriverSurname(fernTestValueDriverSurname)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLoadWarehouseID *string
-
-		// Act
-		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLoadAddress string
-
-		// Act
-		obj.SetLoadAddress(fernTestValueLoadAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueUnloadAddress string
-
-		// Act
-		obj.SetUnloadAddress(fernTestValueUnloadAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueValueEur *string
-
-		// Act
-		obj.SetValueEur(fernTestValueValueEur)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueSaleInvoiceID *string
-
-		// Act
-		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueNotes *string
-
-		// Act
-		obj.SetNotes(fernTestValueNotes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueSeries *string
-
-		// Act
-		obj.SetSeries(fernTestValueSeries)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequest{}
-		var fernTestValueLines []*PostV1TransportWaybillsCreateRequestLinesItem
-
-		// Act
-		obj.SetLines(fernTestValueLines)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsGetRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsGetRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsGetRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsIssueRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsIssueRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsIssueRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsListRequest(t *testing.T) {
-	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValuePage *int64
-		obj.SetPage(fernTestValuePage)
-		assert.Equal(t, fernTestValuePage, obj.Page)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValuePageSize *int64
-		obj.SetPageSize(fernTestValuePageSize)
-		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueSort []*PostV1TransportWaybillsListRequestSortItem
-		obj.SetSort(fernTestValueSort)
-		assert.Equal(t, fernTestValueSort, obj.Sort)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueFilter []*PostV1TransportWaybillsListRequestFilterItem
-		obj.SetFilter(fernTestValueFilter)
-		assert.Equal(t, fernTestValueFilter, obj.Filter)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueTotals []string
-		obj.SetTotals(fernTestValueTotals)
-		assert.Equal(t, fernTestValueTotals, obj.Totals)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsListRequest(t *testing.T) {
-	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValuePage *int64
-
-		// Act
-		obj.SetPage(fernTestValuePage)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValuePageSize *int64
-
-		// Act
-		obj.SetPageSize(fernTestValuePageSize)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueSort []*PostV1TransportWaybillsListRequestSortItem
-
-		// Act
-		obj.SetSort(fernTestValueSort)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueFilter []*PostV1TransportWaybillsListRequestFilterItem
-
-		// Act
-		obj.SetFilter(fernTestValueFilter)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsListRequest{}
-		var fernTestValueTotals []string
-
-		// Act
-		obj.SetTotals(fernTestValueTotals)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsUpdateRequest(t *testing.T) {
-	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueConsigneePartnerID *string
-		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
-		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueTransporterPartnerID *string
-		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
-		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDocumentDate *string
-		obj.SetDocumentDate(fernTestValueDocumentDate)
-		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDispatchAt *time.Time
-		obj.SetDispatchAt(fernTestValueDispatchAt)
-		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueEstimatedArrivalAt *time.Time
-		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
-		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueVehiclePlate *string
-		obj.SetVehiclePlate(fernTestValueVehiclePlate)
-		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueTrailerPlate *string
-		obj.SetTrailerPlate(fernTestValueTrailerPlate)
-		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDriverName *string
-		obj.SetDriverName(fernTestValueDriverName)
-		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDriverSurname *string
-		obj.SetDriverSurname(fernTestValueDriverSurname)
-		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLoadWarehouseID *string
-		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
-		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLoadAddress *string
-		obj.SetLoadAddress(fernTestValueLoadAddress)
-		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueUnloadAddress *string
-		obj.SetUnloadAddress(fernTestValueUnloadAddress)
-		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueValueEur *string
-		obj.SetValueEur(fernTestValueValueEur)
-		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueSaleInvoiceID *string
-		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
-		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueNotes *string
-		obj.SetNotes(fernTestValueNotes)
-		assert.Equal(t, fernTestValueNotes, obj.Notes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueSeries *string
-		obj.SetSeries(fernTestValueSeries)
-		assert.Equal(t, fernTestValueSeries, obj.Series)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLines []*PostV1TransportWaybillsUpdateRequestLinesItem
-		obj.SetLines(fernTestValueLines)
-		assert.Equal(t, fernTestValueLines, obj.Lines)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequest(t *testing.T) {
-	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueConsigneePartnerID *string
-
-		// Act
-		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueTransporterPartnerID *string
-
-		// Act
-		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDocumentDate *string
-
-		// Act
-		obj.SetDocumentDate(fernTestValueDocumentDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDispatchAt *time.Time
-
-		// Act
-		obj.SetDispatchAt(fernTestValueDispatchAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueEstimatedArrivalAt *time.Time
-
-		// Act
-		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueVehiclePlate *string
-
-		// Act
-		obj.SetVehiclePlate(fernTestValueVehiclePlate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueTrailerPlate *string
-
-		// Act
-		obj.SetTrailerPlate(fernTestValueTrailerPlate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDriverName *string
-
-		// Act
-		obj.SetDriverName(fernTestValueDriverName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueDriverSurname *string
-
-		// Act
-		obj.SetDriverSurname(fernTestValueDriverSurname)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLoadWarehouseID *string
-
-		// Act
-		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLoadAddress *string
-
-		// Act
-		obj.SetLoadAddress(fernTestValueLoadAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueUnloadAddress *string
-
-		// Act
-		obj.SetUnloadAddress(fernTestValueUnloadAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueValueEur *string
-
-		// Act
-		obj.SetValueEur(fernTestValueValueEur)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueSaleInvoiceID *string
-
-		// Act
-		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueNotes *string
-
-		// Act
-		obj.SetNotes(fernTestValueNotes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueSeries *string
-
-		// Act
-		obj.SetSeries(fernTestValueSeries)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueLines []*PostV1TransportWaybillsUpdateRequestLinesItem
-
-		// Act
-		obj.SetLines(fernTestValueLines)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1733,15 +20,15 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsCancelResponseStatus
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueStatus WaybillsCancelTransportResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -1749,7 +36,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -1757,31 +44,31 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -1789,7 +76,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -1797,7 +84,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -1805,7 +92,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -1813,7 +100,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -1821,7 +108,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -1829,7 +116,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -1837,7 +124,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -1845,7 +132,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -1853,7 +140,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -1861,7 +148,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -1869,7 +156,7 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -1877,16 +164,16 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -1894,11 +181,11 @@ func TestSettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
+func TestGettersWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -1908,7 +195,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1921,8 +208,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected PostV1TransportWaybillsCancelResponseStatus
+		obj := &WaybillsCancelTransportResponse{}
+		var expected WaybillsCancelTransportResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -1931,7 +218,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1944,7 +231,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected string
 		obj.Series = expected
 
@@ -1954,7 +241,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1967,7 +254,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -1978,7 +265,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -1987,7 +274,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2000,8 +287,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected string
+		obj := &WaybillsCancelTransportResponse{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -2010,7 +297,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2023,8 +310,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected string
+		obj := &WaybillsCancelTransportResponse{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -2033,7 +320,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2046,8 +333,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected *string
+		obj := &WaybillsCancelTransportResponse{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -2057,7 +344,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -2066,7 +353,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2079,7 +366,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -2089,7 +376,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2102,7 +389,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -2113,7 +400,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -2122,7 +409,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2135,7 +422,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -2146,7 +433,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -2155,7 +442,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2168,7 +455,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -2179,7 +466,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -2188,7 +475,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2201,7 +488,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -2212,7 +499,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -2221,7 +508,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2234,7 +521,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -2245,7 +532,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -2254,7 +541,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2267,7 +554,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -2278,7 +565,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -2287,7 +574,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2300,7 +587,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -2310,7 +597,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2323,7 +610,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -2333,7 +620,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2346,7 +633,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -2357,7 +644,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -2366,7 +653,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2379,7 +666,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -2390,7 +677,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -2399,7 +686,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2412,7 +699,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -2423,7 +710,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -2432,7 +719,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2445,8 +732,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected string
+		obj := &WaybillsCancelTransportResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2455,7 +742,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2468,8 +755,8 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var expected string
+		obj := &WaybillsCancelTransportResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -2478,7 +765,7 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2490,11 +777,11 @@ func TestGettersPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2525,8 +812,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsCancelResponseStatus
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueStatus WaybillsCancelTransportResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -2556,7 +843,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueSeries string
 
 		// Act
@@ -2587,7 +874,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -2618,8 +905,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -2649,8 +936,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -2680,8 +967,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -2711,7 +998,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -2742,7 +1029,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -2773,7 +1060,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -2804,7 +1091,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -2835,7 +1122,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -2866,7 +1153,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -2897,7 +1184,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -2928,7 +1215,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -2959,7 +1246,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -2990,7 +1277,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -3021,7 +1308,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -3052,7 +1339,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -3083,8 +1370,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3114,8 +1401,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsCancelTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -3144,9 +1431,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCancelResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestSettersWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -3154,7 +1441,7 @@ func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -3162,7 +1449,7 @@ func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -3170,7 +1457,7 @@ func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -3178,7 +1465,7 @@ func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -3187,11 +1474,11 @@ func TestSettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestGettersWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -3202,7 +1489,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -3211,7 +1498,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3224,7 +1511,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -3235,7 +1522,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -3244,7 +1531,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3257,7 +1544,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -3268,7 +1555,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -3277,7 +1564,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3290,7 +1577,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -3300,7 +1587,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3313,7 +1600,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -3324,7 +1611,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -3333,7 +1620,7 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3345,11 +1632,11 @@ func TestGettersPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -3380,7 +1667,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -3411,7 +1698,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *tes
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -3442,7 +1729,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *tes
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -3473,7 +1760,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *tes
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -3503,9 +1790,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateRequestLinesItem(t *tes
 
 }
 
-func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestSettersWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3513,15 +1800,15 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsCreateResponseStatus
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueStatus WaybillsCreateTransportResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -3529,7 +1816,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -3537,31 +1824,31 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -3569,7 +1856,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -3577,7 +1864,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -3585,7 +1872,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -3593,7 +1880,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -3601,7 +1888,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -3609,7 +1896,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -3617,7 +1904,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -3625,7 +1912,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -3633,7 +1920,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -3641,7 +1928,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -3649,7 +1936,7 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -3657,24 +1944,24 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsCreateResponseLinesItem
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueLines []*WaybillsCreateTransportResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -3682,11 +1969,11 @@ func TestSettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestGettersWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -3696,7 +1983,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3709,8 +1996,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected PostV1TransportWaybillsCreateResponseStatus
+		obj := &WaybillsCreateTransportResponse{}
+		var expected WaybillsCreateTransportResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -3719,7 +2006,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3732,7 +2019,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected string
 		obj.Series = expected
 
@@ -3742,7 +2029,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3755,7 +2042,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -3766,7 +2053,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -3775,7 +2062,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3788,8 +2075,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected string
+		obj := &WaybillsCreateTransportResponse{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -3798,7 +2085,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3811,8 +2098,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected string
+		obj := &WaybillsCreateTransportResponse{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -3821,7 +2108,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3834,8 +2121,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected *string
+		obj := &WaybillsCreateTransportResponse{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -3845,7 +2132,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -3854,7 +2141,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3867,7 +2154,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -3877,7 +2164,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3890,7 +2177,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -3901,7 +2188,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -3910,7 +2197,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3923,7 +2210,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -3934,7 +2221,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -3943,7 +2230,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3956,7 +2243,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -3967,7 +2254,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -3976,7 +2263,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3989,7 +2276,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -4000,7 +2287,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -4009,7 +2296,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4022,7 +2309,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -4033,7 +2320,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -4042,7 +2329,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4055,7 +2342,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -4066,7 +2353,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -4075,7 +2362,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4088,7 +2375,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -4098,7 +2385,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4111,7 +2398,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -4121,7 +2408,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4134,7 +2421,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -4145,7 +2432,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -4154,7 +2441,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4167,7 +2454,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -4178,7 +2465,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -4187,7 +2474,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4200,7 +2487,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4211,7 +2498,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4220,7 +2507,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4233,8 +2520,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected string
+		obj := &WaybillsCreateTransportResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4243,7 +2530,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4256,8 +2543,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected string
+		obj := &WaybillsCreateTransportResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -4266,7 +2553,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4279,8 +2566,8 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var expected []*PostV1TransportWaybillsCreateResponseLinesItem
+		obj := &WaybillsCreateTransportResponse{}
+		var expected []*WaybillsCreateTransportResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -4290,7 +2577,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -4299,7 +2586,7 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4311,11 +2598,11 @@ func TestGettersPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4346,8 +2633,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsCreateResponseStatus
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueStatus WaybillsCreateTransportResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -4377,7 +2664,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueSeries string
 
 		// Act
@@ -4408,7 +2695,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -4439,8 +2726,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -4470,8 +2757,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -4501,8 +2788,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -4532,7 +2819,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -4563,7 +2850,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -4594,7 +2881,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -4625,7 +2912,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -4656,7 +2943,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -4687,7 +2974,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -4718,7 +3005,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -4749,7 +3036,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -4780,7 +3067,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -4811,7 +3098,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -4842,7 +3129,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -4873,7 +3160,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -4904,8 +3191,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -4935,8 +3222,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -4966,8 +3253,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsCreateResponseLinesItem
+		obj := &WaybillsCreateTransportResponse{}
+		var fernTestValueLines []*WaybillsCreateTransportResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -4996,9 +3283,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestSettersWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5006,7 +3293,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -5014,7 +3301,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -5022,7 +3309,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -5030,7 +3317,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -5038,7 +3325,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -5046,7 +3333,7 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetSortOrder", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 		obj.SetSortOrder(fernTestValueSortOrder)
 		assert.Equal(t, fernTestValueSortOrder, obj.SortOrder)
@@ -5055,11 +3342,11 @@ func TestSettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestGettersWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -5069,7 +3356,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5082,7 +3369,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -5093,7 +3380,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -5102,7 +3389,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5115,7 +3402,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -5125,7 +3412,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5138,7 +3425,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -5148,7 +3435,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5161,7 +3448,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -5171,7 +3458,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5184,7 +3471,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -5195,7 +3482,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -5204,7 +3491,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5217,7 +3504,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetSortOrder", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var expected int64
 		obj.SortOrder = expected
 
@@ -5227,7 +3514,7 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetSortOrder_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5239,11 +3526,11 @@ func TestGettersPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -5274,7 +3561,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -5305,7 +3592,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -5336,7 +3623,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -5367,7 +3654,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -5398,7 +3685,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -5429,7 +3716,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 	t.Run("SetSortOrder_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 
 		// Act
@@ -5459,9 +3746,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsCreateResponseLinesItem(t *te
 
 }
 
-func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestSettersWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5469,15 +3756,15 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsGetResponseStatus
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueStatus WaybillsGetTransportResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -5485,7 +3772,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -5493,31 +3780,31 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -5525,7 +3812,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -5533,7 +3820,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -5541,7 +3828,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -5549,7 +3836,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -5557,7 +3844,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -5565,7 +3852,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -5573,7 +3860,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -5581,7 +3868,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -5589,7 +3876,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -5597,7 +3884,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -5605,7 +3892,7 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -5613,24 +3900,24 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsGetResponseLinesItem
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueLines []*WaybillsGetTransportResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -5638,11 +3925,11 @@ func TestSettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestGettersWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -5652,7 +3939,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5665,8 +3952,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected PostV1TransportWaybillsGetResponseStatus
+		obj := &WaybillsGetTransportResponse{}
+		var expected WaybillsGetTransportResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -5675,7 +3962,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5688,7 +3975,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected string
 		obj.Series = expected
 
@@ -5698,7 +3985,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5711,7 +3998,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -5722,7 +4009,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -5731,7 +4018,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5744,8 +4031,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected string
+		obj := &WaybillsGetTransportResponse{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -5754,7 +4041,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5767,8 +4054,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected string
+		obj := &WaybillsGetTransportResponse{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -5777,7 +4064,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5790,8 +4077,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected *string
+		obj := &WaybillsGetTransportResponse{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -5801,7 +4088,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -5810,7 +4097,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5823,7 +4110,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -5833,7 +4120,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5846,7 +4133,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -5857,7 +4144,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -5866,7 +4153,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5879,7 +4166,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -5890,7 +4177,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -5899,7 +4186,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5912,7 +4199,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -5923,7 +4210,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -5932,7 +4219,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5945,7 +4232,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -5956,7 +4243,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -5965,7 +4252,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5978,7 +4265,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -5989,7 +4276,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -5998,7 +4285,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6011,7 +4298,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -6022,7 +4309,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -6031,7 +4318,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6044,7 +4331,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -6054,7 +4341,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6067,7 +4354,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -6077,7 +4364,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6090,7 +4377,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -6101,7 +4388,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -6110,7 +4397,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6123,7 +4410,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -6134,7 +4421,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -6143,7 +4430,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6156,7 +4443,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -6167,7 +4454,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -6176,7 +4463,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6189,8 +4476,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected string
+		obj := &WaybillsGetTransportResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6199,7 +4486,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6212,8 +4499,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected string
+		obj := &WaybillsGetTransportResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -6222,7 +4509,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6235,8 +4522,8 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var expected []*PostV1TransportWaybillsGetResponseLinesItem
+		obj := &WaybillsGetTransportResponse{}
+		var expected []*WaybillsGetTransportResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -6246,7 +4533,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -6255,7 +4542,7 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6267,11 +4554,11 @@ func TestGettersPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -6302,8 +4589,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsGetResponseStatus
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueStatus WaybillsGetTransportResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -6333,7 +4620,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueSeries string
 
 		// Act
@@ -6364,7 +4651,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -6395,8 +4682,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -6426,8 +4713,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -6457,8 +4744,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -6488,7 +4775,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -6519,7 +4806,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -6550,7 +4837,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -6581,7 +4868,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -6612,7 +4899,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -6643,7 +4930,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -6674,7 +4961,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -6705,7 +4992,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -6736,7 +5023,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -6767,7 +5054,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -6798,7 +5085,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -6829,7 +5116,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6860,8 +5147,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6891,8 +5178,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -6922,8 +5209,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsGetResponseLinesItem
+		obj := &WaybillsGetTransportResponse{}
+		var fernTestValueLines []*WaybillsGetTransportResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -6952,9 +5239,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestSettersWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6962,7 +5249,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -6970,7 +5257,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -6978,7 +5265,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -6986,7 +5273,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -6994,7 +5281,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -7002,7 +5289,7 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetSortOrder", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 		obj.SetSortOrder(fernTestValueSortOrder)
 		assert.Equal(t, fernTestValueSortOrder, obj.SortOrder)
@@ -7011,11 +5298,11 @@ func TestSettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestGettersWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -7025,7 +5312,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7038,7 +5325,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -7049,7 +5336,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -7058,7 +5345,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7071,7 +5358,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -7081,7 +5368,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7094,7 +5381,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -7104,7 +5391,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7117,7 +5404,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -7127,7 +5414,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7140,7 +5427,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -7151,7 +5438,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -7160,7 +5447,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7173,7 +5460,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetSortOrder", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var expected int64
 		obj.SortOrder = expected
 
@@ -7183,7 +5470,7 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetSortOrder_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7195,11 +5482,11 @@ func TestGettersPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -7230,7 +5517,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -7261,7 +5548,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -7292,7 +5579,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -7323,7 +5610,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -7354,7 +5641,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -7385,7 +5672,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 	t.Run("SetSortOrder_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 
 		// Act
@@ -7415,9 +5702,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsGetResponseLinesItem(t *testi
 
 }
 
-func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestSettersWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7425,15 +5712,15 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsIssueResponseStatus
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueStatus WaybillsIssueTransportResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -7441,7 +5728,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -7449,31 +5736,31 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -7481,7 +5768,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -7489,7 +5776,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -7497,7 +5784,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -7505,7 +5792,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -7513,7 +5800,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -7521,7 +5808,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -7529,7 +5816,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -7537,7 +5824,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -7545,7 +5832,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -7553,7 +5840,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -7561,7 +5848,7 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -7569,24 +5856,24 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsIssueResponseLinesItem
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueLines []*WaybillsIssueTransportResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -7594,11 +5881,11 @@ func TestSettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestGettersWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -7608,7 +5895,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7621,8 +5908,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected PostV1TransportWaybillsIssueResponseStatus
+		obj := &WaybillsIssueTransportResponse{}
+		var expected WaybillsIssueTransportResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -7631,7 +5918,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7644,7 +5931,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected string
 		obj.Series = expected
 
@@ -7654,7 +5941,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7667,7 +5954,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -7678,7 +5965,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -7687,7 +5974,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7700,8 +5987,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected string
+		obj := &WaybillsIssueTransportResponse{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -7710,7 +5997,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7723,8 +6010,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected string
+		obj := &WaybillsIssueTransportResponse{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -7733,7 +6020,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7746,8 +6033,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected *string
+		obj := &WaybillsIssueTransportResponse{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -7757,7 +6044,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -7766,7 +6053,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7779,7 +6066,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -7789,7 +6076,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7802,7 +6089,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -7813,7 +6100,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -7822,7 +6109,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7835,7 +6122,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -7846,7 +6133,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -7855,7 +6142,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7868,7 +6155,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -7879,7 +6166,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -7888,7 +6175,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7901,7 +6188,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -7912,7 +6199,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -7921,7 +6208,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7934,7 +6221,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -7945,7 +6232,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -7954,7 +6241,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7967,7 +6254,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -7978,7 +6265,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -7987,7 +6274,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8000,7 +6287,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -8010,7 +6297,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8023,7 +6310,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -8033,7 +6320,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8046,7 +6333,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -8057,7 +6344,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -8066,7 +6353,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8079,7 +6366,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -8090,7 +6377,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -8099,7 +6386,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8112,7 +6399,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -8123,7 +6410,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -8132,7 +6419,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8145,8 +6432,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected string
+		obj := &WaybillsIssueTransportResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8155,7 +6442,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8168,8 +6455,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected string
+		obj := &WaybillsIssueTransportResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -8178,7 +6465,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8191,8 +6478,8 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var expected []*PostV1TransportWaybillsIssueResponseLinesItem
+		obj := &WaybillsIssueTransportResponse{}
+		var expected []*WaybillsIssueTransportResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -8202,7 +6489,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -8211,7 +6498,7 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8223,11 +6510,11 @@ func TestGettersPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -8258,8 +6545,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsIssueResponseStatus
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueStatus WaybillsIssueTransportResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -8289,7 +6576,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueSeries string
 
 		// Act
@@ -8320,7 +6607,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -8351,8 +6638,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -8382,8 +6669,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -8413,8 +6700,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -8444,7 +6731,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -8475,7 +6762,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -8506,7 +6793,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -8537,7 +6824,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -8568,7 +6855,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -8599,7 +6886,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -8630,7 +6917,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -8661,7 +6948,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -8692,7 +6979,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -8723,7 +7010,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -8754,7 +7041,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -8785,7 +7072,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -8816,8 +7103,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -8847,8 +7134,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -8878,8 +7165,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsIssueResponseLinesItem
+		obj := &WaybillsIssueTransportResponse{}
+		var fernTestValueLines []*WaybillsIssueTransportResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -8908,9 +7195,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestSettersWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8918,7 +7205,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -8926,7 +7213,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -8934,7 +7221,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -8942,7 +7229,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -8950,7 +7237,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -8958,7 +7245,7 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetSortOrder", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 		obj.SetSortOrder(fernTestValueSortOrder)
 		assert.Equal(t, fernTestValueSortOrder, obj.SortOrder)
@@ -8967,11 +7254,11 @@ func TestSettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestGettersWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -8981,7 +7268,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8994,7 +7281,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -9005,7 +7292,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -9014,7 +7301,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9027,7 +7314,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -9037,7 +7324,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9050,7 +7337,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -9060,7 +7347,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9073,7 +7360,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -9083,7 +7370,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9096,7 +7383,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -9107,7 +7394,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -9116,7 +7403,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9129,7 +7416,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 	t.Run("GetSortOrder", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var expected int64
 		obj.SortOrder = expected
 
@@ -9139,7 +7426,7 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 	t.Run("GetSortOrder_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9151,11 +7438,11 @@ func TestGettersPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -9186,7 +7473,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -9217,7 +7504,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -9248,7 +7535,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -9279,7 +7566,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -9310,7 +7597,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -9341,7 +7628,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 	t.Run("SetSortOrder_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 
 		// Act
@@ -9371,9 +7658,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsIssueResponseLinesItem(t *tes
 
 }
 
-func TestSettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestSettersWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -9381,16 +7668,16 @@ func TestSettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var fernTestValueOp PostV1TransportWaybillsListRequestFilterItemOp
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var fernTestValueOp WaybillsListTransportRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var fernTestValueValue *PostV1TransportWaybillsListRequestFilterItemValue
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var fernTestValueValue *WaybillsListTransportRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -9398,11 +7685,11 @@ func TestSettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestGettersWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -9412,7 +7699,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItem
+		var obj *WaybillsListTransportRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9425,8 +7712,8 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var expected PostV1TransportWaybillsListRequestFilterItemOp
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var expected WaybillsListTransportRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -9435,7 +7722,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItem
+		var obj *WaybillsListTransportRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9448,8 +7735,8 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var expected *PostV1TransportWaybillsListRequestFilterItemValue
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var expected *WaybillsListTransportRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -9459,7 +7746,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -9468,7 +7755,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItem
+		var obj *WaybillsListTransportRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9480,11 +7767,11 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -9515,8 +7802,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListRequestFilterItem(t *test
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var fernTestValueOp PostV1TransportWaybillsListRequestFilterItemOp
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var fernTestValueOp WaybillsListTransportRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -9546,8 +7833,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListRequestFilterItem(t *test
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
-		var fernTestValueValue *PostV1TransportWaybillsListRequestFilterItemValue
+		obj := &WaybillsListTransportRequestFilterItem{}
+		var fernTestValueValue *WaybillsListTransportRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -9576,11 +7863,11 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListRequestFilterItem(t *test
 
 }
 
-func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) {
+func TestGettersWaybillsListTransportRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValue{}
+		obj := &WaybillsListTransportRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -9590,7 +7877,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValue
+		var obj *WaybillsListTransportRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9603,7 +7890,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValue{}
+		obj := &WaybillsListTransportRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -9613,7 +7900,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValue
+		var obj *WaybillsListTransportRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9626,7 +7913,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValue{}
+		obj := &WaybillsListTransportRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -9636,7 +7923,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValue
+		var obj *WaybillsListTransportRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9646,46 +7933,46 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValue(t *testing.T) 
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetWaybillsListTransportRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValue{}
-		var expected []*PostV1TransportWaybillsListRequestFilterItemValueThreeItem
-		obj.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList = expected
+		obj := &WaybillsListTransportRequestFilterItemValue{}
+		var expected []*WaybillsListTransportRequestFilterItemValueThreeItem
+		obj.WaybillsListTransportRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetWaybillsListTransportRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetWaybillsListTransportRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValue{}
-		obj.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList = nil
+		obj := &WaybillsListTransportRequestFilterItemValue{}
+		obj.WaybillsListTransportRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetWaybillsListTransportRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetWaybillsListTransportRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValue
+		var obj *WaybillsListTransportRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetWaybillsListTransportRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1TransportWaybillsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersWaybillsListTransportRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValueThreeItem{}
+		obj := &WaybillsListTransportRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -9695,7 +7982,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValueThreeItem(t *te
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValueThreeItem
+		var obj *WaybillsListTransportRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9708,7 +7995,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValueThreeItem(t *te
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItemValueThreeItem{}
+		obj := &WaybillsListTransportRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -9718,7 +8005,7 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValueThreeItem(t *te
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItemValueThreeItem
+		var obj *WaybillsListTransportRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9730,9 +8017,9 @@ func TestGettersPostV1TransportWaybillsListRequestFilterItemValueThreeItem(t *te
 
 }
 
-func TestSettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestSettersWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -9740,8 +8027,8 @@ func TestSettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
-		var fernTestValueDir *PostV1TransportWaybillsListRequestSortItemDir
+		obj := &WaybillsListTransportRequestSortItem{}
+		var fernTestValueDir *WaybillsListTransportRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -9749,11 +8036,11 @@ func TestSettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestGettersWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -9763,7 +8050,7 @@ func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestSortItem
+		var obj *WaybillsListTransportRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9776,8 +8063,8 @@ func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
-		var expected *PostV1TransportWaybillsListRequestSortItemDir
+		obj := &WaybillsListTransportRequestSortItem{}
+		var expected *WaybillsListTransportRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -9787,7 +8074,7 @@ func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -9796,7 +8083,7 @@ func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestSortItem
+		var obj *WaybillsListTransportRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9808,11 +8095,11 @@ func TestGettersPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -9843,8 +8130,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListRequestSortItem(t *testin
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
-		var fernTestValueDir *PostV1TransportWaybillsListRequestSortItemDir
+		obj := &WaybillsListTransportRequestSortItem{}
+		var fernTestValueDir *WaybillsListTransportRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -9873,17 +8160,17 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListRequestSortItem(t *testin
 
 }
 
-func TestSettersPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestSettersWaybillsListTransportResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponse{}
-		var fernTestValueRows []*PostV1TransportWaybillsListResponseRowsItem
+		obj := &WaybillsListTransportResponse{}
+		var fernTestValueRows []*WaybillsListTransportResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -9891,7 +8178,7 @@ func TestSettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -9899,7 +8186,7 @@ func TestSettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -9907,7 +8194,7 @@ func TestSettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -9916,12 +8203,12 @@ func TestSettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestGettersWaybillsListTransportResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
-		var expected []*PostV1TransportWaybillsListResponseRowsItem
+		obj := &WaybillsListTransportResponse{}
+		var expected []*WaybillsListTransportResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -9931,7 +8218,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -9940,7 +8227,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9953,7 +8240,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -9963,7 +8250,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9976,7 +8263,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -9986,7 +8273,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9999,7 +8286,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -10009,7 +8296,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10022,7 +8309,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -10033,7 +8320,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -10042,7 +8329,7 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10054,12 +8341,12 @@ func TestGettersPostV1TransportWaybillsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsListTransportResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
-		var fernTestValueRows []*PostV1TransportWaybillsListResponseRowsItem
+		obj := &WaybillsListTransportResponse{}
+		var fernTestValueRows []*WaybillsListTransportResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -10089,7 +8376,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -10120,7 +8407,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -10151,7 +8438,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -10182,7 +8469,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -10212,9 +8499,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestSettersWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10222,15 +8509,15 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueStatus PostV1TransportWaybillsListResponseRowsItemStatus
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueStatus WaybillsListTransportResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -10238,7 +8525,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -10246,31 +8533,31 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -10278,7 +8565,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -10286,7 +8573,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -10294,7 +8581,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -10302,7 +8589,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -10310,7 +8597,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -10318,7 +8605,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -10326,7 +8613,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -10334,7 +8621,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -10342,7 +8629,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -10350,7 +8637,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -10358,7 +8645,7 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -10366,28 +8653,36 @@ func TestSettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConsigneeName", func(t *testing.T) {
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueConsigneeName *string
+		obj.SetConsigneeName(fernTestValueConsigneeName)
+		assert.Equal(t, fernTestValueConsigneeName, obj.ConsigneeName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
-func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestGettersWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -10397,7 +8692,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10410,8 +8705,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected PostV1TransportWaybillsListResponseRowsItemStatus
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected WaybillsListTransportResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -10420,7 +8715,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10433,7 +8728,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected string
 		obj.Series = expected
 
@@ -10443,7 +8738,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10456,7 +8751,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -10467,7 +8762,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -10476,7 +8771,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10489,8 +8784,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -10499,7 +8794,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10512,8 +8807,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -10522,7 +8817,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10535,8 +8830,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected *string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -10546,7 +8841,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -10555,7 +8850,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10568,7 +8863,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -10578,7 +8873,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10591,7 +8886,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -10602,7 +8897,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -10611,7 +8906,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10624,7 +8919,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -10635,7 +8930,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -10644,7 +8939,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10657,7 +8952,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -10668,7 +8963,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -10677,7 +8972,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10690,7 +8985,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -10701,7 +8996,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -10710,7 +9005,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10723,7 +9018,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -10734,7 +9029,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -10743,7 +9038,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10756,7 +9051,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -10767,7 +9062,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -10776,7 +9071,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10789,7 +9084,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -10799,7 +9094,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10812,7 +9107,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -10822,7 +9117,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10835,7 +9130,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -10846,7 +9141,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -10855,7 +9150,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10868,7 +9163,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -10879,7 +9174,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -10888,7 +9183,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10901,7 +9196,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -10912,7 +9207,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -10921,7 +9216,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10934,8 +9229,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -10944,7 +9239,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10957,8 +9252,8 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var expected string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -10967,7 +9262,7 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10977,13 +9272,46 @@ func TestGettersPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetUpdatedAt() // Should return zero value
 	})
 
+	t.Run("GetConsigneeName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var expected *string
+		obj.ConsigneeName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConsigneeName(), "getter should return the property value")
+	})
+
+	t.Run("GetConsigneeName_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportResponseRowsItem{}
+		obj.ConsigneeName = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetConsigneeName(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetConsigneeName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WaybillsListTransportResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConsigneeName() // Should return zero value
+	})
+
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -11014,8 +9342,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueStatus PostV1TransportWaybillsListResponseRowsItemStatus
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueStatus WaybillsListTransportResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -11045,7 +9373,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueSeries string
 
 		// Act
@@ -11076,7 +9404,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -11107,8 +9435,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -11138,8 +9466,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -11169,8 +9497,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -11200,7 +9528,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -11231,7 +9559,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -11262,7 +9590,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -11293,7 +9621,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -11324,7 +9652,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -11355,7 +9683,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -11386,7 +9714,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -11417,7 +9745,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -11448,7 +9776,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -11479,7 +9807,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -11510,7 +9838,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -11541,7 +9869,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -11572,8 +9900,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -11603,8 +9931,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -11631,11 +9959,42 @@ func TestSettersMarkExplicitPostV1TransportWaybillsListResponseRowsItem(t *testi
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConsigneeName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportResponseRowsItem{}
+		var fernTestValueConsigneeName *string
+
+		// Act
+		obj.SetConsigneeName(fernTestValueConsigneeName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
-func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestSettersWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -11643,7 +10002,7 @@ func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -11651,7 +10010,7 @@ func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -11659,7 +10018,7 @@ func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -11667,7 +10026,7 @@ func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -11676,11 +10035,11 @@ func TestSettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestGettersWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -11691,7 +10050,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -11700,7 +10059,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11713,7 +10072,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -11724,7 +10083,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -11733,7 +10092,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11746,7 +10105,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -11757,7 +10116,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -11766,7 +10125,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11779,7 +10138,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -11789,7 +10148,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11802,7 +10161,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -11813,7 +10172,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -11822,7 +10181,7 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11834,11 +10193,11 @@ func TestGettersPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -11869,7 +10228,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -11900,7 +10259,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *tes
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -11931,7 +10290,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *tes
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -11962,7 +10321,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *tes
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -11992,9 +10351,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateRequestLinesItem(t *tes
 
 }
 
-func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestSettersWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -12002,15 +10361,15 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsUpdateResponseStatus
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueStatus WaybillsUpdateTransportResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSeries", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueSeries string
 		obj.SetSeries(fernTestValueSeries)
 		assert.Equal(t, fernTestValueSeries, obj.Series)
@@ -12018,7 +10377,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueFullNumber *string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -12026,31 +10385,31 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDispatchAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 		obj.SetDispatchAt(fernTestValueDispatchAt)
 		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
 		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetConsigneePartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
 		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
@@ -12058,7 +10417,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransporterPartnerID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
 		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
@@ -12066,7 +10425,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetVehiclePlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueVehiclePlate *string
 		obj.SetVehiclePlate(fernTestValueVehiclePlate)
 		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
@@ -12074,7 +10433,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrailerPlate", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueTrailerPlate *string
 		obj.SetTrailerPlate(fernTestValueTrailerPlate)
 		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
@@ -12082,7 +10441,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverName", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueDriverName *string
 		obj.SetDriverName(fernTestValueDriverName)
 		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
@@ -12090,7 +10449,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDriverSurname", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueDriverSurname *string
 		obj.SetDriverSurname(fernTestValueDriverSurname)
 		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
@@ -12098,7 +10457,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadWarehouseID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
 		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
@@ -12106,7 +10465,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetLoadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueLoadAddress string
 		obj.SetLoadAddress(fernTestValueLoadAddress)
 		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
@@ -12114,7 +10473,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnloadAddress", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueUnloadAddress string
 		obj.SetUnloadAddress(fernTestValueUnloadAddress)
 		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
@@ -12122,7 +10481,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetValueEur", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueValueEur *string
 		obj.SetValueEur(fernTestValueValueEur)
 		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
@@ -12130,7 +10489,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSaleInvoiceID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
@@ -12138,7 +10497,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -12146,24 +10505,24 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsUpdateResponseLinesItem
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueLines []*WaybillsUpdateTransportResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -12171,11 +10530,11 @@ func TestSettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestGettersWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -12185,7 +10544,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12198,8 +10557,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected PostV1TransportWaybillsUpdateResponseStatus
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected WaybillsUpdateTransportResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -12208,7 +10567,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12221,7 +10580,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected string
 		obj.Series = expected
 
@@ -12231,7 +10590,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12244,7 +10603,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.FullNumber = expected
 
@@ -12255,7 +10614,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetFullNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.FullNumber = nil
 
 		// Act & Assert
@@ -12264,7 +10623,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12277,8 +10636,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected string
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -12287,7 +10646,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12300,8 +10659,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDispatchAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected string
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected time.Time
 		obj.DispatchAt = expected
 
 		// Act & Assert
@@ -12310,7 +10669,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDispatchAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12323,8 +10682,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected *string
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected *time.Time
 		obj.EstimatedArrivalAt = expected
 
 		// Act & Assert
@@ -12334,7 +10693,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetEstimatedArrivalAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.EstimatedArrivalAt = nil
 
 		// Act & Assert
@@ -12343,7 +10702,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetEstimatedArrivalAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12356,7 +10715,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetConsigneePartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected string
 		obj.ConsigneePartnerID = expected
 
@@ -12366,7 +10725,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetConsigneePartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12379,7 +10738,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.TransporterPartnerID = expected
 
@@ -12390,7 +10749,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetTransporterPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.TransporterPartnerID = nil
 
 		// Act & Assert
@@ -12399,7 +10758,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetTransporterPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12412,7 +10771,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetVehiclePlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.VehiclePlate = expected
 
@@ -12423,7 +10782,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetVehiclePlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.VehiclePlate = nil
 
 		// Act & Assert
@@ -12432,7 +10791,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetVehiclePlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12445,7 +10804,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetTrailerPlate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.TrailerPlate = expected
 
@@ -12456,7 +10815,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetTrailerPlate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.TrailerPlate = nil
 
 		// Act & Assert
@@ -12465,7 +10824,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetTrailerPlate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12478,7 +10837,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDriverName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.DriverName = expected
 
@@ -12489,7 +10848,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDriverName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.DriverName = nil
 
 		// Act & Assert
@@ -12498,7 +10857,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDriverName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12511,7 +10870,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDriverSurname", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.DriverSurname = expected
 
@@ -12522,7 +10881,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetDriverSurname_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.DriverSurname = nil
 
 		// Act & Assert
@@ -12531,7 +10890,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDriverSurname_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12544,7 +10903,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.LoadWarehouseID = expected
 
@@ -12555,7 +10914,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetLoadWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.LoadWarehouseID = nil
 
 		// Act & Assert
@@ -12564,7 +10923,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetLoadWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12577,7 +10936,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetLoadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected string
 		obj.LoadAddress = expected
 
@@ -12587,7 +10946,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetLoadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12600,7 +10959,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetUnloadAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected string
 		obj.UnloadAddress = expected
 
@@ -12610,7 +10969,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetUnloadAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12623,7 +10982,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetValueEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.ValueEur = expected
 
@@ -12634,7 +10993,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetValueEur_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.ValueEur = nil
 
 		// Act & Assert
@@ -12643,7 +11002,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetValueEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12656,7 +11015,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.SaleInvoiceID = expected
 
@@ -12667,7 +11026,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetSaleInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.SaleInvoiceID = nil
 
 		// Act & Assert
@@ -12676,7 +11035,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetSaleInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12689,7 +11048,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -12700,7 +11059,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -12709,7 +11068,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12722,8 +11081,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected string
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -12732,7 +11091,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12745,8 +11104,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected string
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -12755,7 +11114,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12768,8 +11127,8 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var expected []*PostV1TransportWaybillsUpdateResponseLinesItem
+		obj := &WaybillsUpdateTransportResponse{}
+		var expected []*WaybillsUpdateTransportResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -12779,7 +11138,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -12788,7 +11147,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12800,11 +11159,11 @@ func TestGettersPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -12835,8 +11194,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueStatus PostV1TransportWaybillsUpdateResponseStatus
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueStatus WaybillsUpdateTransportResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -12866,7 +11225,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueSeries string
 
 		// Act
@@ -12897,7 +11256,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueFullNumber *string
 
 		// Act
@@ -12928,8 +11287,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueDocumentDate string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -12959,8 +11318,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueDispatchAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueDispatchAt time.Time
 
 		// Act
 		obj.SetDispatchAt(fernTestValueDispatchAt)
@@ -12990,8 +11349,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueEstimatedArrivalAt *string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueEstimatedArrivalAt *time.Time
 
 		// Act
 		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
@@ -13021,7 +11380,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueConsigneePartnerID string
 
 		// Act
@@ -13052,7 +11411,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueTransporterPartnerID *string
 
 		// Act
@@ -13083,7 +11442,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueVehiclePlate *string
 
 		// Act
@@ -13114,7 +11473,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueTrailerPlate *string
 
 		// Act
@@ -13145,7 +11504,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueDriverName *string
 
 		// Act
@@ -13176,7 +11535,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueDriverSurname *string
 
 		// Act
@@ -13207,7 +11566,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueLoadWarehouseID *string
 
 		// Act
@@ -13238,7 +11597,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueLoadAddress string
 
 		// Act
@@ -13269,7 +11628,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueUnloadAddress string
 
 		// Act
@@ -13300,7 +11659,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueValueEur *string
 
 		// Act
@@ -13331,7 +11690,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueSaleInvoiceID *string
 
 		// Act
@@ -13362,7 +11721,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -13393,8 +11752,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -13424,8 +11783,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -13455,8 +11814,8 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
-		var fernTestValueLines []*PostV1TransportWaybillsUpdateResponseLinesItem
+		obj := &WaybillsUpdateTransportResponse{}
+		var fernTestValueLines []*WaybillsUpdateTransportResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -13485,9 +11844,9 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestSettersWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -13495,7 +11854,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -13503,7 +11862,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -13511,7 +11870,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -13519,7 +11878,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -13527,7 +11886,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetProductCode", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 		obj.SetProductCode(fernTestValueProductCode)
 		assert.Equal(t, fernTestValueProductCode, obj.ProductCode)
@@ -13535,7 +11894,7 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetSortOrder", func(t *testing.T) {
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 		obj.SetSortOrder(fernTestValueSortOrder)
 		assert.Equal(t, fernTestValueSortOrder, obj.SortOrder)
@@ -13544,11 +11903,11 @@ func TestSettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestGettersWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -13558,7 +11917,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13571,7 +11930,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -13582,7 +11941,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -13591,7 +11950,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13604,7 +11963,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -13614,7 +11973,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13627,7 +11986,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -13637,7 +11996,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13650,7 +12009,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -13660,7 +12019,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13673,7 +12032,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected *string
 		obj.ProductCode = expected
 
@@ -13684,7 +12043,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetProductCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		obj.ProductCode = nil
 
 		// Act & Assert
@@ -13693,7 +12052,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetProductCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13706,7 +12065,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 	t.Run("GetSortOrder", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var expected int64
 		obj.SortOrder = expected
 
@@ -13716,7 +12075,7 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetSortOrder_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13728,11 +12087,11 @@ func TestGettersPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -13763,7 +12122,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -13794,7 +12153,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -13825,7 +12184,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -13856,7 +12215,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -13887,7 +12246,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetProductCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueProductCode *string
 
 		// Act
@@ -13918,7 +12277,7 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 	t.Run("SetSortOrder_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		var fernTestValueSortOrder int64
 
 		// Act
@@ -13948,11 +12307,1724 @@ func TestSettersMarkExplicitPostV1TransportWaybillsUpdateResponseLinesItem(t *te
 
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsCancelResponse(t *testing.T) {
+func TestSettersWaybillsCancelTransportRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WaybillsCancelTransportRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsCancelTransportRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCancelTransportRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWaybillsCreateTransportRequest(t *testing.T) {
+	t.Run("SetConsigneePartnerID", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueConsigneePartnerID string
+		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
+		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransporterPartnerID", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueTransporterPartnerID *string
+		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
+		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentDate", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDocumentDate *time.Time
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDispatchAt", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDispatchAt time.Time
+		obj.SetDispatchAt(fernTestValueDispatchAt)
+		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueEstimatedArrivalAt *time.Time
+		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
+		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVehiclePlate", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueVehiclePlate *string
+		obj.SetVehiclePlate(fernTestValueVehiclePlate)
+		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTrailerPlate", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueTrailerPlate *string
+		obj.SetTrailerPlate(fernTestValueTrailerPlate)
+		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDriverName", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDriverName *string
+		obj.SetDriverName(fernTestValueDriverName)
+		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDriverSurname", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDriverSurname *string
+		obj.SetDriverSurname(fernTestValueDriverSurname)
+		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLoadWarehouseID", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLoadWarehouseID *string
+		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
+		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLoadAddress", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLoadAddress string
+		obj.SetLoadAddress(fernTestValueLoadAddress)
+		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnloadAddress", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueUnloadAddress string
+		obj.SetUnloadAddress(fernTestValueUnloadAddress)
+		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetValueEur", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueValueEur *string
+		obj.SetValueEur(fernTestValueValueEur)
+		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSaleInvoiceID", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueSaleInvoiceID *string
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
+		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSeries", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueSeries *string
+		obj.SetSeries(fernTestValueSeries)
+		assert.Equal(t, fernTestValueSeries, obj.Series)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLines", func(t *testing.T) {
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLines []*WaybillsCreateTransportRequestLinesItem
+		obj.SetLines(fernTestValueLines)
+		assert.Equal(t, fernTestValueLines, obj.Lines)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsCreateTransportRequest(t *testing.T) {
+	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueConsigneePartnerID string
+
+		// Act
+		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueTransporterPartnerID *string
+
+		// Act
+		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDocumentDate *time.Time
+
+		// Act
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDispatchAt time.Time
+
+		// Act
+		obj.SetDispatchAt(fernTestValueDispatchAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueEstimatedArrivalAt *time.Time
+
+		// Act
+		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueVehiclePlate *string
+
+		// Act
+		obj.SetVehiclePlate(fernTestValueVehiclePlate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueTrailerPlate *string
+
+		// Act
+		obj.SetTrailerPlate(fernTestValueTrailerPlate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDriverName *string
+
+		// Act
+		obj.SetDriverName(fernTestValueDriverName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueDriverSurname *string
+
+		// Act
+		obj.SetDriverSurname(fernTestValueDriverSurname)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLoadWarehouseID *string
+
+		// Act
+		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLoadAddress string
+
+		// Act
+		obj.SetLoadAddress(fernTestValueLoadAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueUnloadAddress string
+
+		// Act
+		obj.SetUnloadAddress(fernTestValueUnloadAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueValueEur *string
+
+		// Act
+		obj.SetValueEur(fernTestValueValueEur)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueSaleInvoiceID *string
+
+		// Act
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueSeries *string
+
+		// Act
+		obj.SetSeries(fernTestValueSeries)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsCreateTransportRequest{}
+		var fernTestValueLines []*WaybillsCreateTransportRequestLinesItem
+
+		// Act
+		obj.SetLines(fernTestValueLines)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWaybillsGetTransportRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WaybillsGetTransportRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsGetTransportRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsGetTransportRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWaybillsIssueTransportRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WaybillsIssueTransportRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsIssueTransportRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsIssueTransportRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWaybillsListTransportRequest(t *testing.T) {
+	t.Run("SetPage", func(t *testing.T) {
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValuePage *int64
+		obj.SetPage(fernTestValuePage)
+		assert.Equal(t, fernTestValuePage, obj.Page)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPageSize", func(t *testing.T) {
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValuePageSize *int64
+		obj.SetPageSize(fernTestValuePageSize)
+		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSort", func(t *testing.T) {
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueSort []*WaybillsListTransportRequestSortItem
+		obj.SetSort(fernTestValueSort)
+		assert.Equal(t, fernTestValueSort, obj.Sort)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilter", func(t *testing.T) {
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueFilter []*WaybillsListTransportRequestFilterItem
+		obj.SetFilter(fernTestValueFilter)
+		assert.Equal(t, fernTestValueFilter, obj.Filter)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotals", func(t *testing.T) {
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueTotals []string
+		obj.SetTotals(fernTestValueTotals)
+		assert.Equal(t, fernTestValueTotals, obj.Totals)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsListTransportRequest(t *testing.T) {
+	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValuePage *int64
+
+		// Act
+		obj.SetPage(fernTestValuePage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValuePageSize *int64
+
+		// Act
+		obj.SetPageSize(fernTestValuePageSize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueSort []*WaybillsListTransportRequestSortItem
+
+		// Act
+		obj.SetSort(fernTestValueSort)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueFilter []*WaybillsListTransportRequestFilterItem
+
+		// Act
+		obj.SetFilter(fernTestValueFilter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsListTransportRequest{}
+		var fernTestValueTotals []string
+
+		// Act
+		obj.SetTotals(fernTestValueTotals)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWaybillsUpdateTransportRequest(t *testing.T) {
+	t.Run("SetConsigneePartnerID", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueConsigneePartnerID *string
+		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
+		assert.Equal(t, fernTestValueConsigneePartnerID, obj.ConsigneePartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransporterPartnerID", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueTransporterPartnerID *string
+		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
+		assert.Equal(t, fernTestValueTransporterPartnerID, obj.TransporterPartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentDate", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDocumentDate *time.Time
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDispatchAt", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDispatchAt *time.Time
+		obj.SetDispatchAt(fernTestValueDispatchAt)
+		assert.Equal(t, fernTestValueDispatchAt, obj.DispatchAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEstimatedArrivalAt", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueEstimatedArrivalAt *time.Time
+		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
+		assert.Equal(t, fernTestValueEstimatedArrivalAt, obj.EstimatedArrivalAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVehiclePlate", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueVehiclePlate *string
+		obj.SetVehiclePlate(fernTestValueVehiclePlate)
+		assert.Equal(t, fernTestValueVehiclePlate, obj.VehiclePlate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTrailerPlate", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueTrailerPlate *string
+		obj.SetTrailerPlate(fernTestValueTrailerPlate)
+		assert.Equal(t, fernTestValueTrailerPlate, obj.TrailerPlate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDriverName", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDriverName *string
+		obj.SetDriverName(fernTestValueDriverName)
+		assert.Equal(t, fernTestValueDriverName, obj.DriverName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDriverSurname", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDriverSurname *string
+		obj.SetDriverSurname(fernTestValueDriverSurname)
+		assert.Equal(t, fernTestValueDriverSurname, obj.DriverSurname)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLoadWarehouseID", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLoadWarehouseID *string
+		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
+		assert.Equal(t, fernTestValueLoadWarehouseID, obj.LoadWarehouseID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLoadAddress", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLoadAddress *string
+		obj.SetLoadAddress(fernTestValueLoadAddress)
+		assert.Equal(t, fernTestValueLoadAddress, obj.LoadAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnloadAddress", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueUnloadAddress *string
+		obj.SetUnloadAddress(fernTestValueUnloadAddress)
+		assert.Equal(t, fernTestValueUnloadAddress, obj.UnloadAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetValueEur", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueValueEur *string
+		obj.SetValueEur(fernTestValueValueEur)
+		assert.Equal(t, fernTestValueValueEur, obj.ValueEur)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSaleInvoiceID", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueSaleInvoiceID *string
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
+		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSeries", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueSeries *string
+		obj.SetSeries(fernTestValueSeries)
+		assert.Equal(t, fernTestValueSeries, obj.Series)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLines", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLines []*WaybillsUpdateTransportRequestLinesItem
+		obj.SetLines(fernTestValueLines)
+		assert.Equal(t, fernTestValueLines, obj.Lines)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWaybillsUpdateTransportRequest(t *testing.T) {
+	t.Run("SetConsigneePartnerID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueConsigneePartnerID *string
+
+		// Act
+		obj.SetConsigneePartnerID(fernTestValueConsigneePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransporterPartnerID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueTransporterPartnerID *string
+
+		// Act
+		obj.SetTransporterPartnerID(fernTestValueTransporterPartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDocumentDate *time.Time
+
+		// Act
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDispatchAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDispatchAt *time.Time
+
+		// Act
+		obj.SetDispatchAt(fernTestValueDispatchAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEstimatedArrivalAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueEstimatedArrivalAt *time.Time
+
+		// Act
+		obj.SetEstimatedArrivalAt(fernTestValueEstimatedArrivalAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVehiclePlate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueVehiclePlate *string
+
+		// Act
+		obj.SetVehiclePlate(fernTestValueVehiclePlate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTrailerPlate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueTrailerPlate *string
+
+		// Act
+		obj.SetTrailerPlate(fernTestValueTrailerPlate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDriverName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDriverName *string
+
+		// Act
+		obj.SetDriverName(fernTestValueDriverName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDriverSurname_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueDriverSurname *string
+
+		// Act
+		obj.SetDriverSurname(fernTestValueDriverSurname)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLoadWarehouseID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLoadWarehouseID *string
+
+		// Act
+		obj.SetLoadWarehouseID(fernTestValueLoadWarehouseID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLoadAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLoadAddress *string
+
+		// Act
+		obj.SetLoadAddress(fernTestValueLoadAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnloadAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueUnloadAddress *string
+
+		// Act
+		obj.SetUnloadAddress(fernTestValueUnloadAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetValueEur_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueValueEur *string
+
+		// Act
+		obj.SetValueEur(fernTestValueValueEur)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueSaleInvoiceID *string
+
+		// Act
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSeries_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueSeries *string
+
+		// Act
+		obj.SetSeries(fernTestValueSeries)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueLines []*WaybillsUpdateTransportRequestLinesItem
+
+		// Act
+		obj.SetLines(fernTestValueLines)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WaybillsUpdateTransportRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -13961,31 +14033,31 @@ func TestJSONMarshalingPostV1TransportWaybillsCancelResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsCancelResponse
+		var unmarshaled WaybillsCancelTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCancelResponse
+		var obj WaybillsCancelTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCancelResponse
+		var obj WaybillsCancelTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -13994,31 +14066,31 @@ func TestJSONMarshalingPostV1TransportWaybillsCreateRequestLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsCreateRequestLinesItem
+		var unmarshaled WaybillsCreateTransportRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateRequestLinesItem
+		var obj WaybillsCreateTransportRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateRequestLinesItem
+		var obj WaybillsCreateTransportRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestJSONMarshalingWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14027,31 +14099,31 @@ func TestJSONMarshalingPostV1TransportWaybillsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsCreateResponse
+		var unmarshaled WaybillsCreateTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateResponse
+		var obj WaybillsCreateTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateResponse
+		var obj WaybillsCreateTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14060,31 +14132,31 @@ func TestJSONMarshalingPostV1TransportWaybillsCreateResponseLinesItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsCreateResponseLinesItem
+		var unmarshaled WaybillsCreateTransportResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateResponseLinesItem
+		var obj WaybillsCreateTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsCreateResponseLinesItem
+		var obj WaybillsCreateTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestJSONMarshalingWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14093,31 +14165,31 @@ func TestJSONMarshalingPostV1TransportWaybillsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsGetResponse
+		var unmarshaled WaybillsGetTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsGetResponse
+		var obj WaybillsGetTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsGetResponse
+		var obj WaybillsGetTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14126,31 +14198,31 @@ func TestJSONMarshalingPostV1TransportWaybillsGetResponseLinesItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsGetResponseLinesItem
+		var unmarshaled WaybillsGetTransportResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsGetResponseLinesItem
+		var obj WaybillsGetTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsGetResponseLinesItem
+		var obj WaybillsGetTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestJSONMarshalingWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14159,31 +14231,31 @@ func TestJSONMarshalingPostV1TransportWaybillsIssueResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsIssueResponse
+		var unmarshaled WaybillsIssueTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsIssueResponse
+		var obj WaybillsIssueTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsIssueResponse
+		var obj WaybillsIssueTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14192,31 +14264,31 @@ func TestJSONMarshalingPostV1TransportWaybillsIssueResponseLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsIssueResponseLinesItem
+		var unmarshaled WaybillsIssueTransportResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsIssueResponseLinesItem
+		var obj WaybillsIssueTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsIssueResponseLinesItem
+		var obj WaybillsIssueTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14225,31 +14297,31 @@ func TestJSONMarshalingPostV1TransportWaybillsListRequestFilterItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsListRequestFilterItem
+		var unmarshaled WaybillsListTransportRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListRequestFilterItem
+		var obj WaybillsListTransportRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListRequestFilterItem
+		var obj WaybillsListTransportRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14258,31 +14330,31 @@ func TestJSONMarshalingPostV1TransportWaybillsListRequestSortItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsListRequestSortItem
+		var unmarshaled WaybillsListTransportRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListRequestSortItem
+		var obj WaybillsListTransportRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListRequestSortItem
+		var obj WaybillsListTransportRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestJSONMarshalingWaybillsListTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14291,31 +14363,31 @@ func TestJSONMarshalingPostV1TransportWaybillsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsListResponse
+		var unmarshaled WaybillsListTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListResponse
+		var obj WaybillsListTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListResponse
+		var obj WaybillsListTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14324,31 +14396,31 @@ func TestJSONMarshalingPostV1TransportWaybillsListResponseRowsItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsListResponseRowsItem
+		var unmarshaled WaybillsListTransportResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListResponseRowsItem
+		var obj WaybillsListTransportResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsListResponseRowsItem
+		var obj WaybillsListTransportResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14357,31 +14429,31 @@ func TestJSONMarshalingPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsUpdateRequestLinesItem
+		var unmarshaled WaybillsUpdateTransportRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj WaybillsUpdateTransportRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj WaybillsUpdateTransportRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14390,31 +14462,31 @@ func TestJSONMarshalingPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsUpdateResponse
+		var unmarshaled WaybillsUpdateTransportResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateResponse
+		var obj WaybillsUpdateTransportResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateResponse
+		var obj WaybillsUpdateTransportResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14423,295 +14495,295 @@ func TestJSONMarshalingPostV1TransportWaybillsUpdateResponseLinesItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1TransportWaybillsUpdateResponseLinesItem
+		var unmarshaled WaybillsUpdateTransportResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj WaybillsUpdateTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj WaybillsUpdateTransportResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1TransportWaybillsCancelResponse(t *testing.T) {
+func TestStringWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestStringWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestStringWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestStringWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestStringWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestStringWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestStringWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestStringWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestStringWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItem
+		var obj *WaybillsListTransportRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestStringWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestSortItem
+		var obj *WaybillsListTransportRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestStringWaybillsListTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestStringWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestStringWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestStringWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestStringWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1TransportWaybillsCancelResponseStatus(t *testing.T) {
+func TestEnumWaybillsCancelTransportResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCancelResponseStatusFromString("draft")
+		val, err := NewWaybillsCancelTransportResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCancelResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCancelTransportResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCancelResponseStatusFromString("issued")
+		val, err := NewWaybillsCancelTransportResponseStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCancelResponseStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCancelTransportResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCancelResponseStatusFromString("cancelled")
+		val, err := NewWaybillsCancelTransportResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCancelResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCancelTransportResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsCancelResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsCancelTransportResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsCancelResponseStatusFromString("draft")
+		val, err := NewWaybillsCancelTransportResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14719,35 +14791,35 @@ func TestEnumPostV1TransportWaybillsCancelResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsCreateResponseStatus(t *testing.T) {
+func TestEnumWaybillsCreateTransportResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCreateResponseStatusFromString("draft")
+		val, err := NewWaybillsCreateTransportResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCreateResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCreateTransportResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCreateResponseStatusFromString("issued")
+		val, err := NewWaybillsCreateTransportResponseStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCreateResponseStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCreateTransportResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsCreateResponseStatusFromString("cancelled")
+		val, err := NewWaybillsCreateTransportResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsCreateResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsCreateTransportResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsCreateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsCreateTransportResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsCreateResponseStatusFromString("draft")
+		val, err := NewWaybillsCreateTransportResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14755,35 +14827,35 @@ func TestEnumPostV1TransportWaybillsCreateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsGetResponseStatus(t *testing.T) {
+func TestEnumWaybillsGetTransportResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsGetResponseStatusFromString("draft")
+		val, err := NewWaybillsGetTransportResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsGetResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsGetTransportResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsGetResponseStatusFromString("issued")
+		val, err := NewWaybillsGetTransportResponseStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsGetResponseStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsGetTransportResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsGetResponseStatusFromString("cancelled")
+		val, err := NewWaybillsGetTransportResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsGetResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsGetTransportResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsGetTransportResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsGetResponseStatusFromString("draft")
+		val, err := NewWaybillsGetTransportResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14791,35 +14863,35 @@ func TestEnumPostV1TransportWaybillsGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsIssueResponseStatus(t *testing.T) {
+func TestEnumWaybillsIssueTransportResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsIssueResponseStatusFromString("draft")
+		val, err := NewWaybillsIssueTransportResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsIssueResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsIssueTransportResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsIssueResponseStatusFromString("issued")
+		val, err := NewWaybillsIssueTransportResponseStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsIssueResponseStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsIssueTransportResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsIssueResponseStatusFromString("cancelled")
+		val, err := NewWaybillsIssueTransportResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsIssueResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsIssueTransportResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsIssueResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsIssueTransportResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsIssueResponseStatusFromString("draft")
+		val, err := NewWaybillsIssueTransportResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14827,56 +14899,56 @@ func TestEnumPostV1TransportWaybillsIssueResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsListRequestFilterItemOp(t *testing.T) {
+func TestEnumWaybillsListTransportRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("eq")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("ne")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("contains")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("gte")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("lte")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("in")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsListTransportRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsListRequestFilterItemOpFromString("eq")
+		val, err := NewWaybillsListTransportRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14884,28 +14956,28 @@ func TestEnumPostV1TransportWaybillsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsListRequestSortItemDir(t *testing.T) {
+func TestEnumWaybillsListTransportRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestSortItemDirFromString("asc")
+		val, err := NewWaybillsListTransportRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListRequestSortItemDirFromString("desc")
+		val, err := NewWaybillsListTransportRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsListTransportRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsListRequestSortItemDirFromString("asc")
+		val, err := NewWaybillsListTransportRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14913,35 +14985,35 @@ func TestEnumPostV1TransportWaybillsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsListResponseRowsItemStatus(t *testing.T) {
+func TestEnumWaybillsListTransportResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListResponseRowsItemStatusFromString("draft")
+		val, err := NewWaybillsListTransportResponseRowsItemStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListResponseRowsItemStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportResponseRowsItemStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListResponseRowsItemStatusFromString("issued")
+		val, err := NewWaybillsListTransportResponseRowsItemStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListResponseRowsItemStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportResponseRowsItemStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsListResponseRowsItemStatusFromString("cancelled")
+		val, err := NewWaybillsListTransportResponseRowsItemStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsListResponseRowsItemStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsListTransportResponseRowsItemStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsListTransportResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsListResponseRowsItemStatusFromString("draft")
+		val, err := NewWaybillsListTransportResponseRowsItemStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14949,35 +15021,35 @@ func TestEnumPostV1TransportWaybillsListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1TransportWaybillsUpdateResponseStatus(t *testing.T) {
+func TestEnumWaybillsUpdateTransportResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsUpdateResponseStatusFromString("draft")
+		val, err := NewWaybillsUpdateTransportResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsUpdateResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsUpdateTransportResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_issued", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsUpdateResponseStatusFromString("issued")
+		val, err := NewWaybillsUpdateTransportResponseStatusFromString("issued")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsUpdateResponseStatus("issued"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsUpdateTransportResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1TransportWaybillsUpdateResponseStatusFromString("cancelled")
+		val, err := NewWaybillsUpdateTransportResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1TransportWaybillsUpdateResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, WaybillsUpdateTransportResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1TransportWaybillsUpdateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewWaybillsUpdateTransportResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1TransportWaybillsUpdateResponseStatusFromString("draft")
+		val, err := NewWaybillsUpdateTransportResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14985,10 +15057,10 @@ func TestEnumPostV1TransportWaybillsUpdateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsCancelResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsCancelTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCancelResponse{}
+		obj := &WaybillsCancelTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15002,16 +15074,16 @@ func TestExtraPropertiesPostV1TransportWaybillsCancelResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCancelResponse
+		var obj *WaybillsCancelTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsCreateRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsCreateTransportRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateRequestLinesItem{}
+		obj := &WaybillsCreateTransportRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15025,16 +15097,16 @@ func TestExtraPropertiesPostV1TransportWaybillsCreateRequestLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateRequestLinesItem
+		var obj *WaybillsCreateTransportRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsCreateResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsCreateTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateResponse{}
+		obj := &WaybillsCreateTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15048,16 +15120,16 @@ func TestExtraPropertiesPostV1TransportWaybillsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponse
+		var obj *WaybillsCreateTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsCreateResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsCreateTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsCreateResponseLinesItem{}
+		obj := &WaybillsCreateTransportResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15071,16 +15143,16 @@ func TestExtraPropertiesPostV1TransportWaybillsCreateResponseLinesItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsCreateResponseLinesItem
+		var obj *WaybillsCreateTransportResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsGetResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsGetTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsGetResponse{}
+		obj := &WaybillsGetTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15094,16 +15166,16 @@ func TestExtraPropertiesPostV1TransportWaybillsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponse
+		var obj *WaybillsGetTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsGetResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsGetTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsGetResponseLinesItem{}
+		obj := &WaybillsGetTransportResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15117,16 +15189,16 @@ func TestExtraPropertiesPostV1TransportWaybillsGetResponseLinesItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsGetResponseLinesItem
+		var obj *WaybillsGetTransportResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsIssueResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsIssueTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsIssueResponse{}
+		obj := &WaybillsIssueTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15140,16 +15212,16 @@ func TestExtraPropertiesPostV1TransportWaybillsIssueResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponse
+		var obj *WaybillsIssueTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsIssueResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsIssueTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsIssueResponseLinesItem{}
+		obj := &WaybillsIssueTransportResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15163,16 +15235,16 @@ func TestExtraPropertiesPostV1TransportWaybillsIssueResponseLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsIssueResponseLinesItem
+		var obj *WaybillsIssueTransportResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesWaybillsListTransportRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListRequestFilterItem{}
+		obj := &WaybillsListTransportRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15186,16 +15258,16 @@ func TestExtraPropertiesPostV1TransportWaybillsListRequestFilterItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestFilterItem
+		var obj *WaybillsListTransportRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesWaybillsListTransportRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListRequestSortItem{}
+		obj := &WaybillsListTransportRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15209,16 +15281,16 @@ func TestExtraPropertiesPostV1TransportWaybillsListRequestSortItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListRequestSortItem
+		var obj *WaybillsListTransportRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsListResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsListTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListResponse{}
+		obj := &WaybillsListTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15232,16 +15304,16 @@ func TestExtraPropertiesPostV1TransportWaybillsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponse
+		var obj *WaybillsListTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesWaybillsListTransportResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsListResponseRowsItem{}
+		obj := &WaybillsListTransportResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15255,16 +15327,16 @@ func TestExtraPropertiesPostV1TransportWaybillsListResponseRowsItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsListResponseRowsItem
+		var obj *WaybillsListTransportResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsUpdateRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsUpdateTransportRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateRequestLinesItem{}
+		obj := &WaybillsUpdateTransportRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15278,16 +15350,16 @@ func TestExtraPropertiesPostV1TransportWaybillsUpdateRequestLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateRequestLinesItem
+		var obj *WaybillsUpdateTransportRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesWaybillsUpdateTransportResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateResponse{}
+		obj := &WaybillsUpdateTransportResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15301,16 +15373,16 @@ func TestExtraPropertiesPostV1TransportWaybillsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponse
+		var obj *WaybillsUpdateTransportResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1TransportWaybillsUpdateResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesWaybillsUpdateTransportResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1TransportWaybillsUpdateResponseLinesItem{}
+		obj := &WaybillsUpdateTransportResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15324,7 +15396,7 @@ func TestExtraPropertiesPostV1TransportWaybillsUpdateResponseLinesItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1TransportWaybillsUpdateResponseLinesItem
+		var obj *WaybillsUpdateTransportResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestConsolidationPostV1ConsolidationGroupsCreateWithWireMock(
+func TestConsolidationGroupsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,22 +88,22 @@ func TestConsolidationPostV1ConsolidationGroupsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationGroupsCreateRequest{
+	request := &nordlet.GroupsCreateConsolidationRequest{
 		Name: "name",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationGroupsCreate(
+	_, invocationErr := client.Consolidation.GroupsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationGroupsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationGroupsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationGroupsCreateWithWireMock", "POST", "/v1/consolidation/groups/create", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationGroupsCreateWithWireMock", "POST", "/v1/consolidation/groups/create", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationGroupsListWithWireMock(
+func TestConsolidationGroupsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -114,20 +114,20 @@ func TestConsolidationPostV1ConsolidationGroupsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationGroupsListRequest{}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationGroupsList(
+	request := &nordlet.GroupsListConsolidationRequest{}
+	_, invocationErr := client.Consolidation.GroupsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationGroupsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationGroupsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationGroupsListWithWireMock", "POST", "/v1/consolidation/groups/list", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationGroupsListWithWireMock", "POST", "/v1/consolidation/groups/list", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationGroupsGetWithWireMock(
+func TestConsolidationGroupsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -138,22 +138,22 @@ func TestConsolidationPostV1ConsolidationGroupsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationGroupsGetRequest{
+	request := &nordlet.GroupsGetConsolidationRequest{
 		GroupID: "groupId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationGroupsGet(
+	_, invocationErr := client.Consolidation.GroupsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationGroupsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationGroupsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationGroupsGetWithWireMock", "POST", "/v1/consolidation/groups/get", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationGroupsGetWithWireMock", "POST", "/v1/consolidation/groups/get", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationGroupsUpdateWithWireMock(
+func TestConsolidationGroupsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -164,22 +164,22 @@ func TestConsolidationPostV1ConsolidationGroupsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationGroupsUpdateRequest{
+	request := &nordlet.GroupsUpdateConsolidationRequest{
 		GroupID: "groupId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationGroupsUpdate(
+	_, invocationErr := client.Consolidation.GroupsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationGroupsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationGroupsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationGroupsUpdateWithWireMock", "POST", "/v1/consolidation/groups/update", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationGroupsUpdateWithWireMock", "POST", "/v1/consolidation/groups/update", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationGroupsDeleteWithWireMock(
+func TestConsolidationGroupsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -190,22 +190,22 @@ func TestConsolidationPostV1ConsolidationGroupsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationGroupsDeleteRequest{
+	request := &nordlet.GroupsDeleteConsolidationRequest{
 		GroupID: "groupId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationGroupsDelete(
+	_, invocationErr := client.Consolidation.GroupsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationGroupsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationGroupsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationGroupsDeleteWithWireMock", "POST", "/v1/consolidation/groups/delete", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationGroupsDeleteWithWireMock", "POST", "/v1/consolidation/groups/delete", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationMembersAddWithWireMock(
+func TestConsolidationMembersAddWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -216,23 +216,23 @@ func TestConsolidationPostV1ConsolidationMembersAddWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationMembersAddRequest{
+	request := &nordlet.MembersAddConsolidationRequest{
 		GroupID:         "groupId",
 		MemberCompanyID: "memberCompanyId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationMembersAdd(
+	_, invocationErr := client.Consolidation.MembersAdd(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationMembersAddWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationMembersAddWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationMembersAddWithWireMock", "POST", "/v1/consolidation/members/add", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationMembersAddWithWireMock", "POST", "/v1/consolidation/members/add", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationMembersRemoveWithWireMock(
+func TestConsolidationMembersRemoveWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -243,23 +243,23 @@ func TestConsolidationPostV1ConsolidationMembersRemoveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationMembersRemoveRequest{
+	request := &nordlet.MembersRemoveConsolidationRequest{
 		GroupID:         "groupId",
 		MemberCompanyID: "memberCompanyId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationMembersRemove(
+	_, invocationErr := client.Consolidation.MembersRemove(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationMembersRemoveWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationMembersRemoveWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationMembersRemoveWithWireMock", "POST", "/v1/consolidation/members/remove", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationMembersRemoveWithWireMock", "POST", "/v1/consolidation/members/remove", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationIntercompanyCandidatesWithWireMock(
+func TestConsolidationIntercompanyCandidatesWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -270,22 +270,22 @@ func TestConsolidationPostV1ConsolidationIntercompanyCandidatesWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationIntercompanyCandidatesRequest{
+	request := &nordlet.IntercompanyCandidatesConsolidationRequest{
 		GroupID: "groupId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationIntercompanyCandidates(
+	_, invocationErr := client.Consolidation.IntercompanyCandidates(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationIntercompanyCandidatesWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationIntercompanyCandidatesWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationIntercompanyCandidatesWithWireMock", "POST", "/v1/consolidation/intercompany/candidates", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationIntercompanyCandidatesWithWireMock", "POST", "/v1/consolidation/intercompany/candidates", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationIntercompanyLinksSetWithWireMock(
+func TestConsolidationIntercompanyLinksSetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -296,24 +296,24 @@ func TestConsolidationPostV1ConsolidationIntercompanyLinksSetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationIntercompanyLinksSetRequest{
+	request := &nordlet.IntercompanyLinksSetConsolidationRequest{
 		GroupID:               "groupId",
 		PartnerID:             "partnerId",
 		CounterpartyCompanyID: "counterpartyCompanyId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(
+	_, invocationErr := client.Consolidation.IntercompanyLinksSet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationIntercompanyLinksSetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationIntercompanyLinksSetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationIntercompanyLinksSetWithWireMock", "POST", "/v1/consolidation/intercompany/links/set", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationIntercompanyLinksSetWithWireMock", "POST", "/v1/consolidation/intercompany/links/set", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationIntercompanyLinksListWithWireMock(
+func TestConsolidationIntercompanyLinksListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -324,22 +324,22 @@ func TestConsolidationPostV1ConsolidationIntercompanyLinksListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationIntercompanyLinksListRequest{
+	request := &nordlet.IntercompanyLinksListConsolidationRequest{
 		GroupID: "groupId",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationIntercompanyLinksList(
+	_, invocationErr := client.Consolidation.IntercompanyLinksList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationIntercompanyLinksListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationIntercompanyLinksListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationIntercompanyLinksListWithWireMock", "POST", "/v1/consolidation/intercompany/links/list", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationIntercompanyLinksListWithWireMock", "POST", "/v1/consolidation/intercompany/links/list", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationIntercompanyLinksRemoveWithWireMock(
+func TestConsolidationIntercompanyLinksRemoveWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -350,23 +350,23 @@ func TestConsolidationPostV1ConsolidationIntercompanyLinksRemoveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest{
+	request := &nordlet.IntercompanyLinksRemoveConsolidationRequest{
 		GroupID: "groupId",
 		ID:      "id",
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(
+	_, invocationErr := client.Consolidation.IntercompanyLinksRemove(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationIntercompanyLinksRemoveWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationIntercompanyLinksRemoveWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationIntercompanyLinksRemoveWithWireMock", "POST", "/v1/consolidation/intercompany/links/remove", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationIntercompanyLinksRemoveWithWireMock", "POST", "/v1/consolidation/intercompany/links/remove", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationIntercompanyReportWithWireMock(
+func TestConsolidationIntercompanyReportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -377,24 +377,28 @@ func TestConsolidationPostV1ConsolidationIntercompanyReportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationIntercompanyReportRequest{
-		GroupID:  "groupId",
-		FromDate: "fromDate",
-		ToDate:   "toDate",
+	request := &nordlet.IntercompanyReportConsolidationRequest{
+		GroupID: "groupId",
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationIntercompanyReport(
+	_, invocationErr := client.Consolidation.IntercompanyReport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationIntercompanyReportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationIntercompanyReportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationIntercompanyReportWithWireMock", "POST", "/v1/consolidation/intercompany/report", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationIntercompanyReportWithWireMock", "POST", "/v1/consolidation/intercompany/report", nil, 1)
 }
 
-func TestConsolidationPostV1ConsolidationReportWithWireMock(
+func TestConsolidationReportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -405,19 +409,23 @@ func TestConsolidationPostV1ConsolidationReportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ConsolidationReportRequest{
-		GroupID:  "groupId",
-		FromDate: "fromDate",
-		ToDate:   "toDate",
+	request := &nordlet.ReportConsolidationRequest{
+		GroupID: "groupId",
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Consolidation.PostV1ConsolidationReport(
+	_, invocationErr := client.Consolidation.Report(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestConsolidationPostV1ConsolidationReportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestConsolidationReportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestConsolidationPostV1ConsolidationReportWithWireMock", "POST", "/v1/consolidation/report", nil, 1)
+	VerifyRequestCount(t, "TestConsolidationReportWithWireMock", "POST", "/v1/consolidation/report", nil, 1)
 }

@@ -7,79 +7,80 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
-type PostV1BillingAccountGetRequest struct {
+type AccountGetBillingRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1BillingAccountGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountGetBillingRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 var (
-	postV1BillingAccountSetPlanRequestFieldPlan = big.NewInt(1 << 0)
+	accountSetPlanBillingRequestFieldPlan = big.NewInt(1 << 0)
 )
 
-type PostV1BillingAccountSetPlanRequest struct {
-	Plan PostV1BillingAccountSetPlanRequestPlan `json:"plan" url:"-"`
+type AccountSetPlanBillingRequest struct {
+	Plan AccountSetPlanBillingRequestPlan `json:"plan" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1BillingAccountSetPlanRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountSetPlanBillingRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanRequest) SetPlan(plan PostV1BillingAccountSetPlanRequestPlan) {
-	p.Plan = plan
-	p.require(postV1BillingAccountSetPlanRequestFieldPlan)
+func (a *AccountSetPlanBillingRequest) SetPlan(plan AccountSetPlanBillingRequestPlan) {
+	a.Plan = plan
+	a.require(accountSetPlanBillingRequestFieldPlan)
 }
 
-func (p *PostV1BillingAccountSetPlanRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountSetPlanRequest
+func (a *AccountSetPlanBillingRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountSetPlanBillingRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountSetPlanRequest(body)
+	*a = AccountSetPlanBillingRequest(body)
 	return nil
 }
 
-func (p *PostV1BillingAccountSetPlanRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountSetPlanRequest
+func (a *AccountSetPlanBillingRequest) MarshalJSON() ([]byte, error) {
+	type embed AccountSetPlanBillingRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1BillingPortalCreateRequestFieldLocale = big.NewInt(1 << 0)
+	portalCreateBillingRequestFieldLocale = big.NewInt(1 << 0)
 )
 
-type PostV1BillingPortalCreateRequest struct {
-	Locale *PostV1BillingPortalCreateRequestLocale `json:"locale,omitempty" url:"-"`
+type PortalCreateBillingRequest struct {
+	Locale *PortalCreateBillingRequestLocale `json:"locale,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1BillingPortalCreateRequest) require(field *big.Int) {
+func (p *PortalCreateBillingRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -88,23 +89,23 @@ func (p *PostV1BillingPortalCreateRequest) require(field *big.Int) {
 
 // SetLocale sets the Locale field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingPortalCreateRequest) SetLocale(locale *PostV1BillingPortalCreateRequestLocale) {
+func (p *PortalCreateBillingRequest) SetLocale(locale *PortalCreateBillingRequestLocale) {
 	p.Locale = locale
-	p.require(postV1BillingPortalCreateRequestFieldLocale)
+	p.require(portalCreateBillingRequestFieldLocale)
 }
 
-func (p *PostV1BillingPortalCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingPortalCreateRequest
+func (p *PortalCreateBillingRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PortalCreateBillingRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1BillingPortalCreateRequest(body)
+	*p = PortalCreateBillingRequest(body)
 	return nil
 }
 
-func (p *PostV1BillingPortalCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingPortalCreateRequest
+func (p *PortalCreateBillingRequest) MarshalJSON() ([]byte, error) {
+	type embed PortalCreateBillingRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -115,195 +116,140 @@ func (p *PostV1BillingPortalCreateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1BillingTopupCreateRequestFieldAmountCents = big.NewInt(1 << 0)
-	postV1BillingTopupCreateRequestFieldLocale      = big.NewInt(1 << 1)
+	topupCreateBillingRequestFieldAmountCents = big.NewInt(1 << 0)
+	topupCreateBillingRequestFieldLocale      = big.NewInt(1 << 1)
 )
 
-type PostV1BillingTopupCreateRequest struct {
-	AmountCents int64                                  `json:"amountCents" url:"-"`
-	Locale      *PostV1BillingTopupCreateRequestLocale `json:"locale,omitempty" url:"-"`
+type TopupCreateBillingRequest struct {
+	AmountCents int64                            `json:"amountCents" url:"-"`
+	Locale      *TopupCreateBillingRequestLocale `json:"locale,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1BillingTopupCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TopupCreateBillingRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetAmountCents sets the AmountCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTopupCreateRequest) SetAmountCents(amountCents int64) {
-	p.AmountCents = amountCents
-	p.require(postV1BillingTopupCreateRequestFieldAmountCents)
+func (t *TopupCreateBillingRequest) SetAmountCents(amountCents int64) {
+	t.AmountCents = amountCents
+	t.require(topupCreateBillingRequestFieldAmountCents)
 }
 
 // SetLocale sets the Locale field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTopupCreateRequest) SetLocale(locale *PostV1BillingTopupCreateRequestLocale) {
-	p.Locale = locale
-	p.require(postV1BillingTopupCreateRequestFieldLocale)
+func (t *TopupCreateBillingRequest) SetLocale(locale *TopupCreateBillingRequestLocale) {
+	t.Locale = locale
+	t.require(topupCreateBillingRequestFieldLocale)
 }
 
-func (p *PostV1BillingTopupCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingTopupCreateRequest
+func (t *TopupCreateBillingRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TopupCreateBillingRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1BillingTopupCreateRequest(body)
+	*t = TopupCreateBillingRequest(body)
 	return nil
 }
 
-func (p *PostV1BillingTopupCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingTopupCreateRequest
+func (t *TopupCreateBillingRequest) MarshalJSON() ([]byte, error) {
+	type embed TopupCreateBillingRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1BillingTransactionsListRequestFieldLimit = big.NewInt(1 << 0)
+	transactionsListBillingRequestFieldLimit = big.NewInt(1 << 0)
 )
 
-type PostV1BillingTransactionsListRequest struct {
+type TransactionsListBillingRequest struct {
 	Limit *int64 `json:"limit,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1BillingTransactionsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TransactionsListBillingRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetLimit sets the Limit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListRequest) SetLimit(limit *int64) {
-	p.Limit = limit
-	p.require(postV1BillingTransactionsListRequestFieldLimit)
+func (t *TransactionsListBillingRequest) SetLimit(limit *int64) {
+	t.Limit = limit
+	t.require(transactionsListBillingRequestFieldLimit)
 }
 
-func (p *PostV1BillingTransactionsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingTransactionsListRequest
+func (t *TransactionsListBillingRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsListBillingRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1BillingTransactionsListRequest(body)
+	*t = TransactionsListBillingRequest(body)
 	return nil
 }
 
-func (p *PostV1BillingTransactionsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingTransactionsListRequest
+func (t *TransactionsListBillingRequest) MarshalJSON() ([]byte, error) {
+	type embed TransactionsListBillingRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1BillingUsageListRequestFieldFrom = big.NewInt(1 << 0)
-	postV1BillingUsageListRequestFieldTo   = big.NewInt(1 << 1)
+	accountGetBillingResponseFieldPlan                    = big.NewInt(1 << 0)
+	accountGetBillingResponseFieldStatus                  = big.NewInt(1 << 1)
+	accountGetBillingResponseFieldBalanceCents            = big.NewInt(1 << 2)
+	accountGetBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
+	accountGetBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
+	accountGetBillingResponseFieldLastChargedDate         = big.NewInt(1 << 5)
+	accountGetBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
+	accountGetBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
+	accountGetBillingResponseFieldHasSubscription         = big.NewInt(1 << 8)
+	accountGetBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
+	accountGetBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
+	accountGetBillingResponseFieldMonthToDate             = big.NewInt(1 << 11)
+	accountGetBillingResponseFieldPlans                   = big.NewInt(1 << 12)
+	accountGetBillingResponseFieldTopUp                   = big.NewInt(1 << 13)
+	accountGetBillingResponseFieldTrialDays               = big.NewInt(1 << 14)
 )
 
-type PostV1BillingUsageListRequest struct {
-	From string `json:"from" url:"-"`
-	To   string `json:"to" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1BillingUsageListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetFrom sets the From field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListRequest) SetFrom(from string) {
-	p.From = from
-	p.require(postV1BillingUsageListRequestFieldFrom)
-}
-
-// SetTo sets the To field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListRequest) SetTo(to string) {
-	p.To = to
-	p.require(postV1BillingUsageListRequestFieldTo)
-}
-
-func (p *PostV1BillingUsageListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingUsageListRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1BillingUsageListRequest(body)
-	return nil
-}
-
-func (p *PostV1BillingUsageListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingUsageListRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1BillingAccountGetResponseFieldPlan                    = big.NewInt(1 << 0)
-	postV1BillingAccountGetResponseFieldStatus                  = big.NewInt(1 << 1)
-	postV1BillingAccountGetResponseFieldBalanceCents            = big.NewInt(1 << 2)
-	postV1BillingAccountGetResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
-	postV1BillingAccountGetResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
-	postV1BillingAccountGetResponseFieldLastChargedDate         = big.NewInt(1 << 5)
-	postV1BillingAccountGetResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
-	postV1BillingAccountGetResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
-	postV1BillingAccountGetResponseFieldHasSubscription         = big.NewInt(1 << 8)
-	postV1BillingAccountGetResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
-	postV1BillingAccountGetResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
-	postV1BillingAccountGetResponseFieldMonthToDate             = big.NewInt(1 << 11)
-	postV1BillingAccountGetResponseFieldPlans                   = big.NewInt(1 << 12)
-	postV1BillingAccountGetResponseFieldTopUp                   = big.NewInt(1 << 13)
-	postV1BillingAccountGetResponseFieldTrialDays               = big.NewInt(1 << 14)
-)
-
-type PostV1BillingAccountGetResponse struct {
-	Plan                    PostV1BillingAccountGetResponsePlan                   `json:"plan" url:"plan"`
-	Status                  PostV1BillingAccountGetResponseStatus                 `json:"status" url:"status"`
-	BalanceCents            int64                                                 `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt             *string                                               `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt            *string                                               `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate         *string                                               `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
-	PaymentsConfigured      bool                                                  `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount       bool                                                  `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription         bool                                                  `json:"hasSubscription" url:"hasSubscription"`
-	PaymentFailedAt         *string                                               `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
-	PaymentFailedInvoiceURL *string                                               `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
-	MonthToDate             *PostV1BillingAccountGetResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
-	Plans                   map[string]*PostV1BillingAccountGetResponsePlansValue `json:"plans" url:"plans"`
-	TopUp                   *PostV1BillingAccountGetResponseTopUp                 `json:"topUp" url:"topUp"`
-	TrialDays               int64                                                 `json:"trialDays" url:"trialDays"`
+type AccountGetBillingResponse struct {
+	Plan                    AccountGetBillingResponsePlan                   `json:"plan" url:"plan"`
+	Status                  AccountGetBillingResponseStatus                 `json:"status" url:"status"`
+	BalanceCents            int64                                           `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt             *time.Time                                      `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt            *time.Time                                      `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate         *time.Time                                      `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured      bool                                            `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount       bool                                            `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription         bool                                            `json:"hasSubscription" url:"hasSubscription"`
+	PaymentFailedAt         *time.Time                                      `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
+	PaymentFailedInvoiceURL *string                                         `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
+	MonthToDate             *AccountGetBillingResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
+	Plans                   map[string]*AccountGetBillingResponsePlansValue `json:"plans" url:"plans"`
+	TopUp                   *AccountGetBillingResponseTopUp                 `json:"topUp" url:"topUp"`
+	TrialDays               int64                                           `json:"trialDays" url:"trialDays"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -312,284 +258,304 @@ type PostV1BillingAccountGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountGetResponse) GetPlan() PostV1BillingAccountGetResponsePlan {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetPlan() AccountGetBillingResponsePlan {
+	if a == nil {
 		return ""
 	}
-	return p.Plan
+	return a.Plan
 }
 
-func (p *PostV1BillingAccountGetResponse) GetStatus() PostV1BillingAccountGetResponseStatus {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetStatus() AccountGetBillingResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1BillingAccountGetResponse) GetBalanceCents() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetBalanceCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.BalanceCents
+	return a.BalanceCents
 }
 
-func (p *PostV1BillingAccountGetResponse) GetTrialEndsAt() *string {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetTrialEndsAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.TrialEndsAt
+	return a.TrialEndsAt
 }
 
-func (p *PostV1BillingAccountGetResponse) GetFirstTopUpAt() *string {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetFirstTopUpAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.FirstTopUpAt
+	return a.FirstTopUpAt
 }
 
-func (p *PostV1BillingAccountGetResponse) GetLastChargedDate() *string {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetLastChargedDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.LastChargedDate
+	return a.LastChargedDate
 }
 
-func (p *PostV1BillingAccountGetResponse) GetPaymentsConfigured() bool {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetPaymentsConfigured() bool {
+	if a == nil {
 		return false
 	}
-	return p.PaymentsConfigured
+	return a.PaymentsConfigured
 }
 
-func (p *PostV1BillingAccountGetResponse) GetHasPaymentAccount() bool {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetHasPaymentAccount() bool {
+	if a == nil {
 		return false
 	}
-	return p.HasPaymentAccount
+	return a.HasPaymentAccount
 }
 
-func (p *PostV1BillingAccountGetResponse) GetHasSubscription() bool {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetHasSubscription() bool {
+	if a == nil {
 		return false
 	}
-	return p.HasSubscription
+	return a.HasSubscription
 }
 
-func (p *PostV1BillingAccountGetResponse) GetPaymentFailedAt() *string {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetPaymentFailedAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.PaymentFailedAt
+	return a.PaymentFailedAt
 }
 
-func (p *PostV1BillingAccountGetResponse) GetPaymentFailedInvoiceURL() *string {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetPaymentFailedInvoiceURL() *string {
+	if a == nil {
 		return nil
 	}
-	return p.PaymentFailedInvoiceURL
+	return a.PaymentFailedInvoiceURL
 }
 
-func (p *PostV1BillingAccountGetResponse) GetMonthToDate() *PostV1BillingAccountGetResponseMonthToDate {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetMonthToDate() *AccountGetBillingResponseMonthToDate {
+	if a == nil {
 		return nil
 	}
-	return p.MonthToDate
+	return a.MonthToDate
 }
 
-func (p *PostV1BillingAccountGetResponse) GetPlans() map[string]*PostV1BillingAccountGetResponsePlansValue {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetPlans() map[string]*AccountGetBillingResponsePlansValue {
+	if a == nil {
 		return nil
 	}
-	return p.Plans
+	return a.Plans
 }
 
-func (p *PostV1BillingAccountGetResponse) GetTopUp() *PostV1BillingAccountGetResponseTopUp {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetTopUp() *AccountGetBillingResponseTopUp {
+	if a == nil {
 		return nil
 	}
-	return p.TopUp
+	return a.TopUp
 }
 
-func (p *PostV1BillingAccountGetResponse) GetTrialDays() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetTrialDays() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.TrialDays
+	return a.TrialDays
 }
 
-func (p *PostV1BillingAccountGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountGetBillingResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountGetBillingResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetPlan(plan PostV1BillingAccountGetResponsePlan) {
-	p.Plan = plan
-	p.require(postV1BillingAccountGetResponseFieldPlan)
+func (a *AccountGetBillingResponse) SetPlan(plan AccountGetBillingResponsePlan) {
+	a.Plan = plan
+	a.require(accountGetBillingResponseFieldPlan)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetStatus(status PostV1BillingAccountGetResponseStatus) {
-	p.Status = status
-	p.require(postV1BillingAccountGetResponseFieldStatus)
+func (a *AccountGetBillingResponse) SetStatus(status AccountGetBillingResponseStatus) {
+	a.Status = status
+	a.require(accountGetBillingResponseFieldStatus)
 }
 
 // SetBalanceCents sets the BalanceCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetBalanceCents(balanceCents int64) {
-	p.BalanceCents = balanceCents
-	p.require(postV1BillingAccountGetResponseFieldBalanceCents)
+func (a *AccountGetBillingResponse) SetBalanceCents(balanceCents int64) {
+	a.BalanceCents = balanceCents
+	a.require(accountGetBillingResponseFieldBalanceCents)
 }
 
 // SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetTrialEndsAt(trialEndsAt *string) {
-	p.TrialEndsAt = trialEndsAt
-	p.require(postV1BillingAccountGetResponseFieldTrialEndsAt)
+func (a *AccountGetBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
+	a.TrialEndsAt = trialEndsAt
+	a.require(accountGetBillingResponseFieldTrialEndsAt)
 }
 
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetFirstTopUpAt(firstTopUpAt *string) {
-	p.FirstTopUpAt = firstTopUpAt
-	p.require(postV1BillingAccountGetResponseFieldFirstTopUpAt)
+func (a *AccountGetBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
+	a.FirstTopUpAt = firstTopUpAt
+	a.require(accountGetBillingResponseFieldFirstTopUpAt)
 }
 
 // SetLastChargedDate sets the LastChargedDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetLastChargedDate(lastChargedDate *string) {
-	p.LastChargedDate = lastChargedDate
-	p.require(postV1BillingAccountGetResponseFieldLastChargedDate)
+func (a *AccountGetBillingResponse) SetLastChargedDate(lastChargedDate *time.Time) {
+	a.LastChargedDate = lastChargedDate
+	a.require(accountGetBillingResponseFieldLastChargedDate)
 }
 
 // SetPaymentsConfigured sets the PaymentsConfigured field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetPaymentsConfigured(paymentsConfigured bool) {
-	p.PaymentsConfigured = paymentsConfigured
-	p.require(postV1BillingAccountGetResponseFieldPaymentsConfigured)
+func (a *AccountGetBillingResponse) SetPaymentsConfigured(paymentsConfigured bool) {
+	a.PaymentsConfigured = paymentsConfigured
+	a.require(accountGetBillingResponseFieldPaymentsConfigured)
 }
 
 // SetHasPaymentAccount sets the HasPaymentAccount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetHasPaymentAccount(hasPaymentAccount bool) {
-	p.HasPaymentAccount = hasPaymentAccount
-	p.require(postV1BillingAccountGetResponseFieldHasPaymentAccount)
+func (a *AccountGetBillingResponse) SetHasPaymentAccount(hasPaymentAccount bool) {
+	a.HasPaymentAccount = hasPaymentAccount
+	a.require(accountGetBillingResponseFieldHasPaymentAccount)
 }
 
 // SetHasSubscription sets the HasSubscription field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetHasSubscription(hasSubscription bool) {
-	p.HasSubscription = hasSubscription
-	p.require(postV1BillingAccountGetResponseFieldHasSubscription)
+func (a *AccountGetBillingResponse) SetHasSubscription(hasSubscription bool) {
+	a.HasSubscription = hasSubscription
+	a.require(accountGetBillingResponseFieldHasSubscription)
 }
 
 // SetPaymentFailedAt sets the PaymentFailedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetPaymentFailedAt(paymentFailedAt *string) {
-	p.PaymentFailedAt = paymentFailedAt
-	p.require(postV1BillingAccountGetResponseFieldPaymentFailedAt)
+func (a *AccountGetBillingResponse) SetPaymentFailedAt(paymentFailedAt *time.Time) {
+	a.PaymentFailedAt = paymentFailedAt
+	a.require(accountGetBillingResponseFieldPaymentFailedAt)
 }
 
 // SetPaymentFailedInvoiceURL sets the PaymentFailedInvoiceURL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
-	p.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
-	p.require(postV1BillingAccountGetResponseFieldPaymentFailedInvoiceURL)
+func (a *AccountGetBillingResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
+	a.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
+	a.require(accountGetBillingResponseFieldPaymentFailedInvoiceURL)
 }
 
 // SetMonthToDate sets the MonthToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetMonthToDate(monthToDate *PostV1BillingAccountGetResponseMonthToDate) {
-	p.MonthToDate = monthToDate
-	p.require(postV1BillingAccountGetResponseFieldMonthToDate)
+func (a *AccountGetBillingResponse) SetMonthToDate(monthToDate *AccountGetBillingResponseMonthToDate) {
+	a.MonthToDate = monthToDate
+	a.require(accountGetBillingResponseFieldMonthToDate)
 }
 
 // SetPlans sets the Plans field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetPlans(plans map[string]*PostV1BillingAccountGetResponsePlansValue) {
-	p.Plans = plans
-	p.require(postV1BillingAccountGetResponseFieldPlans)
+func (a *AccountGetBillingResponse) SetPlans(plans map[string]*AccountGetBillingResponsePlansValue) {
+	a.Plans = plans
+	a.require(accountGetBillingResponseFieldPlans)
 }
 
 // SetTopUp sets the TopUp field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetTopUp(topUp *PostV1BillingAccountGetResponseTopUp) {
-	p.TopUp = topUp
-	p.require(postV1BillingAccountGetResponseFieldTopUp)
+func (a *AccountGetBillingResponse) SetTopUp(topUp *AccountGetBillingResponseTopUp) {
+	a.TopUp = topUp
+	a.require(accountGetBillingResponseFieldTopUp)
 }
 
 // SetTrialDays sets the TrialDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponse) SetTrialDays(trialDays int64) {
-	p.TrialDays = trialDays
-	p.require(postV1BillingAccountGetResponseFieldTrialDays)
+func (a *AccountGetBillingResponse) SetTrialDays(trialDays int64) {
+	a.TrialDays = trialDays
+	a.require(accountGetBillingResponseFieldTrialDays)
 }
 
-func (p *PostV1BillingAccountGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AccountGetBillingResponse) UnmarshalJSON(data []byte) error {
+	type embed AccountGetBillingResponse
+	var unmarshaler = struct {
+		embed
+		TrialEndsAt     *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt    *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate *internal.Date     `json:"lastChargedDate,omitempty"`
+		PaymentFailedAt *internal.DateTime `json:"paymentFailedAt,omitempty"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountGetBillingResponse(unmarshaler.embed)
+	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
+	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
+	a.PaymentFailedAt = unmarshaler.PaymentFailedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountGetResponse
+func (a *AccountGetBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed AccountGetBillingResponse
 	var marshaler = struct {
 		embed
+		TrialEndsAt     *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt    *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate *internal.Date     `json:"lastChargedDate,omitempty"`
+		PaymentFailedAt *internal.DateTime `json:"paymentFailedAt,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*a),
+		TrialEndsAt:     internal.NewOptionalDateTime(a.TrialEndsAt),
+		FirstTopUpAt:    internal.NewOptionalDateTime(a.FirstTopUpAt),
+		LastChargedDate: internal.NewOptionalDate(a.LastChargedDate),
+		PaymentFailedAt: internal.NewOptionalDateTime(a.PaymentFailedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountGetResponse) String() string {
-	if p == nil {
+func (a *AccountGetBillingResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1BillingAccountGetResponseMonthToDateFieldFrom                = big.NewInt(1 << 0)
-	postV1BillingAccountGetResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
-	postV1BillingAccountGetResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
-	postV1BillingAccountGetResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 3)
-	postV1BillingAccountGetResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
-	postV1BillingAccountGetResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
-	postV1BillingAccountGetResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
-	postV1BillingAccountGetResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
+	accountGetBillingResponseMonthToDateFieldFrom                = big.NewInt(1 << 0)
+	accountGetBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
+	accountGetBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
+	accountGetBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 3)
+	accountGetBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountGetBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountGetBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountGetBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
-type PostV1BillingAccountGetResponseMonthToDate struct {
+type AccountGetBillingResponseMonthToDate struct {
 	From                string  `json:"from" url:"from"`
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
@@ -606,208 +572,208 @@ type PostV1BillingAccountGetResponseMonthToDate struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetFrom() string {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetFrom() string {
+	if a == nil {
 		return ""
 	}
-	return p.From
+	return a.From
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetTo() string {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetTo() string {
+	if a == nil {
 		return ""
 	}
-	return p.To
+	return a.To
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetAPIRequests() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetAPIRequests() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.APIRequests
+	return a.APIRequests
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetOcrPages() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetOcrPages() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.OcrPages
+	return a.OcrPages
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetFileBytes() float64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetFileBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.FileBytes
+	return a.FileBytes
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetDatabaseBytes() float64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetDatabaseBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.DatabaseBytes
+	return a.DatabaseBytes
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetArchivedCompanies() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetArchivedCompanies() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.ArchivedCompanies
+	return a.ArchivedCompanies
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetEstimatedTodayCents() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetEstimatedTodayCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.EstimatedTodayCents
+	return a.EstimatedTodayCents
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountGetBillingResponseMonthToDate) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetFrom(from string) {
-	p.From = from
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldFrom)
+func (a *AccountGetBillingResponseMonthToDate) SetFrom(from string) {
+	a.From = from
+	a.require(accountGetBillingResponseMonthToDateFieldFrom)
 }
 
 // SetTo sets the To field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetTo(to string) {
-	p.To = to
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldTo)
+func (a *AccountGetBillingResponseMonthToDate) SetTo(to string) {
+	a.To = to
+	a.require(accountGetBillingResponseMonthToDateFieldTo)
 }
 
 // SetAPIRequests sets the APIRequests field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetAPIRequests(apiRequests int64) {
-	p.APIRequests = apiRequests
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldAPIRequests)
+func (a *AccountGetBillingResponseMonthToDate) SetAPIRequests(apiRequests int64) {
+	a.APIRequests = apiRequests
+	a.require(accountGetBillingResponseMonthToDateFieldAPIRequests)
 }
 
 // SetOcrPages sets the OcrPages field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	p.OcrPages = ocrPages
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldOcrPages)
+func (a *AccountGetBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
+	a.OcrPages = ocrPages
+	a.require(accountGetBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetFileBytes(fileBytes float64) {
-	p.FileBytes = fileBytes
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldFileBytes)
+func (a *AccountGetBillingResponseMonthToDate) SetFileBytes(fileBytes float64) {
+	a.FileBytes = fileBytes
+	a.require(accountGetBillingResponseMonthToDateFieldFileBytes)
 }
 
 // SetDatabaseBytes sets the DatabaseBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetDatabaseBytes(databaseBytes float64) {
-	p.DatabaseBytes = databaseBytes
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldDatabaseBytes)
+func (a *AccountGetBillingResponseMonthToDate) SetDatabaseBytes(databaseBytes float64) {
+	a.DatabaseBytes = databaseBytes
+	a.require(accountGetBillingResponseMonthToDateFieldDatabaseBytes)
 }
 
 // SetArchivedCompanies sets the ArchivedCompanies field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetArchivedCompanies(archivedCompanies int64) {
-	p.ArchivedCompanies = archivedCompanies
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldArchivedCompanies)
+func (a *AccountGetBillingResponseMonthToDate) SetArchivedCompanies(archivedCompanies int64) {
+	a.ArchivedCompanies = archivedCompanies
+	a.require(accountGetBillingResponseMonthToDateFieldArchivedCompanies)
 }
 
 // SetEstimatedTodayCents sets the EstimatedTodayCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseMonthToDate) SetEstimatedTodayCents(estimatedTodayCents int64) {
-	p.EstimatedTodayCents = estimatedTodayCents
-	p.require(postV1BillingAccountGetResponseMonthToDateFieldEstimatedTodayCents)
+func (a *AccountGetBillingResponseMonthToDate) SetEstimatedTodayCents(estimatedTodayCents int64) {
+	a.EstimatedTodayCents = estimatedTodayCents
+	a.require(accountGetBillingResponseMonthToDateFieldEstimatedTodayCents)
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountGetResponseMonthToDate
+func (a *AccountGetBillingResponseMonthToDate) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountGetBillingResponseMonthToDate
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountGetResponseMonthToDate(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountGetBillingResponseMonthToDate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountGetResponseMonthToDate
+func (a *AccountGetBillingResponseMonthToDate) MarshalJSON() ([]byte, error) {
+	type embed AccountGetBillingResponseMonthToDate
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountGetResponseMonthToDate) String() string {
-	if p == nil {
+func (a *AccountGetBillingResponseMonthToDate) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingAccountGetResponsePlan string
+type AccountGetBillingResponsePlan string
 
 const (
-	PostV1BillingAccountGetResponsePlanStarter  PostV1BillingAccountGetResponsePlan = "starter"
-	PostV1BillingAccountGetResponsePlanBusiness PostV1BillingAccountGetResponsePlan = "business"
-	PostV1BillingAccountGetResponsePlanScale    PostV1BillingAccountGetResponsePlan = "scale"
+	AccountGetBillingResponsePlanStarter  AccountGetBillingResponsePlan = "starter"
+	AccountGetBillingResponsePlanBusiness AccountGetBillingResponsePlan = "business"
+	AccountGetBillingResponsePlanScale    AccountGetBillingResponsePlan = "scale"
 )
 
-func NewPostV1BillingAccountGetResponsePlanFromString(s string) (PostV1BillingAccountGetResponsePlan, error) {
+func NewAccountGetBillingResponsePlanFromString(s string) (AccountGetBillingResponsePlan, error) {
 	switch s {
 	case "starter":
-		return PostV1BillingAccountGetResponsePlanStarter, nil
+		return AccountGetBillingResponsePlanStarter, nil
 	case "business":
-		return PostV1BillingAccountGetResponsePlanBusiness, nil
+		return AccountGetBillingResponsePlanBusiness, nil
 	case "scale":
-		return PostV1BillingAccountGetResponsePlanScale, nil
+		return AccountGetBillingResponsePlanScale, nil
 	}
-	var t PostV1BillingAccountGetResponsePlan
+	var t AccountGetBillingResponsePlan
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingAccountGetResponsePlan) Ptr() *PostV1BillingAccountGetResponsePlan {
-	return &p
+func (a AccountGetBillingResponsePlan) Ptr() *AccountGetBillingResponsePlan {
+	return &a
 }
 
 var (
-	postV1BillingAccountGetResponsePlansValueFieldMonthlyFeeEur         = big.NewInt(1 << 0)
-	postV1BillingAccountGetResponsePlansValueFieldIncludedRequests      = big.NewInt(1 << 1)
-	postV1BillingAccountGetResponsePlansValueFieldRequestOverageEur     = big.NewInt(1 << 2)
-	postV1BillingAccountGetResponsePlansValueFieldIncludedDatabaseBytes = big.NewInt(1 << 3)
-	postV1BillingAccountGetResponsePlansValueFieldIncludedFileBytes     = big.NewInt(1 << 4)
+	accountGetBillingResponsePlansValueFieldMonthlyFeeEur         = big.NewInt(1 << 0)
+	accountGetBillingResponsePlansValueFieldIncludedRequests      = big.NewInt(1 << 1)
+	accountGetBillingResponsePlansValueFieldRequestOverageEur     = big.NewInt(1 << 2)
+	accountGetBillingResponsePlansValueFieldIncludedDatabaseBytes = big.NewInt(1 << 3)
+	accountGetBillingResponsePlansValueFieldIncludedFileBytes     = big.NewInt(1 << 4)
 )
 
-type PostV1BillingAccountGetResponsePlansValue struct {
+type AccountGetBillingResponsePlansValue struct {
 	MonthlyFeeEur         string  `json:"monthlyFeeEur" url:"monthlyFeeEur"`
 	IncludedRequests      int64   `json:"includedRequests" url:"includedRequests"`
 	RequestOverageEur     string  `json:"requestOverageEur" url:"requestOverageEur"`
@@ -821,163 +787,163 @@ type PostV1BillingAccountGetResponsePlansValue struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetMonthlyFeeEur() string {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetMonthlyFeeEur() string {
+	if a == nil {
 		return ""
 	}
-	return p.MonthlyFeeEur
+	return a.MonthlyFeeEur
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetIncludedRequests() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetIncludedRequests() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedRequests
+	return a.IncludedRequests
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetRequestOverageEur() string {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetRequestOverageEur() string {
+	if a == nil {
 		return ""
 	}
-	return p.RequestOverageEur
+	return a.RequestOverageEur
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetIncludedDatabaseBytes() float64 {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetIncludedDatabaseBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedDatabaseBytes
+	return a.IncludedDatabaseBytes
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetIncludedFileBytes() float64 {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetIncludedFileBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedFileBytes
+	return a.IncludedFileBytes
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountGetBillingResponsePlansValue) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetMonthlyFeeEur sets the MonthlyFeeEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponsePlansValue) SetMonthlyFeeEur(monthlyFeeEur string) {
-	p.MonthlyFeeEur = monthlyFeeEur
-	p.require(postV1BillingAccountGetResponsePlansValueFieldMonthlyFeeEur)
+func (a *AccountGetBillingResponsePlansValue) SetMonthlyFeeEur(monthlyFeeEur string) {
+	a.MonthlyFeeEur = monthlyFeeEur
+	a.require(accountGetBillingResponsePlansValueFieldMonthlyFeeEur)
 }
 
 // SetIncludedRequests sets the IncludedRequests field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponsePlansValue) SetIncludedRequests(includedRequests int64) {
-	p.IncludedRequests = includedRequests
-	p.require(postV1BillingAccountGetResponsePlansValueFieldIncludedRequests)
+func (a *AccountGetBillingResponsePlansValue) SetIncludedRequests(includedRequests int64) {
+	a.IncludedRequests = includedRequests
+	a.require(accountGetBillingResponsePlansValueFieldIncludedRequests)
 }
 
 // SetRequestOverageEur sets the RequestOverageEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponsePlansValue) SetRequestOverageEur(requestOverageEur string) {
-	p.RequestOverageEur = requestOverageEur
-	p.require(postV1BillingAccountGetResponsePlansValueFieldRequestOverageEur)
+func (a *AccountGetBillingResponsePlansValue) SetRequestOverageEur(requestOverageEur string) {
+	a.RequestOverageEur = requestOverageEur
+	a.require(accountGetBillingResponsePlansValueFieldRequestOverageEur)
 }
 
 // SetIncludedDatabaseBytes sets the IncludedDatabaseBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponsePlansValue) SetIncludedDatabaseBytes(includedDatabaseBytes float64) {
-	p.IncludedDatabaseBytes = includedDatabaseBytes
-	p.require(postV1BillingAccountGetResponsePlansValueFieldIncludedDatabaseBytes)
+func (a *AccountGetBillingResponsePlansValue) SetIncludedDatabaseBytes(includedDatabaseBytes float64) {
+	a.IncludedDatabaseBytes = includedDatabaseBytes
+	a.require(accountGetBillingResponsePlansValueFieldIncludedDatabaseBytes)
 }
 
 // SetIncludedFileBytes sets the IncludedFileBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponsePlansValue) SetIncludedFileBytes(includedFileBytes float64) {
-	p.IncludedFileBytes = includedFileBytes
-	p.require(postV1BillingAccountGetResponsePlansValueFieldIncludedFileBytes)
+func (a *AccountGetBillingResponsePlansValue) SetIncludedFileBytes(includedFileBytes float64) {
+	a.IncludedFileBytes = includedFileBytes
+	a.require(accountGetBillingResponsePlansValueFieldIncludedFileBytes)
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountGetResponsePlansValue
+func (a *AccountGetBillingResponsePlansValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountGetBillingResponsePlansValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountGetResponsePlansValue(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountGetBillingResponsePlansValue(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountGetResponsePlansValue
+func (a *AccountGetBillingResponsePlansValue) MarshalJSON() ([]byte, error) {
+	type embed AccountGetBillingResponsePlansValue
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountGetResponsePlansValue) String() string {
-	if p == nil {
+func (a *AccountGetBillingResponsePlansValue) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingAccountGetResponseStatus string
+type AccountGetBillingResponseStatus string
 
 const (
-	PostV1BillingAccountGetResponseStatusTrial     PostV1BillingAccountGetResponseStatus = "trial"
-	PostV1BillingAccountGetResponseStatusActive    PostV1BillingAccountGetResponseStatus = "active"
-	PostV1BillingAccountGetResponseStatusSuspended PostV1BillingAccountGetResponseStatus = "suspended"
+	AccountGetBillingResponseStatusTrial     AccountGetBillingResponseStatus = "trial"
+	AccountGetBillingResponseStatusActive    AccountGetBillingResponseStatus = "active"
+	AccountGetBillingResponseStatusSuspended AccountGetBillingResponseStatus = "suspended"
 )
 
-func NewPostV1BillingAccountGetResponseStatusFromString(s string) (PostV1BillingAccountGetResponseStatus, error) {
+func NewAccountGetBillingResponseStatusFromString(s string) (AccountGetBillingResponseStatus, error) {
 	switch s {
 	case "trial":
-		return PostV1BillingAccountGetResponseStatusTrial, nil
+		return AccountGetBillingResponseStatusTrial, nil
 	case "active":
-		return PostV1BillingAccountGetResponseStatusActive, nil
+		return AccountGetBillingResponseStatusActive, nil
 	case "suspended":
-		return PostV1BillingAccountGetResponseStatusSuspended, nil
+		return AccountGetBillingResponseStatusSuspended, nil
 	}
-	var t PostV1BillingAccountGetResponseStatus
+	var t AccountGetBillingResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingAccountGetResponseStatus) Ptr() *PostV1BillingAccountGetResponseStatus {
-	return &p
+func (a AccountGetBillingResponseStatus) Ptr() *AccountGetBillingResponseStatus {
+	return &a
 }
 
 var (
-	postV1BillingAccountGetResponseTopUpFieldMinCents = big.NewInt(1 << 0)
-	postV1BillingAccountGetResponseTopUpFieldMaxCents = big.NewInt(1 << 1)
+	accountGetBillingResponseTopUpFieldMinCents = big.NewInt(1 << 0)
+	accountGetBillingResponseTopUpFieldMaxCents = big.NewInt(1 << 1)
 )
 
-type PostV1BillingAccountGetResponseTopUp struct {
+type AccountGetBillingResponseTopUp struct {
 	MinCents int64 `json:"minCents" url:"minCents"`
 	MaxCents int64 `json:"maxCents" url:"maxCents"`
 
@@ -988,149 +954,149 @@ type PostV1BillingAccountGetResponseTopUp struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) GetMinCents() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseTopUp) GetMinCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.MinCents
+	return a.MinCents
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) GetMaxCents() int64 {
-	if p == nil {
+func (a *AccountGetBillingResponseTopUp) GetMaxCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.MaxCents
+	return a.MaxCents
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountGetBillingResponseTopUp) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountGetBillingResponseTopUp) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetMinCents sets the MinCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseTopUp) SetMinCents(minCents int64) {
-	p.MinCents = minCents
-	p.require(postV1BillingAccountGetResponseTopUpFieldMinCents)
+func (a *AccountGetBillingResponseTopUp) SetMinCents(minCents int64) {
+	a.MinCents = minCents
+	a.require(accountGetBillingResponseTopUpFieldMinCents)
 }
 
 // SetMaxCents sets the MaxCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountGetResponseTopUp) SetMaxCents(maxCents int64) {
-	p.MaxCents = maxCents
-	p.require(postV1BillingAccountGetResponseTopUpFieldMaxCents)
+func (a *AccountGetBillingResponseTopUp) SetMaxCents(maxCents int64) {
+	a.MaxCents = maxCents
+	a.require(accountGetBillingResponseTopUpFieldMaxCents)
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountGetResponseTopUp
+func (a *AccountGetBillingResponseTopUp) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountGetBillingResponseTopUp
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountGetResponseTopUp(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountGetBillingResponseTopUp(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountGetResponseTopUp
+func (a *AccountGetBillingResponseTopUp) MarshalJSON() ([]byte, error) {
+	type embed AccountGetBillingResponseTopUp
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountGetResponseTopUp) String() string {
-	if p == nil {
+func (a *AccountGetBillingResponseTopUp) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingAccountSetPlanRequestPlan string
+type AccountSetPlanBillingRequestPlan string
 
 const (
-	PostV1BillingAccountSetPlanRequestPlanStarter  PostV1BillingAccountSetPlanRequestPlan = "starter"
-	PostV1BillingAccountSetPlanRequestPlanBusiness PostV1BillingAccountSetPlanRequestPlan = "business"
-	PostV1BillingAccountSetPlanRequestPlanScale    PostV1BillingAccountSetPlanRequestPlan = "scale"
+	AccountSetPlanBillingRequestPlanStarter  AccountSetPlanBillingRequestPlan = "starter"
+	AccountSetPlanBillingRequestPlanBusiness AccountSetPlanBillingRequestPlan = "business"
+	AccountSetPlanBillingRequestPlanScale    AccountSetPlanBillingRequestPlan = "scale"
 )
 
-func NewPostV1BillingAccountSetPlanRequestPlanFromString(s string) (PostV1BillingAccountSetPlanRequestPlan, error) {
+func NewAccountSetPlanBillingRequestPlanFromString(s string) (AccountSetPlanBillingRequestPlan, error) {
 	switch s {
 	case "starter":
-		return PostV1BillingAccountSetPlanRequestPlanStarter, nil
+		return AccountSetPlanBillingRequestPlanStarter, nil
 	case "business":
-		return PostV1BillingAccountSetPlanRequestPlanBusiness, nil
+		return AccountSetPlanBillingRequestPlanBusiness, nil
 	case "scale":
-		return PostV1BillingAccountSetPlanRequestPlanScale, nil
+		return AccountSetPlanBillingRequestPlanScale, nil
 	}
-	var t PostV1BillingAccountSetPlanRequestPlan
+	var t AccountSetPlanBillingRequestPlan
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingAccountSetPlanRequestPlan) Ptr() *PostV1BillingAccountSetPlanRequestPlan {
-	return &p
+func (a AccountSetPlanBillingRequestPlan) Ptr() *AccountSetPlanBillingRequestPlan {
+	return &a
 }
 
 var (
-	postV1BillingAccountSetPlanResponseFieldPlan                    = big.NewInt(1 << 0)
-	postV1BillingAccountSetPlanResponseFieldStatus                  = big.NewInt(1 << 1)
-	postV1BillingAccountSetPlanResponseFieldBalanceCents            = big.NewInt(1 << 2)
-	postV1BillingAccountSetPlanResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
-	postV1BillingAccountSetPlanResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
-	postV1BillingAccountSetPlanResponseFieldLastChargedDate         = big.NewInt(1 << 5)
-	postV1BillingAccountSetPlanResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
-	postV1BillingAccountSetPlanResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
-	postV1BillingAccountSetPlanResponseFieldHasSubscription         = big.NewInt(1 << 8)
-	postV1BillingAccountSetPlanResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
-	postV1BillingAccountSetPlanResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
-	postV1BillingAccountSetPlanResponseFieldMonthToDate             = big.NewInt(1 << 11)
-	postV1BillingAccountSetPlanResponseFieldPlans                   = big.NewInt(1 << 12)
-	postV1BillingAccountSetPlanResponseFieldTopUp                   = big.NewInt(1 << 13)
-	postV1BillingAccountSetPlanResponseFieldTrialDays               = big.NewInt(1 << 14)
+	accountSetPlanBillingResponseFieldPlan                    = big.NewInt(1 << 0)
+	accountSetPlanBillingResponseFieldStatus                  = big.NewInt(1 << 1)
+	accountSetPlanBillingResponseFieldBalanceCents            = big.NewInt(1 << 2)
+	accountSetPlanBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
+	accountSetPlanBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
+	accountSetPlanBillingResponseFieldLastChargedDate         = big.NewInt(1 << 5)
+	accountSetPlanBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
+	accountSetPlanBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
+	accountSetPlanBillingResponseFieldHasSubscription         = big.NewInt(1 << 8)
+	accountSetPlanBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
+	accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
+	accountSetPlanBillingResponseFieldMonthToDate             = big.NewInt(1 << 11)
+	accountSetPlanBillingResponseFieldPlans                   = big.NewInt(1 << 12)
+	accountSetPlanBillingResponseFieldTopUp                   = big.NewInt(1 << 13)
+	accountSetPlanBillingResponseFieldTrialDays               = big.NewInt(1 << 14)
 )
 
-type PostV1BillingAccountSetPlanResponse struct {
-	Plan                    PostV1BillingAccountSetPlanResponsePlan                   `json:"plan" url:"plan"`
-	Status                  PostV1BillingAccountSetPlanResponseStatus                 `json:"status" url:"status"`
-	BalanceCents            int64                                                     `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt             *string                                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt            *string                                                   `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate         *string                                                   `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
-	PaymentsConfigured      bool                                                      `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount       bool                                                      `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription         bool                                                      `json:"hasSubscription" url:"hasSubscription"`
-	PaymentFailedAt         *string                                                   `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
-	PaymentFailedInvoiceURL *string                                                   `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
-	MonthToDate             *PostV1BillingAccountSetPlanResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
-	Plans                   map[string]*PostV1BillingAccountSetPlanResponsePlansValue `json:"plans" url:"plans"`
-	TopUp                   *PostV1BillingAccountSetPlanResponseTopUp                 `json:"topUp" url:"topUp"`
-	TrialDays               int64                                                     `json:"trialDays" url:"trialDays"`
+type AccountSetPlanBillingResponse struct {
+	Plan                    AccountSetPlanBillingResponsePlan                   `json:"plan" url:"plan"`
+	Status                  AccountSetPlanBillingResponseStatus                 `json:"status" url:"status"`
+	BalanceCents            int64                                               `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt             *time.Time                                          `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt            *time.Time                                          `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate         *time.Time                                          `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured      bool                                                `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount       bool                                                `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription         bool                                                `json:"hasSubscription" url:"hasSubscription"`
+	PaymentFailedAt         *time.Time                                          `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
+	PaymentFailedInvoiceURL *string                                             `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
+	MonthToDate             *AccountSetPlanBillingResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
+	Plans                   map[string]*AccountSetPlanBillingResponsePlansValue `json:"plans" url:"plans"`
+	TopUp                   *AccountSetPlanBillingResponseTopUp                 `json:"topUp" url:"topUp"`
+	TrialDays               int64                                               `json:"trialDays" url:"trialDays"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1139,284 +1105,304 @@ type PostV1BillingAccountSetPlanResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetPlan() PostV1BillingAccountSetPlanResponsePlan {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetPlan() AccountSetPlanBillingResponsePlan {
+	if a == nil {
 		return ""
 	}
-	return p.Plan
+	return a.Plan
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetStatus() PostV1BillingAccountSetPlanResponseStatus {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetStatus() AccountSetPlanBillingResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetBalanceCents() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetBalanceCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.BalanceCents
+	return a.BalanceCents
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetTrialEndsAt() *string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetTrialEndsAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.TrialEndsAt
+	return a.TrialEndsAt
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetFirstTopUpAt() *string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetFirstTopUpAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.FirstTopUpAt
+	return a.FirstTopUpAt
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetLastChargedDate() *string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetLastChargedDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.LastChargedDate
+	return a.LastChargedDate
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetPaymentsConfigured() bool {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetPaymentsConfigured() bool {
+	if a == nil {
 		return false
 	}
-	return p.PaymentsConfigured
+	return a.PaymentsConfigured
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetHasPaymentAccount() bool {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetHasPaymentAccount() bool {
+	if a == nil {
 		return false
 	}
-	return p.HasPaymentAccount
+	return a.HasPaymentAccount
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetHasSubscription() bool {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetHasSubscription() bool {
+	if a == nil {
 		return false
 	}
-	return p.HasSubscription
+	return a.HasSubscription
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetPaymentFailedAt() *string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetPaymentFailedAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.PaymentFailedAt
+	return a.PaymentFailedAt
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetPaymentFailedInvoiceURL() *string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetPaymentFailedInvoiceURL() *string {
+	if a == nil {
 		return nil
 	}
-	return p.PaymentFailedInvoiceURL
+	return a.PaymentFailedInvoiceURL
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetMonthToDate() *PostV1BillingAccountSetPlanResponseMonthToDate {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetMonthToDate() *AccountSetPlanBillingResponseMonthToDate {
+	if a == nil {
 		return nil
 	}
-	return p.MonthToDate
+	return a.MonthToDate
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetPlans() map[string]*PostV1BillingAccountSetPlanResponsePlansValue {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetPlans() map[string]*AccountSetPlanBillingResponsePlansValue {
+	if a == nil {
 		return nil
 	}
-	return p.Plans
+	return a.Plans
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetTopUp() *PostV1BillingAccountSetPlanResponseTopUp {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetTopUp() *AccountSetPlanBillingResponseTopUp {
+	if a == nil {
 		return nil
 	}
-	return p.TopUp
+	return a.TopUp
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetTrialDays() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetTrialDays() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.TrialDays
+	return a.TrialDays
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountSetPlanBillingResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetPlan(plan PostV1BillingAccountSetPlanResponsePlan) {
-	p.Plan = plan
-	p.require(postV1BillingAccountSetPlanResponseFieldPlan)
+func (a *AccountSetPlanBillingResponse) SetPlan(plan AccountSetPlanBillingResponsePlan) {
+	a.Plan = plan
+	a.require(accountSetPlanBillingResponseFieldPlan)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetStatus(status PostV1BillingAccountSetPlanResponseStatus) {
-	p.Status = status
-	p.require(postV1BillingAccountSetPlanResponseFieldStatus)
+func (a *AccountSetPlanBillingResponse) SetStatus(status AccountSetPlanBillingResponseStatus) {
+	a.Status = status
+	a.require(accountSetPlanBillingResponseFieldStatus)
 }
 
 // SetBalanceCents sets the BalanceCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetBalanceCents(balanceCents int64) {
-	p.BalanceCents = balanceCents
-	p.require(postV1BillingAccountSetPlanResponseFieldBalanceCents)
+func (a *AccountSetPlanBillingResponse) SetBalanceCents(balanceCents int64) {
+	a.BalanceCents = balanceCents
+	a.require(accountSetPlanBillingResponseFieldBalanceCents)
 }
 
 // SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetTrialEndsAt(trialEndsAt *string) {
-	p.TrialEndsAt = trialEndsAt
-	p.require(postV1BillingAccountSetPlanResponseFieldTrialEndsAt)
+func (a *AccountSetPlanBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
+	a.TrialEndsAt = trialEndsAt
+	a.require(accountSetPlanBillingResponseFieldTrialEndsAt)
 }
 
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetFirstTopUpAt(firstTopUpAt *string) {
-	p.FirstTopUpAt = firstTopUpAt
-	p.require(postV1BillingAccountSetPlanResponseFieldFirstTopUpAt)
+func (a *AccountSetPlanBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
+	a.FirstTopUpAt = firstTopUpAt
+	a.require(accountSetPlanBillingResponseFieldFirstTopUpAt)
 }
 
 // SetLastChargedDate sets the LastChargedDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetLastChargedDate(lastChargedDate *string) {
-	p.LastChargedDate = lastChargedDate
-	p.require(postV1BillingAccountSetPlanResponseFieldLastChargedDate)
+func (a *AccountSetPlanBillingResponse) SetLastChargedDate(lastChargedDate *time.Time) {
+	a.LastChargedDate = lastChargedDate
+	a.require(accountSetPlanBillingResponseFieldLastChargedDate)
 }
 
 // SetPaymentsConfigured sets the PaymentsConfigured field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetPaymentsConfigured(paymentsConfigured bool) {
-	p.PaymentsConfigured = paymentsConfigured
-	p.require(postV1BillingAccountSetPlanResponseFieldPaymentsConfigured)
+func (a *AccountSetPlanBillingResponse) SetPaymentsConfigured(paymentsConfigured bool) {
+	a.PaymentsConfigured = paymentsConfigured
+	a.require(accountSetPlanBillingResponseFieldPaymentsConfigured)
 }
 
 // SetHasPaymentAccount sets the HasPaymentAccount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetHasPaymentAccount(hasPaymentAccount bool) {
-	p.HasPaymentAccount = hasPaymentAccount
-	p.require(postV1BillingAccountSetPlanResponseFieldHasPaymentAccount)
+func (a *AccountSetPlanBillingResponse) SetHasPaymentAccount(hasPaymentAccount bool) {
+	a.HasPaymentAccount = hasPaymentAccount
+	a.require(accountSetPlanBillingResponseFieldHasPaymentAccount)
 }
 
 // SetHasSubscription sets the HasSubscription field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetHasSubscription(hasSubscription bool) {
-	p.HasSubscription = hasSubscription
-	p.require(postV1BillingAccountSetPlanResponseFieldHasSubscription)
+func (a *AccountSetPlanBillingResponse) SetHasSubscription(hasSubscription bool) {
+	a.HasSubscription = hasSubscription
+	a.require(accountSetPlanBillingResponseFieldHasSubscription)
 }
 
 // SetPaymentFailedAt sets the PaymentFailedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetPaymentFailedAt(paymentFailedAt *string) {
-	p.PaymentFailedAt = paymentFailedAt
-	p.require(postV1BillingAccountSetPlanResponseFieldPaymentFailedAt)
+func (a *AccountSetPlanBillingResponse) SetPaymentFailedAt(paymentFailedAt *time.Time) {
+	a.PaymentFailedAt = paymentFailedAt
+	a.require(accountSetPlanBillingResponseFieldPaymentFailedAt)
 }
 
 // SetPaymentFailedInvoiceURL sets the PaymentFailedInvoiceURL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
-	p.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
-	p.require(postV1BillingAccountSetPlanResponseFieldPaymentFailedInvoiceURL)
+func (a *AccountSetPlanBillingResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
+	a.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
+	a.require(accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL)
 }
 
 // SetMonthToDate sets the MonthToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetMonthToDate(monthToDate *PostV1BillingAccountSetPlanResponseMonthToDate) {
-	p.MonthToDate = monthToDate
-	p.require(postV1BillingAccountSetPlanResponseFieldMonthToDate)
+func (a *AccountSetPlanBillingResponse) SetMonthToDate(monthToDate *AccountSetPlanBillingResponseMonthToDate) {
+	a.MonthToDate = monthToDate
+	a.require(accountSetPlanBillingResponseFieldMonthToDate)
 }
 
 // SetPlans sets the Plans field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetPlans(plans map[string]*PostV1BillingAccountSetPlanResponsePlansValue) {
-	p.Plans = plans
-	p.require(postV1BillingAccountSetPlanResponseFieldPlans)
+func (a *AccountSetPlanBillingResponse) SetPlans(plans map[string]*AccountSetPlanBillingResponsePlansValue) {
+	a.Plans = plans
+	a.require(accountSetPlanBillingResponseFieldPlans)
 }
 
 // SetTopUp sets the TopUp field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetTopUp(topUp *PostV1BillingAccountSetPlanResponseTopUp) {
-	p.TopUp = topUp
-	p.require(postV1BillingAccountSetPlanResponseFieldTopUp)
+func (a *AccountSetPlanBillingResponse) SetTopUp(topUp *AccountSetPlanBillingResponseTopUp) {
+	a.TopUp = topUp
+	a.require(accountSetPlanBillingResponseFieldTopUp)
 }
 
 // SetTrialDays sets the TrialDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponse) SetTrialDays(trialDays int64) {
-	p.TrialDays = trialDays
-	p.require(postV1BillingAccountSetPlanResponseFieldTrialDays)
+func (a *AccountSetPlanBillingResponse) SetTrialDays(trialDays int64) {
+	a.TrialDays = trialDays
+	a.require(accountSetPlanBillingResponseFieldTrialDays)
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountSetPlanResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AccountSetPlanBillingResponse) UnmarshalJSON(data []byte) error {
+	type embed AccountSetPlanBillingResponse
+	var unmarshaler = struct {
+		embed
+		TrialEndsAt     *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt    *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate *internal.Date     `json:"lastChargedDate,omitempty"`
+		PaymentFailedAt *internal.DateTime `json:"paymentFailedAt,omitempty"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountSetPlanResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountSetPlanBillingResponse(unmarshaler.embed)
+	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
+	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
+	a.PaymentFailedAt = unmarshaler.PaymentFailedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountSetPlanResponse
+func (a *AccountSetPlanBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed AccountSetPlanBillingResponse
 	var marshaler = struct {
 		embed
+		TrialEndsAt     *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt    *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate *internal.Date     `json:"lastChargedDate,omitempty"`
+		PaymentFailedAt *internal.DateTime `json:"paymentFailedAt,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*a),
+		TrialEndsAt:     internal.NewOptionalDateTime(a.TrialEndsAt),
+		FirstTopUpAt:    internal.NewOptionalDateTime(a.FirstTopUpAt),
+		LastChargedDate: internal.NewOptionalDate(a.LastChargedDate),
+		PaymentFailedAt: internal.NewOptionalDateTime(a.PaymentFailedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountSetPlanResponse) String() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1BillingAccountSetPlanResponseMonthToDateFieldFrom                = big.NewInt(1 << 0)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 3)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
-	postV1BillingAccountSetPlanResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
+	accountSetPlanBillingResponseMonthToDateFieldFrom                = big.NewInt(1 << 0)
+	accountSetPlanBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
+	accountSetPlanBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
+	accountSetPlanBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 3)
+	accountSetPlanBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountSetPlanBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountSetPlanBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountSetPlanBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
-type PostV1BillingAccountSetPlanResponseMonthToDate struct {
+type AccountSetPlanBillingResponseMonthToDate struct {
 	From                string  `json:"from" url:"from"`
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
@@ -1433,208 +1419,208 @@ type PostV1BillingAccountSetPlanResponseMonthToDate struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetFrom() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetFrom() string {
+	if a == nil {
 		return ""
 	}
-	return p.From
+	return a.From
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetTo() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetTo() string {
+	if a == nil {
 		return ""
 	}
-	return p.To
+	return a.To
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetAPIRequests() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetAPIRequests() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.APIRequests
+	return a.APIRequests
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetOcrPages() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetOcrPages() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.OcrPages
+	return a.OcrPages
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetFileBytes() float64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetFileBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.FileBytes
+	return a.FileBytes
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetDatabaseBytes() float64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetDatabaseBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.DatabaseBytes
+	return a.DatabaseBytes
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetArchivedCompanies() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetArchivedCompanies() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.ArchivedCompanies
+	return a.ArchivedCompanies
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetEstimatedTodayCents() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetEstimatedTodayCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.EstimatedTodayCents
+	return a.EstimatedTodayCents
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountSetPlanBillingResponseMonthToDate) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetFrom(from string) {
-	p.From = from
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldFrom)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetFrom(from string) {
+	a.From = from
+	a.require(accountSetPlanBillingResponseMonthToDateFieldFrom)
 }
 
 // SetTo sets the To field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetTo(to string) {
-	p.To = to
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldTo)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetTo(to string) {
+	a.To = to
+	a.require(accountSetPlanBillingResponseMonthToDateFieldTo)
 }
 
 // SetAPIRequests sets the APIRequests field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetAPIRequests(apiRequests int64) {
-	p.APIRequests = apiRequests
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldAPIRequests)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetAPIRequests(apiRequests int64) {
+	a.APIRequests = apiRequests
+	a.require(accountSetPlanBillingResponseMonthToDateFieldAPIRequests)
 }
 
 // SetOcrPages sets the OcrPages field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	p.OcrPages = ocrPages
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldOcrPages)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
+	a.OcrPages = ocrPages
+	a.require(accountSetPlanBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetFileBytes(fileBytes float64) {
-	p.FileBytes = fileBytes
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldFileBytes)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetFileBytes(fileBytes float64) {
+	a.FileBytes = fileBytes
+	a.require(accountSetPlanBillingResponseMonthToDateFieldFileBytes)
 }
 
 // SetDatabaseBytes sets the DatabaseBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetDatabaseBytes(databaseBytes float64) {
-	p.DatabaseBytes = databaseBytes
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldDatabaseBytes)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetDatabaseBytes(databaseBytes float64) {
+	a.DatabaseBytes = databaseBytes
+	a.require(accountSetPlanBillingResponseMonthToDateFieldDatabaseBytes)
 }
 
 // SetArchivedCompanies sets the ArchivedCompanies field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetArchivedCompanies(archivedCompanies int64) {
-	p.ArchivedCompanies = archivedCompanies
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldArchivedCompanies)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetArchivedCompanies(archivedCompanies int64) {
+	a.ArchivedCompanies = archivedCompanies
+	a.require(accountSetPlanBillingResponseMonthToDateFieldArchivedCompanies)
 }
 
 // SetEstimatedTodayCents sets the EstimatedTodayCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) SetEstimatedTodayCents(estimatedTodayCents int64) {
-	p.EstimatedTodayCents = estimatedTodayCents
-	p.require(postV1BillingAccountSetPlanResponseMonthToDateFieldEstimatedTodayCents)
+func (a *AccountSetPlanBillingResponseMonthToDate) SetEstimatedTodayCents(estimatedTodayCents int64) {
+	a.EstimatedTodayCents = estimatedTodayCents
+	a.require(accountSetPlanBillingResponseMonthToDateFieldEstimatedTodayCents)
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountSetPlanResponseMonthToDate
+func (a *AccountSetPlanBillingResponseMonthToDate) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountSetPlanBillingResponseMonthToDate
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountSetPlanResponseMonthToDate(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountSetPlanBillingResponseMonthToDate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountSetPlanResponseMonthToDate
+func (a *AccountSetPlanBillingResponseMonthToDate) MarshalJSON() ([]byte, error) {
+	type embed AccountSetPlanBillingResponseMonthToDate
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountSetPlanResponseMonthToDate) String() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseMonthToDate) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingAccountSetPlanResponsePlan string
+type AccountSetPlanBillingResponsePlan string
 
 const (
-	PostV1BillingAccountSetPlanResponsePlanStarter  PostV1BillingAccountSetPlanResponsePlan = "starter"
-	PostV1BillingAccountSetPlanResponsePlanBusiness PostV1BillingAccountSetPlanResponsePlan = "business"
-	PostV1BillingAccountSetPlanResponsePlanScale    PostV1BillingAccountSetPlanResponsePlan = "scale"
+	AccountSetPlanBillingResponsePlanStarter  AccountSetPlanBillingResponsePlan = "starter"
+	AccountSetPlanBillingResponsePlanBusiness AccountSetPlanBillingResponsePlan = "business"
+	AccountSetPlanBillingResponsePlanScale    AccountSetPlanBillingResponsePlan = "scale"
 )
 
-func NewPostV1BillingAccountSetPlanResponsePlanFromString(s string) (PostV1BillingAccountSetPlanResponsePlan, error) {
+func NewAccountSetPlanBillingResponsePlanFromString(s string) (AccountSetPlanBillingResponsePlan, error) {
 	switch s {
 	case "starter":
-		return PostV1BillingAccountSetPlanResponsePlanStarter, nil
+		return AccountSetPlanBillingResponsePlanStarter, nil
 	case "business":
-		return PostV1BillingAccountSetPlanResponsePlanBusiness, nil
+		return AccountSetPlanBillingResponsePlanBusiness, nil
 	case "scale":
-		return PostV1BillingAccountSetPlanResponsePlanScale, nil
+		return AccountSetPlanBillingResponsePlanScale, nil
 	}
-	var t PostV1BillingAccountSetPlanResponsePlan
+	var t AccountSetPlanBillingResponsePlan
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingAccountSetPlanResponsePlan) Ptr() *PostV1BillingAccountSetPlanResponsePlan {
-	return &p
+func (a AccountSetPlanBillingResponsePlan) Ptr() *AccountSetPlanBillingResponsePlan {
+	return &a
 }
 
 var (
-	postV1BillingAccountSetPlanResponsePlansValueFieldMonthlyFeeEur         = big.NewInt(1 << 0)
-	postV1BillingAccountSetPlanResponsePlansValueFieldIncludedRequests      = big.NewInt(1 << 1)
-	postV1BillingAccountSetPlanResponsePlansValueFieldRequestOverageEur     = big.NewInt(1 << 2)
-	postV1BillingAccountSetPlanResponsePlansValueFieldIncludedDatabaseBytes = big.NewInt(1 << 3)
-	postV1BillingAccountSetPlanResponsePlansValueFieldIncludedFileBytes     = big.NewInt(1 << 4)
+	accountSetPlanBillingResponsePlansValueFieldMonthlyFeeEur         = big.NewInt(1 << 0)
+	accountSetPlanBillingResponsePlansValueFieldIncludedRequests      = big.NewInt(1 << 1)
+	accountSetPlanBillingResponsePlansValueFieldRequestOverageEur     = big.NewInt(1 << 2)
+	accountSetPlanBillingResponsePlansValueFieldIncludedDatabaseBytes = big.NewInt(1 << 3)
+	accountSetPlanBillingResponsePlansValueFieldIncludedFileBytes     = big.NewInt(1 << 4)
 )
 
-type PostV1BillingAccountSetPlanResponsePlansValue struct {
+type AccountSetPlanBillingResponsePlansValue struct {
 	MonthlyFeeEur         string  `json:"monthlyFeeEur" url:"monthlyFeeEur"`
 	IncludedRequests      int64   `json:"includedRequests" url:"includedRequests"`
 	RequestOverageEur     string  `json:"requestOverageEur" url:"requestOverageEur"`
@@ -1648,163 +1634,163 @@ type PostV1BillingAccountSetPlanResponsePlansValue struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetMonthlyFeeEur() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetMonthlyFeeEur() string {
+	if a == nil {
 		return ""
 	}
-	return p.MonthlyFeeEur
+	return a.MonthlyFeeEur
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetIncludedRequests() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetIncludedRequests() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedRequests
+	return a.IncludedRequests
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetRequestOverageEur() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetRequestOverageEur() string {
+	if a == nil {
 		return ""
 	}
-	return p.RequestOverageEur
+	return a.RequestOverageEur
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetIncludedDatabaseBytes() float64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetIncludedDatabaseBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedDatabaseBytes
+	return a.IncludedDatabaseBytes
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetIncludedFileBytes() float64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetIncludedFileBytes() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.IncludedFileBytes
+	return a.IncludedFileBytes
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountSetPlanBillingResponsePlansValue) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetMonthlyFeeEur sets the MonthlyFeeEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) SetMonthlyFeeEur(monthlyFeeEur string) {
-	p.MonthlyFeeEur = monthlyFeeEur
-	p.require(postV1BillingAccountSetPlanResponsePlansValueFieldMonthlyFeeEur)
+func (a *AccountSetPlanBillingResponsePlansValue) SetMonthlyFeeEur(monthlyFeeEur string) {
+	a.MonthlyFeeEur = monthlyFeeEur
+	a.require(accountSetPlanBillingResponsePlansValueFieldMonthlyFeeEur)
 }
 
 // SetIncludedRequests sets the IncludedRequests field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) SetIncludedRequests(includedRequests int64) {
-	p.IncludedRequests = includedRequests
-	p.require(postV1BillingAccountSetPlanResponsePlansValueFieldIncludedRequests)
+func (a *AccountSetPlanBillingResponsePlansValue) SetIncludedRequests(includedRequests int64) {
+	a.IncludedRequests = includedRequests
+	a.require(accountSetPlanBillingResponsePlansValueFieldIncludedRequests)
 }
 
 // SetRequestOverageEur sets the RequestOverageEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) SetRequestOverageEur(requestOverageEur string) {
-	p.RequestOverageEur = requestOverageEur
-	p.require(postV1BillingAccountSetPlanResponsePlansValueFieldRequestOverageEur)
+func (a *AccountSetPlanBillingResponsePlansValue) SetRequestOverageEur(requestOverageEur string) {
+	a.RequestOverageEur = requestOverageEur
+	a.require(accountSetPlanBillingResponsePlansValueFieldRequestOverageEur)
 }
 
 // SetIncludedDatabaseBytes sets the IncludedDatabaseBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) SetIncludedDatabaseBytes(includedDatabaseBytes float64) {
-	p.IncludedDatabaseBytes = includedDatabaseBytes
-	p.require(postV1BillingAccountSetPlanResponsePlansValueFieldIncludedDatabaseBytes)
+func (a *AccountSetPlanBillingResponsePlansValue) SetIncludedDatabaseBytes(includedDatabaseBytes float64) {
+	a.IncludedDatabaseBytes = includedDatabaseBytes
+	a.require(accountSetPlanBillingResponsePlansValueFieldIncludedDatabaseBytes)
 }
 
 // SetIncludedFileBytes sets the IncludedFileBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) SetIncludedFileBytes(includedFileBytes float64) {
-	p.IncludedFileBytes = includedFileBytes
-	p.require(postV1BillingAccountSetPlanResponsePlansValueFieldIncludedFileBytes)
+func (a *AccountSetPlanBillingResponsePlansValue) SetIncludedFileBytes(includedFileBytes float64) {
+	a.IncludedFileBytes = includedFileBytes
+	a.require(accountSetPlanBillingResponsePlansValueFieldIncludedFileBytes)
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountSetPlanResponsePlansValue
+func (a *AccountSetPlanBillingResponsePlansValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountSetPlanBillingResponsePlansValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountSetPlanResponsePlansValue(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountSetPlanBillingResponsePlansValue(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountSetPlanResponsePlansValue
+func (a *AccountSetPlanBillingResponsePlansValue) MarshalJSON() ([]byte, error) {
+	type embed AccountSetPlanBillingResponsePlansValue
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountSetPlanResponsePlansValue) String() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponsePlansValue) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingAccountSetPlanResponseStatus string
+type AccountSetPlanBillingResponseStatus string
 
 const (
-	PostV1BillingAccountSetPlanResponseStatusTrial     PostV1BillingAccountSetPlanResponseStatus = "trial"
-	PostV1BillingAccountSetPlanResponseStatusActive    PostV1BillingAccountSetPlanResponseStatus = "active"
-	PostV1BillingAccountSetPlanResponseStatusSuspended PostV1BillingAccountSetPlanResponseStatus = "suspended"
+	AccountSetPlanBillingResponseStatusTrial     AccountSetPlanBillingResponseStatus = "trial"
+	AccountSetPlanBillingResponseStatusActive    AccountSetPlanBillingResponseStatus = "active"
+	AccountSetPlanBillingResponseStatusSuspended AccountSetPlanBillingResponseStatus = "suspended"
 )
 
-func NewPostV1BillingAccountSetPlanResponseStatusFromString(s string) (PostV1BillingAccountSetPlanResponseStatus, error) {
+func NewAccountSetPlanBillingResponseStatusFromString(s string) (AccountSetPlanBillingResponseStatus, error) {
 	switch s {
 	case "trial":
-		return PostV1BillingAccountSetPlanResponseStatusTrial, nil
+		return AccountSetPlanBillingResponseStatusTrial, nil
 	case "active":
-		return PostV1BillingAccountSetPlanResponseStatusActive, nil
+		return AccountSetPlanBillingResponseStatusActive, nil
 	case "suspended":
-		return PostV1BillingAccountSetPlanResponseStatusSuspended, nil
+		return AccountSetPlanBillingResponseStatusSuspended, nil
 	}
-	var t PostV1BillingAccountSetPlanResponseStatus
+	var t AccountSetPlanBillingResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingAccountSetPlanResponseStatus) Ptr() *PostV1BillingAccountSetPlanResponseStatus {
-	return &p
+func (a AccountSetPlanBillingResponseStatus) Ptr() *AccountSetPlanBillingResponseStatus {
+	return &a
 }
 
 var (
-	postV1BillingAccountSetPlanResponseTopUpFieldMinCents = big.NewInt(1 << 0)
-	postV1BillingAccountSetPlanResponseTopUpFieldMaxCents = big.NewInt(1 << 1)
+	accountSetPlanBillingResponseTopUpFieldMinCents = big.NewInt(1 << 0)
+	accountSetPlanBillingResponseTopUpFieldMaxCents = big.NewInt(1 << 1)
 )
 
-type PostV1BillingAccountSetPlanResponseTopUp struct {
+type AccountSetPlanBillingResponseTopUp struct {
 	MinCents int64 `json:"minCents" url:"minCents"`
 	MaxCents int64 `json:"maxCents" url:"maxCents"`
 
@@ -1815,120 +1801,120 @@ type PostV1BillingAccountSetPlanResponseTopUp struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) GetMinCents() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseTopUp) GetMinCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.MinCents
+	return a.MinCents
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) GetMaxCents() int64 {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseTopUp) GetMaxCents() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.MaxCents
+	return a.MaxCents
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseTopUp) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AccountSetPlanBillingResponseTopUp) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetMinCents sets the MinCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseTopUp) SetMinCents(minCents int64) {
-	p.MinCents = minCents
-	p.require(postV1BillingAccountSetPlanResponseTopUpFieldMinCents)
+func (a *AccountSetPlanBillingResponseTopUp) SetMinCents(minCents int64) {
+	a.MinCents = minCents
+	a.require(accountSetPlanBillingResponseTopUpFieldMinCents)
 }
 
 // SetMaxCents sets the MaxCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingAccountSetPlanResponseTopUp) SetMaxCents(maxCents int64) {
-	p.MaxCents = maxCents
-	p.require(postV1BillingAccountSetPlanResponseTopUpFieldMaxCents)
+func (a *AccountSetPlanBillingResponseTopUp) SetMaxCents(maxCents int64) {
+	a.MaxCents = maxCents
+	a.require(accountSetPlanBillingResponseTopUpFieldMaxCents)
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingAccountSetPlanResponseTopUp
+func (a *AccountSetPlanBillingResponseTopUp) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountSetPlanBillingResponseTopUp
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingAccountSetPlanResponseTopUp(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AccountSetPlanBillingResponseTopUp(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingAccountSetPlanResponseTopUp
+func (a *AccountSetPlanBillingResponseTopUp) MarshalJSON() ([]byte, error) {
+	type embed AccountSetPlanBillingResponseTopUp
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingAccountSetPlanResponseTopUp) String() string {
-	if p == nil {
+func (a *AccountSetPlanBillingResponseTopUp) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1BillingPortalCreateRequestLocale string
+type PortalCreateBillingRequestLocale string
 
 const (
-	PostV1BillingPortalCreateRequestLocaleEn PostV1BillingPortalCreateRequestLocale = "en"
-	PostV1BillingPortalCreateRequestLocaleLt PostV1BillingPortalCreateRequestLocale = "lt"
-	PostV1BillingPortalCreateRequestLocaleDe PostV1BillingPortalCreateRequestLocale = "de"
+	PortalCreateBillingRequestLocaleEn PortalCreateBillingRequestLocale = "en"
+	PortalCreateBillingRequestLocaleLt PortalCreateBillingRequestLocale = "lt"
+	PortalCreateBillingRequestLocaleDe PortalCreateBillingRequestLocale = "de"
 )
 
-func NewPostV1BillingPortalCreateRequestLocaleFromString(s string) (PostV1BillingPortalCreateRequestLocale, error) {
+func NewPortalCreateBillingRequestLocaleFromString(s string) (PortalCreateBillingRequestLocale, error) {
 	switch s {
 	case "en":
-		return PostV1BillingPortalCreateRequestLocaleEn, nil
+		return PortalCreateBillingRequestLocaleEn, nil
 	case "lt":
-		return PostV1BillingPortalCreateRequestLocaleLt, nil
+		return PortalCreateBillingRequestLocaleLt, nil
 	case "de":
-		return PostV1BillingPortalCreateRequestLocaleDe, nil
+		return PortalCreateBillingRequestLocaleDe, nil
 	}
-	var t PostV1BillingPortalCreateRequestLocale
+	var t PortalCreateBillingRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingPortalCreateRequestLocale) Ptr() *PostV1BillingPortalCreateRequestLocale {
+func (p PortalCreateBillingRequestLocale) Ptr() *PortalCreateBillingRequestLocale {
 	return &p
 }
 
 var (
-	postV1BillingPortalCreateResponseFieldURL = big.NewInt(1 << 0)
+	portalCreateBillingResponseFieldURL = big.NewInt(1 << 0)
 )
 
-type PostV1BillingPortalCreateResponse struct {
+type PortalCreateBillingResponse struct {
 	URL string `json:"url" url:"url"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1938,21 +1924,21 @@ type PostV1BillingPortalCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingPortalCreateResponse) GetURL() string {
+func (p *PortalCreateBillingResponse) GetURL() string {
 	if p == nil {
 		return ""
 	}
 	return p.URL
 }
 
-func (p *PostV1BillingPortalCreateResponse) GetExtraProperties() map[string]interface{} {
+func (p *PortalCreateBillingResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1BillingPortalCreateResponse) require(field *big.Int) {
+func (p *PortalCreateBillingResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -1961,18 +1947,18 @@ func (p *PostV1BillingPortalCreateResponse) require(field *big.Int) {
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingPortalCreateResponse) SetURL(url string) {
+func (p *PortalCreateBillingResponse) SetURL(url string) {
 	p.URL = url
-	p.require(postV1BillingPortalCreateResponseFieldURL)
+	p.require(portalCreateBillingResponseFieldURL)
 }
 
-func (p *PostV1BillingPortalCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingPortalCreateResponse
+func (p *PortalCreateBillingResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PortalCreateBillingResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingPortalCreateResponse(value)
+	*p = PortalCreateBillingResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -1982,8 +1968,8 @@ func (p *PostV1BillingPortalCreateResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PostV1BillingPortalCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingPortalCreateResponse
+func (p *PortalCreateBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed PortalCreateBillingResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -1993,7 +1979,7 @@ func (p *PostV1BillingPortalCreateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingPortalCreateResponse) String() string {
+func (p *PortalCreateBillingResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2008,37 +1994,37 @@ func (p *PostV1BillingPortalCreateResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
-type PostV1BillingTopupCreateRequestLocale string
+type TopupCreateBillingRequestLocale string
 
 const (
-	PostV1BillingTopupCreateRequestLocaleEn PostV1BillingTopupCreateRequestLocale = "en"
-	PostV1BillingTopupCreateRequestLocaleLt PostV1BillingTopupCreateRequestLocale = "lt"
-	PostV1BillingTopupCreateRequestLocaleDe PostV1BillingTopupCreateRequestLocale = "de"
+	TopupCreateBillingRequestLocaleEn TopupCreateBillingRequestLocale = "en"
+	TopupCreateBillingRequestLocaleLt TopupCreateBillingRequestLocale = "lt"
+	TopupCreateBillingRequestLocaleDe TopupCreateBillingRequestLocale = "de"
 )
 
-func NewPostV1BillingTopupCreateRequestLocaleFromString(s string) (PostV1BillingTopupCreateRequestLocale, error) {
+func NewTopupCreateBillingRequestLocaleFromString(s string) (TopupCreateBillingRequestLocale, error) {
 	switch s {
 	case "en":
-		return PostV1BillingTopupCreateRequestLocaleEn, nil
+		return TopupCreateBillingRequestLocaleEn, nil
 	case "lt":
-		return PostV1BillingTopupCreateRequestLocaleLt, nil
+		return TopupCreateBillingRequestLocaleLt, nil
 	case "de":
-		return PostV1BillingTopupCreateRequestLocaleDe, nil
+		return TopupCreateBillingRequestLocaleDe, nil
 	}
-	var t PostV1BillingTopupCreateRequestLocale
+	var t TopupCreateBillingRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingTopupCreateRequestLocale) Ptr() *PostV1BillingTopupCreateRequestLocale {
-	return &p
+func (t TopupCreateBillingRequestLocale) Ptr() *TopupCreateBillingRequestLocale {
+	return &t
 }
 
 var (
-	postV1BillingTopupCreateResponseFieldURL       = big.NewInt(1 << 0)
-	postV1BillingTopupCreateResponseFieldSessionID = big.NewInt(1 << 1)
+	topupCreateBillingResponseFieldURL       = big.NewInt(1 << 0)
+	topupCreateBillingResponseFieldSessionID = big.NewInt(1 << 1)
 )
 
-type PostV1BillingTopupCreateResponse struct {
+type TopupCreateBillingResponse struct {
 	URL       string `json:"url" url:"url"`
 	SessionID string `json:"sessionId" url:"sessionId"`
 
@@ -2049,96 +2035,96 @@ type PostV1BillingTopupCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingTopupCreateResponse) GetURL() string {
-	if p == nil {
+func (t *TopupCreateBillingResponse) GetURL() string {
+	if t == nil {
 		return ""
 	}
-	return p.URL
+	return t.URL
 }
 
-func (p *PostV1BillingTopupCreateResponse) GetSessionID() string {
-	if p == nil {
+func (t *TopupCreateBillingResponse) GetSessionID() string {
+	if t == nil {
 		return ""
 	}
-	return p.SessionID
+	return t.SessionID
 }
 
-func (p *PostV1BillingTopupCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TopupCreateBillingResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1BillingTopupCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TopupCreateBillingResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetURL sets the URL field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTopupCreateResponse) SetURL(url string) {
-	p.URL = url
-	p.require(postV1BillingTopupCreateResponseFieldURL)
+func (t *TopupCreateBillingResponse) SetURL(url string) {
+	t.URL = url
+	t.require(topupCreateBillingResponseFieldURL)
 }
 
 // SetSessionID sets the SessionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTopupCreateResponse) SetSessionID(sessionID string) {
-	p.SessionID = sessionID
-	p.require(postV1BillingTopupCreateResponseFieldSessionID)
+func (t *TopupCreateBillingResponse) SetSessionID(sessionID string) {
+	t.SessionID = sessionID
+	t.require(topupCreateBillingResponseFieldSessionID)
 }
 
-func (p *PostV1BillingTopupCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingTopupCreateResponse
+func (t *TopupCreateBillingResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TopupCreateBillingResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingTopupCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TopupCreateBillingResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingTopupCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingTopupCreateResponse
+func (t *TopupCreateBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed TopupCreateBillingResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingTopupCreateResponse) String() string {
-	if p == nil {
+func (t *TopupCreateBillingResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1BillingTransactionsListResponseFieldRows = big.NewInt(1 << 0)
+	transactionsListBillingResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1BillingTransactionsListResponse struct {
-	Rows []*PostV1BillingTransactionsListResponseRowsItem `json:"rows" url:"rows"`
+type TransactionsListBillingResponse struct {
+	Rows []*TransactionsListBillingResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2147,96 +2133,96 @@ type PostV1BillingTransactionsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingTransactionsListResponse) GetRows() []*PostV1BillingTransactionsListResponseRowsItem {
-	if p == nil {
+func (t *TransactionsListBillingResponse) GetRows() []*TransactionsListBillingResponseRowsItem {
+	if t == nil {
 		return nil
 	}
-	return p.Rows
+	return t.Rows
 }
 
-func (p *PostV1BillingTransactionsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TransactionsListBillingResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1BillingTransactionsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TransactionsListBillingResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponse) SetRows(rows []*PostV1BillingTransactionsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1BillingTransactionsListResponseFieldRows)
+func (t *TransactionsListBillingResponse) SetRows(rows []*TransactionsListBillingResponseRowsItem) {
+	t.Rows = rows
+	t.require(transactionsListBillingResponseFieldRows)
 }
 
-func (p *PostV1BillingTransactionsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingTransactionsListResponse
+func (t *TransactionsListBillingResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsListBillingResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingTransactionsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TransactionsListBillingResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingTransactionsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingTransactionsListResponse
+func (t *TransactionsListBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed TransactionsListBillingResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingTransactionsListResponse) String() string {
-	if p == nil {
+func (t *TransactionsListBillingResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1BillingTransactionsListResponseRowsItemFieldID                = big.NewInt(1 << 0)
-	postV1BillingTransactionsListResponseRowsItemFieldType              = big.NewInt(1 << 1)
-	postV1BillingTransactionsListResponseRowsItemFieldAmountCents       = big.NewInt(1 << 2)
-	postV1BillingTransactionsListResponseRowsItemFieldBalanceAfterCents = big.NewInt(1 << 3)
-	postV1BillingTransactionsListResponseRowsItemFieldDescription       = big.NewInt(1 << 4)
-	postV1BillingTransactionsListResponseRowsItemFieldReference         = big.NewInt(1 << 5)
-	postV1BillingTransactionsListResponseRowsItemFieldUsageDate         = big.NewInt(1 << 6)
-	postV1BillingTransactionsListResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 7)
+	transactionsListBillingResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	transactionsListBillingResponseRowsItemFieldType              = big.NewInt(1 << 1)
+	transactionsListBillingResponseRowsItemFieldAmountCents       = big.NewInt(1 << 2)
+	transactionsListBillingResponseRowsItemFieldBalanceAfterCents = big.NewInt(1 << 3)
+	transactionsListBillingResponseRowsItemFieldDescription       = big.NewInt(1 << 4)
+	transactionsListBillingResponseRowsItemFieldReference         = big.NewInt(1 << 5)
+	transactionsListBillingResponseRowsItemFieldUsageDate         = big.NewInt(1 << 6)
+	transactionsListBillingResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 7)
 )
 
-type PostV1BillingTransactionsListResponseRowsItem struct {
-	ID                string                                            `json:"id" url:"id"`
-	Type              PostV1BillingTransactionsListResponseRowsItemType `json:"type" url:"type"`
-	AmountCents       int64                                             `json:"amountCents" url:"amountCents"`
-	BalanceAfterCents int64                                             `json:"balanceAfterCents" url:"balanceAfterCents"`
-	Description       string                                            `json:"description" url:"description"`
-	Reference         *string                                           `json:"reference,omitempty" url:"reference,omitempty"`
-	UsageDate         *string                                           `json:"usageDate,omitempty" url:"usageDate,omitempty"`
-	CreatedAt         string                                            `json:"createdAt" url:"createdAt"`
+type TransactionsListBillingResponseRowsItem struct {
+	ID                string                                      `json:"id" url:"id"`
+	Type              TransactionsListBillingResponseRowsItemType `json:"type" url:"type"`
+	AmountCents       int64                                       `json:"amountCents" url:"amountCents"`
+	BalanceAfterCents int64                                       `json:"balanceAfterCents" url:"balanceAfterCents"`
+	Description       string                                      `json:"description" url:"description"`
+	Reference         *string                                     `json:"reference,omitempty" url:"reference,omitempty"`
+	UsageDate         *time.Time                                  `json:"usageDate,omitempty" url:"usageDate,omitempty" format:"date"`
+	CreatedAt         time.Time                                   `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2245,211 +2231,223 @@ type PostV1BillingTransactionsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetType() PostV1BillingTransactionsListResponseRowsItemType {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetType() TransactionsListBillingResponseRowsItemType {
+	if t == nil {
 		return ""
 	}
-	return p.Type
+	return t.Type
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetAmountCents() int64 {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetAmountCents() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.AmountCents
+	return t.AmountCents
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetBalanceAfterCents() int64 {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetBalanceAfterCents() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.BalanceAfterCents
+	return t.BalanceAfterCents
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetDescription() string {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetDescription() string {
+	if t == nil {
 		return ""
 	}
-	return p.Description
+	return t.Description
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetReference() *string {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetReference() *string {
+	if t == nil {
 		return nil
 	}
-	return p.Reference
+	return t.Reference
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetUsageDate() *string {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetUsageDate() *time.Time {
+	if t == nil {
 		return nil
 	}
-	return p.UsageDate
+	return t.UsageDate
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (t *TransactionsListBillingResponseRowsItem) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return t.CreatedAt
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TransactionsListBillingResponseRowsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldID)
+func (t *TransactionsListBillingResponseRowsItem) SetID(id string) {
+	t.ID = id
+	t.require(transactionsListBillingResponseRowsItemFieldID)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetType(type_ PostV1BillingTransactionsListResponseRowsItemType) {
-	p.Type = type_
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldType)
+func (t *TransactionsListBillingResponseRowsItem) SetType(type_ TransactionsListBillingResponseRowsItemType) {
+	t.Type = type_
+	t.require(transactionsListBillingResponseRowsItemFieldType)
 }
 
 // SetAmountCents sets the AmountCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetAmountCents(amountCents int64) {
-	p.AmountCents = amountCents
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldAmountCents)
+func (t *TransactionsListBillingResponseRowsItem) SetAmountCents(amountCents int64) {
+	t.AmountCents = amountCents
+	t.require(transactionsListBillingResponseRowsItemFieldAmountCents)
 }
 
 // SetBalanceAfterCents sets the BalanceAfterCents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetBalanceAfterCents(balanceAfterCents int64) {
-	p.BalanceAfterCents = balanceAfterCents
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldBalanceAfterCents)
+func (t *TransactionsListBillingResponseRowsItem) SetBalanceAfterCents(balanceAfterCents int64) {
+	t.BalanceAfterCents = balanceAfterCents
+	t.require(transactionsListBillingResponseRowsItemFieldBalanceAfterCents)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldDescription)
+func (t *TransactionsListBillingResponseRowsItem) SetDescription(description string) {
+	t.Description = description
+	t.require(transactionsListBillingResponseRowsItemFieldDescription)
 }
 
 // SetReference sets the Reference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetReference(reference *string) {
-	p.Reference = reference
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldReference)
+func (t *TransactionsListBillingResponseRowsItem) SetReference(reference *string) {
+	t.Reference = reference
+	t.require(transactionsListBillingResponseRowsItemFieldReference)
 }
 
 // SetUsageDate sets the UsageDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetUsageDate(usageDate *string) {
-	p.UsageDate = usageDate
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldUsageDate)
+func (t *TransactionsListBillingResponseRowsItem) SetUsageDate(usageDate *time.Time) {
+	t.UsageDate = usageDate
+	t.require(transactionsListBillingResponseRowsItemFieldUsageDate)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingTransactionsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1BillingTransactionsListResponseRowsItemFieldCreatedAt)
+func (t *TransactionsListBillingResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(transactionsListBillingResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingTransactionsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (t *TransactionsListBillingResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed TransactionsListBillingResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		UsageDate *internal.Date     `json:"usageDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1BillingTransactionsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TransactionsListBillingResponseRowsItem(unmarshaler.embed)
+	t.UsageDate = unmarshaler.UsageDate.TimePtr()
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingTransactionsListResponseRowsItem
+func (t *TransactionsListBillingResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed TransactionsListBillingResponseRowsItem
 	var marshaler = struct {
 		embed
+		UsageDate *internal.Date     `json:"usageDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*t),
+		UsageDate: internal.NewOptionalDate(t.UsageDate),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingTransactionsListResponseRowsItem) String() string {
-	if p == nil {
+func (t *TransactionsListBillingResponseRowsItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
-type PostV1BillingTransactionsListResponseRowsItemType string
+type TransactionsListBillingResponseRowsItemType string
 
 const (
-	PostV1BillingTransactionsListResponseRowsItemTypeTrialGrant PostV1BillingTransactionsListResponseRowsItemType = "trial_grant"
-	PostV1BillingTransactionsListResponseRowsItemTypeTopup      PostV1BillingTransactionsListResponseRowsItemType = "topup"
-	PostV1BillingTransactionsListResponseRowsItemTypeUsage      PostV1BillingTransactionsListResponseRowsItemType = "usage"
-	PostV1BillingTransactionsListResponseRowsItemTypeActivation PostV1BillingTransactionsListResponseRowsItemType = "activation"
-	PostV1BillingTransactionsListResponseRowsItemTypeAdjustment PostV1BillingTransactionsListResponseRowsItemType = "adjustment"
+	TransactionsListBillingResponseRowsItemTypeTrialGrant TransactionsListBillingResponseRowsItemType = "trial_grant"
+	TransactionsListBillingResponseRowsItemTypeTopup      TransactionsListBillingResponseRowsItemType = "topup"
+	TransactionsListBillingResponseRowsItemTypeUsage      TransactionsListBillingResponseRowsItemType = "usage"
+	TransactionsListBillingResponseRowsItemTypeActivation TransactionsListBillingResponseRowsItemType = "activation"
+	TransactionsListBillingResponseRowsItemTypeAdjustment TransactionsListBillingResponseRowsItemType = "adjustment"
 )
 
-func NewPostV1BillingTransactionsListResponseRowsItemTypeFromString(s string) (PostV1BillingTransactionsListResponseRowsItemType, error) {
+func NewTransactionsListBillingResponseRowsItemTypeFromString(s string) (TransactionsListBillingResponseRowsItemType, error) {
 	switch s {
 	case "trial_grant":
-		return PostV1BillingTransactionsListResponseRowsItemTypeTrialGrant, nil
+		return TransactionsListBillingResponseRowsItemTypeTrialGrant, nil
 	case "topup":
-		return PostV1BillingTransactionsListResponseRowsItemTypeTopup, nil
+		return TransactionsListBillingResponseRowsItemTypeTopup, nil
 	case "usage":
-		return PostV1BillingTransactionsListResponseRowsItemTypeUsage, nil
+		return TransactionsListBillingResponseRowsItemTypeUsage, nil
 	case "activation":
-		return PostV1BillingTransactionsListResponseRowsItemTypeActivation, nil
+		return TransactionsListBillingResponseRowsItemTypeActivation, nil
 	case "adjustment":
-		return PostV1BillingTransactionsListResponseRowsItemTypeAdjustment, nil
+		return TransactionsListBillingResponseRowsItemTypeAdjustment, nil
 	}
-	var t PostV1BillingTransactionsListResponseRowsItemType
+	var t TransactionsListBillingResponseRowsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingTransactionsListResponseRowsItemType) Ptr() *PostV1BillingTransactionsListResponseRowsItemType {
-	return &p
+func (t TransactionsListBillingResponseRowsItemType) Ptr() *TransactionsListBillingResponseRowsItemType {
+	return &t
 }
 
 var (
-	postV1BillingUsageListResponseFieldRows = big.NewInt(1 << 0)
+	usageListBillingResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1BillingUsageListResponse struct {
-	Rows []*PostV1BillingUsageListResponseRowsItem `json:"rows" url:"rows"`
+type UsageListBillingResponse struct {
+	Rows []*UsageListBillingResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2458,88 +2456,88 @@ type PostV1BillingUsageListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingUsageListResponse) GetRows() []*PostV1BillingUsageListResponseRowsItem {
-	if p == nil {
+func (u *UsageListBillingResponse) GetRows() []*UsageListBillingResponseRowsItem {
+	if u == nil {
 		return nil
 	}
-	return p.Rows
+	return u.Rows
 }
 
-func (p *PostV1BillingUsageListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (u *UsageListBillingResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
 		return nil
 	}
-	return p.extraProperties
+	return u.extraProperties
 }
 
-func (p *PostV1BillingUsageListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (u *UsageListBillingResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	u.explicitFields.Or(u.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListResponse) SetRows(rows []*PostV1BillingUsageListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1BillingUsageListResponseFieldRows)
+func (u *UsageListBillingResponse) SetRows(rows []*UsageListBillingResponseRowsItem) {
+	u.Rows = rows
+	u.require(usageListBillingResponseFieldRows)
 }
 
-func (p *PostV1BillingUsageListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingUsageListResponse
+func (u *UsageListBillingResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsageListBillingResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1BillingUsageListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*u = UsageListBillingResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingUsageListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingUsageListResponse
+func (u *UsageListBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed UsageListBillingResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*u),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingUsageListResponse) String() string {
-	if p == nil {
+func (u *UsageListBillingResponse) String() string {
+	if u == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(u); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", u)
 }
 
 var (
-	postV1BillingUsageListResponseRowsItemFieldCompanyID = big.NewInt(1 << 0)
-	postV1BillingUsageListResponseRowsItemFieldDate      = big.NewInt(1 << 1)
-	postV1BillingUsageListResponseRowsItemFieldMetric    = big.NewInt(1 << 2)
-	postV1BillingUsageListResponseRowsItemFieldQuantity  = big.NewInt(1 << 3)
+	usageListBillingResponseRowsItemFieldCompanyID = big.NewInt(1 << 0)
+	usageListBillingResponseRowsItemFieldDate      = big.NewInt(1 << 1)
+	usageListBillingResponseRowsItemFieldMetric    = big.NewInt(1 << 2)
+	usageListBillingResponseRowsItemFieldQuantity  = big.NewInt(1 << 3)
 )
 
-type PostV1BillingUsageListResponseRowsItem struct {
-	CompanyID string                                       `json:"companyId" url:"companyId"`
-	Date      string                                       `json:"date" url:"date"`
-	Metric    PostV1BillingUsageListResponseRowsItemMetric `json:"metric" url:"metric"`
-	Quantity  float64                                      `json:"quantity" url:"quantity"`
+type UsageListBillingResponseRowsItem struct {
+	CompanyID string                                 `json:"companyId" url:"companyId"`
+	Date      time.Time                              `json:"date" url:"date" format:"date"`
+	Metric    UsageListBillingResponseRowsItemMetric `json:"metric" url:"metric"`
+	Quantity  float64                                `json:"quantity" url:"quantity"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2548,142 +2546,209 @@ type PostV1BillingUsageListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) GetCompanyID() string {
-	if p == nil {
+func (u *UsageListBillingResponseRowsItem) GetCompanyID() string {
+	if u == nil {
 		return ""
 	}
-	return p.CompanyID
+	return u.CompanyID
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) GetDate() string {
-	if p == nil {
+func (u *UsageListBillingResponseRowsItem) GetDate() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.Date
+}
+
+func (u *UsageListBillingResponseRowsItem) GetMetric() UsageListBillingResponseRowsItemMetric {
+	if u == nil {
 		return ""
 	}
-	return p.Date
+	return u.Metric
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) GetMetric() PostV1BillingUsageListResponseRowsItemMetric {
-	if p == nil {
-		return ""
-	}
-	return p.Metric
-}
-
-func (p *PostV1BillingUsageListResponseRowsItem) GetQuantity() float64 {
-	if p == nil {
+func (u *UsageListBillingResponseRowsItem) GetQuantity() float64 {
+	if u == nil {
 		return 0
 	}
-	return p.Quantity
+	return u.Quantity
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (u *UsageListBillingResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
 		return nil
 	}
-	return p.extraProperties
+	return u.extraProperties
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (u *UsageListBillingResponseRowsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	u.explicitFields.Or(u.explicitFields, field)
 }
 
 // SetCompanyID sets the CompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListResponseRowsItem) SetCompanyID(companyID string) {
-	p.CompanyID = companyID
-	p.require(postV1BillingUsageListResponseRowsItemFieldCompanyID)
+func (u *UsageListBillingResponseRowsItem) SetCompanyID(companyID string) {
+	u.CompanyID = companyID
+	u.require(usageListBillingResponseRowsItemFieldCompanyID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListResponseRowsItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1BillingUsageListResponseRowsItemFieldDate)
+func (u *UsageListBillingResponseRowsItem) SetDate(date time.Time) {
+	u.Date = date
+	u.require(usageListBillingResponseRowsItemFieldDate)
 }
 
 // SetMetric sets the Metric field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListResponseRowsItem) SetMetric(metric PostV1BillingUsageListResponseRowsItemMetric) {
-	p.Metric = metric
-	p.require(postV1BillingUsageListResponseRowsItemFieldMetric)
+func (u *UsageListBillingResponseRowsItem) SetMetric(metric UsageListBillingResponseRowsItemMetric) {
+	u.Metric = metric
+	u.require(usageListBillingResponseRowsItemFieldMetric)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1BillingUsageListResponseRowsItem) SetQuantity(quantity float64) {
-	p.Quantity = quantity
-	p.require(postV1BillingUsageListResponseRowsItemFieldQuantity)
+func (u *UsageListBillingResponseRowsItem) SetQuantity(quantity float64) {
+	u.Quantity = quantity
+	u.require(usageListBillingResponseRowsItemFieldQuantity)
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1BillingUsageListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (u *UsageListBillingResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed UsageListBillingResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1BillingUsageListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*u = UsageListBillingResponseRowsItem(unmarshaler.embed)
+	u.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1BillingUsageListResponseRowsItem
+func (u *UsageListBillingResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed UsageListBillingResponseRowsItem
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*u),
+		Date:  internal.NewDate(u.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1BillingUsageListResponseRowsItem) String() string {
-	if p == nil {
+func (u *UsageListBillingResponseRowsItem) String() string {
+	if u == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(u); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", u)
 }
 
-type PostV1BillingUsageListResponseRowsItemMetric string
+type UsageListBillingResponseRowsItemMetric string
 
 const (
-	PostV1BillingUsageListResponseRowsItemMetricAPIRequest       PostV1BillingUsageListResponseRowsItemMetric = "api_request"
-	PostV1BillingUsageListResponseRowsItemMetricOcrPage          PostV1BillingUsageListResponseRowsItemMetric = "ocr_page"
-	PostV1BillingUsageListResponseRowsItemMetricFileStorageBytes PostV1BillingUsageListResponseRowsItemMetric = "file_storage_bytes"
-	PostV1BillingUsageListResponseRowsItemMetricDatabaseBytes    PostV1BillingUsageListResponseRowsItemMetric = "database_bytes"
+	UsageListBillingResponseRowsItemMetricAPIRequest       UsageListBillingResponseRowsItemMetric = "api_request"
+	UsageListBillingResponseRowsItemMetricOcrPage          UsageListBillingResponseRowsItemMetric = "ocr_page"
+	UsageListBillingResponseRowsItemMetricFileStorageBytes UsageListBillingResponseRowsItemMetric = "file_storage_bytes"
+	UsageListBillingResponseRowsItemMetricDatabaseBytes    UsageListBillingResponseRowsItemMetric = "database_bytes"
 )
 
-func NewPostV1BillingUsageListResponseRowsItemMetricFromString(s string) (PostV1BillingUsageListResponseRowsItemMetric, error) {
+func NewUsageListBillingResponseRowsItemMetricFromString(s string) (UsageListBillingResponseRowsItemMetric, error) {
 	switch s {
 	case "api_request":
-		return PostV1BillingUsageListResponseRowsItemMetricAPIRequest, nil
+		return UsageListBillingResponseRowsItemMetricAPIRequest, nil
 	case "ocr_page":
-		return PostV1BillingUsageListResponseRowsItemMetricOcrPage, nil
+		return UsageListBillingResponseRowsItemMetricOcrPage, nil
 	case "file_storage_bytes":
-		return PostV1BillingUsageListResponseRowsItemMetricFileStorageBytes, nil
+		return UsageListBillingResponseRowsItemMetricFileStorageBytes, nil
 	case "database_bytes":
-		return PostV1BillingUsageListResponseRowsItemMetricDatabaseBytes, nil
+		return UsageListBillingResponseRowsItemMetricDatabaseBytes, nil
 	}
-	var t PostV1BillingUsageListResponseRowsItemMetric
+	var t UsageListBillingResponseRowsItemMetric
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1BillingUsageListResponseRowsItemMetric) Ptr() *PostV1BillingUsageListResponseRowsItemMetric {
-	return &p
+func (u UsageListBillingResponseRowsItemMetric) Ptr() *UsageListBillingResponseRowsItemMetric {
+	return &u
+}
+
+var (
+	usageListBillingRequestFieldFrom = big.NewInt(1 << 0)
+	usageListBillingRequestFieldTo   = big.NewInt(1 << 1)
+)
+
+type UsageListBillingRequest struct {
+	From time.Time `json:"from" url:"-" format:"date"`
+	To   time.Time `json:"to" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UsageListBillingRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsageListBillingRequest) SetFrom(from time.Time) {
+	u.From = from
+	u.require(usageListBillingRequestFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsageListBillingRequest) SetTo(to time.Time) {
+	u.To = to
+	u.require(usageListBillingRequestFieldTo)
+}
+
+func (u *UsageListBillingRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsageListBillingRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UsageListBillingRequest(body)
+	return nil
+}
+
+func (u *UsageListBillingRequest) MarshalJSON() ([]byte, error) {
+	type embed UsageListBillingRequest
+	var marshaler = struct {
+		embed
+		From *internal.Date `json:"from"`
+		To   *internal.Date `json:"to"`
+	}{
+		embed: embed(*u),
+		From:  internal.NewDate(u.From),
+		To:    internal.NewDate(u.To),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1AgreementsTypesCreate(
+func (c *Client) TypesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsTypesCreateRequest,
+	request *nordlet.TypesCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsTypesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsTypesCreate(
+) (*nordlet.TypesCreateAgreementsResponse, error) {
+	response, err := c.WithRawResponse.TypesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1AgreementsTypesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsTypesList(
+func (c *Client) TypesList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsTypesListRequest,
+	request *nordlet.TypesListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsTypesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsTypesList(
+) (*nordlet.TypesListAgreementsResponse, error) {
+	response, err := c.WithRawResponse.TypesList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1AgreementsTypesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsCreate(
+func (c *Client) AgreementsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsCreateRequest,
+	request *nordlet.AgreementsCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsCreate(
+) (*nordlet.AgreementsCreateAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsCreate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1AgreementsAgreementsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsGet(
+func (c *Client) AgreementsGet(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsGetRequest,
+	request *nordlet.AgreementsGetAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsGet(
+) (*nordlet.AgreementsGetAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsGet(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1AgreementsAgreementsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsUpdate(
+func (c *Client) AgreementsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsUpdateRequest,
+	request *nordlet.AgreementsUpdateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsUpdate(
+) (*nordlet.AgreementsUpdateAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1AgreementsAgreementsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsDelete(
+func (c *Client) AgreementsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsDeleteRequest,
+	request *nordlet.AgreementsDeleteAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsDelete(
+) (*nordlet.AgreementsDeleteAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsDelete(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1AgreementsAgreementsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsList(
+func (c *Client) AgreementsList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsListRequest,
+	request *nordlet.AgreementsListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsList(
+) (*nordlet.AgreementsListAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsList(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1AgreementsAgreementsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsGenerateInvoice(
+func (c *Client) AgreementsGenerateInvoice(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest,
+	request *nordlet.AgreementsGenerateInvoiceAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsGenerateInvoice(
+) (*nordlet.AgreementsGenerateInvoiceAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsGenerateInvoice(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1AgreementsAgreementsGenerateInvoice(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsAgreementsBillingRun(
+func (c *Client) AgreementsBillingRun(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsBillingRunRequest,
+	request *nordlet.AgreementsBillingRunAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsAgreementsBillingRunResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsAgreementsBillingRun(
+) (*nordlet.AgreementsBillingRunAgreementsResponse, error) {
+	response, err := c.WithRawResponse.AgreementsBillingRun(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1AgreementsAgreementsBillingRun(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsInsurancePoliciesCreate(
+func (c *Client) InsurancePoliciesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesCreateRequest,
+	request *nordlet.InsurancePoliciesCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsInsurancePoliciesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsInsurancePoliciesCreate(
+) (*nordlet.InsurancePoliciesCreateAgreementsResponse, error) {
+	response, err := c.WithRawResponse.InsurancePoliciesCreate(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1AgreementsInsurancePoliciesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsInsurancePoliciesList(
+func (c *Client) InsurancePoliciesList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesListRequest,
+	request *nordlet.InsurancePoliciesListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsInsurancePoliciesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsInsurancePoliciesList(
+) (*nordlet.InsurancePoliciesListAgreementsResponse, error) {
+	response, err := c.WithRawResponse.InsurancePoliciesList(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1AgreementsInsurancePoliciesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AgreementsInsurancePoliciesDelete(
+func (c *Client) InsurancePoliciesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesDeleteRequest,
+	request *nordlet.InsurancePoliciesDeleteAgreementsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AgreementsInsurancePoliciesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1AgreementsInsurancePoliciesDelete(
+) (*nordlet.InsurancePoliciesDeleteAgreementsResponse, error) {
+	response, err := c.WithRawResponse.InsurancePoliciesDelete(
 		ctx,
 		request,
 		opts...,

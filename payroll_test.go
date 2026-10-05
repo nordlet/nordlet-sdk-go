@@ -7,11 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
+func TestSettersCalcPayrollRequest(t *testing.T) {
 	t.Run("SetTaxableBase", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueTaxableBase string
 		obj.SetTaxableBase(fernTestValueTaxableBase)
 		assert.Equal(t, fernTestValueTaxableBase, obj.TaxableBase)
@@ -19,15 +20,15 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
-		var fernTestValueDate string
+		obj := &CalcPayrollRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetApplyAllowance", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueApplyAllowance *bool
 		obj.SetApplyAllowance(fernTestValueApplyAllowance)
 		assert.Equal(t, fernTestValueApplyAllowance, obj.ApplyAllowance)
@@ -35,7 +36,7 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetAllowanceOverride", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueAllowanceOverride *string
 		obj.SetAllowanceOverride(fernTestValueAllowanceOverride)
 		assert.Equal(t, fernTestValueAllowanceOverride, obj.AllowanceOverride)
@@ -43,7 +44,7 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetPensionAccumulation", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValuePensionAccumulation *bool
 		obj.SetPensionAccumulation(fernTestValuePensionAccumulation)
 		assert.Equal(t, fernTestValuePensionAccumulation, obj.PensionAccumulation)
@@ -51,7 +52,7 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetFixedTerm", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueFixedTerm *bool
 		obj.SetFixedTerm(fernTestValueFixedTerm)
 		assert.Equal(t, fernTestValueFixedTerm, obj.FixedTerm)
@@ -59,7 +60,7 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetBenefitInKind", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueBenefitInKind *string
 		obj.SetBenefitInKind(fernTestValueBenefitInKind)
 		assert.Equal(t, fernTestValueBenefitInKind, obj.BenefitInKind)
@@ -67,7 +68,7 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 	})
 
 	t.Run("SetOptions", func(t *testing.T) {
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueOptions map[string]string
 		obj.SetOptions(fernTestValueOptions)
 		assert.Equal(t, fernTestValueOptions, obj.Options)
@@ -76,11 +77,11 @@ func TestSettersPostV1PayrollCalcRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
+func TestSettersMarkExplicitCalcPayrollRequest(t *testing.T) {
 	t.Run("SetTaxableBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueTaxableBase string
 
 		// Act
@@ -111,8 +112,8 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
-		var fernTestValueDate string
+		obj := &CalcPayrollRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -142,7 +143,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetApplyAllowance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueApplyAllowance *bool
 
 		// Act
@@ -173,7 +174,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetAllowanceOverride_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueAllowanceOverride *string
 
 		// Act
@@ -204,7 +205,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetPensionAccumulation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValuePensionAccumulation *bool
 
 		// Act
@@ -235,7 +236,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetFixedTerm_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueFixedTerm *bool
 
 		// Act
@@ -266,7 +267,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetBenefitInKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueBenefitInKind *string
 
 		// Act
@@ -297,7 +298,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 	t.Run("SetOptions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcRequest{}
+		obj := &CalcPayrollRequest{}
 		var fernTestValueOptions map[string]string
 
 		// Act
@@ -327,9 +328,9 @@ func TestSettersMarkExplicitPostV1PayrollCalcRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollDepartmentsCreateRequest(t *testing.T) {
+func TestSettersDepartmentsCreatePayrollRequest(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsCreateRequest{}
+		obj := &DepartmentsCreatePayrollRequest{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -337,7 +338,7 @@ func TestSettersPostV1PayrollDepartmentsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsCreateRequest{}
+		obj := &DepartmentsCreatePayrollRequest{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -346,11 +347,11 @@ func TestSettersPostV1PayrollDepartmentsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitDepartmentsCreatePayrollRequest(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateRequest{}
+		obj := &DepartmentsCreatePayrollRequest{}
 		var fernTestValueCode string
 
 		// Act
@@ -381,7 +382,7 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateRequest(t *testing.T) 
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateRequest{}
+		obj := &DepartmentsCreatePayrollRequest{}
 		var fernTestValueName string
 
 		// Act
@@ -411,9 +412,210 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateRequest(t *testing.T) 
 
 }
 
-func TestSettersPostV1PayrollPaymentsExportRequest(t *testing.T) {
+func TestSettersLinesAttendancePayrollRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDaysWorked", func(t *testing.T) {
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueDaysWorked *string
+		obj.SetDaysWorked(fernTestValueDaysWorked)
+		assert.Equal(t, fernTestValueDaysWorked, obj.DaysWorked)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetHoursWorked", func(t *testing.T) {
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueHoursWorked *string
+		obj.SetHoursWorked(fernTestValueHoursWorked)
+		assert.Equal(t, fernTestValueHoursWorked, obj.HoursWorked)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRegisteredDays", func(t *testing.T) {
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueRegisteredDays *string
+		obj.SetRegisteredDays(fernTestValueRegisteredDays)
+		assert.Equal(t, fernTestValueRegisteredDays, obj.RegisteredDays)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAverageHourlyEarnings", func(t *testing.T) {
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueAverageHourlyEarnings *string
+		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
+		assert.Equal(t, fernTestValueAverageHourlyEarnings, obj.AverageHourlyEarnings)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitLinesAttendancePayrollRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDaysWorked_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueDaysWorked *string
+
+		// Act
+		obj.SetDaysWorked(fernTestValueDaysWorked)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetHoursWorked_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueHoursWorked *string
+
+		// Act
+		obj.SetHoursWorked(fernTestValueHoursWorked)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRegisteredDays_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueRegisteredDays *string
+
+		// Act
+		obj.SetRegisteredDays(fernTestValueRegisteredDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAverageHourlyEarnings_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &LinesAttendancePayrollRequest{}
+		var fernTestValueAverageHourlyEarnings *string
+
+		// Act
+		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPaymentsExportPayrollRequest(t *testing.T) {
 	t.Run("SetRunID", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportRequest{}
+		obj := &PaymentsExportPayrollRequest{}
 		var fernTestValueRunID string
 		obj.SetRunID(fernTestValueRunID)
 		assert.Equal(t, fernTestValueRunID, obj.RunID)
@@ -421,7 +623,7 @@ func TestSettersPostV1PayrollPaymentsExportRequest(t *testing.T) {
 	})
 
 	t.Run("SetBankAccountID", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportRequest{}
+		obj := &PaymentsExportPayrollRequest{}
 		var fernTestValueBankAccountID string
 		obj.SetBankAccountID(fernTestValueBankAccountID)
 		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
@@ -429,20 +631,28 @@ func TestSettersPostV1PayrollPaymentsExportRequest(t *testing.T) {
 	})
 
 	t.Run("SetExecutionDate", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportRequest{}
-		var fernTestValueExecutionDate *string
+		obj := &PaymentsExportPayrollRequest{}
+		var fernTestValueExecutionDate *time.Time
 		obj.SetExecutionDate(fernTestValueExecutionDate)
 		assert.Equal(t, fernTestValueExecutionDate, obj.ExecutionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetLocale", func(t *testing.T) {
+		obj := &PaymentsExportPayrollRequest{}
+		var fernTestValueLocale *PaymentsExportPayrollRequestLocale
+		obj.SetLocale(fernTestValueLocale)
+		assert.Equal(t, fernTestValueLocale, obj.Locale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
-func TestSettersMarkExplicitPostV1PayrollPaymentsExportRequest(t *testing.T) {
+func TestSettersMarkExplicitPaymentsExportPayrollRequest(t *testing.T) {
 	t.Run("SetRunID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportRequest{}
+		obj := &PaymentsExportPayrollRequest{}
 		var fernTestValueRunID string
 
 		// Act
@@ -473,7 +683,7 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportRequest(t *testing.T) {
 	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportRequest{}
+		obj := &PaymentsExportPayrollRequest{}
 		var fernTestValueBankAccountID string
 
 		// Act
@@ -504,8 +714,8 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportRequest(t *testing.T) {
 	t.Run("SetExecutionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportRequest{}
-		var fernTestValueExecutionDate *string
+		obj := &PaymentsExportPayrollRequest{}
+		var fernTestValueExecutionDate *time.Time
 
 		// Act
 		obj.SetExecutionDate(fernTestValueExecutionDate)
@@ -532,11 +742,42 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PaymentsExportPayrollRequest{}
+		var fernTestValueLocale *PaymentsExportPayrollRequestLocale
+
+		// Act
+		obj.SetLocale(fernTestValueLocale)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
-func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
+func TestSettersRunsApprovePayrollRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -544,7 +785,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetWageAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueWageAccountCode *string
 		obj.SetWageAccountCode(fernTestValueWageAccountCode)
 		assert.Equal(t, fernTestValueWageAccountCode, obj.WageAccountCode)
@@ -552,7 +793,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetEmployerAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueEmployerAccountCode *string
 		obj.SetEmployerAccountCode(fernTestValueEmployerAccountCode)
 		assert.Equal(t, fernTestValueEmployerAccountCode, obj.EmployerAccountCode)
@@ -560,7 +801,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetPayableAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValuePayableAccountCode *string
 		obj.SetPayableAccountCode(fernTestValuePayableAccountCode)
 		assert.Equal(t, fernTestValuePayableAccountCode, obj.PayableAccountCode)
@@ -568,7 +809,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetGpmAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueGpmAccountCode *string
 		obj.SetGpmAccountCode(fernTestValueGpmAccountCode)
 		assert.Equal(t, fernTestValueGpmAccountCode, obj.GpmAccountCode)
@@ -576,7 +817,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetSodraAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueSodraAccountCode *string
 		obj.SetSodraAccountCode(fernTestValueSodraAccountCode)
 		assert.Equal(t, fernTestValueSodraAccountCode, obj.SodraAccountCode)
@@ -584,7 +825,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetEmployerSocialAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueEmployerSocialAccountCode *string
 		obj.SetEmployerSocialAccountCode(fernTestValueEmployerSocialAccountCode)
 		assert.Equal(t, fernTestValueEmployerSocialAccountCode, obj.EmployerSocialAccountCode)
@@ -592,7 +833,7 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 	})
 
 	t.Run("SetDeductionAccountCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueDeductionAccountCode *string
 		obj.SetDeductionAccountCode(fernTestValueDeductionAccountCode)
 		assert.Equal(t, fernTestValueDeductionAccountCode, obj.DeductionAccountCode)
@@ -601,11 +842,11 @@ func TestSettersPostV1PayrollRunsApproveRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
+func TestSettersMarkExplicitRunsApprovePayrollRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -636,7 +877,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetWageAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueWageAccountCode *string
 
 		// Act
@@ -667,7 +908,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetEmployerAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueEmployerAccountCode *string
 
 		// Act
@@ -698,7 +939,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetPayableAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValuePayableAccountCode *string
 
 		// Act
@@ -729,7 +970,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetGpmAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueGpmAccountCode *string
 
 		// Act
@@ -760,7 +1001,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetSodraAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueSodraAccountCode *string
 
 		// Act
@@ -791,7 +1032,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetEmployerSocialAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueEmployerSocialAccountCode *string
 
 		// Act
@@ -822,7 +1063,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 	t.Run("SetDeductionAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveRequest{}
+		obj := &RunsApprovePayrollRequest{}
 		var fernTestValueDeductionAccountCode *string
 
 		// Act
@@ -852,9 +1093,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsCancelRequest(t *testing.T) {
+func TestSettersRunsCancelPayrollRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCancelRequest{}
+		obj := &RunsCancelPayrollRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -863,11 +1104,11 @@ func TestSettersPostV1PayrollRunsCancelRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCancelRequest(t *testing.T) {
+func TestSettersMarkExplicitRunsCancelPayrollRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCancelRequest{}
+		obj := &RunsCancelPayrollRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -897,9 +1138,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCancelRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsCreateRequest(t *testing.T) {
+func TestSettersRunsCreatePayrollRequest(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -907,7 +1148,7 @@ func TestSettersPostV1PayrollRunsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueMonth int64
 		obj.SetMonth(fernTestValueMonth)
 		assert.Equal(t, fernTestValueMonth, obj.Month)
@@ -915,7 +1156,7 @@ func TestSettersPostV1PayrollRunsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetIncludeNatura", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueIncludeNatura *bool
 		obj.SetIncludeNatura(fernTestValueIncludeNatura)
 		assert.Equal(t, fernTestValueIncludeNatura, obj.IncludeNatura)
@@ -923,23 +1164,23 @@ func TestSettersPostV1PayrollRunsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetGrossOverrides", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
-		var fernTestValueGrossOverrides []*PostV1PayrollRunsCreateRequestGrossOverridesItem
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValueGrossOverrides []*RunsCreatePayrollRequestGrossOverridesItem
 		obj.SetGrossOverrides(fernTestValueGrossOverrides)
 		assert.Equal(t, fernTestValueGrossOverrides, obj.GrossOverrides)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
-		var fernTestValueLines []*PostV1PayrollRunsCreateRequestLinesItem
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValueLines []*RunsCreatePayrollRequestLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -948,11 +1189,11 @@ func TestSettersPostV1PayrollRunsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollRequest(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueYear int64
 
 		// Act
@@ -983,7 +1224,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueMonth int64
 
 		// Act
@@ -1014,7 +1255,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 	t.Run("SetIncludeNatura_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueIncludeNatura *bool
 
 		// Act
@@ -1045,8 +1286,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 	t.Run("SetGrossOverrides_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
-		var fernTestValueGrossOverrides []*PostV1PayrollRunsCreateRequestGrossOverridesItem
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValueGrossOverrides []*RunsCreatePayrollRequestGrossOverridesItem
 
 		// Act
 		obj.SetGrossOverrides(fernTestValueGrossOverrides)
@@ -1076,8 +1317,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
-		var fernTestValueLines []*PostV1PayrollRunsCreateRequestLinesItem
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValueLines []*RunsCreatePayrollRequestLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -1107,7 +1348,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequest{}
+		obj := &RunsCreatePayrollRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1137,9 +1378,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsGetRequest(t *testing.T) {
+func TestSettersRunsGetPayrollRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetRequest{}
+		obj := &RunsGetPayrollRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1148,11 +1389,11 @@ func TestSettersPostV1PayrollRunsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetRequest(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetRequest{}
+		obj := &RunsGetPayrollRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -1182,9 +1423,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsListRequest(t *testing.T) {
+func TestSettersRunsListPayrollRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1192,7 +1433,7 @@ func TestSettersPostV1PayrollRunsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1200,23 +1441,23 @@ func TestSettersPostV1PayrollRunsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequest{}
-		var fernTestValueSort []*PostV1PayrollRunsListRequestSortItem
+		obj := &RunsListPayrollRequest{}
+		var fernTestValueSort []*RunsListPayrollRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequest{}
-		var fernTestValueFilter []*PostV1PayrollRunsListRequestFilterItem
+		obj := &RunsListPayrollRequest{}
+		var fernTestValueFilter []*RunsListPayrollRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1225,11 +1466,11 @@ func TestSettersPostV1PayrollRunsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -1260,7 +1501,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -1291,8 +1532,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequest{}
-		var fernTestValueSort []*PostV1PayrollRunsListRequestSortItem
+		obj := &RunsListPayrollRequest{}
+		var fernTestValueSort []*RunsListPayrollRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -1322,8 +1563,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequest{}
-		var fernTestValueFilter []*PostV1PayrollRunsListRequestFilterItem
+		obj := &RunsListPayrollRequest{}
+		var fernTestValueFilter []*RunsListPayrollRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -1353,7 +1594,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequest{}
+		obj := &RunsListPayrollRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -1383,9 +1624,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollSchedulesCreateRequest(t *testing.T) {
+func TestSettersSchedulesCreatePayrollRequest(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -1393,7 +1634,7 @@ func TestSettersPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -1401,7 +1642,7 @@ func TestSettersPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetHoursPerWeek", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueHoursPerWeek *string
 		obj.SetHoursPerWeek(fernTestValueHoursPerWeek)
 		assert.Equal(t, fernTestValueHoursPerWeek, obj.HoursPerWeek)
@@ -1410,11 +1651,11 @@ func TestSettersPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollSchedulesCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitSchedulesCreatePayrollRequest(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueCode string
 
 		// Act
@@ -1445,7 +1686,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueName string
 
 		// Act
@@ -1476,7 +1717,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 	t.Run("SetHoursPerWeek_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateRequest{}
+		obj := &SchedulesCreatePayrollRequest{}
 		var fernTestValueHoursPerWeek *string
 
 		// Act
@@ -1506,210 +1747,9 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollLinesAttendanceRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDaysWorked", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueDaysWorked *string
-		obj.SetDaysWorked(fernTestValueDaysWorked)
-		assert.Equal(t, fernTestValueDaysWorked, obj.DaysWorked)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetHoursWorked", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueHoursWorked *string
-		obj.SetHoursWorked(fernTestValueHoursWorked)
-		assert.Equal(t, fernTestValueHoursWorked, obj.HoursWorked)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetRegisteredDays", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueRegisteredDays *string
-		obj.SetRegisteredDays(fernTestValueRegisteredDays)
-		assert.Equal(t, fernTestValueRegisteredDays, obj.RegisteredDays)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAverageHourlyEarnings", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueAverageHourlyEarnings *string
-		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
-		assert.Equal(t, fernTestValueAverageHourlyEarnings, obj.AverageHourlyEarnings)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1PayrollLinesAttendanceRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDaysWorked_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueDaysWorked *string
-
-		// Act
-		obj.SetDaysWorked(fernTestValueDaysWorked)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetHoursWorked_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueHoursWorked *string
-
-		// Act
-		obj.SetHoursWorked(fernTestValueHoursWorked)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetRegisteredDays_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueRegisteredDays *string
-
-		// Act
-		obj.SetRegisteredDays(fernTestValueRegisteredDays)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAverageHourlyEarnings_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1PayrollLinesAttendanceRequest{}
-		var fernTestValueAverageHourlyEarnings *string
-
-		// Act
-		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
+func TestSettersCalcPayrollResponse(t *testing.T) {
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -1717,7 +1757,7 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowance", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueTaxAllowance string
 		obj.SetTaxAllowance(fernTestValueTaxAllowance)
 		assert.Equal(t, fernTestValueTaxAllowance, obj.TaxAllowance)
@@ -1725,7 +1765,7 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTax", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueIncomeTax string
 		obj.SetIncomeTax(fernTestValueIncomeTax)
 		assert.Equal(t, fernTestValueIncomeTax, obj.IncomeTax)
@@ -1733,7 +1773,7 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributions", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueEmployeeContributions string
 		obj.SetEmployeeContributions(fernTestValueEmployeeContributions)
 		assert.Equal(t, fernTestValueEmployeeContributions, obj.EmployeeContributions)
@@ -1741,7 +1781,7 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributions", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueEmployerContributions string
 		obj.SetEmployerContributions(fernTestValueEmployerContributions)
 		assert.Equal(t, fernTestValueEmployerContributions, obj.EmployerContributions)
@@ -1749,15 +1789,15 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 	})
 
 	t.Run("SetComponents", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
-		var fernTestValueComponents []*PostV1PayrollCalcResponseComponentsItem
+		obj := &CalcPayrollResponse{}
+		var fernTestValueComponents []*CalcPayrollResponseComponentsItem
 		obj.SetComponents(fernTestValueComponents)
 		assert.Equal(t, fernTestValueComponents, obj.Components)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -1766,11 +1806,11 @@ func TestSettersPostV1PayrollCalcResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
+func TestGettersCalcPayrollResponse(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.CountryCode = expected
 
@@ -1780,7 +1820,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1793,7 +1833,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetTaxAllowance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.TaxAllowance = expected
 
@@ -1803,7 +1843,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetTaxAllowance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1816,7 +1856,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetIncomeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.IncomeTax = expected
 
@@ -1826,7 +1866,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetIncomeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1839,7 +1879,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetEmployeeContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.EmployeeContributions = expected
 
@@ -1849,7 +1889,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetEmployeeContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1862,7 +1902,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetEmployerContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.EmployerContributions = expected
 
@@ -1872,7 +1912,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetEmployerContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1885,8 +1925,8 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetComponents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
-		var expected []*PostV1PayrollCalcResponseComponentsItem
+		obj := &CalcPayrollResponse{}
+		var expected []*CalcPayrollResponseComponentsItem
 		obj.Components = expected
 
 		// Act & Assert
@@ -1896,7 +1936,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetComponents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		obj.Components = nil
 
 		// Act & Assert
@@ -1905,7 +1945,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetComponents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1918,7 +1958,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var expected string
 		obj.Net = expected
 
@@ -1928,7 +1968,7 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1940,11 +1980,11 @@ func TestGettersPostV1PayrollCalcResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
+func TestSettersMarkExplicitCalcPayrollResponse(t *testing.T) {
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueCountryCode string
 
 		// Act
@@ -1975,7 +2015,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetTaxAllowance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueTaxAllowance string
 
 		// Act
@@ -2006,7 +2046,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetIncomeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueIncomeTax string
 
 		// Act
@@ -2037,7 +2077,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetEmployeeContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueEmployeeContributions string
 
 		// Act
@@ -2068,7 +2108,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetEmployerContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueEmployerContributions string
 
 		// Act
@@ -2099,8 +2139,8 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetComponents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
-		var fernTestValueComponents []*PostV1PayrollCalcResponseComponentsItem
+		obj := &CalcPayrollResponse{}
+		var fernTestValueComponents []*CalcPayrollResponseComponentsItem
 
 		// Act
 		obj.SetComponents(fernTestValueComponents)
@@ -2130,7 +2170,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		var fernTestValueNet string
 
 		// Act
@@ -2160,9 +2200,9 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestSettersCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -2170,15 +2210,15 @@ func TestSettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
-		var fernTestValueKind PostV1PayrollCalcResponseComponentsItemKind
+		obj := &CalcPayrollResponseComponentsItem{}
+		var fernTestValueKind CalcPayrollResponseComponentsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -2186,7 +2226,7 @@ func TestSettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -2194,7 +2234,7 @@ func TestSettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -2203,11 +2243,11 @@ func TestSettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestGettersCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -2217,7 +2257,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2230,8 +2270,8 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
-		var expected PostV1PayrollCalcResponseComponentsItemKind
+		obj := &CalcPayrollResponseComponentsItem{}
+		var expected CalcPayrollResponseComponentsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -2240,7 +2280,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2253,7 +2293,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -2263,7 +2303,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2276,7 +2316,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -2287,7 +2327,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -2296,7 +2336,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2309,7 +2349,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -2320,7 +2360,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -2329,7 +2369,7 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2341,11 +2381,11 @@ func TestGettersPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestSettersMarkExplicitCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -2376,8 +2416,8 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
-		var fernTestValueKind PostV1PayrollCalcResponseComponentsItemKind
+		obj := &CalcPayrollResponseComponentsItem{}
+		var fernTestValueKind CalcPayrollResponseComponentsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -2407,7 +2447,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -2438,7 +2478,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -2469,7 +2509,7 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -2499,9 +2539,9 @@ func TestSettersMarkExplicitPostV1PayrollCalcResponseComponentsItem(t *testing.T
 
 }
 
-func TestSettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestSettersDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2509,7 +2549,7 @@ func TestSettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -2517,7 +2557,7 @@ func TestSettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2526,11 +2566,11 @@ func TestSettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestGettersDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2540,7 +2580,7 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsCreateResponse
+		var obj *DepartmentsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2553,7 +2593,7 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -2563,7 +2603,7 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsCreateResponse
+		var obj *DepartmentsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2576,7 +2616,7 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -2586,7 +2626,7 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsCreateResponse
+		var obj *DepartmentsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2598,11 +2638,11 @@ func TestGettersPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2633,7 +2673,7 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateResponse(t *testing.T)
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -2664,7 +2704,7 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateResponse(t *testing.T)
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -2694,10 +2734,10 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsCreateResponse(t *testing.T)
 
 }
 
-func TestSettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestSettersDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsListResponse{}
-		var fernTestValueRows []*PostV1PayrollDepartmentsListResponseRowsItem
+		obj := &DepartmentsListPayrollResponse{}
+		var fernTestValueRows []*DepartmentsListPayrollResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -2705,12 +2745,12 @@ func TestSettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestGettersDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponse{}
-		var expected []*PostV1PayrollDepartmentsListResponseRowsItem
+		obj := &DepartmentsListPayrollResponse{}
+		var expected []*DepartmentsListPayrollResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -2720,7 +2760,7 @@ func TestGettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponse{}
+		obj := &DepartmentsListPayrollResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -2729,7 +2769,7 @@ func TestGettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponse
+		var obj *DepartmentsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2741,12 +2781,12 @@ func TestGettersPostV1PayrollDepartmentsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestSettersMarkExplicitDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponse{}
-		var fernTestValueRows []*PostV1PayrollDepartmentsListResponseRowsItem
+		obj := &DepartmentsListPayrollResponse{}
+		var fernTestValueRows []*DepartmentsListPayrollResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -2775,9 +2815,9 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestSettersDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2785,7 +2825,7 @@ func TestSettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -2793,7 +2833,7 @@ func TestSettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2802,11 +2842,11 @@ func TestSettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestGettersDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -2816,7 +2856,7 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponseRowsItem
+		var obj *DepartmentsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2829,7 +2869,7 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -2839,7 +2879,7 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponseRowsItem
+		var obj *DepartmentsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2852,7 +2892,7 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -2862,7 +2902,7 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponseRowsItem
+		var obj *DepartmentsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2874,11 +2914,11 @@ func TestGettersPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -2909,7 +2949,7 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponseRowsItem(t *test
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -2940,7 +2980,7 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponseRowsItem(t *test
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -2970,9 +3010,9 @@ func TestSettersMarkExplicitPostV1PayrollDepartmentsListResponseRowsItem(t *test
 
 }
 
-func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestSettersLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2980,7 +3020,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeID", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeID string
 		obj.SetEmployeeID(fernTestValueEmployeeID)
 		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
@@ -2988,7 +3028,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetContractID", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueContractID *string
 		obj.SetContractID(fernTestValueContractID)
 		assert.Equal(t, fernTestValueContractID, obj.ContractID)
@@ -2996,7 +3036,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeName", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeName string
 		obj.SetEmployeeName(fernTestValueEmployeeName)
 		assert.Equal(t, fernTestValueEmployeeName, obj.EmployeeName)
@@ -3004,7 +3044,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetGross", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueGross string
 		obj.SetGross(fernTestValueGross)
 		assert.Equal(t, fernTestValueGross, obj.Gross)
@@ -3012,7 +3052,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetNatura", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueNatura string
 		obj.SetNatura(fernTestValueNatura)
 		assert.Equal(t, fernTestValueNatura, obj.Natura)
@@ -3020,23 +3060,23 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetAdditions", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueAdditions []*PostV1PayrollLinesAttendanceResponseAdditionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueAdditions []*LinesAttendancePayrollResponseAdditionsItem
 		obj.SetAdditions(fernTestValueAdditions)
 		assert.Equal(t, fernTestValueAdditions, obj.Additions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDeductions", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueDeductions []*PostV1PayrollLinesAttendanceResponseDeductionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueDeductions []*LinesAttendancePayrollResponseDeductionsItem
 		obj.SetDeductions(fernTestValueDeductions)
 		assert.Equal(t, fernTestValueDeductions, obj.Deductions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTaxableBase", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueTaxableBase string
 		obj.SetTaxableBase(fernTestValueTaxableBase)
 		assert.Equal(t, fernTestValueTaxableBase, obj.TaxableBase)
@@ -3044,7 +3084,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowance", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueTaxAllowance string
 		obj.SetTaxAllowance(fernTestValueTaxAllowance)
 		assert.Equal(t, fernTestValueTaxAllowance, obj.TaxAllowance)
@@ -3052,7 +3092,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTax", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueIncomeTax string
 		obj.SetIncomeTax(fernTestValueIncomeTax)
 		assert.Equal(t, fernTestValueIncomeTax, obj.IncomeTax)
@@ -3060,7 +3100,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributions", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeContributions string
 		obj.SetEmployeeContributions(fernTestValueEmployeeContributions)
 		assert.Equal(t, fernTestValueEmployeeContributions, obj.EmployeeContributions)
@@ -3068,7 +3108,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributions", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployerContributions string
 		obj.SetEmployerContributions(fernTestValueEmployerContributions)
 		assert.Equal(t, fernTestValueEmployerContributions, obj.EmployerContributions)
@@ -3076,15 +3116,15 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetComponents", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueComponents []*PostV1PayrollLinesAttendanceResponseComponentsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueComponents []*LinesAttendancePayrollResponseComponentsItem
 		obj.SetComponents(fernTestValueComponents)
 		assert.Equal(t, fernTestValueComponents, obj.Components)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -3092,7 +3132,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetDaysWorked", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueDaysWorked *string
 		obj.SetDaysWorked(fernTestValueDaysWorked)
 		assert.Equal(t, fernTestValueDaysWorked, obj.DaysWorked)
@@ -3100,7 +3140,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetHoursWorked", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueHoursWorked *string
 		obj.SetHoursWorked(fernTestValueHoursWorked)
 		assert.Equal(t, fernTestValueHoursWorked, obj.HoursWorked)
@@ -3108,7 +3148,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetRegisteredDays", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueRegisteredDays *string
 		obj.SetRegisteredDays(fernTestValueRegisteredDays)
 		assert.Equal(t, fernTestValueRegisteredDays, obj.RegisteredDays)
@@ -3116,7 +3156,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	})
 
 	t.Run("SetAverageHourlyEarnings", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueAverageHourlyEarnings *string
 		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
 		assert.Equal(t, fernTestValueAverageHourlyEarnings, obj.AverageHourlyEarnings)
@@ -3125,11 +3165,11 @@ func TestSettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestGettersLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -3139,7 +3179,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3152,7 +3192,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetEmployeeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.EmployeeID = expected
 
@@ -3162,7 +3202,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3175,7 +3215,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetContractID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected *string
 		obj.ContractID = expected
 
@@ -3186,7 +3226,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetContractID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.ContractID = nil
 
 		// Act & Assert
@@ -3195,7 +3235,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetContractID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3208,7 +3248,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetEmployeeName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.EmployeeName = expected
 
@@ -3218,7 +3258,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetEmployeeName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3231,7 +3271,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.Gross = expected
 
@@ -3241,7 +3281,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3254,7 +3294,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetNatura", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.Natura = expected
 
@@ -3264,7 +3304,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetNatura_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3277,8 +3317,8 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetAdditions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var expected []*PostV1PayrollLinesAttendanceResponseAdditionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var expected []*LinesAttendancePayrollResponseAdditionsItem
 		obj.Additions = expected
 
 		// Act & Assert
@@ -3288,7 +3328,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetAdditions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.Additions = nil
 
 		// Act & Assert
@@ -3297,7 +3337,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetAdditions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3310,8 +3350,8 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetDeductions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var expected []*PostV1PayrollLinesAttendanceResponseDeductionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var expected []*LinesAttendancePayrollResponseDeductionsItem
 		obj.Deductions = expected
 
 		// Act & Assert
@@ -3321,7 +3361,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetDeductions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.Deductions = nil
 
 		// Act & Assert
@@ -3330,7 +3370,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetDeductions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3343,7 +3383,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetTaxableBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.TaxableBase = expected
 
@@ -3353,7 +3393,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetTaxableBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3366,7 +3406,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetTaxAllowance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.TaxAllowance = expected
 
@@ -3376,7 +3416,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetTaxAllowance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3389,7 +3429,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetIncomeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.IncomeTax = expected
 
@@ -3399,7 +3439,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetIncomeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3412,7 +3452,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetEmployeeContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.EmployeeContributions = expected
 
@@ -3422,7 +3462,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetEmployeeContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3435,7 +3475,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetEmployerContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.EmployerContributions = expected
 
@@ -3445,7 +3485,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetEmployerContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3458,8 +3498,8 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetComponents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var expected []*PostV1PayrollLinesAttendanceResponseComponentsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var expected []*LinesAttendancePayrollResponseComponentsItem
 		obj.Components = expected
 
 		// Act & Assert
@@ -3469,7 +3509,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetComponents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.Components = nil
 
 		// Act & Assert
@@ -3478,7 +3518,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetComponents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3491,7 +3531,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected string
 		obj.Net = expected
 
@@ -3501,7 +3541,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3514,7 +3554,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetDaysWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected *string
 		obj.DaysWorked = expected
 
@@ -3525,7 +3565,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetDaysWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.DaysWorked = nil
 
 		// Act & Assert
@@ -3534,7 +3574,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetDaysWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3547,7 +3587,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetHoursWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected *string
 		obj.HoursWorked = expected
 
@@ -3558,7 +3598,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetHoursWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.HoursWorked = nil
 
 		// Act & Assert
@@ -3567,7 +3607,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetHoursWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3580,7 +3620,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetRegisteredDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected *string
 		obj.RegisteredDays = expected
 
@@ -3591,7 +3631,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetRegisteredDays_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.RegisteredDays = nil
 
 		// Act & Assert
@@ -3600,7 +3640,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetRegisteredDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3613,7 +3653,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var expected *string
 		obj.AverageHourlyEarnings = expected
 
@@ -3624,7 +3664,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		obj.AverageHourlyEarnings = nil
 
 		// Act & Assert
@@ -3633,7 +3673,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetAverageHourlyEarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3645,11 +3685,11 @@ func TestGettersPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestSettersMarkExplicitLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -3680,7 +3720,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeID string
 
 		// Act
@@ -3711,7 +3751,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetContractID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueContractID *string
 
 		// Act
@@ -3742,7 +3782,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetEmployeeName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeName string
 
 		// Act
@@ -3773,7 +3813,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueGross string
 
 		// Act
@@ -3804,7 +3844,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetNatura_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueNatura string
 
 		// Act
@@ -3835,8 +3875,8 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetAdditions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueAdditions []*PostV1PayrollLinesAttendanceResponseAdditionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueAdditions []*LinesAttendancePayrollResponseAdditionsItem
 
 		// Act
 		obj.SetAdditions(fernTestValueAdditions)
@@ -3866,8 +3906,8 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetDeductions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueDeductions []*PostV1PayrollLinesAttendanceResponseDeductionsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueDeductions []*LinesAttendancePayrollResponseDeductionsItem
 
 		// Act
 		obj.SetDeductions(fernTestValueDeductions)
@@ -3897,7 +3937,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetTaxableBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueTaxableBase string
 
 		// Act
@@ -3928,7 +3968,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetTaxAllowance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueTaxAllowance string
 
 		// Act
@@ -3959,7 +3999,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetIncomeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueIncomeTax string
 
 		// Act
@@ -3990,7 +4030,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetEmployeeContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployeeContributions string
 
 		// Act
@@ -4021,7 +4061,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetEmployerContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueEmployerContributions string
 
 		// Act
@@ -4052,8 +4092,8 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetComponents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
-		var fernTestValueComponents []*PostV1PayrollLinesAttendanceResponseComponentsItem
+		obj := &LinesAttendancePayrollResponse{}
+		var fernTestValueComponents []*LinesAttendancePayrollResponseComponentsItem
 
 		// Act
 		obj.SetComponents(fernTestValueComponents)
@@ -4083,7 +4123,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueNet string
 
 		// Act
@@ -4114,7 +4154,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetDaysWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueDaysWorked *string
 
 		// Act
@@ -4145,7 +4185,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetHoursWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueHoursWorked *string
 
 		// Act
@@ -4176,7 +4216,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetRegisteredDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueRegisteredDays *string
 
 		// Act
@@ -4207,7 +4247,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 	t.Run("SetAverageHourlyEarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		var fernTestValueAverageHourlyEarnings *string
 
 		// Act
@@ -4237,9 +4277,9 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestSettersLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -4247,7 +4287,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -4255,7 +4295,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 	})
 
 	t.Run("SetTaxable", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueTaxable bool
 		obj.SetTaxable(fernTestValueTaxable)
 		assert.Equal(t, fernTestValueTaxable, obj.Taxable)
@@ -4264,11 +4304,11 @@ func TestSettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 
 }
 
-func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestGettersLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -4278,7 +4318,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj *LinesAttendancePayrollResponseAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4291,7 +4331,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -4301,7 +4341,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj *LinesAttendancePayrollResponseAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4314,7 +4354,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 	t.Run("GetTaxable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var expected bool
 		obj.Taxable = expected
 
@@ -4324,7 +4364,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 
 	t.Run("GetTaxable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj *LinesAttendancePayrollResponseAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4336,11 +4376,11 @@ func TestGettersPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestSettersMarkExplicitLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -4371,7 +4411,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseAdditionsItem(t 
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -4402,7 +4442,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseAdditionsItem(t 
 	t.Run("SetTaxable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		var fernTestValueTaxable bool
 
 		// Act
@@ -4432,9 +4472,9 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseAdditionsItem(t 
 
 }
 
-func TestSettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestSettersLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -4442,15 +4482,15 @@ func TestSettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
-		var fernTestValueKind PostV1PayrollLinesAttendanceResponseComponentsItemKind
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
+		var fernTestValueKind LinesAttendancePayrollResponseComponentsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -4458,7 +4498,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -4466,7 +4506,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -4475,11 +4515,11 @@ func TestSettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestGettersLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -4489,7 +4529,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4502,8 +4542,8 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
-		var expected PostV1PayrollLinesAttendanceResponseComponentsItemKind
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
+		var expected LinesAttendancePayrollResponseComponentsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -4512,7 +4552,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4525,7 +4565,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -4535,7 +4575,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4548,7 +4588,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -4559,7 +4599,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -4568,7 +4608,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4581,7 +4621,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -4592,7 +4632,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -4601,7 +4641,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4613,11 +4653,11 @@ func TestGettersPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestSettersMarkExplicitLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -4648,8 +4688,8 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
-		var fernTestValueKind PostV1PayrollLinesAttendanceResponseComponentsItemKind
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
+		var fernTestValueKind LinesAttendancePayrollResponseComponentsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -4679,7 +4719,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -4710,7 +4750,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -4741,7 +4781,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -4771,9 +4811,9 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseComponentsItem(t
 
 }
 
-func TestSettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestSettersLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -4781,7 +4821,7 @@ func TestSettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -4790,11 +4830,11 @@ func TestSettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestGettersLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -4804,7 +4844,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj *LinesAttendancePayrollResponseDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4817,7 +4857,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -4827,7 +4867,7 @@ func TestGettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj *LinesAttendancePayrollResponseDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4839,11 +4879,11 @@ func TestGettersPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestSettersMarkExplicitLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -4874,7 +4914,7 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseDeductionsItem(t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -4904,9 +4944,9 @@ func TestSettersMarkExplicitPostV1PayrollLinesAttendanceResponseDeductionsItem(t
 
 }
 
-func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestSettersPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("SetMessageID", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueMessageID string
 		obj.SetMessageID(fernTestValueMessageID)
 		assert.Equal(t, fernTestValueMessageID, obj.MessageID)
@@ -4914,7 +4954,7 @@ func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -4922,7 +4962,7 @@ func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransactionCount", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueTransactionCount int64
 		obj.SetTransactionCount(fernTestValueTransactionCount)
 		assert.Equal(t, fernTestValueTransactionCount, obj.TransactionCount)
@@ -4930,7 +4970,7 @@ func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	})
 
 	t.Run("SetControlSum", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueControlSum string
 		obj.SetControlSum(fernTestValueControlSum)
 		assert.Equal(t, fernTestValueControlSum, obj.ControlSum)
@@ -4938,7 +4978,7 @@ func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	})
 
 	t.Run("SetXML", func(t *testing.T) {
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueXML string
 		obj.SetXML(fernTestValueXML)
 		assert.Equal(t, fernTestValueXML, obj.XML)
@@ -4947,11 +4987,11 @@ func TestSettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestGettersPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("GetMessageID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var expected string
 		obj.MessageID = expected
 
@@ -4961,7 +5001,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetMessageID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4974,7 +5014,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -4984,7 +5024,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4997,7 +5037,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("GetTransactionCount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var expected int64
 		obj.TransactionCount = expected
 
@@ -5007,7 +5047,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetTransactionCount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5020,7 +5060,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("GetControlSum", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var expected string
 		obj.ControlSum = expected
 
@@ -5030,7 +5070,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetControlSum_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5043,7 +5083,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("GetXML", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var expected string
 		obj.XML = expected
 
@@ -5053,7 +5093,7 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetXML_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5065,11 +5105,11 @@ func TestGettersPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestSettersMarkExplicitPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("SetMessageID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueMessageID string
 
 		// Act
@@ -5100,7 +5140,7 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -5131,7 +5171,7 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("SetTransactionCount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueTransactionCount int64
 
 		// Act
@@ -5162,7 +5202,7 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("SetControlSum_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueControlSum string
 
 		// Act
@@ -5193,7 +5233,7 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
 	t.Run("SetXML_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		var fernTestValueXML string
 
 		// Act
@@ -5223,9 +5263,9 @@ func TestSettersMarkExplicitPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestSettersRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5233,7 +5273,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -5241,7 +5281,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueMonth int64
 		obj.SetMonth(fernTestValueMonth)
 		assert.Equal(t, fernTestValueMonth, obj.Month)
@@ -5249,7 +5289,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -5257,15 +5297,15 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueStatus PostV1PayrollRunsApproveResponseStatus
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueStatus RunsApprovePayrollResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -5273,7 +5313,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowanceTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 		obj.SetTaxAllowanceTotal(fernTestValueTaxAllowanceTotal)
 		assert.Equal(t, fernTestValueTaxAllowanceTotal, obj.TaxAllowanceTotal)
@@ -5281,7 +5321,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTaxTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 		obj.SetIncomeTaxTotal(fernTestValueIncomeTaxTotal)
 		assert.Equal(t, fernTestValueIncomeTaxTotal, obj.IncomeTaxTotal)
@@ -5289,7 +5329,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 		obj.SetEmployeeContributionsTotal(fernTestValueEmployeeContributionsTotal)
 		assert.Equal(t, fernTestValueEmployeeContributionsTotal, obj.EmployeeContributionsTotal)
@@ -5297,7 +5337,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 		obj.SetEmployerContributionsTotal(fernTestValueEmployerContributionsTotal)
 		assert.Equal(t, fernTestValueEmployerContributionsTotal, obj.EmployerContributionsTotal)
@@ -5305,15 +5345,15 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetComponentTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsApproveResponseComponentTotalsItem
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueComponentTotals []*RunsApprovePayrollResponseComponentTotalsItem
 		obj.SetComponentTotals(fernTestValueComponentTotals)
 		assert.Equal(t, fernTestValueComponentTotals, obj.ComponentTotals)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueNetTotal string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -5321,7 +5361,7 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -5329,24 +5369,32 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetWarnings", func(t *testing.T) {
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueWarnings []string
+		obj.SetWarnings(fernTestValueWarnings)
+		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetApprovedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 		obj.SetApprovedAt(fernTestValueApprovedAt)
 		assert.Equal(t, fernTestValueApprovedAt, obj.ApprovedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -5354,11 +5402,11 @@ func TestSettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestGettersRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -5368,7 +5416,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5381,7 +5429,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected int64
 		obj.Year = expected
 
@@ -5391,7 +5439,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5404,7 +5452,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected int64
 		obj.Month = expected
 
@@ -5414,7 +5462,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5427,7 +5475,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.CountryCode = expected
 
@@ -5437,7 +5485,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5450,8 +5498,8 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var expected PostV1PayrollRunsApproveResponseStatus
+		obj := &RunsApprovePayrollResponse{}
+		var expected RunsApprovePayrollResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -5460,7 +5508,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5473,7 +5521,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -5483,7 +5531,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5496,7 +5544,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetTaxAllowanceTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.TaxAllowanceTotal = expected
 
@@ -5506,7 +5554,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetTaxAllowanceTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5519,7 +5567,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetIncomeTaxTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.IncomeTaxTotal = expected
 
@@ -5529,7 +5577,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetIncomeTaxTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5542,7 +5590,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetEmployeeContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.EmployeeContributionsTotal = expected
 
@@ -5552,7 +5600,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetEmployeeContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5565,7 +5613,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetEmployerContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.EmployerContributionsTotal = expected
 
@@ -5575,7 +5623,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetEmployerContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5588,8 +5636,8 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetComponentTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var expected []*PostV1PayrollRunsApproveResponseComponentTotalsItem
+		obj := &RunsApprovePayrollResponse{}
+		var expected []*RunsApprovePayrollResponseComponentTotalsItem
 		obj.ComponentTotals = expected
 
 		// Act & Assert
@@ -5599,7 +5647,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetComponentTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		obj.ComponentTotals = nil
 
 		// Act & Assert
@@ -5608,7 +5656,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetComponentTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5621,7 +5669,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected string
 		obj.NetTotal = expected
 
@@ -5631,7 +5679,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5644,7 +5692,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -5655,7 +5703,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -5664,7 +5712,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5677,7 +5725,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -5688,7 +5736,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -5697,7 +5745,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5707,11 +5755,44 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetWarnings", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		var expected []string
+		obj.Warnings = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWarnings(), "getter should return the property value")
+	})
+
+	t.Run("GetWarnings_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		obj.Warnings = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWarnings(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsApprovePayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWarnings() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var expected string
+		obj := &RunsApprovePayrollResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -5720,7 +5801,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5733,8 +5814,8 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetApprovedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var expected *string
+		obj := &RunsApprovePayrollResponse{}
+		var expected *time.Time
 		obj.ApprovedAt = expected
 
 		// Act & Assert
@@ -5744,7 +5825,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("GetApprovedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		obj.ApprovedAt = nil
 
 		// Act & Assert
@@ -5753,7 +5834,7 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetApprovedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5765,11 +5846,11 @@ func TestGettersPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestSettersMarkExplicitRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -5800,7 +5881,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueYear int64
 
 		// Act
@@ -5831,7 +5912,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueMonth int64
 
 		// Act
@@ -5862,7 +5943,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueCountryCode string
 
 		// Act
@@ -5893,8 +5974,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueStatus PostV1PayrollRunsApproveResponseStatus
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueStatus RunsApprovePayrollResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -5924,7 +6005,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -5955,7 +6036,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetTaxAllowanceTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 
 		// Act
@@ -5986,7 +6067,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetIncomeTaxTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 
 		// Act
@@ -6017,7 +6098,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetEmployeeContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 
 		// Act
@@ -6048,7 +6129,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetEmployerContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 
 		// Act
@@ -6079,8 +6160,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetComponentTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsApproveResponseComponentTotalsItem
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueComponentTotals []*RunsApprovePayrollResponseComponentTotalsItem
 
 		// Act
 		obj.SetComponentTotals(fernTestValueComponentTotals)
@@ -6110,7 +6191,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueNetTotal string
 
 		// Act
@@ -6141,7 +6222,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -6172,7 +6253,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6200,11 +6281,42 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueWarnings []string
+
+		// Act
+		obj.SetWarnings(fernTestValueWarnings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6234,8 +6346,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 	t.Run("SetApprovedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 
 		// Act
 		obj.SetApprovedAt(fernTestValueApprovedAt)
@@ -6264,9 +6376,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestSettersRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -6274,15 +6386,15 @@ func TestSettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsApproveResponseComponentTotalsItemKind
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsApprovePayrollResponseComponentTotalsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -6290,7 +6402,7 @@ func TestSettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -6298,7 +6410,7 @@ func TestSettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -6307,11 +6419,11 @@ func TestSettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 }
 
-func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestGettersRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -6321,7 +6433,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6334,8 +6446,8 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
-		var expected PostV1PayrollRunsApproveResponseComponentTotalsItemKind
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
+		var expected RunsApprovePayrollResponseComponentTotalsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -6344,7 +6456,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6357,7 +6469,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -6367,7 +6479,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6380,7 +6492,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -6391,7 +6503,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -6400,7 +6512,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6413,7 +6525,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -6424,7 +6536,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -6433,7 +6545,7 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6445,11 +6557,11 @@ func TestGettersPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -6480,8 +6592,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsApproveResponseComponentTotalsItemKind
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsApprovePayrollResponseComponentTotalsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -6511,7 +6623,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -6542,7 +6654,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -6573,7 +6685,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -6603,9 +6715,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsApproveResponseComponentTotalsItem(
 
 }
 
-func TestSettersPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestSettersRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("SetDeleted", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 		var fernTestValueDeleted bool
 		obj.SetDeleted(fernTestValueDeleted)
 		assert.Equal(t, fernTestValueDeleted, obj.Deleted)
@@ -6614,11 +6726,11 @@ func TestSettersPostV1PayrollRunsCancelResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestGettersRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("GetDeleted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 		var expected bool
 		obj.Deleted = expected
 
@@ -6628,7 +6740,7 @@ func TestGettersPostV1PayrollRunsCancelResponse(t *testing.T) {
 
 	t.Run("GetDeleted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCancelResponse
+		var obj *RunsCancelPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6640,11 +6752,11 @@ func TestGettersPostV1PayrollRunsCancelResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestSettersMarkExplicitRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("SetDeleted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 		var fernTestValueDeleted bool
 
 		// Act
@@ -6674,9 +6786,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCancelResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestSettersRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("SetEmployeeID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var fernTestValueEmployeeID string
 		obj.SetEmployeeID(fernTestValueEmployeeID)
 		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
@@ -6684,7 +6796,7 @@ func TestSettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 	})
 
 	t.Run("SetGross", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var fernTestValueGross string
 		obj.SetGross(fernTestValueGross)
 		assert.Equal(t, fernTestValueGross, obj.Gross)
@@ -6693,11 +6805,11 @@ func TestSettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestGettersRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("GetEmployeeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var expected string
 		obj.EmployeeID = expected
 
@@ -6707,7 +6819,7 @@ func TestGettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 
 	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj *RunsCreatePayrollRequestGrossOverridesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6720,7 +6832,7 @@ func TestGettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 	t.Run("GetGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var expected string
 		obj.Gross = expected
 
@@ -6730,7 +6842,7 @@ func TestGettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 
 	t.Run("GetGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj *RunsCreatePayrollRequestGrossOverridesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6742,11 +6854,11 @@ func TestGettersPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var fernTestValueEmployeeID string
 
 		// Act
@@ -6777,7 +6889,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestGrossOverridesItem(t *
 	t.Run("SetGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		var fernTestValueGross string
 
 		// Act
@@ -6807,9 +6919,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestGrossOverridesItem(t *
 
 }
 
-func TestSettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestSettersRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("SetEmployeeID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var fernTestValueEmployeeID string
 		obj.SetEmployeeID(fernTestValueEmployeeID)
 		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
@@ -6817,7 +6929,7 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetGross", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var fernTestValueGross *string
 		obj.SetGross(fernTestValueGross)
 		assert.Equal(t, fernTestValueGross, obj.Gross)
@@ -6825,16 +6937,16 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAdditions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var fernTestValueAdditions []*RunsCreatePayrollRequestLinesItemAdditionsItem
 		obj.SetAdditions(fernTestValueAdditions)
 		assert.Equal(t, fernTestValueAdditions, obj.Additions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDeductions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var fernTestValueDeductions []*RunsCreatePayrollRequestLinesItemDeductionsItem
 		obj.SetDeductions(fernTestValueDeductions)
 		assert.Equal(t, fernTestValueDeductions, obj.Deductions)
 		assert.NotNil(t, obj.explicitFields)
@@ -6842,11 +6954,11 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestGettersRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("GetEmployeeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var expected string
 		obj.EmployeeID = expected
 
@@ -6856,7 +6968,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6869,7 +6981,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var expected *string
 		obj.Gross = expected
 
@@ -6880,7 +6992,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetGross_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		obj.Gross = nil
 
 		// Act & Assert
@@ -6889,7 +7001,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6902,8 +7014,8 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetAdditions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var expected []*PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var expected []*RunsCreatePayrollRequestLinesItemAdditionsItem
 		obj.Additions = expected
 
 		// Act & Assert
@@ -6913,7 +7025,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetAdditions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		obj.Additions = nil
 
 		// Act & Assert
@@ -6922,7 +7034,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetAdditions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6935,8 +7047,8 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetDeductions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var expected []*PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var expected []*RunsCreatePayrollRequestLinesItemDeductionsItem
 		obj.Deductions = expected
 
 		// Act & Assert
@@ -6946,7 +7058,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetDeductions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		obj.Deductions = nil
 
 		// Act & Assert
@@ -6955,7 +7067,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetDeductions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6967,11 +7079,11 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var fernTestValueEmployeeID string
 
 		// Act
@@ -7002,7 +7114,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItem(t *testing.T
 	t.Run("SetGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		var fernTestValueGross *string
 
 		// Act
@@ -7033,8 +7145,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItem(t *testing.T
 	t.Run("SetAdditions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var fernTestValueAdditions []*RunsCreatePayrollRequestLinesItemAdditionsItem
 
 		// Act
 		obj.SetAdditions(fernTestValueAdditions)
@@ -7064,8 +7176,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItem(t *testing.T
 	t.Run("SetDeductions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		obj := &RunsCreatePayrollRequestLinesItem{}
+		var fernTestValueDeductions []*RunsCreatePayrollRequestLinesItemDeductionsItem
 
 		// Act
 		obj.SetDeductions(fernTestValueDeductions)
@@ -7094,9 +7206,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItem(t *testing.T
 
 }
 
-func TestSettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -7104,7 +7216,7 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -7112,7 +7224,7 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 	})
 
 	t.Run("SetTaxable", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueTaxable *bool
 		obj.SetTaxable(fernTestValueTaxable)
 		assert.Equal(t, fernTestValueTaxable, obj.Taxable)
@@ -7121,11 +7233,11 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 
 }
 
-func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -7135,7 +7247,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj *RunsCreatePayrollRequestLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7148,7 +7260,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -7158,7 +7270,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj *RunsCreatePayrollRequestLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7171,7 +7283,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 	t.Run("GetTaxable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var expected *bool
 		obj.Taxable = expected
 
@@ -7182,7 +7294,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 	t.Run("GetTaxable_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		obj.Taxable = nil
 
 		// Act & Assert
@@ -7191,7 +7303,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 
 	t.Run("GetTaxable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj *RunsCreatePayrollRequestLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7203,11 +7315,11 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -7238,7 +7350,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemAdditionsItem
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -7269,7 +7381,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemAdditionsItem
 	t.Run("SetTaxable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		var fernTestValueTaxable *bool
 
 		// Act
@@ -7299,9 +7411,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemAdditionsItem
 
 }
 
-func TestSettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -7309,7 +7421,7 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -7318,11 +7430,11 @@ func TestSettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 
 }
 
-func TestGettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -7332,7 +7444,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj *RunsCreatePayrollRequestLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7345,7 +7457,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -7355,7 +7467,7 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj *RunsCreatePayrollRequestLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7367,11 +7479,11 @@ func TestGettersPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -7402,7 +7514,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemDeductionsIte
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -7432,9 +7544,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateRequestLinesItemDeductionsIte
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestSettersRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7442,7 +7554,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -7450,7 +7562,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueMonth int64
 		obj.SetMonth(fernTestValueMonth)
 		assert.Equal(t, fernTestValueMonth, obj.Month)
@@ -7458,7 +7570,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -7466,15 +7578,15 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueStatus PostV1PayrollRunsCreateResponseStatus
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueStatus RunsCreatePayrollResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -7482,7 +7594,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowanceTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 		obj.SetTaxAllowanceTotal(fernTestValueTaxAllowanceTotal)
 		assert.Equal(t, fernTestValueTaxAllowanceTotal, obj.TaxAllowanceTotal)
@@ -7490,7 +7602,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTaxTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 		obj.SetIncomeTaxTotal(fernTestValueIncomeTaxTotal)
 		assert.Equal(t, fernTestValueIncomeTaxTotal, obj.IncomeTaxTotal)
@@ -7498,7 +7610,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 		obj.SetEmployeeContributionsTotal(fernTestValueEmployeeContributionsTotal)
 		assert.Equal(t, fernTestValueEmployeeContributionsTotal, obj.EmployeeContributionsTotal)
@@ -7506,7 +7618,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 		obj.SetEmployerContributionsTotal(fernTestValueEmployerContributionsTotal)
 		assert.Equal(t, fernTestValueEmployerContributionsTotal, obj.EmployerContributionsTotal)
@@ -7514,15 +7626,15 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetComponentTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsCreateResponseComponentTotalsItem
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueComponentTotals []*RunsCreatePayrollResponseComponentTotalsItem
 		obj.SetComponentTotals(fernTestValueComponentTotals)
 		assert.Equal(t, fernTestValueComponentTotals, obj.ComponentTotals)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueNetTotal string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -7530,7 +7642,7 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -7538,32 +7650,40 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetWarnings", func(t *testing.T) {
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueWarnings []string
+		obj.SetWarnings(fernTestValueWarnings)
+		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetApprovedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 		obj.SetApprovedAt(fernTestValueApprovedAt)
 		assert.Equal(t, fernTestValueApprovedAt, obj.ApprovedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueLines []*PostV1PayrollRunsCreateResponseLinesItem
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueLines []*RunsCreatePayrollResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -7571,11 +7691,11 @@ func TestSettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestGettersRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -7585,7 +7705,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7598,7 +7718,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected int64
 		obj.Year = expected
 
@@ -7608,7 +7728,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7621,7 +7741,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected int64
 		obj.Month = expected
 
@@ -7631,7 +7751,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7644,7 +7764,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.CountryCode = expected
 
@@ -7654,7 +7774,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7667,8 +7787,8 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var expected PostV1PayrollRunsCreateResponseStatus
+		obj := &RunsCreatePayrollResponse{}
+		var expected RunsCreatePayrollResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -7677,7 +7797,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7690,7 +7810,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -7700,7 +7820,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7713,7 +7833,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetTaxAllowanceTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.TaxAllowanceTotal = expected
 
@@ -7723,7 +7843,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetTaxAllowanceTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7736,7 +7856,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetIncomeTaxTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.IncomeTaxTotal = expected
 
@@ -7746,7 +7866,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetIncomeTaxTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7759,7 +7879,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetEmployeeContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.EmployeeContributionsTotal = expected
 
@@ -7769,7 +7889,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetEmployeeContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7782,7 +7902,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetEmployerContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.EmployerContributionsTotal = expected
 
@@ -7792,7 +7912,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetEmployerContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7805,8 +7925,8 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetComponentTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var expected []*PostV1PayrollRunsCreateResponseComponentTotalsItem
+		obj := &RunsCreatePayrollResponse{}
+		var expected []*RunsCreatePayrollResponseComponentTotalsItem
 		obj.ComponentTotals = expected
 
 		// Act & Assert
@@ -7816,7 +7936,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetComponentTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		obj.ComponentTotals = nil
 
 		// Act & Assert
@@ -7825,7 +7945,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetComponentTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7838,7 +7958,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected string
 		obj.NetTotal = expected
 
@@ -7848,7 +7968,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7861,7 +7981,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -7872,7 +7992,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -7881,7 +8001,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7894,7 +8014,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -7905,7 +8025,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -7914,7 +8034,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7924,11 +8044,44 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetWarnings", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		var expected []string
+		obj.Warnings = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWarnings(), "getter should return the property value")
+	})
+
+	t.Run("GetWarnings_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		obj.Warnings = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWarnings(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsCreatePayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWarnings() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var expected string
+		obj := &RunsCreatePayrollResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -7937,7 +8090,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7950,8 +8103,8 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetApprovedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var expected *string
+		obj := &RunsCreatePayrollResponse{}
+		var expected *time.Time
 		obj.ApprovedAt = expected
 
 		// Act & Assert
@@ -7961,7 +8114,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetApprovedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		obj.ApprovedAt = nil
 
 		// Act & Assert
@@ -7970,7 +8123,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetApprovedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7983,8 +8136,8 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var expected []*PostV1PayrollRunsCreateResponseLinesItem
+		obj := &RunsCreatePayrollResponse{}
+		var expected []*RunsCreatePayrollResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -7994,7 +8147,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -8003,7 +8156,7 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8015,11 +8168,11 @@ func TestGettersPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -8050,7 +8203,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueYear int64
 
 		// Act
@@ -8081,7 +8234,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueMonth int64
 
 		// Act
@@ -8112,7 +8265,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueCountryCode string
 
 		// Act
@@ -8143,8 +8296,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueStatus PostV1PayrollRunsCreateResponseStatus
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueStatus RunsCreatePayrollResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -8174,7 +8327,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -8205,7 +8358,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetTaxAllowanceTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 
 		// Act
@@ -8236,7 +8389,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetIncomeTaxTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 
 		// Act
@@ -8267,7 +8420,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetEmployeeContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 
 		// Act
@@ -8298,7 +8451,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetEmployerContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 
 		// Act
@@ -8329,8 +8482,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetComponentTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsCreateResponseComponentTotalsItem
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueComponentTotals []*RunsCreatePayrollResponseComponentTotalsItem
 
 		// Act
 		obj.SetComponentTotals(fernTestValueComponentTotals)
@@ -8360,7 +8513,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueNetTotal string
 
 		// Act
@@ -8391,7 +8544,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -8422,7 +8575,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -8450,11 +8603,42 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueWarnings []string
+
+		// Act
+		obj.SetWarnings(fernTestValueWarnings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -8484,8 +8668,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetApprovedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 
 		// Act
 		obj.SetApprovedAt(fernTestValueApprovedAt)
@@ -8515,8 +8699,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
-		var fernTestValueLines []*PostV1PayrollRunsCreateResponseLinesItem
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValueLines []*RunsCreatePayrollResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -8545,9 +8729,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -8555,15 +8739,15 @@ func TestSettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsCreateResponseComponentTotalsItemKind
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsCreatePayrollResponseComponentTotalsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -8571,7 +8755,7 @@ func TestSettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -8579,7 +8763,7 @@ func TestSettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -8588,11 +8772,11 @@ func TestSettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -8602,7 +8786,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8615,8 +8799,8 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
-		var expected PostV1PayrollRunsCreateResponseComponentTotalsItemKind
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
+		var expected RunsCreatePayrollResponseComponentTotalsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -8625,7 +8809,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8638,7 +8822,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -8648,7 +8832,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8661,7 +8845,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -8672,7 +8856,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -8681,7 +8865,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8694,7 +8878,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -8705,7 +8889,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -8714,7 +8898,7 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8726,11 +8910,11 @@ func TestGettersPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -8761,8 +8945,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsCreateResponseComponentTotalsItemKind
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsCreatePayrollResponseComponentTotalsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -8792,7 +8976,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -8823,7 +9007,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -8854,7 +9038,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -8884,9 +9068,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseComponentTotalsItem(t
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestSettersRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8894,7 +9078,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeID string
 		obj.SetEmployeeID(fernTestValueEmployeeID)
 		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
@@ -8902,7 +9086,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetContractID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueContractID *string
 		obj.SetContractID(fernTestValueContractID)
 		assert.Equal(t, fernTestValueContractID, obj.ContractID)
@@ -8910,7 +9094,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeName string
 		obj.SetEmployeeName(fernTestValueEmployeeName)
 		assert.Equal(t, fernTestValueEmployeeName, obj.EmployeeName)
@@ -8918,7 +9102,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetGross", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueGross string
 		obj.SetGross(fernTestValueGross)
 		assert.Equal(t, fernTestValueGross, obj.Gross)
@@ -8926,7 +9110,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetNatura", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueNatura string
 		obj.SetNatura(fernTestValueNatura)
 		assert.Equal(t, fernTestValueNatura, obj.Natura)
@@ -8934,23 +9118,23 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAdditions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueAdditions []*RunsCreatePayrollResponseLinesItemAdditionsItem
 		obj.SetAdditions(fernTestValueAdditions)
 		assert.Equal(t, fernTestValueAdditions, obj.Additions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDeductions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueDeductions []*RunsCreatePayrollResponseLinesItemDeductionsItem
 		obj.SetDeductions(fernTestValueDeductions)
 		assert.Equal(t, fernTestValueDeductions, obj.Deductions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTaxableBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueTaxableBase string
 		obj.SetTaxableBase(fernTestValueTaxableBase)
 		assert.Equal(t, fernTestValueTaxableBase, obj.TaxableBase)
@@ -8958,7 +9142,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowance", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueTaxAllowance string
 		obj.SetTaxAllowance(fernTestValueTaxAllowance)
 		assert.Equal(t, fernTestValueTaxAllowance, obj.TaxAllowance)
@@ -8966,7 +9150,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTax", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueIncomeTax string
 		obj.SetIncomeTax(fernTestValueIncomeTax)
 		assert.Equal(t, fernTestValueIncomeTax, obj.IncomeTax)
@@ -8974,7 +9158,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeContributions string
 		obj.SetEmployeeContributions(fernTestValueEmployeeContributions)
 		assert.Equal(t, fernTestValueEmployeeContributions, obj.EmployeeContributions)
@@ -8982,7 +9166,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployerContributions string
 		obj.SetEmployerContributions(fernTestValueEmployerContributions)
 		assert.Equal(t, fernTestValueEmployerContributions, obj.EmployerContributions)
@@ -8990,15 +9174,15 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetComponents", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueComponents []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueComponents []*RunsCreatePayrollResponseLinesItemComponentsItem
 		obj.SetComponents(fernTestValueComponents)
 		assert.Equal(t, fernTestValueComponents, obj.Components)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -9006,7 +9190,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDaysWorked", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueDaysWorked *string
 		obj.SetDaysWorked(fernTestValueDaysWorked)
 		assert.Equal(t, fernTestValueDaysWorked, obj.DaysWorked)
@@ -9014,7 +9198,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetHoursWorked", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueHoursWorked *string
 		obj.SetHoursWorked(fernTestValueHoursWorked)
 		assert.Equal(t, fernTestValueHoursWorked, obj.HoursWorked)
@@ -9022,7 +9206,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetRegisteredDays", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueRegisteredDays *string
 		obj.SetRegisteredDays(fernTestValueRegisteredDays)
 		assert.Equal(t, fernTestValueRegisteredDays, obj.RegisteredDays)
@@ -9030,7 +9214,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAverageHourlyEarnings", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueAverageHourlyEarnings *string
 		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
 		assert.Equal(t, fernTestValueAverageHourlyEarnings, obj.AverageHourlyEarnings)
@@ -9039,11 +9223,11 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestGettersRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -9053,7 +9237,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9066,7 +9250,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeID = expected
 
@@ -9076,7 +9260,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9089,7 +9273,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetContractID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected *string
 		obj.ContractID = expected
 
@@ -9100,7 +9284,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetContractID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.ContractID = nil
 
 		// Act & Assert
@@ -9109,7 +9293,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetContractID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9122,7 +9306,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeName = expected
 
@@ -9132,7 +9316,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9145,7 +9329,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.Gross = expected
 
@@ -9155,7 +9339,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9168,7 +9352,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetNatura", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.Natura = expected
 
@@ -9178,7 +9362,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetNatura_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9191,8 +9375,8 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetAdditions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var expected []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var expected []*RunsCreatePayrollResponseLinesItemAdditionsItem
 		obj.Additions = expected
 
 		// Act & Assert
@@ -9202,7 +9386,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetAdditions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.Additions = nil
 
 		// Act & Assert
@@ -9211,7 +9395,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetAdditions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9224,8 +9408,8 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDeductions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var expected []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var expected []*RunsCreatePayrollResponseLinesItemDeductionsItem
 		obj.Deductions = expected
 
 		// Act & Assert
@@ -9235,7 +9419,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDeductions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.Deductions = nil
 
 		// Act & Assert
@@ -9244,7 +9428,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDeductions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9257,7 +9441,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetTaxableBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.TaxableBase = expected
 
@@ -9267,7 +9451,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetTaxableBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9280,7 +9464,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetTaxAllowance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.TaxAllowance = expected
 
@@ -9290,7 +9474,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetTaxAllowance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9303,7 +9487,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetIncomeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.IncomeTax = expected
 
@@ -9313,7 +9497,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetIncomeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9326,7 +9510,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeContributions = expected
 
@@ -9336,7 +9520,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9349,7 +9533,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployerContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.EmployerContributions = expected
 
@@ -9359,7 +9543,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployerContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9372,8 +9556,8 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetComponents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var expected []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var expected []*RunsCreatePayrollResponseLinesItemComponentsItem
 		obj.Components = expected
 
 		// Act & Assert
@@ -9383,7 +9567,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetComponents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.Components = nil
 
 		// Act & Assert
@@ -9392,7 +9576,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetComponents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9405,7 +9589,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected string
 		obj.Net = expected
 
@@ -9415,7 +9599,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9428,7 +9612,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDaysWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected *string
 		obj.DaysWorked = expected
 
@@ -9439,7 +9623,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDaysWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.DaysWorked = nil
 
 		// Act & Assert
@@ -9448,7 +9632,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDaysWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9461,7 +9645,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetHoursWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected *string
 		obj.HoursWorked = expected
 
@@ -9472,7 +9656,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetHoursWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.HoursWorked = nil
 
 		// Act & Assert
@@ -9481,7 +9665,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetHoursWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9494,7 +9678,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetRegisteredDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected *string
 		obj.RegisteredDays = expected
 
@@ -9505,7 +9689,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetRegisteredDays_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.RegisteredDays = nil
 
 		// Act & Assert
@@ -9514,7 +9698,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetRegisteredDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9527,7 +9711,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var expected *string
 		obj.AverageHourlyEarnings = expected
 
@@ -9538,7 +9722,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		obj.AverageHourlyEarnings = nil
 
 		// Act & Assert
@@ -9547,7 +9731,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetAverageHourlyEarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9559,11 +9743,11 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -9594,7 +9778,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeID string
 
 		// Act
@@ -9625,7 +9809,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetContractID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueContractID *string
 
 		// Act
@@ -9656,7 +9840,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetEmployeeName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeName string
 
 		// Act
@@ -9687,7 +9871,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueGross string
 
 		// Act
@@ -9718,7 +9902,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetNatura_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueNatura string
 
 		// Act
@@ -9749,8 +9933,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetAdditions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueAdditions []*RunsCreatePayrollResponseLinesItemAdditionsItem
 
 		// Act
 		obj.SetAdditions(fernTestValueAdditions)
@@ -9780,8 +9964,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetDeductions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueDeductions []*RunsCreatePayrollResponseLinesItemDeductionsItem
 
 		// Act
 		obj.SetDeductions(fernTestValueDeductions)
@@ -9811,7 +9995,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetTaxableBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueTaxableBase string
 
 		// Act
@@ -9842,7 +10026,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetTaxAllowance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueTaxAllowance string
 
 		// Act
@@ -9873,7 +10057,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetIncomeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueIncomeTax string
 
 		// Act
@@ -9904,7 +10088,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetEmployeeContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployeeContributions string
 
 		// Act
@@ -9935,7 +10119,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetEmployerContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueEmployerContributions string
 
 		// Act
@@ -9966,8 +10150,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetComponents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
-		var fernTestValueComponents []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		obj := &RunsCreatePayrollResponseLinesItem{}
+		var fernTestValueComponents []*RunsCreatePayrollResponseLinesItemComponentsItem
 
 		// Act
 		obj.SetComponents(fernTestValueComponents)
@@ -9997,7 +10181,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueNet string
 
 		// Act
@@ -10028,7 +10212,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetDaysWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueDaysWorked *string
 
 		// Act
@@ -10059,7 +10243,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetHoursWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueHoursWorked *string
 
 		// Act
@@ -10090,7 +10274,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetRegisteredDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueRegisteredDays *string
 
 		// Act
@@ -10121,7 +10305,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 	t.Run("SetAverageHourlyEarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		var fernTestValueAverageHourlyEarnings *string
 
 		// Act
@@ -10151,9 +10335,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItem(t *testing.
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10161,7 +10345,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -10169,7 +10353,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 	})
 
 	t.Run("SetTaxable", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueTaxable bool
 		obj.SetTaxable(fernTestValueTaxable)
 		assert.Equal(t, fernTestValueTaxable, obj.Taxable)
@@ -10178,11 +10362,11 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10192,7 +10376,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj *RunsCreatePayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10205,7 +10389,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -10215,7 +10399,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj *RunsCreatePayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10228,7 +10412,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 	t.Run("GetTaxable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var expected bool
 		obj.Taxable = expected
 
@@ -10238,7 +10422,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 
 	t.Run("GetTaxable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj *RunsCreatePayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10250,11 +10434,11 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10285,7 +10469,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemAdditionsIte
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -10316,7 +10500,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemAdditionsIte
 	t.Run("SetTaxable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueTaxable bool
 
 		// Act
@@ -10346,9 +10530,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemAdditionsIte
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10356,15 +10540,15 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
-		var fernTestValueKind PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
+		var fernTestValueKind RunsCreatePayrollResponseLinesItemComponentsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -10372,7 +10556,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -10380,7 +10564,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -10389,11 +10573,11 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -10403,7 +10587,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10416,8 +10600,8 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
-		var expected PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
+		var expected RunsCreatePayrollResponseLinesItemComponentsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -10426,7 +10610,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10439,7 +10623,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -10449,7 +10633,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10462,7 +10646,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -10473,7 +10657,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -10482,7 +10666,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10495,7 +10679,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -10506,7 +10690,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -10515,7 +10699,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10527,11 +10711,11 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -10562,8 +10746,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsIt
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
-		var fernTestValueKind PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
+		var fernTestValueKind RunsCreatePayrollResponseLinesItemComponentsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -10593,7 +10777,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsIt
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -10624,7 +10808,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsIt
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -10655,7 +10839,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsIt
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -10685,9 +10869,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemComponentsIt
 
 }
 
-func TestSettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestSettersRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10695,7 +10879,7 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -10704,11 +10888,11 @@ func TestSettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 
 }
 
-func TestGettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestGettersRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10718,7 +10902,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj *RunsCreatePayrollResponseLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10731,7 +10915,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -10741,7 +10925,7 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj *RunsCreatePayrollResponseLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10753,11 +10937,11 @@ func TestGettersPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10788,7 +10972,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemDeductionsIt
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -10818,9 +11002,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsCreateResponseLinesItemDeductionsIt
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestSettersRunsGetPayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10828,7 +11012,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -10836,7 +11020,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueMonth int64
 		obj.SetMonth(fernTestValueMonth)
 		assert.Equal(t, fernTestValueMonth, obj.Month)
@@ -10844,7 +11028,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -10852,15 +11036,15 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueStatus PostV1PayrollRunsGetResponseStatus
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueStatus RunsGetPayrollResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -10868,7 +11052,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowanceTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 		obj.SetTaxAllowanceTotal(fernTestValueTaxAllowanceTotal)
 		assert.Equal(t, fernTestValueTaxAllowanceTotal, obj.TaxAllowanceTotal)
@@ -10876,7 +11060,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTaxTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 		obj.SetIncomeTaxTotal(fernTestValueIncomeTaxTotal)
 		assert.Equal(t, fernTestValueIncomeTaxTotal, obj.IncomeTaxTotal)
@@ -10884,7 +11068,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 		obj.SetEmployeeContributionsTotal(fernTestValueEmployeeContributionsTotal)
 		assert.Equal(t, fernTestValueEmployeeContributionsTotal, obj.EmployeeContributionsTotal)
@@ -10892,7 +11076,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 		obj.SetEmployerContributionsTotal(fernTestValueEmployerContributionsTotal)
 		assert.Equal(t, fernTestValueEmployerContributionsTotal, obj.EmployerContributionsTotal)
@@ -10900,15 +11084,15 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetComponentTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsGetResponseComponentTotalsItem
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueComponentTotals []*RunsGetPayrollResponseComponentTotalsItem
 		obj.SetComponentTotals(fernTestValueComponentTotals)
 		assert.Equal(t, fernTestValueComponentTotals, obj.ComponentTotals)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueNetTotal string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -10916,7 +11100,7 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -10924,32 +11108,40 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetWarnings", func(t *testing.T) {
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueWarnings []string
+		obj.SetWarnings(fernTestValueWarnings)
+		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetApprovedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 		obj.SetApprovedAt(fernTestValueApprovedAt)
 		assert.Equal(t, fernTestValueApprovedAt, obj.ApprovedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueLines []*PostV1PayrollRunsGetResponseLinesItem
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueLines []*RunsGetPayrollResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -10957,11 +11149,11 @@ func TestSettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestGettersRunsGetPayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -10971,7 +11163,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10984,7 +11176,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected int64
 		obj.Year = expected
 
@@ -10994,7 +11186,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11007,7 +11199,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected int64
 		obj.Month = expected
 
@@ -11017,7 +11209,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11030,7 +11222,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.CountryCode = expected
 
@@ -11040,7 +11232,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11053,8 +11245,8 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var expected PostV1PayrollRunsGetResponseStatus
+		obj := &RunsGetPayrollResponse{}
+		var expected RunsGetPayrollResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -11063,7 +11255,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11076,7 +11268,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -11086,7 +11278,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11099,7 +11291,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetTaxAllowanceTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.TaxAllowanceTotal = expected
 
@@ -11109,7 +11301,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetTaxAllowanceTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11122,7 +11314,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetIncomeTaxTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.IncomeTaxTotal = expected
 
@@ -11132,7 +11324,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetIncomeTaxTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11145,7 +11337,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetEmployeeContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.EmployeeContributionsTotal = expected
 
@@ -11155,7 +11347,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetEmployeeContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11168,7 +11360,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetEmployerContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.EmployerContributionsTotal = expected
 
@@ -11178,7 +11370,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetEmployerContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11191,8 +11383,8 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetComponentTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var expected []*PostV1PayrollRunsGetResponseComponentTotalsItem
+		obj := &RunsGetPayrollResponse{}
+		var expected []*RunsGetPayrollResponseComponentTotalsItem
 		obj.ComponentTotals = expected
 
 		// Act & Assert
@@ -11202,7 +11394,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetComponentTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		obj.ComponentTotals = nil
 
 		// Act & Assert
@@ -11211,7 +11403,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetComponentTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11224,7 +11416,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected string
 		obj.NetTotal = expected
 
@@ -11234,7 +11426,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11247,7 +11439,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -11258,7 +11450,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -11267,7 +11459,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11280,7 +11472,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -11291,7 +11483,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -11300,7 +11492,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11310,11 +11502,44 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetWarnings", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		var expected []string
+		obj.Warnings = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWarnings(), "getter should return the property value")
+	})
+
+	t.Run("GetWarnings_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		obj.Warnings = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWarnings(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsGetPayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWarnings() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var expected string
+		obj := &RunsGetPayrollResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -11323,7 +11548,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11336,8 +11561,8 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetApprovedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var expected *string
+		obj := &RunsGetPayrollResponse{}
+		var expected *time.Time
 		obj.ApprovedAt = expected
 
 		// Act & Assert
@@ -11347,7 +11572,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetApprovedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		obj.ApprovedAt = nil
 
 		// Act & Assert
@@ -11356,7 +11581,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetApprovedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11369,8 +11594,8 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var expected []*PostV1PayrollRunsGetResponseLinesItem
+		obj := &RunsGetPayrollResponse{}
+		var expected []*RunsGetPayrollResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -11380,7 +11605,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -11389,7 +11614,7 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11401,11 +11626,11 @@ func TestGettersPostV1PayrollRunsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -11436,7 +11661,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueYear int64
 
 		// Act
@@ -11467,7 +11692,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueMonth int64
 
 		// Act
@@ -11498,7 +11723,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueCountryCode string
 
 		// Act
@@ -11529,8 +11754,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueStatus PostV1PayrollRunsGetResponseStatus
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueStatus RunsGetPayrollResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -11560,7 +11785,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -11591,7 +11816,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetTaxAllowanceTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueTaxAllowanceTotal string
 
 		// Act
@@ -11622,7 +11847,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetIncomeTaxTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueIncomeTaxTotal string
 
 		// Act
@@ -11653,7 +11878,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetEmployeeContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueEmployeeContributionsTotal string
 
 		// Act
@@ -11684,7 +11909,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetEmployerContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueEmployerContributionsTotal string
 
 		// Act
@@ -11715,8 +11940,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetComponentTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsGetResponseComponentTotalsItem
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueComponentTotals []*RunsGetPayrollResponseComponentTotalsItem
 
 		// Act
 		obj.SetComponentTotals(fernTestValueComponentTotals)
@@ -11746,7 +11971,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueNetTotal string
 
 		// Act
@@ -11777,7 +12002,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -11808,7 +12033,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -11836,11 +12061,42 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueWarnings []string
+
+		// Act
+		obj.SetWarnings(fernTestValueWarnings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -11870,8 +12126,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetApprovedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueApprovedAt *time.Time
 
 		// Act
 		obj.SetApprovedAt(fernTestValueApprovedAt)
@@ -11901,8 +12157,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
-		var fernTestValueLines []*PostV1PayrollRunsGetResponseLinesItem
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValueLines []*RunsGetPayrollResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -11931,9 +12187,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestSettersRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -11941,15 +12197,15 @@ func TestSettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsGetResponseComponentTotalsItemKind
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsGetPayrollResponseComponentTotalsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -11957,7 +12213,7 @@ func TestSettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -11965,7 +12221,7 @@ func TestSettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -11974,11 +12230,11 @@ func TestSettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestGettersRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -11988,7 +12244,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12001,8 +12257,8 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
-		var expected PostV1PayrollRunsGetResponseComponentTotalsItemKind
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
+		var expected RunsGetPayrollResponseComponentTotalsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -12011,7 +12267,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12024,7 +12280,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -12034,7 +12290,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12047,7 +12303,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -12058,7 +12314,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -12067,7 +12323,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12080,7 +12336,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -12091,7 +12347,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -12100,7 +12356,7 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12112,11 +12368,11 @@ func TestGettersPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -12147,8 +12403,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *t
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsGetResponseComponentTotalsItemKind
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
+		var fernTestValueKind RunsGetPayrollResponseComponentTotalsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -12178,7 +12434,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -12209,7 +12465,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *t
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -12240,7 +12496,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *t
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -12270,9 +12526,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseComponentTotalsItem(t *t
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestSettersRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -12280,7 +12536,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeID string
 		obj.SetEmployeeID(fernTestValueEmployeeID)
 		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
@@ -12288,7 +12544,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetContractID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueContractID *string
 		obj.SetContractID(fernTestValueContractID)
 		assert.Equal(t, fernTestValueContractID, obj.ContractID)
@@ -12296,7 +12552,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeName string
 		obj.SetEmployeeName(fernTestValueEmployeeName)
 		assert.Equal(t, fernTestValueEmployeeName, obj.EmployeeName)
@@ -12304,7 +12560,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetGross", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueGross string
 		obj.SetGross(fernTestValueGross)
 		assert.Equal(t, fernTestValueGross, obj.Gross)
@@ -12312,7 +12568,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetNatura", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueNatura string
 		obj.SetNatura(fernTestValueNatura)
 		assert.Equal(t, fernTestValueNatura, obj.Natura)
@@ -12320,23 +12576,23 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAdditions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueAdditions []*RunsGetPayrollResponseLinesItemAdditionsItem
 		obj.SetAdditions(fernTestValueAdditions)
 		assert.Equal(t, fernTestValueAdditions, obj.Additions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDeductions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueDeductions []*RunsGetPayrollResponseLinesItemDeductionsItem
 		obj.SetDeductions(fernTestValueDeductions)
 		assert.Equal(t, fernTestValueDeductions, obj.Deductions)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTaxableBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueTaxableBase string
 		obj.SetTaxableBase(fernTestValueTaxableBase)
 		assert.Equal(t, fernTestValueTaxableBase, obj.TaxableBase)
@@ -12344,7 +12600,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowance", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueTaxAllowance string
 		obj.SetTaxAllowance(fernTestValueTaxAllowance)
 		assert.Equal(t, fernTestValueTaxAllowance, obj.TaxAllowance)
@@ -12352,7 +12608,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTax", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueIncomeTax string
 		obj.SetIncomeTax(fernTestValueIncomeTax)
 		assert.Equal(t, fernTestValueIncomeTax, obj.IncomeTax)
@@ -12360,7 +12616,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeContributions string
 		obj.SetEmployeeContributions(fernTestValueEmployeeContributions)
 		assert.Equal(t, fernTestValueEmployeeContributions, obj.EmployeeContributions)
@@ -12368,7 +12624,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributions", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployerContributions string
 		obj.SetEmployerContributions(fernTestValueEmployerContributions)
 		assert.Equal(t, fernTestValueEmployerContributions, obj.EmployerContributions)
@@ -12376,15 +12632,15 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetComponents", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueComponents []*PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueComponents []*RunsGetPayrollResponseLinesItemComponentsItem
 		obj.SetComponents(fernTestValueComponents)
 		assert.Equal(t, fernTestValueComponents, obj.Components)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -12392,7 +12648,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDaysWorked", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueDaysWorked *string
 		obj.SetDaysWorked(fernTestValueDaysWorked)
 		assert.Equal(t, fernTestValueDaysWorked, obj.DaysWorked)
@@ -12400,7 +12656,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetHoursWorked", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueHoursWorked *string
 		obj.SetHoursWorked(fernTestValueHoursWorked)
 		assert.Equal(t, fernTestValueHoursWorked, obj.HoursWorked)
@@ -12408,7 +12664,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetRegisteredDays", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueRegisteredDays *string
 		obj.SetRegisteredDays(fernTestValueRegisteredDays)
 		assert.Equal(t, fernTestValueRegisteredDays, obj.RegisteredDays)
@@ -12416,7 +12672,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAverageHourlyEarnings", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueAverageHourlyEarnings *string
 		obj.SetAverageHourlyEarnings(fernTestValueAverageHourlyEarnings)
 		assert.Equal(t, fernTestValueAverageHourlyEarnings, obj.AverageHourlyEarnings)
@@ -12425,11 +12681,11 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestGettersRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -12439,7 +12695,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12452,7 +12708,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeID = expected
 
@@ -12462,7 +12718,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12475,7 +12731,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetContractID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected *string
 		obj.ContractID = expected
 
@@ -12486,7 +12742,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetContractID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.ContractID = nil
 
 		// Act & Assert
@@ -12495,7 +12751,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetContractID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12508,7 +12764,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeName = expected
 
@@ -12518,7 +12774,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12531,7 +12787,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.Gross = expected
 
@@ -12541,7 +12797,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12554,7 +12810,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetNatura", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.Natura = expected
 
@@ -12564,7 +12820,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetNatura_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12577,8 +12833,8 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetAdditions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var expected []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var expected []*RunsGetPayrollResponseLinesItemAdditionsItem
 		obj.Additions = expected
 
 		// Act & Assert
@@ -12588,7 +12844,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetAdditions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.Additions = nil
 
 		// Act & Assert
@@ -12597,7 +12853,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetAdditions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12610,8 +12866,8 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDeductions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var expected []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var expected []*RunsGetPayrollResponseLinesItemDeductionsItem
 		obj.Deductions = expected
 
 		// Act & Assert
@@ -12621,7 +12877,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDeductions_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.Deductions = nil
 
 		// Act & Assert
@@ -12630,7 +12886,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDeductions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12643,7 +12899,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetTaxableBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.TaxableBase = expected
 
@@ -12653,7 +12909,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetTaxableBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12666,7 +12922,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetTaxAllowance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.TaxAllowance = expected
 
@@ -12676,7 +12932,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetTaxAllowance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12689,7 +12945,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetIncomeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.IncomeTax = expected
 
@@ -12699,7 +12955,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetIncomeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12712,7 +12968,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployeeContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.EmployeeContributions = expected
 
@@ -12722,7 +12978,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployeeContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12735,7 +12991,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetEmployerContributions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.EmployerContributions = expected
 
@@ -12745,7 +13001,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetEmployerContributions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12758,8 +13014,8 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetComponents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var expected []*PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var expected []*RunsGetPayrollResponseLinesItemComponentsItem
 		obj.Components = expected
 
 		// Act & Assert
@@ -12769,7 +13025,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetComponents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.Components = nil
 
 		// Act & Assert
@@ -12778,7 +13034,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetComponents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12791,7 +13047,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected string
 		obj.Net = expected
 
@@ -12801,7 +13057,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12814,7 +13070,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDaysWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected *string
 		obj.DaysWorked = expected
 
@@ -12825,7 +13081,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDaysWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.DaysWorked = nil
 
 		// Act & Assert
@@ -12834,7 +13090,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDaysWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12847,7 +13103,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetHoursWorked", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected *string
 		obj.HoursWorked = expected
 
@@ -12858,7 +13114,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetHoursWorked_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.HoursWorked = nil
 
 		// Act & Assert
@@ -12867,7 +13123,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetHoursWorked_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12880,7 +13136,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetRegisteredDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected *string
 		obj.RegisteredDays = expected
 
@@ -12891,7 +13147,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetRegisteredDays_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.RegisteredDays = nil
 
 		// Act & Assert
@@ -12900,7 +13156,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetRegisteredDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12913,7 +13169,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var expected *string
 		obj.AverageHourlyEarnings = expected
 
@@ -12924,7 +13180,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetAverageHourlyEarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		obj.AverageHourlyEarnings = nil
 
 		// Act & Assert
@@ -12933,7 +13189,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetAverageHourlyEarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12945,11 +13201,11 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -12980,7 +13236,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeID string
 
 		// Act
@@ -13011,7 +13267,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetContractID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueContractID *string
 
 		// Act
@@ -13042,7 +13298,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetEmployeeName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeName string
 
 		// Act
@@ -13073,7 +13329,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueGross string
 
 		// Act
@@ -13104,7 +13360,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetNatura_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueNatura string
 
 		// Act
@@ -13135,8 +13391,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetAdditions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueAdditions []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueAdditions []*RunsGetPayrollResponseLinesItemAdditionsItem
 
 		// Act
 		obj.SetAdditions(fernTestValueAdditions)
@@ -13166,8 +13422,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetDeductions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueDeductions []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueDeductions []*RunsGetPayrollResponseLinesItemDeductionsItem
 
 		// Act
 		obj.SetDeductions(fernTestValueDeductions)
@@ -13197,7 +13453,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetTaxableBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueTaxableBase string
 
 		// Act
@@ -13228,7 +13484,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetTaxAllowance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueTaxAllowance string
 
 		// Act
@@ -13259,7 +13515,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetIncomeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueIncomeTax string
 
 		// Act
@@ -13290,7 +13546,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetEmployeeContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployeeContributions string
 
 		// Act
@@ -13321,7 +13577,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetEmployerContributions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueEmployerContributions string
 
 		// Act
@@ -13352,8 +13608,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetComponents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
-		var fernTestValueComponents []*PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		obj := &RunsGetPayrollResponseLinesItem{}
+		var fernTestValueComponents []*RunsGetPayrollResponseLinesItemComponentsItem
 
 		// Act
 		obj.SetComponents(fernTestValueComponents)
@@ -13383,7 +13639,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueNet string
 
 		// Act
@@ -13414,7 +13670,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetDaysWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueDaysWorked *string
 
 		// Act
@@ -13445,7 +13701,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetHoursWorked_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueHoursWorked *string
 
 		// Act
@@ -13476,7 +13732,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetRegisteredDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueRegisteredDays *string
 
 		// Act
@@ -13507,7 +13763,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 	t.Run("SetAverageHourlyEarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		var fernTestValueAverageHourlyEarnings *string
 
 		// Act
@@ -13537,9 +13793,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItem(t *testing.T) 
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestSettersRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -13547,7 +13803,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -13555,7 +13811,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 	})
 
 	t.Run("SetTaxable", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueTaxable bool
 		obj.SetTaxable(fernTestValueTaxable)
 		assert.Equal(t, fernTestValueTaxable, obj.Taxable)
@@ -13564,11 +13820,11 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestGettersRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -13578,7 +13834,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj *RunsGetPayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13591,7 +13847,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -13601,7 +13857,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj *RunsGetPayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13614,7 +13870,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 	t.Run("GetTaxable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var expected bool
 		obj.Taxable = expected
 
@@ -13624,7 +13880,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 
 	t.Run("GetTaxable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj *RunsGetPayrollResponseLinesItemAdditionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13636,11 +13892,11 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -13671,7 +13927,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -13702,7 +13958,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t
 	t.Run("SetTaxable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		var fernTestValueTaxable bool
 
 		// Act
@@ -13732,9 +13988,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestSettersRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -13742,15 +13998,15 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
-		var fernTestValueKind PostV1PayrollRunsGetResponseLinesItemComponentsItemKind
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
+		var fernTestValueKind RunsGetPayrollResponseLinesItemComponentsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -13758,7 +14014,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -13766,7 +14022,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -13775,11 +14031,11 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestGettersRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -13789,7 +14045,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13802,8 +14058,8 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
-		var expected PostV1PayrollRunsGetResponseLinesItemComponentsItemKind
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
+		var expected RunsGetPayrollResponseLinesItemComponentsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -13812,7 +14068,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13825,7 +14081,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -13835,7 +14091,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13848,7 +14104,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -13859,7 +14115,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -13868,7 +14124,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13881,7 +14137,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -13892,7 +14148,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -13901,7 +14157,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13913,11 +14169,11 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -13948,8 +14204,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
-		var fernTestValueKind PostV1PayrollRunsGetResponseLinesItemComponentsItemKind
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
+		var fernTestValueKind RunsGetPayrollResponseLinesItemComponentsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -13979,7 +14235,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -14010,7 +14266,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -14041,7 +14297,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -14071,9 +14327,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemComponentsItem(
 
 }
 
-func TestSettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestSettersRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -14081,7 +14337,7 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -14090,11 +14346,11 @@ func TestSettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 
 }
 
-func TestGettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestGettersRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -14104,7 +14360,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj *RunsGetPayrollResponseLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14117,7 +14373,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -14127,7 +14383,7 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj *RunsGetPayrollResponseLinesItemDeductionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14139,11 +14395,11 @@ func TestGettersPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -14174,7 +14430,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemDeductionsItem(
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -14204,9 +14460,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsGetResponseLinesItemDeductionsItem(
 
 }
 
-func TestSettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestSettersRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -14214,16 +14470,16 @@ func TestSettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var fernTestValueOp PostV1PayrollRunsListRequestFilterItemOp
+		obj := &RunsListPayrollRequestFilterItem{}
+		var fernTestValueOp RunsListPayrollRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var fernTestValueValue *PostV1PayrollRunsListRequestFilterItemValue
+		obj := &RunsListPayrollRequestFilterItem{}
+		var fernTestValueValue *RunsListPayrollRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -14231,11 +14487,11 @@ func TestSettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestGettersRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -14245,7 +14501,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItem
+		var obj *RunsListPayrollRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14258,8 +14514,8 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var expected PostV1PayrollRunsListRequestFilterItemOp
+		obj := &RunsListPayrollRequestFilterItem{}
+		var expected RunsListPayrollRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -14268,7 +14524,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItem
+		var obj *RunsListPayrollRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14281,8 +14537,8 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var expected *PostV1PayrollRunsListRequestFilterItemValue
+		obj := &RunsListPayrollRequestFilterItem{}
+		var expected *RunsListPayrollRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -14292,7 +14548,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -14301,7 +14557,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItem
+		var obj *RunsListPayrollRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14313,11 +14569,11 @@ func TestGettersPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -14348,8 +14604,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequestFilterItem(t *testing.T)
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var fernTestValueOp PostV1PayrollRunsListRequestFilterItemOp
+		obj := &RunsListPayrollRequestFilterItem{}
+		var fernTestValueOp RunsListPayrollRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -14379,8 +14635,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequestFilterItem(t *testing.T)
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
-		var fernTestValueValue *PostV1PayrollRunsListRequestFilterItemValue
+		obj := &RunsListPayrollRequestFilterItem{}
+		var fernTestValueValue *RunsListPayrollRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -14409,11 +14665,11 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequestFilterItem(t *testing.T)
 
 }
 
-func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
+func TestGettersRunsListPayrollRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValue{}
+		obj := &RunsListPayrollRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -14423,7 +14679,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValue
+		var obj *RunsListPayrollRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14436,7 +14692,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValue{}
+		obj := &RunsListPayrollRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -14446,7 +14702,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValue
+		var obj *RunsListPayrollRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14459,7 +14715,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValue{}
+		obj := &RunsListPayrollRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -14469,7 +14725,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValue
+		var obj *RunsListPayrollRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14479,46 +14735,46 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetRunsListPayrollRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValue{}
-		var expected []*PostV1PayrollRunsListRequestFilterItemValueThreeItem
-		obj.PostV1PayrollRunsListRequestFilterItemValueThreeItemList = expected
+		obj := &RunsListPayrollRequestFilterItemValue{}
+		var expected []*RunsListPayrollRequestFilterItemValueThreeItem
+		obj.RunsListPayrollRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetRunsListPayrollRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetRunsListPayrollRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValue{}
-		obj.PostV1PayrollRunsListRequestFilterItemValueThreeItemList = nil
+		obj := &RunsListPayrollRequestFilterItemValue{}
+		obj.RunsListPayrollRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetRunsListPayrollRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetRunsListPayrollRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValue
+		var obj *RunsListPayrollRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1PayrollRunsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetRunsListPayrollRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1PayrollRunsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersRunsListPayrollRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValueThreeItem{}
+		obj := &RunsListPayrollRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -14528,7 +14784,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValueThreeItem(t *testing.
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValueThreeItem
+		var obj *RunsListPayrollRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14541,7 +14797,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValueThreeItem(t *testing.
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItemValueThreeItem{}
+		obj := &RunsListPayrollRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -14551,7 +14807,7 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValueThreeItem(t *testing.
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItemValueThreeItem
+		var obj *RunsListPayrollRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14563,9 +14819,9 @@ func TestGettersPostV1PayrollRunsListRequestFilterItemValueThreeItem(t *testing.
 
 }
 
-func TestSettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestSettersRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -14573,8 +14829,8 @@ func TestSettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListRequestSortItem{}
-		var fernTestValueDir *PostV1PayrollRunsListRequestSortItemDir
+		obj := &RunsListPayrollRequestSortItem{}
+		var fernTestValueDir *RunsListPayrollRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -14582,11 +14838,11 @@ func TestSettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestGettersRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -14596,7 +14852,7 @@ func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestSortItem
+		var obj *RunsListPayrollRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14609,8 +14865,8 @@ func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
-		var expected *PostV1PayrollRunsListRequestSortItemDir
+		obj := &RunsListPayrollRequestSortItem{}
+		var expected *RunsListPayrollRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -14620,7 +14876,7 @@ func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -14629,7 +14885,7 @@ func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestSortItem
+		var obj *RunsListPayrollRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14641,11 +14897,11 @@ func TestGettersPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -14676,8 +14932,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
-		var fernTestValueDir *PostV1PayrollRunsListRequestSortItemDir
+		obj := &RunsListPayrollRequestSortItem{}
+		var fernTestValueDir *RunsListPayrollRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -14706,17 +14962,17 @@ func TestSettersMarkExplicitPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsListResponse(t *testing.T) {
+func TestSettersRunsListPayrollResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponse{}
-		var fernTestValueRows []*PostV1PayrollRunsListResponseRowsItem
+		obj := &RunsListPayrollResponse{}
+		var fernTestValueRows []*RunsListPayrollResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -14724,7 +14980,7 @@ func TestSettersPostV1PayrollRunsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -14732,7 +14988,7 @@ func TestSettersPostV1PayrollRunsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14740,7 +14996,7 @@ func TestSettersPostV1PayrollRunsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -14749,12 +15005,12 @@ func TestSettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
+func TestGettersRunsListPayrollResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
-		var expected []*PostV1PayrollRunsListResponseRowsItem
+		obj := &RunsListPayrollResponse{}
+		var expected []*RunsListPayrollResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -14764,7 +15020,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -14773,7 +15029,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14786,7 +15042,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -14796,7 +15052,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14809,7 +15065,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -14819,7 +15075,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14832,7 +15088,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -14842,7 +15098,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14855,7 +15111,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -14866,7 +15122,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -14875,7 +15131,7 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14887,12 +15143,12 @@ func TestGettersPostV1PayrollRunsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
-		var fernTestValueRows []*PostV1PayrollRunsListResponseRowsItem
+		obj := &RunsListPayrollResponse{}
+		var fernTestValueRows []*RunsListPayrollResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -14922,7 +15178,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -14953,7 +15209,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -14984,7 +15240,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -15015,7 +15271,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -15045,9 +15301,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestSettersRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -15055,7 +15311,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -15063,7 +15319,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueMonth int64
 		obj.SetMonth(fernTestValueMonth)
 		assert.Equal(t, fernTestValueMonth, obj.Month)
@@ -15071,7 +15327,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -15079,15 +15335,15 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueStatus PostV1PayrollRunsListResponseRowsItemStatus
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueStatus RunsListPayrollResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -15095,7 +15351,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTaxAllowanceTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueTaxAllowanceTotal string
 		obj.SetTaxAllowanceTotal(fernTestValueTaxAllowanceTotal)
 		assert.Equal(t, fernTestValueTaxAllowanceTotal, obj.TaxAllowanceTotal)
@@ -15103,7 +15359,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetIncomeTaxTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueIncomeTaxTotal string
 		obj.SetIncomeTaxTotal(fernTestValueIncomeTaxTotal)
 		assert.Equal(t, fernTestValueIncomeTaxTotal, obj.IncomeTaxTotal)
@@ -15111,7 +15367,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployeeContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueEmployeeContributionsTotal string
 		obj.SetEmployeeContributionsTotal(fernTestValueEmployeeContributionsTotal)
 		assert.Equal(t, fernTestValueEmployeeContributionsTotal, obj.EmployeeContributionsTotal)
@@ -15119,7 +15375,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEmployerContributionsTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueEmployerContributionsTotal string
 		obj.SetEmployerContributionsTotal(fernTestValueEmployerContributionsTotal)
 		assert.Equal(t, fernTestValueEmployerContributionsTotal, obj.EmployerContributionsTotal)
@@ -15127,15 +15383,15 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetComponentTotals", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueComponentTotals []*RunsListPayrollResponseRowsItemComponentTotalsItem
 		obj.SetComponentTotals(fernTestValueComponentTotals)
 		assert.Equal(t, fernTestValueComponentTotals, obj.ComponentTotals)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueNetTotal string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -15143,7 +15399,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -15151,24 +15407,32 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetWarnings", func(t *testing.T) {
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueWarnings []string
+		obj.SetWarnings(fernTestValueWarnings)
+		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetApprovedAt", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueApprovedAt *time.Time
 		obj.SetApprovedAt(fernTestValueApprovedAt)
 		assert.Equal(t, fernTestValueApprovedAt, obj.ApprovedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -15176,11 +15440,11 @@ func TestSettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestGettersRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -15190,7 +15454,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15203,7 +15467,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -15213,7 +15477,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15226,7 +15490,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected int64
 		obj.Month = expected
 
@@ -15236,7 +15500,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15249,7 +15513,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.CountryCode = expected
 
@@ -15259,7 +15523,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15272,8 +15536,8 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var expected PostV1PayrollRunsListResponseRowsItemStatus
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected RunsListPayrollResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -15282,7 +15546,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15295,7 +15559,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -15305,7 +15569,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15318,7 +15582,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTaxAllowanceTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.TaxAllowanceTotal = expected
 
@@ -15328,7 +15592,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTaxAllowanceTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15341,7 +15605,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetIncomeTaxTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.IncomeTaxTotal = expected
 
@@ -15351,7 +15615,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetIncomeTaxTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15364,7 +15628,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEmployeeContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.EmployeeContributionsTotal = expected
 
@@ -15374,7 +15638,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEmployeeContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15387,7 +15651,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetEmployerContributionsTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.EmployerContributionsTotal = expected
 
@@ -15397,7 +15661,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEmployerContributionsTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15410,8 +15674,8 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetComponentTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var expected []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected []*RunsListPayrollResponseRowsItemComponentTotalsItem
 		obj.ComponentTotals = expected
 
 		// Act & Assert
@@ -15421,7 +15685,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetComponentTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		obj.ComponentTotals = nil
 
 		// Act & Assert
@@ -15430,7 +15694,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetComponentTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15443,7 +15707,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected string
 		obj.NetTotal = expected
 
@@ -15453,7 +15717,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15466,7 +15730,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -15477,7 +15741,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -15486,7 +15750,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15499,7 +15763,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -15510,7 +15774,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -15519,7 +15783,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15529,11 +15793,44 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetWarnings", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected []string
+		obj.Warnings = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWarnings(), "getter should return the property value")
+	})
+
+	t.Run("GetWarnings_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		obj.Warnings = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWarnings(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsListPayrollResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWarnings() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var expected string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -15542,7 +15839,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15555,8 +15852,8 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetApprovedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var expected *string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected *time.Time
 		obj.ApprovedAt = expected
 
 		// Act & Assert
@@ -15566,7 +15863,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 	t.Run("GetApprovedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		obj.ApprovedAt = nil
 
 		// Act & Assert
@@ -15575,7 +15872,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetApprovedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15587,11 +15884,11 @@ func TestGettersPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -15622,7 +15919,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -15653,7 +15950,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueMonth int64
 
 		// Act
@@ -15684,7 +15981,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueCountryCode string
 
 		// Act
@@ -15715,8 +16012,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueStatus PostV1PayrollRunsListResponseRowsItemStatus
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueStatus RunsListPayrollResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -15746,7 +16043,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -15777,7 +16074,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetTaxAllowanceTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueTaxAllowanceTotal string
 
 		// Act
@@ -15808,7 +16105,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetIncomeTaxTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueIncomeTaxTotal string
 
 		// Act
@@ -15839,7 +16136,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetEmployeeContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueEmployeeContributionsTotal string
 
 		// Act
@@ -15870,7 +16167,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetEmployerContributionsTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueEmployerContributionsTotal string
 
 		// Act
@@ -15901,8 +16198,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetComponentTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueComponentTotals []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueComponentTotals []*RunsListPayrollResponseRowsItemComponentTotalsItem
 
 		// Act
 		obj.SetComponentTotals(fernTestValueComponentTotals)
@@ -15932,7 +16229,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueNetTotal string
 
 		// Act
@@ -15963,7 +16260,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -15994,7 +16291,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -16022,11 +16319,42 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueWarnings []string
+
+		// Act
+		obj.SetWarnings(fernTestValueWarnings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -16056,8 +16384,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 	t.Run("SetApprovedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
-		var fernTestValueApprovedAt *string
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValueApprovedAt *time.Time
 
 		// Act
 		obj.SetApprovedAt(fernTestValueApprovedAt)
@@ -16086,9 +16414,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItem(t *testing.T) 
 
 }
 
-func TestSettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestSettersRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16096,15 +16424,15 @@ func TestSettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
+		var fernTestValueKind RunsListPayrollResponseRowsItemComponentTotalsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -16112,7 +16440,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	})
 
 	t.Run("SetRate", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueRate *string
 		obj.SetRate(fernTestValueRate)
 		assert.Equal(t, fernTestValueRate, obj.Rate)
@@ -16120,7 +16448,7 @@ func TestSettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	})
 
 	t.Run("SetBase", func(t *testing.T) {
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueBase *string
 		obj.SetBase(fernTestValueBase)
 		assert.Equal(t, fernTestValueBase, obj.Base)
@@ -16129,11 +16457,11 @@ func TestSettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 }
 
-func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestGettersRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -16143,7 +16471,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16156,8 +16484,8 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
-		var expected PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
+		var expected RunsListPayrollResponseRowsItemComponentTotalsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -16166,7 +16494,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16179,7 +16507,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -16189,7 +16517,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16202,7 +16530,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var expected *string
 		obj.Rate = expected
 
@@ -16213,7 +16541,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		obj.Rate = nil
 
 		// Act & Assert
@@ -16222,7 +16550,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 	t.Run("GetRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16235,7 +16563,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetBase", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var expected *string
 		obj.Base = expected
 
@@ -16246,7 +16574,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 	t.Run("GetBase_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		obj.Base = nil
 
 		// Act & Assert
@@ -16255,7 +16583,7 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 	t.Run("GetBase_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16267,11 +16595,11 @@ func TestGettersPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *test
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestSettersMarkExplicitRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -16302,8 +16630,8 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotals
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
-		var fernTestValueKind PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
+		var fernTestValueKind RunsListPayrollResponseRowsItemComponentTotalsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -16333,7 +16661,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotals
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -16364,7 +16692,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotals
 	t.Run("SetRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueRate *string
 
 		// Act
@@ -16395,7 +16723,7 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotals
 	t.Run("SetBase_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		var fernTestValueBase *string
 
 		// Act
@@ -16425,9 +16753,9 @@ func TestSettersMarkExplicitPostV1PayrollRunsListResponseRowsItemComponentTotals
 
 }
 
-func TestSettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestSettersSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -16435,7 +16763,7 @@ func TestSettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16443,7 +16771,7 @@ func TestSettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -16451,7 +16779,7 @@ func TestSettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetHoursPerWeek", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueHoursPerWeek string
 		obj.SetHoursPerWeek(fernTestValueHoursPerWeek)
 		assert.Equal(t, fernTestValueHoursPerWeek, obj.HoursPerWeek)
@@ -16460,11 +16788,11 @@ func TestSettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestGettersSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -16474,7 +16802,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16487,7 +16815,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -16497,7 +16825,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16510,7 +16838,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -16520,7 +16848,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16533,7 +16861,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("GetHoursPerWeek", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var expected string
 		obj.HoursPerWeek = expected
 
@@ -16543,7 +16871,7 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 	t.Run("GetHoursPerWeek_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16555,11 +16883,11 @@ func TestGettersPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -16590,7 +16918,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -16621,7 +16949,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -16652,7 +16980,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 	t.Run("SetHoursPerWeek_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		var fernTestValueHoursPerWeek string
 
 		// Act
@@ -16682,10 +17010,10 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestSettersSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesListResponse{}
-		var fernTestValueRows []*PostV1PayrollSchedulesListResponseRowsItem
+		obj := &SchedulesListPayrollResponse{}
+		var fernTestValueRows []*SchedulesListPayrollResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -16693,12 +17021,12 @@ func TestSettersPostV1PayrollSchedulesListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestGettersSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponse{}
-		var expected []*PostV1PayrollSchedulesListResponseRowsItem
+		obj := &SchedulesListPayrollResponse{}
+		var expected []*SchedulesListPayrollResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -16708,7 +17036,7 @@ func TestGettersPostV1PayrollSchedulesListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponse{}
+		obj := &SchedulesListPayrollResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -16717,7 +17045,7 @@ func TestGettersPostV1PayrollSchedulesListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponse
+		var obj *SchedulesListPayrollResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16729,12 +17057,12 @@ func TestGettersPostV1PayrollSchedulesListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestSettersMarkExplicitSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponse{}
-		var fernTestValueRows []*PostV1PayrollSchedulesListResponseRowsItem
+		obj := &SchedulesListPayrollResponse{}
+		var fernTestValueRows []*SchedulesListPayrollResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -16763,9 +17091,9 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestSettersSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -16773,7 +17101,7 @@ func TestSettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16781,7 +17109,7 @@ func TestSettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -16789,7 +17117,7 @@ func TestSettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetHoursPerWeek", func(t *testing.T) {
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueHoursPerWeek string
 		obj.SetHoursPerWeek(fernTestValueHoursPerWeek)
 		assert.Equal(t, fernTestValueHoursPerWeek, obj.HoursPerWeek)
@@ -16798,11 +17126,11 @@ func TestSettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestGettersSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -16812,7 +17140,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16825,7 +17153,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -16835,7 +17163,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16848,7 +17176,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -16858,7 +17186,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16871,7 +17199,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetHoursPerWeek", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var expected string
 		obj.HoursPerWeek = expected
 
@@ -16881,7 +17209,7 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetHoursPerWeek_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16893,11 +17221,11 @@ func TestGettersPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -16928,7 +17256,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesListResponseRowsItem(t *testin
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -16959,7 +17287,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesListResponseRowsItem(t *testin
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -16990,7 +17318,7 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesListResponseRowsItem(t *testin
 	t.Run("SetHoursPerWeek_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		var fernTestValueHoursPerWeek string
 
 		// Act
@@ -17020,11 +17348,11 @@ func TestSettersMarkExplicitPostV1PayrollSchedulesListResponseRowsItem(t *testin
 
 }
 
-func TestJSONMarshalingPostV1PayrollCalcResponse(t *testing.T) {
+func TestJSONMarshalingCalcPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17033,31 +17361,31 @@ func TestJSONMarshalingPostV1PayrollCalcResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollCalcResponse
+		var unmarshaled CalcPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollCalcResponse
+		var obj CalcPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollCalcResponse
+		var obj CalcPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestJSONMarshalingCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17066,31 +17394,31 @@ func TestJSONMarshalingPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollCalcResponseComponentsItem
+		var unmarshaled CalcPayrollResponseComponentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollCalcResponseComponentsItem
+		var obj CalcPayrollResponseComponentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollCalcResponseComponentsItem
+		var obj CalcPayrollResponseComponentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestJSONMarshalingDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17099,31 +17427,31 @@ func TestJSONMarshalingPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollDepartmentsCreateResponse
+		var unmarshaled DepartmentsCreatePayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsCreateResponse
+		var obj DepartmentsCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsCreateResponse
+		var obj DepartmentsCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestJSONMarshalingDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponse{}
+		obj := &DepartmentsListPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17132,31 +17460,31 @@ func TestJSONMarshalingPostV1PayrollDepartmentsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollDepartmentsListResponse
+		var unmarshaled DepartmentsListPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsListResponse
+		var obj DepartmentsListPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsListResponse
+		var obj DepartmentsListPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17165,31 +17493,31 @@ func TestJSONMarshalingPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollDepartmentsListResponseRowsItem
+		var unmarshaled DepartmentsListPayrollResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsListResponseRowsItem
+		var obj DepartmentsListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollDepartmentsListResponseRowsItem
+		var obj DepartmentsListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestJSONMarshalingLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17198,31 +17526,31 @@ func TestJSONMarshalingPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollLinesAttendanceResponse
+		var unmarshaled LinesAttendancePayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponse
+		var obj LinesAttendancePayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponse
+		var obj LinesAttendancePayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestJSONMarshalingLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17231,31 +17559,31 @@ func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseAdditionsItem(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var unmarshaled LinesAttendancePayrollResponseAdditionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj LinesAttendancePayrollResponseAdditionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj LinesAttendancePayrollResponseAdditionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestJSONMarshalingLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17264,31 +17592,31 @@ func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseComponentsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollLinesAttendanceResponseComponentsItem
+		var unmarshaled LinesAttendancePayrollResponseComponentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj LinesAttendancePayrollResponseComponentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj LinesAttendancePayrollResponseComponentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestJSONMarshalingLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17297,31 +17625,31 @@ func TestJSONMarshalingPostV1PayrollLinesAttendanceResponseDeductionsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var unmarshaled LinesAttendancePayrollResponseDeductionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj LinesAttendancePayrollResponseDeductionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj LinesAttendancePayrollResponseDeductionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestJSONMarshalingPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17330,31 +17658,31 @@ func TestJSONMarshalingPostV1PayrollPaymentsExportResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollPaymentsExportResponse
+		var unmarshaled PaymentsExportPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollPaymentsExportResponse
+		var obj PaymentsExportPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollPaymentsExportResponse
+		var obj PaymentsExportPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestJSONMarshalingRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17363,31 +17691,31 @@ func TestJSONMarshalingPostV1PayrollRunsApproveResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsApproveResponse
+		var unmarshaled RunsApprovePayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsApproveResponse
+		var obj RunsApprovePayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsApproveResponse
+		var obj RunsApprovePayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestJSONMarshalingRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17396,31 +17724,31 @@ func TestJSONMarshalingPostV1PayrollRunsApproveResponseComponentTotalsItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var unmarshaled RunsApprovePayrollResponseComponentTotalsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj RunsApprovePayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj RunsApprovePayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestJSONMarshalingRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17429,31 +17757,31 @@ func TestJSONMarshalingPostV1PayrollRunsCancelResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCancelResponse
+		var unmarshaled RunsCancelPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCancelResponse
+		var obj RunsCancelPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCancelResponse
+		var obj RunsCancelPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17462,31 +17790,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var unmarshaled RunsCreatePayrollRequestGrossOverridesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj RunsCreatePayrollRequestGrossOverridesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj RunsCreatePayrollRequestGrossOverridesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17495,31 +17823,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateRequestLinesItem
+		var unmarshaled RunsCreatePayrollRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItem
+		var obj RunsCreatePayrollRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItem
+		var obj RunsCreatePayrollRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17528,31 +17856,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var unmarshaled RunsCreatePayrollRequestLinesItemAdditionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj RunsCreatePayrollRequestLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj RunsCreatePayrollRequestLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17561,31 +17889,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var unmarshaled RunsCreatePayrollRequestLinesItemDeductionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj RunsCreatePayrollRequestLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj RunsCreatePayrollRequestLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17594,31 +17922,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponse
+		var unmarshaled RunsCreatePayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponse
+		var obj RunsCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponse
+		var obj RunsCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17627,31 +17955,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponseComponentTotalsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var unmarshaled RunsCreatePayrollResponseComponentTotalsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj RunsCreatePayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj RunsCreatePayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17660,31 +17988,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponseLinesItem
+		var unmarshaled RunsCreatePayrollResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItem
+		var obj RunsCreatePayrollResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItem
+		var obj RunsCreatePayrollResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17693,31 +18021,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var unmarshaled RunsCreatePayrollResponseLinesItemAdditionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj RunsCreatePayrollResponseLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj RunsCreatePayrollResponseLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17726,31 +18054,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var unmarshaled RunsCreatePayrollResponseLinesItemComponentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj RunsCreatePayrollResponseLinesItemComponentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj RunsCreatePayrollResponseLinesItemComponentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestJSONMarshalingRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17759,31 +18087,31 @@ func TestJSONMarshalingPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var unmarshaled RunsCreatePayrollResponseLinesItemDeductionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj RunsCreatePayrollResponseLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj RunsCreatePayrollResponseLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17792,31 +18120,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponse
+		var unmarshaled RunsGetPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponse
+		var obj RunsGetPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponse
+		var obj RunsGetPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17825,31 +18153,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponseComponentTotalsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponseComponentTotalsItem
+		var unmarshaled RunsGetPayrollResponseComponentTotalsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj RunsGetPayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj RunsGetPayrollResponseComponentTotalsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17858,31 +18186,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponseLinesItem
+		var unmarshaled RunsGetPayrollResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItem
+		var obj RunsGetPayrollResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItem
+		var obj RunsGetPayrollResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17891,31 +18219,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var unmarshaled RunsGetPayrollResponseLinesItemAdditionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj RunsGetPayrollResponseLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj RunsGetPayrollResponseLinesItemAdditionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17924,31 +18252,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var unmarshaled RunsGetPayrollResponseLinesItemComponentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj RunsGetPayrollResponseLinesItemComponentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj RunsGetPayrollResponseLinesItemComponentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestJSONMarshalingRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17957,31 +18285,31 @@ func TestJSONMarshalingPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var unmarshaled RunsGetPayrollResponseLinesItemDeductionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj RunsGetPayrollResponseLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj RunsGetPayrollResponseLinesItemDeductionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17990,31 +18318,31 @@ func TestJSONMarshalingPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsListRequestFilterItem
+		var unmarshaled RunsListPayrollRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListRequestFilterItem
+		var obj RunsListPayrollRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListRequestFilterItem
+		var obj RunsListPayrollRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18023,31 +18351,31 @@ func TestJSONMarshalingPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsListRequestSortItem
+		var unmarshaled RunsListPayrollRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListRequestSortItem
+		var obj RunsListPayrollRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListRequestSortItem
+		var obj RunsListPayrollRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsListResponse(t *testing.T) {
+func TestJSONMarshalingRunsListPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18056,31 +18384,31 @@ func TestJSONMarshalingPostV1PayrollRunsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsListResponse
+		var unmarshaled RunsListPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponse
+		var obj RunsListPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponse
+		var obj RunsListPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18089,31 +18417,31 @@ func TestJSONMarshalingPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsListResponseRowsItem
+		var unmarshaled RunsListPayrollResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponseRowsItem
+		var obj RunsListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponseRowsItem
+		var obj RunsListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestJSONMarshalingRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18122,31 +18450,31 @@ func TestJSONMarshalingPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var unmarshaled RunsListPayrollResponseRowsItemComponentTotalsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj RunsListPayrollResponseRowsItemComponentTotalsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj RunsListPayrollResponseRowsItemComponentTotalsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestJSONMarshalingSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18155,31 +18483,31 @@ func TestJSONMarshalingPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollSchedulesCreateResponse
+		var unmarshaled SchedulesCreatePayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesCreateResponse
+		var obj SchedulesCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesCreateResponse
+		var obj SchedulesCreatePayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestJSONMarshalingSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponse{}
+		obj := &SchedulesListPayrollResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18188,31 +18516,31 @@ func TestJSONMarshalingPostV1PayrollSchedulesListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollSchedulesListResponse
+		var unmarshaled SchedulesListPayrollResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesListResponse
+		var obj SchedulesListPayrollResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesListResponse
+		var obj SchedulesListPayrollResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18221,661 +18549,661 @@ func TestJSONMarshalingPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PayrollSchedulesListResponseRowsItem
+		var unmarshaled SchedulesListPayrollResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesListResponseRowsItem
+		var obj SchedulesListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PayrollSchedulesListResponseRowsItem
+		var obj SchedulesListPayrollResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1PayrollCalcResponse(t *testing.T) {
+func TestStringCalcPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestStringCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestStringDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsCreateResponse
+		var obj *DepartmentsCreatePayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestStringDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsListResponse{}
+		obj := &DepartmentsListPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponse
+		var obj *DepartmentsListPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestStringDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponseRowsItem
+		var obj *DepartmentsListPayrollResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestStringLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestStringLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj *LinesAttendancePayrollResponseAdditionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestStringLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestStringLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj *LinesAttendancePayrollResponseDeductionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestStringPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestStringRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestStringRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestStringRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCancelResponse
+		var obj *RunsCancelPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestStringRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj *RunsCreatePayrollRequestGrossOverridesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestStringRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestStringRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj *RunsCreatePayrollRequestLinesItemAdditionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestStringRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj *RunsCreatePayrollRequestLinesItemDeductionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestStringRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestStringRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestStringRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestStringRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj *RunsCreatePayrollResponseLinesItemAdditionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestStringRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestStringRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj *RunsCreatePayrollResponseLinesItemDeductionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestStringRunsGetPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestStringRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestStringRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestStringRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj *RunsGetPayrollResponseLinesItemAdditionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestStringRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestStringRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj *RunsGetPayrollResponseLinesItemDeductionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestStringRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItem
+		var obj *RunsListPayrollRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestStringRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestSortItem
+		var obj *RunsListPayrollRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsListResponse(t *testing.T) {
+func TestStringRunsListPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestStringRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestStringRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestStringSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestStringSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesListResponse{}
+		obj := &SchedulesListPayrollResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponse
+		var obj *SchedulesListPayrollResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestStringSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1PayrollCalcResponseComponentsItemKind(t *testing.T) {
+func TestEnumCalcPayrollResponseComponentsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("allowance")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollCalcResponseComponentsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, CalcPayrollResponseComponentsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("employee_tax")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollCalcResponseComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, CalcPayrollResponseComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("employee_contribution")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollCalcResponseComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, CalcPayrollResponseComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("employer_contribution")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollCalcResponseComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, CalcPayrollResponseComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("employer_payment")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollCalcResponseComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, CalcPayrollResponseComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewCalcPayrollResponseComponentsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollCalcResponseComponentsItemKindFromString("allowance")
+		val, err := NewCalcPayrollResponseComponentsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18883,49 +19211,49 @@ func TestEnumPostV1PayrollCalcResponseComponentsItemKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollLinesAttendanceResponseComponentsItemKind(t *testing.T) {
+func TestEnumLinesAttendancePayrollResponseComponentsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("allowance")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollLinesAttendanceResponseComponentsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, LinesAttendancePayrollResponseComponentsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("employee_tax")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollLinesAttendanceResponseComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, LinesAttendancePayrollResponseComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("employee_contribution")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollLinesAttendanceResponseComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, LinesAttendancePayrollResponseComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("employer_contribution")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollLinesAttendanceResponseComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, LinesAttendancePayrollResponseComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("employer_payment")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollLinesAttendanceResponseComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, LinesAttendancePayrollResponseComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString("allowance")
+		val, err := NewLinesAttendancePayrollResponseComponentsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18933,49 +19261,35 @@ func TestEnumPostV1PayrollLinesAttendanceResponseComponentsItemKind(t *testing.T
 	})
 }
 
-func TestEnumPostV1PayrollRunsApproveResponseComponentTotalsItemKind(t *testing.T) {
-	t.Run("NewFromString_allowance", func(t *testing.T) {
+func TestEnumPaymentsExportPayrollRequestLocale(t *testing.T) {
+	t.Run("NewFromString_en", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("en")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("en"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_employee_tax", func(t *testing.T) {
+	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("employee_tax")
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("lt")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("lt"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
+	t.Run("NewFromString_de", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("employee_contribution")
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("employer_contribution")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_employer_payment", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("employer_payment")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewPaymentsExportPayrollRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18983,28 +19297,78 @@ func TestEnumPostV1PayrollRunsApproveResponseComponentTotalsItemKind(t *testing.
 	})
 }
 
-func TestEnumPostV1PayrollRunsApproveResponseStatus(t *testing.T) {
+func TestEnumRunsApprovePayrollResponseComponentTotalsItemKind(t *testing.T) {
+	t.Run("NewFromString_allowance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("allowance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RunsApprovePayrollResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employee_tax", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("employee_tax")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RunsApprovePayrollResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("employee_contribution")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RunsApprovePayrollResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("employer_contribution")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RunsApprovePayrollResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employer_payment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("employer_payment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RunsApprovePayrollResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewRunsApprovePayrollResponseComponentTotalsItemKindFromString("allowance")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumRunsApprovePayrollResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseStatusFromString("draft")
+		val, err := NewRunsApprovePayrollResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsApprovePayrollResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_approved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsApproveResponseStatusFromString("approved")
+		val, err := NewRunsApprovePayrollResponseStatusFromString("approved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsApproveResponseStatus("approved"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsApprovePayrollResponseStatus("approved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsApproveResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsApprovePayrollResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsApproveResponseStatusFromString("draft")
+		val, err := NewRunsApprovePayrollResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19012,49 +19376,49 @@ func TestEnumPostV1PayrollRunsApproveResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsCreateResponseComponentTotalsItemKind(t *testing.T) {
+func TestEnumRunsCreatePayrollResponseComponentTotalsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("employee_tax")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("employee_contribution")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("employer_contribution")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("employer_payment")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsCreatePayrollResponseComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19062,49 +19426,49 @@ func TestEnumPostV1PayrollRunsCreateResponseComponentTotalsItemKind(t *testing.T
 	})
 }
 
-func TestEnumPostV1PayrollRunsCreateResponseLinesItemComponentsItemKind(t *testing.T) {
+func TestEnumRunsCreatePayrollResponseLinesItemComponentsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("allowance")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseLinesItemComponentsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("employee_tax")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseLinesItemComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("employee_contribution")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseLinesItemComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("employer_contribution")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseLinesItemComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("employer_payment")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseLinesItemComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString("allowance")
+		val, err := NewRunsCreatePayrollResponseLinesItemComponentsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19112,28 +19476,28 @@ func TestEnumPostV1PayrollRunsCreateResponseLinesItemComponentsItemKind(t *testi
 	})
 }
 
-func TestEnumPostV1PayrollRunsCreateResponseStatus(t *testing.T) {
+func TestEnumRunsCreatePayrollResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseStatusFromString("draft")
+		val, err := NewRunsCreatePayrollResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_approved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsCreateResponseStatusFromString("approved")
+		val, err := NewRunsCreatePayrollResponseStatusFromString("approved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsCreateResponseStatus("approved"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsCreatePayrollResponseStatus("approved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsCreateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsCreatePayrollResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsCreateResponseStatusFromString("draft")
+		val, err := NewRunsCreatePayrollResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19141,49 +19505,49 @@ func TestEnumPostV1PayrollRunsCreateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsGetResponseComponentTotalsItemKind(t *testing.T) {
+func TestEnumRunsGetPayrollResponseComponentTotalsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("employee_tax")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("employee_contribution")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("employer_contribution")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("employer_payment")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsGetPayrollResponseComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19191,49 +19555,49 @@ func TestEnumPostV1PayrollRunsGetResponseComponentTotalsItemKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsGetResponseLinesItemComponentsItemKind(t *testing.T) {
+func TestEnumRunsGetPayrollResponseLinesItemComponentsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("allowance")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseLinesItemComponentsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseLinesItemComponentsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("employee_tax")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseLinesItemComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseLinesItemComponentsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("employee_contribution")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseLinesItemComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseLinesItemComponentsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("employer_contribution")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseLinesItemComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseLinesItemComponentsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("employer_payment")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseLinesItemComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseLinesItemComponentsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString("allowance")
+		val, err := NewRunsGetPayrollResponseLinesItemComponentsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19241,28 +19605,28 @@ func TestEnumPostV1PayrollRunsGetResponseLinesItemComponentsItemKind(t *testing.
 	})
 }
 
-func TestEnumPostV1PayrollRunsGetResponseStatus(t *testing.T) {
+func TestEnumRunsGetPayrollResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseStatusFromString("draft")
+		val, err := NewRunsGetPayrollResponseStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_approved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsGetResponseStatusFromString("approved")
+		val, err := NewRunsGetPayrollResponseStatusFromString("approved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsGetResponseStatus("approved"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsGetPayrollResponseStatus("approved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsGetPayrollResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsGetResponseStatusFromString("draft")
+		val, err := NewRunsGetPayrollResponseStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19270,56 +19634,56 @@ func TestEnumPostV1PayrollRunsGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsListRequestFilterItemOp(t *testing.T) {
+func TestEnumRunsListPayrollRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("eq")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("ne")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("contains")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("gte")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("lte")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("in")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsListPayrollRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsListRequestFilterItemOpFromString("eq")
+		val, err := NewRunsListPayrollRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19327,28 +19691,28 @@ func TestEnumPostV1PayrollRunsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsListRequestSortItemDir(t *testing.T) {
+func TestEnumRunsListPayrollRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestSortItemDirFromString("asc")
+		val, err := NewRunsListPayrollRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListRequestSortItemDirFromString("desc")
+		val, err := NewRunsListPayrollRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsListPayrollRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsListRequestSortItemDirFromString("asc")
+		val, err := NewRunsListPayrollRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19356,49 +19720,49 @@ func TestEnumPostV1PayrollRunsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind(t *testing.T) {
+func TestEnumRunsListPayrollResponseRowsItemComponentTotalsItemKind(t *testing.T) {
 	t.Run("NewFromString_allowance", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemComponentTotalsItemKind("allowance"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_tax", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("employee_tax")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("employee_tax")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemComponentTotalsItemKind("employee_tax"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employee_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("employee_contribution")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("employee_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemComponentTotalsItemKind("employee_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_contribution", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("employer_contribution")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("employer_contribution")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemComponentTotalsItemKind("employer_contribution"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_employer_payment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("employer_payment")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("employer_payment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemComponentTotalsItemKind("employer_payment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString("allowance")
+		val, err := NewRunsListPayrollResponseRowsItemComponentTotalsItemKindFromString("allowance")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19406,28 +19770,28 @@ func TestEnumPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind(t *tes
 	})
 }
 
-func TestEnumPostV1PayrollRunsListResponseRowsItemStatus(t *testing.T) {
+func TestEnumRunsListPayrollResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemStatusFromString("draft")
+		val, err := NewRunsListPayrollResponseRowsItemStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_approved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PayrollRunsListResponseRowsItemStatusFromString("approved")
+		val, err := NewRunsListPayrollResponseRowsItemStatusFromString("approved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PayrollRunsListResponseRowsItemStatus("approved"), val, "enum value should match expected wire value")
+		assert.Equal(t, RunsListPayrollResponseRowsItemStatus("approved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1PayrollRunsListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewRunsListPayrollResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PayrollRunsListResponseRowsItemStatusFromString("draft")
+		val, err := NewRunsListPayrollResponseRowsItemStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19435,10 +19799,10 @@ func TestEnumPostV1PayrollRunsListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollCalcResponse(t *testing.T) {
+func TestExtraPropertiesCalcPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollCalcResponse{}
+		obj := &CalcPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19452,16 +19816,16 @@ func TestExtraPropertiesPostV1PayrollCalcResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponse
+		var obj *CalcPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
+func TestExtraPropertiesCalcPayrollResponseComponentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollCalcResponseComponentsItem{}
+		obj := &CalcPayrollResponseComponentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19475,16 +19839,16 @@ func TestExtraPropertiesPostV1PayrollCalcResponseComponentsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollCalcResponseComponentsItem
+		var obj *CalcPayrollResponseComponentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
+func TestExtraPropertiesDepartmentsCreatePayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsCreateResponse{}
+		obj := &DepartmentsCreatePayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19498,16 +19862,16 @@ func TestExtraPropertiesPostV1PayrollDepartmentsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsCreateResponse
+		var obj *DepartmentsCreatePayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollDepartmentsListResponse(t *testing.T) {
+func TestExtraPropertiesDepartmentsListPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsListResponse{}
+		obj := &DepartmentsListPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19521,16 +19885,16 @@ func TestExtraPropertiesPostV1PayrollDepartmentsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponse
+		var obj *DepartmentsListPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollDepartmentsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesDepartmentsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollDepartmentsListResponseRowsItem{}
+		obj := &DepartmentsListPayrollResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19544,16 +19908,16 @@ func TestExtraPropertiesPostV1PayrollDepartmentsListResponseRowsItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollDepartmentsListResponseRowsItem
+		var obj *DepartmentsListPayrollResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollLinesAttendanceResponse(t *testing.T) {
+func TestExtraPropertiesLinesAttendancePayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponse{}
+		obj := &LinesAttendancePayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19567,16 +19931,16 @@ func TestExtraPropertiesPostV1PayrollLinesAttendanceResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponse
+		var obj *LinesAttendancePayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseAdditionsItem(t *testing.T) {
+func TestExtraPropertiesLinesAttendancePayrollResponseAdditionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseAdditionsItem{}
+		obj := &LinesAttendancePayrollResponseAdditionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19590,16 +19954,16 @@ func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseAdditionsItem(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseAdditionsItem
+		var obj *LinesAttendancePayrollResponseAdditionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseComponentsItem(t *testing.T) {
+func TestExtraPropertiesLinesAttendancePayrollResponseComponentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseComponentsItem{}
+		obj := &LinesAttendancePayrollResponseComponentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19613,16 +19977,16 @@ func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseComponentsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseComponentsItem
+		var obj *LinesAttendancePayrollResponseComponentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseDeductionsItem(t *testing.T) {
+func TestExtraPropertiesLinesAttendancePayrollResponseDeductionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollLinesAttendanceResponseDeductionsItem{}
+		obj := &LinesAttendancePayrollResponseDeductionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19636,16 +20000,16 @@ func TestExtraPropertiesPostV1PayrollLinesAttendanceResponseDeductionsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollLinesAttendanceResponseDeductionsItem
+		var obj *LinesAttendancePayrollResponseDeductionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollPaymentsExportResponse(t *testing.T) {
+func TestExtraPropertiesPaymentsExportPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollPaymentsExportResponse{}
+		obj := &PaymentsExportPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19659,16 +20023,16 @@ func TestExtraPropertiesPostV1PayrollPaymentsExportResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollPaymentsExportResponse
+		var obj *PaymentsExportPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsApproveResponse(t *testing.T) {
+func TestExtraPropertiesRunsApprovePayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsApproveResponse{}
+		obj := &RunsApprovePayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19682,16 +20046,16 @@ func TestExtraPropertiesPostV1PayrollRunsApproveResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponse
+		var obj *RunsApprovePayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsApproveResponseComponentTotalsItem(t *testing.T) {
+func TestExtraPropertiesRunsApprovePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsApproveResponseComponentTotalsItem{}
+		obj := &RunsApprovePayrollResponseComponentTotalsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19705,16 +20069,16 @@ func TestExtraPropertiesPostV1PayrollRunsApproveResponseComponentTotalsItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsApproveResponseComponentTotalsItem
+		var obj *RunsApprovePayrollResponseComponentTotalsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCancelResponse(t *testing.T) {
+func TestExtraPropertiesRunsCancelPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCancelResponse{}
+		obj := &RunsCancelPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19728,16 +20092,16 @@ func TestExtraPropertiesPostV1PayrollRunsCancelResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCancelResponse
+		var obj *RunsCancelPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateRequestGrossOverridesItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollRequestGrossOverridesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestGrossOverridesItem{}
+		obj := &RunsCreatePayrollRequestGrossOverridesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19751,16 +20115,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateRequestGrossOverridesItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestGrossOverridesItem
+		var obj *RunsCreatePayrollRequestGrossOverridesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItem{}
+		obj := &RunsCreatePayrollRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19774,16 +20138,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItem
+		var obj *RunsCreatePayrollRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollRequestLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemAdditionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19797,16 +20161,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItemAdditionsItem(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemAdditionsItem
+		var obj *RunsCreatePayrollRequestLinesItemAdditionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollRequestLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateRequestLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollRequestLinesItemDeductionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19820,16 +20184,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateRequestLinesItemDeductionsItem(t 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateRequestLinesItemDeductionsItem
+		var obj *RunsCreatePayrollRequestLinesItemDeductionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponse(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponse{}
+		obj := &RunsCreatePayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19843,16 +20207,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponse
+		var obj *RunsCreatePayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponseComponentTotalsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseComponentTotalsItem{}
+		obj := &RunsCreatePayrollResponseComponentTotalsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19866,16 +20230,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponseComponentTotalsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseComponentTotalsItem
+		var obj *RunsCreatePayrollResponseComponentTotalsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItem{}
+		obj := &RunsCreatePayrollResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19889,16 +20253,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItem
+		var obj *RunsCreatePayrollResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemAdditionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemAdditionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19912,16 +20276,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemAdditionsItem(t 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem
+		var obj *RunsCreatePayrollResponseLinesItemAdditionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemComponentsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemComponentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19935,16 +20299,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemComponentsItem(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+		var obj *RunsCreatePayrollResponseLinesItemComponentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t *testing.T) {
+func TestExtraPropertiesRunsCreatePayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsCreateResponseLinesItemDeductionsItem{}
+		obj := &RunsCreatePayrollResponseLinesItemDeductionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19958,16 +20322,16 @@ func TestExtraPropertiesPostV1PayrollRunsCreateResponseLinesItemDeductionsItem(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsCreateResponseLinesItemDeductionsItem
+		var obj *RunsCreatePayrollResponseLinesItemDeductionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponse(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponse{}
+		obj := &RunsGetPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19981,16 +20345,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponse
+		var obj *RunsGetPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponseComponentTotalsItem(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponseComponentTotalsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseComponentTotalsItem{}
+		obj := &RunsGetPayrollResponseComponentTotalsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20004,16 +20368,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponseComponentTotalsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseComponentTotalsItem
+		var obj *RunsGetPayrollResponseComponentTotalsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItem{}
+		obj := &RunsGetPayrollResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20027,16 +20391,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItem
+		var obj *RunsGetPayrollResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponseLinesItemAdditionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemAdditionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemAdditionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20050,16 +20414,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemAdditionsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemAdditionsItem
+		var obj *RunsGetPayrollResponseLinesItemAdditionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponseLinesItemComponentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemComponentsItem{}
+		obj := &RunsGetPayrollResponseLinesItemComponentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20073,16 +20437,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemComponentsItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemComponentsItem
+		var obj *RunsGetPayrollResponseLinesItemComponentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *testing.T) {
+func TestExtraPropertiesRunsGetPayrollResponseLinesItemDeductionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsGetResponseLinesItemDeductionsItem{}
+		obj := &RunsGetPayrollResponseLinesItemDeductionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20096,16 +20460,16 @@ func TestExtraPropertiesPostV1PayrollRunsGetResponseLinesItemDeductionsItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsGetResponseLinesItemDeductionsItem
+		var obj *RunsGetPayrollResponseLinesItemDeductionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesRunsListPayrollRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListRequestFilterItem{}
+		obj := &RunsListPayrollRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20119,16 +20483,16 @@ func TestExtraPropertiesPostV1PayrollRunsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestFilterItem
+		var obj *RunsListPayrollRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesRunsListPayrollRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListRequestSortItem{}
+		obj := &RunsListPayrollRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20142,16 +20506,16 @@ func TestExtraPropertiesPostV1PayrollRunsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListRequestSortItem
+		var obj *RunsListPayrollRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsListResponse(t *testing.T) {
+func TestExtraPropertiesRunsListPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponse{}
+		obj := &RunsListPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20165,16 +20529,16 @@ func TestExtraPropertiesPostV1PayrollRunsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponse
+		var obj *RunsListPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesRunsListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponseRowsItem{}
+		obj := &RunsListPayrollResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20188,16 +20552,16 @@ func TestExtraPropertiesPostV1PayrollRunsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItem
+		var obj *RunsListPayrollResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollRunsListResponseRowsItemComponentTotalsItem(t *testing.T) {
+func TestExtraPropertiesRunsListPayrollResponseRowsItemComponentTotalsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollRunsListResponseRowsItemComponentTotalsItem{}
+		obj := &RunsListPayrollResponseRowsItemComponentTotalsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20211,16 +20575,16 @@ func TestExtraPropertiesPostV1PayrollRunsListResponseRowsItemComponentTotalsItem
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+		var obj *RunsListPayrollResponseRowsItemComponentTotalsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollSchedulesCreateResponse(t *testing.T) {
+func TestExtraPropertiesSchedulesCreatePayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesCreateResponse{}
+		obj := &SchedulesCreatePayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20234,16 +20598,16 @@ func TestExtraPropertiesPostV1PayrollSchedulesCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesCreateResponse
+		var obj *SchedulesCreatePayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollSchedulesListResponse(t *testing.T) {
+func TestExtraPropertiesSchedulesListPayrollResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesListResponse{}
+		obj := &SchedulesListPayrollResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20257,16 +20621,16 @@ func TestExtraPropertiesPostV1PayrollSchedulesListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponse
+		var obj *SchedulesListPayrollResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1PayrollSchedulesListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesSchedulesListPayrollResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PayrollSchedulesListResponseRowsItem{}
+		obj := &SchedulesListPayrollResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20280,7 +20644,7 @@ func TestExtraPropertiesPostV1PayrollSchedulesListResponseRowsItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PayrollSchedulesListResponseRowsItem
+		var obj *SchedulesListPayrollResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1ReferenceExchangeRatesSync(
+func (r *RawClient) ExchangeRatesSync(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesSyncRequest,
+	request *nordlet.ExchangeRatesSyncReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceExchangeRatesSyncResponse], error) {
+) (*core.Response[*nordlet.ExchangeRatesSyncReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1ReferenceExchangeRatesSync(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceExchangeRatesSyncResponse
+	var response *nordlet.ExchangeRatesSyncReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1ReferenceExchangeRatesSync(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceExchangeRatesSyncResponse]{
+	return &core.Response[*nordlet.ExchangeRatesSyncReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceExchangeRatesList(
+func (r *RawClient) ExchangeRatesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesListRequest,
+	request *nordlet.ExchangeRatesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceExchangeRatesListResponse], error) {
+) (*core.Response[*nordlet.ExchangeRatesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1ReferenceExchangeRatesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceExchangeRatesListResponse
+	var response *nordlet.ExchangeRatesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1ReferenceExchangeRatesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceExchangeRatesListResponse]{
+	return &core.Response[*nordlet.ExchangeRatesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceExchangeRatesSet(
+func (r *RawClient) ExchangeRatesSet(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesSetRequest,
+	request *nordlet.ExchangeRatesSetReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceExchangeRatesSetResponse], error) {
+) (*core.Response[*nordlet.ExchangeRatesSetReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1ReferenceExchangeRatesSet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceExchangeRatesSetResponse
+	var response *nordlet.ExchangeRatesSetReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1ReferenceExchangeRatesSet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceExchangeRatesSetResponse]{
+	return &core.Response[*nordlet.ExchangeRatesSetReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceExchangeRatesOverridesList(
+func (r *RawClient) ExchangeRatesOverridesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesOverridesListRequest,
+	request *nordlet.ExchangeRatesOverridesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceExchangeRatesOverridesListResponse], error) {
+) (*core.Response[*nordlet.ExchangeRatesOverridesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1ReferenceExchangeRatesOverridesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceExchangeRatesOverridesListResponse
+	var response *nordlet.ExchangeRatesOverridesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1ReferenceExchangeRatesOverridesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceExchangeRatesOverridesListResponse]{
+	return &core.Response[*nordlet.ExchangeRatesOverridesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceExchangeRatesOverridesDelete(
+func (r *RawClient) ExchangeRatesOverridesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesOverridesDeleteRequest,
+	request *nordlet.ExchangeRatesOverridesDeleteReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceExchangeRatesOverridesDeleteResponse], error) {
+) (*core.Response[*nordlet.ExchangeRatesOverridesDeleteReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1ReferenceExchangeRatesOverridesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceExchangeRatesOverridesDeleteResponse
+	var response *nordlet.ExchangeRatesOverridesDeleteReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1ReferenceExchangeRatesOverridesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceExchangeRatesOverridesDeleteResponse]{
+	return &core.Response[*nordlet.ExchangeRatesOverridesDeleteReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceCountriesList(
+func (r *RawClient) CountriesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCountriesListRequest,
+	request *nordlet.CountriesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceCountriesListResponse], error) {
+) (*core.Response[*nordlet.CountriesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1ReferenceCountriesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceCountriesListResponse
+	var response *nordlet.CountriesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1ReferenceCountriesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceCountriesListResponse]{
+	return &core.Response[*nordlet.CountriesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceLtCountiesList(
+func (r *RawClient) LtCountiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtCountiesListRequest,
+	request *nordlet.LtCountiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceLtCountiesListResponse], error) {
+) (*core.Response[*nordlet.LtCountiesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1ReferenceLtCountiesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceLtCountiesListResponse
+	var response *nordlet.LtCountiesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1ReferenceLtCountiesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceLtCountiesListResponse]{
+	return &core.Response[*nordlet.LtCountiesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceLtMunicipalitiesList(
+func (r *RawClient) LtMunicipalitiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtMunicipalitiesListRequest,
+	request *nordlet.LtMunicipalitiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceLtMunicipalitiesListResponse], error) {
+) (*core.Response[*nordlet.LtMunicipalitiesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1ReferenceLtMunicipalitiesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceLtMunicipalitiesListResponse
+	var response *nordlet.LtMunicipalitiesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1ReferenceLtMunicipalitiesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceLtMunicipalitiesListResponse]{
+	return &core.Response[*nordlet.LtMunicipalitiesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceLtCitiesList(
+func (r *RawClient) LtCitiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtCitiesListRequest,
+	request *nordlet.LtCitiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceLtCitiesListResponse], error) {
+) (*core.Response[*nordlet.LtCitiesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1ReferenceLtCitiesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceLtCitiesListResponse
+	var response *nordlet.LtCitiesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1ReferenceLtCitiesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceLtCitiesListResponse]{
+	return &core.Response[*nordlet.LtCitiesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceBanksList(
+func (r *RawClient) BanksList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceBanksListRequest,
+	request *nordlet.BanksListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceBanksListResponse], error) {
+) (*core.Response[*nordlet.BanksListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1ReferenceBanksList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceBanksListResponse
+	var response *nordlet.BanksListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1ReferenceBanksList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceBanksListResponse]{
+	return &core.Response[*nordlet.BanksListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceBanksUpsert(
+func (r *RawClient) BanksUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceBanksUpsertRequest,
+	request *nordlet.BanksUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceBanksUpsertResponse], error) {
+) (*core.Response[*nordlet.BanksUpsertReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1ReferenceBanksUpsert(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceBanksUpsertResponse
+	var response *nordlet.BanksUpsertReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1ReferenceBanksUpsert(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceBanksUpsertResponse]{
+	return &core.Response[*nordlet.BanksUpsertReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceLtRegionsList(
+func (r *RawClient) LtRegionsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtRegionsListRequest,
+	request *nordlet.LtRegionsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceLtRegionsListResponse], error) {
+) (*core.Response[*nordlet.LtRegionsListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1ReferenceLtRegionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceLtRegionsListResponse
+	var response *nordlet.LtRegionsListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1ReferenceLtRegionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceLtRegionsListResponse]{
+	return &core.Response[*nordlet.LtRegionsListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceCurrenciesList(
+func (r *RawClient) CurrenciesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCurrenciesListRequest,
+	request *nordlet.CurrenciesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceCurrenciesListResponse], error) {
+) (*core.Response[*nordlet.CurrenciesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1ReferenceCurrenciesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceCurrenciesListResponse
+	var response *nordlet.CurrenciesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +597,18 @@ func (r *RawClient) PostV1ReferenceCurrenciesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceCurrenciesListResponse]{
+	return &core.Response[*nordlet.CurrenciesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceVatClassifiersList(
+func (r *RawClient) VatClassifiersList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatClassifiersListRequest,
+	request *nordlet.VatClassifiersListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceVatClassifiersListResponse], error) {
+) (*core.Response[*nordlet.VatClassifiersListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +621,7 @@ func (r *RawClient) PostV1ReferenceVatClassifiersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceVatClassifiersListResponse
+	var response *nordlet.VatClassifiersListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +641,18 @@ func (r *RawClient) PostV1ReferenceVatClassifiersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceVatClassifiersListResponse]{
+	return &core.Response[*nordlet.VatClassifiersListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceVatClassifiersUpsert(
+func (r *RawClient) VatClassifiersUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatClassifiersUpsertRequest,
+	request *nordlet.VatClassifiersUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceVatClassifiersUpsertResponse], error) {
+) (*core.Response[*nordlet.VatClassifiersUpsertReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +665,7 @@ func (r *RawClient) PostV1ReferenceVatClassifiersUpsert(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceVatClassifiersUpsertResponse
+	var response *nordlet.VatClassifiersUpsertReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +685,18 @@ func (r *RawClient) PostV1ReferenceVatClassifiersUpsert(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceVatClassifiersUpsertResponse]{
+	return &core.Response[*nordlet.VatClassifiersUpsertReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceEuVatRatesList(
+func (r *RawClient) EuVatRatesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceEuVatRatesListRequest,
+	request *nordlet.EuVatRatesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceEuVatRatesListResponse], error) {
+) (*core.Response[*nordlet.EuVatRatesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +709,7 @@ func (r *RawClient) PostV1ReferenceEuVatRatesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceEuVatRatesListResponse
+	var response *nordlet.EuVatRatesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +729,18 @@ func (r *RawClient) PostV1ReferenceEuVatRatesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceEuVatRatesListResponse]{
+	return &core.Response[*nordlet.EuVatRatesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceEuVatRatesSetOverrides(
+func (r *RawClient) EuVatRatesSetOverrides(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest,
+	request *nordlet.EuVatRatesSetOverridesReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse], error) {
+) (*core.Response[*nordlet.EuVatRatesSetOverridesReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +753,7 @@ func (r *RawClient) PostV1ReferenceEuVatRatesSetOverrides(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse
+	var response *nordlet.EuVatRatesSetOverridesReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +773,18 @@ func (r *RawClient) PostV1ReferenceEuVatRatesSetOverrides(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse]{
+	return &core.Response[*nordlet.EuVatRatesSetOverridesReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceVatResolve(
+func (r *RawClient) VatResolve(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatResolveRequest,
+	request *nordlet.VatResolveReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceVatResolveResponse], error) {
+) (*core.Response[*nordlet.VatResolveReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +797,7 @@ func (r *RawClient) PostV1ReferenceVatResolve(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceVatResolveResponse
+	var response *nordlet.VatResolveReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +817,18 @@ func (r *RawClient) PostV1ReferenceVatResolve(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceVatResolveResponse]{
+	return &core.Response[*nordlet.VatResolveReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceCnCodesList(
+func (r *RawClient) CnCodesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCnCodesListRequest,
+	request *nordlet.CnCodesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceCnCodesListResponse], error) {
+) (*core.Response[*nordlet.CnCodesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +841,7 @@ func (r *RawClient) PostV1ReferenceCnCodesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceCnCodesListResponse
+	var response *nordlet.CnCodesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +861,18 @@ func (r *RawClient) PostV1ReferenceCnCodesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceCnCodesListResponse]{
+	return &core.Response[*nordlet.CnCodesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceCnCodesUpsert(
+func (r *RawClient) CnCodesUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCnCodesUpsertRequest,
+	request *nordlet.CnCodesUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceCnCodesUpsertResponse], error) {
+) (*core.Response[*nordlet.CnCodesUpsertReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +885,7 @@ func (r *RawClient) PostV1ReferenceCnCodesUpsert(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceCnCodesUpsertResponse
+	var response *nordlet.CnCodesUpsertReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +905,18 @@ func (r *RawClient) PostV1ReferenceCnCodesUpsert(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceCnCodesUpsertResponse]{
+	return &core.Response[*nordlet.CnCodesUpsertReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceComplianceVersionsList(
+func (r *RawClient) ComplianceVersionsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceComplianceVersionsListRequest,
+	request *nordlet.ComplianceVersionsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceComplianceVersionsListResponse], error) {
+) (*core.Response[*nordlet.ComplianceVersionsListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +929,7 @@ func (r *RawClient) PostV1ReferenceComplianceVersionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceComplianceVersionsListResponse
+	var response *nordlet.ComplianceVersionsListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,18 +949,18 @@ func (r *RawClient) PostV1ReferenceComplianceVersionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceComplianceVersionsListResponse]{
+	return &core.Response[*nordlet.ComplianceVersionsListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceIntrastatThresholdsList(
+func (r *RawClient) IntrastatThresholdsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceIntrastatThresholdsListRequest,
+	request *nordlet.IntrastatThresholdsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceIntrastatThresholdsListResponse], error) {
+) (*core.Response[*nordlet.IntrastatThresholdsListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -973,7 +973,7 @@ func (r *RawClient) PostV1ReferenceIntrastatThresholdsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceIntrastatThresholdsListResponse
+	var response *nordlet.IntrastatThresholdsListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -993,18 +993,18 @@ func (r *RawClient) PostV1ReferenceIntrastatThresholdsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceIntrastatThresholdsListResponse]{
+	return &core.Response[*nordlet.IntrastatThresholdsListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceUnitsList(
+func (r *RawClient) UnitsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceUnitsListRequest,
+	request *nordlet.UnitsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceUnitsListResponse], error) {
+) (*core.Response[*nordlet.UnitsListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1017,7 +1017,7 @@ func (r *RawClient) PostV1ReferenceUnitsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceUnitsListResponse
+	var response *nordlet.UnitsListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1037,18 +1037,18 @@ func (r *RawClient) PostV1ReferenceUnitsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceUnitsListResponse]{
+	return &core.Response[*nordlet.UnitsListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceSeriesCreate(
+func (r *RawClient) SeriesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceSeriesCreateRequest,
+	request *nordlet.SeriesCreateReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceSeriesCreateResponse], error) {
+) (*core.Response[*nordlet.SeriesCreateReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1061,7 +1061,7 @@ func (r *RawClient) PostV1ReferenceSeriesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceSeriesCreateResponse
+	var response *nordlet.SeriesCreateReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1081,18 +1081,18 @@ func (r *RawClient) PostV1ReferenceSeriesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceSeriesCreateResponse]{
+	return &core.Response[*nordlet.SeriesCreateReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ReferenceSeriesList(
+func (r *RawClient) SeriesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceSeriesListRequest,
+	request *nordlet.SeriesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ReferenceSeriesListResponse], error) {
+) (*core.Response[*nordlet.SeriesListReferenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1105,7 +1105,7 @@ func (r *RawClient) PostV1ReferenceSeriesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ReferenceSeriesListResponse
+	var response *nordlet.SeriesListReferenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1125,7 +1125,7 @@ func (r *RawClient) PostV1ReferenceSeriesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ReferenceSeriesListResponse]{
+	return &core.Response[*nordlet.SeriesListReferenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

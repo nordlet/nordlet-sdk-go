@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1SalesInvoicesCreate(
+func (c *Client) InvoicesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesCreateRequest,
+	request *nordlet.InvoicesCreateSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesCreate(
+) (*nordlet.InvoicesCreateSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1SalesInvoicesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesGet(
+func (c *Client) InvoicesGet(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesGetRequest,
+	request *nordlet.InvoicesGetSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesGet(
+) (*nordlet.InvoicesGetSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesGet(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1SalesInvoicesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPdf(
+func (c *Client) InvoicesPdf(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPdfRequest,
+	request *nordlet.InvoicesPdfSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPdfResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPdf(
+) (*nordlet.InvoicesPdfSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPdf(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1SalesInvoicesPdf(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesSend(
+func (c *Client) InvoicesSend(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesSendRequest,
+	request *nordlet.InvoicesSendSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesSend(
+) (*nordlet.InvoicesSendSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesSend(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1SalesInvoicesSend(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPeppolXML(
+func (c *Client) InvoicesPeppolXML(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPeppolXMLRequest,
+	request *nordlet.InvoicesPeppolXMLSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPeppolXMLResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPeppolXML(
+) (*nordlet.InvoicesPeppolXMLSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPeppolXML(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1SalesInvoicesPeppolXML(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPeppolSend(
+func (c *Client) InvoicesPeppolSend(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPeppolSendRequest,
+	request *nordlet.InvoicesPeppolSendSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPeppolSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPeppolSend(
+) (*nordlet.InvoicesPeppolSendSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPeppolSend(
 		ctx,
 		request,
 		opts...,
@@ -131,12 +131,12 @@ func (c *Client) PostV1SalesInvoicesPeppolSend(
 }
 
 // Render an issued invoice as the national e-invoicing payload for the company country: FatturaPA (IT), KSeF FA(3) (PL) or UBL CIUS-RO (RO). Review the warnings - data the invoice does not carry is flagged, never invented.
-func (c *Client) PostV1SalesInvoicesEinvoiceXML(
+func (c *Client) InvoicesEinvoiceXML(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesEinvoiceXMLRequest,
+	request *nordlet.InvoicesEinvoiceXMLSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesEinvoiceXMLResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceXML(
+) (*nordlet.InvoicesEinvoiceXMLSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesEinvoiceXML(
 		ctx,
 		request,
 		opts...,
@@ -148,12 +148,12 @@ func (c *Client) PostV1SalesInvoicesEinvoiceXML(
 }
 
 // Build the national e-invoicing payload and deliver it over the transport configured for the country gateway in compliance settings. With transport=direct the request talks to the tax authority itself - SdICoop over 2-way TLS for Italy, a KSeF session for Poland, ANAF SPV OAuth for Romania - and returns the national number as soon as the channel assigns one. With transport=bridge the payload goes to the configured bridge endpoint (an accredited intermediary or connector) instead.
-func (c *Client) PostV1SalesInvoicesEinvoiceSend(
+func (c *Client) InvoicesEinvoiceSend(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesEinvoiceSendRequest,
+	request *nordlet.InvoicesEinvoiceSendSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesEinvoiceSendResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceSend(
+) (*nordlet.InvoicesEinvoiceSendSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesEinvoiceSend(
 		ctx,
 		request,
 		opts...,
@@ -165,12 +165,12 @@ func (c *Client) PostV1SalesInvoicesEinvoiceSend(
 }
 
 // Ask the national e-invoicing channel what happened to an invoice that was already sent, and store the answer. Italy, Poland and Romania return the outcome only on request - none of them calls back - so this is the way the national number and any rejection reason reach the invoice.
-func (c *Client) PostV1SalesInvoicesEinvoiceStatus(
+func (c *Client) InvoicesEinvoiceStatus(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesEinvoiceStatusRequest,
+	request *nordlet.InvoicesEinvoiceStatusSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesEinvoiceStatusResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceStatus(
+) (*nordlet.InvoicesEinvoiceStatusSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesEinvoiceStatus(
 		ctx,
 		request,
 		opts...,
@@ -181,12 +181,12 @@ func (c *Client) PostV1SalesInvoicesEinvoiceStatus(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesUpdate(
+func (c *Client) InvoicesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesUpdateRequest,
+	request *nordlet.InvoicesUpdateSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesUpdate(
+) (*nordlet.InvoicesUpdateSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -197,12 +197,12 @@ func (c *Client) PostV1SalesInvoicesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesDelete(
+func (c *Client) InvoicesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesDeleteRequest,
+	request *nordlet.InvoicesDeleteSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesDelete(
+) (*nordlet.InvoicesDeleteSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesDelete(
 		ctx,
 		request,
 		opts...,
@@ -213,12 +213,12 @@ func (c *Client) PostV1SalesInvoicesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesIssue(
+func (c *Client) InvoicesIssue(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesIssueRequest,
+	request *nordlet.InvoicesIssueSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesIssueResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesIssue(
+) (*nordlet.InvoicesIssueSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesIssue(
 		ctx,
 		request,
 		opts...,
@@ -229,12 +229,12 @@ func (c *Client) PostV1SalesInvoicesIssue(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesLock(
+func (c *Client) InvoicesLock(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesLockRequest,
+	request *nordlet.InvoicesLockSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesLockResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesLock(
+) (*nordlet.InvoicesLockSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesLock(
 		ctx,
 		request,
 		opts...,
@@ -245,12 +245,12 @@ func (c *Client) PostV1SalesInvoicesLock(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesUnlock(
+func (c *Client) InvoicesUnlock(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesUnlockRequest,
+	request *nordlet.InvoicesUnlockSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesUnlockResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesUnlock(
+) (*nordlet.InvoicesUnlockSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesUnlock(
 		ctx,
 		request,
 		opts...,
@@ -261,12 +261,12 @@ func (c *Client) PostV1SalesInvoicesUnlock(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPaymentLink(
+func (c *Client) InvoicesPaymentLink(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPaymentLinkRequest,
+	request *nordlet.InvoicesPaymentLinkSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPaymentLinkResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentLink(
+) (*nordlet.InvoicesPaymentLinkSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPaymentLink(
 		ctx,
 		request,
 		opts...,
@@ -277,12 +277,12 @@ func (c *Client) PostV1SalesInvoicesPaymentLink(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPaymentSettingsGet(
+func (c *Client) InvoicesPaymentSettingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPaymentSettingsGetRequest,
+	request *nordlet.InvoicesPaymentSettingsGetSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPaymentSettingsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentSettingsGet(
+) (*nordlet.InvoicesPaymentSettingsGetSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPaymentSettingsGet(
 		ctx,
 		request,
 		opts...,
@@ -293,12 +293,12 @@ func (c *Client) PostV1SalesInvoicesPaymentSettingsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesPaymentSettingsUpdate(
+func (c *Client) InvoicesPaymentSettingsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesPaymentSettingsUpdateRequest,
+	request *nordlet.InvoicesPaymentSettingsUpdateSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesPaymentSettingsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentSettingsUpdate(
+) (*nordlet.InvoicesPaymentSettingsUpdateSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPaymentSettingsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -309,12 +309,12 @@ func (c *Client) PostV1SalesInvoicesPaymentSettingsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesRecognitionSchedulesList(
+func (c *Client) RecognitionSchedulesList(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionSchedulesListRequest,
+	request *nordlet.RecognitionSchedulesListSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionSchedulesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionSchedulesList(
+) (*nordlet.RecognitionSchedulesListSalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionSchedulesList(
 		ctx,
 		request,
 		opts...,
@@ -325,12 +325,12 @@ func (c *Client) PostV1SalesRecognitionSchedulesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesApplyAdvance(
+func (c *Client) InvoicesApplyAdvance(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesApplyAdvanceRequest,
+	request *nordlet.InvoicesApplyAdvanceSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesApplyAdvanceResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesApplyAdvance(
+) (*nordlet.InvoicesApplyAdvanceSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesApplyAdvance(
 		ctx,
 		request,
 		opts...,
@@ -341,12 +341,12 @@ func (c *Client) PostV1SalesInvoicesApplyAdvance(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesInvoicesList(
+func (c *Client) InvoicesList(
 	ctx context.Context,
-	request *nordlet.PostV1SalesInvoicesListRequest,
+	request *nordlet.InvoicesListSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesInvoicesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesInvoicesList(
+) (*nordlet.InvoicesListSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesList(
 		ctx,
 		request,
 		opts...,
@@ -357,12 +357,12 @@ func (c *Client) PostV1SalesInvoicesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsCreate(
+func (c *Client) ActsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsCreateRequest,
+	request *nordlet.ActsCreateSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsCreate(
+) (*nordlet.ActsCreateSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsCreate(
 		ctx,
 		request,
 		opts...,
@@ -373,12 +373,12 @@ func (c *Client) PostV1SalesActsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsUpdate(
+func (c *Client) ActsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsUpdateRequest,
+	request *nordlet.ActsUpdateSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsUpdate(
+) (*nordlet.ActsUpdateSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -389,12 +389,12 @@ func (c *Client) PostV1SalesActsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsIssue(
+func (c *Client) ActsIssue(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsIssueRequest,
+	request *nordlet.ActsIssueSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsIssueResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsIssue(
+) (*nordlet.ActsIssueSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsIssue(
 		ctx,
 		request,
 		opts...,
@@ -405,12 +405,12 @@ func (c *Client) PostV1SalesActsIssue(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsCancel(
+func (c *Client) ActsCancel(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsCancelRequest,
+	request *nordlet.ActsCancelSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsCancel(
+) (*nordlet.ActsCancelSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsCancel(
 		ctx,
 		request,
 		opts...,
@@ -421,12 +421,12 @@ func (c *Client) PostV1SalesActsCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsGet(
+func (c *Client) ActsGet(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsGetRequest,
+	request *nordlet.ActsGetSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsGet(
+) (*nordlet.ActsGetSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsGet(
 		ctx,
 		request,
 		opts...,
@@ -437,12 +437,12 @@ func (c *Client) PostV1SalesActsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsList(
+func (c *Client) ActsList(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsListRequest,
+	request *nordlet.ActsListSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsList(
+) (*nordlet.ActsListSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsList(
 		ctx,
 		request,
 		opts...,
@@ -453,12 +453,12 @@ func (c *Client) PostV1SalesActsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesActsPdf(
+func (c *Client) ActsPdf(
 	ctx context.Context,
-	request *nordlet.PostV1SalesActsPdfRequest,
+	request *nordlet.ActsPdfSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesActsPdfResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesActsPdf(
+) (*nordlet.ActsPdfSalesResponse, error) {
+	response, err := c.WithRawResponse.ActsPdf(
 		ctx,
 		request,
 		opts...,
@@ -469,12 +469,12 @@ func (c *Client) PostV1SalesActsPdf(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1OperationTypesCreate(
+func (c *Client) RecognitionCompute(
 	ctx context.Context,
-	request *nordlet.PostV1OperationTypesCreateRequest,
+	request *nordlet.RecognitionComputeSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1OperationTypesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1OperationTypesCreate(
+) (*nordlet.RecognitionComputeSalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionCompute(
 		ctx,
 		request,
 		opts...,
@@ -485,12 +485,12 @@ func (c *Client) PostV1OperationTypesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1OperationTypesUpdate(
+func (c *Client) RecognitionRun(
 	ctx context.Context,
-	request *nordlet.PostV1OperationTypesUpdateRequest,
+	request *nordlet.RecognitionRunSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1OperationTypesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1OperationTypesUpdate(
+) (*nordlet.RecognitionRunSalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionRun(
 		ctx,
 		request,
 		opts...,
@@ -501,172 +501,12 @@ func (c *Client) PostV1OperationTypesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1OperationTypesGet(
+func (c *Client) RecognitionProgress(
 	ctx context.Context,
-	request *nordlet.PostV1OperationTypesGetRequest,
+	request *nordlet.RecognitionProgressSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1OperationTypesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1OperationTypesGet(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1OperationTypesDelete(
-	ctx context.Context,
-	request *nordlet.PostV1OperationTypesDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OperationTypesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1OperationTypesDelete(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1OperationTypesList(
-	ctx context.Context,
-	request *nordlet.PostV1OperationTypesListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OperationTypesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1OperationTypesList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1DocumentSeriesCreate(
-	ctx context.Context,
-	request *nordlet.PostV1DocumentSeriesCreateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1DocumentSeriesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DocumentSeriesCreate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1DocumentSeriesUpdate(
-	ctx context.Context,
-	request *nordlet.PostV1DocumentSeriesUpdateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1DocumentSeriesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1DocumentSeriesUpdate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1DocumentSeriesGet(
-	ctx context.Context,
-	request *nordlet.PostV1DocumentSeriesGetRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1DocumentSeriesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1DocumentSeriesGet(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1DocumentSeriesDelete(
-	ctx context.Context,
-	request *nordlet.PostV1DocumentSeriesDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1DocumentSeriesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1DocumentSeriesDelete(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1DocumentSeriesList(
-	ctx context.Context,
-	request *nordlet.PostV1DocumentSeriesListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1DocumentSeriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1DocumentSeriesList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1SalesRecognitionCompute(
-	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionComputeRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionComputeResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionCompute(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1SalesRecognitionRun(
-	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionRunRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionRunResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionRun(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1SalesRecognitionProgress(
-	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionProgressRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionProgressResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionProgress(
+) (*nordlet.RecognitionProgressSalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionProgress(
 		ctx,
 		request,
 		opts...,
@@ -678,12 +518,12 @@ func (c *Client) PostV1SalesRecognitionProgress(
 }
 
 // Apply an IFRS 15 contract modification to a deferred invoice line. Prospective: cancel the pending schedule and respread the unrecognized remainder over the new terms. Cumulative catch-up (ratable only): recompute revenue as if the new terms applied from the start and post the difference immediately.
-func (c *Client) PostV1SalesRecognitionModify(
+func (c *Client) RecognitionModify(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionModifyRequest,
+	request *nordlet.RecognitionModifySalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionModifyResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionModify(
+) (*nordlet.RecognitionModifySalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionModify(
 		ctx,
 		request,
 		opts...,
@@ -694,12 +534,12 @@ func (c *Client) PostV1SalesRecognitionModify(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesRecognitionRunsList(
+func (c *Client) RecognitionRunsList(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionRunsListRequest,
+	request *nordlet.RecognitionRunsListSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionRunsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionRunsList(
+) (*nordlet.RecognitionRunsListSalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionRunsList(
 		ctx,
 		request,
 		opts...,
@@ -710,12 +550,12 @@ func (c *Client) PostV1SalesRecognitionRunsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesRecognitionSummary(
+func (c *Client) RecognitionSummary(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRecognitionSummaryRequest,
+	request *nordlet.RecognitionSummarySalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRecognitionSummaryResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRecognitionSummary(
+) (*nordlet.RecognitionSummarySalesResponse, error) {
+	response, err := c.WithRawResponse.RecognitionSummary(
 		ctx,
 		request,
 		opts...,
@@ -726,12 +566,12 @@ func (c *Client) PostV1SalesRecognitionSummary(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesRefundLiabilityList(
+func (c *Client) RefundLiabilityList(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRefundLiabilityListRequest,
+	request *nordlet.RefundLiabilityListSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRefundLiabilityListResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRefundLiabilityList(
+) (*nordlet.RefundLiabilityListSalesResponse, error) {
+	response, err := c.WithRawResponse.RefundLiabilityList(
 		ctx,
 		request,
 		opts...,
@@ -742,12 +582,12 @@ func (c *Client) PostV1SalesRefundLiabilityList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1SalesRefundLiabilityTrueUp(
+func (c *Client) RefundLiabilityTrueUp(
 	ctx context.Context,
-	request *nordlet.PostV1SalesRefundLiabilityTrueUpRequest,
+	request *nordlet.RefundLiabilityTrueUpSalesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1SalesRefundLiabilityTrueUpResponse, error) {
-	response, err := c.WithRawResponse.PostV1SalesRefundLiabilityTrueUp(
+) (*nordlet.RefundLiabilityTrueUpSalesResponse, error) {
+	response, err := c.WithRawResponse.RefundLiabilityTrueUp(
 		ctx,
 		request,
 		opts...,

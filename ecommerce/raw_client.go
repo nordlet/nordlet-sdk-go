@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1EcommerceOrdersCreate(
+func (r *RawClient) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersCreateRequest,
+	request *nordlet.OrdersCreateEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersCreateResponse], error) {
+) (*core.Response[*nordlet.OrdersCreateEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1EcommerceOrdersCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersCreateResponse
+	var response *nordlet.OrdersCreateEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1EcommerceOrdersCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersCreateResponse]{
+	return &core.Response[*nordlet.OrdersCreateEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceOrdersGet(
+func (r *RawClient) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersGetRequest,
+	request *nordlet.OrdersGetEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersGetResponse], error) {
+) (*core.Response[*nordlet.OrdersGetEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1EcommerceOrdersGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersGetResponse
+	var response *nordlet.OrdersGetEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1EcommerceOrdersGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersGetResponse]{
+	return &core.Response[*nordlet.OrdersGetEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceOrdersList(
+func (r *RawClient) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersListRequest,
+	request *nordlet.OrdersListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersListResponse], error) {
+) (*core.Response[*nordlet.OrdersListEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1EcommerceOrdersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersListResponse
+	var response *nordlet.OrdersListEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1EcommerceOrdersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersListResponse]{
+	return &core.Response[*nordlet.OrdersListEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceOrdersReserve(
+func (r *RawClient) OrdersReserve(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersReserveRequest,
+	request *nordlet.OrdersReserveEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersReserveResponse], error) {
+) (*core.Response[*nordlet.OrdersReserveEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1EcommerceOrdersReserve(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersReserveResponse
+	var response *nordlet.OrdersReserveEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1EcommerceOrdersReserve(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersReserveResponse]{
+	return &core.Response[*nordlet.OrdersReserveEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceOrdersFulfill(
+func (r *RawClient) OrdersFulfill(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersFulfillRequest,
+	request *nordlet.OrdersFulfillEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersFulfillResponse], error) {
+) (*core.Response[*nordlet.OrdersFulfillEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1EcommerceOrdersFulfill(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersFulfillResponse
+	var response *nordlet.OrdersFulfillEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1EcommerceOrdersFulfill(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersFulfillResponse]{
+	return &core.Response[*nordlet.OrdersFulfillEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceOrdersCancel(
+func (r *RawClient) OrdersCancel(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersCancelRequest,
+	request *nordlet.OrdersCancelEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceOrdersCancelResponse], error) {
+) (*core.Response[*nordlet.OrdersCancelEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1EcommerceOrdersCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceOrdersCancelResponse
+	var response *nordlet.OrdersCancelEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1EcommerceOrdersCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceOrdersCancelResponse]{
+	return &core.Response[*nordlet.OrdersCancelEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceProductsList(
+func (r *RawClient) ProductsList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceProductsListRequest,
+	request *nordlet.ProductsListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceProductsListResponse], error) {
+) (*core.Response[*nordlet.ProductsListEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1EcommerceProductsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceProductsListResponse
+	var response *nordlet.ProductsListEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1EcommerceProductsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceProductsListResponse]{
+	return &core.Response[*nordlet.ProductsListEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1EcommerceStockList(
+func (r *RawClient) StockList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceStockListRequest,
+	request *nordlet.StockListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1EcommerceStockListResponse], error) {
+) (*core.Response[*nordlet.StockListEcommerceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1EcommerceStockList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1EcommerceStockListResponse
+	var response *nordlet.StockListEcommerceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,7 +377,7 @@ func (r *RawClient) PostV1EcommerceStockList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1EcommerceStockListResponse]{
+	return &core.Response[*nordlet.StockListEcommerceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

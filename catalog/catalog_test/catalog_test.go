@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestCatalogPostV1CatalogItemsCreateWithWireMock(
+func TestCatalogItemsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,22 +88,22 @@ func TestCatalogPostV1CatalogItemsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsCreateRequest{
+	request := &nordlet.ItemsCreateCatalogRequest{
 		Name: "name",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsCreate(
+	_, invocationErr := client.Catalog.ItemsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsCreateWithWireMock", "POST", "/v1/catalog/items/create", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsCreateWithWireMock", "POST", "/v1/catalog/items/create", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsGetWithWireMock(
+func TestCatalogItemsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -114,22 +114,22 @@ func TestCatalogPostV1CatalogItemsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsGetRequest{
+	request := &nordlet.ItemsGetCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsGet(
+	_, invocationErr := client.Catalog.ItemsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsGetWithWireMock", "POST", "/v1/catalog/items/get", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsGetWithWireMock", "POST", "/v1/catalog/items/get", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsUpdateWithWireMock(
+func TestCatalogItemsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -140,22 +140,22 @@ func TestCatalogPostV1CatalogItemsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsUpdateRequest{
+	request := &nordlet.ItemsUpdateCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsUpdate(
+	_, invocationErr := client.Catalog.ItemsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsUpdateWithWireMock", "POST", "/v1/catalog/items/update", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsUpdateWithWireMock", "POST", "/v1/catalog/items/update", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsDeleteWithWireMock(
+func TestCatalogItemsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -166,22 +166,22 @@ func TestCatalogPostV1CatalogItemsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsDeleteRequest{
+	request := &nordlet.ItemsDeleteCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsDelete(
+	_, invocationErr := client.Catalog.ItemsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsDeleteWithWireMock", "POST", "/v1/catalog/items/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsDeleteWithWireMock", "POST", "/v1/catalog/items/delete", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsListWithWireMock(
+func TestCatalogItemsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -192,20 +192,20 @@ func TestCatalogPostV1CatalogItemsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsList(
+	request := &nordlet.ItemsListCatalogRequest{}
+	_, invocationErr := client.Catalog.ItemsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsListWithWireMock", "POST", "/v1/catalog/items/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsListWithWireMock", "POST", "/v1/catalog/items/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsFilesListWithWireMock(
+func TestCatalogItemsFilesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -216,22 +216,22 @@ func TestCatalogPostV1CatalogItemsFilesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsFilesListRequest{
+	request := &nordlet.ItemsFilesListCatalogRequest{
 		ItemID: "itemId",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsFilesList(
+	_, invocationErr := client.Catalog.ItemsFilesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsFilesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsFilesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsFilesListWithWireMock", "POST", "/v1/catalog/items/files/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsFilesListWithWireMock", "POST", "/v1/catalog/items/files/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsKindsCreateWithWireMock(
+func TestCatalogItemsKindsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -242,23 +242,23 @@ func TestCatalogPostV1CatalogItemsKindsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsKindsCreateRequest{
+	request := &nordlet.ItemsKindsCreateCatalogRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsKindsCreate(
+	_, invocationErr := client.Catalog.ItemsKindsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsKindsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsKindsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsKindsCreateWithWireMock", "POST", "/v1/catalog/items/kinds/create", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsKindsCreateWithWireMock", "POST", "/v1/catalog/items/kinds/create", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsKindsUpdateWithWireMock(
+func TestCatalogItemsKindsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -269,22 +269,22 @@ func TestCatalogPostV1CatalogItemsKindsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsKindsUpdateRequest{
+	request := &nordlet.ItemsKindsUpdateCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsKindsUpdate(
+	_, invocationErr := client.Catalog.ItemsKindsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsKindsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsKindsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsKindsUpdateWithWireMock", "POST", "/v1/catalog/items/kinds/update", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsKindsUpdateWithWireMock", "POST", "/v1/catalog/items/kinds/update", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsKindsDeleteWithWireMock(
+func TestCatalogItemsKindsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -295,22 +295,22 @@ func TestCatalogPostV1CatalogItemsKindsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsKindsDeleteRequest{
+	request := &nordlet.ItemsKindsDeleteCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsKindsDelete(
+	_, invocationErr := client.Catalog.ItemsKindsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsKindsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsKindsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsKindsDeleteWithWireMock", "POST", "/v1/catalog/items/kinds/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsKindsDeleteWithWireMock", "POST", "/v1/catalog/items/kinds/delete", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsKindsListWithWireMock(
+func TestCatalogItemsKindsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -321,20 +321,20 @@ func TestCatalogPostV1CatalogItemsKindsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsKindsListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsKindsList(
+	request := &nordlet.ItemsKindsListCatalogRequest{}
+	_, invocationErr := client.Catalog.ItemsKindsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsKindsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsKindsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsKindsListWithWireMock", "POST", "/v1/catalog/items/kinds/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsKindsListWithWireMock", "POST", "/v1/catalog/items/kinds/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogUnitsCreateWithWireMock(
+func TestCatalogUnitsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -345,23 +345,23 @@ func TestCatalogPostV1CatalogUnitsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogUnitsCreateRequest{
+	request := &nordlet.UnitsCreateCatalogRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogUnitsCreate(
+	_, invocationErr := client.Catalog.UnitsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogUnitsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogUnitsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogUnitsCreateWithWireMock", "POST", "/v1/catalog/units/create", nil, 1)
+	VerifyRequestCount(t, "TestCatalogUnitsCreateWithWireMock", "POST", "/v1/catalog/units/create", nil, 1)
 }
 
-func TestCatalogPostV1CatalogUnitsUpdateWithWireMock(
+func TestCatalogUnitsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -372,22 +372,22 @@ func TestCatalogPostV1CatalogUnitsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogUnitsUpdateRequest{
+	request := &nordlet.UnitsUpdateCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogUnitsUpdate(
+	_, invocationErr := client.Catalog.UnitsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogUnitsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogUnitsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogUnitsUpdateWithWireMock", "POST", "/v1/catalog/units/update", nil, 1)
+	VerifyRequestCount(t, "TestCatalogUnitsUpdateWithWireMock", "POST", "/v1/catalog/units/update", nil, 1)
 }
 
-func TestCatalogPostV1CatalogUnitsDeleteWithWireMock(
+func TestCatalogUnitsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -398,22 +398,22 @@ func TestCatalogPostV1CatalogUnitsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogUnitsDeleteRequest{
+	request := &nordlet.UnitsDeleteCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogUnitsDelete(
+	_, invocationErr := client.Catalog.UnitsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogUnitsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogUnitsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogUnitsDeleteWithWireMock", "POST", "/v1/catalog/units/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogUnitsDeleteWithWireMock", "POST", "/v1/catalog/units/delete", nil, 1)
 }
 
-func TestCatalogPostV1CatalogUnitsListWithWireMock(
+func TestCatalogUnitsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -424,20 +424,20 @@ func TestCatalogPostV1CatalogUnitsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogUnitsListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogUnitsList(
+	request := &nordlet.UnitsListCatalogRequest{}
+	_, invocationErr := client.Catalog.UnitsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogUnitsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogUnitsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogUnitsListWithWireMock", "POST", "/v1/catalog/units/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogUnitsListWithWireMock", "POST", "/v1/catalog/units/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogUnitsOptionsWithWireMock(
+func TestCatalogUnitsOptionsWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -448,20 +448,20 @@ func TestCatalogPostV1CatalogUnitsOptionsWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogUnitsOptionsRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogUnitsOptions(
+	request := &nordlet.UnitsOptionsCatalogRequest{}
+	_, invocationErr := client.Catalog.UnitsOptions(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogUnitsOptionsWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogUnitsOptionsWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogUnitsOptionsWithWireMock", "POST", "/v1/catalog/units/options", nil, 1)
+	VerifyRequestCount(t, "TestCatalogUnitsOptionsWithWireMock", "POST", "/v1/catalog/units/options", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemGroupsCreateWithWireMock(
+func TestCatalogItemGroupsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -472,23 +472,23 @@ func TestCatalogPostV1CatalogItemGroupsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemGroupsCreateRequest{
+	request := &nordlet.ItemGroupsCreateCatalogRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemGroupsCreate(
+	_, invocationErr := client.Catalog.ItemGroupsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemGroupsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemGroupsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemGroupsCreateWithWireMock", "POST", "/v1/catalog/item-groups/create", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemGroupsCreateWithWireMock", "POST", "/v1/catalog/item-groups/create", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemGroupsUpdateWithWireMock(
+func TestCatalogItemGroupsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -499,22 +499,22 @@ func TestCatalogPostV1CatalogItemGroupsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemGroupsUpdateRequest{
+	request := &nordlet.ItemGroupsUpdateCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemGroupsUpdate(
+	_, invocationErr := client.Catalog.ItemGroupsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemGroupsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemGroupsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemGroupsUpdateWithWireMock", "POST", "/v1/catalog/item-groups/update", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemGroupsUpdateWithWireMock", "POST", "/v1/catalog/item-groups/update", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemGroupsDeleteWithWireMock(
+func TestCatalogItemGroupsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -525,22 +525,22 @@ func TestCatalogPostV1CatalogItemGroupsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemGroupsDeleteRequest{
+	request := &nordlet.ItemGroupsDeleteCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemGroupsDelete(
+	_, invocationErr := client.Catalog.ItemGroupsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemGroupsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemGroupsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemGroupsDeleteWithWireMock", "POST", "/v1/catalog/item-groups/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemGroupsDeleteWithWireMock", "POST", "/v1/catalog/item-groups/delete", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemGroupsListWithWireMock(
+func TestCatalogItemGroupsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -551,20 +551,20 @@ func TestCatalogPostV1CatalogItemGroupsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemGroupsListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogItemGroupsList(
+	request := &nordlet.ItemGroupsListCatalogRequest{}
+	_, invocationErr := client.Catalog.ItemGroupsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemGroupsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemGroupsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemGroupsListWithWireMock", "POST", "/v1/catalog/item-groups/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemGroupsListWithWireMock", "POST", "/v1/catalog/item-groups/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsSuppliersUpsertWithWireMock(
+func TestCatalogItemsSuppliersUpsertWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -575,23 +575,23 @@ func TestCatalogPostV1CatalogItemsSuppliersUpsertWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsSuppliersUpsertRequest{
+	request := &nordlet.ItemsSuppliersUpsertCatalogRequest{
 		ItemID:    "itemId",
 		PartnerID: "partnerId",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsSuppliersUpsert(
+	_, invocationErr := client.Catalog.ItemsSuppliersUpsert(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsSuppliersUpsertWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsSuppliersUpsertWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsSuppliersUpsertWithWireMock", "POST", "/v1/catalog/items/suppliers/upsert", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsSuppliersUpsertWithWireMock", "POST", "/v1/catalog/items/suppliers/upsert", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsSuppliersListWithWireMock(
+func TestCatalogItemsSuppliersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -602,20 +602,20 @@ func TestCatalogPostV1CatalogItemsSuppliersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsSuppliersListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsSuppliersList(
+	request := &nordlet.ItemsSuppliersListCatalogRequest{}
+	_, invocationErr := client.Catalog.ItemsSuppliersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsSuppliersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsSuppliersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsSuppliersListWithWireMock", "POST", "/v1/catalog/items/suppliers/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsSuppliersListWithWireMock", "POST", "/v1/catalog/items/suppliers/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogItemsSuppliersDeleteWithWireMock(
+func TestCatalogItemsSuppliersDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -626,22 +626,22 @@ func TestCatalogPostV1CatalogItemsSuppliersDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogItemsSuppliersDeleteRequest{
+	request := &nordlet.ItemsSuppliersDeleteCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogItemsSuppliersDelete(
+	_, invocationErr := client.Catalog.ItemsSuppliersDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogItemsSuppliersDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsSuppliersDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogItemsSuppliersDeleteWithWireMock", "POST", "/v1/catalog/items/suppliers/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogItemsSuppliersDeleteWithWireMock", "POST", "/v1/catalog/items/suppliers/delete", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsCreateWithWireMock(
+func TestCatalogPriceListsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -652,23 +652,23 @@ func TestCatalogPostV1CatalogPriceListsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsCreateRequest{
+	request := &nordlet.PriceListsCreateCatalogRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsCreate(
+	_, invocationErr := client.Catalog.PriceListsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsCreateWithWireMock", "POST", "/v1/catalog/price-lists/create", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsCreateWithWireMock", "POST", "/v1/catalog/price-lists/create", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsUpdateWithWireMock(
+func TestCatalogPriceListsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -679,22 +679,22 @@ func TestCatalogPostV1CatalogPriceListsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsUpdateRequest{
+	request := &nordlet.PriceListsUpdateCatalogRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsUpdate(
+	_, invocationErr := client.Catalog.PriceListsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsUpdateWithWireMock", "POST", "/v1/catalog/price-lists/update", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsUpdateWithWireMock", "POST", "/v1/catalog/price-lists/update", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsListWithWireMock(
+func TestCatalogPriceListsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -705,20 +705,20 @@ func TestCatalogPostV1CatalogPriceListsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsListRequest{}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsList(
+	request := &nordlet.PriceListsListCatalogRequest{}
+	_, invocationErr := client.Catalog.PriceListsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsListWithWireMock", "POST", "/v1/catalog/price-lists/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsListWithWireMock", "POST", "/v1/catalog/price-lists/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsItemsSetWithWireMock(
+func TestCatalogPriceListsItemsSetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -729,28 +729,28 @@ func TestCatalogPostV1CatalogPriceListsItemsSetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsItemsSetRequest{
+	request := &nordlet.PriceListsItemsSetCatalogRequest{
 		PriceListID: "priceListId",
-		Items: []*nordlet.PostV1CatalogPriceListsItemsSetRequestItemsItem{
-			&nordlet.PostV1CatalogPriceListsItemsSetRequestItemsItem{
+		Items: []*nordlet.PriceListsItemsSetCatalogRequestItemsItem{
+			&nordlet.PriceListsItemsSetCatalogRequestItemsItem{
 				ItemID:           "itemId",
-				UnitPriceExclVat: "unitPriceExclVat",
+				UnitPriceExclVat: "121.0000",
 			},
 		},
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsItemsSet(
+	_, invocationErr := client.Catalog.PriceListsItemsSet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsItemsSetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsItemsSetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsItemsSetWithWireMock", "POST", "/v1/catalog/price-lists/items/set", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsItemsSetWithWireMock", "POST", "/v1/catalog/price-lists/items/set", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsItemsListWithWireMock(
+func TestCatalogPriceListsItemsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -761,22 +761,22 @@ func TestCatalogPostV1CatalogPriceListsItemsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsItemsListRequest{
+	request := &nordlet.PriceListsItemsListCatalogRequest{
 		PriceListID: "priceListId",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsItemsList(
+	_, invocationErr := client.Catalog.PriceListsItemsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsItemsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsItemsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsItemsListWithWireMock", "POST", "/v1/catalog/price-lists/items/list", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsItemsListWithWireMock", "POST", "/v1/catalog/price-lists/items/list", nil, 1)
 }
 
-func TestCatalogPostV1CatalogPriceListsItemsDeleteWithWireMock(
+func TestCatalogPriceListsItemsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -787,18 +787,18 @@ func TestCatalogPostV1CatalogPriceListsItemsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CatalogPriceListsItemsDeleteRequest{
+	request := &nordlet.PriceListsItemsDeleteCatalogRequest{
 		PriceListID: "priceListId",
 		ItemID:      "itemId",
 	}
-	_, invocationErr := client.Catalog.PostV1CatalogPriceListsItemsDelete(
+	_, invocationErr := client.Catalog.PriceListsItemsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCatalogPostV1CatalogPriceListsItemsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCatalogPriceListsItemsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCatalogPostV1CatalogPriceListsItemsDeleteWithWireMock", "POST", "/v1/catalog/price-lists/items/delete", nil, 1)
+	VerifyRequestCount(t, "TestCatalogPriceListsItemsDeleteWithWireMock", "POST", "/v1/catalog/price-lists/items/delete", nil, 1)
 }

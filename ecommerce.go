@@ -11,310 +11,312 @@ import (
 )
 
 var (
-	postV1EcommerceOrdersCancelRequestFieldID = big.NewInt(1 << 0)
+	ordersCancelEcommerceRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1EcommerceOrdersCancelRequest struct {
+type OrdersCancelEcommerceRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersCancelRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCancelEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersCancelRequestFieldID)
+func (o *OrdersCancelEcommerceRequest) SetID(id string) {
+	o.ID = id
+	o.require(ordersCancelEcommerceRequestFieldID)
 }
 
-func (p *PostV1EcommerceOrdersCancelRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCancelRequest
+func (o *OrdersCancelEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCancelEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCancelRequest(body)
+	*o = OrdersCancelEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCancelRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCancelRequest
+func (o *OrdersCancelEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersCancelEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersCreateRequestFieldChannel           = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCreateRequestFieldExternalRef       = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCreateRequestFieldPartnerID         = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCreateRequestFieldPartner           = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCreateRequestFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersCreateRequestFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersCreateRequestFieldShipToCountryCode = big.NewInt(1 << 6)
-	postV1EcommerceOrdersCreateRequestFieldMarketplace       = big.NewInt(1 << 7)
-	postV1EcommerceOrdersCreateRequestFieldNotes             = big.NewInt(1 << 8)
-	postV1EcommerceOrdersCreateRequestFieldLines             = big.NewInt(1 << 9)
+	ordersCreateEcommerceRequestFieldChannel           = big.NewInt(1 << 0)
+	ordersCreateEcommerceRequestFieldExternalRef       = big.NewInt(1 << 1)
+	ordersCreateEcommerceRequestFieldPartnerID         = big.NewInt(1 << 2)
+	ordersCreateEcommerceRequestFieldPartner           = big.NewInt(1 << 3)
+	ordersCreateEcommerceRequestFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersCreateEcommerceRequestFieldCurrency          = big.NewInt(1 << 5)
+	ordersCreateEcommerceRequestFieldShipToCountryCode = big.NewInt(1 << 6)
+	ordersCreateEcommerceRequestFieldMarketplace       = big.NewInt(1 << 7)
+	ordersCreateEcommerceRequestFieldNotes             = big.NewInt(1 << 8)
+	ordersCreateEcommerceRequestFieldLines             = big.NewInt(1 << 9)
 )
 
-type PostV1EcommerceOrdersCreateRequest struct {
-	Channel           *string                                        `json:"channel,omitempty" url:"-"`
-	ExternalRef       *string                                        `json:"externalRef,omitempty" url:"-"`
-	PartnerID         *string                                        `json:"partnerId,omitempty" url:"-"`
-	Partner           *PostV1EcommerceOrdersCreateRequestPartner     `json:"partner,omitempty" url:"-"`
-	WarehouseID       *string                                        `json:"warehouseId,omitempty" url:"-"`
-	Currency          *string                                        `json:"currency,omitempty" url:"-"`
-	ShipToCountryCode *string                                        `json:"shipToCountryCode,omitempty" url:"-"`
-	Marketplace       *string                                        `json:"marketplace,omitempty" url:"-"`
-	Notes             *string                                        `json:"notes,omitempty" url:"-"`
-	Lines             []*PostV1EcommerceOrdersCreateRequestLinesItem `json:"lines" url:"-"`
+type OrdersCreateEcommerceRequest struct {
+	Channel           *string                                  `json:"channel,omitempty" url:"-"`
+	ExternalRef       *string                                  `json:"externalRef,omitempty" url:"-"`
+	PartnerID         *string                                  `json:"partnerId,omitempty" url:"-"`
+	Partner           *OrdersCreateEcommerceRequestPartner     `json:"partner,omitempty" url:"-"`
+	WarehouseID       *string                                  `json:"warehouseId,omitempty" url:"-"`
+	Currency          *string                                  `json:"currency,omitempty" url:"-"`
+	ShipToCountryCode *string                                  `json:"shipToCountryCode,omitempty" url:"-"`
+	Marketplace       *string                                  `json:"marketplace,omitempty" url:"-"`
+	Notes             *string                                  `json:"notes,omitempty" url:"-"`
+	Lines             []*OrdersCreateEcommerceRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCreateEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetChannel(channel *string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersCreateRequestFieldChannel)
+func (o *OrdersCreateEcommerceRequest) SetChannel(channel *string) {
+	o.Channel = channel
+	o.require(ordersCreateEcommerceRequestFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersCreateRequestFieldExternalRef)
+func (o *OrdersCreateEcommerceRequest) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersCreateEcommerceRequestFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersCreateRequestFieldPartnerID)
+func (o *OrdersCreateEcommerceRequest) SetPartnerID(partnerID *string) {
+	o.PartnerID = partnerID
+	o.require(ordersCreateEcommerceRequestFieldPartnerID)
 }
 
 // SetPartner sets the Partner field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetPartner(partner *PostV1EcommerceOrdersCreateRequestPartner) {
-	p.Partner = partner
-	p.require(postV1EcommerceOrdersCreateRequestFieldPartner)
+func (o *OrdersCreateEcommerceRequest) SetPartner(partner *OrdersCreateEcommerceRequestPartner) {
+	o.Partner = partner
+	o.require(ordersCreateEcommerceRequestFieldPartner)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersCreateRequestFieldWarehouseID)
+func (o *OrdersCreateEcommerceRequest) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersCreateEcommerceRequestFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersCreateRequestFieldCurrency)
+func (o *OrdersCreateEcommerceRequest) SetCurrency(currency *string) {
+	o.Currency = currency
+	o.require(ordersCreateEcommerceRequestFieldCurrency)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersCreateRequestFieldShipToCountryCode)
+func (o *OrdersCreateEcommerceRequest) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersCreateEcommerceRequestFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersCreateRequestFieldMarketplace)
+func (o *OrdersCreateEcommerceRequest) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersCreateEcommerceRequestFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersCreateRequestFieldNotes)
+func (o *OrdersCreateEcommerceRequest) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersCreateEcommerceRequestFieldNotes)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequest) SetLines(lines []*PostV1EcommerceOrdersCreateRequestLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersCreateRequestFieldLines)
+func (o *OrdersCreateEcommerceRequest) SetLines(lines []*OrdersCreateEcommerceRequestLinesItem) {
+	o.Lines = lines
+	o.require(ordersCreateEcommerceRequestFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCreateRequest
+func (o *OrdersCreateEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCreateEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCreateRequest(body)
+	*o = OrdersCreateEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCreateRequest
+func (o *OrdersCreateEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersCreateEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersFulfillRequestFieldID                   = big.NewInt(1 << 0)
-	postV1EcommerceOrdersFulfillRequestFieldDate                 = big.NewInt(1 << 1)
-	postV1EcommerceOrdersFulfillRequestFieldCogsAccountCode      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersFulfillRequestFieldInventoryAccountCode = big.NewInt(1 << 3)
+	ordersFulfillEcommerceRequestFieldID                   = big.NewInt(1 << 0)
+	ordersFulfillEcommerceRequestFieldDate                 = big.NewInt(1 << 1)
+	ordersFulfillEcommerceRequestFieldCogsAccountCode      = big.NewInt(1 << 2)
+	ordersFulfillEcommerceRequestFieldInventoryAccountCode = big.NewInt(1 << 3)
 )
 
-type PostV1EcommerceOrdersFulfillRequest struct {
-	ID                   string  `json:"id" url:"-"`
-	Date                 *string `json:"date,omitempty" url:"-"`
-	CogsAccountCode      *string `json:"cogsAccountCode,omitempty" url:"-"`
-	InventoryAccountCode *string `json:"inventoryAccountCode,omitempty" url:"-"`
+type OrdersFulfillEcommerceRequest struct {
+	ID                   string     `json:"id" url:"-"`
+	Date                 *time.Time `json:"date,omitempty" url:"-" format:"date"`
+	CogsAccountCode      *string    `json:"cogsAccountCode,omitempty" url:"-"`
+	InventoryAccountCode *string    `json:"inventoryAccountCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersFulfillRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersFulfillEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersFulfillRequestFieldID)
+func (o *OrdersFulfillEcommerceRequest) SetID(id string) {
+	o.ID = id
+	o.require(ordersFulfillEcommerceRequestFieldID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillRequest) SetDate(date *string) {
-	p.Date = date
-	p.require(postV1EcommerceOrdersFulfillRequestFieldDate)
+func (o *OrdersFulfillEcommerceRequest) SetDate(date *time.Time) {
+	o.Date = date
+	o.require(ordersFulfillEcommerceRequestFieldDate)
 }
 
 // SetCogsAccountCode sets the CogsAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillRequest) SetCogsAccountCode(cogsAccountCode *string) {
-	p.CogsAccountCode = cogsAccountCode
-	p.require(postV1EcommerceOrdersFulfillRequestFieldCogsAccountCode)
+func (o *OrdersFulfillEcommerceRequest) SetCogsAccountCode(cogsAccountCode *string) {
+	o.CogsAccountCode = cogsAccountCode
+	o.require(ordersFulfillEcommerceRequestFieldCogsAccountCode)
 }
 
 // SetInventoryAccountCode sets the InventoryAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
-	p.InventoryAccountCode = inventoryAccountCode
-	p.require(postV1EcommerceOrdersFulfillRequestFieldInventoryAccountCode)
+func (o *OrdersFulfillEcommerceRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
+	o.InventoryAccountCode = inventoryAccountCode
+	o.require(ordersFulfillEcommerceRequestFieldInventoryAccountCode)
 }
 
-func (p *PostV1EcommerceOrdersFulfillRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersFulfillRequest
+func (o *OrdersFulfillEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersFulfillEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersFulfillRequest(body)
+	*o = OrdersFulfillEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersFulfillRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersFulfillRequest
+func (o *OrdersFulfillEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersFulfillEcommerceRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date,omitempty"`
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
+		Date:  internal.NewOptionalDate(o.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersGetRequestFieldID = big.NewInt(1 << 0)
+	ordersGetEcommerceRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1EcommerceOrdersGetRequest struct {
+type OrdersGetEcommerceRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersGetEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersGetRequestFieldID)
+func (o *OrdersGetEcommerceRequest) SetID(id string) {
+	o.ID = id
+	o.require(ordersGetEcommerceRequestFieldID)
 }
 
-func (p *PostV1EcommerceOrdersGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersGetRequest
+func (o *OrdersGetEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersGetEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersGetRequest(body)
+	*o = OrdersGetEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersGetRequest
+func (o *OrdersGetEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersGetEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1EcommerceOrdersListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1EcommerceOrdersListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1EcommerceOrdersListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1EcommerceOrdersListRequestFieldTotals   = big.NewInt(1 << 4)
+	ordersListEcommerceRequestFieldPage     = big.NewInt(1 << 0)
+	ordersListEcommerceRequestFieldPageSize = big.NewInt(1 << 1)
+	ordersListEcommerceRequestFieldSort     = big.NewInt(1 << 2)
+	ordersListEcommerceRequestFieldFilter   = big.NewInt(1 << 3)
+	ordersListEcommerceRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1EcommerceOrdersListRequest struct {
-	Page     *int64                                        `json:"page,omitempty" url:"-"`
-	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1EcommerceOrdersListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1EcommerceOrdersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type OrdersListEcommerceRequest struct {
+	Page     *int64                                  `json:"page,omitempty" url:"-"`
+	PageSize *int64                                  `json:"pageSize,omitempty" url:"-"`
+	Sort     []*OrdersListEcommerceRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*OrdersListEcommerceRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -322,75 +324,75 @@ type PostV1EcommerceOrdersListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersListEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1EcommerceOrdersListRequestFieldPage)
+func (o *OrdersListEcommerceRequest) SetPage(page *int64) {
+	o.Page = page
+	o.require(ordersListEcommerceRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1EcommerceOrdersListRequestFieldPageSize)
+func (o *OrdersListEcommerceRequest) SetPageSize(pageSize *int64) {
+	o.PageSize = pageSize
+	o.require(ordersListEcommerceRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequest) SetSort(sort []*PostV1EcommerceOrdersListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1EcommerceOrdersListRequestFieldSort)
+func (o *OrdersListEcommerceRequest) SetSort(sort []*OrdersListEcommerceRequestSortItem) {
+	o.Sort = sort
+	o.require(ordersListEcommerceRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequest) SetFilter(filter []*PostV1EcommerceOrdersListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1EcommerceOrdersListRequestFieldFilter)
+func (o *OrdersListEcommerceRequest) SetFilter(filter []*OrdersListEcommerceRequestFilterItem) {
+	o.Filter = filter
+	o.require(ordersListEcommerceRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1EcommerceOrdersListRequestFieldTotals)
+func (o *OrdersListEcommerceRequest) SetTotals(totals []string) {
+	o.Totals = totals
+	o.require(ordersListEcommerceRequestFieldTotals)
 }
 
-func (p *PostV1EcommerceOrdersListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersListRequest
+func (o *OrdersListEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersListEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersListRequest(body)
+	*o = OrdersListEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersListRequest
+func (o *OrdersListEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersListEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersReserveRequestFieldID          = big.NewInt(1 << 0)
-	postV1EcommerceOrdersReserveRequestFieldWarehouseID = big.NewInt(1 << 1)
+	ordersReserveEcommerceRequestFieldID          = big.NewInt(1 << 0)
+	ordersReserveEcommerceRequestFieldWarehouseID = big.NewInt(1 << 1)
 )
 
-type PostV1EcommerceOrdersReserveRequest struct {
+type OrdersReserveEcommerceRequest struct {
 	ID          string  `json:"id" url:"-"`
 	WarehouseID *string `json:"warehouseId,omitempty" url:"-"`
 
@@ -398,57 +400,57 @@ type PostV1EcommerceOrdersReserveRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceOrdersReserveRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersReserveEcommerceRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersReserveRequestFieldID)
+func (o *OrdersReserveEcommerceRequest) SetID(id string) {
+	o.ID = id
+	o.require(ordersReserveEcommerceRequestFieldID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersReserveRequestFieldWarehouseID)
+func (o *OrdersReserveEcommerceRequest) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersReserveEcommerceRequestFieldWarehouseID)
 }
 
-func (p *PostV1EcommerceOrdersReserveRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersReserveRequest
+func (o *OrdersReserveEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersReserveEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersReserveRequest(body)
+	*o = OrdersReserveEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersReserveRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersReserveRequest
+func (o *OrdersReserveEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed OrdersReserveEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceProductsListRequestFieldWarehouseID  = big.NewInt(1 << 0)
-	postV1EcommerceProductsListRequestFieldPriceListID  = big.NewInt(1 << 1)
-	postV1EcommerceProductsListRequestFieldUpdatedSince = big.NewInt(1 << 2)
-	postV1EcommerceProductsListRequestFieldPage         = big.NewInt(1 << 3)
-	postV1EcommerceProductsListRequestFieldPageSize     = big.NewInt(1 << 4)
+	productsListEcommerceRequestFieldWarehouseID  = big.NewInt(1 << 0)
+	productsListEcommerceRequestFieldPriceListID  = big.NewInt(1 << 1)
+	productsListEcommerceRequestFieldUpdatedSince = big.NewInt(1 << 2)
+	productsListEcommerceRequestFieldPage         = big.NewInt(1 << 3)
+	productsListEcommerceRequestFieldPageSize     = big.NewInt(1 << 4)
 )
 
-type PostV1EcommerceProductsListRequest struct {
+type ProductsListEcommerceRequest struct {
 	WarehouseID  *string    `json:"warehouseId,omitempty" url:"-"`
 	PriceListID  *string    `json:"priceListId,omitempty" url:"-"`
 	UpdatedSince *time.Time `json:"updatedSince,omitempty" url:"-"`
@@ -459,7 +461,7 @@ type PostV1EcommerceProductsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceProductsListRequest) require(field *big.Int) {
+func (p *ProductsListEcommerceRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -468,51 +470,51 @@ func (p *PostV1EcommerceProductsListRequest) require(field *big.Int) {
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListRequest) SetWarehouseID(warehouseID *string) {
+func (p *ProductsListEcommerceRequest) SetWarehouseID(warehouseID *string) {
 	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceProductsListRequestFieldWarehouseID)
+	p.require(productsListEcommerceRequestFieldWarehouseID)
 }
 
 // SetPriceListID sets the PriceListID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListRequest) SetPriceListID(priceListID *string) {
+func (p *ProductsListEcommerceRequest) SetPriceListID(priceListID *string) {
 	p.PriceListID = priceListID
-	p.require(postV1EcommerceProductsListRequestFieldPriceListID)
+	p.require(productsListEcommerceRequestFieldPriceListID)
 }
 
 // SetUpdatedSince sets the UpdatedSince field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListRequest) SetUpdatedSince(updatedSince *time.Time) {
+func (p *ProductsListEcommerceRequest) SetUpdatedSince(updatedSince *time.Time) {
 	p.UpdatedSince = updatedSince
-	p.require(postV1EcommerceProductsListRequestFieldUpdatedSince)
+	p.require(productsListEcommerceRequestFieldUpdatedSince)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListRequest) SetPage(page *int64) {
+func (p *ProductsListEcommerceRequest) SetPage(page *int64) {
 	p.Page = page
-	p.require(postV1EcommerceProductsListRequestFieldPage)
+	p.require(productsListEcommerceRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListRequest) SetPageSize(pageSize *int64) {
+func (p *ProductsListEcommerceRequest) SetPageSize(pageSize *int64) {
 	p.PageSize = pageSize
-	p.require(postV1EcommerceProductsListRequestFieldPageSize)
+	p.require(productsListEcommerceRequestFieldPageSize)
 }
 
-func (p *PostV1EcommerceProductsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceProductsListRequest
+func (p *ProductsListEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ProductsListEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceProductsListRequest(body)
+	*p = ProductsListEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceProductsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceProductsListRequest
+func (p *ProductsListEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed ProductsListEcommerceRequest
 	var marshaler = struct {
 		embed
 		UpdatedSince *internal.DateTime `json:"updatedSince,omitempty"`
@@ -525,81 +527,81 @@ func (p *PostV1EcommerceProductsListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1EcommerceStockListRequestFieldWarehouseID = big.NewInt(1 << 0)
+	stockListEcommerceRequestFieldWarehouseID = big.NewInt(1 << 0)
 )
 
-type PostV1EcommerceStockListRequest struct {
+type StockListEcommerceRequest struct {
 	WarehouseID *string `json:"warehouseId,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1EcommerceStockListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockListEcommerceRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceStockListRequestFieldWarehouseID)
+func (s *StockListEcommerceRequest) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(stockListEcommerceRequestFieldWarehouseID)
 }
 
-func (p *PostV1EcommerceStockListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceStockListRequest
+func (s *StockListEcommerceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockListEcommerceRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceStockListRequest(body)
+	*s = StockListEcommerceRequest(body)
 	return nil
 }
 
-func (p *PostV1EcommerceStockListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceStockListRequest
+func (s *StockListEcommerceRequest) MarshalJSON() ([]byte, error) {
+	type embed StockListEcommerceRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1EcommerceOrdersCancelResponseFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCancelResponseFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCancelResponseFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCancelResponseFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCancelResponseFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersCancelResponseFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersCancelResponseFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersCancelResponseFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersCancelResponseFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersCancelResponseFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersCancelResponseFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersCancelResponseFieldCreatedAt         = big.NewInt(1 << 11)
-	postV1EcommerceOrdersCancelResponseFieldLines             = big.NewInt(1 << 12)
+	ordersCancelEcommerceResponseFieldID                = big.NewInt(1 << 0)
+	ordersCancelEcommerceResponseFieldChannel           = big.NewInt(1 << 1)
+	ordersCancelEcommerceResponseFieldExternalRef       = big.NewInt(1 << 2)
+	ordersCancelEcommerceResponseFieldPartnerID         = big.NewInt(1 << 3)
+	ordersCancelEcommerceResponseFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersCancelEcommerceResponseFieldCurrency          = big.NewInt(1 << 5)
+	ordersCancelEcommerceResponseFieldStatus            = big.NewInt(1 << 6)
+	ordersCancelEcommerceResponseFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersCancelEcommerceResponseFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersCancelEcommerceResponseFieldMarketplace       = big.NewInt(1 << 9)
+	ordersCancelEcommerceResponseFieldNotes             = big.NewInt(1 << 10)
+	ordersCancelEcommerceResponseFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersCancelEcommerceResponseFieldLines             = big.NewInt(1 << 12)
 )
 
-type PostV1EcommerceOrdersCancelResponse struct {
-	ID                string                                          `json:"id" url:"id"`
-	Channel           string                                          `json:"channel" url:"channel"`
-	ExternalRef       *string                                         `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                          `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                         `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                          `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersCancelResponseStatus       `json:"status" url:"status"`
-	InvoiceID         *string                                         `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                         `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                         `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                          `json:"createdAt" url:"createdAt"`
-	Lines             []*PostV1EcommerceOrdersCancelResponseLinesItem `json:"lines" url:"lines"`
+type OrdersCancelEcommerceResponse struct {
+	ID                string                                    `json:"id" url:"id"`
+	Channel           string                                    `json:"channel" url:"channel"`
+	ExternalRef       *string                                   `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                    `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                    `json:"currency" url:"currency"`
+	Status            OrdersCancelEcommerceResponseStatus       `json:"status" url:"status"`
+	InvoiceID         *string                                   `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                   `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                   `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
+	Lines             []*OrdersCancelEcommerceResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -608,254 +610,262 @@ type PostV1EcommerceOrdersCancelResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetID() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetChannel() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetCurrency() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetStatus() PostV1EcommerceOrdersCancelResponseStatus {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetStatus() OrdersCancelEcommerceResponseStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetNotes() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersCancelEcommerceResponse) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetLines() []*PostV1EcommerceOrdersCancelResponseLinesItem {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetLines() []*OrdersCancelEcommerceResponseLinesItem {
+	if o == nil {
 		return nil
 	}
-	return p.Lines
+	return o.Lines
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCancelEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersCancelResponseFieldID)
+func (o *OrdersCancelEcommerceResponse) SetID(id string) {
+	o.ID = id
+	o.require(ordersCancelEcommerceResponseFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersCancelResponseFieldChannel)
+func (o *OrdersCancelEcommerceResponse) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersCancelEcommerceResponseFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersCancelResponseFieldExternalRef)
+func (o *OrdersCancelEcommerceResponse) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersCancelEcommerceResponseFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersCancelResponseFieldPartnerID)
+func (o *OrdersCancelEcommerceResponse) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersCancelEcommerceResponseFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersCancelResponseFieldWarehouseID)
+func (o *OrdersCancelEcommerceResponse) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersCancelEcommerceResponseFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersCancelResponseFieldCurrency)
+func (o *OrdersCancelEcommerceResponse) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersCancelEcommerceResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetStatus(status PostV1EcommerceOrdersCancelResponseStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersCancelResponseFieldStatus)
+func (o *OrdersCancelEcommerceResponse) SetStatus(status OrdersCancelEcommerceResponseStatus) {
+	o.Status = status
+	o.require(ordersCancelEcommerceResponseFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersCancelResponseFieldInvoiceID)
+func (o *OrdersCancelEcommerceResponse) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersCancelEcommerceResponseFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersCancelResponseFieldShipToCountryCode)
+func (o *OrdersCancelEcommerceResponse) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersCancelEcommerceResponseFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersCancelResponseFieldMarketplace)
+func (o *OrdersCancelEcommerceResponse) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersCancelEcommerceResponseFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersCancelResponseFieldNotes)
+func (o *OrdersCancelEcommerceResponse) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersCancelEcommerceResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersCancelResponseFieldCreatedAt)
+func (o *OrdersCancelEcommerceResponse) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersCancelEcommerceResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponse) SetLines(lines []*PostV1EcommerceOrdersCancelResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersCancelResponseFieldLines)
+func (o *OrdersCancelEcommerceResponse) SetLines(lines []*OrdersCancelEcommerceResponseLinesItem) {
+	o.Lines = lines
+	o.require(ordersCancelEcommerceResponseFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCancelResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersCancelEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type embed OrdersCancelEcommerceResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCancelResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCancelEcommerceResponse(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCancelResponse
+func (o *OrdersCancelEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersCancelEcommerceResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCancelResponse) String() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersCancelResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCancelResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCancelResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCancelResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCancelResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	postV1EcommerceOrdersCancelResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersCancelEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	ordersCancelEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	ordersCancelEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	ordersCancelEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	ordersCancelEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
+	ordersCancelEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
 )
 
-type PostV1EcommerceOrdersCancelResponseLinesItem struct {
+type OrdersCancelEcommerceResponseLinesItem struct {
 	ID               string  `json:"id" url:"id"`
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
@@ -870,183 +880,183 @@ type PostV1EcommerceOrdersCancelResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetID() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetVatRatePercent() string {
+	if o == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCancelEcommerceResponseLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldID)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersCancelEcommerceResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldItemID)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersCancelEcommerceResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldDescription)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersCancelEcommerceResponseLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldQuantity)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersCancelEcommerceResponseLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldUnitPriceExclVat)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersCancelEcommerceResponseLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersCancelResponseLinesItemFieldVatRatePercent)
+func (o *OrdersCancelEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersCancelEcommerceResponseLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCancelResponseLinesItem
+func (o *OrdersCancelEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCancelEcommerceResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCancelResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCancelEcommerceResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCancelResponseLinesItem
+func (o *OrdersCancelEcommerceResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersCancelEcommerceResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCancelResponseLinesItem) String() string {
-	if p == nil {
+func (o *OrdersCancelEcommerceResponseLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersCancelResponseStatus string
+type OrdersCancelEcommerceResponseStatus string
 
 const (
-	PostV1EcommerceOrdersCancelResponseStatusNew       PostV1EcommerceOrdersCancelResponseStatus = "new"
-	PostV1EcommerceOrdersCancelResponseStatusReserved  PostV1EcommerceOrdersCancelResponseStatus = "reserved"
-	PostV1EcommerceOrdersCancelResponseStatusFulfilled PostV1EcommerceOrdersCancelResponseStatus = "fulfilled"
-	PostV1EcommerceOrdersCancelResponseStatusCancelled PostV1EcommerceOrdersCancelResponseStatus = "cancelled"
+	OrdersCancelEcommerceResponseStatusNew       OrdersCancelEcommerceResponseStatus = "new"
+	OrdersCancelEcommerceResponseStatusReserved  OrdersCancelEcommerceResponseStatus = "reserved"
+	OrdersCancelEcommerceResponseStatusFulfilled OrdersCancelEcommerceResponseStatus = "fulfilled"
+	OrdersCancelEcommerceResponseStatusCancelled OrdersCancelEcommerceResponseStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersCancelResponseStatusFromString(s string) (PostV1EcommerceOrdersCancelResponseStatus, error) {
+func NewOrdersCancelEcommerceResponseStatusFromString(s string) (OrdersCancelEcommerceResponseStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersCancelResponseStatusNew, nil
+		return OrdersCancelEcommerceResponseStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersCancelResponseStatusReserved, nil
+		return OrdersCancelEcommerceResponseStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersCancelResponseStatusFulfilled, nil
+		return OrdersCancelEcommerceResponseStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersCancelResponseStatusCancelled, nil
+		return OrdersCancelEcommerceResponseStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersCancelResponseStatus
+	var t OrdersCancelEcommerceResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersCancelResponseStatus) Ptr() *PostV1EcommerceOrdersCancelResponseStatus {
-	return &p
+func (o OrdersCancelEcommerceResponseStatus) Ptr() *OrdersCancelEcommerceResponseStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersCreateRequestLinesItemFieldItemID           = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCreateRequestLinesItemFieldDescription      = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCreateRequestLinesItemFieldQuantity         = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCreateRequestLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCreateRequestLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	ordersCreateEcommerceRequestLinesItemFieldItemID           = big.NewInt(1 << 0)
+	ordersCreateEcommerceRequestLinesItemFieldDescription      = big.NewInt(1 << 1)
+	ordersCreateEcommerceRequestLinesItemFieldQuantity         = big.NewInt(1 << 2)
+	ordersCreateEcommerceRequestLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	ordersCreateEcommerceRequestLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
 )
 
-type PostV1EcommerceOrdersCreateRequestLinesItem struct {
+type OrdersCreateEcommerceRequestLinesItem struct {
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
 	Quantity         string  `json:"quantity" url:"quantity"`
@@ -1060,139 +1070,139 @@ type PostV1EcommerceOrdersCreateRequestLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetVatRatePercent() *string {
+	if o == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCreateEcommerceRequestLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersCreateRequestLinesItemFieldItemID)
+func (o *OrdersCreateEcommerceRequestLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersCreateEcommerceRequestLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersCreateRequestLinesItemFieldDescription)
+func (o *OrdersCreateEcommerceRequestLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersCreateEcommerceRequestLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersCreateRequestLinesItemFieldQuantity)
+func (o *OrdersCreateEcommerceRequestLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersCreateEcommerceRequestLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersCreateRequestLinesItemFieldUnitPriceExclVat)
+func (o *OrdersCreateEcommerceRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersCreateEcommerceRequestLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersCreateRequestLinesItemFieldVatRatePercent)
+func (o *OrdersCreateEcommerceRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersCreateEcommerceRequestLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCreateRequestLinesItem
+func (o *OrdersCreateEcommerceRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCreateEcommerceRequestLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCreateRequestLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCreateEcommerceRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCreateRequestLinesItem
+func (o *OrdersCreateEcommerceRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersCreateEcommerceRequestLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestLinesItem) String() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersCreateRequestPartnerFieldName  = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCreateRequestPartnerFieldEmail = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCreateRequestPartnerFieldCode  = big.NewInt(1 << 2)
+	ordersCreateEcommerceRequestPartnerFieldName  = big.NewInt(1 << 0)
+	ordersCreateEcommerceRequestPartnerFieldEmail = big.NewInt(1 << 1)
+	ordersCreateEcommerceRequestPartnerFieldCode  = big.NewInt(1 << 2)
 )
 
-type PostV1EcommerceOrdersCreateRequestPartner struct {
+type OrdersCreateEcommerceRequestPartner struct {
 	Name  string  `json:"name" url:"name"`
 	Email *string `json:"email,omitempty" url:"email,omitempty"`
 	Code  *string `json:"code,omitempty" url:"code,omitempty"`
@@ -1204,134 +1214,134 @@ type PostV1EcommerceOrdersCreateRequestPartner struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) GetName() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestPartner) GetName() string {
+	if o == nil {
 		return ""
 	}
-	return p.Name
+	return o.Name
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) GetEmail() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestPartner) GetEmail() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Email
+	return o.Email
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) GetCode() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestPartner) GetCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Code
+	return o.Code
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestPartner) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCreateEcommerceRequestPartner) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestPartner) SetName(name string) {
-	p.Name = name
-	p.require(postV1EcommerceOrdersCreateRequestPartnerFieldName)
+func (o *OrdersCreateEcommerceRequestPartner) SetName(name string) {
+	o.Name = name
+	o.require(ordersCreateEcommerceRequestPartnerFieldName)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestPartner) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1EcommerceOrdersCreateRequestPartnerFieldEmail)
+func (o *OrdersCreateEcommerceRequestPartner) SetEmail(email *string) {
+	o.Email = email
+	o.require(ordersCreateEcommerceRequestPartnerFieldEmail)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateRequestPartner) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1EcommerceOrdersCreateRequestPartnerFieldCode)
+func (o *OrdersCreateEcommerceRequestPartner) SetCode(code *string) {
+	o.Code = code
+	o.require(ordersCreateEcommerceRequestPartnerFieldCode)
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCreateRequestPartner
+func (o *OrdersCreateEcommerceRequestPartner) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCreateEcommerceRequestPartner
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCreateRequestPartner(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCreateEcommerceRequestPartner(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCreateRequestPartner
+func (o *OrdersCreateEcommerceRequestPartner) MarshalJSON() ([]byte, error) {
+	type embed OrdersCreateEcommerceRequestPartner
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCreateRequestPartner) String() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceRequestPartner) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersCreateResponseFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCreateResponseFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCreateResponseFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCreateResponseFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCreateResponseFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersCreateResponseFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersCreateResponseFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersCreateResponseFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersCreateResponseFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersCreateResponseFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersCreateResponseFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersCreateResponseFieldCreatedAt         = big.NewInt(1 << 11)
-	postV1EcommerceOrdersCreateResponseFieldLines             = big.NewInt(1 << 12)
+	ordersCreateEcommerceResponseFieldID                = big.NewInt(1 << 0)
+	ordersCreateEcommerceResponseFieldChannel           = big.NewInt(1 << 1)
+	ordersCreateEcommerceResponseFieldExternalRef       = big.NewInt(1 << 2)
+	ordersCreateEcommerceResponseFieldPartnerID         = big.NewInt(1 << 3)
+	ordersCreateEcommerceResponseFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersCreateEcommerceResponseFieldCurrency          = big.NewInt(1 << 5)
+	ordersCreateEcommerceResponseFieldStatus            = big.NewInt(1 << 6)
+	ordersCreateEcommerceResponseFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersCreateEcommerceResponseFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersCreateEcommerceResponseFieldMarketplace       = big.NewInt(1 << 9)
+	ordersCreateEcommerceResponseFieldNotes             = big.NewInt(1 << 10)
+	ordersCreateEcommerceResponseFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersCreateEcommerceResponseFieldLines             = big.NewInt(1 << 12)
 )
 
-type PostV1EcommerceOrdersCreateResponse struct {
-	ID                string                                          `json:"id" url:"id"`
-	Channel           string                                          `json:"channel" url:"channel"`
-	ExternalRef       *string                                         `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                          `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                         `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                          `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersCreateResponseStatus       `json:"status" url:"status"`
-	InvoiceID         *string                                         `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                         `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                         `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                          `json:"createdAt" url:"createdAt"`
-	Lines             []*PostV1EcommerceOrdersCreateResponseLinesItem `json:"lines" url:"lines"`
+type OrdersCreateEcommerceResponse struct {
+	ID                string                                    `json:"id" url:"id"`
+	Channel           string                                    `json:"channel" url:"channel"`
+	ExternalRef       *string                                   `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                    `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                    `json:"currency" url:"currency"`
+	Status            OrdersCreateEcommerceResponseStatus       `json:"status" url:"status"`
+	InvoiceID         *string                                   `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                   `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                   `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
+	Lines             []*OrdersCreateEcommerceResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1340,254 +1350,262 @@ type PostV1EcommerceOrdersCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetID() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetChannel() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetCurrency() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetStatus() PostV1EcommerceOrdersCreateResponseStatus {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetStatus() OrdersCreateEcommerceResponseStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetNotes() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersCreateEcommerceResponse) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetLines() []*PostV1EcommerceOrdersCreateResponseLinesItem {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetLines() []*OrdersCreateEcommerceResponseLinesItem {
+	if o == nil {
 		return nil
 	}
-	return p.Lines
+	return o.Lines
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCreateEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersCreateResponseFieldID)
+func (o *OrdersCreateEcommerceResponse) SetID(id string) {
+	o.ID = id
+	o.require(ordersCreateEcommerceResponseFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersCreateResponseFieldChannel)
+func (o *OrdersCreateEcommerceResponse) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersCreateEcommerceResponseFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersCreateResponseFieldExternalRef)
+func (o *OrdersCreateEcommerceResponse) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersCreateEcommerceResponseFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersCreateResponseFieldPartnerID)
+func (o *OrdersCreateEcommerceResponse) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersCreateEcommerceResponseFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersCreateResponseFieldWarehouseID)
+func (o *OrdersCreateEcommerceResponse) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersCreateEcommerceResponseFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersCreateResponseFieldCurrency)
+func (o *OrdersCreateEcommerceResponse) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersCreateEcommerceResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetStatus(status PostV1EcommerceOrdersCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersCreateResponseFieldStatus)
+func (o *OrdersCreateEcommerceResponse) SetStatus(status OrdersCreateEcommerceResponseStatus) {
+	o.Status = status
+	o.require(ordersCreateEcommerceResponseFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersCreateResponseFieldInvoiceID)
+func (o *OrdersCreateEcommerceResponse) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersCreateEcommerceResponseFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersCreateResponseFieldShipToCountryCode)
+func (o *OrdersCreateEcommerceResponse) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersCreateEcommerceResponseFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersCreateResponseFieldMarketplace)
+func (o *OrdersCreateEcommerceResponse) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersCreateEcommerceResponseFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersCreateResponseFieldNotes)
+func (o *OrdersCreateEcommerceResponse) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersCreateEcommerceResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersCreateResponseFieldCreatedAt)
+func (o *OrdersCreateEcommerceResponse) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersCreateEcommerceResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponse) SetLines(lines []*PostV1EcommerceOrdersCreateResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersCreateResponseFieldLines)
+func (o *OrdersCreateEcommerceResponse) SetLines(lines []*OrdersCreateEcommerceResponseLinesItem) {
+	o.Lines = lines
+	o.require(ordersCreateEcommerceResponseFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersCreateEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type embed OrdersCreateEcommerceResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCreateEcommerceResponse(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCreateResponse
+func (o *OrdersCreateEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersCreateEcommerceResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCreateResponse) String() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersCreateResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1EcommerceOrdersCreateResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersCreateResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersCreateResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersCreateResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	postV1EcommerceOrdersCreateResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersCreateEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	ordersCreateEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	ordersCreateEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	ordersCreateEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	ordersCreateEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
+	ordersCreateEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
 )
 
-type PostV1EcommerceOrdersCreateResponseLinesItem struct {
+type OrdersCreateEcommerceResponseLinesItem struct {
 	ID               string  `json:"id" url:"id"`
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
@@ -1602,204 +1620,204 @@ type PostV1EcommerceOrdersCreateResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetID() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetVatRatePercent() string {
+	if o == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersCreateEcommerceResponseLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldID)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersCreateEcommerceResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldItemID)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersCreateEcommerceResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldDescription)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersCreateEcommerceResponseLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldQuantity)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersCreateEcommerceResponseLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldUnitPriceExclVat)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersCreateEcommerceResponseLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersCreateResponseLinesItemFieldVatRatePercent)
+func (o *OrdersCreateEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersCreateEcommerceResponseLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersCreateResponseLinesItem
+func (o *OrdersCreateEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersCreateEcommerceResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersCreateResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersCreateEcommerceResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersCreateResponseLinesItem
+func (o *OrdersCreateEcommerceResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersCreateEcommerceResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersCreateResponseLinesItem) String() string {
-	if p == nil {
+func (o *OrdersCreateEcommerceResponseLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersCreateResponseStatus string
+type OrdersCreateEcommerceResponseStatus string
 
 const (
-	PostV1EcommerceOrdersCreateResponseStatusNew       PostV1EcommerceOrdersCreateResponseStatus = "new"
-	PostV1EcommerceOrdersCreateResponseStatusReserved  PostV1EcommerceOrdersCreateResponseStatus = "reserved"
-	PostV1EcommerceOrdersCreateResponseStatusFulfilled PostV1EcommerceOrdersCreateResponseStatus = "fulfilled"
-	PostV1EcommerceOrdersCreateResponseStatusCancelled PostV1EcommerceOrdersCreateResponseStatus = "cancelled"
+	OrdersCreateEcommerceResponseStatusNew       OrdersCreateEcommerceResponseStatus = "new"
+	OrdersCreateEcommerceResponseStatusReserved  OrdersCreateEcommerceResponseStatus = "reserved"
+	OrdersCreateEcommerceResponseStatusFulfilled OrdersCreateEcommerceResponseStatus = "fulfilled"
+	OrdersCreateEcommerceResponseStatusCancelled OrdersCreateEcommerceResponseStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersCreateResponseStatusFromString(s string) (PostV1EcommerceOrdersCreateResponseStatus, error) {
+func NewOrdersCreateEcommerceResponseStatusFromString(s string) (OrdersCreateEcommerceResponseStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersCreateResponseStatusNew, nil
+		return OrdersCreateEcommerceResponseStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersCreateResponseStatusReserved, nil
+		return OrdersCreateEcommerceResponseStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersCreateResponseStatusFulfilled, nil
+		return OrdersCreateEcommerceResponseStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersCreateResponseStatusCancelled, nil
+		return OrdersCreateEcommerceResponseStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersCreateResponseStatus
+	var t OrdersCreateEcommerceResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersCreateResponseStatus) Ptr() *PostV1EcommerceOrdersCreateResponseStatus {
-	return &p
+func (o OrdersCreateEcommerceResponseStatus) Ptr() *OrdersCreateEcommerceResponseStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersFulfillResponseFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersFulfillResponseFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersFulfillResponseFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersFulfillResponseFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersFulfillResponseFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersFulfillResponseFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersFulfillResponseFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersFulfillResponseFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersFulfillResponseFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersFulfillResponseFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersFulfillResponseFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersFulfillResponseFieldCreatedAt         = big.NewInt(1 << 11)
-	postV1EcommerceOrdersFulfillResponseFieldLines             = big.NewInt(1 << 12)
+	ordersFulfillEcommerceResponseFieldID                = big.NewInt(1 << 0)
+	ordersFulfillEcommerceResponseFieldChannel           = big.NewInt(1 << 1)
+	ordersFulfillEcommerceResponseFieldExternalRef       = big.NewInt(1 << 2)
+	ordersFulfillEcommerceResponseFieldPartnerID         = big.NewInt(1 << 3)
+	ordersFulfillEcommerceResponseFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersFulfillEcommerceResponseFieldCurrency          = big.NewInt(1 << 5)
+	ordersFulfillEcommerceResponseFieldStatus            = big.NewInt(1 << 6)
+	ordersFulfillEcommerceResponseFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersFulfillEcommerceResponseFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersFulfillEcommerceResponseFieldMarketplace       = big.NewInt(1 << 9)
+	ordersFulfillEcommerceResponseFieldNotes             = big.NewInt(1 << 10)
+	ordersFulfillEcommerceResponseFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersFulfillEcommerceResponseFieldLines             = big.NewInt(1 << 12)
 )
 
-type PostV1EcommerceOrdersFulfillResponse struct {
-	ID                string                                           `json:"id" url:"id"`
-	Channel           string                                           `json:"channel" url:"channel"`
-	ExternalRef       *string                                          `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                           `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                          `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                           `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersFulfillResponseStatus       `json:"status" url:"status"`
-	InvoiceID         *string                                          `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                          `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                          `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                           `json:"createdAt" url:"createdAt"`
-	Lines             []*PostV1EcommerceOrdersFulfillResponseLinesItem `json:"lines" url:"lines"`
+type OrdersFulfillEcommerceResponse struct {
+	ID                string                                     `json:"id" url:"id"`
+	Channel           string                                     `json:"channel" url:"channel"`
+	ExternalRef       *string                                    `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                     `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                    `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                     `json:"currency" url:"currency"`
+	Status            OrdersFulfillEcommerceResponseStatus       `json:"status" url:"status"`
+	InvoiceID         *string                                    `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                    `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                    `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                  `json:"createdAt" url:"createdAt"`
+	Lines             []*OrdersFulfillEcommerceResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1808,254 +1826,262 @@ type PostV1EcommerceOrdersFulfillResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetID() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetChannel() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetCurrency() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetStatus() PostV1EcommerceOrdersFulfillResponseStatus {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetStatus() OrdersFulfillEcommerceResponseStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetNotes() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersFulfillEcommerceResponse) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetLines() []*PostV1EcommerceOrdersFulfillResponseLinesItem {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetLines() []*OrdersFulfillEcommerceResponseLinesItem {
+	if o == nil {
 		return nil
 	}
-	return p.Lines
+	return o.Lines
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersFulfillEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersFulfillResponseFieldID)
+func (o *OrdersFulfillEcommerceResponse) SetID(id string) {
+	o.ID = id
+	o.require(ordersFulfillEcommerceResponseFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersFulfillResponseFieldChannel)
+func (o *OrdersFulfillEcommerceResponse) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersFulfillEcommerceResponseFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersFulfillResponseFieldExternalRef)
+func (o *OrdersFulfillEcommerceResponse) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersFulfillEcommerceResponseFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersFulfillResponseFieldPartnerID)
+func (o *OrdersFulfillEcommerceResponse) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersFulfillEcommerceResponseFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersFulfillResponseFieldWarehouseID)
+func (o *OrdersFulfillEcommerceResponse) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersFulfillEcommerceResponseFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersFulfillResponseFieldCurrency)
+func (o *OrdersFulfillEcommerceResponse) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersFulfillEcommerceResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetStatus(status PostV1EcommerceOrdersFulfillResponseStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersFulfillResponseFieldStatus)
+func (o *OrdersFulfillEcommerceResponse) SetStatus(status OrdersFulfillEcommerceResponseStatus) {
+	o.Status = status
+	o.require(ordersFulfillEcommerceResponseFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersFulfillResponseFieldInvoiceID)
+func (o *OrdersFulfillEcommerceResponse) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersFulfillEcommerceResponseFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersFulfillResponseFieldShipToCountryCode)
+func (o *OrdersFulfillEcommerceResponse) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersFulfillEcommerceResponseFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersFulfillResponseFieldMarketplace)
+func (o *OrdersFulfillEcommerceResponse) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersFulfillEcommerceResponseFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersFulfillResponseFieldNotes)
+func (o *OrdersFulfillEcommerceResponse) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersFulfillEcommerceResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersFulfillResponseFieldCreatedAt)
+func (o *OrdersFulfillEcommerceResponse) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersFulfillEcommerceResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponse) SetLines(lines []*PostV1EcommerceOrdersFulfillResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersFulfillResponseFieldLines)
+func (o *OrdersFulfillEcommerceResponse) SetLines(lines []*OrdersFulfillEcommerceResponseLinesItem) {
+	o.Lines = lines
+	o.require(ordersFulfillEcommerceResponseFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersFulfillResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersFulfillEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type embed OrdersFulfillEcommerceResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersFulfillResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersFulfillEcommerceResponse(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersFulfillResponse
+func (o *OrdersFulfillEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersFulfillEcommerceResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponse) String() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	postV1EcommerceOrdersFulfillResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersFulfillEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	ordersFulfillEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	ordersFulfillEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	ordersFulfillEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	ordersFulfillEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
+	ordersFulfillEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
 )
 
-type PostV1EcommerceOrdersFulfillResponseLinesItem struct {
+type OrdersFulfillEcommerceResponseLinesItem struct {
 	ID               string  `json:"id" url:"id"`
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
@@ -2070,204 +2096,204 @@ type PostV1EcommerceOrdersFulfillResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetID() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetVatRatePercent() string {
+	if o == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersFulfillEcommerceResponseLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldID)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldItemID)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldDescription)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldQuantity)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldUnitPriceExclVat)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersFulfillResponseLinesItemFieldVatRatePercent)
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersFulfillResponseLinesItem
+func (o *OrdersFulfillEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersFulfillEcommerceResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersFulfillResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersFulfillEcommerceResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersFulfillResponseLinesItem
+func (o *OrdersFulfillEcommerceResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersFulfillEcommerceResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersFulfillResponseLinesItem) String() string {
-	if p == nil {
+func (o *OrdersFulfillEcommerceResponseLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersFulfillResponseStatus string
+type OrdersFulfillEcommerceResponseStatus string
 
 const (
-	PostV1EcommerceOrdersFulfillResponseStatusNew       PostV1EcommerceOrdersFulfillResponseStatus = "new"
-	PostV1EcommerceOrdersFulfillResponseStatusReserved  PostV1EcommerceOrdersFulfillResponseStatus = "reserved"
-	PostV1EcommerceOrdersFulfillResponseStatusFulfilled PostV1EcommerceOrdersFulfillResponseStatus = "fulfilled"
-	PostV1EcommerceOrdersFulfillResponseStatusCancelled PostV1EcommerceOrdersFulfillResponseStatus = "cancelled"
+	OrdersFulfillEcommerceResponseStatusNew       OrdersFulfillEcommerceResponseStatus = "new"
+	OrdersFulfillEcommerceResponseStatusReserved  OrdersFulfillEcommerceResponseStatus = "reserved"
+	OrdersFulfillEcommerceResponseStatusFulfilled OrdersFulfillEcommerceResponseStatus = "fulfilled"
+	OrdersFulfillEcommerceResponseStatusCancelled OrdersFulfillEcommerceResponseStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersFulfillResponseStatusFromString(s string) (PostV1EcommerceOrdersFulfillResponseStatus, error) {
+func NewOrdersFulfillEcommerceResponseStatusFromString(s string) (OrdersFulfillEcommerceResponseStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersFulfillResponseStatusNew, nil
+		return OrdersFulfillEcommerceResponseStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersFulfillResponseStatusReserved, nil
+		return OrdersFulfillEcommerceResponseStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersFulfillResponseStatusFulfilled, nil
+		return OrdersFulfillEcommerceResponseStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersFulfillResponseStatusCancelled, nil
+		return OrdersFulfillEcommerceResponseStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersFulfillResponseStatus
+	var t OrdersFulfillEcommerceResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersFulfillResponseStatus) Ptr() *PostV1EcommerceOrdersFulfillResponseStatus {
-	return &p
+func (o OrdersFulfillEcommerceResponseStatus) Ptr() *OrdersFulfillEcommerceResponseStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersGetResponseFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersGetResponseFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersGetResponseFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersGetResponseFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersGetResponseFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersGetResponseFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersGetResponseFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersGetResponseFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersGetResponseFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersGetResponseFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersGetResponseFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersGetResponseFieldCreatedAt         = big.NewInt(1 << 11)
-	postV1EcommerceOrdersGetResponseFieldLines             = big.NewInt(1 << 12)
+	ordersGetEcommerceResponseFieldID                = big.NewInt(1 << 0)
+	ordersGetEcommerceResponseFieldChannel           = big.NewInt(1 << 1)
+	ordersGetEcommerceResponseFieldExternalRef       = big.NewInt(1 << 2)
+	ordersGetEcommerceResponseFieldPartnerID         = big.NewInt(1 << 3)
+	ordersGetEcommerceResponseFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersGetEcommerceResponseFieldCurrency          = big.NewInt(1 << 5)
+	ordersGetEcommerceResponseFieldStatus            = big.NewInt(1 << 6)
+	ordersGetEcommerceResponseFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersGetEcommerceResponseFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersGetEcommerceResponseFieldMarketplace       = big.NewInt(1 << 9)
+	ordersGetEcommerceResponseFieldNotes             = big.NewInt(1 << 10)
+	ordersGetEcommerceResponseFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersGetEcommerceResponseFieldLines             = big.NewInt(1 << 12)
 )
 
-type PostV1EcommerceOrdersGetResponse struct {
-	ID                string                                       `json:"id" url:"id"`
-	Channel           string                                       `json:"channel" url:"channel"`
-	ExternalRef       *string                                      `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                       `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                      `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                       `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersGetResponseStatus       `json:"status" url:"status"`
-	InvoiceID         *string                                      `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                      `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                      `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                       `json:"createdAt" url:"createdAt"`
-	Lines             []*PostV1EcommerceOrdersGetResponseLinesItem `json:"lines" url:"lines"`
+type OrdersGetEcommerceResponse struct {
+	ID                string                                 `json:"id" url:"id"`
+	Channel           string                                 `json:"channel" url:"channel"`
+	ExternalRef       *string                                `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                 `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                 `json:"currency" url:"currency"`
+	Status            OrdersGetEcommerceResponseStatus       `json:"status" url:"status"`
+	InvoiceID         *string                                `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                              `json:"createdAt" url:"createdAt"`
+	Lines             []*OrdersGetEcommerceResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2276,254 +2302,262 @@ type PostV1EcommerceOrdersGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetID() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetChannel() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetCurrency() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetStatus() PostV1EcommerceOrdersGetResponseStatus {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetStatus() OrdersGetEcommerceResponseStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetNotes() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersGetEcommerceResponse) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetLines() []*PostV1EcommerceOrdersGetResponseLinesItem {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetLines() []*OrdersGetEcommerceResponseLinesItem {
+	if o == nil {
 		return nil
 	}
-	return p.Lines
+	return o.Lines
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersGetEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersGetResponseFieldID)
+func (o *OrdersGetEcommerceResponse) SetID(id string) {
+	o.ID = id
+	o.require(ordersGetEcommerceResponseFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersGetResponseFieldChannel)
+func (o *OrdersGetEcommerceResponse) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersGetEcommerceResponseFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersGetResponseFieldExternalRef)
+func (o *OrdersGetEcommerceResponse) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersGetEcommerceResponseFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersGetResponseFieldPartnerID)
+func (o *OrdersGetEcommerceResponse) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersGetEcommerceResponseFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersGetResponseFieldWarehouseID)
+func (o *OrdersGetEcommerceResponse) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersGetEcommerceResponseFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersGetResponseFieldCurrency)
+func (o *OrdersGetEcommerceResponse) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersGetEcommerceResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetStatus(status PostV1EcommerceOrdersGetResponseStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersGetResponseFieldStatus)
+func (o *OrdersGetEcommerceResponse) SetStatus(status OrdersGetEcommerceResponseStatus) {
+	o.Status = status
+	o.require(ordersGetEcommerceResponseFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersGetResponseFieldInvoiceID)
+func (o *OrdersGetEcommerceResponse) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersGetEcommerceResponseFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersGetResponseFieldShipToCountryCode)
+func (o *OrdersGetEcommerceResponse) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersGetEcommerceResponseFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersGetResponseFieldMarketplace)
+func (o *OrdersGetEcommerceResponse) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersGetEcommerceResponseFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersGetResponseFieldNotes)
+func (o *OrdersGetEcommerceResponse) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersGetEcommerceResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersGetResponseFieldCreatedAt)
+func (o *OrdersGetEcommerceResponse) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersGetEcommerceResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponse) SetLines(lines []*PostV1EcommerceOrdersGetResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersGetResponseFieldLines)
+func (o *OrdersGetEcommerceResponse) SetLines(lines []*OrdersGetEcommerceResponseLinesItem) {
+	o.Lines = lines
+	o.require(ordersGetEcommerceResponseFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersGetEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type embed OrdersGetEcommerceResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersGetEcommerceResponse(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersGetResponse
+func (o *OrdersGetEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersGetEcommerceResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersGetResponse) String() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersGetResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1EcommerceOrdersGetResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersGetResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersGetResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersGetResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	postV1EcommerceOrdersGetResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersGetEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	ordersGetEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	ordersGetEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	ordersGetEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	ordersGetEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
+	ordersGetEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
 )
 
-type PostV1EcommerceOrdersGetResponseLinesItem struct {
+type OrdersGetEcommerceResponseLinesItem struct {
 	ID               string  `json:"id" url:"id"`
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
@@ -2538,184 +2572,184 @@ type PostV1EcommerceOrdersGetResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetID() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetVatRatePercent() string {
+	if o == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersGetEcommerceResponseLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldID)
+func (o *OrdersGetEcommerceResponseLinesItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersGetEcommerceResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldItemID)
+func (o *OrdersGetEcommerceResponseLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersGetEcommerceResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldDescription)
+func (o *OrdersGetEcommerceResponseLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersGetEcommerceResponseLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldQuantity)
+func (o *OrdersGetEcommerceResponseLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersGetEcommerceResponseLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldUnitPriceExclVat)
+func (o *OrdersGetEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersGetEcommerceResponseLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersGetResponseLinesItemFieldVatRatePercent)
+func (o *OrdersGetEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersGetEcommerceResponseLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersGetResponseLinesItem
+func (o *OrdersGetEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersGetEcommerceResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersGetResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersGetEcommerceResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersGetResponseLinesItem
+func (o *OrdersGetEcommerceResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersGetEcommerceResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersGetResponseLinesItem) String() string {
-	if p == nil {
+func (o *OrdersGetEcommerceResponseLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersGetResponseStatus string
+type OrdersGetEcommerceResponseStatus string
 
 const (
-	PostV1EcommerceOrdersGetResponseStatusNew       PostV1EcommerceOrdersGetResponseStatus = "new"
-	PostV1EcommerceOrdersGetResponseStatusReserved  PostV1EcommerceOrdersGetResponseStatus = "reserved"
-	PostV1EcommerceOrdersGetResponseStatusFulfilled PostV1EcommerceOrdersGetResponseStatus = "fulfilled"
-	PostV1EcommerceOrdersGetResponseStatusCancelled PostV1EcommerceOrdersGetResponseStatus = "cancelled"
+	OrdersGetEcommerceResponseStatusNew       OrdersGetEcommerceResponseStatus = "new"
+	OrdersGetEcommerceResponseStatusReserved  OrdersGetEcommerceResponseStatus = "reserved"
+	OrdersGetEcommerceResponseStatusFulfilled OrdersGetEcommerceResponseStatus = "fulfilled"
+	OrdersGetEcommerceResponseStatusCancelled OrdersGetEcommerceResponseStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersGetResponseStatusFromString(s string) (PostV1EcommerceOrdersGetResponseStatus, error) {
+func NewOrdersGetEcommerceResponseStatusFromString(s string) (OrdersGetEcommerceResponseStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersGetResponseStatusNew, nil
+		return OrdersGetEcommerceResponseStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersGetResponseStatusReserved, nil
+		return OrdersGetEcommerceResponseStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersGetResponseStatusFulfilled, nil
+		return OrdersGetEcommerceResponseStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersGetResponseStatusCancelled, nil
+		return OrdersGetEcommerceResponseStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersGetResponseStatus
+	var t OrdersGetEcommerceResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersGetResponseStatus) Ptr() *PostV1EcommerceOrdersGetResponseStatus {
-	return &p
+func (o OrdersGetEcommerceResponseStatus) Ptr() *OrdersGetEcommerceResponseStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1EcommerceOrdersListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1EcommerceOrdersListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	ordersListEcommerceRequestFilterItemFieldField = big.NewInt(1 << 0)
+	ordersListEcommerceRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	ordersListEcommerceRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1EcommerceOrdersListRequestFilterItem struct {
-	Field string                                           `json:"field" url:"field"`
-	Op    PostV1EcommerceOrdersListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1EcommerceOrdersListRequestFilterItemValue `json:"value" url:"value"`
+type OrdersListEcommerceRequestFilterItem struct {
+	Field string                                     `json:"field" url:"field"`
+	Op    OrdersListEcommerceRequestFilterItemOp     `json:"op" url:"op"`
+	Value *OrdersListEcommerceRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2724,312 +2758,312 @@ type PostV1EcommerceOrdersListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) GetField() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItem) GetField() string {
+	if o == nil {
 		return ""
 	}
-	return p.Field
+	return o.Field
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) GetOp() PostV1EcommerceOrdersListRequestFilterItemOp {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItem) GetOp() OrdersListEcommerceRequestFilterItemOp {
+	if o == nil {
 		return ""
 	}
-	return p.Op
+	return o.Op
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) GetValue() *PostV1EcommerceOrdersListRequestFilterItemValue {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItem) GetValue() *OrdersListEcommerceRequestFilterItemValue {
+	if o == nil {
 		return nil
 	}
-	return p.Value
+	return o.Value
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersListEcommerceRequestFilterItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1EcommerceOrdersListRequestFilterItemFieldField)
+func (o *OrdersListEcommerceRequestFilterItem) SetField(field string) {
+	o.Field = field
+	o.require(ordersListEcommerceRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequestFilterItem) SetOp(op PostV1EcommerceOrdersListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1EcommerceOrdersListRequestFilterItemFieldOp)
+func (o *OrdersListEcommerceRequestFilterItem) SetOp(op OrdersListEcommerceRequestFilterItemOp) {
+	o.Op = op
+	o.require(ordersListEcommerceRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequestFilterItem) SetValue(value *PostV1EcommerceOrdersListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1EcommerceOrdersListRequestFilterItemFieldValue)
+func (o *OrdersListEcommerceRequestFilterItem) SetValue(value *OrdersListEcommerceRequestFilterItemValue) {
+	o.Value = value
+	o.require(ordersListEcommerceRequestFilterItemFieldValue)
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersListRequestFilterItem
+func (o *OrdersListEcommerceRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersListEcommerceRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersListEcommerceRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersListRequestFilterItem
+func (o *OrdersListEcommerceRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersListEcommerceRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItem) String() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersListRequestFilterItemOp string
+type OrdersListEcommerceRequestFilterItemOp string
 
 const (
-	PostV1EcommerceOrdersListRequestFilterItemOpEq       PostV1EcommerceOrdersListRequestFilterItemOp = "eq"
-	PostV1EcommerceOrdersListRequestFilterItemOpNe       PostV1EcommerceOrdersListRequestFilterItemOp = "ne"
-	PostV1EcommerceOrdersListRequestFilterItemOpContains PostV1EcommerceOrdersListRequestFilterItemOp = "contains"
-	PostV1EcommerceOrdersListRequestFilterItemOpGte      PostV1EcommerceOrdersListRequestFilterItemOp = "gte"
-	PostV1EcommerceOrdersListRequestFilterItemOpLte      PostV1EcommerceOrdersListRequestFilterItemOp = "lte"
-	PostV1EcommerceOrdersListRequestFilterItemOpIn       PostV1EcommerceOrdersListRequestFilterItemOp = "in"
+	OrdersListEcommerceRequestFilterItemOpEq       OrdersListEcommerceRequestFilterItemOp = "eq"
+	OrdersListEcommerceRequestFilterItemOpNe       OrdersListEcommerceRequestFilterItemOp = "ne"
+	OrdersListEcommerceRequestFilterItemOpContains OrdersListEcommerceRequestFilterItemOp = "contains"
+	OrdersListEcommerceRequestFilterItemOpGte      OrdersListEcommerceRequestFilterItemOp = "gte"
+	OrdersListEcommerceRequestFilterItemOpLte      OrdersListEcommerceRequestFilterItemOp = "lte"
+	OrdersListEcommerceRequestFilterItemOpIn       OrdersListEcommerceRequestFilterItemOp = "in"
 )
 
-func NewPostV1EcommerceOrdersListRequestFilterItemOpFromString(s string) (PostV1EcommerceOrdersListRequestFilterItemOp, error) {
+func NewOrdersListEcommerceRequestFilterItemOpFromString(s string) (OrdersListEcommerceRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1EcommerceOrdersListRequestFilterItemOpEq, nil
+		return OrdersListEcommerceRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1EcommerceOrdersListRequestFilterItemOpNe, nil
+		return OrdersListEcommerceRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1EcommerceOrdersListRequestFilterItemOpContains, nil
+		return OrdersListEcommerceRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1EcommerceOrdersListRequestFilterItemOpGte, nil
+		return OrdersListEcommerceRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1EcommerceOrdersListRequestFilterItemOpLte, nil
+		return OrdersListEcommerceRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1EcommerceOrdersListRequestFilterItemOpIn, nil
+		return OrdersListEcommerceRequestFilterItemOpIn, nil
 	}
-	var t PostV1EcommerceOrdersListRequestFilterItemOp
+	var t OrdersListEcommerceRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersListRequestFilterItemOp) Ptr() *PostV1EcommerceOrdersListRequestFilterItemOp {
-	return &p
+func (o OrdersListEcommerceRequestFilterItemOp) Ptr() *OrdersListEcommerceRequestFilterItemOp {
+	return &o
 }
 
-type PostV1EcommerceOrdersListRequestFilterItemValue struct {
-	String                                                       string
-	Double                                                       float64
-	Boolean                                                      bool
-	PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList []*PostV1EcommerceOrdersListRequestFilterItemValueThreeItem
+type OrdersListEcommerceRequestFilterItemValue struct {
+	String                                                 string
+	Double                                                 float64
+	Boolean                                                bool
+	OrdersListEcommerceRequestFilterItemValueThreeItemList []*OrdersListEcommerceRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValue) GetString() string {
+	if o == nil {
 		return ""
 	}
-	return p.String
+	return o.String
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValue) GetDouble() float64 {
+	if o == nil {
 		return 0
 	}
-	return p.Double
+	return o.Double
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValue) GetBoolean() bool {
+	if o == nil {
 		return false
 	}
-	return p.Boolean
+	return o.Boolean
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList() []*PostV1EcommerceOrdersListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValue) GetOrdersListEcommerceRequestFilterItemValueThreeItemList() []*OrdersListEcommerceRequestFilterItemValueThreeItem {
+	if o == nil {
 		return nil
 	}
-	return p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList
+	return o.OrdersListEcommerceRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (o *OrdersListEcommerceRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		o.typ = "String"
+		o.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		o.typ = "Double"
+		o.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		o.typ = "Boolean"
+		o.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1EcommerceOrdersListRequestFilterItemValueThreeItemList []*PostV1EcommerceOrdersListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1EcommerceOrdersListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList"
-		p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList = valuePostV1EcommerceOrdersListRequestFilterItemValueThreeItemList
+	var valueOrdersListEcommerceRequestFilterItemValueThreeItemList []*OrdersListEcommerceRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueOrdersListEcommerceRequestFilterItemValueThreeItemList); err == nil {
+		o.typ = "OrdersListEcommerceRequestFilterItemValueThreeItemList"
+		o.OrdersListEcommerceRequestFilterItemValueThreeItemList = valueOrdersListEcommerceRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, o)
 }
 
-func (p PostV1EcommerceOrdersListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (o OrdersListEcommerceRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if o.typ == "String" || o.String != "" {
+		return json.Marshal(o.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if o.typ == "Double" || o.Double != 0 {
+		return json.Marshal(o.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if o.typ == "Boolean" || o.Boolean != false {
+		return json.Marshal(o.Boolean)
 	}
-	if p.typ == "PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList" || p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList)
+	if o.typ == "OrdersListEcommerceRequestFilterItemValueThreeItemList" || o.OrdersListEcommerceRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(o.OrdersListEcommerceRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", o)
 }
 
-type PostV1EcommerceOrdersListRequestFilterItemValueVisitor interface {
+type OrdersListEcommerceRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList([]*PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) error
+	VisitOrdersListEcommerceRequestFilterItemValueThreeItemList([]*OrdersListEcommerceRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValue) Accept(visitor PostV1EcommerceOrdersListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (o *OrdersListEcommerceRequestFilterItemValue) Accept(visitor OrdersListEcommerceRequestFilterItemValueVisitor) error {
+	if o.typ == "String" || o.String != "" {
+		return visitor.VisitString(o.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if o.typ == "Double" || o.Double != 0 {
+		return visitor.VisitDouble(o.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if o.typ == "Boolean" || o.Boolean != false {
+		return visitor.VisitBoolean(o.Boolean)
 	}
-	if p.typ == "PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList" || p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList(p.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList)
+	if o.typ == "OrdersListEcommerceRequestFilterItemValueThreeItemList" || o.OrdersListEcommerceRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitOrdersListEcommerceRequestFilterItemValueThreeItemList(o.OrdersListEcommerceRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", o)
 }
 
-type PostV1EcommerceOrdersListRequestFilterItemValueThreeItem struct {
+type OrdersListEcommerceRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValueThreeItem) GetString() string {
+	if o == nil {
 		return ""
 	}
-	return p.String
+	return o.String
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (o *OrdersListEcommerceRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if o == nil {
 		return 0
 	}
-	return p.Double
+	return o.Double
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (o *OrdersListEcommerceRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		o.typ = "String"
+		o.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		o.typ = "Double"
+		o.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, o)
 }
 
-func (p PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (o OrdersListEcommerceRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if o.typ == "String" || o.String != "" {
+		return json.Marshal(o.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if o.typ == "Double" || o.Double != 0 {
+		return json.Marshal(o.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", o)
 }
 
-type PostV1EcommerceOrdersListRequestFilterItemValueThreeItemVisitor interface {
+type OrdersListEcommerceRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem) Accept(visitor PostV1EcommerceOrdersListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (o *OrdersListEcommerceRequestFilterItemValueThreeItem) Accept(visitor OrdersListEcommerceRequestFilterItemValueThreeItemVisitor) error {
+	if o.typ == "String" || o.String != "" {
+		return visitor.VisitString(o.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if o.typ == "Double" || o.Double != 0 {
+		return visitor.VisitDouble(o.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", o)
 }
 
 var (
-	postV1EcommerceOrdersListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1EcommerceOrdersListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	ordersListEcommerceRequestSortItemFieldField = big.NewInt(1 << 0)
+	ordersListEcommerceRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1EcommerceOrdersListRequestSortItem struct {
-	Field string                                       `json:"field" url:"field"`
-	Dir   *PostV1EcommerceOrdersListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type OrdersListEcommerceRequestSortItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Dir   *OrdersListEcommerceRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3038,126 +3072,126 @@ type PostV1EcommerceOrdersListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) GetField() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestSortItem) GetField() string {
+	if o == nil {
 		return ""
 	}
-	return p.Field
+	return o.Field
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) GetDir() *PostV1EcommerceOrdersListRequestSortItemDir {
-	if p == nil {
+func (o *OrdersListEcommerceRequestSortItem) GetDir() *OrdersListEcommerceRequestSortItemDir {
+	if o == nil {
 		return nil
 	}
-	return p.Dir
+	return o.Dir
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersListEcommerceRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersListEcommerceRequestSortItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1EcommerceOrdersListRequestSortItemFieldField)
+func (o *OrdersListEcommerceRequestSortItem) SetField(field string) {
+	o.Field = field
+	o.require(ordersListEcommerceRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListRequestSortItem) SetDir(dir *PostV1EcommerceOrdersListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1EcommerceOrdersListRequestSortItemFieldDir)
+func (o *OrdersListEcommerceRequestSortItem) SetDir(dir *OrdersListEcommerceRequestSortItemDir) {
+	o.Dir = dir
+	o.require(ordersListEcommerceRequestSortItemFieldDir)
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersListRequestSortItem
+func (o *OrdersListEcommerceRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersListEcommerceRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersListEcommerceRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersListRequestSortItem
+func (o *OrdersListEcommerceRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersListEcommerceRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersListRequestSortItem) String() string {
-	if p == nil {
+func (o *OrdersListEcommerceRequestSortItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersListRequestSortItemDir string
+type OrdersListEcommerceRequestSortItemDir string
 
 const (
-	PostV1EcommerceOrdersListRequestSortItemDirAsc  PostV1EcommerceOrdersListRequestSortItemDir = "asc"
-	PostV1EcommerceOrdersListRequestSortItemDirDesc PostV1EcommerceOrdersListRequestSortItemDir = "desc"
+	OrdersListEcommerceRequestSortItemDirAsc  OrdersListEcommerceRequestSortItemDir = "asc"
+	OrdersListEcommerceRequestSortItemDirDesc OrdersListEcommerceRequestSortItemDir = "desc"
 )
 
-func NewPostV1EcommerceOrdersListRequestSortItemDirFromString(s string) (PostV1EcommerceOrdersListRequestSortItemDir, error) {
+func NewOrdersListEcommerceRequestSortItemDirFromString(s string) (OrdersListEcommerceRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1EcommerceOrdersListRequestSortItemDirAsc, nil
+		return OrdersListEcommerceRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1EcommerceOrdersListRequestSortItemDirDesc, nil
+		return OrdersListEcommerceRequestSortItemDirDesc, nil
 	}
-	var t PostV1EcommerceOrdersListRequestSortItemDir
+	var t OrdersListEcommerceRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersListRequestSortItemDir) Ptr() *PostV1EcommerceOrdersListRequestSortItemDir {
-	return &p
+func (o OrdersListEcommerceRequestSortItemDir) Ptr() *OrdersListEcommerceRequestSortItemDir {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1EcommerceOrdersListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1EcommerceOrdersListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1EcommerceOrdersListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1EcommerceOrdersListResponseFieldTotals   = big.NewInt(1 << 4)
+	ordersListEcommerceResponseFieldRows     = big.NewInt(1 << 0)
+	ordersListEcommerceResponseFieldPage     = big.NewInt(1 << 1)
+	ordersListEcommerceResponseFieldPageSize = big.NewInt(1 << 2)
+	ordersListEcommerceResponseFieldTotal    = big.NewInt(1 << 3)
+	ordersListEcommerceResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1EcommerceOrdersListResponse struct {
-	Rows     []*PostV1EcommerceOrdersListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                        `json:"page" url:"page"`
-	PageSize int64                                        `json:"pageSize" url:"pageSize"`
-	Total    int64                                        `json:"total" url:"total"`
-	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
+type OrdersListEcommerceResponse struct {
+	Rows     []*OrdersListEcommerceResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                  `json:"page" url:"page"`
+	PageSize int64                                  `json:"pageSize" url:"pageSize"`
+	Total    int64                                  `json:"total" url:"total"`
+	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3166,160 +3200,160 @@ type PostV1EcommerceOrdersListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetRows() []*PostV1EcommerceOrdersListResponseRowsItem {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetRows() []*OrdersListEcommerceResponseRowsItem {
+	if o == nil {
 		return nil
 	}
-	return p.Rows
+	return o.Rows
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetPage() int64 {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetPage() int64 {
+	if o == nil {
 		return 0
 	}
-	return p.Page
+	return o.Page
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetPageSize() int64 {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetPageSize() int64 {
+	if o == nil {
 		return 0
 	}
-	return p.PageSize
+	return o.PageSize
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetTotal() int64 {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetTotal() int64 {
+	if o == nil {
 		return 0
 	}
-	return p.Total
+	return o.Total
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetTotals() map[string]string {
+	if o == nil {
 		return nil
 	}
-	return p.Totals
+	return o.Totals
 }
 
-func (p *PostV1EcommerceOrdersListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersListEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponse) SetRows(rows []*PostV1EcommerceOrdersListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1EcommerceOrdersListResponseFieldRows)
+func (o *OrdersListEcommerceResponse) SetRows(rows []*OrdersListEcommerceResponseRowsItem) {
+	o.Rows = rows
+	o.require(ordersListEcommerceResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1EcommerceOrdersListResponseFieldPage)
+func (o *OrdersListEcommerceResponse) SetPage(page int64) {
+	o.Page = page
+	o.require(ordersListEcommerceResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1EcommerceOrdersListResponseFieldPageSize)
+func (o *OrdersListEcommerceResponse) SetPageSize(pageSize int64) {
+	o.PageSize = pageSize
+	o.require(ordersListEcommerceResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1EcommerceOrdersListResponseFieldTotal)
+func (o *OrdersListEcommerceResponse) SetTotal(total int64) {
+	o.Total = total
+	o.require(ordersListEcommerceResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1EcommerceOrdersListResponseFieldTotals)
+func (o *OrdersListEcommerceResponse) SetTotals(totals map[string]string) {
+	o.Totals = totals
+	o.require(ordersListEcommerceResponseFieldTotals)
 }
 
-func (p *PostV1EcommerceOrdersListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersListResponse
+func (o *OrdersListEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersListEcommerceResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersListEcommerceResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersListResponse
+func (o *OrdersListEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersListEcommerceResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersListResponse) String() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersListResponseRowsItemFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersListResponseRowsItemFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersListResponseRowsItemFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersListResponseRowsItemFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersListResponseRowsItemFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersListResponseRowsItemFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersListResponseRowsItemFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersListResponseRowsItemFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersListResponseRowsItemFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersListResponseRowsItemFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersListResponseRowsItemFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersListResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersListEcommerceResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	ordersListEcommerceResponseRowsItemFieldChannel           = big.NewInt(1 << 1)
+	ordersListEcommerceResponseRowsItemFieldExternalRef       = big.NewInt(1 << 2)
+	ordersListEcommerceResponseRowsItemFieldPartnerID         = big.NewInt(1 << 3)
+	ordersListEcommerceResponseRowsItemFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersListEcommerceResponseRowsItemFieldCurrency          = big.NewInt(1 << 5)
+	ordersListEcommerceResponseRowsItemFieldStatus            = big.NewInt(1 << 6)
+	ordersListEcommerceResponseRowsItemFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersListEcommerceResponseRowsItemFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersListEcommerceResponseRowsItemFieldMarketplace       = big.NewInt(1 << 9)
+	ordersListEcommerceResponseRowsItemFieldNotes             = big.NewInt(1 << 10)
+	ordersListEcommerceResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 11)
 )
 
-type PostV1EcommerceOrdersListResponseRowsItem struct {
-	ID                string                                          `json:"id" url:"id"`
-	Channel           string                                          `json:"channel" url:"channel"`
-	ExternalRef       *string                                         `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                          `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                         `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                          `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersListResponseRowsItemStatus `json:"status" url:"status"`
-	InvoiceID         *string                                         `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                         `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                         `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                          `json:"createdAt" url:"createdAt"`
+type OrdersListEcommerceResponseRowsItem struct {
+	ID                string                                    `json:"id" url:"id"`
+	Channel           string                                    `json:"channel" url:"channel"`
+	ExternalRef       *string                                   `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                    `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                    `json:"currency" url:"currency"`
+	Status            OrdersListEcommerceResponseRowsItemStatus `json:"status" url:"status"`
+	InvoiceID         *string                                   `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                   `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                   `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3328,288 +3362,296 @@ type PostV1EcommerceOrdersListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetID() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetChannel() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetCurrency() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetStatus() PostV1EcommerceOrdersListResponseRowsItemStatus {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetStatus() OrdersListEcommerceResponseRowsItemStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersListEcommerceResponseRowsItem) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersListEcommerceResponseRowsItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldID)
+func (o *OrdersListEcommerceResponseRowsItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersListEcommerceResponseRowsItemFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldChannel)
+func (o *OrdersListEcommerceResponseRowsItem) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersListEcommerceResponseRowsItemFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldExternalRef)
+func (o *OrdersListEcommerceResponseRowsItem) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersListEcommerceResponseRowsItemFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldPartnerID)
+func (o *OrdersListEcommerceResponseRowsItem) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersListEcommerceResponseRowsItemFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldWarehouseID)
+func (o *OrdersListEcommerceResponseRowsItem) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersListEcommerceResponseRowsItemFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldCurrency)
+func (o *OrdersListEcommerceResponseRowsItem) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersListEcommerceResponseRowsItemFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetStatus(status PostV1EcommerceOrdersListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldStatus)
+func (o *OrdersListEcommerceResponseRowsItem) SetStatus(status OrdersListEcommerceResponseRowsItemStatus) {
+	o.Status = status
+	o.require(ordersListEcommerceResponseRowsItemFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldInvoiceID)
+func (o *OrdersListEcommerceResponseRowsItem) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersListEcommerceResponseRowsItemFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldShipToCountryCode)
+func (o *OrdersListEcommerceResponseRowsItem) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersListEcommerceResponseRowsItemFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldMarketplace)
+func (o *OrdersListEcommerceResponseRowsItem) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersListEcommerceResponseRowsItemFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldNotes)
+func (o *OrdersListEcommerceResponseRowsItem) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersListEcommerceResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersListResponseRowsItemFieldCreatedAt)
+func (o *OrdersListEcommerceResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersListEcommerceResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersListEcommerceResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed OrdersListEcommerceResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersListEcommerceResponseRowsItem(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersListResponseRowsItem
+func (o *OrdersListEcommerceResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersListEcommerceResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersListResponseRowsItem) String() string {
-	if p == nil {
+func (o *OrdersListEcommerceResponseRowsItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersListResponseRowsItemStatus string
+type OrdersListEcommerceResponseRowsItemStatus string
 
 const (
-	PostV1EcommerceOrdersListResponseRowsItemStatusNew       PostV1EcommerceOrdersListResponseRowsItemStatus = "new"
-	PostV1EcommerceOrdersListResponseRowsItemStatusReserved  PostV1EcommerceOrdersListResponseRowsItemStatus = "reserved"
-	PostV1EcommerceOrdersListResponseRowsItemStatusFulfilled PostV1EcommerceOrdersListResponseRowsItemStatus = "fulfilled"
-	PostV1EcommerceOrdersListResponseRowsItemStatusCancelled PostV1EcommerceOrdersListResponseRowsItemStatus = "cancelled"
+	OrdersListEcommerceResponseRowsItemStatusNew       OrdersListEcommerceResponseRowsItemStatus = "new"
+	OrdersListEcommerceResponseRowsItemStatusReserved  OrdersListEcommerceResponseRowsItemStatus = "reserved"
+	OrdersListEcommerceResponseRowsItemStatusFulfilled OrdersListEcommerceResponseRowsItemStatus = "fulfilled"
+	OrdersListEcommerceResponseRowsItemStatusCancelled OrdersListEcommerceResponseRowsItemStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString(s string) (PostV1EcommerceOrdersListResponseRowsItemStatus, error) {
+func NewOrdersListEcommerceResponseRowsItemStatusFromString(s string) (OrdersListEcommerceResponseRowsItemStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersListResponseRowsItemStatusNew, nil
+		return OrdersListEcommerceResponseRowsItemStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersListResponseRowsItemStatusReserved, nil
+		return OrdersListEcommerceResponseRowsItemStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersListResponseRowsItemStatusFulfilled, nil
+		return OrdersListEcommerceResponseRowsItemStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersListResponseRowsItemStatusCancelled, nil
+		return OrdersListEcommerceResponseRowsItemStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersListResponseRowsItemStatus
+	var t OrdersListEcommerceResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersListResponseRowsItemStatus) Ptr() *PostV1EcommerceOrdersListResponseRowsItemStatus {
-	return &p
+func (o OrdersListEcommerceResponseRowsItemStatus) Ptr() *OrdersListEcommerceResponseRowsItemStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceOrdersReserveResponseFieldID                = big.NewInt(1 << 0)
-	postV1EcommerceOrdersReserveResponseFieldChannel           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersReserveResponseFieldExternalRef       = big.NewInt(1 << 2)
-	postV1EcommerceOrdersReserveResponseFieldPartnerID         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersReserveResponseFieldWarehouseID       = big.NewInt(1 << 4)
-	postV1EcommerceOrdersReserveResponseFieldCurrency          = big.NewInt(1 << 5)
-	postV1EcommerceOrdersReserveResponseFieldStatus            = big.NewInt(1 << 6)
-	postV1EcommerceOrdersReserveResponseFieldInvoiceID         = big.NewInt(1 << 7)
-	postV1EcommerceOrdersReserveResponseFieldShipToCountryCode = big.NewInt(1 << 8)
-	postV1EcommerceOrdersReserveResponseFieldMarketplace       = big.NewInt(1 << 9)
-	postV1EcommerceOrdersReserveResponseFieldNotes             = big.NewInt(1 << 10)
-	postV1EcommerceOrdersReserveResponseFieldCreatedAt         = big.NewInt(1 << 11)
-	postV1EcommerceOrdersReserveResponseFieldLines             = big.NewInt(1 << 12)
+	ordersReserveEcommerceResponseFieldID                = big.NewInt(1 << 0)
+	ordersReserveEcommerceResponseFieldChannel           = big.NewInt(1 << 1)
+	ordersReserveEcommerceResponseFieldExternalRef       = big.NewInt(1 << 2)
+	ordersReserveEcommerceResponseFieldPartnerID         = big.NewInt(1 << 3)
+	ordersReserveEcommerceResponseFieldWarehouseID       = big.NewInt(1 << 4)
+	ordersReserveEcommerceResponseFieldCurrency          = big.NewInt(1 << 5)
+	ordersReserveEcommerceResponseFieldStatus            = big.NewInt(1 << 6)
+	ordersReserveEcommerceResponseFieldInvoiceID         = big.NewInt(1 << 7)
+	ordersReserveEcommerceResponseFieldShipToCountryCode = big.NewInt(1 << 8)
+	ordersReserveEcommerceResponseFieldMarketplace       = big.NewInt(1 << 9)
+	ordersReserveEcommerceResponseFieldNotes             = big.NewInt(1 << 10)
+	ordersReserveEcommerceResponseFieldCreatedAt         = big.NewInt(1 << 11)
+	ordersReserveEcommerceResponseFieldLines             = big.NewInt(1 << 12)
 )
 
-type PostV1EcommerceOrdersReserveResponse struct {
-	ID                string                                           `json:"id" url:"id"`
-	Channel           string                                           `json:"channel" url:"channel"`
-	ExternalRef       *string                                          `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	PartnerID         string                                           `json:"partnerId" url:"partnerId"`
-	WarehouseID       *string                                          `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	Currency          string                                           `json:"currency" url:"currency"`
-	Status            PostV1EcommerceOrdersReserveResponseStatus       `json:"status" url:"status"`
-	InvoiceID         *string                                          `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
-	ShipToCountryCode *string                                          `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
-	Marketplace       *string                                          `json:"marketplace,omitempty" url:"marketplace,omitempty"`
-	Notes             *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt         string                                           `json:"createdAt" url:"createdAt"`
-	Lines             []*PostV1EcommerceOrdersReserveResponseLinesItem `json:"lines" url:"lines"`
+type OrdersReserveEcommerceResponse struct {
+	ID                string                                     `json:"id" url:"id"`
+	Channel           string                                     `json:"channel" url:"channel"`
+	ExternalRef       *string                                    `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	PartnerID         string                                     `json:"partnerId" url:"partnerId"`
+	WarehouseID       *string                                    `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Currency          string                                     `json:"currency" url:"currency"`
+	Status            OrdersReserveEcommerceResponseStatus       `json:"status" url:"status"`
+	InvoiceID         *string                                    `json:"invoiceId,omitempty" url:"invoiceId,omitempty"`
+	ShipToCountryCode *string                                    `json:"shipToCountryCode,omitempty" url:"shipToCountryCode,omitempty"`
+	Marketplace       *string                                    `json:"marketplace,omitempty" url:"marketplace,omitempty"`
+	Notes             *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                  `json:"createdAt" url:"createdAt"`
+	Lines             []*OrdersReserveEcommerceResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3618,254 +3660,262 @@ type PostV1EcommerceOrdersReserveResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetID() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetChannel() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetChannel() string {
+	if o == nil {
 		return ""
 	}
-	return p.Channel
+	return o.Channel
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetExternalRef() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetExternalRef() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ExternalRef
+	return o.ExternalRef
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetPartnerID() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetPartnerID() string {
+	if o == nil {
 		return ""
 	}
-	return p.PartnerID
+	return o.PartnerID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetWarehouseID() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetWarehouseID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return o.WarehouseID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetCurrency() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetCurrency() string {
+	if o == nil {
 		return ""
 	}
-	return p.Currency
+	return o.Currency
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetStatus() PostV1EcommerceOrdersReserveResponseStatus {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetStatus() OrdersReserveEcommerceResponseStatus {
+	if o == nil {
 		return ""
 	}
-	return p.Status
+	return o.Status
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetInvoiceID() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetInvoiceID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.InvoiceID
+	return o.InvoiceID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetShipToCountryCode() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetShipToCountryCode() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ShipToCountryCode
+	return o.ShipToCountryCode
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetMarketplace() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetMarketplace() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Marketplace
+	return o.Marketplace
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetNotes() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetNotes() *string {
+	if o == nil {
 		return nil
 	}
-	return p.Notes
+	return o.Notes
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (o *OrdersReserveEcommerceResponse) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return o.CreatedAt
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetLines() []*PostV1EcommerceOrdersReserveResponseLinesItem {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetLines() []*OrdersReserveEcommerceResponseLinesItem {
+	if o == nil {
 		return nil
 	}
-	return p.Lines
+	return o.Lines
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersReserveEcommerceResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersReserveResponseFieldID)
+func (o *OrdersReserveEcommerceResponse) SetID(id string) {
+	o.ID = id
+	o.require(ordersReserveEcommerceResponseFieldID)
 }
 
 // SetChannel sets the Channel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetChannel(channel string) {
-	p.Channel = channel
-	p.require(postV1EcommerceOrdersReserveResponseFieldChannel)
+func (o *OrdersReserveEcommerceResponse) SetChannel(channel string) {
+	o.Channel = channel
+	o.require(ordersReserveEcommerceResponseFieldChannel)
 }
 
 // SetExternalRef sets the ExternalRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetExternalRef(externalRef *string) {
-	p.ExternalRef = externalRef
-	p.require(postV1EcommerceOrdersReserveResponseFieldExternalRef)
+func (o *OrdersReserveEcommerceResponse) SetExternalRef(externalRef *string) {
+	o.ExternalRef = externalRef
+	o.require(ordersReserveEcommerceResponseFieldExternalRef)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1EcommerceOrdersReserveResponseFieldPartnerID)
+func (o *OrdersReserveEcommerceResponse) SetPartnerID(partnerID string) {
+	o.PartnerID = partnerID
+	o.require(ordersReserveEcommerceResponseFieldPartnerID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceOrdersReserveResponseFieldWarehouseID)
+func (o *OrdersReserveEcommerceResponse) SetWarehouseID(warehouseID *string) {
+	o.WarehouseID = warehouseID
+	o.require(ordersReserveEcommerceResponseFieldWarehouseID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1EcommerceOrdersReserveResponseFieldCurrency)
+func (o *OrdersReserveEcommerceResponse) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(ordersReserveEcommerceResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetStatus(status PostV1EcommerceOrdersReserveResponseStatus) {
-	p.Status = status
-	p.require(postV1EcommerceOrdersReserveResponseFieldStatus)
+func (o *OrdersReserveEcommerceResponse) SetStatus(status OrdersReserveEcommerceResponseStatus) {
+	o.Status = status
+	o.require(ordersReserveEcommerceResponseFieldStatus)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetInvoiceID(invoiceID *string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1EcommerceOrdersReserveResponseFieldInvoiceID)
+func (o *OrdersReserveEcommerceResponse) SetInvoiceID(invoiceID *string) {
+	o.InvoiceID = invoiceID
+	o.require(ordersReserveEcommerceResponseFieldInvoiceID)
 }
 
 // SetShipToCountryCode sets the ShipToCountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetShipToCountryCode(shipToCountryCode *string) {
-	p.ShipToCountryCode = shipToCountryCode
-	p.require(postV1EcommerceOrdersReserveResponseFieldShipToCountryCode)
+func (o *OrdersReserveEcommerceResponse) SetShipToCountryCode(shipToCountryCode *string) {
+	o.ShipToCountryCode = shipToCountryCode
+	o.require(ordersReserveEcommerceResponseFieldShipToCountryCode)
 }
 
 // SetMarketplace sets the Marketplace field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetMarketplace(marketplace *string) {
-	p.Marketplace = marketplace
-	p.require(postV1EcommerceOrdersReserveResponseFieldMarketplace)
+func (o *OrdersReserveEcommerceResponse) SetMarketplace(marketplace *string) {
+	o.Marketplace = marketplace
+	o.require(ordersReserveEcommerceResponseFieldMarketplace)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1EcommerceOrdersReserveResponseFieldNotes)
+func (o *OrdersReserveEcommerceResponse) SetNotes(notes *string) {
+	o.Notes = notes
+	o.require(ordersReserveEcommerceResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1EcommerceOrdersReserveResponseFieldCreatedAt)
+func (o *OrdersReserveEcommerceResponse) SetCreatedAt(createdAt time.Time) {
+	o.CreatedAt = createdAt
+	o.require(ordersReserveEcommerceResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponse) SetLines(lines []*PostV1EcommerceOrdersReserveResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1EcommerceOrdersReserveResponseFieldLines)
+func (o *OrdersReserveEcommerceResponse) SetLines(lines []*OrdersReserveEcommerceResponseLinesItem) {
+	o.Lines = lines
+	o.require(ordersReserveEcommerceResponseFieldLines)
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersReserveResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (o *OrdersReserveEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type embed OrdersReserveEcommerceResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersReserveResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersReserveEcommerceResponse(unmarshaler.embed)
+	o.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersReserveResponse
+func (o *OrdersReserveEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed OrdersReserveEcommerceResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*o),
+		CreatedAt: internal.NewDateTime(o.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersReserveResponse) String() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponse) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
 var (
-	postV1EcommerceOrdersReserveResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1EcommerceOrdersReserveResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	postV1EcommerceOrdersReserveResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	postV1EcommerceOrdersReserveResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	postV1EcommerceOrdersReserveResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	postV1EcommerceOrdersReserveResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersReserveEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	ordersReserveEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	ordersReserveEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	ordersReserveEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	ordersReserveEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
+	ordersReserveEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
 )
 
-type PostV1EcommerceOrdersReserveResponseLinesItem struct {
+type OrdersReserveEcommerceResponseLinesItem struct {
 	ID               string  `json:"id" url:"id"`
 	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description      string  `json:"description" url:"description"`
@@ -3880,186 +3930,186 @@ type PostV1EcommerceOrdersReserveResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetID() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetID() string {
+	if o == nil {
 		return ""
 	}
-	return p.ID
+	return o.ID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetItemID() *string {
+	if o == nil {
 		return nil
 	}
-	return p.ItemID
+	return o.ItemID
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetDescription() string {
+	if o == nil {
 		return ""
 	}
-	return p.Description
+	return o.Description
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetQuantity() string {
+	if o == nil {
 		return ""
 	}
-	return p.Quantity
+	return o.Quantity
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetUnitPriceExclVat() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetUnitPriceExclVat() string {
+	if o == nil {
 		return ""
 	}
-	return p.UnitPriceExclVat
+	return o.UnitPriceExclVat
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetVatRatePercent() string {
+	if o == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return o.VatRatePercent
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if o == nil {
 		return nil
 	}
-	return p.extraProperties
+	return o.extraProperties
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (o *OrdersReserveEcommerceResponseLinesItem) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	o.explicitFields.Or(o.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldID)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetID(id string) {
+	o.ID = id
+	o.require(ordersReserveEcommerceResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldItemID)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetItemID(itemID *string) {
+	o.ItemID = itemID
+	o.require(ordersReserveEcommerceResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldDescription)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetDescription(description string) {
+	o.Description = description
+	o.require(ordersReserveEcommerceResponseLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldQuantity)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetQuantity(quantity string) {
+	o.Quantity = quantity
+	o.require(ordersReserveEcommerceResponseLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldUnitPriceExclVat)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat string) {
+	o.UnitPriceExclVat = unitPriceExclVat
+	o.require(ordersReserveEcommerceResponseLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceOrdersReserveResponseLinesItemFieldVatRatePercent)
+func (o *OrdersReserveEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	o.VatRatePercent = vatRatePercent
+	o.require(ordersReserveEcommerceResponseLinesItemFieldVatRatePercent)
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceOrdersReserveResponseLinesItem
+func (o *OrdersReserveEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler OrdersReserveEcommerceResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceOrdersReserveResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*o = OrdersReserveEcommerceResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceOrdersReserveResponseLinesItem
+func (o *OrdersReserveEcommerceResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed OrdersReserveEcommerceResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*o),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceOrdersReserveResponseLinesItem) String() string {
-	if p == nil {
+func (o *OrdersReserveEcommerceResponseLinesItem) String() string {
+	if o == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(o); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", o)
 }
 
-type PostV1EcommerceOrdersReserveResponseStatus string
+type OrdersReserveEcommerceResponseStatus string
 
 const (
-	PostV1EcommerceOrdersReserveResponseStatusNew       PostV1EcommerceOrdersReserveResponseStatus = "new"
-	PostV1EcommerceOrdersReserveResponseStatusReserved  PostV1EcommerceOrdersReserveResponseStatus = "reserved"
-	PostV1EcommerceOrdersReserveResponseStatusFulfilled PostV1EcommerceOrdersReserveResponseStatus = "fulfilled"
-	PostV1EcommerceOrdersReserveResponseStatusCancelled PostV1EcommerceOrdersReserveResponseStatus = "cancelled"
+	OrdersReserveEcommerceResponseStatusNew       OrdersReserveEcommerceResponseStatus = "new"
+	OrdersReserveEcommerceResponseStatusReserved  OrdersReserveEcommerceResponseStatus = "reserved"
+	OrdersReserveEcommerceResponseStatusFulfilled OrdersReserveEcommerceResponseStatus = "fulfilled"
+	OrdersReserveEcommerceResponseStatusCancelled OrdersReserveEcommerceResponseStatus = "cancelled"
 )
 
-func NewPostV1EcommerceOrdersReserveResponseStatusFromString(s string) (PostV1EcommerceOrdersReserveResponseStatus, error) {
+func NewOrdersReserveEcommerceResponseStatusFromString(s string) (OrdersReserveEcommerceResponseStatus, error) {
 	switch s {
 	case "new":
-		return PostV1EcommerceOrdersReserveResponseStatusNew, nil
+		return OrdersReserveEcommerceResponseStatusNew, nil
 	case "reserved":
-		return PostV1EcommerceOrdersReserveResponseStatusReserved, nil
+		return OrdersReserveEcommerceResponseStatusReserved, nil
 	case "fulfilled":
-		return PostV1EcommerceOrdersReserveResponseStatusFulfilled, nil
+		return OrdersReserveEcommerceResponseStatusFulfilled, nil
 	case "cancelled":
-		return PostV1EcommerceOrdersReserveResponseStatusCancelled, nil
+		return OrdersReserveEcommerceResponseStatusCancelled, nil
 	}
-	var t PostV1EcommerceOrdersReserveResponseStatus
+	var t OrdersReserveEcommerceResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceOrdersReserveResponseStatus) Ptr() *PostV1EcommerceOrdersReserveResponseStatus {
-	return &p
+func (o OrdersReserveEcommerceResponseStatus) Ptr() *OrdersReserveEcommerceResponseStatus {
+	return &o
 }
 
 var (
-	postV1EcommerceProductsListResponseFieldTotal    = big.NewInt(1 << 0)
-	postV1EcommerceProductsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1EcommerceProductsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1EcommerceProductsListResponseFieldRows     = big.NewInt(1 << 3)
+	productsListEcommerceResponseFieldTotal    = big.NewInt(1 << 0)
+	productsListEcommerceResponseFieldPage     = big.NewInt(1 << 1)
+	productsListEcommerceResponseFieldPageSize = big.NewInt(1 << 2)
+	productsListEcommerceResponseFieldRows     = big.NewInt(1 << 3)
 )
 
-type PostV1EcommerceProductsListResponse struct {
-	Total    int64                                          `json:"total" url:"total"`
-	Page     int64                                          `json:"page" url:"page"`
-	PageSize int64                                          `json:"pageSize" url:"pageSize"`
-	Rows     []*PostV1EcommerceProductsListResponseRowsItem `json:"rows" url:"rows"`
+type ProductsListEcommerceResponse struct {
+	Total    int64                                    `json:"total" url:"total"`
+	Page     int64                                    `json:"page" url:"page"`
+	PageSize int64                                    `json:"pageSize" url:"pageSize"`
+	Rows     []*ProductsListEcommerceResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4068,42 +4118,42 @@ type PostV1EcommerceProductsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceProductsListResponse) GetTotal() int64 {
+func (p *ProductsListEcommerceResponse) GetTotal() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.Total
 }
 
-func (p *PostV1EcommerceProductsListResponse) GetPage() int64 {
+func (p *ProductsListEcommerceResponse) GetPage() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.Page
 }
 
-func (p *PostV1EcommerceProductsListResponse) GetPageSize() int64 {
+func (p *ProductsListEcommerceResponse) GetPageSize() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.PageSize
 }
 
-func (p *PostV1EcommerceProductsListResponse) GetRows() []*PostV1EcommerceProductsListResponseRowsItem {
+func (p *ProductsListEcommerceResponse) GetRows() []*ProductsListEcommerceResponseRowsItem {
 	if p == nil {
 		return nil
 	}
 	return p.Rows
 }
 
-func (p *PostV1EcommerceProductsListResponse) GetExtraProperties() map[string]interface{} {
+func (p *ProductsListEcommerceResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1EcommerceProductsListResponse) require(field *big.Int) {
+func (p *ProductsListEcommerceResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -4112,39 +4162,39 @@ func (p *PostV1EcommerceProductsListResponse) require(field *big.Int) {
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponse) SetTotal(total int64) {
+func (p *ProductsListEcommerceResponse) SetTotal(total int64) {
 	p.Total = total
-	p.require(postV1EcommerceProductsListResponseFieldTotal)
+	p.require(productsListEcommerceResponseFieldTotal)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponse) SetPage(page int64) {
+func (p *ProductsListEcommerceResponse) SetPage(page int64) {
 	p.Page = page
-	p.require(postV1EcommerceProductsListResponseFieldPage)
+	p.require(productsListEcommerceResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponse) SetPageSize(pageSize int64) {
+func (p *ProductsListEcommerceResponse) SetPageSize(pageSize int64) {
 	p.PageSize = pageSize
-	p.require(postV1EcommerceProductsListResponseFieldPageSize)
+	p.require(productsListEcommerceResponseFieldPageSize)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponse) SetRows(rows []*PostV1EcommerceProductsListResponseRowsItem) {
+func (p *ProductsListEcommerceResponse) SetRows(rows []*ProductsListEcommerceResponseRowsItem) {
 	p.Rows = rows
-	p.require(postV1EcommerceProductsListResponseFieldRows)
+	p.require(productsListEcommerceResponseFieldRows)
 }
 
-func (p *PostV1EcommerceProductsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceProductsListResponse
+func (p *ProductsListEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ProductsListEcommerceResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceProductsListResponse(value)
+	*p = ProductsListEcommerceResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -4154,8 +4204,8 @@ func (p *PostV1EcommerceProductsListResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PostV1EcommerceProductsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceProductsListResponse
+func (p *ProductsListEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed ProductsListEcommerceResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -4165,7 +4215,7 @@ func (p *PostV1EcommerceProductsListResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceProductsListResponse) String() string {
+func (p *ProductsListEcommerceResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -4181,49 +4231,49 @@ func (p *PostV1EcommerceProductsListResponse) String() string {
 }
 
 var (
-	postV1EcommerceProductsListResponseRowsItemFieldID             = big.NewInt(1 << 0)
-	postV1EcommerceProductsListResponseRowsItemFieldType           = big.NewInt(1 << 1)
-	postV1EcommerceProductsListResponseRowsItemFieldName           = big.NewInt(1 << 2)
-	postV1EcommerceProductsListResponseRowsItemFieldCode           = big.NewInt(1 << 3)
-	postV1EcommerceProductsListResponseRowsItemFieldBarcode        = big.NewInt(1 << 4)
-	postV1EcommerceProductsListResponseRowsItemFieldUnit           = big.NewInt(1 << 5)
-	postV1EcommerceProductsListResponseRowsItemFieldDescription    = big.NewInt(1 << 6)
-	postV1EcommerceProductsListResponseRowsItemFieldTranslations   = big.NewInt(1 << 7)
-	postV1EcommerceProductsListResponseRowsItemFieldAttributes     = big.NewInt(1 << 8)
-	postV1EcommerceProductsListResponseRowsItemFieldGroupID        = big.NewInt(1 << 9)
-	postV1EcommerceProductsListResponseRowsItemFieldGroupName      = big.NewInt(1 << 10)
-	postV1EcommerceProductsListResponseRowsItemFieldVatRatePercent = big.NewInt(1 << 11)
-	postV1EcommerceProductsListResponseRowsItemFieldPrice          = big.NewInt(1 << 12)
-	postV1EcommerceProductsListResponseRowsItemFieldCurrency       = big.NewInt(1 << 13)
-	postV1EcommerceProductsListResponseRowsItemFieldComponents     = big.NewInt(1 << 14)
-	postV1EcommerceProductsListResponseRowsItemFieldOnHand         = big.NewInt(1 << 15)
-	postV1EcommerceProductsListResponseRowsItemFieldReserved       = big.NewInt(1 << 16)
-	postV1EcommerceProductsListResponseRowsItemFieldAvailable      = big.NewInt(1 << 17)
-	postV1EcommerceProductsListResponseRowsItemFieldDeleted        = big.NewInt(1 << 18)
-	postV1EcommerceProductsListResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 19)
+	productsListEcommerceResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	productsListEcommerceResponseRowsItemFieldType           = big.NewInt(1 << 1)
+	productsListEcommerceResponseRowsItemFieldName           = big.NewInt(1 << 2)
+	productsListEcommerceResponseRowsItemFieldCode           = big.NewInt(1 << 3)
+	productsListEcommerceResponseRowsItemFieldBarcode        = big.NewInt(1 << 4)
+	productsListEcommerceResponseRowsItemFieldUnit           = big.NewInt(1 << 5)
+	productsListEcommerceResponseRowsItemFieldDescription    = big.NewInt(1 << 6)
+	productsListEcommerceResponseRowsItemFieldTranslations   = big.NewInt(1 << 7)
+	productsListEcommerceResponseRowsItemFieldAttributes     = big.NewInt(1 << 8)
+	productsListEcommerceResponseRowsItemFieldGroupID        = big.NewInt(1 << 9)
+	productsListEcommerceResponseRowsItemFieldGroupName      = big.NewInt(1 << 10)
+	productsListEcommerceResponseRowsItemFieldVatRatePercent = big.NewInt(1 << 11)
+	productsListEcommerceResponseRowsItemFieldPrice          = big.NewInt(1 << 12)
+	productsListEcommerceResponseRowsItemFieldCurrency       = big.NewInt(1 << 13)
+	productsListEcommerceResponseRowsItemFieldComponents     = big.NewInt(1 << 14)
+	productsListEcommerceResponseRowsItemFieldOnHand         = big.NewInt(1 << 15)
+	productsListEcommerceResponseRowsItemFieldReserved       = big.NewInt(1 << 16)
+	productsListEcommerceResponseRowsItemFieldAvailable      = big.NewInt(1 << 17)
+	productsListEcommerceResponseRowsItemFieldDeleted        = big.NewInt(1 << 18)
+	productsListEcommerceResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
-type PostV1EcommerceProductsListResponseRowsItem struct {
-	ID             string                                                                   `json:"id" url:"id"`
-	Type           PostV1EcommerceProductsListResponseRowsItemType                          `json:"type" url:"type"`
-	Name           string                                                                   `json:"name" url:"name"`
-	Code           *string                                                                  `json:"code,omitempty" url:"code,omitempty"`
-	Barcode        *string                                                                  `json:"barcode,omitempty" url:"barcode,omitempty"`
-	Unit           string                                                                   `json:"unit" url:"unit"`
-	Description    *string                                                                  `json:"description,omitempty" url:"description,omitempty"`
-	Translations   map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
-	Attributes     map[string]*string                                                       `json:"attributes,omitempty" url:"attributes,omitempty"`
-	GroupID        *string                                                                  `json:"groupId,omitempty" url:"groupId,omitempty"`
-	GroupName      *string                                                                  `json:"groupName,omitempty" url:"groupName,omitempty"`
-	VatRatePercent *string                                                                  `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	Price          *string                                                                  `json:"price,omitempty" url:"price,omitempty"`
-	Currency       string                                                                   `json:"currency" url:"currency"`
-	Components     []*PostV1EcommerceProductsListResponseRowsItemComponentsItem             `json:"components" url:"components"`
-	OnHand         *string                                                                  `json:"onHand,omitempty" url:"onHand,omitempty"`
-	Reserved       *string                                                                  `json:"reserved,omitempty" url:"reserved,omitempty"`
-	Available      *string                                                                  `json:"available,omitempty" url:"available,omitempty"`
-	Deleted        bool                                                                     `json:"deleted" url:"deleted"`
-	UpdatedAt      string                                                                   `json:"updatedAt" url:"updatedAt"`
+type ProductsListEcommerceResponseRowsItem struct {
+	ID             string                                                             `json:"id" url:"id"`
+	Type           ProductsListEcommerceResponseRowsItemType                          `json:"type" url:"type"`
+	Name           string                                                             `json:"name" url:"name"`
+	Code           *string                                                            `json:"code,omitempty" url:"code,omitempty"`
+	Barcode        *string                                                            `json:"barcode,omitempty" url:"barcode,omitempty"`
+	Unit           string                                                             `json:"unit" url:"unit"`
+	Description    *string                                                            `json:"description,omitempty" url:"description,omitempty"`
+	Translations   map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+	Attributes     map[string]*string                                                 `json:"attributes,omitempty" url:"attributes,omitempty"`
+	GroupID        *string                                                            `json:"groupId,omitempty" url:"groupId,omitempty"`
+	GroupName      *string                                                            `json:"groupName,omitempty" url:"groupName,omitempty"`
+	VatRatePercent *string                                                            `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	Price          *string                                                            `json:"price,omitempty" url:"price,omitempty"`
+	Currency       string                                                             `json:"currency" url:"currency"`
+	Components     []*ProductsListEcommerceResponseRowsItemComponentsItem             `json:"components" url:"components"`
+	OnHand         *string                                                            `json:"onHand,omitempty" url:"onHand,omitempty"`
+	Reserved       *string                                                            `json:"reserved,omitempty" url:"reserved,omitempty"`
+	Available      *string                                                            `json:"available,omitempty" url:"available,omitempty"`
+	Deleted        bool                                                               `json:"deleted" url:"deleted"`
+	UpdatedAt      time.Time                                                          `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4232,154 +4282,154 @@ type PostV1EcommerceProductsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetID() string {
+func (p *ProductsListEcommerceResponseRowsItem) GetID() string {
 	if p == nil {
 		return ""
 	}
 	return p.ID
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetType() PostV1EcommerceProductsListResponseRowsItemType {
+func (p *ProductsListEcommerceResponseRowsItem) GetType() ProductsListEcommerceResponseRowsItemType {
 	if p == nil {
 		return ""
 	}
 	return p.Type
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetName() string {
+func (p *ProductsListEcommerceResponseRowsItem) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetCode() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetCode() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Code
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetBarcode() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetBarcode() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Barcode
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetUnit() string {
+func (p *ProductsListEcommerceResponseRowsItem) GetUnit() string {
 	if p == nil {
 		return ""
 	}
 	return p.Unit
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetDescription() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetDescription() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Description
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetTranslations() map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue {
+func (p *ProductsListEcommerceResponseRowsItem) GetTranslations() map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue {
 	if p == nil {
 		return nil
 	}
 	return p.Translations
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetAttributes() map[string]*string {
+func (p *ProductsListEcommerceResponseRowsItem) GetAttributes() map[string]*string {
 	if p == nil {
 		return nil
 	}
 	return p.Attributes
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetGroupID() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetGroupID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.GroupID
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetGroupName() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetGroupName() *string {
 	if p == nil {
 		return nil
 	}
 	return p.GroupName
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetVatRatePercent() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetVatRatePercent() *string {
 	if p == nil {
 		return nil
 	}
 	return p.VatRatePercent
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetPrice() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetPrice() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Price
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetCurrency() string {
+func (p *ProductsListEcommerceResponseRowsItem) GetCurrency() string {
 	if p == nil {
 		return ""
 	}
 	return p.Currency
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetComponents() []*PostV1EcommerceProductsListResponseRowsItemComponentsItem {
+func (p *ProductsListEcommerceResponseRowsItem) GetComponents() []*ProductsListEcommerceResponseRowsItemComponentsItem {
 	if p == nil {
 		return nil
 	}
 	return p.Components
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetOnHand() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetOnHand() *string {
 	if p == nil {
 		return nil
 	}
 	return p.OnHand
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetReserved() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetReserved() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Reserved
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetAvailable() *string {
+func (p *ProductsListEcommerceResponseRowsItem) GetAvailable() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Available
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetDeleted() bool {
+func (p *ProductsListEcommerceResponseRowsItem) GetDeleted() bool {
 	if p == nil {
 		return false
 	}
 	return p.Deleted
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetUpdatedAt() string {
+func (p *ProductsListEcommerceResponseRowsItem) GetUpdatedAt() time.Time {
 	if p == nil {
-		return ""
+		return time.Time{}
 	}
 	return p.UpdatedAt
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+func (p *ProductsListEcommerceResponseRowsItem) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) require(field *big.Int) {
+func (p *ProductsListEcommerceResponseRowsItem) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -4388,151 +4438,157 @@ func (p *PostV1EcommerceProductsListResponseRowsItem) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetID(id string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetID(id string) {
 	p.ID = id
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldID)
+	p.require(productsListEcommerceResponseRowsItemFieldID)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetType(type_ PostV1EcommerceProductsListResponseRowsItemType) {
+func (p *ProductsListEcommerceResponseRowsItem) SetType(type_ ProductsListEcommerceResponseRowsItemType) {
 	p.Type = type_
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldType)
+	p.require(productsListEcommerceResponseRowsItemFieldType)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetName(name string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetName(name string) {
 	p.Name = name
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldName)
+	p.require(productsListEcommerceResponseRowsItemFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetCode(code *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldCode)
+	p.require(productsListEcommerceResponseRowsItemFieldCode)
 }
 
 // SetBarcode sets the Barcode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetBarcode(barcode *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetBarcode(barcode *string) {
 	p.Barcode = barcode
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldBarcode)
+	p.require(productsListEcommerceResponseRowsItemFieldBarcode)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetUnit(unit string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetUnit(unit string) {
 	p.Unit = unit
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldUnit)
+	p.require(productsListEcommerceResponseRowsItemFieldUnit)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetDescription(description *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetDescription(description *string) {
 	p.Description = description
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldDescription)
+	p.require(productsListEcommerceResponseRowsItemFieldDescription)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetTranslations(translations map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue) {
+func (p *ProductsListEcommerceResponseRowsItem) SetTranslations(translations map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue) {
 	p.Translations = translations
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldTranslations)
+	p.require(productsListEcommerceResponseRowsItemFieldTranslations)
 }
 
 // SetAttributes sets the Attributes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetAttributes(attributes map[string]*string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldAttributes)
+	p.require(productsListEcommerceResponseRowsItemFieldAttributes)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetGroupID(groupID *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetGroupID(groupID *string) {
 	p.GroupID = groupID
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldGroupID)
+	p.require(productsListEcommerceResponseRowsItemFieldGroupID)
 }
 
 // SetGroupName sets the GroupName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetGroupName(groupName *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetGroupName(groupName *string) {
 	p.GroupName = groupName
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldGroupName)
+	p.require(productsListEcommerceResponseRowsItemFieldGroupName)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetVatRatePercent(vatRatePercent *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetVatRatePercent(vatRatePercent *string) {
 	p.VatRatePercent = vatRatePercent
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldVatRatePercent)
+	p.require(productsListEcommerceResponseRowsItemFieldVatRatePercent)
 }
 
 // SetPrice sets the Price field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetPrice(price *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetPrice(price *string) {
 	p.Price = price
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldPrice)
+	p.require(productsListEcommerceResponseRowsItemFieldPrice)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetCurrency(currency string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetCurrency(currency string) {
 	p.Currency = currency
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldCurrency)
+	p.require(productsListEcommerceResponseRowsItemFieldCurrency)
 }
 
 // SetComponents sets the Components field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetComponents(components []*PostV1EcommerceProductsListResponseRowsItemComponentsItem) {
+func (p *ProductsListEcommerceResponseRowsItem) SetComponents(components []*ProductsListEcommerceResponseRowsItemComponentsItem) {
 	p.Components = components
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldComponents)
+	p.require(productsListEcommerceResponseRowsItemFieldComponents)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetOnHand(onHand *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetOnHand(onHand *string) {
 	p.OnHand = onHand
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldOnHand)
+	p.require(productsListEcommerceResponseRowsItemFieldOnHand)
 }
 
 // SetReserved sets the Reserved field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetReserved(reserved *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetReserved(reserved *string) {
 	p.Reserved = reserved
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldReserved)
+	p.require(productsListEcommerceResponseRowsItemFieldReserved)
 }
 
 // SetAvailable sets the Available field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetAvailable(available *string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetAvailable(available *string) {
 	p.Available = available
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldAvailable)
+	p.require(productsListEcommerceResponseRowsItemFieldAvailable)
 }
 
 // SetDeleted sets the Deleted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetDeleted(deleted bool) {
+func (p *ProductsListEcommerceResponseRowsItem) SetDeleted(deleted bool) {
 	p.Deleted = deleted
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldDeleted)
+	p.require(productsListEcommerceResponseRowsItemFieldDeleted)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
+func (p *ProductsListEcommerceResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
 	p.UpdatedAt = updatedAt
-	p.require(postV1EcommerceProductsListResponseRowsItemFieldUpdatedAt)
+	p.require(productsListEcommerceResponseRowsItemFieldUpdatedAt)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceProductsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (p *ProductsListEcommerceResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ProductsListEcommerceResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceProductsListResponseRowsItem(value)
+	*p = ProductsListEcommerceResponseRowsItem(unmarshaler.embed)
+	p.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -4542,18 +4598,20 @@ func (p *PostV1EcommerceProductsListResponseRowsItem) UnmarshalJSON(data []byte)
 	return nil
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceProductsListResponseRowsItem
+func (p *ProductsListEcommerceResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ProductsListEcommerceResponseRowsItem
 	var marshaler = struct {
 		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*p),
+		UpdatedAt: internal.NewDateTime(p.UpdatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItem) String() string {
+func (p *ProductsListEcommerceResponseRowsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -4569,11 +4627,11 @@ func (p *PostV1EcommerceProductsListResponseRowsItem) String() string {
 }
 
 var (
-	postV1EcommerceProductsListResponseRowsItemComponentsItemFieldItemID   = big.NewInt(1 << 0)
-	postV1EcommerceProductsListResponseRowsItemComponentsItemFieldQuantity = big.NewInt(1 << 1)
+	productsListEcommerceResponseRowsItemComponentsItemFieldItemID   = big.NewInt(1 << 0)
+	productsListEcommerceResponseRowsItemComponentsItemFieldQuantity = big.NewInt(1 << 1)
 )
 
-type PostV1EcommerceProductsListResponseRowsItemComponentsItem struct {
+type ProductsListEcommerceResponseRowsItemComponentsItem struct {
 	ItemID   string `json:"itemId" url:"itemId"`
 	Quantity string `json:"quantity" url:"quantity"`
 
@@ -4584,28 +4642,28 @@ type PostV1EcommerceProductsListResponseRowsItemComponentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) GetItemID() string {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) GetItemID() string {
 	if p == nil {
 		return ""
 	}
 	return p.ItemID
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) GetQuantity() string {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) GetQuantity() string {
 	if p == nil {
 		return ""
 	}
 	return p.Quantity
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) GetExtraProperties() map[string]interface{} {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) require(field *big.Int) {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -4614,25 +4672,25 @@ func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) require(fiel
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) SetItemID(itemID string) {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) SetItemID(itemID string) {
 	p.ItemID = itemID
-	p.require(postV1EcommerceProductsListResponseRowsItemComponentsItemFieldItemID)
+	p.require(productsListEcommerceResponseRowsItemComponentsItemFieldItemID)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) SetQuantity(quantity string) {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) SetQuantity(quantity string) {
 	p.Quantity = quantity
-	p.require(postV1EcommerceProductsListResponseRowsItemComponentsItemFieldQuantity)
+	p.require(productsListEcommerceResponseRowsItemComponentsItemFieldQuantity)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceProductsListResponseRowsItemComponentsItem
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ProductsListEcommerceResponseRowsItemComponentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceProductsListResponseRowsItemComponentsItem(value)
+	*p = ProductsListEcommerceResponseRowsItemComponentsItem(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -4642,8 +4700,8 @@ func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) UnmarshalJSO
 	return nil
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceProductsListResponseRowsItemComponentsItem
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) MarshalJSON() ([]byte, error) {
+	type embed ProductsListEcommerceResponseRowsItemComponentsItem
 	var marshaler = struct {
 		embed
 	}{
@@ -4653,7 +4711,7 @@ func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) MarshalJSON(
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) String() string {
+func (p *ProductsListEcommerceResponseRowsItemComponentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -4669,11 +4727,11 @@ func (p *PostV1EcommerceProductsListResponseRowsItemComponentsItem) String() str
 }
 
 var (
-	postV1EcommerceProductsListResponseRowsItemTranslationsValueFieldName        = big.NewInt(1 << 0)
-	postV1EcommerceProductsListResponseRowsItemTranslationsValueFieldDescription = big.NewInt(1 << 1)
+	productsListEcommerceResponseRowsItemTranslationsValueFieldName        = big.NewInt(1 << 0)
+	productsListEcommerceResponseRowsItemTranslationsValueFieldDescription = big.NewInt(1 << 1)
 )
 
-type PostV1EcommerceProductsListResponseRowsItemTranslationsValue struct {
+type ProductsListEcommerceResponseRowsItemTranslationsValue struct {
 	Name        string  `json:"name" url:"name"`
 	Description *string `json:"description,omitempty" url:"description,omitempty"`
 
@@ -4684,28 +4742,28 @@ type PostV1EcommerceProductsListResponseRowsItemTranslationsValue struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) GetName() string {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) GetDescription() *string {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) GetDescription() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Description
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) GetExtraProperties() map[string]interface{} {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) require(field *big.Int) {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -4714,25 +4772,25 @@ func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) require(f
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) SetName(name string) {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1EcommerceProductsListResponseRowsItemTranslationsValueFieldName)
+	p.require(productsListEcommerceResponseRowsItemTranslationsValueFieldName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) SetDescription(description *string) {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) SetDescription(description *string) {
 	p.Description = description
-	p.require(postV1EcommerceProductsListResponseRowsItemTranslationsValueFieldDescription)
+	p.require(productsListEcommerceResponseRowsItemTranslationsValueFieldDescription)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler ProductsListEcommerceResponseRowsItemTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceProductsListResponseRowsItemTranslationsValue(value)
+	*p = ProductsListEcommerceResponseRowsItemTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -4742,8 +4800,8 @@ func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) Unmarshal
 	return nil
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed ProductsListEcommerceResponseRowsItemTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -4753,7 +4811,7 @@ func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) MarshalJS
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) String() string {
+func (p *ProductsListEcommerceResponseRowsItemTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -4768,37 +4826,37 @@ func (p *PostV1EcommerceProductsListResponseRowsItemTranslationsValue) String() 
 	return fmt.Sprintf("%#v", p)
 }
 
-type PostV1EcommerceProductsListResponseRowsItemType string
+type ProductsListEcommerceResponseRowsItemType string
 
 const (
-	PostV1EcommerceProductsListResponseRowsItemTypeProduct PostV1EcommerceProductsListResponseRowsItemType = "product"
-	PostV1EcommerceProductsListResponseRowsItemTypeService PostV1EcommerceProductsListResponseRowsItemType = "service"
-	PostV1EcommerceProductsListResponseRowsItemTypeSet     PostV1EcommerceProductsListResponseRowsItemType = "set"
+	ProductsListEcommerceResponseRowsItemTypeProduct ProductsListEcommerceResponseRowsItemType = "product"
+	ProductsListEcommerceResponseRowsItemTypeService ProductsListEcommerceResponseRowsItemType = "service"
+	ProductsListEcommerceResponseRowsItemTypeSet     ProductsListEcommerceResponseRowsItemType = "set"
 )
 
-func NewPostV1EcommerceProductsListResponseRowsItemTypeFromString(s string) (PostV1EcommerceProductsListResponseRowsItemType, error) {
+func NewProductsListEcommerceResponseRowsItemTypeFromString(s string) (ProductsListEcommerceResponseRowsItemType, error) {
 	switch s {
 	case "product":
-		return PostV1EcommerceProductsListResponseRowsItemTypeProduct, nil
+		return ProductsListEcommerceResponseRowsItemTypeProduct, nil
 	case "service":
-		return PostV1EcommerceProductsListResponseRowsItemTypeService, nil
+		return ProductsListEcommerceResponseRowsItemTypeService, nil
 	case "set":
-		return PostV1EcommerceProductsListResponseRowsItemTypeSet, nil
+		return ProductsListEcommerceResponseRowsItemTypeSet, nil
 	}
-	var t PostV1EcommerceProductsListResponseRowsItemType
+	var t ProductsListEcommerceResponseRowsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1EcommerceProductsListResponseRowsItemType) Ptr() *PostV1EcommerceProductsListResponseRowsItemType {
+func (p ProductsListEcommerceResponseRowsItemType) Ptr() *ProductsListEcommerceResponseRowsItemType {
 	return &p
 }
 
 var (
-	postV1EcommerceStockListResponseFieldRows = big.NewInt(1 << 0)
+	stockListEcommerceResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1EcommerceStockListResponse struct {
-	Rows []*PostV1EcommerceStockListResponseRowsItem `json:"rows" url:"rows"`
+type StockListEcommerceResponse struct {
+	Rows []*StockListEcommerceResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4807,85 +4865,85 @@ type PostV1EcommerceStockListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceStockListResponse) GetRows() []*PostV1EcommerceStockListResponseRowsItem {
-	if p == nil {
+func (s *StockListEcommerceResponse) GetRows() []*StockListEcommerceResponseRowsItem {
+	if s == nil {
 		return nil
 	}
-	return p.Rows
+	return s.Rows
 }
 
-func (p *PostV1EcommerceStockListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockListEcommerceResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1EcommerceStockListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockListEcommerceResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponse) SetRows(rows []*PostV1EcommerceStockListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1EcommerceStockListResponseFieldRows)
+func (s *StockListEcommerceResponse) SetRows(rows []*StockListEcommerceResponseRowsItem) {
+	s.Rows = rows
+	s.require(stockListEcommerceResponseFieldRows)
 }
 
-func (p *PostV1EcommerceStockListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceStockListResponse
+func (s *StockListEcommerceResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockListEcommerceResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceStockListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockListEcommerceResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceStockListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceStockListResponse
+func (s *StockListEcommerceResponse) MarshalJSON() ([]byte, error) {
+	type embed StockListEcommerceResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceStockListResponse) String() string {
-	if p == nil {
+func (s *StockListEcommerceResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1EcommerceStockListResponseRowsItemFieldItemID      = big.NewInt(1 << 0)
-	postV1EcommerceStockListResponseRowsItemFieldWarehouseID = big.NewInt(1 << 1)
-	postV1EcommerceStockListResponseRowsItemFieldOnHand      = big.NewInt(1 << 2)
-	postV1EcommerceStockListResponseRowsItemFieldReserved    = big.NewInt(1 << 3)
-	postV1EcommerceStockListResponseRowsItemFieldAvailable   = big.NewInt(1 << 4)
+	stockListEcommerceResponseRowsItemFieldItemID      = big.NewInt(1 << 0)
+	stockListEcommerceResponseRowsItemFieldWarehouseID = big.NewInt(1 << 1)
+	stockListEcommerceResponseRowsItemFieldOnHand      = big.NewInt(1 << 2)
+	stockListEcommerceResponseRowsItemFieldReserved    = big.NewInt(1 << 3)
+	stockListEcommerceResponseRowsItemFieldAvailable   = big.NewInt(1 << 4)
 )
 
-type PostV1EcommerceStockListResponseRowsItem struct {
+type StockListEcommerceResponseRowsItem struct {
 	ItemID      string `json:"itemId" url:"itemId"`
 	WarehouseID string `json:"warehouseId" url:"warehouseId"`
 	OnHand      string `json:"onHand" url:"onHand"`
@@ -4899,128 +4957,128 @@ type PostV1EcommerceStockListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetItemID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ItemID
+	return s.ItemID
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetWarehouseID() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetWarehouseID() string {
+	if s == nil {
 		return ""
 	}
-	return p.WarehouseID
+	return s.WarehouseID
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetOnHand() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetOnHand() string {
+	if s == nil {
 		return ""
 	}
-	return p.OnHand
+	return s.OnHand
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetReserved() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetReserved() string {
+	if s == nil {
 		return ""
 	}
-	return p.Reserved
+	return s.Reserved
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetAvailable() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetAvailable() string {
+	if s == nil {
 		return ""
 	}
-	return p.Available
+	return s.Available
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockListEcommerceResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1EcommerceStockListResponseRowsItemFieldItemID)
+func (s *StockListEcommerceResponseRowsItem) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockListEcommerceResponseRowsItemFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponseRowsItem) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1EcommerceStockListResponseRowsItemFieldWarehouseID)
+func (s *StockListEcommerceResponseRowsItem) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockListEcommerceResponseRowsItemFieldWarehouseID)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponseRowsItem) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1EcommerceStockListResponseRowsItemFieldOnHand)
+func (s *StockListEcommerceResponseRowsItem) SetOnHand(onHand string) {
+	s.OnHand = onHand
+	s.require(stockListEcommerceResponseRowsItemFieldOnHand)
 }
 
 // SetReserved sets the Reserved field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponseRowsItem) SetReserved(reserved string) {
-	p.Reserved = reserved
-	p.require(postV1EcommerceStockListResponseRowsItemFieldReserved)
+func (s *StockListEcommerceResponseRowsItem) SetReserved(reserved string) {
+	s.Reserved = reserved
+	s.require(stockListEcommerceResponseRowsItemFieldReserved)
 }
 
 // SetAvailable sets the Available field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1EcommerceStockListResponseRowsItem) SetAvailable(available string) {
-	p.Available = available
-	p.require(postV1EcommerceStockListResponseRowsItemFieldAvailable)
+func (s *StockListEcommerceResponseRowsItem) SetAvailable(available string) {
+	s.Available = available
+	s.require(stockListEcommerceResponseRowsItemFieldAvailable)
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1EcommerceStockListResponseRowsItem
+func (s *StockListEcommerceResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockListEcommerceResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1EcommerceStockListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockListEcommerceResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1EcommerceStockListResponseRowsItem
+func (s *StockListEcommerceResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed StockListEcommerceResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1EcommerceStockListResponseRowsItem) String() string {
-	if p == nil {
+func (s *StockListEcommerceResponseRowsItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }

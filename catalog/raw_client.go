@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1CatalogItemsCreate(
+func (r *RawClient) ItemsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsCreateRequest,
+	request *nordlet.ItemsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsCreateResponse], error) {
+) (*core.Response[*nordlet.ItemsCreateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1CatalogItemsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsCreateResponse
+	var response *nordlet.ItemsCreateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1CatalogItemsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsCreateResponse]{
+	return &core.Response[*nordlet.ItemsCreateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsGet(
+func (r *RawClient) ItemsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsGetRequest,
+	request *nordlet.ItemsGetCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsGetResponse], error) {
+) (*core.Response[*nordlet.ItemsGetCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1CatalogItemsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsGetResponse
+	var response *nordlet.ItemsGetCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1CatalogItemsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsGetResponse]{
+	return &core.Response[*nordlet.ItemsGetCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsUpdate(
+func (r *RawClient) ItemsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsUpdateRequest,
+	request *nordlet.ItemsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsUpdateResponse], error) {
+) (*core.Response[*nordlet.ItemsUpdateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1CatalogItemsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsUpdateResponse
+	var response *nordlet.ItemsUpdateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1CatalogItemsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsUpdateResponse]{
+	return &core.Response[*nordlet.ItemsUpdateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsDelete(
+func (r *RawClient) ItemsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsDeleteRequest,
+	request *nordlet.ItemsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsDeleteResponse], error) {
+) (*core.Response[*nordlet.ItemsDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1CatalogItemsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsDeleteResponse
+	var response *nordlet.ItemsDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1CatalogItemsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsDeleteResponse]{
+	return &core.Response[*nordlet.ItemsDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsList(
+func (r *RawClient) ItemsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsListRequest,
+	request *nordlet.ItemsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsListResponse], error) {
+) (*core.Response[*nordlet.ItemsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1CatalogItemsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsListResponse
+	var response *nordlet.ItemsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1CatalogItemsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsListResponse]{
+	return &core.Response[*nordlet.ItemsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsFilesList(
+func (r *RawClient) ItemsFilesList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsFilesListRequest,
+	request *nordlet.ItemsFilesListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsFilesListResponse], error) {
+) (*core.Response[*nordlet.ItemsFilesListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1CatalogItemsFilesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsFilesListResponse
+	var response *nordlet.ItemsFilesListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1CatalogItemsFilesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsFilesListResponse]{
+	return &core.Response[*nordlet.ItemsFilesListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsKindsCreate(
+func (r *RawClient) ItemsKindsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsCreateRequest,
+	request *nordlet.ItemsKindsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsKindsCreateResponse], error) {
+) (*core.Response[*nordlet.ItemsKindsCreateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1CatalogItemsKindsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsKindsCreateResponse
+	var response *nordlet.ItemsKindsCreateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1CatalogItemsKindsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsKindsCreateResponse]{
+	return &core.Response[*nordlet.ItemsKindsCreateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsKindsUpdate(
+func (r *RawClient) ItemsKindsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsUpdateRequest,
+	request *nordlet.ItemsKindsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsKindsUpdateResponse], error) {
+) (*core.Response[*nordlet.ItemsKindsUpdateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1CatalogItemsKindsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsKindsUpdateResponse
+	var response *nordlet.ItemsKindsUpdateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1CatalogItemsKindsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsKindsUpdateResponse]{
+	return &core.Response[*nordlet.ItemsKindsUpdateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsKindsDelete(
+func (r *RawClient) ItemsKindsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsDeleteRequest,
+	request *nordlet.ItemsKindsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsKindsDeleteResponse], error) {
+) (*core.Response[*nordlet.ItemsKindsDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1CatalogItemsKindsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsKindsDeleteResponse
+	var response *nordlet.ItemsKindsDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1CatalogItemsKindsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsKindsDeleteResponse]{
+	return &core.Response[*nordlet.ItemsKindsDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsKindsList(
+func (r *RawClient) ItemsKindsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsListRequest,
+	request *nordlet.ItemsKindsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsKindsListResponse], error) {
+) (*core.Response[*nordlet.ItemsKindsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1CatalogItemsKindsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsKindsListResponse
+	var response *nordlet.ItemsKindsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1CatalogItemsKindsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsKindsListResponse]{
+	return &core.Response[*nordlet.ItemsKindsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogUnitsCreate(
+func (r *RawClient) UnitsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsCreateRequest,
+	request *nordlet.UnitsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogUnitsCreateResponse], error) {
+) (*core.Response[*nordlet.UnitsCreateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1CatalogUnitsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogUnitsCreateResponse
+	var response *nordlet.UnitsCreateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1CatalogUnitsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogUnitsCreateResponse]{
+	return &core.Response[*nordlet.UnitsCreateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogUnitsUpdate(
+func (r *RawClient) UnitsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsUpdateRequest,
+	request *nordlet.UnitsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogUnitsUpdateResponse], error) {
+) (*core.Response[*nordlet.UnitsUpdateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1CatalogUnitsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogUnitsUpdateResponse
+	var response *nordlet.UnitsUpdateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1CatalogUnitsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogUnitsUpdateResponse]{
+	return &core.Response[*nordlet.UnitsUpdateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogUnitsDelete(
+func (r *RawClient) UnitsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsDeleteRequest,
+	request *nordlet.UnitsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogUnitsDeleteResponse], error) {
+) (*core.Response[*nordlet.UnitsDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1CatalogUnitsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogUnitsDeleteResponse
+	var response *nordlet.UnitsDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +597,18 @@ func (r *RawClient) PostV1CatalogUnitsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogUnitsDeleteResponse]{
+	return &core.Response[*nordlet.UnitsDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogUnitsList(
+func (r *RawClient) UnitsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsListRequest,
+	request *nordlet.UnitsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogUnitsListResponse], error) {
+) (*core.Response[*nordlet.UnitsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +621,7 @@ func (r *RawClient) PostV1CatalogUnitsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogUnitsListResponse
+	var response *nordlet.UnitsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +641,18 @@ func (r *RawClient) PostV1CatalogUnitsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogUnitsListResponse]{
+	return &core.Response[*nordlet.UnitsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogUnitsOptions(
+func (r *RawClient) UnitsOptions(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsOptionsRequest,
+	request *nordlet.UnitsOptionsCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogUnitsOptionsResponse], error) {
+) (*core.Response[*nordlet.UnitsOptionsCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +665,7 @@ func (r *RawClient) PostV1CatalogUnitsOptions(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogUnitsOptionsResponse
+	var response *nordlet.UnitsOptionsCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +685,18 @@ func (r *RawClient) PostV1CatalogUnitsOptions(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogUnitsOptionsResponse]{
+	return &core.Response[*nordlet.UnitsOptionsCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemGroupsCreate(
+func (r *RawClient) ItemGroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsCreateRequest,
+	request *nordlet.ItemGroupsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemGroupsCreateResponse], error) {
+) (*core.Response[*nordlet.ItemGroupsCreateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +709,7 @@ func (r *RawClient) PostV1CatalogItemGroupsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemGroupsCreateResponse
+	var response *nordlet.ItemGroupsCreateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +729,18 @@ func (r *RawClient) PostV1CatalogItemGroupsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemGroupsCreateResponse]{
+	return &core.Response[*nordlet.ItemGroupsCreateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemGroupsUpdate(
+func (r *RawClient) ItemGroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsUpdateRequest,
+	request *nordlet.ItemGroupsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemGroupsUpdateResponse], error) {
+) (*core.Response[*nordlet.ItemGroupsUpdateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +753,7 @@ func (r *RawClient) PostV1CatalogItemGroupsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemGroupsUpdateResponse
+	var response *nordlet.ItemGroupsUpdateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +773,18 @@ func (r *RawClient) PostV1CatalogItemGroupsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemGroupsUpdateResponse]{
+	return &core.Response[*nordlet.ItemGroupsUpdateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemGroupsDelete(
+func (r *RawClient) ItemGroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsDeleteRequest,
+	request *nordlet.ItemGroupsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemGroupsDeleteResponse], error) {
+) (*core.Response[*nordlet.ItemGroupsDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +797,7 @@ func (r *RawClient) PostV1CatalogItemGroupsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemGroupsDeleteResponse
+	var response *nordlet.ItemGroupsDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +817,18 @@ func (r *RawClient) PostV1CatalogItemGroupsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemGroupsDeleteResponse]{
+	return &core.Response[*nordlet.ItemGroupsDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemGroupsList(
+func (r *RawClient) ItemGroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsListRequest,
+	request *nordlet.ItemGroupsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemGroupsListResponse], error) {
+) (*core.Response[*nordlet.ItemGroupsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +841,7 @@ func (r *RawClient) PostV1CatalogItemGroupsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemGroupsListResponse
+	var response *nordlet.ItemGroupsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +861,18 @@ func (r *RawClient) PostV1CatalogItemGroupsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemGroupsListResponse]{
+	return &core.Response[*nordlet.ItemGroupsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsSuppliersUpsert(
+func (r *RawClient) ItemsSuppliersUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersUpsertRequest,
+	request *nordlet.ItemsSuppliersUpsertCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsSuppliersUpsertResponse], error) {
+) (*core.Response[*nordlet.ItemsSuppliersUpsertCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +885,7 @@ func (r *RawClient) PostV1CatalogItemsSuppliersUpsert(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsSuppliersUpsertResponse
+	var response *nordlet.ItemsSuppliersUpsertCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +905,18 @@ func (r *RawClient) PostV1CatalogItemsSuppliersUpsert(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsSuppliersUpsertResponse]{
+	return &core.Response[*nordlet.ItemsSuppliersUpsertCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsSuppliersList(
+func (r *RawClient) ItemsSuppliersList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersListRequest,
+	request *nordlet.ItemsSuppliersListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsSuppliersListResponse], error) {
+) (*core.Response[*nordlet.ItemsSuppliersListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +929,7 @@ func (r *RawClient) PostV1CatalogItemsSuppliersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsSuppliersListResponse
+	var response *nordlet.ItemsSuppliersListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,18 +949,18 @@ func (r *RawClient) PostV1CatalogItemsSuppliersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsSuppliersListResponse]{
+	return &core.Response[*nordlet.ItemsSuppliersListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogItemsSuppliersDelete(
+func (r *RawClient) ItemsSuppliersDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersDeleteRequest,
+	request *nordlet.ItemsSuppliersDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogItemsSuppliersDeleteResponse], error) {
+) (*core.Response[*nordlet.ItemsSuppliersDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -973,7 +973,7 @@ func (r *RawClient) PostV1CatalogItemsSuppliersDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogItemsSuppliersDeleteResponse
+	var response *nordlet.ItemsSuppliersDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -993,18 +993,18 @@ func (r *RawClient) PostV1CatalogItemsSuppliersDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogItemsSuppliersDeleteResponse]{
+	return &core.Response[*nordlet.ItemsSuppliersDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsCreate(
+func (r *RawClient) PriceListsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsCreateRequest,
+	request *nordlet.PriceListsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsCreateResponse], error) {
+) (*core.Response[*nordlet.PriceListsCreateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1017,7 +1017,7 @@ func (r *RawClient) PostV1CatalogPriceListsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsCreateResponse
+	var response *nordlet.PriceListsCreateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1037,18 +1037,18 @@ func (r *RawClient) PostV1CatalogPriceListsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsCreateResponse]{
+	return &core.Response[*nordlet.PriceListsCreateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsUpdate(
+func (r *RawClient) PriceListsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsUpdateRequest,
+	request *nordlet.PriceListsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsUpdateResponse], error) {
+) (*core.Response[*nordlet.PriceListsUpdateCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1061,7 +1061,7 @@ func (r *RawClient) PostV1CatalogPriceListsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsUpdateResponse
+	var response *nordlet.PriceListsUpdateCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1081,18 +1081,18 @@ func (r *RawClient) PostV1CatalogPriceListsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsUpdateResponse]{
+	return &core.Response[*nordlet.PriceListsUpdateCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsList(
+func (r *RawClient) PriceListsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsListRequest,
+	request *nordlet.PriceListsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsListResponse], error) {
+) (*core.Response[*nordlet.PriceListsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1105,7 +1105,7 @@ func (r *RawClient) PostV1CatalogPriceListsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsListResponse
+	var response *nordlet.PriceListsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1125,18 +1125,18 @@ func (r *RawClient) PostV1CatalogPriceListsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsListResponse]{
+	return &core.Response[*nordlet.PriceListsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsItemsSet(
+func (r *RawClient) PriceListsItemsSet(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsSetRequest,
+	request *nordlet.PriceListsItemsSetCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsItemsSetResponse], error) {
+) (*core.Response[*nordlet.PriceListsItemsSetCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1149,7 +1149,7 @@ func (r *RawClient) PostV1CatalogPriceListsItemsSet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsItemsSetResponse
+	var response *nordlet.PriceListsItemsSetCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1169,18 +1169,18 @@ func (r *RawClient) PostV1CatalogPriceListsItemsSet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsItemsSetResponse]{
+	return &core.Response[*nordlet.PriceListsItemsSetCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsItemsList(
+func (r *RawClient) PriceListsItemsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsListRequest,
+	request *nordlet.PriceListsItemsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsItemsListResponse], error) {
+) (*core.Response[*nordlet.PriceListsItemsListCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1193,7 +1193,7 @@ func (r *RawClient) PostV1CatalogPriceListsItemsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsItemsListResponse
+	var response *nordlet.PriceListsItemsListCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1213,18 +1213,18 @@ func (r *RawClient) PostV1CatalogPriceListsItemsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsItemsListResponse]{
+	return &core.Response[*nordlet.PriceListsItemsListCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CatalogPriceListsItemsDelete(
+func (r *RawClient) PriceListsItemsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsDeleteRequest,
+	request *nordlet.PriceListsItemsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CatalogPriceListsItemsDeleteResponse], error) {
+) (*core.Response[*nordlet.PriceListsItemsDeleteCatalogResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1237,7 +1237,7 @@ func (r *RawClient) PostV1CatalogPriceListsItemsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CatalogPriceListsItemsDeleteResponse
+	var response *nordlet.PriceListsItemsDeleteCatalogResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1257,7 +1257,7 @@ func (r *RawClient) PostV1CatalogPriceListsItemsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CatalogPriceListsItemsDeleteResponse]{
+	return &core.Response[*nordlet.PriceListsItemsDeleteCatalogResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

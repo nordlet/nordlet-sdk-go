@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) CheckAHistoricalBooksPackageWithoutWritingAnything(
+func (r *RawClient) BooksValidate(
 	ctx context.Context,
-	request *nordlet.PostV1MigrationBooksValidateRequest,
+	request *nordlet.BooksValidateMigrationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1MigrationBooksValidateResponse], error) {
+) (*core.Response[*nordlet.BooksValidateMigrationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) CheckAHistoricalBooksPackageWithoutWritingAnything(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1MigrationBooksValidateResponse
+	var response *nordlet.BooksValidateMigrationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) CheckAHistoricalBooksPackageWithoutWritingAnything(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1MigrationBooksValidateResponse]{
+	return &core.Response[*nordlet.BooksValidateMigrationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ImportHistoricalBooksFromAPreviousAccountingSystem(
+func (r *RawClient) BooksImport(
 	ctx context.Context,
-	request *nordlet.PostV1MigrationBooksImportRequest,
+	request *nordlet.BooksImportMigrationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1MigrationBooksImportResponse], error) {
+) (*core.Response[*nordlet.BooksImportMigrationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) ImportHistoricalBooksFromAPreviousAccountingSystem(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1MigrationBooksImportResponse
+	var response *nordlet.BooksImportMigrationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,7 +113,7 @@ func (r *RawClient) ImportHistoricalBooksFromAPreviousAccountingSystem(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1MigrationBooksImportResponse]{
+	return &core.Response[*nordlet.BooksImportMigrationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

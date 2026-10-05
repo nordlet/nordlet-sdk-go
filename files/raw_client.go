@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1FilesUpload(
+func (r *RawClient) Upload(
 	ctx context.Context,
-	request *nordlet.PostV1FilesUploadRequest,
+	request *nordlet.UploadFilesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FilesUploadResponse], error) {
+) (*core.Response[*nordlet.UploadFilesResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1FilesUpload(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FilesUploadResponse
+	var response *nordlet.UploadFilesResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1FilesUpload(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FilesUploadResponse]{
+	return &core.Response[*nordlet.UploadFilesResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FilesGet(
+func (r *RawClient) Get(
 	ctx context.Context,
-	request *nordlet.PostV1FilesGetRequest,
+	request *nordlet.GetFilesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FilesGetResponse], error) {
+) (*core.Response[*nordlet.GetFilesResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1FilesGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FilesGetResponse
+	var response *nordlet.GetFilesResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1FilesGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FilesGetResponse]{
+	return &core.Response[*nordlet.GetFilesResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FilesList(
+func (r *RawClient) List(
 	ctx context.Context,
-	request *nordlet.PostV1FilesListRequest,
+	request *nordlet.ListFilesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FilesListResponse], error) {
+) (*core.Response[*nordlet.ListFilesResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1FilesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FilesListResponse
+	var response *nordlet.ListFilesResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1FilesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FilesListResponse]{
+	return &core.Response[*nordlet.ListFilesResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FilesDelete(
+func (r *RawClient) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1FilesDeleteRequest,
+	request *nordlet.DeleteFilesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FilesDeleteResponse], error) {
+) (*core.Response[*nordlet.DeleteFilesResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1FilesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FilesDeleteResponse
+	var response *nordlet.DeleteFilesResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,7 +201,7 @@ func (r *RawClient) PostV1FilesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FilesDeleteResponse]{
+	return &core.Response[*nordlet.DeleteFilesResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1CatalogItemsCreate(
+func (c *Client) ItemsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsCreateRequest,
+	request *nordlet.ItemsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsCreate(
+) (*nordlet.ItemsCreateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1CatalogItemsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsGet(
+func (c *Client) ItemsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsGetRequest,
+	request *nordlet.ItemsGetCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsGet(
+) (*nordlet.ItemsGetCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsGet(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1CatalogItemsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsUpdate(
+func (c *Client) ItemsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsUpdateRequest,
+	request *nordlet.ItemsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsUpdate(
+) (*nordlet.ItemsUpdateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1CatalogItemsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsDelete(
+func (c *Client) ItemsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsDeleteRequest,
+	request *nordlet.ItemsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsDelete(
+) (*nordlet.ItemsDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsDelete(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1CatalogItemsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsList(
+func (c *Client) ItemsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsListRequest,
+	request *nordlet.ItemsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsList(
+) (*nordlet.ItemsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsList(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1CatalogItemsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsFilesList(
+func (c *Client) ItemsFilesList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsFilesListRequest,
+	request *nordlet.ItemsFilesListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsFilesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsFilesList(
+) (*nordlet.ItemsFilesListCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsFilesList(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1CatalogItemsFilesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsKindsCreate(
+func (c *Client) ItemsKindsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsCreateRequest,
+	request *nordlet.ItemsKindsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsKindsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsKindsCreate(
+) (*nordlet.ItemsKindsCreateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsKindsCreate(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1CatalogItemsKindsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsKindsUpdate(
+func (c *Client) ItemsKindsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsUpdateRequest,
+	request *nordlet.ItemsKindsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsKindsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsKindsUpdate(
+) (*nordlet.ItemsKindsUpdateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsKindsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1CatalogItemsKindsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsKindsDelete(
+func (c *Client) ItemsKindsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsDeleteRequest,
+	request *nordlet.ItemsKindsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsKindsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsKindsDelete(
+) (*nordlet.ItemsKindsDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsKindsDelete(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1CatalogItemsKindsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsKindsList(
+func (c *Client) ItemsKindsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsKindsListRequest,
+	request *nordlet.ItemsKindsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsKindsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsKindsList(
+) (*nordlet.ItemsKindsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsKindsList(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1CatalogItemsKindsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogUnitsCreate(
+func (c *Client) UnitsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsCreateRequest,
+	request *nordlet.UnitsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogUnitsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogUnitsCreate(
+) (*nordlet.UnitsCreateCatalogResponse, error) {
+	response, err := c.WithRawResponse.UnitsCreate(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1CatalogUnitsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogUnitsUpdate(
+func (c *Client) UnitsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsUpdateRequest,
+	request *nordlet.UnitsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogUnitsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogUnitsUpdate(
+) (*nordlet.UnitsUpdateCatalogResponse, error) {
+	response, err := c.WithRawResponse.UnitsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1CatalogUnitsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogUnitsDelete(
+func (c *Client) UnitsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsDeleteRequest,
+	request *nordlet.UnitsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogUnitsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogUnitsDelete(
+) (*nordlet.UnitsDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.UnitsDelete(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1CatalogUnitsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogUnitsList(
+func (c *Client) UnitsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsListRequest,
+	request *nordlet.UnitsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogUnitsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogUnitsList(
+) (*nordlet.UnitsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.UnitsList(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1CatalogUnitsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogUnitsOptions(
+func (c *Client) UnitsOptions(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogUnitsOptionsRequest,
+	request *nordlet.UnitsOptionsCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogUnitsOptionsResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogUnitsOptions(
+) (*nordlet.UnitsOptionsCatalogResponse, error) {
+	response, err := c.WithRawResponse.UnitsOptions(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1CatalogUnitsOptions(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemGroupsCreate(
+func (c *Client) ItemGroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsCreateRequest,
+	request *nordlet.ItemGroupsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemGroupsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemGroupsCreate(
+) (*nordlet.ItemGroupsCreateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemGroupsCreate(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1CatalogItemGroupsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemGroupsUpdate(
+func (c *Client) ItemGroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsUpdateRequest,
+	request *nordlet.ItemGroupsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemGroupsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemGroupsUpdate(
+) (*nordlet.ItemGroupsUpdateCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemGroupsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1CatalogItemGroupsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemGroupsDelete(
+func (c *Client) ItemGroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsDeleteRequest,
+	request *nordlet.ItemGroupsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemGroupsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemGroupsDelete(
+) (*nordlet.ItemGroupsDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemGroupsDelete(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1CatalogItemGroupsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemGroupsList(
+func (c *Client) ItemGroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemGroupsListRequest,
+	request *nordlet.ItemGroupsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemGroupsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemGroupsList(
+) (*nordlet.ItemGroupsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemGroupsList(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1CatalogItemGroupsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsSuppliersUpsert(
+func (c *Client) ItemsSuppliersUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersUpsertRequest,
+	request *nordlet.ItemsSuppliersUpsertCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsSuppliersUpsertResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsSuppliersUpsert(
+) (*nordlet.ItemsSuppliersUpsertCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsSuppliersUpsert(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +354,12 @@ func (c *Client) PostV1CatalogItemsSuppliersUpsert(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsSuppliersList(
+func (c *Client) ItemsSuppliersList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersListRequest,
+	request *nordlet.ItemsSuppliersListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsSuppliersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsSuppliersList(
+) (*nordlet.ItemsSuppliersListCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsSuppliersList(
 		ctx,
 		request,
 		opts...,
@@ -370,12 +370,12 @@ func (c *Client) PostV1CatalogItemsSuppliersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogItemsSuppliersDelete(
+func (c *Client) ItemsSuppliersDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogItemsSuppliersDeleteRequest,
+	request *nordlet.ItemsSuppliersDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogItemsSuppliersDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogItemsSuppliersDelete(
+) (*nordlet.ItemsSuppliersDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.ItemsSuppliersDelete(
 		ctx,
 		request,
 		opts...,
@@ -386,12 +386,12 @@ func (c *Client) PostV1CatalogItemsSuppliersDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsCreate(
+func (c *Client) PriceListsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsCreateRequest,
+	request *nordlet.PriceListsCreateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsCreate(
+) (*nordlet.PriceListsCreateCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsCreate(
 		ctx,
 		request,
 		opts...,
@@ -402,12 +402,12 @@ func (c *Client) PostV1CatalogPriceListsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsUpdate(
+func (c *Client) PriceListsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsUpdateRequest,
+	request *nordlet.PriceListsUpdateCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsUpdate(
+) (*nordlet.PriceListsUpdateCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -418,12 +418,12 @@ func (c *Client) PostV1CatalogPriceListsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsList(
+func (c *Client) PriceListsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsListRequest,
+	request *nordlet.PriceListsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsList(
+) (*nordlet.PriceListsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsList(
 		ctx,
 		request,
 		opts...,
@@ -434,12 +434,12 @@ func (c *Client) PostV1CatalogPriceListsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsItemsSet(
+func (c *Client) PriceListsItemsSet(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsSetRequest,
+	request *nordlet.PriceListsItemsSetCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsItemsSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsItemsSet(
+) (*nordlet.PriceListsItemsSetCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsItemsSet(
 		ctx,
 		request,
 		opts...,
@@ -450,12 +450,12 @@ func (c *Client) PostV1CatalogPriceListsItemsSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsItemsList(
+func (c *Client) PriceListsItemsList(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsListRequest,
+	request *nordlet.PriceListsItemsListCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsItemsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsItemsList(
+) (*nordlet.PriceListsItemsListCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsItemsList(
 		ctx,
 		request,
 		opts...,
@@ -466,12 +466,12 @@ func (c *Client) PostV1CatalogPriceListsItemsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CatalogPriceListsItemsDelete(
+func (c *Client) PriceListsItemsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CatalogPriceListsItemsDeleteRequest,
+	request *nordlet.PriceListsItemsDeleteCatalogRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CatalogPriceListsItemsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CatalogPriceListsItemsDelete(
+) (*nordlet.PriceListsItemsDeleteCatalogResponse, error) {
+	response, err := c.WithRawResponse.PriceListsItemsDelete(
 		ctx,
 		request,
 		opts...,

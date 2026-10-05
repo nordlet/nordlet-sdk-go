@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestLedgerPostV1LedgerAccountsListWithWireMock(
+func TestLedgerAccountsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,20 +88,20 @@ func TestLedgerPostV1LedgerAccountsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerAccountsListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerAccountsList(
+	request := &nordlet.AccountsListLedgerRequest{}
+	_, invocationErr := client.Ledger.AccountsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerAccountsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerAccountsListWithWireMock", "POST", "/v1/ledger/accounts/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerAccountsListWithWireMock", "POST", "/v1/ledger/accounts/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerAccountsCreateWithWireMock(
+func TestLedgerAccountsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -112,24 +112,24 @@ func TestLedgerPostV1LedgerAccountsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerAccountsCreateRequest{
+	request := &nordlet.AccountsCreateLedgerRequest{
 		Code: "code",
 		Name: "name",
-		Type: nordlet.PostV1LedgerAccountsCreateRequestTypeAsset,
+		Type: nordlet.AccountsCreateLedgerRequestTypeAsset,
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerAccountsCreate(
+	_, invocationErr := client.Ledger.AccountsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerAccountsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerAccountsCreateWithWireMock", "POST", "/v1/ledger/accounts/create", nil, 1)
+	VerifyRequestCount(t, "TestLedgerAccountsCreateWithWireMock", "POST", "/v1/ledger/accounts/create", nil, 1)
 }
 
-func TestLedgerPostV1LedgerAccountsUpdateWithWireMock(
+func TestLedgerAccountsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -140,22 +140,22 @@ func TestLedgerPostV1LedgerAccountsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerAccountsUpdateRequest{
+	request := &nordlet.AccountsUpdateLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerAccountsUpdate(
+	_, invocationErr := client.Ledger.AccountsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerAccountsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerAccountsUpdateWithWireMock", "POST", "/v1/ledger/accounts/update", nil, 1)
+	VerifyRequestCount(t, "TestLedgerAccountsUpdateWithWireMock", "POST", "/v1/ledger/accounts/update", nil, 1)
 }
 
-func TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock(
+func TestLedgerAccountsApplyTemplateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -166,20 +166,20 @@ func TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerAccountsApplyTemplateRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerAccountsApplyTemplate(
+	request := &nordlet.AccountsApplyTemplateLedgerRequest{}
+	_, invocationErr := client.Ledger.AccountsApplyTemplate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsApplyTemplateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock", "POST", "/v1/ledger/accounts/apply-template", nil, 1)
+	VerifyRequestCount(t, "TestLedgerAccountsApplyTemplateWithWireMock", "POST", "/v1/ledger/accounts/apply-template", nil, 1)
 }
 
-func TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock(
+func TestLedgerAccountsSwitchChartWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -190,20 +190,20 @@ func TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCount
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerAccountsSwitchChartRequest{}
-	_, invocationErr := client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+	request := &nordlet.AccountsSwitchChartLedgerRequest{}
+	_, invocationErr := client.Ledger.AccountsSwitchChart(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsSwitchChartWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock", "POST", "/v1/ledger/accounts/switch-chart", nil, 1)
+	VerifyRequestCount(t, "TestLedgerAccountsSwitchChartWithWireMock", "POST", "/v1/ledger/accounts/switch-chart", nil, 1)
 }
 
-func TestLedgerPostV1LedgerPeriodsListWithWireMock(
+func TestLedgerPeriodsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -214,20 +214,20 @@ func TestLedgerPostV1LedgerPeriodsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerPeriodsListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerPeriodsList(
+	request := &nordlet.PeriodsListLedgerRequest{}
+	_, invocationErr := client.Ledger.PeriodsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerPeriodsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerPeriodsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerPeriodsListWithWireMock", "POST", "/v1/ledger/periods/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerPeriodsListWithWireMock", "POST", "/v1/ledger/periods/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerPeriodsLockWithWireMock(
+func TestLedgerPeriodsLockWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -238,23 +238,23 @@ func TestLedgerPostV1LedgerPeriodsLockWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerPeriodsLockRequest{
+	request := &nordlet.PeriodsLockLedgerRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerPeriodsLock(
+	_, invocationErr := client.Ledger.PeriodsLock(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerPeriodsLockWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerPeriodsLockWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerPeriodsLockWithWireMock", "POST", "/v1/ledger/periods/lock", nil, 1)
+	VerifyRequestCount(t, "TestLedgerPeriodsLockWithWireMock", "POST", "/v1/ledger/periods/lock", nil, 1)
 }
 
-func TestLedgerPostV1LedgerPeriodsUnlockWithWireMock(
+func TestLedgerPeriodsUnlockWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -265,23 +265,23 @@ func TestLedgerPostV1LedgerPeriodsUnlockWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerPeriodsUnlockRequest{
+	request := &nordlet.PeriodsUnlockLedgerRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerPeriodsUnlock(
+	_, invocationErr := client.Ledger.PeriodsUnlock(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerPeriodsUnlockWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerPeriodsUnlockWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerPeriodsUnlockWithWireMock", "POST", "/v1/ledger/periods/unlock", nil, 1)
+	VerifyRequestCount(t, "TestLedgerPeriodsUnlockWithWireMock", "POST", "/v1/ledger/periods/unlock", nil, 1)
 }
 
-func TestLedgerPostV1LedgerJournalTransactionsListWithWireMock(
+func TestLedgerJournalTransactionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -292,20 +292,20 @@ func TestLedgerPostV1LedgerJournalTransactionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerJournalTransactionsListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerJournalTransactionsList(
+	request := &nordlet.JournalTransactionsListLedgerRequest{}
+	_, invocationErr := client.Ledger.JournalTransactionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerJournalTransactionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTransactionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerJournalTransactionsListWithWireMock", "POST", "/v1/ledger/journal/transactions/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerJournalTransactionsListWithWireMock", "POST", "/v1/ledger/journal/transactions/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCentersCreateWithWireMock(
+func TestLedgerCostCentersCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -316,23 +316,23 @@ func TestLedgerPostV1LedgerCostCentersCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCentersCreateRequest{
+	request := &nordlet.CostCentersCreateLedgerRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCentersCreate(
+	_, invocationErr := client.Ledger.CostCentersCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCentersCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCentersCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCentersCreateWithWireMock", "POST", "/v1/ledger/cost-centers/create", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCentersCreateWithWireMock", "POST", "/v1/ledger/cost-centers/create", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCentersUpdateWithWireMock(
+func TestLedgerCostCentersUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -343,22 +343,22 @@ func TestLedgerPostV1LedgerCostCentersUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCentersUpdateRequest{
+	request := &nordlet.CostCentersUpdateLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCentersUpdate(
+	_, invocationErr := client.Ledger.CostCentersUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCentersUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCentersUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCentersUpdateWithWireMock", "POST", "/v1/ledger/cost-centers/update", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCentersUpdateWithWireMock", "POST", "/v1/ledger/cost-centers/update", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCentersListWithWireMock(
+func TestLedgerCostCentersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -369,20 +369,20 @@ func TestLedgerPostV1LedgerCostCentersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCentersListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCentersList(
+	request := &nordlet.CostCentersListLedgerRequest{}
+	_, invocationErr := client.Ledger.CostCentersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCentersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCentersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCentersListWithWireMock", "POST", "/v1/ledger/cost-centers/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCentersListWithWireMock", "POST", "/v1/ledger/cost-centers/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCenterGroupsCreateWithWireMock(
+func TestLedgerCostCenterGroupsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -393,23 +393,23 @@ func TestLedgerPostV1LedgerCostCenterGroupsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCenterGroupsCreateRequest{
+	request := &nordlet.CostCenterGroupsCreateLedgerRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCenterGroupsCreate(
+	_, invocationErr := client.Ledger.CostCenterGroupsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCenterGroupsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCenterGroupsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCenterGroupsCreateWithWireMock", "POST", "/v1/ledger/cost-center-groups/create", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCenterGroupsCreateWithWireMock", "POST", "/v1/ledger/cost-center-groups/create", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCenterGroupsUpdateWithWireMock(
+func TestLedgerCostCenterGroupsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -420,22 +420,22 @@ func TestLedgerPostV1LedgerCostCenterGroupsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCenterGroupsUpdateRequest{
+	request := &nordlet.CostCenterGroupsUpdateLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCenterGroupsUpdate(
+	_, invocationErr := client.Ledger.CostCenterGroupsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCenterGroupsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCenterGroupsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCenterGroupsUpdateWithWireMock", "POST", "/v1/ledger/cost-center-groups/update", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCenterGroupsUpdateWithWireMock", "POST", "/v1/ledger/cost-center-groups/update", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCenterGroupsDeleteWithWireMock(
+func TestLedgerCostCenterGroupsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -446,22 +446,22 @@ func TestLedgerPostV1LedgerCostCenterGroupsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCenterGroupsDeleteRequest{
+	request := &nordlet.CostCenterGroupsDeleteLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCenterGroupsDelete(
+	_, invocationErr := client.Ledger.CostCenterGroupsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCenterGroupsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCenterGroupsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCenterGroupsDeleteWithWireMock", "POST", "/v1/ledger/cost-center-groups/delete", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCenterGroupsDeleteWithWireMock", "POST", "/v1/ledger/cost-center-groups/delete", nil, 1)
 }
 
-func TestLedgerPostV1LedgerCostCenterGroupsListWithWireMock(
+func TestLedgerCostCenterGroupsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -472,20 +472,20 @@ func TestLedgerPostV1LedgerCostCenterGroupsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerCostCenterGroupsListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerCostCenterGroupsList(
+	request := &nordlet.CostCenterGroupsListLedgerRequest{}
+	_, invocationErr := client.Ledger.CostCenterGroupsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerCostCenterGroupsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerCostCenterGroupsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerCostCenterGroupsListWithWireMock", "POST", "/v1/ledger/cost-center-groups/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerCostCenterGroupsListWithWireMock", "POST", "/v1/ledger/cost-center-groups/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerPostingRulesListWithWireMock(
+func TestLedgerPostingRulesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -496,20 +496,20 @@ func TestLedgerPostV1LedgerPostingRulesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerPostingRulesListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerPostingRulesList(
+	request := &nordlet.PostingRulesListLedgerRequest{}
+	_, invocationErr := client.Ledger.PostingRulesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerPostingRulesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerPostingRulesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerPostingRulesListWithWireMock", "POST", "/v1/ledger/posting-rules/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerPostingRulesListWithWireMock", "POST", "/v1/ledger/posting-rules/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerPostingRulesUpdateWithWireMock(
+func TestLedgerPostingRulesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -520,26 +520,26 @@ func TestLedgerPostV1LedgerPostingRulesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerPostingRulesUpdateRequest{
-		Rules: []*nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItem{
-			&nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItem{
-				Key: nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItemKeySalesReceivable,
+	request := &nordlet.PostingRulesUpdateLedgerRequest{
+		Rules: []*nordlet.PostingRulesUpdateLedgerRequestRulesItem{
+			&nordlet.PostingRulesUpdateLedgerRequestRulesItem{
+				Key: nordlet.PostingRulesUpdateLedgerRequestRulesItemKeySalesReceivable,
 			},
 		},
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerPostingRulesUpdate(
+	_, invocationErr := client.Ledger.PostingRulesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerPostingRulesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerPostingRulesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerPostingRulesUpdateWithWireMock", "POST", "/v1/ledger/posting-rules/update", nil, 1)
+	VerifyRequestCount(t, "TestLedgerPostingRulesUpdateWithWireMock", "POST", "/v1/ledger/posting-rules/update", nil, 1)
 }
 
-func TestLedgerPostV1LedgerOwnersCreateWithWireMock(
+func TestLedgerOwnersCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -550,22 +550,22 @@ func TestLedgerPostV1LedgerOwnersCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerOwnersCreateRequest{
+	request := &nordlet.OwnersCreateLedgerRequest{
 		Name: "name",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerOwnersCreate(
+	_, invocationErr := client.Ledger.OwnersCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerOwnersCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerOwnersCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerOwnersCreateWithWireMock", "POST", "/v1/ledger/owners/create", nil, 1)
+	VerifyRequestCount(t, "TestLedgerOwnersCreateWithWireMock", "POST", "/v1/ledger/owners/create", nil, 1)
 }
 
-func TestLedgerPostV1LedgerOwnersUpdateWithWireMock(
+func TestLedgerOwnersUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -576,22 +576,22 @@ func TestLedgerPostV1LedgerOwnersUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerOwnersUpdateRequest{
+	request := &nordlet.OwnersUpdateLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerOwnersUpdate(
+	_, invocationErr := client.Ledger.OwnersUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerOwnersUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerOwnersUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerOwnersUpdateWithWireMock", "POST", "/v1/ledger/owners/update", nil, 1)
+	VerifyRequestCount(t, "TestLedgerOwnersUpdateWithWireMock", "POST", "/v1/ledger/owners/update", nil, 1)
 }
 
-func TestLedgerPostV1LedgerOwnersDeleteWithWireMock(
+func TestLedgerOwnersDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -602,22 +602,22 @@ func TestLedgerPostV1LedgerOwnersDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerOwnersDeleteRequest{
+	request := &nordlet.OwnersDeleteLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerOwnersDelete(
+	_, invocationErr := client.Ledger.OwnersDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerOwnersDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerOwnersDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerOwnersDeleteWithWireMock", "POST", "/v1/ledger/owners/delete", nil, 1)
+	VerifyRequestCount(t, "TestLedgerOwnersDeleteWithWireMock", "POST", "/v1/ledger/owners/delete", nil, 1)
 }
 
-func TestLedgerPostV1LedgerOwnersListWithWireMock(
+func TestLedgerOwnersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -628,20 +628,20 @@ func TestLedgerPostV1LedgerOwnersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerOwnersListRequest{}
-	_, invocationErr := client.Ledger.PostV1LedgerOwnersList(
+	request := &nordlet.OwnersListLedgerRequest{}
+	_, invocationErr := client.Ledger.OwnersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerOwnersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerOwnersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerOwnersListWithWireMock", "POST", "/v1/ledger/owners/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerOwnersListWithWireMock", "POST", "/v1/ledger/owners/list", nil, 1)
 }
 
-func TestLedgerPostV1LedgerJournalTransactionsGetWithWireMock(
+func TestLedgerJournalTransactionsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -652,22 +652,22 @@ func TestLedgerPostV1LedgerJournalTransactionsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerJournalTransactionsGetRequest{
+	request := &nordlet.JournalTransactionsGetLedgerRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerJournalTransactionsGet(
+	_, invocationErr := client.Ledger.JournalTransactionsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerJournalTransactionsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTransactionsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerJournalTransactionsGetWithWireMock", "POST", "/v1/ledger/journal/transactions/get", nil, 1)
+	VerifyRequestCount(t, "TestLedgerJournalTransactionsGetWithWireMock", "POST", "/v1/ledger/journal/transactions/get", nil, 1)
 }
 
-func TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock(
+func TestLedgerJournalTransactionsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -678,27 +678,29 @@ func TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerJournalTransactionsCreateRequest{
-		Date: "date",
-		Entries: []*nordlet.PostV1LedgerJournalTransactionsCreateRequestEntriesItem{
-			&nordlet.PostV1LedgerJournalTransactionsCreateRequestEntriesItem{
+	request := &nordlet.JournalTransactionsCreateLedgerRequest{
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Entries: []*nordlet.JournalTransactionsCreateLedgerRequestEntriesItem{
+			&nordlet.JournalTransactionsCreateLedgerRequestEntriesItem{
 				AccountCode: "accountCode",
 			},
 		},
 	}
-	_, invocationErr := client.Ledger.PostV1LedgerJournalTransactionsCreate(
+	_, invocationErr := client.Ledger.JournalTransactionsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTransactionsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock", "POST", "/v1/ledger/journal/transactions/create", nil, 1)
+	VerifyRequestCount(t, "TestLedgerJournalTransactionsCreateWithWireMock", "POST", "/v1/ledger/journal/transactions/create", nil, 1)
 }
 
-func TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock(
+func TestLedgerStatementRowsSchemesWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -709,20 +711,20 @@ func TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerStatementRowsSchemesRequest{}
-	_, invocationErr := client.Ledger.NationalStatementLayoutsAvailableToTheCompany(
+	request := &nordlet.StatementRowsSchemesLedgerRequest{}
+	_, invocationErr := client.Ledger.StatementRowsSchemes(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerStatementRowsSchemesWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock", "POST", "/v1/ledger/statement-rows/schemes", nil, 1)
+	VerifyRequestCount(t, "TestLedgerStatementRowsSchemesWithWireMock", "POST", "/v1/ledger/statement-rows/schemes", nil, 1)
 }
 
-func TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock(
+func TestLedgerStatementRowsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -733,22 +735,22 @@ func TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPerio
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerStatementRowsListRequest{
+	request := &nordlet.StatementRowsListLedgerRequest{
 		Scheme: "scheme",
 	}
-	_, invocationErr := client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+	_, invocationErr := client.Ledger.StatementRowsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerStatementRowsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock", "POST", "/v1/ledger/statement-rows/list", nil, 1)
+	VerifyRequestCount(t, "TestLedgerStatementRowsListWithWireMock", "POST", "/v1/ledger/statement-rows/list", nil, 1)
 }
 
-func TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock(
+func TestLedgerStatementRowsSetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -759,123 +761,18 @@ func TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWire
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1LedgerStatementRowsSetRequest{
+	request := &nordlet.StatementRowsSetLedgerRequest{
 		Scheme:      "scheme",
 		AccountCode: "accountCode",
 	}
-	_, invocationErr := client.Ledger.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+	_, invocationErr := client.Ledger.StatementRowsSet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestLedgerStatementRowsSetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock", "POST", "/v1/ledger/statement-rows/set", nil, 1)
-}
-
-func TestLedgerOfficersOfTheCompanyWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OfficersListRequest{}
-	_, invocationErr := client.Ledger.OfficersOfTheCompany(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerOfficersOfTheCompanyWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerOfficersOfTheCompanyWithWireMock", "POST", "/v1/officers/list", nil, 1)
-}
-
-func TestLedgerRecordAnOfficerOfTheCompanyWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OfficersCreateRequest{
-		Name: "name",
-		Role: nordlet.PostV1OfficersCreateRequestRoleDirector,
-	}
-	_, invocationErr := client.Ledger.RecordAnOfficerOfTheCompany(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerRecordAnOfficerOfTheCompanyWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerRecordAnOfficerOfTheCompanyWithWireMock", "POST", "/v1/officers/create", nil, 1)
-}
-
-func TestLedgerChangeARecordedOfficerWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OfficersUpdateRequest{
-		ID:   "id",
-		Name: "name",
-		Role: nordlet.PostV1OfficersUpdateRequestRoleDirector,
-	}
-	_, invocationErr := client.Ledger.ChangeARecordedOfficer(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerChangeARecordedOfficerWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerChangeARecordedOfficerWithWireMock", "POST", "/v1/officers/update", nil, 1)
-}
-
-func TestLedgerRemoveARecordedOfficerWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OfficersDeleteRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Ledger.RemoveARecordedOfficer(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestLedgerRemoveARecordedOfficerWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestLedgerRemoveARecordedOfficerWithWireMock", "POST", "/v1/officers/delete", nil, 1)
+	VerifyRequestCount(t, "TestLedgerStatementRowsSetWithWireMock", "POST", "/v1/ledger/statement-rows/set", nil, 1)
 }

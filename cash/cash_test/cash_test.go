@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestCashPostV1CashOrdersCreateWithWireMock(
+func TestCashOrdersCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,26 +88,28 @@ func TestCashPostV1CashOrdersCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CashOrdersCreateRequest{
-		Type:               nordlet.PostV1CashOrdersCreateRequestTypeReceipt,
-		Date:               "date",
-		Amount:             "amount",
+	request := &nordlet.OrdersCreateCashRequest{
+		Type: nordlet.OrdersCreateCashRequestTypeReceipt,
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Amount:             "121.0000",
 		Purpose:            "purpose",
 		CounterAccountCode: "counterAccountCode",
 	}
-	_, invocationErr := client.Cash.PostV1CashOrdersCreate(
+	_, invocationErr := client.Cash.OrdersCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCashPostV1CashOrdersCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCashOrdersCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCashPostV1CashOrdersCreateWithWireMock", "POST", "/v1/cash/orders/create", nil, 1)
+	VerifyRequestCount(t, "TestCashOrdersCreateWithWireMock", "POST", "/v1/cash/orders/create", nil, 1)
 }
 
-func TestCashPostV1CashOrdersGetWithWireMock(
+func TestCashOrdersGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -118,22 +120,22 @@ func TestCashPostV1CashOrdersGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CashOrdersGetRequest{
+	request := &nordlet.OrdersGetCashRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Cash.PostV1CashOrdersGet(
+	_, invocationErr := client.Cash.OrdersGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCashPostV1CashOrdersGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCashOrdersGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCashPostV1CashOrdersGetWithWireMock", "POST", "/v1/cash/orders/get", nil, 1)
+	VerifyRequestCount(t, "TestCashOrdersGetWithWireMock", "POST", "/v1/cash/orders/get", nil, 1)
 }
 
-func TestCashPostV1CashOrdersListWithWireMock(
+func TestCashOrdersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -144,20 +146,20 @@ func TestCashPostV1CashOrdersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CashOrdersListRequest{}
-	_, invocationErr := client.Cash.PostV1CashOrdersList(
+	request := &nordlet.OrdersListCashRequest{}
+	_, invocationErr := client.Cash.OrdersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCashPostV1CashOrdersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCashOrdersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCashPostV1CashOrdersListWithWireMock", "POST", "/v1/cash/orders/list", nil, 1)
+	VerifyRequestCount(t, "TestCashOrdersListWithWireMock", "POST", "/v1/cash/orders/list", nil, 1)
 }
 
-func TestCashPostV1CashBalanceWithWireMock(
+func TestCashBalanceWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -168,20 +170,20 @@ func TestCashPostV1CashBalanceWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CashBalanceRequest{}
-	_, invocationErr := client.Cash.PostV1CashBalance(
+	request := &nordlet.BalanceCashRequest{}
+	_, invocationErr := client.Cash.Balance(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCashPostV1CashBalanceWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCashBalanceWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCashPostV1CashBalanceWithWireMock", "POST", "/v1/cash/balance", nil, 1)
+	VerifyRequestCount(t, "TestCashBalanceWithWireMock", "POST", "/v1/cash/balance", nil, 1)
 }
 
-func TestCashPostV1CashAdvanceHoldersBalancesWithWireMock(
+func TestCashAdvanceHoldersBalancesWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -192,15 +194,15 @@ func TestCashPostV1CashAdvanceHoldersBalancesWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CashAdvanceHoldersBalancesRequest{}
-	_, invocationErr := client.Cash.PostV1CashAdvanceHoldersBalances(
+	request := &nordlet.AdvanceHoldersBalancesCashRequest{}
+	_, invocationErr := client.Cash.AdvanceHoldersBalances(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCashPostV1CashAdvanceHoldersBalancesWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCashAdvanceHoldersBalancesWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCashPostV1CashAdvanceHoldersBalancesWithWireMock", "POST", "/v1/cash/advance-holders/balances", nil, 1)
+	VerifyRequestCount(t, "TestCashAdvanceHoldersBalancesWithWireMock", "POST", "/v1/cash/advance-holders/balances", nil, 1)
 }

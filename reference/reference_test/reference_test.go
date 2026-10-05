@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestReferencePostV1ReferenceExchangeRatesSyncWithWireMock(
+func TestReferenceExchangeRatesSyncWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,20 +88,20 @@ func TestReferencePostV1ReferenceExchangeRatesSyncWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceExchangeRatesSyncRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceExchangeRatesSync(
+	request := &nordlet.ExchangeRatesSyncReferenceRequest{}
+	_, invocationErr := client.Reference.ExchangeRatesSync(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceExchangeRatesSyncWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceExchangeRatesSyncWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceExchangeRatesSyncWithWireMock", "POST", "/v1/reference/exchange-rates/sync", nil, 1)
+	VerifyRequestCount(t, "TestReferenceExchangeRatesSyncWithWireMock", "POST", "/v1/reference/exchange-rates/sync", nil, 1)
 }
 
-func TestReferencePostV1ReferenceExchangeRatesListWithWireMock(
+func TestReferenceExchangeRatesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -112,20 +112,20 @@ func TestReferencePostV1ReferenceExchangeRatesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceExchangeRatesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceExchangeRatesList(
+	request := &nordlet.ExchangeRatesListReferenceRequest{}
+	_, invocationErr := client.Reference.ExchangeRatesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceExchangeRatesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceExchangeRatesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceExchangeRatesListWithWireMock", "POST", "/v1/reference/exchange-rates/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceExchangeRatesListWithWireMock", "POST", "/v1/reference/exchange-rates/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceExchangeRatesSetWithWireMock(
+func TestReferenceExchangeRatesSetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -136,24 +136,26 @@ func TestReferencePostV1ReferenceExchangeRatesSetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceExchangeRatesSetRequest{
+	request := &nordlet.ExchangeRatesSetReferenceRequest{
 		Currency: "currency",
-		Date:     "date",
-		Rate:     "rate",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Rate: "121.00000000",
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceExchangeRatesSet(
+	_, invocationErr := client.Reference.ExchangeRatesSet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceExchangeRatesSetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceExchangeRatesSetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceExchangeRatesSetWithWireMock", "POST", "/v1/reference/exchange-rates/set", nil, 1)
+	VerifyRequestCount(t, "TestReferenceExchangeRatesSetWithWireMock", "POST", "/v1/reference/exchange-rates/set", nil, 1)
 }
 
-func TestReferencePostV1ReferenceExchangeRatesOverridesListWithWireMock(
+func TestReferenceExchangeRatesOverridesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -164,20 +166,20 @@ func TestReferencePostV1ReferenceExchangeRatesOverridesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceExchangeRatesOverridesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceExchangeRatesOverridesList(
+	request := &nordlet.ExchangeRatesOverridesListReferenceRequest{}
+	_, invocationErr := client.Reference.ExchangeRatesOverridesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceExchangeRatesOverridesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceExchangeRatesOverridesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceExchangeRatesOverridesListWithWireMock", "POST", "/v1/reference/exchange-rates/overrides/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceExchangeRatesOverridesListWithWireMock", "POST", "/v1/reference/exchange-rates/overrides/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceExchangeRatesOverridesDeleteWithWireMock(
+func TestReferenceExchangeRatesOverridesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -188,23 +190,25 @@ func TestReferencePostV1ReferenceExchangeRatesOverridesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceExchangeRatesOverridesDeleteRequest{
+	request := &nordlet.ExchangeRatesOverridesDeleteReferenceRequest{
 		Currency: "currency",
-		Date:     "date",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(
+	_, invocationErr := client.Reference.ExchangeRatesOverridesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceExchangeRatesOverridesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceExchangeRatesOverridesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceExchangeRatesOverridesDeleteWithWireMock", "POST", "/v1/reference/exchange-rates/overrides/delete", nil, 1)
+	VerifyRequestCount(t, "TestReferenceExchangeRatesOverridesDeleteWithWireMock", "POST", "/v1/reference/exchange-rates/overrides/delete", nil, 1)
 }
 
-func TestReferencePostV1ReferenceCountriesListWithWireMock(
+func TestReferenceCountriesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -215,20 +219,20 @@ func TestReferencePostV1ReferenceCountriesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceCountriesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceCountriesList(
+	request := &nordlet.CountriesListReferenceRequest{}
+	_, invocationErr := client.Reference.CountriesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceCountriesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceCountriesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceCountriesListWithWireMock", "POST", "/v1/reference/countries/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceCountriesListWithWireMock", "POST", "/v1/reference/countries/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceLtCountiesListWithWireMock(
+func TestReferenceLtCountiesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -239,20 +243,20 @@ func TestReferencePostV1ReferenceLtCountiesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceLtCountiesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceLtCountiesList(
+	request := &nordlet.LtCountiesListReferenceRequest{}
+	_, invocationErr := client.Reference.LtCountiesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtCountiesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceLtCountiesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtCountiesListWithWireMock", "POST", "/v1/reference/lt/counties/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceLtCountiesListWithWireMock", "POST", "/v1/reference/lt/counties/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock(
+func TestReferenceLtMunicipalitiesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -263,20 +267,20 @@ func TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceLtMunicipalitiesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceLtMunicipalitiesList(
+	request := &nordlet.LtMunicipalitiesListReferenceRequest{}
+	_, invocationErr := client.Reference.LtMunicipalitiesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceLtMunicipalitiesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock", "POST", "/v1/reference/lt/municipalities/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceLtMunicipalitiesListWithWireMock", "POST", "/v1/reference/lt/municipalities/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceLtCitiesListWithWireMock(
+func TestReferenceLtCitiesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -287,20 +291,20 @@ func TestReferencePostV1ReferenceLtCitiesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceLtCitiesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceLtCitiesList(
+	request := &nordlet.LtCitiesListReferenceRequest{}
+	_, invocationErr := client.Reference.LtCitiesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtCitiesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceLtCitiesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtCitiesListWithWireMock", "POST", "/v1/reference/lt/cities/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceLtCitiesListWithWireMock", "POST", "/v1/reference/lt/cities/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceBanksListWithWireMock(
+func TestReferenceBanksListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -311,20 +315,20 @@ func TestReferencePostV1ReferenceBanksListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceBanksListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceBanksList(
+	request := &nordlet.BanksListReferenceRequest{}
+	_, invocationErr := client.Reference.BanksList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceBanksListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceBanksListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceBanksListWithWireMock", "POST", "/v1/reference/banks/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceBanksListWithWireMock", "POST", "/v1/reference/banks/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceBanksUpsertWithWireMock(
+func TestReferenceBanksUpsertWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -335,24 +339,24 @@ func TestReferencePostV1ReferenceBanksUpsertWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceBanksUpsertRequest{
+	request := &nordlet.BanksUpsertReferenceRequest{
 		CountryCode: "countryCode",
 		Name:        "name",
 		Bic:         "bic",
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceBanksUpsert(
+	_, invocationErr := client.Reference.BanksUpsert(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceBanksUpsertWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceBanksUpsertWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceBanksUpsertWithWireMock", "POST", "/v1/reference/banks/upsert", nil, 1)
+	VerifyRequestCount(t, "TestReferenceBanksUpsertWithWireMock", "POST", "/v1/reference/banks/upsert", nil, 1)
 }
 
-func TestReferencePostV1ReferenceLtRegionsListWithWireMock(
+func TestReferenceLtRegionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -363,20 +367,20 @@ func TestReferencePostV1ReferenceLtRegionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceLtRegionsListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceLtRegionsList(
+	request := &nordlet.LtRegionsListReferenceRequest{}
+	_, invocationErr := client.Reference.LtRegionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtRegionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceLtRegionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtRegionsListWithWireMock", "POST", "/v1/reference/lt/regions/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceLtRegionsListWithWireMock", "POST", "/v1/reference/lt/regions/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceCurrenciesListWithWireMock(
+func TestReferenceCurrenciesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -387,20 +391,20 @@ func TestReferencePostV1ReferenceCurrenciesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceCurrenciesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceCurrenciesList(
+	request := &nordlet.CurrenciesListReferenceRequest{}
+	_, invocationErr := client.Reference.CurrenciesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceCurrenciesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceCurrenciesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceCurrenciesListWithWireMock", "POST", "/v1/reference/currencies/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceCurrenciesListWithWireMock", "POST", "/v1/reference/currencies/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceVatClassifiersListWithWireMock(
+func TestReferenceVatClassifiersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -411,20 +415,20 @@ func TestReferencePostV1ReferenceVatClassifiersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceVatClassifiersListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceVatClassifiersList(
+	request := &nordlet.VatClassifiersListReferenceRequest{}
+	_, invocationErr := client.Reference.VatClassifiersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceVatClassifiersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceVatClassifiersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceVatClassifiersListWithWireMock", "POST", "/v1/reference/vat-classifiers/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceVatClassifiersListWithWireMock", "POST", "/v1/reference/vat-classifiers/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceVatClassifiersUpsertWithWireMock(
+func TestReferenceVatClassifiersUpsertWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -435,27 +439,27 @@ func TestReferencePostV1ReferenceVatClassifiersUpsertWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceVatClassifiersUpsertRequest{
-		Rows: []*nordlet.PostV1ReferenceVatClassifiersUpsertRequestRowsItem{
-			&nordlet.PostV1ReferenceVatClassifiersUpsertRequestRowsItem{
+	request := &nordlet.VatClassifiersUpsertReferenceRequest{
+		Rows: []*nordlet.VatClassifiersUpsertReferenceRequestRowsItem{
+			&nordlet.VatClassifiersUpsertReferenceRequestRowsItem{
 				Code: "code",
 				Name: "name",
 			},
 		},
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceVatClassifiersUpsert(
+	_, invocationErr := client.Reference.VatClassifiersUpsert(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceVatClassifiersUpsertWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceVatClassifiersUpsertWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceVatClassifiersUpsertWithWireMock", "POST", "/v1/reference/vat-classifiers/upsert", nil, 1)
+	VerifyRequestCount(t, "TestReferenceVatClassifiersUpsertWithWireMock", "POST", "/v1/reference/vat-classifiers/upsert", nil, 1)
 }
 
-func TestReferencePostV1ReferenceEuVatRatesListWithWireMock(
+func TestReferenceEuVatRatesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -466,20 +470,20 @@ func TestReferencePostV1ReferenceEuVatRatesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceEuVatRatesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceEuVatRatesList(
+	request := &nordlet.EuVatRatesListReferenceRequest{}
+	_, invocationErr := client.Reference.EuVatRatesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceEuVatRatesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceEuVatRatesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesListWithWireMock", "POST", "/v1/reference/eu-vat-rates/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceEuVatRatesListWithWireMock", "POST", "/v1/reference/eu-vat-rates/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock(
+func TestReferenceEuVatRatesSetOverridesWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -490,28 +494,28 @@ func TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest{
+	request := &nordlet.EuVatRatesSetOverridesReferenceRequest{
 		CountryCode: "countryCode",
-		Rates: []*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
-			&nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
-				Category:    nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard,
-				RatePercent: "ratePercent",
+		Rates: []*nordlet.EuVatRatesSetOverridesReferenceRequestRatesItem{
+			&nordlet.EuVatRatesSetOverridesReferenceRequestRatesItem{
+				Category:    nordlet.EuVatRatesSetOverridesReferenceRequestRatesItemCategoryStandard,
+				RatePercent: "121.00",
 			},
 		},
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
+	_, invocationErr := client.Reference.EuVatRatesSetOverrides(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceEuVatRatesSetOverridesWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock", "POST", "/v1/reference/eu-vat-rates/set-overrides", nil, 1)
+	VerifyRequestCount(t, "TestReferenceEuVatRatesSetOverridesWithWireMock", "POST", "/v1/reference/eu-vat-rates/set-overrides", nil, 1)
 }
 
-func TestReferencePostV1ReferenceVatResolveWithWireMock(
+func TestReferenceVatResolveWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -522,20 +526,20 @@ func TestReferencePostV1ReferenceVatResolveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceVatResolveRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceVatResolve(
+	request := &nordlet.VatResolveReferenceRequest{}
+	_, invocationErr := client.Reference.VatResolve(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceVatResolveWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceVatResolveWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceVatResolveWithWireMock", "POST", "/v1/reference/vat/resolve", nil, 1)
+	VerifyRequestCount(t, "TestReferenceVatResolveWithWireMock", "POST", "/v1/reference/vat/resolve", nil, 1)
 }
 
-func TestReferencePostV1ReferenceCnCodesListWithWireMock(
+func TestReferenceCnCodesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -546,20 +550,20 @@ func TestReferencePostV1ReferenceCnCodesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceCnCodesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceCnCodesList(
+	request := &nordlet.CnCodesListReferenceRequest{}
+	_, invocationErr := client.Reference.CnCodesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceCnCodesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceCnCodesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceCnCodesListWithWireMock", "POST", "/v1/reference/cn-codes/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceCnCodesListWithWireMock", "POST", "/v1/reference/cn-codes/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceCnCodesUpsertWithWireMock(
+func TestReferenceCnCodesUpsertWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -570,27 +574,27 @@ func TestReferencePostV1ReferenceCnCodesUpsertWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceCnCodesUpsertRequest{
-		Rows: []*nordlet.PostV1ReferenceCnCodesUpsertRequestRowsItem{
-			&nordlet.PostV1ReferenceCnCodesUpsertRequestRowsItem{
+	request := &nordlet.CnCodesUpsertReferenceRequest{
+		Rows: []*nordlet.CnCodesUpsertReferenceRequestRowsItem{
+			&nordlet.CnCodesUpsertReferenceRequestRowsItem{
 				Code: "code",
 				Name: "name",
 			},
 		},
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceCnCodesUpsert(
+	_, invocationErr := client.Reference.CnCodesUpsert(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceCnCodesUpsertWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceCnCodesUpsertWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceCnCodesUpsertWithWireMock", "POST", "/v1/reference/cn-codes/upsert", nil, 1)
+	VerifyRequestCount(t, "TestReferenceCnCodesUpsertWithWireMock", "POST", "/v1/reference/cn-codes/upsert", nil, 1)
 }
 
-func TestReferencePostV1ReferenceComplianceVersionsListWithWireMock(
+func TestReferenceComplianceVersionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -601,20 +605,20 @@ func TestReferencePostV1ReferenceComplianceVersionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceComplianceVersionsListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceComplianceVersionsList(
+	request := &nordlet.ComplianceVersionsListReferenceRequest{}
+	_, invocationErr := client.Reference.ComplianceVersionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceComplianceVersionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceComplianceVersionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceComplianceVersionsListWithWireMock", "POST", "/v1/reference/compliance-versions/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceComplianceVersionsListWithWireMock", "POST", "/v1/reference/compliance-versions/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceIntrastatThresholdsListWithWireMock(
+func TestReferenceIntrastatThresholdsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -625,20 +629,20 @@ func TestReferencePostV1ReferenceIntrastatThresholdsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceIntrastatThresholdsListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceIntrastatThresholdsList(
+	request := &nordlet.IntrastatThresholdsListReferenceRequest{}
+	_, invocationErr := client.Reference.IntrastatThresholdsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceIntrastatThresholdsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceIntrastatThresholdsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceIntrastatThresholdsListWithWireMock", "POST", "/v1/reference/intrastat-thresholds/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceIntrastatThresholdsListWithWireMock", "POST", "/v1/reference/intrastat-thresholds/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceUnitsListWithWireMock(
+func TestReferenceUnitsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -649,20 +653,20 @@ func TestReferencePostV1ReferenceUnitsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceUnitsListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceUnitsList(
+	request := &nordlet.UnitsListReferenceRequest{}
+	_, invocationErr := client.Reference.UnitsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceUnitsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceUnitsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceUnitsListWithWireMock", "POST", "/v1/reference/units/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceUnitsListWithWireMock", "POST", "/v1/reference/units/list", nil, 1)
 }
 
-func TestReferencePostV1ReferenceSeriesCreateWithWireMock(
+func TestReferenceSeriesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -673,23 +677,23 @@ func TestReferencePostV1ReferenceSeriesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceSeriesCreateRequest{
+	request := &nordlet.SeriesCreateReferenceRequest{
 		DocumentType: "documentType",
 		Year:         int64(1000000),
 	}
-	_, invocationErr := client.Reference.PostV1ReferenceSeriesCreate(
+	_, invocationErr := client.Reference.SeriesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceSeriesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceSeriesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceSeriesCreateWithWireMock", "POST", "/v1/reference/series/create", nil, 1)
+	VerifyRequestCount(t, "TestReferenceSeriesCreateWithWireMock", "POST", "/v1/reference/series/create", nil, 1)
 }
 
-func TestReferencePostV1ReferenceSeriesListWithWireMock(
+func TestReferenceSeriesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -700,15 +704,15 @@ func TestReferencePostV1ReferenceSeriesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ReferenceSeriesListRequest{}
-	_, invocationErr := client.Reference.PostV1ReferenceSeriesList(
+	request := &nordlet.SeriesListReferenceRequest{}
+	_, invocationErr := client.Reference.SeriesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceSeriesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestReferenceSeriesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestReferencePostV1ReferenceSeriesListWithWireMock", "POST", "/v1/reference/series/list", nil, 1)
+	VerifyRequestCount(t, "TestReferenceSeriesListWithWireMock", "POST", "/v1/reference/series/list", nil, 1)
 }

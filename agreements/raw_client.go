@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1AgreementsTypesCreate(
+func (r *RawClient) TypesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsTypesCreateRequest,
+	request *nordlet.TypesCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsTypesCreateResponse], error) {
+) (*core.Response[*nordlet.TypesCreateAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1AgreementsTypesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsTypesCreateResponse
+	var response *nordlet.TypesCreateAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1AgreementsTypesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsTypesCreateResponse]{
+	return &core.Response[*nordlet.TypesCreateAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsTypesList(
+func (r *RawClient) TypesList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsTypesListRequest,
+	request *nordlet.TypesListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsTypesListResponse], error) {
+) (*core.Response[*nordlet.TypesListAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1AgreementsTypesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsTypesListResponse
+	var response *nordlet.TypesListAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1AgreementsTypesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsTypesListResponse]{
+	return &core.Response[*nordlet.TypesListAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsCreate(
+func (r *RawClient) AgreementsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsCreateRequest,
+	request *nordlet.AgreementsCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsCreateResponse], error) {
+) (*core.Response[*nordlet.AgreementsCreateAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1AgreementsAgreementsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsCreateResponse
+	var response *nordlet.AgreementsCreateAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1AgreementsAgreementsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsCreateResponse]{
+	return &core.Response[*nordlet.AgreementsCreateAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsGet(
+func (r *RawClient) AgreementsGet(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsGetRequest,
+	request *nordlet.AgreementsGetAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsGetResponse], error) {
+) (*core.Response[*nordlet.AgreementsGetAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1AgreementsAgreementsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsGetResponse
+	var response *nordlet.AgreementsGetAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1AgreementsAgreementsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsGetResponse]{
+	return &core.Response[*nordlet.AgreementsGetAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsUpdate(
+func (r *RawClient) AgreementsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsUpdateRequest,
+	request *nordlet.AgreementsUpdateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsUpdateResponse], error) {
+) (*core.Response[*nordlet.AgreementsUpdateAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1AgreementsAgreementsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsUpdateResponse
+	var response *nordlet.AgreementsUpdateAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1AgreementsAgreementsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsUpdateResponse]{
+	return &core.Response[*nordlet.AgreementsUpdateAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsDelete(
+func (r *RawClient) AgreementsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsDeleteRequest,
+	request *nordlet.AgreementsDeleteAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsDeleteResponse], error) {
+) (*core.Response[*nordlet.AgreementsDeleteAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1AgreementsAgreementsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsDeleteResponse
+	var response *nordlet.AgreementsDeleteAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1AgreementsAgreementsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsDeleteResponse]{
+	return &core.Response[*nordlet.AgreementsDeleteAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsList(
+func (r *RawClient) AgreementsList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsListRequest,
+	request *nordlet.AgreementsListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsListResponse], error) {
+) (*core.Response[*nordlet.AgreementsListAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1AgreementsAgreementsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsListResponse
+	var response *nordlet.AgreementsListAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1AgreementsAgreementsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsListResponse]{
+	return &core.Response[*nordlet.AgreementsListAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsGenerateInvoice(
+func (r *RawClient) AgreementsGenerateInvoice(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest,
+	request *nordlet.AgreementsGenerateInvoiceAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse], error) {
+) (*core.Response[*nordlet.AgreementsGenerateInvoiceAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1AgreementsAgreementsGenerateInvoice(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse
+	var response *nordlet.AgreementsGenerateInvoiceAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1AgreementsAgreementsGenerateInvoice(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse]{
+	return &core.Response[*nordlet.AgreementsGenerateInvoiceAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsAgreementsBillingRun(
+func (r *RawClient) AgreementsBillingRun(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsAgreementsBillingRunRequest,
+	request *nordlet.AgreementsBillingRunAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsAgreementsBillingRunResponse], error) {
+) (*core.Response[*nordlet.AgreementsBillingRunAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1AgreementsAgreementsBillingRun(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsAgreementsBillingRunResponse
+	var response *nordlet.AgreementsBillingRunAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1AgreementsAgreementsBillingRun(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsAgreementsBillingRunResponse]{
+	return &core.Response[*nordlet.AgreementsBillingRunAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsInsurancePoliciesCreate(
+func (r *RawClient) InsurancePoliciesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesCreateRequest,
+	request *nordlet.InsurancePoliciesCreateAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsInsurancePoliciesCreateResponse], error) {
+) (*core.Response[*nordlet.InsurancePoliciesCreateAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsInsurancePoliciesCreateResponse
+	var response *nordlet.InsurancePoliciesCreateAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsInsurancePoliciesCreateResponse]{
+	return &core.Response[*nordlet.InsurancePoliciesCreateAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsInsurancePoliciesList(
+func (r *RawClient) InsurancePoliciesList(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesListRequest,
+	request *nordlet.InsurancePoliciesListAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsInsurancePoliciesListResponse], error) {
+) (*core.Response[*nordlet.InsurancePoliciesListAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsInsurancePoliciesListResponse
+	var response *nordlet.InsurancePoliciesListAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsInsurancePoliciesListResponse]{
+	return &core.Response[*nordlet.InsurancePoliciesListAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AgreementsInsurancePoliciesDelete(
+func (r *RawClient) InsurancePoliciesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1AgreementsInsurancePoliciesDeleteRequest,
+	request *nordlet.InsurancePoliciesDeleteAgreementsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AgreementsInsurancePoliciesDeleteResponse], error) {
+) (*core.Response[*nordlet.InsurancePoliciesDeleteAgreementsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AgreementsInsurancePoliciesDeleteResponse
+	var response *nordlet.InsurancePoliciesDeleteAgreementsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,7 +553,7 @@ func (r *RawClient) PostV1AgreementsInsurancePoliciesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AgreementsInsurancePoliciesDeleteResponse]{
+	return &core.Response[*nordlet.InsurancePoliciesDeleteAgreementsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

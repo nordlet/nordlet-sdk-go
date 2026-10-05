@@ -7,19 +7,20 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
+func TestSettersLandedCostsCreateInventoryRequest(t *testing.T) {
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
-		var fernTestValueDate string
+		obj := &LandedCostsCreateInventoryRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -27,15 +28,15 @@ func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
-		var fernTestValueMethod *PostV1InventoryLandedCostsCreateRequestMethod
+		obj := &LandedCostsCreateInventoryRequest{}
+		var fernTestValueMethod *LandedCostsCreateInventoryRequestMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGoodsReceiptID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueGoodsReceiptID *string
 		obj.SetGoodsReceiptID(fernTestValueGoodsReceiptID)
 		assert.Equal(t, fernTestValueGoodsReceiptID, obj.GoodsReceiptID)
@@ -43,7 +44,7 @@ func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMovementIDs", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueMovementIDs []string
 		obj.SetMovementIDs(fernTestValueMovementIDs)
 		assert.Equal(t, fernTestValueMovementIDs, obj.MovementIDs)
@@ -51,7 +52,7 @@ func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetSourceInvoiceID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueSourceInvoiceID *string
 		obj.SetSourceInvoiceID(fernTestValueSourceInvoiceID)
 		assert.Equal(t, fernTestValueSourceInvoiceID, obj.SourceInvoiceID)
@@ -59,7 +60,7 @@ func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -68,12 +69,12 @@ func TestSettersPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsCreateInventoryRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
-		var fernTestValueDate string
+		obj := &LandedCostsCreateInventoryRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -103,7 +104,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueAmount string
 
 		// Act
@@ -134,8 +135,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
-		var fernTestValueMethod *PostV1InventoryLandedCostsCreateRequestMethod
+		obj := &LandedCostsCreateInventoryRequest{}
+		var fernTestValueMethod *LandedCostsCreateInventoryRequestMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -165,7 +166,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetGoodsReceiptID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueGoodsReceiptID *string
 
 		// Act
@@ -196,7 +197,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetMovementIDs_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueMovementIDs []string
 
 		// Act
@@ -227,7 +228,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetSourceInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueSourceInvoiceID *string
 
 		// Act
@@ -258,7 +259,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateRequest{}
+		obj := &LandedCostsCreateInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -288,9 +289,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateRequest(t *testing.T
 
 }
 
-func TestSettersPostV1InventoryLandedCostsGetRequest(t *testing.T) {
+func TestSettersLandedCostsGetInventoryRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetRequest{}
+		obj := &LandedCostsGetInventoryRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -299,11 +300,11 @@ func TestSettersPostV1InventoryLandedCostsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsGetRequest(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsGetInventoryRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetRequest{}
+		obj := &LandedCostsGetInventoryRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -333,9 +334,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryLandedCostsListRequest(t *testing.T) {
+func TestSettersLandedCostsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -343,7 +344,7 @@ func TestSettersPostV1InventoryLandedCostsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -351,23 +352,23 @@ func TestSettersPostV1InventoryLandedCostsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequest{}
-		var fernTestValueSort []*PostV1InventoryLandedCostsListRequestSortItem
+		obj := &LandedCostsListInventoryRequest{}
+		var fernTestValueSort []*LandedCostsListInventoryRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryLandedCostsListRequestFilterItem
+		obj := &LandedCostsListInventoryRequest{}
+		var fernTestValueFilter []*LandedCostsListInventoryRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -376,11 +377,11 @@ func TestSettersPostV1InventoryLandedCostsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -411,7 +412,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) 
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -442,8 +443,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) 
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequest{}
-		var fernTestValueSort []*PostV1InventoryLandedCostsListRequestSortItem
+		obj := &LandedCostsListInventoryRequest{}
+		var fernTestValueSort []*LandedCostsListInventoryRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -473,8 +474,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) 
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryLandedCostsListRequestFilterItem
+		obj := &LandedCostsListInventoryRequest{}
+		var fernTestValueFilter []*LandedCostsListInventoryRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -504,7 +505,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) 
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequest{}
+		obj := &LandedCostsListInventoryRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -534,9 +535,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequest(t *testing.T) 
 
 }
 
-func TestSettersPostV1InventoryLotsGetRequest(t *testing.T) {
+func TestSettersLotsGetInventoryRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetRequest{}
+		obj := &LotsGetInventoryRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -545,11 +546,11 @@ func TestSettersPostV1InventoryLotsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsGetRequest(t *testing.T) {
+func TestSettersMarkExplicitLotsGetInventoryRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetRequest{}
+		obj := &LotsGetInventoryRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -579,9 +580,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryLotsListRequest(t *testing.T) {
+func TestSettersLotsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -589,7 +590,7 @@ func TestSettersPostV1InventoryLotsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -597,23 +598,23 @@ func TestSettersPostV1InventoryLotsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequest{}
-		var fernTestValueSort []*PostV1InventoryLotsListRequestSortItem
+		obj := &LotsListInventoryRequest{}
+		var fernTestValueSort []*LotsListInventoryRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryLotsListRequestFilterItem
+		obj := &LotsListInventoryRequest{}
+		var fernTestValueFilter []*LotsListInventoryRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -622,11 +623,11 @@ func TestSettersPostV1InventoryLotsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
+func TestSettersMarkExplicitLotsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -657,7 +658,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -688,8 +689,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequest{}
-		var fernTestValueSort []*PostV1InventoryLotsListRequestSortItem
+		obj := &LotsListInventoryRequest{}
+		var fernTestValueSort []*LotsListInventoryRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -719,8 +720,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryLotsListRequestFilterItem
+		obj := &LotsListInventoryRequest{}
+		var fernTestValueFilter []*LotsListInventoryRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -750,7 +751,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequest{}
+		obj := &LotsListInventoryRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -780,9 +781,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryLotsUpdateRequest(t *testing.T) {
+func TestSettersLotsUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateRequest{}
+		obj := &LotsUpdateInventoryRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -790,15 +791,15 @@ func TestSettersPostV1InventoryLotsUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateRequest{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsUpdateInventoryRequest{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateRequest{}
+		obj := &LotsUpdateInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -807,11 +808,11 @@ func TestSettersPostV1InventoryLotsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitLotsUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateRequest{}
+		obj := &LotsUpdateInventoryRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -842,8 +843,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateRequest(t *testing.T) {
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateRequest{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsUpdateInventoryRequest{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -873,7 +874,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateRequest{}
+		obj := &LotsUpdateInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -903,9 +904,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
+func TestSettersReorderRulesCreateInventoryRequest(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -913,7 +914,7 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -921,7 +922,7 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueMinQty string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -929,7 +930,7 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -937,7 +938,7 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueIsActive *bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -945,7 +946,7 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -954,11 +955,11 @@ func TestSettersPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesCreateInventoryRequest(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueItemID string
 
 		// Act
@@ -989,7 +990,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -1020,7 +1021,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueMinQty string
 
 		// Act
@@ -1051,7 +1052,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -1082,7 +1083,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueIsActive *bool
 
 		// Act
@@ -1113,7 +1114,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateRequest{}
+		obj := &ReorderRulesCreateInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1143,9 +1144,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateRequest(t *testing.
 
 }
 
-func TestSettersPostV1InventoryReorderRulesDeleteRequest(t *testing.T) {
+func TestSettersReorderRulesDeleteInventoryRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesDeleteRequest{}
+		obj := &ReorderRulesDeleteInventoryRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1154,11 +1155,11 @@ func TestSettersPostV1InventoryReorderRulesDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesDeleteRequest(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesDeleteInventoryRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesDeleteRequest{}
+		obj := &ReorderRulesDeleteInventoryRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -1188,9 +1189,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesDeleteRequest(t *testing.
 
 }
 
-func TestSettersPostV1InventoryReorderRulesListRequest(t *testing.T) {
+func TestSettersReorderRulesListInventoryRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1198,7 +1199,7 @@ func TestSettersPostV1InventoryReorderRulesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1206,23 +1207,23 @@ func TestSettersPostV1InventoryReorderRulesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequest{}
-		var fernTestValueSort []*PostV1InventoryReorderRulesListRequestSortItem
+		obj := &ReorderRulesListInventoryRequest{}
+		var fernTestValueSort []*ReorderRulesListInventoryRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequest{}
-		var fernTestValueFilter []*PostV1InventoryReorderRulesListRequestFilterItem
+		obj := &ReorderRulesListInventoryRequest{}
+		var fernTestValueFilter []*ReorderRulesListInventoryRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1231,11 +1232,11 @@ func TestSettersPostV1InventoryReorderRulesListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesListInventoryRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -1266,7 +1267,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T)
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -1297,8 +1298,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T)
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequest{}
-		var fernTestValueSort []*PostV1InventoryReorderRulesListRequestSortItem
+		obj := &ReorderRulesListInventoryRequest{}
+		var fernTestValueSort []*ReorderRulesListInventoryRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -1328,8 +1329,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T)
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequest{}
-		var fernTestValueFilter []*PostV1InventoryReorderRulesListRequestFilterItem
+		obj := &ReorderRulesListInventoryRequest{}
+		var fernTestValueFilter []*ReorderRulesListInventoryRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -1359,7 +1360,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T)
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequest{}
+		obj := &ReorderRulesListInventoryRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -1389,9 +1390,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
+func TestSettersReorderRulesUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1399,7 +1400,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueMinQty *string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -1407,7 +1408,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -1415,7 +1416,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueIsActive *bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -1423,7 +1424,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -1432,11 +1433,11 @@ func TestSettersPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -1467,7 +1468,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueMinQty *string
 
 		// Act
@@ -1498,7 +1499,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -1529,7 +1530,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueIsActive *bool
 
 		// Act
@@ -1560,7 +1561,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateRequest{}
+		obj := &ReorderRulesUpdateInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1590,10 +1591,10 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateRequest(t *testing.
 
 }
 
-func TestSettersPostV1InventorySettingsUpdateRequest(t *testing.T) {
+func TestSettersSettingsUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetNegativeStockPolicy", func(t *testing.T) {
-		obj := &PostV1InventorySettingsUpdateRequest{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsUpdateRequestNegativeStockPolicy
+		obj := &SettingsUpdateInventoryRequest{}
+		var fernTestValueNegativeStockPolicy SettingsUpdateInventoryRequestNegativeStockPolicy
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
 		assert.Equal(t, fernTestValueNegativeStockPolicy, obj.NegativeStockPolicy)
 		assert.NotNil(t, obj.explicitFields)
@@ -1601,12 +1602,12 @@ func TestSettersPostV1InventorySettingsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventorySettingsUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitSettingsUpdateInventoryRequest(t *testing.T) {
 	t.Run("SetNegativeStockPolicy_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsUpdateRequest{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsUpdateRequestNegativeStockPolicy
+		obj := &SettingsUpdateInventoryRequest{}
+		var fernTestValueNegativeStockPolicy SettingsUpdateInventoryRequestNegativeStockPolicy
 
 		// Act
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
@@ -1635,9 +1636,9 @@ func TestSettersMarkExplicitPostV1InventorySettingsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockLevelsRequest(t *testing.T) {
+func TestSettersStockLevelsInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsRequest{}
+		obj := &StockLevelsInventoryRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -1645,7 +1646,7 @@ func TestSettersPostV1InventoryStockLevelsRequest(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsRequest{}
+		obj := &StockLevelsInventoryRequest{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -1654,11 +1655,11 @@ func TestSettersPostV1InventoryStockLevelsRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockLevelsRequest(t *testing.T) {
+func TestSettersMarkExplicitStockLevelsInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsRequest{}
+		obj := &StockLevelsInventoryRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -1689,7 +1690,7 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsRequest(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsRequest{}
+		obj := &StockLevelsInventoryRequest{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -1719,9 +1720,9 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockMovementsListRequest(t *testing.T) {
+func TestSettersStockMovementsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1729,7 +1730,7 @@ func TestSettersPostV1InventoryStockMovementsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1737,23 +1738,23 @@ func TestSettersPostV1InventoryStockMovementsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequest{}
-		var fernTestValueSort []*PostV1InventoryStockMovementsListRequestSortItem
+		obj := &StockMovementsListInventoryRequest{}
+		var fernTestValueSort []*StockMovementsListInventoryRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryStockMovementsListRequestFilterItem
+		obj := &StockMovementsListInventoryRequest{}
+		var fernTestValueFilter []*StockMovementsListInventoryRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1762,11 +1763,11 @@ func TestSettersPostV1InventoryStockMovementsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.T) {
+func TestSettersMarkExplicitStockMovementsListInventoryRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -1797,7 +1798,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -1828,8 +1829,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequest{}
-		var fernTestValueSort []*PostV1InventoryStockMovementsListRequestSortItem
+		obj := &StockMovementsListInventoryRequest{}
+		var fernTestValueSort []*StockMovementsListInventoryRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -1859,8 +1860,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequest{}
-		var fernTestValueFilter []*PostV1InventoryStockMovementsListRequestFilterItem
+		obj := &StockMovementsListInventoryRequest{}
+		var fernTestValueFilter []*StockMovementsListInventoryRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -1890,7 +1891,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequest{}
+		obj := &StockMovementsListInventoryRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -1920,9 +1921,9 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequest(t *testing.
 
 }
 
-func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
+func TestSettersStockReceiveInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -1930,7 +1931,7 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -1938,15 +1939,15 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
-		var fernTestValueDate string
+		obj := &StockReceiveInventoryRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -1954,7 +1955,7 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueUnitCost string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -1962,7 +1963,7 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -1970,15 +1971,15 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
-		var fernTestValueExpiryDate *string
+		obj := &StockReceiveInventoryRequest{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -1987,11 +1988,11 @@ func TestSettersPostV1InventoryStockReceiveRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
+func TestSettersMarkExplicitStockReceiveInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -2022,7 +2023,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueItemID string
 
 		// Act
@@ -2053,8 +2054,8 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
-		var fernTestValueDate string
+		obj := &StockReceiveInventoryRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -2084,7 +2085,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -2115,7 +2116,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueUnitCost string
 
 		// Act
@@ -2146,7 +2147,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -2177,8 +2178,8 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
-		var fernTestValueExpiryDate *string
+		obj := &StockReceiveInventoryRequest{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -2208,7 +2209,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveRequest{}
+		obj := &StockReceiveInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -2238,9 +2239,9 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockTakeRequest(t *testing.T) {
+func TestSettersStockTakeInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -2248,15 +2249,15 @@ func TestSettersPostV1InventoryStockTakeRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequest{}
-		var fernTestValueDate string
+		obj := &StockTakeInventoryRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueExpenseAccountCode *string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -2264,7 +2265,7 @@ func TestSettersPostV1InventoryStockTakeRequest(t *testing.T) {
 	})
 
 	t.Run("SetInventoryAccountCode", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueInventoryAccountCode *string
 		obj.SetInventoryAccountCode(fernTestValueInventoryAccountCode)
 		assert.Equal(t, fernTestValueInventoryAccountCode, obj.InventoryAccountCode)
@@ -2272,8 +2273,8 @@ func TestSettersPostV1InventoryStockTakeRequest(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequest{}
-		var fernTestValueLines []*PostV1InventoryStockTakeRequestLinesItem
+		obj := &StockTakeInventoryRequest{}
+		var fernTestValueLines []*StockTakeInventoryRequestLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -2281,11 +2282,11 @@ func TestSettersPostV1InventoryStockTakeRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
+func TestSettersMarkExplicitStockTakeInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -2316,8 +2317,8 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequest{}
-		var fernTestValueDate string
+		obj := &StockTakeInventoryRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -2347,7 +2348,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueExpenseAccountCode *string
 
 		// Act
@@ -2378,7 +2379,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
 	t.Run("SetInventoryAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequest{}
+		obj := &StockTakeInventoryRequest{}
 		var fernTestValueInventoryAccountCode *string
 
 		// Act
@@ -2409,8 +2410,8 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequest{}
-		var fernTestValueLines []*PostV1InventoryStockTakeRequestLinesItem
+		obj := &StockTakeInventoryRequest{}
+		var fernTestValueLines []*StockTakeInventoryRequestLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -2439,9 +2440,9 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
+func TestSettersStockTransferInventoryRequest(t *testing.T) {
 	t.Run("SetFromWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueFromWarehouseID string
 		obj.SetFromWarehouseID(fernTestValueFromWarehouseID)
 		assert.Equal(t, fernTestValueFromWarehouseID, obj.FromWarehouseID)
@@ -2449,7 +2450,7 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 	})
 
 	t.Run("SetToWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueToWarehouseID string
 		obj.SetToWarehouseID(fernTestValueToWarehouseID)
 		assert.Equal(t, fernTestValueToWarehouseID, obj.ToWarehouseID)
@@ -2457,7 +2458,7 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -2465,15 +2466,15 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
-		var fernTestValueDate string
+		obj := &StockTransferInventoryRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -2481,7 +2482,7 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -2489,7 +2490,7 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -2498,11 +2499,11 @@ func TestSettersPostV1InventoryStockTransferRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
+func TestSettersMarkExplicitStockTransferInventoryRequest(t *testing.T) {
 	t.Run("SetFromWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueFromWarehouseID string
 
 		// Act
@@ -2533,7 +2534,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetToWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueToWarehouseID string
 
 		// Act
@@ -2564,7 +2565,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueItemID string
 
 		// Act
@@ -2595,8 +2596,8 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
-		var fernTestValueDate string
+		obj := &StockTransferInventoryRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -2626,7 +2627,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -2657,7 +2658,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -2688,7 +2689,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferRequest{}
+		obj := &StockTransferInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -2718,9 +2719,9 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
+func TestSettersStockWriteOffInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -2728,7 +2729,7 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -2736,15 +2737,15 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
-		var fernTestValueDate string
+		obj := &StockWriteOffInventoryRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -2752,7 +2753,7 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -2760,7 +2761,7 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueExpenseAccountCode *string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -2768,7 +2769,7 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetInventoryAccountCode", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueInventoryAccountCode *string
 		obj.SetInventoryAccountCode(fernTestValueInventoryAccountCode)
 		assert.Equal(t, fernTestValueInventoryAccountCode, obj.InventoryAccountCode)
@@ -2776,7 +2777,7 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -2785,11 +2786,11 @@ func TestSettersPostV1InventoryStockWriteOffRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
+func TestSettersMarkExplicitStockWriteOffInventoryRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -2820,7 +2821,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueItemID string
 
 		// Act
@@ -2851,8 +2852,8 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
-		var fernTestValueDate string
+		obj := &StockWriteOffInventoryRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -2882,7 +2883,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -2913,7 +2914,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -2944,7 +2945,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueExpenseAccountCode *string
 
 		// Act
@@ -2975,7 +2976,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetInventoryAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueInventoryAccountCode *string
 
 		// Act
@@ -3006,7 +3007,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffRequest{}
+		obj := &StockWriteOffInventoryRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -3036,333 +3037,9 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryWarehousesCreateRequest(t *testing.T) {
-	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueCode string
-		obj.SetCode(fernTestValueCode)
-		assert.Equal(t, fernTestValueCode, obj.Code)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetIsDefault", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueIsDefault *bool
-		obj.SetIsDefault(fernTestValueIsDefault)
-		assert.Equal(t, fernTestValueIsDefault, obj.IsDefault)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1InventoryWarehousesCreateRequest(t *testing.T) {
-	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueCode string
-
-		// Act
-		obj.SetCode(fernTestValueCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesCreateRequest{}
-		var fernTestValueIsDefault *bool
-
-		// Act
-		obj.SetIsDefault(fernTestValueIsDefault)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1InventoryWarehousesListRequest(t *testing.T) {
-	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValuePage *int64
-		obj.SetPage(fernTestValuePage)
-		assert.Equal(t, fernTestValuePage, obj.Page)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValuePageSize *int64
-		obj.SetPageSize(fernTestValuePageSize)
-		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueSort []*PostV1InventoryWarehousesListRequestSortItem
-		obj.SetSort(fernTestValueSort)
-		assert.Equal(t, fernTestValueSort, obj.Sort)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueFilter []*PostV1InventoryWarehousesListRequestFilterItem
-		obj.SetFilter(fernTestValueFilter)
-		assert.Equal(t, fernTestValueFilter, obj.Filter)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueTotals []string
-		obj.SetTotals(fernTestValueTotals)
-		assert.Equal(t, fernTestValueTotals, obj.Totals)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1InventoryWarehousesListRequest(t *testing.T) {
-	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValuePage *int64
-
-		// Act
-		obj.SetPage(fernTestValuePage)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValuePageSize *int64
-
-		// Act
-		obj.SetPageSize(fernTestValuePageSize)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueSort []*PostV1InventoryWarehousesListRequestSortItem
-
-		// Act
-		obj.SetSort(fernTestValueSort)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueFilter []*PostV1InventoryWarehousesListRequestFilterItem
-
-		// Act
-		obj.SetFilter(fernTestValueFilter)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1InventoryWarehousesListRequest{}
-		var fernTestValueTotals []string
-
-		// Act
-		obj.SetTotals(fernTestValueTotals)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestSettersLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3370,15 +3047,15 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueDate string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -3386,15 +3063,15 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueMethod PostV1InventoryLandedCostsCreateResponseMethod
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueMethod LandedCostsCreateInventoryResponseMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGoodsReceiptID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueGoodsReceiptID *string
 		obj.SetGoodsReceiptID(fernTestValueGoodsReceiptID)
 		assert.Equal(t, fernTestValueGoodsReceiptID, obj.GoodsReceiptID)
@@ -3402,7 +3079,7 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSourceInvoiceID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueSourceInvoiceID *string
 		obj.SetSourceInvoiceID(fernTestValueSourceInvoiceID)
 		assert.Equal(t, fernTestValueSourceInvoiceID, obj.SourceInvoiceID)
@@ -3410,7 +3087,7 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -3418,16 +3095,16 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueLines []*PostV1InventoryLandedCostsCreateResponseLinesItem
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueLines []*LandedCostsCreateInventoryResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -3435,11 +3112,11 @@ func TestSettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestGettersLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -3449,7 +3126,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3462,8 +3139,8 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var expected string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -3472,7 +3149,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3485,7 +3162,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var expected string
 		obj.Amount = expected
 
@@ -3495,7 +3172,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3508,8 +3185,8 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var expected PostV1InventoryLandedCostsCreateResponseMethod
+		obj := &LandedCostsCreateInventoryResponse{}
+		var expected LandedCostsCreateInventoryResponseMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -3518,7 +3195,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3531,7 +3208,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetGoodsReceiptID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var expected *string
 		obj.GoodsReceiptID = expected
 
@@ -3542,7 +3219,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetGoodsReceiptID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		obj.GoodsReceiptID = nil
 
 		// Act & Assert
@@ -3551,7 +3228,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetGoodsReceiptID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3564,7 +3241,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetSourceInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var expected *string
 		obj.SourceInvoiceID = expected
 
@@ -3575,7 +3252,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetSourceInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		obj.SourceInvoiceID = nil
 
 		// Act & Assert
@@ -3584,7 +3261,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetSourceInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3597,7 +3274,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -3608,7 +3285,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -3617,7 +3294,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3630,8 +3307,8 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var expected string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -3640,7 +3317,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3653,8 +3330,8 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var expected []*PostV1InventoryLandedCostsCreateResponseLinesItem
+		obj := &LandedCostsCreateInventoryResponse{}
+		var expected []*LandedCostsCreateInventoryResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -3664,7 +3341,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -3673,7 +3350,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3685,11 +3362,11 @@ func TestGettersPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -3720,8 +3397,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueDate string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -3751,7 +3428,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueAmount string
 
 		// Act
@@ -3782,8 +3459,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueMethod PostV1InventoryLandedCostsCreateResponseMethod
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueMethod LandedCostsCreateInventoryResponseMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -3813,7 +3490,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetGoodsReceiptID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueGoodsReceiptID *string
 
 		// Act
@@ -3844,7 +3521,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetSourceInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueSourceInvoiceID *string
 
 		// Act
@@ -3875,7 +3552,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -3906,8 +3583,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3937,8 +3614,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
-		var fernTestValueLines []*PostV1InventoryLandedCostsCreateResponseLinesItem
+		obj := &LandedCostsCreateInventoryResponse{}
+		var fernTestValueLines []*LandedCostsCreateInventoryResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -3967,9 +3644,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponse(t *testing.
 
 }
 
-func TestSettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestSettersLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("SetMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueMovementID string
 		obj.SetMovementID(fernTestValueMovementID)
 		assert.Equal(t, fernTestValueMovementID, obj.MovementID)
@@ -3977,7 +3654,7 @@ func TestSettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 	})
 
 	t.Run("SetAllocatedAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueAllocatedAmount string
 		obj.SetAllocatedAmount(fernTestValueAllocatedAmount)
 		assert.Equal(t, fernTestValueAllocatedAmount, obj.AllocatedAmount)
@@ -3985,7 +3662,7 @@ func TestSettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 	})
 
 	t.Run("SetNewUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueNewUnitCost string
 		obj.SetNewUnitCost(fernTestValueNewUnitCost)
 		assert.Equal(t, fernTestValueNewUnitCost, obj.NewUnitCost)
@@ -3994,11 +3671,11 @@ func TestSettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 
 }
 
-func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestGettersLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("GetMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var expected string
 		obj.MovementID = expected
 
@@ -4008,7 +3685,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 
 	t.Run("GetMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj *LandedCostsCreateInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4021,7 +3698,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 	t.Run("GetAllocatedAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var expected string
 		obj.AllocatedAmount = expected
 
@@ -4031,7 +3708,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 
 	t.Run("GetAllocatedAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj *LandedCostsCreateInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4044,7 +3721,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 	t.Run("GetNewUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var expected string
 		obj.NewUnitCost = expected
 
@@ -4054,7 +3731,7 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 
 	t.Run("GetNewUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj *LandedCostsCreateInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4066,11 +3743,11 @@ func TestGettersPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("SetMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueMovementID string
 
 		// Act
@@ -4101,7 +3778,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponseLinesItem(t 
 	t.Run("SetAllocatedAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueAllocatedAmount string
 
 		// Act
@@ -4132,7 +3809,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponseLinesItem(t 
 	t.Run("SetNewUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		var fernTestValueNewUnitCost string
 
 		// Act
@@ -4162,9 +3839,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsCreateResponseLinesItem(t 
 
 }
 
-func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestSettersLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4172,15 +3849,15 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueDate string
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -4188,15 +3865,15 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueMethod PostV1InventoryLandedCostsGetResponseMethod
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueMethod LandedCostsGetInventoryResponseMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGoodsReceiptID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueGoodsReceiptID *string
 		obj.SetGoodsReceiptID(fernTestValueGoodsReceiptID)
 		assert.Equal(t, fernTestValueGoodsReceiptID, obj.GoodsReceiptID)
@@ -4204,7 +3881,7 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSourceInvoiceID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueSourceInvoiceID *string
 		obj.SetSourceInvoiceID(fernTestValueSourceInvoiceID)
 		assert.Equal(t, fernTestValueSourceInvoiceID, obj.SourceInvoiceID)
@@ -4212,7 +3889,7 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -4220,16 +3897,16 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueLines []*PostV1InventoryLandedCostsGetResponseLinesItem
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueLines []*LandedCostsGetInventoryResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -4237,11 +3914,11 @@ func TestSettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestGettersLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -4251,7 +3928,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4264,8 +3941,8 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var expected string
+		obj := &LandedCostsGetInventoryResponse{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -4274,7 +3951,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4287,7 +3964,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var expected string
 		obj.Amount = expected
 
@@ -4297,7 +3974,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4310,8 +3987,8 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var expected PostV1InventoryLandedCostsGetResponseMethod
+		obj := &LandedCostsGetInventoryResponse{}
+		var expected LandedCostsGetInventoryResponseMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -4320,7 +3997,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4333,7 +4010,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetGoodsReceiptID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var expected *string
 		obj.GoodsReceiptID = expected
 
@@ -4344,7 +4021,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetGoodsReceiptID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		obj.GoodsReceiptID = nil
 
 		// Act & Assert
@@ -4353,7 +4030,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetGoodsReceiptID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4366,7 +4043,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetSourceInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var expected *string
 		obj.SourceInvoiceID = expected
 
@@ -4377,7 +4054,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetSourceInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		obj.SourceInvoiceID = nil
 
 		// Act & Assert
@@ -4386,7 +4063,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetSourceInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4399,7 +4076,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4410,7 +4087,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4419,7 +4096,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4432,8 +4109,8 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var expected string
+		obj := &LandedCostsGetInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4442,7 +4119,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4455,8 +4132,8 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var expected []*PostV1InventoryLandedCostsGetResponseLinesItem
+		obj := &LandedCostsGetInventoryResponse{}
+		var expected []*LandedCostsGetInventoryResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -4466,7 +4143,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -4475,7 +4152,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4487,11 +4164,11 @@ func TestGettersPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4522,8 +4199,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueDate string
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -4553,7 +4230,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueAmount string
 
 		// Act
@@ -4584,8 +4261,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueMethod PostV1InventoryLandedCostsGetResponseMethod
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueMethod LandedCostsGetInventoryResponseMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -4615,7 +4292,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetGoodsReceiptID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueGoodsReceiptID *string
 
 		// Act
@@ -4646,7 +4323,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetSourceInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueSourceInvoiceID *string
 
 		// Act
@@ -4677,7 +4354,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -4708,8 +4385,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -4739,8 +4416,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
-		var fernTestValueLines []*PostV1InventoryLandedCostsGetResponseLinesItem
+		obj := &LandedCostsGetInventoryResponse{}
+		var fernTestValueLines []*LandedCostsGetInventoryResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -4769,9 +4446,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestSettersLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("SetMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueMovementID string
 		obj.SetMovementID(fernTestValueMovementID)
 		assert.Equal(t, fernTestValueMovementID, obj.MovementID)
@@ -4779,7 +4456,7 @@ func TestSettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetAllocatedAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueAllocatedAmount string
 		obj.SetAllocatedAmount(fernTestValueAllocatedAmount)
 		assert.Equal(t, fernTestValueAllocatedAmount, obj.AllocatedAmount)
@@ -4787,7 +4464,7 @@ func TestSettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetNewUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueNewUnitCost string
 		obj.SetNewUnitCost(fernTestValueNewUnitCost)
 		assert.Equal(t, fernTestValueNewUnitCost, obj.NewUnitCost)
@@ -4796,11 +4473,11 @@ func TestSettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestGettersLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("GetMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var expected string
 		obj.MovementID = expected
 
@@ -4810,7 +4487,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj *LandedCostsGetInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4823,7 +4500,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetAllocatedAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var expected string
 		obj.AllocatedAmount = expected
 
@@ -4833,7 +4510,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetAllocatedAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj *LandedCostsGetInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4846,7 +4523,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 	t.Run("GetNewUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var expected string
 		obj.NewUnitCost = expected
 
@@ -4856,7 +4533,7 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetNewUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj *LandedCostsGetInventoryResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4868,11 +4545,11 @@ func TestGettersPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("SetMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueMovementID string
 
 		// Act
@@ -4903,7 +4580,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponseLinesItem(t *te
 	t.Run("SetAllocatedAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueAllocatedAmount string
 
 		// Act
@@ -4934,7 +4611,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponseLinesItem(t *te
 	t.Run("SetNewUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		var fernTestValueNewUnitCost string
 
 		// Act
@@ -4964,9 +4641,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsGetResponseLinesItem(t *te
 
 }
 
-func TestSettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestSettersLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -4974,16 +4651,16 @@ func TestSettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryLandedCostsListRequestFilterItemOp
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var fernTestValueOp LandedCostsListInventoryRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryLandedCostsListRequestFilterItemValue
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var fernTestValueValue *LandedCostsListInventoryRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -4991,11 +4668,11 @@ func TestSettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestGettersLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -5005,7 +4682,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItem
+		var obj *LandedCostsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5018,8 +4695,8 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var expected PostV1InventoryLandedCostsListRequestFilterItemOp
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var expected LandedCostsListInventoryRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -5028,7 +4705,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItem
+		var obj *LandedCostsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5041,8 +4718,8 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var expected *PostV1InventoryLandedCostsListRequestFilterItemValue
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var expected *LandedCostsListInventoryRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -5052,7 +4729,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -5061,7 +4738,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItem
+		var obj *LandedCostsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5073,11 +4750,11 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -5108,8 +4785,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestFilterItem(t *t
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryLandedCostsListRequestFilterItemOp
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var fernTestValueOp LandedCostsListInventoryRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -5139,8 +4816,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestFilterItem(t *t
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryLandedCostsListRequestFilterItemValue
+		obj := &LandedCostsListInventoryRequestFilterItem{}
+		var fernTestValueValue *LandedCostsListInventoryRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -5169,11 +4846,11 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestFilterItem(t *t
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.T) {
+func TestGettersLandedCostsListInventoryRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValue{}
+		obj := &LandedCostsListInventoryRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -5183,7 +4860,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValue
+		var obj *LandedCostsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5196,7 +4873,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValue{}
+		obj := &LandedCostsListInventoryRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -5206,7 +4883,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValue
+		var obj *LandedCostsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5219,7 +4896,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValue{}
+		obj := &LandedCostsListInventoryRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -5229,7 +4906,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValue
+		var obj *LandedCostsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5239,46 +4916,46 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValue(t *testing.
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetLandedCostsListInventoryRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValue{}
-		var expected []*PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem
-		obj.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList = expected
+		obj := &LandedCostsListInventoryRequestFilterItemValue{}
+		var expected []*LandedCostsListInventoryRequestFilterItemValueThreeItem
+		obj.LandedCostsListInventoryRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetLandedCostsListInventoryRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetLandedCostsListInventoryRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValue{}
-		obj.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList = nil
+		obj := &LandedCostsListInventoryRequestFilterItemValue{}
+		obj.LandedCostsListInventoryRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetLandedCostsListInventoryRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetLandedCostsListInventoryRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValue
+		var obj *LandedCostsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetLandedCostsListInventoryRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersLandedCostsListInventoryRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem{}
+		obj := &LandedCostsListInventoryRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -5288,7 +4965,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValueThreeItem(t 
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem
+		var obj *LandedCostsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5301,7 +4978,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValueThreeItem(t 
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem{}
+		obj := &LandedCostsListInventoryRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -5311,7 +4988,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValueThreeItem(t 
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem
+		var obj *LandedCostsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5323,9 +5000,9 @@ func TestGettersPostV1InventoryLandedCostsListRequestFilterItemValueThreeItem(t 
 
 }
 
-func TestSettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestSettersLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -5333,8 +5010,8 @@ func TestSettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryLandedCostsListRequestSortItemDir
+		obj := &LandedCostsListInventoryRequestSortItem{}
+		var fernTestValueDir *LandedCostsListInventoryRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -5342,11 +5019,11 @@ func TestSettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestGettersLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -5356,7 +5033,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestSortItem
+		var obj *LandedCostsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5369,8 +5046,8 @@ func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
-		var expected *PostV1InventoryLandedCostsListRequestSortItemDir
+		obj := &LandedCostsListInventoryRequestSortItem{}
+		var expected *LandedCostsListInventoryRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -5380,7 +5057,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -5389,7 +5066,7 @@ func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestSortItem
+		var obj *LandedCostsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5401,11 +5078,11 @@ func TestGettersPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -5436,8 +5113,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestSortItem(t *tes
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryLandedCostsListRequestSortItemDir
+		obj := &LandedCostsListInventoryRequestSortItem{}
+		var fernTestValueDir *LandedCostsListInventoryRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -5466,17 +5143,17 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListRequestSortItem(t *tes
 
 }
 
-func TestSettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestSettersLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponse{}
-		var fernTestValueRows []*PostV1InventoryLandedCostsListResponseRowsItem
+		obj := &LandedCostsListInventoryResponse{}
+		var fernTestValueRows []*LandedCostsListInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -5484,7 +5161,7 @@ func TestSettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -5492,7 +5169,7 @@ func TestSettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -5500,7 +5177,7 @@ func TestSettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -5509,12 +5186,12 @@ func TestSettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestGettersLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
-		var expected []*PostV1InventoryLandedCostsListResponseRowsItem
+		obj := &LandedCostsListInventoryResponse{}
+		var expected []*LandedCostsListInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -5524,7 +5201,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -5533,7 +5210,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5546,7 +5223,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -5556,7 +5233,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5569,7 +5246,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -5579,7 +5256,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5592,7 +5269,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -5602,7 +5279,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5615,7 +5292,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -5626,7 +5303,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -5635,7 +5312,7 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5647,12 +5324,12 @@ func TestGettersPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
-		var fernTestValueRows []*PostV1InventoryLandedCostsListResponseRowsItem
+		obj := &LandedCostsListInventoryResponse{}
+		var fernTestValueRows []*LandedCostsListInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -5682,7 +5359,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T)
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -5713,7 +5390,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T)
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -5744,7 +5421,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T)
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -5775,7 +5452,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T)
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -5805,9 +5482,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponse(t *testing.T)
 
 }
 
-func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestSettersLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5815,15 +5492,15 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -5831,15 +5508,15 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueMethod PostV1InventoryLandedCostsListResponseRowsItemMethod
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueMethod LandedCostsListInventoryResponseRowsItemMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGoodsReceiptID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueGoodsReceiptID *string
 		obj.SetGoodsReceiptID(fernTestValueGoodsReceiptID)
 		assert.Equal(t, fernTestValueGoodsReceiptID, obj.GoodsReceiptID)
@@ -5847,7 +5524,7 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSourceInvoiceID", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueSourceInvoiceID *string
 		obj.SetSourceInvoiceID(fernTestValueSourceInvoiceID)
 		assert.Equal(t, fernTestValueSourceInvoiceID, obj.SourceInvoiceID)
@@ -5855,7 +5532,7 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -5863,8 +5540,8 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -5872,11 +5549,11 @@ func TestSettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestGettersLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -5886,7 +5563,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5899,8 +5576,8 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var expected string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -5909,7 +5586,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5922,7 +5599,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -5932,7 +5609,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5945,8 +5622,8 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var expected PostV1InventoryLandedCostsListResponseRowsItemMethod
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var expected LandedCostsListInventoryResponseRowsItemMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -5955,7 +5632,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5968,7 +5645,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGoodsReceiptID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.GoodsReceiptID = expected
 
@@ -5979,7 +5656,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGoodsReceiptID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		obj.GoodsReceiptID = nil
 
 		// Act & Assert
@@ -5988,7 +5665,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetGoodsReceiptID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6001,7 +5678,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSourceInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.SourceInvoiceID = expected
 
@@ -6012,7 +5689,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSourceInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		obj.SourceInvoiceID = nil
 
 		// Act & Assert
@@ -6021,7 +5698,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSourceInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6034,7 +5711,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -6045,7 +5722,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -6054,7 +5731,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6067,8 +5744,8 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var expected string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6077,7 +5754,7 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6089,11 +5766,11 @@ func TestGettersPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -6124,8 +5801,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -6155,7 +5832,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -6186,8 +5863,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueMethod PostV1InventoryLandedCostsListResponseRowsItemMethod
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueMethod LandedCostsListInventoryResponseRowsItemMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -6217,7 +5894,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetGoodsReceiptID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueGoodsReceiptID *string
 
 		// Act
@@ -6248,7 +5925,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetSourceInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueSourceInvoiceID *string
 
 		// Act
@@ -6279,7 +5956,7 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6310,8 +5987,8 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LandedCostsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6340,9 +6017,9 @@ func TestSettersMarkExplicitPostV1InventoryLandedCostsListResponseRowsItem(t *te
 
 }
 
-func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestSettersLotsGetInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6350,7 +6027,7 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -6358,7 +6035,7 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueLotNumber string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -6366,15 +6043,15 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -6382,7 +6059,7 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -6390,16 +6067,16 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMovements", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueMovements []*PostV1InventoryLotsGetResponseMovementsItem
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueMovements []*LotsGetInventoryResponseMovementsItem
 		obj.SetMovements(fernTestValueMovements)
 		assert.Equal(t, fernTestValueMovements, obj.Movements)
 		assert.NotNil(t, obj.explicitFields)
@@ -6407,11 +6084,11 @@ func TestSettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestGettersLotsGetInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -6421,7 +6098,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6434,7 +6111,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var expected string
 		obj.ItemID = expected
 
@@ -6444,7 +6121,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6457,7 +6134,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var expected string
 		obj.LotNumber = expected
 
@@ -6467,7 +6144,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6480,8 +6157,8 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var expected *string
+		obj := &LotsGetInventoryResponse{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -6491,7 +6168,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -6500,7 +6177,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6513,7 +6190,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -6524,7 +6201,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -6533,7 +6210,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6546,7 +6223,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var expected string
 		obj.OnHand = expected
 
@@ -6556,7 +6233,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6569,8 +6246,8 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var expected string
+		obj := &LotsGetInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6579,7 +6256,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6592,8 +6269,8 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetMovements", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var expected []*PostV1InventoryLotsGetResponseMovementsItem
+		obj := &LotsGetInventoryResponse{}
+		var expected []*LotsGetInventoryResponseMovementsItem
 		obj.Movements = expected
 
 		// Act & Assert
@@ -6603,7 +6280,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("GetMovements_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		obj.Movements = nil
 
 		// Act & Assert
@@ -6612,7 +6289,7 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetMovements_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6624,11 +6301,11 @@ func TestGettersPostV1InventoryLotsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitLotsGetInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -6659,7 +6336,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueItemID string
 
 		// Act
@@ -6690,7 +6367,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueLotNumber string
 
 		// Act
@@ -6721,8 +6398,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -6752,7 +6429,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6783,7 +6460,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -6814,8 +6491,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6845,8 +6522,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 	t.Run("SetMovements_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
-		var fernTestValueMovements []*PostV1InventoryLotsGetResponseMovementsItem
+		obj := &LotsGetInventoryResponse{}
+		var fernTestValueMovements []*LotsGetInventoryResponseMovementsItem
 
 		// Act
 		obj.SetMovements(fernTestValueMovements)
@@ -6875,9 +6552,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestSettersLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6885,7 +6562,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -6893,7 +6570,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -6901,7 +6578,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetLotID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueLotID *string
 		obj.SetLotID(fernTestValueLotID)
 		assert.Equal(t, fernTestValueLotID, obj.LotID)
@@ -6909,23 +6586,23 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueDate string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDirection", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueDirection PostV1InventoryLotsGetResponseMovementsItemDirection
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueDirection LotsGetInventoryResponseMovementsItemDirection
 		obj.SetDirection(fernTestValueDirection)
 		assert.Equal(t, fernTestValueDirection, obj.Direction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -6933,7 +6610,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueUnitCost *string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -6941,7 +6618,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -6949,7 +6626,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetRemainingQty", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueRemainingQty string
 		obj.SetRemainingQty(fernTestValueRemainingQty)
 		assert.Equal(t, fernTestValueRemainingQty, obj.RemainingQty)
@@ -6957,7 +6634,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetDocumentType", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueDocumentType *string
 		obj.SetDocumentType(fernTestValueDocumentType)
 		assert.Equal(t, fernTestValueDocumentType, obj.DocumentType)
@@ -6965,7 +6642,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetDocumentID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueDocumentID *string
 		obj.SetDocumentID(fernTestValueDocumentID)
 		assert.Equal(t, fernTestValueDocumentID, obj.DocumentID)
@@ -6973,7 +6650,7 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -6981,8 +6658,8 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -6990,11 +6667,11 @@ func TestSettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestGettersLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -7004,7 +6681,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7017,7 +6694,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.WarehouseID = expected
 
@@ -7027,7 +6704,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7040,7 +6717,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -7050,7 +6727,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7063,7 +6740,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetLotID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected *string
 		obj.LotID = expected
 
@@ -7074,7 +6751,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetLotID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		obj.LotID = nil
 
 		// Act & Assert
@@ -7083,7 +6760,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetLotID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7096,8 +6773,8 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var expected string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -7106,7 +6783,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7119,8 +6796,8 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDirection", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var expected PostV1InventoryLotsGetResponseMovementsItemDirection
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var expected LotsGetInventoryResponseMovementsItemDirection
 		obj.Direction = expected
 
 		// Act & Assert
@@ -7129,7 +6806,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetDirection_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7142,7 +6819,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -7152,7 +6829,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7165,7 +6842,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected *string
 		obj.UnitCost = expected
 
@@ -7176,7 +6853,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetUnitCost_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		obj.UnitCost = nil
 
 		// Act & Assert
@@ -7185,7 +6862,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7198,7 +6875,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -7208,7 +6885,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7221,7 +6898,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetRemainingQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected string
 		obj.RemainingQty = expected
 
@@ -7231,7 +6908,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetRemainingQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7244,7 +6921,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDocumentType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected *string
 		obj.DocumentType = expected
 
@@ -7255,7 +6932,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDocumentType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		obj.DocumentType = nil
 
 		// Act & Assert
@@ -7264,7 +6941,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetDocumentType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7277,7 +6954,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDocumentID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected *string
 		obj.DocumentID = expected
 
@@ -7288,7 +6965,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetDocumentID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		obj.DocumentID = nil
 
 		// Act & Assert
@@ -7297,7 +6974,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetDocumentID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7310,7 +6987,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -7321,7 +6998,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -7330,7 +7007,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7343,8 +7020,8 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var expected string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -7353,7 +7030,7 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7365,11 +7042,11 @@ func TestGettersPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestSettersMarkExplicitLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -7400,7 +7077,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -7431,7 +7108,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -7462,7 +7139,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetLotID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueLotID *string
 
 		// Act
@@ -7493,8 +7170,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueDate string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -7524,8 +7201,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetDirection_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueDirection PostV1InventoryLotsGetResponseMovementsItemDirection
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueDirection LotsGetInventoryResponseMovementsItemDirection
 
 		// Act
 		obj.SetDirection(fernTestValueDirection)
@@ -7555,7 +7232,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -7586,7 +7263,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueUnitCost *string
 
 		// Act
@@ -7617,7 +7294,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -7648,7 +7325,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetRemainingQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueRemainingQty string
 
 		// Act
@@ -7679,7 +7356,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetDocumentType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueDocumentType *string
 
 		// Act
@@ -7710,7 +7387,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetDocumentID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueDocumentID *string
 
 		// Act
@@ -7741,7 +7418,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -7772,8 +7449,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LotsGetInventoryResponseMovementsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -7802,9 +7479,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsGetResponseMovementsItem(t *testi
 
 }
 
-func TestSettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestSettersLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -7812,16 +7489,16 @@ func TestSettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryLotsListRequestFilterItemOp
+		obj := &LotsListInventoryRequestFilterItem{}
+		var fernTestValueOp LotsListInventoryRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryLotsListRequestFilterItemValue
+		obj := &LotsListInventoryRequestFilterItem{}
+		var fernTestValueValue *LotsListInventoryRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -7829,11 +7506,11 @@ func TestSettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestGettersLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -7843,7 +7520,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItem
+		var obj *LotsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7856,8 +7533,8 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var expected PostV1InventoryLotsListRequestFilterItemOp
+		obj := &LotsListInventoryRequestFilterItem{}
+		var expected LotsListInventoryRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -7866,7 +7543,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItem
+		var obj *LotsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7879,8 +7556,8 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var expected *PostV1InventoryLotsListRequestFilterItemValue
+		obj := &LotsListInventoryRequestFilterItem{}
+		var expected *LotsListInventoryRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -7890,7 +7567,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -7899,7 +7576,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItem
+		var obj *LotsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7911,11 +7588,11 @@ func TestGettersPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -7946,8 +7623,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequestFilterItem(t *testing.
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryLotsListRequestFilterItemOp
+		obj := &LotsListInventoryRequestFilterItem{}
+		var fernTestValueOp LotsListInventoryRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -7977,8 +7654,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequestFilterItem(t *testing.
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryLotsListRequestFilterItemValue
+		obj := &LotsListInventoryRequestFilterItem{}
+		var fernTestValueValue *LotsListInventoryRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -8007,11 +7684,11 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequestFilterItem(t *testing.
 
 }
 
-func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
+func TestGettersLotsListInventoryRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValue{}
+		obj := &LotsListInventoryRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -8021,7 +7698,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValue
+		var obj *LotsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8034,7 +7711,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValue{}
+		obj := &LotsListInventoryRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -8044,7 +7721,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValue
+		var obj *LotsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8057,7 +7734,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValue{}
+		obj := &LotsListInventoryRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -8067,7 +7744,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValue
+		var obj *LotsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8077,46 +7754,46 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetLotsListInventoryRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValue{}
-		var expected []*PostV1InventoryLotsListRequestFilterItemValueThreeItem
-		obj.PostV1InventoryLotsListRequestFilterItemValueThreeItemList = expected
+		obj := &LotsListInventoryRequestFilterItemValue{}
+		var expected []*LotsListInventoryRequestFilterItemValueThreeItem
+		obj.LotsListInventoryRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetLotsListInventoryRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetLotsListInventoryRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValue{}
-		obj.PostV1InventoryLotsListRequestFilterItemValueThreeItemList = nil
+		obj := &LotsListInventoryRequestFilterItemValue{}
+		obj.LotsListInventoryRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetLotsListInventoryRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetLotsListInventoryRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValue
+		var obj *LotsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetLotsListInventoryRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1InventoryLotsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersLotsListInventoryRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValueThreeItem{}
+		obj := &LotsListInventoryRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -8126,7 +7803,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValueThreeItem(t *testin
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValueThreeItem
+		var obj *LotsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8139,7 +7816,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValueThreeItem(t *testin
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItemValueThreeItem{}
+		obj := &LotsListInventoryRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -8149,7 +7826,7 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValueThreeItem(t *testin
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItemValueThreeItem
+		var obj *LotsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8161,9 +7838,9 @@ func TestGettersPostV1InventoryLotsListRequestFilterItemValueThreeItem(t *testin
 
 }
 
-func TestSettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestSettersLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -8171,8 +7848,8 @@ func TestSettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryLotsListRequestSortItemDir
+		obj := &LotsListInventoryRequestSortItem{}
+		var fernTestValueDir *LotsListInventoryRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -8180,11 +7857,11 @@ func TestSettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestGettersLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -8194,7 +7871,7 @@ func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestSortItem
+		var obj *LotsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8207,8 +7884,8 @@ func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
-		var expected *PostV1InventoryLotsListRequestSortItemDir
+		obj := &LotsListInventoryRequestSortItem{}
+		var expected *LotsListInventoryRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -8218,7 +7895,7 @@ func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -8227,7 +7904,7 @@ func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestSortItem
+		var obj *LotsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8239,11 +7916,11 @@ func TestGettersPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -8274,8 +7951,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequestSortItem(t *testing.T)
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryLotsListRequestSortItemDir
+		obj := &LotsListInventoryRequestSortItem{}
+		var fernTestValueDir *LotsListInventoryRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -8304,17 +7981,17 @@ func TestSettersMarkExplicitPostV1InventoryLotsListRequestSortItem(t *testing.T)
 
 }
 
-func TestSettersPostV1InventoryLotsListResponse(t *testing.T) {
+func TestSettersLotsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponse{}
-		var fernTestValueRows []*PostV1InventoryLotsListResponseRowsItem
+		obj := &LotsListInventoryResponse{}
+		var fernTestValueRows []*LotsListInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -8322,7 +7999,7 @@ func TestSettersPostV1InventoryLotsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -8330,7 +8007,7 @@ func TestSettersPostV1InventoryLotsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -8338,7 +8015,7 @@ func TestSettersPostV1InventoryLotsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -8347,12 +8024,12 @@ func TestSettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
+func TestGettersLotsListInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
-		var expected []*PostV1InventoryLotsListResponseRowsItem
+		obj := &LotsListInventoryResponse{}
+		var expected []*LotsListInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -8362,7 +8039,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -8371,7 +8048,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8384,7 +8061,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -8394,7 +8071,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8407,7 +8084,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -8417,7 +8094,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8430,7 +8107,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -8440,7 +8117,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8453,7 +8130,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -8464,7 +8141,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -8473,7 +8150,7 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8485,12 +8162,12 @@ func TestGettersPostV1InventoryLotsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
+func TestSettersMarkExplicitLotsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
-		var fernTestValueRows []*PostV1InventoryLotsListResponseRowsItem
+		obj := &LotsListInventoryResponse{}
+		var fernTestValueRows []*LotsListInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -8520,7 +8197,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -8551,7 +8228,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -8582,7 +8259,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -8613,7 +8290,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -8643,9 +8320,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestSettersLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8653,7 +8330,7 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -8661,7 +8338,7 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueLotNumber string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -8669,15 +8346,15 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -8685,7 +8362,7 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -8693,8 +8370,8 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -8702,11 +8379,11 @@ func TestSettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestGettersLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -8716,7 +8393,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8729,7 +8406,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -8739,7 +8416,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8752,7 +8429,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var expected string
 		obj.LotNumber = expected
 
@@ -8762,7 +8439,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8775,8 +8452,8 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var expected *string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -8786,7 +8463,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -8795,7 +8472,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8808,7 +8485,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -8819,7 +8496,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -8828,7 +8505,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8841,7 +8518,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var expected string
 		obj.OnHand = expected
 
@@ -8851,7 +8528,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8864,8 +8541,8 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var expected string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8874,7 +8551,7 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8886,11 +8563,11 @@ func TestGettersPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -8921,7 +8598,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -8952,7 +8629,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueLotNumber string
 
 		// Act
@@ -8983,8 +8660,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -9014,7 +8691,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -9045,7 +8722,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -9076,8 +8753,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &LotsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -9106,9 +8783,9 @@ func TestSettersMarkExplicitPostV1InventoryLotsListResponseRowsItem(t *testing.T
 
 }
 
-func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestSettersLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -9116,7 +8793,7 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -9124,7 +8801,7 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueLotNumber string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -9132,15 +8809,15 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsUpdateInventoryResponse{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -9148,7 +8825,7 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -9156,8 +8833,8 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LotsUpdateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -9165,11 +8842,11 @@ func TestSettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestGettersLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -9179,7 +8856,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9192,7 +8869,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var expected string
 		obj.ItemID = expected
 
@@ -9202,7 +8879,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9215,7 +8892,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var expected string
 		obj.LotNumber = expected
 
@@ -9225,7 +8902,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9238,8 +8915,8 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var expected *string
+		obj := &LotsUpdateInventoryResponse{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -9249,7 +8926,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -9258,7 +8935,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9271,7 +8948,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -9282,7 +8959,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -9291,7 +8968,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9304,7 +8981,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var expected string
 		obj.OnHand = expected
 
@@ -9314,7 +8991,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9327,8 +9004,8 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var expected string
+		obj := &LotsUpdateInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -9337,7 +9014,7 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9349,11 +9026,11 @@ func TestGettersPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -9384,7 +9061,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueItemID string
 
 		// Act
@@ -9415,7 +9092,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueLotNumber string
 
 		// Act
@@ -9446,8 +9123,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var fernTestValueExpiryDate *string
+		obj := &LotsUpdateInventoryResponse{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -9477,7 +9154,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -9508,7 +9185,7 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -9539,8 +9216,8 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &LotsUpdateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -9569,10 +9246,10 @@ func TestSettersMarkExplicitPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestSettersReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
-		var fernTestValueRows []*PostV1InventoryReorderRulesCheckResponseRowsItem
+		obj := &ReorderRulesCheckInventoryResponse{}
+		var fernTestValueRows []*ReorderRulesCheckInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -9580,12 +9257,12 @@ func TestSettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestGettersReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
-		var expected []*PostV1InventoryReorderRulesCheckResponseRowsItem
+		obj := &ReorderRulesCheckInventoryResponse{}
+		var expected []*ReorderRulesCheckInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -9595,7 +9272,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
+		obj := &ReorderRulesCheckInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -9604,7 +9281,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponse
+		var obj *ReorderRulesCheckInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9616,12 +9293,12 @@ func TestGettersPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
-		var fernTestValueRows []*PostV1InventoryReorderRulesCheckResponseRowsItem
+		obj := &ReorderRulesCheckInventoryResponse{}
+		var fernTestValueRows []*ReorderRulesCheckInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -9650,9 +9327,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponse(t *testing.
 
 }
 
-func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestSettersReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetRuleID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueRuleID string
 		obj.SetRuleID(fernTestValueRuleID)
 		assert.Equal(t, fernTestValueRuleID, obj.RuleID)
@@ -9660,7 +9337,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -9668,7 +9345,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -9676,7 +9353,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueMinQty string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -9684,7 +9361,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -9692,7 +9369,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -9700,7 +9377,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReserved", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueReserved string
 		obj.SetReserved(fernTestValueReserved)
 		assert.Equal(t, fernTestValueReserved, obj.Reserved)
@@ -9708,7 +9385,7 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAvailable", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueAvailable string
 		obj.SetAvailable(fernTestValueAvailable)
 		assert.Equal(t, fernTestValueAvailable, obj.Available)
@@ -9717,11 +9394,11 @@ func TestSettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestGettersReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetRuleID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.RuleID = expected
 
@@ -9731,7 +9408,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetRuleID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9744,7 +9421,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -9754,7 +9431,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9767,7 +9444,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -9778,7 +9455,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -9787,7 +9464,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9800,7 +9477,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetMinQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.MinQty = expected
 
@@ -9810,7 +9487,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMinQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9823,7 +9500,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetReorderQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected *string
 		obj.ReorderQty = expected
 
@@ -9834,7 +9511,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetReorderQty_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		obj.ReorderQty = nil
 
 		// Act & Assert
@@ -9843,7 +9520,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReorderQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9856,7 +9533,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.OnHand = expected
 
@@ -9866,7 +9543,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9879,7 +9556,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetReserved", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.Reserved = expected
 
@@ -9889,7 +9566,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReserved_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9902,7 +9579,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 	t.Run("GetAvailable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var expected string
 		obj.Available = expected
 
@@ -9912,7 +9589,7 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAvailable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9924,11 +9601,11 @@ func TestGettersPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetRuleID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueRuleID string
 
 		// Act
@@ -9959,7 +9636,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -9990,7 +9667,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -10021,7 +9698,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueMinQty string
 
 		// Act
@@ -10052,7 +9729,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -10083,7 +9760,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -10114,7 +9791,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetReserved_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueReserved string
 
 		// Act
@@ -10145,7 +9822,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 	t.Run("SetAvailable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		var fernTestValueAvailable string
 
 		// Act
@@ -10175,9 +9852,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCheckResponseRowsItem(t *
 
 }
 
-func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestSettersReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10185,7 +9862,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -10193,7 +9870,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -10201,7 +9878,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueMinQty string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -10209,7 +9886,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -10217,7 +9894,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -10225,7 +9902,7 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -10233,16 +9910,16 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -10250,11 +9927,11 @@ func TestSettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestGettersReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -10264,7 +9941,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10277,7 +9954,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected string
 		obj.ItemID = expected
 
@@ -10287,7 +9964,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10300,7 +9977,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -10311,7 +9988,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -10320,7 +9997,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10333,7 +10010,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetMinQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected string
 		obj.MinQty = expected
 
@@ -10343,7 +10020,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetMinQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10356,7 +10033,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetReorderQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected *string
 		obj.ReorderQty = expected
 
@@ -10367,7 +10044,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetReorderQty_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		obj.ReorderQty = nil
 
 		// Act & Assert
@@ -10376,7 +10053,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetReorderQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10389,7 +10066,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -10399,7 +10076,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10412,7 +10089,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -10423,7 +10100,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -10432,7 +10109,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10445,8 +10122,8 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var expected string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -10455,7 +10132,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10468,8 +10145,8 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var expected string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -10478,7 +10155,7 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10490,11 +10167,11 @@ func TestGettersPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -10525,7 +10202,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueItemID string
 
 		// Act
@@ -10556,7 +10233,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -10587,7 +10264,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueMinQty string
 
 		// Act
@@ -10618,7 +10295,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -10649,7 +10326,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueIsActive bool
 
 		// Act
@@ -10680,7 +10357,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -10711,8 +10388,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -10742,8 +10419,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesCreateInventoryResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -10772,9 +10449,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesCreateResponse(t *testing
 
 }
 
-func TestSettersPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestSettersReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10783,11 +10460,11 @@ func TestSettersPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestGettersReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -10797,7 +10474,7 @@ func TestGettersPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesDeleteResponse
+		var obj *ReorderRulesDeleteInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10809,11 +10486,11 @@ func TestGettersPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -10843,9 +10520,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesDeleteResponse(t *testing
 
 }
 
-func TestSettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestSettersReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -10853,16 +10530,16 @@ func TestSettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryReorderRulesListRequestFilterItemOp
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var fernTestValueOp ReorderRulesListInventoryRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryReorderRulesListRequestFilterItemValue
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var fernTestValueValue *ReorderRulesListInventoryRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -10870,11 +10547,11 @@ func TestSettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestGettersReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -10884,7 +10561,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItem
+		var obj *ReorderRulesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10897,8 +10574,8 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var expected PostV1InventoryReorderRulesListRequestFilterItemOp
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var expected ReorderRulesListInventoryRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -10907,7 +10584,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItem
+		var obj *ReorderRulesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10920,8 +10597,8 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var expected *PostV1InventoryReorderRulesListRequestFilterItemValue
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var expected *ReorderRulesListInventoryRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -10931,7 +10608,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -10940,7 +10617,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItem
+		var obj *ReorderRulesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10952,11 +10629,11 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -10987,8 +10664,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestFilterItem(t *
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryReorderRulesListRequestFilterItemOp
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var fernTestValueOp ReorderRulesListInventoryRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -11018,8 +10695,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestFilterItem(t *
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryReorderRulesListRequestFilterItemValue
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
+		var fernTestValueValue *ReorderRulesListInventoryRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -11048,11 +10725,11 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestFilterItem(t *
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing.T) {
+func TestGettersReorderRulesListInventoryRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValue{}
+		obj := &ReorderRulesListInventoryRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -11062,7 +10739,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValue
+		var obj *ReorderRulesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11075,7 +10752,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValue{}
+		obj := &ReorderRulesListInventoryRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -11085,7 +10762,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValue
+		var obj *ReorderRulesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11098,7 +10775,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValue{}
+		obj := &ReorderRulesListInventoryRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -11108,7 +10785,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValue
+		var obj *ReorderRulesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11118,46 +10795,46 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValue(t *testing
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetReorderRulesListInventoryRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValue{}
-		var expected []*PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem
-		obj.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList = expected
+		obj := &ReorderRulesListInventoryRequestFilterItemValue{}
+		var expected []*ReorderRulesListInventoryRequestFilterItemValueThreeItem
+		obj.ReorderRulesListInventoryRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetReorderRulesListInventoryRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetReorderRulesListInventoryRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValue{}
-		obj.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList = nil
+		obj := &ReorderRulesListInventoryRequestFilterItemValue{}
+		obj.ReorderRulesListInventoryRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetReorderRulesListInventoryRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetReorderRulesListInventoryRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValue
+		var obj *ReorderRulesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetReorderRulesListInventoryRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersReorderRulesListInventoryRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -11167,7 +10844,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValueThreeItem(t
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem
+		var obj *ReorderRulesListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11180,7 +10857,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValueThreeItem(t
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -11190,7 +10867,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValueThreeItem(t
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem
+		var obj *ReorderRulesListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11202,9 +10879,9 @@ func TestGettersPostV1InventoryReorderRulesListRequestFilterItemValueThreeItem(t
 
 }
 
-func TestSettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestSettersReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -11212,8 +10889,8 @@ func TestSettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryReorderRulesListRequestSortItemDir
+		obj := &ReorderRulesListInventoryRequestSortItem{}
+		var fernTestValueDir *ReorderRulesListInventoryRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -11221,11 +10898,11 @@ func TestSettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestGettersReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -11235,7 +10912,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestSortItem
+		var obj *ReorderRulesListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11248,8 +10925,8 @@ func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
-		var expected *PostV1InventoryReorderRulesListRequestSortItemDir
+		obj := &ReorderRulesListInventoryRequestSortItem{}
+		var expected *ReorderRulesListInventoryRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -11259,7 +10936,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -11268,7 +10945,7 @@ func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestSortItem
+		var obj *ReorderRulesListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11280,11 +10957,11 @@ func TestGettersPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -11315,8 +10992,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestSortItem(t *te
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryReorderRulesListRequestSortItemDir
+		obj := &ReorderRulesListInventoryRequestSortItem{}
+		var fernTestValueDir *ReorderRulesListInventoryRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -11345,17 +11022,17 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListRequestSortItem(t *te
 
 }
 
-func TestSettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestSettersReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponse{}
-		var fernTestValueRows []*PostV1InventoryReorderRulesListResponseRowsItem
+		obj := &ReorderRulesListInventoryResponse{}
+		var fernTestValueRows []*ReorderRulesListInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -11363,7 +11040,7 @@ func TestSettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -11371,7 +11048,7 @@ func TestSettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -11379,7 +11056,7 @@ func TestSettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -11388,12 +11065,12 @@ func TestSettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestGettersReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
-		var expected []*PostV1InventoryReorderRulesListResponseRowsItem
+		obj := &ReorderRulesListInventoryResponse{}
+		var expected []*ReorderRulesListInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -11403,7 +11080,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -11412,7 +11089,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11425,7 +11102,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -11435,7 +11112,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11448,7 +11125,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -11458,7 +11135,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11471,7 +11148,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -11481,7 +11158,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11494,7 +11171,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -11505,7 +11182,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -11514,7 +11191,7 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11526,12 +11203,12 @@ func TestGettersPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
-		var fernTestValueRows []*PostV1InventoryReorderRulesListResponseRowsItem
+		obj := &ReorderRulesListInventoryResponse{}
+		var fernTestValueRows []*ReorderRulesListInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -11561,7 +11238,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -11592,7 +11269,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -11623,7 +11300,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -11654,7 +11331,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -11684,9 +11361,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponse(t *testing.T
 
 }
 
-func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestSettersReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -11694,7 +11371,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -11702,7 +11379,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -11710,7 +11387,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueMinQty string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -11718,7 +11395,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -11726,7 +11403,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -11734,7 +11411,7 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -11742,16 +11419,16 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -11759,11 +11436,11 @@ func TestSettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestGettersReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -11773,7 +11450,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11786,7 +11463,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -11796,7 +11473,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11809,7 +11486,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -11820,7 +11497,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -11829,7 +11506,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11842,7 +11519,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetMinQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected string
 		obj.MinQty = expected
 
@@ -11852,7 +11529,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMinQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11865,7 +11542,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetReorderQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected *string
 		obj.ReorderQty = expected
 
@@ -11876,7 +11553,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetReorderQty_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		obj.ReorderQty = nil
 
 		// Act & Assert
@@ -11885,7 +11562,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReorderQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11898,7 +11575,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -11908,7 +11585,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11921,7 +11598,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -11932,7 +11609,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -11941,7 +11618,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11954,8 +11631,8 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var expected string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -11964,7 +11641,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11977,8 +11654,8 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var expected string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -11987,7 +11664,7 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11999,11 +11676,11 @@ func TestGettersPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -12034,7 +11711,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -12065,7 +11742,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -12096,7 +11773,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueMinQty string
 
 		// Act
@@ -12127,7 +11804,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -12158,7 +11835,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueIsActive bool
 
 		// Act
@@ -12189,7 +11866,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -12220,8 +11897,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -12251,8 +11928,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -12281,9 +11958,9 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesListResponseRowsItem(t *t
 
 }
 
-func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestSettersReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -12291,7 +11968,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -12299,7 +11976,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -12307,7 +11984,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMinQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueMinQty string
 		obj.SetMinQty(fernTestValueMinQty)
 		assert.Equal(t, fernTestValueMinQty, obj.MinQty)
@@ -12315,7 +11992,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetReorderQty", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueReorderQty *string
 		obj.SetReorderQty(fernTestValueReorderQty)
 		assert.Equal(t, fernTestValueReorderQty, obj.ReorderQty)
@@ -12323,7 +12000,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIsActive", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueIsActive bool
 		obj.SetIsActive(fernTestValueIsActive)
 		assert.Equal(t, fernTestValueIsActive, obj.IsActive)
@@ -12331,7 +12008,7 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -12339,16 +12016,16 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -12356,11 +12033,11 @@ func TestSettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestGettersReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -12370,7 +12047,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12383,7 +12060,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected string
 		obj.ItemID = expected
 
@@ -12393,7 +12070,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12406,7 +12083,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -12417,7 +12094,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -12426,7 +12103,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12439,7 +12116,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetMinQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected string
 		obj.MinQty = expected
 
@@ -12449,7 +12126,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetMinQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12462,7 +12139,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetReorderQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected *string
 		obj.ReorderQty = expected
 
@@ -12473,7 +12150,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetReorderQty_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		obj.ReorderQty = nil
 
 		// Act & Assert
@@ -12482,7 +12159,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetReorderQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12495,7 +12172,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetIsActive", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected bool
 		obj.IsActive = expected
 
@@ -12505,7 +12182,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetIsActive_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12518,7 +12195,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -12529,7 +12206,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -12538,7 +12215,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12551,8 +12228,8 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var expected string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -12561,7 +12238,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12574,8 +12251,8 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var expected string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -12584,7 +12261,7 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12596,11 +12273,11 @@ func TestGettersPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -12631,7 +12308,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueItemID string
 
 		// Act
@@ -12662,7 +12339,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -12693,7 +12370,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetMinQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueMinQty string
 
 		// Act
@@ -12724,7 +12401,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetReorderQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueReorderQty *string
 
 		// Act
@@ -12755,7 +12432,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetIsActive_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueIsActive bool
 
 		// Act
@@ -12786,7 +12463,7 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -12817,8 +12494,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -12848,8 +12525,8 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ReorderRulesUpdateInventoryResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -12878,10 +12555,10 @@ func TestSettersMarkExplicitPostV1InventoryReorderRulesUpdateResponse(t *testing
 
 }
 
-func TestSettersPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestSettersSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("SetNegativeStockPolicy", func(t *testing.T) {
-		obj := &PostV1InventorySettingsGetResponse{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsGetResponseNegativeStockPolicy
+		obj := &SettingsGetInventoryResponse{}
+		var fernTestValueNegativeStockPolicy SettingsGetInventoryResponseNegativeStockPolicy
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
 		assert.Equal(t, fernTestValueNegativeStockPolicy, obj.NegativeStockPolicy)
 		assert.NotNil(t, obj.explicitFields)
@@ -12889,12 +12566,12 @@ func TestSettersPostV1InventorySettingsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestGettersSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("GetNegativeStockPolicy", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsGetResponse{}
-		var expected PostV1InventorySettingsGetResponseNegativeStockPolicy
+		obj := &SettingsGetInventoryResponse{}
+		var expected SettingsGetInventoryResponseNegativeStockPolicy
 		obj.NegativeStockPolicy = expected
 
 		// Act & Assert
@@ -12903,7 +12580,7 @@ func TestGettersPostV1InventorySettingsGetResponse(t *testing.T) {
 
 	t.Run("GetNegativeStockPolicy_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsGetResponse
+		var obj *SettingsGetInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12915,12 +12592,12 @@ func TestGettersPostV1InventorySettingsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("SetNegativeStockPolicy_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsGetResponse{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsGetResponseNegativeStockPolicy
+		obj := &SettingsGetInventoryResponse{}
+		var fernTestValueNegativeStockPolicy SettingsGetInventoryResponseNegativeStockPolicy
 
 		// Act
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
@@ -12949,10 +12626,10 @@ func TestSettersMarkExplicitPostV1InventorySettingsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestSettersSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetNegativeStockPolicy", func(t *testing.T) {
-		obj := &PostV1InventorySettingsUpdateResponse{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsUpdateResponseNegativeStockPolicy
+		obj := &SettingsUpdateInventoryResponse{}
+		var fernTestValueNegativeStockPolicy SettingsUpdateInventoryResponseNegativeStockPolicy
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
 		assert.Equal(t, fernTestValueNegativeStockPolicy, obj.NegativeStockPolicy)
 		assert.NotNil(t, obj.explicitFields)
@@ -12960,12 +12637,12 @@ func TestSettersPostV1InventorySettingsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestGettersSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetNegativeStockPolicy", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsUpdateResponse{}
-		var expected PostV1InventorySettingsUpdateResponseNegativeStockPolicy
+		obj := &SettingsUpdateInventoryResponse{}
+		var expected SettingsUpdateInventoryResponseNegativeStockPolicy
 		obj.NegativeStockPolicy = expected
 
 		// Act & Assert
@@ -12974,7 +12651,7 @@ func TestGettersPostV1InventorySettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetNegativeStockPolicy_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsUpdateResponse
+		var obj *SettingsUpdateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12986,12 +12663,12 @@ func TestGettersPostV1InventorySettingsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("SetNegativeStockPolicy_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsUpdateResponse{}
-		var fernTestValueNegativeStockPolicy PostV1InventorySettingsUpdateResponseNegativeStockPolicy
+		obj := &SettingsUpdateInventoryResponse{}
+		var fernTestValueNegativeStockPolicy SettingsUpdateInventoryResponseNegativeStockPolicy
 
 		// Act
 		obj.SetNegativeStockPolicy(fernTestValueNegativeStockPolicy)
@@ -13020,10 +12697,10 @@ func TestSettersMarkExplicitPostV1InventorySettingsUpdateResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestSettersStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsResponse{}
-		var fernTestValueRows []*PostV1InventoryStockLevelsResponseRowsItem
+		obj := &StockLevelsInventoryResponse{}
+		var fernTestValueRows []*StockLevelsInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -13031,12 +12708,12 @@ func TestSettersPostV1InventoryStockLevelsResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestGettersStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponse{}
-		var expected []*PostV1InventoryStockLevelsResponseRowsItem
+		obj := &StockLevelsInventoryResponse{}
+		var expected []*StockLevelsInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -13046,7 +12723,7 @@ func TestGettersPostV1InventoryStockLevelsResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponse{}
+		obj := &StockLevelsInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -13055,7 +12732,7 @@ func TestGettersPostV1InventoryStockLevelsResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponse
+		var obj *StockLevelsInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13067,12 +12744,12 @@ func TestGettersPostV1InventoryStockLevelsResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestSettersMarkExplicitStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponse{}
-		var fernTestValueRows []*PostV1InventoryStockLevelsResponseRowsItem
+		obj := &StockLevelsInventoryResponse{}
+		var fernTestValueRows []*StockLevelsInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -13101,9 +12778,9 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestSettersStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -13111,7 +12788,7 @@ func TestSettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -13119,7 +12796,7 @@ func TestSettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -13127,7 +12804,7 @@ func TestSettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueValue string
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
@@ -13136,11 +12813,11 @@ func TestSettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestGettersStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -13150,7 +12827,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13163,7 +12840,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var expected string
 		obj.WarehouseID = expected
 
@@ -13173,7 +12850,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13186,7 +12863,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -13196,7 +12873,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13209,7 +12886,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var expected string
 		obj.Value = expected
 
@@ -13219,7 +12896,7 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13231,11 +12908,11 @@ func TestGettersPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -13266,7 +12943,7 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsResponseRowsItem(t *testin
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -13297,7 +12974,7 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsResponseRowsItem(t *testin
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -13328,7 +13005,7 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsResponseRowsItem(t *testin
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		var fernTestValueValue string
 
 		// Act
@@ -13358,9 +13035,9 @@ func TestSettersMarkExplicitPostV1InventoryStockLevelsResponseRowsItem(t *testin
 
 }
 
-func TestSettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestSettersStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -13368,16 +13045,16 @@ func TestSettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryStockMovementsListRequestFilterItemOp
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var fernTestValueOp StockMovementsListInventoryRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryStockMovementsListRequestFilterItemValue
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var fernTestValueValue *StockMovementsListInventoryRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -13385,11 +13062,11 @@ func TestSettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestGettersStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -13399,7 +13076,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItem
+		var obj *StockMovementsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13412,8 +13089,8 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var expected PostV1InventoryStockMovementsListRequestFilterItemOp
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var expected StockMovementsListInventoryRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -13422,7 +13099,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItem
+		var obj *StockMovementsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13435,8 +13112,8 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var expected *PostV1InventoryStockMovementsListRequestFilterItemValue
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var expected *StockMovementsListInventoryRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -13446,7 +13123,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -13455,7 +13132,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItem
+		var obj *StockMovementsListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13467,11 +13144,11 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -13502,8 +13179,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestFilterItem(t
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryStockMovementsListRequestFilterItemOp
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var fernTestValueOp StockMovementsListInventoryRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -13533,8 +13210,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestFilterItem(t
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryStockMovementsListRequestFilterItemValue
+		obj := &StockMovementsListInventoryRequestFilterItem{}
+		var fernTestValueValue *StockMovementsListInventoryRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -13563,11 +13240,11 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestFilterItem(t
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testing.T) {
+func TestGettersStockMovementsListInventoryRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValue{}
+		obj := &StockMovementsListInventoryRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -13577,7 +13254,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValue
+		var obj *StockMovementsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13590,7 +13267,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValue{}
+		obj := &StockMovementsListInventoryRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -13600,7 +13277,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValue
+		var obj *StockMovementsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13613,7 +13290,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValue{}
+		obj := &StockMovementsListInventoryRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -13623,7 +13300,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValue
+		var obj *StockMovementsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13633,46 +13310,46 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValue(t *testi
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetStockMovementsListInventoryRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValue{}
-		var expected []*PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
-		obj.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList = expected
+		obj := &StockMovementsListInventoryRequestFilterItemValue{}
+		var expected []*StockMovementsListInventoryRequestFilterItemValueThreeItem
+		obj.StockMovementsListInventoryRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetStockMovementsListInventoryRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetStockMovementsListInventoryRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValue{}
-		obj.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList = nil
+		obj := &StockMovementsListInventoryRequestFilterItemValue{}
+		obj.StockMovementsListInventoryRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetStockMovementsListInventoryRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetStockMovementsListInventoryRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValue
+		var obj *StockMovementsListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetStockMovementsListInventoryRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersStockMovementsListInventoryRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem{}
+		obj := &StockMovementsListInventoryRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -13682,7 +13359,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
+		var obj *StockMovementsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13695,7 +13372,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem{}
+		obj := &StockMovementsListInventoryRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -13705,7 +13382,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
+		var obj *StockMovementsListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13717,9 +13394,9 @@ func TestGettersPostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
 
 }
 
-func TestSettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestSettersStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -13727,8 +13404,8 @@ func TestSettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryStockMovementsListRequestSortItemDir
+		obj := &StockMovementsListInventoryRequestSortItem{}
+		var fernTestValueDir *StockMovementsListInventoryRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -13736,11 +13413,11 @@ func TestSettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestGettersStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -13750,7 +13427,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestSortItem
+		var obj *StockMovementsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13763,8 +13440,8 @@ func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
-		var expected *PostV1InventoryStockMovementsListRequestSortItemDir
+		obj := &StockMovementsListInventoryRequestSortItem{}
+		var expected *StockMovementsListInventoryRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -13774,7 +13451,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -13783,7 +13460,7 @@ func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestSortItem
+		var obj *StockMovementsListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13795,11 +13472,11 @@ func TestGettersPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -13830,8 +13507,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestSortItem(t *
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryStockMovementsListRequestSortItemDir
+		obj := &StockMovementsListInventoryRequestSortItem{}
+		var fernTestValueDir *StockMovementsListInventoryRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -13860,17 +13537,17 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListRequestSortItem(t *
 
 }
 
-func TestSettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestSettersStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponse{}
-		var fernTestValueRows []*PostV1InventoryStockMovementsListResponseRowsItem
+		obj := &StockMovementsListInventoryResponse{}
+		var fernTestValueRows []*StockMovementsListInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -13878,7 +13555,7 @@ func TestSettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -13886,7 +13563,7 @@ func TestSettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -13894,7 +13571,7 @@ func TestSettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -13903,12 +13580,12 @@ func TestSettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestGettersStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
-		var expected []*PostV1InventoryStockMovementsListResponseRowsItem
+		obj := &StockMovementsListInventoryResponse{}
+		var expected []*StockMovementsListInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -13918,7 +13595,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -13927,7 +13604,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13940,7 +13617,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -13950,7 +13627,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13963,7 +13640,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -13973,7 +13650,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13986,7 +13663,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -13996,7 +13673,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14009,7 +13686,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -14020,7 +13697,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -14029,7 +13706,7 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14041,12 +13718,12 @@ func TestGettersPostV1InventoryStockMovementsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestSettersMarkExplicitStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
-		var fernTestValueRows []*PostV1InventoryStockMovementsListResponseRowsItem
+		obj := &StockMovementsListInventoryResponse{}
+		var fernTestValueRows []*StockMovementsListInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -14076,7 +13753,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -14107,7 +13784,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -14138,7 +13815,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -14169,7 +13846,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -14199,9 +13876,9 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponse(t *testing
 
 }
 
-func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestSettersStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -14209,7 +13886,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -14217,7 +13894,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -14225,7 +13902,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetLotID", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueLotID *string
 		obj.SetLotID(fernTestValueLotID)
 		assert.Equal(t, fernTestValueLotID, obj.LotID)
@@ -14233,23 +13910,23 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDirection", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueDirection PostV1InventoryStockMovementsListResponseRowsItemDirection
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueDirection StockMovementsListInventoryResponseRowsItemDirection
 		obj.SetDirection(fernTestValueDirection)
 		assert.Equal(t, fernTestValueDirection, obj.Direction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -14257,7 +13934,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueUnitCost *string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -14265,7 +13942,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -14273,7 +13950,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetRemainingQty", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueRemainingQty string
 		obj.SetRemainingQty(fernTestValueRemainingQty)
 		assert.Equal(t, fernTestValueRemainingQty, obj.RemainingQty)
@@ -14281,7 +13958,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetDocumentType", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueDocumentType *string
 		obj.SetDocumentType(fernTestValueDocumentType)
 		assert.Equal(t, fernTestValueDocumentType, obj.DocumentType)
@@ -14289,7 +13966,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetDocumentID", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueDocumentID *string
 		obj.SetDocumentID(fernTestValueDocumentID)
 		assert.Equal(t, fernTestValueDocumentID, obj.DocumentID)
@@ -14297,7 +13974,7 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -14305,8 +13982,8 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -14314,11 +13991,11 @@ func TestSettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 }
 
-func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestGettersStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -14328,7 +14005,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14341,7 +14018,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.WarehouseID = expected
 
@@ -14351,7 +14028,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14364,7 +14041,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -14374,7 +14051,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14387,7 +14064,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetLotID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.LotID = expected
 
@@ -14398,7 +14075,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetLotID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		obj.LotID = nil
 
 		// Act & Assert
@@ -14407,7 +14084,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetLotID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14420,8 +14097,8 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var expected string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -14430,7 +14107,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14443,8 +14120,8 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDirection", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var expected PostV1InventoryStockMovementsListResponseRowsItemDirection
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var expected StockMovementsListInventoryResponseRowsItemDirection
 		obj.Direction = expected
 
 		// Act & Assert
@@ -14453,7 +14130,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetDirection_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14466,7 +14143,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -14476,7 +14153,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14489,7 +14166,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.UnitCost = expected
 
@@ -14500,7 +14177,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetUnitCost_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		obj.UnitCost = nil
 
 		// Act & Assert
@@ -14509,7 +14186,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14522,7 +14199,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -14532,7 +14209,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14545,7 +14222,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetRemainingQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected string
 		obj.RemainingQty = expected
 
@@ -14555,7 +14232,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetRemainingQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14568,7 +14245,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDocumentType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.DocumentType = expected
 
@@ -14579,7 +14256,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDocumentType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		obj.DocumentType = nil
 
 		// Act & Assert
@@ -14588,7 +14265,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetDocumentType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14601,7 +14278,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDocumentID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.DocumentID = expected
 
@@ -14612,7 +14289,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetDocumentID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		obj.DocumentID = nil
 
 		// Act & Assert
@@ -14621,7 +14298,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetDocumentID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14634,7 +14311,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -14645,7 +14322,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -14654,7 +14331,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14667,8 +14344,8 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var expected string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -14677,7 +14354,7 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14689,11 +14366,11 @@ func TestGettersPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -14724,7 +14401,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -14755,7 +14432,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -14786,7 +14463,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetLotID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueLotID *string
 
 		// Act
@@ -14817,8 +14494,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -14848,8 +14525,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetDirection_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueDirection PostV1InventoryStockMovementsListResponseRowsItemDirection
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueDirection StockMovementsListInventoryResponseRowsItemDirection
 
 		// Act
 		obj.SetDirection(fernTestValueDirection)
@@ -14879,7 +14556,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -14910,7 +14587,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueUnitCost *string
 
 		// Act
@@ -14941,7 +14618,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -14972,7 +14649,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetRemainingQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueRemainingQty string
 
 		// Act
@@ -15003,7 +14680,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetDocumentType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueDocumentType *string
 
 		// Act
@@ -15034,7 +14711,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetDocumentID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueDocumentID *string
 
 		// Act
@@ -15065,7 +14742,7 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -15096,8 +14773,8 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &StockMovementsListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -15126,9 +14803,9 @@ func TestSettersMarkExplicitPostV1InventoryStockMovementsListResponseRowsItem(t 
 
 }
 
-func TestSettersPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestSettersStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("SetMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var fernTestValueMovementID string
 		obj.SetMovementID(fernTestValueMovementID)
 		assert.Equal(t, fernTestValueMovementID, obj.MovementID)
@@ -15136,7 +14813,7 @@ func TestSettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -15145,11 +14822,11 @@ func TestSettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestGettersStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("GetMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var expected string
 		obj.MovementID = expected
 
@@ -15159,7 +14836,7 @@ func TestGettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 	t.Run("GetMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockReceiveResponse
+		var obj *StockReceiveInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15172,7 +14849,7 @@ func TestGettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -15182,7 +14859,7 @@ func TestGettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockReceiveResponse
+		var obj *StockReceiveInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15194,11 +14871,11 @@ func TestGettersPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestSettersMarkExplicitStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("SetMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var fernTestValueMovementID string
 
 		// Act
@@ -15229,7 +14906,7 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -15259,9 +14936,9 @@ func TestSettersMarkExplicitPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestSettersStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -15269,7 +14946,7 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetBarcode", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueBarcode *string
 		obj.SetBarcode(fernTestValueBarcode)
 		assert.Equal(t, fernTestValueBarcode, obj.Barcode)
@@ -15277,7 +14954,7 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetCountedQty", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueCountedQty string
 		obj.SetCountedQty(fernTestValueCountedQty)
 		assert.Equal(t, fernTestValueCountedQty, obj.CountedQty)
@@ -15285,7 +14962,7 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueUnitCost *string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -15293,7 +14970,7 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -15301,8 +14978,8 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
-		var fernTestValueExpiryDate *string
+		obj := &StockTakeInventoryRequestLinesItem{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -15310,11 +14987,11 @@ func TestSettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestGettersStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -15325,7 +15002,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -15334,7 +15011,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15347,7 +15024,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetBarcode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var expected *string
 		obj.Barcode = expected
 
@@ -15358,7 +15035,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetBarcode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		obj.Barcode = nil
 
 		// Act & Assert
@@ -15367,7 +15044,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetBarcode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15380,7 +15057,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetCountedQty", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var expected string
 		obj.CountedQty = expected
 
@@ -15390,7 +15067,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetCountedQty_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15403,7 +15080,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var expected *string
 		obj.UnitCost = expected
 
@@ -15414,7 +15091,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetUnitCost_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		obj.UnitCost = nil
 
 		// Act & Assert
@@ -15423,7 +15100,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15436,7 +15113,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var expected *string
 		obj.LotNumber = expected
 
@@ -15447,7 +15124,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetLotNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		obj.LotNumber = nil
 
 		// Act & Assert
@@ -15456,7 +15133,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15469,8 +15146,8 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
-		var expected *string
+		obj := &StockTakeInventoryRequestLinesItem{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -15480,7 +15157,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -15489,7 +15166,7 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15501,11 +15178,11 @@ func TestGettersPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestSettersMarkExplicitStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -15536,7 +15213,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 	t.Run("SetBarcode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueBarcode *string
 
 		// Act
@@ -15567,7 +15244,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 	t.Run("SetCountedQty_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueCountedQty string
 
 		// Act
@@ -15598,7 +15275,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueUnitCost *string
 
 		// Act
@@ -15629,7 +15306,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -15660,8 +15337,8 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
-		var fernTestValueExpiryDate *string
+		obj := &StockTakeInventoryRequestLinesItem{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -15690,17 +15367,17 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeRequestLinesItem(t *testing.
 
 }
 
-func TestSettersPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestSettersStockTakeInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponse{}
-		var fernTestValueRows []*PostV1InventoryStockTakeResponseRowsItem
+		obj := &StockTakeInventoryResponse{}
+		var fernTestValueRows []*StockTakeInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -15709,12 +15386,12 @@ func TestSettersPostV1InventoryStockTakeResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestGettersStockTakeInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
-		var expected []*PostV1InventoryStockTakeResponseRowsItem
+		obj := &StockTakeInventoryResponse{}
+		var expected []*StockTakeInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -15724,7 +15401,7 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -15733,7 +15410,7 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponse
+		var obj *StockTakeInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15746,7 +15423,7 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -15757,7 +15434,7 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -15766,7 +15443,7 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponse
+		var obj *StockTakeInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15778,12 +15455,12 @@ func TestGettersPostV1InventoryStockTakeResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestSettersMarkExplicitStockTakeInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
-		var fernTestValueRows []*PostV1InventoryStockTakeResponseRowsItem
+		obj := &StockTakeInventoryResponse{}
+		var fernTestValueRows []*StockTakeInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -15813,7 +15490,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -15843,9 +15520,9 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestSettersStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -15853,7 +15530,7 @@ func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -15861,7 +15538,7 @@ func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCounted", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueCounted string
 		obj.SetCounted(fernTestValueCounted)
 		assert.Equal(t, fernTestValueCounted, obj.Counted)
@@ -15869,7 +15546,7 @@ func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDifference", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueDifference string
 		obj.SetDifference(fernTestValueDifference)
 		assert.Equal(t, fernTestValueDifference, obj.Difference)
@@ -15877,7 +15554,7 @@ func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAdjustmentCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueAdjustmentCost string
 		obj.SetAdjustmentCost(fernTestValueAdjustmentCost)
 		assert.Equal(t, fernTestValueAdjustmentCost, obj.AdjustmentCost)
@@ -15886,11 +15563,11 @@ func TestSettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestGettersStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -15900,7 +15577,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15913,7 +15590,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var expected string
 		obj.OnHand = expected
 
@@ -15923,7 +15600,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15936,7 +15613,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	t.Run("GetCounted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var expected string
 		obj.Counted = expected
 
@@ -15946,7 +15623,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCounted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15959,7 +15636,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	t.Run("GetDifference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var expected string
 		obj.Difference = expected
 
@@ -15969,7 +15646,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDifference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15982,7 +15659,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 	t.Run("GetAdjustmentCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var expected string
 		obj.AdjustmentCost = expected
 
@@ -15992,7 +15669,7 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAdjustmentCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16004,11 +15681,11 @@ func TestGettersPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -16039,7 +15716,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -16070,7 +15747,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.
 	t.Run("SetCounted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueCounted string
 
 		// Act
@@ -16101,7 +15778,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.
 	t.Run("SetDifference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueDifference string
 
 		// Act
@@ -16132,7 +15809,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.
 	t.Run("SetAdjustmentCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		var fernTestValueAdjustmentCost string
 
 		// Act
@@ -16162,9 +15839,9 @@ func TestSettersMarkExplicitPostV1InventoryStockTakeResponseRowsItem(t *testing.
 
 }
 
-func TestSettersPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestSettersStockTransferInventoryResponse(t *testing.T) {
 	t.Run("SetOutMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueOutMovementID string
 		obj.SetOutMovementID(fernTestValueOutMovementID)
 		assert.Equal(t, fernTestValueOutMovementID, obj.OutMovementID)
@@ -16172,7 +15849,7 @@ func TestSettersPostV1InventoryStockTransferResponse(t *testing.T) {
 	})
 
 	t.Run("SetInMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueInMovementID string
 		obj.SetInMovementID(fernTestValueInMovementID)
 		assert.Equal(t, fernTestValueInMovementID, obj.InMovementID)
@@ -16180,7 +15857,7 @@ func TestSettersPostV1InventoryStockTransferResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -16189,11 +15866,11 @@ func TestSettersPostV1InventoryStockTransferResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestGettersStockTransferInventoryResponse(t *testing.T) {
 	t.Run("GetOutMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var expected string
 		obj.OutMovementID = expected
 
@@ -16203,7 +15880,7 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 
 	t.Run("GetOutMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTransferResponse
+		var obj *StockTransferInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16216,7 +15893,7 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 	t.Run("GetInMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var expected string
 		obj.InMovementID = expected
 
@@ -16226,7 +15903,7 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 
 	t.Run("GetInMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTransferResponse
+		var obj *StockTransferInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16239,7 +15916,7 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -16249,7 +15926,7 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTransferResponse
+		var obj *StockTransferInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16261,11 +15938,11 @@ func TestGettersPostV1InventoryStockTransferResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestSettersMarkExplicitStockTransferInventoryResponse(t *testing.T) {
 	t.Run("SetOutMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueOutMovementID string
 
 		// Act
@@ -16296,7 +15973,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferResponse(t *testing.T) {
 	t.Run("SetInMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueInMovementID string
 
 		// Act
@@ -16327,7 +16004,7 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -16357,9 +16034,9 @@ func TestSettersMarkExplicitPostV1InventoryStockTransferResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestSettersStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("SetMovementID", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueMovementID string
 		obj.SetMovementID(fernTestValueMovementID)
 		assert.Equal(t, fernTestValueMovementID, obj.MovementID)
@@ -16367,7 +16044,7 @@ func TestSettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -16375,7 +16052,7 @@ func TestSettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueJournalTransactionID string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -16384,11 +16061,11 @@ func TestSettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestGettersStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("GetMovementID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var expected string
 		obj.MovementID = expected
 
@@ -16398,7 +16075,7 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 	t.Run("GetMovementID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockWriteOffResponse
+		var obj *StockWriteOffInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16411,7 +16088,7 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -16421,7 +16098,7 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockWriteOffResponse
+		var obj *StockWriteOffInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16434,7 +16111,7 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var expected string
 		obj.JournalTransactionID = expected
 
@@ -16444,7 +16121,7 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockWriteOffResponse
+		var obj *StockWriteOffInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16456,11 +16133,11 @@ func TestGettersPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestSettersMarkExplicitStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("SetMovementID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueMovementID string
 
 		// Act
@@ -16491,7 +16168,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -16522,7 +16199,7 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		var fernTestValueJournalTransactionID string
 
 		// Act
@@ -16552,9 +16229,9 @@ func TestSettersMarkExplicitPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestSettersWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -16562,7 +16239,7 @@ func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16570,7 +16247,7 @@ func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -16578,7 +16255,7 @@ func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIsDefault", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueIsDefault bool
 		obj.SetIsDefault(fernTestValueIsDefault)
 		assert.Equal(t, fernTestValueIsDefault, obj.IsDefault)
@@ -16586,8 +16263,8 @@ func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WarehousesCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -16595,11 +16272,11 @@ func TestSettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestGettersWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -16609,7 +16286,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16622,7 +16299,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -16632,7 +16309,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16645,7 +16322,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -16655,7 +16332,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16668,7 +16345,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	t.Run("GetIsDefault", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var expected bool
 		obj.IsDefault = expected
 
@@ -16678,7 +16355,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetIsDefault_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16691,8 +16368,8 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
-		var expected string
+		obj := &WarehousesCreateInventoryResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -16701,7 +16378,7 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16713,11 +16390,11 @@ func TestGettersPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -16748,7 +16425,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -16779,7 +16456,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -16810,7 +16487,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T
 	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		var fernTestValueIsDefault bool
 
 		// Act
@@ -16841,8 +16518,8 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &WarehousesCreateInventoryResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -16871,9 +16548,9 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesCreateResponse(t *testing.T
 
 }
 
-func TestSettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestSettersWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -16881,16 +16558,16 @@ func TestSettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryWarehousesListRequestFilterItemOp
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var fernTestValueOp WarehousesListInventoryRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryWarehousesListRequestFilterItemValue
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var fernTestValueValue *WarehousesListInventoryRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -16898,11 +16575,11 @@ func TestSettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestGettersWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -16912,7 +16589,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItem
+		var obj *WarehousesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16925,8 +16602,8 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var expected PostV1InventoryWarehousesListRequestFilterItemOp
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var expected WarehousesListInventoryRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -16935,7 +16612,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItem
+		var obj *WarehousesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16948,8 +16625,8 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var expected *PostV1InventoryWarehousesListRequestFilterItemValue
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var expected *WarehousesListInventoryRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -16959,7 +16636,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -16968,7 +16645,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItem
+		var obj *WarehousesListInventoryRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16980,11 +16657,11 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -17015,8 +16692,8 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestFilterItem(t *te
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var fernTestValueOp PostV1InventoryWarehousesListRequestFilterItemOp
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var fernTestValueOp WarehousesListInventoryRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -17046,8 +16723,8 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestFilterItem(t *te
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
-		var fernTestValueValue *PostV1InventoryWarehousesListRequestFilterItemValue
+		obj := &WarehousesListInventoryRequestFilterItem{}
+		var fernTestValueValue *WarehousesListInventoryRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -17076,11 +16753,11 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestFilterItem(t *te
 
 }
 
-func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T) {
+func TestGettersWarehousesListInventoryRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValue{}
+		obj := &WarehousesListInventoryRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -17090,7 +16767,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValue
+		var obj *WarehousesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17103,7 +16780,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValue{}
+		obj := &WarehousesListInventoryRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -17113,7 +16790,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValue
+		var obj *WarehousesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17126,7 +16803,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValue{}
+		obj := &WarehousesListInventoryRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -17136,7 +16813,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValue
+		var obj *WarehousesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17146,46 +16823,46 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValue(t *testing.T
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetWarehousesListInventoryRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValue{}
-		var expected []*PostV1InventoryWarehousesListRequestFilterItemValueThreeItem
-		obj.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList = expected
+		obj := &WarehousesListInventoryRequestFilterItemValue{}
+		var expected []*WarehousesListInventoryRequestFilterItemValueThreeItem
+		obj.WarehousesListInventoryRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetWarehousesListInventoryRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetWarehousesListInventoryRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValue{}
-		obj.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList = nil
+		obj := &WarehousesListInventoryRequestFilterItemValue{}
+		obj.WarehousesListInventoryRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetWarehousesListInventoryRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetWarehousesListInventoryRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValue
+		var obj *WarehousesListInventoryRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetWarehousesListInventoryRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1InventoryWarehousesListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersWarehousesListInventoryRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValueThreeItem{}
+		obj := &WarehousesListInventoryRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -17195,7 +16872,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValueThreeItem(t *
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem
+		var obj *WarehousesListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17208,7 +16885,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValueThreeItem(t *
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItemValueThreeItem{}
+		obj := &WarehousesListInventoryRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -17218,7 +16895,7 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValueThreeItem(t *
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem
+		var obj *WarehousesListInventoryRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17230,9 +16907,9 @@ func TestGettersPostV1InventoryWarehousesListRequestFilterItemValueThreeItem(t *
 
 }
 
-func TestSettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestSettersWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -17240,8 +16917,8 @@ func TestSettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryWarehousesListRequestSortItemDir
+		obj := &WarehousesListInventoryRequestSortItem{}
+		var fernTestValueDir *WarehousesListInventoryRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -17249,11 +16926,11 @@ func TestSettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestGettersWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -17263,7 +16940,7 @@ func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestSortItem
+		var obj *WarehousesListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17276,8 +16953,8 @@ func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
-		var expected *PostV1InventoryWarehousesListRequestSortItemDir
+		obj := &WarehousesListInventoryRequestSortItem{}
+		var expected *WarehousesListInventoryRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -17287,7 +16964,7 @@ func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -17296,7 +16973,7 @@ func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestSortItem
+		var obj *WarehousesListInventoryRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17308,11 +16985,11 @@ func TestGettersPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -17343,8 +17020,8 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestSortItem(t *test
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
-		var fernTestValueDir *PostV1InventoryWarehousesListRequestSortItemDir
+		obj := &WarehousesListInventoryRequestSortItem{}
+		var fernTestValueDir *WarehousesListInventoryRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -17373,17 +17050,17 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListRequestSortItem(t *test
 
 }
 
-func TestSettersPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestSettersWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponse{}
-		var fernTestValueRows []*PostV1InventoryWarehousesListResponseRowsItem
+		obj := &WarehousesListInventoryResponse{}
+		var fernTestValueRows []*WarehousesListInventoryResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -17391,7 +17068,7 @@ func TestSettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -17399,7 +17076,7 @@ func TestSettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -17407,7 +17084,7 @@ func TestSettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -17416,12 +17093,12 @@ func TestSettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestGettersWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
-		var expected []*PostV1InventoryWarehousesListResponseRowsItem
+		obj := &WarehousesListInventoryResponse{}
+		var expected []*WarehousesListInventoryResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -17431,7 +17108,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -17440,7 +17117,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17453,7 +17130,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -17463,7 +17140,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17476,7 +17153,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -17486,7 +17163,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17499,7 +17176,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -17509,7 +17186,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17522,7 +17199,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -17533,7 +17210,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -17542,7 +17219,7 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17554,12 +17231,12 @@ func TestGettersPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestSettersMarkExplicitWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
-		var fernTestValueRows []*PostV1InventoryWarehousesListResponseRowsItem
+		obj := &WarehousesListInventoryResponse{}
+		var fernTestValueRows []*WarehousesListInventoryResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -17589,7 +17266,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) 
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -17620,7 +17297,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) 
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -17651,7 +17328,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) 
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -17682,7 +17359,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) 
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -17712,9 +17389,9 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestSettersWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -17722,7 +17399,7 @@ func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -17730,7 +17407,7 @@ func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -17738,7 +17415,7 @@ func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetIsDefault", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueIsDefault bool
 		obj.SetIsDefault(fernTestValueIsDefault)
 		assert.Equal(t, fernTestValueIsDefault, obj.IsDefault)
@@ -17746,8 +17423,8 @@ func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &WarehousesListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -17755,11 +17432,11 @@ func TestSettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestGettersWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -17769,7 +17446,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17782,7 +17459,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -17792,7 +17469,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17805,7 +17482,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -17815,7 +17492,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17828,7 +17505,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	t.Run("GetIsDefault", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var expected bool
 		obj.IsDefault = expected
 
@@ -17838,7 +17515,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetIsDefault_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17851,8 +17528,8 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
-		var expected string
+		obj := &WarehousesListInventoryResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -17861,7 +17538,7 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17873,11 +17550,11 @@ func TestGettersPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -17908,7 +17585,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *tes
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -17939,7 +17616,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *tes
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -17970,7 +17647,7 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *tes
 	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		var fernTestValueIsDefault bool
 
 		// Act
@@ -18001,8 +17678,8 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *tes
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &WarehousesListInventoryResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -18031,11 +17708,335 @@ func TestSettersMarkExplicitPostV1InventoryWarehousesListResponseRowsItem(t *tes
 
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestSettersWarehousesCreateInventoryRequest(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetIsDefault", func(t *testing.T) {
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueIsDefault *bool
+		obj.SetIsDefault(fernTestValueIsDefault)
+		assert.Equal(t, fernTestValueIsDefault, obj.IsDefault)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWarehousesCreateInventoryRequest(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesCreateInventoryRequest{}
+		var fernTestValueIsDefault *bool
+
+		// Act
+		obj.SetIsDefault(fernTestValueIsDefault)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWarehousesListInventoryRequest(t *testing.T) {
+	t.Run("SetPage", func(t *testing.T) {
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValuePage *int64
+		obj.SetPage(fernTestValuePage)
+		assert.Equal(t, fernTestValuePage, obj.Page)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPageSize", func(t *testing.T) {
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValuePageSize *int64
+		obj.SetPageSize(fernTestValuePageSize)
+		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSort", func(t *testing.T) {
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueSort []*WarehousesListInventoryRequestSortItem
+		obj.SetSort(fernTestValueSort)
+		assert.Equal(t, fernTestValueSort, obj.Sort)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilter", func(t *testing.T) {
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueFilter []*WarehousesListInventoryRequestFilterItem
+		obj.SetFilter(fernTestValueFilter)
+		assert.Equal(t, fernTestValueFilter, obj.Filter)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotals", func(t *testing.T) {
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueTotals []string
+		obj.SetTotals(fernTestValueTotals)
+		assert.Equal(t, fernTestValueTotals, obj.Totals)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitWarehousesListInventoryRequest(t *testing.T) {
+	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValuePage *int64
+
+		// Act
+		obj.SetPage(fernTestValuePage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValuePageSize *int64
+
+		// Act
+		obj.SetPageSize(fernTestValuePageSize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueSort []*WarehousesListInventoryRequestSortItem
+
+		// Act
+		obj.SetSort(fernTestValueSort)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueFilter []*WarehousesListInventoryRequestFilterItem
+
+		// Act
+		obj.SetFilter(fernTestValueFilter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WarehousesListInventoryRequest{}
+		var fernTestValueTotals []string
+
+		// Act
+		obj.SetTotals(fernTestValueTotals)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18044,31 +18045,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsCreateResponse
+		var unmarshaled LandedCostsCreateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsCreateResponse
+		var obj LandedCostsCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsCreateResponse
+		var obj LandedCostsCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18077,31 +18078,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsCreateResponseLinesItem(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsCreateResponseLinesItem
+		var unmarshaled LandedCostsCreateInventoryResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj LandedCostsCreateInventoryResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj LandedCostsCreateInventoryResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestJSONMarshalingLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18110,31 +18111,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsGetResponse
+		var unmarshaled LandedCostsGetInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsGetResponse
+		var obj LandedCostsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsGetResponse
+		var obj LandedCostsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18143,31 +18144,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsGetResponseLinesItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsGetResponseLinesItem
+		var unmarshaled LandedCostsGetInventoryResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj LandedCostsGetInventoryResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj LandedCostsGetInventoryResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18176,31 +18177,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsListRequestFilterItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsListRequestFilterItem
+		var unmarshaled LandedCostsListInventoryRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListRequestFilterItem
+		var obj LandedCostsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListRequestFilterItem
+		var obj LandedCostsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18209,31 +18210,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsListRequestSortItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsListRequestSortItem
+		var unmarshaled LandedCostsListInventoryRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListRequestSortItem
+		var obj LandedCostsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListRequestSortItem
+		var obj LandedCostsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestJSONMarshalingLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18242,31 +18243,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsListResponse
+		var unmarshaled LandedCostsListInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListResponse
+		var obj LandedCostsListInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListResponse
+		var obj LandedCostsListInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18275,31 +18276,31 @@ func TestJSONMarshalingPostV1InventoryLandedCostsListResponseRowsItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLandedCostsListResponseRowsItem
+		var unmarshaled LandedCostsListInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListResponseRowsItem
+		var obj LandedCostsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLandedCostsListResponseRowsItem
+		var obj LandedCostsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestJSONMarshalingLotsGetInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18308,31 +18309,31 @@ func TestJSONMarshalingPostV1InventoryLotsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsGetResponse
+		var unmarshaled LotsGetInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsGetResponse
+		var obj LotsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsGetResponse
+		var obj LotsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestJSONMarshalingLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18341,31 +18342,31 @@ func TestJSONMarshalingPostV1InventoryLotsGetResponseMovementsItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsGetResponseMovementsItem
+		var unmarshaled LotsGetInventoryResponseMovementsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsGetResponseMovementsItem
+		var obj LotsGetInventoryResponseMovementsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsGetResponseMovementsItem
+		var obj LotsGetInventoryResponseMovementsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18374,31 +18375,31 @@ func TestJSONMarshalingPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsListRequestFilterItem
+		var unmarshaled LotsListInventoryRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListRequestFilterItem
+		var obj LotsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListRequestFilterItem
+		var obj LotsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18407,31 +18408,31 @@ func TestJSONMarshalingPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsListRequestSortItem
+		var unmarshaled LotsListInventoryRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListRequestSortItem
+		var obj LotsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListRequestSortItem
+		var obj LotsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsListResponse(t *testing.T) {
+func TestJSONMarshalingLotsListInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18440,31 +18441,31 @@ func TestJSONMarshalingPostV1InventoryLotsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsListResponse
+		var unmarshaled LotsListInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListResponse
+		var obj LotsListInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListResponse
+		var obj LotsListInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18473,31 +18474,31 @@ func TestJSONMarshalingPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsListResponseRowsItem
+		var unmarshaled LotsListInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListResponseRowsItem
+		var obj LotsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsListResponseRowsItem
+		var obj LotsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18506,31 +18507,31 @@ func TestJSONMarshalingPostV1InventoryLotsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryLotsUpdateResponse
+		var unmarshaled LotsUpdateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsUpdateResponse
+		var obj LotsUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryLotsUpdateResponse
+		var obj LotsUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestJSONMarshalingReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
+		obj := &ReorderRulesCheckInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18539,31 +18540,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesCheckResponse
+		var unmarshaled ReorderRulesCheckInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCheckResponse
+		var obj ReorderRulesCheckInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCheckResponse
+		var obj ReorderRulesCheckInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18572,31 +18573,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesCheckResponseRowsItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesCheckResponseRowsItem
+		var unmarshaled ReorderRulesCheckInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj ReorderRulesCheckInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj ReorderRulesCheckInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestJSONMarshalingReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18605,31 +18606,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesCreateResponse
+		var unmarshaled ReorderRulesCreateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCreateResponse
+		var obj ReorderRulesCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesCreateResponse
+		var obj ReorderRulesCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestJSONMarshalingReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18638,31 +18639,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesDeleteResponse
+		var unmarshaled ReorderRulesDeleteInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesDeleteResponse
+		var obj ReorderRulesDeleteInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesDeleteResponse
+		var obj ReorderRulesDeleteInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18671,31 +18672,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesListRequestFilterItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesListRequestFilterItem
+		var unmarshaled ReorderRulesListInventoryRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListRequestFilterItem
+		var obj ReorderRulesListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListRequestFilterItem
+		var obj ReorderRulesListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18704,31 +18705,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesListRequestSortItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesListRequestSortItem
+		var unmarshaled ReorderRulesListInventoryRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListRequestSortItem
+		var obj ReorderRulesListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListRequestSortItem
+		var obj ReorderRulesListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestJSONMarshalingReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18737,31 +18738,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesListResponse
+		var unmarshaled ReorderRulesListInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListResponse
+		var obj ReorderRulesListInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListResponse
+		var obj ReorderRulesListInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18770,31 +18771,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesListResponseRowsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesListResponseRowsItem
+		var unmarshaled ReorderRulesListInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListResponseRowsItem
+		var obj ReorderRulesListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesListResponseRowsItem
+		var obj ReorderRulesListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestJSONMarshalingReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18803,31 +18804,31 @@ func TestJSONMarshalingPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryReorderRulesUpdateResponse
+		var unmarshaled ReorderRulesUpdateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesUpdateResponse
+		var obj ReorderRulesUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryReorderRulesUpdateResponse
+		var obj ReorderRulesUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestJSONMarshalingSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsGetResponse{}
+		obj := &SettingsGetInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18836,31 +18837,31 @@ func TestJSONMarshalingPostV1InventorySettingsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventorySettingsGetResponse
+		var unmarshaled SettingsGetInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventorySettingsGetResponse
+		var obj SettingsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventorySettingsGetResponse
+		var obj SettingsGetInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventorySettingsUpdateResponse{}
+		obj := &SettingsUpdateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18869,31 +18870,31 @@ func TestJSONMarshalingPostV1InventorySettingsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventorySettingsUpdateResponse
+		var unmarshaled SettingsUpdateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventorySettingsUpdateResponse
+		var obj SettingsUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventorySettingsUpdateResponse
+		var obj SettingsUpdateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestJSONMarshalingStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponse{}
+		obj := &StockLevelsInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18902,31 +18903,31 @@ func TestJSONMarshalingPostV1InventoryStockLevelsResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockLevelsResponse
+		var unmarshaled StockLevelsInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockLevelsResponse
+		var obj StockLevelsInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockLevelsResponse
+		var obj StockLevelsInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18935,31 +18936,31 @@ func TestJSONMarshalingPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockLevelsResponseRowsItem
+		var unmarshaled StockLevelsInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockLevelsResponseRowsItem
+		var obj StockLevelsInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockLevelsResponseRowsItem
+		var obj StockLevelsInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18968,31 +18969,31 @@ func TestJSONMarshalingPostV1InventoryStockMovementsListRequestFilterItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockMovementsListRequestFilterItem
+		var unmarshaled StockMovementsListInventoryRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListRequestFilterItem
+		var obj StockMovementsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListRequestFilterItem
+		var obj StockMovementsListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19001,31 +19002,31 @@ func TestJSONMarshalingPostV1InventoryStockMovementsListRequestSortItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockMovementsListRequestSortItem
+		var unmarshaled StockMovementsListInventoryRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListRequestSortItem
+		var obj StockMovementsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListRequestSortItem
+		var obj StockMovementsListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestJSONMarshalingStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19034,31 +19035,31 @@ func TestJSONMarshalingPostV1InventoryStockMovementsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockMovementsListResponse
+		var unmarshaled StockMovementsListInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListResponse
+		var obj StockMovementsListInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListResponse
+		var obj StockMovementsListInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19067,31 +19068,31 @@ func TestJSONMarshalingPostV1InventoryStockMovementsListResponseRowsItem(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockMovementsListResponseRowsItem
+		var unmarshaled StockMovementsListInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListResponseRowsItem
+		var obj StockMovementsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockMovementsListResponseRowsItem
+		var obj StockMovementsListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestJSONMarshalingStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19100,31 +19101,31 @@ func TestJSONMarshalingPostV1InventoryStockReceiveResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockReceiveResponse
+		var unmarshaled StockReceiveInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockReceiveResponse
+		var obj StockReceiveInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockReceiveResponse
+		var obj StockReceiveInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19133,31 +19134,31 @@ func TestJSONMarshalingPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockTakeRequestLinesItem
+		var unmarshaled StockTakeInventoryRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeRequestLinesItem
+		var obj StockTakeInventoryRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeRequestLinesItem
+		var obj StockTakeInventoryRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestJSONMarshalingStockTakeInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19166,31 +19167,31 @@ func TestJSONMarshalingPostV1InventoryStockTakeResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockTakeResponse
+		var unmarshaled StockTakeInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeResponse
+		var obj StockTakeInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeResponse
+		var obj StockTakeInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19199,31 +19200,31 @@ func TestJSONMarshalingPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockTakeResponseRowsItem
+		var unmarshaled StockTakeInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeResponseRowsItem
+		var obj StockTakeInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTakeResponseRowsItem
+		var obj StockTakeInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestJSONMarshalingStockTransferInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19232,31 +19233,31 @@ func TestJSONMarshalingPostV1InventoryStockTransferResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockTransferResponse
+		var unmarshaled StockTransferInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTransferResponse
+		var obj StockTransferInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockTransferResponse
+		var obj StockTransferInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestJSONMarshalingStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19265,31 +19266,31 @@ func TestJSONMarshalingPostV1InventoryStockWriteOffResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryStockWriteOffResponse
+		var unmarshaled StockWriteOffInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockWriteOffResponse
+		var obj StockWriteOffInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryStockWriteOffResponse
+		var obj StockWriteOffInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestJSONMarshalingWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19298,31 +19299,31 @@ func TestJSONMarshalingPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryWarehousesCreateResponse
+		var unmarshaled WarehousesCreateInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesCreateResponse
+		var obj WarehousesCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesCreateResponse
+		var obj WarehousesCreateInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19331,31 +19332,31 @@ func TestJSONMarshalingPostV1InventoryWarehousesListRequestFilterItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryWarehousesListRequestFilterItem
+		var unmarshaled WarehousesListInventoryRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListRequestFilterItem
+		var obj WarehousesListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListRequestFilterItem
+		var obj WarehousesListInventoryRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19364,31 +19365,31 @@ func TestJSONMarshalingPostV1InventoryWarehousesListRequestSortItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryWarehousesListRequestSortItem
+		var unmarshaled WarehousesListInventoryRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListRequestSortItem
+		var obj WarehousesListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListRequestSortItem
+		var obj WarehousesListInventoryRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestJSONMarshalingWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19397,31 +19398,31 @@ func TestJSONMarshalingPostV1InventoryWarehousesListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryWarehousesListResponse
+		var unmarshaled WarehousesListInventoryResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListResponse
+		var obj WarehousesListInventoryResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListResponse
+		var obj WarehousesListInventoryResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19430,736 +19431,736 @@ func TestJSONMarshalingPostV1InventoryWarehousesListResponseRowsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1InventoryWarehousesListResponseRowsItem
+		var unmarshaled WarehousesListInventoryResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListResponseRowsItem
+		var obj WarehousesListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1InventoryWarehousesListResponseRowsItem
+		var obj WarehousesListInventoryResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestStringLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestStringLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj *LandedCostsCreateInventoryResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestStringLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestStringLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj *LandedCostsGetInventoryResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestStringLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItem
+		var obj *LandedCostsListInventoryRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestStringLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestSortItem
+		var obj *LandedCostsListInventoryRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestStringLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestStringLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestStringLotsGetInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestStringLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestStringLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItem
+		var obj *LotsListInventoryRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestStringLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestSortItem
+		var obj *LotsListInventoryRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsListResponse(t *testing.T) {
+func TestStringLotsListInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestStringLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestStringLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestStringReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
+		obj := &ReorderRulesCheckInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponse
+		var obj *ReorderRulesCheckInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestStringReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestStringReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestStringReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesDeleteResponse
+		var obj *ReorderRulesDeleteInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestStringReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItem
+		var obj *ReorderRulesListInventoryRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestStringReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestSortItem
+		var obj *ReorderRulesListInventoryRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestStringReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestStringReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestStringReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestStringSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventorySettingsGetResponse{}
+		obj := &SettingsGetInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsGetResponse
+		var obj *SettingsGetInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestStringSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventorySettingsUpdateResponse{}
+		obj := &SettingsUpdateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsUpdateResponse
+		var obj *SettingsUpdateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestStringStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockLevelsResponse{}
+		obj := &StockLevelsInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponse
+		var obj *StockLevelsInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestStringStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestStringStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItem
+		var obj *StockMovementsListInventoryRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestStringStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestSortItem
+		var obj *StockMovementsListInventoryRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestStringStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestStringStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestStringStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockReceiveResponse
+		var obj *StockReceiveInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestStringStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestStringStockTakeInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponse
+		var obj *StockTakeInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestStringStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestStringStockTransferInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTransferResponse
+		var obj *StockTransferInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestStringStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockWriteOffResponse
+		var obj *StockWriteOffInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestStringWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestStringWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItem
+		var obj *WarehousesListInventoryRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestStringWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestSortItem
+		var obj *WarehousesListInventoryRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestStringWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestStringWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsCreateRequestMethod(t *testing.T) {
+func TestEnumLandedCostsCreateInventoryRequestMethod(t *testing.T) {
 	t.Run("NewFromString_by_value", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsCreateRequestMethodFromString("by_value")
+		val, err := NewLandedCostsCreateInventoryRequestMethodFromString("by_value")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsCreateRequestMethod("by_value"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsCreateInventoryRequestMethod("by_value"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_by_quantity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsCreateRequestMethodFromString("by_quantity")
+		val, err := NewLandedCostsCreateInventoryRequestMethodFromString("by_quantity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsCreateRequestMethod("by_quantity"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsCreateInventoryRequestMethod("by_quantity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsCreateRequestMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsCreateInventoryRequestMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsCreateRequestMethodFromString("by_value")
+		val, err := NewLandedCostsCreateInventoryRequestMethodFromString("by_value")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20167,28 +20168,28 @@ func TestEnumPostV1InventoryLandedCostsCreateRequestMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsCreateResponseMethod(t *testing.T) {
+func TestEnumLandedCostsCreateInventoryResponseMethod(t *testing.T) {
 	t.Run("NewFromString_by_value", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsCreateResponseMethodFromString("by_value")
+		val, err := NewLandedCostsCreateInventoryResponseMethodFromString("by_value")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsCreateResponseMethod("by_value"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsCreateInventoryResponseMethod("by_value"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_by_quantity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsCreateResponseMethodFromString("by_quantity")
+		val, err := NewLandedCostsCreateInventoryResponseMethodFromString("by_quantity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsCreateResponseMethod("by_quantity"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsCreateInventoryResponseMethod("by_quantity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsCreateResponseMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsCreateInventoryResponseMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsCreateResponseMethodFromString("by_value")
+		val, err := NewLandedCostsCreateInventoryResponseMethodFromString("by_value")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20196,28 +20197,28 @@ func TestEnumPostV1InventoryLandedCostsCreateResponseMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsGetResponseMethod(t *testing.T) {
+func TestEnumLandedCostsGetInventoryResponseMethod(t *testing.T) {
 	t.Run("NewFromString_by_value", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsGetResponseMethodFromString("by_value")
+		val, err := NewLandedCostsGetInventoryResponseMethodFromString("by_value")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsGetResponseMethod("by_value"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsGetInventoryResponseMethod("by_value"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_by_quantity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsGetResponseMethodFromString("by_quantity")
+		val, err := NewLandedCostsGetInventoryResponseMethodFromString("by_quantity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsGetResponseMethod("by_quantity"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsGetInventoryResponseMethod("by_quantity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsGetResponseMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsGetInventoryResponseMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsGetResponseMethodFromString("by_value")
+		val, err := NewLandedCostsGetInventoryResponseMethodFromString("by_value")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20225,56 +20226,56 @@ func TestEnumPostV1InventoryLandedCostsGetResponseMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsListRequestFilterItemOp(t *testing.T) {
+func TestEnumLandedCostsListInventoryRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("eq")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("ne")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("contains")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("gte")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("lte")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("in")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString("eq")
+		val, err := NewLandedCostsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20282,28 +20283,28 @@ func TestEnumPostV1InventoryLandedCostsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsListRequestSortItemDir(t *testing.T) {
+func TestEnumLandedCostsListInventoryRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestSortItemDirFromString("asc")
+		val, err := NewLandedCostsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListRequestSortItemDirFromString("desc")
+		val, err := NewLandedCostsListInventoryRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsListInventoryRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsListRequestSortItemDirFromString("asc")
+		val, err := NewLandedCostsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20311,28 +20312,28 @@ func TestEnumPostV1InventoryLandedCostsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLandedCostsListResponseRowsItemMethod(t *testing.T) {
+func TestEnumLandedCostsListInventoryResponseRowsItemMethod(t *testing.T) {
 	t.Run("NewFromString_by_value", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListResponseRowsItemMethodFromString("by_value")
+		val, err := NewLandedCostsListInventoryResponseRowsItemMethodFromString("by_value")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListResponseRowsItemMethod("by_value"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryResponseRowsItemMethod("by_value"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_by_quantity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLandedCostsListResponseRowsItemMethodFromString("by_quantity")
+		val, err := NewLandedCostsListInventoryResponseRowsItemMethodFromString("by_quantity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLandedCostsListResponseRowsItemMethod("by_quantity"), val, "enum value should match expected wire value")
+		assert.Equal(t, LandedCostsListInventoryResponseRowsItemMethod("by_quantity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLandedCostsListResponseRowsItemMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewLandedCostsListInventoryResponseRowsItemMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLandedCostsListResponseRowsItemMethodFromString("by_value")
+		val, err := NewLandedCostsListInventoryResponseRowsItemMethodFromString("by_value")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20340,28 +20341,28 @@ func TestEnumPostV1InventoryLandedCostsListResponseRowsItemMethod(t *testing.T) 
 	})
 }
 
-func TestEnumPostV1InventoryLotsGetResponseMovementsItemDirection(t *testing.T) {
+func TestEnumLotsGetInventoryResponseMovementsItemDirection(t *testing.T) {
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsGetResponseMovementsItemDirectionFromString("in")
+		val, err := NewLotsGetInventoryResponseMovementsItemDirectionFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsGetResponseMovementsItemDirection("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsGetInventoryResponseMovementsItemDirection("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_out", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsGetResponseMovementsItemDirectionFromString("out")
+		val, err := NewLotsGetInventoryResponseMovementsItemDirectionFromString("out")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsGetResponseMovementsItemDirection("out"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsGetInventoryResponseMovementsItemDirection("out"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLotsGetResponseMovementsItemDirectionFromString("invalid_value_that_does_not_exist")
+		_, err := NewLotsGetInventoryResponseMovementsItemDirectionFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLotsGetResponseMovementsItemDirectionFromString("in")
+		val, err := NewLotsGetInventoryResponseMovementsItemDirectionFromString("in")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20369,56 +20370,56 @@ func TestEnumPostV1InventoryLotsGetResponseMovementsItemDirection(t *testing.T) 
 	})
 }
 
-func TestEnumPostV1InventoryLotsListRequestFilterItemOp(t *testing.T) {
+func TestEnumLotsListInventoryRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("eq")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("ne")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("contains")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("gte")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("lte")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("in")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewLotsListInventoryRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLotsListRequestFilterItemOpFromString("eq")
+		val, err := NewLotsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20426,28 +20427,28 @@ func TestEnumPostV1InventoryLotsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryLotsListRequestSortItemDir(t *testing.T) {
+func TestEnumLotsListInventoryRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestSortItemDirFromString("asc")
+		val, err := NewLotsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryLotsListRequestSortItemDirFromString("desc")
+		val, err := NewLotsListInventoryRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryLotsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, LotsListInventoryRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryLotsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewLotsListInventoryRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryLotsListRequestSortItemDirFromString("asc")
+		val, err := NewLotsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20455,56 +20456,56 @@ func TestEnumPostV1InventoryLotsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryReorderRulesListRequestFilterItemOp(t *testing.T) {
+func TestEnumReorderRulesListInventoryRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("eq")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("ne")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("contains")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("gte")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("lte")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("in")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString("eq")
+		val, err := NewReorderRulesListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20512,28 +20513,28 @@ func TestEnumPostV1InventoryReorderRulesListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryReorderRulesListRequestSortItemDir(t *testing.T) {
+func TestEnumReorderRulesListInventoryRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestSortItemDirFromString("asc")
+		val, err := NewReorderRulesListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryReorderRulesListRequestSortItemDirFromString("desc")
+		val, err := NewReorderRulesListInventoryRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryReorderRulesListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReorderRulesListInventoryRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryReorderRulesListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewReorderRulesListInventoryRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryReorderRulesListRequestSortItemDirFromString("asc")
+		val, err := NewReorderRulesListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20541,28 +20542,28 @@ func TestEnumPostV1InventoryReorderRulesListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventorySettingsGetResponseNegativeStockPolicy(t *testing.T) {
+func TestEnumSettingsGetInventoryResponseNegativeStockPolicy(t *testing.T) {
 	t.Run("NewFromString_reject", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsGetResponseNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsGetInventoryResponseNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsGetResponseNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsGetInventoryResponseNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_allow", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsGetResponseNegativeStockPolicyFromString("allow")
+		val, err := NewSettingsGetInventoryResponseNegativeStockPolicyFromString("allow")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsGetResponseNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsGetInventoryResponseNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventorySettingsGetResponseNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
+		_, err := NewSettingsGetInventoryResponseNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventorySettingsGetResponseNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsGetInventoryResponseNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20570,28 +20571,28 @@ func TestEnumPostV1InventorySettingsGetResponseNegativeStockPolicy(t *testing.T)
 	})
 }
 
-func TestEnumPostV1InventorySettingsUpdateRequestNegativeStockPolicy(t *testing.T) {
+func TestEnumSettingsUpdateInventoryRequestNegativeStockPolicy(t *testing.T) {
 	t.Run("NewFromString_reject", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsUpdateRequestNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsUpdateInventoryRequestNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsUpdateRequestNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsUpdateInventoryRequestNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_allow", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsUpdateRequestNegativeStockPolicyFromString("allow")
+		val, err := NewSettingsUpdateInventoryRequestNegativeStockPolicyFromString("allow")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsUpdateRequestNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsUpdateInventoryRequestNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventorySettingsUpdateRequestNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
+		_, err := NewSettingsUpdateInventoryRequestNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventorySettingsUpdateRequestNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsUpdateInventoryRequestNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20599,28 +20600,28 @@ func TestEnumPostV1InventorySettingsUpdateRequestNegativeStockPolicy(t *testing.
 	})
 }
 
-func TestEnumPostV1InventorySettingsUpdateResponseNegativeStockPolicy(t *testing.T) {
+func TestEnumSettingsUpdateInventoryResponseNegativeStockPolicy(t *testing.T) {
 	t.Run("NewFromString_reject", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsUpdateResponseNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsUpdateInventoryResponseNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsUpdateResponseNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsUpdateInventoryResponseNegativeStockPolicy("reject"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_allow", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventorySettingsUpdateResponseNegativeStockPolicyFromString("allow")
+		val, err := NewSettingsUpdateInventoryResponseNegativeStockPolicyFromString("allow")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventorySettingsUpdateResponseNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
+		assert.Equal(t, SettingsUpdateInventoryResponseNegativeStockPolicy("allow"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventorySettingsUpdateResponseNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
+		_, err := NewSettingsUpdateInventoryResponseNegativeStockPolicyFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventorySettingsUpdateResponseNegativeStockPolicyFromString("reject")
+		val, err := NewSettingsUpdateInventoryResponseNegativeStockPolicyFromString("reject")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20628,56 +20629,56 @@ func TestEnumPostV1InventorySettingsUpdateResponseNegativeStockPolicy(t *testing
 	})
 }
 
-func TestEnumPostV1InventoryStockMovementsListRequestFilterItemOp(t *testing.T) {
+func TestEnumStockMovementsListInventoryRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("eq")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("ne")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("contains")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("gte")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("lte")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("in")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString("eq")
+		val, err := NewStockMovementsListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20685,28 +20686,28 @@ func TestEnumPostV1InventoryStockMovementsListRequestFilterItemOp(t *testing.T) 
 	})
 }
 
-func TestEnumPostV1InventoryStockMovementsListRequestSortItemDir(t *testing.T) {
+func TestEnumStockMovementsListInventoryRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestSortItemDirFromString("asc")
+		val, err := NewStockMovementsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListRequestSortItemDirFromString("desc")
+		val, err := NewStockMovementsListInventoryRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryStockMovementsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewStockMovementsListInventoryRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryStockMovementsListRequestSortItemDirFromString("asc")
+		val, err := NewStockMovementsListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20714,28 +20715,28 @@ func TestEnumPostV1InventoryStockMovementsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryStockMovementsListResponseRowsItemDirection(t *testing.T) {
+func TestEnumStockMovementsListInventoryResponseRowsItemDirection(t *testing.T) {
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListResponseRowsItemDirectionFromString("in")
+		val, err := NewStockMovementsListInventoryResponseRowsItemDirectionFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListResponseRowsItemDirection("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryResponseRowsItemDirection("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_out", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryStockMovementsListResponseRowsItemDirectionFromString("out")
+		val, err := NewStockMovementsListInventoryResponseRowsItemDirectionFromString("out")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryStockMovementsListResponseRowsItemDirection("out"), val, "enum value should match expected wire value")
+		assert.Equal(t, StockMovementsListInventoryResponseRowsItemDirection("out"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryStockMovementsListResponseRowsItemDirectionFromString("invalid_value_that_does_not_exist")
+		_, err := NewStockMovementsListInventoryResponseRowsItemDirectionFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryStockMovementsListResponseRowsItemDirectionFromString("in")
+		val, err := NewStockMovementsListInventoryResponseRowsItemDirectionFromString("in")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20743,56 +20744,56 @@ func TestEnumPostV1InventoryStockMovementsListResponseRowsItemDirection(t *testi
 	})
 }
 
-func TestEnumPostV1InventoryWarehousesListRequestFilterItemOp(t *testing.T) {
+func TestEnumWarehousesListInventoryRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("eq")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("ne")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("contains")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("gte")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("lte")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("in")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewWarehousesListInventoryRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryWarehousesListRequestFilterItemOpFromString("eq")
+		val, err := NewWarehousesListInventoryRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20800,28 +20801,28 @@ func TestEnumPostV1InventoryWarehousesListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1InventoryWarehousesListRequestSortItemDir(t *testing.T) {
+func TestEnumWarehousesListInventoryRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestSortItemDirFromString("asc")
+		val, err := NewWarehousesListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1InventoryWarehousesListRequestSortItemDirFromString("desc")
+		val, err := NewWarehousesListInventoryRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1InventoryWarehousesListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, WarehousesListInventoryRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1InventoryWarehousesListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewWarehousesListInventoryRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1InventoryWarehousesListRequestSortItemDirFromString("asc")
+		val, err := NewWarehousesListInventoryRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -20829,10 +20830,10 @@ func TestEnumPostV1InventoryWarehousesListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
+func TestExtraPropertiesLandedCostsCreateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsCreateResponse{}
+		obj := &LandedCostsCreateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20846,16 +20847,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponse
+		var obj *LandedCostsCreateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsCreateResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesLandedCostsCreateInventoryResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsCreateResponseLinesItem{}
+		obj := &LandedCostsCreateInventoryResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20869,16 +20870,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsCreateResponseLinesItem(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsCreateResponseLinesItem
+		var obj *LandedCostsCreateInventoryResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsGetResponse(t *testing.T) {
+func TestExtraPropertiesLandedCostsGetInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsGetResponse{}
+		obj := &LandedCostsGetInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20892,16 +20893,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponse
+		var obj *LandedCostsGetInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsGetResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesLandedCostsGetInventoryResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsGetResponseLinesItem{}
+		obj := &LandedCostsGetInventoryResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20915,16 +20916,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsGetResponseLinesItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsGetResponseLinesItem
+		var obj *LandedCostsGetInventoryResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesLandedCostsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListRequestFilterItem{}
+		obj := &LandedCostsListInventoryRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20938,16 +20939,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsListRequestFilterItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestFilterItem
+		var obj *LandedCostsListInventoryRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesLandedCostsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListRequestSortItem{}
+		obj := &LandedCostsListInventoryRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20961,16 +20962,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsListRequestSortItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListRequestSortItem
+		var obj *LandedCostsListInventoryRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsListResponse(t *testing.T) {
+func TestExtraPropertiesLandedCostsListInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListResponse{}
+		obj := &LandedCostsListInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20984,16 +20985,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponse
+		var obj *LandedCostsListInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLandedCostsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesLandedCostsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLandedCostsListResponseRowsItem{}
+		obj := &LandedCostsListInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21007,16 +21008,16 @@ func TestExtraPropertiesPostV1InventoryLandedCostsListResponseRowsItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLandedCostsListResponseRowsItem
+		var obj *LandedCostsListInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsGetResponse(t *testing.T) {
+func TestExtraPropertiesLotsGetInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsGetResponse{}
+		obj := &LotsGetInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21030,16 +21031,16 @@ func TestExtraPropertiesPostV1InventoryLotsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponse
+		var obj *LotsGetInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsGetResponseMovementsItem(t *testing.T) {
+func TestExtraPropertiesLotsGetInventoryResponseMovementsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsGetResponseMovementsItem{}
+		obj := &LotsGetInventoryResponseMovementsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21053,16 +21054,16 @@ func TestExtraPropertiesPostV1InventoryLotsGetResponseMovementsItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsGetResponseMovementsItem
+		var obj *LotsGetInventoryResponseMovementsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesLotsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListRequestFilterItem{}
+		obj := &LotsListInventoryRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21076,16 +21077,16 @@ func TestExtraPropertiesPostV1InventoryLotsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestFilterItem
+		var obj *LotsListInventoryRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesLotsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListRequestSortItem{}
+		obj := &LotsListInventoryRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21099,16 +21100,16 @@ func TestExtraPropertiesPostV1InventoryLotsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListRequestSortItem
+		var obj *LotsListInventoryRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsListResponse(t *testing.T) {
+func TestExtraPropertiesLotsListInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListResponse{}
+		obj := &LotsListInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21122,16 +21123,16 @@ func TestExtraPropertiesPostV1InventoryLotsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponse
+		var obj *LotsListInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesLotsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsListResponseRowsItem{}
+		obj := &LotsListInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21145,16 +21146,16 @@ func TestExtraPropertiesPostV1InventoryLotsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsListResponseRowsItem
+		var obj *LotsListInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryLotsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesLotsUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryLotsUpdateResponse{}
+		obj := &LotsUpdateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21168,16 +21169,16 @@ func TestExtraPropertiesPostV1InventoryLotsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryLotsUpdateResponse
+		var obj *LotsUpdateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
+func TestExtraPropertiesReorderRulesCheckInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCheckResponse{}
+		obj := &ReorderRulesCheckInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21191,16 +21192,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesCheckResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponse
+		var obj *ReorderRulesCheckInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesCheckResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesReorderRulesCheckInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCheckResponseRowsItem{}
+		obj := &ReorderRulesCheckInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21214,16 +21215,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesCheckResponseRowsItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCheckResponseRowsItem
+		var obj *ReorderRulesCheckInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesCreateResponse(t *testing.T) {
+func TestExtraPropertiesReorderRulesCreateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesCreateResponse{}
+		obj := &ReorderRulesCreateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21237,16 +21238,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesCreateResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesCreateResponse
+		var obj *ReorderRulesCreateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesDeleteResponse(t *testing.T) {
+func TestExtraPropertiesReorderRulesDeleteInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesDeleteResponse{}
+		obj := &ReorderRulesDeleteInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21260,16 +21261,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesDeleteResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesDeleteResponse
+		var obj *ReorderRulesDeleteInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesReorderRulesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListRequestFilterItem{}
+		obj := &ReorderRulesListInventoryRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21283,16 +21284,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesListRequestFilterItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestFilterItem
+		var obj *ReorderRulesListInventoryRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesReorderRulesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListRequestSortItem{}
+		obj := &ReorderRulesListInventoryRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21306,16 +21307,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesListRequestSortItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListRequestSortItem
+		var obj *ReorderRulesListInventoryRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesListResponse(t *testing.T) {
+func TestExtraPropertiesReorderRulesListInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListResponse{}
+		obj := &ReorderRulesListInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21329,16 +21330,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponse
+		var obj *ReorderRulesListInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesReorderRulesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesListResponseRowsItem{}
+		obj := &ReorderRulesListInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21352,16 +21353,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesListResponseRowsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesListResponseRowsItem
+		var obj *ReorderRulesListInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryReorderRulesUpdateResponse(t *testing.T) {
+func TestExtraPropertiesReorderRulesUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryReorderRulesUpdateResponse{}
+		obj := &ReorderRulesUpdateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21375,16 +21376,16 @@ func TestExtraPropertiesPostV1InventoryReorderRulesUpdateResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryReorderRulesUpdateResponse
+		var obj *ReorderRulesUpdateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventorySettingsGetResponse(t *testing.T) {
+func TestExtraPropertiesSettingsGetInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventorySettingsGetResponse{}
+		obj := &SettingsGetInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21398,16 +21399,16 @@ func TestExtraPropertiesPostV1InventorySettingsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsGetResponse
+		var obj *SettingsGetInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventorySettingsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesSettingsUpdateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventorySettingsUpdateResponse{}
+		obj := &SettingsUpdateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21421,16 +21422,16 @@ func TestExtraPropertiesPostV1InventorySettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventorySettingsUpdateResponse
+		var obj *SettingsUpdateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockLevelsResponse(t *testing.T) {
+func TestExtraPropertiesStockLevelsInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockLevelsResponse{}
+		obj := &StockLevelsInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21444,16 +21445,16 @@ func TestExtraPropertiesPostV1InventoryStockLevelsResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponse
+		var obj *StockLevelsInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockLevelsResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesStockLevelsInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockLevelsResponseRowsItem{}
+		obj := &StockLevelsInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21467,16 +21468,16 @@ func TestExtraPropertiesPostV1InventoryStockLevelsResponseRowsItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockLevelsResponseRowsItem
+		var obj *StockLevelsInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockMovementsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesStockMovementsListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListRequestFilterItem{}
+		obj := &StockMovementsListInventoryRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21490,16 +21491,16 @@ func TestExtraPropertiesPostV1InventoryStockMovementsListRequestFilterItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestFilterItem
+		var obj *StockMovementsListInventoryRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockMovementsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesStockMovementsListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListRequestSortItem{}
+		obj := &StockMovementsListInventoryRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21513,16 +21514,16 @@ func TestExtraPropertiesPostV1InventoryStockMovementsListRequestSortItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListRequestSortItem
+		var obj *StockMovementsListInventoryRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockMovementsListResponse(t *testing.T) {
+func TestExtraPropertiesStockMovementsListInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListResponse{}
+		obj := &StockMovementsListInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21536,16 +21537,16 @@ func TestExtraPropertiesPostV1InventoryStockMovementsListResponse(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponse
+		var obj *StockMovementsListInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockMovementsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesStockMovementsListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockMovementsListResponseRowsItem{}
+		obj := &StockMovementsListInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21559,16 +21560,16 @@ func TestExtraPropertiesPostV1InventoryStockMovementsListResponseRowsItem(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockMovementsListResponseRowsItem
+		var obj *StockMovementsListInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockReceiveResponse(t *testing.T) {
+func TestExtraPropertiesStockReceiveInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockReceiveResponse{}
+		obj := &StockReceiveInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21582,16 +21583,16 @@ func TestExtraPropertiesPostV1InventoryStockReceiveResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockReceiveResponse
+		var obj *StockReceiveInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesStockTakeInventoryRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeRequestLinesItem{}
+		obj := &StockTakeInventoryRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21605,16 +21606,16 @@ func TestExtraPropertiesPostV1InventoryStockTakeRequestLinesItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeRequestLinesItem
+		var obj *StockTakeInventoryRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockTakeResponse(t *testing.T) {
+func TestExtraPropertiesStockTakeInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeResponse{}
+		obj := &StockTakeInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21628,16 +21629,16 @@ func TestExtraPropertiesPostV1InventoryStockTakeResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponse
+		var obj *StockTakeInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesStockTakeInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTakeResponseRowsItem{}
+		obj := &StockTakeInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21651,16 +21652,16 @@ func TestExtraPropertiesPostV1InventoryStockTakeResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTakeResponseRowsItem
+		var obj *StockTakeInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockTransferResponse(t *testing.T) {
+func TestExtraPropertiesStockTransferInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockTransferResponse{}
+		obj := &StockTransferInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21674,16 +21675,16 @@ func TestExtraPropertiesPostV1InventoryStockTransferResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockTransferResponse
+		var obj *StockTransferInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryStockWriteOffResponse(t *testing.T) {
+func TestExtraPropertiesStockWriteOffInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryStockWriteOffResponse{}
+		obj := &StockWriteOffInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21697,16 +21698,16 @@ func TestExtraPropertiesPostV1InventoryStockWriteOffResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryStockWriteOffResponse
+		var obj *StockWriteOffInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryWarehousesCreateResponse(t *testing.T) {
+func TestExtraPropertiesWarehousesCreateInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesCreateResponse{}
+		obj := &WarehousesCreateInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21720,16 +21721,16 @@ func TestExtraPropertiesPostV1InventoryWarehousesCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesCreateResponse
+		var obj *WarehousesCreateInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryWarehousesListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesWarehousesListInventoryRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListRequestFilterItem{}
+		obj := &WarehousesListInventoryRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21743,16 +21744,16 @@ func TestExtraPropertiesPostV1InventoryWarehousesListRequestFilterItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestFilterItem
+		var obj *WarehousesListInventoryRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryWarehousesListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesWarehousesListInventoryRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListRequestSortItem{}
+		obj := &WarehousesListInventoryRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21766,16 +21767,16 @@ func TestExtraPropertiesPostV1InventoryWarehousesListRequestSortItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListRequestSortItem
+		var obj *WarehousesListInventoryRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryWarehousesListResponse(t *testing.T) {
+func TestExtraPropertiesWarehousesListInventoryResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListResponse{}
+		obj := &WarehousesListInventoryResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21789,16 +21790,16 @@ func TestExtraPropertiesPostV1InventoryWarehousesListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponse
+		var obj *WarehousesListInventoryResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1InventoryWarehousesListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesWarehousesListInventoryResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1InventoryWarehousesListResponseRowsItem{}
+		obj := &WarehousesListInventoryResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21812,7 +21813,7 @@ func TestExtraPropertiesPostV1InventoryWarehousesListResponseRowsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1InventoryWarehousesListResponseRowsItem
+		var obj *WarehousesListInventoryResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

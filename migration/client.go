@@ -35,12 +35,12 @@ func NewClient(options *core.RequestOptions) *Client {
 }
 
 // Runs every check the import runs (accounts, partners, balances, open invoices, assets, stock) and returns the same summary and warnings, then rolls everything back. Nothing is stored.
-func (c *Client) CheckAHistoricalBooksPackageWithoutWritingAnything(
+func (c *Client) BooksValidate(
 	ctx context.Context,
-	request *nordlet.PostV1MigrationBooksValidateRequest,
+	request *nordlet.BooksValidateMigrationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1MigrationBooksValidateResponse, error) {
-	response, err := c.WithRawResponse.CheckAHistoricalBooksPackageWithoutWritingAnything(
+) (*nordlet.BooksValidateMigrationResponse, error) {
+	response, err := c.WithRawResponse.BooksValidate(
 		ctx,
 		request,
 		opts...,
@@ -52,12 +52,12 @@ func (c *Client) CheckAHistoricalBooksPackageWithoutWritingAnything(
 }
 
 // Brings a company over from another system in one call: chart of accounts, partners, items, opening balances (or the full journal history), open customer and supplier invoices, fixed assets with their accumulated depreciation, and stock on hand. The whole package is written in one database transaction — if any row fails, nothing is stored.
-func (c *Client) ImportHistoricalBooksFromAPreviousAccountingSystem(
+func (c *Client) BooksImport(
 	ctx context.Context,
-	request *nordlet.PostV1MigrationBooksImportRequest,
+	request *nordlet.BooksImportMigrationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1MigrationBooksImportResponse, error) {
-	response, err := c.WithRawResponse.ImportHistoricalBooksFromAPreviousAccountingSystem(
+) (*nordlet.BooksImportMigrationResponse, error) {
+	response, err := c.WithRawResponse.BooksImport(
 		ctx,
 		request,
 		opts...,

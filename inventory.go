@@ -7,167 +7,170 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1InventoryLandedCostsCreateRequestFieldDate            = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsCreateRequestFieldAmount          = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsCreateRequestFieldMethod          = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsCreateRequestFieldGoodsReceiptID  = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsCreateRequestFieldMovementIDs     = big.NewInt(1 << 4)
-	postV1InventoryLandedCostsCreateRequestFieldSourceInvoiceID = big.NewInt(1 << 5)
-	postV1InventoryLandedCostsCreateRequestFieldNotes           = big.NewInt(1 << 6)
+	landedCostsCreateInventoryRequestFieldDate            = big.NewInt(1 << 0)
+	landedCostsCreateInventoryRequestFieldAmount          = big.NewInt(1 << 1)
+	landedCostsCreateInventoryRequestFieldMethod          = big.NewInt(1 << 2)
+	landedCostsCreateInventoryRequestFieldGoodsReceiptID  = big.NewInt(1 << 3)
+	landedCostsCreateInventoryRequestFieldMovementIDs     = big.NewInt(1 << 4)
+	landedCostsCreateInventoryRequestFieldSourceInvoiceID = big.NewInt(1 << 5)
+	landedCostsCreateInventoryRequestFieldNotes           = big.NewInt(1 << 6)
 )
 
-type PostV1InventoryLandedCostsCreateRequest struct {
-	Date            string                                         `json:"date" url:"-"`
-	Amount          string                                         `json:"amount" url:"-"`
-	Method          *PostV1InventoryLandedCostsCreateRequestMethod `json:"method,omitempty" url:"-"`
-	GoodsReceiptID  *string                                        `json:"goodsReceiptId,omitempty" url:"-"`
-	MovementIDs     []string                                       `json:"movementIds,omitempty" url:"-"`
-	SourceInvoiceID *string                                        `json:"sourceInvoiceId,omitempty" url:"-"`
-	Notes           *string                                        `json:"notes,omitempty" url:"-"`
+type LandedCostsCreateInventoryRequest struct {
+	Date            time.Time                                `json:"date" url:"-" format:"date"`
+	Amount          string                                   `json:"amount" url:"-"`
+	Method          *LandedCostsCreateInventoryRequestMethod `json:"method,omitempty" url:"-"`
+	GoodsReceiptID  *string                                  `json:"goodsReceiptId,omitempty" url:"-"`
+	MovementIDs     []string                                 `json:"movementIds,omitempty" url:"-"`
+	SourceInvoiceID *string                                  `json:"sourceInvoiceId,omitempty" url:"-"`
+	Notes           *string                                  `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLandedCostsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsCreateInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryLandedCostsCreateRequestFieldDate)
+func (l *LandedCostsCreateInventoryRequest) SetDate(date time.Time) {
+	l.Date = date
+	l.require(landedCostsCreateInventoryRequestFieldDate)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1InventoryLandedCostsCreateRequestFieldAmount)
+func (l *LandedCostsCreateInventoryRequest) SetAmount(amount string) {
+	l.Amount = amount
+	l.require(landedCostsCreateInventoryRequestFieldAmount)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetMethod(method *PostV1InventoryLandedCostsCreateRequestMethod) {
-	p.Method = method
-	p.require(postV1InventoryLandedCostsCreateRequestFieldMethod)
+func (l *LandedCostsCreateInventoryRequest) SetMethod(method *LandedCostsCreateInventoryRequestMethod) {
+	l.Method = method
+	l.require(landedCostsCreateInventoryRequestFieldMethod)
 }
 
 // SetGoodsReceiptID sets the GoodsReceiptID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetGoodsReceiptID(goodsReceiptID *string) {
-	p.GoodsReceiptID = goodsReceiptID
-	p.require(postV1InventoryLandedCostsCreateRequestFieldGoodsReceiptID)
+func (l *LandedCostsCreateInventoryRequest) SetGoodsReceiptID(goodsReceiptID *string) {
+	l.GoodsReceiptID = goodsReceiptID
+	l.require(landedCostsCreateInventoryRequestFieldGoodsReceiptID)
 }
 
 // SetMovementIDs sets the MovementIDs field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetMovementIDs(movementIDs []string) {
-	p.MovementIDs = movementIDs
-	p.require(postV1InventoryLandedCostsCreateRequestFieldMovementIDs)
+func (l *LandedCostsCreateInventoryRequest) SetMovementIDs(movementIDs []string) {
+	l.MovementIDs = movementIDs
+	l.require(landedCostsCreateInventoryRequestFieldMovementIDs)
 }
 
 // SetSourceInvoiceID sets the SourceInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetSourceInvoiceID(sourceInvoiceID *string) {
-	p.SourceInvoiceID = sourceInvoiceID
-	p.require(postV1InventoryLandedCostsCreateRequestFieldSourceInvoiceID)
+func (l *LandedCostsCreateInventoryRequest) SetSourceInvoiceID(sourceInvoiceID *string) {
+	l.SourceInvoiceID = sourceInvoiceID
+	l.require(landedCostsCreateInventoryRequestFieldSourceInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLandedCostsCreateRequestFieldNotes)
+func (l *LandedCostsCreateInventoryRequest) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(landedCostsCreateInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryLandedCostsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsCreateRequest
+func (l *LandedCostsCreateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsCreateInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsCreateRequest(body)
+	*l = LandedCostsCreateInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsCreateRequest
+func (l *LandedCostsCreateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsCreateInventoryRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
+		Date:  internal.NewDate(l.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryLandedCostsGetRequestFieldID = big.NewInt(1 << 0)
+	landedCostsGetInventoryRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryLandedCostsGetRequest struct {
+type LandedCostsGetInventoryRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLandedCostsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsGetInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLandedCostsGetRequestFieldID)
+func (l *LandedCostsGetInventoryRequest) SetID(id string) {
+	l.ID = id
+	l.require(landedCostsGetInventoryRequestFieldID)
 }
 
-func (p *PostV1InventoryLandedCostsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsGetRequest
+func (l *LandedCostsGetInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsGetInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsGetRequest(body)
+	*l = LandedCostsGetInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsGetRequest
+func (l *LandedCostsGetInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsGetInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryLandedCostsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsListRequestFieldTotals   = big.NewInt(1 << 4)
+	landedCostsListInventoryRequestFieldPage     = big.NewInt(1 << 0)
+	landedCostsListInventoryRequestFieldPageSize = big.NewInt(1 << 1)
+	landedCostsListInventoryRequestFieldSort     = big.NewInt(1 << 2)
+	landedCostsListInventoryRequestFieldFilter   = big.NewInt(1 << 3)
+	landedCostsListInventoryRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryLandedCostsListRequest struct {
-	Page     *int64                                             `json:"page,omitempty" url:"-"`
-	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1InventoryLandedCostsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1InventoryLandedCostsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type LandedCostsListInventoryRequest struct {
+	Page     *int64                                       `json:"page,omitempty" url:"-"`
+	PageSize *int64                                       `json:"pageSize,omitempty" url:"-"`
+	Sort     []*LandedCostsListInventoryRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*LandedCostsListInventoryRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -175,128 +178,128 @@ type PostV1InventoryLandedCostsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLandedCostsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsListInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1InventoryLandedCostsListRequestFieldPage)
+func (l *LandedCostsListInventoryRequest) SetPage(page *int64) {
+	l.Page = page
+	l.require(landedCostsListInventoryRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryLandedCostsListRequestFieldPageSize)
+func (l *LandedCostsListInventoryRequest) SetPageSize(pageSize *int64) {
+	l.PageSize = pageSize
+	l.require(landedCostsListInventoryRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequest) SetSort(sort []*PostV1InventoryLandedCostsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1InventoryLandedCostsListRequestFieldSort)
+func (l *LandedCostsListInventoryRequest) SetSort(sort []*LandedCostsListInventoryRequestSortItem) {
+	l.Sort = sort
+	l.require(landedCostsListInventoryRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequest) SetFilter(filter []*PostV1InventoryLandedCostsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1InventoryLandedCostsListRequestFieldFilter)
+func (l *LandedCostsListInventoryRequest) SetFilter(filter []*LandedCostsListInventoryRequestFilterItem) {
+	l.Filter = filter
+	l.require(landedCostsListInventoryRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1InventoryLandedCostsListRequestFieldTotals)
+func (l *LandedCostsListInventoryRequest) SetTotals(totals []string) {
+	l.Totals = totals
+	l.require(landedCostsListInventoryRequestFieldTotals)
 }
 
-func (p *PostV1InventoryLandedCostsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsListRequest
+func (l *LandedCostsListInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsListInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsListRequest(body)
+	*l = LandedCostsListInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsListRequest
+func (l *LandedCostsListInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsListInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryLotsGetRequestFieldID = big.NewInt(1 << 0)
+	lotsGetInventoryRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryLotsGetRequest struct {
+type LotsGetInventoryRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLotsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsGetInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsGetRequestFieldID)
+func (l *LotsGetInventoryRequest) SetID(id string) {
+	l.ID = id
+	l.require(lotsGetInventoryRequestFieldID)
 }
 
-func (p *PostV1InventoryLotsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsGetRequest
+func (l *LotsGetInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsGetInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsGetRequest(body)
+	*l = LotsGetInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLotsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsGetRequest
+func (l *LotsGetInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LotsGetInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryLotsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1InventoryLotsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1InventoryLotsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1InventoryLotsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1InventoryLotsListRequestFieldTotals   = big.NewInt(1 << 4)
+	lotsListInventoryRequestFieldPage     = big.NewInt(1 << 0)
+	lotsListInventoryRequestFieldPageSize = big.NewInt(1 << 1)
+	lotsListInventoryRequestFieldSort     = big.NewInt(1 << 2)
+	lotsListInventoryRequestFieldFilter   = big.NewInt(1 << 3)
+	lotsListInventoryRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryLotsListRequest struct {
-	Page     *int64                                      `json:"page,omitempty" url:"-"`
-	PageSize *int64                                      `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1InventoryLotsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1InventoryLotsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type LotsListInventoryRequest struct {
+	Page     *int64                                `json:"page,omitempty" url:"-"`
+	PageSize *int64                                `json:"pageSize,omitempty" url:"-"`
+	Sort     []*LotsListInventoryRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*LotsListInventoryRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -304,156 +307,158 @@ type PostV1InventoryLotsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLotsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsListInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1InventoryLotsListRequestFieldPage)
+func (l *LotsListInventoryRequest) SetPage(page *int64) {
+	l.Page = page
+	l.require(lotsListInventoryRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryLotsListRequestFieldPageSize)
+func (l *LotsListInventoryRequest) SetPageSize(pageSize *int64) {
+	l.PageSize = pageSize
+	l.require(lotsListInventoryRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequest) SetSort(sort []*PostV1InventoryLotsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1InventoryLotsListRequestFieldSort)
+func (l *LotsListInventoryRequest) SetSort(sort []*LotsListInventoryRequestSortItem) {
+	l.Sort = sort
+	l.require(lotsListInventoryRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequest) SetFilter(filter []*PostV1InventoryLotsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1InventoryLotsListRequestFieldFilter)
+func (l *LotsListInventoryRequest) SetFilter(filter []*LotsListInventoryRequestFilterItem) {
+	l.Filter = filter
+	l.require(lotsListInventoryRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1InventoryLotsListRequestFieldTotals)
+func (l *LotsListInventoryRequest) SetTotals(totals []string) {
+	l.Totals = totals
+	l.require(lotsListInventoryRequestFieldTotals)
 }
 
-func (p *PostV1InventoryLotsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsListRequest
+func (l *LotsListInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsListInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsListRequest(body)
+	*l = LotsListInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLotsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsListRequest
+func (l *LotsListInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LotsListInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryLotsUpdateRequestFieldID         = big.NewInt(1 << 0)
-	postV1InventoryLotsUpdateRequestFieldExpiryDate = big.NewInt(1 << 1)
-	postV1InventoryLotsUpdateRequestFieldNotes      = big.NewInt(1 << 2)
+	lotsUpdateInventoryRequestFieldID         = big.NewInt(1 << 0)
+	lotsUpdateInventoryRequestFieldExpiryDate = big.NewInt(1 << 1)
+	lotsUpdateInventoryRequestFieldNotes      = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryLotsUpdateRequest struct {
-	ID         string  `json:"id" url:"-"`
-	ExpiryDate *string `json:"expiryDate,omitempty" url:"-"`
-	Notes      *string `json:"notes,omitempty" url:"-"`
+type LotsUpdateInventoryRequest struct {
+	ID         string     `json:"id" url:"-"`
+	ExpiryDate *time.Time `json:"expiryDate,omitempty" url:"-" format:"date"`
+	Notes      *string    `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryLotsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsUpdateInventoryRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsUpdateRequestFieldID)
+func (l *LotsUpdateInventoryRequest) SetID(id string) {
+	l.ID = id
+	l.require(lotsUpdateInventoryRequestFieldID)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateRequest) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryLotsUpdateRequestFieldExpiryDate)
+func (l *LotsUpdateInventoryRequest) SetExpiryDate(expiryDate *time.Time) {
+	l.ExpiryDate = expiryDate
+	l.require(lotsUpdateInventoryRequestFieldExpiryDate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLotsUpdateRequestFieldNotes)
+func (l *LotsUpdateInventoryRequest) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(lotsUpdateInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryLotsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsUpdateRequest
+func (l *LotsUpdateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsUpdateInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsUpdateRequest(body)
+	*l = LotsUpdateInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryLotsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsUpdateRequest
+func (l *LotsUpdateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed LotsUpdateInventoryRequest
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*l),
+		ExpiryDate: internal.NewOptionalDate(l.ExpiryDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-type PostV1InventoryReorderRulesCheckRequest struct {
+type ReorderRulesCheckInventoryRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryReorderRulesCheckRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesCheckInventoryRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 var (
-	postV1InventoryReorderRulesCreateRequestFieldItemID      = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesCreateRequestFieldWarehouseID = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesCreateRequestFieldMinQty      = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesCreateRequestFieldReorderQty  = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesCreateRequestFieldIsActive    = big.NewInt(1 << 4)
-	postV1InventoryReorderRulesCreateRequestFieldNotes       = big.NewInt(1 << 5)
+	reorderRulesCreateInventoryRequestFieldItemID      = big.NewInt(1 << 0)
+	reorderRulesCreateInventoryRequestFieldWarehouseID = big.NewInt(1 << 1)
+	reorderRulesCreateInventoryRequestFieldMinQty      = big.NewInt(1 << 2)
+	reorderRulesCreateInventoryRequestFieldReorderQty  = big.NewInt(1 << 3)
+	reorderRulesCreateInventoryRequestFieldIsActive    = big.NewInt(1 << 4)
+	reorderRulesCreateInventoryRequestFieldNotes       = big.NewInt(1 << 5)
 )
 
-type PostV1InventoryReorderRulesCreateRequest struct {
+type ReorderRulesCreateInventoryRequest struct {
 	ItemID      string  `json:"itemId" url:"-"`
 	WarehouseID *string `json:"warehouseId,omitempty" url:"-"`
 	MinQty      string  `json:"minQty" url:"-"`
@@ -465,135 +470,135 @@ type PostV1InventoryReorderRulesCreateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryReorderRulesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesCreateInventoryRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryReorderRulesCreateRequestFieldItemID)
+func (r *ReorderRulesCreateInventoryRequest) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reorderRulesCreateInventoryRequestFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryReorderRulesCreateRequestFieldWarehouseID)
+func (r *ReorderRulesCreateInventoryRequest) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reorderRulesCreateInventoryRequestFieldWarehouseID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetMinQty(minQty string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesCreateRequestFieldMinQty)
+func (r *ReorderRulesCreateInventoryRequest) SetMinQty(minQty string) {
+	r.MinQty = minQty
+	r.require(reorderRulesCreateInventoryRequestFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesCreateRequestFieldReorderQty)
+func (r *ReorderRulesCreateInventoryRequest) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesCreateInventoryRequestFieldReorderQty)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetIsActive(isActive *bool) {
-	p.IsActive = isActive
-	p.require(postV1InventoryReorderRulesCreateRequestFieldIsActive)
+func (r *ReorderRulesCreateInventoryRequest) SetIsActive(isActive *bool) {
+	r.IsActive = isActive
+	r.require(reorderRulesCreateInventoryRequestFieldIsActive)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryReorderRulesCreateRequestFieldNotes)
+func (r *ReorderRulesCreateInventoryRequest) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reorderRulesCreateInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryReorderRulesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesCreateRequest
+func (r *ReorderRulesCreateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesCreateInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesCreateRequest(body)
+	*r = ReorderRulesCreateInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesCreateRequest
+func (r *ReorderRulesCreateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesCreateInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryReorderRulesDeleteRequestFieldID = big.NewInt(1 << 0)
+	reorderRulesDeleteInventoryRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryReorderRulesDeleteRequest struct {
+type ReorderRulesDeleteInventoryRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryReorderRulesDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesDeleteInventoryRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesDeleteRequestFieldID)
+func (r *ReorderRulesDeleteInventoryRequest) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesDeleteInventoryRequestFieldID)
 }
 
-func (p *PostV1InventoryReorderRulesDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesDeleteRequest
+func (r *ReorderRulesDeleteInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesDeleteInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesDeleteRequest(body)
+	*r = ReorderRulesDeleteInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesDeleteRequest
+func (r *ReorderRulesDeleteInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesDeleteInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryReorderRulesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesListRequestFieldTotals   = big.NewInt(1 << 4)
+	reorderRulesListInventoryRequestFieldPage     = big.NewInt(1 << 0)
+	reorderRulesListInventoryRequestFieldPageSize = big.NewInt(1 << 1)
+	reorderRulesListInventoryRequestFieldSort     = big.NewInt(1 << 2)
+	reorderRulesListInventoryRequestFieldFilter   = big.NewInt(1 << 3)
+	reorderRulesListInventoryRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryReorderRulesListRequest struct {
-	Page     *int64                                              `json:"page,omitempty" url:"-"`
-	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1InventoryReorderRulesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1InventoryReorderRulesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type ReorderRulesListInventoryRequest struct {
+	Page     *int64                                        `json:"page,omitempty" url:"-"`
+	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ReorderRulesListInventoryRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ReorderRulesListInventoryRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -601,78 +606,78 @@ type PostV1InventoryReorderRulesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryReorderRulesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesListInventoryRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1InventoryReorderRulesListRequestFieldPage)
+func (r *ReorderRulesListInventoryRequest) SetPage(page *int64) {
+	r.Page = page
+	r.require(reorderRulesListInventoryRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryReorderRulesListRequestFieldPageSize)
+func (r *ReorderRulesListInventoryRequest) SetPageSize(pageSize *int64) {
+	r.PageSize = pageSize
+	r.require(reorderRulesListInventoryRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequest) SetSort(sort []*PostV1InventoryReorderRulesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1InventoryReorderRulesListRequestFieldSort)
+func (r *ReorderRulesListInventoryRequest) SetSort(sort []*ReorderRulesListInventoryRequestSortItem) {
+	r.Sort = sort
+	r.require(reorderRulesListInventoryRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequest) SetFilter(filter []*PostV1InventoryReorderRulesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1InventoryReorderRulesListRequestFieldFilter)
+func (r *ReorderRulesListInventoryRequest) SetFilter(filter []*ReorderRulesListInventoryRequestFilterItem) {
+	r.Filter = filter
+	r.require(reorderRulesListInventoryRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1InventoryReorderRulesListRequestFieldTotals)
+func (r *ReorderRulesListInventoryRequest) SetTotals(totals []string) {
+	r.Totals = totals
+	r.require(reorderRulesListInventoryRequestFieldTotals)
 }
 
-func (p *PostV1InventoryReorderRulesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesListRequest
+func (r *ReorderRulesListInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesListInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesListRequest(body)
+	*r = ReorderRulesListInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesListRequest
+func (r *ReorderRulesListInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesListInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryReorderRulesUpdateRequestFieldID         = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesUpdateRequestFieldMinQty     = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesUpdateRequestFieldReorderQty = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesUpdateRequestFieldIsActive   = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesUpdateRequestFieldNotes      = big.NewInt(1 << 4)
+	reorderRulesUpdateInventoryRequestFieldID         = big.NewInt(1 << 0)
+	reorderRulesUpdateInventoryRequestFieldMinQty     = big.NewInt(1 << 1)
+	reorderRulesUpdateInventoryRequestFieldReorderQty = big.NewInt(1 << 2)
+	reorderRulesUpdateInventoryRequestFieldIsActive   = big.NewInt(1 << 3)
+	reorderRulesUpdateInventoryRequestFieldNotes      = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryReorderRulesUpdateRequest struct {
+type ReorderRulesUpdateInventoryRequest struct {
 	ID         string  `json:"id" url:"-"`
 	MinQty     *string `json:"minQty,omitempty" url:"-"`
 	ReorderQty *string `json:"reorderQty,omitempty" url:"-"`
@@ -683,134 +688,134 @@ type PostV1InventoryReorderRulesUpdateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryReorderRulesUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesUpdateInventoryRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesUpdateRequestFieldID)
+func (r *ReorderRulesUpdateInventoryRequest) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesUpdateInventoryRequestFieldID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateRequest) SetMinQty(minQty *string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesUpdateRequestFieldMinQty)
+func (r *ReorderRulesUpdateInventoryRequest) SetMinQty(minQty *string) {
+	r.MinQty = minQty
+	r.require(reorderRulesUpdateInventoryRequestFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateRequest) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesUpdateRequestFieldReorderQty)
+func (r *ReorderRulesUpdateInventoryRequest) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesUpdateInventoryRequestFieldReorderQty)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateRequest) SetIsActive(isActive *bool) {
-	p.IsActive = isActive
-	p.require(postV1InventoryReorderRulesUpdateRequestFieldIsActive)
+func (r *ReorderRulesUpdateInventoryRequest) SetIsActive(isActive *bool) {
+	r.IsActive = isActive
+	r.require(reorderRulesUpdateInventoryRequestFieldIsActive)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryReorderRulesUpdateRequestFieldNotes)
+func (r *ReorderRulesUpdateInventoryRequest) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reorderRulesUpdateInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryReorderRulesUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesUpdateRequest
+func (r *ReorderRulesUpdateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesUpdateInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesUpdateRequest(body)
+	*r = ReorderRulesUpdateInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesUpdateRequest
+func (r *ReorderRulesUpdateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesUpdateInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-type PostV1InventorySettingsGetRequest struct {
+type SettingsGetInventoryRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventorySettingsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsGetInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 var (
-	postV1InventorySettingsUpdateRequestFieldNegativeStockPolicy = big.NewInt(1 << 0)
+	settingsUpdateInventoryRequestFieldNegativeStockPolicy = big.NewInt(1 << 0)
 )
 
-type PostV1InventorySettingsUpdateRequest struct {
-	NegativeStockPolicy PostV1InventorySettingsUpdateRequestNegativeStockPolicy `json:"negativeStockPolicy" url:"-"`
+type SettingsUpdateInventoryRequest struct {
+	NegativeStockPolicy SettingsUpdateInventoryRequestNegativeStockPolicy `json:"negativeStockPolicy" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventorySettingsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsUpdateInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetNegativeStockPolicy sets the NegativeStockPolicy field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventorySettingsUpdateRequest) SetNegativeStockPolicy(negativeStockPolicy PostV1InventorySettingsUpdateRequestNegativeStockPolicy) {
-	p.NegativeStockPolicy = negativeStockPolicy
-	p.require(postV1InventorySettingsUpdateRequestFieldNegativeStockPolicy)
+func (s *SettingsUpdateInventoryRequest) SetNegativeStockPolicy(negativeStockPolicy SettingsUpdateInventoryRequestNegativeStockPolicy) {
+	s.NegativeStockPolicy = negativeStockPolicy
+	s.require(settingsUpdateInventoryRequestFieldNegativeStockPolicy)
 }
 
-func (p *PostV1InventorySettingsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventorySettingsUpdateRequest
+func (s *SettingsUpdateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventorySettingsUpdateRequest(body)
+	*s = SettingsUpdateInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventorySettingsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventorySettingsUpdateRequest
+func (s *SettingsUpdateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockLevelsRequestFieldWarehouseID = big.NewInt(1 << 0)
-	postV1InventoryStockLevelsRequestFieldItemID      = big.NewInt(1 << 1)
+	stockLevelsInventoryRequestFieldWarehouseID = big.NewInt(1 << 0)
+	stockLevelsInventoryRequestFieldItemID      = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryStockLevelsRequest struct {
+type StockLevelsInventoryRequest struct {
 	WarehouseID *string `json:"warehouseId,omitempty" url:"-"`
 	ItemID      *string `json:"itemId,omitempty" url:"-"`
 
@@ -818,61 +823,61 @@ type PostV1InventoryStockLevelsRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockLevelsRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockLevelsInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockLevelsRequestFieldWarehouseID)
+func (s *StockLevelsInventoryRequest) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(stockLevelsInventoryRequestFieldWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsRequest) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockLevelsRequestFieldItemID)
+func (s *StockLevelsInventoryRequest) SetItemID(itemID *string) {
+	s.ItemID = itemID
+	s.require(stockLevelsInventoryRequestFieldItemID)
 }
 
-func (p *PostV1InventoryStockLevelsRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockLevelsRequest
+func (s *StockLevelsInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockLevelsInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockLevelsRequest(body)
+	*s = StockLevelsInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockLevelsRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockLevelsRequest
+func (s *StockLevelsInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockLevelsInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockMovementsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1InventoryStockMovementsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1InventoryStockMovementsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1InventoryStockMovementsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1InventoryStockMovementsListRequestFieldTotals   = big.NewInt(1 << 4)
+	stockMovementsListInventoryRequestFieldPage     = big.NewInt(1 << 0)
+	stockMovementsListInventoryRequestFieldPageSize = big.NewInt(1 << 1)
+	stockMovementsListInventoryRequestFieldSort     = big.NewInt(1 << 2)
+	stockMovementsListInventoryRequestFieldFilter   = big.NewInt(1 << 3)
+	stockMovementsListInventoryRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryStockMovementsListRequest struct {
-	Page     *int64                                                `json:"page,omitempty" url:"-"`
-	PageSize *int64                                                `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1InventoryStockMovementsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1InventoryStockMovementsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type StockMovementsListInventoryRequest struct {
+	Page     *int64                                          `json:"page,omitempty" url:"-"`
+	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
+	Sort     []*StockMovementsListInventoryRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*StockMovementsListInventoryRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -880,660 +885,523 @@ type PostV1InventoryStockMovementsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockMovementsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockMovementsListInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1InventoryStockMovementsListRequestFieldPage)
+func (s *StockMovementsListInventoryRequest) SetPage(page *int64) {
+	s.Page = page
+	s.require(stockMovementsListInventoryRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryStockMovementsListRequestFieldPageSize)
+func (s *StockMovementsListInventoryRequest) SetPageSize(pageSize *int64) {
+	s.PageSize = pageSize
+	s.require(stockMovementsListInventoryRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequest) SetSort(sort []*PostV1InventoryStockMovementsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1InventoryStockMovementsListRequestFieldSort)
+func (s *StockMovementsListInventoryRequest) SetSort(sort []*StockMovementsListInventoryRequestSortItem) {
+	s.Sort = sort
+	s.require(stockMovementsListInventoryRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequest) SetFilter(filter []*PostV1InventoryStockMovementsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1InventoryStockMovementsListRequestFieldFilter)
+func (s *StockMovementsListInventoryRequest) SetFilter(filter []*StockMovementsListInventoryRequestFilterItem) {
+	s.Filter = filter
+	s.require(stockMovementsListInventoryRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1InventoryStockMovementsListRequestFieldTotals)
+func (s *StockMovementsListInventoryRequest) SetTotals(totals []string) {
+	s.Totals = totals
+	s.require(stockMovementsListInventoryRequestFieldTotals)
 }
 
-func (p *PostV1InventoryStockMovementsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockMovementsListRequest
+func (s *StockMovementsListInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockMovementsListInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockMovementsListRequest(body)
+	*s = StockMovementsListInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockMovementsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockMovementsListRequest
+func (s *StockMovementsListInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockMovementsListInventoryRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockReceiveRequestFieldWarehouseID = big.NewInt(1 << 0)
-	postV1InventoryStockReceiveRequestFieldItemID      = big.NewInt(1 << 1)
-	postV1InventoryStockReceiveRequestFieldDate        = big.NewInt(1 << 2)
-	postV1InventoryStockReceiveRequestFieldQuantity    = big.NewInt(1 << 3)
-	postV1InventoryStockReceiveRequestFieldUnitCost    = big.NewInt(1 << 4)
-	postV1InventoryStockReceiveRequestFieldLotNumber   = big.NewInt(1 << 5)
-	postV1InventoryStockReceiveRequestFieldExpiryDate  = big.NewInt(1 << 6)
-	postV1InventoryStockReceiveRequestFieldNotes       = big.NewInt(1 << 7)
+	stockReceiveInventoryRequestFieldWarehouseID = big.NewInt(1 << 0)
+	stockReceiveInventoryRequestFieldItemID      = big.NewInt(1 << 1)
+	stockReceiveInventoryRequestFieldDate        = big.NewInt(1 << 2)
+	stockReceiveInventoryRequestFieldQuantity    = big.NewInt(1 << 3)
+	stockReceiveInventoryRequestFieldUnitCost    = big.NewInt(1 << 4)
+	stockReceiveInventoryRequestFieldLotNumber   = big.NewInt(1 << 5)
+	stockReceiveInventoryRequestFieldExpiryDate  = big.NewInt(1 << 6)
+	stockReceiveInventoryRequestFieldNotes       = big.NewInt(1 << 7)
 )
 
-type PostV1InventoryStockReceiveRequest struct {
-	WarehouseID string  `json:"warehouseId" url:"-"`
-	ItemID      string  `json:"itemId" url:"-"`
-	Date        string  `json:"date" url:"-"`
-	Quantity    string  `json:"quantity" url:"-"`
-	UnitCost    string  `json:"unitCost" url:"-"`
-	LotNumber   *string `json:"lotNumber,omitempty" url:"-"`
-	ExpiryDate  *string `json:"expiryDate,omitempty" url:"-"`
-	Notes       *string `json:"notes,omitempty" url:"-"`
+type StockReceiveInventoryRequest struct {
+	WarehouseID string     `json:"warehouseId" url:"-"`
+	ItemID      string     `json:"itemId" url:"-"`
+	Date        time.Time  `json:"date" url:"-" format:"date"`
+	Quantity    string     `json:"quantity" url:"-"`
+	UnitCost    string     `json:"unitCost" url:"-"`
+	LotNumber   *string    `json:"lotNumber,omitempty" url:"-"`
+	ExpiryDate  *time.Time `json:"expiryDate,omitempty" url:"-" format:"date"`
+	Notes       *string    `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockReceiveRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockReceiveInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockReceiveRequestFieldWarehouseID)
+func (s *StockReceiveInventoryRequest) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockReceiveInventoryRequestFieldWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockReceiveRequestFieldItemID)
+func (s *StockReceiveInventoryRequest) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockReceiveInventoryRequestFieldItemID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryStockReceiveRequestFieldDate)
+func (s *StockReceiveInventoryRequest) SetDate(date time.Time) {
+	s.Date = date
+	s.require(stockReceiveInventoryRequestFieldDate)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryStockReceiveRequestFieldQuantity)
+func (s *StockReceiveInventoryRequest) SetQuantity(quantity string) {
+	s.Quantity = quantity
+	s.require(stockReceiveInventoryRequestFieldQuantity)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetUnitCost(unitCost string) {
-	p.UnitCost = unitCost
-	p.require(postV1InventoryStockReceiveRequestFieldUnitCost)
+func (s *StockReceiveInventoryRequest) SetUnitCost(unitCost string) {
+	s.UnitCost = unitCost
+	s.require(stockReceiveInventoryRequestFieldUnitCost)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryStockReceiveRequestFieldLotNumber)
+func (s *StockReceiveInventoryRequest) SetLotNumber(lotNumber *string) {
+	s.LotNumber = lotNumber
+	s.require(stockReceiveInventoryRequestFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryStockReceiveRequestFieldExpiryDate)
+func (s *StockReceiveInventoryRequest) SetExpiryDate(expiryDate *time.Time) {
+	s.ExpiryDate = expiryDate
+	s.require(stockReceiveInventoryRequestFieldExpiryDate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryStockReceiveRequestFieldNotes)
+func (s *StockReceiveInventoryRequest) SetNotes(notes *string) {
+	s.Notes = notes
+	s.require(stockReceiveInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryStockReceiveRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockReceiveRequest
+func (s *StockReceiveInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockReceiveInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockReceiveRequest(body)
+	*s = StockReceiveInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockReceiveRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockReceiveRequest
+func (s *StockReceiveInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockReceiveInventoryRequest
 	var marshaler = struct {
 		embed
+		Date       *internal.Date `json:"date"`
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*s),
+		Date:       internal.NewDate(s.Date),
+		ExpiryDate: internal.NewOptionalDate(s.ExpiryDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockTakeRequestFieldWarehouseID          = big.NewInt(1 << 0)
-	postV1InventoryStockTakeRequestFieldDate                 = big.NewInt(1 << 1)
-	postV1InventoryStockTakeRequestFieldExpenseAccountCode   = big.NewInt(1 << 2)
-	postV1InventoryStockTakeRequestFieldInventoryAccountCode = big.NewInt(1 << 3)
-	postV1InventoryStockTakeRequestFieldLines                = big.NewInt(1 << 4)
+	stockTakeInventoryRequestFieldWarehouseID          = big.NewInt(1 << 0)
+	stockTakeInventoryRequestFieldDate                 = big.NewInt(1 << 1)
+	stockTakeInventoryRequestFieldExpenseAccountCode   = big.NewInt(1 << 2)
+	stockTakeInventoryRequestFieldInventoryAccountCode = big.NewInt(1 << 3)
+	stockTakeInventoryRequestFieldLines                = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryStockTakeRequest struct {
-	WarehouseID          string                                      `json:"warehouseId" url:"-"`
-	Date                 string                                      `json:"date" url:"-"`
-	ExpenseAccountCode   *string                                     `json:"expenseAccountCode,omitempty" url:"-"`
-	InventoryAccountCode *string                                     `json:"inventoryAccountCode,omitempty" url:"-"`
-	Lines                []*PostV1InventoryStockTakeRequestLinesItem `json:"lines" url:"-"`
+type StockTakeInventoryRequest struct {
+	WarehouseID          string                                `json:"warehouseId" url:"-"`
+	Date                 time.Time                             `json:"date" url:"-" format:"date"`
+	ExpenseAccountCode   *string                               `json:"expenseAccountCode,omitempty" url:"-"`
+	InventoryAccountCode *string                               `json:"inventoryAccountCode,omitempty" url:"-"`
+	Lines                []*StockTakeInventoryRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockTakeRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTakeInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequest) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockTakeRequestFieldWarehouseID)
+func (s *StockTakeInventoryRequest) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockTakeInventoryRequestFieldWarehouseID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryStockTakeRequestFieldDate)
+func (s *StockTakeInventoryRequest) SetDate(date time.Time) {
+	s.Date = date
+	s.require(stockTakeInventoryRequestFieldDate)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequest) SetExpenseAccountCode(expenseAccountCode *string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1InventoryStockTakeRequestFieldExpenseAccountCode)
+func (s *StockTakeInventoryRequest) SetExpenseAccountCode(expenseAccountCode *string) {
+	s.ExpenseAccountCode = expenseAccountCode
+	s.require(stockTakeInventoryRequestFieldExpenseAccountCode)
 }
 
 // SetInventoryAccountCode sets the InventoryAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
-	p.InventoryAccountCode = inventoryAccountCode
-	p.require(postV1InventoryStockTakeRequestFieldInventoryAccountCode)
+func (s *StockTakeInventoryRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
+	s.InventoryAccountCode = inventoryAccountCode
+	s.require(stockTakeInventoryRequestFieldInventoryAccountCode)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequest) SetLines(lines []*PostV1InventoryStockTakeRequestLinesItem) {
-	p.Lines = lines
-	p.require(postV1InventoryStockTakeRequestFieldLines)
+func (s *StockTakeInventoryRequest) SetLines(lines []*StockTakeInventoryRequestLinesItem) {
+	s.Lines = lines
+	s.require(stockTakeInventoryRequestFieldLines)
 }
 
-func (p *PostV1InventoryStockTakeRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTakeRequest
+func (s *StockTakeInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockTakeInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTakeRequest(body)
+	*s = StockTakeInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockTakeRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTakeRequest
+func (s *StockTakeInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockTakeInventoryRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
+		Date:  internal.NewDate(s.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockTransferRequestFieldFromWarehouseID = big.NewInt(1 << 0)
-	postV1InventoryStockTransferRequestFieldToWarehouseID   = big.NewInt(1 << 1)
-	postV1InventoryStockTransferRequestFieldItemID          = big.NewInt(1 << 2)
-	postV1InventoryStockTransferRequestFieldDate            = big.NewInt(1 << 3)
-	postV1InventoryStockTransferRequestFieldQuantity        = big.NewInt(1 << 4)
-	postV1InventoryStockTransferRequestFieldLotNumber       = big.NewInt(1 << 5)
-	postV1InventoryStockTransferRequestFieldNotes           = big.NewInt(1 << 6)
+	stockTransferInventoryRequestFieldFromWarehouseID = big.NewInt(1 << 0)
+	stockTransferInventoryRequestFieldToWarehouseID   = big.NewInt(1 << 1)
+	stockTransferInventoryRequestFieldItemID          = big.NewInt(1 << 2)
+	stockTransferInventoryRequestFieldDate            = big.NewInt(1 << 3)
+	stockTransferInventoryRequestFieldQuantity        = big.NewInt(1 << 4)
+	stockTransferInventoryRequestFieldLotNumber       = big.NewInt(1 << 5)
+	stockTransferInventoryRequestFieldNotes           = big.NewInt(1 << 6)
 )
 
-type PostV1InventoryStockTransferRequest struct {
-	FromWarehouseID string  `json:"fromWarehouseId" url:"-"`
-	ToWarehouseID   string  `json:"toWarehouseId" url:"-"`
-	ItemID          string  `json:"itemId" url:"-"`
-	Date            string  `json:"date" url:"-"`
-	Quantity        string  `json:"quantity" url:"-"`
-	LotNumber       *string `json:"lotNumber,omitempty" url:"-"`
-	Notes           *string `json:"notes,omitempty" url:"-"`
+type StockTransferInventoryRequest struct {
+	FromWarehouseID string    `json:"fromWarehouseId" url:"-"`
+	ToWarehouseID   string    `json:"toWarehouseId" url:"-"`
+	ItemID          string    `json:"itemId" url:"-"`
+	Date            time.Time `json:"date" url:"-" format:"date"`
+	Quantity        string    `json:"quantity" url:"-"`
+	LotNumber       *string   `json:"lotNumber,omitempty" url:"-"`
+	Notes           *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockTransferRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTransferInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetFromWarehouseID sets the FromWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetFromWarehouseID(fromWarehouseID string) {
-	p.FromWarehouseID = fromWarehouseID
-	p.require(postV1InventoryStockTransferRequestFieldFromWarehouseID)
+func (s *StockTransferInventoryRequest) SetFromWarehouseID(fromWarehouseID string) {
+	s.FromWarehouseID = fromWarehouseID
+	s.require(stockTransferInventoryRequestFieldFromWarehouseID)
 }
 
 // SetToWarehouseID sets the ToWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetToWarehouseID(toWarehouseID string) {
-	p.ToWarehouseID = toWarehouseID
-	p.require(postV1InventoryStockTransferRequestFieldToWarehouseID)
+func (s *StockTransferInventoryRequest) SetToWarehouseID(toWarehouseID string) {
+	s.ToWarehouseID = toWarehouseID
+	s.require(stockTransferInventoryRequestFieldToWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockTransferRequestFieldItemID)
+func (s *StockTransferInventoryRequest) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockTransferInventoryRequestFieldItemID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryStockTransferRequestFieldDate)
+func (s *StockTransferInventoryRequest) SetDate(date time.Time) {
+	s.Date = date
+	s.require(stockTransferInventoryRequestFieldDate)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryStockTransferRequestFieldQuantity)
+func (s *StockTransferInventoryRequest) SetQuantity(quantity string) {
+	s.Quantity = quantity
+	s.require(stockTransferInventoryRequestFieldQuantity)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryStockTransferRequestFieldLotNumber)
+func (s *StockTransferInventoryRequest) SetLotNumber(lotNumber *string) {
+	s.LotNumber = lotNumber
+	s.require(stockTransferInventoryRequestFieldLotNumber)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryStockTransferRequestFieldNotes)
+func (s *StockTransferInventoryRequest) SetNotes(notes *string) {
+	s.Notes = notes
+	s.require(stockTransferInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryStockTransferRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTransferRequest
+func (s *StockTransferInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockTransferInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTransferRequest(body)
+	*s = StockTransferInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockTransferRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTransferRequest
+func (s *StockTransferInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockTransferInventoryRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
+		Date:  internal.NewDate(s.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1InventoryStockWriteOffRequestFieldWarehouseID          = big.NewInt(1 << 0)
-	postV1InventoryStockWriteOffRequestFieldItemID               = big.NewInt(1 << 1)
-	postV1InventoryStockWriteOffRequestFieldDate                 = big.NewInt(1 << 2)
-	postV1InventoryStockWriteOffRequestFieldQuantity             = big.NewInt(1 << 3)
-	postV1InventoryStockWriteOffRequestFieldLotNumber            = big.NewInt(1 << 4)
-	postV1InventoryStockWriteOffRequestFieldExpenseAccountCode   = big.NewInt(1 << 5)
-	postV1InventoryStockWriteOffRequestFieldInventoryAccountCode = big.NewInt(1 << 6)
-	postV1InventoryStockWriteOffRequestFieldNotes                = big.NewInt(1 << 7)
+	stockWriteOffInventoryRequestFieldWarehouseID          = big.NewInt(1 << 0)
+	stockWriteOffInventoryRequestFieldItemID               = big.NewInt(1 << 1)
+	stockWriteOffInventoryRequestFieldDate                 = big.NewInt(1 << 2)
+	stockWriteOffInventoryRequestFieldQuantity             = big.NewInt(1 << 3)
+	stockWriteOffInventoryRequestFieldLotNumber            = big.NewInt(1 << 4)
+	stockWriteOffInventoryRequestFieldExpenseAccountCode   = big.NewInt(1 << 5)
+	stockWriteOffInventoryRequestFieldInventoryAccountCode = big.NewInt(1 << 6)
+	stockWriteOffInventoryRequestFieldNotes                = big.NewInt(1 << 7)
 )
 
-type PostV1InventoryStockWriteOffRequest struct {
-	WarehouseID          string  `json:"warehouseId" url:"-"`
-	ItemID               string  `json:"itemId" url:"-"`
-	Date                 string  `json:"date" url:"-"`
-	Quantity             string  `json:"quantity" url:"-"`
-	LotNumber            *string `json:"lotNumber,omitempty" url:"-"`
-	ExpenseAccountCode   *string `json:"expenseAccountCode,omitempty" url:"-"`
-	InventoryAccountCode *string `json:"inventoryAccountCode,omitempty" url:"-"`
-	Notes                *string `json:"notes,omitempty" url:"-"`
+type StockWriteOffInventoryRequest struct {
+	WarehouseID          string    `json:"warehouseId" url:"-"`
+	ItemID               string    `json:"itemId" url:"-"`
+	Date                 time.Time `json:"date" url:"-" format:"date"`
+	Quantity             string    `json:"quantity" url:"-"`
+	LotNumber            *string   `json:"lotNumber,omitempty" url:"-"`
+	ExpenseAccountCode   *string   `json:"expenseAccountCode,omitempty" url:"-"`
+	InventoryAccountCode *string   `json:"inventoryAccountCode,omitempty" url:"-"`
+	Notes                *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1InventoryStockWriteOffRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockWriteOffInventoryRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockWriteOffRequestFieldWarehouseID)
+func (s *StockWriteOffInventoryRequest) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockWriteOffInventoryRequestFieldWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockWriteOffRequestFieldItemID)
+func (s *StockWriteOffInventoryRequest) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockWriteOffInventoryRequestFieldItemID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryStockWriteOffRequestFieldDate)
+func (s *StockWriteOffInventoryRequest) SetDate(date time.Time) {
+	s.Date = date
+	s.require(stockWriteOffInventoryRequestFieldDate)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryStockWriteOffRequestFieldQuantity)
+func (s *StockWriteOffInventoryRequest) SetQuantity(quantity string) {
+	s.Quantity = quantity
+	s.require(stockWriteOffInventoryRequestFieldQuantity)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryStockWriteOffRequestFieldLotNumber)
+func (s *StockWriteOffInventoryRequest) SetLotNumber(lotNumber *string) {
+	s.LotNumber = lotNumber
+	s.require(stockWriteOffInventoryRequestFieldLotNumber)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetExpenseAccountCode(expenseAccountCode *string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1InventoryStockWriteOffRequestFieldExpenseAccountCode)
+func (s *StockWriteOffInventoryRequest) SetExpenseAccountCode(expenseAccountCode *string) {
+	s.ExpenseAccountCode = expenseAccountCode
+	s.require(stockWriteOffInventoryRequestFieldExpenseAccountCode)
 }
 
 // SetInventoryAccountCode sets the InventoryAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
-	p.InventoryAccountCode = inventoryAccountCode
-	p.require(postV1InventoryStockWriteOffRequestFieldInventoryAccountCode)
+func (s *StockWriteOffInventoryRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
+	s.InventoryAccountCode = inventoryAccountCode
+	s.require(stockWriteOffInventoryRequestFieldInventoryAccountCode)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryStockWriteOffRequestFieldNotes)
+func (s *StockWriteOffInventoryRequest) SetNotes(notes *string) {
+	s.Notes = notes
+	s.require(stockWriteOffInventoryRequestFieldNotes)
 }
 
-func (p *PostV1InventoryStockWriteOffRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockWriteOffRequest
+func (s *StockWriteOffInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockWriteOffInventoryRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockWriteOffRequest(body)
+	*s = StockWriteOffInventoryRequest(body)
 	return nil
 }
 
-func (p *PostV1InventoryStockWriteOffRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockWriteOffRequest
+func (s *StockWriteOffInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed StockWriteOffInventoryRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
+		Date:  internal.NewDate(s.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-var (
-	postV1InventoryWarehousesCreateRequestFieldCode      = big.NewInt(1 << 0)
-	postV1InventoryWarehousesCreateRequestFieldName      = big.NewInt(1 << 1)
-	postV1InventoryWarehousesCreateRequestFieldIsDefault = big.NewInt(1 << 2)
-)
-
-type PostV1InventoryWarehousesCreateRequest struct {
-	Code      string `json:"code" url:"-"`
-	Name      string `json:"name" url:"-"`
-	IsDefault *bool  `json:"isDefault,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1InventoryWarehousesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateRequest) SetCode(code string) {
-	p.Code = code
-	p.require(postV1InventoryWarehousesCreateRequestFieldCode)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1InventoryWarehousesCreateRequestFieldName)
-}
-
-// SetIsDefault sets the IsDefault field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateRequest) SetIsDefault(isDefault *bool) {
-	p.IsDefault = isDefault
-	p.require(postV1InventoryWarehousesCreateRequestFieldIsDefault)
-}
-
-func (p *PostV1InventoryWarehousesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesCreateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1InventoryWarehousesCreateRequest(body)
-	return nil
-}
-
-func (p *PostV1InventoryWarehousesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesCreateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1InventoryWarehousesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1InventoryWarehousesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1InventoryWarehousesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1InventoryWarehousesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1InventoryWarehousesListRequestFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1InventoryWarehousesListRequest struct {
-	Page     *int64                                            `json:"page,omitempty" url:"-"`
-	PageSize *int64                                            `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1InventoryWarehousesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1InventoryWarehousesListRequestFilterItem `json:"filter,omitempty" url:"-"`
-	// Numeric fields to sum over every row matching the filter (not only the current page)
-	Totals []string `json:"totals,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1InventoryWarehousesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1InventoryWarehousesListRequestFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryWarehousesListRequestFieldPageSize)
-}
-
-// SetSort sets the Sort field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequest) SetSort(sort []*PostV1InventoryWarehousesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1InventoryWarehousesListRequestFieldSort)
-}
-
-// SetFilter sets the Filter field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequest) SetFilter(filter []*PostV1InventoryWarehousesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1InventoryWarehousesListRequestFieldFilter)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1InventoryWarehousesListRequestFieldTotals)
-}
-
-func (p *PostV1InventoryWarehousesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesListRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1InventoryWarehousesListRequest(body)
-	return nil
-}
-
-func (p *PostV1InventoryWarehousesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesListRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-type PostV1InventoryLandedCostsCreateRequestMethod string
+type LandedCostsCreateInventoryRequestMethod string
 
 const (
-	PostV1InventoryLandedCostsCreateRequestMethodByValue    PostV1InventoryLandedCostsCreateRequestMethod = "by_value"
-	PostV1InventoryLandedCostsCreateRequestMethodByQuantity PostV1InventoryLandedCostsCreateRequestMethod = "by_quantity"
+	LandedCostsCreateInventoryRequestMethodByValue    LandedCostsCreateInventoryRequestMethod = "by_value"
+	LandedCostsCreateInventoryRequestMethodByQuantity LandedCostsCreateInventoryRequestMethod = "by_quantity"
 )
 
-func NewPostV1InventoryLandedCostsCreateRequestMethodFromString(s string) (PostV1InventoryLandedCostsCreateRequestMethod, error) {
+func NewLandedCostsCreateInventoryRequestMethodFromString(s string) (LandedCostsCreateInventoryRequestMethod, error) {
 	switch s {
 	case "by_value":
-		return PostV1InventoryLandedCostsCreateRequestMethodByValue, nil
+		return LandedCostsCreateInventoryRequestMethodByValue, nil
 	case "by_quantity":
-		return PostV1InventoryLandedCostsCreateRequestMethodByQuantity, nil
+		return LandedCostsCreateInventoryRequestMethodByQuantity, nil
 	}
-	var t PostV1InventoryLandedCostsCreateRequestMethod
+	var t LandedCostsCreateInventoryRequestMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsCreateRequestMethod) Ptr() *PostV1InventoryLandedCostsCreateRequestMethod {
-	return &p
+func (l LandedCostsCreateInventoryRequestMethod) Ptr() *LandedCostsCreateInventoryRequestMethod {
+	return &l
 }
 
 var (
-	postV1InventoryLandedCostsCreateResponseFieldID              = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsCreateResponseFieldDate            = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsCreateResponseFieldAmount          = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsCreateResponseFieldMethod          = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsCreateResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
-	postV1InventoryLandedCostsCreateResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
-	postV1InventoryLandedCostsCreateResponseFieldNotes           = big.NewInt(1 << 6)
-	postV1InventoryLandedCostsCreateResponseFieldCreatedAt       = big.NewInt(1 << 7)
-	postV1InventoryLandedCostsCreateResponseFieldLines           = big.NewInt(1 << 8)
+	landedCostsCreateInventoryResponseFieldID              = big.NewInt(1 << 0)
+	landedCostsCreateInventoryResponseFieldDate            = big.NewInt(1 << 1)
+	landedCostsCreateInventoryResponseFieldAmount          = big.NewInt(1 << 2)
+	landedCostsCreateInventoryResponseFieldMethod          = big.NewInt(1 << 3)
+	landedCostsCreateInventoryResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
+	landedCostsCreateInventoryResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
+	landedCostsCreateInventoryResponseFieldNotes           = big.NewInt(1 << 6)
+	landedCostsCreateInventoryResponseFieldCreatedAt       = big.NewInt(1 << 7)
+	landedCostsCreateInventoryResponseFieldLines           = big.NewInt(1 << 8)
 )
 
-type PostV1InventoryLandedCostsCreateResponse struct {
-	ID              string                                               `json:"id" url:"id"`
-	Date            string                                               `json:"date" url:"date"`
-	Amount          string                                               `json:"amount" url:"amount"`
-	Method          PostV1InventoryLandedCostsCreateResponseMethod       `json:"method" url:"method"`
-	GoodsReceiptID  *string                                              `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
-	SourceInvoiceID *string                                              `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
-	Notes           *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt       string                                               `json:"createdAt" url:"createdAt"`
-	Lines           []*PostV1InventoryLandedCostsCreateResponseLinesItem `json:"lines" url:"lines"`
+type LandedCostsCreateInventoryResponse struct {
+	ID              string                                         `json:"id" url:"id"`
+	Date            time.Time                                      `json:"date" url:"date" format:"date"`
+	Amount          string                                         `json:"amount" url:"amount"`
+	Method          LandedCostsCreateInventoryResponseMethod       `json:"method" url:"method"`
+	GoodsReceiptID  *string                                        `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
+	SourceInvoiceID *string                                        `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
+	Notes           *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt       time.Time                                      `json:"createdAt" url:"createdAt"`
+	Lines           []*LandedCostsCreateInventoryResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1542,195 +1410,207 @@ type PostV1InventoryLandedCostsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetID() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetDate() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetDate() time.Time {
+	if l == nil {
+		return time.Time{}
+	}
+	return l.Date
+}
+
+func (l *LandedCostsCreateInventoryResponse) GetAmount() string {
+	if l == nil {
 		return ""
 	}
-	return p.Date
+	return l.Amount
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetAmount() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetMethod() LandedCostsCreateInventoryResponseMethod {
+	if l == nil {
 		return ""
 	}
-	return p.Amount
+	return l.Method
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetMethod() PostV1InventoryLandedCostsCreateResponseMethod {
-	if p == nil {
-		return ""
-	}
-	return p.Method
-}
-
-func (p *PostV1InventoryLandedCostsCreateResponse) GetGoodsReceiptID() *string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetGoodsReceiptID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.GoodsReceiptID
+	return l.GoodsReceiptID
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetSourceInvoiceID() *string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetSourceInvoiceID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.SourceInvoiceID
+	return l.SourceInvoiceID
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LandedCostsCreateInventoryResponse) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetLines() []*PostV1InventoryLandedCostsCreateResponseLinesItem {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetLines() []*LandedCostsCreateInventoryResponseLinesItem {
+	if l == nil {
 		return nil
 	}
-	return p.Lines
+	return l.Lines
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsCreateInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLandedCostsCreateResponseFieldID)
+func (l *LandedCostsCreateInventoryResponse) SetID(id string) {
+	l.ID = id
+	l.require(landedCostsCreateInventoryResponseFieldID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryLandedCostsCreateResponseFieldDate)
+func (l *LandedCostsCreateInventoryResponse) SetDate(date time.Time) {
+	l.Date = date
+	l.require(landedCostsCreateInventoryResponseFieldDate)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1InventoryLandedCostsCreateResponseFieldAmount)
+func (l *LandedCostsCreateInventoryResponse) SetAmount(amount string) {
+	l.Amount = amount
+	l.require(landedCostsCreateInventoryResponseFieldAmount)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetMethod(method PostV1InventoryLandedCostsCreateResponseMethod) {
-	p.Method = method
-	p.require(postV1InventoryLandedCostsCreateResponseFieldMethod)
+func (l *LandedCostsCreateInventoryResponse) SetMethod(method LandedCostsCreateInventoryResponseMethod) {
+	l.Method = method
+	l.require(landedCostsCreateInventoryResponseFieldMethod)
 }
 
 // SetGoodsReceiptID sets the GoodsReceiptID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetGoodsReceiptID(goodsReceiptID *string) {
-	p.GoodsReceiptID = goodsReceiptID
-	p.require(postV1InventoryLandedCostsCreateResponseFieldGoodsReceiptID)
+func (l *LandedCostsCreateInventoryResponse) SetGoodsReceiptID(goodsReceiptID *string) {
+	l.GoodsReceiptID = goodsReceiptID
+	l.require(landedCostsCreateInventoryResponseFieldGoodsReceiptID)
 }
 
 // SetSourceInvoiceID sets the SourceInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetSourceInvoiceID(sourceInvoiceID *string) {
-	p.SourceInvoiceID = sourceInvoiceID
-	p.require(postV1InventoryLandedCostsCreateResponseFieldSourceInvoiceID)
+func (l *LandedCostsCreateInventoryResponse) SetSourceInvoiceID(sourceInvoiceID *string) {
+	l.SourceInvoiceID = sourceInvoiceID
+	l.require(landedCostsCreateInventoryResponseFieldSourceInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLandedCostsCreateResponseFieldNotes)
+func (l *LandedCostsCreateInventoryResponse) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(landedCostsCreateInventoryResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLandedCostsCreateResponseFieldCreatedAt)
+func (l *LandedCostsCreateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(landedCostsCreateInventoryResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponse) SetLines(lines []*PostV1InventoryLandedCostsCreateResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1InventoryLandedCostsCreateResponseFieldLines)
+func (l *LandedCostsCreateInventoryResponse) SetLines(lines []*LandedCostsCreateInventoryResponseLinesItem) {
+	l.Lines = lines
+	l.require(landedCostsCreateInventoryResponseFieldLines)
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LandedCostsCreateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed LandedCostsCreateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsCreateInventoryResponse(unmarshaler.embed)
+	l.Date = unmarshaler.Date.Time()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsCreateResponse
+func (l *LandedCostsCreateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsCreateInventoryResponse
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		Date:      internal.NewDate(l.Date),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponse) String() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLandedCostsCreateResponseLinesItemFieldMovementID      = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsCreateResponseLinesItemFieldAllocatedAmount = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsCreateResponseLinesItemFieldNewUnitCost     = big.NewInt(1 << 2)
+	landedCostsCreateInventoryResponseLinesItemFieldMovementID      = big.NewInt(1 << 0)
+	landedCostsCreateInventoryResponseLinesItemFieldAllocatedAmount = big.NewInt(1 << 1)
+	landedCostsCreateInventoryResponseLinesItemFieldNewUnitCost     = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryLandedCostsCreateResponseLinesItem struct {
+type LandedCostsCreateInventoryResponseLinesItem struct {
 	MovementID      string `json:"movementId" url:"movementId"`
 	AllocatedAmount string `json:"allocatedAmount" url:"allocatedAmount"`
 	NewUnitCost     string `json:"newUnitCost" url:"newUnitCost"`
@@ -1742,148 +1622,148 @@ type PostV1InventoryLandedCostsCreateResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) GetMovementID() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponseLinesItem) GetMovementID() string {
+	if l == nil {
 		return ""
 	}
-	return p.MovementID
+	return l.MovementID
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) GetAllocatedAmount() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponseLinesItem) GetAllocatedAmount() string {
+	if l == nil {
 		return ""
 	}
-	return p.AllocatedAmount
+	return l.AllocatedAmount
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) GetNewUnitCost() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponseLinesItem) GetNewUnitCost() string {
+	if l == nil {
 		return ""
 	}
-	return p.NewUnitCost
+	return l.NewUnitCost
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsCreateInventoryResponseLinesItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetMovementID sets the MovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) SetMovementID(movementID string) {
-	p.MovementID = movementID
-	p.require(postV1InventoryLandedCostsCreateResponseLinesItemFieldMovementID)
+func (l *LandedCostsCreateInventoryResponseLinesItem) SetMovementID(movementID string) {
+	l.MovementID = movementID
+	l.require(landedCostsCreateInventoryResponseLinesItemFieldMovementID)
 }
 
 // SetAllocatedAmount sets the AllocatedAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) SetAllocatedAmount(allocatedAmount string) {
-	p.AllocatedAmount = allocatedAmount
-	p.require(postV1InventoryLandedCostsCreateResponseLinesItemFieldAllocatedAmount)
+func (l *LandedCostsCreateInventoryResponseLinesItem) SetAllocatedAmount(allocatedAmount string) {
+	l.AllocatedAmount = allocatedAmount
+	l.require(landedCostsCreateInventoryResponseLinesItemFieldAllocatedAmount)
 }
 
 // SetNewUnitCost sets the NewUnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) SetNewUnitCost(newUnitCost string) {
-	p.NewUnitCost = newUnitCost
-	p.require(postV1InventoryLandedCostsCreateResponseLinesItemFieldNewUnitCost)
+func (l *LandedCostsCreateInventoryResponseLinesItem) SetNewUnitCost(newUnitCost string) {
+	l.NewUnitCost = newUnitCost
+	l.require(landedCostsCreateInventoryResponseLinesItemFieldNewUnitCost)
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsCreateResponseLinesItem
+func (l *LandedCostsCreateInventoryResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsCreateInventoryResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsCreateResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsCreateInventoryResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsCreateResponseLinesItem
+func (l *LandedCostsCreateInventoryResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsCreateInventoryResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsCreateResponseLinesItem) String() string {
-	if p == nil {
+func (l *LandedCostsCreateInventoryResponseLinesItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLandedCostsCreateResponseMethod string
+type LandedCostsCreateInventoryResponseMethod string
 
 const (
-	PostV1InventoryLandedCostsCreateResponseMethodByValue    PostV1InventoryLandedCostsCreateResponseMethod = "by_value"
-	PostV1InventoryLandedCostsCreateResponseMethodByQuantity PostV1InventoryLandedCostsCreateResponseMethod = "by_quantity"
+	LandedCostsCreateInventoryResponseMethodByValue    LandedCostsCreateInventoryResponseMethod = "by_value"
+	LandedCostsCreateInventoryResponseMethodByQuantity LandedCostsCreateInventoryResponseMethod = "by_quantity"
 )
 
-func NewPostV1InventoryLandedCostsCreateResponseMethodFromString(s string) (PostV1InventoryLandedCostsCreateResponseMethod, error) {
+func NewLandedCostsCreateInventoryResponseMethodFromString(s string) (LandedCostsCreateInventoryResponseMethod, error) {
 	switch s {
 	case "by_value":
-		return PostV1InventoryLandedCostsCreateResponseMethodByValue, nil
+		return LandedCostsCreateInventoryResponseMethodByValue, nil
 	case "by_quantity":
-		return PostV1InventoryLandedCostsCreateResponseMethodByQuantity, nil
+		return LandedCostsCreateInventoryResponseMethodByQuantity, nil
 	}
-	var t PostV1InventoryLandedCostsCreateResponseMethod
+	var t LandedCostsCreateInventoryResponseMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsCreateResponseMethod) Ptr() *PostV1InventoryLandedCostsCreateResponseMethod {
-	return &p
+func (l LandedCostsCreateInventoryResponseMethod) Ptr() *LandedCostsCreateInventoryResponseMethod {
+	return &l
 }
 
 var (
-	postV1InventoryLandedCostsGetResponseFieldID              = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsGetResponseFieldDate            = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsGetResponseFieldAmount          = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsGetResponseFieldMethod          = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsGetResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
-	postV1InventoryLandedCostsGetResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
-	postV1InventoryLandedCostsGetResponseFieldNotes           = big.NewInt(1 << 6)
-	postV1InventoryLandedCostsGetResponseFieldCreatedAt       = big.NewInt(1 << 7)
-	postV1InventoryLandedCostsGetResponseFieldLines           = big.NewInt(1 << 8)
+	landedCostsGetInventoryResponseFieldID              = big.NewInt(1 << 0)
+	landedCostsGetInventoryResponseFieldDate            = big.NewInt(1 << 1)
+	landedCostsGetInventoryResponseFieldAmount          = big.NewInt(1 << 2)
+	landedCostsGetInventoryResponseFieldMethod          = big.NewInt(1 << 3)
+	landedCostsGetInventoryResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
+	landedCostsGetInventoryResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
+	landedCostsGetInventoryResponseFieldNotes           = big.NewInt(1 << 6)
+	landedCostsGetInventoryResponseFieldCreatedAt       = big.NewInt(1 << 7)
+	landedCostsGetInventoryResponseFieldLines           = big.NewInt(1 << 8)
 )
 
-type PostV1InventoryLandedCostsGetResponse struct {
-	ID              string                                            `json:"id" url:"id"`
-	Date            string                                            `json:"date" url:"date"`
-	Amount          string                                            `json:"amount" url:"amount"`
-	Method          PostV1InventoryLandedCostsGetResponseMethod       `json:"method" url:"method"`
-	GoodsReceiptID  *string                                           `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
-	SourceInvoiceID *string                                           `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
-	Notes           *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt       string                                            `json:"createdAt" url:"createdAt"`
-	Lines           []*PostV1InventoryLandedCostsGetResponseLinesItem `json:"lines" url:"lines"`
+type LandedCostsGetInventoryResponse struct {
+	ID              string                                      `json:"id" url:"id"`
+	Date            time.Time                                   `json:"date" url:"date" format:"date"`
+	Amount          string                                      `json:"amount" url:"amount"`
+	Method          LandedCostsGetInventoryResponseMethod       `json:"method" url:"method"`
+	GoodsReceiptID  *string                                     `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
+	SourceInvoiceID *string                                     `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
+	Notes           *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt       time.Time                                   `json:"createdAt" url:"createdAt"`
+	Lines           []*LandedCostsGetInventoryResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1892,195 +1772,207 @@ type PostV1InventoryLandedCostsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetID() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetDate() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetDate() time.Time {
+	if l == nil {
+		return time.Time{}
+	}
+	return l.Date
+}
+
+func (l *LandedCostsGetInventoryResponse) GetAmount() string {
+	if l == nil {
 		return ""
 	}
-	return p.Date
+	return l.Amount
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetAmount() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetMethod() LandedCostsGetInventoryResponseMethod {
+	if l == nil {
 		return ""
 	}
-	return p.Amount
+	return l.Method
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetMethod() PostV1InventoryLandedCostsGetResponseMethod {
-	if p == nil {
-		return ""
-	}
-	return p.Method
-}
-
-func (p *PostV1InventoryLandedCostsGetResponse) GetGoodsReceiptID() *string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetGoodsReceiptID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.GoodsReceiptID
+	return l.GoodsReceiptID
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetSourceInvoiceID() *string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetSourceInvoiceID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.SourceInvoiceID
+	return l.SourceInvoiceID
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetNotes() *string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LandedCostsGetInventoryResponse) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetLines() []*PostV1InventoryLandedCostsGetResponseLinesItem {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetLines() []*LandedCostsGetInventoryResponseLinesItem {
+	if l == nil {
 		return nil
 	}
-	return p.Lines
+	return l.Lines
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsGetInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLandedCostsGetResponseFieldID)
+func (l *LandedCostsGetInventoryResponse) SetID(id string) {
+	l.ID = id
+	l.require(landedCostsGetInventoryResponseFieldID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryLandedCostsGetResponseFieldDate)
+func (l *LandedCostsGetInventoryResponse) SetDate(date time.Time) {
+	l.Date = date
+	l.require(landedCostsGetInventoryResponseFieldDate)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1InventoryLandedCostsGetResponseFieldAmount)
+func (l *LandedCostsGetInventoryResponse) SetAmount(amount string) {
+	l.Amount = amount
+	l.require(landedCostsGetInventoryResponseFieldAmount)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetMethod(method PostV1InventoryLandedCostsGetResponseMethod) {
-	p.Method = method
-	p.require(postV1InventoryLandedCostsGetResponseFieldMethod)
+func (l *LandedCostsGetInventoryResponse) SetMethod(method LandedCostsGetInventoryResponseMethod) {
+	l.Method = method
+	l.require(landedCostsGetInventoryResponseFieldMethod)
 }
 
 // SetGoodsReceiptID sets the GoodsReceiptID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetGoodsReceiptID(goodsReceiptID *string) {
-	p.GoodsReceiptID = goodsReceiptID
-	p.require(postV1InventoryLandedCostsGetResponseFieldGoodsReceiptID)
+func (l *LandedCostsGetInventoryResponse) SetGoodsReceiptID(goodsReceiptID *string) {
+	l.GoodsReceiptID = goodsReceiptID
+	l.require(landedCostsGetInventoryResponseFieldGoodsReceiptID)
 }
 
 // SetSourceInvoiceID sets the SourceInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetSourceInvoiceID(sourceInvoiceID *string) {
-	p.SourceInvoiceID = sourceInvoiceID
-	p.require(postV1InventoryLandedCostsGetResponseFieldSourceInvoiceID)
+func (l *LandedCostsGetInventoryResponse) SetSourceInvoiceID(sourceInvoiceID *string) {
+	l.SourceInvoiceID = sourceInvoiceID
+	l.require(landedCostsGetInventoryResponseFieldSourceInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLandedCostsGetResponseFieldNotes)
+func (l *LandedCostsGetInventoryResponse) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(landedCostsGetInventoryResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLandedCostsGetResponseFieldCreatedAt)
+func (l *LandedCostsGetInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(landedCostsGetInventoryResponseFieldCreatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponse) SetLines(lines []*PostV1InventoryLandedCostsGetResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1InventoryLandedCostsGetResponseFieldLines)
+func (l *LandedCostsGetInventoryResponse) SetLines(lines []*LandedCostsGetInventoryResponseLinesItem) {
+	l.Lines = lines
+	l.require(landedCostsGetInventoryResponseFieldLines)
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LandedCostsGetInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed LandedCostsGetInventoryResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsGetInventoryResponse(unmarshaler.embed)
+	l.Date = unmarshaler.Date.Time()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsGetResponse
+func (l *LandedCostsGetInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsGetInventoryResponse
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		Date:      internal.NewDate(l.Date),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsGetResponse) String() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLandedCostsGetResponseLinesItemFieldMovementID      = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsGetResponseLinesItemFieldAllocatedAmount = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsGetResponseLinesItemFieldNewUnitCost     = big.NewInt(1 << 2)
+	landedCostsGetInventoryResponseLinesItemFieldMovementID      = big.NewInt(1 << 0)
+	landedCostsGetInventoryResponseLinesItemFieldAllocatedAmount = big.NewInt(1 << 1)
+	landedCostsGetInventoryResponseLinesItemFieldNewUnitCost     = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryLandedCostsGetResponseLinesItem struct {
+type LandedCostsGetInventoryResponseLinesItem struct {
 	MovementID      string `json:"movementId" url:"movementId"`
 	AllocatedAmount string `json:"allocatedAmount" url:"allocatedAmount"`
 	NewUnitCost     string `json:"newUnitCost" url:"newUnitCost"`
@@ -2092,136 +1984,136 @@ type PostV1InventoryLandedCostsGetResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) GetMovementID() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponseLinesItem) GetMovementID() string {
+	if l == nil {
 		return ""
 	}
-	return p.MovementID
+	return l.MovementID
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) GetAllocatedAmount() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponseLinesItem) GetAllocatedAmount() string {
+	if l == nil {
 		return ""
 	}
-	return p.AllocatedAmount
+	return l.AllocatedAmount
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) GetNewUnitCost() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponseLinesItem) GetNewUnitCost() string {
+	if l == nil {
 		return ""
 	}
-	return p.NewUnitCost
+	return l.NewUnitCost
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsGetInventoryResponseLinesItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetMovementID sets the MovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) SetMovementID(movementID string) {
-	p.MovementID = movementID
-	p.require(postV1InventoryLandedCostsGetResponseLinesItemFieldMovementID)
+func (l *LandedCostsGetInventoryResponseLinesItem) SetMovementID(movementID string) {
+	l.MovementID = movementID
+	l.require(landedCostsGetInventoryResponseLinesItemFieldMovementID)
 }
 
 // SetAllocatedAmount sets the AllocatedAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) SetAllocatedAmount(allocatedAmount string) {
-	p.AllocatedAmount = allocatedAmount
-	p.require(postV1InventoryLandedCostsGetResponseLinesItemFieldAllocatedAmount)
+func (l *LandedCostsGetInventoryResponseLinesItem) SetAllocatedAmount(allocatedAmount string) {
+	l.AllocatedAmount = allocatedAmount
+	l.require(landedCostsGetInventoryResponseLinesItemFieldAllocatedAmount)
 }
 
 // SetNewUnitCost sets the NewUnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) SetNewUnitCost(newUnitCost string) {
-	p.NewUnitCost = newUnitCost
-	p.require(postV1InventoryLandedCostsGetResponseLinesItemFieldNewUnitCost)
+func (l *LandedCostsGetInventoryResponseLinesItem) SetNewUnitCost(newUnitCost string) {
+	l.NewUnitCost = newUnitCost
+	l.require(landedCostsGetInventoryResponseLinesItemFieldNewUnitCost)
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsGetResponseLinesItem
+func (l *LandedCostsGetInventoryResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsGetInventoryResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsGetResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsGetInventoryResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsGetResponseLinesItem
+func (l *LandedCostsGetInventoryResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsGetInventoryResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsGetResponseLinesItem) String() string {
-	if p == nil {
+func (l *LandedCostsGetInventoryResponseLinesItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLandedCostsGetResponseMethod string
+type LandedCostsGetInventoryResponseMethod string
 
 const (
-	PostV1InventoryLandedCostsGetResponseMethodByValue    PostV1InventoryLandedCostsGetResponseMethod = "by_value"
-	PostV1InventoryLandedCostsGetResponseMethodByQuantity PostV1InventoryLandedCostsGetResponseMethod = "by_quantity"
+	LandedCostsGetInventoryResponseMethodByValue    LandedCostsGetInventoryResponseMethod = "by_value"
+	LandedCostsGetInventoryResponseMethodByQuantity LandedCostsGetInventoryResponseMethod = "by_quantity"
 )
 
-func NewPostV1InventoryLandedCostsGetResponseMethodFromString(s string) (PostV1InventoryLandedCostsGetResponseMethod, error) {
+func NewLandedCostsGetInventoryResponseMethodFromString(s string) (LandedCostsGetInventoryResponseMethod, error) {
 	switch s {
 	case "by_value":
-		return PostV1InventoryLandedCostsGetResponseMethodByValue, nil
+		return LandedCostsGetInventoryResponseMethodByValue, nil
 	case "by_quantity":
-		return PostV1InventoryLandedCostsGetResponseMethodByQuantity, nil
+		return LandedCostsGetInventoryResponseMethodByQuantity, nil
 	}
-	var t PostV1InventoryLandedCostsGetResponseMethod
+	var t LandedCostsGetInventoryResponseMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsGetResponseMethod) Ptr() *PostV1InventoryLandedCostsGetResponseMethod {
-	return &p
+func (l LandedCostsGetInventoryResponseMethod) Ptr() *LandedCostsGetInventoryResponseMethod {
+	return &l
 }
 
 var (
-	postV1InventoryLandedCostsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	landedCostsListInventoryRequestFilterItemFieldField = big.NewInt(1 << 0)
+	landedCostsListInventoryRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	landedCostsListInventoryRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryLandedCostsListRequestFilterItem struct {
-	Field string                                                `json:"field" url:"field"`
-	Op    PostV1InventoryLandedCostsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1InventoryLandedCostsListRequestFilterItemValue `json:"value" url:"value"`
+type LandedCostsListInventoryRequestFilterItem struct {
+	Field string                                          `json:"field" url:"field"`
+	Op    LandedCostsListInventoryRequestFilterItemOp     `json:"op" url:"op"`
+	Value *LandedCostsListInventoryRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2230,312 +2122,312 @@ type PostV1InventoryLandedCostsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) GetOp() PostV1InventoryLandedCostsListRequestFilterItemOp {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItem) GetOp() LandedCostsListInventoryRequestFilterItemOp {
+	if l == nil {
 		return ""
 	}
-	return p.Op
+	return l.Op
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) GetValue() *PostV1InventoryLandedCostsListRequestFilterItemValue {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItem) GetValue() *LandedCostsListInventoryRequestFilterItemValue {
+	if l == nil {
 		return nil
 	}
-	return p.Value
+	return l.Value
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsListInventoryRequestFilterItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryLandedCostsListRequestFilterItemFieldField)
+func (l *LandedCostsListInventoryRequestFilterItem) SetField(field string) {
+	l.Field = field
+	l.require(landedCostsListInventoryRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) SetOp(op PostV1InventoryLandedCostsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1InventoryLandedCostsListRequestFilterItemFieldOp)
+func (l *LandedCostsListInventoryRequestFilterItem) SetOp(op LandedCostsListInventoryRequestFilterItemOp) {
+	l.Op = op
+	l.require(landedCostsListInventoryRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) SetValue(value *PostV1InventoryLandedCostsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1InventoryLandedCostsListRequestFilterItemFieldValue)
+func (l *LandedCostsListInventoryRequestFilterItem) SetValue(value *LandedCostsListInventoryRequestFilterItemValue) {
+	l.Value = value
+	l.require(landedCostsListInventoryRequestFilterItemFieldValue)
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsListRequestFilterItem
+func (l *LandedCostsListInventoryRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsListInventoryRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsListInventoryRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsListRequestFilterItem
+func (l *LandedCostsListInventoryRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsListInventoryRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItem) String() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLandedCostsListRequestFilterItemOp string
+type LandedCostsListInventoryRequestFilterItemOp string
 
 const (
-	PostV1InventoryLandedCostsListRequestFilterItemOpEq       PostV1InventoryLandedCostsListRequestFilterItemOp = "eq"
-	PostV1InventoryLandedCostsListRequestFilterItemOpNe       PostV1InventoryLandedCostsListRequestFilterItemOp = "ne"
-	PostV1InventoryLandedCostsListRequestFilterItemOpContains PostV1InventoryLandedCostsListRequestFilterItemOp = "contains"
-	PostV1InventoryLandedCostsListRequestFilterItemOpGte      PostV1InventoryLandedCostsListRequestFilterItemOp = "gte"
-	PostV1InventoryLandedCostsListRequestFilterItemOpLte      PostV1InventoryLandedCostsListRequestFilterItemOp = "lte"
-	PostV1InventoryLandedCostsListRequestFilterItemOpIn       PostV1InventoryLandedCostsListRequestFilterItemOp = "in"
+	LandedCostsListInventoryRequestFilterItemOpEq       LandedCostsListInventoryRequestFilterItemOp = "eq"
+	LandedCostsListInventoryRequestFilterItemOpNe       LandedCostsListInventoryRequestFilterItemOp = "ne"
+	LandedCostsListInventoryRequestFilterItemOpContains LandedCostsListInventoryRequestFilterItemOp = "contains"
+	LandedCostsListInventoryRequestFilterItemOpGte      LandedCostsListInventoryRequestFilterItemOp = "gte"
+	LandedCostsListInventoryRequestFilterItemOpLte      LandedCostsListInventoryRequestFilterItemOp = "lte"
+	LandedCostsListInventoryRequestFilterItemOpIn       LandedCostsListInventoryRequestFilterItemOp = "in"
 )
 
-func NewPostV1InventoryLandedCostsListRequestFilterItemOpFromString(s string) (PostV1InventoryLandedCostsListRequestFilterItemOp, error) {
+func NewLandedCostsListInventoryRequestFilterItemOpFromString(s string) (LandedCostsListInventoryRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpEq, nil
+		return LandedCostsListInventoryRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpNe, nil
+		return LandedCostsListInventoryRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpContains, nil
+		return LandedCostsListInventoryRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpGte, nil
+		return LandedCostsListInventoryRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpLte, nil
+		return LandedCostsListInventoryRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1InventoryLandedCostsListRequestFilterItemOpIn, nil
+		return LandedCostsListInventoryRequestFilterItemOpIn, nil
 	}
-	var t PostV1InventoryLandedCostsListRequestFilterItemOp
+	var t LandedCostsListInventoryRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsListRequestFilterItemOp) Ptr() *PostV1InventoryLandedCostsListRequestFilterItemOp {
-	return &p
+func (l LandedCostsListInventoryRequestFilterItemOp) Ptr() *LandedCostsListInventoryRequestFilterItemOp {
+	return &l
 }
 
-type PostV1InventoryLandedCostsListRequestFilterItemValue struct {
-	String                                                            string
-	Double                                                            float64
-	Boolean                                                           bool
-	PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList []*PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem
+type LandedCostsListInventoryRequestFilterItemValue struct {
+	String                                                      string
+	Double                                                      float64
+	Boolean                                                     bool
+	LandedCostsListInventoryRequestFilterItemValueThreeItemList []*LandedCostsListInventoryRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValue) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValue) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValue) GetBoolean() bool {
+	if l == nil {
 		return false
 	}
-	return p.Boolean
+	return l.Boolean
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) GetPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList() []*PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValue) GetLandedCostsListInventoryRequestFilterItemValueThreeItemList() []*LandedCostsListInventoryRequestFilterItemValueThreeItem {
+	if l == nil {
 		return nil
 	}
-	return p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList
+	return l.LandedCostsListInventoryRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (l *LandedCostsListInventoryRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		l.typ = "Boolean"
+		l.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList []*PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList"
-		p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList = valuePostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList
+	var valueLandedCostsListInventoryRequestFilterItemValueThreeItemList []*LandedCostsListInventoryRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueLandedCostsListInventoryRequestFilterItemValueThreeItemList); err == nil {
+		l.typ = "LandedCostsListInventoryRequestFilterItemValueThreeItemList"
+		l.LandedCostsListInventoryRequestFilterItemValueThreeItemList = valueLandedCostsListInventoryRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1InventoryLandedCostsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l LandedCostsListInventoryRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return json.Marshal(l.Boolean)
 	}
-	if p.typ == "PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList)
+	if l.typ == "LandedCostsListInventoryRequestFilterItemValueThreeItemList" || l.LandedCostsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(l.LandedCostsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLandedCostsListRequestFilterItemValueVisitor interface {
+type LandedCostsListInventoryRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList([]*PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) error
+	VisitLandedCostsListInventoryRequestFilterItemValueThreeItemList([]*LandedCostsListInventoryRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValue) Accept(visitor PostV1InventoryLandedCostsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *LandedCostsListInventoryRequestFilterItemValue) Accept(visitor LandedCostsListInventoryRequestFilterItemValueVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return visitor.VisitBoolean(l.Boolean)
 	}
-	if p.typ == "PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList(p.PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemList)
+	if l.typ == "LandedCostsListInventoryRequestFilterItemValueThreeItemList" || l.LandedCostsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitLandedCostsListInventoryRequestFilterItemValueThreeItemList(l.LandedCostsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem struct {
+type LandedCostsListInventoryRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValueThreeItem) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (l *LandedCostsListInventoryRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l LandedCostsListInventoryRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemVisitor interface {
+type LandedCostsListInventoryRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1InventoryLandedCostsListRequestFilterItemValueThreeItem) Accept(visitor PostV1InventoryLandedCostsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *LandedCostsListInventoryRequestFilterItemValueThreeItem) Accept(visitor LandedCostsListInventoryRequestFilterItemValueThreeItemVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
 var (
-	postV1InventoryLandedCostsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	landedCostsListInventoryRequestSortItemFieldField = big.NewInt(1 << 0)
+	landedCostsListInventoryRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryLandedCostsListRequestSortItem struct {
-	Field string                                            `json:"field" url:"field"`
-	Dir   *PostV1InventoryLandedCostsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type LandedCostsListInventoryRequestSortItem struct {
+	Field string                                      `json:"field" url:"field"`
+	Dir   *LandedCostsListInventoryRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2544,126 +2436,126 @@ type PostV1InventoryLandedCostsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) GetField() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestSortItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) GetDir() *PostV1InventoryLandedCostsListRequestSortItemDir {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestSortItem) GetDir() *LandedCostsListInventoryRequestSortItemDir {
+	if l == nil {
 		return nil
 	}
-	return p.Dir
+	return l.Dir
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsListInventoryRequestSortItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryLandedCostsListRequestSortItemFieldField)
+func (l *LandedCostsListInventoryRequestSortItem) SetField(field string) {
+	l.Field = field
+	l.require(landedCostsListInventoryRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListRequestSortItem) SetDir(dir *PostV1InventoryLandedCostsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1InventoryLandedCostsListRequestSortItemFieldDir)
+func (l *LandedCostsListInventoryRequestSortItem) SetDir(dir *LandedCostsListInventoryRequestSortItemDir) {
+	l.Dir = dir
+	l.require(landedCostsListInventoryRequestSortItemFieldDir)
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsListRequestSortItem
+func (l *LandedCostsListInventoryRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsListInventoryRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsListInventoryRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsListRequestSortItem
+func (l *LandedCostsListInventoryRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsListInventoryRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsListRequestSortItem) String() string {
-	if p == nil {
+func (l *LandedCostsListInventoryRequestSortItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLandedCostsListRequestSortItemDir string
+type LandedCostsListInventoryRequestSortItemDir string
 
 const (
-	PostV1InventoryLandedCostsListRequestSortItemDirAsc  PostV1InventoryLandedCostsListRequestSortItemDir = "asc"
-	PostV1InventoryLandedCostsListRequestSortItemDirDesc PostV1InventoryLandedCostsListRequestSortItemDir = "desc"
+	LandedCostsListInventoryRequestSortItemDirAsc  LandedCostsListInventoryRequestSortItemDir = "asc"
+	LandedCostsListInventoryRequestSortItemDirDesc LandedCostsListInventoryRequestSortItemDir = "desc"
 )
 
-func NewPostV1InventoryLandedCostsListRequestSortItemDirFromString(s string) (PostV1InventoryLandedCostsListRequestSortItemDir, error) {
+func NewLandedCostsListInventoryRequestSortItemDirFromString(s string) (LandedCostsListInventoryRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1InventoryLandedCostsListRequestSortItemDirAsc, nil
+		return LandedCostsListInventoryRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1InventoryLandedCostsListRequestSortItemDirDesc, nil
+		return LandedCostsListInventoryRequestSortItemDirDesc, nil
 	}
-	var t PostV1InventoryLandedCostsListRequestSortItemDir
+	var t LandedCostsListInventoryRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsListRequestSortItemDir) Ptr() *PostV1InventoryLandedCostsListRequestSortItemDir {
-	return &p
+func (l LandedCostsListInventoryRequestSortItemDir) Ptr() *LandedCostsListInventoryRequestSortItemDir {
+	return &l
 }
 
 var (
-	postV1InventoryLandedCostsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsListResponseFieldTotals   = big.NewInt(1 << 4)
+	landedCostsListInventoryResponseFieldRows     = big.NewInt(1 << 0)
+	landedCostsListInventoryResponseFieldPage     = big.NewInt(1 << 1)
+	landedCostsListInventoryResponseFieldPageSize = big.NewInt(1 << 2)
+	landedCostsListInventoryResponseFieldTotal    = big.NewInt(1 << 3)
+	landedCostsListInventoryResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryLandedCostsListResponse struct {
-	Rows     []*PostV1InventoryLandedCostsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                             `json:"page" url:"page"`
-	PageSize int64                                             `json:"pageSize" url:"pageSize"`
-	Total    int64                                             `json:"total" url:"total"`
-	Totals   map[string]string                                 `json:"totals,omitempty" url:"totals,omitempty"`
+type LandedCostsListInventoryResponse struct {
+	Rows     []*LandedCostsListInventoryResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                       `json:"page" url:"page"`
+	PageSize int64                                       `json:"pageSize" url:"pageSize"`
+	Total    int64                                       `json:"total" url:"total"`
+	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2672,152 +2564,152 @@ type PostV1InventoryLandedCostsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetRows() []*PostV1InventoryLandedCostsListResponseRowsItem {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetRows() []*LandedCostsListInventoryResponseRowsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Rows
+	return l.Rows
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetPage() int64 {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetPage() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Page
+	return l.Page
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetPageSize() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.PageSize
+	return l.PageSize
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetTotal() int64 {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetTotal() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Total
+	return l.Total
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetTotals() map[string]string {
+	if l == nil {
 		return nil
 	}
-	return p.Totals
+	return l.Totals
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsListInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponse) SetRows(rows []*PostV1InventoryLandedCostsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryLandedCostsListResponseFieldRows)
+func (l *LandedCostsListInventoryResponse) SetRows(rows []*LandedCostsListInventoryResponseRowsItem) {
+	l.Rows = rows
+	l.require(landedCostsListInventoryResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1InventoryLandedCostsListResponseFieldPage)
+func (l *LandedCostsListInventoryResponse) SetPage(page int64) {
+	l.Page = page
+	l.require(landedCostsListInventoryResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryLandedCostsListResponseFieldPageSize)
+func (l *LandedCostsListInventoryResponse) SetPageSize(pageSize int64) {
+	l.PageSize = pageSize
+	l.require(landedCostsListInventoryResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1InventoryLandedCostsListResponseFieldTotal)
+func (l *LandedCostsListInventoryResponse) SetTotal(total int64) {
+	l.Total = total
+	l.require(landedCostsListInventoryResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1InventoryLandedCostsListResponseFieldTotals)
+func (l *LandedCostsListInventoryResponse) SetTotals(totals map[string]string) {
+	l.Totals = totals
+	l.require(landedCostsListInventoryResponseFieldTotals)
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsListResponse
+func (l *LandedCostsListInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler LandedCostsListInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsListInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsListResponse
+func (l *LandedCostsListInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsListInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsListResponse) String() string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLandedCostsListResponseRowsItemFieldID              = big.NewInt(1 << 0)
-	postV1InventoryLandedCostsListResponseRowsItemFieldDate            = big.NewInt(1 << 1)
-	postV1InventoryLandedCostsListResponseRowsItemFieldAmount          = big.NewInt(1 << 2)
-	postV1InventoryLandedCostsListResponseRowsItemFieldMethod          = big.NewInt(1 << 3)
-	postV1InventoryLandedCostsListResponseRowsItemFieldGoodsReceiptID  = big.NewInt(1 << 4)
-	postV1InventoryLandedCostsListResponseRowsItemFieldSourceInvoiceID = big.NewInt(1 << 5)
-	postV1InventoryLandedCostsListResponseRowsItemFieldNotes           = big.NewInt(1 << 6)
-	postV1InventoryLandedCostsListResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
+	landedCostsListInventoryResponseRowsItemFieldID              = big.NewInt(1 << 0)
+	landedCostsListInventoryResponseRowsItemFieldDate            = big.NewInt(1 << 1)
+	landedCostsListInventoryResponseRowsItemFieldAmount          = big.NewInt(1 << 2)
+	landedCostsListInventoryResponseRowsItemFieldMethod          = big.NewInt(1 << 3)
+	landedCostsListInventoryResponseRowsItemFieldGoodsReceiptID  = big.NewInt(1 << 4)
+	landedCostsListInventoryResponseRowsItemFieldSourceInvoiceID = big.NewInt(1 << 5)
+	landedCostsListInventoryResponseRowsItemFieldNotes           = big.NewInt(1 << 6)
+	landedCostsListInventoryResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
 )
 
-type PostV1InventoryLandedCostsListResponseRowsItem struct {
-	ID              string                                               `json:"id" url:"id"`
-	Date            string                                               `json:"date" url:"date"`
-	Amount          string                                               `json:"amount" url:"amount"`
-	Method          PostV1InventoryLandedCostsListResponseRowsItemMethod `json:"method" url:"method"`
-	GoodsReceiptID  *string                                              `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
-	SourceInvoiceID *string                                              `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
-	Notes           *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt       string                                               `json:"createdAt" url:"createdAt"`
+type LandedCostsListInventoryResponseRowsItem struct {
+	ID              string                                         `json:"id" url:"id"`
+	Date            time.Time                                      `json:"date" url:"date" format:"date"`
+	Amount          string                                         `json:"amount" url:"amount"`
+	Method          LandedCostsListInventoryResponseRowsItemMethod `json:"method" url:"method"`
+	GoodsReceiptID  *string                                        `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
+	SourceInvoiceID *string                                        `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
+	Notes           *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt       time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2826,216 +2718,228 @@ type PostV1InventoryLandedCostsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetDate() string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetDate() time.Time {
+	if l == nil {
+		return time.Time{}
+	}
+	return l.Date
+}
+
+func (l *LandedCostsListInventoryResponseRowsItem) GetAmount() string {
+	if l == nil {
 		return ""
 	}
-	return p.Date
+	return l.Amount
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetAmount() string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetMethod() LandedCostsListInventoryResponseRowsItemMethod {
+	if l == nil {
 		return ""
 	}
-	return p.Amount
+	return l.Method
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetMethod() PostV1InventoryLandedCostsListResponseRowsItemMethod {
-	if p == nil {
-		return ""
-	}
-	return p.Method
-}
-
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetGoodsReceiptID() *string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetGoodsReceiptID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.GoodsReceiptID
+	return l.GoodsReceiptID
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetSourceInvoiceID() *string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetSourceInvoiceID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.SourceInvoiceID
+	return l.SourceInvoiceID
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LandedCostsListInventoryResponseRowsItem) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LandedCostsListInventoryResponseRowsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldID)
+func (l *LandedCostsListInventoryResponseRowsItem) SetID(id string) {
+	l.ID = id
+	l.require(landedCostsListInventoryResponseRowsItemFieldID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldDate)
+func (l *LandedCostsListInventoryResponseRowsItem) SetDate(date time.Time) {
+	l.Date = date
+	l.require(landedCostsListInventoryResponseRowsItemFieldDate)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldAmount)
+func (l *LandedCostsListInventoryResponseRowsItem) SetAmount(amount string) {
+	l.Amount = amount
+	l.require(landedCostsListInventoryResponseRowsItemFieldAmount)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetMethod(method PostV1InventoryLandedCostsListResponseRowsItemMethod) {
-	p.Method = method
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldMethod)
+func (l *LandedCostsListInventoryResponseRowsItem) SetMethod(method LandedCostsListInventoryResponseRowsItemMethod) {
+	l.Method = method
+	l.require(landedCostsListInventoryResponseRowsItemFieldMethod)
 }
 
 // SetGoodsReceiptID sets the GoodsReceiptID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetGoodsReceiptID(goodsReceiptID *string) {
-	p.GoodsReceiptID = goodsReceiptID
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldGoodsReceiptID)
+func (l *LandedCostsListInventoryResponseRowsItem) SetGoodsReceiptID(goodsReceiptID *string) {
+	l.GoodsReceiptID = goodsReceiptID
+	l.require(landedCostsListInventoryResponseRowsItemFieldGoodsReceiptID)
 }
 
 // SetSourceInvoiceID sets the SourceInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetSourceInvoiceID(sourceInvoiceID *string) {
-	p.SourceInvoiceID = sourceInvoiceID
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldSourceInvoiceID)
+func (l *LandedCostsListInventoryResponseRowsItem) SetSourceInvoiceID(sourceInvoiceID *string) {
+	l.SourceInvoiceID = sourceInvoiceID
+	l.require(landedCostsListInventoryResponseRowsItemFieldSourceInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldNotes)
+func (l *LandedCostsListInventoryResponseRowsItem) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(landedCostsListInventoryResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLandedCostsListResponseRowsItemFieldCreatedAt)
+func (l *LandedCostsListInventoryResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(landedCostsListInventoryResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLandedCostsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LandedCostsListInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed LandedCostsListInventoryResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLandedCostsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LandedCostsListInventoryResponseRowsItem(unmarshaler.embed)
+	l.Date = unmarshaler.Date.Time()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLandedCostsListResponseRowsItem
+func (l *LandedCostsListInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed LandedCostsListInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		Date:      internal.NewDate(l.Date),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLandedCostsListResponseRowsItem) String() string {
-	if p == nil {
+func (l *LandedCostsListInventoryResponseRowsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLandedCostsListResponseRowsItemMethod string
+type LandedCostsListInventoryResponseRowsItemMethod string
 
 const (
-	PostV1InventoryLandedCostsListResponseRowsItemMethodByValue    PostV1InventoryLandedCostsListResponseRowsItemMethod = "by_value"
-	PostV1InventoryLandedCostsListResponseRowsItemMethodByQuantity PostV1InventoryLandedCostsListResponseRowsItemMethod = "by_quantity"
+	LandedCostsListInventoryResponseRowsItemMethodByValue    LandedCostsListInventoryResponseRowsItemMethod = "by_value"
+	LandedCostsListInventoryResponseRowsItemMethodByQuantity LandedCostsListInventoryResponseRowsItemMethod = "by_quantity"
 )
 
-func NewPostV1InventoryLandedCostsListResponseRowsItemMethodFromString(s string) (PostV1InventoryLandedCostsListResponseRowsItemMethod, error) {
+func NewLandedCostsListInventoryResponseRowsItemMethodFromString(s string) (LandedCostsListInventoryResponseRowsItemMethod, error) {
 	switch s {
 	case "by_value":
-		return PostV1InventoryLandedCostsListResponseRowsItemMethodByValue, nil
+		return LandedCostsListInventoryResponseRowsItemMethodByValue, nil
 	case "by_quantity":
-		return PostV1InventoryLandedCostsListResponseRowsItemMethodByQuantity, nil
+		return LandedCostsListInventoryResponseRowsItemMethodByQuantity, nil
 	}
-	var t PostV1InventoryLandedCostsListResponseRowsItemMethod
+	var t LandedCostsListInventoryResponseRowsItemMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLandedCostsListResponseRowsItemMethod) Ptr() *PostV1InventoryLandedCostsListResponseRowsItemMethod {
-	return &p
+func (l LandedCostsListInventoryResponseRowsItemMethod) Ptr() *LandedCostsListInventoryResponseRowsItemMethod {
+	return &l
 }
 
 var (
-	postV1InventoryLotsGetResponseFieldID         = big.NewInt(1 << 0)
-	postV1InventoryLotsGetResponseFieldItemID     = big.NewInt(1 << 1)
-	postV1InventoryLotsGetResponseFieldLotNumber  = big.NewInt(1 << 2)
-	postV1InventoryLotsGetResponseFieldExpiryDate = big.NewInt(1 << 3)
-	postV1InventoryLotsGetResponseFieldNotes      = big.NewInt(1 << 4)
-	postV1InventoryLotsGetResponseFieldOnHand     = big.NewInt(1 << 5)
-	postV1InventoryLotsGetResponseFieldCreatedAt  = big.NewInt(1 << 6)
-	postV1InventoryLotsGetResponseFieldMovements  = big.NewInt(1 << 7)
+	lotsGetInventoryResponseFieldID         = big.NewInt(1 << 0)
+	lotsGetInventoryResponseFieldItemID     = big.NewInt(1 << 1)
+	lotsGetInventoryResponseFieldLotNumber  = big.NewInt(1 << 2)
+	lotsGetInventoryResponseFieldExpiryDate = big.NewInt(1 << 3)
+	lotsGetInventoryResponseFieldNotes      = big.NewInt(1 << 4)
+	lotsGetInventoryResponseFieldOnHand     = big.NewInt(1 << 5)
+	lotsGetInventoryResponseFieldCreatedAt  = big.NewInt(1 << 6)
+	lotsGetInventoryResponseFieldMovements  = big.NewInt(1 << 7)
 )
 
-type PostV1InventoryLotsGetResponse struct {
-	ID         string                                         `json:"id" url:"id"`
-	ItemID     string                                         `json:"itemId" url:"itemId"`
-	LotNumber  string                                         `json:"lotNumber" url:"lotNumber"`
-	ExpiryDate *string                                        `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
-	Notes      *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	OnHand     string                                         `json:"onHand" url:"onHand"`
-	CreatedAt  string                                         `json:"createdAt" url:"createdAt"`
-	Movements  []*PostV1InventoryLotsGetResponseMovementsItem `json:"movements" url:"movements"`
+type LotsGetInventoryResponse struct {
+	ID         string                                   `json:"id" url:"id"`
+	ItemID     string                                   `json:"itemId" url:"itemId"`
+	LotNumber  string                                   `json:"lotNumber" url:"lotNumber"`
+	ExpiryDate *time.Time                               `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	Notes      *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	OnHand     string                                   `json:"onHand" url:"onHand"`
+	CreatedAt  time.Time                                `json:"createdAt" url:"createdAt"`
+	Movements  []*LotsGetInventoryResponseMovementsItem `json:"movements" url:"movements"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3044,206 +2948,218 @@ type PostV1InventoryLotsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetID() string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetItemID() string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetItemID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ItemID
+	return l.ItemID
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetLotNumber() string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetLotNumber() string {
+	if l == nil {
 		return ""
 	}
-	return p.LotNumber
+	return l.LotNumber
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetExpiryDate() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetExpiryDate() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return l.ExpiryDate
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetNotes() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetOnHand() string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetOnHand() string {
+	if l == nil {
 		return ""
 	}
-	return p.OnHand
+	return l.OnHand
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LotsGetInventoryResponse) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetMovements() []*PostV1InventoryLotsGetResponseMovementsItem {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetMovements() []*LotsGetInventoryResponseMovementsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Movements
+	return l.Movements
 }
 
-func (p *PostV1InventoryLotsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsGetInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsGetInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsGetResponseFieldID)
+func (l *LotsGetInventoryResponse) SetID(id string) {
+	l.ID = id
+	l.require(lotsGetInventoryResponseFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryLotsGetResponseFieldItemID)
+func (l *LotsGetInventoryResponse) SetItemID(itemID string) {
+	l.ItemID = itemID
+	l.require(lotsGetInventoryResponseFieldItemID)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetLotNumber(lotNumber string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryLotsGetResponseFieldLotNumber)
+func (l *LotsGetInventoryResponse) SetLotNumber(lotNumber string) {
+	l.LotNumber = lotNumber
+	l.require(lotsGetInventoryResponseFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryLotsGetResponseFieldExpiryDate)
+func (l *LotsGetInventoryResponse) SetExpiryDate(expiryDate *time.Time) {
+	l.ExpiryDate = expiryDate
+	l.require(lotsGetInventoryResponseFieldExpiryDate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLotsGetResponseFieldNotes)
+func (l *LotsGetInventoryResponse) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(lotsGetInventoryResponseFieldNotes)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1InventoryLotsGetResponseFieldOnHand)
+func (l *LotsGetInventoryResponse) SetOnHand(onHand string) {
+	l.OnHand = onHand
+	l.require(lotsGetInventoryResponseFieldOnHand)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLotsGetResponseFieldCreatedAt)
+func (l *LotsGetInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(lotsGetInventoryResponseFieldCreatedAt)
 }
 
 // SetMovements sets the Movements field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponse) SetMovements(movements []*PostV1InventoryLotsGetResponseMovementsItem) {
-	p.Movements = movements
-	p.require(postV1InventoryLotsGetResponseFieldMovements)
+func (l *LotsGetInventoryResponse) SetMovements(movements []*LotsGetInventoryResponseMovementsItem) {
+	l.Movements = movements
+	l.require(lotsGetInventoryResponseFieldMovements)
 }
 
-func (p *PostV1InventoryLotsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LotsGetInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed LotsGetInventoryResponse
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsGetInventoryResponse(unmarshaler.embed)
+	l.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsGetResponse
+func (l *LotsGetInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LotsGetInventoryResponse
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*l),
+		ExpiryDate: internal.NewOptionalDate(l.ExpiryDate),
+		CreatedAt:  internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsGetResponse) String() string {
-	if p == nil {
+func (l *LotsGetInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLotsGetResponseMovementsItemFieldID           = big.NewInt(1 << 0)
-	postV1InventoryLotsGetResponseMovementsItemFieldWarehouseID  = big.NewInt(1 << 1)
-	postV1InventoryLotsGetResponseMovementsItemFieldItemID       = big.NewInt(1 << 2)
-	postV1InventoryLotsGetResponseMovementsItemFieldLotID        = big.NewInt(1 << 3)
-	postV1InventoryLotsGetResponseMovementsItemFieldDate         = big.NewInt(1 << 4)
-	postV1InventoryLotsGetResponseMovementsItemFieldDirection    = big.NewInt(1 << 5)
-	postV1InventoryLotsGetResponseMovementsItemFieldQuantity     = big.NewInt(1 << 6)
-	postV1InventoryLotsGetResponseMovementsItemFieldUnitCost     = big.NewInt(1 << 7)
-	postV1InventoryLotsGetResponseMovementsItemFieldTotalCost    = big.NewInt(1 << 8)
-	postV1InventoryLotsGetResponseMovementsItemFieldRemainingQty = big.NewInt(1 << 9)
-	postV1InventoryLotsGetResponseMovementsItemFieldDocumentType = big.NewInt(1 << 10)
-	postV1InventoryLotsGetResponseMovementsItemFieldDocumentID   = big.NewInt(1 << 11)
-	postV1InventoryLotsGetResponseMovementsItemFieldNotes        = big.NewInt(1 << 12)
-	postV1InventoryLotsGetResponseMovementsItemFieldCreatedAt    = big.NewInt(1 << 13)
+	lotsGetInventoryResponseMovementsItemFieldID           = big.NewInt(1 << 0)
+	lotsGetInventoryResponseMovementsItemFieldWarehouseID  = big.NewInt(1 << 1)
+	lotsGetInventoryResponseMovementsItemFieldItemID       = big.NewInt(1 << 2)
+	lotsGetInventoryResponseMovementsItemFieldLotID        = big.NewInt(1 << 3)
+	lotsGetInventoryResponseMovementsItemFieldDate         = big.NewInt(1 << 4)
+	lotsGetInventoryResponseMovementsItemFieldDirection    = big.NewInt(1 << 5)
+	lotsGetInventoryResponseMovementsItemFieldQuantity     = big.NewInt(1 << 6)
+	lotsGetInventoryResponseMovementsItemFieldUnitCost     = big.NewInt(1 << 7)
+	lotsGetInventoryResponseMovementsItemFieldTotalCost    = big.NewInt(1 << 8)
+	lotsGetInventoryResponseMovementsItemFieldRemainingQty = big.NewInt(1 << 9)
+	lotsGetInventoryResponseMovementsItemFieldDocumentType = big.NewInt(1 << 10)
+	lotsGetInventoryResponseMovementsItemFieldDocumentID   = big.NewInt(1 << 11)
+	lotsGetInventoryResponseMovementsItemFieldNotes        = big.NewInt(1 << 12)
+	lotsGetInventoryResponseMovementsItemFieldCreatedAt    = big.NewInt(1 << 13)
 )
 
-type PostV1InventoryLotsGetResponseMovementsItem struct {
-	ID           string                                               `json:"id" url:"id"`
-	WarehouseID  string                                               `json:"warehouseId" url:"warehouseId"`
-	ItemID       string                                               `json:"itemId" url:"itemId"`
-	LotID        *string                                              `json:"lotId,omitempty" url:"lotId,omitempty"`
-	Date         string                                               `json:"date" url:"date"`
-	Direction    PostV1InventoryLotsGetResponseMovementsItemDirection `json:"direction" url:"direction"`
-	Quantity     string                                               `json:"quantity" url:"quantity"`
-	UnitCost     *string                                              `json:"unitCost,omitempty" url:"unitCost,omitempty"`
-	TotalCost    string                                               `json:"totalCost" url:"totalCost"`
-	RemainingQty string                                               `json:"remainingQty" url:"remainingQty"`
-	DocumentType *string                                              `json:"documentType,omitempty" url:"documentType,omitempty"`
-	DocumentID   *string                                              `json:"documentId,omitempty" url:"documentId,omitempty"`
-	Notes        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt    string                                               `json:"createdAt" url:"createdAt"`
+type LotsGetInventoryResponseMovementsItem struct {
+	ID           string                                         `json:"id" url:"id"`
+	WarehouseID  string                                         `json:"warehouseId" url:"warehouseId"`
+	ItemID       string                                         `json:"itemId" url:"itemId"`
+	LotID        *string                                        `json:"lotId,omitempty" url:"lotId,omitempty"`
+	Date         time.Time                                      `json:"date" url:"date" format:"date"`
+	Direction    LotsGetInventoryResponseMovementsItemDirection `json:"direction" url:"direction"`
+	Quantity     string                                         `json:"quantity" url:"quantity"`
+	UnitCost     *string                                        `json:"unitCost,omitempty" url:"unitCost,omitempty"`
+	TotalCost    string                                         `json:"totalCost" url:"totalCost"`
+	RemainingQty string                                         `json:"remainingQty" url:"remainingQty"`
+	DocumentType *string                                        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	DocumentID   *string                                        `json:"documentId,omitempty" url:"documentId,omitempty"`
+	Notes        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt    time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3252,290 +3168,302 @@ type PostV1InventoryLotsGetResponseMovementsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetID() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetWarehouseID() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetWarehouseID() string {
+	if l == nil {
 		return ""
 	}
-	return p.WarehouseID
+	return l.WarehouseID
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetItemID() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetItemID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ItemID
+	return l.ItemID
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetLotID() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetLotID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.LotID
+	return l.LotID
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetDate() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetDate() time.Time {
+	if l == nil {
+		return time.Time{}
+	}
+	return l.Date
+}
+
+func (l *LotsGetInventoryResponseMovementsItem) GetDirection() LotsGetInventoryResponseMovementsItemDirection {
+	if l == nil {
 		return ""
 	}
-	return p.Date
+	return l.Direction
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetDirection() PostV1InventoryLotsGetResponseMovementsItemDirection {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetQuantity() string {
+	if l == nil {
 		return ""
 	}
-	return p.Direction
+	return l.Quantity
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetQuantity() string {
-	if p == nil {
-		return ""
-	}
-	return p.Quantity
-}
-
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetUnitCost() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetUnitCost() *string {
+	if l == nil {
 		return nil
 	}
-	return p.UnitCost
+	return l.UnitCost
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetTotalCost() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetTotalCost() string {
+	if l == nil {
 		return ""
 	}
-	return p.TotalCost
+	return l.TotalCost
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetRemainingQty() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetRemainingQty() string {
+	if l == nil {
 		return ""
 	}
-	return p.RemainingQty
+	return l.RemainingQty
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetDocumentType() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetDocumentType() *string {
+	if l == nil {
 		return nil
 	}
-	return p.DocumentType
+	return l.DocumentType
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetDocumentID() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetDocumentID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.DocumentID
+	return l.DocumentID
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetNotes() *string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LotsGetInventoryResponseMovementsItem) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsGetInventoryResponseMovementsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldID)
+func (l *LotsGetInventoryResponseMovementsItem) SetID(id string) {
+	l.ID = id
+	l.require(lotsGetInventoryResponseMovementsItemFieldID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldWarehouseID)
+func (l *LotsGetInventoryResponseMovementsItem) SetWarehouseID(warehouseID string) {
+	l.WarehouseID = warehouseID
+	l.require(lotsGetInventoryResponseMovementsItemFieldWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldItemID)
+func (l *LotsGetInventoryResponseMovementsItem) SetItemID(itemID string) {
+	l.ItemID = itemID
+	l.require(lotsGetInventoryResponseMovementsItemFieldItemID)
 }
 
 // SetLotID sets the LotID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetLotID(lotID *string) {
-	p.LotID = lotID
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldLotID)
+func (l *LotsGetInventoryResponseMovementsItem) SetLotID(lotID *string) {
+	l.LotID = lotID
+	l.require(lotsGetInventoryResponseMovementsItemFieldLotID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldDate)
+func (l *LotsGetInventoryResponseMovementsItem) SetDate(date time.Time) {
+	l.Date = date
+	l.require(lotsGetInventoryResponseMovementsItemFieldDate)
 }
 
 // SetDirection sets the Direction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetDirection(direction PostV1InventoryLotsGetResponseMovementsItemDirection) {
-	p.Direction = direction
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldDirection)
+func (l *LotsGetInventoryResponseMovementsItem) SetDirection(direction LotsGetInventoryResponseMovementsItemDirection) {
+	l.Direction = direction
+	l.require(lotsGetInventoryResponseMovementsItemFieldDirection)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldQuantity)
+func (l *LotsGetInventoryResponseMovementsItem) SetQuantity(quantity string) {
+	l.Quantity = quantity
+	l.require(lotsGetInventoryResponseMovementsItemFieldQuantity)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetUnitCost(unitCost *string) {
-	p.UnitCost = unitCost
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldUnitCost)
+func (l *LotsGetInventoryResponseMovementsItem) SetUnitCost(unitCost *string) {
+	l.UnitCost = unitCost
+	l.require(lotsGetInventoryResponseMovementsItemFieldUnitCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldTotalCost)
+func (l *LotsGetInventoryResponseMovementsItem) SetTotalCost(totalCost string) {
+	l.TotalCost = totalCost
+	l.require(lotsGetInventoryResponseMovementsItemFieldTotalCost)
 }
 
 // SetRemainingQty sets the RemainingQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetRemainingQty(remainingQty string) {
-	p.RemainingQty = remainingQty
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldRemainingQty)
+func (l *LotsGetInventoryResponseMovementsItem) SetRemainingQty(remainingQty string) {
+	l.RemainingQty = remainingQty
+	l.require(lotsGetInventoryResponseMovementsItemFieldRemainingQty)
 }
 
 // SetDocumentType sets the DocumentType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetDocumentType(documentType *string) {
-	p.DocumentType = documentType
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldDocumentType)
+func (l *LotsGetInventoryResponseMovementsItem) SetDocumentType(documentType *string) {
+	l.DocumentType = documentType
+	l.require(lotsGetInventoryResponseMovementsItemFieldDocumentType)
 }
 
 // SetDocumentID sets the DocumentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetDocumentID(documentID *string) {
-	p.DocumentID = documentID
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldDocumentID)
+func (l *LotsGetInventoryResponseMovementsItem) SetDocumentID(documentID *string) {
+	l.DocumentID = documentID
+	l.require(lotsGetInventoryResponseMovementsItemFieldDocumentID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldNotes)
+func (l *LotsGetInventoryResponseMovementsItem) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(lotsGetInventoryResponseMovementsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsGetResponseMovementsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLotsGetResponseMovementsItemFieldCreatedAt)
+func (l *LotsGetInventoryResponseMovementsItem) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(lotsGetInventoryResponseMovementsItemFieldCreatedAt)
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsGetResponseMovementsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LotsGetInventoryResponseMovementsItem) UnmarshalJSON(data []byte) error {
+	type embed LotsGetInventoryResponseMovementsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsGetResponseMovementsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsGetInventoryResponseMovementsItem(unmarshaler.embed)
+	l.Date = unmarshaler.Date.Time()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsGetResponseMovementsItem
+func (l *LotsGetInventoryResponseMovementsItem) MarshalJSON() ([]byte, error) {
+	type embed LotsGetInventoryResponseMovementsItem
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		Date:      internal.NewDate(l.Date),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsGetResponseMovementsItem) String() string {
-	if p == nil {
+func (l *LotsGetInventoryResponseMovementsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLotsGetResponseMovementsItemDirection string
+type LotsGetInventoryResponseMovementsItemDirection string
 
 const (
-	PostV1InventoryLotsGetResponseMovementsItemDirectionIn  PostV1InventoryLotsGetResponseMovementsItemDirection = "in"
-	PostV1InventoryLotsGetResponseMovementsItemDirectionOut PostV1InventoryLotsGetResponseMovementsItemDirection = "out"
+	LotsGetInventoryResponseMovementsItemDirectionIn  LotsGetInventoryResponseMovementsItemDirection = "in"
+	LotsGetInventoryResponseMovementsItemDirectionOut LotsGetInventoryResponseMovementsItemDirection = "out"
 )
 
-func NewPostV1InventoryLotsGetResponseMovementsItemDirectionFromString(s string) (PostV1InventoryLotsGetResponseMovementsItemDirection, error) {
+func NewLotsGetInventoryResponseMovementsItemDirectionFromString(s string) (LotsGetInventoryResponseMovementsItemDirection, error) {
 	switch s {
 	case "in":
-		return PostV1InventoryLotsGetResponseMovementsItemDirectionIn, nil
+		return LotsGetInventoryResponseMovementsItemDirectionIn, nil
 	case "out":
-		return PostV1InventoryLotsGetResponseMovementsItemDirectionOut, nil
+		return LotsGetInventoryResponseMovementsItemDirectionOut, nil
 	}
-	var t PostV1InventoryLotsGetResponseMovementsItemDirection
+	var t LotsGetInventoryResponseMovementsItemDirection
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLotsGetResponseMovementsItemDirection) Ptr() *PostV1InventoryLotsGetResponseMovementsItemDirection {
-	return &p
+func (l LotsGetInventoryResponseMovementsItemDirection) Ptr() *LotsGetInventoryResponseMovementsItemDirection {
+	return &l
 }
 
 var (
-	postV1InventoryLotsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryLotsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1InventoryLotsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	lotsListInventoryRequestFilterItemFieldField = big.NewInt(1 << 0)
+	lotsListInventoryRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	lotsListInventoryRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryLotsListRequestFilterItem struct {
-	Field string                                         `json:"field" url:"field"`
-	Op    PostV1InventoryLotsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1InventoryLotsListRequestFilterItemValue `json:"value" url:"value"`
+type LotsListInventoryRequestFilterItem struct {
+	Field string                                   `json:"field" url:"field"`
+	Op    LotsListInventoryRequestFilterItemOp     `json:"op" url:"op"`
+	Value *LotsListInventoryRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3544,312 +3472,312 @@ type PostV1InventoryLotsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) GetOp() PostV1InventoryLotsListRequestFilterItemOp {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItem) GetOp() LotsListInventoryRequestFilterItemOp {
+	if l == nil {
 		return ""
 	}
-	return p.Op
+	return l.Op
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) GetValue() *PostV1InventoryLotsListRequestFilterItemValue {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItem) GetValue() *LotsListInventoryRequestFilterItemValue {
+	if l == nil {
 		return nil
 	}
-	return p.Value
+	return l.Value
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsListInventoryRequestFilterItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryLotsListRequestFilterItemFieldField)
+func (l *LotsListInventoryRequestFilterItem) SetField(field string) {
+	l.Field = field
+	l.require(lotsListInventoryRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequestFilterItem) SetOp(op PostV1InventoryLotsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1InventoryLotsListRequestFilterItemFieldOp)
+func (l *LotsListInventoryRequestFilterItem) SetOp(op LotsListInventoryRequestFilterItemOp) {
+	l.Op = op
+	l.require(lotsListInventoryRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequestFilterItem) SetValue(value *PostV1InventoryLotsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1InventoryLotsListRequestFilterItemFieldValue)
+func (l *LotsListInventoryRequestFilterItem) SetValue(value *LotsListInventoryRequestFilterItemValue) {
+	l.Value = value
+	l.require(lotsListInventoryRequestFilterItemFieldValue)
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsListRequestFilterItem
+func (l *LotsListInventoryRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsListInventoryRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsListInventoryRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsListRequestFilterItem
+func (l *LotsListInventoryRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed LotsListInventoryRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItem) String() string {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLotsListRequestFilterItemOp string
+type LotsListInventoryRequestFilterItemOp string
 
 const (
-	PostV1InventoryLotsListRequestFilterItemOpEq       PostV1InventoryLotsListRequestFilterItemOp = "eq"
-	PostV1InventoryLotsListRequestFilterItemOpNe       PostV1InventoryLotsListRequestFilterItemOp = "ne"
-	PostV1InventoryLotsListRequestFilterItemOpContains PostV1InventoryLotsListRequestFilterItemOp = "contains"
-	PostV1InventoryLotsListRequestFilterItemOpGte      PostV1InventoryLotsListRequestFilterItemOp = "gte"
-	PostV1InventoryLotsListRequestFilterItemOpLte      PostV1InventoryLotsListRequestFilterItemOp = "lte"
-	PostV1InventoryLotsListRequestFilterItemOpIn       PostV1InventoryLotsListRequestFilterItemOp = "in"
+	LotsListInventoryRequestFilterItemOpEq       LotsListInventoryRequestFilterItemOp = "eq"
+	LotsListInventoryRequestFilterItemOpNe       LotsListInventoryRequestFilterItemOp = "ne"
+	LotsListInventoryRequestFilterItemOpContains LotsListInventoryRequestFilterItemOp = "contains"
+	LotsListInventoryRequestFilterItemOpGte      LotsListInventoryRequestFilterItemOp = "gte"
+	LotsListInventoryRequestFilterItemOpLte      LotsListInventoryRequestFilterItemOp = "lte"
+	LotsListInventoryRequestFilterItemOpIn       LotsListInventoryRequestFilterItemOp = "in"
 )
 
-func NewPostV1InventoryLotsListRequestFilterItemOpFromString(s string) (PostV1InventoryLotsListRequestFilterItemOp, error) {
+func NewLotsListInventoryRequestFilterItemOpFromString(s string) (LotsListInventoryRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1InventoryLotsListRequestFilterItemOpEq, nil
+		return LotsListInventoryRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1InventoryLotsListRequestFilterItemOpNe, nil
+		return LotsListInventoryRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1InventoryLotsListRequestFilterItemOpContains, nil
+		return LotsListInventoryRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1InventoryLotsListRequestFilterItemOpGte, nil
+		return LotsListInventoryRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1InventoryLotsListRequestFilterItemOpLte, nil
+		return LotsListInventoryRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1InventoryLotsListRequestFilterItemOpIn, nil
+		return LotsListInventoryRequestFilterItemOpIn, nil
 	}
-	var t PostV1InventoryLotsListRequestFilterItemOp
+	var t LotsListInventoryRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLotsListRequestFilterItemOp) Ptr() *PostV1InventoryLotsListRequestFilterItemOp {
-	return &p
+func (l LotsListInventoryRequestFilterItemOp) Ptr() *LotsListInventoryRequestFilterItemOp {
+	return &l
 }
 
-type PostV1InventoryLotsListRequestFilterItemValue struct {
-	String                                                     string
-	Double                                                     float64
-	Boolean                                                    bool
-	PostV1InventoryLotsListRequestFilterItemValueThreeItemList []*PostV1InventoryLotsListRequestFilterItemValueThreeItem
+type LotsListInventoryRequestFilterItemValue struct {
+	String                                               string
+	Double                                               float64
+	Boolean                                              bool
+	LotsListInventoryRequestFilterItemValueThreeItemList []*LotsListInventoryRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValue) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValue) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValue) GetBoolean() bool {
+	if l == nil {
 		return false
 	}
-	return p.Boolean
+	return l.Boolean
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) GetPostV1InventoryLotsListRequestFilterItemValueThreeItemList() []*PostV1InventoryLotsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValue) GetLotsListInventoryRequestFilterItemValueThreeItemList() []*LotsListInventoryRequestFilterItemValueThreeItem {
+	if l == nil {
 		return nil
 	}
-	return p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList
+	return l.LotsListInventoryRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (l *LotsListInventoryRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		l.typ = "Boolean"
+		l.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1InventoryLotsListRequestFilterItemValueThreeItemList []*PostV1InventoryLotsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1InventoryLotsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1InventoryLotsListRequestFilterItemValueThreeItemList"
-		p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList = valuePostV1InventoryLotsListRequestFilterItemValueThreeItemList
+	var valueLotsListInventoryRequestFilterItemValueThreeItemList []*LotsListInventoryRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueLotsListInventoryRequestFilterItemValueThreeItemList); err == nil {
+		l.typ = "LotsListInventoryRequestFilterItemValueThreeItemList"
+		l.LotsListInventoryRequestFilterItemValueThreeItemList = valueLotsListInventoryRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1InventoryLotsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l LotsListInventoryRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return json.Marshal(l.Boolean)
 	}
-	if p.typ == "PostV1InventoryLotsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList)
+	if l.typ == "LotsListInventoryRequestFilterItemValueThreeItemList" || l.LotsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(l.LotsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLotsListRequestFilterItemValueVisitor interface {
+type LotsListInventoryRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1InventoryLotsListRequestFilterItemValueThreeItemList([]*PostV1InventoryLotsListRequestFilterItemValueThreeItem) error
+	VisitLotsListInventoryRequestFilterItemValueThreeItemList([]*LotsListInventoryRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValue) Accept(visitor PostV1InventoryLotsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *LotsListInventoryRequestFilterItemValue) Accept(visitor LotsListInventoryRequestFilterItemValueVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return visitor.VisitBoolean(l.Boolean)
 	}
-	if p.typ == "PostV1InventoryLotsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1InventoryLotsListRequestFilterItemValueThreeItemList(p.PostV1InventoryLotsListRequestFilterItemValueThreeItemList)
+	if l.typ == "LotsListInventoryRequestFilterItemValueThreeItemList" || l.LotsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitLotsListInventoryRequestFilterItemValueThreeItemList(l.LotsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLotsListRequestFilterItemValueThreeItem struct {
+type LotsListInventoryRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValueThreeItem) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (l *LotsListInventoryRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (l *LotsListInventoryRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1InventoryLotsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l LotsListInventoryRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1InventoryLotsListRequestFilterItemValueThreeItemVisitor interface {
+type LotsListInventoryRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1InventoryLotsListRequestFilterItemValueThreeItem) Accept(visitor PostV1InventoryLotsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *LotsListInventoryRequestFilterItemValueThreeItem) Accept(visitor LotsListInventoryRequestFilterItemValueThreeItemVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
 var (
-	postV1InventoryLotsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryLotsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	lotsListInventoryRequestSortItemFieldField = big.NewInt(1 << 0)
+	lotsListInventoryRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryLotsListRequestSortItem struct {
-	Field string                                     `json:"field" url:"field"`
-	Dir   *PostV1InventoryLotsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type LotsListInventoryRequestSortItem struct {
+	Field string                               `json:"field" url:"field"`
+	Dir   *LotsListInventoryRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3858,126 +3786,126 @@ type PostV1InventoryLotsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) GetField() string {
-	if p == nil {
+func (l *LotsListInventoryRequestSortItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) GetDir() *PostV1InventoryLotsListRequestSortItemDir {
-	if p == nil {
+func (l *LotsListInventoryRequestSortItem) GetDir() *LotsListInventoryRequestSortItemDir {
+	if l == nil {
 		return nil
 	}
-	return p.Dir
+	return l.Dir
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsListInventoryRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsListInventoryRequestSortItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryLotsListRequestSortItemFieldField)
+func (l *LotsListInventoryRequestSortItem) SetField(field string) {
+	l.Field = field
+	l.require(lotsListInventoryRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListRequestSortItem) SetDir(dir *PostV1InventoryLotsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1InventoryLotsListRequestSortItemFieldDir)
+func (l *LotsListInventoryRequestSortItem) SetDir(dir *LotsListInventoryRequestSortItemDir) {
+	l.Dir = dir
+	l.require(lotsListInventoryRequestSortItemFieldDir)
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsListRequestSortItem
+func (l *LotsListInventoryRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsListInventoryRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsListInventoryRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsListRequestSortItem
+func (l *LotsListInventoryRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed LotsListInventoryRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsListRequestSortItem) String() string {
-	if p == nil {
+func (l *LotsListInventoryRequestSortItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1InventoryLotsListRequestSortItemDir string
+type LotsListInventoryRequestSortItemDir string
 
 const (
-	PostV1InventoryLotsListRequestSortItemDirAsc  PostV1InventoryLotsListRequestSortItemDir = "asc"
-	PostV1InventoryLotsListRequestSortItemDirDesc PostV1InventoryLotsListRequestSortItemDir = "desc"
+	LotsListInventoryRequestSortItemDirAsc  LotsListInventoryRequestSortItemDir = "asc"
+	LotsListInventoryRequestSortItemDirDesc LotsListInventoryRequestSortItemDir = "desc"
 )
 
-func NewPostV1InventoryLotsListRequestSortItemDirFromString(s string) (PostV1InventoryLotsListRequestSortItemDir, error) {
+func NewLotsListInventoryRequestSortItemDirFromString(s string) (LotsListInventoryRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1InventoryLotsListRequestSortItemDirAsc, nil
+		return LotsListInventoryRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1InventoryLotsListRequestSortItemDirDesc, nil
+		return LotsListInventoryRequestSortItemDirDesc, nil
 	}
-	var t PostV1InventoryLotsListRequestSortItemDir
+	var t LotsListInventoryRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryLotsListRequestSortItemDir) Ptr() *PostV1InventoryLotsListRequestSortItemDir {
-	return &p
+func (l LotsListInventoryRequestSortItemDir) Ptr() *LotsListInventoryRequestSortItemDir {
+	return &l
 }
 
 var (
-	postV1InventoryLotsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1InventoryLotsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1InventoryLotsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1InventoryLotsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1InventoryLotsListResponseFieldTotals   = big.NewInt(1 << 4)
+	lotsListInventoryResponseFieldRows     = big.NewInt(1 << 0)
+	lotsListInventoryResponseFieldPage     = big.NewInt(1 << 1)
+	lotsListInventoryResponseFieldPageSize = big.NewInt(1 << 2)
+	lotsListInventoryResponseFieldTotal    = big.NewInt(1 << 3)
+	lotsListInventoryResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryLotsListResponse struct {
-	Rows     []*PostV1InventoryLotsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                      `json:"page" url:"page"`
-	PageSize int64                                      `json:"pageSize" url:"pageSize"`
-	Total    int64                                      `json:"total" url:"total"`
-	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
+type LotsListInventoryResponse struct {
+	Rows     []*LotsListInventoryResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                `json:"page" url:"page"`
+	PageSize int64                                `json:"pageSize" url:"pageSize"`
+	Total    int64                                `json:"total" url:"total"`
+	Totals   map[string]string                    `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3986,150 +3914,150 @@ type PostV1InventoryLotsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsListResponse) GetRows() []*PostV1InventoryLotsListResponseRowsItem {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetRows() []*LotsListInventoryResponseRowsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Rows
+	return l.Rows
 }
 
-func (p *PostV1InventoryLotsListResponse) GetPage() int64 {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetPage() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Page
+	return l.Page
 }
 
-func (p *PostV1InventoryLotsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetPageSize() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.PageSize
+	return l.PageSize
 }
 
-func (p *PostV1InventoryLotsListResponse) GetTotal() int64 {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetTotal() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Total
+	return l.Total
 }
 
-func (p *PostV1InventoryLotsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetTotals() map[string]string {
+	if l == nil {
 		return nil
 	}
-	return p.Totals
+	return l.Totals
 }
 
-func (p *PostV1InventoryLotsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsListInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsListInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponse) SetRows(rows []*PostV1InventoryLotsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryLotsListResponseFieldRows)
+func (l *LotsListInventoryResponse) SetRows(rows []*LotsListInventoryResponseRowsItem) {
+	l.Rows = rows
+	l.require(lotsListInventoryResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1InventoryLotsListResponseFieldPage)
+func (l *LotsListInventoryResponse) SetPage(page int64) {
+	l.Page = page
+	l.require(lotsListInventoryResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryLotsListResponseFieldPageSize)
+func (l *LotsListInventoryResponse) SetPageSize(pageSize int64) {
+	l.PageSize = pageSize
+	l.require(lotsListInventoryResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1InventoryLotsListResponseFieldTotal)
+func (l *LotsListInventoryResponse) SetTotal(total int64) {
+	l.Total = total
+	l.require(lotsListInventoryResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1InventoryLotsListResponseFieldTotals)
+func (l *LotsListInventoryResponse) SetTotals(totals map[string]string) {
+	l.Totals = totals
+	l.require(lotsListInventoryResponseFieldTotals)
 }
 
-func (p *PostV1InventoryLotsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsListResponse
+func (l *LotsListInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler LotsListInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsListInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsListResponse
+func (l *LotsListInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LotsListInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsListResponse) String() string {
-	if p == nil {
+func (l *LotsListInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLotsListResponseRowsItemFieldID         = big.NewInt(1 << 0)
-	postV1InventoryLotsListResponseRowsItemFieldItemID     = big.NewInt(1 << 1)
-	postV1InventoryLotsListResponseRowsItemFieldLotNumber  = big.NewInt(1 << 2)
-	postV1InventoryLotsListResponseRowsItemFieldExpiryDate = big.NewInt(1 << 3)
-	postV1InventoryLotsListResponseRowsItemFieldNotes      = big.NewInt(1 << 4)
-	postV1InventoryLotsListResponseRowsItemFieldOnHand     = big.NewInt(1 << 5)
-	postV1InventoryLotsListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 6)
+	lotsListInventoryResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	lotsListInventoryResponseRowsItemFieldItemID     = big.NewInt(1 << 1)
+	lotsListInventoryResponseRowsItemFieldLotNumber  = big.NewInt(1 << 2)
+	lotsListInventoryResponseRowsItemFieldExpiryDate = big.NewInt(1 << 3)
+	lotsListInventoryResponseRowsItemFieldNotes      = big.NewInt(1 << 4)
+	lotsListInventoryResponseRowsItemFieldOnHand     = big.NewInt(1 << 5)
+	lotsListInventoryResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 6)
 )
 
-type PostV1InventoryLotsListResponseRowsItem struct {
-	ID         string  `json:"id" url:"id"`
-	ItemID     string  `json:"itemId" url:"itemId"`
-	LotNumber  string  `json:"lotNumber" url:"lotNumber"`
-	ExpiryDate *string `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
-	Notes      *string `json:"notes,omitempty" url:"notes,omitempty"`
-	OnHand     string  `json:"onHand" url:"onHand"`
-	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+type LotsListInventoryResponseRowsItem struct {
+	ID         string     `json:"id" url:"id"`
+	ItemID     string     `json:"itemId" url:"itemId"`
+	LotNumber  string     `json:"lotNumber" url:"lotNumber"`
+	ExpiryDate *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	Notes      *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	OnHand     string     `json:"onHand" url:"onHand"`
+	CreatedAt  time.Time  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4138,178 +4066,190 @@ type PostV1InventoryLotsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetItemID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ItemID
+	return l.ItemID
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetLotNumber() string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetLotNumber() string {
+	if l == nil {
 		return ""
 	}
-	return p.LotNumber
+	return l.LotNumber
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetExpiryDate() *string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetExpiryDate() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return l.ExpiryDate
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetOnHand() string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetOnHand() string {
+	if l == nil {
 		return ""
 	}
-	return p.OnHand
+	return l.OnHand
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LotsListInventoryResponseRowsItem) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsListInventoryResponseRowsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsListResponseRowsItemFieldID)
+func (l *LotsListInventoryResponseRowsItem) SetID(id string) {
+	l.ID = id
+	l.require(lotsListInventoryResponseRowsItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryLotsListResponseRowsItemFieldItemID)
+func (l *LotsListInventoryResponseRowsItem) SetItemID(itemID string) {
+	l.ItemID = itemID
+	l.require(lotsListInventoryResponseRowsItemFieldItemID)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetLotNumber(lotNumber string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryLotsListResponseRowsItemFieldLotNumber)
+func (l *LotsListInventoryResponseRowsItem) SetLotNumber(lotNumber string) {
+	l.LotNumber = lotNumber
+	l.require(lotsListInventoryResponseRowsItemFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryLotsListResponseRowsItemFieldExpiryDate)
+func (l *LotsListInventoryResponseRowsItem) SetExpiryDate(expiryDate *time.Time) {
+	l.ExpiryDate = expiryDate
+	l.require(lotsListInventoryResponseRowsItemFieldExpiryDate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLotsListResponseRowsItemFieldNotes)
+func (l *LotsListInventoryResponseRowsItem) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(lotsListInventoryResponseRowsItemFieldNotes)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1InventoryLotsListResponseRowsItemFieldOnHand)
+func (l *LotsListInventoryResponseRowsItem) SetOnHand(onHand string) {
+	l.OnHand = onHand
+	l.require(lotsListInventoryResponseRowsItemFieldOnHand)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLotsListResponseRowsItemFieldCreatedAt)
+func (l *LotsListInventoryResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(lotsListInventoryResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LotsListInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed LotsListInventoryResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsListInventoryResponseRowsItem(unmarshaler.embed)
+	l.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsListResponseRowsItem
+func (l *LotsListInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed LotsListInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*l),
+		ExpiryDate: internal.NewOptionalDate(l.ExpiryDate),
+		CreatedAt:  internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsListResponseRowsItem) String() string {
-	if p == nil {
+func (l *LotsListInventoryResponseRowsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryLotsUpdateResponseFieldID         = big.NewInt(1 << 0)
-	postV1InventoryLotsUpdateResponseFieldItemID     = big.NewInt(1 << 1)
-	postV1InventoryLotsUpdateResponseFieldLotNumber  = big.NewInt(1 << 2)
-	postV1InventoryLotsUpdateResponseFieldExpiryDate = big.NewInt(1 << 3)
-	postV1InventoryLotsUpdateResponseFieldNotes      = big.NewInt(1 << 4)
-	postV1InventoryLotsUpdateResponseFieldOnHand     = big.NewInt(1 << 5)
-	postV1InventoryLotsUpdateResponseFieldCreatedAt  = big.NewInt(1 << 6)
+	lotsUpdateInventoryResponseFieldID         = big.NewInt(1 << 0)
+	lotsUpdateInventoryResponseFieldItemID     = big.NewInt(1 << 1)
+	lotsUpdateInventoryResponseFieldLotNumber  = big.NewInt(1 << 2)
+	lotsUpdateInventoryResponseFieldExpiryDate = big.NewInt(1 << 3)
+	lotsUpdateInventoryResponseFieldNotes      = big.NewInt(1 << 4)
+	lotsUpdateInventoryResponseFieldOnHand     = big.NewInt(1 << 5)
+	lotsUpdateInventoryResponseFieldCreatedAt  = big.NewInt(1 << 6)
 )
 
-type PostV1InventoryLotsUpdateResponse struct {
-	ID         string  `json:"id" url:"id"`
-	ItemID     string  `json:"itemId" url:"itemId"`
-	LotNumber  string  `json:"lotNumber" url:"lotNumber"`
-	ExpiryDate *string `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
-	Notes      *string `json:"notes,omitempty" url:"notes,omitempty"`
-	OnHand     string  `json:"onHand" url:"onHand"`
-	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+type LotsUpdateInventoryResponse struct {
+	ID         string     `json:"id" url:"id"`
+	ItemID     string     `json:"itemId" url:"itemId"`
+	LotNumber  string     `json:"lotNumber" url:"lotNumber"`
+	ExpiryDate *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	Notes      *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	OnHand     string     `json:"onHand" url:"onHand"`
+	CreatedAt  time.Time  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4318,166 +4258,178 @@ type PostV1InventoryLotsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetID() string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetItemID() string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetItemID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ItemID
+	return l.ItemID
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetLotNumber() string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetLotNumber() string {
+	if l == nil {
 		return ""
 	}
-	return p.LotNumber
+	return l.LotNumber
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetExpiryDate() *string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetExpiryDate() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return l.ExpiryDate
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetNotes() *string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetNotes() *string {
+	if l == nil {
 		return nil
 	}
-	return p.Notes
+	return l.Notes
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetOnHand() string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetOnHand() string {
+	if l == nil {
 		return ""
 	}
-	return p.OnHand
+	return l.OnHand
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *LotsUpdateInventoryResponse) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LotsUpdateInventoryResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryLotsUpdateResponseFieldID)
+func (l *LotsUpdateInventoryResponse) SetID(id string) {
+	l.ID = id
+	l.require(lotsUpdateInventoryResponseFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryLotsUpdateResponseFieldItemID)
+func (l *LotsUpdateInventoryResponse) SetItemID(itemID string) {
+	l.ItemID = itemID
+	l.require(lotsUpdateInventoryResponseFieldItemID)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetLotNumber(lotNumber string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryLotsUpdateResponseFieldLotNumber)
+func (l *LotsUpdateInventoryResponse) SetLotNumber(lotNumber string) {
+	l.LotNumber = lotNumber
+	l.require(lotsUpdateInventoryResponseFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryLotsUpdateResponseFieldExpiryDate)
+func (l *LotsUpdateInventoryResponse) SetExpiryDate(expiryDate *time.Time) {
+	l.ExpiryDate = expiryDate
+	l.require(lotsUpdateInventoryResponseFieldExpiryDate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryLotsUpdateResponseFieldNotes)
+func (l *LotsUpdateInventoryResponse) SetNotes(notes *string) {
+	l.Notes = notes
+	l.require(lotsUpdateInventoryResponseFieldNotes)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1InventoryLotsUpdateResponseFieldOnHand)
+func (l *LotsUpdateInventoryResponse) SetOnHand(onHand string) {
+	l.OnHand = onHand
+	l.require(lotsUpdateInventoryResponseFieldOnHand)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryLotsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryLotsUpdateResponseFieldCreatedAt)
+func (l *LotsUpdateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(lotsUpdateInventoryResponseFieldCreatedAt)
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryLotsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *LotsUpdateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed LotsUpdateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryLotsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LotsUpdateInventoryResponse(unmarshaler.embed)
+	l.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryLotsUpdateResponse
+func (l *LotsUpdateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed LotsUpdateInventoryResponse
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date     `json:"expiryDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*l),
+		ExpiryDate: internal.NewOptionalDate(l.ExpiryDate),
+		CreatedAt:  internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryLotsUpdateResponse) String() string {
-	if p == nil {
+func (l *LotsUpdateInventoryResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1InventoryReorderRulesCheckResponseFieldRows = big.NewInt(1 << 0)
+	reorderRulesCheckInventoryResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryReorderRulesCheckResponse struct {
-	Rows []*PostV1InventoryReorderRulesCheckResponseRowsItem `json:"rows" url:"rows"`
+type ReorderRulesCheckInventoryResponse struct {
+	Rows []*ReorderRulesCheckInventoryResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4486,88 +4438,88 @@ type PostV1InventoryReorderRulesCheckResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) GetRows() []*PostV1InventoryReorderRulesCheckResponseRowsItem {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponse) GetRows() []*ReorderRulesCheckInventoryResponseRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesCheckInventoryResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponse) SetRows(rows []*PostV1InventoryReorderRulesCheckResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryReorderRulesCheckResponseFieldRows)
+func (r *ReorderRulesCheckInventoryResponse) SetRows(rows []*ReorderRulesCheckInventoryResponseRowsItem) {
+	r.Rows = rows
+	r.require(reorderRulesCheckInventoryResponseFieldRows)
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesCheckResponse
+func (r *ReorderRulesCheckInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesCheckInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesCheckResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesCheckInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesCheckResponse
+func (r *ReorderRulesCheckInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesCheckInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponse) String() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldRuleID      = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldItemID      = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldWarehouseID = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldMinQty      = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldReorderQty  = big.NewInt(1 << 4)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldOnHand      = big.NewInt(1 << 5)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldReserved    = big.NewInt(1 << 6)
-	postV1InventoryReorderRulesCheckResponseRowsItemFieldAvailable   = big.NewInt(1 << 7)
+	reorderRulesCheckInventoryResponseRowsItemFieldRuleID      = big.NewInt(1 << 0)
+	reorderRulesCheckInventoryResponseRowsItemFieldItemID      = big.NewInt(1 << 1)
+	reorderRulesCheckInventoryResponseRowsItemFieldWarehouseID = big.NewInt(1 << 2)
+	reorderRulesCheckInventoryResponseRowsItemFieldMinQty      = big.NewInt(1 << 3)
+	reorderRulesCheckInventoryResponseRowsItemFieldReorderQty  = big.NewInt(1 << 4)
+	reorderRulesCheckInventoryResponseRowsItemFieldOnHand      = big.NewInt(1 << 5)
+	reorderRulesCheckInventoryResponseRowsItemFieldReserved    = big.NewInt(1 << 6)
+	reorderRulesCheckInventoryResponseRowsItemFieldAvailable   = big.NewInt(1 << 7)
 )
 
-type PostV1InventoryReorderRulesCheckResponseRowsItem struct {
+type ReorderRulesCheckInventoryResponseRowsItem struct {
 	RuleID      string  `json:"ruleId" url:"ruleId"`
 	ItemID      string  `json:"itemId" url:"itemId"`
 	WarehouseID *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
@@ -4584,196 +4536,196 @@ type PostV1InventoryReorderRulesCheckResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetRuleID() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetRuleID() string {
+	if r == nil {
 		return ""
 	}
-	return p.RuleID
+	return r.RuleID
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetItemID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ItemID
+	return r.ItemID
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetMinQty() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetMinQty() string {
+	if r == nil {
 		return ""
 	}
-	return p.MinQty
+	return r.MinQty
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetReorderQty() *string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetReorderQty() *string {
+	if r == nil {
 		return nil
 	}
-	return p.ReorderQty
+	return r.ReorderQty
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetOnHand() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetOnHand() string {
+	if r == nil {
 		return ""
 	}
-	return p.OnHand
+	return r.OnHand
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetReserved() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetReserved() string {
+	if r == nil {
 		return ""
 	}
-	return p.Reserved
+	return r.Reserved
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetAvailable() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetAvailable() string {
+	if r == nil {
 		return ""
 	}
-	return p.Available
+	return r.Available
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetRuleID sets the RuleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetRuleID(ruleID string) {
-	p.RuleID = ruleID
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldRuleID)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetRuleID(ruleID string) {
+	r.RuleID = ruleID
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldRuleID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldItemID)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldWarehouseID)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldWarehouseID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetMinQty(minQty string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldMinQty)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetMinQty(minQty string) {
+	r.MinQty = minQty
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldReorderQty)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldReorderQty)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldOnHand)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetOnHand(onHand string) {
+	r.OnHand = onHand
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldOnHand)
 }
 
 // SetReserved sets the Reserved field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetReserved(reserved string) {
-	p.Reserved = reserved
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldReserved)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetReserved(reserved string) {
+	r.Reserved = reserved
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldReserved)
 }
 
 // SetAvailable sets the Available field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) SetAvailable(available string) {
-	p.Available = available
-	p.require(postV1InventoryReorderRulesCheckResponseRowsItemFieldAvailable)
+func (r *ReorderRulesCheckInventoryResponseRowsItem) SetAvailable(available string) {
+	r.Available = available
+	r.require(reorderRulesCheckInventoryResponseRowsItemFieldAvailable)
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesCheckResponseRowsItem
+func (r *ReorderRulesCheckInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesCheckInventoryResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesCheckResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesCheckInventoryResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesCheckResponseRowsItem
+func (r *ReorderRulesCheckInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesCheckInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesCheckResponseRowsItem) String() string {
-	if p == nil {
+func (r *ReorderRulesCheckInventoryResponseRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesCreateResponseFieldID          = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesCreateResponseFieldItemID      = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesCreateResponseFieldWarehouseID = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesCreateResponseFieldMinQty      = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesCreateResponseFieldReorderQty  = big.NewInt(1 << 4)
-	postV1InventoryReorderRulesCreateResponseFieldIsActive    = big.NewInt(1 << 5)
-	postV1InventoryReorderRulesCreateResponseFieldNotes       = big.NewInt(1 << 6)
-	postV1InventoryReorderRulesCreateResponseFieldCreatedAt   = big.NewInt(1 << 7)
-	postV1InventoryReorderRulesCreateResponseFieldUpdatedAt   = big.NewInt(1 << 8)
+	reorderRulesCreateInventoryResponseFieldID          = big.NewInt(1 << 0)
+	reorderRulesCreateInventoryResponseFieldItemID      = big.NewInt(1 << 1)
+	reorderRulesCreateInventoryResponseFieldWarehouseID = big.NewInt(1 << 2)
+	reorderRulesCreateInventoryResponseFieldMinQty      = big.NewInt(1 << 3)
+	reorderRulesCreateInventoryResponseFieldReorderQty  = big.NewInt(1 << 4)
+	reorderRulesCreateInventoryResponseFieldIsActive    = big.NewInt(1 << 5)
+	reorderRulesCreateInventoryResponseFieldNotes       = big.NewInt(1 << 6)
+	reorderRulesCreateInventoryResponseFieldCreatedAt   = big.NewInt(1 << 7)
+	reorderRulesCreateInventoryResponseFieldUpdatedAt   = big.NewInt(1 << 8)
 )
 
-type PostV1InventoryReorderRulesCreateResponse struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      string  `json:"itemId" url:"itemId"`
-	WarehouseID *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	MinQty      string  `json:"minQty" url:"minQty"`
-	ReorderQty  *string `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
-	IsActive    bool    `json:"isActive" url:"isActive"`
-	Notes       *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string  `json:"createdAt" url:"createdAt"`
-	UpdatedAt   string  `json:"updatedAt" url:"updatedAt"`
+type ReorderRulesCreateInventoryResponse struct {
+	ID          string    `json:"id" url:"id"`
+	ItemID      string    `json:"itemId" url:"itemId"`
+	WarehouseID *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	MinQty      string    `json:"minQty" url:"minQty"`
+	ReorderQty  *string   `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
+	IsActive    bool      `json:"isActive" url:"isActive"`
+	Notes       *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4782,193 +4734,205 @@ type PostV1InventoryReorderRulesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetID() string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetItemID() string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetItemID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ItemID
+	return r.ItemID
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetMinQty() string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetMinQty() string {
+	if r == nil {
 		return ""
 	}
-	return p.MinQty
+	return r.MinQty
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetReorderQty() *string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetReorderQty() *string {
+	if r == nil {
 		return nil
 	}
-	return p.ReorderQty
+	return r.ReorderQty
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetIsActive() bool {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetIsActive() bool {
+	if r == nil {
 		return false
 	}
-	return p.IsActive
+	return r.IsActive
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetNotes() *string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesCreateInventoryResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesCreateInventoryResponse) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesCreateInventoryResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesCreateResponseFieldID)
+func (r *ReorderRulesCreateInventoryResponse) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesCreateInventoryResponseFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryReorderRulesCreateResponseFieldItemID)
+func (r *ReorderRulesCreateInventoryResponse) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reorderRulesCreateInventoryResponseFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryReorderRulesCreateResponseFieldWarehouseID)
+func (r *ReorderRulesCreateInventoryResponse) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reorderRulesCreateInventoryResponseFieldWarehouseID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetMinQty(minQty string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesCreateResponseFieldMinQty)
+func (r *ReorderRulesCreateInventoryResponse) SetMinQty(minQty string) {
+	r.MinQty = minQty
+	r.require(reorderRulesCreateInventoryResponseFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesCreateResponseFieldReorderQty)
+func (r *ReorderRulesCreateInventoryResponse) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesCreateInventoryResponseFieldReorderQty)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1InventoryReorderRulesCreateResponseFieldIsActive)
+func (r *ReorderRulesCreateInventoryResponse) SetIsActive(isActive bool) {
+	r.IsActive = isActive
+	r.require(reorderRulesCreateInventoryResponseFieldIsActive)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryReorderRulesCreateResponseFieldNotes)
+func (r *ReorderRulesCreateInventoryResponse) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reorderRulesCreateInventoryResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryReorderRulesCreateResponseFieldCreatedAt)
+func (r *ReorderRulesCreateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reorderRulesCreateInventoryResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesCreateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1InventoryReorderRulesCreateResponseFieldUpdatedAt)
+func (r *ReorderRulesCreateInventoryResponse) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(reorderRulesCreateInventoryResponseFieldUpdatedAt)
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReorderRulesCreateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed ReorderRulesCreateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesCreateInventoryResponse(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesCreateResponse
+func (r *ReorderRulesCreateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesCreateInventoryResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+		UpdatedAt: internal.NewDateTime(r.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesCreateResponse) String() string {
-	if p == nil {
+func (r *ReorderRulesCreateInventoryResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesDeleteResponseFieldID = big.NewInt(1 << 0)
+	reorderRulesDeleteInventoryResponseFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryReorderRulesDeleteResponse struct {
+type ReorderRulesDeleteInventoryResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -4978,86 +4942,86 @@ type PostV1InventoryReorderRulesDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) GetID() string {
-	if p == nil {
+func (r *ReorderRulesDeleteInventoryResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesDeleteInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesDeleteInventoryResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesDeleteResponseFieldID)
+func (r *ReorderRulesDeleteInventoryResponse) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesDeleteInventoryResponseFieldID)
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesDeleteResponse
+func (r *ReorderRulesDeleteInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesDeleteInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesDeleteInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesDeleteResponse
+func (r *ReorderRulesDeleteInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesDeleteInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesDeleteResponse) String() string {
-	if p == nil {
+func (r *ReorderRulesDeleteInventoryResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	reorderRulesListInventoryRequestFilterItemFieldField = big.NewInt(1 << 0)
+	reorderRulesListInventoryRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	reorderRulesListInventoryRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryReorderRulesListRequestFilterItem struct {
-	Field string                                                 `json:"field" url:"field"`
-	Op    PostV1InventoryReorderRulesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1InventoryReorderRulesListRequestFilterItemValue `json:"value" url:"value"`
+type ReorderRulesListInventoryRequestFilterItem struct {
+	Field string                                           `json:"field" url:"field"`
+	Op    ReorderRulesListInventoryRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ReorderRulesListInventoryRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5066,312 +5030,312 @@ type PostV1InventoryReorderRulesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItem) GetField() string {
+	if r == nil {
 		return ""
 	}
-	return p.Field
+	return r.Field
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) GetOp() PostV1InventoryReorderRulesListRequestFilterItemOp {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItem) GetOp() ReorderRulesListInventoryRequestFilterItemOp {
+	if r == nil {
 		return ""
 	}
-	return p.Op
+	return r.Op
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) GetValue() *PostV1InventoryReorderRulesListRequestFilterItemValue {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItem) GetValue() *ReorderRulesListInventoryRequestFilterItemValue {
+	if r == nil {
 		return nil
 	}
-	return p.Value
+	return r.Value
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesListInventoryRequestFilterItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryReorderRulesListRequestFilterItemFieldField)
+func (r *ReorderRulesListInventoryRequestFilterItem) SetField(field string) {
+	r.Field = field
+	r.require(reorderRulesListInventoryRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) SetOp(op PostV1InventoryReorderRulesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1InventoryReorderRulesListRequestFilterItemFieldOp)
+func (r *ReorderRulesListInventoryRequestFilterItem) SetOp(op ReorderRulesListInventoryRequestFilterItemOp) {
+	r.Op = op
+	r.require(reorderRulesListInventoryRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) SetValue(value *PostV1InventoryReorderRulesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1InventoryReorderRulesListRequestFilterItemFieldValue)
+func (r *ReorderRulesListInventoryRequestFilterItem) SetValue(value *ReorderRulesListInventoryRequestFilterItemValue) {
+	r.Value = value
+	r.require(reorderRulesListInventoryRequestFilterItemFieldValue)
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesListRequestFilterItem
+func (r *ReorderRulesListInventoryRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesListInventoryRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesListInventoryRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesListRequestFilterItem
+func (r *ReorderRulesListInventoryRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesListInventoryRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItem) String() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1InventoryReorderRulesListRequestFilterItemOp string
+type ReorderRulesListInventoryRequestFilterItemOp string
 
 const (
-	PostV1InventoryReorderRulesListRequestFilterItemOpEq       PostV1InventoryReorderRulesListRequestFilterItemOp = "eq"
-	PostV1InventoryReorderRulesListRequestFilterItemOpNe       PostV1InventoryReorderRulesListRequestFilterItemOp = "ne"
-	PostV1InventoryReorderRulesListRequestFilterItemOpContains PostV1InventoryReorderRulesListRequestFilterItemOp = "contains"
-	PostV1InventoryReorderRulesListRequestFilterItemOpGte      PostV1InventoryReorderRulesListRequestFilterItemOp = "gte"
-	PostV1InventoryReorderRulesListRequestFilterItemOpLte      PostV1InventoryReorderRulesListRequestFilterItemOp = "lte"
-	PostV1InventoryReorderRulesListRequestFilterItemOpIn       PostV1InventoryReorderRulesListRequestFilterItemOp = "in"
+	ReorderRulesListInventoryRequestFilterItemOpEq       ReorderRulesListInventoryRequestFilterItemOp = "eq"
+	ReorderRulesListInventoryRequestFilterItemOpNe       ReorderRulesListInventoryRequestFilterItemOp = "ne"
+	ReorderRulesListInventoryRequestFilterItemOpContains ReorderRulesListInventoryRequestFilterItemOp = "contains"
+	ReorderRulesListInventoryRequestFilterItemOpGte      ReorderRulesListInventoryRequestFilterItemOp = "gte"
+	ReorderRulesListInventoryRequestFilterItemOpLte      ReorderRulesListInventoryRequestFilterItemOp = "lte"
+	ReorderRulesListInventoryRequestFilterItemOpIn       ReorderRulesListInventoryRequestFilterItemOp = "in"
 )
 
-func NewPostV1InventoryReorderRulesListRequestFilterItemOpFromString(s string) (PostV1InventoryReorderRulesListRequestFilterItemOp, error) {
+func NewReorderRulesListInventoryRequestFilterItemOpFromString(s string) (ReorderRulesListInventoryRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpEq, nil
+		return ReorderRulesListInventoryRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpNe, nil
+		return ReorderRulesListInventoryRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpContains, nil
+		return ReorderRulesListInventoryRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpGte, nil
+		return ReorderRulesListInventoryRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpLte, nil
+		return ReorderRulesListInventoryRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1InventoryReorderRulesListRequestFilterItemOpIn, nil
+		return ReorderRulesListInventoryRequestFilterItemOpIn, nil
 	}
-	var t PostV1InventoryReorderRulesListRequestFilterItemOp
+	var t ReorderRulesListInventoryRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryReorderRulesListRequestFilterItemOp) Ptr() *PostV1InventoryReorderRulesListRequestFilterItemOp {
-	return &p
+func (r ReorderRulesListInventoryRequestFilterItemOp) Ptr() *ReorderRulesListInventoryRequestFilterItemOp {
+	return &r
 }
 
-type PostV1InventoryReorderRulesListRequestFilterItemValue struct {
-	String                                                             string
-	Double                                                             float64
-	Boolean                                                            bool
-	PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList []*PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem
+type ReorderRulesListInventoryRequestFilterItemValue struct {
+	String                                                       string
+	Double                                                       float64
+	Boolean                                                      bool
+	ReorderRulesListInventoryRequestFilterItemValueThreeItemList []*ReorderRulesListInventoryRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValue) GetString() string {
+	if r == nil {
 		return ""
 	}
-	return p.String
+	return r.String
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValue) GetDouble() float64 {
+	if r == nil {
 		return 0
 	}
-	return p.Double
+	return r.Double
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValue) GetBoolean() bool {
+	if r == nil {
 		return false
 	}
-	return p.Boolean
+	return r.Boolean
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) GetPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList() []*PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValue) GetReorderRulesListInventoryRequestFilterItemValueThreeItemList() []*ReorderRulesListInventoryRequestFilterItemValueThreeItem {
+	if r == nil {
 		return nil
 	}
-	return p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList
+	return r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (r *ReorderRulesListInventoryRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		r.typ = "String"
+		r.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		r.typ = "Double"
+		r.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		r.typ = "Boolean"
+		r.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList []*PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList"
-		p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList = valuePostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList
+	var valueReorderRulesListInventoryRequestFilterItemValueThreeItemList []*ReorderRulesListInventoryRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueReorderRulesListInventoryRequestFilterItemValueThreeItemList); err == nil {
+		r.typ = "ReorderRulesListInventoryRequestFilterItemValueThreeItemList"
+		r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList = valueReorderRulesListInventoryRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
 }
 
-func (p PostV1InventoryReorderRulesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (r ReorderRulesListInventoryRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if r.typ == "Boolean" || r.Boolean != false {
+		return json.Marshal(r.Boolean)
 	}
-	if p.typ == "PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList" || p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList)
+	if r.typ == "ReorderRulesListInventoryRequestFilterItemValueThreeItemList" || r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1InventoryReorderRulesListRequestFilterItemValueVisitor interface {
+type ReorderRulesListInventoryRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList([]*PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) error
+	VisitReorderRulesListInventoryRequestFilterItemValueThreeItemList([]*ReorderRulesListInventoryRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValue) Accept(visitor PostV1InventoryReorderRulesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (r *ReorderRulesListInventoryRequestFilterItemValue) Accept(visitor ReorderRulesListInventoryRequestFilterItemValueVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if r.typ == "Boolean" || r.Boolean != false {
+		return visitor.VisitBoolean(r.Boolean)
 	}
-	if p.typ == "PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList" || p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList(p.PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemList)
+	if r.typ == "ReorderRulesListInventoryRequestFilterItemValueThreeItemList" || r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitReorderRulesListInventoryRequestFilterItemValueThreeItemList(r.ReorderRulesListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem struct {
+type ReorderRulesListInventoryRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValueThreeItem) GetString() string {
+	if r == nil {
 		return ""
 	}
-	return p.String
+	return r.String
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if r == nil {
 		return 0
 	}
-	return p.Double
+	return r.Double
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (r *ReorderRulesListInventoryRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		r.typ = "String"
+		r.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		r.typ = "Double"
+		r.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
 }
 
-func (p PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (r ReorderRulesListInventoryRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemVisitor interface {
+type ReorderRulesListInventoryRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1InventoryReorderRulesListRequestFilterItemValueThreeItem) Accept(visitor PostV1InventoryReorderRulesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (r *ReorderRulesListInventoryRequestFilterItemValueThreeItem) Accept(visitor ReorderRulesListInventoryRequestFilterItemValueThreeItemVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
 var (
-	postV1InventoryReorderRulesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	reorderRulesListInventoryRequestSortItemFieldField = big.NewInt(1 << 0)
+	reorderRulesListInventoryRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryReorderRulesListRequestSortItem struct {
-	Field string                                             `json:"field" url:"field"`
-	Dir   *PostV1InventoryReorderRulesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type ReorderRulesListInventoryRequestSortItem struct {
+	Field string                                       `json:"field" url:"field"`
+	Dir   *ReorderRulesListInventoryRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5380,126 +5344,126 @@ type PostV1InventoryReorderRulesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) GetField() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestSortItem) GetField() string {
+	if r == nil {
 		return ""
 	}
-	return p.Field
+	return r.Field
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) GetDir() *PostV1InventoryReorderRulesListRequestSortItemDir {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestSortItem) GetDir() *ReorderRulesListInventoryRequestSortItemDir {
+	if r == nil {
 		return nil
 	}
-	return p.Dir
+	return r.Dir
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesListInventoryRequestSortItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryReorderRulesListRequestSortItemFieldField)
+func (r *ReorderRulesListInventoryRequestSortItem) SetField(field string) {
+	r.Field = field
+	r.require(reorderRulesListInventoryRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListRequestSortItem) SetDir(dir *PostV1InventoryReorderRulesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1InventoryReorderRulesListRequestSortItemFieldDir)
+func (r *ReorderRulesListInventoryRequestSortItem) SetDir(dir *ReorderRulesListInventoryRequestSortItemDir) {
+	r.Dir = dir
+	r.require(reorderRulesListInventoryRequestSortItemFieldDir)
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesListRequestSortItem
+func (r *ReorderRulesListInventoryRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesListInventoryRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesListInventoryRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesListRequestSortItem
+func (r *ReorderRulesListInventoryRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesListInventoryRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesListRequestSortItem) String() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryRequestSortItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1InventoryReorderRulesListRequestSortItemDir string
+type ReorderRulesListInventoryRequestSortItemDir string
 
 const (
-	PostV1InventoryReorderRulesListRequestSortItemDirAsc  PostV1InventoryReorderRulesListRequestSortItemDir = "asc"
-	PostV1InventoryReorderRulesListRequestSortItemDirDesc PostV1InventoryReorderRulesListRequestSortItemDir = "desc"
+	ReorderRulesListInventoryRequestSortItemDirAsc  ReorderRulesListInventoryRequestSortItemDir = "asc"
+	ReorderRulesListInventoryRequestSortItemDirDesc ReorderRulesListInventoryRequestSortItemDir = "desc"
 )
 
-func NewPostV1InventoryReorderRulesListRequestSortItemDirFromString(s string) (PostV1InventoryReorderRulesListRequestSortItemDir, error) {
+func NewReorderRulesListInventoryRequestSortItemDirFromString(s string) (ReorderRulesListInventoryRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1InventoryReorderRulesListRequestSortItemDirAsc, nil
+		return ReorderRulesListInventoryRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1InventoryReorderRulesListRequestSortItemDirDesc, nil
+		return ReorderRulesListInventoryRequestSortItemDirDesc, nil
 	}
-	var t PostV1InventoryReorderRulesListRequestSortItemDir
+	var t ReorderRulesListInventoryRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryReorderRulesListRequestSortItemDir) Ptr() *PostV1InventoryReorderRulesListRequestSortItemDir {
-	return &p
+func (r ReorderRulesListInventoryRequestSortItemDir) Ptr() *ReorderRulesListInventoryRequestSortItemDir {
+	return &r
 }
 
 var (
-	postV1InventoryReorderRulesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesListResponseFieldTotals   = big.NewInt(1 << 4)
+	reorderRulesListInventoryResponseFieldRows     = big.NewInt(1 << 0)
+	reorderRulesListInventoryResponseFieldPage     = big.NewInt(1 << 1)
+	reorderRulesListInventoryResponseFieldPageSize = big.NewInt(1 << 2)
+	reorderRulesListInventoryResponseFieldTotal    = big.NewInt(1 << 3)
+	reorderRulesListInventoryResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryReorderRulesListResponse struct {
-	Rows     []*PostV1InventoryReorderRulesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                              `json:"page" url:"page"`
-	PageSize int64                                              `json:"pageSize" url:"pageSize"`
-	Total    int64                                              `json:"total" url:"total"`
-	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
+type ReorderRulesListInventoryResponse struct {
+	Rows     []*ReorderRulesListInventoryResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                        `json:"page" url:"page"`
+	PageSize int64                                        `json:"pageSize" url:"pageSize"`
+	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5508,154 +5472,154 @@ type PostV1InventoryReorderRulesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetRows() []*PostV1InventoryReorderRulesListResponseRowsItem {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetRows() []*ReorderRulesListInventoryResponseRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetPage() int64 {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetPage() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.Page
+	return r.Page
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetPageSize() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.PageSize
+	return r.PageSize
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetTotal() int64 {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetTotal() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetTotals() map[string]string {
+	if r == nil {
 		return nil
 	}
-	return p.Totals
+	return r.Totals
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesListInventoryResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponse) SetRows(rows []*PostV1InventoryReorderRulesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryReorderRulesListResponseFieldRows)
+func (r *ReorderRulesListInventoryResponse) SetRows(rows []*ReorderRulesListInventoryResponseRowsItem) {
+	r.Rows = rows
+	r.require(reorderRulesListInventoryResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1InventoryReorderRulesListResponseFieldPage)
+func (r *ReorderRulesListInventoryResponse) SetPage(page int64) {
+	r.Page = page
+	r.require(reorderRulesListInventoryResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryReorderRulesListResponseFieldPageSize)
+func (r *ReorderRulesListInventoryResponse) SetPageSize(pageSize int64) {
+	r.PageSize = pageSize
+	r.require(reorderRulesListInventoryResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1InventoryReorderRulesListResponseFieldTotal)
+func (r *ReorderRulesListInventoryResponse) SetTotal(total int64) {
+	r.Total = total
+	r.require(reorderRulesListInventoryResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1InventoryReorderRulesListResponseFieldTotals)
+func (r *ReorderRulesListInventoryResponse) SetTotals(totals map[string]string) {
+	r.Totals = totals
+	r.require(reorderRulesListInventoryResponseFieldTotals)
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesListResponse
+func (r *ReorderRulesListInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReorderRulesListInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesListInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesListResponse
+func (r *ReorderRulesListInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesListInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesListResponse) String() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesListResponseRowsItemFieldID          = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesListResponseRowsItemFieldItemID      = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesListResponseRowsItemFieldWarehouseID = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesListResponseRowsItemFieldMinQty      = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesListResponseRowsItemFieldReorderQty  = big.NewInt(1 << 4)
-	postV1InventoryReorderRulesListResponseRowsItemFieldIsActive    = big.NewInt(1 << 5)
-	postV1InventoryReorderRulesListResponseRowsItemFieldNotes       = big.NewInt(1 << 6)
-	postV1InventoryReorderRulesListResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 7)
-	postV1InventoryReorderRulesListResponseRowsItemFieldUpdatedAt   = big.NewInt(1 << 8)
+	reorderRulesListInventoryResponseRowsItemFieldID          = big.NewInt(1 << 0)
+	reorderRulesListInventoryResponseRowsItemFieldItemID      = big.NewInt(1 << 1)
+	reorderRulesListInventoryResponseRowsItemFieldWarehouseID = big.NewInt(1 << 2)
+	reorderRulesListInventoryResponseRowsItemFieldMinQty      = big.NewInt(1 << 3)
+	reorderRulesListInventoryResponseRowsItemFieldReorderQty  = big.NewInt(1 << 4)
+	reorderRulesListInventoryResponseRowsItemFieldIsActive    = big.NewInt(1 << 5)
+	reorderRulesListInventoryResponseRowsItemFieldNotes       = big.NewInt(1 << 6)
+	reorderRulesListInventoryResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 7)
+	reorderRulesListInventoryResponseRowsItemFieldUpdatedAt   = big.NewInt(1 << 8)
 )
 
-type PostV1InventoryReorderRulesListResponseRowsItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      string  `json:"itemId" url:"itemId"`
-	WarehouseID *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	MinQty      string  `json:"minQty" url:"minQty"`
-	ReorderQty  *string `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
-	IsActive    bool    `json:"isActive" url:"isActive"`
-	Notes       *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string  `json:"createdAt" url:"createdAt"`
-	UpdatedAt   string  `json:"updatedAt" url:"updatedAt"`
+type ReorderRulesListInventoryResponseRowsItem struct {
+	ID          string    `json:"id" url:"id"`
+	ItemID      string    `json:"itemId" url:"itemId"`
+	WarehouseID *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	MinQty      string    `json:"minQty" url:"minQty"`
+	ReorderQty  *string   `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
+	IsActive    bool      `json:"isActive" url:"isActive"`
+	Notes       *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5664,210 +5628,222 @@ type PostV1InventoryReorderRulesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetItemID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ItemID
+	return r.ItemID
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetMinQty() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetMinQty() string {
+	if r == nil {
 		return ""
 	}
-	return p.MinQty
+	return r.MinQty
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetReorderQty() *string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetReorderQty() *string {
+	if r == nil {
 		return nil
 	}
-	return p.ReorderQty
+	return r.ReorderQty
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetIsActive() bool {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetIsActive() bool {
+	if r == nil {
 		return false
 	}
-	return p.IsActive
+	return r.IsActive
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesListInventoryResponseRowsItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesListInventoryResponseRowsItem) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesListInventoryResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldID)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesListInventoryResponseRowsItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldItemID)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reorderRulesListInventoryResponseRowsItemFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldWarehouseID)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reorderRulesListInventoryResponseRowsItemFieldWarehouseID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetMinQty(minQty string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldMinQty)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetMinQty(minQty string) {
+	r.MinQty = minQty
+	r.require(reorderRulesListInventoryResponseRowsItemFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldReorderQty)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesListInventoryResponseRowsItemFieldReorderQty)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldIsActive)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetIsActive(isActive bool) {
+	r.IsActive = isActive
+	r.require(reorderRulesListInventoryResponseRowsItemFieldIsActive)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldNotes)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reorderRulesListInventoryResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldCreatedAt)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reorderRulesListInventoryResponseRowsItemFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1InventoryReorderRulesListResponseRowsItemFieldUpdatedAt)
+func (r *ReorderRulesListInventoryResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(reorderRulesListInventoryResponseRowsItemFieldUpdatedAt)
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ReorderRulesListInventoryResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesListInventoryResponseRowsItem(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesListResponseRowsItem
+func (r *ReorderRulesListInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesListInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+		UpdatedAt: internal.NewDateTime(r.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesListResponseRowsItem) String() string {
-	if p == nil {
+func (r *ReorderRulesListInventoryResponseRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventoryReorderRulesUpdateResponseFieldID          = big.NewInt(1 << 0)
-	postV1InventoryReorderRulesUpdateResponseFieldItemID      = big.NewInt(1 << 1)
-	postV1InventoryReorderRulesUpdateResponseFieldWarehouseID = big.NewInt(1 << 2)
-	postV1InventoryReorderRulesUpdateResponseFieldMinQty      = big.NewInt(1 << 3)
-	postV1InventoryReorderRulesUpdateResponseFieldReorderQty  = big.NewInt(1 << 4)
-	postV1InventoryReorderRulesUpdateResponseFieldIsActive    = big.NewInt(1 << 5)
-	postV1InventoryReorderRulesUpdateResponseFieldNotes       = big.NewInt(1 << 6)
-	postV1InventoryReorderRulesUpdateResponseFieldCreatedAt   = big.NewInt(1 << 7)
-	postV1InventoryReorderRulesUpdateResponseFieldUpdatedAt   = big.NewInt(1 << 8)
+	reorderRulesUpdateInventoryResponseFieldID          = big.NewInt(1 << 0)
+	reorderRulesUpdateInventoryResponseFieldItemID      = big.NewInt(1 << 1)
+	reorderRulesUpdateInventoryResponseFieldWarehouseID = big.NewInt(1 << 2)
+	reorderRulesUpdateInventoryResponseFieldMinQty      = big.NewInt(1 << 3)
+	reorderRulesUpdateInventoryResponseFieldReorderQty  = big.NewInt(1 << 4)
+	reorderRulesUpdateInventoryResponseFieldIsActive    = big.NewInt(1 << 5)
+	reorderRulesUpdateInventoryResponseFieldNotes       = big.NewInt(1 << 6)
+	reorderRulesUpdateInventoryResponseFieldCreatedAt   = big.NewInt(1 << 7)
+	reorderRulesUpdateInventoryResponseFieldUpdatedAt   = big.NewInt(1 << 8)
 )
 
-type PostV1InventoryReorderRulesUpdateResponse struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      string  `json:"itemId" url:"itemId"`
-	WarehouseID *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	MinQty      string  `json:"minQty" url:"minQty"`
-	ReorderQty  *string `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
-	IsActive    bool    `json:"isActive" url:"isActive"`
-	Notes       *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string  `json:"createdAt" url:"createdAt"`
-	UpdatedAt   string  `json:"updatedAt" url:"updatedAt"`
+type ReorderRulesUpdateInventoryResponse struct {
+	ID          string    `json:"id" url:"id"`
+	ItemID      string    `json:"itemId" url:"itemId"`
+	WarehouseID *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	MinQty      string    `json:"minQty" url:"minQty"`
+	ReorderQty  *string   `json:"reorderQty,omitempty" url:"reorderQty,omitempty"`
+	IsActive    bool      `json:"isActive" url:"isActive"`
+	Notes       *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5876,194 +5852,206 @@ type PostV1InventoryReorderRulesUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetID() string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetItemID() string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetItemID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ItemID
+	return r.ItemID
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetMinQty() string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetMinQty() string {
+	if r == nil {
 		return ""
 	}
-	return p.MinQty
+	return r.MinQty
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetReorderQty() *string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetReorderQty() *string {
+	if r == nil {
 		return nil
 	}
-	return p.ReorderQty
+	return r.ReorderQty
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetIsActive() bool {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetIsActive() bool {
+	if r == nil {
 		return false
 	}
-	return p.IsActive
+	return r.IsActive
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetNotes() *string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesUpdateInventoryResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReorderRulesUpdateInventoryResponse) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReorderRulesUpdateInventoryResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldID)
+func (r *ReorderRulesUpdateInventoryResponse) SetID(id string) {
+	r.ID = id
+	r.require(reorderRulesUpdateInventoryResponseFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldItemID)
+func (r *ReorderRulesUpdateInventoryResponse) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reorderRulesUpdateInventoryResponseFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldWarehouseID)
+func (r *ReorderRulesUpdateInventoryResponse) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reorderRulesUpdateInventoryResponseFieldWarehouseID)
 }
 
 // SetMinQty sets the MinQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetMinQty(minQty string) {
-	p.MinQty = minQty
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldMinQty)
+func (r *ReorderRulesUpdateInventoryResponse) SetMinQty(minQty string) {
+	r.MinQty = minQty
+	r.require(reorderRulesUpdateInventoryResponseFieldMinQty)
 }
 
 // SetReorderQty sets the ReorderQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetReorderQty(reorderQty *string) {
-	p.ReorderQty = reorderQty
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldReorderQty)
+func (r *ReorderRulesUpdateInventoryResponse) SetReorderQty(reorderQty *string) {
+	r.ReorderQty = reorderQty
+	r.require(reorderRulesUpdateInventoryResponseFieldReorderQty)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldIsActive)
+func (r *ReorderRulesUpdateInventoryResponse) SetIsActive(isActive bool) {
+	r.IsActive = isActive
+	r.require(reorderRulesUpdateInventoryResponseFieldIsActive)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldNotes)
+func (r *ReorderRulesUpdateInventoryResponse) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reorderRulesUpdateInventoryResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldCreatedAt)
+func (r *ReorderRulesUpdateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reorderRulesUpdateInventoryResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryReorderRulesUpdateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1InventoryReorderRulesUpdateResponseFieldUpdatedAt)
+func (r *ReorderRulesUpdateInventoryResponse) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(reorderRulesUpdateInventoryResponseFieldUpdatedAt)
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryReorderRulesUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReorderRulesUpdateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed ReorderRulesUpdateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryReorderRulesUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReorderRulesUpdateInventoryResponse(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryReorderRulesUpdateResponse
+func (r *ReorderRulesUpdateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed ReorderRulesUpdateInventoryResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+		UpdatedAt: internal.NewDateTime(r.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryReorderRulesUpdateResponse) String() string {
-	if p == nil {
+func (r *ReorderRulesUpdateInventoryResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1InventorySettingsGetResponseFieldNegativeStockPolicy = big.NewInt(1 << 0)
+	settingsGetInventoryResponseFieldNegativeStockPolicy = big.NewInt(1 << 0)
 )
 
-type PostV1InventorySettingsGetResponse struct {
-	NegativeStockPolicy PostV1InventorySettingsGetResponseNegativeStockPolicy `json:"negativeStockPolicy" url:"negativeStockPolicy"`
+type SettingsGetInventoryResponse struct {
+	NegativeStockPolicy SettingsGetInventoryResponseNegativeStockPolicy `json:"negativeStockPolicy" url:"negativeStockPolicy"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6072,126 +6060,126 @@ type PostV1InventorySettingsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventorySettingsGetResponse) GetNegativeStockPolicy() PostV1InventorySettingsGetResponseNegativeStockPolicy {
-	if p == nil {
+func (s *SettingsGetInventoryResponse) GetNegativeStockPolicy() SettingsGetInventoryResponseNegativeStockPolicy {
+	if s == nil {
 		return ""
 	}
-	return p.NegativeStockPolicy
+	return s.NegativeStockPolicy
 }
 
-func (p *PostV1InventorySettingsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SettingsGetInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventorySettingsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsGetInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetNegativeStockPolicy sets the NegativeStockPolicy field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventorySettingsGetResponse) SetNegativeStockPolicy(negativeStockPolicy PostV1InventorySettingsGetResponseNegativeStockPolicy) {
-	p.NegativeStockPolicy = negativeStockPolicy
-	p.require(postV1InventorySettingsGetResponseFieldNegativeStockPolicy)
+func (s *SettingsGetInventoryResponse) SetNegativeStockPolicy(negativeStockPolicy SettingsGetInventoryResponseNegativeStockPolicy) {
+	s.NegativeStockPolicy = negativeStockPolicy
+	s.require(settingsGetInventoryResponseFieldNegativeStockPolicy)
 }
 
-func (p *PostV1InventorySettingsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventorySettingsGetResponse
+func (s *SettingsGetInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsGetInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventorySettingsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SettingsGetInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventorySettingsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventorySettingsGetResponse
+func (s *SettingsGetInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsGetInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventorySettingsGetResponse) String() string {
-	if p == nil {
+func (s *SettingsGetInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1InventorySettingsGetResponseNegativeStockPolicy string
+type SettingsGetInventoryResponseNegativeStockPolicy string
 
 const (
-	PostV1InventorySettingsGetResponseNegativeStockPolicyReject PostV1InventorySettingsGetResponseNegativeStockPolicy = "reject"
-	PostV1InventorySettingsGetResponseNegativeStockPolicyAllow  PostV1InventorySettingsGetResponseNegativeStockPolicy = "allow"
+	SettingsGetInventoryResponseNegativeStockPolicyReject SettingsGetInventoryResponseNegativeStockPolicy = "reject"
+	SettingsGetInventoryResponseNegativeStockPolicyAllow  SettingsGetInventoryResponseNegativeStockPolicy = "allow"
 )
 
-func NewPostV1InventorySettingsGetResponseNegativeStockPolicyFromString(s string) (PostV1InventorySettingsGetResponseNegativeStockPolicy, error) {
+func NewSettingsGetInventoryResponseNegativeStockPolicyFromString(s string) (SettingsGetInventoryResponseNegativeStockPolicy, error) {
 	switch s {
 	case "reject":
-		return PostV1InventorySettingsGetResponseNegativeStockPolicyReject, nil
+		return SettingsGetInventoryResponseNegativeStockPolicyReject, nil
 	case "allow":
-		return PostV1InventorySettingsGetResponseNegativeStockPolicyAllow, nil
+		return SettingsGetInventoryResponseNegativeStockPolicyAllow, nil
 	}
-	var t PostV1InventorySettingsGetResponseNegativeStockPolicy
+	var t SettingsGetInventoryResponseNegativeStockPolicy
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventorySettingsGetResponseNegativeStockPolicy) Ptr() *PostV1InventorySettingsGetResponseNegativeStockPolicy {
-	return &p
+func (s SettingsGetInventoryResponseNegativeStockPolicy) Ptr() *SettingsGetInventoryResponseNegativeStockPolicy {
+	return &s
 }
 
-type PostV1InventorySettingsUpdateRequestNegativeStockPolicy string
+type SettingsUpdateInventoryRequestNegativeStockPolicy string
 
 const (
-	PostV1InventorySettingsUpdateRequestNegativeStockPolicyReject PostV1InventorySettingsUpdateRequestNegativeStockPolicy = "reject"
-	PostV1InventorySettingsUpdateRequestNegativeStockPolicyAllow  PostV1InventorySettingsUpdateRequestNegativeStockPolicy = "allow"
+	SettingsUpdateInventoryRequestNegativeStockPolicyReject SettingsUpdateInventoryRequestNegativeStockPolicy = "reject"
+	SettingsUpdateInventoryRequestNegativeStockPolicyAllow  SettingsUpdateInventoryRequestNegativeStockPolicy = "allow"
 )
 
-func NewPostV1InventorySettingsUpdateRequestNegativeStockPolicyFromString(s string) (PostV1InventorySettingsUpdateRequestNegativeStockPolicy, error) {
+func NewSettingsUpdateInventoryRequestNegativeStockPolicyFromString(s string) (SettingsUpdateInventoryRequestNegativeStockPolicy, error) {
 	switch s {
 	case "reject":
-		return PostV1InventorySettingsUpdateRequestNegativeStockPolicyReject, nil
+		return SettingsUpdateInventoryRequestNegativeStockPolicyReject, nil
 	case "allow":
-		return PostV1InventorySettingsUpdateRequestNegativeStockPolicyAllow, nil
+		return SettingsUpdateInventoryRequestNegativeStockPolicyAllow, nil
 	}
-	var t PostV1InventorySettingsUpdateRequestNegativeStockPolicy
+	var t SettingsUpdateInventoryRequestNegativeStockPolicy
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventorySettingsUpdateRequestNegativeStockPolicy) Ptr() *PostV1InventorySettingsUpdateRequestNegativeStockPolicy {
-	return &p
+func (s SettingsUpdateInventoryRequestNegativeStockPolicy) Ptr() *SettingsUpdateInventoryRequestNegativeStockPolicy {
+	return &s
 }
 
 var (
-	postV1InventorySettingsUpdateResponseFieldNegativeStockPolicy = big.NewInt(1 << 0)
+	settingsUpdateInventoryResponseFieldNegativeStockPolicy = big.NewInt(1 << 0)
 )
 
-type PostV1InventorySettingsUpdateResponse struct {
-	NegativeStockPolicy PostV1InventorySettingsUpdateResponseNegativeStockPolicy `json:"negativeStockPolicy" url:"negativeStockPolicy"`
+type SettingsUpdateInventoryResponse struct {
+	NegativeStockPolicy SettingsUpdateInventoryResponseNegativeStockPolicy `json:"negativeStockPolicy" url:"negativeStockPolicy"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6200,104 +6188,104 @@ type PostV1InventorySettingsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) GetNegativeStockPolicy() PostV1InventorySettingsUpdateResponseNegativeStockPolicy {
-	if p == nil {
+func (s *SettingsUpdateInventoryResponse) GetNegativeStockPolicy() SettingsUpdateInventoryResponseNegativeStockPolicy {
+	if s == nil {
 		return ""
 	}
-	return p.NegativeStockPolicy
+	return s.NegativeStockPolicy
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SettingsUpdateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsUpdateInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetNegativeStockPolicy sets the NegativeStockPolicy field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventorySettingsUpdateResponse) SetNegativeStockPolicy(negativeStockPolicy PostV1InventorySettingsUpdateResponseNegativeStockPolicy) {
-	p.NegativeStockPolicy = negativeStockPolicy
-	p.require(postV1InventorySettingsUpdateResponseFieldNegativeStockPolicy)
+func (s *SettingsUpdateInventoryResponse) SetNegativeStockPolicy(negativeStockPolicy SettingsUpdateInventoryResponseNegativeStockPolicy) {
+	s.NegativeStockPolicy = negativeStockPolicy
+	s.require(settingsUpdateInventoryResponseFieldNegativeStockPolicy)
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventorySettingsUpdateResponse
+func (s *SettingsUpdateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventorySettingsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SettingsUpdateInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventorySettingsUpdateResponse
+func (s *SettingsUpdateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventorySettingsUpdateResponse) String() string {
-	if p == nil {
+func (s *SettingsUpdateInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1InventorySettingsUpdateResponseNegativeStockPolicy string
+type SettingsUpdateInventoryResponseNegativeStockPolicy string
 
 const (
-	PostV1InventorySettingsUpdateResponseNegativeStockPolicyReject PostV1InventorySettingsUpdateResponseNegativeStockPolicy = "reject"
-	PostV1InventorySettingsUpdateResponseNegativeStockPolicyAllow  PostV1InventorySettingsUpdateResponseNegativeStockPolicy = "allow"
+	SettingsUpdateInventoryResponseNegativeStockPolicyReject SettingsUpdateInventoryResponseNegativeStockPolicy = "reject"
+	SettingsUpdateInventoryResponseNegativeStockPolicyAllow  SettingsUpdateInventoryResponseNegativeStockPolicy = "allow"
 )
 
-func NewPostV1InventorySettingsUpdateResponseNegativeStockPolicyFromString(s string) (PostV1InventorySettingsUpdateResponseNegativeStockPolicy, error) {
+func NewSettingsUpdateInventoryResponseNegativeStockPolicyFromString(s string) (SettingsUpdateInventoryResponseNegativeStockPolicy, error) {
 	switch s {
 	case "reject":
-		return PostV1InventorySettingsUpdateResponseNegativeStockPolicyReject, nil
+		return SettingsUpdateInventoryResponseNegativeStockPolicyReject, nil
 	case "allow":
-		return PostV1InventorySettingsUpdateResponseNegativeStockPolicyAllow, nil
+		return SettingsUpdateInventoryResponseNegativeStockPolicyAllow, nil
 	}
-	var t PostV1InventorySettingsUpdateResponseNegativeStockPolicy
+	var t SettingsUpdateInventoryResponseNegativeStockPolicy
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventorySettingsUpdateResponseNegativeStockPolicy) Ptr() *PostV1InventorySettingsUpdateResponseNegativeStockPolicy {
-	return &p
+func (s SettingsUpdateInventoryResponseNegativeStockPolicy) Ptr() *SettingsUpdateInventoryResponseNegativeStockPolicy {
+	return &s
 }
 
 var (
-	postV1InventoryStockLevelsResponseFieldRows = big.NewInt(1 << 0)
+	stockLevelsInventoryResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1InventoryStockLevelsResponse struct {
-	Rows []*PostV1InventoryStockLevelsResponseRowsItem `json:"rows" url:"rows"`
+type StockLevelsInventoryResponse struct {
+	Rows []*StockLevelsInventoryResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6306,84 +6294,84 @@ type PostV1InventoryStockLevelsResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockLevelsResponse) GetRows() []*PostV1InventoryStockLevelsResponseRowsItem {
-	if p == nil {
+func (s *StockLevelsInventoryResponse) GetRows() []*StockLevelsInventoryResponseRowsItem {
+	if s == nil {
 		return nil
 	}
-	return p.Rows
+	return s.Rows
 }
 
-func (p *PostV1InventoryStockLevelsResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockLevelsInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockLevelsResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockLevelsInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsResponse) SetRows(rows []*PostV1InventoryStockLevelsResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryStockLevelsResponseFieldRows)
+func (s *StockLevelsInventoryResponse) SetRows(rows []*StockLevelsInventoryResponseRowsItem) {
+	s.Rows = rows
+	s.require(stockLevelsInventoryResponseFieldRows)
 }
 
-func (p *PostV1InventoryStockLevelsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockLevelsResponse
+func (s *StockLevelsInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockLevelsInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockLevelsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockLevelsInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockLevelsResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockLevelsResponse
+func (s *StockLevelsInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockLevelsInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockLevelsResponse) String() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockLevelsResponseRowsItemFieldItemID      = big.NewInt(1 << 0)
-	postV1InventoryStockLevelsResponseRowsItemFieldWarehouseID = big.NewInt(1 << 1)
-	postV1InventoryStockLevelsResponseRowsItemFieldQuantity    = big.NewInt(1 << 2)
-	postV1InventoryStockLevelsResponseRowsItemFieldValue       = big.NewInt(1 << 3)
+	stockLevelsInventoryResponseRowsItemFieldItemID      = big.NewInt(1 << 0)
+	stockLevelsInventoryResponseRowsItemFieldWarehouseID = big.NewInt(1 << 1)
+	stockLevelsInventoryResponseRowsItemFieldQuantity    = big.NewInt(1 << 2)
+	stockLevelsInventoryResponseRowsItemFieldValue       = big.NewInt(1 << 3)
 )
 
-type PostV1InventoryStockLevelsResponseRowsItem struct {
+type StockLevelsInventoryResponseRowsItem struct {
 	ItemID      string `json:"itemId" url:"itemId"`
 	WarehouseID string `json:"warehouseId" url:"warehouseId"`
 	Quantity    string `json:"quantity" url:"quantity"`
@@ -6396,128 +6384,128 @@ type PostV1InventoryStockLevelsResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) GetItemID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ItemID
+	return s.ItemID
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) GetWarehouseID() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) GetWarehouseID() string {
+	if s == nil {
 		return ""
 	}
-	return p.WarehouseID
+	return s.WarehouseID
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) GetQuantity() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) GetQuantity() string {
+	if s == nil {
 		return ""
 	}
-	return p.Quantity
+	return s.Quantity
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) GetValue() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) GetValue() string {
+	if s == nil {
 		return ""
 	}
-	return p.Value
+	return s.Value
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockLevelsInventoryResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockLevelsResponseRowsItemFieldItemID)
+func (s *StockLevelsInventoryResponseRowsItem) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockLevelsInventoryResponseRowsItemFieldItemID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsResponseRowsItem) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockLevelsResponseRowsItemFieldWarehouseID)
+func (s *StockLevelsInventoryResponseRowsItem) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockLevelsInventoryResponseRowsItemFieldWarehouseID)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsResponseRowsItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryStockLevelsResponseRowsItemFieldQuantity)
+func (s *StockLevelsInventoryResponseRowsItem) SetQuantity(quantity string) {
+	s.Quantity = quantity
+	s.require(stockLevelsInventoryResponseRowsItemFieldQuantity)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockLevelsResponseRowsItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1InventoryStockLevelsResponseRowsItemFieldValue)
+func (s *StockLevelsInventoryResponseRowsItem) SetValue(value string) {
+	s.Value = value
+	s.require(stockLevelsInventoryResponseRowsItemFieldValue)
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockLevelsResponseRowsItem
+func (s *StockLevelsInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockLevelsInventoryResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockLevelsResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockLevelsInventoryResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockLevelsResponseRowsItem
+func (s *StockLevelsInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed StockLevelsInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockLevelsResponseRowsItem) String() string {
-	if p == nil {
+func (s *StockLevelsInventoryResponseRowsItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockMovementsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryStockMovementsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1InventoryStockMovementsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	stockMovementsListInventoryRequestFilterItemFieldField = big.NewInt(1 << 0)
+	stockMovementsListInventoryRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	stockMovementsListInventoryRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryStockMovementsListRequestFilterItem struct {
-	Field string                                                   `json:"field" url:"field"`
-	Op    PostV1InventoryStockMovementsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1InventoryStockMovementsListRequestFilterItemValue `json:"value" url:"value"`
+type StockMovementsListInventoryRequestFilterItem struct {
+	Field string                                             `json:"field" url:"field"`
+	Op    StockMovementsListInventoryRequestFilterItemOp     `json:"op" url:"op"`
+	Value *StockMovementsListInventoryRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6526,312 +6514,312 @@ type PostV1InventoryStockMovementsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItem) GetField() string {
+	if s == nil {
 		return ""
 	}
-	return p.Field
+	return s.Field
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) GetOp() PostV1InventoryStockMovementsListRequestFilterItemOp {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItem) GetOp() StockMovementsListInventoryRequestFilterItemOp {
+	if s == nil {
 		return ""
 	}
-	return p.Op
+	return s.Op
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) GetValue() *PostV1InventoryStockMovementsListRequestFilterItemValue {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItem) GetValue() *StockMovementsListInventoryRequestFilterItemValue {
+	if s == nil {
 		return nil
 	}
-	return p.Value
+	return s.Value
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockMovementsListInventoryRequestFilterItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryStockMovementsListRequestFilterItemFieldField)
+func (s *StockMovementsListInventoryRequestFilterItem) SetField(field string) {
+	s.Field = field
+	s.require(stockMovementsListInventoryRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) SetOp(op PostV1InventoryStockMovementsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1InventoryStockMovementsListRequestFilterItemFieldOp)
+func (s *StockMovementsListInventoryRequestFilterItem) SetOp(op StockMovementsListInventoryRequestFilterItemOp) {
+	s.Op = op
+	s.require(stockMovementsListInventoryRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) SetValue(value *PostV1InventoryStockMovementsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1InventoryStockMovementsListRequestFilterItemFieldValue)
+func (s *StockMovementsListInventoryRequestFilterItem) SetValue(value *StockMovementsListInventoryRequestFilterItemValue) {
+	s.Value = value
+	s.require(stockMovementsListInventoryRequestFilterItemFieldValue)
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockMovementsListRequestFilterItem
+func (s *StockMovementsListInventoryRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockMovementsListInventoryRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockMovementsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockMovementsListInventoryRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockMovementsListRequestFilterItem
+func (s *StockMovementsListInventoryRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed StockMovementsListInventoryRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItem) String() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1InventoryStockMovementsListRequestFilterItemOp string
+type StockMovementsListInventoryRequestFilterItemOp string
 
 const (
-	PostV1InventoryStockMovementsListRequestFilterItemOpEq       PostV1InventoryStockMovementsListRequestFilterItemOp = "eq"
-	PostV1InventoryStockMovementsListRequestFilterItemOpNe       PostV1InventoryStockMovementsListRequestFilterItemOp = "ne"
-	PostV1InventoryStockMovementsListRequestFilterItemOpContains PostV1InventoryStockMovementsListRequestFilterItemOp = "contains"
-	PostV1InventoryStockMovementsListRequestFilterItemOpGte      PostV1InventoryStockMovementsListRequestFilterItemOp = "gte"
-	PostV1InventoryStockMovementsListRequestFilterItemOpLte      PostV1InventoryStockMovementsListRequestFilterItemOp = "lte"
-	PostV1InventoryStockMovementsListRequestFilterItemOpIn       PostV1InventoryStockMovementsListRequestFilterItemOp = "in"
+	StockMovementsListInventoryRequestFilterItemOpEq       StockMovementsListInventoryRequestFilterItemOp = "eq"
+	StockMovementsListInventoryRequestFilterItemOpNe       StockMovementsListInventoryRequestFilterItemOp = "ne"
+	StockMovementsListInventoryRequestFilterItemOpContains StockMovementsListInventoryRequestFilterItemOp = "contains"
+	StockMovementsListInventoryRequestFilterItemOpGte      StockMovementsListInventoryRequestFilterItemOp = "gte"
+	StockMovementsListInventoryRequestFilterItemOpLte      StockMovementsListInventoryRequestFilterItemOp = "lte"
+	StockMovementsListInventoryRequestFilterItemOpIn       StockMovementsListInventoryRequestFilterItemOp = "in"
 )
 
-func NewPostV1InventoryStockMovementsListRequestFilterItemOpFromString(s string) (PostV1InventoryStockMovementsListRequestFilterItemOp, error) {
+func NewStockMovementsListInventoryRequestFilterItemOpFromString(s string) (StockMovementsListInventoryRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpEq, nil
+		return StockMovementsListInventoryRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpNe, nil
+		return StockMovementsListInventoryRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpContains, nil
+		return StockMovementsListInventoryRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpGte, nil
+		return StockMovementsListInventoryRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpLte, nil
+		return StockMovementsListInventoryRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1InventoryStockMovementsListRequestFilterItemOpIn, nil
+		return StockMovementsListInventoryRequestFilterItemOpIn, nil
 	}
-	var t PostV1InventoryStockMovementsListRequestFilterItemOp
+	var t StockMovementsListInventoryRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryStockMovementsListRequestFilterItemOp) Ptr() *PostV1InventoryStockMovementsListRequestFilterItemOp {
-	return &p
+func (s StockMovementsListInventoryRequestFilterItemOp) Ptr() *StockMovementsListInventoryRequestFilterItemOp {
+	return &s
 }
 
-type PostV1InventoryStockMovementsListRequestFilterItemValue struct {
-	String                                                               string
-	Double                                                               float64
-	Boolean                                                              bool
-	PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList []*PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
+type StockMovementsListInventoryRequestFilterItemValue struct {
+	String                                                         string
+	Double                                                         float64
+	Boolean                                                        bool
+	StockMovementsListInventoryRequestFilterItemValueThreeItemList []*StockMovementsListInventoryRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValue) GetString() string {
+	if s == nil {
 		return ""
 	}
-	return p.String
+	return s.String
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValue) GetDouble() float64 {
+	if s == nil {
 		return 0
 	}
-	return p.Double
+	return s.Double
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValue) GetBoolean() bool {
+	if s == nil {
 		return false
 	}
-	return p.Boolean
+	return s.Boolean
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) GetPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList() []*PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValue) GetStockMovementsListInventoryRequestFilterItemValueThreeItemList() []*StockMovementsListInventoryRequestFilterItemValueThreeItem {
+	if s == nil {
 		return nil
 	}
-	return p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList
+	return s.StockMovementsListInventoryRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (s *StockMovementsListInventoryRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		s.typ = "String"
+		s.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		s.typ = "Double"
+		s.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		s.typ = "Boolean"
+		s.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList []*PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList"
-		p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList = valuePostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList
+	var valueStockMovementsListInventoryRequestFilterItemValueThreeItemList []*StockMovementsListInventoryRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueStockMovementsListInventoryRequestFilterItemValueThreeItemList); err == nil {
+		s.typ = "StockMovementsListInventoryRequestFilterItemValueThreeItemList"
+		s.StockMovementsListInventoryRequestFilterItemValueThreeItemList = valueStockMovementsListInventoryRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
-func (p PostV1InventoryStockMovementsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (s StockMovementsListInventoryRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if s.typ == "Boolean" || s.Boolean != false {
+		return json.Marshal(s.Boolean)
 	}
-	if p.typ == "PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList)
+	if s.typ == "StockMovementsListInventoryRequestFilterItemValueThreeItemList" || s.StockMovementsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(s.StockMovementsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1InventoryStockMovementsListRequestFilterItemValueVisitor interface {
+type StockMovementsListInventoryRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList([]*PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) error
+	VisitStockMovementsListInventoryRequestFilterItemValueThreeItemList([]*StockMovementsListInventoryRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValue) Accept(visitor PostV1InventoryStockMovementsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (s *StockMovementsListInventoryRequestFilterItemValue) Accept(visitor StockMovementsListInventoryRequestFilterItemValueVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if s.typ == "Boolean" || s.Boolean != false {
+		return visitor.VisitBoolean(s.Boolean)
 	}
-	if p.typ == "PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList" || p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList(p.PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemList)
+	if s.typ == "StockMovementsListInventoryRequestFilterItemValueThreeItemList" || s.StockMovementsListInventoryRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitStockMovementsListInventoryRequestFilterItemValueThreeItemList(s.StockMovementsListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem struct {
+type StockMovementsListInventoryRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValueThreeItem) GetString() string {
+	if s == nil {
 		return ""
 	}
-	return p.String
+	return s.String
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if s == nil {
 		return 0
 	}
-	return p.Double
+	return s.Double
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (s *StockMovementsListInventoryRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		s.typ = "String"
+		s.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		s.typ = "Double"
+		s.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
-func (p PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (s StockMovementsListInventoryRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
-type PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemVisitor interface {
+type StockMovementsListInventoryRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1InventoryStockMovementsListRequestFilterItemValueThreeItem) Accept(visitor PostV1InventoryStockMovementsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (s *StockMovementsListInventoryRequestFilterItemValueThreeItem) Accept(visitor StockMovementsListInventoryRequestFilterItemValueThreeItemVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
 var (
-	postV1InventoryStockMovementsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryStockMovementsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	stockMovementsListInventoryRequestSortItemFieldField = big.NewInt(1 << 0)
+	stockMovementsListInventoryRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryStockMovementsListRequestSortItem struct {
-	Field string                                               `json:"field" url:"field"`
-	Dir   *PostV1InventoryStockMovementsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type StockMovementsListInventoryRequestSortItem struct {
+	Field string                                         `json:"field" url:"field"`
+	Dir   *StockMovementsListInventoryRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6840,126 +6828,126 @@ type PostV1InventoryStockMovementsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) GetField() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestSortItem) GetField() string {
+	if s == nil {
 		return ""
 	}
-	return p.Field
+	return s.Field
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) GetDir() *PostV1InventoryStockMovementsListRequestSortItemDir {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestSortItem) GetDir() *StockMovementsListInventoryRequestSortItemDir {
+	if s == nil {
 		return nil
 	}
-	return p.Dir
+	return s.Dir
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockMovementsListInventoryRequestSortItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryStockMovementsListRequestSortItemFieldField)
+func (s *StockMovementsListInventoryRequestSortItem) SetField(field string) {
+	s.Field = field
+	s.require(stockMovementsListInventoryRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListRequestSortItem) SetDir(dir *PostV1InventoryStockMovementsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1InventoryStockMovementsListRequestSortItemFieldDir)
+func (s *StockMovementsListInventoryRequestSortItem) SetDir(dir *StockMovementsListInventoryRequestSortItemDir) {
+	s.Dir = dir
+	s.require(stockMovementsListInventoryRequestSortItemFieldDir)
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockMovementsListRequestSortItem
+func (s *StockMovementsListInventoryRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockMovementsListInventoryRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockMovementsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockMovementsListInventoryRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockMovementsListRequestSortItem
+func (s *StockMovementsListInventoryRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed StockMovementsListInventoryRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockMovementsListRequestSortItem) String() string {
-	if p == nil {
+func (s *StockMovementsListInventoryRequestSortItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1InventoryStockMovementsListRequestSortItemDir string
+type StockMovementsListInventoryRequestSortItemDir string
 
 const (
-	PostV1InventoryStockMovementsListRequestSortItemDirAsc  PostV1InventoryStockMovementsListRequestSortItemDir = "asc"
-	PostV1InventoryStockMovementsListRequestSortItemDirDesc PostV1InventoryStockMovementsListRequestSortItemDir = "desc"
+	StockMovementsListInventoryRequestSortItemDirAsc  StockMovementsListInventoryRequestSortItemDir = "asc"
+	StockMovementsListInventoryRequestSortItemDirDesc StockMovementsListInventoryRequestSortItemDir = "desc"
 )
 
-func NewPostV1InventoryStockMovementsListRequestSortItemDirFromString(s string) (PostV1InventoryStockMovementsListRequestSortItemDir, error) {
+func NewStockMovementsListInventoryRequestSortItemDirFromString(s string) (StockMovementsListInventoryRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1InventoryStockMovementsListRequestSortItemDirAsc, nil
+		return StockMovementsListInventoryRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1InventoryStockMovementsListRequestSortItemDirDesc, nil
+		return StockMovementsListInventoryRequestSortItemDirDesc, nil
 	}
-	var t PostV1InventoryStockMovementsListRequestSortItemDir
+	var t StockMovementsListInventoryRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryStockMovementsListRequestSortItemDir) Ptr() *PostV1InventoryStockMovementsListRequestSortItemDir {
-	return &p
+func (s StockMovementsListInventoryRequestSortItemDir) Ptr() *StockMovementsListInventoryRequestSortItemDir {
+	return &s
 }
 
 var (
-	postV1InventoryStockMovementsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1InventoryStockMovementsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1InventoryStockMovementsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1InventoryStockMovementsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1InventoryStockMovementsListResponseFieldTotals   = big.NewInt(1 << 4)
+	stockMovementsListInventoryResponseFieldRows     = big.NewInt(1 << 0)
+	stockMovementsListInventoryResponseFieldPage     = big.NewInt(1 << 1)
+	stockMovementsListInventoryResponseFieldPageSize = big.NewInt(1 << 2)
+	stockMovementsListInventoryResponseFieldTotal    = big.NewInt(1 << 3)
+	stockMovementsListInventoryResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryStockMovementsListResponse struct {
-	Rows     []*PostV1InventoryStockMovementsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                                `json:"page" url:"page"`
-	PageSize int64                                                `json:"pageSize" url:"pageSize"`
-	Total    int64                                                `json:"total" url:"total"`
-	Totals   map[string]string                                    `json:"totals,omitempty" url:"totals,omitempty"`
+type StockMovementsListInventoryResponse struct {
+	Rows     []*StockMovementsListInventoryResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                          `json:"page" url:"page"`
+	PageSize int64                                          `json:"pageSize" url:"pageSize"`
+	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6968,164 +6956,164 @@ type PostV1InventoryStockMovementsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetRows() []*PostV1InventoryStockMovementsListResponseRowsItem {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetRows() []*StockMovementsListInventoryResponseRowsItem {
+	if s == nil {
 		return nil
 	}
-	return p.Rows
+	return s.Rows
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetPage() int64 {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetPage() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.Page
+	return s.Page
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetPageSize() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.PageSize
+	return s.PageSize
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetTotal() int64 {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetTotal() int64 {
+	if s == nil {
 		return 0
 	}
-	return p.Total
+	return s.Total
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetTotals() map[string]string {
+	if s == nil {
 		return nil
 	}
-	return p.Totals
+	return s.Totals
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockMovementsListInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponse) SetRows(rows []*PostV1InventoryStockMovementsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryStockMovementsListResponseFieldRows)
+func (s *StockMovementsListInventoryResponse) SetRows(rows []*StockMovementsListInventoryResponseRowsItem) {
+	s.Rows = rows
+	s.require(stockMovementsListInventoryResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1InventoryStockMovementsListResponseFieldPage)
+func (s *StockMovementsListInventoryResponse) SetPage(page int64) {
+	s.Page = page
+	s.require(stockMovementsListInventoryResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryStockMovementsListResponseFieldPageSize)
+func (s *StockMovementsListInventoryResponse) SetPageSize(pageSize int64) {
+	s.PageSize = pageSize
+	s.require(stockMovementsListInventoryResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1InventoryStockMovementsListResponseFieldTotal)
+func (s *StockMovementsListInventoryResponse) SetTotal(total int64) {
+	s.Total = total
+	s.require(stockMovementsListInventoryResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1InventoryStockMovementsListResponseFieldTotals)
+func (s *StockMovementsListInventoryResponse) SetTotals(totals map[string]string) {
+	s.Totals = totals
+	s.require(stockMovementsListInventoryResponseFieldTotals)
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockMovementsListResponse
+func (s *StockMovementsListInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockMovementsListInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockMovementsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockMovementsListInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockMovementsListResponse
+func (s *StockMovementsListInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockMovementsListInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockMovementsListResponse) String() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockMovementsListResponseRowsItemFieldID           = big.NewInt(1 << 0)
-	postV1InventoryStockMovementsListResponseRowsItemFieldWarehouseID  = big.NewInt(1 << 1)
-	postV1InventoryStockMovementsListResponseRowsItemFieldItemID       = big.NewInt(1 << 2)
-	postV1InventoryStockMovementsListResponseRowsItemFieldLotID        = big.NewInt(1 << 3)
-	postV1InventoryStockMovementsListResponseRowsItemFieldDate         = big.NewInt(1 << 4)
-	postV1InventoryStockMovementsListResponseRowsItemFieldDirection    = big.NewInt(1 << 5)
-	postV1InventoryStockMovementsListResponseRowsItemFieldQuantity     = big.NewInt(1 << 6)
-	postV1InventoryStockMovementsListResponseRowsItemFieldUnitCost     = big.NewInt(1 << 7)
-	postV1InventoryStockMovementsListResponseRowsItemFieldTotalCost    = big.NewInt(1 << 8)
-	postV1InventoryStockMovementsListResponseRowsItemFieldRemainingQty = big.NewInt(1 << 9)
-	postV1InventoryStockMovementsListResponseRowsItemFieldDocumentType = big.NewInt(1 << 10)
-	postV1InventoryStockMovementsListResponseRowsItemFieldDocumentID   = big.NewInt(1 << 11)
-	postV1InventoryStockMovementsListResponseRowsItemFieldNotes        = big.NewInt(1 << 12)
-	postV1InventoryStockMovementsListResponseRowsItemFieldCreatedAt    = big.NewInt(1 << 13)
+	stockMovementsListInventoryResponseRowsItemFieldID           = big.NewInt(1 << 0)
+	stockMovementsListInventoryResponseRowsItemFieldWarehouseID  = big.NewInt(1 << 1)
+	stockMovementsListInventoryResponseRowsItemFieldItemID       = big.NewInt(1 << 2)
+	stockMovementsListInventoryResponseRowsItemFieldLotID        = big.NewInt(1 << 3)
+	stockMovementsListInventoryResponseRowsItemFieldDate         = big.NewInt(1 << 4)
+	stockMovementsListInventoryResponseRowsItemFieldDirection    = big.NewInt(1 << 5)
+	stockMovementsListInventoryResponseRowsItemFieldQuantity     = big.NewInt(1 << 6)
+	stockMovementsListInventoryResponseRowsItemFieldUnitCost     = big.NewInt(1 << 7)
+	stockMovementsListInventoryResponseRowsItemFieldTotalCost    = big.NewInt(1 << 8)
+	stockMovementsListInventoryResponseRowsItemFieldRemainingQty = big.NewInt(1 << 9)
+	stockMovementsListInventoryResponseRowsItemFieldDocumentType = big.NewInt(1 << 10)
+	stockMovementsListInventoryResponseRowsItemFieldDocumentID   = big.NewInt(1 << 11)
+	stockMovementsListInventoryResponseRowsItemFieldNotes        = big.NewInt(1 << 12)
+	stockMovementsListInventoryResponseRowsItemFieldCreatedAt    = big.NewInt(1 << 13)
 )
 
-type PostV1InventoryStockMovementsListResponseRowsItem struct {
-	ID           string                                                     `json:"id" url:"id"`
-	WarehouseID  string                                                     `json:"warehouseId" url:"warehouseId"`
-	ItemID       string                                                     `json:"itemId" url:"itemId"`
-	LotID        *string                                                    `json:"lotId,omitempty" url:"lotId,omitempty"`
-	Date         string                                                     `json:"date" url:"date"`
-	Direction    PostV1InventoryStockMovementsListResponseRowsItemDirection `json:"direction" url:"direction"`
-	Quantity     string                                                     `json:"quantity" url:"quantity"`
-	UnitCost     *string                                                    `json:"unitCost,omitempty" url:"unitCost,omitempty"`
-	TotalCost    string                                                     `json:"totalCost" url:"totalCost"`
-	RemainingQty string                                                     `json:"remainingQty" url:"remainingQty"`
-	DocumentType *string                                                    `json:"documentType,omitempty" url:"documentType,omitempty"`
-	DocumentID   *string                                                    `json:"documentId,omitempty" url:"documentId,omitempty"`
-	Notes        *string                                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt    string                                                     `json:"createdAt" url:"createdAt"`
+type StockMovementsListInventoryResponseRowsItem struct {
+	ID           string                                               `json:"id" url:"id"`
+	WarehouseID  string                                               `json:"warehouseId" url:"warehouseId"`
+	ItemID       string                                               `json:"itemId" url:"itemId"`
+	LotID        *string                                              `json:"lotId,omitempty" url:"lotId,omitempty"`
+	Date         time.Time                                            `json:"date" url:"date" format:"date"`
+	Direction    StockMovementsListInventoryResponseRowsItemDirection `json:"direction" url:"direction"`
+	Quantity     string                                               `json:"quantity" url:"quantity"`
+	UnitCost     *string                                              `json:"unitCost,omitempty" url:"unitCost,omitempty"`
+	TotalCost    string                                               `json:"totalCost" url:"totalCost"`
+	RemainingQty string                                               `json:"remainingQty" url:"remainingQty"`
+	DocumentType *string                                              `json:"documentType,omitempty" url:"documentType,omitempty"`
+	DocumentID   *string                                              `json:"documentId,omitempty" url:"documentId,omitempty"`
+	Notes        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt    time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7134,286 +7122,298 @@ type PostV1InventoryStockMovementsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ID
+	return s.ID
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetWarehouseID() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetWarehouseID() string {
+	if s == nil {
 		return ""
 	}
-	return p.WarehouseID
+	return s.WarehouseID
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetItemID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ItemID
+	return s.ItemID
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetLotID() *string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetLotID() *string {
+	if s == nil {
 		return nil
 	}
-	return p.LotID
+	return s.LotID
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetDate() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetDate() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.Date
+}
+
+func (s *StockMovementsListInventoryResponseRowsItem) GetDirection() StockMovementsListInventoryResponseRowsItemDirection {
+	if s == nil {
 		return ""
 	}
-	return p.Date
+	return s.Direction
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetDirection() PostV1InventoryStockMovementsListResponseRowsItemDirection {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetQuantity() string {
+	if s == nil {
 		return ""
 	}
-	return p.Direction
+	return s.Quantity
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetQuantity() string {
-	if p == nil {
-		return ""
-	}
-	return p.Quantity
-}
-
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetUnitCost() *string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetUnitCost() *string {
+	if s == nil {
 		return nil
 	}
-	return p.UnitCost
+	return s.UnitCost
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetTotalCost() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetTotalCost() string {
+	if s == nil {
 		return ""
 	}
-	return p.TotalCost
+	return s.TotalCost
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetRemainingQty() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetRemainingQty() string {
+	if s == nil {
 		return ""
 	}
-	return p.RemainingQty
+	return s.RemainingQty
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetDocumentType() *string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetDocumentType() *string {
+	if s == nil {
 		return nil
 	}
-	return p.DocumentType
+	return s.DocumentType
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetDocumentID() *string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetDocumentID() *string {
+	if s == nil {
 		return nil
 	}
-	return p.DocumentID
+	return s.DocumentID
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetNotes() *string {
+	if s == nil {
 		return nil
 	}
-	return p.Notes
+	return s.Notes
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (s *StockMovementsListInventoryResponseRowsItem) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return s.CreatedAt
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockMovementsListInventoryResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldID)
+func (s *StockMovementsListInventoryResponseRowsItem) SetID(id string) {
+	s.ID = id
+	s.require(stockMovementsListInventoryResponseRowsItemFieldID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetWarehouseID(warehouseID string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldWarehouseID)
+func (s *StockMovementsListInventoryResponseRowsItem) SetWarehouseID(warehouseID string) {
+	s.WarehouseID = warehouseID
+	s.require(stockMovementsListInventoryResponseRowsItemFieldWarehouseID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldItemID)
+func (s *StockMovementsListInventoryResponseRowsItem) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockMovementsListInventoryResponseRowsItemFieldItemID)
 }
 
 // SetLotID sets the LotID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetLotID(lotID *string) {
-	p.LotID = lotID
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldLotID)
+func (s *StockMovementsListInventoryResponseRowsItem) SetLotID(lotID *string) {
+	s.LotID = lotID
+	s.require(stockMovementsListInventoryResponseRowsItemFieldLotID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldDate)
+func (s *StockMovementsListInventoryResponseRowsItem) SetDate(date time.Time) {
+	s.Date = date
+	s.require(stockMovementsListInventoryResponseRowsItemFieldDate)
 }
 
 // SetDirection sets the Direction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetDirection(direction PostV1InventoryStockMovementsListResponseRowsItemDirection) {
-	p.Direction = direction
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldDirection)
+func (s *StockMovementsListInventoryResponseRowsItem) SetDirection(direction StockMovementsListInventoryResponseRowsItemDirection) {
+	s.Direction = direction
+	s.require(stockMovementsListInventoryResponseRowsItemFieldDirection)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldQuantity)
+func (s *StockMovementsListInventoryResponseRowsItem) SetQuantity(quantity string) {
+	s.Quantity = quantity
+	s.require(stockMovementsListInventoryResponseRowsItemFieldQuantity)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetUnitCost(unitCost *string) {
-	p.UnitCost = unitCost
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldUnitCost)
+func (s *StockMovementsListInventoryResponseRowsItem) SetUnitCost(unitCost *string) {
+	s.UnitCost = unitCost
+	s.require(stockMovementsListInventoryResponseRowsItemFieldUnitCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldTotalCost)
+func (s *StockMovementsListInventoryResponseRowsItem) SetTotalCost(totalCost string) {
+	s.TotalCost = totalCost
+	s.require(stockMovementsListInventoryResponseRowsItemFieldTotalCost)
 }
 
 // SetRemainingQty sets the RemainingQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetRemainingQty(remainingQty string) {
-	p.RemainingQty = remainingQty
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldRemainingQty)
+func (s *StockMovementsListInventoryResponseRowsItem) SetRemainingQty(remainingQty string) {
+	s.RemainingQty = remainingQty
+	s.require(stockMovementsListInventoryResponseRowsItemFieldRemainingQty)
 }
 
 // SetDocumentType sets the DocumentType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetDocumentType(documentType *string) {
-	p.DocumentType = documentType
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldDocumentType)
+func (s *StockMovementsListInventoryResponseRowsItem) SetDocumentType(documentType *string) {
+	s.DocumentType = documentType
+	s.require(stockMovementsListInventoryResponseRowsItemFieldDocumentType)
 }
 
 // SetDocumentID sets the DocumentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetDocumentID(documentID *string) {
-	p.DocumentID = documentID
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldDocumentID)
+func (s *StockMovementsListInventoryResponseRowsItem) SetDocumentID(documentID *string) {
+	s.DocumentID = documentID
+	s.require(stockMovementsListInventoryResponseRowsItemFieldDocumentID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldNotes)
+func (s *StockMovementsListInventoryResponseRowsItem) SetNotes(notes *string) {
+	s.Notes = notes
+	s.require(stockMovementsListInventoryResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryStockMovementsListResponseRowsItemFieldCreatedAt)
+func (s *StockMovementsListInventoryResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(stockMovementsListInventoryResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockMovementsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (s *StockMovementsListInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed StockMovementsListInventoryResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockMovementsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockMovementsListInventoryResponseRowsItem(unmarshaler.embed)
+	s.Date = unmarshaler.Date.Time()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockMovementsListResponseRowsItem
+func (s *StockMovementsListInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed StockMovementsListInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*s),
+		Date:      internal.NewDate(s.Date),
+		CreatedAt: internal.NewDateTime(s.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockMovementsListResponseRowsItem) String() string {
-	if p == nil {
+func (s *StockMovementsListInventoryResponseRowsItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
-type PostV1InventoryStockMovementsListResponseRowsItemDirection string
+type StockMovementsListInventoryResponseRowsItemDirection string
 
 const (
-	PostV1InventoryStockMovementsListResponseRowsItemDirectionIn  PostV1InventoryStockMovementsListResponseRowsItemDirection = "in"
-	PostV1InventoryStockMovementsListResponseRowsItemDirectionOut PostV1InventoryStockMovementsListResponseRowsItemDirection = "out"
+	StockMovementsListInventoryResponseRowsItemDirectionIn  StockMovementsListInventoryResponseRowsItemDirection = "in"
+	StockMovementsListInventoryResponseRowsItemDirectionOut StockMovementsListInventoryResponseRowsItemDirection = "out"
 )
 
-func NewPostV1InventoryStockMovementsListResponseRowsItemDirectionFromString(s string) (PostV1InventoryStockMovementsListResponseRowsItemDirection, error) {
+func NewStockMovementsListInventoryResponseRowsItemDirectionFromString(s string) (StockMovementsListInventoryResponseRowsItemDirection, error) {
 	switch s {
 	case "in":
-		return PostV1InventoryStockMovementsListResponseRowsItemDirectionIn, nil
+		return StockMovementsListInventoryResponseRowsItemDirectionIn, nil
 	case "out":
-		return PostV1InventoryStockMovementsListResponseRowsItemDirectionOut, nil
+		return StockMovementsListInventoryResponseRowsItemDirectionOut, nil
 	}
-	var t PostV1InventoryStockMovementsListResponseRowsItemDirection
+	var t StockMovementsListInventoryResponseRowsItemDirection
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryStockMovementsListResponseRowsItemDirection) Ptr() *PostV1InventoryStockMovementsListResponseRowsItemDirection {
-	return &p
+func (s StockMovementsListInventoryResponseRowsItemDirection) Ptr() *StockMovementsListInventoryResponseRowsItemDirection {
+	return &s
 }
 
 var (
-	postV1InventoryStockReceiveResponseFieldMovementID = big.NewInt(1 << 0)
-	postV1InventoryStockReceiveResponseFieldTotalCost  = big.NewInt(1 << 1)
+	stockReceiveInventoryResponseFieldMovementID = big.NewInt(1 << 0)
+	stockReceiveInventoryResponseFieldTotalCost  = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryStockReceiveResponse struct {
+type StockReceiveInventoryResponse struct {
 	MovementID string `json:"movementId" url:"movementId"`
 	TotalCost  string `json:"totalCost" url:"totalCost"`
 
@@ -7424,106 +7424,106 @@ type PostV1InventoryStockReceiveResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockReceiveResponse) GetMovementID() string {
-	if p == nil {
+func (s *StockReceiveInventoryResponse) GetMovementID() string {
+	if s == nil {
 		return ""
 	}
-	return p.MovementID
+	return s.MovementID
 }
 
-func (p *PostV1InventoryStockReceiveResponse) GetTotalCost() string {
-	if p == nil {
+func (s *StockReceiveInventoryResponse) GetTotalCost() string {
+	if s == nil {
 		return ""
 	}
-	return p.TotalCost
+	return s.TotalCost
 }
 
-func (p *PostV1InventoryStockReceiveResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockReceiveInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockReceiveResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockReceiveInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetMovementID sets the MovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveResponse) SetMovementID(movementID string) {
-	p.MovementID = movementID
-	p.require(postV1InventoryStockReceiveResponseFieldMovementID)
+func (s *StockReceiveInventoryResponse) SetMovementID(movementID string) {
+	s.MovementID = movementID
+	s.require(stockReceiveInventoryResponseFieldMovementID)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockReceiveResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1InventoryStockReceiveResponseFieldTotalCost)
+func (s *StockReceiveInventoryResponse) SetTotalCost(totalCost string) {
+	s.TotalCost = totalCost
+	s.require(stockReceiveInventoryResponseFieldTotalCost)
 }
 
-func (p *PostV1InventoryStockReceiveResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockReceiveResponse
+func (s *StockReceiveInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockReceiveInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockReceiveResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockReceiveInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockReceiveResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockReceiveResponse
+func (s *StockReceiveInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockReceiveInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockReceiveResponse) String() string {
-	if p == nil {
+func (s *StockReceiveInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockTakeRequestLinesItemFieldItemID     = big.NewInt(1 << 0)
-	postV1InventoryStockTakeRequestLinesItemFieldBarcode    = big.NewInt(1 << 1)
-	postV1InventoryStockTakeRequestLinesItemFieldCountedQty = big.NewInt(1 << 2)
-	postV1InventoryStockTakeRequestLinesItemFieldUnitCost   = big.NewInt(1 << 3)
-	postV1InventoryStockTakeRequestLinesItemFieldLotNumber  = big.NewInt(1 << 4)
-	postV1InventoryStockTakeRequestLinesItemFieldExpiryDate = big.NewInt(1 << 5)
+	stockTakeInventoryRequestLinesItemFieldItemID     = big.NewInt(1 << 0)
+	stockTakeInventoryRequestLinesItemFieldBarcode    = big.NewInt(1 << 1)
+	stockTakeInventoryRequestLinesItemFieldCountedQty = big.NewInt(1 << 2)
+	stockTakeInventoryRequestLinesItemFieldUnitCost   = big.NewInt(1 << 3)
+	stockTakeInventoryRequestLinesItemFieldLotNumber  = big.NewInt(1 << 4)
+	stockTakeInventoryRequestLinesItemFieldExpiryDate = big.NewInt(1 << 5)
 )
 
-type PostV1InventoryStockTakeRequestLinesItem struct {
-	ItemID     *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Barcode    *string `json:"barcode,omitempty" url:"barcode,omitempty"`
-	CountedQty string  `json:"countedQty" url:"countedQty"`
-	UnitCost   *string `json:"unitCost,omitempty" url:"unitCost,omitempty"`
-	LotNumber  *string `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
-	ExpiryDate *string `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
+type StockTakeInventoryRequestLinesItem struct {
+	ItemID     *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Barcode    *string    `json:"barcode,omitempty" url:"barcode,omitempty"`
+	CountedQty string     `json:"countedQty" url:"countedQty"`
+	UnitCost   *string    `json:"unitCost,omitempty" url:"unitCost,omitempty"`
+	LotNumber  *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7532,154 +7532,162 @@ type PostV1InventoryStockTakeRequestLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetItemID() *string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetItemID() *string {
+	if s == nil {
 		return nil
 	}
-	return p.ItemID
+	return s.ItemID
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetBarcode() *string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetBarcode() *string {
+	if s == nil {
 		return nil
 	}
-	return p.Barcode
+	return s.Barcode
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetCountedQty() string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetCountedQty() string {
+	if s == nil {
 		return ""
 	}
-	return p.CountedQty
+	return s.CountedQty
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetUnitCost() *string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetUnitCost() *string {
+	if s == nil {
 		return nil
 	}
-	return p.UnitCost
+	return s.UnitCost
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetLotNumber() *string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetLotNumber() *string {
+	if s == nil {
 		return nil
 	}
-	return p.LotNumber
+	return s.LotNumber
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetExpiryDate() *string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetExpiryDate() *time.Time {
+	if s == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return s.ExpiryDate
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTakeInventoryRequestLinesItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldItemID)
+func (s *StockTakeInventoryRequestLinesItem) SetItemID(itemID *string) {
+	s.ItemID = itemID
+	s.require(stockTakeInventoryRequestLinesItemFieldItemID)
 }
 
 // SetBarcode sets the Barcode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetBarcode(barcode *string) {
-	p.Barcode = barcode
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldBarcode)
+func (s *StockTakeInventoryRequestLinesItem) SetBarcode(barcode *string) {
+	s.Barcode = barcode
+	s.require(stockTakeInventoryRequestLinesItemFieldBarcode)
 }
 
 // SetCountedQty sets the CountedQty field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetCountedQty(countedQty string) {
-	p.CountedQty = countedQty
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldCountedQty)
+func (s *StockTakeInventoryRequestLinesItem) SetCountedQty(countedQty string) {
+	s.CountedQty = countedQty
+	s.require(stockTakeInventoryRequestLinesItemFieldCountedQty)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetUnitCost(unitCost *string) {
-	p.UnitCost = unitCost
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldUnitCost)
+func (s *StockTakeInventoryRequestLinesItem) SetUnitCost(unitCost *string) {
+	s.UnitCost = unitCost
+	s.require(stockTakeInventoryRequestLinesItemFieldUnitCost)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldLotNumber)
+func (s *StockTakeInventoryRequestLinesItem) SetLotNumber(lotNumber *string) {
+	s.LotNumber = lotNumber
+	s.require(stockTakeInventoryRequestLinesItemFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeRequestLinesItem) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1InventoryStockTakeRequestLinesItemFieldExpiryDate)
+func (s *StockTakeInventoryRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	s.ExpiryDate = expiryDate
+	s.require(stockTakeInventoryRequestLinesItemFieldExpiryDate)
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTakeRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (s *StockTakeInventoryRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type embed StockTakeInventoryRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTakeRequestLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockTakeInventoryRequestLinesItem(unmarshaler.embed)
+	s.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTakeRequestLinesItem
+func (s *StockTakeInventoryRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed StockTakeInventoryRequestLinesItem
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*s),
+		ExpiryDate: internal.NewOptionalDate(s.ExpiryDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockTakeRequestLinesItem) String() string {
-	if p == nil {
+func (s *StockTakeInventoryRequestLinesItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockTakeResponseFieldRows                 = big.NewInt(1 << 0)
-	postV1InventoryStockTakeResponseFieldJournalTransactionID = big.NewInt(1 << 1)
+	stockTakeInventoryResponseFieldRows                 = big.NewInt(1 << 0)
+	stockTakeInventoryResponseFieldJournalTransactionID = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryStockTakeResponse struct {
-	Rows                 []*PostV1InventoryStockTakeResponseRowsItem `json:"rows" url:"rows"`
-	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+type StockTakeInventoryResponse struct {
+	Rows                 []*StockTakeInventoryResponseRowsItem `json:"rows" url:"rows"`
+	JournalTransactionID *string                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7688,99 +7696,99 @@ type PostV1InventoryStockTakeResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockTakeResponse) GetRows() []*PostV1InventoryStockTakeResponseRowsItem {
-	if p == nil {
+func (s *StockTakeInventoryResponse) GetRows() []*StockTakeInventoryResponseRowsItem {
+	if s == nil {
 		return nil
 	}
-	return p.Rows
+	return s.Rows
 }
 
-func (p *PostV1InventoryStockTakeResponse) GetJournalTransactionID() *string {
-	if p == nil {
+func (s *StockTakeInventoryResponse) GetJournalTransactionID() *string {
+	if s == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return s.JournalTransactionID
 }
 
-func (p *PostV1InventoryStockTakeResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockTakeInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockTakeResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTakeInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponse) SetRows(rows []*PostV1InventoryStockTakeResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryStockTakeResponseFieldRows)
+func (s *StockTakeInventoryResponse) SetRows(rows []*StockTakeInventoryResponseRowsItem) {
+	s.Rows = rows
+	s.require(stockTakeInventoryResponseFieldRows)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponse) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1InventoryStockTakeResponseFieldJournalTransactionID)
+func (s *StockTakeInventoryResponse) SetJournalTransactionID(journalTransactionID *string) {
+	s.JournalTransactionID = journalTransactionID
+	s.require(stockTakeInventoryResponseFieldJournalTransactionID)
 }
 
-func (p *PostV1InventoryStockTakeResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTakeResponse
+func (s *StockTakeInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockTakeInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTakeResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockTakeInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockTakeResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTakeResponse
+func (s *StockTakeInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockTakeInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockTakeResponse) String() string {
-	if p == nil {
+func (s *StockTakeInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockTakeResponseRowsItemFieldItemID         = big.NewInt(1 << 0)
-	postV1InventoryStockTakeResponseRowsItemFieldOnHand         = big.NewInt(1 << 1)
-	postV1InventoryStockTakeResponseRowsItemFieldCounted        = big.NewInt(1 << 2)
-	postV1InventoryStockTakeResponseRowsItemFieldDifference     = big.NewInt(1 << 3)
-	postV1InventoryStockTakeResponseRowsItemFieldAdjustmentCost = big.NewInt(1 << 4)
+	stockTakeInventoryResponseRowsItemFieldItemID         = big.NewInt(1 << 0)
+	stockTakeInventoryResponseRowsItemFieldOnHand         = big.NewInt(1 << 1)
+	stockTakeInventoryResponseRowsItemFieldCounted        = big.NewInt(1 << 2)
+	stockTakeInventoryResponseRowsItemFieldDifference     = big.NewInt(1 << 3)
+	stockTakeInventoryResponseRowsItemFieldAdjustmentCost = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryStockTakeResponseRowsItem struct {
+type StockTakeInventoryResponseRowsItem struct {
 	ItemID         string `json:"itemId" url:"itemId"`
 	OnHand         string `json:"onHand" url:"onHand"`
 	Counted        string `json:"counted" url:"counted"`
@@ -7794,139 +7802,139 @@ type PostV1InventoryStockTakeResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetItemID() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetItemID() string {
+	if s == nil {
 		return ""
 	}
-	return p.ItemID
+	return s.ItemID
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetOnHand() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetOnHand() string {
+	if s == nil {
 		return ""
 	}
-	return p.OnHand
+	return s.OnHand
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetCounted() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetCounted() string {
+	if s == nil {
 		return ""
 	}
-	return p.Counted
+	return s.Counted
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetDifference() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetDifference() string {
+	if s == nil {
 		return ""
 	}
-	return p.Difference
+	return s.Difference
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetAdjustmentCost() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetAdjustmentCost() string {
+	if s == nil {
 		return ""
 	}
-	return p.AdjustmentCost
+	return s.AdjustmentCost
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTakeInventoryResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponseRowsItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1InventoryStockTakeResponseRowsItemFieldItemID)
+func (s *StockTakeInventoryResponseRowsItem) SetItemID(itemID string) {
+	s.ItemID = itemID
+	s.require(stockTakeInventoryResponseRowsItemFieldItemID)
 }
 
 // SetOnHand sets the OnHand field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponseRowsItem) SetOnHand(onHand string) {
-	p.OnHand = onHand
-	p.require(postV1InventoryStockTakeResponseRowsItemFieldOnHand)
+func (s *StockTakeInventoryResponseRowsItem) SetOnHand(onHand string) {
+	s.OnHand = onHand
+	s.require(stockTakeInventoryResponseRowsItemFieldOnHand)
 }
 
 // SetCounted sets the Counted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponseRowsItem) SetCounted(counted string) {
-	p.Counted = counted
-	p.require(postV1InventoryStockTakeResponseRowsItemFieldCounted)
+func (s *StockTakeInventoryResponseRowsItem) SetCounted(counted string) {
+	s.Counted = counted
+	s.require(stockTakeInventoryResponseRowsItemFieldCounted)
 }
 
 // SetDifference sets the Difference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponseRowsItem) SetDifference(difference string) {
-	p.Difference = difference
-	p.require(postV1InventoryStockTakeResponseRowsItemFieldDifference)
+func (s *StockTakeInventoryResponseRowsItem) SetDifference(difference string) {
+	s.Difference = difference
+	s.require(stockTakeInventoryResponseRowsItemFieldDifference)
 }
 
 // SetAdjustmentCost sets the AdjustmentCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTakeResponseRowsItem) SetAdjustmentCost(adjustmentCost string) {
-	p.AdjustmentCost = adjustmentCost
-	p.require(postV1InventoryStockTakeResponseRowsItemFieldAdjustmentCost)
+func (s *StockTakeInventoryResponseRowsItem) SetAdjustmentCost(adjustmentCost string) {
+	s.AdjustmentCost = adjustmentCost
+	s.require(stockTakeInventoryResponseRowsItemFieldAdjustmentCost)
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTakeResponseRowsItem
+func (s *StockTakeInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockTakeInventoryResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTakeResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockTakeInventoryResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTakeResponseRowsItem
+func (s *StockTakeInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed StockTakeInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockTakeResponseRowsItem) String() string {
-	if p == nil {
+func (s *StockTakeInventoryResponseRowsItem) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockTransferResponseFieldOutMovementID = big.NewInt(1 << 0)
-	postV1InventoryStockTransferResponseFieldInMovementID  = big.NewInt(1 << 1)
-	postV1InventoryStockTransferResponseFieldTotalCost     = big.NewInt(1 << 2)
+	stockTransferInventoryResponseFieldOutMovementID = big.NewInt(1 << 0)
+	stockTransferInventoryResponseFieldInMovementID  = big.NewInt(1 << 1)
+	stockTransferInventoryResponseFieldTotalCost     = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryStockTransferResponse struct {
+type StockTransferInventoryResponse struct {
 	OutMovementID string `json:"outMovementId" url:"outMovementId"`
 	InMovementID  string `json:"inMovementId" url:"inMovementId"`
 	TotalCost     string `json:"totalCost" url:"totalCost"`
@@ -7938,111 +7946,111 @@ type PostV1InventoryStockTransferResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockTransferResponse) GetOutMovementID() string {
-	if p == nil {
+func (s *StockTransferInventoryResponse) GetOutMovementID() string {
+	if s == nil {
 		return ""
 	}
-	return p.OutMovementID
+	return s.OutMovementID
 }
 
-func (p *PostV1InventoryStockTransferResponse) GetInMovementID() string {
-	if p == nil {
+func (s *StockTransferInventoryResponse) GetInMovementID() string {
+	if s == nil {
 		return ""
 	}
-	return p.InMovementID
+	return s.InMovementID
 }
 
-func (p *PostV1InventoryStockTransferResponse) GetTotalCost() string {
-	if p == nil {
+func (s *StockTransferInventoryResponse) GetTotalCost() string {
+	if s == nil {
 		return ""
 	}
-	return p.TotalCost
+	return s.TotalCost
 }
 
-func (p *PostV1InventoryStockTransferResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockTransferInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockTransferResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockTransferInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetOutMovementID sets the OutMovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferResponse) SetOutMovementID(outMovementID string) {
-	p.OutMovementID = outMovementID
-	p.require(postV1InventoryStockTransferResponseFieldOutMovementID)
+func (s *StockTransferInventoryResponse) SetOutMovementID(outMovementID string) {
+	s.OutMovementID = outMovementID
+	s.require(stockTransferInventoryResponseFieldOutMovementID)
 }
 
 // SetInMovementID sets the InMovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferResponse) SetInMovementID(inMovementID string) {
-	p.InMovementID = inMovementID
-	p.require(postV1InventoryStockTransferResponseFieldInMovementID)
+func (s *StockTransferInventoryResponse) SetInMovementID(inMovementID string) {
+	s.InMovementID = inMovementID
+	s.require(stockTransferInventoryResponseFieldInMovementID)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockTransferResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1InventoryStockTransferResponseFieldTotalCost)
+func (s *StockTransferInventoryResponse) SetTotalCost(totalCost string) {
+	s.TotalCost = totalCost
+	s.require(stockTransferInventoryResponseFieldTotalCost)
 }
 
-func (p *PostV1InventoryStockTransferResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockTransferResponse
+func (s *StockTransferInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockTransferInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockTransferResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockTransferInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockTransferResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockTransferResponse
+func (s *StockTransferInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockTransferInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockTransferResponse) String() string {
-	if p == nil {
+func (s *StockTransferInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryStockWriteOffResponseFieldMovementID           = big.NewInt(1 << 0)
-	postV1InventoryStockWriteOffResponseFieldTotalCost            = big.NewInt(1 << 1)
-	postV1InventoryStockWriteOffResponseFieldJournalTransactionID = big.NewInt(1 << 2)
+	stockWriteOffInventoryResponseFieldMovementID           = big.NewInt(1 << 0)
+	stockWriteOffInventoryResponseFieldTotalCost            = big.NewInt(1 << 1)
+	stockWriteOffInventoryResponseFieldJournalTransactionID = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryStockWriteOffResponse struct {
+type StockWriteOffInventoryResponse struct {
 	MovementID           string `json:"movementId" url:"movementId"`
 	TotalCost            string `json:"totalCost" url:"totalCost"`
 	JournalTransactionID string `json:"journalTransactionId" url:"journalTransactionId"`
@@ -8054,118 +8062,118 @@ type PostV1InventoryStockWriteOffResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) GetMovementID() string {
-	if p == nil {
+func (s *StockWriteOffInventoryResponse) GetMovementID() string {
+	if s == nil {
 		return ""
 	}
-	return p.MovementID
+	return s.MovementID
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) GetTotalCost() string {
-	if p == nil {
+func (s *StockWriteOffInventoryResponse) GetTotalCost() string {
+	if s == nil {
 		return ""
 	}
-	return p.TotalCost
+	return s.TotalCost
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) GetJournalTransactionID() string {
-	if p == nil {
+func (s *StockWriteOffInventoryResponse) GetJournalTransactionID() string {
+	if s == nil {
 		return ""
 	}
-	return p.JournalTransactionID
+	return s.JournalTransactionID
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *StockWriteOffInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *StockWriteOffInventoryResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetMovementID sets the MovementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffResponse) SetMovementID(movementID string) {
-	p.MovementID = movementID
-	p.require(postV1InventoryStockWriteOffResponseFieldMovementID)
+func (s *StockWriteOffInventoryResponse) SetMovementID(movementID string) {
+	s.MovementID = movementID
+	s.require(stockWriteOffInventoryResponseFieldMovementID)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1InventoryStockWriteOffResponseFieldTotalCost)
+func (s *StockWriteOffInventoryResponse) SetTotalCost(totalCost string) {
+	s.TotalCost = totalCost
+	s.require(stockWriteOffInventoryResponseFieldTotalCost)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryStockWriteOffResponse) SetJournalTransactionID(journalTransactionID string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1InventoryStockWriteOffResponseFieldJournalTransactionID)
+func (s *StockWriteOffInventoryResponse) SetJournalTransactionID(journalTransactionID string) {
+	s.JournalTransactionID = journalTransactionID
+	s.require(stockWriteOffInventoryResponseFieldJournalTransactionID)
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryStockWriteOffResponse
+func (s *StockWriteOffInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockWriteOffInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryStockWriteOffResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = StockWriteOffInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryStockWriteOffResponse
+func (s *StockWriteOffInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed StockWriteOffInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryStockWriteOffResponse) String() string {
-	if p == nil {
+func (s *StockWriteOffInventoryResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1InventoryWarehousesCreateResponseFieldID        = big.NewInt(1 << 0)
-	postV1InventoryWarehousesCreateResponseFieldCode      = big.NewInt(1 << 1)
-	postV1InventoryWarehousesCreateResponseFieldName      = big.NewInt(1 << 2)
-	postV1InventoryWarehousesCreateResponseFieldIsDefault = big.NewInt(1 << 3)
-	postV1InventoryWarehousesCreateResponseFieldCreatedAt = big.NewInt(1 << 4)
+	warehousesCreateInventoryResponseFieldID        = big.NewInt(1 << 0)
+	warehousesCreateInventoryResponseFieldCode      = big.NewInt(1 << 1)
+	warehousesCreateInventoryResponseFieldName      = big.NewInt(1 << 2)
+	warehousesCreateInventoryResponseFieldIsDefault = big.NewInt(1 << 3)
+	warehousesCreateInventoryResponseFieldCreatedAt = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryWarehousesCreateResponse struct {
-	ID        string `json:"id" url:"id"`
-	Code      string `json:"code" url:"code"`
-	Name      string `json:"name" url:"name"`
-	IsDefault bool   `json:"isDefault" url:"isDefault"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
+type WarehousesCreateInventoryResponse struct {
+	ID        string    `json:"id" url:"id"`
+	Code      string    `json:"code" url:"code"`
+	Name      string    `json:"name" url:"name"`
+	IsDefault bool      `json:"isDefault" url:"isDefault"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8174,142 +8182,150 @@ type PostV1InventoryWarehousesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetID() string {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetCode() string {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) GetCode() string {
+	if w == nil {
 		return ""
 	}
-	return p.Code
+	return w.Code
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetName() string {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return p.Name
+	return w.Name
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetIsDefault() bool {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) GetIsDefault() bool {
+	if w == nil {
 		return false
 	}
-	return p.IsDefault
+	return w.IsDefault
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (w *WarehousesCreateInventoryResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return w.CreatedAt
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WarehousesCreateInventoryResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryWarehousesCreateResponseFieldID)
+func (w *WarehousesCreateInventoryResponse) SetID(id string) {
+	w.ID = id
+	w.require(warehousesCreateInventoryResponseFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1InventoryWarehousesCreateResponseFieldCode)
+func (w *WarehousesCreateInventoryResponse) SetCode(code string) {
+	w.Code = code
+	w.require(warehousesCreateInventoryResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1InventoryWarehousesCreateResponseFieldName)
+func (w *WarehousesCreateInventoryResponse) SetName(name string) {
+	w.Name = name
+	w.require(warehousesCreateInventoryResponseFieldName)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateResponse) SetIsDefault(isDefault bool) {
-	p.IsDefault = isDefault
-	p.require(postV1InventoryWarehousesCreateResponseFieldIsDefault)
+func (w *WarehousesCreateInventoryResponse) SetIsDefault(isDefault bool) {
+	w.IsDefault = isDefault
+	w.require(warehousesCreateInventoryResponseFieldIsDefault)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryWarehousesCreateResponseFieldCreatedAt)
+func (w *WarehousesCreateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(warehousesCreateInventoryResponseFieldCreatedAt)
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WarehousesCreateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed WarehousesCreateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryWarehousesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WarehousesCreateInventoryResponse(unmarshaler.embed)
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesCreateResponse
+func (w *WarehousesCreateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed WarehousesCreateInventoryResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*w),
+		CreatedAt: internal.NewDateTime(w.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryWarehousesCreateResponse) String() string {
-	if p == nil {
+func (w *WarehousesCreateInventoryResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1InventoryWarehousesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryWarehousesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1InventoryWarehousesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	warehousesListInventoryRequestFilterItemFieldField = big.NewInt(1 << 0)
+	warehousesListInventoryRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	warehousesListInventoryRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1InventoryWarehousesListRequestFilterItem struct {
-	Field string                                               `json:"field" url:"field"`
-	Op    PostV1InventoryWarehousesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1InventoryWarehousesListRequestFilterItemValue `json:"value" url:"value"`
+type WarehousesListInventoryRequestFilterItem struct {
+	Field string                                         `json:"field" url:"field"`
+	Op    WarehousesListInventoryRequestFilterItemOp     `json:"op" url:"op"`
+	Value *WarehousesListInventoryRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8318,312 +8334,312 @@ type PostV1InventoryWarehousesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItem) GetField() string {
+	if w == nil {
 		return ""
 	}
-	return p.Field
+	return w.Field
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) GetOp() PostV1InventoryWarehousesListRequestFilterItemOp {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItem) GetOp() WarehousesListInventoryRequestFilterItemOp {
+	if w == nil {
 		return ""
 	}
-	return p.Op
+	return w.Op
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) GetValue() *PostV1InventoryWarehousesListRequestFilterItemValue {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItem) GetValue() *WarehousesListInventoryRequestFilterItemValue {
+	if w == nil {
 		return nil
 	}
-	return p.Value
+	return w.Value
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WarehousesListInventoryRequestFilterItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryWarehousesListRequestFilterItemFieldField)
+func (w *WarehousesListInventoryRequestFilterItem) SetField(field string) {
+	w.Field = field
+	w.require(warehousesListInventoryRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequestFilterItem) SetOp(op PostV1InventoryWarehousesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1InventoryWarehousesListRequestFilterItemFieldOp)
+func (w *WarehousesListInventoryRequestFilterItem) SetOp(op WarehousesListInventoryRequestFilterItemOp) {
+	w.Op = op
+	w.require(warehousesListInventoryRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequestFilterItem) SetValue(value *PostV1InventoryWarehousesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1InventoryWarehousesListRequestFilterItemFieldValue)
+func (w *WarehousesListInventoryRequestFilterItem) SetValue(value *WarehousesListInventoryRequestFilterItemValue) {
+	w.Value = value
+	w.require(warehousesListInventoryRequestFilterItemFieldValue)
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesListRequestFilterItem
+func (w *WarehousesListInventoryRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesListInventoryRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryWarehousesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WarehousesListInventoryRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesListRequestFilterItem
+func (w *WarehousesListInventoryRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed WarehousesListInventoryRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItem) String() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1InventoryWarehousesListRequestFilterItemOp string
+type WarehousesListInventoryRequestFilterItemOp string
 
 const (
-	PostV1InventoryWarehousesListRequestFilterItemOpEq       PostV1InventoryWarehousesListRequestFilterItemOp = "eq"
-	PostV1InventoryWarehousesListRequestFilterItemOpNe       PostV1InventoryWarehousesListRequestFilterItemOp = "ne"
-	PostV1InventoryWarehousesListRequestFilterItemOpContains PostV1InventoryWarehousesListRequestFilterItemOp = "contains"
-	PostV1InventoryWarehousesListRequestFilterItemOpGte      PostV1InventoryWarehousesListRequestFilterItemOp = "gte"
-	PostV1InventoryWarehousesListRequestFilterItemOpLte      PostV1InventoryWarehousesListRequestFilterItemOp = "lte"
-	PostV1InventoryWarehousesListRequestFilterItemOpIn       PostV1InventoryWarehousesListRequestFilterItemOp = "in"
+	WarehousesListInventoryRequestFilterItemOpEq       WarehousesListInventoryRequestFilterItemOp = "eq"
+	WarehousesListInventoryRequestFilterItemOpNe       WarehousesListInventoryRequestFilterItemOp = "ne"
+	WarehousesListInventoryRequestFilterItemOpContains WarehousesListInventoryRequestFilterItemOp = "contains"
+	WarehousesListInventoryRequestFilterItemOpGte      WarehousesListInventoryRequestFilterItemOp = "gte"
+	WarehousesListInventoryRequestFilterItemOpLte      WarehousesListInventoryRequestFilterItemOp = "lte"
+	WarehousesListInventoryRequestFilterItemOpIn       WarehousesListInventoryRequestFilterItemOp = "in"
 )
 
-func NewPostV1InventoryWarehousesListRequestFilterItemOpFromString(s string) (PostV1InventoryWarehousesListRequestFilterItemOp, error) {
+func NewWarehousesListInventoryRequestFilterItemOpFromString(s string) (WarehousesListInventoryRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1InventoryWarehousesListRequestFilterItemOpEq, nil
+		return WarehousesListInventoryRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1InventoryWarehousesListRequestFilterItemOpNe, nil
+		return WarehousesListInventoryRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1InventoryWarehousesListRequestFilterItemOpContains, nil
+		return WarehousesListInventoryRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1InventoryWarehousesListRequestFilterItemOpGte, nil
+		return WarehousesListInventoryRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1InventoryWarehousesListRequestFilterItemOpLte, nil
+		return WarehousesListInventoryRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1InventoryWarehousesListRequestFilterItemOpIn, nil
+		return WarehousesListInventoryRequestFilterItemOpIn, nil
 	}
-	var t PostV1InventoryWarehousesListRequestFilterItemOp
+	var t WarehousesListInventoryRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryWarehousesListRequestFilterItemOp) Ptr() *PostV1InventoryWarehousesListRequestFilterItemOp {
-	return &p
+func (w WarehousesListInventoryRequestFilterItemOp) Ptr() *WarehousesListInventoryRequestFilterItemOp {
+	return &w
 }
 
-type PostV1InventoryWarehousesListRequestFilterItemValue struct {
-	String                                                           string
-	Double                                                           float64
-	Boolean                                                          bool
-	PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList []*PostV1InventoryWarehousesListRequestFilterItemValueThreeItem
+type WarehousesListInventoryRequestFilterItemValue struct {
+	String                                                     string
+	Double                                                     float64
+	Boolean                                                    bool
+	WarehousesListInventoryRequestFilterItemValueThreeItemList []*WarehousesListInventoryRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValue) GetString() string {
+	if w == nil {
 		return ""
 	}
-	return p.String
+	return w.String
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValue) GetDouble() float64 {
+	if w == nil {
 		return 0
 	}
-	return p.Double
+	return w.Double
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValue) GetBoolean() bool {
+	if w == nil {
 		return false
 	}
-	return p.Boolean
+	return w.Boolean
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) GetPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList() []*PostV1InventoryWarehousesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValue) GetWarehousesListInventoryRequestFilterItemValueThreeItemList() []*WarehousesListInventoryRequestFilterItemValueThreeItem {
+	if w == nil {
 		return nil
 	}
-	return p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList
+	return w.WarehousesListInventoryRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (w *WarehousesListInventoryRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		w.typ = "String"
+		w.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		w.typ = "Double"
+		w.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		w.typ = "Boolean"
+		w.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1InventoryWarehousesListRequestFilterItemValueThreeItemList []*PostV1InventoryWarehousesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1InventoryWarehousesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList"
-		p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList = valuePostV1InventoryWarehousesListRequestFilterItemValueThreeItemList
+	var valueWarehousesListInventoryRequestFilterItemValueThreeItemList []*WarehousesListInventoryRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueWarehousesListInventoryRequestFilterItemValueThreeItemList); err == nil {
+		w.typ = "WarehousesListInventoryRequestFilterItemValueThreeItemList"
+		w.WarehousesListInventoryRequestFilterItemValueThreeItemList = valueWarehousesListInventoryRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, w)
 }
 
-func (p PostV1InventoryWarehousesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (w WarehousesListInventoryRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if w.typ == "String" || w.String != "" {
+		return json.Marshal(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return json.Marshal(w.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if w.typ == "Boolean" || w.Boolean != false {
+		return json.Marshal(w.Boolean)
 	}
-	if p.typ == "PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList" || p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList)
+	if w.typ == "WarehousesListInventoryRequestFilterItemValueThreeItemList" || w.WarehousesListInventoryRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(w.WarehousesListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1InventoryWarehousesListRequestFilterItemValueVisitor interface {
+type WarehousesListInventoryRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList([]*PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) error
+	VisitWarehousesListInventoryRequestFilterItemValueThreeItemList([]*WarehousesListInventoryRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValue) Accept(visitor PostV1InventoryWarehousesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (w *WarehousesListInventoryRequestFilterItemValue) Accept(visitor WarehousesListInventoryRequestFilterItemValueVisitor) error {
+	if w.typ == "String" || w.String != "" {
+		return visitor.VisitString(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return visitor.VisitDouble(w.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if w.typ == "Boolean" || w.Boolean != false {
+		return visitor.VisitBoolean(w.Boolean)
 	}
-	if p.typ == "PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList" || p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1InventoryWarehousesListRequestFilterItemValueThreeItemList(p.PostV1InventoryWarehousesListRequestFilterItemValueThreeItemList)
+	if w.typ == "WarehousesListInventoryRequestFilterItemValueThreeItemList" || w.WarehousesListInventoryRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitWarehousesListInventoryRequestFilterItemValueThreeItemList(w.WarehousesListInventoryRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1InventoryWarehousesListRequestFilterItemValueThreeItem struct {
+type WarehousesListInventoryRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValueThreeItem) GetString() string {
+	if w == nil {
 		return ""
 	}
-	return p.String
+	return w.String
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (w *WarehousesListInventoryRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if w == nil {
 		return 0
 	}
-	return p.Double
+	return w.Double
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (w *WarehousesListInventoryRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		w.typ = "String"
+		w.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		w.typ = "Double"
+		w.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, w)
 }
 
-func (p PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (w WarehousesListInventoryRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if w.typ == "String" || w.String != "" {
+		return json.Marshal(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return json.Marshal(w.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1InventoryWarehousesListRequestFilterItemValueThreeItemVisitor interface {
+type WarehousesListInventoryRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1InventoryWarehousesListRequestFilterItemValueThreeItem) Accept(visitor PostV1InventoryWarehousesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (w *WarehousesListInventoryRequestFilterItemValueThreeItem) Accept(visitor WarehousesListInventoryRequestFilterItemValueThreeItemVisitor) error {
+	if w.typ == "String" || w.String != "" {
+		return visitor.VisitString(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return visitor.VisitDouble(w.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
 var (
-	postV1InventoryWarehousesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1InventoryWarehousesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	warehousesListInventoryRequestSortItemFieldField = big.NewInt(1 << 0)
+	warehousesListInventoryRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1InventoryWarehousesListRequestSortItem struct {
-	Field string                                           `json:"field" url:"field"`
-	Dir   *PostV1InventoryWarehousesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type WarehousesListInventoryRequestSortItem struct {
+	Field string                                     `json:"field" url:"field"`
+	Dir   *WarehousesListInventoryRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8632,126 +8648,126 @@ type PostV1InventoryWarehousesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) GetField() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestSortItem) GetField() string {
+	if w == nil {
 		return ""
 	}
-	return p.Field
+	return w.Field
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) GetDir() *PostV1InventoryWarehousesListRequestSortItemDir {
-	if p == nil {
+func (w *WarehousesListInventoryRequestSortItem) GetDir() *WarehousesListInventoryRequestSortItemDir {
+	if w == nil {
 		return nil
 	}
-	return p.Dir
+	return w.Dir
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WarehousesListInventoryRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WarehousesListInventoryRequestSortItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1InventoryWarehousesListRequestSortItemFieldField)
+func (w *WarehousesListInventoryRequestSortItem) SetField(field string) {
+	w.Field = field
+	w.require(warehousesListInventoryRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListRequestSortItem) SetDir(dir *PostV1InventoryWarehousesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1InventoryWarehousesListRequestSortItemFieldDir)
+func (w *WarehousesListInventoryRequestSortItem) SetDir(dir *WarehousesListInventoryRequestSortItemDir) {
+	w.Dir = dir
+	w.require(warehousesListInventoryRequestSortItemFieldDir)
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesListRequestSortItem
+func (w *WarehousesListInventoryRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesListInventoryRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryWarehousesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WarehousesListInventoryRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesListRequestSortItem
+func (w *WarehousesListInventoryRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed WarehousesListInventoryRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryWarehousesListRequestSortItem) String() string {
-	if p == nil {
+func (w *WarehousesListInventoryRequestSortItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1InventoryWarehousesListRequestSortItemDir string
+type WarehousesListInventoryRequestSortItemDir string
 
 const (
-	PostV1InventoryWarehousesListRequestSortItemDirAsc  PostV1InventoryWarehousesListRequestSortItemDir = "asc"
-	PostV1InventoryWarehousesListRequestSortItemDirDesc PostV1InventoryWarehousesListRequestSortItemDir = "desc"
+	WarehousesListInventoryRequestSortItemDirAsc  WarehousesListInventoryRequestSortItemDir = "asc"
+	WarehousesListInventoryRequestSortItemDirDesc WarehousesListInventoryRequestSortItemDir = "desc"
 )
 
-func NewPostV1InventoryWarehousesListRequestSortItemDirFromString(s string) (PostV1InventoryWarehousesListRequestSortItemDir, error) {
+func NewWarehousesListInventoryRequestSortItemDirFromString(s string) (WarehousesListInventoryRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1InventoryWarehousesListRequestSortItemDirAsc, nil
+		return WarehousesListInventoryRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1InventoryWarehousesListRequestSortItemDirDesc, nil
+		return WarehousesListInventoryRequestSortItemDirDesc, nil
 	}
-	var t PostV1InventoryWarehousesListRequestSortItemDir
+	var t WarehousesListInventoryRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1InventoryWarehousesListRequestSortItemDir) Ptr() *PostV1InventoryWarehousesListRequestSortItemDir {
-	return &p
+func (w WarehousesListInventoryRequestSortItemDir) Ptr() *WarehousesListInventoryRequestSortItemDir {
+	return &w
 }
 
 var (
-	postV1InventoryWarehousesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1InventoryWarehousesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1InventoryWarehousesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1InventoryWarehousesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1InventoryWarehousesListResponseFieldTotals   = big.NewInt(1 << 4)
+	warehousesListInventoryResponseFieldRows     = big.NewInt(1 << 0)
+	warehousesListInventoryResponseFieldPage     = big.NewInt(1 << 1)
+	warehousesListInventoryResponseFieldPageSize = big.NewInt(1 << 2)
+	warehousesListInventoryResponseFieldTotal    = big.NewInt(1 << 3)
+	warehousesListInventoryResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryWarehousesListResponse struct {
-	Rows     []*PostV1InventoryWarehousesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                            `json:"page" url:"page"`
-	PageSize int64                                            `json:"pageSize" url:"pageSize"`
-	Total    int64                                            `json:"total" url:"total"`
-	Totals   map[string]string                                `json:"totals,omitempty" url:"totals,omitempty"`
+type WarehousesListInventoryResponse struct {
+	Rows     []*WarehousesListInventoryResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                      `json:"page" url:"page"`
+	PageSize int64                                      `json:"pageSize" url:"pageSize"`
+	Total    int64                                      `json:"total" url:"total"`
+	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8760,146 +8776,146 @@ type PostV1InventoryWarehousesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetRows() []*PostV1InventoryWarehousesListResponseRowsItem {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetRows() []*WarehousesListInventoryResponseRowsItem {
+	if w == nil {
 		return nil
 	}
-	return p.Rows
+	return w.Rows
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetPage() int64 {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetPage() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.Page
+	return w.Page
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetPageSize() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.PageSize
+	return w.PageSize
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetTotal() int64 {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetTotal() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.Total
+	return w.Total
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetTotals() map[string]string {
+	if w == nil {
 		return nil
 	}
-	return p.Totals
+	return w.Totals
 }
 
-func (p *PostV1InventoryWarehousesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1InventoryWarehousesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WarehousesListInventoryResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponse) SetRows(rows []*PostV1InventoryWarehousesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1InventoryWarehousesListResponseFieldRows)
+func (w *WarehousesListInventoryResponse) SetRows(rows []*WarehousesListInventoryResponseRowsItem) {
+	w.Rows = rows
+	w.require(warehousesListInventoryResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1InventoryWarehousesListResponseFieldPage)
+func (w *WarehousesListInventoryResponse) SetPage(page int64) {
+	w.Page = page
+	w.require(warehousesListInventoryResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1InventoryWarehousesListResponseFieldPageSize)
+func (w *WarehousesListInventoryResponse) SetPageSize(pageSize int64) {
+	w.PageSize = pageSize
+	w.require(warehousesListInventoryResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1InventoryWarehousesListResponseFieldTotal)
+func (w *WarehousesListInventoryResponse) SetTotal(total int64) {
+	w.Total = total
+	w.require(warehousesListInventoryResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1InventoryWarehousesListResponseFieldTotals)
+func (w *WarehousesListInventoryResponse) SetTotals(totals map[string]string) {
+	w.Totals = totals
+	w.require(warehousesListInventoryResponseFieldTotals)
 }
 
-func (p *PostV1InventoryWarehousesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesListResponse
+func (w *WarehousesListInventoryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesListInventoryResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1InventoryWarehousesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WarehousesListInventoryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryWarehousesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesListResponse
+func (w *WarehousesListInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed WarehousesListInventoryResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryWarehousesListResponse) String() string {
-	if p == nil {
+func (w *WarehousesListInventoryResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1InventoryWarehousesListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1InventoryWarehousesListResponseRowsItemFieldCode      = big.NewInt(1 << 1)
-	postV1InventoryWarehousesListResponseRowsItemFieldName      = big.NewInt(1 << 2)
-	postV1InventoryWarehousesListResponseRowsItemFieldIsDefault = big.NewInt(1 << 3)
-	postV1InventoryWarehousesListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+	warehousesListInventoryResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	warehousesListInventoryResponseRowsItemFieldCode      = big.NewInt(1 << 1)
+	warehousesListInventoryResponseRowsItemFieldName      = big.NewInt(1 << 2)
+	warehousesListInventoryResponseRowsItemFieldIsDefault = big.NewInt(1 << 3)
+	warehousesListInventoryResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
 )
 
-type PostV1InventoryWarehousesListResponseRowsItem struct {
-	ID        string `json:"id" url:"id"`
-	Code      string `json:"code" url:"code"`
-	Name      string `json:"name" url:"name"`
-	IsDefault bool   `json:"isDefault" url:"isDefault"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
+type WarehousesListInventoryResponseRowsItem struct {
+	ID        string    `json:"id" url:"id"`
+	Code      string    `json:"code" url:"code"`
+	Name      string    `json:"name" url:"name"`
+	IsDefault bool      `json:"isDefault" url:"isDefault"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8908,128 +8924,283 @@ type PostV1InventoryWarehousesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetCode() string {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) GetCode() string {
+	if w == nil {
 		return ""
 	}
-	return p.Code
+	return w.Code
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetName() string {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return p.Name
+	return w.Name
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetIsDefault() bool {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) GetIsDefault() bool {
+	if w == nil {
 		return false
 	}
-	return p.IsDefault
+	return w.IsDefault
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (w *WarehousesListInventoryResponseRowsItem) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return w.CreatedAt
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WarehousesListInventoryResponseRowsItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1InventoryWarehousesListResponseRowsItemFieldID)
+func (w *WarehousesListInventoryResponseRowsItem) SetID(id string) {
+	w.ID = id
+	w.require(warehousesListInventoryResponseRowsItemFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponseRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1InventoryWarehousesListResponseRowsItemFieldCode)
+func (w *WarehousesListInventoryResponseRowsItem) SetCode(code string) {
+	w.Code = code
+	w.require(warehousesListInventoryResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1InventoryWarehousesListResponseRowsItemFieldName)
+func (w *WarehousesListInventoryResponseRowsItem) SetName(name string) {
+	w.Name = name
+	w.require(warehousesListInventoryResponseRowsItemFieldName)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponseRowsItem) SetIsDefault(isDefault bool) {
-	p.IsDefault = isDefault
-	p.require(postV1InventoryWarehousesListResponseRowsItemFieldIsDefault)
+func (w *WarehousesListInventoryResponseRowsItem) SetIsDefault(isDefault bool) {
+	w.IsDefault = isDefault
+	w.require(warehousesListInventoryResponseRowsItemFieldIsDefault)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1InventoryWarehousesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1InventoryWarehousesListResponseRowsItemFieldCreatedAt)
+func (w *WarehousesListInventoryResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(warehousesListInventoryResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1InventoryWarehousesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WarehousesListInventoryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed WarehousesListInventoryResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1InventoryWarehousesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WarehousesListInventoryResponseRowsItem(unmarshaler.embed)
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1InventoryWarehousesListResponseRowsItem
+func (w *WarehousesListInventoryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed WarehousesListInventoryResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*w),
+		CreatedAt: internal.NewDateTime(w.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1InventoryWarehousesListResponseRowsItem) String() string {
-	if p == nil {
+func (w *WarehousesListInventoryResponseRowsItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	warehousesCreateInventoryRequestFieldCode      = big.NewInt(1 << 0)
+	warehousesCreateInventoryRequestFieldName      = big.NewInt(1 << 1)
+	warehousesCreateInventoryRequestFieldIsDefault = big.NewInt(1 << 2)
+)
+
+type WarehousesCreateInventoryRequest struct {
+	Code      string `json:"code" url:"-"`
+	Name      string `json:"name" url:"-"`
+	IsDefault *bool  `json:"isDefault,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WarehousesCreateInventoryRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesCreateInventoryRequest) SetCode(code string) {
+	w.Code = code
+	w.require(warehousesCreateInventoryRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesCreateInventoryRequest) SetName(name string) {
+	w.Name = name
+	w.require(warehousesCreateInventoryRequestFieldName)
+}
+
+// SetIsDefault sets the IsDefault field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesCreateInventoryRequest) SetIsDefault(isDefault *bool) {
+	w.IsDefault = isDefault
+	w.require(warehousesCreateInventoryRequestFieldIsDefault)
+}
+
+func (w *WarehousesCreateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesCreateInventoryRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WarehousesCreateInventoryRequest(body)
+	return nil
+}
+
+func (w *WarehousesCreateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed WarehousesCreateInventoryRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	warehousesListInventoryRequestFieldPage     = big.NewInt(1 << 0)
+	warehousesListInventoryRequestFieldPageSize = big.NewInt(1 << 1)
+	warehousesListInventoryRequestFieldSort     = big.NewInt(1 << 2)
+	warehousesListInventoryRequestFieldFilter   = big.NewInt(1 << 3)
+	warehousesListInventoryRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type WarehousesListInventoryRequest struct {
+	Page     *int64                                      `json:"page,omitempty" url:"-"`
+	PageSize *int64                                      `json:"pageSize,omitempty" url:"-"`
+	Sort     []*WarehousesListInventoryRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*WarehousesListInventoryRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WarehousesListInventoryRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryRequest) SetPage(page *int64) {
+	w.Page = page
+	w.require(warehousesListInventoryRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryRequest) SetPageSize(pageSize *int64) {
+	w.PageSize = pageSize
+	w.require(warehousesListInventoryRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryRequest) SetSort(sort []*WarehousesListInventoryRequestSortItem) {
+	w.Sort = sort
+	w.require(warehousesListInventoryRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryRequest) SetFilter(filter []*WarehousesListInventoryRequestFilterItem) {
+	w.Filter = filter
+	w.require(warehousesListInventoryRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryRequest) SetTotals(totals []string) {
+	w.Totals = totals
+	w.require(warehousesListInventoryRequestFieldTotals)
+}
+
+func (w *WarehousesListInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesListInventoryRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WarehousesListInventoryRequest(body)
+	return nil
+}
+
+func (w *WarehousesListInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed WarehousesListInventoryRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

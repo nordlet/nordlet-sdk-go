@@ -7,11 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1FilesDeleteRequest(t *testing.T) {
+func TestSettersDeleteFilesRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1FilesDeleteRequest{}
+		obj := &DeleteFilesRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -20,11 +21,11 @@ func TestSettersPostV1FilesDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesDeleteRequest(t *testing.T) {
+func TestSettersMarkExplicitDeleteFilesRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesDeleteRequest{}
+		obj := &DeleteFilesRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -54,9 +55,9 @@ func TestSettersMarkExplicitPostV1FilesDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesGetRequest(t *testing.T) {
+func TestSettersGetFilesRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1FilesGetRequest{}
+		obj := &GetFilesRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -65,11 +66,11 @@ func TestSettersPostV1FilesGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesGetRequest(t *testing.T) {
+func TestSettersMarkExplicitGetFilesRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetRequest{}
+		obj := &GetFilesRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -99,9 +100,9 @@ func TestSettersMarkExplicitPostV1FilesGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesListRequest(t *testing.T) {
+func TestSettersListFilesRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -109,7 +110,7 @@ func TestSettersPostV1FilesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -117,23 +118,23 @@ func TestSettersPostV1FilesListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1FilesListRequest{}
-		var fernTestValueSort []*PostV1FilesListRequestSortItem
+		obj := &ListFilesRequest{}
+		var fernTestValueSort []*ListFilesRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1FilesListRequest{}
-		var fernTestValueFilter []*PostV1FilesListRequestFilterItem
+		obj := &ListFilesRequest{}
+		var fernTestValueFilter []*ListFilesRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -142,11 +143,11 @@ func TestSettersPostV1FilesListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
+func TestSettersMarkExplicitListFilesRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -177,7 +178,7 @@ func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -208,8 +209,8 @@ func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequest{}
-		var fernTestValueSort []*PostV1FilesListRequestSortItem
+		obj := &ListFilesRequest{}
+		var fernTestValueSort []*ListFilesRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -239,8 +240,8 @@ func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequest{}
-		var fernTestValueFilter []*PostV1FilesListRequestFilterItem
+		obj := &ListFilesRequest{}
+		var fernTestValueFilter []*ListFilesRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -270,7 +271,7 @@ func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequest{}
+		obj := &ListFilesRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -300,210 +301,9 @@ func TestSettersMarkExplicitPostV1FilesListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesUploadRequest(t *testing.T) {
-	t.Run("SetEntity", func(t *testing.T) {
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntity string
-		obj.SetEntity(fernTestValueEntity)
-		assert.Equal(t, fernTestValueEntity, obj.Entity)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetEntityID", func(t *testing.T) {
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntityID *string
-		obj.SetEntityID(fernTestValueEntityID)
-		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueFileName string
-		obj.SetFileName(fernTestValueFileName)
-		assert.Equal(t, fernTestValueFileName, obj.FileName)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueMimeType string
-		obj.SetMimeType(fernTestValueMimeType)
-		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetContent", func(t *testing.T) {
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueContent string
-		obj.SetContent(fernTestValueContent)
-		assert.Equal(t, fernTestValueContent, obj.Content)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1FilesUploadRequest(t *testing.T) {
-	t.Run("SetEntity_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntity string
-
-		// Act
-		obj.SetEntity(fernTestValueEntity)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetEntityID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntityID *string
-
-		// Act
-		obj.SetEntityID(fernTestValueEntityID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueFileName string
-
-		// Act
-		obj.SetFileName(fernTestValueFileName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueMimeType string
-
-		// Act
-		obj.SetMimeType(fernTestValueMimeType)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueContent string
-
-		// Act
-		obj.SetContent(fernTestValueContent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1FilesDeleteResponse(t *testing.T) {
+func TestSettersDeleteFilesResponse(t *testing.T) {
 	t.Run("SetDeleted", func(t *testing.T) {
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 		var fernTestValueDeleted bool
 		obj.SetDeleted(fernTestValueDeleted)
 		assert.Equal(t, fernTestValueDeleted, obj.Deleted)
@@ -512,11 +312,11 @@ func TestSettersPostV1FilesDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesDeleteResponse(t *testing.T) {
+func TestGettersDeleteFilesResponse(t *testing.T) {
 	t.Run("GetDeleted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 		var expected bool
 		obj.Deleted = expected
 
@@ -526,7 +326,7 @@ func TestGettersPostV1FilesDeleteResponse(t *testing.T) {
 
 	t.Run("GetDeleted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesDeleteResponse
+		var obj *DeleteFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -538,11 +338,11 @@ func TestGettersPostV1FilesDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitDeleteFilesResponse(t *testing.T) {
 	t.Run("SetDeleted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 		var fernTestValueDeleted bool
 
 		// Act
@@ -572,9 +372,9 @@ func TestSettersMarkExplicitPostV1FilesDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesGetResponse(t *testing.T) {
+func TestSettersGetFilesResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -582,7 +382,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetEntity", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueEntity string
 		obj.SetEntity(fernTestValueEntity)
 		assert.Equal(t, fernTestValueEntity, obj.Entity)
@@ -590,7 +390,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetEntityID", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
@@ -598,7 +398,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -606,7 +406,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -614,7 +414,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -622,7 +422,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSha256", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
@@ -630,7 +430,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStorageKey", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueStorageKey string
 		obj.SetStorageKey(fernTestValueStorageKey)
 		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
@@ -638,15 +438,15 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GetFilesResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetContent", func(t *testing.T) {
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueContent string
 		obj.SetContent(fernTestValueContent)
 		assert.Equal(t, fernTestValueContent, obj.Content)
@@ -655,11 +455,11 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesGetResponse(t *testing.T) {
+func TestGettersGetFilesResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -669,7 +469,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -682,7 +482,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetEntity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.Entity = expected
 
@@ -692,7 +492,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetEntity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -705,7 +505,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetEntityID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected *string
 		obj.EntityID = expected
 
@@ -716,7 +516,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetEntityID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		obj.EntityID = nil
 
 		// Act & Assert
@@ -725,7 +525,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -738,7 +538,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -748,7 +548,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -761,7 +561,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -771,7 +571,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -784,7 +584,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -794,7 +594,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -807,7 +607,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.Sha256 = expected
 
@@ -817,7 +617,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -830,7 +630,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetStorageKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.StorageKey = expected
 
@@ -840,7 +640,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -853,8 +653,8 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
-		var expected string
+		obj := &GetFilesResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -863,7 +663,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -876,7 +676,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 	t.Run("GetContent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var expected string
 		obj.Content = expected
 
@@ -886,7 +686,7 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetContent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -898,11 +698,11 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
+func TestSettersMarkExplicitGetFilesResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -933,7 +733,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetEntity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueEntity string
 
 		// Act
@@ -964,7 +764,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetEntityID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueEntityID *string
 
 		// Act
@@ -995,7 +795,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -1026,7 +826,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -1057,7 +857,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -1088,7 +888,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueSha256 string
 
 		// Act
@@ -1119,7 +919,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueStorageKey string
 
 		// Act
@@ -1150,8 +950,8 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GetFilesResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -1181,7 +981,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		var fernTestValueContent string
 
 		// Act
@@ -1211,9 +1011,9 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestSettersListFilesRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -1221,16 +1021,16 @@ func TestSettersPostV1FilesListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1FilesListRequestFilterItem{}
-		var fernTestValueOp PostV1FilesListRequestFilterItemOp
+		obj := &ListFilesRequestFilterItem{}
+		var fernTestValueOp ListFilesRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1FilesListRequestFilterItem{}
-		var fernTestValueValue *PostV1FilesListRequestFilterItemValue
+		obj := &ListFilesRequestFilterItem{}
+		var fernTestValueValue *ListFilesRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -1238,11 +1038,11 @@ func TestSettersPostV1FilesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestGettersListFilesRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -1252,7 +1052,7 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItem
+		var obj *ListFilesRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1265,8 +1065,8 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
-		var expected PostV1FilesListRequestFilterItemOp
+		obj := &ListFilesRequestFilterItem{}
+		var expected ListFilesRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -1275,7 +1075,7 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItem
+		var obj *ListFilesRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1288,8 +1088,8 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
-		var expected *PostV1FilesListRequestFilterItemValue
+		obj := &ListFilesRequestFilterItem{}
+		var expected *ListFilesRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -1299,7 +1099,7 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -1308,7 +1108,7 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItem
+		var obj *ListFilesRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1320,11 +1120,11 @@ func TestGettersPostV1FilesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitListFilesRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -1355,8 +1155,8 @@ func TestSettersMarkExplicitPostV1FilesListRequestFilterItem(t *testing.T) {
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
-		var fernTestValueOp PostV1FilesListRequestFilterItemOp
+		obj := &ListFilesRequestFilterItem{}
+		var fernTestValueOp ListFilesRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -1386,8 +1186,8 @@ func TestSettersMarkExplicitPostV1FilesListRequestFilterItem(t *testing.T) {
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
-		var fernTestValueValue *PostV1FilesListRequestFilterItemValue
+		obj := &ListFilesRequestFilterItem{}
+		var fernTestValueValue *ListFilesRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -1416,11 +1216,11 @@ func TestSettersMarkExplicitPostV1FilesListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
+func TestGettersListFilesRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValue{}
+		obj := &ListFilesRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -1430,7 +1230,7 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValue
+		var obj *ListFilesRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1443,7 +1243,7 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValue{}
+		obj := &ListFilesRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -1453,7 +1253,7 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValue
+		var obj *ListFilesRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1466,7 +1266,7 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValue{}
+		obj := &ListFilesRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -1476,7 +1276,7 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValue
+		var obj *ListFilesRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1486,46 +1286,46 @@ func TestGettersPostV1FilesListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1FilesListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetListFilesRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValue{}
-		var expected []*PostV1FilesListRequestFilterItemValueThreeItem
-		obj.PostV1FilesListRequestFilterItemValueThreeItemList = expected
+		obj := &ListFilesRequestFilterItemValue{}
+		var expected []*ListFilesRequestFilterItemValueThreeItem
+		obj.ListFilesRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1FilesListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetListFilesRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1FilesListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetListFilesRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValue{}
-		obj.PostV1FilesListRequestFilterItemValueThreeItemList = nil
+		obj := &ListFilesRequestFilterItemValue{}
+		obj.ListFilesRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1FilesListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetListFilesRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1FilesListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetListFilesRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValue
+		var obj *ListFilesRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1FilesListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetListFilesRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1FilesListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersListFilesRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValueThreeItem{}
+		obj := &ListFilesRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -1535,7 +1335,7 @@ func TestGettersPostV1FilesListRequestFilterItemValueThreeItem(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValueThreeItem
+		var obj *ListFilesRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1548,7 +1348,7 @@ func TestGettersPostV1FilesListRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItemValueThreeItem{}
+		obj := &ListFilesRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -1558,7 +1358,7 @@ func TestGettersPostV1FilesListRequestFilterItemValueThreeItem(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItemValueThreeItem
+		var obj *ListFilesRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1570,9 +1370,9 @@ func TestGettersPostV1FilesListRequestFilterItemValueThreeItem(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesListRequestSortItem(t *testing.T) {
+func TestSettersListFilesRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -1580,8 +1380,8 @@ func TestSettersPostV1FilesListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1FilesListRequestSortItem{}
-		var fernTestValueDir *PostV1FilesListRequestSortItemDir
+		obj := &ListFilesRequestSortItem{}
+		var fernTestValueDir *ListFilesRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -1589,11 +1389,11 @@ func TestSettersPostV1FilesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
+func TestGettersListFilesRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -1603,7 +1403,7 @@ func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestSortItem
+		var obj *ListFilesRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1616,8 +1416,8 @@ func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
-		var expected *PostV1FilesListRequestSortItemDir
+		obj := &ListFilesRequestSortItem{}
+		var expected *ListFilesRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -1627,7 +1427,7 @@ func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -1636,7 +1436,7 @@ func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestSortItem
+		var obj *ListFilesRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1648,11 +1448,11 @@ func TestGettersPostV1FilesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitListFilesRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -1683,8 +1483,8 @@ func TestSettersMarkExplicitPostV1FilesListRequestSortItem(t *testing.T) {
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
-		var fernTestValueDir *PostV1FilesListRequestSortItemDir
+		obj := &ListFilesRequestSortItem{}
+		var fernTestValueDir *ListFilesRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -1713,17 +1513,17 @@ func TestSettersMarkExplicitPostV1FilesListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesListResponse(t *testing.T) {
+func TestSettersListFilesResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1FilesListResponse{}
-		var fernTestValueRows []*PostV1FilesListResponseRowsItem
+		obj := &ListFilesResponse{}
+		var fernTestValueRows []*ListFilesResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1731,7 +1531,7 @@ func TestSettersPostV1FilesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1739,7 +1539,7 @@ func TestSettersPostV1FilesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -1747,7 +1547,7 @@ func TestSettersPostV1FilesListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1756,12 +1556,12 @@ func TestSettersPostV1FilesListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesListResponse(t *testing.T) {
+func TestGettersListFilesResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
-		var expected []*PostV1FilesListResponseRowsItem
+		obj := &ListFilesResponse{}
+		var expected []*ListFilesResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -1771,7 +1571,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -1780,7 +1580,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1793,7 +1593,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -1803,7 +1603,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1816,7 +1616,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -1826,7 +1626,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1839,7 +1639,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -1849,7 +1649,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1862,7 +1662,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -1873,7 +1673,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -1882,7 +1682,7 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1894,12 +1694,12 @@ func TestGettersPostV1FilesListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
+func TestSettersMarkExplicitListFilesResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
-		var fernTestValueRows []*PostV1FilesListResponseRowsItem
+		obj := &ListFilesResponse{}
+		var fernTestValueRows []*ListFilesResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -1929,7 +1729,7 @@ func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -1960,7 +1760,7 @@ func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -1991,7 +1791,7 @@ func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -2022,7 +1822,7 @@ func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -2052,9 +1852,9 @@ func TestSettersMarkExplicitPostV1FilesListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestSettersListFilesResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2062,7 +1862,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEntity", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueEntity string
 		obj.SetEntity(fernTestValueEntity)
 		assert.Equal(t, fernTestValueEntity, obj.Entity)
@@ -2070,7 +1870,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetEntityID", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
@@ -2078,7 +1878,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -2086,7 +1886,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -2094,7 +1894,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -2102,7 +1902,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSha256", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
@@ -2110,7 +1910,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStorageKey", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueStorageKey string
 		obj.SetStorageKey(fernTestValueStorageKey)
 		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
@@ -2118,8 +1918,8 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1FilesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &ListFilesResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -2127,11 +1927,11 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestGettersListFilesResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -2141,7 +1941,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2154,7 +1954,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetEntity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.Entity = expected
 
@@ -2164,7 +1964,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEntity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2177,7 +1977,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetEntityID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected *string
 		obj.EntityID = expected
 
@@ -2188,7 +1988,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetEntityID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		obj.EntityID = nil
 
 		// Act & Assert
@@ -2197,7 +1997,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2210,7 +2010,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.FileName = expected
 
@@ -2220,7 +2020,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2233,7 +2033,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.MimeType = expected
 
@@ -2243,7 +2043,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2256,7 +2056,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -2266,7 +2066,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2279,7 +2079,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.Sha256 = expected
 
@@ -2289,7 +2089,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2302,7 +2102,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetStorageKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var expected string
 		obj.StorageKey = expected
 
@@ -2312,7 +2112,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2325,8 +2125,8 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
-		var expected string
+		obj := &ListFilesResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2335,7 +2135,7 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2347,11 +2147,11 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitListFilesResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -2382,7 +2182,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetEntity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueEntity string
 
 		// Act
@@ -2413,7 +2213,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetEntityID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueEntityID *string
 
 		// Act
@@ -2444,7 +2244,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueFileName string
 
 		// Act
@@ -2475,7 +2275,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -2506,7 +2306,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -2537,7 +2337,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueSha256 string
 
 		// Act
@@ -2568,7 +2368,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		var fernTestValueStorageKey string
 
 		// Act
@@ -2599,8 +2399,8 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &ListFilesResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2629,9 +2429,9 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersPostV1FilesUploadResponse(t *testing.T) {
+func TestSettersUploadFilesResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2639,7 +2439,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetEntity", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueEntity string
 		obj.SetEntity(fernTestValueEntity)
 		assert.Equal(t, fernTestValueEntity, obj.Entity)
@@ -2647,7 +2447,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetEntityID", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
@@ -2655,7 +2455,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -2663,7 +2463,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -2671,7 +2471,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -2679,7 +2479,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetSha256", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
@@ -2687,7 +2487,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetStorageKey", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueStorageKey string
 		obj.SetStorageKey(fernTestValueStorageKey)
 		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
@@ -2695,8 +2495,8 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1FilesUploadResponse{}
-		var fernTestValueCreatedAt string
+		obj := &UploadFilesResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -2704,11 +2504,11 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1FilesUploadResponse(t *testing.T) {
+func TestGettersUploadFilesResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2718,7 +2518,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2731,7 +2531,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetEntity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.Entity = expected
 
@@ -2741,7 +2541,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetEntity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2754,7 +2554,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetEntityID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected *string
 		obj.EntityID = expected
 
@@ -2765,7 +2565,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetEntityID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		obj.EntityID = nil
 
 		// Act & Assert
@@ -2774,7 +2574,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2787,7 +2587,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -2797,7 +2597,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2810,7 +2610,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -2820,7 +2620,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2833,7 +2633,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -2843,7 +2643,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2856,7 +2656,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.Sha256 = expected
 
@@ -2866,7 +2666,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2879,7 +2679,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetStorageKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var expected string
 		obj.StorageKey = expected
 
@@ -2889,7 +2689,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2902,8 +2702,8 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
-		var expected string
+		obj := &UploadFilesResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2912,7 +2712,7 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2924,11 +2724,11 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
+func TestSettersMarkExplicitUploadFilesResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -2959,7 +2759,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetEntity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueEntity string
 
 		// Act
@@ -2990,7 +2790,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetEntityID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueEntityID *string
 
 		// Act
@@ -3021,7 +2821,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -3052,7 +2852,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -3083,7 +2883,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -3114,7 +2914,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueSha256 string
 
 		// Act
@@ -3145,7 +2945,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		var fernTestValueStorageKey string
 
 		// Act
@@ -3176,8 +2976,8 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
-		var fernTestValueCreatedAt string
+		obj := &UploadFilesResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3206,11 +3006,212 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 
 }
 
-func TestJSONMarshalingPostV1FilesDeleteResponse(t *testing.T) {
+func TestSettersUploadFilesRequest(t *testing.T) {
+	t.Run("SetEntity", func(t *testing.T) {
+		obj := &UploadFilesRequest{}
+		var fernTestValueEntity string
+		obj.SetEntity(fernTestValueEntity)
+		assert.Equal(t, fernTestValueEntity, obj.Entity)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEntityID", func(t *testing.T) {
+		obj := &UploadFilesRequest{}
+		var fernTestValueEntityID *string
+		obj.SetEntityID(fernTestValueEntityID)
+		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &UploadFilesRequest{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMimeType", func(t *testing.T) {
+		obj := &UploadFilesRequest{}
+		var fernTestValueMimeType string
+		obj.SetMimeType(fernTestValueMimeType)
+		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &UploadFilesRequest{}
+		var fernTestValueContent string
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitUploadFilesRequest(t *testing.T) {
+	t.Run("SetEntity_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UploadFilesRequest{}
+		var fernTestValueEntity string
+
+		// Act
+		obj.SetEntity(fernTestValueEntity)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEntityID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UploadFilesRequest{}
+		var fernTestValueEntityID *string
+
+		// Act
+		obj.SetEntityID(fernTestValueEntityID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UploadFilesRequest{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UploadFilesRequest{}
+		var fernTestValueMimeType string
+
+		// Act
+		obj.SetMimeType(fernTestValueMimeType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UploadFilesRequest{}
+		var fernTestValueContent string
+
+		// Act
+		obj.SetContent(fernTestValueContent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingDeleteFilesResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3219,31 +3220,31 @@ func TestJSONMarshalingPostV1FilesDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesDeleteResponse
+		var unmarshaled DeleteFilesResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesDeleteResponse
+		var obj DeleteFilesResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesDeleteResponse
+		var obj DeleteFilesResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesGetResponse(t *testing.T) {
+func TestJSONMarshalingGetFilesResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3252,31 +3253,31 @@ func TestJSONMarshalingPostV1FilesGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesGetResponse
+		var unmarshaled GetFilesResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesGetResponse
+		var obj GetFilesResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesGetResponse
+		var obj GetFilesResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingListFilesRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3285,31 +3286,31 @@ func TestJSONMarshalingPostV1FilesListRequestFilterItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesListRequestFilterItem
+		var unmarshaled ListFilesRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListRequestFilterItem
+		var obj ListFilesRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListRequestFilterItem
+		var obj ListFilesRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingListFilesRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3318,31 +3319,31 @@ func TestJSONMarshalingPostV1FilesListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesListRequestSortItem
+		var unmarshaled ListFilesRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListRequestSortItem
+		var obj ListFilesRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListRequestSortItem
+		var obj ListFilesRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesListResponse(t *testing.T) {
+func TestJSONMarshalingListFilesResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3351,31 +3352,31 @@ func TestJSONMarshalingPostV1FilesListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesListResponse
+		var unmarshaled ListFilesResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListResponse
+		var obj ListFilesResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListResponse
+		var obj ListFilesResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingListFilesResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3384,31 +3385,31 @@ func TestJSONMarshalingPostV1FilesListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesListResponseRowsItem
+		var unmarshaled ListFilesResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListResponseRowsItem
+		var obj ListFilesResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesListResponseRowsItem
+		var obj ListFilesResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1FilesUploadResponse(t *testing.T) {
+func TestJSONMarshalingUploadFilesResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -3417,188 +3418,188 @@ func TestJSONMarshalingPostV1FilesUploadResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1FilesUploadResponse
+		var unmarshaled UploadFilesResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesUploadResponse
+		var obj UploadFilesResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1FilesUploadResponse
+		var obj UploadFilesResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1FilesDeleteResponse(t *testing.T) {
+func TestStringDeleteFilesResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesDeleteResponse
+		var obj *DeleteFilesResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesGetResponse(t *testing.T) {
+func TestStringGetFilesResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestStringListFilesRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItem
+		var obj *ListFilesRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesListRequestSortItem(t *testing.T) {
+func TestStringListFilesRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestSortItem
+		var obj *ListFilesRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesListResponse(t *testing.T) {
+func TestStringListFilesResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestStringListFilesResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1FilesUploadResponse(t *testing.T) {
+func TestStringUploadFilesResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1FilesListRequestFilterItemOp(t *testing.T) {
+func TestEnumListFilesRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("eq")
+		val, err := NewListFilesRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("ne")
+		val, err := NewListFilesRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("contains")
+		val, err := NewListFilesRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("gte")
+		val, err := NewListFilesRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("lte")
+		val, err := NewListFilesRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("in")
+		val, err := NewListFilesRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1FilesListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewListFilesRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1FilesListRequestFilterItemOpFromString("eq")
+		val, err := NewListFilesRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -3606,28 +3607,28 @@ func TestEnumPostV1FilesListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1FilesListRequestSortItemDir(t *testing.T) {
+func TestEnumListFilesRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestSortItemDirFromString("asc")
+		val, err := NewListFilesRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1FilesListRequestSortItemDirFromString("desc")
+		val, err := NewListFilesRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1FilesListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListFilesRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1FilesListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewListFilesRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1FilesListRequestSortItemDirFromString("asc")
+		val, err := NewListFilesRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -3635,10 +3636,10 @@ func TestEnumPostV1FilesListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1FilesDeleteResponse(t *testing.T) {
+func TestExtraPropertiesDeleteFilesResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesDeleteResponse{}
+		obj := &DeleteFilesResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3652,16 +3653,16 @@ func TestExtraPropertiesPostV1FilesDeleteResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesDeleteResponse
+		var obj *DeleteFilesResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesGetResponse(t *testing.T) {
+func TestExtraPropertiesGetFilesResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesGetResponse{}
+		obj := &GetFilesResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3675,16 +3676,16 @@ func TestExtraPropertiesPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesGetResponse
+		var obj *GetFilesResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesListFilesRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListRequestFilterItem{}
+		obj := &ListFilesRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3698,16 +3699,16 @@ func TestExtraPropertiesPostV1FilesListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestFilterItem
+		var obj *ListFilesRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesListFilesRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListRequestSortItem{}
+		obj := &ListFilesRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3721,16 +3722,16 @@ func TestExtraPropertiesPostV1FilesListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListRequestSortItem
+		var obj *ListFilesRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesListResponse(t *testing.T) {
+func TestExtraPropertiesListFilesResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListResponse{}
+		obj := &ListFilesResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3744,16 +3745,16 @@ func TestExtraPropertiesPostV1FilesListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponse
+		var obj *ListFilesResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesListFilesResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesListResponseRowsItem{}
+		obj := &ListFilesResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3767,16 +3768,16 @@ func TestExtraPropertiesPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesListResponseRowsItem
+		var obj *ListFilesResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1FilesUploadResponse(t *testing.T) {
+func TestExtraPropertiesUploadFilesResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1FilesUploadResponse{}
+		obj := &UploadFilesResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -3790,7 +3791,7 @@ func TestExtraPropertiesPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1FilesUploadResponse
+		var obj *UploadFilesResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

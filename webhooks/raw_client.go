@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1WebhooksSubscriptionsCreate(
+func (r *RawClient) SubscriptionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsCreateRequest,
+	request *nordlet.SubscriptionsCreateWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksSubscriptionsCreateResponse], error) {
+) (*core.Response[*nordlet.SubscriptionsCreateWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1WebhooksSubscriptionsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksSubscriptionsCreateResponse
+	var response *nordlet.SubscriptionsCreateWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1WebhooksSubscriptionsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksSubscriptionsCreateResponse]{
+	return &core.Response[*nordlet.SubscriptionsCreateWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1WebhooksSubscriptionsList(
+func (r *RawClient) SubscriptionsList(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsListRequest,
+	request *nordlet.SubscriptionsListWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksSubscriptionsListResponse], error) {
+) (*core.Response[*nordlet.SubscriptionsListWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1WebhooksSubscriptionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksSubscriptionsListResponse
+	var response *nordlet.SubscriptionsListWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1WebhooksSubscriptionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksSubscriptionsListResponse]{
+	return &core.Response[*nordlet.SubscriptionsListWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1WebhooksSubscriptionsUpdate(
+func (r *RawClient) SubscriptionsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsUpdateRequest,
+	request *nordlet.SubscriptionsUpdateWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksSubscriptionsUpdateResponse], error) {
+) (*core.Response[*nordlet.SubscriptionsUpdateWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1WebhooksSubscriptionsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksSubscriptionsUpdateResponse
+	var response *nordlet.SubscriptionsUpdateWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1WebhooksSubscriptionsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksSubscriptionsUpdateResponse]{
+	return &core.Response[*nordlet.SubscriptionsUpdateWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1WebhooksSubscriptionsDelete(
+func (r *RawClient) SubscriptionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksSubscriptionsDeleteRequest,
+	request *nordlet.SubscriptionsDeleteWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksSubscriptionsDeleteResponse], error) {
+) (*core.Response[*nordlet.SubscriptionsDeleteWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1WebhooksSubscriptionsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksSubscriptionsDeleteResponse
+	var response *nordlet.SubscriptionsDeleteWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1WebhooksSubscriptionsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksSubscriptionsDeleteResponse]{
+	return &core.Response[*nordlet.SubscriptionsDeleteWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1WebhooksDeliveriesList(
+func (r *RawClient) DeliveriesList(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksDeliveriesListRequest,
+	request *nordlet.DeliveriesListWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksDeliveriesListResponse], error) {
+) (*core.Response[*nordlet.DeliveriesListWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1WebhooksDeliveriesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksDeliveriesListResponse
+	var response *nordlet.DeliveriesListWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1WebhooksDeliveriesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksDeliveriesListResponse]{
+	return &core.Response[*nordlet.DeliveriesListWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1WebhooksDeliveriesRedeliver(
+func (r *RawClient) DeliveriesRedeliver(
 	ctx context.Context,
-	request *nordlet.PostV1WebhooksDeliveriesRedeliverRequest,
+	request *nordlet.DeliveriesRedeliverWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1WebhooksDeliveriesRedeliverResponse], error) {
+) (*core.Response[*nordlet.DeliveriesRedeliverWebhooksResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1WebhooksDeliveriesRedeliver(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1WebhooksDeliveriesRedeliverResponse
+	var response *nordlet.DeliveriesRedeliverWebhooksResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,7 +289,7 @@ func (r *RawClient) PostV1WebhooksDeliveriesRedeliver(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1WebhooksDeliveriesRedeliverResponse]{
+	return &core.Response[*nordlet.DeliveriesRedeliverWebhooksResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

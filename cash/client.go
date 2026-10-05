@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1CashOrdersCreate(
+func (c *Client) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersCreateRequest,
+	request *nordlet.OrdersCreateCashRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CashOrdersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CashOrdersCreate(
+) (*nordlet.OrdersCreateCashResponse, error) {
+	response, err := c.WithRawResponse.OrdersCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1CashOrdersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CashOrdersGet(
+func (c *Client) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersGetRequest,
+	request *nordlet.OrdersGetCashRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CashOrdersGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CashOrdersGet(
+) (*nordlet.OrdersGetCashResponse, error) {
+	response, err := c.WithRawResponse.OrdersGet(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1CashOrdersGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CashOrdersList(
+func (c *Client) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersListRequest,
+	request *nordlet.OrdersListCashRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CashOrdersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CashOrdersList(
+) (*nordlet.OrdersListCashResponse, error) {
+	response, err := c.WithRawResponse.OrdersList(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1CashOrdersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CashBalance(
+func (c *Client) Balance(
 	ctx context.Context,
-	request *nordlet.PostV1CashBalanceRequest,
+	request *nordlet.BalanceCashRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CashBalanceResponse, error) {
-	response, err := c.WithRawResponse.PostV1CashBalance(
+) (*nordlet.BalanceCashResponse, error) {
+	response, err := c.WithRawResponse.Balance(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1CashBalance(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CashAdvanceHoldersBalances(
+func (c *Client) AdvanceHoldersBalances(
 	ctx context.Context,
-	request *nordlet.PostV1CashAdvanceHoldersBalancesRequest,
+	request *nordlet.AdvanceHoldersBalancesCashRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CashAdvanceHoldersBalancesResponse, error) {
-	response, err := c.WithRawResponse.PostV1CashAdvanceHoldersBalances(
+) (*nordlet.AdvanceHoldersBalancesCashResponse, error) {
+	response, err := c.WithRawResponse.AdvanceHoldersBalances(
 		ctx,
 		request,
 		opts...,

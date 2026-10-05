@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestTransportPostV1TransportWaybillsCreateWithWireMock(
+func TestTransportWaybillsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,7 +88,7 @@ func TestTransportPostV1TransportWaybillsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsCreateRequest{
+	request := &nordlet.WaybillsCreateTransportRequest{
 		ConsigneePartnerID: "consigneePartnerId",
 		DispatchAt: nordlet.MustParseDateTime(
 			"2024-01-15T09:30:00Z",
@@ -96,19 +96,19 @@ func TestTransportPostV1TransportWaybillsCreateWithWireMock(
 		LoadAddress:   "loadAddress",
 		UnloadAddress: "unloadAddress",
 	}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsCreate(
+	_, invocationErr := client.Transport.WaybillsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsCreateWithWireMock", "POST", "/v1/transport/waybills/create", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsCreateWithWireMock", "POST", "/v1/transport/waybills/create", nil, 1)
 }
 
-func TestTransportPostV1TransportWaybillsUpdateWithWireMock(
+func TestTransportWaybillsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -119,22 +119,22 @@ func TestTransportPostV1TransportWaybillsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsUpdateRequest{
+	request := &nordlet.WaybillsUpdateTransportRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsUpdate(
+	_, invocationErr := client.Transport.WaybillsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsUpdateWithWireMock", "POST", "/v1/transport/waybills/update", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsUpdateWithWireMock", "POST", "/v1/transport/waybills/update", nil, 1)
 }
 
-func TestTransportPostV1TransportWaybillsIssueWithWireMock(
+func TestTransportWaybillsIssueWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -145,22 +145,22 @@ func TestTransportPostV1TransportWaybillsIssueWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsIssueRequest{
+	request := &nordlet.WaybillsIssueTransportRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsIssue(
+	_, invocationErr := client.Transport.WaybillsIssue(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsIssueWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsIssueWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsIssueWithWireMock", "POST", "/v1/transport/waybills/issue", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsIssueWithWireMock", "POST", "/v1/transport/waybills/issue", nil, 1)
 }
 
-func TestTransportPostV1TransportWaybillsCancelWithWireMock(
+func TestTransportWaybillsCancelWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -171,22 +171,22 @@ func TestTransportPostV1TransportWaybillsCancelWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsCancelRequest{
+	request := &nordlet.WaybillsCancelTransportRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsCancel(
+	_, invocationErr := client.Transport.WaybillsCancel(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsCancelWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsCancelWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsCancelWithWireMock", "POST", "/v1/transport/waybills/cancel", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsCancelWithWireMock", "POST", "/v1/transport/waybills/cancel", nil, 1)
 }
 
-func TestTransportPostV1TransportWaybillsGetWithWireMock(
+func TestTransportWaybillsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -197,22 +197,22 @@ func TestTransportPostV1TransportWaybillsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsGetRequest{
+	request := &nordlet.WaybillsGetTransportRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsGet(
+	_, invocationErr := client.Transport.WaybillsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsGetWithWireMock", "POST", "/v1/transport/waybills/get", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsGetWithWireMock", "POST", "/v1/transport/waybills/get", nil, 1)
 }
 
-func TestTransportPostV1TransportWaybillsListWithWireMock(
+func TestTransportWaybillsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -223,15 +223,15 @@ func TestTransportPostV1TransportWaybillsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1TransportWaybillsListRequest{}
-	_, invocationErr := client.Transport.PostV1TransportWaybillsList(
+	request := &nordlet.WaybillsListTransportRequest{}
+	_, invocationErr := client.Transport.WaybillsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestTransportPostV1TransportWaybillsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestTransportWaybillsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestTransportPostV1TransportWaybillsListWithWireMock", "POST", "/v1/transport/waybills/list", nil, 1)
+	VerifyRequestCount(t, "TestTransportWaybillsListWithWireMock", "POST", "/v1/transport/waybills/list", nil, 1)
 }

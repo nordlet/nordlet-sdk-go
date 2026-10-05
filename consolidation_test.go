@@ -7,11 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1ConsolidationGroupsCreateRequest(t *testing.T) {
+func TestSettersGroupsCreateConsolidationRequest(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateRequest{}
+		obj := &GroupsCreateConsolidationRequest{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -19,7 +20,7 @@ func TestSettersPostV1ConsolidationGroupsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateRequest{}
+		obj := &GroupsCreateConsolidationRequest{}
 		var fernTestValuePresentationCurrency *string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -28,11 +29,11 @@ func TestSettersPostV1ConsolidationGroupsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitGroupsCreateConsolidationRequest(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateRequest{}
+		obj := &GroupsCreateConsolidationRequest{}
 		var fernTestValueName string
 
 		// Act
@@ -63,7 +64,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateRequest(t *testing.T)
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateRequest{}
+		obj := &GroupsCreateConsolidationRequest{}
 		var fernTestValuePresentationCurrency *string
 
 		// Act
@@ -93,9 +94,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1ConsolidationGroupsDeleteRequest(t *testing.T) {
+func TestSettersGroupsDeleteConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsDeleteRequest{}
+		obj := &GroupsDeleteConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -104,11 +105,11 @@ func TestSettersPostV1ConsolidationGroupsDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsDeleteRequest(t *testing.T) {
+func TestSettersMarkExplicitGroupsDeleteConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsDeleteRequest{}
+		obj := &GroupsDeleteConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -138,9 +139,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsDeleteRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1ConsolidationGroupsGetRequest(t *testing.T) {
+func TestSettersGroupsGetConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetRequest{}
+		obj := &GroupsGetConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -149,11 +150,11 @@ func TestSettersPostV1ConsolidationGroupsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsGetRequest(t *testing.T) {
+func TestSettersMarkExplicitGroupsGetConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetRequest{}
+		obj := &GroupsGetConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -183,9 +184,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1ConsolidationGroupsUpdateRequest(t *testing.T) {
+func TestSettersGroupsUpdateConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -193,7 +194,7 @@ func TestSettersPostV1ConsolidationGroupsUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -201,7 +202,7 @@ func TestSettersPostV1ConsolidationGroupsUpdateRequest(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValuePresentationCurrency *string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -210,11 +211,11 @@ func TestSettersPostV1ConsolidationGroupsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitGroupsUpdateConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -245,7 +246,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateRequest(t *testing.T)
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValueName *string
 
 		// Act
@@ -276,7 +277,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateRequest(t *testing.T)
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateRequest{}
+		obj := &GroupsUpdateConsolidationRequest{}
 		var fernTestValuePresentationCurrency *string
 
 		// Act
@@ -306,9 +307,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyCandidatesRequest(t *testing.T) {
+func TestSettersIntercompanyCandidatesConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesRequest{}
+		obj := &IntercompanyCandidatesConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -317,11 +318,11 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesRequest(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyCandidatesConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesRequest{}
+		obj := &IntercompanyCandidatesConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -351,9 +352,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesRequest(t *
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksListRequest(t *testing.T) {
+func TestSettersIntercompanyLinksListConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListRequest{}
+		obj := &IntercompanyLinksListConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -362,11 +363,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListRequest(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksListConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListRequest{}
+		obj := &IntercompanyLinksListConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -396,9 +397,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListRequest(t *t
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksRemoveRequest(t *testing.T) {
+func TestSettersIntercompanyLinksRemoveConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveRequest{}
+		obj := &IntercompanyLinksRemoveConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -406,7 +407,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksRemoveRequest(t *testing.T) 
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveRequest{}
+		obj := &IntercompanyLinksRemoveConsolidationRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -415,11 +416,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksRemoveRequest(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksRemoveRequest(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksRemoveConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveRequest{}
+		obj := &IntercompanyLinksRemoveConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -450,7 +451,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksRemoveRequest(t 
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveRequest{}
+		obj := &IntercompanyLinksRemoveConsolidationRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -480,9 +481,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksRemoveRequest(t 
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksSetRequest(t *testing.T) {
+func TestSettersIntercompanyLinksSetConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -490,7 +491,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetRequest(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -498,7 +499,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetRequest(t *testing.T) {
 	})
 
 	t.Run("SetCounterpartyCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValueCounterpartyCompanyID string
 		obj.SetCounterpartyCompanyID(fernTestValueCounterpartyCompanyID)
 		assert.Equal(t, fernTestValueCounterpartyCompanyID, obj.CounterpartyCompanyID)
@@ -507,11 +508,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetRequest(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksSetConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -542,7 +543,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetRequest(t *te
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -573,7 +574,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetRequest(t *te
 	t.Run("SetCounterpartyCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetRequest{}
+		obj := &IntercompanyLinksSetConsolidationRequest{}
 		var fernTestValueCounterpartyCompanyID string
 
 		// Act
@@ -603,9 +604,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetRequest(t *te
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportRequest(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
+		obj := &IntercompanyReportConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -613,16 +614,16 @@ func TestSettersPostV1ConsolidationIntercompanyReportRequest(t *testing.T) {
 	})
 
 	t.Run("SetFromDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
-		var fernTestValueFromDate string
+		obj := &IntercompanyReportConsolidationRequest{}
+		var fernTestValueFromDate time.Time
 		obj.SetFromDate(fernTestValueFromDate)
 		assert.Equal(t, fernTestValueFromDate, obj.FromDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetToDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
-		var fernTestValueToDate string
+		obj := &IntercompanyReportConsolidationRequest{}
+		var fernTestValueToDate time.Time
 		obj.SetToDate(fernTestValueToDate)
 		assert.Equal(t, fernTestValueToDate, obj.ToDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -630,11 +631,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportRequest(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
+		obj := &IntercompanyReportConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -665,8 +666,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportRequest(t *test
 	t.Run("SetFromDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
-		var fernTestValueFromDate string
+		obj := &IntercompanyReportConsolidationRequest{}
+		var fernTestValueFromDate time.Time
 
 		// Act
 		obj.SetFromDate(fernTestValueFromDate)
@@ -696,8 +697,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportRequest(t *test
 	t.Run("SetToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportRequest{}
-		var fernTestValueToDate string
+		obj := &IntercompanyReportConsolidationRequest{}
+		var fernTestValueToDate time.Time
 
 		// Act
 		obj.SetToDate(fernTestValueToDate)
@@ -726,9 +727,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportRequest(t *test
 
 }
 
-func TestSettersPostV1ConsolidationMembersAddRequest(t *testing.T) {
+func TestSettersMembersAddConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -736,7 +737,7 @@ func TestSettersPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	})
 
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -744,7 +745,7 @@ func TestSettersPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	})
 
 	t.Run("SetOwnershipPercent", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueOwnershipPercent *float64
 		obj.SetOwnershipPercent(fernTestValueOwnershipPercent)
 		assert.Equal(t, fernTestValueOwnershipPercent, obj.OwnershipPercent)
@@ -752,8 +753,8 @@ func TestSettersPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddRequest{}
-		var fernTestValueMethod *PostV1ConsolidationMembersAddRequestMethod
+		obj := &MembersAddConsolidationRequest{}
+		var fernTestValueMethod *MembersAddConsolidationRequestMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
@@ -761,11 +762,11 @@ func TestSettersPostV1ConsolidationMembersAddRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationMembersAddRequest(t *testing.T) {
+func TestSettersMarkExplicitMembersAddConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -796,7 +797,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -827,7 +828,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	t.Run("SetOwnershipPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddRequest{}
+		obj := &MembersAddConsolidationRequest{}
 		var fernTestValueOwnershipPercent *float64
 
 		// Act
@@ -858,8 +859,8 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddRequest(t *testing.T) {
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddRequest{}
-		var fernTestValueMethod *PostV1ConsolidationMembersAddRequestMethod
+		obj := &MembersAddConsolidationRequest{}
+		var fernTestValueMethod *MembersAddConsolidationRequestMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -888,9 +889,9 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1ConsolidationMembersRemoveRequest(t *testing.T) {
+func TestSettersMembersRemoveConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersRemoveRequest{}
+		obj := &MembersRemoveConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -898,7 +899,7 @@ func TestSettersPostV1ConsolidationMembersRemoveRequest(t *testing.T) {
 	})
 
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersRemoveRequest{}
+		obj := &MembersRemoveConsolidationRequest{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -907,11 +908,11 @@ func TestSettersPostV1ConsolidationMembersRemoveRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationMembersRemoveRequest(t *testing.T) {
+func TestSettersMarkExplicitMembersRemoveConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersRemoveRequest{}
+		obj := &MembersRemoveConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -942,7 +943,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersRemoveRequest(t *testing.T
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersRemoveRequest{}
+		obj := &MembersRemoveConsolidationRequest{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -972,9 +973,9 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersRemoveRequest(t *testing.T
 
 }
 
-func TestSettersPostV1ConsolidationReportRequest(t *testing.T) {
+func TestSettersReportConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequest{}
+		obj := &ReportConsolidationRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -982,32 +983,32 @@ func TestSettersPostV1ConsolidationReportRequest(t *testing.T) {
 	})
 
 	t.Run("SetFromDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueFromDate time.Time
 		obj.SetFromDate(fernTestValueFromDate)
 		assert.Equal(t, fernTestValueFromDate, obj.FromDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetToDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueToDate time.Time
 		obj.SetToDate(fernTestValueToDate)
 		assert.Equal(t, fernTestValueToDate, obj.ToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCategory", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueCategory *PostV1ConsolidationReportRequestCategory
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueCategory *ReportConsolidationRequestCategory
 		obj.SetCategory(fernTestValueCategory)
 		assert.Equal(t, fernTestValueCategory, obj.Category)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEliminations", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueEliminations []*PostV1ConsolidationReportRequestEliminationsItem
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueEliminations []*ReportConsolidationRequestEliminationsItem
 		obj.SetEliminations(fernTestValueEliminations)
 		assert.Equal(t, fernTestValueEliminations, obj.Eliminations)
 		assert.NotNil(t, obj.explicitFields)
@@ -1015,11 +1016,11 @@ func TestSettersPostV1ConsolidationReportRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequest{}
+		obj := &ReportConsolidationRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -1050,8 +1051,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
 	t.Run("SetFromDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueFromDate time.Time
 
 		// Act
 		obj.SetFromDate(fernTestValueFromDate)
@@ -1081,8 +1082,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
 	t.Run("SetToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueToDate time.Time
 
 		// Act
 		obj.SetToDate(fernTestValueToDate)
@@ -1112,8 +1113,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
 	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueCategory *PostV1ConsolidationReportRequestCategory
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueCategory *ReportConsolidationRequestCategory
 
 		// Act
 		obj.SetCategory(fernTestValueCategory)
@@ -1143,8 +1144,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
 	t.Run("SetEliminations_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequest{}
-		var fernTestValueEliminations []*PostV1ConsolidationReportRequestEliminationsItem
+		obj := &ReportConsolidationRequest{}
+		var fernTestValueEliminations []*ReportConsolidationRequestEliminationsItem
 
 		// Act
 		obj.SetEliminations(fernTestValueEliminations)
@@ -1173,9 +1174,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestSettersGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1183,7 +1184,7 @@ func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -1191,7 +1192,7 @@ func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -1199,7 +1200,7 @@ func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMemberCount", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueMemberCount int64
 		obj.SetMemberCount(fernTestValueMemberCount)
 		assert.Equal(t, fernTestValueMemberCount, obj.MemberCount)
@@ -1207,16 +1208,16 @@ func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsCreateConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsCreateConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -1224,11 +1225,11 @@ func TestSettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestGettersGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -1238,7 +1239,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1251,7 +1252,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -1261,7 +1262,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1274,7 +1275,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	t.Run("GetPresentationCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var expected string
 		obj.PresentationCurrency = expected
 
@@ -1284,7 +1285,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetPresentationCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1297,7 +1298,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	t.Run("GetMemberCount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var expected int64
 		obj.MemberCount = expected
 
@@ -1307,7 +1308,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetMemberCount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1320,8 +1321,8 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var expected string
+		obj := &GroupsCreateConsolidationResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -1330,7 +1331,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1343,8 +1344,8 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var expected string
+		obj := &GroupsCreateConsolidationResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -1353,7 +1354,7 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1365,11 +1366,11 @@ func TestGettersPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -1400,7 +1401,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -1431,7 +1432,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 
 		// Act
@@ -1462,7 +1463,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 	t.Run("SetMemberCount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		var fernTestValueMemberCount int64
 
 		// Act
@@ -1493,8 +1494,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsCreateConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -1524,8 +1525,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsCreateConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -1554,9 +1555,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsCreateResponse(t *testing.T
 
 }
 
-func TestSettersPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestSettersGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("SetOk", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 		var fernTestValueOk bool
 		obj.SetOk(fernTestValueOk)
 		assert.Equal(t, fernTestValueOk, obj.Ok)
@@ -1565,11 +1566,11 @@ func TestSettersPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestGettersGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("GetOk", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 		var expected bool
 		obj.Ok = expected
 
@@ -1579,7 +1580,7 @@ func TestGettersPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
 
 	t.Run("GetOk_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsDeleteResponse
+		var obj *GroupsDeleteConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1591,11 +1592,11 @@ func TestGettersPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("SetOk_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 		var fernTestValueOk bool
 
 		// Act
@@ -1625,9 +1626,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsDeleteResponse(t *testing.T
 
 }
 
-func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestSettersGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1635,7 +1636,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -1643,7 +1644,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -1651,7 +1652,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMemberCount", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueMemberCount int64
 		obj.SetMemberCount(fernTestValueMemberCount)
 		assert.Equal(t, fernTestValueMemberCount, obj.MemberCount)
@@ -1659,24 +1660,24 @@ func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMembers", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueMembers []*PostV1ConsolidationGroupsGetResponseMembersItem
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueMembers []*GroupsGetConsolidationResponseMembersItem
 		obj.SetMembers(fernTestValueMembers)
 		assert.Equal(t, fernTestValueMembers, obj.Members)
 		assert.NotNil(t, obj.explicitFields)
@@ -1684,11 +1685,11 @@ func TestSettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestGettersGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -1698,7 +1699,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1711,7 +1712,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -1721,7 +1722,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1734,7 +1735,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetPresentationCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var expected string
 		obj.PresentationCurrency = expected
 
@@ -1744,7 +1745,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetPresentationCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1757,7 +1758,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetMemberCount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var expected int64
 		obj.MemberCount = expected
 
@@ -1767,7 +1768,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetMemberCount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1780,8 +1781,8 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var expected string
+		obj := &GroupsGetConsolidationResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -1790,7 +1791,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1803,8 +1804,8 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var expected string
+		obj := &GroupsGetConsolidationResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -1813,7 +1814,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1826,8 +1827,8 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetMembers", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var expected []*PostV1ConsolidationGroupsGetResponseMembersItem
+		obj := &GroupsGetConsolidationResponse{}
+		var expected []*GroupsGetConsolidationResponseMembersItem
 		obj.Members = expected
 
 		// Act & Assert
@@ -1837,7 +1838,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("GetMembers_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		obj.Members = nil
 
 		// Act & Assert
@@ -1846,7 +1847,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetMembers_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1858,11 +1859,11 @@ func TestGettersPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -1893,7 +1894,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -1924,7 +1925,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 
 		// Act
@@ -1955,7 +1956,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetMemberCount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		var fernTestValueMemberCount int64
 
 		// Act
@@ -1986,8 +1987,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2017,8 +2018,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -2048,8 +2049,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 	t.Run("SetMembers_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
-		var fernTestValueMembers []*PostV1ConsolidationGroupsGetResponseMembersItem
+		obj := &GroupsGetConsolidationResponse{}
+		var fernTestValueMembers []*GroupsGetConsolidationResponseMembersItem
 
 		// Act
 		obj.SetMembers(fernTestValueMembers)
@@ -2078,9 +2079,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestSettersGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -2088,7 +2089,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2096,7 +2097,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetBaseCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueBaseCurrency string
 		obj.SetBaseCurrency(fernTestValueBaseCurrency)
 		assert.Equal(t, fernTestValueBaseCurrency, obj.BaseCurrency)
@@ -2104,7 +2105,7 @@ func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetOwnershipPercent", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueOwnershipPercent string
 		obj.SetOwnershipPercent(fernTestValueOwnershipPercent)
 		assert.Equal(t, fernTestValueOwnershipPercent, obj.OwnershipPercent)
@@ -2112,8 +2113,8 @@ func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
-		var fernTestValueMethod PostV1ConsolidationGroupsGetResponseMembersItemMethod
+		obj := &GroupsGetConsolidationResponseMembersItem{}
+		var fernTestValueMethod GroupsGetConsolidationResponseMembersItemMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
@@ -2121,11 +2122,11 @@ func TestSettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestGettersGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("GetMemberCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var expected string
 		obj.MemberCompanyID = expected
 
@@ -2135,7 +2136,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 	t.Run("GetMemberCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2148,7 +2149,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var expected string
 		obj.Name = expected
 
@@ -2158,7 +2159,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2171,7 +2172,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	t.Run("GetBaseCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var expected string
 		obj.BaseCurrency = expected
 
@@ -2181,7 +2182,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 	t.Run("GetBaseCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2194,7 +2195,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	t.Run("GetOwnershipPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var expected string
 		obj.OwnershipPercent = expected
 
@@ -2204,7 +2205,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 	t.Run("GetOwnershipPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2217,8 +2218,8 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
-		var expected PostV1ConsolidationGroupsGetResponseMembersItemMethod
+		obj := &GroupsGetConsolidationResponseMembersItem{}
+		var expected GroupsGetConsolidationResponseMembersItemMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -2227,7 +2228,7 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2239,11 +2240,11 @@ func TestGettersPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestSettersMarkExplicitGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -2274,7 +2275,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueName string
 
 		// Act
@@ -2305,7 +2306,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *t
 	t.Run("SetBaseCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueBaseCurrency string
 
 		// Act
@@ -2336,7 +2337,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *t
 	t.Run("SetOwnershipPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		var fernTestValueOwnershipPercent string
 
 		// Act
@@ -2367,8 +2368,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *t
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
-		var fernTestValueMethod PostV1ConsolidationGroupsGetResponseMembersItemMethod
+		obj := &GroupsGetConsolidationResponseMembersItem{}
+		var fernTestValueMethod GroupsGetConsolidationResponseMembersItemMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -2397,10 +2398,10 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsGetResponseMembersItem(t *t
 
 }
 
-func TestSettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestSettersGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponse{}
-		var fernTestValueRows []*PostV1ConsolidationGroupsListResponseRowsItem
+		obj := &GroupsListConsolidationResponse{}
+		var fernTestValueRows []*GroupsListConsolidationResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -2408,12 +2409,12 @@ func TestSettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestGettersGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponse{}
-		var expected []*PostV1ConsolidationGroupsListResponseRowsItem
+		obj := &GroupsListConsolidationResponse{}
+		var expected []*GroupsListConsolidationResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -2423,7 +2424,7 @@ func TestGettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponse{}
+		obj := &GroupsListConsolidationResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -2432,7 +2433,7 @@ func TestGettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponse
+		var obj *GroupsListConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2444,12 +2445,12 @@ func TestGettersPostV1ConsolidationGroupsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponse{}
-		var fernTestValueRows []*PostV1ConsolidationGroupsListResponseRowsItem
+		obj := &GroupsListConsolidationResponse{}
+		var fernTestValueRows []*GroupsListConsolidationResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -2478,9 +2479,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestSettersGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2488,7 +2489,7 @@ func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2496,7 +2497,7 @@ func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValuePresentationCurrency string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -2504,7 +2505,7 @@ func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMemberCount", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueMemberCount int64
 		obj.SetMemberCount(fernTestValueMemberCount)
 		assert.Equal(t, fernTestValueMemberCount, obj.MemberCount)
@@ -2512,16 +2513,16 @@ func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -2529,11 +2530,11 @@ func TestSettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestGettersGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -2543,7 +2544,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2556,7 +2557,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -2566,7 +2567,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2579,7 +2580,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPresentationCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var expected string
 		obj.PresentationCurrency = expected
 
@@ -2589,7 +2590,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPresentationCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2602,7 +2603,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMemberCount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var expected int64
 		obj.MemberCount = expected
 
@@ -2612,7 +2613,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMemberCount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2625,8 +2626,8 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var expected string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2635,7 +2636,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2648,8 +2649,8 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var expected string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -2658,7 +2659,7 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2670,11 +2671,11 @@ func TestGettersPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -2705,7 +2706,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -2736,7 +2737,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValuePresentationCurrency string
 
 		// Act
@@ -2767,7 +2768,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 	t.Run("SetMemberCount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		var fernTestValueMemberCount int64
 
 		// Act
@@ -2798,8 +2799,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2829,8 +2830,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsListConsolidationResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -2859,9 +2860,9 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsListResponseRowsItem(t *tes
 
 }
 
-func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestSettersGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2869,7 +2870,7 @@ func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2877,7 +2878,7 @@ func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -2885,7 +2886,7 @@ func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMemberCount", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueMemberCount int64
 		obj.SetMemberCount(fernTestValueMemberCount)
 		assert.Equal(t, fernTestValueMemberCount, obj.MemberCount)
@@ -2893,16 +2894,16 @@ func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -2910,11 +2911,11 @@ func TestSettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestGettersGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -2924,7 +2925,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2937,7 +2938,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -2947,7 +2948,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2960,7 +2961,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	t.Run("GetPresentationCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var expected string
 		obj.PresentationCurrency = expected
 
@@ -2970,7 +2971,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetPresentationCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2983,7 +2984,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	t.Run("GetMemberCount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var expected int64
 		obj.MemberCount = expected
 
@@ -2993,7 +2994,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetMemberCount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3006,8 +3007,8 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var expected string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -3016,7 +3017,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3029,8 +3030,8 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var expected string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -3039,7 +3040,7 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3051,11 +3052,11 @@ func TestGettersPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -3086,7 +3087,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -3117,7 +3118,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 
 		// Act
@@ -3148,7 +3149,7 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 	t.Run("SetMemberCount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		var fernTestValueMemberCount int64
 
 		// Act
@@ -3179,8 +3180,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3210,8 +3211,8 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &GroupsUpdateConsolidationResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -3240,10 +3241,10 @@ func TestSettersMarkExplicitPostV1ConsolidationGroupsUpdateResponse(t *testing.T
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestSettersIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
-		var fernTestValueRows []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		obj := &IntercompanyCandidatesConsolidationResponse{}
+		var fernTestValueRows []*IntercompanyCandidatesConsolidationResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -3251,12 +3252,12 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) 
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestGettersIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
-		var expected []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		obj := &IntercompanyCandidatesConsolidationResponse{}
+		var expected []*IntercompanyCandidatesConsolidationResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -3266,7 +3267,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) 
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
+		obj := &IntercompanyCandidatesConsolidationResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -3275,7 +3276,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) 
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponse
+		var obj *IntercompanyCandidatesConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3287,12 +3288,12 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
-		var fernTestValueRows []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		obj := &IntercompanyCandidatesConsolidationResponse{}
+		var fernTestValueRows []*IntercompanyCandidatesConsolidationResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -3321,9 +3322,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponse(t 
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestSettersIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -3331,7 +3332,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetMemberName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMemberName string
 		obj.SetMemberName(fernTestValueMemberName)
 		assert.Equal(t, fernTestValueMemberName, obj.MemberName)
@@ -3339,7 +3340,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -3347,7 +3348,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetPartnerName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerName string
 		obj.SetPartnerName(fernTestValuePartnerName)
 		assert.Equal(t, fernTestValuePartnerName, obj.PartnerName)
@@ -3355,7 +3356,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerCode *string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -3363,7 +3364,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetMatchesCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMatchesCompanyID string
 		obj.SetMatchesCompanyID(fernTestValueMatchesCompanyID)
 		assert.Equal(t, fernTestValueMatchesCompanyID, obj.MatchesCompanyID)
@@ -3371,7 +3372,7 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetMatchesCompanyName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMatchesCompanyName string
 		obj.SetMatchesCompanyName(fernTestValueMatchesCompanyName)
 		assert.Equal(t, fernTestValueMatchesCompanyName, obj.MatchesCompanyName)
@@ -3379,15 +3380,15 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	})
 
 	t.Run("SetMatchedOn", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
-		var fernTestValueMatchedOn PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
+		var fernTestValueMatchedOn IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn
 		obj.SetMatchedOn(fernTestValueMatchedOn)
 		assert.Equal(t, fernTestValueMatchedOn, obj.MatchedOn)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLinkID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueLinkID *string
 		obj.SetLinkID(fernTestValueLinkID)
 		assert.Equal(t, fernTestValueLinkID, obj.LinkID)
@@ -3396,11 +3397,11 @@ func TestSettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestGettersIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetMemberCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.MemberCompanyID = expected
 
@@ -3410,7 +3411,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetMemberCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3423,7 +3424,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetMemberName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.MemberName = expected
 
@@ -3433,7 +3434,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetMemberName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3446,7 +3447,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -3456,7 +3457,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3469,7 +3470,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetPartnerName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.PartnerName = expected
 
@@ -3479,7 +3480,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetPartnerName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3492,7 +3493,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected *string
 		obj.PartnerCode = expected
 
@@ -3503,7 +3504,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetPartnerCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		obj.PartnerCode = nil
 
 		// Act & Assert
@@ -3512,7 +3513,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3525,7 +3526,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetMatchesCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.MatchesCompanyID = expected
 
@@ -3535,7 +3536,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetMatchesCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3548,7 +3549,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetMatchesCompanyName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected string
 		obj.MatchesCompanyName = expected
 
@@ -3558,7 +3559,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetMatchesCompanyName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3571,8 +3572,8 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetMatchedOn", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
-		var expected PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
+		var expected IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn
 		obj.MatchedOn = expected
 
 		// Act & Assert
@@ -3581,7 +3582,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetMatchedOn_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3594,7 +3595,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetLinkID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var expected *string
 		obj.LinkID = expected
 
@@ -3605,7 +3606,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 	t.Run("GetLinkID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		obj.LinkID = nil
 
 		// Act & Assert
@@ -3614,7 +3615,7 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 	t.Run("GetLinkID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3626,11 +3627,11 @@ func TestGettersPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *tes
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -3661,7 +3662,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetMemberName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMemberName string
 
 		// Act
@@ -3692,7 +3693,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -3723,7 +3724,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetPartnerName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerName string
 
 		// Act
@@ -3754,7 +3755,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValuePartnerCode *string
 
 		// Act
@@ -3785,7 +3786,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetMatchesCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMatchesCompanyID string
 
 		// Act
@@ -3816,7 +3817,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetMatchesCompanyName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueMatchesCompanyName string
 
 		// Act
@@ -3847,8 +3848,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetMatchedOn_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
-		var fernTestValueMatchedOn PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
+		var fernTestValueMatchedOn IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn
 
 		// Act
 		obj.SetMatchedOn(fernTestValueMatchedOn)
@@ -3878,7 +3879,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 	t.Run("SetLinkID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		var fernTestValueLinkID *string
 
 		// Act
@@ -3908,10 +3909,10 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyCandidatesResponseRow
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestSettersIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
-		var fernTestValueRows []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		obj := &IntercompanyLinksListConsolidationResponse{}
+		var fernTestValueRows []*IntercompanyLinksListConsolidationResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -3919,12 +3920,12 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestGettersIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
-		var expected []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		obj := &IntercompanyLinksListConsolidationResponse{}
+		var expected []*IntercompanyLinksListConsolidationResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -3934,7 +3935,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
+		obj := &IntercompanyLinksListConsolidationResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -3943,7 +3944,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponse
+		var obj *IntercompanyLinksListConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3955,12 +3956,12 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
-		var fernTestValueRows []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		obj := &IntercompanyLinksListConsolidationResponse{}
+		var fernTestValueRows []*IntercompanyLinksListConsolidationResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -3989,9 +3990,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponse(t *
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestSettersIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3999,7 +4000,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCompanyID string
 		obj.SetCompanyID(fernTestValueCompanyID)
 		assert.Equal(t, fernTestValueCompanyID, obj.CompanyID)
@@ -4007,7 +4008,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetCompanyName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCompanyName string
 		obj.SetCompanyName(fernTestValueCompanyName)
 		assert.Equal(t, fernTestValueCompanyName, obj.CompanyName)
@@ -4015,7 +4016,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -4023,7 +4024,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetPartnerName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValuePartnerName string
 		obj.SetPartnerName(fernTestValuePartnerName)
 		assert.Equal(t, fernTestValuePartnerName, obj.PartnerName)
@@ -4031,7 +4032,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetCounterpartyCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCounterpartyCompanyID string
 		obj.SetCounterpartyCompanyID(fernTestValueCounterpartyCompanyID)
 		assert.Equal(t, fernTestValueCounterpartyCompanyID, obj.CounterpartyCompanyID)
@@ -4039,7 +4040,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetCounterpartyCompanyName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCounterpartyCompanyName string
 		obj.SetCounterpartyCompanyName(fernTestValueCounterpartyCompanyName)
 		assert.Equal(t, fernTestValueCounterpartyCompanyName, obj.CounterpartyCompanyName)
@@ -4047,8 +4048,8 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -4056,11 +4057,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestGettersIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -4070,7 +4071,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4083,7 +4084,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.CompanyID = expected
 
@@ -4093,7 +4094,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4106,7 +4107,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetCompanyName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.CompanyName = expected
 
@@ -4116,7 +4117,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetCompanyName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4129,7 +4130,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -4139,7 +4140,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4152,7 +4153,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetPartnerName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.PartnerName = expected
 
@@ -4162,7 +4163,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetPartnerName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4175,7 +4176,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetCounterpartyCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.CounterpartyCompanyID = expected
 
@@ -4185,7 +4186,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetCounterpartyCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4198,7 +4199,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetCounterpartyCompanyName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var expected string
 		obj.CounterpartyCompanyName = expected
 
@@ -4208,7 +4209,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetCounterpartyCompanyName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4221,8 +4222,8 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
-		var expected string
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4231,7 +4232,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4243,11 +4244,11 @@ func TestGettersPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *test
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -4278,7 +4279,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCompanyID string
 
 		// Act
@@ -4309,7 +4310,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetCompanyName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCompanyName string
 
 		// Act
@@ -4340,7 +4341,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -4371,7 +4372,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetPartnerName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValuePartnerName string
 
 		// Act
@@ -4402,7 +4403,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetCounterpartyCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCounterpartyCompanyID string
 
 		// Act
@@ -4433,7 +4434,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetCounterpartyCompanyName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		var fernTestValueCounterpartyCompanyName string
 
 		// Act
@@ -4464,8 +4465,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -4494,9 +4495,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksListResponseRows
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestSettersIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("SetOk", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 		var fernTestValueOk bool
 		obj.SetOk(fernTestValueOk)
 		assert.Equal(t, fernTestValueOk, obj.Ok)
@@ -4505,11 +4506,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T)
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestGettersIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("GetOk", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 		var expected bool
 		obj.Ok = expected
 
@@ -4519,7 +4520,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T)
 
 	t.Run("GetOk_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var obj *IntercompanyLinksRemoveConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4531,11 +4532,11 @@ func TestGettersPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("SetOk_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 		var fernTestValueOk bool
 
 		// Act
@@ -4565,9 +4566,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksRemoveResponse(t
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestSettersIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4575,7 +4576,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -4583,7 +4584,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueCompanyID string
 		obj.SetCompanyID(fernTestValueCompanyID)
 		assert.Equal(t, fernTestValueCompanyID, obj.CompanyID)
@@ -4591,7 +4592,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -4599,7 +4600,7 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCounterpartyCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueCounterpartyCompanyID string
 		obj.SetCounterpartyCompanyID(fernTestValueCounterpartyCompanyID)
 		assert.Equal(t, fernTestValueCounterpartyCompanyID, obj.CounterpartyCompanyID)
@@ -4608,11 +4609,11 @@ func TestSettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestGettersIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -4622,7 +4623,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4635,7 +4636,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var expected string
 		obj.GroupID = expected
 
@@ -4645,7 +4646,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4658,7 +4659,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	t.Run("GetCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var expected string
 		obj.CompanyID = expected
 
@@ -4668,7 +4669,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 	t.Run("GetCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4681,7 +4682,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -4691,7 +4692,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4704,7 +4705,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 	t.Run("GetCounterpartyCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var expected string
 		obj.CounterpartyCompanyID = expected
 
@@ -4714,7 +4715,7 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 	t.Run("GetCounterpartyCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4726,11 +4727,11 @@ func TestGettersPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4761,7 +4762,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *t
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -4792,7 +4793,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *t
 	t.Run("SetCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueCompanyID string
 
 		// Act
@@ -4823,7 +4824,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *t
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -4854,7 +4855,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *t
 	t.Run("SetCounterpartyCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		var fernTestValueCounterpartyCompanyID string
 
 		// Act
@@ -4884,26 +4885,26 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyLinksSetResponse(t *t
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("SetFromDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueFromDate string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueFromDate time.Time
 		obj.SetFromDate(fernTestValueFromDate)
 		assert.Equal(t, fernTestValueFromDate, obj.FromDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetToDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueToDate string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueToDate time.Time
 		obj.SetToDate(fernTestValueToDate)
 		assert.Equal(t, fernTestValueToDate, obj.ToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDirections", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueDirections []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueDirections []*IntercompanyReportConsolidationResponseDirectionsItem
 		obj.SetDirections(fernTestValueDirections)
 		assert.Equal(t, fernTestValueDirections, obj.Directions)
 		assert.NotNil(t, obj.explicitFields)
@@ -4911,12 +4912,12 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("GetFromDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var expected string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var expected time.Time
 		obj.FromDate = expected
 
 		// Act & Assert
@@ -4925,7 +4926,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 
 	t.Run("GetFromDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponse
+		var obj *IntercompanyReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4938,8 +4939,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 	t.Run("GetToDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var expected string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var expected time.Time
 		obj.ToDate = expected
 
 		// Act & Assert
@@ -4948,7 +4949,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 
 	t.Run("GetToDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponse
+		var obj *IntercompanyReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4961,8 +4962,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 	t.Run("GetDirections", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var expected []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		obj := &IntercompanyReportConsolidationResponse{}
+		var expected []*IntercompanyReportConsolidationResponseDirectionsItem
 		obj.Directions = expected
 
 		// Act & Assert
@@ -4972,7 +4973,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 	t.Run("GetDirections_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
+		obj := &IntercompanyReportConsolidationResponse{}
 		obj.Directions = nil
 
 		// Act & Assert
@@ -4981,7 +4982,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 
 	t.Run("GetDirections_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponse
+		var obj *IntercompanyReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4993,12 +4994,12 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("SetFromDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueFromDate string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueFromDate time.Time
 
 		// Act
 		obj.SetFromDate(fernTestValueFromDate)
@@ -5028,8 +5029,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponse(t *tes
 	t.Run("SetToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueToDate string
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueToDate time.Time
 
 		// Act
 		obj.SetToDate(fernTestValueToDate)
@@ -5059,8 +5060,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponse(t *tes
 	t.Run("SetDirections_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
-		var fernTestValueDirections []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		obj := &IntercompanyReportConsolidationResponse{}
+		var fernTestValueDirections []*IntercompanyReportConsolidationResponseDirectionsItem
 
 		// Act
 		obj.SetDirections(fernTestValueDirections)
@@ -5089,9 +5090,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponse(t *tes
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("SetSellerCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueSellerCompanyID string
 		obj.SetSellerCompanyID(fernTestValueSellerCompanyID)
 		assert.Equal(t, fernTestValueSellerCompanyID, obj.SellerCompanyID)
@@ -5099,7 +5100,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	})
 
 	t.Run("SetSellerName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueSellerName string
 		obj.SetSellerName(fernTestValueSellerName)
 		assert.Equal(t, fernTestValueSellerName, obj.SellerName)
@@ -5107,7 +5108,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	})
 
 	t.Run("SetBuyerCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueBuyerCompanyID string
 		obj.SetBuyerCompanyID(fernTestValueBuyerCompanyID)
 		assert.Equal(t, fernTestValueBuyerCompanyID, obj.BuyerCompanyID)
@@ -5115,7 +5116,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	})
 
 	t.Run("SetBuyerName", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueBuyerName string
 		obj.SetBuyerName(fernTestValueBuyerName)
 		assert.Equal(t, fernTestValueBuyerName, obj.BuyerName)
@@ -5123,24 +5124,24 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueDocuments []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueDocuments []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUnmatchedPurchases", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueUnmatchedPurchases []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueUnmatchedPurchases []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		obj.SetUnmatchedPurchases(fernTestValueUnmatchedPurchases)
 		assert.Equal(t, fernTestValueUnmatchedPurchases, obj.UnmatchedPurchases)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueTotals []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueTotals []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
 		assert.NotNil(t, obj.explicitFields)
@@ -5148,11 +5149,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("GetSellerCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var expected string
 		obj.SellerCompanyID = expected
 
@@ -5162,7 +5163,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetSellerCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5175,7 +5176,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetSellerName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var expected string
 		obj.SellerName = expected
 
@@ -5185,7 +5186,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetSellerName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5198,7 +5199,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetBuyerCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var expected string
 		obj.BuyerCompanyID = expected
 
@@ -5208,7 +5209,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetBuyerCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5221,7 +5222,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetBuyerName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var expected string
 		obj.BuyerName = expected
 
@@ -5231,7 +5232,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetBuyerName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5244,8 +5245,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var expected []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var expected []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -5255,7 +5256,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -5264,7 +5265,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5277,8 +5278,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetUnmatchedPurchases", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var expected []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var expected []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		obj.UnmatchedPurchases = expected
 
 		// Act & Assert
@@ -5288,7 +5289,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetUnmatchedPurchases_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		obj.UnmatchedPurchases = nil
 
 		// Act & Assert
@@ -5297,7 +5298,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetUnmatchedPurchases_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5310,8 +5311,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var expected []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var expected []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		obj.Totals = expected
 
 		// Act & Assert
@@ -5321,7 +5322,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -5330,7 +5331,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5342,11 +5343,11 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *t
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("SetSellerCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueSellerCompanyID string
 
 		// Act
@@ -5377,7 +5378,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetSellerName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueSellerName string
 
 		// Act
@@ -5408,7 +5409,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetBuyerCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueBuyerCompanyID string
 
 		// Act
@@ -5439,7 +5440,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetBuyerName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		var fernTestValueBuyerName string
 
 		// Act
@@ -5470,8 +5471,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueDocuments []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueDocuments []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -5501,8 +5502,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetUnmatchedPurchases_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueUnmatchedPurchases []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueUnmatchedPurchases []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 
 		// Act
 		obj.SetUnmatchedPurchases(fernTestValueUnmatchedPurchases)
@@ -5532,8 +5533,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
-		var fernTestValueTotals []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
+		var fernTestValueTotals []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 
 		// Act
 		obj.SetTotals(fernTestValueTotals)
@@ -5562,9 +5563,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("SetSourceInvoiceID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueSourceInvoiceID string
 		obj.SetSourceInvoiceID(fernTestValueSourceInvoiceID)
 		assert.Equal(t, fernTestValueSourceInvoiceID, obj.SourceInvoiceID)
@@ -5572,7 +5573,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetFullNumber", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueFullNumber string
 		obj.SetFullNumber(fernTestValueFullNumber)
 		assert.Equal(t, fernTestValueFullNumber, obj.FullNumber)
@@ -5580,23 +5581,23 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetIssueDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueIssueDate string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueIssueDate time.Time
 		obj.SetIssueDate(fernTestValueIssueDate)
 		assert.Equal(t, fernTestValueIssueDate, obj.IssueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueType PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueType IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -5604,7 +5605,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -5612,24 +5613,24 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetPaymentStatus", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValuePaymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValuePaymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
 		assert.Equal(t, fernTestValuePaymentStatus, obj.PaymentStatus)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMatch", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueMatch PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueMatch IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch
 		obj.SetMatch(fernTestValueMatch)
 		assert.Equal(t, fernTestValueMatch, obj.Match)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCounterpart", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueCounterpart *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueCounterpart *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		obj.SetCounterpart(fernTestValueCounterpart)
 		assert.Equal(t, fernTestValueCounterpart, obj.Counterpart)
 		assert.NotNil(t, obj.explicitFields)
@@ -5637,11 +5638,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("GetSourceInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var expected string
 		obj.SourceInvoiceID = expected
 
@@ -5651,7 +5652,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetSourceInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5664,7 +5665,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetFullNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var expected string
 		obj.FullNumber = expected
 
@@ -5674,7 +5675,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetFullNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5687,8 +5688,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetIssueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var expected string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var expected time.Time
 		obj.IssueDate = expected
 
 		// Act & Assert
@@ -5697,7 +5698,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetIssueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5710,8 +5711,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -5720,7 +5721,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5733,7 +5734,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var expected string
 		obj.Currency = expected
 
@@ -5743,7 +5744,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5756,7 +5757,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -5766,7 +5767,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5779,8 +5780,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetPaymentStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus
 		obj.PaymentStatus = expected
 
 		// Act & Assert
@@ -5789,7 +5790,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetPaymentStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5802,8 +5803,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetMatch", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch
 		obj.Match = expected
 
 		// Act & Assert
@@ -5812,7 +5813,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetMatch_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5825,8 +5826,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetCounterpart", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var expected *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var expected *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		obj.Counterpart = expected
 
 		// Act & Assert
@@ -5836,7 +5837,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetCounterpart_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		obj.Counterpart = nil
 
 		// Act & Assert
@@ -5845,7 +5846,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetCounterpart_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5857,11 +5858,11 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("SetSourceInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueSourceInvoiceID string
 
 		// Act
@@ -5892,7 +5893,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetFullNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueFullNumber string
 
 		// Act
@@ -5923,8 +5924,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetIssueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueIssueDate string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueIssueDate time.Time
 
 		// Act
 		obj.SetIssueDate(fernTestValueIssueDate)
@@ -5954,8 +5955,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueType PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueType IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -5985,7 +5986,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -6016,7 +6017,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -6047,8 +6048,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetPaymentStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValuePaymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValuePaymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus
 
 		// Act
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
@@ -6078,8 +6079,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetMatch_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueMatch PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueMatch IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch
 
 		// Act
 		obj.SetMatch(fernTestValueMatch)
@@ -6109,8 +6110,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetCounterpart_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
-		var fernTestValueCounterpart *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
+		var fernTestValueCounterpart *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 
 		// Act
 		obj.SetCounterpart(fernTestValueCounterpart)
@@ -6139,9 +6140,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueInvoiceID string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -6149,23 +6150,23 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var fernTestValueStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var fernTestValueStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentStatus", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var fernTestValuePaymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var fernTestValuePaymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
 		assert.Equal(t, fernTestValuePaymentStatus, obj.PaymentStatus)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -6173,7 +6174,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	})
 
 	t.Run("SetAmountsMatch", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueAmountsMatch bool
 		obj.SetAmountsMatch(fernTestValueAmountsMatch)
 		assert.Equal(t, fernTestValueAmountsMatch, obj.AmountsMatch)
@@ -6182,11 +6183,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var expected string
 		obj.InvoiceID = expected
 
@@ -6196,7 +6197,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6209,8 +6210,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -6219,7 +6220,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6232,8 +6233,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetPaymentStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
 		obj.PaymentStatus = expected
 
 		// Act & Assert
@@ -6242,7 +6243,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetPaymentStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6255,7 +6256,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -6265,7 +6266,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6278,7 +6279,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 	t.Run("GetAmountsMatch", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var expected bool
 		obj.AmountsMatch = expected
 
@@ -6288,7 +6289,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 	t.Run("GetAmountsMatch_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6300,11 +6301,11 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocum
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueInvoiceID string
 
 		// Act
@@ -6335,8 +6336,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var fernTestValueStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var fernTestValueStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -6366,8 +6367,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetPaymentStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
-		var fernTestValuePaymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
+		var fernTestValuePaymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
 
 		// Act
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
@@ -6397,7 +6398,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -6428,7 +6429,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetAmountsMatch_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		var fernTestValueAmountsMatch bool
 
 		// Act
@@ -6458,9 +6459,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -6468,7 +6469,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetSalesGross", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueSalesGross string
 		obj.SetSalesGross(fernTestValueSalesGross)
 		assert.Equal(t, fernTestValueSalesGross, obj.SalesGross)
@@ -6476,7 +6477,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetPurchasesGross", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValuePurchasesGross string
 		obj.SetPurchasesGross(fernTestValuePurchasesGross)
 		assert.Equal(t, fernTestValuePurchasesGross, obj.PurchasesGross)
@@ -6484,7 +6485,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetGrossDifference", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueGrossDifference string
 		obj.SetGrossDifference(fernTestValueGrossDifference)
 		assert.Equal(t, fernTestValueGrossDifference, obj.GrossDifference)
@@ -6492,7 +6493,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetOpenReceivable", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenReceivable string
 		obj.SetOpenReceivable(fernTestValueOpenReceivable)
 		assert.Equal(t, fernTestValueOpenReceivable, obj.OpenReceivable)
@@ -6500,7 +6501,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetOpenPayable", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenPayable string
 		obj.SetOpenPayable(fernTestValueOpenPayable)
 		assert.Equal(t, fernTestValueOpenPayable, obj.OpenPayable)
@@ -6508,7 +6509,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	})
 
 	t.Run("SetOpenDifference", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenDifference string
 		obj.SetOpenDifference(fernTestValueOpenDifference)
 		assert.Equal(t, fernTestValueOpenDifference, obj.OpenDifference)
@@ -6517,11 +6518,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.Currency = expected
 
@@ -6531,7 +6532,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6544,7 +6545,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetSalesGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.SalesGross = expected
 
@@ -6554,7 +6555,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetSalesGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6567,7 +6568,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetPurchasesGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.PurchasesGross = expected
 
@@ -6577,7 +6578,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetPurchasesGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6590,7 +6591,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetGrossDifference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.GrossDifference = expected
 
@@ -6600,7 +6601,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetGrossDifference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6613,7 +6614,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetOpenReceivable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.OpenReceivable = expected
 
@@ -6623,7 +6624,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetOpenReceivable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6636,7 +6637,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetOpenPayable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.OpenPayable = expected
 
@@ -6646,7 +6647,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetOpenPayable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6659,7 +6660,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 	t.Run("GetOpenDifference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var expected string
 		obj.OpenDifference = expected
 
@@ -6669,7 +6670,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 	t.Run("GetOpenDifference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6681,11 +6682,11 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotal
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -6716,7 +6717,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetSalesGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueSalesGross string
 
 		// Act
@@ -6747,7 +6748,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetPurchasesGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValuePurchasesGross string
 
 		// Act
@@ -6778,7 +6779,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetGrossDifference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueGrossDifference string
 
 		// Act
@@ -6809,7 +6810,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetOpenReceivable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenReceivable string
 
 		// Act
@@ -6840,7 +6841,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetOpenPayable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenPayable string
 
 		// Act
@@ -6871,7 +6872,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetOpenDifference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		var fernTestValueOpenDifference string
 
 		// Act
@@ -6901,9 +6902,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 
 }
 
-func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestSettersIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueInvoiceID string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -6911,7 +6912,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueDocumentNumber string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -6919,15 +6920,15 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var fernTestValueDocumentDate string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -6935,7 +6936,7 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -6943,8 +6944,8 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var fernTestValueStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var fernTestValueStatus IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
@@ -6952,11 +6953,11 @@ func TestSettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 }
 
-func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestGettersIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var expected string
 		obj.InvoiceID = expected
 
@@ -6966,7 +6967,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6979,7 +6980,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var expected string
 		obj.DocumentNumber = expected
 
@@ -6989,7 +6990,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7002,8 +7003,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var expected string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -7012,7 +7013,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7025,7 +7026,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var expected string
 		obj.Currency = expected
 
@@ -7035,7 +7036,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7048,7 +7049,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -7058,7 +7059,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7071,8 +7072,8 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var expected PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var expected IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -7081,7 +7082,7 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7093,11 +7094,11 @@ func TestGettersPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmat
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestSettersMarkExplicitIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueInvoiceID string
 
 		// Act
@@ -7128,7 +7129,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueDocumentNumber string
 
 		// Act
@@ -7159,8 +7160,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var fernTestValueDocumentDate string
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -7190,7 +7191,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -7221,7 +7222,7 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -7252,8 +7253,8 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
-		var fernTestValueStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
+		var fernTestValueStatus IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -7282,9 +7283,9 @@ func TestSettersMarkExplicitPostV1ConsolidationIntercompanyReportResponseDirecti
 
 }
 
-func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestSettersMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -7292,7 +7293,7 @@ func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -7300,7 +7301,7 @@ func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	})
 
 	t.Run("SetBaseCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueBaseCurrency string
 		obj.SetBaseCurrency(fernTestValueBaseCurrency)
 		assert.Equal(t, fernTestValueBaseCurrency, obj.BaseCurrency)
@@ -7308,7 +7309,7 @@ func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	})
 
 	t.Run("SetOwnershipPercent", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueOwnershipPercent string
 		obj.SetOwnershipPercent(fernTestValueOwnershipPercent)
 		assert.Equal(t, fernTestValueOwnershipPercent, obj.OwnershipPercent)
@@ -7316,8 +7317,8 @@ func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersAddResponse{}
-		var fernTestValueMethod PostV1ConsolidationMembersAddResponseMethod
+		obj := &MembersAddConsolidationResponse{}
+		var fernTestValueMethod MembersAddConsolidationResponseMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
@@ -7325,11 +7326,11 @@ func TestSettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestGettersMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("GetMemberCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var expected string
 		obj.MemberCompanyID = expected
 
@@ -7339,7 +7340,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetMemberCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7352,7 +7353,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -7362,7 +7363,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7375,7 +7376,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	t.Run("GetBaseCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var expected string
 		obj.BaseCurrency = expected
 
@@ -7385,7 +7386,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetBaseCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7398,7 +7399,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	t.Run("GetOwnershipPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var expected string
 		obj.OwnershipPercent = expected
 
@@ -7408,7 +7409,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetOwnershipPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7421,8 +7422,8 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
-		var expected PostV1ConsolidationMembersAddResponseMethod
+		obj := &MembersAddConsolidationResponse{}
+		var expected MembersAddConsolidationResponseMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -7431,7 +7432,7 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7443,11 +7444,11 @@ func TestGettersPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestSettersMarkExplicitMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -7478,7 +7479,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) 
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -7509,7 +7510,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) 
 	t.Run("SetBaseCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueBaseCurrency string
 
 		// Act
@@ -7540,7 +7541,7 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) 
 	t.Run("SetOwnershipPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		var fernTestValueOwnershipPercent string
 
 		// Act
@@ -7571,8 +7572,8 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) 
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
-		var fernTestValueMethod PostV1ConsolidationMembersAddResponseMethod
+		obj := &MembersAddConsolidationResponse{}
+		var fernTestValueMethod MembersAddConsolidationResponseMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -7601,9 +7602,9 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersAddResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestSettersMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("SetOk", func(t *testing.T) {
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 		var fernTestValueOk bool
 		obj.SetOk(fernTestValueOk)
 		assert.Equal(t, fernTestValueOk, obj.Ok)
@@ -7612,11 +7613,11 @@ func TestSettersPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestGettersMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("GetOk", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 		var expected bool
 		obj.Ok = expected
 
@@ -7626,7 +7627,7 @@ func TestGettersPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
 
 	t.Run("GetOk_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersRemoveResponse
+		var obj *MembersRemoveConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7638,11 +7639,11 @@ func TestGettersPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestSettersMarkExplicitMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("SetOk_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 		var fernTestValueOk bool
 
 		// Act
@@ -7672,9 +7673,9 @@ func TestSettersMarkExplicitPostV1ConsolidationMembersRemoveResponse(t *testing.
 
 }
 
-func TestSettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestSettersReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -7682,7 +7683,7 @@ func TestSettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -7690,7 +7691,7 @@ func TestSettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 	})
 
 	t.Run("SetNote", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueNote *string
 		obj.SetNote(fernTestValueNote)
 		assert.Equal(t, fernTestValueNote, obj.Note)
@@ -7699,11 +7700,11 @@ func TestSettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestGettersReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -7713,7 +7714,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportRequestEliminationsItem
+		var obj *ReportConsolidationRequestEliminationsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7726,7 +7727,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -7736,7 +7737,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportRequestEliminationsItem
+		var obj *ReportConsolidationRequestEliminationsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7749,7 +7750,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 	t.Run("GetNote", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var expected *string
 		obj.Note = expected
 
@@ -7760,7 +7761,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 	t.Run("GetNote_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		obj.Note = nil
 
 		// Act & Assert
@@ -7769,7 +7770,7 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 
 	t.Run("GetNote_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportRequestEliminationsItem
+		var obj *ReportConsolidationRequestEliminationsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7781,11 +7782,11 @@ func TestGettersPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -7816,7 +7817,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequestEliminationsItem(t *
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -7847,7 +7848,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequestEliminationsItem(t *
 	t.Run("SetNote_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		var fernTestValueNote *string
 
 		// Act
@@ -7877,9 +7878,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportRequestEliminationsItem(t *
 
 }
 
-func TestSettersPostV1ConsolidationReportResponse(t *testing.T) {
+func TestSettersReportConsolidationResponse(t *testing.T) {
 	t.Run("SetPresentationCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 		obj.SetPresentationCurrency(fernTestValuePresentationCurrency)
 		assert.Equal(t, fernTestValuePresentationCurrency, obj.PresentationCurrency)
@@ -7887,88 +7888,88 @@ func TestSettersPostV1ConsolidationReportResponse(t *testing.T) {
 	})
 
 	t.Run("SetFromDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueFromDate time.Time
 		obj.SetFromDate(fernTestValueFromDate)
 		assert.Equal(t, fernTestValueFromDate, obj.FromDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetToDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueToDate time.Time
 		obj.SetToDate(fernTestValueToDate)
 		assert.Equal(t, fernTestValueToDate, obj.ToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCategory", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueCategory PostV1ConsolidationReportResponseCategory
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueCategory ReportConsolidationResponseCategory
 		obj.SetCategory(fernTestValueCategory)
 		assert.Equal(t, fernTestValueCategory, obj.Category)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStatements", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueStatements *PostV1ConsolidationReportResponseStatements
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueStatements *ReportConsolidationResponseStatements
 		obj.SetStatements(fernTestValueStatements)
 		assert.Equal(t, fernTestValueStatements, obj.Statements)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTrialBalance", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueTrialBalance []*PostV1ConsolidationReportResponseTrialBalanceItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueTrialBalance []*ReportConsolidationResponseTrialBalanceItem
 		obj.SetTrialBalance(fernTestValueTrialBalance)
 		assert.Equal(t, fernTestValueTrialBalance, obj.TrialBalance)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNonControllingInterest", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueNonControllingInterest *PostV1ConsolidationReportResponseNonControllingInterest
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueNonControllingInterest *ReportConsolidationResponseNonControllingInterest
 		obj.SetNonControllingInterest(fernTestValueNonControllingInterest)
 		assert.Equal(t, fernTestValueNonControllingInterest, obj.NonControllingInterest)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEquityMethod", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueEquityMethod *PostV1ConsolidationReportResponseEquityMethod
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueEquityMethod *ReportConsolidationResponseEquityMethod
 		obj.SetEquityMethod(fernTestValueEquityMethod)
 		assert.Equal(t, fernTestValueEquityMethod, obj.EquityMethod)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMembers", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueMembers []*PostV1ConsolidationReportResponseMembersItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueMembers []*ReportConsolidationResponseMembersItem
 		obj.SetMembers(fernTestValueMembers)
 		assert.Equal(t, fernTestValueMembers, obj.Members)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEliminations", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueEliminations *PostV1ConsolidationReportResponseEliminations
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueEliminations *ReportConsolidationResponseEliminations
 		obj.SetEliminations(fernTestValueEliminations)
 		assert.Equal(t, fernTestValueEliminations, obj.Eliminations)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCashFlow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueCashFlow *PostV1ConsolidationReportResponseCashFlow
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueCashFlow *ReportConsolidationResponseCashFlow
 		obj.SetCashFlow(fernTestValueCashFlow)
 		assert.Equal(t, fernTestValueCashFlow, obj.CashFlow)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetIntercompanyCandidates", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueIntercompanyCandidates []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueIntercompanyCandidates []*ReportConsolidationResponseIntercompanyCandidatesItem
 		obj.SetIntercompanyCandidates(fernTestValueIntercompanyCandidates)
 		assert.Equal(t, fernTestValueIntercompanyCandidates, obj.IntercompanyCandidates)
 		assert.NotNil(t, obj.explicitFields)
@@ -7976,11 +7977,11 @@ func TestSettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
+func TestGettersReportConsolidationResponse(t *testing.T) {
 	t.Run("GetPresentationCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		var expected string
 		obj.PresentationCurrency = expected
 
@@ -7990,7 +7991,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetPresentationCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8003,8 +8004,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetFromDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected string
+		obj := &ReportConsolidationResponse{}
+		var expected time.Time
 		obj.FromDate = expected
 
 		// Act & Assert
@@ -8013,7 +8014,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetFromDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8026,8 +8027,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetToDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected string
+		obj := &ReportConsolidationResponse{}
+		var expected time.Time
 		obj.ToDate = expected
 
 		// Act & Assert
@@ -8036,7 +8037,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetToDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8049,8 +8050,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetCategory", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected PostV1ConsolidationReportResponseCategory
+		obj := &ReportConsolidationResponse{}
+		var expected ReportConsolidationResponseCategory
 		obj.Category = expected
 
 		// Act & Assert
@@ -8059,7 +8060,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8072,8 +8073,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetStatements", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected *PostV1ConsolidationReportResponseStatements
+		obj := &ReportConsolidationResponse{}
+		var expected *ReportConsolidationResponseStatements
 		obj.Statements = expected
 
 		// Act & Assert
@@ -8083,7 +8084,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetStatements_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.Statements = nil
 
 		// Act & Assert
@@ -8092,7 +8093,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetStatements_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8105,8 +8106,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetTrialBalance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected []*PostV1ConsolidationReportResponseTrialBalanceItem
+		obj := &ReportConsolidationResponse{}
+		var expected []*ReportConsolidationResponseTrialBalanceItem
 		obj.TrialBalance = expected
 
 		// Act & Assert
@@ -8116,7 +8117,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetTrialBalance_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.TrialBalance = nil
 
 		// Act & Assert
@@ -8125,7 +8126,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetTrialBalance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8138,8 +8139,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetNonControllingInterest", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected *PostV1ConsolidationReportResponseNonControllingInterest
+		obj := &ReportConsolidationResponse{}
+		var expected *ReportConsolidationResponseNonControllingInterest
 		obj.NonControllingInterest = expected
 
 		// Act & Assert
@@ -8149,7 +8150,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetNonControllingInterest_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.NonControllingInterest = nil
 
 		// Act & Assert
@@ -8158,7 +8159,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetNonControllingInterest_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8171,8 +8172,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetEquityMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected *PostV1ConsolidationReportResponseEquityMethod
+		obj := &ReportConsolidationResponse{}
+		var expected *ReportConsolidationResponseEquityMethod
 		obj.EquityMethod = expected
 
 		// Act & Assert
@@ -8182,7 +8183,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetEquityMethod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.EquityMethod = nil
 
 		// Act & Assert
@@ -8191,7 +8192,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetEquityMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8204,8 +8205,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetMembers", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected []*PostV1ConsolidationReportResponseMembersItem
+		obj := &ReportConsolidationResponse{}
+		var expected []*ReportConsolidationResponseMembersItem
 		obj.Members = expected
 
 		// Act & Assert
@@ -8215,7 +8216,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetMembers_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.Members = nil
 
 		// Act & Assert
@@ -8224,7 +8225,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetMembers_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8237,8 +8238,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetEliminations", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected *PostV1ConsolidationReportResponseEliminations
+		obj := &ReportConsolidationResponse{}
+		var expected *ReportConsolidationResponseEliminations
 		obj.Eliminations = expected
 
 		// Act & Assert
@@ -8248,7 +8249,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetEliminations_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.Eliminations = nil
 
 		// Act & Assert
@@ -8257,7 +8258,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetEliminations_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8270,8 +8271,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetCashFlow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected *PostV1ConsolidationReportResponseCashFlow
+		obj := &ReportConsolidationResponse{}
+		var expected *ReportConsolidationResponseCashFlow
 		obj.CashFlow = expected
 
 		// Act & Assert
@@ -8281,7 +8282,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetCashFlow_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.CashFlow = nil
 
 		// Act & Assert
@@ -8290,7 +8291,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetCashFlow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8303,8 +8304,8 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetIntercompanyCandidates", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var expected []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		obj := &ReportConsolidationResponse{}
+		var expected []*ReportConsolidationResponseIntercompanyCandidatesItem
 		obj.IntercompanyCandidates = expected
 
 		// Act & Assert
@@ -8314,7 +8315,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("GetIntercompanyCandidates_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		obj.IntercompanyCandidates = nil
 
 		// Act & Assert
@@ -8323,7 +8324,7 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetIntercompanyCandidates_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8335,11 +8336,11 @@ func TestGettersPostV1ConsolidationReportResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponse(t *testing.T) {
 	t.Run("SetPresentationCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		var fernTestValuePresentationCurrency string
 
 		// Act
@@ -8370,8 +8371,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetFromDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueFromDate time.Time
 
 		// Act
 		obj.SetFromDate(fernTestValueFromDate)
@@ -8401,8 +8402,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueToDate time.Time
 
 		// Act
 		obj.SetToDate(fernTestValueToDate)
@@ -8432,8 +8433,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueCategory PostV1ConsolidationReportResponseCategory
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueCategory ReportConsolidationResponseCategory
 
 		// Act
 		obj.SetCategory(fernTestValueCategory)
@@ -8463,8 +8464,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetStatements_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueStatements *PostV1ConsolidationReportResponseStatements
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueStatements *ReportConsolidationResponseStatements
 
 		// Act
 		obj.SetStatements(fernTestValueStatements)
@@ -8494,8 +8495,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetTrialBalance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueTrialBalance []*PostV1ConsolidationReportResponseTrialBalanceItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueTrialBalance []*ReportConsolidationResponseTrialBalanceItem
 
 		// Act
 		obj.SetTrialBalance(fernTestValueTrialBalance)
@@ -8525,8 +8526,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetNonControllingInterest_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueNonControllingInterest *PostV1ConsolidationReportResponseNonControllingInterest
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueNonControllingInterest *ReportConsolidationResponseNonControllingInterest
 
 		// Act
 		obj.SetNonControllingInterest(fernTestValueNonControllingInterest)
@@ -8556,8 +8557,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetEquityMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueEquityMethod *PostV1ConsolidationReportResponseEquityMethod
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueEquityMethod *ReportConsolidationResponseEquityMethod
 
 		// Act
 		obj.SetEquityMethod(fernTestValueEquityMethod)
@@ -8587,8 +8588,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetMembers_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueMembers []*PostV1ConsolidationReportResponseMembersItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueMembers []*ReportConsolidationResponseMembersItem
 
 		// Act
 		obj.SetMembers(fernTestValueMembers)
@@ -8618,8 +8619,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetEliminations_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueEliminations *PostV1ConsolidationReportResponseEliminations
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueEliminations *ReportConsolidationResponseEliminations
 
 		// Act
 		obj.SetEliminations(fernTestValueEliminations)
@@ -8649,8 +8650,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetCashFlow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueCashFlow *PostV1ConsolidationReportResponseCashFlow
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueCashFlow *ReportConsolidationResponseCashFlow
 
 		// Act
 		obj.SetCashFlow(fernTestValueCashFlow)
@@ -8680,8 +8681,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 	t.Run("SetIntercompanyCandidates_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
-		var fernTestValueIntercompanyCandidates []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		obj := &ReportConsolidationResponse{}
+		var fernTestValueIntercompanyCandidates []*ReportConsolidationResponseIntercompanyCandidatesItem
 
 		// Act
 		obj.SetIntercompanyCandidates(fernTestValueIntercompanyCandidates)
@@ -8710,9 +8711,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("SetOpeningCash", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueOpeningCash string
 		obj.SetOpeningCash(fernTestValueOpeningCash)
 		assert.Equal(t, fernTestValueOpeningCash, obj.OpeningCash)
@@ -8720,7 +8721,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	})
 
 	t.Run("SetClosingCash", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueClosingCash string
 		obj.SetClosingCash(fernTestValueClosingCash)
 		assert.Equal(t, fernTestValueClosingCash, obj.ClosingCash)
@@ -8728,7 +8729,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	})
 
 	t.Run("SetNetChange", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueNetChange string
 		obj.SetNetChange(fernTestValueNetChange)
 		assert.Equal(t, fernTestValueNetChange, obj.NetChange)
@@ -8736,31 +8737,31 @@ func TestSettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	})
 
 	t.Run("SetOperating", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueOperating *PostV1ConsolidationReportResponseCashFlowOperating
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueOperating *ReportConsolidationResponseCashFlowOperating
 		obj.SetOperating(fernTestValueOperating)
 		assert.Equal(t, fernTestValueOperating, obj.Operating)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvesting", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueInvesting *PostV1ConsolidationReportResponseCashFlowInvesting
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueInvesting *ReportConsolidationResponseCashFlowInvesting
 		obj.SetInvesting(fernTestValueInvesting)
 		assert.Equal(t, fernTestValueInvesting, obj.Investing)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFinancing", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueFinancing *PostV1ConsolidationReportResponseCashFlowFinancing
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueFinancing *ReportConsolidationResponseCashFlowFinancing
 		obj.SetFinancing(fernTestValueFinancing)
 		assert.Equal(t, fernTestValueFinancing, obj.Financing)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalanced", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueBalanced bool
 		obj.SetBalanced(fernTestValueBalanced)
 		assert.Equal(t, fernTestValueBalanced, obj.Balanced)
@@ -8769,11 +8770,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("GetOpeningCash", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var expected string
 		obj.OpeningCash = expected
 
@@ -8783,7 +8784,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetOpeningCash_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8796,7 +8797,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetClosingCash", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var expected string
 		obj.ClosingCash = expected
 
@@ -8806,7 +8807,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetClosingCash_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8819,7 +8820,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetNetChange", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var expected string
 		obj.NetChange = expected
 
@@ -8829,7 +8830,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetNetChange_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8842,8 +8843,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetOperating", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var expected *PostV1ConsolidationReportResponseCashFlowOperating
+		obj := &ReportConsolidationResponseCashFlow{}
+		var expected *ReportConsolidationResponseCashFlowOperating
 		obj.Operating = expected
 
 		// Act & Assert
@@ -8853,7 +8854,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetOperating_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		obj.Operating = nil
 
 		// Act & Assert
@@ -8862,7 +8863,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetOperating_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8875,8 +8876,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetInvesting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var expected *PostV1ConsolidationReportResponseCashFlowInvesting
+		obj := &ReportConsolidationResponseCashFlow{}
+		var expected *ReportConsolidationResponseCashFlowInvesting
 		obj.Investing = expected
 
 		// Act & Assert
@@ -8886,7 +8887,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetInvesting_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		obj.Investing = nil
 
 		// Act & Assert
@@ -8895,7 +8896,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetInvesting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8908,8 +8909,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetFinancing", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var expected *PostV1ConsolidationReportResponseCashFlowFinancing
+		obj := &ReportConsolidationResponseCashFlow{}
+		var expected *ReportConsolidationResponseCashFlowFinancing
 		obj.Financing = expected
 
 		// Act & Assert
@@ -8919,7 +8920,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetFinancing_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		obj.Financing = nil
 
 		// Act & Assert
@@ -8928,7 +8929,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetFinancing_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8941,7 +8942,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 	t.Run("GetBalanced", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var expected bool
 		obj.Balanced = expected
 
@@ -8951,7 +8952,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 	t.Run("GetBalanced_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8963,11 +8964,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("SetOpeningCash_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueOpeningCash string
 
 		// Act
@@ -8998,7 +8999,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetClosingCash_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueClosingCash string
 
 		// Act
@@ -9029,7 +9030,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetNetChange_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueNetChange string
 
 		// Act
@@ -9060,8 +9061,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetOperating_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueOperating *PostV1ConsolidationReportResponseCashFlowOperating
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueOperating *ReportConsolidationResponseCashFlowOperating
 
 		// Act
 		obj.SetOperating(fernTestValueOperating)
@@ -9091,8 +9092,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetInvesting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueInvesting *PostV1ConsolidationReportResponseCashFlowInvesting
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueInvesting *ReportConsolidationResponseCashFlowInvesting
 
 		// Act
 		obj.SetInvesting(fernTestValueInvesting)
@@ -9122,8 +9123,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetFinancing_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
-		var fernTestValueFinancing *PostV1ConsolidationReportResponseCashFlowFinancing
+		obj := &ReportConsolidationResponseCashFlow{}
+		var fernTestValueFinancing *ReportConsolidationResponseCashFlowFinancing
 
 		// Act
 		obj.SetFinancing(fernTestValueFinancing)
@@ -9153,7 +9154,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 	t.Run("SetBalanced_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		var fernTestValueBalanced bool
 
 		// Act
@@ -9183,9 +9184,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlow(t *testing
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -9193,7 +9194,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -9201,7 +9202,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -9209,8 +9210,8 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	})
 
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowFinancingRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -9218,11 +9219,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var expected string
 		obj.Inflow = expected
 
@@ -9232,7 +9233,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9245,7 +9246,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var expected string
 		obj.Outflow = expected
 
@@ -9255,7 +9256,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9268,7 +9269,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var expected string
 		obj.Net = expected
 
@@ -9278,7 +9279,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9291,8 +9292,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
-		var expected []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
+		var expected []*ReportConsolidationResponseCashFlowFinancingRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -9302,7 +9303,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -9311,7 +9312,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9323,11 +9324,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueInflow string
 
 		// Act
@@ -9358,7 +9359,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancing(t
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -9389,7 +9390,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancing(t
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		var fernTestValueNet string
 
 		// Act
@@ -9420,8 +9421,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancing(t
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowFinancingRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -9450,9 +9451,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancing(t
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -9460,7 +9461,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -9468,7 +9469,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	})
 
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -9476,7 +9477,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -9485,11 +9486,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -9499,7 +9500,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9512,7 +9513,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -9522,7 +9523,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9535,7 +9536,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var expected string
 		obj.Inflow = expected
 
@@ -9545,7 +9546,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9558,7 +9559,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var expected string
 		obj.Outflow = expected
 
@@ -9568,7 +9569,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9580,11 +9581,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *te
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -9615,7 +9616,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancingRo
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -9646,7 +9647,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancingRo
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueInflow string
 
 		// Act
@@ -9677,7 +9678,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancingRo
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -9707,9 +9708,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowFinancingRo
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -9717,7 +9718,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -9725,7 +9726,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -9733,8 +9734,8 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	})
 
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowInvestingRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -9742,11 +9743,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var expected string
 		obj.Inflow = expected
 
@@ -9756,7 +9757,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9769,7 +9770,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var expected string
 		obj.Outflow = expected
 
@@ -9779,7 +9780,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9792,7 +9793,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var expected string
 		obj.Net = expected
 
@@ -9802,7 +9803,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9815,8 +9816,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
-		var expected []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
+		var expected []*ReportConsolidationResponseCashFlowInvestingRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -9826,7 +9827,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -9835,7 +9836,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9847,11 +9848,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueInflow string
 
 		// Act
@@ -9882,7 +9883,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvesting(t
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -9913,7 +9914,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvesting(t
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		var fernTestValueNet string
 
 		// Act
@@ -9944,8 +9945,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvesting(t
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowInvestingRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -9974,9 +9975,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvesting(t
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -9984,7 +9985,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -9992,7 +9993,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	})
 
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -10000,7 +10001,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -10009,11 +10010,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -10023,7 +10024,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10036,7 +10037,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10046,7 +10047,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10059,7 +10060,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var expected string
 		obj.Inflow = expected
 
@@ -10069,7 +10070,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10082,7 +10083,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var expected string
 		obj.Outflow = expected
 
@@ -10092,7 +10093,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10104,11 +10105,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *te
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -10139,7 +10140,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvestingRo
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10170,7 +10171,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvestingRo
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueInflow string
 
 		// Act
@@ -10201,7 +10202,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvestingRo
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -10231,9 +10232,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowInvestingRo
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -10241,7 +10242,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -10249,7 +10250,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -10257,8 +10258,8 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	})
 
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		obj := &ReportConsolidationResponseCashFlowOperating{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowOperatingRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -10266,11 +10267,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var expected string
 		obj.Inflow = expected
 
@@ -10280,7 +10281,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10293,7 +10294,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var expected string
 		obj.Outflow = expected
 
@@ -10303,7 +10304,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10316,7 +10317,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var expected string
 		obj.Net = expected
 
@@ -10326,7 +10327,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10339,8 +10340,8 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
-		var expected []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		obj := &ReportConsolidationResponseCashFlowOperating{}
+		var expected []*ReportConsolidationResponseCashFlowOperatingRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -10350,7 +10351,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -10359,7 +10360,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10371,11 +10372,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueInflow string
 
 		// Act
@@ -10406,7 +10407,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperating(t
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -10437,7 +10438,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperating(t
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		var fernTestValueNet string
 
 		// Act
@@ -10468,8 +10469,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperating(t
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
-		var fernTestValueRows []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		obj := &ReportConsolidationResponseCashFlowOperating{}
+		var fernTestValueRows []*ReportConsolidationResponseCashFlowOperatingRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -10498,9 +10499,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperating(t
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestSettersReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10508,7 +10509,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10516,7 +10517,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	})
 
 	t.Run("SetInflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueInflow string
 		obj.SetInflow(fernTestValueInflow)
 		assert.Equal(t, fernTestValueInflow, obj.Inflow)
@@ -10524,7 +10525,7 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	})
 
 	t.Run("SetOutflow", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueOutflow string
 		obj.SetOutflow(fernTestValueOutflow)
 		assert.Equal(t, fernTestValueOutflow, obj.Outflow)
@@ -10533,11 +10534,11 @@ func TestSettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestGettersReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -10547,7 +10548,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10560,7 +10561,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10570,7 +10571,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10583,7 +10584,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	t.Run("GetInflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var expected string
 		obj.Inflow = expected
 
@@ -10593,7 +10594,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 	t.Run("GetInflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10606,7 +10607,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 	t.Run("GetOutflow", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var expected string
 		obj.Outflow = expected
 
@@ -10616,7 +10617,7 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 	t.Run("GetOutflow_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10628,11 +10629,11 @@ func TestGettersPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *te
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -10663,7 +10664,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperatingRo
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10694,7 +10695,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperatingRo
 	t.Run("SetInflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueInflow string
 
 		// Act
@@ -10725,7 +10726,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperatingRo
 	t.Run("SetOutflow_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		var fernTestValueOutflow string
 
 		// Act
@@ -10755,17 +10756,17 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseCashFlowOperatingRo
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestSettersReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("SetApplied", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminations{}
-		var fernTestValueApplied []*PostV1ConsolidationReportResponseEliminationsAppliedItem
+		obj := &ReportConsolidationResponseEliminations{}
+		var fernTestValueApplied []*ReportConsolidationResponseEliminationsAppliedItem
 		obj.SetApplied(fernTestValueApplied)
 		assert.Equal(t, fernTestValueApplied, obj.Applied)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalanced", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var fernTestValueBalanced bool
 		obj.SetBalanced(fernTestValueBalanced)
 		assert.Equal(t, fernTestValueBalanced, obj.Balanced)
@@ -10773,7 +10774,7 @@ func TestSettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 	})
 
 	t.Run("SetNet", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var fernTestValueNet string
 		obj.SetNet(fernTestValueNet)
 		assert.Equal(t, fernTestValueNet, obj.Net)
@@ -10782,12 +10783,12 @@ func TestSettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestGettersReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("GetApplied", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
-		var expected []*PostV1ConsolidationReportResponseEliminationsAppliedItem
+		obj := &ReportConsolidationResponseEliminations{}
+		var expected []*ReportConsolidationResponseEliminationsAppliedItem
 		obj.Applied = expected
 
 		// Act & Assert
@@ -10797,7 +10798,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 	t.Run("GetApplied_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		obj.Applied = nil
 
 		// Act & Assert
@@ -10806,7 +10807,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 
 	t.Run("GetApplied_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminations
+		var obj *ReportConsolidationResponseEliminations
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10819,7 +10820,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 	t.Run("GetBalanced", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var expected bool
 		obj.Balanced = expected
 
@@ -10829,7 +10830,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 
 	t.Run("GetBalanced_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminations
+		var obj *ReportConsolidationResponseEliminations
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10842,7 +10843,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 	t.Run("GetNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var expected string
 		obj.Net = expected
 
@@ -10852,7 +10853,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 
 	t.Run("GetNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminations
+		var obj *ReportConsolidationResponseEliminations
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10864,12 +10865,12 @@ func TestGettersPostV1ConsolidationReportResponseEliminations(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("SetApplied_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
-		var fernTestValueApplied []*PostV1ConsolidationReportResponseEliminationsAppliedItem
+		obj := &ReportConsolidationResponseEliminations{}
+		var fernTestValueApplied []*ReportConsolidationResponseEliminationsAppliedItem
 
 		// Act
 		obj.SetApplied(fernTestValueApplied)
@@ -10899,7 +10900,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminations(t *tes
 	t.Run("SetBalanced_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var fernTestValueBalanced bool
 
 		// Act
@@ -10930,7 +10931,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminations(t *tes
 	t.Run("SetNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		var fernTestValueNet string
 
 		// Act
@@ -10960,9 +10961,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminations(t *tes
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestSettersReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10970,7 +10971,7 @@ func TestSettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -10978,7 +10979,7 @@ func TestSettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 	})
 
 	t.Run("SetNote", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueNote *string
 		obj.SetNote(fernTestValueNote)
 		assert.Equal(t, fernTestValueNote, obj.Note)
@@ -10987,11 +10988,11 @@ func TestSettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestGettersReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var expected string
 		obj.Code = expected
 
@@ -11001,7 +11002,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj *ReportConsolidationResponseEliminationsAppliedItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11014,7 +11015,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -11024,7 +11025,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj *ReportConsolidationResponseEliminationsAppliedItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11037,7 +11038,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 	t.Run("GetNote", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var expected *string
 		obj.Note = expected
 
@@ -11048,7 +11049,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 	t.Run("GetNote_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		obj.Note = nil
 
 		// Act & Assert
@@ -11057,7 +11058,7 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 
 	t.Run("GetNote_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj *ReportConsolidationResponseEliminationsAppliedItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11069,11 +11070,11 @@ func TestGettersPostV1ConsolidationReportResponseEliminationsAppliedItem(t *test
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -11104,7 +11105,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminationsApplied
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -11135,7 +11136,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminationsApplied
 	t.Run("SetNote_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		var fernTestValueNote *string
 
 		// Act
@@ -11165,9 +11166,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEliminationsApplied
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestSettersReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("SetInvestmentsInAssociates", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var fernTestValueInvestmentsInAssociates string
 		obj.SetInvestmentsInAssociates(fernTestValueInvestmentsInAssociates)
 		assert.Equal(t, fernTestValueInvestmentsInAssociates, obj.InvestmentsInAssociates)
@@ -11175,7 +11176,7 @@ func TestSettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 	})
 
 	t.Run("SetShareOfAssociatesResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var fernTestValueShareOfAssociatesResult string
 		obj.SetShareOfAssociatesResult(fernTestValueShareOfAssociatesResult)
 		assert.Equal(t, fernTestValueShareOfAssociatesResult, obj.ShareOfAssociatesResult)
@@ -11184,11 +11185,11 @@ func TestSettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestGettersReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("GetInvestmentsInAssociates", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var expected string
 		obj.InvestmentsInAssociates = expected
 
@@ -11198,7 +11199,7 @@ func TestGettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 
 	t.Run("GetInvestmentsInAssociates_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEquityMethod
+		var obj *ReportConsolidationResponseEquityMethod
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11211,7 +11212,7 @@ func TestGettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 	t.Run("GetShareOfAssociatesResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var expected string
 		obj.ShareOfAssociatesResult = expected
 
@@ -11221,7 +11222,7 @@ func TestGettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 
 	t.Run("GetShareOfAssociatesResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEquityMethod
+		var obj *ReportConsolidationResponseEquityMethod
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11233,11 +11234,11 @@ func TestGettersPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("SetInvestmentsInAssociates_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var fernTestValueInvestmentsInAssociates string
 
 		// Act
@@ -11268,7 +11269,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEquityMethod(t *tes
 	t.Run("SetShareOfAssociatesResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		var fernTestValueShareOfAssociatesResult string
 
 		// Act
@@ -11298,9 +11299,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseEquityMethod(t *tes
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestSettersReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("SetMemberCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMemberCompanyID string
 		obj.SetMemberCompanyID(fernTestValueMemberCompanyID)
 		assert.Equal(t, fernTestValueMemberCompanyID, obj.MemberCompanyID)
@@ -11308,7 +11309,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetMemberName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMemberName string
 		obj.SetMemberName(fernTestValueMemberName)
 		assert.Equal(t, fernTestValueMemberName, obj.MemberName)
@@ -11316,7 +11317,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -11324,7 +11325,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetPartnerName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerName string
 		obj.SetPartnerName(fernTestValuePartnerName)
 		assert.Equal(t, fernTestValuePartnerName, obj.PartnerName)
@@ -11332,7 +11333,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerCode *string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -11340,7 +11341,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetMatchesCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMatchesCompanyID string
 		obj.SetMatchesCompanyID(fernTestValueMatchesCompanyID)
 		assert.Equal(t, fernTestValueMatchesCompanyID, obj.MatchesCompanyID)
@@ -11348,7 +11349,7 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetMatchesCompanyName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMatchesCompanyName string
 		obj.SetMatchesCompanyName(fernTestValueMatchesCompanyName)
 		assert.Equal(t, fernTestValueMatchesCompanyName, obj.MatchesCompanyName)
@@ -11356,8 +11357,8 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	})
 
 	t.Run("SetMatchedOn", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
-		var fernTestValueMatchedOn PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
+		var fernTestValueMatchedOn ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn
 		obj.SetMatchedOn(fernTestValueMatchedOn)
 		assert.Equal(t, fernTestValueMatchedOn, obj.MatchedOn)
 		assert.NotNil(t, obj.explicitFields)
@@ -11365,11 +11366,11 @@ func TestSettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestGettersReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("GetMemberCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.MemberCompanyID = expected
 
@@ -11379,7 +11380,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetMemberCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11392,7 +11393,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetMemberName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.MemberName = expected
 
@@ -11402,7 +11403,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetMemberName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11415,7 +11416,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -11425,7 +11426,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11438,7 +11439,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetPartnerName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.PartnerName = expected
 
@@ -11448,7 +11449,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetPartnerName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11461,7 +11462,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected *string
 		obj.PartnerCode = expected
 
@@ -11472,7 +11473,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetPartnerCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		obj.PartnerCode = nil
 
 		// Act & Assert
@@ -11481,7 +11482,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11494,7 +11495,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetMatchesCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.MatchesCompanyID = expected
 
@@ -11504,7 +11505,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetMatchesCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11517,7 +11518,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetMatchesCompanyName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var expected string
 		obj.MatchesCompanyName = expected
 
@@ -11527,7 +11528,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetMatchesCompanyName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11540,8 +11541,8 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 	t.Run("GetMatchedOn", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
-		var expected PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
+		var expected ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn
 		obj.MatchedOn = expected
 
 		// Act & Assert
@@ -11550,7 +11551,7 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 	t.Run("GetMatchedOn_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11562,11 +11563,11 @@ func TestGettersPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *t
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("SetMemberCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMemberCompanyID string
 
 		// Act
@@ -11597,7 +11598,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetMemberName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMemberName string
 
 		// Act
@@ -11628,7 +11629,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -11659,7 +11660,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetPartnerName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerName string
 
 		// Act
@@ -11690,7 +11691,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValuePartnerCode *string
 
 		// Act
@@ -11721,7 +11722,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetMatchesCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMatchesCompanyID string
 
 		// Act
@@ -11752,7 +11753,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetMatchesCompanyName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		var fernTestValueMatchesCompanyName string
 
 		// Act
@@ -11783,8 +11784,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 	t.Run("SetMatchedOn_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
-		var fernTestValueMatchedOn PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
+		var fernTestValueMatchedOn ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn
 
 		// Act
 		obj.SetMatchedOn(fernTestValueMatchedOn)
@@ -11813,9 +11814,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseIntercompanyCandida
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestSettersReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("SetCompanyID", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueCompanyID string
 		obj.SetCompanyID(fernTestValueCompanyID)
 		assert.Equal(t, fernTestValueCompanyID, obj.CompanyID)
@@ -11823,7 +11824,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -11831,7 +11832,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetBaseCurrency", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueBaseCurrency string
 		obj.SetBaseCurrency(fernTestValueBaseCurrency)
 		assert.Equal(t, fernTestValueBaseCurrency, obj.BaseCurrency)
@@ -11839,7 +11840,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetOwnershipPercent", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueOwnershipPercent string
 		obj.SetOwnershipPercent(fernTestValueOwnershipPercent)
 		assert.Equal(t, fernTestValueOwnershipPercent, obj.OwnershipPercent)
@@ -11847,15 +11848,15 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetMethod", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
-		var fernTestValueMethod PostV1ConsolidationReportResponseMembersItemMethod
+		obj := &ReportConsolidationResponseMembersItem{}
+		var fernTestValueMethod ReportConsolidationResponseMembersItemMethod
 		obj.SetMethod(fernTestValueMethod)
 		assert.Equal(t, fernTestValueMethod, obj.Method)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFxFactor", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueFxFactor string
 		obj.SetFxFactor(fernTestValueFxFactor)
 		assert.Equal(t, fernTestValueFxFactor, obj.FxFactor)
@@ -11863,7 +11864,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetRateFrom", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueRateFrom string
 		obj.SetRateFrom(fernTestValueRateFrom)
 		assert.Equal(t, fernTestValueRateFrom, obj.RateFrom)
@@ -11871,7 +11872,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetRateTo", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueRateTo string
 		obj.SetRateTo(fernTestValueRateTo)
 		assert.Equal(t, fernTestValueRateTo, obj.RateTo)
@@ -11879,7 +11880,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetTotalAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueTotalAssets string
 		obj.SetTotalAssets(fernTestValueTotalAssets)
 		assert.Equal(t, fernTestValueTotalAssets, obj.TotalAssets)
@@ -11887,7 +11888,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetNetEquity", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueNetEquity string
 		obj.SetNetEquity(fernTestValueNetEquity)
 		assert.Equal(t, fernTestValueNetEquity, obj.NetEquity)
@@ -11895,7 +11896,7 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	})
 
 	t.Run("SetPeriodResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValuePeriodResult string
 		obj.SetPeriodResult(fernTestValuePeriodResult)
 		assert.Equal(t, fernTestValuePeriodResult, obj.PeriodResult)
@@ -11904,11 +11905,11 @@ func TestSettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestGettersReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("GetCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.CompanyID = expected
 
@@ -11918,7 +11919,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11931,7 +11932,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.Name = expected
 
@@ -11941,7 +11942,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11954,7 +11955,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetBaseCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.BaseCurrency = expected
 
@@ -11964,7 +11965,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetBaseCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11977,7 +11978,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetOwnershipPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.OwnershipPercent = expected
 
@@ -11987,7 +11988,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetOwnershipPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12000,8 +12001,8 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetMethod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
-		var expected PostV1ConsolidationReportResponseMembersItemMethod
+		obj := &ReportConsolidationResponseMembersItem{}
+		var expected ReportConsolidationResponseMembersItemMethod
 		obj.Method = expected
 
 		// Act & Assert
@@ -12010,7 +12011,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12023,7 +12024,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetFxFactor", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.FxFactor = expected
 
@@ -12033,7 +12034,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetFxFactor_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12046,7 +12047,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetRateFrom", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.RateFrom = expected
 
@@ -12056,7 +12057,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetRateFrom_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12069,7 +12070,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetRateTo", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.RateTo = expected
 
@@ -12079,7 +12080,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetRateTo_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12092,7 +12093,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetTotalAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.TotalAssets = expected
 
@@ -12102,7 +12103,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetTotalAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12115,7 +12116,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetNetEquity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.NetEquity = expected
 
@@ -12125,7 +12126,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetNetEquity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12138,7 +12139,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 	t.Run("GetPeriodResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var expected string
 		obj.PeriodResult = expected
 
@@ -12148,7 +12149,7 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 	t.Run("GetPeriodResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12160,11 +12161,11 @@ func TestGettersPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("SetCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueCompanyID string
 
 		// Act
@@ -12195,7 +12196,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueName string
 
 		// Act
@@ -12226,7 +12227,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetBaseCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueBaseCurrency string
 
 		// Act
@@ -12257,7 +12258,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetOwnershipPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueOwnershipPercent string
 
 		// Act
@@ -12288,8 +12289,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetMethod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
-		var fernTestValueMethod PostV1ConsolidationReportResponseMembersItemMethod
+		obj := &ReportConsolidationResponseMembersItem{}
+		var fernTestValueMethod ReportConsolidationResponseMembersItemMethod
 
 		// Act
 		obj.SetMethod(fernTestValueMethod)
@@ -12319,7 +12320,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetFxFactor_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueFxFactor string
 
 		// Act
@@ -12350,7 +12351,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetRateFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueRateFrom string
 
 		// Act
@@ -12381,7 +12382,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetRateTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueRateTo string
 
 		// Act
@@ -12412,7 +12413,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetTotalAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueTotalAssets string
 
 		// Act
@@ -12443,7 +12444,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetNetEquity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValueNetEquity string
 
 		// Act
@@ -12474,7 +12475,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 	t.Run("SetPeriodResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		var fernTestValuePeriodResult string
 
 		// Act
@@ -12504,9 +12505,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseMembersItem(t *test
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestSettersReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("SetEquity", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var fernTestValueEquity string
 		obj.SetEquity(fernTestValueEquity)
 		assert.Equal(t, fernTestValueEquity, obj.Equity)
@@ -12514,7 +12515,7 @@ func TestSettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 	})
 
 	t.Run("SetResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var fernTestValueResult string
 		obj.SetResult(fernTestValueResult)
 		assert.Equal(t, fernTestValueResult, obj.Result)
@@ -12523,11 +12524,11 @@ func TestSettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestGettersReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("GetEquity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var expected string
 		obj.Equity = expected
 
@@ -12537,7 +12538,7 @@ func TestGettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 
 	t.Run("GetEquity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseNonControllingInterest
+		var obj *ReportConsolidationResponseNonControllingInterest
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12550,7 +12551,7 @@ func TestGettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 	t.Run("GetResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var expected string
 		obj.Result = expected
 
@@ -12560,7 +12561,7 @@ func TestGettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 
 	t.Run("GetResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseNonControllingInterest
+		var obj *ReportConsolidationResponseNonControllingInterest
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12572,11 +12573,11 @@ func TestGettersPostV1ConsolidationReportResponseNonControllingInterest(t *testi
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("SetEquity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var fernTestValueEquity string
 
 		// Act
@@ -12607,7 +12608,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseNonControllingInter
 	t.Run("SetResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		var fernTestValueResult string
 
 		// Act
@@ -12637,17 +12638,17 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseNonControllingInter
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestSettersReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("SetCategory", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueCategory PostV1ConsolidationReportResponseStatementsCategory
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueCategory ReportConsolidationResponseStatementsCategory
 		obj.SetCategory(fernTestValueCategory)
 		assert.Equal(t, fernTestValueCategory, obj.Category)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLayout", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueLayout string
 		obj.SetLayout(fernTestValueLayout)
 		assert.Equal(t, fernTestValueLayout, obj.Layout)
@@ -12655,7 +12656,7 @@ func TestSettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	})
 
 	t.Run("SetRequiredStatements", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueRequiredStatements []string
 		obj.SetRequiredStatements(fernTestValueRequiredStatements)
 		assert.Equal(t, fernTestValueRequiredStatements, obj.RequiredStatements)
@@ -12663,7 +12664,7 @@ func TestSettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	})
 
 	t.Run("SetAsOf", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueAsOf string
 		obj.SetAsOf(fernTestValueAsOf)
 		assert.Equal(t, fernTestValueAsOf, obj.AsOf)
@@ -12671,32 +12672,32 @@ func TestSettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	})
 
 	t.Run("SetBalanceSheet", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueBalanceSheet *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueBalanceSheet *ReportConsolidationResponseStatementsBalanceSheet
 		obj.SetBalanceSheet(fernTestValueBalanceSheet)
 		assert.Equal(t, fernTestValueBalanceSheet, obj.BalanceSheet)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProfitLoss", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueProfitLoss *PostV1ConsolidationReportResponseStatementsProfitLoss
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueProfitLoss *ReportConsolidationResponseStatementsProfitLoss
 		obj.SetProfitLoss(fernTestValueProfitLoss)
 		assert.Equal(t, fernTestValueProfitLoss, obj.ProfitLoss)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalanceSheetDetail", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueBalanceSheetDetail *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueBalanceSheetDetail *ReportConsolidationResponseStatementsBalanceSheetDetail
 		obj.SetBalanceSheetDetail(fernTestValueBalanceSheetDetail)
 		assert.Equal(t, fernTestValueBalanceSheetDetail, obj.BalanceSheetDetail)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProfitLossDetail", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueProfitLossDetail *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueProfitLossDetail *ReportConsolidationResponseStatementsProfitLossDetail
 		obj.SetProfitLossDetail(fernTestValueProfitLossDetail)
 		assert.Equal(t, fernTestValueProfitLossDetail, obj.ProfitLossDetail)
 		assert.NotNil(t, obj.explicitFields)
@@ -12704,12 +12705,12 @@ func TestSettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestGettersReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("GetCategory", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var expected PostV1ConsolidationReportResponseStatementsCategory
+		obj := &ReportConsolidationResponseStatements{}
+		var expected ReportConsolidationResponseStatementsCategory
 		obj.Category = expected
 
 		// Act & Assert
@@ -12718,7 +12719,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12731,7 +12732,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetLayout", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var expected string
 		obj.Layout = expected
 
@@ -12741,7 +12742,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetLayout_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12754,7 +12755,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetRequiredStatements", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var expected []string
 		obj.RequiredStatements = expected
 
@@ -12765,7 +12766,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetRequiredStatements_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		obj.RequiredStatements = nil
 
 		// Act & Assert
@@ -12774,7 +12775,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetRequiredStatements_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12787,7 +12788,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetAsOf", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var expected string
 		obj.AsOf = expected
 
@@ -12797,7 +12798,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetAsOf_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12810,8 +12811,8 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetBalanceSheet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		obj := &ReportConsolidationResponseStatements{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheet
 		obj.BalanceSheet = expected
 
 		// Act & Assert
@@ -12821,7 +12822,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetBalanceSheet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		obj.BalanceSheet = nil
 
 		// Act & Assert
@@ -12830,7 +12831,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetBalanceSheet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12843,8 +12844,8 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetProfitLoss", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var expected *PostV1ConsolidationReportResponseStatementsProfitLoss
+		obj := &ReportConsolidationResponseStatements{}
+		var expected *ReportConsolidationResponseStatementsProfitLoss
 		obj.ProfitLoss = expected
 
 		// Act & Assert
@@ -12854,7 +12855,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetProfitLoss_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		obj.ProfitLoss = nil
 
 		// Act & Assert
@@ -12863,7 +12864,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetProfitLoss_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12876,8 +12877,8 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetBalanceSheetDetail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheetDetail
 		obj.BalanceSheetDetail = expected
 
 		// Act & Assert
@@ -12887,7 +12888,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetBalanceSheetDetail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		obj.BalanceSheetDetail = nil
 
 		// Act & Assert
@@ -12896,7 +12897,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetBalanceSheetDetail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12909,8 +12910,8 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetProfitLossDetail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var expected *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var expected *ReportConsolidationResponseStatementsProfitLossDetail
 		obj.ProfitLossDetail = expected
 
 		// Act & Assert
@@ -12920,7 +12921,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 	t.Run("GetProfitLossDetail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		obj.ProfitLossDetail = nil
 
 		// Act & Assert
@@ -12929,7 +12930,7 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 	t.Run("GetProfitLossDetail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12941,12 +12942,12 @@ func TestGettersPostV1ConsolidationReportResponseStatements(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueCategory PostV1ConsolidationReportResponseStatementsCategory
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueCategory ReportConsolidationResponseStatementsCategory
 
 		// Act
 		obj.SetCategory(fernTestValueCategory)
@@ -12976,7 +12977,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetLayout_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueLayout string
 
 		// Act
@@ -13007,7 +13008,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetRequiredStatements_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueRequiredStatements []string
 
 		// Act
@@ -13038,7 +13039,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetAsOf_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		var fernTestValueAsOf string
 
 		// Act
@@ -13069,8 +13070,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetBalanceSheet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueBalanceSheet *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueBalanceSheet *ReportConsolidationResponseStatementsBalanceSheet
 
 		// Act
 		obj.SetBalanceSheet(fernTestValueBalanceSheet)
@@ -13100,8 +13101,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetProfitLoss_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueProfitLoss *PostV1ConsolidationReportResponseStatementsProfitLoss
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueProfitLoss *ReportConsolidationResponseStatementsProfitLoss
 
 		// Act
 		obj.SetProfitLoss(fernTestValueProfitLoss)
@@ -13131,8 +13132,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetBalanceSheetDetail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueBalanceSheetDetail *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueBalanceSheetDetail *ReportConsolidationResponseStatementsBalanceSheetDetail
 
 		// Act
 		obj.SetBalanceSheetDetail(fernTestValueBalanceSheetDetail)
@@ -13162,8 +13163,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 	t.Run("SetProfitLossDetail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
-		var fernTestValueProfitLossDetail *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		obj := &ReportConsolidationResponseStatements{}
+		var fernTestValueProfitLossDetail *ReportConsolidationResponseStatementsProfitLossDetail
 
 		// Act
 		obj.SetProfitLossDetail(fernTestValueProfitLossDetail)
@@ -13192,9 +13193,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatements(t *testi
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("SetNonCurrentAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueNonCurrentAssets string
 		obj.SetNonCurrentAssets(fernTestValueNonCurrentAssets)
 		assert.Equal(t, fernTestValueNonCurrentAssets, obj.NonCurrentAssets)
@@ -13202,7 +13203,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetCurrentAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueCurrentAssets string
 		obj.SetCurrentAssets(fernTestValueCurrentAssets)
 		assert.Equal(t, fernTestValueCurrentAssets, obj.CurrentAssets)
@@ -13210,7 +13211,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetTotalAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueTotalAssets string
 		obj.SetTotalAssets(fernTestValueTotalAssets)
 		assert.Equal(t, fernTestValueTotalAssets, obj.TotalAssets)
@@ -13218,7 +13219,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetEquity", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueEquity string
 		obj.SetEquity(fernTestValueEquity)
 		assert.Equal(t, fernTestValueEquity, obj.Equity)
@@ -13226,7 +13227,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetOfWhichResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueOfWhichResult string
 		obj.SetOfWhichResult(fernTestValueOfWhichResult)
 		assert.Equal(t, fernTestValueOfWhichResult, obj.OfWhichResult)
@@ -13234,7 +13235,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetLiabilities", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueLiabilities string
 		obj.SetLiabilities(fernTestValueLiabilities)
 		assert.Equal(t, fernTestValueLiabilities, obj.Liabilities)
@@ -13242,7 +13243,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetTotalEquityAndLiabilities", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueTotalEquityAndLiabilities string
 		obj.SetTotalEquityAndLiabilities(fernTestValueTotalEquityAndLiabilities)
 		assert.Equal(t, fernTestValueTotalEquityAndLiabilities, obj.TotalEquityAndLiabilities)
@@ -13250,7 +13251,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	})
 
 	t.Run("SetBalanced", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueBalanced bool
 		obj.SetBalanced(fernTestValueBalanced)
 		assert.Equal(t, fernTestValueBalanced, obj.Balanced)
@@ -13259,11 +13260,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("GetNonCurrentAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.NonCurrentAssets = expected
 
@@ -13273,7 +13274,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetNonCurrentAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13286,7 +13287,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetCurrentAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.CurrentAssets = expected
 
@@ -13296,7 +13297,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetCurrentAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13309,7 +13310,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetTotalAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.TotalAssets = expected
 
@@ -13319,7 +13320,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetTotalAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13332,7 +13333,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetEquity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.Equity = expected
 
@@ -13342,7 +13343,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetEquity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13355,7 +13356,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetOfWhichResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.OfWhichResult = expected
 
@@ -13365,7 +13366,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetOfWhichResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13378,7 +13379,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetLiabilities", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.Liabilities = expected
 
@@ -13388,7 +13389,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetLiabilities_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13401,7 +13402,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetTotalEquityAndLiabilities", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected string
 		obj.TotalEquityAndLiabilities = expected
 
@@ -13411,7 +13412,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetTotalEquityAndLiabilities_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13424,7 +13425,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 	t.Run("GetBalanced", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var expected bool
 		obj.Balanced = expected
 
@@ -13434,7 +13435,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 	t.Run("GetBalanced_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13446,11 +13447,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testi
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("SetNonCurrentAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueNonCurrentAssets string
 
 		// Act
@@ -13481,7 +13482,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetCurrentAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueCurrentAssets string
 
 		// Act
@@ -13512,7 +13513,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotalAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueTotalAssets string
 
 		// Act
@@ -13543,7 +13544,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetEquity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueEquity string
 
 		// Act
@@ -13574,7 +13575,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetOfWhichResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueOfWhichResult string
 
 		// Act
@@ -13605,7 +13606,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetLiabilities_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueLiabilities string
 
 		// Act
@@ -13636,7 +13637,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotalEquityAndLiabilities_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueTotalEquityAndLiabilities string
 
 		// Act
@@ -13667,7 +13668,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetBalanced_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		var fernTestValueBalanced bool
 
 		// Act
@@ -13697,34 +13698,34 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("SetNonCurrentAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueNonCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueNonCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		obj.SetNonCurrentAssets(fernTestValueNonCurrentAssets)
 		assert.Equal(t, fernTestValueNonCurrentAssets, obj.NonCurrentAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrentAssets", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		obj.SetCurrentAssets(fernTestValueCurrentAssets)
 		assert.Equal(t, fernTestValueCurrentAssets, obj.CurrentAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEquity", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueEquity *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueEquity *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		obj.SetEquity(fernTestValueEquity)
 		assert.Equal(t, fernTestValueEquity, obj.Equity)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLiabilities", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueLiabilities *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueLiabilities *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		obj.SetLiabilities(fernTestValueLiabilities)
 		assert.Equal(t, fernTestValueLiabilities, obj.Liabilities)
 		assert.NotNil(t, obj.explicitFields)
@@ -13732,12 +13733,12 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("GetNonCurrentAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		obj.NonCurrentAssets = expected
 
 		// Act & Assert
@@ -13747,7 +13748,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetNonCurrentAssets_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		obj.NonCurrentAssets = nil
 
 		// Act & Assert
@@ -13756,7 +13757,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 	t.Run("GetNonCurrentAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13769,8 +13770,8 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetCurrentAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		obj.CurrentAssets = expected
 
 		// Act & Assert
@@ -13780,7 +13781,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetCurrentAssets_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		obj.CurrentAssets = nil
 
 		// Act & Assert
@@ -13789,7 +13790,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 	t.Run("GetCurrentAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13802,8 +13803,8 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetEquity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		obj.Equity = expected
 
 		// Act & Assert
@@ -13813,7 +13814,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetEquity_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		obj.Equity = nil
 
 		// Act & Assert
@@ -13822,7 +13823,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 	t.Run("GetEquity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13835,8 +13836,8 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetLiabilities", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var expected *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var expected *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		obj.Liabilities = expected
 
 		// Act & Assert
@@ -13846,7 +13847,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 	t.Run("GetLiabilities_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		obj.Liabilities = nil
 
 		// Act & Assert
@@ -13855,7 +13856,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 	t.Run("GetLiabilities_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13867,12 +13868,12 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t 
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("SetNonCurrentAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueNonCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueNonCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 
 		// Act
 		obj.SetNonCurrentAssets(fernTestValueNonCurrentAssets)
@@ -13902,8 +13903,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetCurrentAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 
 		// Act
 		obj.SetCurrentAssets(fernTestValueCurrentAssets)
@@ -13933,8 +13934,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetEquity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueEquity *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueEquity *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 
 		// Act
 		obj.SetEquity(fernTestValueEquity)
@@ -13964,8 +13965,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetLiabilities_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
-		var fernTestValueLiabilities *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
+		var fernTestValueLiabilities *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 
 		// Act
 		obj.SetLiabilities(fernTestValueLiabilities)
@@ -13994,9 +13995,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("SetInventories", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueInventories string
 		obj.SetInventories(fernTestValueInventories)
 		assert.Equal(t, fernTestValueInventories, obj.Inventories)
@@ -14004,7 +14005,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	})
 
 	t.Run("SetReceivables", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueReceivables string
 		obj.SetReceivables(fernTestValueReceivables)
 		assert.Equal(t, fernTestValueReceivables, obj.Receivables)
@@ -14012,7 +14013,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	})
 
 	t.Run("SetOtherCurrent", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueOtherCurrent string
 		obj.SetOtherCurrent(fernTestValueOtherCurrent)
 		assert.Equal(t, fernTestValueOtherCurrent, obj.OtherCurrent)
@@ -14020,7 +14021,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	})
 
 	t.Run("SetCash", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueCash string
 		obj.SetCash(fernTestValueCash)
 		assert.Equal(t, fernTestValueCash, obj.Cash)
@@ -14028,7 +14029,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14037,11 +14038,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("GetInventories", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var expected string
 		obj.Inventories = expected
 
@@ -14051,7 +14052,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 	t.Run("GetInventories_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14064,7 +14065,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	t.Run("GetReceivables", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var expected string
 		obj.Receivables = expected
 
@@ -14074,7 +14075,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 	t.Run("GetReceivables_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14087,7 +14088,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	t.Run("GetOtherCurrent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var expected string
 		obj.OtherCurrent = expected
 
@@ -14097,7 +14098,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 	t.Run("GetOtherCurrent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14110,7 +14111,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	t.Run("GetCash", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var expected string
 		obj.Cash = expected
 
@@ -14120,7 +14121,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 	t.Run("GetCash_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14133,7 +14134,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var expected string
 		obj.Total = expected
 
@@ -14143,7 +14144,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14155,11 +14156,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCur
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("SetInventories_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueInventories string
 
 		// Act
@@ -14190,7 +14191,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetReceivables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueReceivables string
 
 		// Act
@@ -14221,7 +14222,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetOtherCurrent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueOtherCurrent string
 
 		// Act
@@ -14252,7 +14253,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetCash_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueCash string
 
 		// Act
@@ -14283,7 +14284,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		var fernTestValueTotal string
 
 		// Act
@@ -14313,9 +14314,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("SetCapital", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueCapital string
 		obj.SetCapital(fernTestValueCapital)
 		assert.Equal(t, fernTestValueCapital, obj.Capital)
@@ -14323,7 +14324,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	})
 
 	t.Run("SetReserves", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueReserves string
 		obj.SetReserves(fernTestValueReserves)
 		assert.Equal(t, fernTestValueReserves, obj.Reserves)
@@ -14331,7 +14332,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	})
 
 	t.Run("SetRetainedEarnings", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueRetainedEarnings string
 		obj.SetRetainedEarnings(fernTestValueRetainedEarnings)
 		assert.Equal(t, fernTestValueRetainedEarnings, obj.RetainedEarnings)
@@ -14339,7 +14340,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	})
 
 	t.Run("SetOtherEquity", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueOtherEquity string
 		obj.SetOtherEquity(fernTestValueOtherEquity)
 		assert.Equal(t, fernTestValueOtherEquity, obj.OtherEquity)
@@ -14347,7 +14348,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	})
 
 	t.Run("SetPeriodResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValuePeriodResult string
 		obj.SetPeriodResult(fernTestValuePeriodResult)
 		assert.Equal(t, fernTestValuePeriodResult, obj.PeriodResult)
@@ -14355,7 +14356,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14364,11 +14365,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("GetCapital", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.Capital = expected
 
@@ -14378,7 +14379,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetCapital_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14391,7 +14392,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	t.Run("GetReserves", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.Reserves = expected
 
@@ -14401,7 +14402,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetReserves_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14414,7 +14415,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	t.Run("GetRetainedEarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.RetainedEarnings = expected
 
@@ -14424,7 +14425,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetRetainedEarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14437,7 +14438,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	t.Run("GetOtherEquity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.OtherEquity = expected
 
@@ -14447,7 +14448,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetOtherEquity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14460,7 +14461,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	t.Run("GetPeriodResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.PeriodResult = expected
 
@@ -14470,7 +14471,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetPeriodResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14483,7 +14484,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var expected string
 		obj.Total = expected
 
@@ -14493,7 +14494,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14505,11 +14506,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEqu
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("SetCapital_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueCapital string
 
 		// Act
@@ -14540,7 +14541,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetReserves_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueReserves string
 
 		// Act
@@ -14571,7 +14572,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetRetainedEarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueRetainedEarnings string
 
 		// Act
@@ -14602,7 +14603,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetOtherEquity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueOtherEquity string
 
 		// Act
@@ -14633,7 +14634,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetPeriodResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValuePeriodResult string
 
 		// Act
@@ -14664,7 +14665,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		var fernTestValueTotal string
 
 		// Act
@@ -14694,9 +14695,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("SetNonCurrent", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueNonCurrent string
 		obj.SetNonCurrent(fernTestValueNonCurrent)
 		assert.Equal(t, fernTestValueNonCurrent, obj.NonCurrent)
@@ -14704,7 +14705,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	})
 
 	t.Run("SetCurrent", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueCurrent string
 		obj.SetCurrent(fernTestValueCurrent)
 		assert.Equal(t, fernTestValueCurrent, obj.Current)
@@ -14712,7 +14713,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	})
 
 	t.Run("SetOther", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueOther string
 		obj.SetOther(fernTestValueOther)
 		assert.Equal(t, fernTestValueOther, obj.Other)
@@ -14720,7 +14721,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14729,11 +14730,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("GetNonCurrent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var expected string
 		obj.NonCurrent = expected
 
@@ -14743,7 +14744,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 	t.Run("GetNonCurrent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14756,7 +14757,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	t.Run("GetCurrent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var expected string
 		obj.Current = expected
 
@@ -14766,7 +14767,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 	t.Run("GetCurrent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14779,7 +14780,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	t.Run("GetOther", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var expected string
 		obj.Other = expected
 
@@ -14789,7 +14790,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 	t.Run("GetOther_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14802,7 +14803,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var expected string
 		obj.Total = expected
 
@@ -14812,7 +14813,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14824,11 +14825,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLia
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("SetNonCurrent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueNonCurrent string
 
 		// Act
@@ -14859,7 +14860,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetCurrent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueCurrent string
 
 		// Act
@@ -14890,7 +14891,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetOther_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueOther string
 
 		// Act
@@ -14921,7 +14922,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		var fernTestValueTotal string
 
 		// Act
@@ -14951,9 +14952,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("SetIntangible", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueIntangible string
 		obj.SetIntangible(fernTestValueIntangible)
 		assert.Equal(t, fernTestValueIntangible, obj.Intangible)
@@ -14961,7 +14962,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	})
 
 	t.Run("SetTangible", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueTangible string
 		obj.SetTangible(fernTestValueTangible)
 		assert.Equal(t, fernTestValueTangible, obj.Tangible)
@@ -14969,7 +14970,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	})
 
 	t.Run("SetFinancial", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueFinancial string
 		obj.SetFinancial(fernTestValueFinancial)
 		assert.Equal(t, fernTestValueFinancial, obj.Financial)
@@ -14977,7 +14978,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	})
 
 	t.Run("SetOther", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueOther string
 		obj.SetOther(fernTestValueOther)
 		assert.Equal(t, fernTestValueOther, obj.Other)
@@ -14985,7 +14986,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14994,11 +14995,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("GetIntangible", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var expected string
 		obj.Intangible = expected
 
@@ -15008,7 +15009,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 	t.Run("GetIntangible_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15021,7 +15022,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	t.Run("GetTangible", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var expected string
 		obj.Tangible = expected
 
@@ -15031,7 +15032,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 	t.Run("GetTangible_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15044,7 +15045,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	t.Run("GetFinancial", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var expected string
 		obj.Financial = expected
 
@@ -15054,7 +15055,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 	t.Run("GetFinancial_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15067,7 +15068,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	t.Run("GetOther", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var expected string
 		obj.Other = expected
 
@@ -15077,7 +15078,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 	t.Run("GetOther_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15090,7 +15091,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var expected string
 		obj.Total = expected
 
@@ -15100,7 +15101,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15112,11 +15113,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNon
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("SetIntangible_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueIntangible string
 
 		// Act
@@ -15147,7 +15148,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTangible_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueTangible string
 
 		// Act
@@ -15178,7 +15179,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetFinancial_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueFinancial string
 
 		// Act
@@ -15209,7 +15210,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetOther_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueOther string
 
 		// Act
@@ -15240,7 +15241,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		var fernTestValueTotal string
 
 		// Act
@@ -15270,25 +15271,25 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsBalanceSh
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("SetFromDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var fernTestValueFromDate time.Time
 		obj.SetFromDate(fernTestValueFromDate)
 		assert.Equal(t, fernTestValueFromDate, obj.FromDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetToDate", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var fernTestValueToDate time.Time
 		obj.SetToDate(fernTestValueToDate)
 		assert.Equal(t, fernTestValueToDate, obj.ToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRevenue", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueRevenue string
 		obj.SetRevenue(fernTestValueRevenue)
 		assert.Equal(t, fernTestValueRevenue, obj.Revenue)
@@ -15296,7 +15297,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	})
 
 	t.Run("SetExpenses", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueExpenses string
 		obj.SetExpenses(fernTestValueExpenses)
 		assert.Equal(t, fernTestValueExpenses, obj.Expenses)
@@ -15304,7 +15305,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	})
 
 	t.Run("SetNetResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueNetResult string
 		obj.SetNetResult(fernTestValueNetResult)
 		assert.Equal(t, fernTestValueNetResult, obj.NetResult)
@@ -15313,12 +15314,12 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("GetFromDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var expected string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var expected time.Time
 		obj.FromDate = expected
 
 		// Act & Assert
@@ -15327,7 +15328,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 	t.Run("GetFromDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15340,8 +15341,8 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	t.Run("GetToDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var expected string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var expected time.Time
 		obj.ToDate = expected
 
 		// Act & Assert
@@ -15350,7 +15351,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 	t.Run("GetToDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15363,7 +15364,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	t.Run("GetRevenue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var expected string
 		obj.Revenue = expected
 
@@ -15373,7 +15374,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 	t.Run("GetRevenue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15386,7 +15387,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	t.Run("GetExpenses", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var expected string
 		obj.Expenses = expected
 
@@ -15396,7 +15397,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 	t.Run("GetExpenses_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15409,7 +15410,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 	t.Run("GetNetResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var expected string
 		obj.NetResult = expected
 
@@ -15419,7 +15420,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 	t.Run("GetNetResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15431,12 +15432,12 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("SetFromDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var fernTestValueFromDate string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var fernTestValueFromDate time.Time
 
 		// Act
 		obj.SetFromDate(fernTestValueFromDate)
@@ -15466,8 +15467,8 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
-		var fernTestValueToDate string
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
+		var fernTestValueToDate time.Time
 
 		// Act
 		obj.SetToDate(fernTestValueToDate)
@@ -15497,7 +15498,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetRevenue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueRevenue string
 
 		// Act
@@ -15528,7 +15529,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetExpenses_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueExpenses string
 
 		// Act
@@ -15559,7 +15560,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetNetResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		var fernTestValueNetResult string
 
 		// Act
@@ -15589,9 +15590,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestSettersReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("SetSalesRevenue", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueSalesRevenue string
 		obj.SetSalesRevenue(fernTestValueSalesRevenue)
 		assert.Equal(t, fernTestValueSalesRevenue, obj.SalesRevenue)
@@ -15599,7 +15600,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetCostOfSales", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueCostOfSales string
 		obj.SetCostOfSales(fernTestValueCostOfSales)
 		assert.Equal(t, fernTestValueCostOfSales, obj.CostOfSales)
@@ -15607,7 +15608,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetGrossProfit", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueGrossProfit string
 		obj.SetGrossProfit(fernTestValueGrossProfit)
 		assert.Equal(t, fernTestValueGrossProfit, obj.GrossProfit)
@@ -15615,7 +15616,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetSellingExpenses", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueSellingExpenses string
 		obj.SetSellingExpenses(fernTestValueSellingExpenses)
 		assert.Equal(t, fernTestValueSellingExpenses, obj.SellingExpenses)
@@ -15623,7 +15624,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetAdminExpenses", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueAdminExpenses string
 		obj.SetAdminExpenses(fernTestValueAdminExpenses)
 		assert.Equal(t, fernTestValueAdminExpenses, obj.AdminExpenses)
@@ -15631,7 +15632,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetOperatingProfit", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueOperatingProfit string
 		obj.SetOperatingProfit(fernTestValueOperatingProfit)
 		assert.Equal(t, fernTestValueOperatingProfit, obj.OperatingProfit)
@@ -15639,7 +15640,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetOtherActivityResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueOtherActivityResult string
 		obj.SetOtherActivityResult(fernTestValueOtherActivityResult)
 		assert.Equal(t, fernTestValueOtherActivityResult, obj.OtherActivityResult)
@@ -15647,7 +15648,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetFinancialActivityResult", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueFinancialActivityResult string
 		obj.SetFinancialActivityResult(fernTestValueFinancialActivityResult)
 		assert.Equal(t, fernTestValueFinancialActivityResult, obj.FinancialActivityResult)
@@ -15655,7 +15656,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetProfitBeforeTax", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueProfitBeforeTax string
 		obj.SetProfitBeforeTax(fernTestValueProfitBeforeTax)
 		assert.Equal(t, fernTestValueProfitBeforeTax, obj.ProfitBeforeTax)
@@ -15663,7 +15664,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetIncomeTax", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueIncomeTax string
 		obj.SetIncomeTax(fernTestValueIncomeTax)
 		assert.Equal(t, fernTestValueIncomeTax, obj.IncomeTax)
@@ -15671,7 +15672,7 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	})
 
 	t.Run("SetNetProfit", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueNetProfit string
 		obj.SetNetProfit(fernTestValueNetProfit)
 		assert.Equal(t, fernTestValueNetProfit, obj.NetProfit)
@@ -15680,11 +15681,11 @@ func TestSettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestGettersReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("GetSalesRevenue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.SalesRevenue = expected
 
@@ -15694,7 +15695,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetSalesRevenue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15707,7 +15708,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetCostOfSales", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.CostOfSales = expected
 
@@ -15717,7 +15718,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetCostOfSales_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15730,7 +15731,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetGrossProfit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.GrossProfit = expected
 
@@ -15740,7 +15741,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetGrossProfit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15753,7 +15754,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetSellingExpenses", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.SellingExpenses = expected
 
@@ -15763,7 +15764,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetSellingExpenses_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15776,7 +15777,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetAdminExpenses", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.AdminExpenses = expected
 
@@ -15786,7 +15787,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetAdminExpenses_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15799,7 +15800,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetOperatingProfit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.OperatingProfit = expected
 
@@ -15809,7 +15810,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetOperatingProfit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15822,7 +15823,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetOtherActivityResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.OtherActivityResult = expected
 
@@ -15832,7 +15833,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetOtherActivityResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15845,7 +15846,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetFinancialActivityResult", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.FinancialActivityResult = expected
 
@@ -15855,7 +15856,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetFinancialActivityResult_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15868,7 +15869,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetProfitBeforeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.ProfitBeforeTax = expected
 
@@ -15878,7 +15879,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetProfitBeforeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15891,7 +15892,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetIncomeTax", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.IncomeTax = expected
 
@@ -15901,7 +15902,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetIncomeTax_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15914,7 +15915,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 	t.Run("GetNetProfit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var expected string
 		obj.NetProfit = expected
 
@@ -15924,7 +15925,7 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 	t.Run("GetNetProfit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15936,11 +15937,11 @@ func TestGettersPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *t
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("SetSalesRevenue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueSalesRevenue string
 
 		// Act
@@ -15971,7 +15972,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetCostOfSales_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueCostOfSales string
 
 		// Act
@@ -16002,7 +16003,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetGrossProfit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueGrossProfit string
 
 		// Act
@@ -16033,7 +16034,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetSellingExpenses_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueSellingExpenses string
 
 		// Act
@@ -16064,7 +16065,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetAdminExpenses_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueAdminExpenses string
 
 		// Act
@@ -16095,7 +16096,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetOperatingProfit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueOperatingProfit string
 
 		// Act
@@ -16126,7 +16127,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetOtherActivityResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueOtherActivityResult string
 
 		// Act
@@ -16157,7 +16158,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetFinancialActivityResult_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueFinancialActivityResult string
 
 		// Act
@@ -16188,7 +16189,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetProfitBeforeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueProfitBeforeTax string
 
 		// Act
@@ -16219,7 +16220,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetIncomeTax_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueIncomeTax string
 
 		// Act
@@ -16250,7 +16251,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 	t.Run("SetNetProfit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		var fernTestValueNetProfit string
 
 		// Act
@@ -16280,9 +16281,9 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseStatementsProfitLos
 
 }
 
-func TestSettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestSettersReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16290,7 +16291,7 @@ func TestSettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueType string
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
@@ -16298,7 +16299,7 @@ func TestSettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	})
 
 	t.Run("SetClosing", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueClosing string
 		obj.SetClosing(fernTestValueClosing)
 		assert.Equal(t, fernTestValueClosing, obj.Closing)
@@ -16306,7 +16307,7 @@ func TestSettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValuePeriod string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -16315,11 +16316,11 @@ func TestSettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 }
 
-func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestGettersReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var expected string
 		obj.Code = expected
 
@@ -16329,7 +16330,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16342,7 +16343,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var expected string
 		obj.Type = expected
 
@@ -16352,7 +16353,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16365,7 +16366,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	t.Run("GetClosing", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var expected string
 		obj.Closing = expected
 
@@ -16375,7 +16376,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 	t.Run("GetClosing_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16388,7 +16389,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var expected string
 		obj.Period = expected
 
@@ -16398,7 +16399,7 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16410,11 +16411,11 @@ func TestGettersPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestSettersMarkExplicitReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -16445,7 +16446,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseTrialBalanceItem(t 
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueType string
 
 		// Act
@@ -16476,7 +16477,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseTrialBalanceItem(t 
 	t.Run("SetClosing_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValueClosing string
 
 		// Act
@@ -16507,7 +16508,7 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseTrialBalanceItem(t 
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		var fernTestValuePeriod string
 
 		// Act
@@ -16537,11 +16538,11 @@ func TestSettersMarkExplicitPostV1ConsolidationReportResponseTrialBalanceItem(t 
 
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestJSONMarshalingGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16550,31 +16551,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsCreateResponse
+		var unmarshaled GroupsCreateConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsCreateResponse
+		var obj GroupsCreateConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsCreateResponse
+		var obj GroupsCreateConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestJSONMarshalingGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16583,31 +16584,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsDeleteResponse
+		var unmarshaled GroupsDeleteConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsDeleteResponse
+		var obj GroupsDeleteConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsDeleteResponse
+		var obj GroupsDeleteConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestJSONMarshalingGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16616,31 +16617,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsGetResponse
+		var unmarshaled GroupsGetConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsGetResponse
+		var obj GroupsGetConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsGetResponse
+		var obj GroupsGetConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestJSONMarshalingGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16649,31 +16650,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsGetResponseMembersItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsGetResponseMembersItem
+		var unmarshaled GroupsGetConsolidationResponseMembersItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj GroupsGetConsolidationResponseMembersItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj GroupsGetConsolidationResponseMembersItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestJSONMarshalingGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponse{}
+		obj := &GroupsListConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16682,31 +16683,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsListResponse
+		var unmarshaled GroupsListConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsListResponse
+		var obj GroupsListConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsListResponse
+		var obj GroupsListConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16715,31 +16716,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsListResponseRowsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsListResponseRowsItem
+		var unmarshaled GroupsListConsolidationResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsListResponseRowsItem
+		var obj GroupsListConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsListResponseRowsItem
+		var obj GroupsListConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16748,31 +16749,31 @@ func TestJSONMarshalingPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationGroupsUpdateResponse
+		var unmarshaled GroupsUpdateConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsUpdateResponse
+		var obj GroupsUpdateConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationGroupsUpdateResponse
+		var obj GroupsUpdateConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestJSONMarshalingIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
+		obj := &IntercompanyCandidatesConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16781,31 +16782,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyCandidatesResponse(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyCandidatesResponse
+		var unmarshaled IntercompanyCandidatesConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyCandidatesResponse
+		var obj IntercompanyCandidatesConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyCandidatesResponse
+		var obj IntercompanyCandidatesConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16814,31 +16815,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyCandidatesResponseRowsItem
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var unmarshaled IntercompanyCandidatesConsolidationResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj IntercompanyCandidatesConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj IntercompanyCandidatesConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestJSONMarshalingIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
+		obj := &IntercompanyLinksListConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16847,31 +16848,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksListResponse(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyLinksListResponse
+		var unmarshaled IntercompanyLinksListConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksListResponse
+		var obj IntercompanyLinksListConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksListResponse
+		var obj IntercompanyLinksListConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16880,31 +16881,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksListResponseRowsItem(
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var unmarshaled IntercompanyLinksListConsolidationResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj IntercompanyLinksListConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj IntercompanyLinksListConsolidationResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestJSONMarshalingIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16913,31 +16914,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksRemoveResponse(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var unmarshaled IntercompanyLinksRemoveConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var obj IntercompanyLinksRemoveConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var obj IntercompanyLinksRemoveConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestJSONMarshalingIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16946,31 +16947,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyLinksSetResponse(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyLinksSetResponse
+		var unmarshaled IntercompanyLinksSetConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj IntercompanyLinksSetConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj IntercompanyLinksSetConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
+		obj := &IntercompanyReportConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16979,31 +16980,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponse(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponse
+		var unmarshaled IntercompanyReportConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponse
+		var obj IntercompanyReportConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponse
+		var obj IntercompanyReportConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17012,31 +17013,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var unmarshaled IntercompanyReportConsolidationResponseDirectionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17045,31 +17046,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var unmarshaled IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17078,31 +17079,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var unmarshaled IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17111,31 +17112,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var unmarshaled IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestJSONMarshalingIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17144,31 +17145,31 @@ func TestJSONMarshalingPostV1ConsolidationIntercompanyReportResponseDirectionsIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var unmarshaled IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestJSONMarshalingMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17177,31 +17178,31 @@ func TestJSONMarshalingPostV1ConsolidationMembersAddResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationMembersAddResponse
+		var unmarshaled MembersAddConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationMembersAddResponse
+		var obj MembersAddConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationMembersAddResponse
+		var obj MembersAddConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestJSONMarshalingMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17210,31 +17211,31 @@ func TestJSONMarshalingPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationMembersRemoveResponse
+		var unmarshaled MembersRemoveConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationMembersRemoveResponse
+		var obj MembersRemoveConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationMembersRemoveResponse
+		var obj MembersRemoveConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17243,31 +17244,31 @@ func TestJSONMarshalingPostV1ConsolidationReportRequestEliminationsItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportRequestEliminationsItem
+		var unmarshaled ReportConsolidationRequestEliminationsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportRequestEliminationsItem
+		var obj ReportConsolidationRequestEliminationsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportRequestEliminationsItem
+		var obj ReportConsolidationRequestEliminationsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponse(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17276,31 +17277,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponse
+		var unmarshaled ReportConsolidationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponse
+		var obj ReportConsolidationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponse
+		var obj ReportConsolidationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17309,31 +17310,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlow
+		var unmarshaled ReportConsolidationResponseCashFlow
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlow
+		var obj ReportConsolidationResponseCashFlow
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlow
+		var obj ReportConsolidationResponseCashFlow
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17342,31 +17343,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowFinancing(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowFinancing
+		var unmarshaled ReportConsolidationResponseCashFlowFinancing
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj ReportConsolidationResponseCashFlowFinancing
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj ReportConsolidationResponseCashFlowFinancing
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17375,31 +17376,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowFinancingRowsIte
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var unmarshaled ReportConsolidationResponseCashFlowFinancingRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj ReportConsolidationResponseCashFlowFinancingRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj ReportConsolidationResponseCashFlowFinancingRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17408,31 +17409,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowInvesting(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowInvesting
+		var unmarshaled ReportConsolidationResponseCashFlowInvesting
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj ReportConsolidationResponseCashFlowInvesting
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj ReportConsolidationResponseCashFlowInvesting
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17441,31 +17442,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowInvestingRowsIte
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var unmarshaled ReportConsolidationResponseCashFlowInvestingRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj ReportConsolidationResponseCashFlowInvestingRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj ReportConsolidationResponseCashFlowInvestingRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17474,31 +17475,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowOperating(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowOperating
+		var unmarshaled ReportConsolidationResponseCashFlowOperating
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowOperating
+		var obj ReportConsolidationResponseCashFlowOperating
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowOperating
+		var obj ReportConsolidationResponseCashFlowOperating
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17507,31 +17508,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseCashFlowOperatingRowsIte
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var unmarshaled ReportConsolidationResponseCashFlowOperatingRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj ReportConsolidationResponseCashFlowOperatingRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj ReportConsolidationResponseCashFlowOperatingRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17540,31 +17541,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseEliminations(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseEliminations
+		var unmarshaled ReportConsolidationResponseEliminations
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEliminations
+		var obj ReportConsolidationResponseEliminations
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEliminations
+		var obj ReportConsolidationResponseEliminations
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17573,31 +17574,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseEliminationsAppliedItem(
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var unmarshaled ReportConsolidationResponseEliminationsAppliedItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj ReportConsolidationResponseEliminationsAppliedItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj ReportConsolidationResponseEliminationsAppliedItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17606,31 +17607,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseEquityMethod(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseEquityMethod
+		var unmarshaled ReportConsolidationResponseEquityMethod
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEquityMethod
+		var obj ReportConsolidationResponseEquityMethod
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseEquityMethod
+		var obj ReportConsolidationResponseEquityMethod
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17639,31 +17640,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseIntercompanyCandidatesIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var unmarshaled ReportConsolidationResponseIntercompanyCandidatesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj ReportConsolidationResponseIntercompanyCandidatesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj ReportConsolidationResponseIntercompanyCandidatesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17672,31 +17673,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseMembersItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseMembersItem
+		var unmarshaled ReportConsolidationResponseMembersItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseMembersItem
+		var obj ReportConsolidationResponseMembersItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseMembersItem
+		var obj ReportConsolidationResponseMembersItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17705,31 +17706,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseNonControllingInterest(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseNonControllingInterest
+		var unmarshaled ReportConsolidationResponseNonControllingInterest
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseNonControllingInterest
+		var obj ReportConsolidationResponseNonControllingInterest
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseNonControllingInterest
+		var obj ReportConsolidationResponseNonControllingInterest
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17738,31 +17739,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatements(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatements
+		var unmarshaled ReportConsolidationResponseStatements
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatements
+		var obj ReportConsolidationResponseStatements
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatements
+		var obj ReportConsolidationResponseStatements
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17771,31 +17772,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheet(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheet
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj ReportConsolidationResponseStatementsBalanceSheet
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj ReportConsolidationResponseStatementsBalanceSheet
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17804,31 +17805,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDe
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheetDetail
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetail
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetail
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17837,31 +17838,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDe
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17870,31 +17871,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDe
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17903,31 +17904,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDe
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17936,31 +17937,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsBalanceSheetDe
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var unmarshaled ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17969,31 +17970,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsProfitLoss(t *
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsProfitLoss
+		var unmarshaled ReportConsolidationResponseStatementsProfitLoss
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj ReportConsolidationResponseStatementsProfitLoss
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj ReportConsolidationResponseStatementsProfitLoss
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18002,31 +18003,31 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseStatementsProfitLossDeta
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var unmarshaled ReportConsolidationResponseStatementsProfitLossDetail
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj ReportConsolidationResponseStatementsProfitLossDetail
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj ReportConsolidationResponseStatementsProfitLossDetail
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestJSONMarshalingReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18035,791 +18036,791 @@ func TestJSONMarshalingPostV1ConsolidationReportResponseTrialBalanceItem(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1ConsolidationReportResponseTrialBalanceItem
+		var unmarshaled ReportConsolidationResponseTrialBalanceItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj ReportConsolidationResponseTrialBalanceItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj ReportConsolidationResponseTrialBalanceItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestStringGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestStringGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsDeleteResponse
+		var obj *GroupsDeleteConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestStringGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestStringGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestStringGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsListResponse{}
+		obj := &GroupsListConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponse
+		var obj *GroupsListConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestStringGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestStringGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestStringIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
+		obj := &IntercompanyCandidatesConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponse
+		var obj *IntercompanyCandidatesConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestStringIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestStringIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
+		obj := &IntercompanyLinksListConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponse
+		var obj *IntercompanyLinksListConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestStringIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestStringIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var obj *IntercompanyLinksRemoveConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestStringIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
+		obj := &IntercompanyReportConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponse
+		var obj *IntercompanyReportConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestStringIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestStringMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestStringMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersRemoveResponse
+		var obj *MembersRemoveConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestStringReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportRequestEliminationsItem
+		var obj *ReportConsolidationRequestEliminationsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponse(t *testing.T) {
+func TestStringReportConsolidationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestStringReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestStringReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminations
+		var obj *ReportConsolidationResponseEliminations
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestStringReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj *ReportConsolidationResponseEliminationsAppliedItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestStringReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEquityMethod
+		var obj *ReportConsolidationResponseEquityMethod
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestStringReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestStringReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestStringReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseNonControllingInterest
+		var obj *ReportConsolidationResponseNonControllingInterest
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestStringReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestStringReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestStringReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1ConsolidationGroupsGetResponseMembersItemMethod(t *testing.T) {
+func TestEnumGroupsGetConsolidationResponseMembersItemMethod(t *testing.T) {
 	t.Run("NewFromString_full", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString("full")
+		val, err := NewGroupsGetConsolidationResponseMembersItemMethodFromString("full")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationGroupsGetResponseMembersItemMethod("full"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsGetConsolidationResponseMembersItemMethod("full"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_proportional", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString("proportional")
+		val, err := NewGroupsGetConsolidationResponseMembersItemMethodFromString("proportional")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationGroupsGetResponseMembersItemMethod("proportional"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsGetConsolidationResponseMembersItemMethod("proportional"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString("equity")
+		val, err := NewGroupsGetConsolidationResponseMembersItemMethodFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationGroupsGetResponseMembersItemMethod("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsGetConsolidationResponseMembersItemMethod("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewGroupsGetConsolidationResponseMembersItemMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString("full")
+		val, err := NewGroupsGetConsolidationResponseMembersItemMethodFromString("full")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18827,28 +18828,28 @@ func TestEnumPostV1ConsolidationGroupsGetResponseMembersItemMethod(t *testing.T)
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn(t *testing.T) {
+func TestEnumIntercompanyCandidatesConsolidationResponseRowsItemMatchedOn(t *testing.T) {
 	t.Run("NewFromString_code", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnFromString("code")
+		val, err := NewIntercompanyCandidatesConsolidationResponseRowsItemMatchedOnFromString("code")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn("code"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn("code"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_vatCode", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnFromString("vatCode")
+		val, err := NewIntercompanyCandidatesConsolidationResponseRowsItemMatchedOnFromString("vatCode")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn("vatCode"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn("vatCode"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyCandidatesConsolidationResponseRowsItemMatchedOnFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnFromString("code")
+		val, err := NewIntercompanyCandidatesConsolidationResponseRowsItemMatchedOnFromString("code")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18856,35 +18857,35 @@ func TestEnumPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn(
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus(t *testing.T) {
 	t.Run("NewFromString_unpaid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("unpaid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("unpaid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("unpaid"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("unpaid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_partial", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("partial")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("partial")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("partial"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("partial"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_paid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("paid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("paid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("paid"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus("paid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("unpaid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString("unpaid")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18892,28 +18893,28 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocument
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusFromString("draft")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_registered", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusFromString("registered")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusFromString("registered")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus("registered"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus("registered"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusFromString("draft")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18921,35 +18922,35 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocument
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch(t *testing.T) {
 	t.Run("NewFromString_mirrored", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString("mirrored")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString("mirrored")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch("mirrored"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch("mirrored"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_matched_by_number", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString("matched_by_number")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString("matched_by_number")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch("matched_by_number"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch("matched_by_number"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_missing", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString("missing")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString("missing")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch("missing"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch("missing"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString("mirrored")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString("mirrored")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18957,35 +18958,35 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocument
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus(t *testing.T) {
 	t.Run("NewFromString_unpaid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString("unpaid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString("unpaid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus("unpaid"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus("unpaid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_partial", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString("partial")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString("partial")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus("partial"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus("partial"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_paid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString("paid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString("paid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus("paid"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus("paid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString("unpaid")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString("unpaid")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18993,28 +18994,28 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocument
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType(t *testing.T) {
 	t.Run("NewFromString_invoice", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeFromString("invoice")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeFromString("invoice")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType("invoice"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType("invoice"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_credit_note", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeFromString("credit_note")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeFromString("credit_note")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType("credit_note"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType("credit_note"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeFromString("invoice")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeFromString("invoice")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19022,28 +19023,28 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocument
 	})
 }
 
-func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus(t *testing.T) {
+func TestEnumIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("draft")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_registered", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("registered")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("registered")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus("registered"), val, "enum value should match expected wire value")
+		assert.Equal(t, IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus("registered"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("draft")
+		val, err := NewIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19051,35 +19052,35 @@ func TestEnumPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatche
 	})
 }
 
-func TestEnumPostV1ConsolidationMembersAddRequestMethod(t *testing.T) {
+func TestEnumMembersAddConsolidationRequestMethod(t *testing.T) {
 	t.Run("NewFromString_full", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddRequestMethodFromString("full")
+		val, err := NewMembersAddConsolidationRequestMethodFromString("full")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddRequestMethod("full"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationRequestMethod("full"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_proportional", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddRequestMethodFromString("proportional")
+		val, err := NewMembersAddConsolidationRequestMethodFromString("proportional")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddRequestMethod("proportional"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationRequestMethod("proportional"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddRequestMethodFromString("equity")
+		val, err := NewMembersAddConsolidationRequestMethodFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddRequestMethod("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationRequestMethod("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationMembersAddRequestMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewMembersAddConsolidationRequestMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationMembersAddRequestMethodFromString("full")
+		val, err := NewMembersAddConsolidationRequestMethodFromString("full")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19087,35 +19088,35 @@ func TestEnumPostV1ConsolidationMembersAddRequestMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1ConsolidationMembersAddResponseMethod(t *testing.T) {
+func TestEnumMembersAddConsolidationResponseMethod(t *testing.T) {
 	t.Run("NewFromString_full", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddResponseMethodFromString("full")
+		val, err := NewMembersAddConsolidationResponseMethodFromString("full")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddResponseMethod("full"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationResponseMethod("full"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_proportional", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddResponseMethodFromString("proportional")
+		val, err := NewMembersAddConsolidationResponseMethodFromString("proportional")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddResponseMethod("proportional"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationResponseMethod("proportional"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationMembersAddResponseMethodFromString("equity")
+		val, err := NewMembersAddConsolidationResponseMethodFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationMembersAddResponseMethod("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, MembersAddConsolidationResponseMethod("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationMembersAddResponseMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewMembersAddConsolidationResponseMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationMembersAddResponseMethodFromString("full")
+		val, err := NewMembersAddConsolidationResponseMethodFromString("full")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19123,42 +19124,42 @@ func TestEnumPostV1ConsolidationMembersAddResponseMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1ConsolidationReportRequestCategory(t *testing.T) {
+func TestEnumReportConsolidationRequestCategory(t *testing.T) {
 	t.Run("NewFromString_micro", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportRequestCategoryFromString("micro")
+		val, err := NewReportConsolidationRequestCategoryFromString("micro")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportRequestCategory("micro"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationRequestCategory("micro"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_small", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportRequestCategoryFromString("small")
+		val, err := NewReportConsolidationRequestCategoryFromString("small")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportRequestCategory("small"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationRequestCategory("small"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_medium", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportRequestCategoryFromString("medium")
+		val, err := NewReportConsolidationRequestCategoryFromString("medium")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportRequestCategory("medium"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationRequestCategory("medium"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_large", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportRequestCategoryFromString("large")
+		val, err := NewReportConsolidationRequestCategoryFromString("large")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportRequestCategory("large"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationRequestCategory("large"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationReportRequestCategoryFromString("invalid_value_that_does_not_exist")
+		_, err := NewReportConsolidationRequestCategoryFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationReportRequestCategoryFromString("micro")
+		val, err := NewReportConsolidationRequestCategoryFromString("micro")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19166,42 +19167,42 @@ func TestEnumPostV1ConsolidationReportRequestCategory(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1ConsolidationReportResponseCategory(t *testing.T) {
+func TestEnumReportConsolidationResponseCategory(t *testing.T) {
 	t.Run("NewFromString_micro", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseCategoryFromString("micro")
+		val, err := NewReportConsolidationResponseCategoryFromString("micro")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseCategory("micro"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseCategory("micro"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_small", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseCategoryFromString("small")
+		val, err := NewReportConsolidationResponseCategoryFromString("small")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseCategory("small"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseCategory("small"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_medium", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseCategoryFromString("medium")
+		val, err := NewReportConsolidationResponseCategoryFromString("medium")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseCategory("medium"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseCategory("medium"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_large", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseCategoryFromString("large")
+		val, err := NewReportConsolidationResponseCategoryFromString("large")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseCategory("large"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseCategory("large"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationReportResponseCategoryFromString("invalid_value_that_does_not_exist")
+		_, err := NewReportConsolidationResponseCategoryFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationReportResponseCategoryFromString("micro")
+		val, err := NewReportConsolidationResponseCategoryFromString("micro")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19209,28 +19210,28 @@ func TestEnumPostV1ConsolidationReportResponseCategory(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn(t *testing.T) {
+func TestEnumReportConsolidationResponseIntercompanyCandidatesItemMatchedOn(t *testing.T) {
 	t.Run("NewFromString_code", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnFromString("code")
+		val, err := NewReportConsolidationResponseIntercompanyCandidatesItemMatchedOnFromString("code")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn("code"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn("code"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_vatCode", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnFromString("vatCode")
+		val, err := NewReportConsolidationResponseIntercompanyCandidatesItemMatchedOnFromString("vatCode")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn("vatCode"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn("vatCode"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnFromString("invalid_value_that_does_not_exist")
+		_, err := NewReportConsolidationResponseIntercompanyCandidatesItemMatchedOnFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnFromString("code")
+		val, err := NewReportConsolidationResponseIntercompanyCandidatesItemMatchedOnFromString("code")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19238,35 +19239,35 @@ func TestEnumPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedO
 	})
 }
 
-func TestEnumPostV1ConsolidationReportResponseMembersItemMethod(t *testing.T) {
+func TestEnumReportConsolidationResponseMembersItemMethod(t *testing.T) {
 	t.Run("NewFromString_full", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseMembersItemMethodFromString("full")
+		val, err := NewReportConsolidationResponseMembersItemMethodFromString("full")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseMembersItemMethod("full"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseMembersItemMethod("full"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_proportional", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseMembersItemMethodFromString("proportional")
+		val, err := NewReportConsolidationResponseMembersItemMethodFromString("proportional")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseMembersItemMethod("proportional"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseMembersItemMethod("proportional"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseMembersItemMethodFromString("equity")
+		val, err := NewReportConsolidationResponseMembersItemMethodFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseMembersItemMethod("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseMembersItemMethod("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationReportResponseMembersItemMethodFromString("invalid_value_that_does_not_exist")
+		_, err := NewReportConsolidationResponseMembersItemMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationReportResponseMembersItemMethodFromString("full")
+		val, err := NewReportConsolidationResponseMembersItemMethodFromString("full")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19274,42 +19275,42 @@ func TestEnumPostV1ConsolidationReportResponseMembersItemMethod(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1ConsolidationReportResponseStatementsCategory(t *testing.T) {
+func TestEnumReportConsolidationResponseStatementsCategory(t *testing.T) {
 	t.Run("NewFromString_micro", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("micro")
+		val, err := NewReportConsolidationResponseStatementsCategoryFromString("micro")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseStatementsCategory("micro"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseStatementsCategory("micro"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_small", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("small")
+		val, err := NewReportConsolidationResponseStatementsCategoryFromString("small")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseStatementsCategory("small"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseStatementsCategory("small"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_medium", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("medium")
+		val, err := NewReportConsolidationResponseStatementsCategoryFromString("medium")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseStatementsCategory("medium"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseStatementsCategory("medium"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_large", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("large")
+		val, err := NewReportConsolidationResponseStatementsCategoryFromString("large")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1ConsolidationReportResponseStatementsCategory("large"), val, "enum value should match expected wire value")
+		assert.Equal(t, ReportConsolidationResponseStatementsCategory("large"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("invalid_value_that_does_not_exist")
+		_, err := NewReportConsolidationResponseStatementsCategoryFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1ConsolidationReportResponseStatementsCategoryFromString("micro")
+		val, err := NewReportConsolidationResponseStatementsCategoryFromString("micro")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19317,10 +19318,10 @@ func TestEnumPostV1ConsolidationReportResponseStatementsCategory(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
+func TestExtraPropertiesGroupsCreateConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsCreateResponse{}
+		obj := &GroupsCreateConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19334,16 +19335,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsCreateResponse
+		var obj *GroupsCreateConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
+func TestExtraPropertiesGroupsDeleteConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsDeleteResponse{}
+		obj := &GroupsDeleteConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19357,16 +19358,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsDeleteResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsDeleteResponse
+		var obj *GroupsDeleteConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsGetResponse(t *testing.T) {
+func TestExtraPropertiesGroupsGetConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsGetResponse{}
+		obj := &GroupsGetConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19380,16 +19381,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponse
+		var obj *GroupsGetConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsGetResponseMembersItem(t *testing.T) {
+func TestExtraPropertiesGroupsGetConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsGetResponseMembersItem{}
+		obj := &GroupsGetConsolidationResponseMembersItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19403,16 +19404,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsGetResponseMembersItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsGetResponseMembersItem
+		var obj *GroupsGetConsolidationResponseMembersItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsListResponse(t *testing.T) {
+func TestExtraPropertiesGroupsListConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsListResponse{}
+		obj := &GroupsListConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19426,16 +19427,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponse
+		var obj *GroupsListConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesGroupsListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsListResponseRowsItem{}
+		obj := &GroupsListConsolidationResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19449,16 +19450,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsListResponseRowsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsListResponseRowsItem
+		var obj *GroupsListConsolidationResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesGroupsUpdateConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationGroupsUpdateResponse{}
+		obj := &GroupsUpdateConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19472,16 +19473,16 @@ func TestExtraPropertiesPostV1ConsolidationGroupsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationGroupsUpdateResponse
+		var obj *GroupsUpdateConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyCandidatesResponse(t *testing.T) {
+func TestExtraPropertiesIntercompanyCandidatesConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponse{}
+		obj := &IntercompanyCandidatesConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19495,16 +19496,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyCandidatesResponse(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponse
+		var obj *IntercompanyCandidatesConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyCandidatesResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyCandidatesConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyCandidatesResponseRowsItem{}
+		obj := &IntercompanyCandidatesConsolidationResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19518,16 +19519,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyCandidatesResponseRowsIte
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+		var obj *IntercompanyCandidatesConsolidationResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksListResponse(t *testing.T) {
+func TestExtraPropertiesIntercompanyLinksListConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksListResponse{}
+		obj := &IntercompanyLinksListConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19541,16 +19542,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksListResponse(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponse
+		var obj *IntercompanyLinksListConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyLinksListConsolidationResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksListResponseRowsItem{}
+		obj := &IntercompanyLinksListConsolidationResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19564,16 +19565,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksListResponseRowsItem
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+		var obj *IntercompanyLinksListConsolidationResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksRemoveResponse(t *testing.T) {
+func TestExtraPropertiesIntercompanyLinksRemoveConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksRemoveResponse{}
+		obj := &IntercompanyLinksRemoveConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19587,16 +19588,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksRemoveResponse(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksRemoveResponse
+		var obj *IntercompanyLinksRemoveConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksSetResponse(t *testing.T) {
+func TestExtraPropertiesIntercompanyLinksSetConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyLinksSetResponse{}
+		obj := &IntercompanyLinksSetConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19610,16 +19611,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyLinksSetResponse(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyLinksSetResponse
+		var obj *IntercompanyLinksSetConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponse(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponse{}
+		obj := &IntercompanyReportConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19633,16 +19634,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponse(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponse
+		var obj *IntercompanyReportConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponseDirectionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19656,16 +19657,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19679,16 +19680,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19702,16 +19703,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponseDirectionsItemTotalsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemTotalsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19725,16 +19726,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
+func TestExtraPropertiesIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem{}
+		obj := &IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19748,16 +19749,16 @@ func TestExtraPropertiesPostV1ConsolidationIntercompanyReportResponseDirectionsI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+		var obj *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationMembersAddResponse(t *testing.T) {
+func TestExtraPropertiesMembersAddConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationMembersAddResponse{}
+		obj := &MembersAddConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19771,16 +19772,16 @@ func TestExtraPropertiesPostV1ConsolidationMembersAddResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersAddResponse
+		var obj *MembersAddConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
+func TestExtraPropertiesMembersRemoveConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationMembersRemoveResponse{}
+		obj := &MembersRemoveConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19794,16 +19795,16 @@ func TestExtraPropertiesPostV1ConsolidationMembersRemoveResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationMembersRemoveResponse
+		var obj *MembersRemoveConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportRequestEliminationsItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationRequestEliminationsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportRequestEliminationsItem{}
+		obj := &ReportConsolidationRequestEliminationsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19817,16 +19818,16 @@ func TestExtraPropertiesPostV1ConsolidationReportRequestEliminationsItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportRequestEliminationsItem
+		var obj *ReportConsolidationRequestEliminationsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponse(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponse{}
+		obj := &ReportConsolidationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19840,16 +19841,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponse
+		var obj *ReportConsolidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlow(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlow(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlow{}
+		obj := &ReportConsolidationResponseCashFlow{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19863,16 +19864,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlow(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlow
+		var obj *ReportConsolidationResponseCashFlow
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowFinancing(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowFinancing(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancing{}
+		obj := &ReportConsolidationResponseCashFlowFinancing{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19886,16 +19887,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowFinancing(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancing
+		var obj *ReportConsolidationResponseCashFlowFinancing
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowFinancingRowsItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowFinancingRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowFinancingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowFinancingRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19909,16 +19910,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowFinancingRowsIt
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+		var obj *ReportConsolidationResponseCashFlowFinancingRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowInvesting(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowInvesting(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowInvesting{}
+		obj := &ReportConsolidationResponseCashFlowInvesting{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19932,16 +19933,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowInvesting(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvesting
+		var obj *ReportConsolidationResponseCashFlowInvesting
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowInvestingRowsItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowInvestingRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowInvestingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowInvestingRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19955,16 +19956,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowInvestingRowsIt
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+		var obj *ReportConsolidationResponseCashFlowInvestingRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowOperating(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowOperating(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowOperating{}
+		obj := &ReportConsolidationResponseCashFlowOperating{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19978,16 +19979,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowOperating(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperating
+		var obj *ReportConsolidationResponseCashFlowOperating
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowOperatingRowsItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseCashFlowOperatingRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseCashFlowOperatingRowsItem{}
+		obj := &ReportConsolidationResponseCashFlowOperatingRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20001,16 +20002,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseCashFlowOperatingRowsIt
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+		var obj *ReportConsolidationResponseCashFlowOperatingRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseEliminations(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseEliminations(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEliminations{}
+		obj := &ReportConsolidationResponseEliminations{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20024,16 +20025,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseEliminations(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminations
+		var obj *ReportConsolidationResponseEliminations
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseEliminationsAppliedItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseEliminationsAppliedItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEliminationsAppliedItem{}
+		obj := &ReportConsolidationResponseEliminationsAppliedItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20047,16 +20048,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseEliminationsAppliedItem
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEliminationsAppliedItem
+		var obj *ReportConsolidationResponseEliminationsAppliedItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseEquityMethod(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseEquityMethod(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseEquityMethod{}
+		obj := &ReportConsolidationResponseEquityMethod{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20070,16 +20071,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseEquityMethod(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseEquityMethod
+		var obj *ReportConsolidationResponseEquityMethod
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseIntercompanyCandidatesItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseIntercompanyCandidatesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseIntercompanyCandidatesItem{}
+		obj := &ReportConsolidationResponseIntercompanyCandidatesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20093,16 +20094,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseIntercompanyCandidatesI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+		var obj *ReportConsolidationResponseIntercompanyCandidatesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseMembersItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseMembersItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseMembersItem{}
+		obj := &ReportConsolidationResponseMembersItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20116,16 +20117,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseMembersItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseMembersItem
+		var obj *ReportConsolidationResponseMembersItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseNonControllingInterest(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseNonControllingInterest(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseNonControllingInterest{}
+		obj := &ReportConsolidationResponseNonControllingInterest{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20139,16 +20140,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseNonControllingInterest(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseNonControllingInterest
+		var obj *ReportConsolidationResponseNonControllingInterest
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatements(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatements(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatements{}
+		obj := &ReportConsolidationResponseStatements{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20162,16 +20163,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatements(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatements
+		var obj *ReportConsolidationResponseStatements
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheet(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheet(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheet{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheet{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20185,16 +20186,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheet(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheet
+		var obj *ReportConsolidationResponseStatementsBalanceSheet
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetDetail(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheetDetail(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetail{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetail{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20208,16 +20209,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetD
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetail
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20231,16 +20232,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetD
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheetDetailEquity(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailEquity{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20254,16 +20255,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetD
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20277,16 +20278,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetD
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets{}
+		obj := &ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20300,16 +20301,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsBalanceSheetD
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+		var obj *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsProfitLoss(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsProfitLoss(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLoss{}
+		obj := &ReportConsolidationResponseStatementsProfitLoss{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20323,16 +20324,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsProfitLoss(t 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLoss
+		var obj *ReportConsolidationResponseStatementsProfitLoss
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsProfitLossDetail(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseStatementsProfitLossDetail(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseStatementsProfitLossDetail{}
+		obj := &ReportConsolidationResponseStatementsProfitLossDetail{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20346,16 +20347,16 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseStatementsProfitLossDet
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseStatementsProfitLossDetail
+		var obj *ReportConsolidationResponseStatementsProfitLossDetail
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1ConsolidationReportResponseTrialBalanceItem(t *testing.T) {
+func TestExtraPropertiesReportConsolidationResponseTrialBalanceItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1ConsolidationReportResponseTrialBalanceItem{}
+		obj := &ReportConsolidationResponseTrialBalanceItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -20369,7 +20370,7 @@ func TestExtraPropertiesPostV1ConsolidationReportResponseTrialBalanceItem(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1ConsolidationReportResponseTrialBalanceItem
+		var obj *ReportConsolidationResponseTrialBalanceItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

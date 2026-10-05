@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestAuditPostV1AuditListWithWireMock(
+func TestAuditListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,15 +88,15 @@ func TestAuditPostV1AuditListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AuditListRequest{}
-	_, invocationErr := client.Audit.PostV1AuditList(
+	request := &nordlet.ListAuditRequest{}
+	_, invocationErr := client.Audit.List(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAuditPostV1AuditListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAuditListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAuditPostV1AuditListWithWireMock", "POST", "/v1/audit/list", nil, 1)
+	VerifyRequestCount(t, "TestAuditListWithWireMock", "POST", "/v1/audit/list", nil, 1)
 }

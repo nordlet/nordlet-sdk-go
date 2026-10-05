@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1FleetVehiclesCreate(
+func (c *Client) VehiclesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesCreateRequest,
+	request *nordlet.VehiclesCreateFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetVehiclesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetVehiclesCreate(
+) (*nordlet.VehiclesCreateFleetResponse, error) {
+	response, err := c.WithRawResponse.VehiclesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1FleetVehiclesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetVehiclesUpdate(
+func (c *Client) VehiclesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesUpdateRequest,
+	request *nordlet.VehiclesUpdateFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetVehiclesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetVehiclesUpdate(
+) (*nordlet.VehiclesUpdateFleetResponse, error) {
+	response, err := c.WithRawResponse.VehiclesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1FleetVehiclesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetVehiclesGet(
+func (c *Client) VehiclesGet(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesGetRequest,
+	request *nordlet.VehiclesGetFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetVehiclesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetVehiclesGet(
+) (*nordlet.VehiclesGetFleetResponse, error) {
+	response, err := c.WithRawResponse.VehiclesGet(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1FleetVehiclesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetVehiclesList(
+func (c *Client) VehiclesList(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesListRequest,
+	request *nordlet.VehiclesListFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetVehiclesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetVehiclesList(
+) (*nordlet.VehiclesListFleetResponse, error) {
+	response, err := c.WithRawResponse.VehiclesList(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1FleetVehiclesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetAssignmentsCreate(
+func (c *Client) AssignmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsCreateRequest,
+	request *nordlet.AssignmentsCreateFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetAssignmentsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetAssignmentsCreate(
+) (*nordlet.AssignmentsCreateFleetResponse, error) {
+	response, err := c.WithRawResponse.AssignmentsCreate(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1FleetAssignmentsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetAssignmentsEnd(
+func (c *Client) AssignmentsEnd(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsEndRequest,
+	request *nordlet.AssignmentsEndFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetAssignmentsEndResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetAssignmentsEnd(
+) (*nordlet.AssignmentsEndFleetResponse, error) {
+	response, err := c.WithRawResponse.AssignmentsEnd(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1FleetAssignmentsEnd(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetAssignmentsList(
+func (c *Client) AssignmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsListRequest,
+	request *nordlet.AssignmentsListFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetAssignmentsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetAssignmentsList(
+) (*nordlet.AssignmentsListFleetResponse, error) {
+	response, err := c.WithRawResponse.AssignmentsList(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1FleetAssignmentsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FleetNaturaPreview(
+func (c *Client) NaturaPreview(
 	ctx context.Context,
-	request *nordlet.PostV1FleetNaturaPreviewRequest,
+	request *nordlet.NaturaPreviewFleetRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FleetNaturaPreviewResponse, error) {
-	response, err := c.WithRawResponse.PostV1FleetNaturaPreview(
+) (*nordlet.NaturaPreviewFleetResponse, error) {
+	response, err := c.WithRawResponse.NaturaPreview(
 		ctx,
 		request,
 		opts...,

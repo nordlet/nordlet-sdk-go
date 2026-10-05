@@ -7,312 +7,317 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1MigrationBooksValidateRequestFieldCutoverDate     = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestFieldSource          = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestFieldAccounts        = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestFieldPartners        = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestFieldItems           = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestFieldOpeningBalances = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestFieldJournal         = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestFieldOpenReceivables = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestFieldOpenPayables    = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateRequestFieldAssetGroups     = big.NewInt(1 << 9)
-	postV1MigrationBooksValidateRequestFieldFixedAssets     = big.NewInt(1 << 10)
-	postV1MigrationBooksValidateRequestFieldStock           = big.NewInt(1 << 11)
+	booksImportMigrationRequestFieldCutoverDate     = big.NewInt(1 << 0)
+	booksImportMigrationRequestFieldSource          = big.NewInt(1 << 1)
+	booksImportMigrationRequestFieldAccounts        = big.NewInt(1 << 2)
+	booksImportMigrationRequestFieldPartners        = big.NewInt(1 << 3)
+	booksImportMigrationRequestFieldItems           = big.NewInt(1 << 4)
+	booksImportMigrationRequestFieldOpeningBalances = big.NewInt(1 << 5)
+	booksImportMigrationRequestFieldJournal         = big.NewInt(1 << 6)
+	booksImportMigrationRequestFieldOpenReceivables = big.NewInt(1 << 7)
+	booksImportMigrationRequestFieldOpenPayables    = big.NewInt(1 << 8)
+	booksImportMigrationRequestFieldAssetGroups     = big.NewInt(1 << 9)
+	booksImportMigrationRequestFieldFixedAssets     = big.NewInt(1 << 10)
+	booksImportMigrationRequestFieldStock           = big.NewInt(1 << 11)
 )
 
-type PostV1MigrationBooksValidateRequest struct {
-	CutoverDate     string                                                    `json:"cutoverDate" url:"-"`
-	Source          *string                                                   `json:"source,omitempty" url:"-"`
-	Accounts        []*PostV1MigrationBooksValidateRequestAccountsItem        `json:"accounts,omitempty" url:"-"`
-	Partners        []*PostV1MigrationBooksValidateRequestPartnersItem        `json:"partners,omitempty" url:"-"`
-	Items           []*PostV1MigrationBooksValidateRequestItemsItem           `json:"items,omitempty" url:"-"`
-	OpeningBalances *PostV1MigrationBooksValidateRequestOpeningBalances       `json:"openingBalances,omitempty" url:"-"`
-	Journal         []*PostV1MigrationBooksValidateRequestJournalItem         `json:"journal,omitempty" url:"-"`
-	OpenReceivables []*PostV1MigrationBooksValidateRequestOpenReceivablesItem `json:"openReceivables,omitempty" url:"-"`
-	OpenPayables    []*PostV1MigrationBooksValidateRequestOpenPayablesItem    `json:"openPayables,omitempty" url:"-"`
-	AssetGroups     []*PostV1MigrationBooksValidateRequestAssetGroupsItem     `json:"assetGroups,omitempty" url:"-"`
-	FixedAssets     []*PostV1MigrationBooksValidateRequestFixedAssetsItem     `json:"fixedAssets,omitempty" url:"-"`
-	Stock           []*PostV1MigrationBooksValidateRequestStockItem           `json:"stock,omitempty" url:"-"`
+type BooksImportMigrationRequest struct {
+	CutoverDate     time.Time                                         `json:"cutoverDate" url:"-" format:"date"`
+	Source          *string                                           `json:"source,omitempty" url:"-"`
+	Accounts        []*BooksImportMigrationRequestAccountsItem        `json:"accounts,omitempty" url:"-"`
+	Partners        []*BooksImportMigrationRequestPartnersItem        `json:"partners,omitempty" url:"-"`
+	Items           []*BooksImportMigrationRequestItemsItem           `json:"items,omitempty" url:"-"`
+	OpeningBalances *BooksImportMigrationRequestOpeningBalances       `json:"openingBalances,omitempty" url:"-"`
+	Journal         []*BooksImportMigrationRequestJournalItem         `json:"journal,omitempty" url:"-"`
+	OpenReceivables []*BooksImportMigrationRequestOpenReceivablesItem `json:"openReceivables,omitempty" url:"-"`
+	OpenPayables    []*BooksImportMigrationRequestOpenPayablesItem    `json:"openPayables,omitempty" url:"-"`
+	AssetGroups     []*BooksImportMigrationRequestAssetGroupsItem     `json:"assetGroups,omitempty" url:"-"`
+	FixedAssets     []*BooksImportMigrationRequestFixedAssetsItem     `json:"fixedAssets,omitempty" url:"-"`
+	Stock           []*BooksImportMigrationRequestStockItem           `json:"stock,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1MigrationBooksValidateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCutoverDate sets the CutoverDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetCutoverDate(cutoverDate string) {
-	p.CutoverDate = cutoverDate
-	p.require(postV1MigrationBooksValidateRequestFieldCutoverDate)
+func (b *BooksImportMigrationRequest) SetCutoverDate(cutoverDate time.Time) {
+	b.CutoverDate = cutoverDate
+	b.require(booksImportMigrationRequestFieldCutoverDate)
 }
 
 // SetSource sets the Source field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetSource(source *string) {
-	p.Source = source
-	p.require(postV1MigrationBooksValidateRequestFieldSource)
+func (b *BooksImportMigrationRequest) SetSource(source *string) {
+	b.Source = source
+	b.require(booksImportMigrationRequestFieldSource)
 }
 
 // SetAccounts sets the Accounts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetAccounts(accounts []*PostV1MigrationBooksValidateRequestAccountsItem) {
-	p.Accounts = accounts
-	p.require(postV1MigrationBooksValidateRequestFieldAccounts)
+func (b *BooksImportMigrationRequest) SetAccounts(accounts []*BooksImportMigrationRequestAccountsItem) {
+	b.Accounts = accounts
+	b.require(booksImportMigrationRequestFieldAccounts)
 }
 
 // SetPartners sets the Partners field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetPartners(partners []*PostV1MigrationBooksValidateRequestPartnersItem) {
-	p.Partners = partners
-	p.require(postV1MigrationBooksValidateRequestFieldPartners)
+func (b *BooksImportMigrationRequest) SetPartners(partners []*BooksImportMigrationRequestPartnersItem) {
+	b.Partners = partners
+	b.require(booksImportMigrationRequestFieldPartners)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetItems(items []*PostV1MigrationBooksValidateRequestItemsItem) {
-	p.Items = items
-	p.require(postV1MigrationBooksValidateRequestFieldItems)
+func (b *BooksImportMigrationRequest) SetItems(items []*BooksImportMigrationRequestItemsItem) {
+	b.Items = items
+	b.require(booksImportMigrationRequestFieldItems)
 }
 
 // SetOpeningBalances sets the OpeningBalances field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetOpeningBalances(openingBalances *PostV1MigrationBooksValidateRequestOpeningBalances) {
-	p.OpeningBalances = openingBalances
-	p.require(postV1MigrationBooksValidateRequestFieldOpeningBalances)
+func (b *BooksImportMigrationRequest) SetOpeningBalances(openingBalances *BooksImportMigrationRequestOpeningBalances) {
+	b.OpeningBalances = openingBalances
+	b.require(booksImportMigrationRequestFieldOpeningBalances)
 }
 
 // SetJournal sets the Journal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetJournal(journal []*PostV1MigrationBooksValidateRequestJournalItem) {
-	p.Journal = journal
-	p.require(postV1MigrationBooksValidateRequestFieldJournal)
+func (b *BooksImportMigrationRequest) SetJournal(journal []*BooksImportMigrationRequestJournalItem) {
+	b.Journal = journal
+	b.require(booksImportMigrationRequestFieldJournal)
 }
 
 // SetOpenReceivables sets the OpenReceivables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetOpenReceivables(openReceivables []*PostV1MigrationBooksValidateRequestOpenReceivablesItem) {
-	p.OpenReceivables = openReceivables
-	p.require(postV1MigrationBooksValidateRequestFieldOpenReceivables)
+func (b *BooksImportMigrationRequest) SetOpenReceivables(openReceivables []*BooksImportMigrationRequestOpenReceivablesItem) {
+	b.OpenReceivables = openReceivables
+	b.require(booksImportMigrationRequestFieldOpenReceivables)
 }
 
 // SetOpenPayables sets the OpenPayables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetOpenPayables(openPayables []*PostV1MigrationBooksValidateRequestOpenPayablesItem) {
-	p.OpenPayables = openPayables
-	p.require(postV1MigrationBooksValidateRequestFieldOpenPayables)
+func (b *BooksImportMigrationRequest) SetOpenPayables(openPayables []*BooksImportMigrationRequestOpenPayablesItem) {
+	b.OpenPayables = openPayables
+	b.require(booksImportMigrationRequestFieldOpenPayables)
 }
 
 // SetAssetGroups sets the AssetGroups field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetAssetGroups(assetGroups []*PostV1MigrationBooksValidateRequestAssetGroupsItem) {
-	p.AssetGroups = assetGroups
-	p.require(postV1MigrationBooksValidateRequestFieldAssetGroups)
+func (b *BooksImportMigrationRequest) SetAssetGroups(assetGroups []*BooksImportMigrationRequestAssetGroupsItem) {
+	b.AssetGroups = assetGroups
+	b.require(booksImportMigrationRequestFieldAssetGroups)
 }
 
 // SetFixedAssets sets the FixedAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetFixedAssets(fixedAssets []*PostV1MigrationBooksValidateRequestFixedAssetsItem) {
-	p.FixedAssets = fixedAssets
-	p.require(postV1MigrationBooksValidateRequestFieldFixedAssets)
+func (b *BooksImportMigrationRequest) SetFixedAssets(fixedAssets []*BooksImportMigrationRequestFixedAssetsItem) {
+	b.FixedAssets = fixedAssets
+	b.require(booksImportMigrationRequestFieldFixedAssets)
 }
 
 // SetStock sets the Stock field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequest) SetStock(stock []*PostV1MigrationBooksValidateRequestStockItem) {
-	p.Stock = stock
-	p.require(postV1MigrationBooksValidateRequestFieldStock)
+func (b *BooksImportMigrationRequest) SetStock(stock []*BooksImportMigrationRequestStockItem) {
+	b.Stock = stock
+	b.require(booksImportMigrationRequestFieldStock)
 }
 
-func (p *PostV1MigrationBooksValidateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequest
+func (b *BooksImportMigrationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequest(body)
+	*b = BooksImportMigrationRequest(body)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequest
+func (b *BooksImportMigrationRequest) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequest
 	var marshaler = struct {
 		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
 	}{
-		embed: embed(*p),
+		embed:       embed(*b),
+		CutoverDate: internal.NewDate(b.CutoverDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1MigrationBooksImportRequestFieldCutoverDate     = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestFieldSource          = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestFieldAccounts        = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestFieldPartners        = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestFieldItems           = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestFieldOpeningBalances = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestFieldJournal         = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestFieldOpenReceivables = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestFieldOpenPayables    = big.NewInt(1 << 8)
-	postV1MigrationBooksImportRequestFieldAssetGroups     = big.NewInt(1 << 9)
-	postV1MigrationBooksImportRequestFieldFixedAssets     = big.NewInt(1 << 10)
-	postV1MigrationBooksImportRequestFieldStock           = big.NewInt(1 << 11)
+	booksValidateMigrationRequestFieldCutoverDate     = big.NewInt(1 << 0)
+	booksValidateMigrationRequestFieldSource          = big.NewInt(1 << 1)
+	booksValidateMigrationRequestFieldAccounts        = big.NewInt(1 << 2)
+	booksValidateMigrationRequestFieldPartners        = big.NewInt(1 << 3)
+	booksValidateMigrationRequestFieldItems           = big.NewInt(1 << 4)
+	booksValidateMigrationRequestFieldOpeningBalances = big.NewInt(1 << 5)
+	booksValidateMigrationRequestFieldJournal         = big.NewInt(1 << 6)
+	booksValidateMigrationRequestFieldOpenReceivables = big.NewInt(1 << 7)
+	booksValidateMigrationRequestFieldOpenPayables    = big.NewInt(1 << 8)
+	booksValidateMigrationRequestFieldAssetGroups     = big.NewInt(1 << 9)
+	booksValidateMigrationRequestFieldFixedAssets     = big.NewInt(1 << 10)
+	booksValidateMigrationRequestFieldStock           = big.NewInt(1 << 11)
 )
 
-type PostV1MigrationBooksImportRequest struct {
-	CutoverDate     string                                                  `json:"cutoverDate" url:"-"`
-	Source          *string                                                 `json:"source,omitempty" url:"-"`
-	Accounts        []*PostV1MigrationBooksImportRequestAccountsItem        `json:"accounts,omitempty" url:"-"`
-	Partners        []*PostV1MigrationBooksImportRequestPartnersItem        `json:"partners,omitempty" url:"-"`
-	Items           []*PostV1MigrationBooksImportRequestItemsItem           `json:"items,omitempty" url:"-"`
-	OpeningBalances *PostV1MigrationBooksImportRequestOpeningBalances       `json:"openingBalances,omitempty" url:"-"`
-	Journal         []*PostV1MigrationBooksImportRequestJournalItem         `json:"journal,omitempty" url:"-"`
-	OpenReceivables []*PostV1MigrationBooksImportRequestOpenReceivablesItem `json:"openReceivables,omitempty" url:"-"`
-	OpenPayables    []*PostV1MigrationBooksImportRequestOpenPayablesItem    `json:"openPayables,omitempty" url:"-"`
-	AssetGroups     []*PostV1MigrationBooksImportRequestAssetGroupsItem     `json:"assetGroups,omitempty" url:"-"`
-	FixedAssets     []*PostV1MigrationBooksImportRequestFixedAssetsItem     `json:"fixedAssets,omitempty" url:"-"`
-	Stock           []*PostV1MigrationBooksImportRequestStockItem           `json:"stock,omitempty" url:"-"`
+type BooksValidateMigrationRequest struct {
+	CutoverDate     time.Time                                           `json:"cutoverDate" url:"-" format:"date"`
+	Source          *string                                             `json:"source,omitempty" url:"-"`
+	Accounts        []*BooksValidateMigrationRequestAccountsItem        `json:"accounts,omitempty" url:"-"`
+	Partners        []*BooksValidateMigrationRequestPartnersItem        `json:"partners,omitempty" url:"-"`
+	Items           []*BooksValidateMigrationRequestItemsItem           `json:"items,omitempty" url:"-"`
+	OpeningBalances *BooksValidateMigrationRequestOpeningBalances       `json:"openingBalances,omitempty" url:"-"`
+	Journal         []*BooksValidateMigrationRequestJournalItem         `json:"journal,omitempty" url:"-"`
+	OpenReceivables []*BooksValidateMigrationRequestOpenReceivablesItem `json:"openReceivables,omitempty" url:"-"`
+	OpenPayables    []*BooksValidateMigrationRequestOpenPayablesItem    `json:"openPayables,omitempty" url:"-"`
+	AssetGroups     []*BooksValidateMigrationRequestAssetGroupsItem     `json:"assetGroups,omitempty" url:"-"`
+	FixedAssets     []*BooksValidateMigrationRequestFixedAssetsItem     `json:"fixedAssets,omitempty" url:"-"`
+	Stock           []*BooksValidateMigrationRequestStockItem           `json:"stock,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1MigrationBooksImportRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCutoverDate sets the CutoverDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetCutoverDate(cutoverDate string) {
-	p.CutoverDate = cutoverDate
-	p.require(postV1MigrationBooksImportRequestFieldCutoverDate)
+func (b *BooksValidateMigrationRequest) SetCutoverDate(cutoverDate time.Time) {
+	b.CutoverDate = cutoverDate
+	b.require(booksValidateMigrationRequestFieldCutoverDate)
 }
 
 // SetSource sets the Source field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetSource(source *string) {
-	p.Source = source
-	p.require(postV1MigrationBooksImportRequestFieldSource)
+func (b *BooksValidateMigrationRequest) SetSource(source *string) {
+	b.Source = source
+	b.require(booksValidateMigrationRequestFieldSource)
 }
 
 // SetAccounts sets the Accounts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetAccounts(accounts []*PostV1MigrationBooksImportRequestAccountsItem) {
-	p.Accounts = accounts
-	p.require(postV1MigrationBooksImportRequestFieldAccounts)
+func (b *BooksValidateMigrationRequest) SetAccounts(accounts []*BooksValidateMigrationRequestAccountsItem) {
+	b.Accounts = accounts
+	b.require(booksValidateMigrationRequestFieldAccounts)
 }
 
 // SetPartners sets the Partners field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetPartners(partners []*PostV1MigrationBooksImportRequestPartnersItem) {
-	p.Partners = partners
-	p.require(postV1MigrationBooksImportRequestFieldPartners)
+func (b *BooksValidateMigrationRequest) SetPartners(partners []*BooksValidateMigrationRequestPartnersItem) {
+	b.Partners = partners
+	b.require(booksValidateMigrationRequestFieldPartners)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetItems(items []*PostV1MigrationBooksImportRequestItemsItem) {
-	p.Items = items
-	p.require(postV1MigrationBooksImportRequestFieldItems)
+func (b *BooksValidateMigrationRequest) SetItems(items []*BooksValidateMigrationRequestItemsItem) {
+	b.Items = items
+	b.require(booksValidateMigrationRequestFieldItems)
 }
 
 // SetOpeningBalances sets the OpeningBalances field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetOpeningBalances(openingBalances *PostV1MigrationBooksImportRequestOpeningBalances) {
-	p.OpeningBalances = openingBalances
-	p.require(postV1MigrationBooksImportRequestFieldOpeningBalances)
+func (b *BooksValidateMigrationRequest) SetOpeningBalances(openingBalances *BooksValidateMigrationRequestOpeningBalances) {
+	b.OpeningBalances = openingBalances
+	b.require(booksValidateMigrationRequestFieldOpeningBalances)
 }
 
 // SetJournal sets the Journal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetJournal(journal []*PostV1MigrationBooksImportRequestJournalItem) {
-	p.Journal = journal
-	p.require(postV1MigrationBooksImportRequestFieldJournal)
+func (b *BooksValidateMigrationRequest) SetJournal(journal []*BooksValidateMigrationRequestJournalItem) {
+	b.Journal = journal
+	b.require(booksValidateMigrationRequestFieldJournal)
 }
 
 // SetOpenReceivables sets the OpenReceivables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetOpenReceivables(openReceivables []*PostV1MigrationBooksImportRequestOpenReceivablesItem) {
-	p.OpenReceivables = openReceivables
-	p.require(postV1MigrationBooksImportRequestFieldOpenReceivables)
+func (b *BooksValidateMigrationRequest) SetOpenReceivables(openReceivables []*BooksValidateMigrationRequestOpenReceivablesItem) {
+	b.OpenReceivables = openReceivables
+	b.require(booksValidateMigrationRequestFieldOpenReceivables)
 }
 
 // SetOpenPayables sets the OpenPayables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetOpenPayables(openPayables []*PostV1MigrationBooksImportRequestOpenPayablesItem) {
-	p.OpenPayables = openPayables
-	p.require(postV1MigrationBooksImportRequestFieldOpenPayables)
+func (b *BooksValidateMigrationRequest) SetOpenPayables(openPayables []*BooksValidateMigrationRequestOpenPayablesItem) {
+	b.OpenPayables = openPayables
+	b.require(booksValidateMigrationRequestFieldOpenPayables)
 }
 
 // SetAssetGroups sets the AssetGroups field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetAssetGroups(assetGroups []*PostV1MigrationBooksImportRequestAssetGroupsItem) {
-	p.AssetGroups = assetGroups
-	p.require(postV1MigrationBooksImportRequestFieldAssetGroups)
+func (b *BooksValidateMigrationRequest) SetAssetGroups(assetGroups []*BooksValidateMigrationRequestAssetGroupsItem) {
+	b.AssetGroups = assetGroups
+	b.require(booksValidateMigrationRequestFieldAssetGroups)
 }
 
 // SetFixedAssets sets the FixedAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetFixedAssets(fixedAssets []*PostV1MigrationBooksImportRequestFixedAssetsItem) {
-	p.FixedAssets = fixedAssets
-	p.require(postV1MigrationBooksImportRequestFieldFixedAssets)
+func (b *BooksValidateMigrationRequest) SetFixedAssets(fixedAssets []*BooksValidateMigrationRequestFixedAssetsItem) {
+	b.FixedAssets = fixedAssets
+	b.require(booksValidateMigrationRequestFieldFixedAssets)
 }
 
 // SetStock sets the Stock field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequest) SetStock(stock []*PostV1MigrationBooksImportRequestStockItem) {
-	p.Stock = stock
-	p.require(postV1MigrationBooksImportRequestFieldStock)
+func (b *BooksValidateMigrationRequest) SetStock(stock []*BooksValidateMigrationRequestStockItem) {
+	b.Stock = stock
+	b.require(booksValidateMigrationRequestFieldStock)
 }
 
-func (p *PostV1MigrationBooksImportRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequest
+func (b *BooksValidateMigrationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequest(body)
+	*b = BooksValidateMigrationRequest(body)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequest
+func (b *BooksValidateMigrationRequest) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequest
 	var marshaler = struct {
 		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
 	}{
-		embed: embed(*p),
+		embed:       embed(*b),
+		CutoverDate: internal.NewDate(b.CutoverDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1MigrationBooksImportRequestAccountsItemFieldCode       = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestAccountsItemFieldName       = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestAccountsItemFieldType       = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestAccountsItemFieldParentCode = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestAccountsItemFieldIsPostable = big.NewInt(1 << 4)
+	booksImportMigrationRequestAccountsItemFieldCode       = big.NewInt(1 << 0)
+	booksImportMigrationRequestAccountsItemFieldName       = big.NewInt(1 << 1)
+	booksImportMigrationRequestAccountsItemFieldType       = big.NewInt(1 << 2)
+	booksImportMigrationRequestAccountsItemFieldParentCode = big.NewInt(1 << 3)
+	booksImportMigrationRequestAccountsItemFieldIsPostable = big.NewInt(1 << 4)
 )
 
-type PostV1MigrationBooksImportRequestAccountsItem struct {
-	Code       string                                            `json:"code" url:"code"`
-	Name       string                                            `json:"name" url:"name"`
-	Type       PostV1MigrationBooksImportRequestAccountsItemType `json:"type" url:"type"`
-	ParentCode *string                                           `json:"parentCode,omitempty" url:"parentCode,omitempty"`
-	IsPostable *bool                                             `json:"isPostable,omitempty" url:"isPostable,omitempty"`
+type BooksImportMigrationRequestAccountsItem struct {
+	Code       string                                      `json:"code" url:"code"`
+	Name       string                                      `json:"name" url:"name"`
+	Type       BooksImportMigrationRequestAccountsItemType `json:"type" url:"type"`
+	ParentCode *string                                     `json:"parentCode,omitempty" url:"parentCode,omitempty"`
+	IsPostable *bool                                       `json:"isPostable,omitempty" url:"isPostable,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -321,173 +326,173 @@ type PostV1MigrationBooksImportRequestAccountsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetName() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetType() PostV1MigrationBooksImportRequestAccountsItemType {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetType() BooksImportMigrationRequestAccountsItemType {
+	if b == nil {
 		return ""
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetParentCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetParentCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.ParentCode
+	return b.ParentCode
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetIsPostable() *bool {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetIsPostable() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsPostable
+	return b.IsPostable
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestAccountsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAccountsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksImportRequestAccountsItemFieldCode)
+func (b *BooksImportMigrationRequestAccountsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksImportMigrationRequestAccountsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAccountsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksImportRequestAccountsItemFieldName)
+func (b *BooksImportMigrationRequestAccountsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksImportMigrationRequestAccountsItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAccountsItem) SetType(type_ PostV1MigrationBooksImportRequestAccountsItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksImportRequestAccountsItemFieldType)
+func (b *BooksImportMigrationRequestAccountsItem) SetType(type_ BooksImportMigrationRequestAccountsItemType) {
+	b.Type = type_
+	b.require(booksImportMigrationRequestAccountsItemFieldType)
 }
 
 // SetParentCode sets the ParentCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAccountsItem) SetParentCode(parentCode *string) {
-	p.ParentCode = parentCode
-	p.require(postV1MigrationBooksImportRequestAccountsItemFieldParentCode)
+func (b *BooksImportMigrationRequestAccountsItem) SetParentCode(parentCode *string) {
+	b.ParentCode = parentCode
+	b.require(booksImportMigrationRequestAccountsItemFieldParentCode)
 }
 
 // SetIsPostable sets the IsPostable field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAccountsItem) SetIsPostable(isPostable *bool) {
-	p.IsPostable = isPostable
-	p.require(postV1MigrationBooksImportRequestAccountsItemFieldIsPostable)
+func (b *BooksImportMigrationRequestAccountsItem) SetIsPostable(isPostable *bool) {
+	b.IsPostable = isPostable
+	b.require(booksImportMigrationRequestAccountsItemFieldIsPostable)
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestAccountsItem
+func (b *BooksImportMigrationRequestAccountsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestAccountsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestAccountsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestAccountsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestAccountsItem
+func (b *BooksImportMigrationRequestAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestAccountsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestAccountsItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAccountsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksImportRequestAccountsItemType string
+type BooksImportMigrationRequestAccountsItemType string
 
 const (
-	PostV1MigrationBooksImportRequestAccountsItemTypeAsset     PostV1MigrationBooksImportRequestAccountsItemType = "asset"
-	PostV1MigrationBooksImportRequestAccountsItemTypeLiability PostV1MigrationBooksImportRequestAccountsItemType = "liability"
-	PostV1MigrationBooksImportRequestAccountsItemTypeEquity    PostV1MigrationBooksImportRequestAccountsItemType = "equity"
-	PostV1MigrationBooksImportRequestAccountsItemTypeIncome    PostV1MigrationBooksImportRequestAccountsItemType = "income"
-	PostV1MigrationBooksImportRequestAccountsItemTypeExpense   PostV1MigrationBooksImportRequestAccountsItemType = "expense"
+	BooksImportMigrationRequestAccountsItemTypeAsset     BooksImportMigrationRequestAccountsItemType = "asset"
+	BooksImportMigrationRequestAccountsItemTypeLiability BooksImportMigrationRequestAccountsItemType = "liability"
+	BooksImportMigrationRequestAccountsItemTypeEquity    BooksImportMigrationRequestAccountsItemType = "equity"
+	BooksImportMigrationRequestAccountsItemTypeIncome    BooksImportMigrationRequestAccountsItemType = "income"
+	BooksImportMigrationRequestAccountsItemTypeExpense   BooksImportMigrationRequestAccountsItemType = "expense"
 )
 
-func NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString(s string) (PostV1MigrationBooksImportRequestAccountsItemType, error) {
+func NewBooksImportMigrationRequestAccountsItemTypeFromString(s string) (BooksImportMigrationRequestAccountsItemType, error) {
 	switch s {
 	case "asset":
-		return PostV1MigrationBooksImportRequestAccountsItemTypeAsset, nil
+		return BooksImportMigrationRequestAccountsItemTypeAsset, nil
 	case "liability":
-		return PostV1MigrationBooksImportRequestAccountsItemTypeLiability, nil
+		return BooksImportMigrationRequestAccountsItemTypeLiability, nil
 	case "equity":
-		return PostV1MigrationBooksImportRequestAccountsItemTypeEquity, nil
+		return BooksImportMigrationRequestAccountsItemTypeEquity, nil
 	case "income":
-		return PostV1MigrationBooksImportRequestAccountsItemTypeIncome, nil
+		return BooksImportMigrationRequestAccountsItemTypeIncome, nil
 	case "expense":
-		return PostV1MigrationBooksImportRequestAccountsItemTypeExpense, nil
+		return BooksImportMigrationRequestAccountsItemTypeExpense, nil
 	}
-	var t PostV1MigrationBooksImportRequestAccountsItemType
+	var t BooksImportMigrationRequestAccountsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksImportRequestAccountsItemType) Ptr() *PostV1MigrationBooksImportRequestAccountsItemType {
-	return &p
+func (b BooksImportMigrationRequestAccountsItemType) Ptr() *BooksImportMigrationRequestAccountsItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldCode                    = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldName                    = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldAssetAccountCode        = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldDepreciationAccountCode = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldExpenseAccountCode      = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestAssetGroupsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 5)
+	booksImportMigrationRequestAssetGroupsItemFieldCode                    = big.NewInt(1 << 0)
+	booksImportMigrationRequestAssetGroupsItemFieldName                    = big.NewInt(1 << 1)
+	booksImportMigrationRequestAssetGroupsItemFieldAssetAccountCode        = big.NewInt(1 << 2)
+	booksImportMigrationRequestAssetGroupsItemFieldDepreciationAccountCode = big.NewInt(1 << 3)
+	booksImportMigrationRequestAssetGroupsItemFieldExpenseAccountCode      = big.NewInt(1 << 4)
+	booksImportMigrationRequestAssetGroupsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksImportRequestAssetGroupsItem struct {
+type BooksImportMigrationRequestAssetGroupsItem struct {
 	Code                    string  `json:"code" url:"code"`
 	Name                    string  `json:"name" url:"name"`
 	AssetAccountCode        string  `json:"assetAccountCode" url:"assetAccountCode"`
@@ -502,172 +507,172 @@ type PostV1MigrationBooksImportRequestAssetGroupsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetName() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetAssetAccountCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetAssetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AssetAccountCode
+	return b.AssetAccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetDepreciationAccountCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetDepreciationAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.DepreciationAccountCode
+	return b.DepreciationAccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetExpenseAccountCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetExpenseAccountCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.ExpenseAccountCode
+	return b.ExpenseAccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetDefaultUsefulLifeMonths() *int64 {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetDefaultUsefulLifeMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.DefaultUsefulLifeMonths
+	return b.DefaultUsefulLifeMonths
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestAssetGroupsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldCode)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldName)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldName)
 }
 
 // SetAssetAccountCode sets the AssetAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetAssetAccountCode(assetAccountCode string) {
-	p.AssetAccountCode = assetAccountCode
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldAssetAccountCode)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetAssetAccountCode(assetAccountCode string) {
+	b.AssetAccountCode = assetAccountCode
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldAssetAccountCode)
 }
 
 // SetDepreciationAccountCode sets the DepreciationAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
-	p.DepreciationAccountCode = depreciationAccountCode
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldDepreciationAccountCode)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
+	b.DepreciationAccountCode = depreciationAccountCode
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldDepreciationAccountCode)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetExpenseAccountCode(expenseAccountCode *string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldExpenseAccountCode)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetExpenseAccountCode(expenseAccountCode *string) {
+	b.ExpenseAccountCode = expenseAccountCode
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldExpenseAccountCode)
 }
 
 // SetDefaultUsefulLifeMonths sets the DefaultUsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
-	p.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
-	p.require(postV1MigrationBooksImportRequestAssetGroupsItemFieldDefaultUsefulLifeMonths)
+func (b *BooksImportMigrationRequestAssetGroupsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
+	b.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
+	b.require(booksImportMigrationRequestAssetGroupsItemFieldDefaultUsefulLifeMonths)
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestAssetGroupsItem
+func (b *BooksImportMigrationRequestAssetGroupsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestAssetGroupsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestAssetGroupsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestAssetGroupsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestAssetGroupsItem
+func (b *BooksImportMigrationRequestAssetGroupsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestAssetGroupsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestAssetGroupsItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestAssetGroupsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldGroupCode               = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldCode                    = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldName                    = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldAcquisitionDate         = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldDepreciationStartDate   = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldAcquisitionCost         = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldSalvageValue            = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldUsefulLifeMonths        = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldAccumulatedDepreciation = big.NewInt(1 << 8)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldDepreciatedMonths       = big.NewInt(1 << 9)
-	postV1MigrationBooksImportRequestFixedAssetsItemFieldNotes                   = big.NewInt(1 << 10)
+	booksImportMigrationRequestFixedAssetsItemFieldGroupCode               = big.NewInt(1 << 0)
+	booksImportMigrationRequestFixedAssetsItemFieldCode                    = big.NewInt(1 << 1)
+	booksImportMigrationRequestFixedAssetsItemFieldName                    = big.NewInt(1 << 2)
+	booksImportMigrationRequestFixedAssetsItemFieldAcquisitionDate         = big.NewInt(1 << 3)
+	booksImportMigrationRequestFixedAssetsItemFieldDepreciationStartDate   = big.NewInt(1 << 4)
+	booksImportMigrationRequestFixedAssetsItemFieldAcquisitionCost         = big.NewInt(1 << 5)
+	booksImportMigrationRequestFixedAssetsItemFieldSalvageValue            = big.NewInt(1 << 6)
+	booksImportMigrationRequestFixedAssetsItemFieldUsefulLifeMonths        = big.NewInt(1 << 7)
+	booksImportMigrationRequestFixedAssetsItemFieldAccumulatedDepreciation = big.NewInt(1 << 8)
+	booksImportMigrationRequestFixedAssetsItemFieldDepreciatedMonths       = big.NewInt(1 << 9)
+	booksImportMigrationRequestFixedAssetsItemFieldNotes                   = big.NewInt(1 << 10)
 )
 
-type PostV1MigrationBooksImportRequestFixedAssetsItem struct {
-	GroupCode               string  `json:"groupCode" url:"groupCode"`
-	Code                    string  `json:"code" url:"code"`
-	Name                    string  `json:"name" url:"name"`
-	AcquisitionDate         string  `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   *string `json:"depreciationStartDate,omitempty" url:"depreciationStartDate,omitempty"`
-	AcquisitionCost         string  `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            *string `json:"salvageValue,omitempty" url:"salvageValue,omitempty"`
-	UsefulLifeMonths        *int64  `json:"usefulLifeMonths,omitempty" url:"usefulLifeMonths,omitempty"`
-	AccumulatedDepreciation *string `json:"accumulatedDepreciation,omitempty" url:"accumulatedDepreciation,omitempty"`
-	DepreciatedMonths       *int64  `json:"depreciatedMonths,omitempty" url:"depreciatedMonths,omitempty"`
-	Notes                   *string `json:"notes,omitempty" url:"notes,omitempty"`
+type BooksImportMigrationRequestFixedAssetsItem struct {
+	GroupCode               string     `json:"groupCode" url:"groupCode"`
+	Code                    string     `json:"code" url:"code"`
+	Name                    string     `json:"name" url:"name"`
+	AcquisitionDate         time.Time  `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate   *time.Time `json:"depreciationStartDate,omitempty" url:"depreciationStartDate,omitempty" format:"date"`
+	AcquisitionCost         string     `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            *string    `json:"salvageValue,omitempty" url:"salvageValue,omitempty"`
+	UsefulLifeMonths        *int64     `json:"usefulLifeMonths,omitempty" url:"usefulLifeMonths,omitempty"`
+	AccumulatedDepreciation *string    `json:"accumulatedDepreciation,omitempty" url:"accumulatedDepreciation,omitempty"`
+	DepreciatedMonths       *int64     `json:"depreciatedMonths,omitempty" url:"depreciatedMonths,omitempty"`
+	Notes                   *string    `json:"notes,omitempty" url:"notes,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -676,238 +681,250 @@ type PostV1MigrationBooksImportRequestFixedAssetsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetGroupCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetGroupCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.GroupCode
+	return b.GroupCode
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetName() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetAcquisitionDate() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetAcquisitionDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.AcquisitionDate
+}
+
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetDepreciationStartDate() *time.Time {
+	if b == nil {
+		return nil
+	}
+	return b.DepreciationStartDate
+}
+
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetAcquisitionCost() string {
+	if b == nil {
 		return ""
 	}
-	return p.AcquisitionDate
+	return b.AcquisitionCost
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetDepreciationStartDate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetSalvageValue() *string {
+	if b == nil {
 		return nil
 	}
-	return p.DepreciationStartDate
+	return b.SalvageValue
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetSalvageValue() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetUsefulLifeMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.SalvageValue
+	return b.UsefulLifeMonths
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetUsefulLifeMonths() *int64 {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetAccumulatedDepreciation() *string {
+	if b == nil {
 		return nil
 	}
-	return p.UsefulLifeMonths
+	return b.AccumulatedDepreciation
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetAccumulatedDepreciation() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetDepreciatedMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.AccumulatedDepreciation
+	return b.DepreciatedMonths
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetDepreciatedMonths() *int64 {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.DepreciatedMonths
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
+func (b *BooksImportMigrationRequestFixedAssetsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	return p.extraProperties
-}
-
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetGroupCode sets the GroupCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetGroupCode(groupCode string) {
-	p.GroupCode = groupCode
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldGroupCode)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetGroupCode(groupCode string) {
+	b.GroupCode = groupCode
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldGroupCode)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldCode)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldName)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldAcquisitionDate)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetAcquisitionDate(acquisitionDate time.Time) {
+	b.AcquisitionDate = acquisitionDate
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetDepreciationStartDate(depreciationStartDate *string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldDepreciationStartDate)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetDepreciationStartDate(depreciationStartDate *time.Time) {
+	b.DepreciationStartDate = depreciationStartDate
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldAcquisitionCost)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetAcquisitionCost(acquisitionCost string) {
+	b.AcquisitionCost = acquisitionCost
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetSalvageValue(salvageValue *string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldSalvageValue)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetSalvageValue(salvageValue *string) {
+	b.SalvageValue = salvageValue
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetUsefulLifeMonths(usefulLifeMonths *int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldUsefulLifeMonths)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	b.UsefulLifeMonths = usefulLifeMonths
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldUsefulLifeMonths)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetAccumulatedDepreciation(accumulatedDepreciation *string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldAccumulatedDepreciation)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetAccumulatedDepreciation(accumulatedDepreciation *string) {
+	b.AccumulatedDepreciation = accumulatedDepreciation
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldAccumulatedDepreciation)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetDepreciatedMonths(depreciatedMonths *int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldDepreciatedMonths)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetDepreciatedMonths(depreciatedMonths *int64) {
+	b.DepreciatedMonths = depreciatedMonths
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldDepreciatedMonths)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksImportRequestFixedAssetsItemFieldNotes)
+func (b *BooksImportMigrationRequestFixedAssetsItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksImportMigrationRequestFixedAssetsItemFieldNotes)
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestFixedAssetsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestFixedAssetsItem
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestFixedAssetsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestFixedAssetsItem(unmarshaler.embed)
+	b.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	b.DepreciationStartDate = unmarshaler.DepreciationStartDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestFixedAssetsItem
+func (b *BooksImportMigrationRequestFixedAssetsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestFixedAssetsItem
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*b),
+		AcquisitionDate:       internal.NewDate(b.AcquisitionDate),
+		DepreciationStartDate: internal.NewOptionalDate(b.DepreciationStartDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestFixedAssetsItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestFixedAssetsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestItemsItemFieldCode                 = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestItemsItemFieldName                 = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestItemsItemFieldType                 = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestItemsItemFieldUnit                 = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestItemsItemFieldBarcode              = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestItemsItemFieldVatRatePercent       = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestItemsItemFieldSalePriceExclVat     = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestItemsItemFieldPurchasePriceExclVat = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestItemsItemFieldDescription          = big.NewInt(1 << 8)
+	booksImportMigrationRequestItemsItemFieldCode                 = big.NewInt(1 << 0)
+	booksImportMigrationRequestItemsItemFieldName                 = big.NewInt(1 << 1)
+	booksImportMigrationRequestItemsItemFieldType                 = big.NewInt(1 << 2)
+	booksImportMigrationRequestItemsItemFieldUnit                 = big.NewInt(1 << 3)
+	booksImportMigrationRequestItemsItemFieldBarcode              = big.NewInt(1 << 4)
+	booksImportMigrationRequestItemsItemFieldVatRatePercent       = big.NewInt(1 << 5)
+	booksImportMigrationRequestItemsItemFieldSalePriceExclVat     = big.NewInt(1 << 6)
+	booksImportMigrationRequestItemsItemFieldPurchasePriceExclVat = big.NewInt(1 << 7)
+	booksImportMigrationRequestItemsItemFieldDescription          = big.NewInt(1 << 8)
 )
 
-type PostV1MigrationBooksImportRequestItemsItem struct {
-	Code                 string                                          `json:"code" url:"code"`
-	Name                 string                                          `json:"name" url:"name"`
-	Type                 *PostV1MigrationBooksImportRequestItemsItemType `json:"type,omitempty" url:"type,omitempty"`
-	Unit                 *string                                         `json:"unit,omitempty" url:"unit,omitempty"`
-	Barcode              *string                                         `json:"barcode,omitempty" url:"barcode,omitempty"`
-	VatRatePercent       *string                                         `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	SalePriceExclVat     *string                                         `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
-	PurchasePriceExclVat *string                                         `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
-	Description          *string                                         `json:"description,omitempty" url:"description,omitempty"`
+type BooksImportMigrationRequestItemsItem struct {
+	Code                 string                                    `json:"code" url:"code"`
+	Name                 string                                    `json:"name" url:"name"`
+	Type                 *BooksImportMigrationRequestItemsItemType `json:"type,omitempty" url:"type,omitempty"`
+	Unit                 *string                                   `json:"unit,omitempty" url:"unit,omitempty"`
+	Barcode              *string                                   `json:"barcode,omitempty" url:"barcode,omitempty"`
+	VatRatePercent       *string                                   `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	SalePriceExclVat     *string                                   `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string                                   `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+	Description          *string                                   `json:"description,omitempty" url:"description,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -916,222 +933,222 @@ type PostV1MigrationBooksImportRequestItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetName() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetType() *PostV1MigrationBooksImportRequestItemsItemType {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetType() *BooksImportMigrationRequestItemsItemType {
+	if b == nil {
 		return nil
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetUnit() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetUnit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Unit
+	return b.Unit
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetBarcode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetBarcode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Barcode
+	return b.Barcode
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetVatRatePercent() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return b.VatRatePercent
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetSalePriceExclVat() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetSalePriceExclVat() *string {
+	if b == nil {
 		return nil
 	}
-	return p.SalePriceExclVat
+	return b.SalePriceExclVat
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetPurchasePriceExclVat() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetPurchasePriceExclVat() *string {
+	if b == nil {
 		return nil
 	}
-	return p.PurchasePriceExclVat
+	return b.PurchasePriceExclVat
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestItemsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldCode)
+func (b *BooksImportMigrationRequestItemsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksImportMigrationRequestItemsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldName)
+func (b *BooksImportMigrationRequestItemsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksImportMigrationRequestItemsItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetType(type_ *PostV1MigrationBooksImportRequestItemsItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldType)
+func (b *BooksImportMigrationRequestItemsItem) SetType(type_ *BooksImportMigrationRequestItemsItemType) {
+	b.Type = type_
+	b.require(booksImportMigrationRequestItemsItemFieldType)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldUnit)
+func (b *BooksImportMigrationRequestItemsItem) SetUnit(unit *string) {
+	b.Unit = unit
+	b.require(booksImportMigrationRequestItemsItemFieldUnit)
 }
 
 // SetBarcode sets the Barcode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetBarcode(barcode *string) {
-	p.Barcode = barcode
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldBarcode)
+func (b *BooksImportMigrationRequestItemsItem) SetBarcode(barcode *string) {
+	b.Barcode = barcode
+	b.require(booksImportMigrationRequestItemsItemFieldBarcode)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldVatRatePercent)
+func (b *BooksImportMigrationRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	b.VatRatePercent = vatRatePercent
+	b.require(booksImportMigrationRequestItemsItemFieldVatRatePercent)
 }
 
 // SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetSalePriceExclVat(salePriceExclVat *string) {
-	p.SalePriceExclVat = salePriceExclVat
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldSalePriceExclVat)
+func (b *BooksImportMigrationRequestItemsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	b.SalePriceExclVat = salePriceExclVat
+	b.require(booksImportMigrationRequestItemsItemFieldSalePriceExclVat)
 }
 
 // SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
-	p.PurchasePriceExclVat = purchasePriceExclVat
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldPurchasePriceExclVat)
+func (b *BooksImportMigrationRequestItemsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	b.PurchasePriceExclVat = purchasePriceExclVat
+	b.require(booksImportMigrationRequestItemsItemFieldPurchasePriceExclVat)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestItemsItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksImportRequestItemsItemFieldDescription)
+func (b *BooksImportMigrationRequestItemsItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksImportMigrationRequestItemsItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestItemsItem
+func (b *BooksImportMigrationRequestItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestItemsItem
+func (b *BooksImportMigrationRequestItemsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestItemsItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestItemsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksImportRequestItemsItemType string
+type BooksImportMigrationRequestItemsItemType string
 
 const (
-	PostV1MigrationBooksImportRequestItemsItemTypeProduct PostV1MigrationBooksImportRequestItemsItemType = "product"
-	PostV1MigrationBooksImportRequestItemsItemTypeService PostV1MigrationBooksImportRequestItemsItemType = "service"
+	BooksImportMigrationRequestItemsItemTypeProduct BooksImportMigrationRequestItemsItemType = "product"
+	BooksImportMigrationRequestItemsItemTypeService BooksImportMigrationRequestItemsItemType = "service"
 )
 
-func NewPostV1MigrationBooksImportRequestItemsItemTypeFromString(s string) (PostV1MigrationBooksImportRequestItemsItemType, error) {
+func NewBooksImportMigrationRequestItemsItemTypeFromString(s string) (BooksImportMigrationRequestItemsItemType, error) {
 	switch s {
 	case "product":
-		return PostV1MigrationBooksImportRequestItemsItemTypeProduct, nil
+		return BooksImportMigrationRequestItemsItemTypeProduct, nil
 	case "service":
-		return PostV1MigrationBooksImportRequestItemsItemTypeService, nil
+		return BooksImportMigrationRequestItemsItemTypeService, nil
 	}
-	var t PostV1MigrationBooksImportRequestItemsItemType
+	var t BooksImportMigrationRequestItemsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksImportRequestItemsItemType) Ptr() *PostV1MigrationBooksImportRequestItemsItemType {
-	return &p
+func (b BooksImportMigrationRequestItemsItemType) Ptr() *BooksImportMigrationRequestItemsItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksImportRequestJournalItemFieldDate        = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestJournalItemFieldDescription = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestJournalItemFieldReference   = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestJournalItemFieldEntries     = big.NewInt(1 << 3)
+	booksImportMigrationRequestJournalItemFieldDate        = big.NewInt(1 << 0)
+	booksImportMigrationRequestJournalItemFieldDescription = big.NewInt(1 << 1)
+	booksImportMigrationRequestJournalItemFieldReference   = big.NewInt(1 << 2)
+	booksImportMigrationRequestJournalItemFieldEntries     = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksImportRequestJournalItem struct {
-	Date        string                                                     `json:"date" url:"date"`
-	Description *string                                                    `json:"description,omitempty" url:"description,omitempty"`
-	Reference   *string                                                    `json:"reference,omitempty" url:"reference,omitempty"`
-	Entries     []*PostV1MigrationBooksImportRequestJournalItemEntriesItem `json:"entries" url:"entries"`
+type BooksImportMigrationRequestJournalItem struct {
+	Date        time.Time                                            `json:"date" url:"date" format:"date"`
+	Description *string                                              `json:"description,omitempty" url:"description,omitempty"`
+	Reference   *string                                              `json:"reference,omitempty" url:"reference,omitempty"`
+	Entries     []*BooksImportMigrationRequestJournalItemEntriesItem `json:"entries" url:"entries"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1140,126 +1157,134 @@ type PostV1MigrationBooksImportRequestJournalItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) GetDate() string {
-	if p == nil {
-		return ""
+func (b *BooksImportMigrationRequestJournalItem) GetDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) GetReference() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItem) GetReference() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Reference
+	return b.Reference
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) GetEntries() []*PostV1MigrationBooksImportRequestJournalItemEntriesItem {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItem) GetEntries() []*BooksImportMigrationRequestJournalItemEntriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestJournalItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1MigrationBooksImportRequestJournalItemFieldDate)
+func (b *BooksImportMigrationRequestJournalItem) SetDate(date time.Time) {
+	b.Date = date
+	b.require(booksImportMigrationRequestJournalItemFieldDate)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksImportRequestJournalItemFieldDescription)
+func (b *BooksImportMigrationRequestJournalItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksImportMigrationRequestJournalItemFieldDescription)
 }
 
 // SetReference sets the Reference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItem) SetReference(reference *string) {
-	p.Reference = reference
-	p.require(postV1MigrationBooksImportRequestJournalItemFieldReference)
+func (b *BooksImportMigrationRequestJournalItem) SetReference(reference *string) {
+	b.Reference = reference
+	b.require(booksImportMigrationRequestJournalItemFieldReference)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItem) SetEntries(entries []*PostV1MigrationBooksImportRequestJournalItemEntriesItem) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksImportRequestJournalItemFieldEntries)
+func (b *BooksImportMigrationRequestJournalItem) SetEntries(entries []*BooksImportMigrationRequestJournalItemEntriesItem) {
+	b.Entries = entries
+	b.require(booksImportMigrationRequestJournalItemFieldEntries)
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestJournalItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestJournalItem) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestJournalItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestJournalItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestJournalItem(unmarshaler.embed)
+	b.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestJournalItem
+func (b *BooksImportMigrationRequestJournalItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestJournalItem
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestJournalItemEntriesItemFieldAccountCode = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestJournalItemEntriesItemFieldDebit       = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestJournalItemEntriesItemFieldCredit      = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestJournalItemEntriesItemFieldDescription = big.NewInt(1 << 3)
+	booksImportMigrationRequestJournalItemEntriesItemFieldAccountCode = big.NewInt(1 << 0)
+	booksImportMigrationRequestJournalItemEntriesItemFieldDebit       = big.NewInt(1 << 1)
+	booksImportMigrationRequestJournalItemEntriesItemFieldCredit      = big.NewInt(1 << 2)
+	booksImportMigrationRequestJournalItemEntriesItemFieldDescription = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksImportRequestJournalItemEntriesItem struct {
+type BooksImportMigrationRequestJournalItemEntriesItem struct {
 	AccountCode string  `json:"accountCode" url:"accountCode"`
 	Debit       *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit      *string `json:"credit,omitempty" url:"credit,omitempty"`
@@ -1272,142 +1297,142 @@ type PostV1MigrationBooksImportRequestJournalItemEntriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) GetAccountCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) GetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccountCode
+	return b.AccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) GetDebit() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) GetDebit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Debit
+	return b.Debit
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) GetCredit() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) GetCredit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Credit
+	return b.Credit
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) SetAccountCode(accountCode string) {
-	p.AccountCode = accountCode
-	p.require(postV1MigrationBooksImportRequestJournalItemEntriesItemFieldAccountCode)
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) SetAccountCode(accountCode string) {
+	b.AccountCode = accountCode
+	b.require(booksImportMigrationRequestJournalItemEntriesItemFieldAccountCode)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) SetDebit(debit *string) {
-	p.Debit = debit
-	p.require(postV1MigrationBooksImportRequestJournalItemEntriesItemFieldDebit)
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) SetDebit(debit *string) {
+	b.Debit = debit
+	b.require(booksImportMigrationRequestJournalItemEntriesItemFieldDebit)
 }
 
 // SetCredit sets the Credit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) SetCredit(credit *string) {
-	p.Credit = credit
-	p.require(postV1MigrationBooksImportRequestJournalItemEntriesItemFieldCredit)
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) SetCredit(credit *string) {
+	b.Credit = credit
+	b.require(booksImportMigrationRequestJournalItemEntriesItemFieldCredit)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksImportRequestJournalItemEntriesItemFieldDescription)
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksImportMigrationRequestJournalItemEntriesItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestJournalItemEntriesItem
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestJournalItemEntriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestJournalItemEntriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestJournalItemEntriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestJournalItemEntriesItem
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestJournalItemEntriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestJournalItemEntriesItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestJournalItemEntriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldPartnerCode    = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldDueDate        = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldCurrency       = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldGrossTotal     = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldVatTotal       = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldOutstanding    = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldFxRate         = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldNotes          = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldDocumentNumber = big.NewInt(1 << 8)
-	postV1MigrationBooksImportRequestOpenPayablesItemFieldDocumentDate   = big.NewInt(1 << 9)
+	booksImportMigrationRequestOpenPayablesItemFieldPartnerCode    = big.NewInt(1 << 0)
+	booksImportMigrationRequestOpenPayablesItemFieldDueDate        = big.NewInt(1 << 1)
+	booksImportMigrationRequestOpenPayablesItemFieldCurrency       = big.NewInt(1 << 2)
+	booksImportMigrationRequestOpenPayablesItemFieldGrossTotal     = big.NewInt(1 << 3)
+	booksImportMigrationRequestOpenPayablesItemFieldVatTotal       = big.NewInt(1 << 4)
+	booksImportMigrationRequestOpenPayablesItemFieldOutstanding    = big.NewInt(1 << 5)
+	booksImportMigrationRequestOpenPayablesItemFieldFxRate         = big.NewInt(1 << 6)
+	booksImportMigrationRequestOpenPayablesItemFieldNotes          = big.NewInt(1 << 7)
+	booksImportMigrationRequestOpenPayablesItemFieldDocumentNumber = big.NewInt(1 << 8)
+	booksImportMigrationRequestOpenPayablesItemFieldDocumentDate   = big.NewInt(1 << 9)
 )
 
-type PostV1MigrationBooksImportRequestOpenPayablesItem struct {
-	PartnerCode    string  `json:"partnerCode" url:"partnerCode"`
-	DueDate        *string `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string `json:"currency,omitempty" url:"currency,omitempty"`
-	GrossTotal     string  `json:"grossTotal" url:"grossTotal"`
-	VatTotal       *string `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	Outstanding    *string `json:"outstanding,omitempty" url:"outstanding,omitempty"`
-	FxRate         *string `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	Notes          *string `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentNumber string  `json:"documentNumber" url:"documentNumber"`
-	DocumentDate   string  `json:"documentDate" url:"documentDate"`
+type BooksImportMigrationRequestOpenPayablesItem struct {
+	PartnerCode    string     `json:"partnerCode" url:"partnerCode"`
+	DueDate        *time.Time `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string    `json:"currency,omitempty" url:"currency,omitempty"`
+	GrossTotal     string     `json:"grossTotal" url:"grossTotal"`
+	VatTotal       *string    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	Outstanding    *string    `json:"outstanding,omitempty" url:"outstanding,omitempty"`
+	FxRate         *string    `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	Notes          *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentNumber string     `json:"documentNumber" url:"documentNumber"`
+	DocumentDate   time.Time  `json:"documentDate" url:"documentDate" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1416,226 +1441,238 @@ type PostV1MigrationBooksImportRequestOpenPayablesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetPartnerCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetPartnerCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.PartnerCode
+	return b.PartnerCode
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetDueDate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetDueDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.DueDate
+	return b.DueDate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetCurrency() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetCurrency() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Currency
+	return b.Currency
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetGrossTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetGrossTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return b.GrossTotal
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetVatTotal() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetVatTotal() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatTotal
+	return b.VatTotal
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetOutstanding() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetOutstanding() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Outstanding
+	return b.Outstanding
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetFxRate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetFxRate() *string {
+	if b == nil {
 		return nil
 	}
-	return p.FxRate
+	return b.FxRate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetDocumentNumber() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetDocumentNumber() string {
+	if b == nil {
 		return ""
 	}
-	return p.DocumentNumber
+	return b.DocumentNumber
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetDocumentDate() string {
-	if p == nil {
-		return ""
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetDocumentDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.DocumentDate
+	return b.DocumentDate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestOpenPayablesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetPartnerCode(partnerCode string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldPartnerCode)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetPartnerCode(partnerCode string) {
+	b.PartnerCode = partnerCode
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldPartnerCode)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldDueDate)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetDueDate(dueDate *time.Time) {
+	b.DueDate = dueDate
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldCurrency)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetCurrency(currency *string) {
+	b.Currency = currency
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldGrossTotal)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetGrossTotal(grossTotal string) {
+	b.GrossTotal = grossTotal
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldGrossTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldVatTotal)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetVatTotal(vatTotal *string) {
+	b.VatTotal = vatTotal
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldVatTotal)
 }
 
 // SetOutstanding sets the Outstanding field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetOutstanding(outstanding *string) {
-	p.Outstanding = outstanding
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldOutstanding)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetOutstanding(outstanding *string) {
+	b.Outstanding = outstanding
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldOutstanding)
 }
 
 // SetFxRate sets the FxRate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetFxRate(fxRate *string) {
-	p.FxRate = fxRate
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldFxRate)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetFxRate(fxRate *string) {
+	b.FxRate = fxRate
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldFxRate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldNotes)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldNotes)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetDocumentNumber(documentNumber string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldDocumentNumber)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetDocumentNumber(documentNumber string) {
+	b.DocumentNumber = documentNumber
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1MigrationBooksImportRequestOpenPayablesItemFieldDocumentDate)
+func (b *BooksImportMigrationRequestOpenPayablesItem) SetDocumentDate(documentDate time.Time) {
+	b.DocumentDate = documentDate
+	b.require(booksImportMigrationRequestOpenPayablesItemFieldDocumentDate)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestOpenPayablesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestOpenPayablesItem
+	var unmarshaler = struct {
+		embed
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate *internal.Date `json:"documentDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestOpenPayablesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestOpenPayablesItem(unmarshaler.embed)
+	b.DueDate = unmarshaler.DueDate.TimePtr()
+	b.DocumentDate = unmarshaler.DocumentDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestOpenPayablesItem
+func (b *BooksImportMigrationRequestOpenPayablesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestOpenPayablesItem
 	var marshaler = struct {
 		embed
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate *internal.Date `json:"documentDate"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*b),
+		DueDate:      internal.NewOptionalDate(b.DueDate),
+		DocumentDate: internal.NewDate(b.DocumentDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenPayablesItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenPayablesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldPartnerCode = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldDueDate     = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldCurrency    = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldGrossTotal  = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldVatTotal    = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldOutstanding = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldFxRate      = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldNotes       = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldNumber      = big.NewInt(1 << 8)
-	postV1MigrationBooksImportRequestOpenReceivablesItemFieldIssueDate   = big.NewInt(1 << 9)
+	booksImportMigrationRequestOpenReceivablesItemFieldPartnerCode = big.NewInt(1 << 0)
+	booksImportMigrationRequestOpenReceivablesItemFieldDueDate     = big.NewInt(1 << 1)
+	booksImportMigrationRequestOpenReceivablesItemFieldCurrency    = big.NewInt(1 << 2)
+	booksImportMigrationRequestOpenReceivablesItemFieldGrossTotal  = big.NewInt(1 << 3)
+	booksImportMigrationRequestOpenReceivablesItemFieldVatTotal    = big.NewInt(1 << 4)
+	booksImportMigrationRequestOpenReceivablesItemFieldOutstanding = big.NewInt(1 << 5)
+	booksImportMigrationRequestOpenReceivablesItemFieldFxRate      = big.NewInt(1 << 6)
+	booksImportMigrationRequestOpenReceivablesItemFieldNotes       = big.NewInt(1 << 7)
+	booksImportMigrationRequestOpenReceivablesItemFieldNumber      = big.NewInt(1 << 8)
+	booksImportMigrationRequestOpenReceivablesItemFieldIssueDate   = big.NewInt(1 << 9)
 )
 
-type PostV1MigrationBooksImportRequestOpenReceivablesItem struct {
-	PartnerCode string  `json:"partnerCode" url:"partnerCode"`
-	DueDate     *string `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency    *string `json:"currency,omitempty" url:"currency,omitempty"`
-	GrossTotal  string  `json:"grossTotal" url:"grossTotal"`
-	VatTotal    *string `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	Outstanding *string `json:"outstanding,omitempty" url:"outstanding,omitempty"`
-	FxRate      *string `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	Notes       *string `json:"notes,omitempty" url:"notes,omitempty"`
-	Number      string  `json:"number" url:"number"`
-	IssueDate   string  `json:"issueDate" url:"issueDate"`
+type BooksImportMigrationRequestOpenReceivablesItem struct {
+	PartnerCode string     `json:"partnerCode" url:"partnerCode"`
+	DueDate     *time.Time `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency    *string    `json:"currency,omitempty" url:"currency,omitempty"`
+	GrossTotal  string     `json:"grossTotal" url:"grossTotal"`
+	VatTotal    *string    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	Outstanding *string    `json:"outstanding,omitempty" url:"outstanding,omitempty"`
+	FxRate      *string    `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	Notes       *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	Number      string     `json:"number" url:"number"`
+	IssueDate   time.Time  `json:"issueDate" url:"issueDate" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1644,212 +1681,224 @@ type PostV1MigrationBooksImportRequestOpenReceivablesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetPartnerCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetPartnerCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.PartnerCode
+	return b.PartnerCode
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetDueDate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetDueDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.DueDate
+	return b.DueDate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetCurrency() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetCurrency() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Currency
+	return b.Currency
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetGrossTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetGrossTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return b.GrossTotal
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetVatTotal() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetVatTotal() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatTotal
+	return b.VatTotal
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetOutstanding() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetOutstanding() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Outstanding
+	return b.Outstanding
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetFxRate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetFxRate() *string {
+	if b == nil {
 		return nil
 	}
-	return p.FxRate
+	return b.FxRate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetNumber() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetNumber() string {
+	if b == nil {
 		return ""
 	}
-	return p.Number
+	return b.Number
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetIssueDate() string {
-	if p == nil {
-		return ""
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetIssueDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.IssueDate
+	return b.IssueDate
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetPartnerCode(partnerCode string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldPartnerCode)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetPartnerCode(partnerCode string) {
+	b.PartnerCode = partnerCode
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldPartnerCode)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldDueDate)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetDueDate(dueDate *time.Time) {
+	b.DueDate = dueDate
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldCurrency)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetCurrency(currency *string) {
+	b.Currency = currency
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldGrossTotal)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetGrossTotal(grossTotal string) {
+	b.GrossTotal = grossTotal
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldGrossTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldVatTotal)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetVatTotal(vatTotal *string) {
+	b.VatTotal = vatTotal
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldVatTotal)
 }
 
 // SetOutstanding sets the Outstanding field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetOutstanding(outstanding *string) {
-	p.Outstanding = outstanding
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldOutstanding)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetOutstanding(outstanding *string) {
+	b.Outstanding = outstanding
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldOutstanding)
 }
 
 // SetFxRate sets the FxRate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetFxRate(fxRate *string) {
-	p.FxRate = fxRate
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldFxRate)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetFxRate(fxRate *string) {
+	b.FxRate = fxRate
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldFxRate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldNotes)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldNotes)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldNumber)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetNumber(number string) {
+	b.Number = number
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldNumber)
 }
 
 // SetIssueDate sets the IssueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) SetIssueDate(issueDate string) {
-	p.IssueDate = issueDate
-	p.require(postV1MigrationBooksImportRequestOpenReceivablesItemFieldIssueDate)
+func (b *BooksImportMigrationRequestOpenReceivablesItem) SetIssueDate(issueDate time.Time) {
+	b.IssueDate = issueDate
+	b.require(booksImportMigrationRequestOpenReceivablesItemFieldIssueDate)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestOpenReceivablesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestOpenReceivablesItem
+	var unmarshaler = struct {
+		embed
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestOpenReceivablesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestOpenReceivablesItem(unmarshaler.embed)
+	b.DueDate = unmarshaler.DueDate.TimePtr()
+	b.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestOpenReceivablesItem
+func (b *BooksImportMigrationRequestOpenReceivablesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestOpenReceivablesItem
 	var marshaler = struct {
 		embed
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+		IssueDate *internal.Date `json:"issueDate"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*b),
+		DueDate:   internal.NewOptionalDate(b.DueDate),
+		IssueDate: internal.NewDate(b.IssueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpenReceivablesItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpenReceivablesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestOpeningBalancesFieldDate                 = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestOpeningBalancesFieldBalancingAccountCode = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
+	booksImportMigrationRequestOpeningBalancesFieldDate                 = big.NewInt(1 << 0)
+	booksImportMigrationRequestOpeningBalancesFieldBalancingAccountCode = big.NewInt(1 << 1)
+	booksImportMigrationRequestOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksImportRequestOpeningBalances struct {
-	Date                 *string                                                        `json:"date,omitempty" url:"date,omitempty"`
-	BalancingAccountCode *string                                                        `json:"balancingAccountCode,omitempty" url:"balancingAccountCode,omitempty"`
-	Entries              []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem `json:"entries" url:"entries"`
+type BooksImportMigrationRequestOpeningBalances struct {
+	Date                 *time.Time                                               `json:"date,omitempty" url:"date,omitempty" format:"date"`
+	BalancingAccountCode *string                                                  `json:"balancingAccountCode,omitempty" url:"balancingAccountCode,omitempty"`
+	Entries              []*BooksImportMigrationRequestOpeningBalancesEntriesItem `json:"entries" url:"entries"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1858,112 +1907,120 @@ type PostV1MigrationBooksImportRequestOpeningBalances struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) GetDate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalances) GetDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) GetBalancingAccountCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalances) GetBalancingAccountCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.BalancingAccountCode
+	return b.BalancingAccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) GetEntries() []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalances) GetEntries() []*BooksImportMigrationRequestOpeningBalancesEntriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalances) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestOpeningBalances) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) SetDate(date *string) {
-	p.Date = date
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesFieldDate)
+func (b *BooksImportMigrationRequestOpeningBalances) SetDate(date *time.Time) {
+	b.Date = date
+	b.require(booksImportMigrationRequestOpeningBalancesFieldDate)
 }
 
 // SetBalancingAccountCode sets the BalancingAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) SetBalancingAccountCode(balancingAccountCode *string) {
-	p.BalancingAccountCode = balancingAccountCode
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesFieldBalancingAccountCode)
+func (b *BooksImportMigrationRequestOpeningBalances) SetBalancingAccountCode(balancingAccountCode *string) {
+	b.BalancingAccountCode = balancingAccountCode
+	b.require(booksImportMigrationRequestOpeningBalancesFieldBalancingAccountCode)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) SetEntries(entries []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesFieldEntries)
+func (b *BooksImportMigrationRequestOpeningBalances) SetEntries(entries []*BooksImportMigrationRequestOpeningBalancesEntriesItem) {
+	b.Entries = entries
+	b.require(booksImportMigrationRequestOpeningBalancesFieldEntries)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestOpeningBalances
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestOpeningBalances) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestOpeningBalances
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestOpeningBalances(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestOpeningBalances(unmarshaler.embed)
+	b.Date = unmarshaler.Date.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestOpeningBalances
+func (b *BooksImportMigrationRequestOpeningBalances) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestOpeningBalances
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date,omitempty"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewOptionalDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalances) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalances) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldAccountCode = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldDebit       = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldCredit      = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldDescription = big.NewInt(1 << 3)
+	booksImportMigrationRequestOpeningBalancesEntriesItemFieldAccountCode = big.NewInt(1 << 0)
+	booksImportMigrationRequestOpeningBalancesEntriesItemFieldDebit       = big.NewInt(1 << 1)
+	booksImportMigrationRequestOpeningBalancesEntriesItemFieldCredit      = big.NewInt(1 << 2)
+	booksImportMigrationRequestOpeningBalancesEntriesItemFieldDescription = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem struct {
+type BooksImportMigrationRequestOpeningBalancesEntriesItem struct {
 	AccountCode string  `json:"accountCode" url:"accountCode"`
 	Debit       *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit      *string `json:"credit,omitempty" url:"credit,omitempty"`
@@ -1976,144 +2033,144 @@ type PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) GetAccountCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) GetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccountCode
+	return b.AccountCode
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) GetDebit() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) GetDebit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Debit
+	return b.Debit
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) GetCredit() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) GetCredit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Credit
+	return b.Credit
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) SetAccountCode(accountCode string) {
-	p.AccountCode = accountCode
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldAccountCode)
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) SetAccountCode(accountCode string) {
+	b.AccountCode = accountCode
+	b.require(booksImportMigrationRequestOpeningBalancesEntriesItemFieldAccountCode)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) SetDebit(debit *string) {
-	p.Debit = debit
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldDebit)
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) SetDebit(debit *string) {
+	b.Debit = debit
+	b.require(booksImportMigrationRequestOpeningBalancesEntriesItemFieldDebit)
 }
 
 // SetCredit sets the Credit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) SetCredit(credit *string) {
-	p.Credit = credit
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldCredit)
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) SetCredit(credit *string) {
+	b.Credit = credit
+	b.require(booksImportMigrationRequestOpeningBalancesEntriesItemFieldCredit)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksImportRequestOpeningBalancesEntriesItemFieldDescription)
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksImportMigrationRequestOpeningBalancesEntriesItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestOpeningBalancesEntriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestOpeningBalancesEntriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestOpeningBalancesEntriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestOpeningBalancesEntriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestPartnersItemFieldCode            = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestPartnersItemFieldName            = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestPartnersItemFieldType            = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestPartnersItemFieldVatCode         = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestPartnersItemFieldEmail           = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestPartnersItemFieldPhone           = big.NewInt(1 << 5)
-	postV1MigrationBooksImportRequestPartnersItemFieldIsCustomer      = big.NewInt(1 << 6)
-	postV1MigrationBooksImportRequestPartnersItemFieldIsSupplier      = big.NewInt(1 << 7)
-	postV1MigrationBooksImportRequestPartnersItemFieldPaymentTermDays = big.NewInt(1 << 8)
-	postV1MigrationBooksImportRequestPartnersItemFieldAddress         = big.NewInt(1 << 9)
-	postV1MigrationBooksImportRequestPartnersItemFieldNotes           = big.NewInt(1 << 10)
+	booksImportMigrationRequestPartnersItemFieldCode            = big.NewInt(1 << 0)
+	booksImportMigrationRequestPartnersItemFieldName            = big.NewInt(1 << 1)
+	booksImportMigrationRequestPartnersItemFieldType            = big.NewInt(1 << 2)
+	booksImportMigrationRequestPartnersItemFieldVatCode         = big.NewInt(1 << 3)
+	booksImportMigrationRequestPartnersItemFieldEmail           = big.NewInt(1 << 4)
+	booksImportMigrationRequestPartnersItemFieldPhone           = big.NewInt(1 << 5)
+	booksImportMigrationRequestPartnersItemFieldIsCustomer      = big.NewInt(1 << 6)
+	booksImportMigrationRequestPartnersItemFieldIsSupplier      = big.NewInt(1 << 7)
+	booksImportMigrationRequestPartnersItemFieldPaymentTermDays = big.NewInt(1 << 8)
+	booksImportMigrationRequestPartnersItemFieldAddress         = big.NewInt(1 << 9)
+	booksImportMigrationRequestPartnersItemFieldNotes           = big.NewInt(1 << 10)
 )
 
-type PostV1MigrationBooksImportRequestPartnersItem struct {
-	Code            string                                                `json:"code" url:"code"`
-	Name            string                                                `json:"name" url:"name"`
-	Type            *PostV1MigrationBooksImportRequestPartnersItemType    `json:"type,omitempty" url:"type,omitempty"`
-	VatCode         *string                                               `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	Email           *string                                               `json:"email,omitempty" url:"email,omitempty"`
-	Phone           *string                                               `json:"phone,omitempty" url:"phone,omitempty"`
-	IsCustomer      *bool                                                 `json:"isCustomer,omitempty" url:"isCustomer,omitempty"`
-	IsSupplier      *bool                                                 `json:"isSupplier,omitempty" url:"isSupplier,omitempty"`
-	PaymentTermDays *int64                                                `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	Address         *PostV1MigrationBooksImportRequestPartnersItemAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes           *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+type BooksImportMigrationRequestPartnersItem struct {
+	Code            string                                          `json:"code" url:"code"`
+	Name            string                                          `json:"name" url:"name"`
+	Type            *BooksImportMigrationRequestPartnersItemType    `json:"type,omitempty" url:"type,omitempty"`
+	VatCode         *string                                         `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Email           *string                                         `json:"email,omitempty" url:"email,omitempty"`
+	Phone           *string                                         `json:"phone,omitempty" url:"phone,omitempty"`
+	IsCustomer      *bool                                           `json:"isCustomer,omitempty" url:"isCustomer,omitempty"`
+	IsSupplier      *bool                                           `json:"isSupplier,omitempty" url:"isSupplier,omitempty"`
+	PaymentTermDays *int64                                          `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	Address         *BooksImportMigrationRequestPartnersItemAddress `json:"address,omitempty" url:"address,omitempty"`
+	Notes           *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2122,224 +2179,224 @@ type PostV1MigrationBooksImportRequestPartnersItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetName() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetType() *PostV1MigrationBooksImportRequestPartnersItemType {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetType() *BooksImportMigrationRequestPartnersItemType {
+	if b == nil {
 		return nil
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetVatCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetVatCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatCode
+	return b.VatCode
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetEmail() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetEmail() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Email
+	return b.Email
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetPhone() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetPhone() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Phone
+	return b.Phone
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetIsCustomer() *bool {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetIsCustomer() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsCustomer
+	return b.IsCustomer
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetIsSupplier() *bool {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetIsSupplier() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsSupplier
+	return b.IsSupplier
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetPaymentTermDays() *int64 {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetPaymentTermDays() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.PaymentTermDays
+	return b.PaymentTermDays
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetAddress() *PostV1MigrationBooksImportRequestPartnersItemAddress {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetAddress() *BooksImportMigrationRequestPartnersItemAddress {
+	if b == nil {
 		return nil
 	}
-	return p.Address
+	return b.Address
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestPartnersItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldCode)
+func (b *BooksImportMigrationRequestPartnersItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksImportMigrationRequestPartnersItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldName)
+func (b *BooksImportMigrationRequestPartnersItem) SetName(name string) {
+	b.Name = name
+	b.require(booksImportMigrationRequestPartnersItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetType(type_ *PostV1MigrationBooksImportRequestPartnersItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldType)
+func (b *BooksImportMigrationRequestPartnersItem) SetType(type_ *BooksImportMigrationRequestPartnersItemType) {
+	b.Type = type_
+	b.require(booksImportMigrationRequestPartnersItemFieldType)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldVatCode)
+func (b *BooksImportMigrationRequestPartnersItem) SetVatCode(vatCode *string) {
+	b.VatCode = vatCode
+	b.require(booksImportMigrationRequestPartnersItemFieldVatCode)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldEmail)
+func (b *BooksImportMigrationRequestPartnersItem) SetEmail(email *string) {
+	b.Email = email
+	b.require(booksImportMigrationRequestPartnersItemFieldEmail)
 }
 
 // SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldPhone)
+func (b *BooksImportMigrationRequestPartnersItem) SetPhone(phone *string) {
+	b.Phone = phone
+	b.require(booksImportMigrationRequestPartnersItemFieldPhone)
 }
 
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetIsCustomer(isCustomer *bool) {
-	p.IsCustomer = isCustomer
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldIsCustomer)
+func (b *BooksImportMigrationRequestPartnersItem) SetIsCustomer(isCustomer *bool) {
+	b.IsCustomer = isCustomer
+	b.require(booksImportMigrationRequestPartnersItemFieldIsCustomer)
 }
 
 // SetIsSupplier sets the IsSupplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetIsSupplier(isSupplier *bool) {
-	p.IsSupplier = isSupplier
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldIsSupplier)
+func (b *BooksImportMigrationRequestPartnersItem) SetIsSupplier(isSupplier *bool) {
+	b.IsSupplier = isSupplier
+	b.require(booksImportMigrationRequestPartnersItemFieldIsSupplier)
 }
 
 // SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetPaymentTermDays(paymentTermDays *int64) {
-	p.PaymentTermDays = paymentTermDays
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldPaymentTermDays)
+func (b *BooksImportMigrationRequestPartnersItem) SetPaymentTermDays(paymentTermDays *int64) {
+	b.PaymentTermDays = paymentTermDays
+	b.require(booksImportMigrationRequestPartnersItemFieldPaymentTermDays)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetAddress(address *PostV1MigrationBooksImportRequestPartnersItemAddress) {
-	p.Address = address
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldAddress)
+func (b *BooksImportMigrationRequestPartnersItem) SetAddress(address *BooksImportMigrationRequestPartnersItemAddress) {
+	b.Address = address
+	b.require(booksImportMigrationRequestPartnersItemFieldAddress)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksImportRequestPartnersItemFieldNotes)
+func (b *BooksImportMigrationRequestPartnersItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksImportMigrationRequestPartnersItemFieldNotes)
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestPartnersItem
+func (b *BooksImportMigrationRequestPartnersItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestPartnersItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestPartnersItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestPartnersItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestPartnersItem
+func (b *BooksImportMigrationRequestPartnersItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestPartnersItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportRequestPartnersItemAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestPartnersItemAddressFieldCity        = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestPartnersItemAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestPartnersItemAddressFieldCountryCode = big.NewInt(1 << 3)
+	booksImportMigrationRequestPartnersItemAddressFieldStreet      = big.NewInt(1 << 0)
+	booksImportMigrationRequestPartnersItemAddressFieldCity        = big.NewInt(1 << 1)
+	booksImportMigrationRequestPartnersItemAddressFieldPostalCode  = big.NewInt(1 << 2)
+	booksImportMigrationRequestPartnersItemAddressFieldCountryCode = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksImportRequestPartnersItemAddress struct {
+type BooksImportMigrationRequestPartnersItemAddress struct {
 	Street      *string `json:"street,omitempty" url:"street,omitempty"`
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
@@ -2352,156 +2409,156 @@ type PostV1MigrationBooksImportRequestPartnersItemAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) GetStreet() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) GetStreet() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Street
+	return b.Street
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) GetCity() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) GetCity() *string {
+	if b == nil {
 		return nil
 	}
-	return p.City
+	return b.City
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) GetPostalCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) GetPostalCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.PostalCode
+	return b.PostalCode
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) GetCountryCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) GetCountryCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.CountryCode
+	return b.CountryCode
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestPartnersItemAddress) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetStreet sets the Street field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1MigrationBooksImportRequestPartnersItemAddressFieldStreet)
+func (b *BooksImportMigrationRequestPartnersItemAddress) SetStreet(street *string) {
+	b.Street = street
+	b.require(booksImportMigrationRequestPartnersItemAddressFieldStreet)
 }
 
 // SetCity sets the City field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1MigrationBooksImportRequestPartnersItemAddressFieldCity)
+func (b *BooksImportMigrationRequestPartnersItemAddress) SetCity(city *string) {
+	b.City = city
+	b.require(booksImportMigrationRequestPartnersItemAddressFieldCity)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1MigrationBooksImportRequestPartnersItemAddressFieldPostalCode)
+func (b *BooksImportMigrationRequestPartnersItemAddress) SetPostalCode(postalCode *string) {
+	b.PostalCode = postalCode
+	b.require(booksImportMigrationRequestPartnersItemAddressFieldPostalCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1MigrationBooksImportRequestPartnersItemAddressFieldCountryCode)
+func (b *BooksImportMigrationRequestPartnersItemAddress) SetCountryCode(countryCode *string) {
+	b.CountryCode = countryCode
+	b.require(booksImportMigrationRequestPartnersItemAddressFieldCountryCode)
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestPartnersItemAddress
+func (b *BooksImportMigrationRequestPartnersItemAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationRequestPartnersItemAddress
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestPartnersItemAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestPartnersItemAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestPartnersItemAddress
+func (b *BooksImportMigrationRequestPartnersItemAddress) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestPartnersItemAddress
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestPartnersItemAddress) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestPartnersItemAddress) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksImportRequestPartnersItemType string
+type BooksImportMigrationRequestPartnersItemType string
 
 const (
-	PostV1MigrationBooksImportRequestPartnersItemTypeCompany PostV1MigrationBooksImportRequestPartnersItemType = "company"
-	PostV1MigrationBooksImportRequestPartnersItemTypePerson  PostV1MigrationBooksImportRequestPartnersItemType = "person"
+	BooksImportMigrationRequestPartnersItemTypeCompany BooksImportMigrationRequestPartnersItemType = "company"
+	BooksImportMigrationRequestPartnersItemTypePerson  BooksImportMigrationRequestPartnersItemType = "person"
 )
 
-func NewPostV1MigrationBooksImportRequestPartnersItemTypeFromString(s string) (PostV1MigrationBooksImportRequestPartnersItemType, error) {
+func NewBooksImportMigrationRequestPartnersItemTypeFromString(s string) (BooksImportMigrationRequestPartnersItemType, error) {
 	switch s {
 	case "company":
-		return PostV1MigrationBooksImportRequestPartnersItemTypeCompany, nil
+		return BooksImportMigrationRequestPartnersItemTypeCompany, nil
 	case "person":
-		return PostV1MigrationBooksImportRequestPartnersItemTypePerson, nil
+		return BooksImportMigrationRequestPartnersItemTypePerson, nil
 	}
-	var t PostV1MigrationBooksImportRequestPartnersItemType
+	var t BooksImportMigrationRequestPartnersItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksImportRequestPartnersItemType) Ptr() *PostV1MigrationBooksImportRequestPartnersItemType {
-	return &p
+func (b BooksImportMigrationRequestPartnersItemType) Ptr() *BooksImportMigrationRequestPartnersItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksImportRequestStockItemFieldWarehouseCode = big.NewInt(1 << 0)
-	postV1MigrationBooksImportRequestStockItemFieldItemCode      = big.NewInt(1 << 1)
-	postV1MigrationBooksImportRequestStockItemFieldQuantity      = big.NewInt(1 << 2)
-	postV1MigrationBooksImportRequestStockItemFieldUnitCost      = big.NewInt(1 << 3)
-	postV1MigrationBooksImportRequestStockItemFieldLotNumber     = big.NewInt(1 << 4)
-	postV1MigrationBooksImportRequestStockItemFieldExpiryDate    = big.NewInt(1 << 5)
+	booksImportMigrationRequestStockItemFieldWarehouseCode = big.NewInt(1 << 0)
+	booksImportMigrationRequestStockItemFieldItemCode      = big.NewInt(1 << 1)
+	booksImportMigrationRequestStockItemFieldQuantity      = big.NewInt(1 << 2)
+	booksImportMigrationRequestStockItemFieldUnitCost      = big.NewInt(1 << 3)
+	booksImportMigrationRequestStockItemFieldLotNumber     = big.NewInt(1 << 4)
+	booksImportMigrationRequestStockItemFieldExpiryDate    = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksImportRequestStockItem struct {
-	WarehouseCode *string `json:"warehouseCode,omitempty" url:"warehouseCode,omitempty"`
-	ItemCode      string  `json:"itemCode" url:"itemCode"`
-	Quantity      string  `json:"quantity" url:"quantity"`
-	UnitCost      string  `json:"unitCost" url:"unitCost"`
-	LotNumber     *string `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
-	ExpiryDate    *string `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
+type BooksImportMigrationRequestStockItem struct {
+	WarehouseCode *string    `json:"warehouseCode,omitempty" url:"warehouseCode,omitempty"`
+	ItemCode      string     `json:"itemCode" url:"itemCode"`
+	Quantity      string     `json:"quantity" url:"quantity"`
+	UnitCost      string     `json:"unitCost" url:"unitCost"`
+	LotNumber     *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate    *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2510,178 +2567,186 @@ type PostV1MigrationBooksImportRequestStockItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetWarehouseCode() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetWarehouseCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.WarehouseCode
+	return b.WarehouseCode
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetItemCode() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetItemCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.ItemCode
+	return b.ItemCode
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetQuantity() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetQuantity() string {
+	if b == nil {
 		return ""
 	}
-	return p.Quantity
+	return b.Quantity
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetUnitCost() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetUnitCost() string {
+	if b == nil {
 		return ""
 	}
-	return p.UnitCost
+	return b.UnitCost
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetLotNumber() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetLotNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return p.LotNumber
+	return b.LotNumber
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetExpiryDate() *string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetExpiryDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return b.ExpiryDate
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationRequestStockItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetWarehouseCode sets the WarehouseCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetWarehouseCode(warehouseCode *string) {
-	p.WarehouseCode = warehouseCode
-	p.require(postV1MigrationBooksImportRequestStockItemFieldWarehouseCode)
+func (b *BooksImportMigrationRequestStockItem) SetWarehouseCode(warehouseCode *string) {
+	b.WarehouseCode = warehouseCode
+	b.require(booksImportMigrationRequestStockItemFieldWarehouseCode)
 }
 
 // SetItemCode sets the ItemCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetItemCode(itemCode string) {
-	p.ItemCode = itemCode
-	p.require(postV1MigrationBooksImportRequestStockItemFieldItemCode)
+func (b *BooksImportMigrationRequestStockItem) SetItemCode(itemCode string) {
+	b.ItemCode = itemCode
+	b.require(booksImportMigrationRequestStockItemFieldItemCode)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1MigrationBooksImportRequestStockItemFieldQuantity)
+func (b *BooksImportMigrationRequestStockItem) SetQuantity(quantity string) {
+	b.Quantity = quantity
+	b.require(booksImportMigrationRequestStockItemFieldQuantity)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetUnitCost(unitCost string) {
-	p.UnitCost = unitCost
-	p.require(postV1MigrationBooksImportRequestStockItemFieldUnitCost)
+func (b *BooksImportMigrationRequestStockItem) SetUnitCost(unitCost string) {
+	b.UnitCost = unitCost
+	b.require(booksImportMigrationRequestStockItemFieldUnitCost)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1MigrationBooksImportRequestStockItemFieldLotNumber)
+func (b *BooksImportMigrationRequestStockItem) SetLotNumber(lotNumber *string) {
+	b.LotNumber = lotNumber
+	b.require(booksImportMigrationRequestStockItemFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportRequestStockItem) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1MigrationBooksImportRequestStockItemFieldExpiryDate)
+func (b *BooksImportMigrationRequestStockItem) SetExpiryDate(expiryDate *time.Time) {
+	b.ExpiryDate = expiryDate
+	b.require(booksImportMigrationRequestStockItemFieldExpiryDate)
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportRequestStockItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationRequestStockItem) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationRequestStockItem
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportRequestStockItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationRequestStockItem(unmarshaler.embed)
+	b.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportRequestStockItem
+func (b *BooksImportMigrationRequestStockItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationRequestStockItem
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*b),
+		ExpiryDate: internal.NewOptionalDate(b.ExpiryDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportRequestStockItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationRequestStockItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseFieldDryRun          = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseFieldCutoverDate     = big.NewInt(1 << 1)
-	postV1MigrationBooksImportResponseFieldAccounts        = big.NewInt(1 << 2)
-	postV1MigrationBooksImportResponseFieldPartners        = big.NewInt(1 << 3)
-	postV1MigrationBooksImportResponseFieldItems           = big.NewInt(1 << 4)
-	postV1MigrationBooksImportResponseFieldAssetGroups     = big.NewInt(1 << 5)
-	postV1MigrationBooksImportResponseFieldOpeningBalances = big.NewInt(1 << 6)
-	postV1MigrationBooksImportResponseFieldJournal         = big.NewInt(1 << 7)
-	postV1MigrationBooksImportResponseFieldOpenReceivables = big.NewInt(1 << 8)
-	postV1MigrationBooksImportResponseFieldOpenPayables    = big.NewInt(1 << 9)
-	postV1MigrationBooksImportResponseFieldFixedAssets     = big.NewInt(1 << 10)
-	postV1MigrationBooksImportResponseFieldStock           = big.NewInt(1 << 11)
-	postV1MigrationBooksImportResponseFieldNumberSeries    = big.NewInt(1 << 12)
-	postV1MigrationBooksImportResponseFieldWarnings        = big.NewInt(1 << 13)
+	booksImportMigrationResponseFieldDryRun          = big.NewInt(1 << 0)
+	booksImportMigrationResponseFieldCutoverDate     = big.NewInt(1 << 1)
+	booksImportMigrationResponseFieldAccounts        = big.NewInt(1 << 2)
+	booksImportMigrationResponseFieldPartners        = big.NewInt(1 << 3)
+	booksImportMigrationResponseFieldItems           = big.NewInt(1 << 4)
+	booksImportMigrationResponseFieldAssetGroups     = big.NewInt(1 << 5)
+	booksImportMigrationResponseFieldOpeningBalances = big.NewInt(1 << 6)
+	booksImportMigrationResponseFieldJournal         = big.NewInt(1 << 7)
+	booksImportMigrationResponseFieldOpenReceivables = big.NewInt(1 << 8)
+	booksImportMigrationResponseFieldOpenPayables    = big.NewInt(1 << 9)
+	booksImportMigrationResponseFieldFixedAssets     = big.NewInt(1 << 10)
+	booksImportMigrationResponseFieldStock           = big.NewInt(1 << 11)
+	booksImportMigrationResponseFieldNumberSeries    = big.NewInt(1 << 12)
+	booksImportMigrationResponseFieldWarnings        = big.NewInt(1 << 13)
 )
 
-type PostV1MigrationBooksImportResponse struct {
-	DryRun          bool                                                  `json:"dryRun" url:"dryRun"`
-	CutoverDate     string                                                `json:"cutoverDate" url:"cutoverDate"`
-	Accounts        *PostV1MigrationBooksImportResponseAccounts           `json:"accounts" url:"accounts"`
-	Partners        *PostV1MigrationBooksImportResponsePartners           `json:"partners" url:"partners"`
-	Items           *PostV1MigrationBooksImportResponseItems              `json:"items" url:"items"`
-	AssetGroups     *PostV1MigrationBooksImportResponseAssetGroups        `json:"assetGroups" url:"assetGroups"`
-	OpeningBalances *PostV1MigrationBooksImportResponseOpeningBalances    `json:"openingBalances,omitempty" url:"openingBalances,omitempty"`
-	Journal         *PostV1MigrationBooksImportResponseJournal            `json:"journal" url:"journal"`
-	OpenReceivables *PostV1MigrationBooksImportResponseOpenReceivables    `json:"openReceivables" url:"openReceivables"`
-	OpenPayables    *PostV1MigrationBooksImportResponseOpenPayables       `json:"openPayables" url:"openPayables"`
-	FixedAssets     *PostV1MigrationBooksImportResponseFixedAssets        `json:"fixedAssets" url:"fixedAssets"`
-	Stock           *PostV1MigrationBooksImportResponseStock              `json:"stock" url:"stock"`
-	NumberSeries    []*PostV1MigrationBooksImportResponseNumberSeriesItem `json:"numberSeries" url:"numberSeries"`
-	Warnings        []string                                              `json:"warnings" url:"warnings"`
+type BooksImportMigrationResponse struct {
+	DryRun          bool                                            `json:"dryRun" url:"dryRun"`
+	CutoverDate     time.Time                                       `json:"cutoverDate" url:"cutoverDate" format:"date"`
+	Accounts        *BooksImportMigrationResponseAccounts           `json:"accounts" url:"accounts"`
+	Partners        *BooksImportMigrationResponsePartners           `json:"partners" url:"partners"`
+	Items           *BooksImportMigrationResponseItems              `json:"items" url:"items"`
+	AssetGroups     *BooksImportMigrationResponseAssetGroups        `json:"assetGroups" url:"assetGroups"`
+	OpeningBalances *BooksImportMigrationResponseOpeningBalances    `json:"openingBalances,omitempty" url:"openingBalances,omitempty"`
+	Journal         *BooksImportMigrationResponseJournal            `json:"journal" url:"journal"`
+	OpenReceivables *BooksImportMigrationResponseOpenReceivables    `json:"openReceivables" url:"openReceivables"`
+	OpenPayables    *BooksImportMigrationResponseOpenPayables       `json:"openPayables" url:"openPayables"`
+	FixedAssets     *BooksImportMigrationResponseFixedAssets        `json:"fixedAssets" url:"fixedAssets"`
+	Stock           *BooksImportMigrationResponseStock              `json:"stock" url:"stock"`
+	NumberSeries    []*BooksImportMigrationResponseNumberSeriesItem `json:"numberSeries" url:"numberSeries"`
+	Warnings        []string                                        `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2690,264 +2755,272 @@ type PostV1MigrationBooksImportResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetDryRun() bool {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetDryRun() bool {
+	if b == nil {
 		return false
 	}
-	return p.DryRun
+	return b.DryRun
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetCutoverDate() string {
-	if p == nil {
-		return ""
+func (b *BooksImportMigrationResponse) GetCutoverDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.CutoverDate
+	return b.CutoverDate
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetAccounts() *PostV1MigrationBooksImportResponseAccounts {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetAccounts() *BooksImportMigrationResponseAccounts {
+	if b == nil {
 		return nil
 	}
-	return p.Accounts
+	return b.Accounts
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetPartners() *PostV1MigrationBooksImportResponsePartners {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetPartners() *BooksImportMigrationResponsePartners {
+	if b == nil {
 		return nil
 	}
-	return p.Partners
+	return b.Partners
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetItems() *PostV1MigrationBooksImportResponseItems {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetItems() *BooksImportMigrationResponseItems {
+	if b == nil {
 		return nil
 	}
-	return p.Items
+	return b.Items
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetAssetGroups() *PostV1MigrationBooksImportResponseAssetGroups {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetAssetGroups() *BooksImportMigrationResponseAssetGroups {
+	if b == nil {
 		return nil
 	}
-	return p.AssetGroups
+	return b.AssetGroups
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetOpeningBalances() *PostV1MigrationBooksImportResponseOpeningBalances {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetOpeningBalances() *BooksImportMigrationResponseOpeningBalances {
+	if b == nil {
 		return nil
 	}
-	return p.OpeningBalances
+	return b.OpeningBalances
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetJournal() *PostV1MigrationBooksImportResponseJournal {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetJournal() *BooksImportMigrationResponseJournal {
+	if b == nil {
 		return nil
 	}
-	return p.Journal
+	return b.Journal
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetOpenReceivables() *PostV1MigrationBooksImportResponseOpenReceivables {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetOpenReceivables() *BooksImportMigrationResponseOpenReceivables {
+	if b == nil {
 		return nil
 	}
-	return p.OpenReceivables
+	return b.OpenReceivables
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetOpenPayables() *PostV1MigrationBooksImportResponseOpenPayables {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetOpenPayables() *BooksImportMigrationResponseOpenPayables {
+	if b == nil {
 		return nil
 	}
-	return p.OpenPayables
+	return b.OpenPayables
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetFixedAssets() *PostV1MigrationBooksImportResponseFixedAssets {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetFixedAssets() *BooksImportMigrationResponseFixedAssets {
+	if b == nil {
 		return nil
 	}
-	return p.FixedAssets
+	return b.FixedAssets
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetStock() *PostV1MigrationBooksImportResponseStock {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetStock() *BooksImportMigrationResponseStock {
+	if b == nil {
 		return nil
 	}
-	return p.Stock
+	return b.Stock
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetNumberSeries() []*PostV1MigrationBooksImportResponseNumberSeriesItem {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetNumberSeries() []*BooksImportMigrationResponseNumberSeriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.NumberSeries
+	return b.NumberSeries
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetWarnings() []string {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetWarnings() []string {
+	if b == nil {
 		return nil
 	}
-	return p.Warnings
+	return b.Warnings
 }
 
-func (p *PostV1MigrationBooksImportResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDryRun sets the DryRun field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetDryRun(dryRun bool) {
-	p.DryRun = dryRun
-	p.require(postV1MigrationBooksImportResponseFieldDryRun)
+func (b *BooksImportMigrationResponse) SetDryRun(dryRun bool) {
+	b.DryRun = dryRun
+	b.require(booksImportMigrationResponseFieldDryRun)
 }
 
 // SetCutoverDate sets the CutoverDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetCutoverDate(cutoverDate string) {
-	p.CutoverDate = cutoverDate
-	p.require(postV1MigrationBooksImportResponseFieldCutoverDate)
+func (b *BooksImportMigrationResponse) SetCutoverDate(cutoverDate time.Time) {
+	b.CutoverDate = cutoverDate
+	b.require(booksImportMigrationResponseFieldCutoverDate)
 }
 
 // SetAccounts sets the Accounts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetAccounts(accounts *PostV1MigrationBooksImportResponseAccounts) {
-	p.Accounts = accounts
-	p.require(postV1MigrationBooksImportResponseFieldAccounts)
+func (b *BooksImportMigrationResponse) SetAccounts(accounts *BooksImportMigrationResponseAccounts) {
+	b.Accounts = accounts
+	b.require(booksImportMigrationResponseFieldAccounts)
 }
 
 // SetPartners sets the Partners field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetPartners(partners *PostV1MigrationBooksImportResponsePartners) {
-	p.Partners = partners
-	p.require(postV1MigrationBooksImportResponseFieldPartners)
+func (b *BooksImportMigrationResponse) SetPartners(partners *BooksImportMigrationResponsePartners) {
+	b.Partners = partners
+	b.require(booksImportMigrationResponseFieldPartners)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetItems(items *PostV1MigrationBooksImportResponseItems) {
-	p.Items = items
-	p.require(postV1MigrationBooksImportResponseFieldItems)
+func (b *BooksImportMigrationResponse) SetItems(items *BooksImportMigrationResponseItems) {
+	b.Items = items
+	b.require(booksImportMigrationResponseFieldItems)
 }
 
 // SetAssetGroups sets the AssetGroups field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetAssetGroups(assetGroups *PostV1MigrationBooksImportResponseAssetGroups) {
-	p.AssetGroups = assetGroups
-	p.require(postV1MigrationBooksImportResponseFieldAssetGroups)
+func (b *BooksImportMigrationResponse) SetAssetGroups(assetGroups *BooksImportMigrationResponseAssetGroups) {
+	b.AssetGroups = assetGroups
+	b.require(booksImportMigrationResponseFieldAssetGroups)
 }
 
 // SetOpeningBalances sets the OpeningBalances field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetOpeningBalances(openingBalances *PostV1MigrationBooksImportResponseOpeningBalances) {
-	p.OpeningBalances = openingBalances
-	p.require(postV1MigrationBooksImportResponseFieldOpeningBalances)
+func (b *BooksImportMigrationResponse) SetOpeningBalances(openingBalances *BooksImportMigrationResponseOpeningBalances) {
+	b.OpeningBalances = openingBalances
+	b.require(booksImportMigrationResponseFieldOpeningBalances)
 }
 
 // SetJournal sets the Journal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetJournal(journal *PostV1MigrationBooksImportResponseJournal) {
-	p.Journal = journal
-	p.require(postV1MigrationBooksImportResponseFieldJournal)
+func (b *BooksImportMigrationResponse) SetJournal(journal *BooksImportMigrationResponseJournal) {
+	b.Journal = journal
+	b.require(booksImportMigrationResponseFieldJournal)
 }
 
 // SetOpenReceivables sets the OpenReceivables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetOpenReceivables(openReceivables *PostV1MigrationBooksImportResponseOpenReceivables) {
-	p.OpenReceivables = openReceivables
-	p.require(postV1MigrationBooksImportResponseFieldOpenReceivables)
+func (b *BooksImportMigrationResponse) SetOpenReceivables(openReceivables *BooksImportMigrationResponseOpenReceivables) {
+	b.OpenReceivables = openReceivables
+	b.require(booksImportMigrationResponseFieldOpenReceivables)
 }
 
 // SetOpenPayables sets the OpenPayables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetOpenPayables(openPayables *PostV1MigrationBooksImportResponseOpenPayables) {
-	p.OpenPayables = openPayables
-	p.require(postV1MigrationBooksImportResponseFieldOpenPayables)
+func (b *BooksImportMigrationResponse) SetOpenPayables(openPayables *BooksImportMigrationResponseOpenPayables) {
+	b.OpenPayables = openPayables
+	b.require(booksImportMigrationResponseFieldOpenPayables)
 }
 
 // SetFixedAssets sets the FixedAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetFixedAssets(fixedAssets *PostV1MigrationBooksImportResponseFixedAssets) {
-	p.FixedAssets = fixedAssets
-	p.require(postV1MigrationBooksImportResponseFieldFixedAssets)
+func (b *BooksImportMigrationResponse) SetFixedAssets(fixedAssets *BooksImportMigrationResponseFixedAssets) {
+	b.FixedAssets = fixedAssets
+	b.require(booksImportMigrationResponseFieldFixedAssets)
 }
 
 // SetStock sets the Stock field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetStock(stock *PostV1MigrationBooksImportResponseStock) {
-	p.Stock = stock
-	p.require(postV1MigrationBooksImportResponseFieldStock)
+func (b *BooksImportMigrationResponse) SetStock(stock *BooksImportMigrationResponseStock) {
+	b.Stock = stock
+	b.require(booksImportMigrationResponseFieldStock)
 }
 
 // SetNumberSeries sets the NumberSeries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetNumberSeries(numberSeries []*PostV1MigrationBooksImportResponseNumberSeriesItem) {
-	p.NumberSeries = numberSeries
-	p.require(postV1MigrationBooksImportResponseFieldNumberSeries)
+func (b *BooksImportMigrationResponse) SetNumberSeries(numberSeries []*BooksImportMigrationResponseNumberSeriesItem) {
+	b.NumberSeries = numberSeries
+	b.require(booksImportMigrationResponseFieldNumberSeries)
 }
 
 // SetWarnings sets the Warnings field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponse) SetWarnings(warnings []string) {
-	p.Warnings = warnings
-	p.require(postV1MigrationBooksImportResponseFieldWarnings)
+func (b *BooksImportMigrationResponse) SetWarnings(warnings []string) {
+	b.Warnings = warnings
+	b.require(booksImportMigrationResponseFieldWarnings)
 }
 
-func (p *PostV1MigrationBooksImportResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationResponse) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationResponse
+	var unmarshaler = struct {
+		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponse(unmarshaler.embed)
+	b.CutoverDate = unmarshaler.CutoverDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponse
+func (b *BooksImportMigrationResponse) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponse
 	var marshaler = struct {
 		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
 	}{
-		embed: embed(*p),
+		embed:       embed(*b),
+		CutoverDate: internal.NewDate(b.CutoverDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponse) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponse) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseAccountsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseAccountsFieldExisting = big.NewInt(1 << 1)
+	booksImportMigrationResponseAccountsFieldCreated  = big.NewInt(1 << 0)
+	booksImportMigrationResponseAccountsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseAccounts struct {
+type BooksImportMigrationResponseAccounts struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -2958,96 +3031,96 @@ type PostV1MigrationBooksImportResponseAccounts struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseAccounts) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) GetExisting() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseAccounts) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseAccounts) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseAccounts) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseAccounts) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseAccountsFieldCreated)
+func (b *BooksImportMigrationResponseAccounts) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseAccountsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseAccounts) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksImportResponseAccountsFieldExisting)
+func (b *BooksImportMigrationResponseAccounts) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksImportMigrationResponseAccountsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseAccounts
+func (b *BooksImportMigrationResponseAccounts) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseAccounts
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseAccounts(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseAccounts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseAccounts
+func (b *BooksImportMigrationResponseAccounts) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseAccounts
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseAccounts) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseAccounts) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseAssetGroupsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseAssetGroupsFieldExisting = big.NewInt(1 << 1)
+	booksImportMigrationResponseAssetGroupsFieldCreated  = big.NewInt(1 << 0)
+	booksImportMigrationResponseAssetGroupsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseAssetGroups struct {
+type BooksImportMigrationResponseAssetGroups struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -3058,97 +3131,97 @@ type PostV1MigrationBooksImportResponseAssetGroups struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseAssetGroups) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) GetExisting() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseAssetGroups) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseAssetGroups) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseAssetGroups) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseAssetGroups) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseAssetGroupsFieldCreated)
+func (b *BooksImportMigrationResponseAssetGroups) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseAssetGroupsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseAssetGroups) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksImportResponseAssetGroupsFieldExisting)
+func (b *BooksImportMigrationResponseAssetGroups) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksImportMigrationResponseAssetGroupsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseAssetGroups
+func (b *BooksImportMigrationResponseAssetGroups) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseAssetGroups
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseAssetGroups(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseAssetGroups(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseAssetGroups
+func (b *BooksImportMigrationResponseAssetGroups) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseAssetGroups
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseAssetGroups) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseAssetGroups) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseFixedAssetsFieldCreated                      = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseFixedAssetsFieldCostTotal                    = big.NewInt(1 << 1)
-	postV1MigrationBooksImportResponseFixedAssetsFieldAccumulatedDepreciationTotal = big.NewInt(1 << 2)
+	booksImportMigrationResponseFixedAssetsFieldCreated                      = big.NewInt(1 << 0)
+	booksImportMigrationResponseFixedAssetsFieldCostTotal                    = big.NewInt(1 << 1)
+	booksImportMigrationResponseFixedAssetsFieldAccumulatedDepreciationTotal = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksImportResponseFixedAssets struct {
+type BooksImportMigrationResponseFixedAssets struct {
 	Created                      int64  `json:"created" url:"created"`
 	CostTotal                    string `json:"costTotal" url:"costTotal"`
 	AccumulatedDepreciationTotal string `json:"accumulatedDepreciationTotal" url:"accumulatedDepreciationTotal"`
@@ -3160,110 +3233,110 @@ type PostV1MigrationBooksImportResponseFixedAssets struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseFixedAssets) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) GetCostTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseFixedAssets) GetCostTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CostTotal
+	return b.CostTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) GetAccumulatedDepreciationTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseFixedAssets) GetAccumulatedDepreciationTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccumulatedDepreciationTotal
+	return b.AccumulatedDepreciationTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseFixedAssets) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseFixedAssets) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseFixedAssets) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseFixedAssetsFieldCreated)
+func (b *BooksImportMigrationResponseFixedAssets) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseFixedAssetsFieldCreated)
 }
 
 // SetCostTotal sets the CostTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseFixedAssets) SetCostTotal(costTotal string) {
-	p.CostTotal = costTotal
-	p.require(postV1MigrationBooksImportResponseFixedAssetsFieldCostTotal)
+func (b *BooksImportMigrationResponseFixedAssets) SetCostTotal(costTotal string) {
+	b.CostTotal = costTotal
+	b.require(booksImportMigrationResponseFixedAssetsFieldCostTotal)
 }
 
 // SetAccumulatedDepreciationTotal sets the AccumulatedDepreciationTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseFixedAssets) SetAccumulatedDepreciationTotal(accumulatedDepreciationTotal string) {
-	p.AccumulatedDepreciationTotal = accumulatedDepreciationTotal
-	p.require(postV1MigrationBooksImportResponseFixedAssetsFieldAccumulatedDepreciationTotal)
+func (b *BooksImportMigrationResponseFixedAssets) SetAccumulatedDepreciationTotal(accumulatedDepreciationTotal string) {
+	b.AccumulatedDepreciationTotal = accumulatedDepreciationTotal
+	b.require(booksImportMigrationResponseFixedAssetsFieldAccumulatedDepreciationTotal)
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseFixedAssets
+func (b *BooksImportMigrationResponseFixedAssets) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseFixedAssets
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseFixedAssets(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseFixedAssets(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseFixedAssets
+func (b *BooksImportMigrationResponseFixedAssets) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseFixedAssets
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseFixedAssets) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseFixedAssets) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseItemsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseItemsFieldExisting = big.NewInt(1 << 1)
+	booksImportMigrationResponseItemsFieldCreated  = big.NewInt(1 << 0)
+	booksImportMigrationResponseItemsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseItems struct {
+type BooksImportMigrationResponseItems struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -3274,96 +3347,96 @@ type PostV1MigrationBooksImportResponseItems struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseItems) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) GetExisting() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseItems) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseItems) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseItems) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseItems) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseItemsFieldCreated)
+func (b *BooksImportMigrationResponseItems) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseItemsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseItems) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksImportResponseItemsFieldExisting)
+func (b *BooksImportMigrationResponseItems) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksImportMigrationResponseItemsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseItems
+func (b *BooksImportMigrationResponseItems) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseItems
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseItems(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseItems(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseItems
+func (b *BooksImportMigrationResponseItems) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseItems
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseItems) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseItems) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseJournalFieldTransactions = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseJournalFieldEntries      = big.NewInt(1 << 1)
+	booksImportMigrationResponseJournalFieldTransactions = big.NewInt(1 << 0)
+	booksImportMigrationResponseJournalFieldEntries      = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseJournal struct {
+type BooksImportMigrationResponseJournal struct {
 	Transactions int64 `json:"transactions" url:"transactions"`
 	Entries      int64 `json:"entries" url:"entries"`
 
@@ -3374,97 +3447,97 @@ type PostV1MigrationBooksImportResponseJournal struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) GetTransactions() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseJournal) GetTransactions() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Transactions
+	return b.Transactions
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) GetEntries() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseJournal) GetEntries() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseJournal) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseJournal) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetTransactions sets the Transactions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseJournal) SetTransactions(transactions int64) {
-	p.Transactions = transactions
-	p.require(postV1MigrationBooksImportResponseJournalFieldTransactions)
+func (b *BooksImportMigrationResponseJournal) SetTransactions(transactions int64) {
+	b.Transactions = transactions
+	b.require(booksImportMigrationResponseJournalFieldTransactions)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseJournal) SetEntries(entries int64) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksImportResponseJournalFieldEntries)
+func (b *BooksImportMigrationResponseJournal) SetEntries(entries int64) {
+	b.Entries = entries
+	b.require(booksImportMigrationResponseJournalFieldEntries)
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseJournal
+func (b *BooksImportMigrationResponseJournal) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseJournal
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseJournal(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseJournal(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseJournal
+func (b *BooksImportMigrationResponseJournal) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseJournal
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseJournal) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseJournal) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseNumberSeriesItemFieldPrefix     = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseNumberSeriesItemFieldYear       = big.NewInt(1 << 1)
-	postV1MigrationBooksImportResponseNumberSeriesItemFieldNextNumber = big.NewInt(1 << 2)
+	booksImportMigrationResponseNumberSeriesItemFieldPrefix     = big.NewInt(1 << 0)
+	booksImportMigrationResponseNumberSeriesItemFieldYear       = big.NewInt(1 << 1)
+	booksImportMigrationResponseNumberSeriesItemFieldNextNumber = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksImportResponseNumberSeriesItem struct {
+type BooksImportMigrationResponseNumberSeriesItem struct {
 	Prefix     string `json:"prefix" url:"prefix"`
 	Year       int64  `json:"year" url:"year"`
 	NextNumber int64  `json:"nextNumber" url:"nextNumber"`
@@ -3476,110 +3549,110 @@ type PostV1MigrationBooksImportResponseNumberSeriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) GetPrefix() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseNumberSeriesItem) GetPrefix() string {
+	if b == nil {
 		return ""
 	}
-	return p.Prefix
+	return b.Prefix
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) GetYear() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseNumberSeriesItem) GetYear() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Year
+	return b.Year
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) GetNextNumber() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseNumberSeriesItem) GetNextNumber() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.NextNumber
+	return b.NextNumber
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseNumberSeriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseNumberSeriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPrefix sets the Prefix field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) SetPrefix(prefix string) {
-	p.Prefix = prefix
-	p.require(postV1MigrationBooksImportResponseNumberSeriesItemFieldPrefix)
+func (b *BooksImportMigrationResponseNumberSeriesItem) SetPrefix(prefix string) {
+	b.Prefix = prefix
+	b.require(booksImportMigrationResponseNumberSeriesItemFieldPrefix)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1MigrationBooksImportResponseNumberSeriesItemFieldYear)
+func (b *BooksImportMigrationResponseNumberSeriesItem) SetYear(year int64) {
+	b.Year = year
+	b.require(booksImportMigrationResponseNumberSeriesItemFieldYear)
 }
 
 // SetNextNumber sets the NextNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) SetNextNumber(nextNumber int64) {
-	p.NextNumber = nextNumber
-	p.require(postV1MigrationBooksImportResponseNumberSeriesItemFieldNextNumber)
+func (b *BooksImportMigrationResponseNumberSeriesItem) SetNextNumber(nextNumber int64) {
+	b.NextNumber = nextNumber
+	b.require(booksImportMigrationResponseNumberSeriesItemFieldNextNumber)
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseNumberSeriesItem
+func (b *BooksImportMigrationResponseNumberSeriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseNumberSeriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseNumberSeriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseNumberSeriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseNumberSeriesItem
+func (b *BooksImportMigrationResponseNumberSeriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseNumberSeriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseNumberSeriesItem) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseNumberSeriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseOpenPayablesFieldCreated          = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseOpenPayablesFieldOutstandingTotal = big.NewInt(1 << 1)
+	booksImportMigrationResponseOpenPayablesFieldCreated          = big.NewInt(1 << 0)
+	booksImportMigrationResponseOpenPayablesFieldOutstandingTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseOpenPayables struct {
+type BooksImportMigrationResponseOpenPayables struct {
 	Created          int64  `json:"created" url:"created"`
 	OutstandingTotal string `json:"outstandingTotal" url:"outstandingTotal"`
 
@@ -3590,96 +3663,96 @@ type PostV1MigrationBooksImportResponseOpenPayables struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenPayables) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) GetOutstandingTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenPayables) GetOutstandingTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.OutstandingTotal
+	return b.OutstandingTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenPayables) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseOpenPayables) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpenPayables) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseOpenPayablesFieldCreated)
+func (b *BooksImportMigrationResponseOpenPayables) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseOpenPayablesFieldCreated)
 }
 
 // SetOutstandingTotal sets the OutstandingTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpenPayables) SetOutstandingTotal(outstandingTotal string) {
-	p.OutstandingTotal = outstandingTotal
-	p.require(postV1MigrationBooksImportResponseOpenPayablesFieldOutstandingTotal)
+func (b *BooksImportMigrationResponseOpenPayables) SetOutstandingTotal(outstandingTotal string) {
+	b.OutstandingTotal = outstandingTotal
+	b.require(booksImportMigrationResponseOpenPayablesFieldOutstandingTotal)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseOpenPayables
+func (b *BooksImportMigrationResponseOpenPayables) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseOpenPayables
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseOpenPayables(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseOpenPayables(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseOpenPayables
+func (b *BooksImportMigrationResponseOpenPayables) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseOpenPayables
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenPayables) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenPayables) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseOpenReceivablesFieldCreated          = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseOpenReceivablesFieldOutstandingTotal = big.NewInt(1 << 1)
+	booksImportMigrationResponseOpenReceivablesFieldCreated          = big.NewInt(1 << 0)
+	booksImportMigrationResponseOpenReceivablesFieldOutstandingTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseOpenReceivables struct {
+type BooksImportMigrationResponseOpenReceivables struct {
 	Created          int64  `json:"created" url:"created"`
 	OutstandingTotal string `json:"outstandingTotal" url:"outstandingTotal"`
 
@@ -3690,106 +3763,106 @@ type PostV1MigrationBooksImportResponseOpenReceivables struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenReceivables) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) GetOutstandingTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenReceivables) GetOutstandingTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.OutstandingTotal
+	return b.OutstandingTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenReceivables) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseOpenReceivables) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponseOpenReceivablesFieldCreated)
+func (b *BooksImportMigrationResponseOpenReceivables) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponseOpenReceivablesFieldCreated)
 }
 
 // SetOutstandingTotal sets the OutstandingTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) SetOutstandingTotal(outstandingTotal string) {
-	p.OutstandingTotal = outstandingTotal
-	p.require(postV1MigrationBooksImportResponseOpenReceivablesFieldOutstandingTotal)
+func (b *BooksImportMigrationResponseOpenReceivables) SetOutstandingTotal(outstandingTotal string) {
+	b.OutstandingTotal = outstandingTotal
+	b.require(booksImportMigrationResponseOpenReceivablesFieldOutstandingTotal)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseOpenReceivables
+func (b *BooksImportMigrationResponseOpenReceivables) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseOpenReceivables
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseOpenReceivables(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseOpenReceivables(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseOpenReceivables
+func (b *BooksImportMigrationResponseOpenReceivables) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseOpenReceivables
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpenReceivables) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpenReceivables) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseOpeningBalancesFieldJournalTransactionID = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseOpeningBalancesFieldDate                 = big.NewInt(1 << 1)
-	postV1MigrationBooksImportResponseOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
-	postV1MigrationBooksImportResponseOpeningBalancesFieldDebitTotal           = big.NewInt(1 << 3)
-	postV1MigrationBooksImportResponseOpeningBalancesFieldCreditTotal          = big.NewInt(1 << 4)
-	postV1MigrationBooksImportResponseOpeningBalancesFieldBalancingAmount      = big.NewInt(1 << 5)
+	booksImportMigrationResponseOpeningBalancesFieldJournalTransactionID = big.NewInt(1 << 0)
+	booksImportMigrationResponseOpeningBalancesFieldDate                 = big.NewInt(1 << 1)
+	booksImportMigrationResponseOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
+	booksImportMigrationResponseOpeningBalancesFieldDebitTotal           = big.NewInt(1 << 3)
+	booksImportMigrationResponseOpeningBalancesFieldCreditTotal          = big.NewInt(1 << 4)
+	booksImportMigrationResponseOpeningBalancesFieldBalancingAmount      = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksImportResponseOpeningBalances struct {
-	JournalTransactionID *string `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Date                 string  `json:"date" url:"date"`
-	Entries              int64   `json:"entries" url:"entries"`
-	DebitTotal           string  `json:"debitTotal" url:"debitTotal"`
-	CreditTotal          string  `json:"creditTotal" url:"creditTotal"`
-	BalancingAmount      string  `json:"balancingAmount" url:"balancingAmount"`
+type BooksImportMigrationResponseOpeningBalances struct {
+	JournalTransactionID *string   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Date                 time.Time `json:"date" url:"date" format:"date"`
+	Entries              int64     `json:"entries" url:"entries"`
+	DebitTotal           string    `json:"debitTotal" url:"debitTotal"`
+	CreditTotal          string    `json:"creditTotal" url:"creditTotal"`
+	BalancingAmount      string    `json:"balancingAmount" url:"balancingAmount"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3798,152 +3871,160 @@ type PostV1MigrationBooksImportResponseOpeningBalances struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetJournalTransactionID() *string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetJournalTransactionID() *string {
+	if b == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return b.JournalTransactionID
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetDate() string {
-	if p == nil {
-		return ""
+func (b *BooksImportMigrationResponseOpeningBalances) GetDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetEntries() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetEntries() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetDebitTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetDebitTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.DebitTotal
+	return b.DebitTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetCreditTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetCreditTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CreditTotal
+	return b.CreditTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetBalancingAmount() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetBalancingAmount() string {
+	if b == nil {
 		return ""
 	}
-	return p.BalancingAmount
+	return b.BalancingAmount
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseOpeningBalances) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldJournalTransactionID)
+func (b *BooksImportMigrationResponseOpeningBalances) SetJournalTransactionID(journalTransactionID *string) {
+	b.JournalTransactionID = journalTransactionID
+	b.require(booksImportMigrationResponseOpeningBalancesFieldJournalTransactionID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetDate(date string) {
-	p.Date = date
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldDate)
+func (b *BooksImportMigrationResponseOpeningBalances) SetDate(date time.Time) {
+	b.Date = date
+	b.require(booksImportMigrationResponseOpeningBalancesFieldDate)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetEntries(entries int64) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldEntries)
+func (b *BooksImportMigrationResponseOpeningBalances) SetEntries(entries int64) {
+	b.Entries = entries
+	b.require(booksImportMigrationResponseOpeningBalancesFieldEntries)
 }
 
 // SetDebitTotal sets the DebitTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetDebitTotal(debitTotal string) {
-	p.DebitTotal = debitTotal
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldDebitTotal)
+func (b *BooksImportMigrationResponseOpeningBalances) SetDebitTotal(debitTotal string) {
+	b.DebitTotal = debitTotal
+	b.require(booksImportMigrationResponseOpeningBalancesFieldDebitTotal)
 }
 
 // SetCreditTotal sets the CreditTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetCreditTotal(creditTotal string) {
-	p.CreditTotal = creditTotal
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldCreditTotal)
+func (b *BooksImportMigrationResponseOpeningBalances) SetCreditTotal(creditTotal string) {
+	b.CreditTotal = creditTotal
+	b.require(booksImportMigrationResponseOpeningBalancesFieldCreditTotal)
 }
 
 // SetBalancingAmount sets the BalancingAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) SetBalancingAmount(balancingAmount string) {
-	p.BalancingAmount = balancingAmount
-	p.require(postV1MigrationBooksImportResponseOpeningBalancesFieldBalancingAmount)
+func (b *BooksImportMigrationResponseOpeningBalances) SetBalancingAmount(balancingAmount string) {
+	b.BalancingAmount = balancingAmount
+	b.require(booksImportMigrationResponseOpeningBalancesFieldBalancingAmount)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseOpeningBalances
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksImportMigrationResponseOpeningBalances) UnmarshalJSON(data []byte) error {
+	type embed BooksImportMigrationResponseOpeningBalances
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseOpeningBalances(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseOpeningBalances(unmarshaler.embed)
+	b.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseOpeningBalances
+func (b *BooksImportMigrationResponseOpeningBalances) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseOpeningBalances
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseOpeningBalances) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseOpeningBalances) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponsePartnersFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponsePartnersFieldExisting = big.NewInt(1 << 1)
+	booksImportMigrationResponsePartnersFieldCreated  = big.NewInt(1 << 0)
+	booksImportMigrationResponsePartnersFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponsePartners struct {
+type BooksImportMigrationResponsePartners struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -3954,96 +4035,96 @@ type PostV1MigrationBooksImportResponsePartners struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) GetCreated() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponsePartners) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) GetExisting() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponsePartners) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponsePartners) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponsePartners) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponsePartners) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksImportResponsePartnersFieldCreated)
+func (b *BooksImportMigrationResponsePartners) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksImportMigrationResponsePartnersFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponsePartners) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksImportResponsePartnersFieldExisting)
+func (b *BooksImportMigrationResponsePartners) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksImportMigrationResponsePartnersFieldExisting)
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponsePartners
+func (b *BooksImportMigrationResponsePartners) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponsePartners
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponsePartners(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponsePartners(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponsePartners
+func (b *BooksImportMigrationResponsePartners) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponsePartners
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponsePartners) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponsePartners) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksImportResponseStockFieldMovements = big.NewInt(1 << 0)
-	postV1MigrationBooksImportResponseStockFieldCostTotal = big.NewInt(1 << 1)
+	booksImportMigrationResponseStockFieldMovements = big.NewInt(1 << 0)
+	booksImportMigrationResponseStockFieldCostTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksImportResponseStock struct {
+type BooksImportMigrationResponseStock struct {
 	Movements int64  `json:"movements" url:"movements"`
 	CostTotal string `json:"costTotal" url:"costTotal"`
 
@@ -4054,104 +4135,104 @@ type PostV1MigrationBooksImportResponseStock struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) GetMovements() int64 {
-	if p == nil {
+func (b *BooksImportMigrationResponseStock) GetMovements() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Movements
+	return b.Movements
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) GetCostTotal() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseStock) GetCostTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CostTotal
+	return b.CostTotal
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksImportMigrationResponseStock) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksImportMigrationResponseStock) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetMovements sets the Movements field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseStock) SetMovements(movements int64) {
-	p.Movements = movements
-	p.require(postV1MigrationBooksImportResponseStockFieldMovements)
+func (b *BooksImportMigrationResponseStock) SetMovements(movements int64) {
+	b.Movements = movements
+	b.require(booksImportMigrationResponseStockFieldMovements)
 }
 
 // SetCostTotal sets the CostTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksImportResponseStock) SetCostTotal(costTotal string) {
-	p.CostTotal = costTotal
-	p.require(postV1MigrationBooksImportResponseStockFieldCostTotal)
+func (b *BooksImportMigrationResponseStock) SetCostTotal(costTotal string) {
+	b.CostTotal = costTotal
+	b.require(booksImportMigrationResponseStockFieldCostTotal)
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksImportResponseStock
+func (b *BooksImportMigrationResponseStock) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksImportMigrationResponseStock
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksImportResponseStock(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksImportMigrationResponseStock(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksImportResponseStock
+func (b *BooksImportMigrationResponseStock) MarshalJSON() ([]byte, error) {
+	type embed BooksImportMigrationResponseStock
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksImportResponseStock) String() string {
-	if p == nil {
+func (b *BooksImportMigrationResponseStock) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestAccountsItemFieldCode       = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestAccountsItemFieldName       = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestAccountsItemFieldType       = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestAccountsItemFieldParentCode = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestAccountsItemFieldIsPostable = big.NewInt(1 << 4)
+	booksValidateMigrationRequestAccountsItemFieldCode       = big.NewInt(1 << 0)
+	booksValidateMigrationRequestAccountsItemFieldName       = big.NewInt(1 << 1)
+	booksValidateMigrationRequestAccountsItemFieldType       = big.NewInt(1 << 2)
+	booksValidateMigrationRequestAccountsItemFieldParentCode = big.NewInt(1 << 3)
+	booksValidateMigrationRequestAccountsItemFieldIsPostable = big.NewInt(1 << 4)
 )
 
-type PostV1MigrationBooksValidateRequestAccountsItem struct {
-	Code       string                                              `json:"code" url:"code"`
-	Name       string                                              `json:"name" url:"name"`
-	Type       PostV1MigrationBooksValidateRequestAccountsItemType `json:"type" url:"type"`
-	ParentCode *string                                             `json:"parentCode,omitempty" url:"parentCode,omitempty"`
-	IsPostable *bool                                               `json:"isPostable,omitempty" url:"isPostable,omitempty"`
+type BooksValidateMigrationRequestAccountsItem struct {
+	Code       string                                        `json:"code" url:"code"`
+	Name       string                                        `json:"name" url:"name"`
+	Type       BooksValidateMigrationRequestAccountsItemType `json:"type" url:"type"`
+	ParentCode *string                                       `json:"parentCode,omitempty" url:"parentCode,omitempty"`
+	IsPostable *bool                                         `json:"isPostable,omitempty" url:"isPostable,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4160,173 +4241,173 @@ type PostV1MigrationBooksValidateRequestAccountsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetName() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetType() PostV1MigrationBooksValidateRequestAccountsItemType {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetType() BooksValidateMigrationRequestAccountsItemType {
+	if b == nil {
 		return ""
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetParentCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetParentCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.ParentCode
+	return b.ParentCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetIsPostable() *bool {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetIsPostable() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsPostable
+	return b.IsPostable
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestAccountsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksValidateRequestAccountsItemFieldCode)
+func (b *BooksValidateMigrationRequestAccountsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksValidateMigrationRequestAccountsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksValidateRequestAccountsItemFieldName)
+func (b *BooksValidateMigrationRequestAccountsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksValidateMigrationRequestAccountsItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) SetType(type_ PostV1MigrationBooksValidateRequestAccountsItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksValidateRequestAccountsItemFieldType)
+func (b *BooksValidateMigrationRequestAccountsItem) SetType(type_ BooksValidateMigrationRequestAccountsItemType) {
+	b.Type = type_
+	b.require(booksValidateMigrationRequestAccountsItemFieldType)
 }
 
 // SetParentCode sets the ParentCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) SetParentCode(parentCode *string) {
-	p.ParentCode = parentCode
-	p.require(postV1MigrationBooksValidateRequestAccountsItemFieldParentCode)
+func (b *BooksValidateMigrationRequestAccountsItem) SetParentCode(parentCode *string) {
+	b.ParentCode = parentCode
+	b.require(booksValidateMigrationRequestAccountsItemFieldParentCode)
 }
 
 // SetIsPostable sets the IsPostable field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) SetIsPostable(isPostable *bool) {
-	p.IsPostable = isPostable
-	p.require(postV1MigrationBooksValidateRequestAccountsItemFieldIsPostable)
+func (b *BooksValidateMigrationRequestAccountsItem) SetIsPostable(isPostable *bool) {
+	b.IsPostable = isPostable
+	b.require(booksValidateMigrationRequestAccountsItemFieldIsPostable)
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestAccountsItem
+func (b *BooksValidateMigrationRequestAccountsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestAccountsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestAccountsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestAccountsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestAccountsItem
+func (b *BooksValidateMigrationRequestAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestAccountsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestAccountsItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAccountsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksValidateRequestAccountsItemType string
+type BooksValidateMigrationRequestAccountsItemType string
 
 const (
-	PostV1MigrationBooksValidateRequestAccountsItemTypeAsset     PostV1MigrationBooksValidateRequestAccountsItemType = "asset"
-	PostV1MigrationBooksValidateRequestAccountsItemTypeLiability PostV1MigrationBooksValidateRequestAccountsItemType = "liability"
-	PostV1MigrationBooksValidateRequestAccountsItemTypeEquity    PostV1MigrationBooksValidateRequestAccountsItemType = "equity"
-	PostV1MigrationBooksValidateRequestAccountsItemTypeIncome    PostV1MigrationBooksValidateRequestAccountsItemType = "income"
-	PostV1MigrationBooksValidateRequestAccountsItemTypeExpense   PostV1MigrationBooksValidateRequestAccountsItemType = "expense"
+	BooksValidateMigrationRequestAccountsItemTypeAsset     BooksValidateMigrationRequestAccountsItemType = "asset"
+	BooksValidateMigrationRequestAccountsItemTypeLiability BooksValidateMigrationRequestAccountsItemType = "liability"
+	BooksValidateMigrationRequestAccountsItemTypeEquity    BooksValidateMigrationRequestAccountsItemType = "equity"
+	BooksValidateMigrationRequestAccountsItemTypeIncome    BooksValidateMigrationRequestAccountsItemType = "income"
+	BooksValidateMigrationRequestAccountsItemTypeExpense   BooksValidateMigrationRequestAccountsItemType = "expense"
 )
 
-func NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString(s string) (PostV1MigrationBooksValidateRequestAccountsItemType, error) {
+func NewBooksValidateMigrationRequestAccountsItemTypeFromString(s string) (BooksValidateMigrationRequestAccountsItemType, error) {
 	switch s {
 	case "asset":
-		return PostV1MigrationBooksValidateRequestAccountsItemTypeAsset, nil
+		return BooksValidateMigrationRequestAccountsItemTypeAsset, nil
 	case "liability":
-		return PostV1MigrationBooksValidateRequestAccountsItemTypeLiability, nil
+		return BooksValidateMigrationRequestAccountsItemTypeLiability, nil
 	case "equity":
-		return PostV1MigrationBooksValidateRequestAccountsItemTypeEquity, nil
+		return BooksValidateMigrationRequestAccountsItemTypeEquity, nil
 	case "income":
-		return PostV1MigrationBooksValidateRequestAccountsItemTypeIncome, nil
+		return BooksValidateMigrationRequestAccountsItemTypeIncome, nil
 	case "expense":
-		return PostV1MigrationBooksValidateRequestAccountsItemTypeExpense, nil
+		return BooksValidateMigrationRequestAccountsItemTypeExpense, nil
 	}
-	var t PostV1MigrationBooksValidateRequestAccountsItemType
+	var t BooksValidateMigrationRequestAccountsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksValidateRequestAccountsItemType) Ptr() *PostV1MigrationBooksValidateRequestAccountsItemType {
-	return &p
+func (b BooksValidateMigrationRequestAccountsItemType) Ptr() *BooksValidateMigrationRequestAccountsItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldCode                    = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldName                    = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldAssetAccountCode        = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldDepreciationAccountCode = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldExpenseAccountCode      = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestAssetGroupsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 5)
+	booksValidateMigrationRequestAssetGroupsItemFieldCode                    = big.NewInt(1 << 0)
+	booksValidateMigrationRequestAssetGroupsItemFieldName                    = big.NewInt(1 << 1)
+	booksValidateMigrationRequestAssetGroupsItemFieldAssetAccountCode        = big.NewInt(1 << 2)
+	booksValidateMigrationRequestAssetGroupsItemFieldDepreciationAccountCode = big.NewInt(1 << 3)
+	booksValidateMigrationRequestAssetGroupsItemFieldExpenseAccountCode      = big.NewInt(1 << 4)
+	booksValidateMigrationRequestAssetGroupsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksValidateRequestAssetGroupsItem struct {
+type BooksValidateMigrationRequestAssetGroupsItem struct {
 	Code                    string  `json:"code" url:"code"`
 	Name                    string  `json:"name" url:"name"`
 	AssetAccountCode        string  `json:"assetAccountCode" url:"assetAccountCode"`
@@ -4341,172 +4422,172 @@ type PostV1MigrationBooksValidateRequestAssetGroupsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetName() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetAssetAccountCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetAssetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AssetAccountCode
+	return b.AssetAccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetDepreciationAccountCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetDepreciationAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.DepreciationAccountCode
+	return b.DepreciationAccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetExpenseAccountCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetExpenseAccountCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.ExpenseAccountCode
+	return b.ExpenseAccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetDefaultUsefulLifeMonths() *int64 {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetDefaultUsefulLifeMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.DefaultUsefulLifeMonths
+	return b.DefaultUsefulLifeMonths
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldCode)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldName)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldName)
 }
 
 // SetAssetAccountCode sets the AssetAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetAssetAccountCode(assetAccountCode string) {
-	p.AssetAccountCode = assetAccountCode
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldAssetAccountCode)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetAssetAccountCode(assetAccountCode string) {
+	b.AssetAccountCode = assetAccountCode
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldAssetAccountCode)
 }
 
 // SetDepreciationAccountCode sets the DepreciationAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
-	p.DepreciationAccountCode = depreciationAccountCode
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldDepreciationAccountCode)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
+	b.DepreciationAccountCode = depreciationAccountCode
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldDepreciationAccountCode)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetExpenseAccountCode(expenseAccountCode *string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldExpenseAccountCode)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetExpenseAccountCode(expenseAccountCode *string) {
+	b.ExpenseAccountCode = expenseAccountCode
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldExpenseAccountCode)
 }
 
 // SetDefaultUsefulLifeMonths sets the DefaultUsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
-	p.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
-	p.require(postV1MigrationBooksValidateRequestAssetGroupsItemFieldDefaultUsefulLifeMonths)
+func (b *BooksValidateMigrationRequestAssetGroupsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
+	b.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
+	b.require(booksValidateMigrationRequestAssetGroupsItemFieldDefaultUsefulLifeMonths)
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestAssetGroupsItem
+func (b *BooksValidateMigrationRequestAssetGroupsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestAssetGroupsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestAssetGroupsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestAssetGroupsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestAssetGroupsItem
+func (b *BooksValidateMigrationRequestAssetGroupsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestAssetGroupsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestAssetGroupsItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestAssetGroupsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldGroupCode               = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldCode                    = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldName                    = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldAcquisitionDate         = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldDepreciationStartDate   = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldAcquisitionCost         = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldSalvageValue            = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldUsefulLifeMonths        = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldAccumulatedDepreciation = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldDepreciatedMonths       = big.NewInt(1 << 9)
-	postV1MigrationBooksValidateRequestFixedAssetsItemFieldNotes                   = big.NewInt(1 << 10)
+	booksValidateMigrationRequestFixedAssetsItemFieldGroupCode               = big.NewInt(1 << 0)
+	booksValidateMigrationRequestFixedAssetsItemFieldCode                    = big.NewInt(1 << 1)
+	booksValidateMigrationRequestFixedAssetsItemFieldName                    = big.NewInt(1 << 2)
+	booksValidateMigrationRequestFixedAssetsItemFieldAcquisitionDate         = big.NewInt(1 << 3)
+	booksValidateMigrationRequestFixedAssetsItemFieldDepreciationStartDate   = big.NewInt(1 << 4)
+	booksValidateMigrationRequestFixedAssetsItemFieldAcquisitionCost         = big.NewInt(1 << 5)
+	booksValidateMigrationRequestFixedAssetsItemFieldSalvageValue            = big.NewInt(1 << 6)
+	booksValidateMigrationRequestFixedAssetsItemFieldUsefulLifeMonths        = big.NewInt(1 << 7)
+	booksValidateMigrationRequestFixedAssetsItemFieldAccumulatedDepreciation = big.NewInt(1 << 8)
+	booksValidateMigrationRequestFixedAssetsItemFieldDepreciatedMonths       = big.NewInt(1 << 9)
+	booksValidateMigrationRequestFixedAssetsItemFieldNotes                   = big.NewInt(1 << 10)
 )
 
-type PostV1MigrationBooksValidateRequestFixedAssetsItem struct {
-	GroupCode               string  `json:"groupCode" url:"groupCode"`
-	Code                    string  `json:"code" url:"code"`
-	Name                    string  `json:"name" url:"name"`
-	AcquisitionDate         string  `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   *string `json:"depreciationStartDate,omitempty" url:"depreciationStartDate,omitempty"`
-	AcquisitionCost         string  `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            *string `json:"salvageValue,omitempty" url:"salvageValue,omitempty"`
-	UsefulLifeMonths        *int64  `json:"usefulLifeMonths,omitempty" url:"usefulLifeMonths,omitempty"`
-	AccumulatedDepreciation *string `json:"accumulatedDepreciation,omitempty" url:"accumulatedDepreciation,omitempty"`
-	DepreciatedMonths       *int64  `json:"depreciatedMonths,omitempty" url:"depreciatedMonths,omitempty"`
-	Notes                   *string `json:"notes,omitempty" url:"notes,omitempty"`
+type BooksValidateMigrationRequestFixedAssetsItem struct {
+	GroupCode               string     `json:"groupCode" url:"groupCode"`
+	Code                    string     `json:"code" url:"code"`
+	Name                    string     `json:"name" url:"name"`
+	AcquisitionDate         time.Time  `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate   *time.Time `json:"depreciationStartDate,omitempty" url:"depreciationStartDate,omitempty" format:"date"`
+	AcquisitionCost         string     `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            *string    `json:"salvageValue,omitempty" url:"salvageValue,omitempty"`
+	UsefulLifeMonths        *int64     `json:"usefulLifeMonths,omitempty" url:"usefulLifeMonths,omitempty"`
+	AccumulatedDepreciation *string    `json:"accumulatedDepreciation,omitempty" url:"accumulatedDepreciation,omitempty"`
+	DepreciatedMonths       *int64     `json:"depreciatedMonths,omitempty" url:"depreciatedMonths,omitempty"`
+	Notes                   *string    `json:"notes,omitempty" url:"notes,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4515,238 +4596,250 @@ type PostV1MigrationBooksValidateRequestFixedAssetsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetGroupCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetGroupCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.GroupCode
+	return b.GroupCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetName() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetAcquisitionDate() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetAcquisitionDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.AcquisitionDate
+}
+
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetDepreciationStartDate() *time.Time {
+	if b == nil {
+		return nil
+	}
+	return b.DepreciationStartDate
+}
+
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetAcquisitionCost() string {
+	if b == nil {
 		return ""
 	}
-	return p.AcquisitionDate
+	return b.AcquisitionCost
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetDepreciationStartDate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetSalvageValue() *string {
+	if b == nil {
 		return nil
 	}
-	return p.DepreciationStartDate
+	return b.SalvageValue
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetSalvageValue() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetUsefulLifeMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.SalvageValue
+	return b.UsefulLifeMonths
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetUsefulLifeMonths() *int64 {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetAccumulatedDepreciation() *string {
+	if b == nil {
 		return nil
 	}
-	return p.UsefulLifeMonths
+	return b.AccumulatedDepreciation
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetAccumulatedDepreciation() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetDepreciatedMonths() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.AccumulatedDepreciation
+	return b.DepreciatedMonths
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetDepreciatedMonths() *int64 {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.DepreciatedMonths
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
+func (b *BooksValidateMigrationRequestFixedAssetsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	return p.extraProperties
-}
-
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetGroupCode sets the GroupCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetGroupCode(groupCode string) {
-	p.GroupCode = groupCode
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldGroupCode)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetGroupCode(groupCode string) {
+	b.GroupCode = groupCode
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldGroupCode)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldCode)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldName)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldAcquisitionDate)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetAcquisitionDate(acquisitionDate time.Time) {
+	b.AcquisitionDate = acquisitionDate
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetDepreciationStartDate(depreciationStartDate *string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldDepreciationStartDate)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetDepreciationStartDate(depreciationStartDate *time.Time) {
+	b.DepreciationStartDate = depreciationStartDate
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldAcquisitionCost)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetAcquisitionCost(acquisitionCost string) {
+	b.AcquisitionCost = acquisitionCost
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetSalvageValue(salvageValue *string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldSalvageValue)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetSalvageValue(salvageValue *string) {
+	b.SalvageValue = salvageValue
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetUsefulLifeMonths(usefulLifeMonths *int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldUsefulLifeMonths)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	b.UsefulLifeMonths = usefulLifeMonths
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldUsefulLifeMonths)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetAccumulatedDepreciation(accumulatedDepreciation *string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldAccumulatedDepreciation)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetAccumulatedDepreciation(accumulatedDepreciation *string) {
+	b.AccumulatedDepreciation = accumulatedDepreciation
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldAccumulatedDepreciation)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetDepreciatedMonths(depreciatedMonths *int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldDepreciatedMonths)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetDepreciatedMonths(depreciatedMonths *int64) {
+	b.DepreciatedMonths = depreciatedMonths
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldDepreciatedMonths)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksValidateRequestFixedAssetsItemFieldNotes)
+func (b *BooksValidateMigrationRequestFixedAssetsItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksValidateMigrationRequestFixedAssetsItemFieldNotes)
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestFixedAssetsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestFixedAssetsItem
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestFixedAssetsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestFixedAssetsItem(unmarshaler.embed)
+	b.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	b.DepreciationStartDate = unmarshaler.DepreciationStartDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestFixedAssetsItem
+func (b *BooksValidateMigrationRequestFixedAssetsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestFixedAssetsItem
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*b),
+		AcquisitionDate:       internal.NewDate(b.AcquisitionDate),
+		DepreciationStartDate: internal.NewOptionalDate(b.DepreciationStartDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestFixedAssetsItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestFixedAssetsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestItemsItemFieldCode                 = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestItemsItemFieldName                 = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestItemsItemFieldType                 = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestItemsItemFieldUnit                 = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestItemsItemFieldBarcode              = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestItemsItemFieldVatRatePercent       = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestItemsItemFieldSalePriceExclVat     = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestItemsItemFieldPurchasePriceExclVat = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestItemsItemFieldDescription          = big.NewInt(1 << 8)
+	booksValidateMigrationRequestItemsItemFieldCode                 = big.NewInt(1 << 0)
+	booksValidateMigrationRequestItemsItemFieldName                 = big.NewInt(1 << 1)
+	booksValidateMigrationRequestItemsItemFieldType                 = big.NewInt(1 << 2)
+	booksValidateMigrationRequestItemsItemFieldUnit                 = big.NewInt(1 << 3)
+	booksValidateMigrationRequestItemsItemFieldBarcode              = big.NewInt(1 << 4)
+	booksValidateMigrationRequestItemsItemFieldVatRatePercent       = big.NewInt(1 << 5)
+	booksValidateMigrationRequestItemsItemFieldSalePriceExclVat     = big.NewInt(1 << 6)
+	booksValidateMigrationRequestItemsItemFieldPurchasePriceExclVat = big.NewInt(1 << 7)
+	booksValidateMigrationRequestItemsItemFieldDescription          = big.NewInt(1 << 8)
 )
 
-type PostV1MigrationBooksValidateRequestItemsItem struct {
-	Code                 string                                            `json:"code" url:"code"`
-	Name                 string                                            `json:"name" url:"name"`
-	Type                 *PostV1MigrationBooksValidateRequestItemsItemType `json:"type,omitempty" url:"type,omitempty"`
-	Unit                 *string                                           `json:"unit,omitempty" url:"unit,omitempty"`
-	Barcode              *string                                           `json:"barcode,omitempty" url:"barcode,omitempty"`
-	VatRatePercent       *string                                           `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	SalePriceExclVat     *string                                           `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
-	PurchasePriceExclVat *string                                           `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
-	Description          *string                                           `json:"description,omitempty" url:"description,omitempty"`
+type BooksValidateMigrationRequestItemsItem struct {
+	Code                 string                                      `json:"code" url:"code"`
+	Name                 string                                      `json:"name" url:"name"`
+	Type                 *BooksValidateMigrationRequestItemsItemType `json:"type,omitempty" url:"type,omitempty"`
+	Unit                 *string                                     `json:"unit,omitempty" url:"unit,omitempty"`
+	Barcode              *string                                     `json:"barcode,omitempty" url:"barcode,omitempty"`
+	VatRatePercent       *string                                     `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	SalePriceExclVat     *string                                     `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string                                     `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+	Description          *string                                     `json:"description,omitempty" url:"description,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4755,222 +4848,222 @@ type PostV1MigrationBooksValidateRequestItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetName() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetType() *PostV1MigrationBooksValidateRequestItemsItemType {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetType() *BooksValidateMigrationRequestItemsItemType {
+	if b == nil {
 		return nil
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetUnit() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetUnit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Unit
+	return b.Unit
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetBarcode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetBarcode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Barcode
+	return b.Barcode
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetVatRatePercent() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return b.VatRatePercent
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetSalePriceExclVat() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetSalePriceExclVat() *string {
+	if b == nil {
 		return nil
 	}
-	return p.SalePriceExclVat
+	return b.SalePriceExclVat
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetPurchasePriceExclVat() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetPurchasePriceExclVat() *string {
+	if b == nil {
 		return nil
 	}
-	return p.PurchasePriceExclVat
+	return b.PurchasePriceExclVat
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestItemsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldCode)
+func (b *BooksValidateMigrationRequestItemsItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksValidateMigrationRequestItemsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldName)
+func (b *BooksValidateMigrationRequestItemsItem) SetName(name string) {
+	b.Name = name
+	b.require(booksValidateMigrationRequestItemsItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetType(type_ *PostV1MigrationBooksValidateRequestItemsItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldType)
+func (b *BooksValidateMigrationRequestItemsItem) SetType(type_ *BooksValidateMigrationRequestItemsItemType) {
+	b.Type = type_
+	b.require(booksValidateMigrationRequestItemsItemFieldType)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldUnit)
+func (b *BooksValidateMigrationRequestItemsItem) SetUnit(unit *string) {
+	b.Unit = unit
+	b.require(booksValidateMigrationRequestItemsItemFieldUnit)
 }
 
 // SetBarcode sets the Barcode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetBarcode(barcode *string) {
-	p.Barcode = barcode
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldBarcode)
+func (b *BooksValidateMigrationRequestItemsItem) SetBarcode(barcode *string) {
+	b.Barcode = barcode
+	b.require(booksValidateMigrationRequestItemsItemFieldBarcode)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldVatRatePercent)
+func (b *BooksValidateMigrationRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	b.VatRatePercent = vatRatePercent
+	b.require(booksValidateMigrationRequestItemsItemFieldVatRatePercent)
 }
 
 // SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetSalePriceExclVat(salePriceExclVat *string) {
-	p.SalePriceExclVat = salePriceExclVat
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldSalePriceExclVat)
+func (b *BooksValidateMigrationRequestItemsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	b.SalePriceExclVat = salePriceExclVat
+	b.require(booksValidateMigrationRequestItemsItemFieldSalePriceExclVat)
 }
 
 // SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
-	p.PurchasePriceExclVat = purchasePriceExclVat
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldPurchasePriceExclVat)
+func (b *BooksValidateMigrationRequestItemsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	b.PurchasePriceExclVat = purchasePriceExclVat
+	b.require(booksValidateMigrationRequestItemsItemFieldPurchasePriceExclVat)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestItemsItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksValidateRequestItemsItemFieldDescription)
+func (b *BooksValidateMigrationRequestItemsItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksValidateMigrationRequestItemsItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestItemsItem
+func (b *BooksValidateMigrationRequestItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestItemsItem
+func (b *BooksValidateMigrationRequestItemsItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestItemsItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestItemsItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksValidateRequestItemsItemType string
+type BooksValidateMigrationRequestItemsItemType string
 
 const (
-	PostV1MigrationBooksValidateRequestItemsItemTypeProduct PostV1MigrationBooksValidateRequestItemsItemType = "product"
-	PostV1MigrationBooksValidateRequestItemsItemTypeService PostV1MigrationBooksValidateRequestItemsItemType = "service"
+	BooksValidateMigrationRequestItemsItemTypeProduct BooksValidateMigrationRequestItemsItemType = "product"
+	BooksValidateMigrationRequestItemsItemTypeService BooksValidateMigrationRequestItemsItemType = "service"
 )
 
-func NewPostV1MigrationBooksValidateRequestItemsItemTypeFromString(s string) (PostV1MigrationBooksValidateRequestItemsItemType, error) {
+func NewBooksValidateMigrationRequestItemsItemTypeFromString(s string) (BooksValidateMigrationRequestItemsItemType, error) {
 	switch s {
 	case "product":
-		return PostV1MigrationBooksValidateRequestItemsItemTypeProduct, nil
+		return BooksValidateMigrationRequestItemsItemTypeProduct, nil
 	case "service":
-		return PostV1MigrationBooksValidateRequestItemsItemTypeService, nil
+		return BooksValidateMigrationRequestItemsItemTypeService, nil
 	}
-	var t PostV1MigrationBooksValidateRequestItemsItemType
+	var t BooksValidateMigrationRequestItemsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksValidateRequestItemsItemType) Ptr() *PostV1MigrationBooksValidateRequestItemsItemType {
-	return &p
+func (b BooksValidateMigrationRequestItemsItemType) Ptr() *BooksValidateMigrationRequestItemsItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksValidateRequestJournalItemFieldDate        = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestJournalItemFieldDescription = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestJournalItemFieldReference   = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestJournalItemFieldEntries     = big.NewInt(1 << 3)
+	booksValidateMigrationRequestJournalItemFieldDate        = big.NewInt(1 << 0)
+	booksValidateMigrationRequestJournalItemFieldDescription = big.NewInt(1 << 1)
+	booksValidateMigrationRequestJournalItemFieldReference   = big.NewInt(1 << 2)
+	booksValidateMigrationRequestJournalItemFieldEntries     = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksValidateRequestJournalItem struct {
-	Date        string                                                       `json:"date" url:"date"`
-	Description *string                                                      `json:"description,omitempty" url:"description,omitempty"`
-	Reference   *string                                                      `json:"reference,omitempty" url:"reference,omitempty"`
-	Entries     []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem `json:"entries" url:"entries"`
+type BooksValidateMigrationRequestJournalItem struct {
+	Date        time.Time                                              `json:"date" url:"date" format:"date"`
+	Description *string                                                `json:"description,omitempty" url:"description,omitempty"`
+	Reference   *string                                                `json:"reference,omitempty" url:"reference,omitempty"`
+	Entries     []*BooksValidateMigrationRequestJournalItemEntriesItem `json:"entries" url:"entries"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4979,126 +5072,134 @@ type PostV1MigrationBooksValidateRequestJournalItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) GetDate() string {
-	if p == nil {
-		return ""
+func (b *BooksValidateMigrationRequestJournalItem) GetDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) GetReference() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItem) GetReference() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Reference
+	return b.Reference
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) GetEntries() []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItem) GetEntries() []*BooksValidateMigrationRequestJournalItemEntriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestJournalItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1MigrationBooksValidateRequestJournalItemFieldDate)
+func (b *BooksValidateMigrationRequestJournalItem) SetDate(date time.Time) {
+	b.Date = date
+	b.require(booksValidateMigrationRequestJournalItemFieldDate)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksValidateRequestJournalItemFieldDescription)
+func (b *BooksValidateMigrationRequestJournalItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksValidateMigrationRequestJournalItemFieldDescription)
 }
 
 // SetReference sets the Reference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItem) SetReference(reference *string) {
-	p.Reference = reference
-	p.require(postV1MigrationBooksValidateRequestJournalItemFieldReference)
+func (b *BooksValidateMigrationRequestJournalItem) SetReference(reference *string) {
+	b.Reference = reference
+	b.require(booksValidateMigrationRequestJournalItemFieldReference)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItem) SetEntries(entries []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksValidateRequestJournalItemFieldEntries)
+func (b *BooksValidateMigrationRequestJournalItem) SetEntries(entries []*BooksValidateMigrationRequestJournalItemEntriesItem) {
+	b.Entries = entries
+	b.require(booksValidateMigrationRequestJournalItemFieldEntries)
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestJournalItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestJournalItem) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestJournalItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestJournalItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestJournalItem(unmarshaler.embed)
+	b.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestJournalItem
+func (b *BooksValidateMigrationRequestJournalItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestJournalItem
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldAccountCode = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldDebit       = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldCredit      = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldDescription = big.NewInt(1 << 3)
+	booksValidateMigrationRequestJournalItemEntriesItemFieldAccountCode = big.NewInt(1 << 0)
+	booksValidateMigrationRequestJournalItemEntriesItemFieldDebit       = big.NewInt(1 << 1)
+	booksValidateMigrationRequestJournalItemEntriesItemFieldCredit      = big.NewInt(1 << 2)
+	booksValidateMigrationRequestJournalItemEntriesItemFieldDescription = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksValidateRequestJournalItemEntriesItem struct {
+type BooksValidateMigrationRequestJournalItemEntriesItem struct {
 	AccountCode string  `json:"accountCode" url:"accountCode"`
 	Debit       *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit      *string `json:"credit,omitempty" url:"credit,omitempty"`
@@ -5111,142 +5212,142 @@ type PostV1MigrationBooksValidateRequestJournalItemEntriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) GetAccountCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) GetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccountCode
+	return b.AccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) GetDebit() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) GetDebit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Debit
+	return b.Debit
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) GetCredit() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) GetCredit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Credit
+	return b.Credit
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) SetAccountCode(accountCode string) {
-	p.AccountCode = accountCode
-	p.require(postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldAccountCode)
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) SetAccountCode(accountCode string) {
+	b.AccountCode = accountCode
+	b.require(booksValidateMigrationRequestJournalItemEntriesItemFieldAccountCode)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) SetDebit(debit *string) {
-	p.Debit = debit
-	p.require(postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldDebit)
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) SetDebit(debit *string) {
+	b.Debit = debit
+	b.require(booksValidateMigrationRequestJournalItemEntriesItemFieldDebit)
 }
 
 // SetCredit sets the Credit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) SetCredit(credit *string) {
-	p.Credit = credit
-	p.require(postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldCredit)
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) SetCredit(credit *string) {
+	b.Credit = credit
+	b.require(booksValidateMigrationRequestJournalItemEntriesItemFieldCredit)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksValidateRequestJournalItemEntriesItemFieldDescription)
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksValidateMigrationRequestJournalItemEntriesItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestJournalItemEntriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestJournalItemEntriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestJournalItemEntriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestJournalItemEntriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestJournalItemEntriesItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestJournalItemEntriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldPartnerCode    = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldDueDate        = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldCurrency       = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldGrossTotal     = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldVatTotal       = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldOutstanding    = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldFxRate         = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldNotes          = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldDocumentNumber = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateRequestOpenPayablesItemFieldDocumentDate   = big.NewInt(1 << 9)
+	booksValidateMigrationRequestOpenPayablesItemFieldPartnerCode    = big.NewInt(1 << 0)
+	booksValidateMigrationRequestOpenPayablesItemFieldDueDate        = big.NewInt(1 << 1)
+	booksValidateMigrationRequestOpenPayablesItemFieldCurrency       = big.NewInt(1 << 2)
+	booksValidateMigrationRequestOpenPayablesItemFieldGrossTotal     = big.NewInt(1 << 3)
+	booksValidateMigrationRequestOpenPayablesItemFieldVatTotal       = big.NewInt(1 << 4)
+	booksValidateMigrationRequestOpenPayablesItemFieldOutstanding    = big.NewInt(1 << 5)
+	booksValidateMigrationRequestOpenPayablesItemFieldFxRate         = big.NewInt(1 << 6)
+	booksValidateMigrationRequestOpenPayablesItemFieldNotes          = big.NewInt(1 << 7)
+	booksValidateMigrationRequestOpenPayablesItemFieldDocumentNumber = big.NewInt(1 << 8)
+	booksValidateMigrationRequestOpenPayablesItemFieldDocumentDate   = big.NewInt(1 << 9)
 )
 
-type PostV1MigrationBooksValidateRequestOpenPayablesItem struct {
-	PartnerCode    string  `json:"partnerCode" url:"partnerCode"`
-	DueDate        *string `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string `json:"currency,omitempty" url:"currency,omitempty"`
-	GrossTotal     string  `json:"grossTotal" url:"grossTotal"`
-	VatTotal       *string `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	Outstanding    *string `json:"outstanding,omitempty" url:"outstanding,omitempty"`
-	FxRate         *string `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	Notes          *string `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentNumber string  `json:"documentNumber" url:"documentNumber"`
-	DocumentDate   string  `json:"documentDate" url:"documentDate"`
+type BooksValidateMigrationRequestOpenPayablesItem struct {
+	PartnerCode    string     `json:"partnerCode" url:"partnerCode"`
+	DueDate        *time.Time `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string    `json:"currency,omitempty" url:"currency,omitempty"`
+	GrossTotal     string     `json:"grossTotal" url:"grossTotal"`
+	VatTotal       *string    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	Outstanding    *string    `json:"outstanding,omitempty" url:"outstanding,omitempty"`
+	FxRate         *string    `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	Notes          *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentNumber string     `json:"documentNumber" url:"documentNumber"`
+	DocumentDate   time.Time  `json:"documentDate" url:"documentDate" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5255,226 +5356,238 @@ type PostV1MigrationBooksValidateRequestOpenPayablesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetPartnerCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetPartnerCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.PartnerCode
+	return b.PartnerCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetDueDate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetDueDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.DueDate
+	return b.DueDate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetCurrency() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetCurrency() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Currency
+	return b.Currency
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetGrossTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetGrossTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return b.GrossTotal
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetVatTotal() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetVatTotal() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatTotal
+	return b.VatTotal
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetOutstanding() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetOutstanding() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Outstanding
+	return b.Outstanding
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetFxRate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetFxRate() *string {
+	if b == nil {
 		return nil
 	}
-	return p.FxRate
+	return b.FxRate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetDocumentNumber() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetDocumentNumber() string {
+	if b == nil {
 		return ""
 	}
-	return p.DocumentNumber
+	return b.DocumentNumber
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetDocumentDate() string {
-	if p == nil {
-		return ""
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetDocumentDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.DocumentDate
+	return b.DocumentDate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetPartnerCode(partnerCode string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldPartnerCode)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetPartnerCode(partnerCode string) {
+	b.PartnerCode = partnerCode
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldPartnerCode)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldDueDate)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetDueDate(dueDate *time.Time) {
+	b.DueDate = dueDate
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldCurrency)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetCurrency(currency *string) {
+	b.Currency = currency
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldGrossTotal)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetGrossTotal(grossTotal string) {
+	b.GrossTotal = grossTotal
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldGrossTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldVatTotal)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetVatTotal(vatTotal *string) {
+	b.VatTotal = vatTotal
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldVatTotal)
 }
 
 // SetOutstanding sets the Outstanding field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetOutstanding(outstanding *string) {
-	p.Outstanding = outstanding
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldOutstanding)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetOutstanding(outstanding *string) {
+	b.Outstanding = outstanding
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldOutstanding)
 }
 
 // SetFxRate sets the FxRate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetFxRate(fxRate *string) {
-	p.FxRate = fxRate
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldFxRate)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetFxRate(fxRate *string) {
+	b.FxRate = fxRate
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldFxRate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldNotes)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldNotes)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetDocumentNumber(documentNumber string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldDocumentNumber)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetDocumentNumber(documentNumber string) {
+	b.DocumentNumber = documentNumber
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1MigrationBooksValidateRequestOpenPayablesItemFieldDocumentDate)
+func (b *BooksValidateMigrationRequestOpenPayablesItem) SetDocumentDate(documentDate time.Time) {
+	b.DocumentDate = documentDate
+	b.require(booksValidateMigrationRequestOpenPayablesItemFieldDocumentDate)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestOpenPayablesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestOpenPayablesItem
+	var unmarshaler = struct {
+		embed
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate *internal.Date `json:"documentDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestOpenPayablesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestOpenPayablesItem(unmarshaler.embed)
+	b.DueDate = unmarshaler.DueDate.TimePtr()
+	b.DocumentDate = unmarshaler.DocumentDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestOpenPayablesItem
+func (b *BooksValidateMigrationRequestOpenPayablesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestOpenPayablesItem
 	var marshaler = struct {
 		embed
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate *internal.Date `json:"documentDate"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*b),
+		DueDate:      internal.NewOptionalDate(b.DueDate),
+		DocumentDate: internal.NewDate(b.DocumentDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenPayablesItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenPayablesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldPartnerCode = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldDueDate     = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldCurrency    = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldGrossTotal  = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldVatTotal    = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldOutstanding = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldFxRate      = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldNotes       = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldNumber      = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateRequestOpenReceivablesItemFieldIssueDate   = big.NewInt(1 << 9)
+	booksValidateMigrationRequestOpenReceivablesItemFieldPartnerCode = big.NewInt(1 << 0)
+	booksValidateMigrationRequestOpenReceivablesItemFieldDueDate     = big.NewInt(1 << 1)
+	booksValidateMigrationRequestOpenReceivablesItemFieldCurrency    = big.NewInt(1 << 2)
+	booksValidateMigrationRequestOpenReceivablesItemFieldGrossTotal  = big.NewInt(1 << 3)
+	booksValidateMigrationRequestOpenReceivablesItemFieldVatTotal    = big.NewInt(1 << 4)
+	booksValidateMigrationRequestOpenReceivablesItemFieldOutstanding = big.NewInt(1 << 5)
+	booksValidateMigrationRequestOpenReceivablesItemFieldFxRate      = big.NewInt(1 << 6)
+	booksValidateMigrationRequestOpenReceivablesItemFieldNotes       = big.NewInt(1 << 7)
+	booksValidateMigrationRequestOpenReceivablesItemFieldNumber      = big.NewInt(1 << 8)
+	booksValidateMigrationRequestOpenReceivablesItemFieldIssueDate   = big.NewInt(1 << 9)
 )
 
-type PostV1MigrationBooksValidateRequestOpenReceivablesItem struct {
-	PartnerCode string  `json:"partnerCode" url:"partnerCode"`
-	DueDate     *string `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency    *string `json:"currency,omitempty" url:"currency,omitempty"`
-	GrossTotal  string  `json:"grossTotal" url:"grossTotal"`
-	VatTotal    *string `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	Outstanding *string `json:"outstanding,omitempty" url:"outstanding,omitempty"`
-	FxRate      *string `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	Notes       *string `json:"notes,omitempty" url:"notes,omitempty"`
-	Number      string  `json:"number" url:"number"`
-	IssueDate   string  `json:"issueDate" url:"issueDate"`
+type BooksValidateMigrationRequestOpenReceivablesItem struct {
+	PartnerCode string     `json:"partnerCode" url:"partnerCode"`
+	DueDate     *time.Time `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency    *string    `json:"currency,omitempty" url:"currency,omitempty"`
+	GrossTotal  string     `json:"grossTotal" url:"grossTotal"`
+	VatTotal    *string    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	Outstanding *string    `json:"outstanding,omitempty" url:"outstanding,omitempty"`
+	FxRate      *string    `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	Notes       *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	Number      string     `json:"number" url:"number"`
+	IssueDate   time.Time  `json:"issueDate" url:"issueDate" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5483,212 +5596,224 @@ type PostV1MigrationBooksValidateRequestOpenReceivablesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetPartnerCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetPartnerCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.PartnerCode
+	return b.PartnerCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetDueDate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetDueDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.DueDate
+	return b.DueDate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetCurrency() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetCurrency() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Currency
+	return b.Currency
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetGrossTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetGrossTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return b.GrossTotal
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetVatTotal() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetVatTotal() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatTotal
+	return b.VatTotal
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetOutstanding() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetOutstanding() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Outstanding
+	return b.Outstanding
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetFxRate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetFxRate() *string {
+	if b == nil {
 		return nil
 	}
-	return p.FxRate
+	return b.FxRate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetNumber() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetNumber() string {
+	if b == nil {
 		return ""
 	}
-	return p.Number
+	return b.Number
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetIssueDate() string {
-	if p == nil {
-		return ""
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetIssueDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.IssueDate
+	return b.IssueDate
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetPartnerCode(partnerCode string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldPartnerCode)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetPartnerCode(partnerCode string) {
+	b.PartnerCode = partnerCode
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldPartnerCode)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldDueDate)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetDueDate(dueDate *time.Time) {
+	b.DueDate = dueDate
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldCurrency)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetCurrency(currency *string) {
+	b.Currency = currency
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldGrossTotal)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetGrossTotal(grossTotal string) {
+	b.GrossTotal = grossTotal
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldGrossTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldVatTotal)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetVatTotal(vatTotal *string) {
+	b.VatTotal = vatTotal
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldVatTotal)
 }
 
 // SetOutstanding sets the Outstanding field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetOutstanding(outstanding *string) {
-	p.Outstanding = outstanding
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldOutstanding)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetOutstanding(outstanding *string) {
+	b.Outstanding = outstanding
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldOutstanding)
 }
 
 // SetFxRate sets the FxRate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetFxRate(fxRate *string) {
-	p.FxRate = fxRate
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldFxRate)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetFxRate(fxRate *string) {
+	b.FxRate = fxRate
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldFxRate)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldNotes)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldNotes)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldNumber)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetNumber(number string) {
+	b.Number = number
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldNumber)
 }
 
 // SetIssueDate sets the IssueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) SetIssueDate(issueDate string) {
-	p.IssueDate = issueDate
-	p.require(postV1MigrationBooksValidateRequestOpenReceivablesItemFieldIssueDate)
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) SetIssueDate(issueDate time.Time) {
+	b.IssueDate = issueDate
+	b.require(booksValidateMigrationRequestOpenReceivablesItemFieldIssueDate)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestOpenReceivablesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestOpenReceivablesItem
+	var unmarshaler = struct {
+		embed
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestOpenReceivablesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestOpenReceivablesItem(unmarshaler.embed)
+	b.DueDate = unmarshaler.DueDate.TimePtr()
+	b.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestOpenReceivablesItem
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestOpenReceivablesItem
 	var marshaler = struct {
 		embed
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+		IssueDate *internal.Date `json:"issueDate"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*b),
+		DueDate:   internal.NewOptionalDate(b.DueDate),
+		IssueDate: internal.NewDate(b.IssueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpenReceivablesItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpenReceivablesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestOpeningBalancesFieldDate                 = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestOpeningBalancesFieldBalancingAccountCode = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
+	booksValidateMigrationRequestOpeningBalancesFieldDate                 = big.NewInt(1 << 0)
+	booksValidateMigrationRequestOpeningBalancesFieldBalancingAccountCode = big.NewInt(1 << 1)
+	booksValidateMigrationRequestOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksValidateRequestOpeningBalances struct {
-	Date                 *string                                                          `json:"date,omitempty" url:"date,omitempty"`
-	BalancingAccountCode *string                                                          `json:"balancingAccountCode,omitempty" url:"balancingAccountCode,omitempty"`
-	Entries              []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem `json:"entries" url:"entries"`
+type BooksValidateMigrationRequestOpeningBalances struct {
+	Date                 *time.Time                                                 `json:"date,omitempty" url:"date,omitempty" format:"date"`
+	BalancingAccountCode *string                                                    `json:"balancingAccountCode,omitempty" url:"balancingAccountCode,omitempty"`
+	Entries              []*BooksValidateMigrationRequestOpeningBalancesEntriesItem `json:"entries" url:"entries"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5697,112 +5822,120 @@ type PostV1MigrationBooksValidateRequestOpeningBalances struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) GetDate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) GetDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) GetBalancingAccountCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) GetBalancingAccountCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.BalancingAccountCode
+	return b.BalancingAccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) GetEntries() []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) GetEntries() []*BooksValidateMigrationRequestOpeningBalancesEntriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestOpeningBalances) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) SetDate(date *string) {
-	p.Date = date
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesFieldDate)
+func (b *BooksValidateMigrationRequestOpeningBalances) SetDate(date *time.Time) {
+	b.Date = date
+	b.require(booksValidateMigrationRequestOpeningBalancesFieldDate)
 }
 
 // SetBalancingAccountCode sets the BalancingAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) SetBalancingAccountCode(balancingAccountCode *string) {
-	p.BalancingAccountCode = balancingAccountCode
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesFieldBalancingAccountCode)
+func (b *BooksValidateMigrationRequestOpeningBalances) SetBalancingAccountCode(balancingAccountCode *string) {
+	b.BalancingAccountCode = balancingAccountCode
+	b.require(booksValidateMigrationRequestOpeningBalancesFieldBalancingAccountCode)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) SetEntries(entries []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesFieldEntries)
+func (b *BooksValidateMigrationRequestOpeningBalances) SetEntries(entries []*BooksValidateMigrationRequestOpeningBalancesEntriesItem) {
+	b.Entries = entries
+	b.require(booksValidateMigrationRequestOpeningBalancesFieldEntries)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestOpeningBalances
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestOpeningBalances
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestOpeningBalances(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestOpeningBalances(unmarshaler.embed)
+	b.Date = unmarshaler.Date.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestOpeningBalances
+func (b *BooksValidateMigrationRequestOpeningBalances) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestOpeningBalances
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date,omitempty"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewOptionalDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalances) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalances) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldAccountCode = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldDebit       = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldCredit      = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldDescription = big.NewInt(1 << 3)
+	booksValidateMigrationRequestOpeningBalancesEntriesItemFieldAccountCode = big.NewInt(1 << 0)
+	booksValidateMigrationRequestOpeningBalancesEntriesItemFieldDebit       = big.NewInt(1 << 1)
+	booksValidateMigrationRequestOpeningBalancesEntriesItemFieldCredit      = big.NewInt(1 << 2)
+	booksValidateMigrationRequestOpeningBalancesEntriesItemFieldDescription = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem struct {
+type BooksValidateMigrationRequestOpeningBalancesEntriesItem struct {
 	AccountCode string  `json:"accountCode" url:"accountCode"`
 	Debit       *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit      *string `json:"credit,omitempty" url:"credit,omitempty"`
@@ -5815,144 +5948,144 @@ type PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) GetAccountCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) GetAccountCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccountCode
+	return b.AccountCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) GetDebit() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) GetDebit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Debit
+	return b.Debit
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) GetCredit() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) GetCredit() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Credit
+	return b.Credit
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) GetDescription() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) GetDescription() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Description
+	return b.Description
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) SetAccountCode(accountCode string) {
-	p.AccountCode = accountCode
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldAccountCode)
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) SetAccountCode(accountCode string) {
+	b.AccountCode = accountCode
+	b.require(booksValidateMigrationRequestOpeningBalancesEntriesItemFieldAccountCode)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) SetDebit(debit *string) {
-	p.Debit = debit
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldDebit)
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) SetDebit(debit *string) {
+	b.Debit = debit
+	b.require(booksValidateMigrationRequestOpeningBalancesEntriesItemFieldDebit)
 }
 
 // SetCredit sets the Credit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) SetCredit(credit *string) {
-	p.Credit = credit
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldCredit)
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) SetCredit(credit *string) {
+	b.Credit = credit
+	b.require(booksValidateMigrationRequestOpeningBalancesEntriesItemFieldCredit)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1MigrationBooksValidateRequestOpeningBalancesEntriesItemFieldDescription)
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) SetDescription(description *string) {
+	b.Description = description
+	b.require(booksValidateMigrationRequestOpeningBalancesEntriesItemFieldDescription)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestOpeningBalancesEntriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestOpeningBalancesEntriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestOpeningBalancesEntriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestOpeningBalancesEntriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestPartnersItemFieldCode            = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestPartnersItemFieldName            = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestPartnersItemFieldType            = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestPartnersItemFieldVatCode         = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestPartnersItemFieldEmail           = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestPartnersItemFieldPhone           = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateRequestPartnersItemFieldIsCustomer      = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateRequestPartnersItemFieldIsSupplier      = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateRequestPartnersItemFieldPaymentTermDays = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateRequestPartnersItemFieldAddress         = big.NewInt(1 << 9)
-	postV1MigrationBooksValidateRequestPartnersItemFieldNotes           = big.NewInt(1 << 10)
+	booksValidateMigrationRequestPartnersItemFieldCode            = big.NewInt(1 << 0)
+	booksValidateMigrationRequestPartnersItemFieldName            = big.NewInt(1 << 1)
+	booksValidateMigrationRequestPartnersItemFieldType            = big.NewInt(1 << 2)
+	booksValidateMigrationRequestPartnersItemFieldVatCode         = big.NewInt(1 << 3)
+	booksValidateMigrationRequestPartnersItemFieldEmail           = big.NewInt(1 << 4)
+	booksValidateMigrationRequestPartnersItemFieldPhone           = big.NewInt(1 << 5)
+	booksValidateMigrationRequestPartnersItemFieldIsCustomer      = big.NewInt(1 << 6)
+	booksValidateMigrationRequestPartnersItemFieldIsSupplier      = big.NewInt(1 << 7)
+	booksValidateMigrationRequestPartnersItemFieldPaymentTermDays = big.NewInt(1 << 8)
+	booksValidateMigrationRequestPartnersItemFieldAddress         = big.NewInt(1 << 9)
+	booksValidateMigrationRequestPartnersItemFieldNotes           = big.NewInt(1 << 10)
 )
 
-type PostV1MigrationBooksValidateRequestPartnersItem struct {
-	Code            string                                                  `json:"code" url:"code"`
-	Name            string                                                  `json:"name" url:"name"`
-	Type            *PostV1MigrationBooksValidateRequestPartnersItemType    `json:"type,omitempty" url:"type,omitempty"`
-	VatCode         *string                                                 `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	Email           *string                                                 `json:"email,omitempty" url:"email,omitempty"`
-	Phone           *string                                                 `json:"phone,omitempty" url:"phone,omitempty"`
-	IsCustomer      *bool                                                   `json:"isCustomer,omitempty" url:"isCustomer,omitempty"`
-	IsSupplier      *bool                                                   `json:"isSupplier,omitempty" url:"isSupplier,omitempty"`
-	PaymentTermDays *int64                                                  `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	Address         *PostV1MigrationBooksValidateRequestPartnersItemAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes           *string                                                 `json:"notes,omitempty" url:"notes,omitempty"`
+type BooksValidateMigrationRequestPartnersItem struct {
+	Code            string                                            `json:"code" url:"code"`
+	Name            string                                            `json:"name" url:"name"`
+	Type            *BooksValidateMigrationRequestPartnersItemType    `json:"type,omitempty" url:"type,omitempty"`
+	VatCode         *string                                           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Email           *string                                           `json:"email,omitempty" url:"email,omitempty"`
+	Phone           *string                                           `json:"phone,omitempty" url:"phone,omitempty"`
+	IsCustomer      *bool                                             `json:"isCustomer,omitempty" url:"isCustomer,omitempty"`
+	IsSupplier      *bool                                             `json:"isSupplier,omitempty" url:"isSupplier,omitempty"`
+	PaymentTermDays *int64                                            `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	Address         *BooksValidateMigrationRequestPartnersItemAddress `json:"address,omitempty" url:"address,omitempty"`
+	Notes           *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5961,224 +6094,224 @@ type PostV1MigrationBooksValidateRequestPartnersItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.Code
+	return b.Code
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetName() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetName() string {
+	if b == nil {
 		return ""
 	}
-	return p.Name
+	return b.Name
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetType() *PostV1MigrationBooksValidateRequestPartnersItemType {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetType() *BooksValidateMigrationRequestPartnersItemType {
+	if b == nil {
 		return nil
 	}
-	return p.Type
+	return b.Type
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetVatCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetVatCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.VatCode
+	return b.VatCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetEmail() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetEmail() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Email
+	return b.Email
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetPhone() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetPhone() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Phone
+	return b.Phone
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetIsCustomer() *bool {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetIsCustomer() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsCustomer
+	return b.IsCustomer
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetIsSupplier() *bool {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetIsSupplier() *bool {
+	if b == nil {
 		return nil
 	}
-	return p.IsSupplier
+	return b.IsSupplier
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetPaymentTermDays() *int64 {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetPaymentTermDays() *int64 {
+	if b == nil {
 		return nil
 	}
-	return p.PaymentTermDays
+	return b.PaymentTermDays
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetAddress() *PostV1MigrationBooksValidateRequestPartnersItemAddress {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetAddress() *BooksValidateMigrationRequestPartnersItemAddress {
+	if b == nil {
 		return nil
 	}
-	return p.Address
+	return b.Address
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetNotes() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetNotes() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Notes
+	return b.Notes
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestPartnersItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldCode)
+func (b *BooksValidateMigrationRequestPartnersItem) SetCode(code string) {
+	b.Code = code
+	b.require(booksValidateMigrationRequestPartnersItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldName)
+func (b *BooksValidateMigrationRequestPartnersItem) SetName(name string) {
+	b.Name = name
+	b.require(booksValidateMigrationRequestPartnersItemFieldName)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetType(type_ *PostV1MigrationBooksValidateRequestPartnersItemType) {
-	p.Type = type_
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldType)
+func (b *BooksValidateMigrationRequestPartnersItem) SetType(type_ *BooksValidateMigrationRequestPartnersItemType) {
+	b.Type = type_
+	b.require(booksValidateMigrationRequestPartnersItemFieldType)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldVatCode)
+func (b *BooksValidateMigrationRequestPartnersItem) SetVatCode(vatCode *string) {
+	b.VatCode = vatCode
+	b.require(booksValidateMigrationRequestPartnersItemFieldVatCode)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldEmail)
+func (b *BooksValidateMigrationRequestPartnersItem) SetEmail(email *string) {
+	b.Email = email
+	b.require(booksValidateMigrationRequestPartnersItemFieldEmail)
 }
 
 // SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldPhone)
+func (b *BooksValidateMigrationRequestPartnersItem) SetPhone(phone *string) {
+	b.Phone = phone
+	b.require(booksValidateMigrationRequestPartnersItemFieldPhone)
 }
 
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetIsCustomer(isCustomer *bool) {
-	p.IsCustomer = isCustomer
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldIsCustomer)
+func (b *BooksValidateMigrationRequestPartnersItem) SetIsCustomer(isCustomer *bool) {
+	b.IsCustomer = isCustomer
+	b.require(booksValidateMigrationRequestPartnersItemFieldIsCustomer)
 }
 
 // SetIsSupplier sets the IsSupplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetIsSupplier(isSupplier *bool) {
-	p.IsSupplier = isSupplier
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldIsSupplier)
+func (b *BooksValidateMigrationRequestPartnersItem) SetIsSupplier(isSupplier *bool) {
+	b.IsSupplier = isSupplier
+	b.require(booksValidateMigrationRequestPartnersItemFieldIsSupplier)
 }
 
 // SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetPaymentTermDays(paymentTermDays *int64) {
-	p.PaymentTermDays = paymentTermDays
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldPaymentTermDays)
+func (b *BooksValidateMigrationRequestPartnersItem) SetPaymentTermDays(paymentTermDays *int64) {
+	b.PaymentTermDays = paymentTermDays
+	b.require(booksValidateMigrationRequestPartnersItemFieldPaymentTermDays)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetAddress(address *PostV1MigrationBooksValidateRequestPartnersItemAddress) {
-	p.Address = address
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldAddress)
+func (b *BooksValidateMigrationRequestPartnersItem) SetAddress(address *BooksValidateMigrationRequestPartnersItemAddress) {
+	b.Address = address
+	b.require(booksValidateMigrationRequestPartnersItemFieldAddress)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1MigrationBooksValidateRequestPartnersItemFieldNotes)
+func (b *BooksValidateMigrationRequestPartnersItem) SetNotes(notes *string) {
+	b.Notes = notes
+	b.require(booksValidateMigrationRequestPartnersItemFieldNotes)
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestPartnersItem
+func (b *BooksValidateMigrationRequestPartnersItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestPartnersItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestPartnersItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestPartnersItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestPartnersItem
+func (b *BooksValidateMigrationRequestPartnersItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestPartnersItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateRequestPartnersItemAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestPartnersItemAddressFieldCity        = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestPartnersItemAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestPartnersItemAddressFieldCountryCode = big.NewInt(1 << 3)
+	booksValidateMigrationRequestPartnersItemAddressFieldStreet      = big.NewInt(1 << 0)
+	booksValidateMigrationRequestPartnersItemAddressFieldCity        = big.NewInt(1 << 1)
+	booksValidateMigrationRequestPartnersItemAddressFieldPostalCode  = big.NewInt(1 << 2)
+	booksValidateMigrationRequestPartnersItemAddressFieldCountryCode = big.NewInt(1 << 3)
 )
 
-type PostV1MigrationBooksValidateRequestPartnersItemAddress struct {
+type BooksValidateMigrationRequestPartnersItemAddress struct {
 	Street      *string `json:"street,omitempty" url:"street,omitempty"`
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
@@ -6191,156 +6324,156 @@ type PostV1MigrationBooksValidateRequestPartnersItemAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) GetStreet() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) GetStreet() *string {
+	if b == nil {
 		return nil
 	}
-	return p.Street
+	return b.Street
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) GetCity() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) GetCity() *string {
+	if b == nil {
 		return nil
 	}
-	return p.City
+	return b.City
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) GetPostalCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) GetPostalCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.PostalCode
+	return b.PostalCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) GetCountryCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) GetCountryCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.CountryCode
+	return b.CountryCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestPartnersItemAddress) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetStreet sets the Street field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1MigrationBooksValidateRequestPartnersItemAddressFieldStreet)
+func (b *BooksValidateMigrationRequestPartnersItemAddress) SetStreet(street *string) {
+	b.Street = street
+	b.require(booksValidateMigrationRequestPartnersItemAddressFieldStreet)
 }
 
 // SetCity sets the City field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1MigrationBooksValidateRequestPartnersItemAddressFieldCity)
+func (b *BooksValidateMigrationRequestPartnersItemAddress) SetCity(city *string) {
+	b.City = city
+	b.require(booksValidateMigrationRequestPartnersItemAddressFieldCity)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1MigrationBooksValidateRequestPartnersItemAddressFieldPostalCode)
+func (b *BooksValidateMigrationRequestPartnersItemAddress) SetPostalCode(postalCode *string) {
+	b.PostalCode = postalCode
+	b.require(booksValidateMigrationRequestPartnersItemAddressFieldPostalCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1MigrationBooksValidateRequestPartnersItemAddressFieldCountryCode)
+func (b *BooksValidateMigrationRequestPartnersItemAddress) SetCountryCode(countryCode *string) {
+	b.CountryCode = countryCode
+	b.require(booksValidateMigrationRequestPartnersItemAddressFieldCountryCode)
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestPartnersItemAddress
+func (b *BooksValidateMigrationRequestPartnersItemAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationRequestPartnersItemAddress
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestPartnersItemAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestPartnersItemAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestPartnersItemAddress
+func (b *BooksValidateMigrationRequestPartnersItemAddress) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestPartnersItemAddress
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestPartnersItemAddress) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestPartnersItemAddress) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
-type PostV1MigrationBooksValidateRequestPartnersItemType string
+type BooksValidateMigrationRequestPartnersItemType string
 
 const (
-	PostV1MigrationBooksValidateRequestPartnersItemTypeCompany PostV1MigrationBooksValidateRequestPartnersItemType = "company"
-	PostV1MigrationBooksValidateRequestPartnersItemTypePerson  PostV1MigrationBooksValidateRequestPartnersItemType = "person"
+	BooksValidateMigrationRequestPartnersItemTypeCompany BooksValidateMigrationRequestPartnersItemType = "company"
+	BooksValidateMigrationRequestPartnersItemTypePerson  BooksValidateMigrationRequestPartnersItemType = "person"
 )
 
-func NewPostV1MigrationBooksValidateRequestPartnersItemTypeFromString(s string) (PostV1MigrationBooksValidateRequestPartnersItemType, error) {
+func NewBooksValidateMigrationRequestPartnersItemTypeFromString(s string) (BooksValidateMigrationRequestPartnersItemType, error) {
 	switch s {
 	case "company":
-		return PostV1MigrationBooksValidateRequestPartnersItemTypeCompany, nil
+		return BooksValidateMigrationRequestPartnersItemTypeCompany, nil
 	case "person":
-		return PostV1MigrationBooksValidateRequestPartnersItemTypePerson, nil
+		return BooksValidateMigrationRequestPartnersItemTypePerson, nil
 	}
-	var t PostV1MigrationBooksValidateRequestPartnersItemType
+	var t BooksValidateMigrationRequestPartnersItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1MigrationBooksValidateRequestPartnersItemType) Ptr() *PostV1MigrationBooksValidateRequestPartnersItemType {
-	return &p
+func (b BooksValidateMigrationRequestPartnersItemType) Ptr() *BooksValidateMigrationRequestPartnersItemType {
+	return &b
 }
 
 var (
-	postV1MigrationBooksValidateRequestStockItemFieldWarehouseCode = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateRequestStockItemFieldItemCode      = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateRequestStockItemFieldQuantity      = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateRequestStockItemFieldUnitCost      = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateRequestStockItemFieldLotNumber     = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateRequestStockItemFieldExpiryDate    = big.NewInt(1 << 5)
+	booksValidateMigrationRequestStockItemFieldWarehouseCode = big.NewInt(1 << 0)
+	booksValidateMigrationRequestStockItemFieldItemCode      = big.NewInt(1 << 1)
+	booksValidateMigrationRequestStockItemFieldQuantity      = big.NewInt(1 << 2)
+	booksValidateMigrationRequestStockItemFieldUnitCost      = big.NewInt(1 << 3)
+	booksValidateMigrationRequestStockItemFieldLotNumber     = big.NewInt(1 << 4)
+	booksValidateMigrationRequestStockItemFieldExpiryDate    = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksValidateRequestStockItem struct {
-	WarehouseCode *string `json:"warehouseCode,omitempty" url:"warehouseCode,omitempty"`
-	ItemCode      string  `json:"itemCode" url:"itemCode"`
-	Quantity      string  `json:"quantity" url:"quantity"`
-	UnitCost      string  `json:"unitCost" url:"unitCost"`
-	LotNumber     *string `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
-	ExpiryDate    *string `json:"expiryDate,omitempty" url:"expiryDate,omitempty"`
+type BooksValidateMigrationRequestStockItem struct {
+	WarehouseCode *string    `json:"warehouseCode,omitempty" url:"warehouseCode,omitempty"`
+	ItemCode      string     `json:"itemCode" url:"itemCode"`
+	Quantity      string     `json:"quantity" url:"quantity"`
+	UnitCost      string     `json:"unitCost" url:"unitCost"`
+	LotNumber     *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate    *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6349,178 +6482,186 @@ type PostV1MigrationBooksValidateRequestStockItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetWarehouseCode() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetWarehouseCode() *string {
+	if b == nil {
 		return nil
 	}
-	return p.WarehouseCode
+	return b.WarehouseCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetItemCode() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetItemCode() string {
+	if b == nil {
 		return ""
 	}
-	return p.ItemCode
+	return b.ItemCode
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetQuantity() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetQuantity() string {
+	if b == nil {
 		return ""
 	}
-	return p.Quantity
+	return b.Quantity
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetUnitCost() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetUnitCost() string {
+	if b == nil {
 		return ""
 	}
-	return p.UnitCost
+	return b.UnitCost
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetLotNumber() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetLotNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return p.LotNumber
+	return b.LotNumber
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetExpiryDate() *string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetExpiryDate() *time.Time {
+	if b == nil {
 		return nil
 	}
-	return p.ExpiryDate
+	return b.ExpiryDate
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationRequestStockItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetWarehouseCode sets the WarehouseCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetWarehouseCode(warehouseCode *string) {
-	p.WarehouseCode = warehouseCode
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldWarehouseCode)
+func (b *BooksValidateMigrationRequestStockItem) SetWarehouseCode(warehouseCode *string) {
+	b.WarehouseCode = warehouseCode
+	b.require(booksValidateMigrationRequestStockItemFieldWarehouseCode)
 }
 
 // SetItemCode sets the ItemCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetItemCode(itemCode string) {
-	p.ItemCode = itemCode
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldItemCode)
+func (b *BooksValidateMigrationRequestStockItem) SetItemCode(itemCode string) {
+	b.ItemCode = itemCode
+	b.require(booksValidateMigrationRequestStockItemFieldItemCode)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldQuantity)
+func (b *BooksValidateMigrationRequestStockItem) SetQuantity(quantity string) {
+	b.Quantity = quantity
+	b.require(booksValidateMigrationRequestStockItemFieldQuantity)
 }
 
 // SetUnitCost sets the UnitCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetUnitCost(unitCost string) {
-	p.UnitCost = unitCost
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldUnitCost)
+func (b *BooksValidateMigrationRequestStockItem) SetUnitCost(unitCost string) {
+	b.UnitCost = unitCost
+	b.require(booksValidateMigrationRequestStockItemFieldUnitCost)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetLotNumber(lotNumber *string) {
-	p.LotNumber = lotNumber
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldLotNumber)
+func (b *BooksValidateMigrationRequestStockItem) SetLotNumber(lotNumber *string) {
+	b.LotNumber = lotNumber
+	b.require(booksValidateMigrationRequestStockItemFieldLotNumber)
 }
 
 // SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateRequestStockItem) SetExpiryDate(expiryDate *string) {
-	p.ExpiryDate = expiryDate
-	p.require(postV1MigrationBooksValidateRequestStockItemFieldExpiryDate)
+func (b *BooksValidateMigrationRequestStockItem) SetExpiryDate(expiryDate *time.Time) {
+	b.ExpiryDate = expiryDate
+	b.require(booksValidateMigrationRequestStockItemFieldExpiryDate)
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateRequestStockItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationRequestStockItem) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationRequestStockItem
+	var unmarshaler = struct {
+		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateRequestStockItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationRequestStockItem(unmarshaler.embed)
+	b.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateRequestStockItem
+func (b *BooksValidateMigrationRequestStockItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationRequestStockItem
 	var marshaler = struct {
 		embed
+		ExpiryDate *internal.Date `json:"expiryDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*b),
+		ExpiryDate: internal.NewOptionalDate(b.ExpiryDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateRequestStockItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationRequestStockItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseFieldDryRun          = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseFieldCutoverDate     = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateResponseFieldAccounts        = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateResponseFieldPartners        = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateResponseFieldItems           = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateResponseFieldAssetGroups     = big.NewInt(1 << 5)
-	postV1MigrationBooksValidateResponseFieldOpeningBalances = big.NewInt(1 << 6)
-	postV1MigrationBooksValidateResponseFieldJournal         = big.NewInt(1 << 7)
-	postV1MigrationBooksValidateResponseFieldOpenReceivables = big.NewInt(1 << 8)
-	postV1MigrationBooksValidateResponseFieldOpenPayables    = big.NewInt(1 << 9)
-	postV1MigrationBooksValidateResponseFieldFixedAssets     = big.NewInt(1 << 10)
-	postV1MigrationBooksValidateResponseFieldStock           = big.NewInt(1 << 11)
-	postV1MigrationBooksValidateResponseFieldNumberSeries    = big.NewInt(1 << 12)
-	postV1MigrationBooksValidateResponseFieldWarnings        = big.NewInt(1 << 13)
+	booksValidateMigrationResponseFieldDryRun          = big.NewInt(1 << 0)
+	booksValidateMigrationResponseFieldCutoverDate     = big.NewInt(1 << 1)
+	booksValidateMigrationResponseFieldAccounts        = big.NewInt(1 << 2)
+	booksValidateMigrationResponseFieldPartners        = big.NewInt(1 << 3)
+	booksValidateMigrationResponseFieldItems           = big.NewInt(1 << 4)
+	booksValidateMigrationResponseFieldAssetGroups     = big.NewInt(1 << 5)
+	booksValidateMigrationResponseFieldOpeningBalances = big.NewInt(1 << 6)
+	booksValidateMigrationResponseFieldJournal         = big.NewInt(1 << 7)
+	booksValidateMigrationResponseFieldOpenReceivables = big.NewInt(1 << 8)
+	booksValidateMigrationResponseFieldOpenPayables    = big.NewInt(1 << 9)
+	booksValidateMigrationResponseFieldFixedAssets     = big.NewInt(1 << 10)
+	booksValidateMigrationResponseFieldStock           = big.NewInt(1 << 11)
+	booksValidateMigrationResponseFieldNumberSeries    = big.NewInt(1 << 12)
+	booksValidateMigrationResponseFieldWarnings        = big.NewInt(1 << 13)
 )
 
-type PostV1MigrationBooksValidateResponse struct {
-	DryRun          bool                                                    `json:"dryRun" url:"dryRun"`
-	CutoverDate     string                                                  `json:"cutoverDate" url:"cutoverDate"`
-	Accounts        *PostV1MigrationBooksValidateResponseAccounts           `json:"accounts" url:"accounts"`
-	Partners        *PostV1MigrationBooksValidateResponsePartners           `json:"partners" url:"partners"`
-	Items           *PostV1MigrationBooksValidateResponseItems              `json:"items" url:"items"`
-	AssetGroups     *PostV1MigrationBooksValidateResponseAssetGroups        `json:"assetGroups" url:"assetGroups"`
-	OpeningBalances *PostV1MigrationBooksValidateResponseOpeningBalances    `json:"openingBalances,omitempty" url:"openingBalances,omitempty"`
-	Journal         *PostV1MigrationBooksValidateResponseJournal            `json:"journal" url:"journal"`
-	OpenReceivables *PostV1MigrationBooksValidateResponseOpenReceivables    `json:"openReceivables" url:"openReceivables"`
-	OpenPayables    *PostV1MigrationBooksValidateResponseOpenPayables       `json:"openPayables" url:"openPayables"`
-	FixedAssets     *PostV1MigrationBooksValidateResponseFixedAssets        `json:"fixedAssets" url:"fixedAssets"`
-	Stock           *PostV1MigrationBooksValidateResponseStock              `json:"stock" url:"stock"`
-	NumberSeries    []*PostV1MigrationBooksValidateResponseNumberSeriesItem `json:"numberSeries" url:"numberSeries"`
-	Warnings        []string                                                `json:"warnings" url:"warnings"`
+type BooksValidateMigrationResponse struct {
+	DryRun          bool                                              `json:"dryRun" url:"dryRun"`
+	CutoverDate     time.Time                                         `json:"cutoverDate" url:"cutoverDate" format:"date"`
+	Accounts        *BooksValidateMigrationResponseAccounts           `json:"accounts" url:"accounts"`
+	Partners        *BooksValidateMigrationResponsePartners           `json:"partners" url:"partners"`
+	Items           *BooksValidateMigrationResponseItems              `json:"items" url:"items"`
+	AssetGroups     *BooksValidateMigrationResponseAssetGroups        `json:"assetGroups" url:"assetGroups"`
+	OpeningBalances *BooksValidateMigrationResponseOpeningBalances    `json:"openingBalances,omitempty" url:"openingBalances,omitempty"`
+	Journal         *BooksValidateMigrationResponseJournal            `json:"journal" url:"journal"`
+	OpenReceivables *BooksValidateMigrationResponseOpenReceivables    `json:"openReceivables" url:"openReceivables"`
+	OpenPayables    *BooksValidateMigrationResponseOpenPayables       `json:"openPayables" url:"openPayables"`
+	FixedAssets     *BooksValidateMigrationResponseFixedAssets        `json:"fixedAssets" url:"fixedAssets"`
+	Stock           *BooksValidateMigrationResponseStock              `json:"stock" url:"stock"`
+	NumberSeries    []*BooksValidateMigrationResponseNumberSeriesItem `json:"numberSeries" url:"numberSeries"`
+	Warnings        []string                                          `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6529,264 +6670,272 @@ type PostV1MigrationBooksValidateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetDryRun() bool {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetDryRun() bool {
+	if b == nil {
 		return false
 	}
-	return p.DryRun
+	return b.DryRun
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetCutoverDate() string {
-	if p == nil {
-		return ""
+func (b *BooksValidateMigrationResponse) GetCutoverDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.CutoverDate
+	return b.CutoverDate
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetAccounts() *PostV1MigrationBooksValidateResponseAccounts {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetAccounts() *BooksValidateMigrationResponseAccounts {
+	if b == nil {
 		return nil
 	}
-	return p.Accounts
+	return b.Accounts
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetPartners() *PostV1MigrationBooksValidateResponsePartners {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetPartners() *BooksValidateMigrationResponsePartners {
+	if b == nil {
 		return nil
 	}
-	return p.Partners
+	return b.Partners
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetItems() *PostV1MigrationBooksValidateResponseItems {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetItems() *BooksValidateMigrationResponseItems {
+	if b == nil {
 		return nil
 	}
-	return p.Items
+	return b.Items
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetAssetGroups() *PostV1MigrationBooksValidateResponseAssetGroups {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetAssetGroups() *BooksValidateMigrationResponseAssetGroups {
+	if b == nil {
 		return nil
 	}
-	return p.AssetGroups
+	return b.AssetGroups
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetOpeningBalances() *PostV1MigrationBooksValidateResponseOpeningBalances {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetOpeningBalances() *BooksValidateMigrationResponseOpeningBalances {
+	if b == nil {
 		return nil
 	}
-	return p.OpeningBalances
+	return b.OpeningBalances
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetJournal() *PostV1MigrationBooksValidateResponseJournal {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetJournal() *BooksValidateMigrationResponseJournal {
+	if b == nil {
 		return nil
 	}
-	return p.Journal
+	return b.Journal
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetOpenReceivables() *PostV1MigrationBooksValidateResponseOpenReceivables {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetOpenReceivables() *BooksValidateMigrationResponseOpenReceivables {
+	if b == nil {
 		return nil
 	}
-	return p.OpenReceivables
+	return b.OpenReceivables
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetOpenPayables() *PostV1MigrationBooksValidateResponseOpenPayables {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetOpenPayables() *BooksValidateMigrationResponseOpenPayables {
+	if b == nil {
 		return nil
 	}
-	return p.OpenPayables
+	return b.OpenPayables
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetFixedAssets() *PostV1MigrationBooksValidateResponseFixedAssets {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetFixedAssets() *BooksValidateMigrationResponseFixedAssets {
+	if b == nil {
 		return nil
 	}
-	return p.FixedAssets
+	return b.FixedAssets
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetStock() *PostV1MigrationBooksValidateResponseStock {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetStock() *BooksValidateMigrationResponseStock {
+	if b == nil {
 		return nil
 	}
-	return p.Stock
+	return b.Stock
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetNumberSeries() []*PostV1MigrationBooksValidateResponseNumberSeriesItem {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetNumberSeries() []*BooksValidateMigrationResponseNumberSeriesItem {
+	if b == nil {
 		return nil
 	}
-	return p.NumberSeries
+	return b.NumberSeries
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetWarnings() []string {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetWarnings() []string {
+	if b == nil {
 		return nil
 	}
-	return p.Warnings
+	return b.Warnings
 }
 
-func (p *PostV1MigrationBooksValidateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetDryRun sets the DryRun field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetDryRun(dryRun bool) {
-	p.DryRun = dryRun
-	p.require(postV1MigrationBooksValidateResponseFieldDryRun)
+func (b *BooksValidateMigrationResponse) SetDryRun(dryRun bool) {
+	b.DryRun = dryRun
+	b.require(booksValidateMigrationResponseFieldDryRun)
 }
 
 // SetCutoverDate sets the CutoverDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetCutoverDate(cutoverDate string) {
-	p.CutoverDate = cutoverDate
-	p.require(postV1MigrationBooksValidateResponseFieldCutoverDate)
+func (b *BooksValidateMigrationResponse) SetCutoverDate(cutoverDate time.Time) {
+	b.CutoverDate = cutoverDate
+	b.require(booksValidateMigrationResponseFieldCutoverDate)
 }
 
 // SetAccounts sets the Accounts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetAccounts(accounts *PostV1MigrationBooksValidateResponseAccounts) {
-	p.Accounts = accounts
-	p.require(postV1MigrationBooksValidateResponseFieldAccounts)
+func (b *BooksValidateMigrationResponse) SetAccounts(accounts *BooksValidateMigrationResponseAccounts) {
+	b.Accounts = accounts
+	b.require(booksValidateMigrationResponseFieldAccounts)
 }
 
 // SetPartners sets the Partners field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetPartners(partners *PostV1MigrationBooksValidateResponsePartners) {
-	p.Partners = partners
-	p.require(postV1MigrationBooksValidateResponseFieldPartners)
+func (b *BooksValidateMigrationResponse) SetPartners(partners *BooksValidateMigrationResponsePartners) {
+	b.Partners = partners
+	b.require(booksValidateMigrationResponseFieldPartners)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetItems(items *PostV1MigrationBooksValidateResponseItems) {
-	p.Items = items
-	p.require(postV1MigrationBooksValidateResponseFieldItems)
+func (b *BooksValidateMigrationResponse) SetItems(items *BooksValidateMigrationResponseItems) {
+	b.Items = items
+	b.require(booksValidateMigrationResponseFieldItems)
 }
 
 // SetAssetGroups sets the AssetGroups field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetAssetGroups(assetGroups *PostV1MigrationBooksValidateResponseAssetGroups) {
-	p.AssetGroups = assetGroups
-	p.require(postV1MigrationBooksValidateResponseFieldAssetGroups)
+func (b *BooksValidateMigrationResponse) SetAssetGroups(assetGroups *BooksValidateMigrationResponseAssetGroups) {
+	b.AssetGroups = assetGroups
+	b.require(booksValidateMigrationResponseFieldAssetGroups)
 }
 
 // SetOpeningBalances sets the OpeningBalances field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetOpeningBalances(openingBalances *PostV1MigrationBooksValidateResponseOpeningBalances) {
-	p.OpeningBalances = openingBalances
-	p.require(postV1MigrationBooksValidateResponseFieldOpeningBalances)
+func (b *BooksValidateMigrationResponse) SetOpeningBalances(openingBalances *BooksValidateMigrationResponseOpeningBalances) {
+	b.OpeningBalances = openingBalances
+	b.require(booksValidateMigrationResponseFieldOpeningBalances)
 }
 
 // SetJournal sets the Journal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetJournal(journal *PostV1MigrationBooksValidateResponseJournal) {
-	p.Journal = journal
-	p.require(postV1MigrationBooksValidateResponseFieldJournal)
+func (b *BooksValidateMigrationResponse) SetJournal(journal *BooksValidateMigrationResponseJournal) {
+	b.Journal = journal
+	b.require(booksValidateMigrationResponseFieldJournal)
 }
 
 // SetOpenReceivables sets the OpenReceivables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetOpenReceivables(openReceivables *PostV1MigrationBooksValidateResponseOpenReceivables) {
-	p.OpenReceivables = openReceivables
-	p.require(postV1MigrationBooksValidateResponseFieldOpenReceivables)
+func (b *BooksValidateMigrationResponse) SetOpenReceivables(openReceivables *BooksValidateMigrationResponseOpenReceivables) {
+	b.OpenReceivables = openReceivables
+	b.require(booksValidateMigrationResponseFieldOpenReceivables)
 }
 
 // SetOpenPayables sets the OpenPayables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetOpenPayables(openPayables *PostV1MigrationBooksValidateResponseOpenPayables) {
-	p.OpenPayables = openPayables
-	p.require(postV1MigrationBooksValidateResponseFieldOpenPayables)
+func (b *BooksValidateMigrationResponse) SetOpenPayables(openPayables *BooksValidateMigrationResponseOpenPayables) {
+	b.OpenPayables = openPayables
+	b.require(booksValidateMigrationResponseFieldOpenPayables)
 }
 
 // SetFixedAssets sets the FixedAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetFixedAssets(fixedAssets *PostV1MigrationBooksValidateResponseFixedAssets) {
-	p.FixedAssets = fixedAssets
-	p.require(postV1MigrationBooksValidateResponseFieldFixedAssets)
+func (b *BooksValidateMigrationResponse) SetFixedAssets(fixedAssets *BooksValidateMigrationResponseFixedAssets) {
+	b.FixedAssets = fixedAssets
+	b.require(booksValidateMigrationResponseFieldFixedAssets)
 }
 
 // SetStock sets the Stock field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetStock(stock *PostV1MigrationBooksValidateResponseStock) {
-	p.Stock = stock
-	p.require(postV1MigrationBooksValidateResponseFieldStock)
+func (b *BooksValidateMigrationResponse) SetStock(stock *BooksValidateMigrationResponseStock) {
+	b.Stock = stock
+	b.require(booksValidateMigrationResponseFieldStock)
 }
 
 // SetNumberSeries sets the NumberSeries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetNumberSeries(numberSeries []*PostV1MigrationBooksValidateResponseNumberSeriesItem) {
-	p.NumberSeries = numberSeries
-	p.require(postV1MigrationBooksValidateResponseFieldNumberSeries)
+func (b *BooksValidateMigrationResponse) SetNumberSeries(numberSeries []*BooksValidateMigrationResponseNumberSeriesItem) {
+	b.NumberSeries = numberSeries
+	b.require(booksValidateMigrationResponseFieldNumberSeries)
 }
 
 // SetWarnings sets the Warnings field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponse) SetWarnings(warnings []string) {
-	p.Warnings = warnings
-	p.require(postV1MigrationBooksValidateResponseFieldWarnings)
+func (b *BooksValidateMigrationResponse) SetWarnings(warnings []string) {
+	b.Warnings = warnings
+	b.require(booksValidateMigrationResponseFieldWarnings)
 }
 
-func (p *PostV1MigrationBooksValidateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationResponse) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationResponse
+	var unmarshaler = struct {
+		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponse(unmarshaler.embed)
+	b.CutoverDate = unmarshaler.CutoverDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponse
+func (b *BooksValidateMigrationResponse) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponse
 	var marshaler = struct {
 		embed
+		CutoverDate *internal.Date `json:"cutoverDate"`
 	}{
-		embed: embed(*p),
+		embed:       embed(*b),
+		CutoverDate: internal.NewDate(b.CutoverDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponse) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponse) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseAccountsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseAccountsFieldExisting = big.NewInt(1 << 1)
+	booksValidateMigrationResponseAccountsFieldCreated  = big.NewInt(1 << 0)
+	booksValidateMigrationResponseAccountsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseAccounts struct {
+type BooksValidateMigrationResponseAccounts struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -6797,96 +6946,96 @@ type PostV1MigrationBooksValidateResponseAccounts struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAccounts) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) GetExisting() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAccounts) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAccounts) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseAccounts) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseAccounts) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseAccountsFieldCreated)
+func (b *BooksValidateMigrationResponseAccounts) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseAccountsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseAccounts) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksValidateResponseAccountsFieldExisting)
+func (b *BooksValidateMigrationResponseAccounts) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksValidateMigrationResponseAccountsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseAccounts
+func (b *BooksValidateMigrationResponseAccounts) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseAccounts
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseAccounts(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseAccounts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseAccounts
+func (b *BooksValidateMigrationResponseAccounts) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseAccounts
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseAccounts) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAccounts) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseAssetGroupsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseAssetGroupsFieldExisting = big.NewInt(1 << 1)
+	booksValidateMigrationResponseAssetGroupsFieldCreated  = big.NewInt(1 << 0)
+	booksValidateMigrationResponseAssetGroupsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseAssetGroups struct {
+type BooksValidateMigrationResponseAssetGroups struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -6897,97 +7046,97 @@ type PostV1MigrationBooksValidateResponseAssetGroups struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAssetGroups) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) GetExisting() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAssetGroups) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAssetGroups) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseAssetGroups) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseAssetGroupsFieldCreated)
+func (b *BooksValidateMigrationResponseAssetGroups) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseAssetGroupsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksValidateResponseAssetGroupsFieldExisting)
+func (b *BooksValidateMigrationResponseAssetGroups) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksValidateMigrationResponseAssetGroupsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseAssetGroups
+func (b *BooksValidateMigrationResponseAssetGroups) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseAssetGroups
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseAssetGroups(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseAssetGroups(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseAssetGroups
+func (b *BooksValidateMigrationResponseAssetGroups) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseAssetGroups
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseAssetGroups) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseAssetGroups) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseFixedAssetsFieldCreated                      = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseFixedAssetsFieldCostTotal                    = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateResponseFixedAssetsFieldAccumulatedDepreciationTotal = big.NewInt(1 << 2)
+	booksValidateMigrationResponseFixedAssetsFieldCreated                      = big.NewInt(1 << 0)
+	booksValidateMigrationResponseFixedAssetsFieldCostTotal                    = big.NewInt(1 << 1)
+	booksValidateMigrationResponseFixedAssetsFieldAccumulatedDepreciationTotal = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksValidateResponseFixedAssets struct {
+type BooksValidateMigrationResponseFixedAssets struct {
 	Created                      int64  `json:"created" url:"created"`
 	CostTotal                    string `json:"costTotal" url:"costTotal"`
 	AccumulatedDepreciationTotal string `json:"accumulatedDepreciationTotal" url:"accumulatedDepreciationTotal"`
@@ -6999,110 +7148,110 @@ type PostV1MigrationBooksValidateResponseFixedAssets struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseFixedAssets) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) GetCostTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseFixedAssets) GetCostTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CostTotal
+	return b.CostTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) GetAccumulatedDepreciationTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseFixedAssets) GetAccumulatedDepreciationTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.AccumulatedDepreciationTotal
+	return b.AccumulatedDepreciationTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseFixedAssets) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseFixedAssets) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseFixedAssetsFieldCreated)
+func (b *BooksValidateMigrationResponseFixedAssets) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseFixedAssetsFieldCreated)
 }
 
 // SetCostTotal sets the CostTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) SetCostTotal(costTotal string) {
-	p.CostTotal = costTotal
-	p.require(postV1MigrationBooksValidateResponseFixedAssetsFieldCostTotal)
+func (b *BooksValidateMigrationResponseFixedAssets) SetCostTotal(costTotal string) {
+	b.CostTotal = costTotal
+	b.require(booksValidateMigrationResponseFixedAssetsFieldCostTotal)
 }
 
 // SetAccumulatedDepreciationTotal sets the AccumulatedDepreciationTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) SetAccumulatedDepreciationTotal(accumulatedDepreciationTotal string) {
-	p.AccumulatedDepreciationTotal = accumulatedDepreciationTotal
-	p.require(postV1MigrationBooksValidateResponseFixedAssetsFieldAccumulatedDepreciationTotal)
+func (b *BooksValidateMigrationResponseFixedAssets) SetAccumulatedDepreciationTotal(accumulatedDepreciationTotal string) {
+	b.AccumulatedDepreciationTotal = accumulatedDepreciationTotal
+	b.require(booksValidateMigrationResponseFixedAssetsFieldAccumulatedDepreciationTotal)
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseFixedAssets
+func (b *BooksValidateMigrationResponseFixedAssets) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseFixedAssets
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseFixedAssets(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseFixedAssets(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseFixedAssets
+func (b *BooksValidateMigrationResponseFixedAssets) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseFixedAssets
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseFixedAssets) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseFixedAssets) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseItemsFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseItemsFieldExisting = big.NewInt(1 << 1)
+	booksValidateMigrationResponseItemsFieldCreated  = big.NewInt(1 << 0)
+	booksValidateMigrationResponseItemsFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseItems struct {
+type BooksValidateMigrationResponseItems struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -7113,96 +7262,96 @@ type PostV1MigrationBooksValidateResponseItems struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseItems) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) GetExisting() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseItems) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseItems) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseItems) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseItems) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseItemsFieldCreated)
+func (b *BooksValidateMigrationResponseItems) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseItemsFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseItems) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksValidateResponseItemsFieldExisting)
+func (b *BooksValidateMigrationResponseItems) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksValidateMigrationResponseItemsFieldExisting)
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseItems
+func (b *BooksValidateMigrationResponseItems) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseItems
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseItems(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseItems(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseItems
+func (b *BooksValidateMigrationResponseItems) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseItems
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseItems) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseItems) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseJournalFieldTransactions = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseJournalFieldEntries      = big.NewInt(1 << 1)
+	booksValidateMigrationResponseJournalFieldTransactions = big.NewInt(1 << 0)
+	booksValidateMigrationResponseJournalFieldEntries      = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseJournal struct {
+type BooksValidateMigrationResponseJournal struct {
 	Transactions int64 `json:"transactions" url:"transactions"`
 	Entries      int64 `json:"entries" url:"entries"`
 
@@ -7213,97 +7362,97 @@ type PostV1MigrationBooksValidateResponseJournal struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) GetTransactions() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseJournal) GetTransactions() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Transactions
+	return b.Transactions
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) GetEntries() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseJournal) GetEntries() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseJournal) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseJournal) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetTransactions sets the Transactions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseJournal) SetTransactions(transactions int64) {
-	p.Transactions = transactions
-	p.require(postV1MigrationBooksValidateResponseJournalFieldTransactions)
+func (b *BooksValidateMigrationResponseJournal) SetTransactions(transactions int64) {
+	b.Transactions = transactions
+	b.require(booksValidateMigrationResponseJournalFieldTransactions)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseJournal) SetEntries(entries int64) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksValidateResponseJournalFieldEntries)
+func (b *BooksValidateMigrationResponseJournal) SetEntries(entries int64) {
+	b.Entries = entries
+	b.require(booksValidateMigrationResponseJournalFieldEntries)
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseJournal
+func (b *BooksValidateMigrationResponseJournal) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseJournal
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseJournal(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseJournal(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseJournal
+func (b *BooksValidateMigrationResponseJournal) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseJournal
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseJournal) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseJournal) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseNumberSeriesItemFieldPrefix     = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseNumberSeriesItemFieldYear       = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateResponseNumberSeriesItemFieldNextNumber = big.NewInt(1 << 2)
+	booksValidateMigrationResponseNumberSeriesItemFieldPrefix     = big.NewInt(1 << 0)
+	booksValidateMigrationResponseNumberSeriesItemFieldYear       = big.NewInt(1 << 1)
+	booksValidateMigrationResponseNumberSeriesItemFieldNextNumber = big.NewInt(1 << 2)
 )
 
-type PostV1MigrationBooksValidateResponseNumberSeriesItem struct {
+type BooksValidateMigrationResponseNumberSeriesItem struct {
 	Prefix     string `json:"prefix" url:"prefix"`
 	Year       int64  `json:"year" url:"year"`
 	NextNumber int64  `json:"nextNumber" url:"nextNumber"`
@@ -7315,110 +7464,110 @@ type PostV1MigrationBooksValidateResponseNumberSeriesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) GetPrefix() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseNumberSeriesItem) GetPrefix() string {
+	if b == nil {
 		return ""
 	}
-	return p.Prefix
+	return b.Prefix
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) GetYear() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseNumberSeriesItem) GetYear() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Year
+	return b.Year
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) GetNextNumber() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseNumberSeriesItem) GetNextNumber() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.NextNumber
+	return b.NextNumber
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseNumberSeriesItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseNumberSeriesItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetPrefix sets the Prefix field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) SetPrefix(prefix string) {
-	p.Prefix = prefix
-	p.require(postV1MigrationBooksValidateResponseNumberSeriesItemFieldPrefix)
+func (b *BooksValidateMigrationResponseNumberSeriesItem) SetPrefix(prefix string) {
+	b.Prefix = prefix
+	b.require(booksValidateMigrationResponseNumberSeriesItemFieldPrefix)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1MigrationBooksValidateResponseNumberSeriesItemFieldYear)
+func (b *BooksValidateMigrationResponseNumberSeriesItem) SetYear(year int64) {
+	b.Year = year
+	b.require(booksValidateMigrationResponseNumberSeriesItemFieldYear)
 }
 
 // SetNextNumber sets the NextNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) SetNextNumber(nextNumber int64) {
-	p.NextNumber = nextNumber
-	p.require(postV1MigrationBooksValidateResponseNumberSeriesItemFieldNextNumber)
+func (b *BooksValidateMigrationResponseNumberSeriesItem) SetNextNumber(nextNumber int64) {
+	b.NextNumber = nextNumber
+	b.require(booksValidateMigrationResponseNumberSeriesItemFieldNextNumber)
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseNumberSeriesItem
+func (b *BooksValidateMigrationResponseNumberSeriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseNumberSeriesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseNumberSeriesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseNumberSeriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseNumberSeriesItem
+func (b *BooksValidateMigrationResponseNumberSeriesItem) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseNumberSeriesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseNumberSeriesItem) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseNumberSeriesItem) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseOpenPayablesFieldCreated          = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseOpenPayablesFieldOutstandingTotal = big.NewInt(1 << 1)
+	booksValidateMigrationResponseOpenPayablesFieldCreated          = big.NewInt(1 << 0)
+	booksValidateMigrationResponseOpenPayablesFieldOutstandingTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseOpenPayables struct {
+type BooksValidateMigrationResponseOpenPayables struct {
 	Created          int64  `json:"created" url:"created"`
 	OutstandingTotal string `json:"outstandingTotal" url:"outstandingTotal"`
 
@@ -7429,96 +7578,96 @@ type PostV1MigrationBooksValidateResponseOpenPayables struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenPayables) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) GetOutstandingTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenPayables) GetOutstandingTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.OutstandingTotal
+	return b.OutstandingTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenPayables) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseOpenPayables) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseOpenPayablesFieldCreated)
+func (b *BooksValidateMigrationResponseOpenPayables) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseOpenPayablesFieldCreated)
 }
 
 // SetOutstandingTotal sets the OutstandingTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) SetOutstandingTotal(outstandingTotal string) {
-	p.OutstandingTotal = outstandingTotal
-	p.require(postV1MigrationBooksValidateResponseOpenPayablesFieldOutstandingTotal)
+func (b *BooksValidateMigrationResponseOpenPayables) SetOutstandingTotal(outstandingTotal string) {
+	b.OutstandingTotal = outstandingTotal
+	b.require(booksValidateMigrationResponseOpenPayablesFieldOutstandingTotal)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseOpenPayables
+func (b *BooksValidateMigrationResponseOpenPayables) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseOpenPayables
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseOpenPayables(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseOpenPayables(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseOpenPayables
+func (b *BooksValidateMigrationResponseOpenPayables) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseOpenPayables
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenPayables) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenPayables) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseOpenReceivablesFieldCreated          = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseOpenReceivablesFieldOutstandingTotal = big.NewInt(1 << 1)
+	booksValidateMigrationResponseOpenReceivablesFieldCreated          = big.NewInt(1 << 0)
+	booksValidateMigrationResponseOpenReceivablesFieldOutstandingTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseOpenReceivables struct {
+type BooksValidateMigrationResponseOpenReceivables struct {
 	Created          int64  `json:"created" url:"created"`
 	OutstandingTotal string `json:"outstandingTotal" url:"outstandingTotal"`
 
@@ -7529,106 +7678,106 @@ type PostV1MigrationBooksValidateResponseOpenReceivables struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenReceivables) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) GetOutstandingTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenReceivables) GetOutstandingTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.OutstandingTotal
+	return b.OutstandingTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenReceivables) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseOpenReceivables) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponseOpenReceivablesFieldCreated)
+func (b *BooksValidateMigrationResponseOpenReceivables) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponseOpenReceivablesFieldCreated)
 }
 
 // SetOutstandingTotal sets the OutstandingTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) SetOutstandingTotal(outstandingTotal string) {
-	p.OutstandingTotal = outstandingTotal
-	p.require(postV1MigrationBooksValidateResponseOpenReceivablesFieldOutstandingTotal)
+func (b *BooksValidateMigrationResponseOpenReceivables) SetOutstandingTotal(outstandingTotal string) {
+	b.OutstandingTotal = outstandingTotal
+	b.require(booksValidateMigrationResponseOpenReceivablesFieldOutstandingTotal)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseOpenReceivables
+func (b *BooksValidateMigrationResponseOpenReceivables) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseOpenReceivables
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseOpenReceivables(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseOpenReceivables(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseOpenReceivables
+func (b *BooksValidateMigrationResponseOpenReceivables) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseOpenReceivables
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpenReceivables) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpenReceivables) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldJournalTransactionID = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldDate                 = big.NewInt(1 << 1)
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldDebitTotal           = big.NewInt(1 << 3)
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldCreditTotal          = big.NewInt(1 << 4)
-	postV1MigrationBooksValidateResponseOpeningBalancesFieldBalancingAmount      = big.NewInt(1 << 5)
+	booksValidateMigrationResponseOpeningBalancesFieldJournalTransactionID = big.NewInt(1 << 0)
+	booksValidateMigrationResponseOpeningBalancesFieldDate                 = big.NewInt(1 << 1)
+	booksValidateMigrationResponseOpeningBalancesFieldEntries              = big.NewInt(1 << 2)
+	booksValidateMigrationResponseOpeningBalancesFieldDebitTotal           = big.NewInt(1 << 3)
+	booksValidateMigrationResponseOpeningBalancesFieldCreditTotal          = big.NewInt(1 << 4)
+	booksValidateMigrationResponseOpeningBalancesFieldBalancingAmount      = big.NewInt(1 << 5)
 )
 
-type PostV1MigrationBooksValidateResponseOpeningBalances struct {
-	JournalTransactionID *string `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Date                 string  `json:"date" url:"date"`
-	Entries              int64   `json:"entries" url:"entries"`
-	DebitTotal           string  `json:"debitTotal" url:"debitTotal"`
-	CreditTotal          string  `json:"creditTotal" url:"creditTotal"`
-	BalancingAmount      string  `json:"balancingAmount" url:"balancingAmount"`
+type BooksValidateMigrationResponseOpeningBalances struct {
+	JournalTransactionID *string   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Date                 time.Time `json:"date" url:"date" format:"date"`
+	Entries              int64     `json:"entries" url:"entries"`
+	DebitTotal           string    `json:"debitTotal" url:"debitTotal"`
+	CreditTotal          string    `json:"creditTotal" url:"creditTotal"`
+	BalancingAmount      string    `json:"balancingAmount" url:"balancingAmount"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7637,152 +7786,160 @@ type PostV1MigrationBooksValidateResponseOpeningBalances struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetJournalTransactionID() *string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetJournalTransactionID() *string {
+	if b == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return b.JournalTransactionID
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetDate() string {
-	if p == nil {
-		return ""
+func (b *BooksValidateMigrationResponseOpeningBalances) GetDate() time.Time {
+	if b == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return b.Date
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetEntries() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetEntries() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Entries
+	return b.Entries
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetDebitTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetDebitTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.DebitTotal
+	return b.DebitTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetCreditTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetCreditTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CreditTotal
+	return b.CreditTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetBalancingAmount() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetBalancingAmount() string {
+	if b == nil {
 		return ""
 	}
-	return p.BalancingAmount
+	return b.BalancingAmount
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseOpeningBalances) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldJournalTransactionID)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetJournalTransactionID(journalTransactionID *string) {
+	b.JournalTransactionID = journalTransactionID
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldJournalTransactionID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetDate(date string) {
-	p.Date = date
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldDate)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetDate(date time.Time) {
+	b.Date = date
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldDate)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetEntries(entries int64) {
-	p.Entries = entries
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldEntries)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetEntries(entries int64) {
+	b.Entries = entries
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldEntries)
 }
 
 // SetDebitTotal sets the DebitTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetDebitTotal(debitTotal string) {
-	p.DebitTotal = debitTotal
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldDebitTotal)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetDebitTotal(debitTotal string) {
+	b.DebitTotal = debitTotal
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldDebitTotal)
 }
 
 // SetCreditTotal sets the CreditTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetCreditTotal(creditTotal string) {
-	p.CreditTotal = creditTotal
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldCreditTotal)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetCreditTotal(creditTotal string) {
+	b.CreditTotal = creditTotal
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldCreditTotal)
 }
 
 // SetBalancingAmount sets the BalancingAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) SetBalancingAmount(balancingAmount string) {
-	p.BalancingAmount = balancingAmount
-	p.require(postV1MigrationBooksValidateResponseOpeningBalancesFieldBalancingAmount)
+func (b *BooksValidateMigrationResponseOpeningBalances) SetBalancingAmount(balancingAmount string) {
+	b.BalancingAmount = balancingAmount
+	b.require(booksValidateMigrationResponseOpeningBalancesFieldBalancingAmount)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseOpeningBalances
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) UnmarshalJSON(data []byte) error {
+	type embed BooksValidateMigrationResponseOpeningBalances
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseOpeningBalances(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseOpeningBalances(unmarshaler.embed)
+	b.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseOpeningBalances
+func (b *BooksValidateMigrationResponseOpeningBalances) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseOpeningBalances
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
+		Date:  internal.NewDate(b.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseOpeningBalances) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseOpeningBalances) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponsePartnersFieldCreated  = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponsePartnersFieldExisting = big.NewInt(1 << 1)
+	booksValidateMigrationResponsePartnersFieldCreated  = big.NewInt(1 << 0)
+	booksValidateMigrationResponsePartnersFieldExisting = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponsePartners struct {
+type BooksValidateMigrationResponsePartners struct {
 	Created  int64 `json:"created" url:"created"`
 	Existing int64 `json:"existing" url:"existing"`
 
@@ -7793,96 +7950,96 @@ type PostV1MigrationBooksValidateResponsePartners struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) GetCreated() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponsePartners) GetCreated() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Created
+	return b.Created
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) GetExisting() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponsePartners) GetExisting() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Existing
+	return b.Existing
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponsePartners) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponsePartners) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetCreated sets the Created field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponsePartners) SetCreated(created int64) {
-	p.Created = created
-	p.require(postV1MigrationBooksValidateResponsePartnersFieldCreated)
+func (b *BooksValidateMigrationResponsePartners) SetCreated(created int64) {
+	b.Created = created
+	b.require(booksValidateMigrationResponsePartnersFieldCreated)
 }
 
 // SetExisting sets the Existing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponsePartners) SetExisting(existing int64) {
-	p.Existing = existing
-	p.require(postV1MigrationBooksValidateResponsePartnersFieldExisting)
+func (b *BooksValidateMigrationResponsePartners) SetExisting(existing int64) {
+	b.Existing = existing
+	b.require(booksValidateMigrationResponsePartnersFieldExisting)
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponsePartners
+func (b *BooksValidateMigrationResponsePartners) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponsePartners
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponsePartners(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponsePartners(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponsePartners
+func (b *BooksValidateMigrationResponsePartners) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponsePartners
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponsePartners) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponsePartners) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }
 
 var (
-	postV1MigrationBooksValidateResponseStockFieldMovements = big.NewInt(1 << 0)
-	postV1MigrationBooksValidateResponseStockFieldCostTotal = big.NewInt(1 << 1)
+	booksValidateMigrationResponseStockFieldMovements = big.NewInt(1 << 0)
+	booksValidateMigrationResponseStockFieldCostTotal = big.NewInt(1 << 1)
 )
 
-type PostV1MigrationBooksValidateResponseStock struct {
+type BooksValidateMigrationResponseStock struct {
 	Movements int64  `json:"movements" url:"movements"`
 	CostTotal string `json:"costTotal" url:"costTotal"`
 
@@ -7893,86 +8050,86 @@ type PostV1MigrationBooksValidateResponseStock struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) GetMovements() int64 {
-	if p == nil {
+func (b *BooksValidateMigrationResponseStock) GetMovements() int64 {
+	if b == nil {
 		return 0
 	}
-	return p.Movements
+	return b.Movements
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) GetCostTotal() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseStock) GetCostTotal() string {
+	if b == nil {
 		return ""
 	}
-	return p.CostTotal
+	return b.CostTotal
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (b *BooksValidateMigrationResponseStock) GetExtraProperties() map[string]interface{} {
+	if b == nil {
 		return nil
 	}
-	return p.extraProperties
+	return b.extraProperties
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (b *BooksValidateMigrationResponseStock) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	b.explicitFields.Or(b.explicitFields, field)
 }
 
 // SetMovements sets the Movements field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseStock) SetMovements(movements int64) {
-	p.Movements = movements
-	p.require(postV1MigrationBooksValidateResponseStockFieldMovements)
+func (b *BooksValidateMigrationResponseStock) SetMovements(movements int64) {
+	b.Movements = movements
+	b.require(booksValidateMigrationResponseStockFieldMovements)
 }
 
 // SetCostTotal sets the CostTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1MigrationBooksValidateResponseStock) SetCostTotal(costTotal string) {
-	p.CostTotal = costTotal
-	p.require(postV1MigrationBooksValidateResponseStockFieldCostTotal)
+func (b *BooksValidateMigrationResponseStock) SetCostTotal(costTotal string) {
+	b.CostTotal = costTotal
+	b.require(booksValidateMigrationResponseStockFieldCostTotal)
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1MigrationBooksValidateResponseStock
+func (b *BooksValidateMigrationResponseStock) UnmarshalJSON(data []byte) error {
+	type unmarshaler BooksValidateMigrationResponseStock
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1MigrationBooksValidateResponseStock(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*b = BooksValidateMigrationResponseStock(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) MarshalJSON() ([]byte, error) {
-	type embed PostV1MigrationBooksValidateResponseStock
+func (b *BooksValidateMigrationResponseStock) MarshalJSON() ([]byte, error) {
+	type embed BooksValidateMigrationResponseStock
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*b),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1MigrationBooksValidateResponseStock) String() string {
-	if p == nil {
+func (b *BooksValidateMigrationResponseStock) String() string {
+	if b == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(b); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", b)
 }

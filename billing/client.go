@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1BillingAccountGet(
+func (c *Client) AccountGet(
 	ctx context.Context,
-	request *nordlet.PostV1BillingAccountGetRequest,
+	request *nordlet.AccountGetBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingAccountGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingAccountGet(
+) (*nordlet.AccountGetBillingResponse, error) {
+	response, err := c.WithRawResponse.AccountGet(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1BillingAccountGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BillingAccountSetPlan(
+func (c *Client) AccountSetPlan(
 	ctx context.Context,
-	request *nordlet.PostV1BillingAccountSetPlanRequest,
+	request *nordlet.AccountSetPlanBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingAccountSetPlanResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingAccountSetPlan(
+) (*nordlet.AccountSetPlanBillingResponse, error) {
+	response, err := c.WithRawResponse.AccountSetPlan(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1BillingAccountSetPlan(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BillingTopupCreate(
+func (c *Client) TopupCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BillingTopupCreateRequest,
+	request *nordlet.TopupCreateBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingTopupCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingTopupCreate(
+) (*nordlet.TopupCreateBillingResponse, error) {
+	response, err := c.WithRawResponse.TopupCreate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1BillingTopupCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BillingPortalCreate(
+func (c *Client) PortalCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BillingPortalCreateRequest,
+	request *nordlet.PortalCreateBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingPortalCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingPortalCreate(
+) (*nordlet.PortalCreateBillingResponse, error) {
+	response, err := c.WithRawResponse.PortalCreate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1BillingPortalCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BillingTransactionsList(
+func (c *Client) TransactionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BillingTransactionsListRequest,
+	request *nordlet.TransactionsListBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingTransactionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingTransactionsList(
+) (*nordlet.TransactionsListBillingResponse, error) {
+	response, err := c.WithRawResponse.TransactionsList(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1BillingTransactionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1BillingUsageList(
+func (c *Client) UsageList(
 	ctx context.Context,
-	request *nordlet.PostV1BillingUsageListRequest,
+	request *nordlet.UsageListBillingRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1BillingUsageListResponse, error) {
-	response, err := c.WithRawResponse.PostV1BillingUsageList(
+) (*nordlet.UsageListBillingResponse, error) {
+	response, err := c.WithRawResponse.UsageList(
 		ctx,
 		request,
 		opts...,

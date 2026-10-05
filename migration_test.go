@@ -7,19 +7,20 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1MigrationBooksValidateRequest(t *testing.T) {
+func TestSettersBooksImportMigrationRequest(t *testing.T) {
 	t.Run("SetCutoverDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueCutoverDate string
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueCutoverDate time.Time
 		obj.SetCutoverDate(fernTestValueCutoverDate)
 		assert.Equal(t, fernTestValueCutoverDate, obj.CutoverDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSource", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
+		obj := &BooksImportMigrationRequest{}
 		var fernTestValueSource *string
 		obj.SetSource(fernTestValueSource)
 		assert.Equal(t, fernTestValueSource, obj.Source)
@@ -27,80 +28,80 @@ func TestSettersPostV1MigrationBooksValidateRequest(t *testing.T) {
 	})
 
 	t.Run("SetAccounts", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueAccounts []*PostV1MigrationBooksValidateRequestAccountsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueAccounts []*BooksImportMigrationRequestAccountsItem
 		obj.SetAccounts(fernTestValueAccounts)
 		assert.Equal(t, fernTestValueAccounts, obj.Accounts)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPartners", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValuePartners []*PostV1MigrationBooksValidateRequestPartnersItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValuePartners []*BooksImportMigrationRequestPartnersItem
 		obj.SetPartners(fernTestValuePartners)
 		assert.Equal(t, fernTestValuePartners, obj.Partners)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetItems", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueItems []*PostV1MigrationBooksValidateRequestItemsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueItems []*BooksImportMigrationRequestItemsItem
 		obj.SetItems(fernTestValueItems)
 		assert.Equal(t, fernTestValueItems, obj.Items)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpeningBalances", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksValidateRequestOpeningBalances
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpeningBalances *BooksImportMigrationRequestOpeningBalances
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
 		assert.Equal(t, fernTestValueOpeningBalances, obj.OpeningBalances)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetJournal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueJournal []*PostV1MigrationBooksValidateRequestJournalItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueJournal []*BooksImportMigrationRequestJournalItem
 		obj.SetJournal(fernTestValueJournal)
 		assert.Equal(t, fernTestValueJournal, obj.Journal)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenReceivables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpenReceivables []*PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpenReceivables []*BooksImportMigrationRequestOpenReceivablesItem
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
 		assert.Equal(t, fernTestValueOpenReceivables, obj.OpenReceivables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenPayables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpenPayables []*PostV1MigrationBooksValidateRequestOpenPayablesItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpenPayables []*BooksImportMigrationRequestOpenPayablesItem
 		obj.SetOpenPayables(fernTestValueOpenPayables)
 		assert.Equal(t, fernTestValueOpenPayables, obj.OpenPayables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAssetGroups", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueAssetGroups []*PostV1MigrationBooksValidateRequestAssetGroupsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueAssetGroups []*BooksImportMigrationRequestAssetGroupsItem
 		obj.SetAssetGroups(fernTestValueAssetGroups)
 		assert.Equal(t, fernTestValueAssetGroups, obj.AssetGroups)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFixedAssets", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueFixedAssets []*PostV1MigrationBooksValidateRequestFixedAssetsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueFixedAssets []*BooksImportMigrationRequestFixedAssetsItem
 		obj.SetFixedAssets(fernTestValueFixedAssets)
 		assert.Equal(t, fernTestValueFixedAssets, obj.FixedAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStock", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueStock []*PostV1MigrationBooksValidateRequestStockItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueStock []*BooksImportMigrationRequestStockItem
 		obj.SetStock(fernTestValueStock)
 		assert.Equal(t, fernTestValueStock, obj.Stock)
 		assert.NotNil(t, obj.explicitFields)
@@ -108,12 +109,12 @@ func TestSettersPostV1MigrationBooksValidateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequest(t *testing.T) {
 	t.Run("SetCutoverDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueCutoverDate string
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueCutoverDate time.Time
 
 		// Act
 		obj.SetCutoverDate(fernTestValueCutoverDate)
@@ -143,7 +144,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
+		obj := &BooksImportMigrationRequest{}
 		var fernTestValueSource *string
 
 		// Act
@@ -174,8 +175,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetAccounts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueAccounts []*PostV1MigrationBooksValidateRequestAccountsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueAccounts []*BooksImportMigrationRequestAccountsItem
 
 		// Act
 		obj.SetAccounts(fernTestValueAccounts)
@@ -205,8 +206,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetPartners_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValuePartners []*PostV1MigrationBooksValidateRequestPartnersItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValuePartners []*BooksImportMigrationRequestPartnersItem
 
 		// Act
 		obj.SetPartners(fernTestValuePartners)
@@ -236,8 +237,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueItems []*PostV1MigrationBooksValidateRequestItemsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueItems []*BooksImportMigrationRequestItemsItem
 
 		// Act
 		obj.SetItems(fernTestValueItems)
@@ -267,8 +268,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetOpeningBalances_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksValidateRequestOpeningBalances
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpeningBalances *BooksImportMigrationRequestOpeningBalances
 
 		// Act
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
@@ -298,8 +299,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetJournal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueJournal []*PostV1MigrationBooksValidateRequestJournalItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueJournal []*BooksImportMigrationRequestJournalItem
 
 		// Act
 		obj.SetJournal(fernTestValueJournal)
@@ -329,8 +330,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetOpenReceivables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpenReceivables []*PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpenReceivables []*BooksImportMigrationRequestOpenReceivablesItem
 
 		// Act
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
@@ -360,8 +361,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetOpenPayables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueOpenPayables []*PostV1MigrationBooksValidateRequestOpenPayablesItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueOpenPayables []*BooksImportMigrationRequestOpenPayablesItem
 
 		// Act
 		obj.SetOpenPayables(fernTestValueOpenPayables)
@@ -391,8 +392,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetAssetGroups_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueAssetGroups []*PostV1MigrationBooksValidateRequestAssetGroupsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueAssetGroups []*BooksImportMigrationRequestAssetGroupsItem
 
 		// Act
 		obj.SetAssetGroups(fernTestValueAssetGroups)
@@ -422,8 +423,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetFixedAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueFixedAssets []*PostV1MigrationBooksValidateRequestFixedAssetsItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueFixedAssets []*BooksImportMigrationRequestFixedAssetsItem
 
 		// Act
 		obj.SetFixedAssets(fernTestValueFixedAssets)
@@ -453,8 +454,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 	t.Run("SetStock_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequest{}
-		var fernTestValueStock []*PostV1MigrationBooksValidateRequestStockItem
+		obj := &BooksImportMigrationRequest{}
+		var fernTestValueStock []*BooksImportMigrationRequestStockItem
 
 		// Act
 		obj.SetStock(fernTestValueStock)
@@ -483,17 +484,17 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequest(t *testing.T) {
+func TestSettersBooksValidateMigrationRequest(t *testing.T) {
 	t.Run("SetCutoverDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueCutoverDate string
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueCutoverDate time.Time
 		obj.SetCutoverDate(fernTestValueCutoverDate)
 		assert.Equal(t, fernTestValueCutoverDate, obj.CutoverDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSource", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
+		obj := &BooksValidateMigrationRequest{}
 		var fernTestValueSource *string
 		obj.SetSource(fernTestValueSource)
 		assert.Equal(t, fernTestValueSource, obj.Source)
@@ -501,80 +502,80 @@ func TestSettersPostV1MigrationBooksImportRequest(t *testing.T) {
 	})
 
 	t.Run("SetAccounts", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueAccounts []*PostV1MigrationBooksImportRequestAccountsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueAccounts []*BooksValidateMigrationRequestAccountsItem
 		obj.SetAccounts(fernTestValueAccounts)
 		assert.Equal(t, fernTestValueAccounts, obj.Accounts)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPartners", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValuePartners []*PostV1MigrationBooksImportRequestPartnersItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValuePartners []*BooksValidateMigrationRequestPartnersItem
 		obj.SetPartners(fernTestValuePartners)
 		assert.Equal(t, fernTestValuePartners, obj.Partners)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetItems", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueItems []*PostV1MigrationBooksImportRequestItemsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueItems []*BooksValidateMigrationRequestItemsItem
 		obj.SetItems(fernTestValueItems)
 		assert.Equal(t, fernTestValueItems, obj.Items)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpeningBalances", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksImportRequestOpeningBalances
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpeningBalances *BooksValidateMigrationRequestOpeningBalances
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
 		assert.Equal(t, fernTestValueOpeningBalances, obj.OpeningBalances)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetJournal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueJournal []*PostV1MigrationBooksImportRequestJournalItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueJournal []*BooksValidateMigrationRequestJournalItem
 		obj.SetJournal(fernTestValueJournal)
 		assert.Equal(t, fernTestValueJournal, obj.Journal)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenReceivables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpenReceivables []*PostV1MigrationBooksImportRequestOpenReceivablesItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpenReceivables []*BooksValidateMigrationRequestOpenReceivablesItem
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
 		assert.Equal(t, fernTestValueOpenReceivables, obj.OpenReceivables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenPayables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpenPayables []*PostV1MigrationBooksImportRequestOpenPayablesItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpenPayables []*BooksValidateMigrationRequestOpenPayablesItem
 		obj.SetOpenPayables(fernTestValueOpenPayables)
 		assert.Equal(t, fernTestValueOpenPayables, obj.OpenPayables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAssetGroups", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueAssetGroups []*PostV1MigrationBooksImportRequestAssetGroupsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueAssetGroups []*BooksValidateMigrationRequestAssetGroupsItem
 		obj.SetAssetGroups(fernTestValueAssetGroups)
 		assert.Equal(t, fernTestValueAssetGroups, obj.AssetGroups)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFixedAssets", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueFixedAssets []*PostV1MigrationBooksImportRequestFixedAssetsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueFixedAssets []*BooksValidateMigrationRequestFixedAssetsItem
 		obj.SetFixedAssets(fernTestValueFixedAssets)
 		assert.Equal(t, fernTestValueFixedAssets, obj.FixedAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStock", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueStock []*PostV1MigrationBooksImportRequestStockItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueStock []*BooksValidateMigrationRequestStockItem
 		obj.SetStock(fernTestValueStock)
 		assert.Equal(t, fernTestValueStock, obj.Stock)
 		assert.NotNil(t, obj.explicitFields)
@@ -582,12 +583,12 @@ func TestSettersPostV1MigrationBooksImportRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequest(t *testing.T) {
 	t.Run("SetCutoverDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueCutoverDate string
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueCutoverDate time.Time
 
 		// Act
 		obj.SetCutoverDate(fernTestValueCutoverDate)
@@ -617,7 +618,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
+		obj := &BooksValidateMigrationRequest{}
 		var fernTestValueSource *string
 
 		// Act
@@ -648,8 +649,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetAccounts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueAccounts []*PostV1MigrationBooksImportRequestAccountsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueAccounts []*BooksValidateMigrationRequestAccountsItem
 
 		// Act
 		obj.SetAccounts(fernTestValueAccounts)
@@ -679,8 +680,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetPartners_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValuePartners []*PostV1MigrationBooksImportRequestPartnersItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValuePartners []*BooksValidateMigrationRequestPartnersItem
 
 		// Act
 		obj.SetPartners(fernTestValuePartners)
@@ -710,8 +711,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueItems []*PostV1MigrationBooksImportRequestItemsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueItems []*BooksValidateMigrationRequestItemsItem
 
 		// Act
 		obj.SetItems(fernTestValueItems)
@@ -741,8 +742,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetOpeningBalances_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksImportRequestOpeningBalances
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpeningBalances *BooksValidateMigrationRequestOpeningBalances
 
 		// Act
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
@@ -772,8 +773,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetJournal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueJournal []*PostV1MigrationBooksImportRequestJournalItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueJournal []*BooksValidateMigrationRequestJournalItem
 
 		// Act
 		obj.SetJournal(fernTestValueJournal)
@@ -803,8 +804,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetOpenReceivables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpenReceivables []*PostV1MigrationBooksImportRequestOpenReceivablesItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpenReceivables []*BooksValidateMigrationRequestOpenReceivablesItem
 
 		// Act
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
@@ -834,8 +835,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetOpenPayables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueOpenPayables []*PostV1MigrationBooksImportRequestOpenPayablesItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueOpenPayables []*BooksValidateMigrationRequestOpenPayablesItem
 
 		// Act
 		obj.SetOpenPayables(fernTestValueOpenPayables)
@@ -865,8 +866,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetAssetGroups_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueAssetGroups []*PostV1MigrationBooksImportRequestAssetGroupsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueAssetGroups []*BooksValidateMigrationRequestAssetGroupsItem
 
 		// Act
 		obj.SetAssetGroups(fernTestValueAssetGroups)
@@ -896,8 +897,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetFixedAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueFixedAssets []*PostV1MigrationBooksImportRequestFixedAssetsItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueFixedAssets []*BooksValidateMigrationRequestFixedAssetsItem
 
 		// Act
 		obj.SetFixedAssets(fernTestValueFixedAssets)
@@ -927,8 +928,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 	t.Run("SetStock_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequest{}
-		var fernTestValueStock []*PostV1MigrationBooksImportRequestStockItem
+		obj := &BooksValidateMigrationRequest{}
+		var fernTestValueStock []*BooksValidateMigrationRequestStockItem
 
 		// Act
 		obj.SetStock(fernTestValueStock)
@@ -957,9 +958,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -967,7 +968,7 @@ func TestSettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -975,15 +976,15 @@ func TestSettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
-		var fernTestValueType PostV1MigrationBooksImportRequestAccountsItemType
+		obj := &BooksImportMigrationRequestAccountsItem{}
+		var fernTestValueType BooksImportMigrationRequestAccountsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetParentCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueParentCode *string
 		obj.SetParentCode(fernTestValueParentCode)
 		assert.Equal(t, fernTestValueParentCode, obj.ParentCode)
@@ -991,7 +992,7 @@ func TestSettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetIsPostable", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueIsPostable *bool
 		obj.SetIsPostable(fernTestValueIsPostable)
 		assert.Equal(t, fernTestValueIsPostable, obj.IsPostable)
@@ -1000,11 +1001,11 @@ func TestSettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -1014,7 +1015,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1027,7 +1028,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -1037,7 +1038,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1050,8 +1051,8 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
-		var expected PostV1MigrationBooksImportRequestAccountsItemType
+		obj := &BooksImportMigrationRequestAccountsItem{}
+		var expected BooksImportMigrationRequestAccountsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -1060,7 +1061,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1073,7 +1074,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetParentCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var expected *string
 		obj.ParentCode = expected
 
@@ -1084,7 +1085,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetParentCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		obj.ParentCode = nil
 
 		// Act & Assert
@@ -1093,7 +1094,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetParentCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1106,7 +1107,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetIsPostable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var expected *bool
 		obj.IsPostable = expected
 
@@ -1117,7 +1118,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 	t.Run("GetIsPostable_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		obj.IsPostable = nil
 
 		// Act & Assert
@@ -1126,7 +1127,7 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetIsPostable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1138,11 +1139,11 @@ func TestGettersPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -1173,7 +1174,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *tes
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -1204,8 +1205,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *tes
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
-		var fernTestValueType PostV1MigrationBooksImportRequestAccountsItemType
+		obj := &BooksImportMigrationRequestAccountsItem{}
+		var fernTestValueType BooksImportMigrationRequestAccountsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -1235,7 +1236,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *tes
 	t.Run("SetParentCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueParentCode *string
 
 		// Act
@@ -1266,7 +1267,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *tes
 	t.Run("SetIsPostable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		var fernTestValueIsPostable *bool
 
 		// Act
@@ -1296,9 +1297,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAccountsItem(t *tes
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -1306,7 +1307,7 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -1314,7 +1315,7 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	})
 
 	t.Run("SetAssetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueAssetAccountCode string
 		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
 		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
@@ -1322,7 +1323,7 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	})
 
 	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueDepreciationAccountCode string
 		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
 		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
@@ -1330,7 +1331,7 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueExpenseAccountCode *string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -1338,7 +1339,7 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	})
 
 	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
 		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
@@ -1347,11 +1348,11 @@ func TestSettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -1361,7 +1362,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1374,7 +1375,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -1384,7 +1385,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1397,7 +1398,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetAssetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.AssetAccountCode = expected
 
@@ -1407,7 +1408,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetAssetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1420,7 +1421,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetDepreciationAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.DepreciationAccountCode = expected
 
@@ -1430,7 +1431,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetDepreciationAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1443,7 +1444,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetExpenseAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected *string
 		obj.ExpenseAccountCode = expected
 
@@ -1454,7 +1455,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetExpenseAccountCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		obj.ExpenseAccountCode = nil
 
 		// Act & Assert
@@ -1463,7 +1464,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetExpenseAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1476,7 +1477,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var expected *int64
 		obj.DefaultUsefulLifeMonths = expected
 
@@ -1487,7 +1488,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		obj.DefaultUsefulLifeMonths = nil
 
 		// Act & Assert
@@ -1496,7 +1497,7 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 	t.Run("GetDefaultUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1508,11 +1509,11 @@ func TestGettersPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -1543,7 +1544,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -1574,7 +1575,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueAssetAccountCode string
 
 		// Act
@@ -1605,7 +1606,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueDepreciationAccountCode string
 
 		// Act
@@ -1636,7 +1637,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueExpenseAccountCode *string
 
 		// Act
@@ -1667,7 +1668,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 
 		// Act
@@ -1697,9 +1698,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestAssetGroupsItem(t *
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("SetGroupCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueGroupCode string
 		obj.SetGroupCode(fernTestValueGroupCode)
 		assert.Equal(t, fernTestValueGroupCode, obj.GroupCode)
@@ -1707,7 +1708,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -1715,7 +1716,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -1723,23 +1724,23 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var fernTestValueDepreciationStartDate *time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -1747,7 +1748,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueSalvageValue *string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -1755,7 +1756,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueUsefulLifeMonths *int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -1763,7 +1764,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueAccumulatedDepreciation *string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -1771,7 +1772,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueDepreciatedMonths *int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -1779,7 +1780,7 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -1788,11 +1789,11 @@ func TestSettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetGroupCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.GroupCode = expected
 
@@ -1802,7 +1803,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetGroupCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1815,7 +1816,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -1825,7 +1826,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1838,7 +1839,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -1848,7 +1849,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1861,8 +1862,8 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var expected string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -1871,7 +1872,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1884,8 +1885,8 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var expected *string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var expected *time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -1895,7 +1896,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetDepreciationStartDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.DepreciationStartDate = nil
 
 		// Act & Assert
@@ -1904,7 +1905,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1917,7 +1918,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -1927,7 +1928,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1940,7 +1941,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.SalvageValue = expected
 
@@ -1951,7 +1952,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetSalvageValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.SalvageValue = nil
 
 		// Act & Assert
@@ -1960,7 +1961,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1973,7 +1974,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected *int64
 		obj.UsefulLifeMonths = expected
 
@@ -1984,7 +1985,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.UsefulLifeMonths = nil
 
 		// Act & Assert
@@ -1993,7 +1994,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2006,7 +2007,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.AccumulatedDepreciation = expected
 
@@ -2017,7 +2018,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.AccumulatedDepreciation = nil
 
 		// Act & Assert
@@ -2026,7 +2027,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2039,7 +2040,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected *int64
 		obj.DepreciatedMonths = expected
 
@@ -2050,7 +2051,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetDepreciatedMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.DepreciatedMonths = nil
 
 		// Act & Assert
@@ -2059,7 +2060,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2072,7 +2073,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -2083,7 +2084,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -2092,7 +2093,7 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2104,11 +2105,11 @@ func TestGettersPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("SetGroupCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueGroupCode string
 
 		// Act
@@ -2139,7 +2140,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -2170,7 +2171,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -2201,8 +2202,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -2232,8 +2233,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
+		var fernTestValueDepreciationStartDate *time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -2263,7 +2264,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -2294,7 +2295,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueSalvageValue *string
 
 		// Act
@@ -2325,7 +2326,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueUsefulLifeMonths *int64
 
 		// Act
@@ -2356,7 +2357,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueAccumulatedDepreciation *string
 
 		// Act
@@ -2387,7 +2388,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueDepreciatedMonths *int64
 
 		// Act
@@ -2418,7 +2419,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -2448,9 +2449,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestFixedAssetsItem(t *
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -2458,7 +2459,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2466,15 +2467,15 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
-		var fernTestValueType *PostV1MigrationBooksImportRequestItemsItemType
+		obj := &BooksImportMigrationRequestItemsItem{}
+		var fernTestValueType *BooksImportMigrationRequestItemsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -2482,7 +2483,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetBarcode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueBarcode *string
 		obj.SetBarcode(fernTestValueBarcode)
 		assert.Equal(t, fernTestValueBarcode, obj.Barcode)
@@ -2490,7 +2491,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -2498,7 +2499,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetSalePriceExclVat", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueSalePriceExclVat *string
 		obj.SetSalePriceExclVat(fernTestValueSalePriceExclVat)
 		assert.Equal(t, fernTestValueSalePriceExclVat, obj.SalePriceExclVat)
@@ -2506,7 +2507,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetPurchasePriceExclVat", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValuePurchasePriceExclVat *string
 		obj.SetPurchasePriceExclVat(fernTestValuePurchasePriceExclVat)
 		assert.Equal(t, fernTestValuePurchasePriceExclVat, obj.PurchasePriceExclVat)
@@ -2514,7 +2515,7 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -2523,11 +2524,11 @@ func TestSettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -2537,7 +2538,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2550,7 +2551,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -2560,7 +2561,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2573,8 +2574,8 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
-		var expected *PostV1MigrationBooksImportRequestItemsItemType
+		obj := &BooksImportMigrationRequestItemsItem{}
+		var expected *BooksImportMigrationRequestItemsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -2584,7 +2585,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.Type = nil
 
 		// Act & Assert
@@ -2593,7 +2594,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2606,7 +2607,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -2617,7 +2618,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -2626,7 +2627,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2639,7 +2640,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetBarcode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.Barcode = expected
 
@@ -2650,7 +2651,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetBarcode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.Barcode = nil
 
 		// Act & Assert
@@ -2659,7 +2660,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetBarcode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2672,7 +2673,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -2683,7 +2684,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -2692,7 +2693,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2705,7 +2706,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetSalePriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.SalePriceExclVat = expected
 
@@ -2716,7 +2717,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetSalePriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.SalePriceExclVat = nil
 
 		// Act & Assert
@@ -2725,7 +2726,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetSalePriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2738,7 +2739,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetPurchasePriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.PurchasePriceExclVat = expected
 
@@ -2749,7 +2750,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetPurchasePriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.PurchasePriceExclVat = nil
 
 		// Act & Assert
@@ -2758,7 +2759,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetPurchasePriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2771,7 +2772,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -2782,7 +2783,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -2791,7 +2792,7 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2803,11 +2804,11 @@ func TestGettersPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -2838,7 +2839,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -2869,8 +2870,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
-		var fernTestValueType *PostV1MigrationBooksImportRequestItemsItemType
+		obj := &BooksImportMigrationRequestItemsItem{}
+		var fernTestValueType *BooksImportMigrationRequestItemsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -2900,7 +2901,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -2931,7 +2932,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetBarcode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueBarcode *string
 
 		// Act
@@ -2962,7 +2963,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -2993,7 +2994,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetSalePriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueSalePriceExclVat *string
 
 		// Act
@@ -3024,7 +3025,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetPurchasePriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValuePurchasePriceExclVat *string
 
 		// Act
@@ -3055,7 +3056,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -3085,17 +3086,17 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestItemsItem(t *testin
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var fernTestValueDate string
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -3103,7 +3104,7 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	})
 
 	t.Run("SetReference", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var fernTestValueReference *string
 		obj.SetReference(fernTestValueReference)
 		assert.Equal(t, fernTestValueReference, obj.Reference)
@@ -3111,8 +3112,8 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var fernTestValueEntries []*PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var fernTestValueEntries []*BooksImportMigrationRequestJournalItemEntriesItem
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
 		assert.NotNil(t, obj.explicitFields)
@@ -3120,12 +3121,12 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var expected string
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -3134,7 +3135,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3147,7 +3148,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -3158,7 +3159,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -3167,7 +3168,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3180,7 +3181,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetReference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var expected *string
 		obj.Reference = expected
 
@@ -3191,7 +3192,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetReference_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		obj.Reference = nil
 
 		// Act & Assert
@@ -3200,7 +3201,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 	t.Run("GetReference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3213,8 +3214,8 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var expected []*PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var expected []*BooksImportMigrationRequestJournalItemEntriesItem
 		obj.Entries = expected
 
 		// Act & Assert
@@ -3224,7 +3225,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 	t.Run("GetEntries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		obj.Entries = nil
 
 		// Act & Assert
@@ -3233,7 +3234,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3245,12 +3246,12 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var fernTestValueDate string
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -3280,7 +3281,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItem(t *test
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -3311,7 +3312,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItem(t *test
 	t.Run("SetReference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		var fernTestValueReference *string
 
 		// Act
@@ -3342,8 +3343,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItem(t *test
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
-		var fernTestValueEntries []*PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		obj := &BooksImportMigrationRequestJournalItem{}
+		var fernTestValueEntries []*BooksImportMigrationRequestJournalItemEntriesItem
 
 		// Act
 		obj.SetEntries(fernTestValueEntries)
@@ -3372,9 +3373,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItem(t *test
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueAccountCode string
 		obj.SetAccountCode(fernTestValueAccountCode)
 		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
@@ -3382,7 +3383,7 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	})
 
 	t.Run("SetDebit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDebit *string
 		obj.SetDebit(fernTestValueDebit)
 		assert.Equal(t, fernTestValueDebit, obj.Debit)
@@ -3390,7 +3391,7 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	})
 
 	t.Run("SetCredit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueCredit *string
 		obj.SetCredit(fernTestValueCredit)
 		assert.Equal(t, fernTestValueCredit, obj.Credit)
@@ -3398,7 +3399,7 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -3407,11 +3408,11 @@ func TestSettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("GetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var expected string
 		obj.AccountCode = expected
 
@@ -3421,7 +3422,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3434,7 +3435,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetDebit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Debit = expected
 
@@ -3445,7 +3446,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetDebit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		obj.Debit = nil
 
 		// Act & Assert
@@ -3454,7 +3455,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 	t.Run("GetDebit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3467,7 +3468,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetCredit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Credit = expected
 
@@ -3478,7 +3479,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetCredit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		obj.Credit = nil
 
 		// Act & Assert
@@ -3487,7 +3488,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 	t.Run("GetCredit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3500,7 +3501,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -3511,7 +3512,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -3520,7 +3521,7 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3532,11 +3533,11 @@ func TestGettersPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testi
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueAccountCode string
 
 		// Act
@@ -3567,7 +3568,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItemEntriesI
 	t.Run("SetDebit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDebit *string
 
 		// Act
@@ -3598,7 +3599,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItemEntriesI
 	t.Run("SetCredit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueCredit *string
 
 		// Act
@@ -3629,7 +3630,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItemEntriesI
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -3659,9 +3660,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestJournalItemEntriesI
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValuePartnerCode string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -3669,15 +3670,15 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -3685,7 +3686,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -3693,7 +3694,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -3701,7 +3702,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetOutstanding", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueOutstanding *string
 		obj.SetOutstanding(fernTestValueOutstanding)
 		assert.Equal(t, fernTestValueOutstanding, obj.Outstanding)
@@ -3709,7 +3710,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetFxRate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueFxRate *string
 		obj.SetFxRate(fernTestValueFxRate)
 		assert.Equal(t, fernTestValueFxRate, obj.FxRate)
@@ -3717,7 +3718,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -3725,7 +3726,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueDocumentNumber string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -3733,8 +3734,8 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var fernTestValueDocumentDate string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -3742,11 +3743,11 @@ func TestSettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.PartnerCode = expected
 
@@ -3756,7 +3757,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3769,8 +3770,8 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var expected *string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -3780,7 +3781,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -3789,7 +3790,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3802,7 +3803,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Currency = expected
 
@@ -3813,7 +3814,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -3822,7 +3823,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3835,7 +3836,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -3845,7 +3846,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3858,7 +3859,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -3869,7 +3870,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -3878,7 +3879,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3891,7 +3892,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetOutstanding", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Outstanding = expected
 
@@ -3902,7 +3903,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetOutstanding_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.Outstanding = nil
 
 		// Act & Assert
@@ -3911,7 +3912,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetOutstanding_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3924,7 +3925,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetFxRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.FxRate = expected
 
@@ -3935,7 +3936,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetFxRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.FxRate = nil
 
 		// Act & Assert
@@ -3944,7 +3945,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetFxRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3957,7 +3958,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -3968,7 +3969,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -3977,7 +3978,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3990,7 +3991,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.DocumentNumber = expected
 
@@ -4000,7 +4001,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4013,8 +4014,8 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var expected string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -4023,7 +4024,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4035,11 +4036,11 @@ func TestGettersPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValuePartnerCode string
 
 		// Act
@@ -4070,8 +4071,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -4101,7 +4102,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -4132,7 +4133,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -4163,7 +4164,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -4194,7 +4195,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetOutstanding_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueOutstanding *string
 
 		// Act
@@ -4225,7 +4226,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetFxRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueFxRate *string
 
 		// Act
@@ -4256,7 +4257,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -4287,7 +4288,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		var fernTestValueDocumentNumber string
 
 		// Act
@@ -4318,8 +4319,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
-		var fernTestValueDocumentDate string
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -4348,9 +4349,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenPayablesItem(t 
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValuePartnerCode string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -4358,15 +4359,15 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -4374,7 +4375,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -4382,7 +4383,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -4390,7 +4391,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetOutstanding", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueOutstanding *string
 		obj.SetOutstanding(fernTestValueOutstanding)
 		assert.Equal(t, fernTestValueOutstanding, obj.Outstanding)
@@ -4398,7 +4399,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetFxRate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueFxRate *string
 		obj.SetFxRate(fernTestValueFxRate)
 		assert.Equal(t, fernTestValueFxRate, obj.FxRate)
@@ -4406,7 +4407,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -4414,7 +4415,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNumber string
 		obj.SetNumber(fernTestValueNumber)
 		assert.Equal(t, fernTestValueNumber, obj.Number)
@@ -4422,8 +4423,8 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	})
 
 	t.Run("SetIssueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var fernTestValueIssueDate string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var fernTestValueIssueDate time.Time
 		obj.SetIssueDate(fernTestValueIssueDate)
 		assert.Equal(t, fernTestValueIssueDate, obj.IssueDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -4431,11 +4432,11 @@ func TestSettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.PartnerCode = expected
 
@@ -4445,7 +4446,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4458,8 +4459,8 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var expected *string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -4469,7 +4470,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -4478,7 +4479,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4491,7 +4492,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Currency = expected
 
@@ -4502,7 +4503,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -4511,7 +4512,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4524,7 +4525,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -4534,7 +4535,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4547,7 +4548,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -4558,7 +4559,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -4567,7 +4568,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4580,7 +4581,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetOutstanding", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Outstanding = expected
 
@@ -4591,7 +4592,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetOutstanding_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.Outstanding = nil
 
 		// Act & Assert
@@ -4600,7 +4601,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetOutstanding_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4613,7 +4614,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetFxRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.FxRate = expected
 
@@ -4624,7 +4625,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetFxRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.FxRate = nil
 
 		// Act & Assert
@@ -4633,7 +4634,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetFxRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4646,7 +4647,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4657,7 +4658,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4666,7 +4667,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4679,7 +4680,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.Number = expected
 
@@ -4689,7 +4690,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4702,8 +4703,8 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 	t.Run("GetIssueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var expected string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var expected time.Time
 		obj.IssueDate = expected
 
 		// Act & Assert
@@ -4712,7 +4713,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 	t.Run("GetIssueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4724,11 +4725,11 @@ func TestGettersPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValuePartnerCode string
 
 		// Act
@@ -4759,8 +4760,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -4790,7 +4791,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -4821,7 +4822,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -4852,7 +4853,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -4883,7 +4884,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetOutstanding_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueOutstanding *string
 
 		// Act
@@ -4914,7 +4915,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetFxRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueFxRate *string
 
 		// Act
@@ -4945,7 +4946,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -4976,7 +4977,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNumber string
 
 		// Act
@@ -5007,8 +5008,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 	t.Run("SetIssueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
-		var fernTestValueIssueDate string
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
+		var fernTestValueIssueDate time.Time
 
 		// Act
 		obj.SetIssueDate(fernTestValueIssueDate)
@@ -5037,17 +5038,17 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpenReceivablesItem
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestSettersBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var fernTestValueDate *string
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var fernTestValueDate *time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalancingAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		var fernTestValueBalancingAccountCode *string
 		obj.SetBalancingAccountCode(fernTestValueBalancingAccountCode)
 		assert.Equal(t, fernTestValueBalancingAccountCode, obj.BalancingAccountCode)
@@ -5055,8 +5056,8 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var fernTestValueEntries []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var fernTestValueEntries []*BooksImportMigrationRequestOpeningBalancesEntriesItem
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
 		assert.NotNil(t, obj.explicitFields)
@@ -5064,12 +5065,12 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestGettersBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var expected *string
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var expected *time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -5079,7 +5080,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	t.Run("GetDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		obj.Date = nil
 
 		// Act & Assert
@@ -5088,7 +5089,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalances
+		var obj *BooksImportMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5101,7 +5102,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	t.Run("GetBalancingAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		var expected *string
 		obj.BalancingAccountCode = expected
 
@@ -5112,7 +5113,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	t.Run("GetBalancingAccountCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		obj.BalancingAccountCode = nil
 
 		// Act & Assert
@@ -5121,7 +5122,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 
 	t.Run("GetBalancingAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalances
+		var obj *BooksImportMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5134,8 +5135,8 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var expected []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var expected []*BooksImportMigrationRequestOpeningBalancesEntriesItem
 		obj.Entries = expected
 
 		// Act & Assert
@@ -5145,7 +5146,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 	t.Run("GetEntries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		obj.Entries = nil
 
 		// Act & Assert
@@ -5154,7 +5155,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalances
+		var obj *BooksImportMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5166,12 +5167,12 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var fernTestValueDate *string
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var fernTestValueDate *time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -5201,7 +5202,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalances(t *
 	t.Run("SetBalancingAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		var fernTestValueBalancingAccountCode *string
 
 		// Act
@@ -5232,8 +5233,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalances(t *
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
-		var fernTestValueEntries []*PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		obj := &BooksImportMigrationRequestOpeningBalances{}
+		var fernTestValueEntries []*BooksImportMigrationRequestOpeningBalancesEntriesItem
 
 		// Act
 		obj.SetEntries(fernTestValueEntries)
@@ -5262,9 +5263,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalances(t *
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueAccountCode string
 		obj.SetAccountCode(fernTestValueAccountCode)
 		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
@@ -5272,7 +5273,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	})
 
 	t.Run("SetDebit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDebit *string
 		obj.SetDebit(fernTestValueDebit)
 		assert.Equal(t, fernTestValueDebit, obj.Debit)
@@ -5280,7 +5281,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	})
 
 	t.Run("SetCredit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueCredit *string
 		obj.SetCredit(fernTestValueCredit)
 		assert.Equal(t, fernTestValueCredit, obj.Credit)
@@ -5288,7 +5289,7 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -5297,11 +5298,11 @@ func TestSettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("GetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var expected string
 		obj.AccountCode = expected
 
@@ -5311,7 +5312,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5324,7 +5325,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetDebit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Debit = expected
 
@@ -5335,7 +5336,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetDebit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Debit = nil
 
 		// Act & Assert
@@ -5344,7 +5345,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 	t.Run("GetDebit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5357,7 +5358,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetCredit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Credit = expected
 
@@ -5368,7 +5369,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetCredit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Credit = nil
 
 		// Act & Assert
@@ -5377,7 +5378,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 	t.Run("GetCredit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5390,7 +5391,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -5401,7 +5402,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -5410,7 +5411,7 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5422,11 +5423,11 @@ func TestGettersPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *t
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueAccountCode string
 
 		// Act
@@ -5457,7 +5458,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalancesEntr
 	t.Run("SetDebit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDebit *string
 
 		// Act
@@ -5488,7 +5489,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalancesEntr
 	t.Run("SetCredit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueCredit *string
 
 		// Act
@@ -5519,7 +5520,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalancesEntr
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -5549,9 +5550,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestOpeningBalancesEntr
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -5559,7 +5560,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -5567,15 +5568,15 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var fernTestValueType *PostV1MigrationBooksImportRequestPartnersItemType
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var fernTestValueType *BooksImportMigrationRequestPartnersItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -5583,7 +5584,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetEmail", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueEmail *string
 		obj.SetEmail(fernTestValueEmail)
 		assert.Equal(t, fernTestValueEmail, obj.Email)
@@ -5591,7 +5592,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetPhone", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValuePhone *string
 		obj.SetPhone(fernTestValuePhone)
 		assert.Equal(t, fernTestValuePhone, obj.Phone)
@@ -5599,7 +5600,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetIsCustomer", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueIsCustomer *bool
 		obj.SetIsCustomer(fernTestValueIsCustomer)
 		assert.Equal(t, fernTestValueIsCustomer, obj.IsCustomer)
@@ -5607,7 +5608,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetIsSupplier", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueIsSupplier *bool
 		obj.SetIsSupplier(fernTestValueIsSupplier)
 		assert.Equal(t, fernTestValueIsSupplier, obj.IsSupplier)
@@ -5615,7 +5616,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetPaymentTermDays", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValuePaymentTermDays *int64
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
 		assert.Equal(t, fernTestValuePaymentTermDays, obj.PaymentTermDays)
@@ -5623,15 +5624,15 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetAddress", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var fernTestValueAddress *PostV1MigrationBooksImportRequestPartnersItemAddress
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var fernTestValueAddress *BooksImportMigrationRequestPartnersItemAddress
 		obj.SetAddress(fernTestValueAddress)
 		assert.Equal(t, fernTestValueAddress, obj.Address)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -5640,11 +5641,11 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected string
 		obj.Code = expected
 
@@ -5654,7 +5655,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5667,7 +5668,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected string
 		obj.Name = expected
 
@@ -5677,7 +5678,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5690,8 +5691,8 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var expected *PostV1MigrationBooksImportRequestPartnersItemType
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var expected *BooksImportMigrationRequestPartnersItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -5701,7 +5702,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.Type = nil
 
 		// Act & Assert
@@ -5710,7 +5711,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5723,7 +5724,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -5734,7 +5735,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -5743,7 +5744,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5756,7 +5757,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetEmail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Email = expected
 
@@ -5767,7 +5768,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetEmail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.Email = nil
 
 		// Act & Assert
@@ -5776,7 +5777,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetEmail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5789,7 +5790,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetPhone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Phone = expected
 
@@ -5800,7 +5801,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetPhone_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.Phone = nil
 
 		// Act & Assert
@@ -5809,7 +5810,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetPhone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5822,7 +5823,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsCustomer", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *bool
 		obj.IsCustomer = expected
 
@@ -5833,7 +5834,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsCustomer_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.IsCustomer = nil
 
 		// Act & Assert
@@ -5842,7 +5843,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetIsCustomer_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5855,7 +5856,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *bool
 		obj.IsSupplier = expected
 
@@ -5866,7 +5867,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.IsSupplier = nil
 
 		// Act & Assert
@@ -5875,7 +5876,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetIsSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5888,7 +5889,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetPaymentTermDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *int64
 		obj.PaymentTermDays = expected
 
@@ -5899,7 +5900,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetPaymentTermDays_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.PaymentTermDays = nil
 
 		// Act & Assert
@@ -5908,7 +5909,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetPaymentTermDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5921,8 +5922,8 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var expected *PostV1MigrationBooksImportRequestPartnersItemAddress
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var expected *BooksImportMigrationRequestPartnersItemAddress
 		obj.Address = expected
 
 		// Act & Assert
@@ -5932,7 +5933,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.Address = nil
 
 		// Act & Assert
@@ -5941,7 +5942,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5954,7 +5955,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -5965,7 +5966,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -5974,7 +5975,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5986,11 +5987,11 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -6021,7 +6022,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueName string
 
 		// Act
@@ -6052,8 +6053,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var fernTestValueType *PostV1MigrationBooksImportRequestPartnersItemType
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var fernTestValueType *BooksImportMigrationRequestPartnersItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -6083,7 +6084,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -6114,7 +6115,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetEmail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueEmail *string
 
 		// Act
@@ -6145,7 +6146,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetPhone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValuePhone *string
 
 		// Act
@@ -6176,7 +6177,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetIsCustomer_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueIsCustomer *bool
 
 		// Act
@@ -6207,7 +6208,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetIsSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueIsSupplier *bool
 
 		// Act
@@ -6238,7 +6239,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetPaymentTermDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValuePaymentTermDays *int64
 
 		// Act
@@ -6269,8 +6270,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
-		var fernTestValueAddress *PostV1MigrationBooksImportRequestPartnersItemAddress
+		obj := &BooksImportMigrationRequestPartnersItem{}
+		var fernTestValueAddress *BooksImportMigrationRequestPartnersItemAddress
 
 		// Act
 		obj.SetAddress(fernTestValueAddress)
@@ -6300,7 +6301,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6330,9 +6331,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItem(t *tes
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestSettersBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("SetStreet", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueStreet *string
 		obj.SetStreet(fernTestValueStreet)
 		assert.Equal(t, fernTestValueStreet, obj.Street)
@@ -6340,7 +6341,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	})
 
 	t.Run("SetCity", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueCity *string
 		obj.SetCity(fernTestValueCity)
 		assert.Equal(t, fernTestValueCity, obj.City)
@@ -6348,7 +6349,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	})
 
 	t.Run("SetPostalCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValuePostalCode *string
 		obj.SetPostalCode(fernTestValuePostalCode)
 		assert.Equal(t, fernTestValuePostalCode, obj.PostalCode)
@@ -6356,7 +6357,7 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -6365,11 +6366,11 @@ func TestSettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestGettersBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("GetStreet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.Street = expected
 
@@ -6380,7 +6381,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetStreet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		obj.Street = nil
 
 		// Act & Assert
@@ -6389,7 +6390,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 	t.Run("GetStreet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6402,7 +6403,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetCity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.City = expected
 
@@ -6413,7 +6414,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetCity_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		obj.City = nil
 
 		// Act & Assert
@@ -6422,7 +6423,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 	t.Run("GetCity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6435,7 +6436,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetPostalCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.PostalCode = expected
 
@@ -6446,7 +6447,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetPostalCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		obj.PostalCode = nil
 
 		// Act & Assert
@@ -6455,7 +6456,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 	t.Run("GetPostalCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6468,7 +6469,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -6479,7 +6480,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -6488,7 +6489,7 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6500,11 +6501,11 @@ func TestGettersPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("SetStreet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueStreet *string
 
 		// Act
@@ -6535,7 +6536,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItemAddress
 	t.Run("SetCity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueCity *string
 
 		// Act
@@ -6566,7 +6567,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItemAddress
 	t.Run("SetPostalCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValuePostalCode *string
 
 		// Act
@@ -6597,7 +6598,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItemAddress
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -6627,9 +6628,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestPartnersItemAddress
 
 }
 
-func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestSettersBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("SetWarehouseCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueWarehouseCode *string
 		obj.SetWarehouseCode(fernTestValueWarehouseCode)
 		assert.Equal(t, fernTestValueWarehouseCode, obj.WarehouseCode)
@@ -6637,7 +6638,7 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetItemCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueItemCode string
 		obj.SetItemCode(fernTestValueItemCode)
 		assert.Equal(t, fernTestValueItemCode, obj.ItemCode)
@@ -6645,7 +6646,7 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -6653,7 +6654,7 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueUnitCost string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -6661,7 +6662,7 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -6669,8 +6670,8 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
-		var fernTestValueExpiryDate *string
+		obj := &BooksImportMigrationRequestStockItem{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -6678,11 +6679,11 @@ func TestSettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestGettersBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("GetWarehouseCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var expected *string
 		obj.WarehouseCode = expected
 
@@ -6693,7 +6694,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetWarehouseCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		obj.WarehouseCode = nil
 
 		// Act & Assert
@@ -6702,7 +6703,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetWarehouseCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6715,7 +6716,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetItemCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var expected string
 		obj.ItemCode = expected
 
@@ -6725,7 +6726,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetItemCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6738,7 +6739,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -6748,7 +6749,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6761,7 +6762,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var expected string
 		obj.UnitCost = expected
 
@@ -6771,7 +6772,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6784,7 +6785,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var expected *string
 		obj.LotNumber = expected
 
@@ -6795,7 +6796,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetLotNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		obj.LotNumber = nil
 
 		// Act & Assert
@@ -6804,7 +6805,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6817,8 +6818,8 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
-		var expected *string
+		obj := &BooksImportMigrationRequestStockItem{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -6828,7 +6829,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -6837,7 +6838,7 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6849,11 +6850,11 @@ func TestGettersPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("SetWarehouseCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueWarehouseCode *string
 
 		// Act
@@ -6884,7 +6885,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 	t.Run("SetItemCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueItemCode string
 
 		// Act
@@ -6915,7 +6916,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -6946,7 +6947,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueUnitCost string
 
 		// Act
@@ -6977,7 +6978,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -7008,8 +7009,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
-		var fernTestValueExpiryDate *string
+		obj := &BooksImportMigrationRequestStockItem{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -7038,9 +7039,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportRequestStockItem(t *testin
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestSettersBooksImportMigrationResponse(t *testing.T) {
 	t.Run("SetDryRun", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var fernTestValueDryRun bool
 		obj.SetDryRun(fernTestValueDryRun)
 		assert.Equal(t, fernTestValueDryRun, obj.DryRun)
@@ -7048,103 +7049,103 @@ func TestSettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	})
 
 	t.Run("SetCutoverDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueCutoverDate string
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueCutoverDate time.Time
 		obj.SetCutoverDate(fernTestValueCutoverDate)
 		assert.Equal(t, fernTestValueCutoverDate, obj.CutoverDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAccounts", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueAccounts *PostV1MigrationBooksImportResponseAccounts
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueAccounts *BooksImportMigrationResponseAccounts
 		obj.SetAccounts(fernTestValueAccounts)
 		assert.Equal(t, fernTestValueAccounts, obj.Accounts)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPartners", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValuePartners *PostV1MigrationBooksImportResponsePartners
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValuePartners *BooksImportMigrationResponsePartners
 		obj.SetPartners(fernTestValuePartners)
 		assert.Equal(t, fernTestValuePartners, obj.Partners)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetItems", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueItems *PostV1MigrationBooksImportResponseItems
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueItems *BooksImportMigrationResponseItems
 		obj.SetItems(fernTestValueItems)
 		assert.Equal(t, fernTestValueItems, obj.Items)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAssetGroups", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueAssetGroups *PostV1MigrationBooksImportResponseAssetGroups
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueAssetGroups *BooksImportMigrationResponseAssetGroups
 		obj.SetAssetGroups(fernTestValueAssetGroups)
 		assert.Equal(t, fernTestValueAssetGroups, obj.AssetGroups)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpeningBalances", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksImportResponseOpeningBalances
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpeningBalances *BooksImportMigrationResponseOpeningBalances
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
 		assert.Equal(t, fernTestValueOpeningBalances, obj.OpeningBalances)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetJournal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueJournal *PostV1MigrationBooksImportResponseJournal
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueJournal *BooksImportMigrationResponseJournal
 		obj.SetJournal(fernTestValueJournal)
 		assert.Equal(t, fernTestValueJournal, obj.Journal)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenReceivables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpenReceivables *PostV1MigrationBooksImportResponseOpenReceivables
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpenReceivables *BooksImportMigrationResponseOpenReceivables
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
 		assert.Equal(t, fernTestValueOpenReceivables, obj.OpenReceivables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenPayables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpenPayables *PostV1MigrationBooksImportResponseOpenPayables
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpenPayables *BooksImportMigrationResponseOpenPayables
 		obj.SetOpenPayables(fernTestValueOpenPayables)
 		assert.Equal(t, fernTestValueOpenPayables, obj.OpenPayables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFixedAssets", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueFixedAssets *PostV1MigrationBooksImportResponseFixedAssets
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueFixedAssets *BooksImportMigrationResponseFixedAssets
 		obj.SetFixedAssets(fernTestValueFixedAssets)
 		assert.Equal(t, fernTestValueFixedAssets, obj.FixedAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStock", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueStock *PostV1MigrationBooksImportResponseStock
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueStock *BooksImportMigrationResponseStock
 		obj.SetStock(fernTestValueStock)
 		assert.Equal(t, fernTestValueStock, obj.Stock)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNumberSeries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueNumberSeries []*PostV1MigrationBooksImportResponseNumberSeriesItem
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueNumberSeries []*BooksImportMigrationResponseNumberSeriesItem
 		obj.SetNumberSeries(fernTestValueNumberSeries)
 		assert.Equal(t, fernTestValueNumberSeries, obj.NumberSeries)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetWarnings", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var fernTestValueWarnings []string
 		obj.SetWarnings(fernTestValueWarnings)
 		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
@@ -7153,11 +7154,11 @@ func TestSettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestGettersBooksImportMigrationResponse(t *testing.T) {
 	t.Run("GetDryRun", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var expected bool
 		obj.DryRun = expected
 
@@ -7167,7 +7168,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetDryRun_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7180,8 +7181,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetCutoverDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected string
+		obj := &BooksImportMigrationResponse{}
+		var expected time.Time
 		obj.CutoverDate = expected
 
 		// Act & Assert
@@ -7190,7 +7191,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetCutoverDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7203,8 +7204,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetAccounts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseAccounts
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseAccounts
 		obj.Accounts = expected
 
 		// Act & Assert
@@ -7214,7 +7215,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetAccounts_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Accounts = nil
 
 		// Act & Assert
@@ -7223,7 +7224,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetAccounts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7236,8 +7237,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetPartners", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponsePartners
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponsePartners
 		obj.Partners = expected
 
 		// Act & Assert
@@ -7247,7 +7248,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetPartners_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Partners = nil
 
 		// Act & Assert
@@ -7256,7 +7257,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetPartners_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7269,8 +7270,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetItems", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseItems
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseItems
 		obj.Items = expected
 
 		// Act & Assert
@@ -7280,7 +7281,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetItems_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Items = nil
 
 		// Act & Assert
@@ -7289,7 +7290,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetItems_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7302,8 +7303,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetAssetGroups", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseAssetGroups
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseAssetGroups
 		obj.AssetGroups = expected
 
 		// Act & Assert
@@ -7313,7 +7314,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetAssetGroups_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.AssetGroups = nil
 
 		// Act & Assert
@@ -7322,7 +7323,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetAssetGroups_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7335,8 +7336,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpeningBalances", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseOpeningBalances
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseOpeningBalances
 		obj.OpeningBalances = expected
 
 		// Act & Assert
@@ -7346,7 +7347,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpeningBalances_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.OpeningBalances = nil
 
 		// Act & Assert
@@ -7355,7 +7356,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetOpeningBalances_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7368,8 +7369,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetJournal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseJournal
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseJournal
 		obj.Journal = expected
 
 		// Act & Assert
@@ -7379,7 +7380,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetJournal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Journal = nil
 
 		// Act & Assert
@@ -7388,7 +7389,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetJournal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7401,8 +7402,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpenReceivables", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseOpenReceivables
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseOpenReceivables
 		obj.OpenReceivables = expected
 
 		// Act & Assert
@@ -7412,7 +7413,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpenReceivables_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.OpenReceivables = nil
 
 		// Act & Assert
@@ -7421,7 +7422,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetOpenReceivables_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7434,8 +7435,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpenPayables", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseOpenPayables
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseOpenPayables
 		obj.OpenPayables = expected
 
 		// Act & Assert
@@ -7445,7 +7446,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetOpenPayables_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.OpenPayables = nil
 
 		// Act & Assert
@@ -7454,7 +7455,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetOpenPayables_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7467,8 +7468,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetFixedAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseFixedAssets
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseFixedAssets
 		obj.FixedAssets = expected
 
 		// Act & Assert
@@ -7478,7 +7479,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetFixedAssets_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.FixedAssets = nil
 
 		// Act & Assert
@@ -7487,7 +7488,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetFixedAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7500,8 +7501,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetStock", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected *PostV1MigrationBooksImportResponseStock
+		obj := &BooksImportMigrationResponse{}
+		var expected *BooksImportMigrationResponseStock
 		obj.Stock = expected
 
 		// Act & Assert
@@ -7511,7 +7512,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetStock_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Stock = nil
 
 		// Act & Assert
@@ -7520,7 +7521,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetStock_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7533,8 +7534,8 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetNumberSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var expected []*PostV1MigrationBooksImportResponseNumberSeriesItem
+		obj := &BooksImportMigrationResponse{}
+		var expected []*BooksImportMigrationResponseNumberSeriesItem
 		obj.NumberSeries = expected
 
 		// Act & Assert
@@ -7544,7 +7545,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetNumberSeries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.NumberSeries = nil
 
 		// Act & Assert
@@ -7553,7 +7554,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetNumberSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7566,7 +7567,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetWarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var expected []string
 		obj.Warnings = expected
 
@@ -7577,7 +7578,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("GetWarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		obj.Warnings = nil
 
 		// Act & Assert
@@ -7586,7 +7587,7 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7598,11 +7599,11 @@ func TestGettersPostV1MigrationBooksImportResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponse(t *testing.T) {
 	t.Run("SetDryRun_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var fernTestValueDryRun bool
 
 		// Act
@@ -7633,8 +7634,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetCutoverDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueCutoverDate string
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueCutoverDate time.Time
 
 		// Act
 		obj.SetCutoverDate(fernTestValueCutoverDate)
@@ -7664,8 +7665,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetAccounts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueAccounts *PostV1MigrationBooksImportResponseAccounts
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueAccounts *BooksImportMigrationResponseAccounts
 
 		// Act
 		obj.SetAccounts(fernTestValueAccounts)
@@ -7695,8 +7696,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetPartners_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValuePartners *PostV1MigrationBooksImportResponsePartners
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValuePartners *BooksImportMigrationResponsePartners
 
 		// Act
 		obj.SetPartners(fernTestValuePartners)
@@ -7726,8 +7727,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueItems *PostV1MigrationBooksImportResponseItems
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueItems *BooksImportMigrationResponseItems
 
 		// Act
 		obj.SetItems(fernTestValueItems)
@@ -7757,8 +7758,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetAssetGroups_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueAssetGroups *PostV1MigrationBooksImportResponseAssetGroups
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueAssetGroups *BooksImportMigrationResponseAssetGroups
 
 		// Act
 		obj.SetAssetGroups(fernTestValueAssetGroups)
@@ -7788,8 +7789,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetOpeningBalances_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksImportResponseOpeningBalances
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpeningBalances *BooksImportMigrationResponseOpeningBalances
 
 		// Act
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
@@ -7819,8 +7820,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetJournal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueJournal *PostV1MigrationBooksImportResponseJournal
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueJournal *BooksImportMigrationResponseJournal
 
 		// Act
 		obj.SetJournal(fernTestValueJournal)
@@ -7850,8 +7851,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetOpenReceivables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpenReceivables *PostV1MigrationBooksImportResponseOpenReceivables
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpenReceivables *BooksImportMigrationResponseOpenReceivables
 
 		// Act
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
@@ -7881,8 +7882,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetOpenPayables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueOpenPayables *PostV1MigrationBooksImportResponseOpenPayables
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueOpenPayables *BooksImportMigrationResponseOpenPayables
 
 		// Act
 		obj.SetOpenPayables(fernTestValueOpenPayables)
@@ -7912,8 +7913,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetFixedAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueFixedAssets *PostV1MigrationBooksImportResponseFixedAssets
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueFixedAssets *BooksImportMigrationResponseFixedAssets
 
 		// Act
 		obj.SetFixedAssets(fernTestValueFixedAssets)
@@ -7943,8 +7944,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetStock_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueStock *PostV1MigrationBooksImportResponseStock
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueStock *BooksImportMigrationResponseStock
 
 		// Act
 		obj.SetStock(fernTestValueStock)
@@ -7974,8 +7975,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetNumberSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
-		var fernTestValueNumberSeries []*PostV1MigrationBooksImportResponseNumberSeriesItem
+		obj := &BooksImportMigrationResponse{}
+		var fernTestValueNumberSeries []*BooksImportMigrationResponseNumberSeriesItem
 
 		// Act
 		obj.SetNumberSeries(fernTestValueNumberSeries)
@@ -8005,7 +8006,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		var fernTestValueWarnings []string
 
 		// Act
@@ -8035,9 +8036,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestSettersBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -8045,7 +8046,7 @@ func TestSettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -8054,11 +8055,11 @@ func TestSettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestGettersBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var expected int64
 		obj.Created = expected
 
@@ -8068,7 +8069,7 @@ func TestGettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAccounts
+		var obj *BooksImportMigrationResponseAccounts
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8081,7 +8082,7 @@ func TestGettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var expected int64
 		obj.Existing = expected
 
@@ -8091,7 +8092,7 @@ func TestGettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAccounts
+		var obj *BooksImportMigrationResponseAccounts
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8103,11 +8104,11 @@ func TestGettersPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -8138,7 +8139,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAccounts(t *testin
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -8168,9 +8169,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAccounts(t *testin
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestSettersBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -8178,7 +8179,7 @@ func TestSettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -8187,11 +8188,11 @@ func TestSettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestGettersBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var expected int64
 		obj.Created = expected
 
@@ -8201,7 +8202,7 @@ func TestGettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAssetGroups
+		var obj *BooksImportMigrationResponseAssetGroups
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8214,7 +8215,7 @@ func TestGettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var expected int64
 		obj.Existing = expected
 
@@ -8224,7 +8225,7 @@ func TestGettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAssetGroups
+		var obj *BooksImportMigrationResponseAssetGroups
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8236,11 +8237,11 @@ func TestGettersPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -8271,7 +8272,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAssetGroups(t *tes
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -8301,9 +8302,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseAssetGroups(t *tes
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestSettersBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -8311,7 +8312,7 @@ func TestSettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 	})
 
 	t.Run("SetCostTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueCostTotal string
 		obj.SetCostTotal(fernTestValueCostTotal)
 		assert.Equal(t, fernTestValueCostTotal, obj.CostTotal)
@@ -8319,7 +8320,7 @@ func TestSettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciationTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueAccumulatedDepreciationTotal string
 		obj.SetAccumulatedDepreciationTotal(fernTestValueAccumulatedDepreciationTotal)
 		assert.Equal(t, fernTestValueAccumulatedDepreciationTotal, obj.AccumulatedDepreciationTotal)
@@ -8328,11 +8329,11 @@ func TestSettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestGettersBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var expected int64
 		obj.Created = expected
 
@@ -8342,7 +8343,7 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseFixedAssets
+		var obj *BooksImportMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8355,7 +8356,7 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 	t.Run("GetCostTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var expected string
 		obj.CostTotal = expected
 
@@ -8365,7 +8366,7 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetCostTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseFixedAssets
+		var obj *BooksImportMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8378,7 +8379,7 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 	t.Run("GetAccumulatedDepreciationTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var expected string
 		obj.AccumulatedDepreciationTotal = expected
 
@@ -8388,7 +8389,7 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciationTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseFixedAssets
+		var obj *BooksImportMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8400,11 +8401,11 @@ func TestGettersPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -8435,7 +8436,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseFixedAssets(t *tes
 	t.Run("SetCostTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueCostTotal string
 
 		// Act
@@ -8466,7 +8467,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseFixedAssets(t *tes
 	t.Run("SetAccumulatedDepreciationTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		var fernTestValueAccumulatedDepreciationTotal string
 
 		// Act
@@ -8496,9 +8497,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseFixedAssets(t *tes
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestSettersBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -8506,7 +8507,7 @@ func TestSettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -8515,11 +8516,11 @@ func TestSettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestGettersBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var expected int64
 		obj.Created = expected
 
@@ -8529,7 +8530,7 @@ func TestGettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseItems
+		var obj *BooksImportMigrationResponseItems
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8542,7 +8543,7 @@ func TestGettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var expected int64
 		obj.Existing = expected
 
@@ -8552,7 +8553,7 @@ func TestGettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseItems
+		var obj *BooksImportMigrationResponseItems
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8564,11 +8565,11 @@ func TestGettersPostV1MigrationBooksImportResponseItems(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -8599,7 +8600,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseItems(t *testing.T
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -8629,9 +8630,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseItems(t *testing.T
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestSettersBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("SetTransactions", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var fernTestValueTransactions int64
 		obj.SetTransactions(fernTestValueTransactions)
 		assert.Equal(t, fernTestValueTransactions, obj.Transactions)
@@ -8639,7 +8640,7 @@ func TestSettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var fernTestValueEntries int64
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
@@ -8648,11 +8649,11 @@ func TestSettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestGettersBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("GetTransactions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var expected int64
 		obj.Transactions = expected
 
@@ -8662,7 +8663,7 @@ func TestGettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 
 	t.Run("GetTransactions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseJournal
+		var obj *BooksImportMigrationResponseJournal
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8675,7 +8676,7 @@ func TestGettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var expected int64
 		obj.Entries = expected
 
@@ -8685,7 +8686,7 @@ func TestGettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseJournal
+		var obj *BooksImportMigrationResponseJournal
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8697,11 +8698,11 @@ func TestGettersPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("SetTransactions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var fernTestValueTransactions int64
 
 		// Act
@@ -8732,7 +8733,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseJournal(t *testing
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		var fernTestValueEntries int64
 
 		// Act
@@ -8762,9 +8763,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseJournal(t *testing
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestSettersBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("SetPrefix", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValuePrefix string
 		obj.SetPrefix(fernTestValuePrefix)
 		assert.Equal(t, fernTestValuePrefix, obj.Prefix)
@@ -8772,7 +8773,7 @@ func TestSettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -8780,7 +8781,7 @@ func TestSettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 	})
 
 	t.Run("SetNextNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValueNextNumber int64
 		obj.SetNextNumber(fernTestValueNextNumber)
 		assert.Equal(t, fernTestValueNextNumber, obj.NextNumber)
@@ -8789,11 +8790,11 @@ func TestSettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestGettersBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("GetPrefix", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var expected string
 		obj.Prefix = expected
 
@@ -8803,7 +8804,7 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 
 	t.Run("GetPrefix_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj *BooksImportMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8816,7 +8817,7 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -8826,7 +8827,7 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj *BooksImportMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8839,7 +8840,7 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 	t.Run("GetNextNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var expected int64
 		obj.NextNumber = expected
 
@@ -8849,7 +8850,7 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 
 	t.Run("GetNextNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj *BooksImportMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8861,11 +8862,11 @@ func TestGettersPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("SetPrefix_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValuePrefix string
 
 		// Act
@@ -8896,7 +8897,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseNumberSeriesItem(t
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -8927,7 +8928,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseNumberSeriesItem(t
 	t.Run("SetNextNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		var fernTestValueNextNumber int64
 
 		// Act
@@ -8957,9 +8958,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseNumberSeriesItem(t
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestSettersBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -8967,7 +8968,7 @@ func TestSettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 	})
 
 	t.Run("SetOutstandingTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var fernTestValueOutstandingTotal string
 		obj.SetOutstandingTotal(fernTestValueOutstandingTotal)
 		assert.Equal(t, fernTestValueOutstandingTotal, obj.OutstandingTotal)
@@ -8976,11 +8977,11 @@ func TestSettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestGettersBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var expected int64
 		obj.Created = expected
 
@@ -8990,7 +8991,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenPayables
+		var obj *BooksImportMigrationResponseOpenPayables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9003,7 +9004,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 	t.Run("GetOutstandingTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var expected string
 		obj.OutstandingTotal = expected
 
@@ -9013,7 +9014,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 
 	t.Run("GetOutstandingTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenPayables
+		var obj *BooksImportMigrationResponseOpenPayables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9025,11 +9026,11 @@ func TestGettersPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -9060,7 +9061,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenPayables(t *te
 	t.Run("SetOutstandingTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		var fernTestValueOutstandingTotal string
 
 		// Act
@@ -9090,9 +9091,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenPayables(t *te
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestSettersBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -9100,7 +9101,7 @@ func TestSettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 	})
 
 	t.Run("SetOutstandingTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var fernTestValueOutstandingTotal string
 		obj.SetOutstandingTotal(fernTestValueOutstandingTotal)
 		assert.Equal(t, fernTestValueOutstandingTotal, obj.OutstandingTotal)
@@ -9109,11 +9110,11 @@ func TestSettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestGettersBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var expected int64
 		obj.Created = expected
 
@@ -9123,7 +9124,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenReceivables
+		var obj *BooksImportMigrationResponseOpenReceivables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9136,7 +9137,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 	t.Run("GetOutstandingTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var expected string
 		obj.OutstandingTotal = expected
 
@@ -9146,7 +9147,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 
 	t.Run("GetOutstandingTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenReceivables
+		var obj *BooksImportMigrationResponseOpenReceivables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9158,11 +9159,11 @@ func TestGettersPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -9193,7 +9194,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenReceivables(t 
 	t.Run("SetOutstandingTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		var fernTestValueOutstandingTotal string
 
 		// Act
@@ -9223,9 +9224,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpenReceivables(t 
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestSettersBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -9233,15 +9234,15 @@ func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
-		var fernTestValueDate string
+		obj := &BooksImportMigrationResponseOpeningBalances{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueEntries int64
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
@@ -9249,7 +9250,7 @@ func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	})
 
 	t.Run("SetDebitTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueDebitTotal string
 		obj.SetDebitTotal(fernTestValueDebitTotal)
 		assert.Equal(t, fernTestValueDebitTotal, obj.DebitTotal)
@@ -9257,7 +9258,7 @@ func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	})
 
 	t.Run("SetCreditTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueCreditTotal string
 		obj.SetCreditTotal(fernTestValueCreditTotal)
 		assert.Equal(t, fernTestValueCreditTotal, obj.CreditTotal)
@@ -9265,7 +9266,7 @@ func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	})
 
 	t.Run("SetBalancingAmount", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueBalancingAmount string
 		obj.SetBalancingAmount(fernTestValueBalancingAmount)
 		assert.Equal(t, fernTestValueBalancingAmount, obj.BalancingAmount)
@@ -9274,11 +9275,11 @@ func TestSettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestGettersBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -9289,7 +9290,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -9298,7 +9299,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9311,8 +9312,8 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
-		var expected string
+		obj := &BooksImportMigrationResponseOpeningBalances{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -9321,7 +9322,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9334,7 +9335,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var expected int64
 		obj.Entries = expected
 
@@ -9344,7 +9345,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9357,7 +9358,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetDebitTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var expected string
 		obj.DebitTotal = expected
 
@@ -9367,7 +9368,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetDebitTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9380,7 +9381,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetCreditTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var expected string
 		obj.CreditTotal = expected
 
@@ -9390,7 +9391,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetCreditTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9403,7 +9404,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 	t.Run("GetBalancingAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var expected string
 		obj.BalancingAmount = expected
 
@@ -9413,7 +9414,7 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 	t.Run("GetBalancingAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9425,11 +9426,11 @@ func TestGettersPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) 
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -9460,8 +9461,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
-		var fernTestValueDate string
+		obj := &BooksImportMigrationResponseOpeningBalances{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -9491,7 +9492,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueEntries int64
 
 		// Act
@@ -9522,7 +9523,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 	t.Run("SetDebitTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueDebitTotal string
 
 		// Act
@@ -9553,7 +9554,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 	t.Run("SetCreditTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueCreditTotal string
 
 		// Act
@@ -9584,7 +9585,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 	t.Run("SetBalancingAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		var fernTestValueBalancingAmount string
 
 		// Act
@@ -9614,9 +9615,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseOpeningBalances(t 
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestSettersBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -9624,7 +9625,7 @@ func TestSettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -9633,11 +9634,11 @@ func TestSettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestGettersBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var expected int64
 		obj.Created = expected
 
@@ -9647,7 +9648,7 @@ func TestGettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponsePartners
+		var obj *BooksImportMigrationResponsePartners
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9660,7 +9661,7 @@ func TestGettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var expected int64
 		obj.Existing = expected
 
@@ -9670,7 +9671,7 @@ func TestGettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponsePartners
+		var obj *BooksImportMigrationResponsePartners
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9682,11 +9683,11 @@ func TestGettersPostV1MigrationBooksImportResponsePartners(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -9717,7 +9718,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponsePartners(t *testin
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -9747,9 +9748,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponsePartners(t *testin
 
 }
 
-func TestSettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestSettersBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("SetMovements", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var fernTestValueMovements int64
 		obj.SetMovements(fernTestValueMovements)
 		assert.Equal(t, fernTestValueMovements, obj.Movements)
@@ -9757,7 +9758,7 @@ func TestSettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 	})
 
 	t.Run("SetCostTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var fernTestValueCostTotal string
 		obj.SetCostTotal(fernTestValueCostTotal)
 		assert.Equal(t, fernTestValueCostTotal, obj.CostTotal)
@@ -9766,11 +9767,11 @@ func TestSettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestGettersBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("GetMovements", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var expected int64
 		obj.Movements = expected
 
@@ -9780,7 +9781,7 @@ func TestGettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 
 	t.Run("GetMovements_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseStock
+		var obj *BooksImportMigrationResponseStock
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9793,7 +9794,7 @@ func TestGettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 	t.Run("GetCostTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var expected string
 		obj.CostTotal = expected
 
@@ -9803,7 +9804,7 @@ func TestGettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 
 	t.Run("GetCostTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseStock
+		var obj *BooksImportMigrationResponseStock
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9815,11 +9816,11 @@ func TestGettersPostV1MigrationBooksImportResponseStock(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestSettersMarkExplicitBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("SetMovements_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var fernTestValueMovements int64
 
 		// Act
@@ -9850,7 +9851,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseStock(t *testing.T
 	t.Run("SetCostTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		var fernTestValueCostTotal string
 
 		// Act
@@ -9880,9 +9881,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksImportResponseStock(t *testing.T
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -9890,7 +9891,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -9898,15 +9899,15 @@ func TestSettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
-		var fernTestValueType PostV1MigrationBooksValidateRequestAccountsItemType
+		obj := &BooksValidateMigrationRequestAccountsItem{}
+		var fernTestValueType BooksValidateMigrationRequestAccountsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetParentCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueParentCode *string
 		obj.SetParentCode(fernTestValueParentCode)
 		assert.Equal(t, fernTestValueParentCode, obj.ParentCode)
@@ -9914,7 +9915,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	})
 
 	t.Run("SetIsPostable", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueIsPostable *bool
 		obj.SetIsPostable(fernTestValueIsPostable)
 		assert.Equal(t, fernTestValueIsPostable, obj.IsPostable)
@@ -9923,11 +9924,11 @@ func TestSettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -9937,7 +9938,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9950,7 +9951,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -9960,7 +9961,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9973,8 +9974,8 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
-		var expected PostV1MigrationBooksValidateRequestAccountsItemType
+		obj := &BooksValidateMigrationRequestAccountsItem{}
+		var expected BooksValidateMigrationRequestAccountsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -9983,7 +9984,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9996,7 +9997,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetParentCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var expected *string
 		obj.ParentCode = expected
 
@@ -10007,7 +10008,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetParentCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		obj.ParentCode = nil
 
 		// Act & Assert
@@ -10016,7 +10017,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetParentCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10029,7 +10030,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetIsPostable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var expected *bool
 		obj.IsPostable = expected
 
@@ -10040,7 +10041,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 	t.Run("GetIsPostable_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		obj.IsPostable = nil
 
 		// Act & Assert
@@ -10049,7 +10050,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 	t.Run("GetIsPostable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10061,11 +10062,11 @@ func TestGettersPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -10096,7 +10097,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10127,8 +10128,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *t
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
-		var fernTestValueType PostV1MigrationBooksValidateRequestAccountsItemType
+		obj := &BooksValidateMigrationRequestAccountsItem{}
+		var fernTestValueType BooksValidateMigrationRequestAccountsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -10158,7 +10159,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *t
 	t.Run("SetParentCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueParentCode *string
 
 		// Act
@@ -10189,7 +10190,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *t
 	t.Run("SetIsPostable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		var fernTestValueIsPostable *bool
 
 		// Act
@@ -10219,9 +10220,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAccountsItem(t *t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10229,7 +10230,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10237,7 +10238,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	})
 
 	t.Run("SetAssetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueAssetAccountCode string
 		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
 		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
@@ -10245,7 +10246,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	})
 
 	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueDepreciationAccountCode string
 		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
 		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
@@ -10253,7 +10254,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueExpenseAccountCode *string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -10261,7 +10262,7 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	})
 
 	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
 		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
@@ -10270,11 +10271,11 @@ func TestSettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -10284,7 +10285,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10297,7 +10298,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10307,7 +10308,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10320,7 +10321,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetAssetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.AssetAccountCode = expected
 
@@ -10330,7 +10331,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetAssetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10343,7 +10344,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetDepreciationAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected string
 		obj.DepreciationAccountCode = expected
 
@@ -10353,7 +10354,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetDepreciationAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10366,7 +10367,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetExpenseAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected *string
 		obj.ExpenseAccountCode = expected
 
@@ -10377,7 +10378,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetExpenseAccountCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		obj.ExpenseAccountCode = nil
 
 		// Act & Assert
@@ -10386,7 +10387,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetExpenseAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10399,7 +10400,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetDefaultUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var expected *int64
 		obj.DefaultUsefulLifeMonths = expected
 
@@ -10410,7 +10411,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 	t.Run("GetDefaultUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		obj.DefaultUsefulLifeMonths = nil
 
 		// Act & Assert
@@ -10419,7 +10420,7 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 	t.Run("GetDefaultUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10431,11 +10432,11 @@ func TestGettersPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -10466,7 +10467,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10497,7 +10498,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueAssetAccountCode string
 
 		// Act
@@ -10528,7 +10529,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueDepreciationAccountCode string
 
 		// Act
@@ -10559,7 +10560,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueExpenseAccountCode *string
 
 		// Act
@@ -10590,7 +10591,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 
 		// Act
@@ -10620,9 +10621,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestAssetGroupsItem(t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("SetGroupCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueGroupCode string
 		obj.SetGroupCode(fernTestValueGroupCode)
 		assert.Equal(t, fernTestValueGroupCode, obj.GroupCode)
@@ -10630,7 +10631,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10638,7 +10639,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10646,23 +10647,23 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var fernTestValueDepreciationStartDate *time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -10670,7 +10671,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueSalvageValue *string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -10678,7 +10679,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueUsefulLifeMonths *int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -10686,7 +10687,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueAccumulatedDepreciation *string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -10694,7 +10695,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueDepreciatedMonths *int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -10702,7 +10703,7 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -10711,11 +10712,11 @@ func TestSettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetGroupCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.GroupCode = expected
 
@@ -10725,7 +10726,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetGroupCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10738,7 +10739,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -10748,7 +10749,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10761,7 +10762,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10771,7 +10772,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10784,8 +10785,8 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var expected string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -10794,7 +10795,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10807,8 +10808,8 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var expected *string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var expected *time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -10818,7 +10819,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetDepreciationStartDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.DepreciationStartDate = nil
 
 		// Act & Assert
@@ -10827,7 +10828,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10840,7 +10841,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -10850,7 +10851,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10863,7 +10864,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.SalvageValue = expected
 
@@ -10874,7 +10875,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetSalvageValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.SalvageValue = nil
 
 		// Act & Assert
@@ -10883,7 +10884,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10896,7 +10897,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected *int64
 		obj.UsefulLifeMonths = expected
 
@@ -10907,7 +10908,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.UsefulLifeMonths = nil
 
 		// Act & Assert
@@ -10916,7 +10917,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10929,7 +10930,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.AccumulatedDepreciation = expected
 
@@ -10940,7 +10941,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetAccumulatedDepreciation_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.AccumulatedDepreciation = nil
 
 		// Act & Assert
@@ -10949,7 +10950,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10962,7 +10963,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected *int64
 		obj.DepreciatedMonths = expected
 
@@ -10973,7 +10974,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetDepreciatedMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.DepreciatedMonths = nil
 
 		// Act & Assert
@@ -10982,7 +10983,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10995,7 +10996,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -11006,7 +11007,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -11015,7 +11016,7 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11027,11 +11028,11 @@ func TestGettersPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("SetGroupCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueGroupCode string
 
 		// Act
@@ -11062,7 +11063,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -11093,7 +11094,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -11124,8 +11125,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -11155,8 +11156,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
+		var fernTestValueDepreciationStartDate *time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -11186,7 +11187,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -11217,7 +11218,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueSalvageValue *string
 
 		// Act
@@ -11248,7 +11249,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueUsefulLifeMonths *int64
 
 		// Act
@@ -11279,7 +11280,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueAccumulatedDepreciation *string
 
 		// Act
@@ -11310,7 +11311,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueDepreciatedMonths *int64
 
 		// Act
@@ -11341,7 +11342,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -11371,9 +11372,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestFixedAssetsItem(t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -11381,7 +11382,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -11389,15 +11390,15 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
-		var fernTestValueType *PostV1MigrationBooksValidateRequestItemsItemType
+		obj := &BooksValidateMigrationRequestItemsItem{}
+		var fernTestValueType *BooksValidateMigrationRequestItemsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -11405,7 +11406,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetBarcode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueBarcode *string
 		obj.SetBarcode(fernTestValueBarcode)
 		assert.Equal(t, fernTestValueBarcode, obj.Barcode)
@@ -11413,7 +11414,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -11421,7 +11422,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetSalePriceExclVat", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueSalePriceExclVat *string
 		obj.SetSalePriceExclVat(fernTestValueSalePriceExclVat)
 		assert.Equal(t, fernTestValueSalePriceExclVat, obj.SalePriceExclVat)
@@ -11429,7 +11430,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetPurchasePriceExclVat", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValuePurchasePriceExclVat *string
 		obj.SetPurchasePriceExclVat(fernTestValuePurchasePriceExclVat)
 		assert.Equal(t, fernTestValuePurchasePriceExclVat, obj.PurchasePriceExclVat)
@@ -11437,7 +11438,7 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -11446,11 +11447,11 @@ func TestSettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -11460,7 +11461,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11473,7 +11474,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -11483,7 +11484,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11496,8 +11497,8 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
-		var expected *PostV1MigrationBooksValidateRequestItemsItemType
+		obj := &BooksValidateMigrationRequestItemsItem{}
+		var expected *BooksValidateMigrationRequestItemsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -11507,7 +11508,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.Type = nil
 
 		// Act & Assert
@@ -11516,7 +11517,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11529,7 +11530,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -11540,7 +11541,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -11549,7 +11550,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11562,7 +11563,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetBarcode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.Barcode = expected
 
@@ -11573,7 +11574,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetBarcode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.Barcode = nil
 
 		// Act & Assert
@@ -11582,7 +11583,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetBarcode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11595,7 +11596,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -11606,7 +11607,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -11615,7 +11616,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11628,7 +11629,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetSalePriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.SalePriceExclVat = expected
 
@@ -11639,7 +11640,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetSalePriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.SalePriceExclVat = nil
 
 		// Act & Assert
@@ -11648,7 +11649,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetSalePriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11661,7 +11662,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetPurchasePriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.PurchasePriceExclVat = expected
 
@@ -11672,7 +11673,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetPurchasePriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.PurchasePriceExclVat = nil
 
 		// Act & Assert
@@ -11681,7 +11682,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetPurchasePriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11694,7 +11695,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -11705,7 +11706,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -11714,7 +11715,7 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11726,11 +11727,11 @@ func TestGettersPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -11761,7 +11762,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -11792,8 +11793,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
-		var fernTestValueType *PostV1MigrationBooksValidateRequestItemsItemType
+		obj := &BooksValidateMigrationRequestItemsItem{}
+		var fernTestValueType *BooksValidateMigrationRequestItemsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -11823,7 +11824,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -11854,7 +11855,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetBarcode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueBarcode *string
 
 		// Act
@@ -11885,7 +11886,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -11916,7 +11917,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetSalePriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueSalePriceExclVat *string
 
 		// Act
@@ -11947,7 +11948,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetPurchasePriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValuePurchasePriceExclVat *string
 
 		// Act
@@ -11978,7 +11979,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -12008,17 +12009,17 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestItemsItem(t *test
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var fernTestValueDate string
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -12026,7 +12027,7 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	})
 
 	t.Run("SetReference", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var fernTestValueReference *string
 		obj.SetReference(fernTestValueReference)
 		assert.Equal(t, fernTestValueReference, obj.Reference)
@@ -12034,8 +12035,8 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var fernTestValueEntries []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var fernTestValueEntries []*BooksValidateMigrationRequestJournalItemEntriesItem
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
 		assert.NotNil(t, obj.explicitFields)
@@ -12043,12 +12044,12 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var expected string
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -12057,7 +12058,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12070,7 +12071,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -12081,7 +12082,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -12090,7 +12091,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12103,7 +12104,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetReference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var expected *string
 		obj.Reference = expected
 
@@ -12114,7 +12115,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetReference_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		obj.Reference = nil
 
 		// Act & Assert
@@ -12123,7 +12124,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 	t.Run("GetReference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12136,8 +12137,8 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var expected []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var expected []*BooksValidateMigrationRequestJournalItemEntriesItem
 		obj.Entries = expected
 
 		// Act & Assert
@@ -12147,7 +12148,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 	t.Run("GetEntries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		obj.Entries = nil
 
 		// Act & Assert
@@ -12156,7 +12157,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12168,12 +12169,12 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var fernTestValueDate string
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -12203,7 +12204,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItem(t *te
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -12234,7 +12235,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItem(t *te
 	t.Run("SetReference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		var fernTestValueReference *string
 
 		// Act
@@ -12265,8 +12266,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItem(t *te
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
-		var fernTestValueEntries []*PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		obj := &BooksValidateMigrationRequestJournalItem{}
+		var fernTestValueEntries []*BooksValidateMigrationRequestJournalItemEntriesItem
 
 		// Act
 		obj.SetEntries(fernTestValueEntries)
@@ -12295,9 +12296,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItem(t *te
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueAccountCode string
 		obj.SetAccountCode(fernTestValueAccountCode)
 		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
@@ -12305,7 +12306,7 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	})
 
 	t.Run("SetDebit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDebit *string
 		obj.SetDebit(fernTestValueDebit)
 		assert.Equal(t, fernTestValueDebit, obj.Debit)
@@ -12313,7 +12314,7 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	})
 
 	t.Run("SetCredit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueCredit *string
 		obj.SetCredit(fernTestValueCredit)
 		assert.Equal(t, fernTestValueCredit, obj.Credit)
@@ -12321,7 +12322,7 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -12330,11 +12331,11 @@ func TestSettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("GetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var expected string
 		obj.AccountCode = expected
 
@@ -12344,7 +12345,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12357,7 +12358,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetDebit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Debit = expected
 
@@ -12368,7 +12369,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetDebit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		obj.Debit = nil
 
 		// Act & Assert
@@ -12377,7 +12378,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 	t.Run("GetDebit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12390,7 +12391,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetCredit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Credit = expected
 
@@ -12401,7 +12402,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetCredit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		obj.Credit = nil
 
 		// Act & Assert
@@ -12410,7 +12411,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 	t.Run("GetCredit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12423,7 +12424,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -12434,7 +12435,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -12443,7 +12444,7 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12455,11 +12456,11 @@ func TestGettersPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *tes
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueAccountCode string
 
 		// Act
@@ -12490,7 +12491,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItemEntrie
 	t.Run("SetDebit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDebit *string
 
 		// Act
@@ -12521,7 +12522,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItemEntrie
 	t.Run("SetCredit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueCredit *string
 
 		// Act
@@ -12552,7 +12553,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItemEntrie
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -12582,9 +12583,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestJournalItemEntrie
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValuePartnerCode string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -12592,15 +12593,15 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -12608,7 +12609,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -12616,7 +12617,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -12624,7 +12625,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetOutstanding", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueOutstanding *string
 		obj.SetOutstanding(fernTestValueOutstanding)
 		assert.Equal(t, fernTestValueOutstanding, obj.Outstanding)
@@ -12632,7 +12633,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetFxRate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueFxRate *string
 		obj.SetFxRate(fernTestValueFxRate)
 		assert.Equal(t, fernTestValueFxRate, obj.FxRate)
@@ -12640,7 +12641,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -12648,7 +12649,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueDocumentNumber string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -12656,8 +12657,8 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var fernTestValueDocumentDate string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -12665,11 +12666,11 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.PartnerCode = expected
 
@@ -12679,7 +12680,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12692,8 +12693,8 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var expected *string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -12703,7 +12704,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -12712,7 +12713,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12725,7 +12726,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Currency = expected
 
@@ -12736,7 +12737,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -12745,7 +12746,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12758,7 +12759,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -12768,7 +12769,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12781,7 +12782,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -12792,7 +12793,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -12801,7 +12802,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12814,7 +12815,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetOutstanding", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Outstanding = expected
 
@@ -12825,7 +12826,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetOutstanding_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.Outstanding = nil
 
 		// Act & Assert
@@ -12834,7 +12835,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetOutstanding_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12847,7 +12848,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetFxRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.FxRate = expected
 
@@ -12858,7 +12859,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetFxRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.FxRate = nil
 
 		// Act & Assert
@@ -12867,7 +12868,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetFxRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12880,7 +12881,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -12891,7 +12892,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -12900,7 +12901,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12913,7 +12914,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var expected string
 		obj.DocumentNumber = expected
 
@@ -12923,7 +12924,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12936,8 +12937,8 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var expected string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -12946,7 +12947,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12958,11 +12959,11 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValuePartnerCode string
 
 		// Act
@@ -12993,8 +12994,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -13024,7 +13025,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -13055,7 +13056,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -13086,7 +13087,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -13117,7 +13118,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetOutstanding_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueOutstanding *string
 
 		// Act
@@ -13148,7 +13149,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetFxRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueFxRate *string
 
 		// Act
@@ -13179,7 +13180,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -13210,7 +13211,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		var fernTestValueDocumentNumber string
 
 		// Act
@@ -13241,8 +13242,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
-		var fernTestValueDocumentDate string
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -13271,9 +13272,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenPayablesItem(
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("SetPartnerCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValuePartnerCode string
 		obj.SetPartnerCode(fernTestValuePartnerCode)
 		assert.Equal(t, fernTestValuePartnerCode, obj.PartnerCode)
@@ -13281,15 +13282,15 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -13297,7 +13298,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -13305,7 +13306,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -13313,7 +13314,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetOutstanding", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueOutstanding *string
 		obj.SetOutstanding(fernTestValueOutstanding)
 		assert.Equal(t, fernTestValueOutstanding, obj.Outstanding)
@@ -13321,7 +13322,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetFxRate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueFxRate *string
 		obj.SetFxRate(fernTestValueFxRate)
 		assert.Equal(t, fernTestValueFxRate, obj.FxRate)
@@ -13329,7 +13330,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -13337,7 +13338,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNumber string
 		obj.SetNumber(fernTestValueNumber)
 		assert.Equal(t, fernTestValueNumber, obj.Number)
@@ -13345,8 +13346,8 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	})
 
 	t.Run("SetIssueDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var fernTestValueIssueDate string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var fernTestValueIssueDate time.Time
 		obj.SetIssueDate(fernTestValueIssueDate)
 		assert.Equal(t, fernTestValueIssueDate, obj.IssueDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -13354,11 +13355,11 @@ func TestSettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("GetPartnerCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.PartnerCode = expected
 
@@ -13368,7 +13369,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetPartnerCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13381,8 +13382,8 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var expected *string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -13392,7 +13393,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -13401,7 +13402,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13414,7 +13415,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Currency = expected
 
@@ -13425,7 +13426,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -13434,7 +13435,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13447,7 +13448,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -13457,7 +13458,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13470,7 +13471,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -13481,7 +13482,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -13490,7 +13491,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13503,7 +13504,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetOutstanding", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Outstanding = expected
 
@@ -13514,7 +13515,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetOutstanding_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.Outstanding = nil
 
 		// Act & Assert
@@ -13523,7 +13524,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetOutstanding_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13536,7 +13537,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetFxRate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.FxRate = expected
 
@@ -13547,7 +13548,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetFxRate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.FxRate = nil
 
 		// Act & Assert
@@ -13556,7 +13557,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetFxRate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13569,7 +13570,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -13580,7 +13581,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -13589,7 +13590,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13602,7 +13603,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var expected string
 		obj.Number = expected
 
@@ -13612,7 +13613,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13625,8 +13626,8 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 	t.Run("GetIssueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var expected string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var expected time.Time
 		obj.IssueDate = expected
 
 		// Act & Assert
@@ -13635,7 +13636,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 	t.Run("GetIssueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13647,11 +13648,11 @@ func TestGettersPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("SetPartnerCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValuePartnerCode string
 
 		// Act
@@ -13682,8 +13683,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var fernTestValueDueDate *string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -13713,7 +13714,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -13744,7 +13745,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -13775,7 +13776,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -13806,7 +13807,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetOutstanding_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueOutstanding *string
 
 		// Act
@@ -13837,7 +13838,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetFxRate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueFxRate *string
 
 		// Act
@@ -13868,7 +13869,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -13899,7 +13900,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		var fernTestValueNumber string
 
 		// Act
@@ -13930,8 +13931,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 	t.Run("SetIssueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
-		var fernTestValueIssueDate string
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
+		var fernTestValueIssueDate time.Time
 
 		// Act
 		obj.SetIssueDate(fernTestValueIssueDate)
@@ -13960,17 +13961,17 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpenReceivablesIt
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var fernTestValueDate *string
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var fernTestValueDate *time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalancingAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		var fernTestValueBalancingAccountCode *string
 		obj.SetBalancingAccountCode(fernTestValueBalancingAccountCode)
 		assert.Equal(t, fernTestValueBalancingAccountCode, obj.BalancingAccountCode)
@@ -13978,8 +13979,8 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var fernTestValueEntries []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var fernTestValueEntries []*BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
 		assert.NotNil(t, obj.explicitFields)
@@ -13987,12 +13988,12 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var expected *string
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var expected *time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -14002,7 +14003,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	t.Run("GetDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		obj.Date = nil
 
 		// Act & Assert
@@ -14011,7 +14012,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj *BooksValidateMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14024,7 +14025,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	t.Run("GetBalancingAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		var expected *string
 		obj.BalancingAccountCode = expected
 
@@ -14035,7 +14036,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	t.Run("GetBalancingAccountCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		obj.BalancingAccountCode = nil
 
 		// Act & Assert
@@ -14044,7 +14045,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 
 	t.Run("GetBalancingAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj *BooksValidateMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14057,8 +14058,8 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var expected []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var expected []*BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		obj.Entries = expected
 
 		// Act & Assert
@@ -14068,7 +14069,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 	t.Run("GetEntries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		obj.Entries = nil
 
 		// Act & Assert
@@ -14077,7 +14078,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj *BooksValidateMigrationRequestOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14089,12 +14090,12 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T)
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var fernTestValueDate *string
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var fernTestValueDate *time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -14124,7 +14125,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalances(t
 	t.Run("SetBalancingAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		var fernTestValueBalancingAccountCode *string
 
 		// Act
@@ -14155,8 +14156,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalances(t
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
-		var fernTestValueEntries []*PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
+		var fernTestValueEntries []*BooksValidateMigrationRequestOpeningBalancesEntriesItem
 
 		// Act
 		obj.SetEntries(fernTestValueEntries)
@@ -14185,9 +14186,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalances(t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueAccountCode string
 		obj.SetAccountCode(fernTestValueAccountCode)
 		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
@@ -14195,7 +14196,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	})
 
 	t.Run("SetDebit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDebit *string
 		obj.SetDebit(fernTestValueDebit)
 		assert.Equal(t, fernTestValueDebit, obj.Debit)
@@ -14203,7 +14204,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	})
 
 	t.Run("SetCredit", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueCredit *string
 		obj.SetCredit(fernTestValueCredit)
 		assert.Equal(t, fernTestValueCredit, obj.Credit)
@@ -14211,7 +14212,7 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -14220,11 +14221,11 @@ func TestSettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("GetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var expected string
 		obj.AccountCode = expected
 
@@ -14234,7 +14235,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14247,7 +14248,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetDebit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Debit = expected
 
@@ -14258,7 +14259,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetDebit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Debit = nil
 
 		// Act & Assert
@@ -14267,7 +14268,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 	t.Run("GetDebit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14280,7 +14281,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetCredit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Credit = expected
 
@@ -14291,7 +14292,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetCredit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Credit = nil
 
 		// Act & Assert
@@ -14300,7 +14301,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 	t.Run("GetCredit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14313,7 +14314,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -14324,7 +14325,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -14333,7 +14334,7 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14345,11 +14346,11 @@ func TestGettersPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t 
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueAccountCode string
 
 		// Act
@@ -14380,7 +14381,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalancesEn
 	t.Run("SetDebit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDebit *string
 
 		// Act
@@ -14411,7 +14412,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalancesEn
 	t.Run("SetCredit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueCredit *string
 
 		// Act
@@ -14442,7 +14443,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalancesEn
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -14472,9 +14473,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestOpeningBalancesEn
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -14482,7 +14483,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -14490,15 +14491,15 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var fernTestValueType *PostV1MigrationBooksValidateRequestPartnersItemType
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var fernTestValueType *BooksValidateMigrationRequestPartnersItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -14506,7 +14507,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetEmail", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueEmail *string
 		obj.SetEmail(fernTestValueEmail)
 		assert.Equal(t, fernTestValueEmail, obj.Email)
@@ -14514,7 +14515,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetPhone", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValuePhone *string
 		obj.SetPhone(fernTestValuePhone)
 		assert.Equal(t, fernTestValuePhone, obj.Phone)
@@ -14522,7 +14523,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetIsCustomer", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueIsCustomer *bool
 		obj.SetIsCustomer(fernTestValueIsCustomer)
 		assert.Equal(t, fernTestValueIsCustomer, obj.IsCustomer)
@@ -14530,7 +14531,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetIsSupplier", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueIsSupplier *bool
 		obj.SetIsSupplier(fernTestValueIsSupplier)
 		assert.Equal(t, fernTestValueIsSupplier, obj.IsSupplier)
@@ -14538,7 +14539,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetPaymentTermDays", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValuePaymentTermDays *int64
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
 		assert.Equal(t, fernTestValuePaymentTermDays, obj.PaymentTermDays)
@@ -14546,15 +14547,15 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	})
 
 	t.Run("SetAddress", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var fernTestValueAddress *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var fernTestValueAddress *BooksValidateMigrationRequestPartnersItemAddress
 		obj.SetAddress(fernTestValueAddress)
 		assert.Equal(t, fernTestValueAddress, obj.Address)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -14563,11 +14564,11 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected string
 		obj.Code = expected
 
@@ -14577,7 +14578,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14590,7 +14591,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected string
 		obj.Name = expected
 
@@ -14600,7 +14601,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14613,8 +14614,8 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var expected *PostV1MigrationBooksValidateRequestPartnersItemType
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var expected *BooksValidateMigrationRequestPartnersItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -14624,7 +14625,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.Type = nil
 
 		// Act & Assert
@@ -14633,7 +14634,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14646,7 +14647,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -14657,7 +14658,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -14666,7 +14667,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14679,7 +14680,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetEmail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Email = expected
 
@@ -14690,7 +14691,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetEmail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.Email = nil
 
 		// Act & Assert
@@ -14699,7 +14700,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetEmail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14712,7 +14713,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetPhone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Phone = expected
 
@@ -14723,7 +14724,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetPhone_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.Phone = nil
 
 		// Act & Assert
@@ -14732,7 +14733,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetPhone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14745,7 +14746,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsCustomer", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *bool
 		obj.IsCustomer = expected
 
@@ -14756,7 +14757,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsCustomer_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.IsCustomer = nil
 
 		// Act & Assert
@@ -14765,7 +14766,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetIsCustomer_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14778,7 +14779,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *bool
 		obj.IsSupplier = expected
 
@@ -14789,7 +14790,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetIsSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.IsSupplier = nil
 
 		// Act & Assert
@@ -14798,7 +14799,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetIsSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14811,7 +14812,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetPaymentTermDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *int64
 		obj.PaymentTermDays = expected
 
@@ -14822,7 +14823,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetPaymentTermDays_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.PaymentTermDays = nil
 
 		// Act & Assert
@@ -14831,7 +14832,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetPaymentTermDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14844,8 +14845,8 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var expected *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var expected *BooksValidateMigrationRequestPartnersItemAddress
 		obj.Address = expected
 
 		// Act & Assert
@@ -14855,7 +14856,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.Address = nil
 
 		// Act & Assert
@@ -14864,7 +14865,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14877,7 +14878,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -14888,7 +14889,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -14897,7 +14898,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14909,11 +14910,11 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -14944,7 +14945,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueName string
 
 		// Act
@@ -14975,8 +14976,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var fernTestValueType *PostV1MigrationBooksValidateRequestPartnersItemType
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var fernTestValueType *BooksValidateMigrationRequestPartnersItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -15006,7 +15007,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -15037,7 +15038,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetEmail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueEmail *string
 
 		// Act
@@ -15068,7 +15069,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetPhone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValuePhone *string
 
 		// Act
@@ -15099,7 +15100,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetIsCustomer_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueIsCustomer *bool
 
 		// Act
@@ -15130,7 +15131,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetIsSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueIsSupplier *bool
 
 		// Act
@@ -15161,7 +15162,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetPaymentTermDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValuePaymentTermDays *int64
 
 		// Act
@@ -15192,8 +15193,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
-		var fernTestValueAddress *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		obj := &BooksValidateMigrationRequestPartnersItem{}
+		var fernTestValueAddress *BooksValidateMigrationRequestPartnersItemAddress
 
 		// Act
 		obj.SetAddress(fernTestValueAddress)
@@ -15223,7 +15224,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -15253,9 +15254,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItem(t *t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("SetStreet", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueStreet *string
 		obj.SetStreet(fernTestValueStreet)
 		assert.Equal(t, fernTestValueStreet, obj.Street)
@@ -15263,7 +15264,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	})
 
 	t.Run("SetCity", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueCity *string
 		obj.SetCity(fernTestValueCity)
 		assert.Equal(t, fernTestValueCity, obj.City)
@@ -15271,7 +15272,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	})
 
 	t.Run("SetPostalCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValuePostalCode *string
 		obj.SetPostalCode(fernTestValuePostalCode)
 		assert.Equal(t, fernTestValuePostalCode, obj.PostalCode)
@@ -15279,7 +15280,7 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -15288,11 +15289,11 @@ func TestSettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("GetStreet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.Street = expected
 
@@ -15303,7 +15304,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetStreet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		obj.Street = nil
 
 		// Act & Assert
@@ -15312,7 +15313,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 	t.Run("GetStreet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15325,7 +15326,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetCity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.City = expected
 
@@ -15336,7 +15337,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetCity_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		obj.City = nil
 
 		// Act & Assert
@@ -15345,7 +15346,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 	t.Run("GetCity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15358,7 +15359,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetPostalCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.PostalCode = expected
 
@@ -15369,7 +15370,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetPostalCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		obj.PostalCode = nil
 
 		// Act & Assert
@@ -15378,7 +15379,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 	t.Run("GetPostalCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15391,7 +15392,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -15402,7 +15403,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -15411,7 +15412,7 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15423,11 +15424,11 @@ func TestGettersPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("SetStreet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueStreet *string
 
 		// Act
@@ -15458,7 +15459,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItemAddre
 	t.Run("SetCity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueCity *string
 
 		// Act
@@ -15489,7 +15490,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItemAddre
 	t.Run("SetPostalCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValuePostalCode *string
 
 		// Act
@@ -15520,7 +15521,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItemAddre
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -15550,9 +15551,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestPartnersItemAddre
 
 }
 
-func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestSettersBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("SetWarehouseCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueWarehouseCode *string
 		obj.SetWarehouseCode(fernTestValueWarehouseCode)
 		assert.Equal(t, fernTestValueWarehouseCode, obj.WarehouseCode)
@@ -15560,7 +15561,7 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetItemCode", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueItemCode string
 		obj.SetItemCode(fernTestValueItemCode)
 		assert.Equal(t, fernTestValueItemCode, obj.ItemCode)
@@ -15568,7 +15569,7 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -15576,7 +15577,7 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitCost", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueUnitCost string
 		obj.SetUnitCost(fernTestValueUnitCost)
 		assert.Equal(t, fernTestValueUnitCost, obj.UnitCost)
@@ -15584,7 +15585,7 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetLotNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueLotNumber *string
 		obj.SetLotNumber(fernTestValueLotNumber)
 		assert.Equal(t, fernTestValueLotNumber, obj.LotNumber)
@@ -15592,8 +15593,8 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	})
 
 	t.Run("SetExpiryDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
-		var fernTestValueExpiryDate *string
+		obj := &BooksValidateMigrationRequestStockItem{}
+		var fernTestValueExpiryDate *time.Time
 		obj.SetExpiryDate(fernTestValueExpiryDate)
 		assert.Equal(t, fernTestValueExpiryDate, obj.ExpiryDate)
 		assert.NotNil(t, obj.explicitFields)
@@ -15601,11 +15602,11 @@ func TestSettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestGettersBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("GetWarehouseCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var expected *string
 		obj.WarehouseCode = expected
 
@@ -15616,7 +15617,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetWarehouseCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		obj.WarehouseCode = nil
 
 		// Act & Assert
@@ -15625,7 +15626,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetWarehouseCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15638,7 +15639,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetItemCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var expected string
 		obj.ItemCode = expected
 
@@ -15648,7 +15649,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetItemCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15661,7 +15662,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -15671,7 +15672,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15684,7 +15685,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetUnitCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var expected string
 		obj.UnitCost = expected
 
@@ -15694,7 +15695,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetUnitCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15707,7 +15708,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetLotNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var expected *string
 		obj.LotNumber = expected
 
@@ -15718,7 +15719,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetLotNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		obj.LotNumber = nil
 
 		// Act & Assert
@@ -15727,7 +15728,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetLotNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15740,8 +15741,8 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetExpiryDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
-		var expected *string
+		obj := &BooksValidateMigrationRequestStockItem{}
+		var expected *time.Time
 		obj.ExpiryDate = expected
 
 		// Act & Assert
@@ -15751,7 +15752,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 	t.Run("GetExpiryDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		obj.ExpiryDate = nil
 
 		// Act & Assert
@@ -15760,7 +15761,7 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 	t.Run("GetExpiryDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15772,11 +15773,11 @@ func TestGettersPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("SetWarehouseCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueWarehouseCode *string
 
 		// Act
@@ -15807,7 +15808,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 	t.Run("SetItemCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueItemCode string
 
 		// Act
@@ -15838,7 +15839,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -15869,7 +15870,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 	t.Run("SetUnitCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueUnitCost string
 
 		// Act
@@ -15900,7 +15901,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 	t.Run("SetLotNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		var fernTestValueLotNumber *string
 
 		// Act
@@ -15931,8 +15932,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 	t.Run("SetExpiryDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
-		var fernTestValueExpiryDate *string
+		obj := &BooksValidateMigrationRequestStockItem{}
+		var fernTestValueExpiryDate *time.Time
 
 		// Act
 		obj.SetExpiryDate(fernTestValueExpiryDate)
@@ -15961,9 +15962,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateRequestStockItem(t *test
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestSettersBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("SetDryRun", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var fernTestValueDryRun bool
 		obj.SetDryRun(fernTestValueDryRun)
 		assert.Equal(t, fernTestValueDryRun, obj.DryRun)
@@ -15971,103 +15972,103 @@ func TestSettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCutoverDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueCutoverDate string
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueCutoverDate time.Time
 		obj.SetCutoverDate(fernTestValueCutoverDate)
 		assert.Equal(t, fernTestValueCutoverDate, obj.CutoverDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAccounts", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueAccounts *PostV1MigrationBooksValidateResponseAccounts
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueAccounts *BooksValidateMigrationResponseAccounts
 		obj.SetAccounts(fernTestValueAccounts)
 		assert.Equal(t, fernTestValueAccounts, obj.Accounts)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPartners", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValuePartners *PostV1MigrationBooksValidateResponsePartners
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValuePartners *BooksValidateMigrationResponsePartners
 		obj.SetPartners(fernTestValuePartners)
 		assert.Equal(t, fernTestValuePartners, obj.Partners)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetItems", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueItems *PostV1MigrationBooksValidateResponseItems
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueItems *BooksValidateMigrationResponseItems
 		obj.SetItems(fernTestValueItems)
 		assert.Equal(t, fernTestValueItems, obj.Items)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAssetGroups", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueAssetGroups *PostV1MigrationBooksValidateResponseAssetGroups
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueAssetGroups *BooksValidateMigrationResponseAssetGroups
 		obj.SetAssetGroups(fernTestValueAssetGroups)
 		assert.Equal(t, fernTestValueAssetGroups, obj.AssetGroups)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpeningBalances", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksValidateResponseOpeningBalances
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpeningBalances *BooksValidateMigrationResponseOpeningBalances
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
 		assert.Equal(t, fernTestValueOpeningBalances, obj.OpeningBalances)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetJournal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueJournal *PostV1MigrationBooksValidateResponseJournal
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueJournal *BooksValidateMigrationResponseJournal
 		obj.SetJournal(fernTestValueJournal)
 		assert.Equal(t, fernTestValueJournal, obj.Journal)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenReceivables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpenReceivables *PostV1MigrationBooksValidateResponseOpenReceivables
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpenReceivables *BooksValidateMigrationResponseOpenReceivables
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
 		assert.Equal(t, fernTestValueOpenReceivables, obj.OpenReceivables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOpenPayables", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpenPayables *PostV1MigrationBooksValidateResponseOpenPayables
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpenPayables *BooksValidateMigrationResponseOpenPayables
 		obj.SetOpenPayables(fernTestValueOpenPayables)
 		assert.Equal(t, fernTestValueOpenPayables, obj.OpenPayables)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFixedAssets", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueFixedAssets *PostV1MigrationBooksValidateResponseFixedAssets
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueFixedAssets *BooksValidateMigrationResponseFixedAssets
 		obj.SetFixedAssets(fernTestValueFixedAssets)
 		assert.Equal(t, fernTestValueFixedAssets, obj.FixedAssets)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStock", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueStock *PostV1MigrationBooksValidateResponseStock
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueStock *BooksValidateMigrationResponseStock
 		obj.SetStock(fernTestValueStock)
 		assert.Equal(t, fernTestValueStock, obj.Stock)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNumberSeries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueNumberSeries []*PostV1MigrationBooksValidateResponseNumberSeriesItem
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueNumberSeries []*BooksValidateMigrationResponseNumberSeriesItem
 		obj.SetNumberSeries(fernTestValueNumberSeries)
 		assert.Equal(t, fernTestValueNumberSeries, obj.NumberSeries)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetWarnings", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var fernTestValueWarnings []string
 		obj.SetWarnings(fernTestValueWarnings)
 		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
@@ -16076,11 +16077,11 @@ func TestSettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestGettersBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("GetDryRun", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var expected bool
 		obj.DryRun = expected
 
@@ -16090,7 +16091,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetDryRun_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16103,8 +16104,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetCutoverDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected string
+		obj := &BooksValidateMigrationResponse{}
+		var expected time.Time
 		obj.CutoverDate = expected
 
 		// Act & Assert
@@ -16113,7 +16114,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetCutoverDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16126,8 +16127,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetAccounts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseAccounts
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseAccounts
 		obj.Accounts = expected
 
 		// Act & Assert
@@ -16137,7 +16138,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetAccounts_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Accounts = nil
 
 		// Act & Assert
@@ -16146,7 +16147,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetAccounts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16159,8 +16160,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetPartners", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponsePartners
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponsePartners
 		obj.Partners = expected
 
 		// Act & Assert
@@ -16170,7 +16171,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetPartners_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Partners = nil
 
 		// Act & Assert
@@ -16179,7 +16180,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetPartners_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16192,8 +16193,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetItems", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseItems
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseItems
 		obj.Items = expected
 
 		// Act & Assert
@@ -16203,7 +16204,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetItems_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Items = nil
 
 		// Act & Assert
@@ -16212,7 +16213,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetItems_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16225,8 +16226,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetAssetGroups", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseAssetGroups
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseAssetGroups
 		obj.AssetGroups = expected
 
 		// Act & Assert
@@ -16236,7 +16237,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetAssetGroups_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.AssetGroups = nil
 
 		// Act & Assert
@@ -16245,7 +16246,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetAssetGroups_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16258,8 +16259,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpeningBalances", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseOpeningBalances
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseOpeningBalances
 		obj.OpeningBalances = expected
 
 		// Act & Assert
@@ -16269,7 +16270,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpeningBalances_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.OpeningBalances = nil
 
 		// Act & Assert
@@ -16278,7 +16279,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetOpeningBalances_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16291,8 +16292,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetJournal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseJournal
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseJournal
 		obj.Journal = expected
 
 		// Act & Assert
@@ -16302,7 +16303,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetJournal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Journal = nil
 
 		// Act & Assert
@@ -16311,7 +16312,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetJournal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16324,8 +16325,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpenReceivables", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseOpenReceivables
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseOpenReceivables
 		obj.OpenReceivables = expected
 
 		// Act & Assert
@@ -16335,7 +16336,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpenReceivables_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.OpenReceivables = nil
 
 		// Act & Assert
@@ -16344,7 +16345,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetOpenReceivables_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16357,8 +16358,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpenPayables", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseOpenPayables
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseOpenPayables
 		obj.OpenPayables = expected
 
 		// Act & Assert
@@ -16368,7 +16369,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetOpenPayables_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.OpenPayables = nil
 
 		// Act & Assert
@@ -16377,7 +16378,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetOpenPayables_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16390,8 +16391,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetFixedAssets", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseFixedAssets
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseFixedAssets
 		obj.FixedAssets = expected
 
 		// Act & Assert
@@ -16401,7 +16402,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetFixedAssets_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.FixedAssets = nil
 
 		// Act & Assert
@@ -16410,7 +16411,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetFixedAssets_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16423,8 +16424,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetStock", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected *PostV1MigrationBooksValidateResponseStock
+		obj := &BooksValidateMigrationResponse{}
+		var expected *BooksValidateMigrationResponseStock
 		obj.Stock = expected
 
 		// Act & Assert
@@ -16434,7 +16435,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetStock_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Stock = nil
 
 		// Act & Assert
@@ -16443,7 +16444,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetStock_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16456,8 +16457,8 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetNumberSeries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var expected []*PostV1MigrationBooksValidateResponseNumberSeriesItem
+		obj := &BooksValidateMigrationResponse{}
+		var expected []*BooksValidateMigrationResponseNumberSeriesItem
 		obj.NumberSeries = expected
 
 		// Act & Assert
@@ -16467,7 +16468,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetNumberSeries_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.NumberSeries = nil
 
 		// Act & Assert
@@ -16476,7 +16477,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetNumberSeries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16489,7 +16490,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetWarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var expected []string
 		obj.Warnings = expected
 
@@ -16500,7 +16501,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("GetWarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		obj.Warnings = nil
 
 		// Act & Assert
@@ -16509,7 +16510,7 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16521,11 +16522,11 @@ func TestGettersPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("SetDryRun_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var fernTestValueDryRun bool
 
 		// Act
@@ -16556,8 +16557,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetCutoverDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueCutoverDate string
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueCutoverDate time.Time
 
 		// Act
 		obj.SetCutoverDate(fernTestValueCutoverDate)
@@ -16587,8 +16588,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetAccounts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueAccounts *PostV1MigrationBooksValidateResponseAccounts
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueAccounts *BooksValidateMigrationResponseAccounts
 
 		// Act
 		obj.SetAccounts(fernTestValueAccounts)
@@ -16618,8 +16619,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetPartners_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValuePartners *PostV1MigrationBooksValidateResponsePartners
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValuePartners *BooksValidateMigrationResponsePartners
 
 		// Act
 		obj.SetPartners(fernTestValuePartners)
@@ -16649,8 +16650,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueItems *PostV1MigrationBooksValidateResponseItems
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueItems *BooksValidateMigrationResponseItems
 
 		// Act
 		obj.SetItems(fernTestValueItems)
@@ -16680,8 +16681,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetAssetGroups_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueAssetGroups *PostV1MigrationBooksValidateResponseAssetGroups
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueAssetGroups *BooksValidateMigrationResponseAssetGroups
 
 		// Act
 		obj.SetAssetGroups(fernTestValueAssetGroups)
@@ -16711,8 +16712,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetOpeningBalances_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpeningBalances *PostV1MigrationBooksValidateResponseOpeningBalances
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpeningBalances *BooksValidateMigrationResponseOpeningBalances
 
 		// Act
 		obj.SetOpeningBalances(fernTestValueOpeningBalances)
@@ -16742,8 +16743,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetJournal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueJournal *PostV1MigrationBooksValidateResponseJournal
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueJournal *BooksValidateMigrationResponseJournal
 
 		// Act
 		obj.SetJournal(fernTestValueJournal)
@@ -16773,8 +16774,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetOpenReceivables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpenReceivables *PostV1MigrationBooksValidateResponseOpenReceivables
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpenReceivables *BooksValidateMigrationResponseOpenReceivables
 
 		// Act
 		obj.SetOpenReceivables(fernTestValueOpenReceivables)
@@ -16804,8 +16805,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetOpenPayables_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueOpenPayables *PostV1MigrationBooksValidateResponseOpenPayables
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueOpenPayables *BooksValidateMigrationResponseOpenPayables
 
 		// Act
 		obj.SetOpenPayables(fernTestValueOpenPayables)
@@ -16835,8 +16836,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetFixedAssets_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueFixedAssets *PostV1MigrationBooksValidateResponseFixedAssets
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueFixedAssets *BooksValidateMigrationResponseFixedAssets
 
 		// Act
 		obj.SetFixedAssets(fernTestValueFixedAssets)
@@ -16866,8 +16867,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetStock_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueStock *PostV1MigrationBooksValidateResponseStock
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueStock *BooksValidateMigrationResponseStock
 
 		// Act
 		obj.SetStock(fernTestValueStock)
@@ -16897,8 +16898,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetNumberSeries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
-		var fernTestValueNumberSeries []*PostV1MigrationBooksValidateResponseNumberSeriesItem
+		obj := &BooksValidateMigrationResponse{}
+		var fernTestValueNumberSeries []*BooksValidateMigrationResponseNumberSeriesItem
 
 		// Act
 		obj.SetNumberSeries(fernTestValueNumberSeries)
@@ -16928,7 +16929,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		var fernTestValueWarnings []string
 
 		// Act
@@ -16958,9 +16959,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -16968,7 +16969,7 @@ func TestSettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -16977,11 +16978,11 @@ func TestSettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var expected int64
 		obj.Created = expected
 
@@ -16991,7 +16992,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAccounts
+		var obj *BooksValidateMigrationResponseAccounts
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17004,7 +17005,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var expected int64
 		obj.Existing = expected
 
@@ -17014,7 +17015,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAccounts
+		var obj *BooksValidateMigrationResponseAccounts
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17026,11 +17027,11 @@ func TestGettersPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -17061,7 +17062,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAccounts(t *test
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -17091,9 +17092,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAccounts(t *test
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -17101,7 +17102,7 @@ func TestSettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -17110,11 +17111,11 @@ func TestSettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var expected int64
 		obj.Created = expected
 
@@ -17124,7 +17125,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAssetGroups
+		var obj *BooksValidateMigrationResponseAssetGroups
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17137,7 +17138,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var expected int64
 		obj.Existing = expected
 
@@ -17147,7 +17148,7 @@ func TestGettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAssetGroups
+		var obj *BooksValidateMigrationResponseAssetGroups
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17159,11 +17160,11 @@ func TestGettersPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -17194,7 +17195,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAssetGroups(t *t
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -17224,9 +17225,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseAssetGroups(t *t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -17234,7 +17235,7 @@ func TestSettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 	})
 
 	t.Run("SetCostTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueCostTotal string
 		obj.SetCostTotal(fernTestValueCostTotal)
 		assert.Equal(t, fernTestValueCostTotal, obj.CostTotal)
@@ -17242,7 +17243,7 @@ func TestSettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciationTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueAccumulatedDepreciationTotal string
 		obj.SetAccumulatedDepreciationTotal(fernTestValueAccumulatedDepreciationTotal)
 		assert.Equal(t, fernTestValueAccumulatedDepreciationTotal, obj.AccumulatedDepreciationTotal)
@@ -17251,11 +17252,11 @@ func TestSettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var expected int64
 		obj.Created = expected
 
@@ -17265,7 +17266,7 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseFixedAssets
+		var obj *BooksValidateMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17278,7 +17279,7 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 	t.Run("GetCostTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var expected string
 		obj.CostTotal = expected
 
@@ -17288,7 +17289,7 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetCostTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseFixedAssets
+		var obj *BooksValidateMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17301,7 +17302,7 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 	t.Run("GetAccumulatedDepreciationTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var expected string
 		obj.AccumulatedDepreciationTotal = expected
 
@@ -17311,7 +17312,7 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciationTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseFixedAssets
+		var obj *BooksValidateMigrationResponseFixedAssets
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17323,11 +17324,11 @@ func TestGettersPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -17358,7 +17359,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseFixedAssets(t *t
 	t.Run("SetCostTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueCostTotal string
 
 		// Act
@@ -17389,7 +17390,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseFixedAssets(t *t
 	t.Run("SetAccumulatedDepreciationTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		var fernTestValueAccumulatedDepreciationTotal string
 
 		// Act
@@ -17419,9 +17420,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseFixedAssets(t *t
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -17429,7 +17430,7 @@ func TestSettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -17438,11 +17439,11 @@ func TestSettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var expected int64
 		obj.Created = expected
 
@@ -17452,7 +17453,7 @@ func TestGettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseItems
+		var obj *BooksValidateMigrationResponseItems
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17465,7 +17466,7 @@ func TestGettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var expected int64
 		obj.Existing = expected
 
@@ -17475,7 +17476,7 @@ func TestGettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseItems
+		var obj *BooksValidateMigrationResponseItems
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17487,11 +17488,11 @@ func TestGettersPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -17522,7 +17523,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseItems(t *testing
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -17552,9 +17553,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseItems(t *testing
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("SetTransactions", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var fernTestValueTransactions int64
 		obj.SetTransactions(fernTestValueTransactions)
 		assert.Equal(t, fernTestValueTransactions, obj.Transactions)
@@ -17562,7 +17563,7 @@ func TestSettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var fernTestValueEntries int64
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
@@ -17571,11 +17572,11 @@ func TestSettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("GetTransactions", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var expected int64
 		obj.Transactions = expected
 
@@ -17585,7 +17586,7 @@ func TestGettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 
 	t.Run("GetTransactions_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseJournal
+		var obj *BooksValidateMigrationResponseJournal
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17598,7 +17599,7 @@ func TestGettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var expected int64
 		obj.Entries = expected
 
@@ -17608,7 +17609,7 @@ func TestGettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseJournal
+		var obj *BooksValidateMigrationResponseJournal
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17620,11 +17621,11 @@ func TestGettersPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("SetTransactions_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var fernTestValueTransactions int64
 
 		// Act
@@ -17655,7 +17656,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseJournal(t *testi
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		var fernTestValueEntries int64
 
 		// Act
@@ -17685,9 +17686,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseJournal(t *testi
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("SetPrefix", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValuePrefix string
 		obj.SetPrefix(fernTestValuePrefix)
 		assert.Equal(t, fernTestValuePrefix, obj.Prefix)
@@ -17695,7 +17696,7 @@ func TestSettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 	})
 
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -17703,7 +17704,7 @@ func TestSettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 	})
 
 	t.Run("SetNextNumber", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValueNextNumber int64
 		obj.SetNextNumber(fernTestValueNextNumber)
 		assert.Equal(t, fernTestValueNextNumber, obj.NextNumber)
@@ -17712,11 +17713,11 @@ func TestSettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("GetPrefix", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var expected string
 		obj.Prefix = expected
 
@@ -17726,7 +17727,7 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 
 	t.Run("GetPrefix_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj *BooksValidateMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17739,7 +17740,7 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -17749,7 +17750,7 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj *BooksValidateMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17762,7 +17763,7 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 	t.Run("GetNextNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var expected int64
 		obj.NextNumber = expected
 
@@ -17772,7 +17773,7 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 
 	t.Run("GetNextNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj *BooksValidateMigrationResponseNumberSeriesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17784,11 +17785,11 @@ func TestGettersPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("SetPrefix_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValuePrefix string
 
 		// Act
@@ -17819,7 +17820,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseNumberSeriesItem
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -17850,7 +17851,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseNumberSeriesItem
 	t.Run("SetNextNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		var fernTestValueNextNumber int64
 
 		// Act
@@ -17880,9 +17881,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseNumberSeriesItem
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -17890,7 +17891,7 @@ func TestSettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 	})
 
 	t.Run("SetOutstandingTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var fernTestValueOutstandingTotal string
 		obj.SetOutstandingTotal(fernTestValueOutstandingTotal)
 		assert.Equal(t, fernTestValueOutstandingTotal, obj.OutstandingTotal)
@@ -17899,11 +17900,11 @@ func TestSettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var expected int64
 		obj.Created = expected
 
@@ -17913,7 +17914,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenPayables
+		var obj *BooksValidateMigrationResponseOpenPayables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17926,7 +17927,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 	t.Run("GetOutstandingTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var expected string
 		obj.OutstandingTotal = expected
 
@@ -17936,7 +17937,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 
 	t.Run("GetOutstandingTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenPayables
+		var obj *BooksValidateMigrationResponseOpenPayables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17948,11 +17949,11 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -17983,7 +17984,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenPayables(t *
 	t.Run("SetOutstandingTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		var fernTestValueOutstandingTotal string
 
 		// Act
@@ -18013,9 +18014,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenPayables(t *
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -18023,7 +18024,7 @@ func TestSettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 	})
 
 	t.Run("SetOutstandingTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var fernTestValueOutstandingTotal string
 		obj.SetOutstandingTotal(fernTestValueOutstandingTotal)
 		assert.Equal(t, fernTestValueOutstandingTotal, obj.OutstandingTotal)
@@ -18032,11 +18033,11 @@ func TestSettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var expected int64
 		obj.Created = expected
 
@@ -18046,7 +18047,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj *BooksValidateMigrationResponseOpenReceivables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18059,7 +18060,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 	t.Run("GetOutstandingTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var expected string
 		obj.OutstandingTotal = expected
 
@@ -18069,7 +18070,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 
 	t.Run("GetOutstandingTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj *BooksValidateMigrationResponseOpenReceivables
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18081,11 +18082,11 @@ func TestGettersPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -18116,7 +18117,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenReceivables(
 	t.Run("SetOutstandingTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		var fernTestValueOutstandingTotal string
 
 		// Act
@@ -18146,9 +18147,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpenReceivables(
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -18156,15 +18157,15 @@ func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
-		var fernTestValueDate string
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetEntries", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueEntries int64
 		obj.SetEntries(fernTestValueEntries)
 		assert.Equal(t, fernTestValueEntries, obj.Entries)
@@ -18172,7 +18173,7 @@ func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	})
 
 	t.Run("SetDebitTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueDebitTotal string
 		obj.SetDebitTotal(fernTestValueDebitTotal)
 		assert.Equal(t, fernTestValueDebitTotal, obj.DebitTotal)
@@ -18180,7 +18181,7 @@ func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	})
 
 	t.Run("SetCreditTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueCreditTotal string
 		obj.SetCreditTotal(fernTestValueCreditTotal)
 		assert.Equal(t, fernTestValueCreditTotal, obj.CreditTotal)
@@ -18188,7 +18189,7 @@ func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	})
 
 	t.Run("SetBalancingAmount", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueBalancingAmount string
 		obj.SetBalancingAmount(fernTestValueBalancingAmount)
 		assert.Equal(t, fernTestValueBalancingAmount, obj.BalancingAmount)
@@ -18197,11 +18198,11 @@ func TestSettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -18212,7 +18213,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -18221,7 +18222,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18234,8 +18235,8 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
-		var expected string
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -18244,7 +18245,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18257,7 +18258,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetEntries", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var expected int64
 		obj.Entries = expected
 
@@ -18267,7 +18268,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetEntries_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18280,7 +18281,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetDebitTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var expected string
 		obj.DebitTotal = expected
 
@@ -18290,7 +18291,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetDebitTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18303,7 +18304,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetCreditTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var expected string
 		obj.CreditTotal = expected
 
@@ -18313,7 +18314,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetCreditTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18326,7 +18327,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 	t.Run("GetBalancingAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var expected string
 		obj.BalancingAmount = expected
 
@@ -18336,7 +18337,7 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 	t.Run("GetBalancingAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18348,11 +18349,11 @@ func TestGettersPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -18383,8 +18384,8 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
-		var fernTestValueDate string
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -18414,7 +18415,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 	t.Run("SetEntries_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueEntries int64
 
 		// Act
@@ -18445,7 +18446,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 	t.Run("SetDebitTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueDebitTotal string
 
 		// Act
@@ -18476,7 +18477,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 	t.Run("SetCreditTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueCreditTotal string
 
 		// Act
@@ -18507,7 +18508,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 	t.Run("SetBalancingAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		var fernTestValueBalancingAmount string
 
 		// Act
@@ -18537,9 +18538,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseOpeningBalances(
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestSettersBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("SetCreated", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var fernTestValueCreated int64
 		obj.SetCreated(fernTestValueCreated)
 		assert.Equal(t, fernTestValueCreated, obj.Created)
@@ -18547,7 +18548,7 @@ func TestSettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 	})
 
 	t.Run("SetExisting", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var fernTestValueExisting int64
 		obj.SetExisting(fernTestValueExisting)
 		assert.Equal(t, fernTestValueExisting, obj.Existing)
@@ -18556,11 +18557,11 @@ func TestSettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestGettersBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("GetCreated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var expected int64
 		obj.Created = expected
 
@@ -18570,7 +18571,7 @@ func TestGettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 
 	t.Run("GetCreated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponsePartners
+		var obj *BooksValidateMigrationResponsePartners
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18583,7 +18584,7 @@ func TestGettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 	t.Run("GetExisting", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var expected int64
 		obj.Existing = expected
 
@@ -18593,7 +18594,7 @@ func TestGettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 
 	t.Run("GetExisting_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponsePartners
+		var obj *BooksValidateMigrationResponsePartners
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18605,11 +18606,11 @@ func TestGettersPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("SetCreated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var fernTestValueCreated int64
 
 		// Act
@@ -18640,7 +18641,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponsePartners(t *test
 	t.Run("SetExisting_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		var fernTestValueExisting int64
 
 		// Act
@@ -18670,9 +18671,9 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponsePartners(t *test
 
 }
 
-func TestSettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestSettersBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("SetMovements", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var fernTestValueMovements int64
 		obj.SetMovements(fernTestValueMovements)
 		assert.Equal(t, fernTestValueMovements, obj.Movements)
@@ -18680,7 +18681,7 @@ func TestSettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 	})
 
 	t.Run("SetCostTotal", func(t *testing.T) {
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var fernTestValueCostTotal string
 		obj.SetCostTotal(fernTestValueCostTotal)
 		assert.Equal(t, fernTestValueCostTotal, obj.CostTotal)
@@ -18689,11 +18690,11 @@ func TestSettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 
 }
 
-func TestGettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestGettersBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("GetMovements", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var expected int64
 		obj.Movements = expected
 
@@ -18703,7 +18704,7 @@ func TestGettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 
 	t.Run("GetMovements_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseStock
+		var obj *BooksValidateMigrationResponseStock
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18716,7 +18717,7 @@ func TestGettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 	t.Run("GetCostTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var expected string
 		obj.CostTotal = expected
 
@@ -18726,7 +18727,7 @@ func TestGettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 
 	t.Run("GetCostTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseStock
+		var obj *BooksValidateMigrationResponseStock
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18738,11 +18739,11 @@ func TestGettersPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestSettersMarkExplicitBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("SetMovements_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var fernTestValueMovements int64
 
 		// Act
@@ -18773,7 +18774,7 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseStock(t *testing
 	t.Run("SetCostTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		var fernTestValueCostTotal string
 
 		// Act
@@ -18803,11 +18804,11 @@ func TestSettersMarkExplicitPostV1MigrationBooksValidateResponseStock(t *testing
 
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18816,31 +18817,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestAccountsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestAccountsItem
+		var unmarshaled BooksImportMigrationRequestAccountsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestAccountsItem
+		var obj BooksImportMigrationRequestAccountsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestAccountsItem
+		var obj BooksImportMigrationRequestAccountsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18849,31 +18850,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestAssetGroupsItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestAssetGroupsItem
+		var unmarshaled BooksImportMigrationRequestAssetGroupsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj BooksImportMigrationRequestAssetGroupsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj BooksImportMigrationRequestAssetGroupsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18882,31 +18883,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestFixedAssetsItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestFixedAssetsItem
+		var unmarshaled BooksImportMigrationRequestFixedAssetsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj BooksImportMigrationRequestFixedAssetsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj BooksImportMigrationRequestFixedAssetsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18915,31 +18916,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestItemsItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestItemsItem
+		var unmarshaled BooksImportMigrationRequestItemsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestItemsItem
+		var obj BooksImportMigrationRequestItemsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestItemsItem
+		var obj BooksImportMigrationRequestItemsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18948,31 +18949,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestJournalItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestJournalItem
+		var unmarshaled BooksImportMigrationRequestJournalItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestJournalItem
+		var obj BooksImportMigrationRequestJournalItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestJournalItem
+		var obj BooksImportMigrationRequestJournalItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18981,31 +18982,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestJournalItemEntriesItem(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var unmarshaled BooksImportMigrationRequestJournalItemEntriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj BooksImportMigrationRequestJournalItemEntriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj BooksImportMigrationRequestJournalItemEntriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19014,31 +19015,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestOpenPayablesItem(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestOpenPayablesItem
+		var unmarshaled BooksImportMigrationRequestOpenPayablesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj BooksImportMigrationRequestOpenPayablesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj BooksImportMigrationRequestOpenPayablesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19047,31 +19048,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestOpenReceivablesItem(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var unmarshaled BooksImportMigrationRequestOpenReceivablesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj BooksImportMigrationRequestOpenReceivablesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj BooksImportMigrationRequestOpenReceivablesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19080,31 +19081,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestOpeningBalances(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestOpeningBalances
+		var unmarshaled BooksImportMigrationRequestOpeningBalances
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpeningBalances
+		var obj BooksImportMigrationRequestOpeningBalances
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpeningBalances
+		var obj BooksImportMigrationRequestOpeningBalances
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19113,31 +19114,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestOpeningBalancesEntriesIt
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var unmarshaled BooksImportMigrationRequestOpeningBalancesEntriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj BooksImportMigrationRequestOpeningBalancesEntriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj BooksImportMigrationRequestOpeningBalancesEntriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19146,31 +19147,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestPartnersItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestPartnersItem
+		var unmarshaled BooksImportMigrationRequestPartnersItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestPartnersItem
+		var obj BooksImportMigrationRequestPartnersItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestPartnersItem
+		var obj BooksImportMigrationRequestPartnersItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19179,31 +19180,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestPartnersItemAddress(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestPartnersItemAddress
+		var unmarshaled BooksImportMigrationRequestPartnersItemAddress
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj BooksImportMigrationRequestPartnersItemAddress
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj BooksImportMigrationRequestPartnersItemAddress
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19212,31 +19213,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportRequestStockItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportRequestStockItem
+		var unmarshaled BooksImportMigrationRequestStockItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestStockItem
+		var obj BooksImportMigrationRequestStockItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportRequestStockItem
+		var obj BooksImportMigrationRequestStockItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19245,31 +19246,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponse
+		var unmarshaled BooksImportMigrationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponse
+		var obj BooksImportMigrationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponse
+		var obj BooksImportMigrationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19278,31 +19279,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseAccounts(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseAccounts
+		var unmarshaled BooksImportMigrationResponseAccounts
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseAccounts
+		var obj BooksImportMigrationResponseAccounts
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseAccounts
+		var obj BooksImportMigrationResponseAccounts
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19311,31 +19312,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseAssetGroups(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseAssetGroups
+		var unmarshaled BooksImportMigrationResponseAssetGroups
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseAssetGroups
+		var obj BooksImportMigrationResponseAssetGroups
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseAssetGroups
+		var obj BooksImportMigrationResponseAssetGroups
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19344,31 +19345,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseFixedAssets(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseFixedAssets
+		var unmarshaled BooksImportMigrationResponseFixedAssets
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseFixedAssets
+		var obj BooksImportMigrationResponseFixedAssets
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseFixedAssets
+		var obj BooksImportMigrationResponseFixedAssets
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19377,31 +19378,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseItems(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseItems
+		var unmarshaled BooksImportMigrationResponseItems
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseItems
+		var obj BooksImportMigrationResponseItems
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseItems
+		var obj BooksImportMigrationResponseItems
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19410,31 +19411,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseJournal(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseJournal
+		var unmarshaled BooksImportMigrationResponseJournal
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseJournal
+		var obj BooksImportMigrationResponseJournal
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseJournal
+		var obj BooksImportMigrationResponseJournal
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19443,31 +19444,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseNumberSeriesItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseNumberSeriesItem
+		var unmarshaled BooksImportMigrationResponseNumberSeriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj BooksImportMigrationResponseNumberSeriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj BooksImportMigrationResponseNumberSeriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19476,31 +19477,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseOpenPayables(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseOpenPayables
+		var unmarshaled BooksImportMigrationResponseOpenPayables
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpenPayables
+		var obj BooksImportMigrationResponseOpenPayables
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpenPayables
+		var obj BooksImportMigrationResponseOpenPayables
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19509,31 +19510,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseOpenReceivables(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseOpenReceivables
+		var unmarshaled BooksImportMigrationResponseOpenReceivables
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpenReceivables
+		var obj BooksImportMigrationResponseOpenReceivables
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpenReceivables
+		var obj BooksImportMigrationResponseOpenReceivables
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19542,31 +19543,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseOpeningBalances(t *test
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseOpeningBalances
+		var unmarshaled BooksImportMigrationResponseOpeningBalances
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpeningBalances
+		var obj BooksImportMigrationResponseOpeningBalances
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseOpeningBalances
+		var obj BooksImportMigrationResponseOpeningBalances
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19575,31 +19576,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponsePartners(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponsePartners
+		var unmarshaled BooksImportMigrationResponsePartners
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponsePartners
+		var obj BooksImportMigrationResponsePartners
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponsePartners
+		var obj BooksImportMigrationResponsePartners
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestJSONMarshalingBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19608,31 +19609,31 @@ func TestJSONMarshalingPostV1MigrationBooksImportResponseStock(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksImportResponseStock
+		var unmarshaled BooksImportMigrationResponseStock
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseStock
+		var obj BooksImportMigrationResponseStock
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksImportResponseStock
+		var obj BooksImportMigrationResponseStock
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19641,31 +19642,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestAccountsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestAccountsItem
+		var unmarshaled BooksValidateMigrationRequestAccountsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestAccountsItem
+		var obj BooksValidateMigrationRequestAccountsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestAccountsItem
+		var obj BooksValidateMigrationRequestAccountsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19674,31 +19675,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestAssetGroupsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var unmarshaled BooksValidateMigrationRequestAssetGroupsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj BooksValidateMigrationRequestAssetGroupsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj BooksValidateMigrationRequestAssetGroupsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19707,31 +19708,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestFixedAssetsItem(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var unmarshaled BooksValidateMigrationRequestFixedAssetsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj BooksValidateMigrationRequestFixedAssetsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj BooksValidateMigrationRequestFixedAssetsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19740,31 +19741,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestItemsItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestItemsItem
+		var unmarshaled BooksValidateMigrationRequestItemsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestItemsItem
+		var obj BooksValidateMigrationRequestItemsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestItemsItem
+		var obj BooksValidateMigrationRequestItemsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19773,31 +19774,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestJournalItem(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestJournalItem
+		var unmarshaled BooksValidateMigrationRequestJournalItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestJournalItem
+		var obj BooksValidateMigrationRequestJournalItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestJournalItem
+		var obj BooksValidateMigrationRequestJournalItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19806,31 +19807,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestJournalItemEntriesItem
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var unmarshaled BooksValidateMigrationRequestJournalItemEntriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj BooksValidateMigrationRequestJournalItemEntriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj BooksValidateMigrationRequestJournalItemEntriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19839,31 +19840,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpenPayablesItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var unmarshaled BooksValidateMigrationRequestOpenPayablesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj BooksValidateMigrationRequestOpenPayablesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj BooksValidateMigrationRequestOpenPayablesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19872,31 +19873,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpenReceivablesItem(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var unmarshaled BooksValidateMigrationRequestOpenReceivablesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj BooksValidateMigrationRequestOpenReceivablesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj BooksValidateMigrationRequestOpenReceivablesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19905,31 +19906,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpeningBalances(t *tes
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestOpeningBalances
+		var unmarshaled BooksValidateMigrationRequestOpeningBalances
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj BooksValidateMigrationRequestOpeningBalances
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj BooksValidateMigrationRequestOpeningBalances
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19938,31 +19939,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestOpeningBalancesEntries
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var unmarshaled BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -19971,31 +19972,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestPartnersItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestPartnersItem
+		var unmarshaled BooksValidateMigrationRequestPartnersItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestPartnersItem
+		var obj BooksValidateMigrationRequestPartnersItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestPartnersItem
+		var obj BooksValidateMigrationRequestPartnersItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20004,31 +20005,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestPartnersItemAddress(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var unmarshaled BooksValidateMigrationRequestPartnersItemAddress
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj BooksValidateMigrationRequestPartnersItemAddress
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj BooksValidateMigrationRequestPartnersItemAddress
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20037,31 +20038,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateRequestStockItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateRequestStockItem
+		var unmarshaled BooksValidateMigrationRequestStockItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestStockItem
+		var obj BooksValidateMigrationRequestStockItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateRequestStockItem
+		var obj BooksValidateMigrationRequestStockItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20070,31 +20071,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponse
+		var unmarshaled BooksValidateMigrationResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponse
+		var obj BooksValidateMigrationResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponse
+		var obj BooksValidateMigrationResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20103,31 +20104,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseAccounts(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseAccounts
+		var unmarshaled BooksValidateMigrationResponseAccounts
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseAccounts
+		var obj BooksValidateMigrationResponseAccounts
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseAccounts
+		var obj BooksValidateMigrationResponseAccounts
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20136,31 +20137,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseAssetGroups(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseAssetGroups
+		var unmarshaled BooksValidateMigrationResponseAssetGroups
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseAssetGroups
+		var obj BooksValidateMigrationResponseAssetGroups
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseAssetGroups
+		var obj BooksValidateMigrationResponseAssetGroups
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20169,31 +20170,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseFixedAssets(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseFixedAssets
+		var unmarshaled BooksValidateMigrationResponseFixedAssets
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseFixedAssets
+		var obj BooksValidateMigrationResponseFixedAssets
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseFixedAssets
+		var obj BooksValidateMigrationResponseFixedAssets
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20202,31 +20203,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseItems(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseItems
+		var unmarshaled BooksValidateMigrationResponseItems
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseItems
+		var obj BooksValidateMigrationResponseItems
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseItems
+		var obj BooksValidateMigrationResponseItems
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20235,31 +20236,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseJournal(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseJournal
+		var unmarshaled BooksValidateMigrationResponseJournal
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseJournal
+		var obj BooksValidateMigrationResponseJournal
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseJournal
+		var obj BooksValidateMigrationResponseJournal
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20268,31 +20269,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseNumberSeriesItem(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var unmarshaled BooksValidateMigrationResponseNumberSeriesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj BooksValidateMigrationResponseNumberSeriesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj BooksValidateMigrationResponseNumberSeriesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20301,31 +20302,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpenPayables(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseOpenPayables
+		var unmarshaled BooksValidateMigrationResponseOpenPayables
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpenPayables
+		var obj BooksValidateMigrationResponseOpenPayables
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpenPayables
+		var obj BooksValidateMigrationResponseOpenPayables
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20334,31 +20335,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpenReceivables(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseOpenReceivables
+		var unmarshaled BooksValidateMigrationResponseOpenReceivables
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj BooksValidateMigrationResponseOpenReceivables
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj BooksValidateMigrationResponseOpenReceivables
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20367,31 +20368,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseOpeningBalances(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseOpeningBalances
+		var unmarshaled BooksValidateMigrationResponseOpeningBalances
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj BooksValidateMigrationResponseOpeningBalances
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj BooksValidateMigrationResponseOpeningBalances
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20400,31 +20401,31 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponsePartners(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponsePartners
+		var unmarshaled BooksValidateMigrationResponsePartners
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponsePartners
+		var obj BooksValidateMigrationResponsePartners
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponsePartners
+		var obj BooksValidateMigrationResponsePartners
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestJSONMarshalingBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -20433,869 +20434,869 @@ func TestJSONMarshalingPostV1MigrationBooksValidateResponseStock(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1MigrationBooksValidateResponseStock
+		var unmarshaled BooksValidateMigrationResponseStock
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseStock
+		var obj BooksValidateMigrationResponseStock
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1MigrationBooksValidateResponseStock
+		var obj BooksValidateMigrationResponseStock
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestStringBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalances
+		var obj *BooksImportMigrationRequestOpeningBalances
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestStringBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestStringBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestStringBooksImportMigrationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestStringBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAccounts
+		var obj *BooksImportMigrationResponseAccounts
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestStringBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAssetGroups
+		var obj *BooksImportMigrationResponseAssetGroups
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestStringBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseFixedAssets
+		var obj *BooksImportMigrationResponseFixedAssets
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestStringBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseItems
+		var obj *BooksImportMigrationResponseItems
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestStringBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseJournal
+		var obj *BooksImportMigrationResponseJournal
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestStringBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj *BooksImportMigrationResponseNumberSeriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestStringBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenPayables
+		var obj *BooksImportMigrationResponseOpenPayables
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestStringBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenReceivables
+		var obj *BooksImportMigrationResponseOpenReceivables
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestStringBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestStringBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponsePartners
+		var obj *BooksImportMigrationResponsePartners
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestStringBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseStock
+		var obj *BooksImportMigrationResponseStock
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestStringBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj *BooksValidateMigrationRequestOpeningBalances
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestStringBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestStringBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestStringBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestStringBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAccounts
+		var obj *BooksValidateMigrationResponseAccounts
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestStringBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAssetGroups
+		var obj *BooksValidateMigrationResponseAssetGroups
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestStringBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseFixedAssets
+		var obj *BooksValidateMigrationResponseFixedAssets
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestStringBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseItems
+		var obj *BooksValidateMigrationResponseItems
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestStringBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseJournal
+		var obj *BooksValidateMigrationResponseJournal
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestStringBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj *BooksValidateMigrationResponseNumberSeriesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestStringBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenPayables
+		var obj *BooksValidateMigrationResponseOpenPayables
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestStringBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj *BooksValidateMigrationResponseOpenReceivables
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestStringBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestStringBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponsePartners
+		var obj *BooksValidateMigrationResponsePartners
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestStringBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseStock
+		var obj *BooksValidateMigrationResponseStock
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1MigrationBooksImportRequestAccountsItemType(t *testing.T) {
+func TestEnumBooksImportMigrationRequestAccountsItemType(t *testing.T) {
 	t.Run("NewFromString_asset", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("asset")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("asset")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestAccountsItemType("asset"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestAccountsItemType("asset"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_liability", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("liability")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("liability")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestAccountsItemType("liability"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestAccountsItemType("liability"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("equity")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestAccountsItemType("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestAccountsItemType("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_income", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("income")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("income")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestAccountsItemType("income"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestAccountsItemType("income"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_expense", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("expense")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("expense")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestAccountsItemType("expense"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestAccountsItemType("expense"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksImportRequestAccountsItemTypeFromString("asset")
+		val, err := NewBooksImportMigrationRequestAccountsItemTypeFromString("asset")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21303,28 +21304,28 @@ func TestEnumPostV1MigrationBooksImportRequestAccountsItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1MigrationBooksImportRequestItemsItemType(t *testing.T) {
+func TestEnumBooksImportMigrationRequestItemsItemType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestItemsItemTypeFromString("product")
+		val, err := NewBooksImportMigrationRequestItemsItemTypeFromString("product")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestItemsItemType("product"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestItemsItemType("product"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_service", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestItemsItemTypeFromString("service")
+		val, err := NewBooksImportMigrationRequestItemsItemTypeFromString("service")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestItemsItemType("service"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestItemsItemType("service"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksImportRequestItemsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksImportMigrationRequestItemsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksImportRequestItemsItemTypeFromString("product")
+		val, err := NewBooksImportMigrationRequestItemsItemTypeFromString("product")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21332,28 +21333,28 @@ func TestEnumPostV1MigrationBooksImportRequestItemsItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1MigrationBooksImportRequestPartnersItemType(t *testing.T) {
+func TestEnumBooksImportMigrationRequestPartnersItemType(t *testing.T) {
 	t.Run("NewFromString_company", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestPartnersItemTypeFromString("company")
+		val, err := NewBooksImportMigrationRequestPartnersItemTypeFromString("company")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestPartnersItemType("company"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestPartnersItemType("company"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_person", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksImportRequestPartnersItemTypeFromString("person")
+		val, err := NewBooksImportMigrationRequestPartnersItemTypeFromString("person")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksImportRequestPartnersItemType("person"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksImportMigrationRequestPartnersItemType("person"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksImportRequestPartnersItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksImportMigrationRequestPartnersItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksImportRequestPartnersItemTypeFromString("company")
+		val, err := NewBooksImportMigrationRequestPartnersItemTypeFromString("company")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21361,49 +21362,49 @@ func TestEnumPostV1MigrationBooksImportRequestPartnersItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1MigrationBooksValidateRequestAccountsItemType(t *testing.T) {
+func TestEnumBooksValidateMigrationRequestAccountsItemType(t *testing.T) {
 	t.Run("NewFromString_asset", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("asset")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("asset")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestAccountsItemType("asset"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestAccountsItemType("asset"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_liability", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("liability")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("liability")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestAccountsItemType("liability"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestAccountsItemType("liability"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_equity", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("equity")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("equity")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestAccountsItemType("equity"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestAccountsItemType("equity"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_income", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("income")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("income")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestAccountsItemType("income"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestAccountsItemType("income"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_expense", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("expense")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("expense")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestAccountsItemType("expense"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestAccountsItemType("expense"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksValidateRequestAccountsItemTypeFromString("asset")
+		val, err := NewBooksValidateMigrationRequestAccountsItemTypeFromString("asset")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21411,28 +21412,28 @@ func TestEnumPostV1MigrationBooksValidateRequestAccountsItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1MigrationBooksValidateRequestItemsItemType(t *testing.T) {
+func TestEnumBooksValidateMigrationRequestItemsItemType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestItemsItemTypeFromString("product")
+		val, err := NewBooksValidateMigrationRequestItemsItemTypeFromString("product")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestItemsItemType("product"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestItemsItemType("product"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_service", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestItemsItemTypeFromString("service")
+		val, err := NewBooksValidateMigrationRequestItemsItemTypeFromString("service")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestItemsItemType("service"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestItemsItemType("service"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksValidateRequestItemsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksValidateMigrationRequestItemsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksValidateRequestItemsItemTypeFromString("product")
+		val, err := NewBooksValidateMigrationRequestItemsItemTypeFromString("product")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21440,28 +21441,28 @@ func TestEnumPostV1MigrationBooksValidateRequestItemsItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1MigrationBooksValidateRequestPartnersItemType(t *testing.T) {
+func TestEnumBooksValidateMigrationRequestPartnersItemType(t *testing.T) {
 	t.Run("NewFromString_company", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestPartnersItemTypeFromString("company")
+		val, err := NewBooksValidateMigrationRequestPartnersItemTypeFromString("company")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestPartnersItemType("company"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestPartnersItemType("company"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_person", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1MigrationBooksValidateRequestPartnersItemTypeFromString("person")
+		val, err := NewBooksValidateMigrationRequestPartnersItemTypeFromString("person")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1MigrationBooksValidateRequestPartnersItemType("person"), val, "enum value should match expected wire value")
+		assert.Equal(t, BooksValidateMigrationRequestPartnersItemType("person"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1MigrationBooksValidateRequestPartnersItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewBooksValidateMigrationRequestPartnersItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1MigrationBooksValidateRequestPartnersItemTypeFromString("company")
+		val, err := NewBooksValidateMigrationRequestPartnersItemTypeFromString("company")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -21469,10 +21470,10 @@ func TestEnumPostV1MigrationBooksValidateRequestPartnersItemType(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestAccountsItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestAccountsItem{}
+		obj := &BooksImportMigrationRequestAccountsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21486,16 +21487,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestAccountsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAccountsItem
+		var obj *BooksImportMigrationRequestAccountsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestAssetGroupsItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestAssetGroupsItem{}
+		obj := &BooksImportMigrationRequestAssetGroupsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21509,16 +21510,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestAssetGroupsItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestAssetGroupsItem
+		var obj *BooksImportMigrationRequestAssetGroupsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestFixedAssetsItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestFixedAssetsItem{}
+		obj := &BooksImportMigrationRequestFixedAssetsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21532,16 +21533,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestFixedAssetsItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestFixedAssetsItem
+		var obj *BooksImportMigrationRequestFixedAssetsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestItemsItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestItemsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestItemsItem{}
+		obj := &BooksImportMigrationRequestItemsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21555,16 +21556,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestItemsItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestItemsItem
+		var obj *BooksImportMigrationRequestItemsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestJournalItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestJournalItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestJournalItem{}
+		obj := &BooksImportMigrationRequestJournalItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21578,16 +21579,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestJournalItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItem
+		var obj *BooksImportMigrationRequestJournalItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestJournalItemEntriesItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestJournalItemEntriesItem{}
+		obj := &BooksImportMigrationRequestJournalItemEntriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21601,16 +21602,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestJournalItemEntriesItem(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestJournalItemEntriesItem
+		var obj *BooksImportMigrationRequestJournalItemEntriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestOpenPayablesItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpenPayablesItem{}
+		obj := &BooksImportMigrationRequestOpenPayablesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21624,16 +21625,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestOpenPayablesItem(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenPayablesItem
+		var obj *BooksImportMigrationRequestOpenPayablesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestOpenReceivablesItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpenReceivablesItem{}
+		obj := &BooksImportMigrationRequestOpenReceivablesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21647,16 +21648,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestOpenReceivablesItem(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpenReceivablesItem
+		var obj *BooksImportMigrationRequestOpenReceivablesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestOpeningBalances(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpeningBalances{}
+		obj := &BooksImportMigrationRequestOpeningBalances{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21670,16 +21671,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestOpeningBalances(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalances
+		var obj *BooksImportMigrationRequestOpeningBalances
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem{}
+		obj := &BooksImportMigrationRequestOpeningBalancesEntriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21693,16 +21694,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestOpeningBalancesEntriesI
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestOpeningBalancesEntriesItem
+		var obj *BooksImportMigrationRequestOpeningBalancesEntriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestPartnersItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestPartnersItem{}
+		obj := &BooksImportMigrationRequestPartnersItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21716,16 +21717,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestPartnersItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItem
+		var obj *BooksImportMigrationRequestPartnersItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestPartnersItemAddress(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestPartnersItemAddress{}
+		obj := &BooksImportMigrationRequestPartnersItemAddress{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21739,16 +21740,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestPartnersItemAddress(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestPartnersItemAddress
+		var obj *BooksImportMigrationRequestPartnersItemAddress
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportRequestStockItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationRequestStockItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportRequestStockItem{}
+		obj := &BooksImportMigrationRequestStockItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21762,16 +21763,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportRequestStockItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportRequestStockItem
+		var obj *BooksImportMigrationRequestStockItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponse(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponse{}
+		obj := &BooksImportMigrationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21785,16 +21786,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponse
+		var obj *BooksImportMigrationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseAccounts(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseAccounts(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseAccounts{}
+		obj := &BooksImportMigrationResponseAccounts{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21808,16 +21809,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseAccounts(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAccounts
+		var obj *BooksImportMigrationResponseAccounts
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseAssetGroups(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseAssetGroups{}
+		obj := &BooksImportMigrationResponseAssetGroups{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21831,16 +21832,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseAssetGroups(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseAssetGroups
+		var obj *BooksImportMigrationResponseAssetGroups
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseFixedAssets(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseFixedAssets{}
+		obj := &BooksImportMigrationResponseFixedAssets{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21854,16 +21855,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseFixedAssets(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseFixedAssets
+		var obj *BooksImportMigrationResponseFixedAssets
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseItems(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseItems(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseItems{}
+		obj := &BooksImportMigrationResponseItems{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21877,16 +21878,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseItems(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseItems
+		var obj *BooksImportMigrationResponseItems
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseJournal(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseJournal(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseJournal{}
+		obj := &BooksImportMigrationResponseJournal{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21900,16 +21901,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseJournal(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseJournal
+		var obj *BooksImportMigrationResponseJournal
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseNumberSeriesItem(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseNumberSeriesItem{}
+		obj := &BooksImportMigrationResponseNumberSeriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21923,16 +21924,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseNumberSeriesItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseNumberSeriesItem
+		var obj *BooksImportMigrationResponseNumberSeriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseOpenPayables(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpenPayables{}
+		obj := &BooksImportMigrationResponseOpenPayables{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21946,16 +21947,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseOpenPayables(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenPayables
+		var obj *BooksImportMigrationResponseOpenPayables
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseOpenReceivables(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpenReceivables{}
+		obj := &BooksImportMigrationResponseOpenReceivables{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21969,16 +21970,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseOpenReceivables(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpenReceivables
+		var obj *BooksImportMigrationResponseOpenReceivables
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseOpeningBalances(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseOpeningBalances{}
+		obj := &BooksImportMigrationResponseOpeningBalances{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -21992,16 +21993,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseOpeningBalances(t *tes
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseOpeningBalances
+		var obj *BooksImportMigrationResponseOpeningBalances
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponsePartners(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponsePartners(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponsePartners{}
+		obj := &BooksImportMigrationResponsePartners{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22015,16 +22016,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponsePartners(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponsePartners
+		var obj *BooksImportMigrationResponsePartners
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksImportResponseStock(t *testing.T) {
+func TestExtraPropertiesBooksImportMigrationResponseStock(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksImportResponseStock{}
+		obj := &BooksImportMigrationResponseStock{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22038,16 +22039,16 @@ func TestExtraPropertiesPostV1MigrationBooksImportResponseStock(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksImportResponseStock
+		var obj *BooksImportMigrationResponseStock
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestAccountsItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestAccountsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestAccountsItem{}
+		obj := &BooksValidateMigrationRequestAccountsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22061,16 +22062,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestAccountsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAccountsItem
+		var obj *BooksValidateMigrationRequestAccountsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestAssetGroupsItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestAssetGroupsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestAssetGroupsItem{}
+		obj := &BooksValidateMigrationRequestAssetGroupsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22084,16 +22085,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestAssetGroupsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestAssetGroupsItem
+		var obj *BooksValidateMigrationRequestAssetGroupsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestFixedAssetsItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestFixedAssetsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestFixedAssetsItem{}
+		obj := &BooksValidateMigrationRequestFixedAssetsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22107,16 +22108,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestFixedAssetsItem(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestFixedAssetsItem
+		var obj *BooksValidateMigrationRequestFixedAssetsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestItemsItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestItemsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestItemsItem{}
+		obj := &BooksValidateMigrationRequestItemsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22130,16 +22131,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestItemsItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestItemsItem
+		var obj *BooksValidateMigrationRequestItemsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestJournalItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestJournalItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestJournalItem{}
+		obj := &BooksValidateMigrationRequestJournalItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22153,16 +22154,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestJournalItem(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItem
+		var obj *BooksValidateMigrationRequestJournalItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestJournalItemEntriesItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestJournalItemEntriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestJournalItemEntriesItem{}
+		obj := &BooksValidateMigrationRequestJournalItemEntriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22176,16 +22177,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestJournalItemEntriesIte
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestJournalItemEntriesItem
+		var obj *BooksValidateMigrationRequestJournalItemEntriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpenPayablesItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestOpenPayablesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpenPayablesItem{}
+		obj := &BooksValidateMigrationRequestOpenPayablesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22199,16 +22200,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpenPayablesItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenPayablesItem
+		var obj *BooksValidateMigrationRequestOpenPayablesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpenReceivablesItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestOpenReceivablesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpenReceivablesItem{}
+		obj := &BooksValidateMigrationRequestOpenReceivablesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22222,16 +22223,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpenReceivablesItem(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpenReceivablesItem
+		var obj *BooksValidateMigrationRequestOpenReceivablesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpeningBalances(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestOpeningBalances(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalances{}
+		obj := &BooksValidateMigrationRequestOpeningBalances{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22245,16 +22246,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpeningBalances(t *te
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalances
+		var obj *BooksValidateMigrationRequestOpeningBalances
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestOpeningBalancesEntriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem{}
+		obj := &BooksValidateMigrationRequestOpeningBalancesEntriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22268,16 +22269,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestOpeningBalancesEntrie
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestOpeningBalancesEntriesItem
+		var obj *BooksValidateMigrationRequestOpeningBalancesEntriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestPartnersItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestPartnersItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestPartnersItem{}
+		obj := &BooksValidateMigrationRequestPartnersItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22291,16 +22292,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestPartnersItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItem
+		var obj *BooksValidateMigrationRequestPartnersItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestPartnersItemAddress(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestPartnersItemAddress(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestPartnersItemAddress{}
+		obj := &BooksValidateMigrationRequestPartnersItemAddress{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22314,16 +22315,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestPartnersItemAddress(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestPartnersItemAddress
+		var obj *BooksValidateMigrationRequestPartnersItemAddress
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateRequestStockItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationRequestStockItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateRequestStockItem{}
+		obj := &BooksValidateMigrationRequestStockItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22337,16 +22338,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateRequestStockItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateRequestStockItem
+		var obj *BooksValidateMigrationRequestStockItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponse(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponse{}
+		obj := &BooksValidateMigrationResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22360,16 +22361,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponse
+		var obj *BooksValidateMigrationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseAccounts(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseAccounts(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseAccounts{}
+		obj := &BooksValidateMigrationResponseAccounts{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22383,16 +22384,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseAccounts(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAccounts
+		var obj *BooksValidateMigrationResponseAccounts
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseAssetGroups(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseAssetGroups(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseAssetGroups{}
+		obj := &BooksValidateMigrationResponseAssetGroups{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22406,16 +22407,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseAssetGroups(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseAssetGroups
+		var obj *BooksValidateMigrationResponseAssetGroups
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseFixedAssets(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseFixedAssets(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseFixedAssets{}
+		obj := &BooksValidateMigrationResponseFixedAssets{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22429,16 +22430,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseFixedAssets(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseFixedAssets
+		var obj *BooksValidateMigrationResponseFixedAssets
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseItems(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseItems(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseItems{}
+		obj := &BooksValidateMigrationResponseItems{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22452,16 +22453,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseItems(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseItems
+		var obj *BooksValidateMigrationResponseItems
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseJournal(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseJournal(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseJournal{}
+		obj := &BooksValidateMigrationResponseJournal{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22475,16 +22476,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseJournal(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseJournal
+		var obj *BooksValidateMigrationResponseJournal
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseNumberSeriesItem(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseNumberSeriesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseNumberSeriesItem{}
+		obj := &BooksValidateMigrationResponseNumberSeriesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22498,16 +22499,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseNumberSeriesItem(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseNumberSeriesItem
+		var obj *BooksValidateMigrationResponseNumberSeriesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpenPayables(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseOpenPayables(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpenPayables{}
+		obj := &BooksValidateMigrationResponseOpenPayables{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22521,16 +22522,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpenPayables(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenPayables
+		var obj *BooksValidateMigrationResponseOpenPayables
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpenReceivables(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseOpenReceivables(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpenReceivables{}
+		obj := &BooksValidateMigrationResponseOpenReceivables{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22544,16 +22545,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpenReceivables(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpenReceivables
+		var obj *BooksValidateMigrationResponseOpenReceivables
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpeningBalances(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseOpeningBalances(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseOpeningBalances{}
+		obj := &BooksValidateMigrationResponseOpeningBalances{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22567,16 +22568,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseOpeningBalances(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseOpeningBalances
+		var obj *BooksValidateMigrationResponseOpeningBalances
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponsePartners(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponsePartners(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponsePartners{}
+		obj := &BooksValidateMigrationResponsePartners{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22590,16 +22591,16 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponsePartners(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponsePartners
+		var obj *BooksValidateMigrationResponsePartners
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1MigrationBooksValidateResponseStock(t *testing.T) {
+func TestExtraPropertiesBooksValidateMigrationResponseStock(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1MigrationBooksValidateResponseStock{}
+		obj := &BooksValidateMigrationResponseStock{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -22613,7 +22614,7 @@ func TestExtraPropertiesPostV1MigrationBooksValidateResponseStock(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1MigrationBooksValidateResponseStock
+		var obj *BooksValidateMigrationResponseStock
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

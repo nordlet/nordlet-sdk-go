@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1PayrollDepartmentsCreate(
+func (r *RawClient) DepartmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollDepartmentsCreateRequest,
+	request *nordlet.DepartmentsCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollDepartmentsCreateResponse], error) {
+) (*core.Response[*nordlet.DepartmentsCreatePayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1PayrollDepartmentsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollDepartmentsCreateResponse
+	var response *nordlet.DepartmentsCreatePayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1PayrollDepartmentsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollDepartmentsCreateResponse]{
+	return &core.Response[*nordlet.DepartmentsCreatePayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollDepartmentsList(
+func (r *RawClient) DepartmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollDepartmentsListRequest,
+	request *nordlet.DepartmentsListPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollDepartmentsListResponse], error) {
+) (*core.Response[*nordlet.DepartmentsListPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1PayrollDepartmentsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollDepartmentsListResponse
+	var response *nordlet.DepartmentsListPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1PayrollDepartmentsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollDepartmentsListResponse]{
+	return &core.Response[*nordlet.DepartmentsListPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollSchedulesCreate(
+func (r *RawClient) SchedulesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollSchedulesCreateRequest,
+	request *nordlet.SchedulesCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollSchedulesCreateResponse], error) {
+) (*core.Response[*nordlet.SchedulesCreatePayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1PayrollSchedulesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollSchedulesCreateResponse
+	var response *nordlet.SchedulesCreatePayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1PayrollSchedulesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollSchedulesCreateResponse]{
+	return &core.Response[*nordlet.SchedulesCreatePayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollSchedulesList(
+func (r *RawClient) SchedulesList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollSchedulesListRequest,
+	request *nordlet.SchedulesListPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollSchedulesListResponse], error) {
+) (*core.Response[*nordlet.SchedulesListPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1PayrollSchedulesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollSchedulesListResponse
+	var response *nordlet.SchedulesListPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1PayrollSchedulesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollSchedulesListResponse]{
+	return &core.Response[*nordlet.SchedulesListPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
+func (r *RawClient) Calc(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollCalcRequest,
+	request *nordlet.CalcPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollCalcResponse], error) {
+) (*core.Response[*nordlet.CalcPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollCalcResponse
+	var response *nordlet.CalcPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollCalcResponse]{
+	return &core.Response[*nordlet.CalcPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollRunsCreate(
+func (r *RawClient) RunsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsCreateRequest,
+	request *nordlet.RunsCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollRunsCreateResponse], error) {
+) (*core.Response[*nordlet.RunsCreatePayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1PayrollRunsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollRunsCreateResponse
+	var response *nordlet.RunsCreatePayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1PayrollRunsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollRunsCreateResponse]{
+	return &core.Response[*nordlet.RunsCreatePayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollRunsGet(
+func (r *RawClient) RunsGet(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsGetRequest,
+	request *nordlet.RunsGetPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollRunsGetResponse], error) {
+) (*core.Response[*nordlet.RunsGetPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1PayrollRunsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollRunsGetResponse
+	var response *nordlet.RunsGetPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1PayrollRunsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollRunsGetResponse]{
+	return &core.Response[*nordlet.RunsGetPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollRunsList(
+func (r *RawClient) RunsList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsListRequest,
+	request *nordlet.RunsListPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollRunsListResponse], error) {
+) (*core.Response[*nordlet.RunsListPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1PayrollRunsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollRunsListResponse
+	var response *nordlet.RunsListPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1PayrollRunsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollRunsListResponse]{
+	return &core.Response[*nordlet.RunsListPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordTheTimeAPersonWorkedInAPayrollLine(
+func (r *RawClient) LinesAttendance(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollLinesAttendanceRequest,
+	request *nordlet.LinesAttendancePayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollLinesAttendanceResponse], error) {
+) (*core.Response[*nordlet.LinesAttendancePayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) RecordTheTimeAPersonWorkedInAPayrollLine(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollLinesAttendanceResponse
+	var response *nordlet.LinesAttendancePayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) RecordTheTimeAPersonWorkedInAPayrollLine(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollLinesAttendanceResponse]{
+	return &core.Response[*nordlet.LinesAttendancePayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollRunsApprove(
+func (r *RawClient) RunsApprove(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsApproveRequest,
+	request *nordlet.RunsApprovePayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollRunsApproveResponse], error) {
+) (*core.Response[*nordlet.RunsApprovePayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1PayrollRunsApprove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollRunsApproveResponse
+	var response *nordlet.RunsApprovePayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1PayrollRunsApprove(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollRunsApproveResponse]{
+	return &core.Response[*nordlet.RunsApprovePayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollRunsCancel(
+func (r *RawClient) RunsCancel(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsCancelRequest,
+	request *nordlet.RunsCancelPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollRunsCancelResponse], error) {
+) (*core.Response[*nordlet.RunsCancelPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1PayrollRunsCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollRunsCancelResponse
+	var response *nordlet.RunsCancelPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1PayrollRunsCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollRunsCancelResponse]{
+	return &core.Response[*nordlet.RunsCancelPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollPaymentsExport(
+func (r *RawClient) PaymentsExport(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollPaymentsExportRequest,
+	request *nordlet.PaymentsExportPayrollRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PayrollPaymentsExportResponse], error) {
+) (*core.Response[*nordlet.PaymentsExportPayrollResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1PayrollPaymentsExport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PayrollPaymentsExportResponse
+	var response *nordlet.PaymentsExportPayrollResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,7 +553,7 @@ func (r *RawClient) PostV1PayrollPaymentsExport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PayrollPaymentsExportResponse]{
+	return &core.Response[*nordlet.PaymentsExportPayrollResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

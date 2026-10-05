@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1PosDevicesCreate(
+func (c *Client) DevicesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PosDevicesCreateRequest,
+	request *nordlet.DevicesCreatePosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosDevicesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosDevicesCreate(
+) (*nordlet.DevicesCreatePosResponse, error) {
+	response, err := c.WithRawResponse.DevicesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1PosDevicesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PosDevicesUpdate(
+func (c *Client) DevicesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PosDevicesUpdateRequest,
+	request *nordlet.DevicesUpdatePosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosDevicesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosDevicesUpdate(
+) (*nordlet.DevicesUpdatePosResponse, error) {
+	response, err := c.WithRawResponse.DevicesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1PosDevicesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PosDevicesList(
+func (c *Client) DevicesList(
 	ctx context.Context,
-	request *nordlet.PostV1PosDevicesListRequest,
+	request *nordlet.DevicesListPosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosDevicesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosDevicesList(
+) (*nordlet.DevicesListPosResponse, error) {
+	response, err := c.WithRawResponse.DevicesList(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1PosDevicesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PosReportsCreate(
+func (c *Client) ReportsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PosReportsCreateRequest,
+	request *nordlet.ReportsCreatePosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosReportsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosReportsCreate(
+) (*nordlet.ReportsCreatePosResponse, error) {
+	response, err := c.WithRawResponse.ReportsCreate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1PosReportsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PosReportsGet(
+func (c *Client) ReportsGet(
 	ctx context.Context,
-	request *nordlet.PostV1PosReportsGetRequest,
+	request *nordlet.ReportsGetPosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosReportsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosReportsGet(
+) (*nordlet.ReportsGetPosResponse, error) {
+	response, err := c.WithRawResponse.ReportsGet(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1PosReportsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PosReportsList(
+func (c *Client) ReportsList(
 	ctx context.Context,
-	request *nordlet.PostV1PosReportsListRequest,
+	request *nordlet.ReportsListPosRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PosReportsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PosReportsList(
+) (*nordlet.ReportsListPosResponse, error) {
+	response, err := c.WithRawResponse.ReportsList(
 		ctx,
 		request,
 		opts...,

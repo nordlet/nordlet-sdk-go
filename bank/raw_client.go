@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1BankAccountsCreate(
+func (r *RawClient) AccountsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsCreateRequest,
+	request *nordlet.AccountsCreateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankAccountsCreateResponse], error) {
+) (*core.Response[*nordlet.AccountsCreateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1BankAccountsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankAccountsCreateResponse
+	var response *nordlet.AccountsCreateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1BankAccountsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankAccountsCreateResponse]{
+	return &core.Response[*nordlet.AccountsCreateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankAccountsList(
+func (r *RawClient) AccountsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsListRequest,
+	request *nordlet.AccountsListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankAccountsListResponse], error) {
+) (*core.Response[*nordlet.AccountsListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1BankAccountsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankAccountsListResponse
+	var response *nordlet.AccountsListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1BankAccountsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankAccountsListResponse]{
+	return &core.Response[*nordlet.AccountsListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankAccountsUpdate(
+func (r *RawClient) AccountsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankAccountsUpdateRequest,
+	request *nordlet.AccountsUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankAccountsUpdateResponse], error) {
+) (*core.Response[*nordlet.AccountsUpdateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1BankAccountsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankAccountsUpdateResponse
+	var response *nordlet.AccountsUpdateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1BankAccountsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankAccountsUpdateResponse]{
+	return &core.Response[*nordlet.AccountsUpdateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankTransactionsImport(
+func (r *RawClient) TransactionsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsImportRequest,
+	request *nordlet.TransactionsImportBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankTransactionsImportResponse], error) {
+) (*core.Response[*nordlet.TransactionsImportBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1BankTransactionsImport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankTransactionsImportResponse
+	var response *nordlet.TransactionsImportBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1BankTransactionsImport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankTransactionsImportResponse]{
+	return &core.Response[*nordlet.TransactionsImportBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankStatementsImport(
+func (r *RawClient) StatementsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankStatementsImportRequest,
+	request *nordlet.StatementsImportBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankStatementsImportResponse], error) {
+) (*core.Response[*nordlet.StatementsImportBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1BankStatementsImport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankStatementsImportResponse
+	var response *nordlet.StatementsImportBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1BankStatementsImport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankStatementsImportResponse]{
+	return &core.Response[*nordlet.StatementsImportBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankTransactionsList(
+func (r *RawClient) TransactionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsListRequest,
+	request *nordlet.TransactionsListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankTransactionsListResponse], error) {
+) (*core.Response[*nordlet.TransactionsListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1BankTransactionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankTransactionsListResponse
+	var response *nordlet.TransactionsListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1BankTransactionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankTransactionsListResponse]{
+	return &core.Response[*nordlet.TransactionsListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankTransactionsMatch(
+func (r *RawClient) TransactionsMatch(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsMatchRequest,
+	request *nordlet.TransactionsMatchBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankTransactionsMatchResponse], error) {
+) (*core.Response[*nordlet.TransactionsMatchBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1BankTransactionsMatch(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankTransactionsMatchResponse
+	var response *nordlet.TransactionsMatchBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,62 @@ func (r *RawClient) PostV1BankTransactionsMatch(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankTransactionsMatchResponse]{
+	return &core.Response[*nordlet.TransactionsMatchBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankTransactionsRecord(
+func (r *RawClient) TransactionsUnmatch(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsRecordRequest,
+	request *nordlet.TransactionsUnmatchBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankTransactionsRecordResponse], error) {
+) (*core.Response[*nordlet.TransactionsUnmatchBankResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/bank/transactions/unmatch"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.TransactionsUnmatchBankResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.TransactionsUnmatchBankResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) TransactionsRecord(
+	ctx context.Context,
+	request *nordlet.TransactionsRecordBankRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.TransactionsRecordBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +401,7 @@ func (r *RawClient) PostV1BankTransactionsRecord(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankTransactionsRecordResponse
+	var response *nordlet.TransactionsRecordBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +421,18 @@ func (r *RawClient) PostV1BankTransactionsRecord(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankTransactionsRecordResponse]{
+	return &core.Response[*nordlet.TransactionsRecordBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankPaymentsExport(
+func (r *RawClient) PaymentsExport(
 	ctx context.Context,
-	request *nordlet.PostV1BankPaymentsExportRequest,
+	request *nordlet.PaymentsExportBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankPaymentsExportResponse], error) {
+) (*core.Response[*nordlet.PaymentsExportBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +445,7 @@ func (r *RawClient) PostV1BankPaymentsExport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankPaymentsExportResponse
+	var response *nordlet.PaymentsExportBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +465,18 @@ func (r *RawClient) PostV1BankPaymentsExport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankPaymentsExportResponse]{
+	return &core.Response[*nordlet.PaymentsExportBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+func (r *RawClient) ImportTemplatesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesCreateRequest,
+	request *nordlet.ImportTemplatesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankImportTemplatesCreateResponse], error) {
+) (*core.Response[*nordlet.ImportTemplatesCreateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +489,7 @@ func (r *RawClient) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFiel
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankImportTemplatesCreateResponse
+	var response *nordlet.ImportTemplatesCreateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +509,18 @@ func (r *RawClient) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFiel
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankImportTemplatesCreateResponse]{
+	return &core.Response[*nordlet.ImportTemplatesCreateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankImportTemplatesUpdate(
+func (r *RawClient) ImportTemplatesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesUpdateRequest,
+	request *nordlet.ImportTemplatesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankImportTemplatesUpdateResponse], error) {
+) (*core.Response[*nordlet.ImportTemplatesUpdateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +533,7 @@ func (r *RawClient) PostV1BankImportTemplatesUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankImportTemplatesUpdateResponse
+	var response *nordlet.ImportTemplatesUpdateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +553,18 @@ func (r *RawClient) PostV1BankImportTemplatesUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankImportTemplatesUpdateResponse]{
+	return &core.Response[*nordlet.ImportTemplatesUpdateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankImportTemplatesDelete(
+func (r *RawClient) ImportTemplatesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesDeleteRequest,
+	request *nordlet.ImportTemplatesDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankImportTemplatesDeleteResponse], error) {
+) (*core.Response[*nordlet.ImportTemplatesDeleteBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +577,7 @@ func (r *RawClient) PostV1BankImportTemplatesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankImportTemplatesDeleteResponse
+	var response *nordlet.ImportTemplatesDeleteBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +597,18 @@ func (r *RawClient) PostV1BankImportTemplatesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankImportTemplatesDeleteResponse]{
+	return &core.Response[*nordlet.ImportTemplatesDeleteBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankImportTemplatesGet(
+func (r *RawClient) ImportTemplatesGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesGetRequest,
+	request *nordlet.ImportTemplatesGetBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankImportTemplatesGetResponse], error) {
+) (*core.Response[*nordlet.ImportTemplatesGetBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +621,7 @@ func (r *RawClient) PostV1BankImportTemplatesGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankImportTemplatesGetResponse
+	var response *nordlet.ImportTemplatesGetBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +641,18 @@ func (r *RawClient) PostV1BankImportTemplatesGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankImportTemplatesGetResponse]{
+	return &core.Response[*nordlet.ImportTemplatesGetBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankImportTemplatesList(
+func (r *RawClient) ImportTemplatesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankImportTemplatesListRequest,
+	request *nordlet.ImportTemplatesListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankImportTemplatesListResponse], error) {
+) (*core.Response[*nordlet.ImportTemplatesListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +665,7 @@ func (r *RawClient) PostV1BankImportTemplatesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankImportTemplatesListResponse
+	var response *nordlet.ImportTemplatesListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +685,18 @@ func (r *RawClient) PostV1BankImportTemplatesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankImportTemplatesListResponse]{
+	return &core.Response[*nordlet.ImportTemplatesListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMatchRulesCreate(
+func (r *RawClient) MatchRulesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesCreateRequest,
+	request *nordlet.MatchRulesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMatchRulesCreateResponse], error) {
+) (*core.Response[*nordlet.MatchRulesCreateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +709,7 @@ func (r *RawClient) PostV1BankMatchRulesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMatchRulesCreateResponse
+	var response *nordlet.MatchRulesCreateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +729,18 @@ func (r *RawClient) PostV1BankMatchRulesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMatchRulesCreateResponse]{
+	return &core.Response[*nordlet.MatchRulesCreateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMatchRulesUpdate(
+func (r *RawClient) MatchRulesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesUpdateRequest,
+	request *nordlet.MatchRulesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMatchRulesUpdateResponse], error) {
+) (*core.Response[*nordlet.MatchRulesUpdateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +753,7 @@ func (r *RawClient) PostV1BankMatchRulesUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMatchRulesUpdateResponse
+	var response *nordlet.MatchRulesUpdateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +773,18 @@ func (r *RawClient) PostV1BankMatchRulesUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMatchRulesUpdateResponse]{
+	return &core.Response[*nordlet.MatchRulesUpdateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMatchRulesDelete(
+func (r *RawClient) MatchRulesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesDeleteRequest,
+	request *nordlet.MatchRulesDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMatchRulesDeleteResponse], error) {
+) (*core.Response[*nordlet.MatchRulesDeleteBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +797,7 @@ func (r *RawClient) PostV1BankMatchRulesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMatchRulesDeleteResponse
+	var response *nordlet.MatchRulesDeleteBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +817,18 @@ func (r *RawClient) PostV1BankMatchRulesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMatchRulesDeleteResponse]{
+	return &core.Response[*nordlet.MatchRulesDeleteBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMatchRulesList(
+func (r *RawClient) MatchRulesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankMatchRulesListRequest,
+	request *nordlet.MatchRulesListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMatchRulesListResponse], error) {
+) (*core.Response[*nordlet.MatchRulesListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +841,7 @@ func (r *RawClient) PostV1BankMatchRulesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMatchRulesListResponse
+	var response *nordlet.MatchRulesListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +861,18 @@ func (r *RawClient) PostV1BankMatchRulesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMatchRulesListResponse]{
+	return &core.Response[*nordlet.MatchRulesListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMandatesCreate(
+func (r *RawClient) MandatesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesCreateRequest,
+	request *nordlet.MandatesCreateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMandatesCreateResponse], error) {
+) (*core.Response[*nordlet.MandatesCreateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +885,7 @@ func (r *RawClient) PostV1BankMandatesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMandatesCreateResponse
+	var response *nordlet.MandatesCreateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +905,18 @@ func (r *RawClient) PostV1BankMandatesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMandatesCreateResponse]{
+	return &core.Response[*nordlet.MandatesCreateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMandatesUpdate(
+func (r *RawClient) MandatesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesUpdateRequest,
+	request *nordlet.MandatesUpdateBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMandatesUpdateResponse], error) {
+) (*core.Response[*nordlet.MandatesUpdateBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +929,7 @@ func (r *RawClient) PostV1BankMandatesUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMandatesUpdateResponse
+	var response *nordlet.MandatesUpdateBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +949,18 @@ func (r *RawClient) PostV1BankMandatesUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMandatesUpdateResponse]{
+	return &core.Response[*nordlet.MandatesUpdateBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMandatesCancel(
+func (r *RawClient) MandatesCancel(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesCancelRequest,
+	request *nordlet.MandatesCancelBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMandatesCancelResponse], error) {
+) (*core.Response[*nordlet.MandatesCancelBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +973,7 @@ func (r *RawClient) PostV1BankMandatesCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMandatesCancelResponse
+	var response *nordlet.MandatesCancelBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,18 +993,18 @@ func (r *RawClient) PostV1BankMandatesCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMandatesCancelResponse]{
+	return &core.Response[*nordlet.MandatesCancelBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMandatesGet(
+func (r *RawClient) MandatesGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesGetRequest,
+	request *nordlet.MandatesGetBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMandatesGetResponse], error) {
+) (*core.Response[*nordlet.MandatesGetBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -973,7 +1017,7 @@ func (r *RawClient) PostV1BankMandatesGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMandatesGetResponse
+	var response *nordlet.MandatesGetBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -993,18 +1037,18 @@ func (r *RawClient) PostV1BankMandatesGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMandatesGetResponse]{
+	return &core.Response[*nordlet.MandatesGetBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankMandatesList(
+func (r *RawClient) MandatesList(
 	ctx context.Context,
-	request *nordlet.PostV1BankMandatesListRequest,
+	request *nordlet.MandatesListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankMandatesListResponse], error) {
+) (*core.Response[*nordlet.MandatesListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1017,7 +1061,7 @@ func (r *RawClient) PostV1BankMandatesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankMandatesListResponse
+	var response *nordlet.MandatesListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1037,18 +1081,18 @@ func (r *RawClient) PostV1BankMandatesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankMandatesListResponse]{
+	return &core.Response[*nordlet.MandatesListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankDirectDebitsExport(
+func (r *RawClient) DirectDebitsExport(
 	ctx context.Context,
-	request *nordlet.PostV1BankDirectDebitsExportRequest,
+	request *nordlet.DirectDebitsExportBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankDirectDebitsExportResponse], error) {
+) (*core.Response[*nordlet.DirectDebitsExportBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1061,7 +1105,7 @@ func (r *RawClient) PostV1BankDirectDebitsExport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankDirectDebitsExportResponse
+	var response *nordlet.DirectDebitsExportBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1081,18 +1125,18 @@ func (r *RawClient) PostV1BankDirectDebitsExport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankDirectDebitsExportResponse]{
+	return &core.Response[*nordlet.DirectDebitsExportBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankTransactionsSuggestMatches(
+func (r *RawClient) TransactionsSuggestMatches(
 	ctx context.Context,
-	request *nordlet.PostV1BankTransactionsSuggestMatchesRequest,
+	request *nordlet.TransactionsSuggestMatchesBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankTransactionsSuggestMatchesResponse], error) {
+) (*core.Response[*nordlet.TransactionsSuggestMatchesBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1105,7 +1149,7 @@ func (r *RawClient) PostV1BankTransactionsSuggestMatches(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankTransactionsSuggestMatchesResponse
+	var response *nordlet.TransactionsSuggestMatchesBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1125,18 +1169,18 @@ func (r *RawClient) PostV1BankTransactionsSuggestMatches(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankTransactionsSuggestMatchesResponse]{
+	return &core.Response[*nordlet.TransactionsSuggestMatchesBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsImport(
+func (r *RawClient) SettlementsImport(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsImportRequest,
+	request *nordlet.SettlementsImportBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsImportResponse], error) {
+) (*core.Response[*nordlet.SettlementsImportBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1149,7 +1193,7 @@ func (r *RawClient) PostV1BankSettlementsImport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsImportResponse
+	var response *nordlet.SettlementsImportBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1169,18 +1213,18 @@ func (r *RawClient) PostV1BankSettlementsImport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsImportResponse]{
+	return &core.Response[*nordlet.SettlementsImportBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsList(
+func (r *RawClient) SettlementsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsListRequest,
+	request *nordlet.SettlementsListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsListResponse], error) {
+) (*core.Response[*nordlet.SettlementsListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1193,7 +1237,7 @@ func (r *RawClient) PostV1BankSettlementsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsListResponse
+	var response *nordlet.SettlementsListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1213,18 +1257,18 @@ func (r *RawClient) PostV1BankSettlementsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsListResponse]{
+	return &core.Response[*nordlet.SettlementsListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsGet(
+func (r *RawClient) SettlementsGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsGetRequest,
+	request *nordlet.SettlementsGetBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsGetResponse], error) {
+) (*core.Response[*nordlet.SettlementsGetBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1237,7 +1281,7 @@ func (r *RawClient) PostV1BankSettlementsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsGetResponse
+	var response *nordlet.SettlementsGetBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1257,18 +1301,18 @@ func (r *RawClient) PostV1BankSettlementsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsGetResponse]{
+	return &core.Response[*nordlet.SettlementsGetBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsMatch(
+func (r *RawClient) SettlementsMatch(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsMatchRequest,
+	request *nordlet.SettlementsMatchBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsMatchResponse], error) {
+) (*core.Response[*nordlet.SettlementsMatchBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1281,7 +1325,7 @@ func (r *RawClient) PostV1BankSettlementsMatch(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsMatchResponse
+	var response *nordlet.SettlementsMatchBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1301,18 +1345,18 @@ func (r *RawClient) PostV1BankSettlementsMatch(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsMatchResponse]{
+	return &core.Response[*nordlet.SettlementsMatchBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+func (r *RawClient) SettlementsCommission(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsCommissionRequest,
+	request *nordlet.SettlementsCommissionBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsCommissionResponse], error) {
+) (*core.Response[*nordlet.SettlementsCommissionBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1325,7 +1369,7 @@ func (r *RawClient) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAn
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsCommissionResponse
+	var response *nordlet.SettlementsCommissionBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1345,18 +1389,18 @@ func (r *RawClient) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAn
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsCommissionResponse]{
+	return &core.Response[*nordlet.SettlementsCommissionBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsLink(
+func (r *RawClient) SettlementsLink(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsLinkRequest,
+	request *nordlet.SettlementsLinkBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsLinkResponse], error) {
+) (*core.Response[*nordlet.SettlementsLinkBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1369,7 +1413,7 @@ func (r *RawClient) PostV1BankSettlementsLink(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsLinkResponse
+	var response *nordlet.SettlementsLinkBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1389,18 +1433,18 @@ func (r *RawClient) PostV1BankSettlementsLink(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsLinkResponse]{
+	return &core.Response[*nordlet.SettlementsLinkBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsUnlink(
+func (r *RawClient) SettlementsUnlink(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsUnlinkRequest,
+	request *nordlet.SettlementsUnlinkBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsUnlinkResponse], error) {
+) (*core.Response[*nordlet.SettlementsUnlinkBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1413,7 +1457,7 @@ func (r *RawClient) PostV1BankSettlementsUnlink(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsUnlinkResponse
+	var response *nordlet.SettlementsUnlinkBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1433,18 +1477,18 @@ func (r *RawClient) PostV1BankSettlementsUnlink(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsUnlinkResponse]{
+	return &core.Response[*nordlet.SettlementsUnlinkBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankSettlementsPost(
+func (r *RawClient) SettlementsPost(
 	ctx context.Context,
-	request *nordlet.PostV1BankSettlementsPostRequest,
+	request *nordlet.SettlementsPostBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankSettlementsPostResponse], error) {
+) (*core.Response[*nordlet.SettlementsPostBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1457,7 +1501,7 @@ func (r *RawClient) PostV1BankSettlementsPost(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankSettlementsPostResponse
+	var response *nordlet.SettlementsPostBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1477,18 +1521,18 @@ func (r *RawClient) PostV1BankSettlementsPost(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankSettlementsPostResponse]{
+	return &core.Response[*nordlet.SettlementsPostBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ListThePsd2BanksAspsPsAvailableToConnect(
+func (r *RawClient) FeedsBanksList(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsBanksListRequest,
+	request *nordlet.FeedsBanksListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsBanksListResponse], error) {
+) (*core.Response[*nordlet.FeedsBanksListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1501,7 +1545,7 @@ func (r *RawClient) ListThePsd2BanksAspsPsAvailableToConnect(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsBanksListResponse
+	var response *nordlet.FeedsBanksListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1521,18 +1565,18 @@ func (r *RawClient) ListThePsd2BanksAspsPsAvailableToConnect(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsBanksListResponse]{
+	return &core.Response[*nordlet.FeedsBanksListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+func (r *RawClient) FeedsConnectionsStart(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsStartRequest,
+	request *nordlet.FeedsConnectionsStartBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsConnectionsStartResponse], error) {
+) (*core.Response[*nordlet.FeedsConnectionsStartBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1545,7 +1589,7 @@ func (r *RawClient) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsConnectionsStartResponse
+	var response *nordlet.FeedsConnectionsStartBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1565,18 +1609,18 @@ func (r *RawClient) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsConnectionsStartResponse]{
+	return &core.Response[*nordlet.FeedsConnectionsStartBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+func (r *RawClient) FeedsConnectionsComplete(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsCompleteRequest,
+	request *nordlet.FeedsConnectionsCompleteBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsConnectionsCompleteResponse], error) {
+) (*core.Response[*nordlet.FeedsConnectionsCompleteBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1589,7 +1633,7 @@ func (r *RawClient) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItE
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsConnectionsCompleteResponse
+	var response *nordlet.FeedsConnectionsCompleteBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1609,18 +1653,18 @@ func (r *RawClient) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItE
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsConnectionsCompleteResponse]{
+	return &core.Response[*nordlet.FeedsConnectionsCompleteBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankFeedsConnectionsGet(
+func (r *RawClient) FeedsConnectionsGet(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsGetRequest,
+	request *nordlet.FeedsConnectionsGetBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsConnectionsGetResponse], error) {
+) (*core.Response[*nordlet.FeedsConnectionsGetBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1633,7 +1677,7 @@ func (r *RawClient) PostV1BankFeedsConnectionsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsConnectionsGetResponse
+	var response *nordlet.FeedsConnectionsGetBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1653,18 +1697,18 @@ func (r *RawClient) PostV1BankFeedsConnectionsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsConnectionsGetResponse]{
+	return &core.Response[*nordlet.FeedsConnectionsGetBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BankFeedsConnectionsList(
+func (r *RawClient) FeedsConnectionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsListRequest,
+	request *nordlet.FeedsConnectionsListBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsConnectionsListResponse], error) {
+) (*core.Response[*nordlet.FeedsConnectionsListBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1677,7 +1721,7 @@ func (r *RawClient) PostV1BankFeedsConnectionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsConnectionsListResponse
+	var response *nordlet.FeedsConnectionsListBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1697,18 +1741,18 @@ func (r *RawClient) PostV1BankFeedsConnectionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsConnectionsListResponse]{
+	return &core.Response[*nordlet.FeedsConnectionsListBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+func (r *RawClient) FeedsConnectionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsConnectionsDeleteRequest,
+	request *nordlet.FeedsConnectionsDeleteBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsConnectionsDeleteResponse], error) {
+) (*core.Response[*nordlet.FeedsConnectionsDeleteBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1721,7 +1765,7 @@ func (r *RawClient) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsConnectionsDeleteResponse
+	var response *nordlet.FeedsConnectionsDeleteBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1741,18 +1785,18 @@ func (r *RawClient) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsConnectionsDeleteResponse]{
+	return &core.Response[*nordlet.FeedsConnectionsDeleteBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+func (r *RawClient) FeedsAccountsLink(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsAccountsLinkRequest,
+	request *nordlet.FeedsAccountsLinkBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsAccountsLinkResponse], error) {
+) (*core.Response[*nordlet.FeedsAccountsLinkBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1765,7 +1809,7 @@ func (r *RawClient) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCa
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsAccountsLinkResponse
+	var response *nordlet.FeedsAccountsLinkBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1785,18 +1829,18 @@ func (r *RawClient) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCa
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsAccountsLinkResponse]{
+	return &core.Response[*nordlet.FeedsAccountsLinkBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+func (r *RawClient) FeedsAccountsConfigure(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsAccountsConfigureRequest,
+	request *nordlet.FeedsAccountsConfigureBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsAccountsConfigureResponse], error) {
+) (*core.Response[*nordlet.FeedsAccountsConfigureBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1809,7 +1853,7 @@ func (r *RawClient) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsS
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsAccountsConfigureResponse
+	var response *nordlet.FeedsAccountsConfigureBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1829,18 +1873,18 @@ func (r *RawClient) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsS
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsAccountsConfigureResponse]{
+	return &core.Response[*nordlet.FeedsAccountsConfigureBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+func (r *RawClient) FeedsSync(
 	ctx context.Context,
-	request *nordlet.PostV1BankFeedsSyncRequest,
+	request *nordlet.FeedsSyncBankRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BankFeedsSyncResponse], error) {
+) (*core.Response[*nordlet.FeedsSyncBankResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1853,7 +1897,7 @@ func (r *RawClient) PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSync
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BankFeedsSyncResponse
+	var response *nordlet.FeedsSyncBankResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1873,7 +1917,7 @@ func (r *RawClient) PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSync
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BankFeedsSyncResponse]{
+	return &core.Response[*nordlet.FeedsSyncBankResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

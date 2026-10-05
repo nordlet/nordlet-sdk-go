@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestProjectsPostV1ProjectsCreateWithWireMock(
+func TestProjectsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,23 +88,23 @@ func TestProjectsPostV1ProjectsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsCreateRequest{
+	request := &nordlet.CreateProjectsRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsCreate(
+	_, invocationErr := client.Projects.Create(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsCreateWithWireMock", "POST", "/v1/projects/create", nil, 1)
+	VerifyRequestCount(t, "TestProjectsCreateWithWireMock", "POST", "/v1/projects/create", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsUpdateWithWireMock(
+func TestProjectsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -115,22 +115,22 @@ func TestProjectsPostV1ProjectsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsUpdateRequest{
+	request := &nordlet.UpdateProjectsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsUpdate(
+	_, invocationErr := client.Projects.Update(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsUpdateWithWireMock", "POST", "/v1/projects/update", nil, 1)
+	VerifyRequestCount(t, "TestProjectsUpdateWithWireMock", "POST", "/v1/projects/update", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsGetWithWireMock(
+func TestProjectsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -141,22 +141,22 @@ func TestProjectsPostV1ProjectsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsGetRequest{
+	request := &nordlet.GetProjectsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsGet(
+	_, invocationErr := client.Projects.Get(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsGetWithWireMock", "POST", "/v1/projects/get", nil, 1)
+	VerifyRequestCount(t, "TestProjectsGetWithWireMock", "POST", "/v1/projects/get", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsListWithWireMock(
+func TestProjectsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -167,20 +167,20 @@ func TestProjectsPostV1ProjectsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsListRequest{}
-	_, invocationErr := client.Projects.PostV1ProjectsList(
+	request := &nordlet.ListProjectsRequest{}
+	_, invocationErr := client.Projects.List(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsListWithWireMock", "POST", "/v1/projects/list", nil, 1)
+	VerifyRequestCount(t, "TestProjectsListWithWireMock", "POST", "/v1/projects/list", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsTimeEntriesCreateWithWireMock(
+func TestProjectsTimeEntriesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -191,24 +191,26 @@ func TestProjectsPostV1ProjectsTimeEntriesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsTimeEntriesCreateRequest{
+	request := &nordlet.TimeEntriesCreateProjectsRequest{
 		ProjectID: "projectId",
-		Date:      "date",
-		Hours:     "hours",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Hours: "121.00",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsTimeEntriesCreate(
+	_, invocationErr := client.Projects.TimeEntriesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsTimeEntriesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsTimeEntriesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsTimeEntriesCreateWithWireMock", "POST", "/v1/projects/time-entries/create", nil, 1)
+	VerifyRequestCount(t, "TestProjectsTimeEntriesCreateWithWireMock", "POST", "/v1/projects/time-entries/create", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsTimeEntriesUpdateWithWireMock(
+func TestProjectsTimeEntriesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -219,22 +221,22 @@ func TestProjectsPostV1ProjectsTimeEntriesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsTimeEntriesUpdateRequest{
+	request := &nordlet.TimeEntriesUpdateProjectsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsTimeEntriesUpdate(
+	_, invocationErr := client.Projects.TimeEntriesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsTimeEntriesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsTimeEntriesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsTimeEntriesUpdateWithWireMock", "POST", "/v1/projects/time-entries/update", nil, 1)
+	VerifyRequestCount(t, "TestProjectsTimeEntriesUpdateWithWireMock", "POST", "/v1/projects/time-entries/update", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsTimeEntriesDeleteWithWireMock(
+func TestProjectsTimeEntriesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -245,22 +247,22 @@ func TestProjectsPostV1ProjectsTimeEntriesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsTimeEntriesDeleteRequest{
+	request := &nordlet.TimeEntriesDeleteProjectsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsTimeEntriesDelete(
+	_, invocationErr := client.Projects.TimeEntriesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsTimeEntriesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsTimeEntriesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsTimeEntriesDeleteWithWireMock", "POST", "/v1/projects/time-entries/delete", nil, 1)
+	VerifyRequestCount(t, "TestProjectsTimeEntriesDeleteWithWireMock", "POST", "/v1/projects/time-entries/delete", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsTimeEntriesListWithWireMock(
+func TestProjectsTimeEntriesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -271,20 +273,20 @@ func TestProjectsPostV1ProjectsTimeEntriesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsTimeEntriesListRequest{}
-	_, invocationErr := client.Projects.PostV1ProjectsTimeEntriesList(
+	request := &nordlet.TimeEntriesListProjectsRequest{}
+	_, invocationErr := client.Projects.TimeEntriesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsTimeEntriesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsTimeEntriesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsTimeEntriesListWithWireMock", "POST", "/v1/projects/time-entries/list", nil, 1)
+	VerifyRequestCount(t, "TestProjectsTimeEntriesListWithWireMock", "POST", "/v1/projects/time-entries/list", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsTimeEntriesBillWithWireMock(
+func TestProjectsTimeEntriesBillWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -295,22 +297,22 @@ func TestProjectsPostV1ProjectsTimeEntriesBillWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsTimeEntriesBillRequest{
+	request := &nordlet.TimeEntriesBillProjectsRequest{
 		ProjectID: "projectId",
 	}
-	_, invocationErr := client.Projects.PostV1ProjectsTimeEntriesBill(
+	_, invocationErr := client.Projects.TimeEntriesBill(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsTimeEntriesBillWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsTimeEntriesBillWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsTimeEntriesBillWithWireMock", "POST", "/v1/projects/time-entries/bill", nil, 1)
+	VerifyRequestCount(t, "TestProjectsTimeEntriesBillWithWireMock", "POST", "/v1/projects/time-entries/bill", nil, 1)
 }
 
-func TestProjectsPostV1ProjectsReportWithWireMock(
+func TestProjectsReportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -321,15 +323,15 @@ func TestProjectsPostV1ProjectsReportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1ProjectsReportRequest{}
-	_, invocationErr := client.Projects.PostV1ProjectsReport(
+	request := &nordlet.ReportProjectsRequest{}
+	_, invocationErr := client.Projects.Report(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestProjectsPostV1ProjectsReportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestProjectsReportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestProjectsPostV1ProjectsReportWithWireMock", "POST", "/v1/projects/report", nil, 1)
+	VerifyRequestCount(t, "TestProjectsReportWithWireMock", "POST", "/v1/projects/report", nil, 1)
 }

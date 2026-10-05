@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestFilesPostV1FilesUploadWithWireMock(
+func TestFilesUploadWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,25 +88,25 @@ func TestFilesPostV1FilesUploadWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FilesUploadRequest{
+	request := &nordlet.UploadFilesRequest{
 		Entity:   "entity",
 		FileName: "fileName",
 		MimeType: "mimeType",
 		Content:  "content",
 	}
-	_, invocationErr := client.Files.PostV1FilesUpload(
+	_, invocationErr := client.Files.Upload(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFilesPostV1FilesUploadWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFilesUploadWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFilesPostV1FilesUploadWithWireMock", "POST", "/v1/files/upload", nil, 1)
+	VerifyRequestCount(t, "TestFilesUploadWithWireMock", "POST", "/v1/files/upload", nil, 1)
 }
 
-func TestFilesPostV1FilesGetWithWireMock(
+func TestFilesGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -117,22 +117,22 @@ func TestFilesPostV1FilesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FilesGetRequest{
+	request := &nordlet.GetFilesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Files.PostV1FilesGet(
+	_, invocationErr := client.Files.Get(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFilesPostV1FilesGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFilesGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFilesPostV1FilesGetWithWireMock", "POST", "/v1/files/get", nil, 1)
+	VerifyRequestCount(t, "TestFilesGetWithWireMock", "POST", "/v1/files/get", nil, 1)
 }
 
-func TestFilesPostV1FilesListWithWireMock(
+func TestFilesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -143,20 +143,20 @@ func TestFilesPostV1FilesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FilesListRequest{}
-	_, invocationErr := client.Files.PostV1FilesList(
+	request := &nordlet.ListFilesRequest{}
+	_, invocationErr := client.Files.List(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFilesPostV1FilesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFilesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFilesPostV1FilesListWithWireMock", "POST", "/v1/files/list", nil, 1)
+	VerifyRequestCount(t, "TestFilesListWithWireMock", "POST", "/v1/files/list", nil, 1)
 }
 
-func TestFilesPostV1FilesDeleteWithWireMock(
+func TestFilesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -167,17 +167,17 @@ func TestFilesPostV1FilesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FilesDeleteRequest{
+	request := &nordlet.DeleteFilesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Files.PostV1FilesDelete(
+	_, invocationErr := client.Files.Delete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFilesPostV1FilesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFilesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFilesPostV1FilesDeleteWithWireMock", "POST", "/v1/files/delete", nil, 1)
+	VerifyRequestCount(t, "TestFilesDeleteWithWireMock", "POST", "/v1/files/delete", nil, 1)
 }

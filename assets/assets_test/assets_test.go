@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestAssetsPostV1AssetsGroupsCreateWithWireMock(
+func TestAssetsGroupsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,25 +88,25 @@ func TestAssetsPostV1AssetsGroupsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsGroupsCreateRequest{
+	request := &nordlet.GroupsCreateAssetsRequest{
 		Code:                    "code",
 		Name:                    "name",
 		AssetAccountCode:        "assetAccountCode",
 		DepreciationAccountCode: "depreciationAccountCode",
 	}
-	_, invocationErr := client.Assets.PostV1AssetsGroupsCreate(
+	_, invocationErr := client.Assets.GroupsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsGroupsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsGroupsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsGroupsCreateWithWireMock", "POST", "/v1/assets/groups/create", nil, 1)
+	VerifyRequestCount(t, "TestAssetsGroupsCreateWithWireMock", "POST", "/v1/assets/groups/create", nil, 1)
 }
 
-func TestAssetsPostV1AssetsGroupsListWithWireMock(
+func TestAssetsGroupsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -117,20 +117,20 @@ func TestAssetsPostV1AssetsGroupsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsGroupsListRequest{}
-	_, invocationErr := client.Assets.PostV1AssetsGroupsList(
+	request := &nordlet.GroupsListAssetsRequest{}
+	_, invocationErr := client.Assets.GroupsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsGroupsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsGroupsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsGroupsListWithWireMock", "POST", "/v1/assets/groups/list", nil, 1)
+	VerifyRequestCount(t, "TestAssetsGroupsListWithWireMock", "POST", "/v1/assets/groups/list", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsCreateWithWireMock(
+func TestAssetsAssetsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -141,26 +141,28 @@ func TestAssetsPostV1AssetsAssetsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsCreateRequest{
-		GroupID:         "groupId",
-		Code:            "code",
-		Name:            "name",
-		AcquisitionDate: "acquisitionDate",
-		AcquisitionCost: "acquisitionCost",
+	request := &nordlet.AssetsCreateAssetsRequest{
+		GroupID: "groupId",
+		Code:    "code",
+		Name:    "name",
+		AcquisitionDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		AcquisitionCost: "121.0000",
 	}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsCreate(
+	_, invocationErr := client.Assets.AssetsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsCreateWithWireMock", "POST", "/v1/assets/assets/create", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsCreateWithWireMock", "POST", "/v1/assets/assets/create", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsUpdateWithWireMock(
+func TestAssetsAssetsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -171,22 +173,22 @@ func TestAssetsPostV1AssetsAssetsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsUpdateRequest{
+	request := &nordlet.AssetsUpdateAssetsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsUpdate(
+	_, invocationErr := client.Assets.AssetsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsUpdateWithWireMock", "POST", "/v1/assets/assets/update", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsUpdateWithWireMock", "POST", "/v1/assets/assets/update", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsInputVatWithWireMock(
+func TestAssetsAssetsInputVatWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -197,30 +199,30 @@ func TestAssetsPostV1AssetsAssetsInputVatWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsInputVatRequest{
+	request := &nordlet.AssetsInputVatAssetsRequest{
 		ID:                 "id",
 		InputVatRealEstate: true,
-		InputVatUseChanges: []*nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
-			&nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
+		InputVatUseChanges: []*nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItem{
+			&nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItem{
 				Year:    int64(1000000),
-				Percent: "percent",
-				Reason:  nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange,
+				Percent: "121.00",
+				Reason:  nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItemReasonUseChange,
 			},
 		},
 	}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsInputVat(
+	_, invocationErr := client.Assets.AssetsInputVat(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsInputVatWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsInputVatWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsInputVatWithWireMock", "POST", "/v1/assets/assets/input-vat", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsInputVatWithWireMock", "POST", "/v1/assets/assets/input-vat", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsGetWithWireMock(
+func TestAssetsAssetsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -231,22 +233,22 @@ func TestAssetsPostV1AssetsAssetsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsGetRequest{
+	request := &nordlet.AssetsGetAssetsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsGet(
+	_, invocationErr := client.Assets.AssetsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsGetWithWireMock", "POST", "/v1/assets/assets/get", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsGetWithWireMock", "POST", "/v1/assets/assets/get", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsListWithWireMock(
+func TestAssetsAssetsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -257,20 +259,20 @@ func TestAssetsPostV1AssetsAssetsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsListRequest{}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsList(
+	request := &nordlet.AssetsListAssetsRequest{}
+	_, invocationErr := client.Assets.AssetsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsListWithWireMock", "POST", "/v1/assets/assets/list", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsListWithWireMock", "POST", "/v1/assets/assets/list", nil, 1)
 }
 
-func TestAssetsPostV1AssetsAssetsModernizeWithWireMock(
+func TestAssetsAssetsModernizeWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -281,24 +283,26 @@ func TestAssetsPostV1AssetsAssetsModernizeWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsAssetsModernizeRequest{
-		ID:     "id",
-		Date:   "date",
-		Amount: "amount",
+	request := &nordlet.AssetsModernizeAssetsRequest{
+		ID: "id",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Amount: "121.0000",
 	}
-	_, invocationErr := client.Assets.PostV1AssetsAssetsModernize(
+	_, invocationErr := client.Assets.AssetsModernize(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsModernizeWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsModernizeWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsModernizeWithWireMock", "POST", "/v1/assets/assets/modernize", nil, 1)
+	VerifyRequestCount(t, "TestAssetsAssetsModernizeWithWireMock", "POST", "/v1/assets/assets/modernize", nil, 1)
 }
 
-func TestAssetsPostV1AssetsDepreciationPreviewWithWireMock(
+func TestAssetsAssetsDisposeWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -309,23 +313,53 @@ func TestAssetsPostV1AssetsDepreciationPreviewWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsDepreciationPreviewRequest{
+	request := &nordlet.AssetsDisposeAssetsRequest{
+		ID: "id",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Reason: nordlet.AssetsDisposeAssetsRequestReasonSold,
+	}
+	_, invocationErr := client.Assets.AssetsDispose(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAssetsAssetsDisposeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAssetsAssetsDisposeWithWireMock", "POST", "/v1/assets/assets/dispose", nil, 1)
+}
+
+func TestAssetsDepreciationPreviewWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DepreciationPreviewAssetsRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Assets.PostV1AssetsDepreciationPreview(
+	_, invocationErr := client.Assets.DepreciationPreview(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsDepreciationPreviewWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsDepreciationPreviewWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsDepreciationPreviewWithWireMock", "POST", "/v1/assets/depreciation/preview", nil, 1)
+	VerifyRequestCount(t, "TestAssetsDepreciationPreviewWithWireMock", "POST", "/v1/assets/depreciation/preview", nil, 1)
 }
 
-func TestAssetsPostV1AssetsDepreciationPostWithWireMock(
+func TestAssetsDepreciationPostWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -336,18 +370,18 @@ func TestAssetsPostV1AssetsDepreciationPostWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AssetsDepreciationPostRequest{
+	request := &nordlet.DepreciationPostAssetsRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Assets.PostV1AssetsDepreciationPost(
+	_, invocationErr := client.Assets.DepreciationPost(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsDepreciationPostWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAssetsDepreciationPostWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAssetsPostV1AssetsDepreciationPostWithWireMock", "POST", "/v1/assets/depreciation/post", nil, 1)
+	VerifyRequestCount(t, "TestAssetsDepreciationPostWithWireMock", "POST", "/v1/assets/depreciation/post", nil, 1)
 }

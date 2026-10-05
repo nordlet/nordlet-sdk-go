@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1PublicIntegrationRequests(
+func (r *RawClient) IntegrationRequests(
 	ctx context.Context,
-	request *nordlet.PostV1PublicIntegrationRequestsRequest,
+	request *nordlet.IntegrationRequestsPublicRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1PublicIntegrationRequestsResponse], error) {
+) (*core.Response[*nordlet.IntegrationRequestsPublicResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1PublicIntegrationRequests(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1PublicIntegrationRequestsResponse
+	var response *nordlet.IntegrationRequestsPublicResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,16 +69,16 @@ func (r *RawClient) PostV1PublicIntegrationRequests(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1PublicIntegrationRequestsResponse]{
+	return &core.Response[*nordlet.IntegrationRequestsPublicResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) GetV1PublicPayToken(
+func (r *RawClient) Pay(
 	ctx context.Context,
-	request *nordlet.GetV1PublicPayTokenRequest,
+	request *nordlet.PayPublicRequest,
 	opts ...option.RequestOption,
 ) (*core.Response[any], error) {
 	options := core.NewRequestOptions(opts...)

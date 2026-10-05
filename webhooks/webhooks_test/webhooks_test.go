@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestWebhooksPostV1WebhooksSubscriptionsCreateWithWireMock(
+func TestWebhooksSubscriptionsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,25 +88,25 @@ func TestWebhooksPostV1WebhooksSubscriptionsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksSubscriptionsCreateRequest{
+	request := &nordlet.SubscriptionsCreateWebhooksRequest{
 		URL: "url",
-		Events: []string{
-			"events",
+		Events: []nordlet.SubscriptionsCreateWebhooksRequestEventsItem{
+			nordlet.SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated,
 		},
 	}
-	_, invocationErr := client.Webhooks.PostV1WebhooksSubscriptionsCreate(
+	_, invocationErr := client.Webhooks.SubscriptionsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksSubscriptionsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksSubscriptionsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksSubscriptionsCreateWithWireMock", "POST", "/v1/webhooks/subscriptions/create", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksSubscriptionsCreateWithWireMock", "POST", "/v1/webhooks/subscriptions/create", nil, 1)
 }
 
-func TestWebhooksPostV1WebhooksSubscriptionsListWithWireMock(
+func TestWebhooksSubscriptionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -117,20 +117,20 @@ func TestWebhooksPostV1WebhooksSubscriptionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksSubscriptionsListRequest{}
-	_, invocationErr := client.Webhooks.PostV1WebhooksSubscriptionsList(
+	request := &nordlet.SubscriptionsListWebhooksRequest{}
+	_, invocationErr := client.Webhooks.SubscriptionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksSubscriptionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksSubscriptionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksSubscriptionsListWithWireMock", "POST", "/v1/webhooks/subscriptions/list", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksSubscriptionsListWithWireMock", "POST", "/v1/webhooks/subscriptions/list", nil, 1)
 }
 
-func TestWebhooksPostV1WebhooksSubscriptionsUpdateWithWireMock(
+func TestWebhooksSubscriptionsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -141,22 +141,22 @@ func TestWebhooksPostV1WebhooksSubscriptionsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksSubscriptionsUpdateRequest{
+	request := &nordlet.SubscriptionsUpdateWebhooksRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Webhooks.PostV1WebhooksSubscriptionsUpdate(
+	_, invocationErr := client.Webhooks.SubscriptionsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksSubscriptionsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksSubscriptionsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksSubscriptionsUpdateWithWireMock", "POST", "/v1/webhooks/subscriptions/update", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksSubscriptionsUpdateWithWireMock", "POST", "/v1/webhooks/subscriptions/update", nil, 1)
 }
 
-func TestWebhooksPostV1WebhooksSubscriptionsDeleteWithWireMock(
+func TestWebhooksSubscriptionsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -167,22 +167,22 @@ func TestWebhooksPostV1WebhooksSubscriptionsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksSubscriptionsDeleteRequest{
+	request := &nordlet.SubscriptionsDeleteWebhooksRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Webhooks.PostV1WebhooksSubscriptionsDelete(
+	_, invocationErr := client.Webhooks.SubscriptionsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksSubscriptionsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksSubscriptionsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksSubscriptionsDeleteWithWireMock", "POST", "/v1/webhooks/subscriptions/delete", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksSubscriptionsDeleteWithWireMock", "POST", "/v1/webhooks/subscriptions/delete", nil, 1)
 }
 
-func TestWebhooksPostV1WebhooksDeliveriesListWithWireMock(
+func TestWebhooksDeliveriesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -193,20 +193,20 @@ func TestWebhooksPostV1WebhooksDeliveriesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksDeliveriesListRequest{}
-	_, invocationErr := client.Webhooks.PostV1WebhooksDeliveriesList(
+	request := &nordlet.DeliveriesListWebhooksRequest{}
+	_, invocationErr := client.Webhooks.DeliveriesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksDeliveriesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksDeliveriesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksDeliveriesListWithWireMock", "POST", "/v1/webhooks/deliveries/list", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksDeliveriesListWithWireMock", "POST", "/v1/webhooks/deliveries/list", nil, 1)
 }
 
-func TestWebhooksPostV1WebhooksDeliveriesRedeliverWithWireMock(
+func TestWebhooksDeliveriesRedeliverWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -217,17 +217,17 @@ func TestWebhooksPostV1WebhooksDeliveriesRedeliverWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1WebhooksDeliveriesRedeliverRequest{
+	request := &nordlet.DeliveriesRedeliverWebhooksRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Webhooks.PostV1WebhooksDeliveriesRedeliver(
+	_, invocationErr := client.Webhooks.DeliveriesRedeliver(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestWebhooksPostV1WebhooksDeliveriesRedeliverWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestWebhooksDeliveriesRedeliverWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestWebhooksPostV1WebhooksDeliveriesRedeliverWithWireMock", "POST", "/v1/webhooks/deliveries/redeliver", nil, 1)
+	VerifyRequestCount(t, "TestWebhooksDeliveriesRedeliverWithWireMock", "POST", "/v1/webhooks/deliveries/redeliver", nil, 1)
 }

@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1FilesUpload(
+func (c *Client) Upload(
 	ctx context.Context,
-	request *nordlet.PostV1FilesUploadRequest,
+	request *nordlet.UploadFilesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FilesUploadResponse, error) {
-	response, err := c.WithRawResponse.PostV1FilesUpload(
+) (*nordlet.UploadFilesResponse, error) {
+	response, err := c.WithRawResponse.Upload(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1FilesUpload(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FilesGet(
+func (c *Client) Get(
 	ctx context.Context,
-	request *nordlet.PostV1FilesGetRequest,
+	request *nordlet.GetFilesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FilesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1FilesGet(
+) (*nordlet.GetFilesResponse, error) {
+	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1FilesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FilesList(
+func (c *Client) List(
 	ctx context.Context,
-	request *nordlet.PostV1FilesListRequest,
+	request *nordlet.ListFilesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FilesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1FilesList(
+) (*nordlet.ListFilesResponse, error) {
+	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1FilesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1FilesDelete(
+func (c *Client) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1FilesDeleteRequest,
+	request *nordlet.DeleteFilesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1FilesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1FilesDelete(
+) (*nordlet.DeleteFilesResponse, error) {
+	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
 		opts...,

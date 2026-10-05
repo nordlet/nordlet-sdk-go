@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestAgreementsPostV1AgreementsTypesCreateWithWireMock(
+func TestAgreementsTypesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,23 +88,23 @@ func TestAgreementsPostV1AgreementsTypesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsTypesCreateRequest{
+	request := &nordlet.TypesCreateAgreementsRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsTypesCreate(
+	_, invocationErr := client.Agreements.TypesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsTypesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsTypesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsTypesCreateWithWireMock", "POST", "/v1/agreements/types/create", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsTypesCreateWithWireMock", "POST", "/v1/agreements/types/create", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsTypesListWithWireMock(
+func TestAgreementsTypesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -115,20 +115,20 @@ func TestAgreementsPostV1AgreementsTypesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsTypesListRequest{}
-	_, invocationErr := client.Agreements.PostV1AgreementsTypesList(
+	request := &nordlet.TypesListAgreementsRequest{}
+	_, invocationErr := client.Agreements.TypesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsTypesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsTypesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsTypesListWithWireMock", "POST", "/v1/agreements/types/list", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsTypesListWithWireMock", "POST", "/v1/agreements/types/list", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsCreateWithWireMock(
+func TestAgreementsAgreementsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -139,23 +139,25 @@ func TestAgreementsPostV1AgreementsAgreementsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsCreateRequest{
-		Number:    "number",
-		StartDate: "startDate",
+	request := &nordlet.AgreementsCreateAgreementsRequest{
+		Number: "number",
+		StartDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsCreate(
+	_, invocationErr := client.Agreements.AgreementsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsCreateWithWireMock", "POST", "/v1/agreements/agreements/create", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsCreateWithWireMock", "POST", "/v1/agreements/agreements/create", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsGetWithWireMock(
+func TestAgreementsAgreementsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -166,22 +168,22 @@ func TestAgreementsPostV1AgreementsAgreementsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsGetRequest{
+	request := &nordlet.AgreementsGetAgreementsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsGet(
+	_, invocationErr := client.Agreements.AgreementsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsGetWithWireMock", "POST", "/v1/agreements/agreements/get", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsGetWithWireMock", "POST", "/v1/agreements/agreements/get", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsUpdateWithWireMock(
+func TestAgreementsAgreementsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -192,22 +194,22 @@ func TestAgreementsPostV1AgreementsAgreementsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsUpdateRequest{
+	request := &nordlet.AgreementsUpdateAgreementsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsUpdate(
+	_, invocationErr := client.Agreements.AgreementsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsUpdateWithWireMock", "POST", "/v1/agreements/agreements/update", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsUpdateWithWireMock", "POST", "/v1/agreements/agreements/update", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsDeleteWithWireMock(
+func TestAgreementsAgreementsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -218,22 +220,22 @@ func TestAgreementsPostV1AgreementsAgreementsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsDeleteRequest{
+	request := &nordlet.AgreementsDeleteAgreementsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsDelete(
+	_, invocationErr := client.Agreements.AgreementsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsDeleteWithWireMock", "POST", "/v1/agreements/agreements/delete", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsDeleteWithWireMock", "POST", "/v1/agreements/agreements/delete", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsListWithWireMock(
+func TestAgreementsAgreementsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -244,20 +246,20 @@ func TestAgreementsPostV1AgreementsAgreementsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsListRequest{}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsList(
+	request := &nordlet.AgreementsListAgreementsRequest{}
+	_, invocationErr := client.Agreements.AgreementsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsListWithWireMock", "POST", "/v1/agreements/agreements/list", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsListWithWireMock", "POST", "/v1/agreements/agreements/list", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock(
+func TestAgreementsAgreementsGenerateInvoiceWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -268,22 +270,22 @@ func TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest{
+	request := &nordlet.AgreementsGenerateInvoiceAgreementsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
+	_, invocationErr := client.Agreements.AgreementsGenerateInvoice(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsGenerateInvoiceWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock", "POST", "/v1/agreements/agreements/generate-invoice", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsGenerateInvoiceWithWireMock", "POST", "/v1/agreements/agreements/generate-invoice", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock(
+func TestAgreementsAgreementsBillingRunWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -294,20 +296,20 @@ func TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsAgreementsBillingRunRequest{}
-	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsBillingRun(
+	request := &nordlet.AgreementsBillingRunAgreementsRequest{}
+	_, invocationErr := client.Agreements.AgreementsBillingRun(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsBillingRunWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock", "POST", "/v1/agreements/agreements/billing/run", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsAgreementsBillingRunWithWireMock", "POST", "/v1/agreements/agreements/billing/run", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsInsurancePoliciesCreateWithWireMock(
+func TestAgreementsInsurancePoliciesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -318,25 +320,29 @@ func TestAgreementsPostV1AgreementsInsurancePoliciesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsInsurancePoliciesCreateRequest{
+	request := &nordlet.InsurancePoliciesCreateAgreementsRequest{
 		PolicyNumber:  "policyNumber",
 		InsuredObject: "insuredObject",
-		FromDate:      "fromDate",
-		ToDate:        "toDate",
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
+	_, invocationErr := client.Agreements.InsurancePoliciesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsInsurancePoliciesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsInsurancePoliciesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsInsurancePoliciesCreateWithWireMock", "POST", "/v1/agreements/insurance-policies/create", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsInsurancePoliciesCreateWithWireMock", "POST", "/v1/agreements/insurance-policies/create", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsInsurancePoliciesListWithWireMock(
+func TestAgreementsInsurancePoliciesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -347,20 +353,20 @@ func TestAgreementsPostV1AgreementsInsurancePoliciesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsInsurancePoliciesListRequest{}
-	_, invocationErr := client.Agreements.PostV1AgreementsInsurancePoliciesList(
+	request := &nordlet.InsurancePoliciesListAgreementsRequest{}
+	_, invocationErr := client.Agreements.InsurancePoliciesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsInsurancePoliciesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsInsurancePoliciesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsInsurancePoliciesListWithWireMock", "POST", "/v1/agreements/insurance-policies/list", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsInsurancePoliciesListWithWireMock", "POST", "/v1/agreements/insurance-policies/list", nil, 1)
 }
 
-func TestAgreementsPostV1AgreementsInsurancePoliciesDeleteWithWireMock(
+func TestAgreementsInsurancePoliciesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -371,17 +377,17 @@ func TestAgreementsPostV1AgreementsInsurancePoliciesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1AgreementsInsurancePoliciesDeleteRequest{
+	request := &nordlet.InsurancePoliciesDeleteAgreementsRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Agreements.PostV1AgreementsInsurancePoliciesDelete(
+	_, invocationErr := client.Agreements.InsurancePoliciesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsInsurancePoliciesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestAgreementsInsurancePoliciesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsInsurancePoliciesDeleteWithWireMock", "POST", "/v1/agreements/insurance-policies/delete", nil, 1)
+	VerifyRequestCount(t, "TestAgreementsInsurancePoliciesDeleteWithWireMock", "POST", "/v1/agreements/insurance-policies/delete", nil, 1)
 }

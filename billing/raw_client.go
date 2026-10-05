@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1BillingAccountGet(
+func (r *RawClient) AccountGet(
 	ctx context.Context,
-	request *nordlet.PostV1BillingAccountGetRequest,
+	request *nordlet.AccountGetBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingAccountGetResponse], error) {
+) (*core.Response[*nordlet.AccountGetBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1BillingAccountGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingAccountGetResponse
+	var response *nordlet.AccountGetBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1BillingAccountGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingAccountGetResponse]{
+	return &core.Response[*nordlet.AccountGetBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BillingAccountSetPlan(
+func (r *RawClient) AccountSetPlan(
 	ctx context.Context,
-	request *nordlet.PostV1BillingAccountSetPlanRequest,
+	request *nordlet.AccountSetPlanBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingAccountSetPlanResponse], error) {
+) (*core.Response[*nordlet.AccountSetPlanBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1BillingAccountSetPlan(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingAccountSetPlanResponse
+	var response *nordlet.AccountSetPlanBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1BillingAccountSetPlan(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingAccountSetPlanResponse]{
+	return &core.Response[*nordlet.AccountSetPlanBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BillingTopupCreate(
+func (r *RawClient) TopupCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BillingTopupCreateRequest,
+	request *nordlet.TopupCreateBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingTopupCreateResponse], error) {
+) (*core.Response[*nordlet.TopupCreateBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1BillingTopupCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingTopupCreateResponse
+	var response *nordlet.TopupCreateBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1BillingTopupCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingTopupCreateResponse]{
+	return &core.Response[*nordlet.TopupCreateBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BillingPortalCreate(
+func (r *RawClient) PortalCreate(
 	ctx context.Context,
-	request *nordlet.PostV1BillingPortalCreateRequest,
+	request *nordlet.PortalCreateBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingPortalCreateResponse], error) {
+) (*core.Response[*nordlet.PortalCreateBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1BillingPortalCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingPortalCreateResponse
+	var response *nordlet.PortalCreateBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1BillingPortalCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingPortalCreateResponse]{
+	return &core.Response[*nordlet.PortalCreateBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BillingTransactionsList(
+func (r *RawClient) TransactionsList(
 	ctx context.Context,
-	request *nordlet.PostV1BillingTransactionsListRequest,
+	request *nordlet.TransactionsListBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingTransactionsListResponse], error) {
+) (*core.Response[*nordlet.TransactionsListBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1BillingTransactionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingTransactionsListResponse
+	var response *nordlet.TransactionsListBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1BillingTransactionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingTransactionsListResponse]{
+	return &core.Response[*nordlet.TransactionsListBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1BillingUsageList(
+func (r *RawClient) UsageList(
 	ctx context.Context,
-	request *nordlet.PostV1BillingUsageListRequest,
+	request *nordlet.UsageListBillingRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1BillingUsageListResponse], error) {
+) (*core.Response[*nordlet.UsageListBillingResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1BillingUsageList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1BillingUsageListResponse
+	var response *nordlet.UsageListBillingResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,7 +289,7 @@ func (r *RawClient) PostV1BillingUsageList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1BillingUsageListResponse]{
+	return &core.Response[*nordlet.UsageListBillingResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

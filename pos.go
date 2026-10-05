@@ -7,17 +7,18 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1PosDevicesCreateRequestFieldName               = big.NewInt(1 << 0)
-	postV1PosDevicesCreateRequestFieldSerialNumber       = big.NewInt(1 << 1)
-	postV1PosDevicesCreateRequestFieldModel              = big.NewInt(1 << 2)
-	postV1PosDevicesCreateRequestFieldRegistrationNumber = big.NewInt(1 << 3)
-	postV1PosDevicesCreateRequestFieldAddress            = big.NewInt(1 << 4)
+	devicesCreatePosRequestFieldName               = big.NewInt(1 << 0)
+	devicesCreatePosRequestFieldSerialNumber       = big.NewInt(1 << 1)
+	devicesCreatePosRequestFieldModel              = big.NewInt(1 << 2)
+	devicesCreatePosRequestFieldRegistrationNumber = big.NewInt(1 << 3)
+	devicesCreatePosRequestFieldAddress            = big.NewInt(1 << 4)
 )
 
-type PostV1PosDevicesCreateRequest struct {
+type DevicesCreatePosRequest struct {
 	Name               string  `json:"name" url:"-"`
 	SerialNumber       string  `json:"serialNumber" url:"-"`
 	Model              *string `json:"model,omitempty" url:"-"`
@@ -28,82 +29,82 @@ type PostV1PosDevicesCreateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosDevicesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesCreatePosRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1PosDevicesCreateRequestFieldName)
+func (d *DevicesCreatePosRequest) SetName(name string) {
+	d.Name = name
+	d.require(devicesCreatePosRequestFieldName)
 }
 
 // SetSerialNumber sets the SerialNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateRequest) SetSerialNumber(serialNumber string) {
-	p.SerialNumber = serialNumber
-	p.require(postV1PosDevicesCreateRequestFieldSerialNumber)
+func (d *DevicesCreatePosRequest) SetSerialNumber(serialNumber string) {
+	d.SerialNumber = serialNumber
+	d.require(devicesCreatePosRequestFieldSerialNumber)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateRequest) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1PosDevicesCreateRequestFieldModel)
+func (d *DevicesCreatePosRequest) SetModel(model *string) {
+	d.Model = model
+	d.require(devicesCreatePosRequestFieldModel)
 }
 
 // SetRegistrationNumber sets the RegistrationNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateRequest) SetRegistrationNumber(registrationNumber *string) {
-	p.RegistrationNumber = registrationNumber
-	p.require(postV1PosDevicesCreateRequestFieldRegistrationNumber)
+func (d *DevicesCreatePosRequest) SetRegistrationNumber(registrationNumber *string) {
+	d.RegistrationNumber = registrationNumber
+	d.require(devicesCreatePosRequestFieldRegistrationNumber)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateRequest) SetAddress(address *string) {
-	p.Address = address
-	p.require(postV1PosDevicesCreateRequestFieldAddress)
+func (d *DevicesCreatePosRequest) SetAddress(address *string) {
+	d.Address = address
+	d.require(devicesCreatePosRequestFieldAddress)
 }
 
-func (p *PostV1PosDevicesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesCreateRequest
+func (d *DevicesCreatePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesCreatePosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesCreateRequest(body)
+	*d = DevicesCreatePosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosDevicesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesCreateRequest
+func (d *DevicesCreatePosRequest) MarshalJSON() ([]byte, error) {
+	type embed DevicesCreatePosRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosDevicesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1PosDevicesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1PosDevicesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1PosDevicesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1PosDevicesListRequestFieldTotals   = big.NewInt(1 << 4)
+	devicesListPosRequestFieldPage     = big.NewInt(1 << 0)
+	devicesListPosRequestFieldPageSize = big.NewInt(1 << 1)
+	devicesListPosRequestFieldSort     = big.NewInt(1 << 2)
+	devicesListPosRequestFieldFilter   = big.NewInt(1 << 3)
+	devicesListPosRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1PosDevicesListRequest struct {
-	Page     *int64                                   `json:"page,omitempty" url:"-"`
-	PageSize *int64                                   `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1PosDevicesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1PosDevicesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type DevicesListPosRequest struct {
+	Page     *int64                             `json:"page,omitempty" url:"-"`
+	PageSize *int64                             `json:"pageSize,omitempty" url:"-"`
+	Sort     []*DevicesListPosRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*DevicesListPosRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -111,80 +112,80 @@ type PostV1PosDevicesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosDevicesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesListPosRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1PosDevicesListRequestFieldPage)
+func (d *DevicesListPosRequest) SetPage(page *int64) {
+	d.Page = page
+	d.require(devicesListPosRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1PosDevicesListRequestFieldPageSize)
+func (d *DevicesListPosRequest) SetPageSize(pageSize *int64) {
+	d.PageSize = pageSize
+	d.require(devicesListPosRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequest) SetSort(sort []*PostV1PosDevicesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1PosDevicesListRequestFieldSort)
+func (d *DevicesListPosRequest) SetSort(sort []*DevicesListPosRequestSortItem) {
+	d.Sort = sort
+	d.require(devicesListPosRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequest) SetFilter(filter []*PostV1PosDevicesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1PosDevicesListRequestFieldFilter)
+func (d *DevicesListPosRequest) SetFilter(filter []*DevicesListPosRequestFilterItem) {
+	d.Filter = filter
+	d.require(devicesListPosRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1PosDevicesListRequestFieldTotals)
+func (d *DevicesListPosRequest) SetTotals(totals []string) {
+	d.Totals = totals
+	d.require(devicesListPosRequestFieldTotals)
 }
 
-func (p *PostV1PosDevicesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesListRequest
+func (d *DevicesListPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesListPosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesListRequest(body)
+	*d = DevicesListPosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosDevicesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesListRequest
+func (d *DevicesListPosRequest) MarshalJSON() ([]byte, error) {
+	type embed DevicesListPosRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosDevicesUpdateRequestFieldID                 = big.NewInt(1 << 0)
-	postV1PosDevicesUpdateRequestFieldIsActive           = big.NewInt(1 << 1)
-	postV1PosDevicesUpdateRequestFieldName               = big.NewInt(1 << 2)
-	postV1PosDevicesUpdateRequestFieldSerialNumber       = big.NewInt(1 << 3)
-	postV1PosDevicesUpdateRequestFieldModel              = big.NewInt(1 << 4)
-	postV1PosDevicesUpdateRequestFieldRegistrationNumber = big.NewInt(1 << 5)
-	postV1PosDevicesUpdateRequestFieldAddress            = big.NewInt(1 << 6)
+	devicesUpdatePosRequestFieldID                 = big.NewInt(1 << 0)
+	devicesUpdatePosRequestFieldIsActive           = big.NewInt(1 << 1)
+	devicesUpdatePosRequestFieldName               = big.NewInt(1 << 2)
+	devicesUpdatePosRequestFieldSerialNumber       = big.NewInt(1 << 3)
+	devicesUpdatePosRequestFieldModel              = big.NewInt(1 << 4)
+	devicesUpdatePosRequestFieldRegistrationNumber = big.NewInt(1 << 5)
+	devicesUpdatePosRequestFieldAddress            = big.NewInt(1 << 6)
 )
 
-type PostV1PosDevicesUpdateRequest struct {
+type DevicesUpdatePosRequest struct {
 	ID                 string  `json:"id" url:"-"`
 	IsActive           *bool   `json:"isActive,omitempty" url:"-"`
 	Name               *string `json:"name,omitempty" url:"-"`
@@ -197,314 +198,316 @@ type PostV1PosDevicesUpdateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosDevicesUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesUpdatePosRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosDevicesUpdateRequestFieldID)
+func (d *DevicesUpdatePosRequest) SetID(id string) {
+	d.ID = id
+	d.require(devicesUpdatePosRequestFieldID)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetIsActive(isActive *bool) {
-	p.IsActive = isActive
-	p.require(postV1PosDevicesUpdateRequestFieldIsActive)
+func (d *DevicesUpdatePosRequest) SetIsActive(isActive *bool) {
+	d.IsActive = isActive
+	d.require(devicesUpdatePosRequestFieldIsActive)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetName(name *string) {
-	p.Name = name
-	p.require(postV1PosDevicesUpdateRequestFieldName)
+func (d *DevicesUpdatePosRequest) SetName(name *string) {
+	d.Name = name
+	d.require(devicesUpdatePosRequestFieldName)
 }
 
 // SetSerialNumber sets the SerialNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetSerialNumber(serialNumber *string) {
-	p.SerialNumber = serialNumber
-	p.require(postV1PosDevicesUpdateRequestFieldSerialNumber)
+func (d *DevicesUpdatePosRequest) SetSerialNumber(serialNumber *string) {
+	d.SerialNumber = serialNumber
+	d.require(devicesUpdatePosRequestFieldSerialNumber)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1PosDevicesUpdateRequestFieldModel)
+func (d *DevicesUpdatePosRequest) SetModel(model *string) {
+	d.Model = model
+	d.require(devicesUpdatePosRequestFieldModel)
 }
 
 // SetRegistrationNumber sets the RegistrationNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetRegistrationNumber(registrationNumber *string) {
-	p.RegistrationNumber = registrationNumber
-	p.require(postV1PosDevicesUpdateRequestFieldRegistrationNumber)
+func (d *DevicesUpdatePosRequest) SetRegistrationNumber(registrationNumber *string) {
+	d.RegistrationNumber = registrationNumber
+	d.require(devicesUpdatePosRequestFieldRegistrationNumber)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateRequest) SetAddress(address *string) {
-	p.Address = address
-	p.require(postV1PosDevicesUpdateRequestFieldAddress)
+func (d *DevicesUpdatePosRequest) SetAddress(address *string) {
+	d.Address = address
+	d.require(devicesUpdatePosRequestFieldAddress)
 }
 
-func (p *PostV1PosDevicesUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesUpdateRequest
+func (d *DevicesUpdatePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesUpdatePosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesUpdateRequest(body)
+	*d = DevicesUpdatePosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosDevicesUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesUpdateRequest
+func (d *DevicesUpdatePosRequest) MarshalJSON() ([]byte, error) {
+	type embed DevicesUpdatePosRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosReportsCreateRequestFieldReportNumber         = big.NewInt(1 << 0)
-	postV1PosReportsCreateRequestFieldDate                 = big.NewInt(1 << 1)
-	postV1PosReportsCreateRequestFieldDeviceID             = big.NewInt(1 << 2)
-	postV1PosReportsCreateRequestFieldWarehouseID          = big.NewInt(1 << 3)
-	postV1PosReportsCreateRequestFieldVatLines             = big.NewInt(1 << 4)
-	postV1PosReportsCreateRequestFieldCashAmount           = big.NewInt(1 << 5)
-	postV1PosReportsCreateRequestFieldCardAmount           = big.NewInt(1 << 6)
-	postV1PosReportsCreateRequestFieldItemLines            = big.NewInt(1 << 7)
-	postV1PosReportsCreateRequestFieldCashAccountCode      = big.NewInt(1 << 8)
-	postV1PosReportsCreateRequestFieldCardAccountCode      = big.NewInt(1 << 9)
-	postV1PosReportsCreateRequestFieldRevenueAccountCode   = big.NewInt(1 << 10)
-	postV1PosReportsCreateRequestFieldVatAccountCode       = big.NewInt(1 << 11)
-	postV1PosReportsCreateRequestFieldCogsAccountCode      = big.NewInt(1 << 12)
-	postV1PosReportsCreateRequestFieldInventoryAccountCode = big.NewInt(1 << 13)
-	postV1PosReportsCreateRequestFieldNotes                = big.NewInt(1 << 14)
+	reportsCreatePosRequestFieldReportNumber         = big.NewInt(1 << 0)
+	reportsCreatePosRequestFieldDate                 = big.NewInt(1 << 1)
+	reportsCreatePosRequestFieldDeviceID             = big.NewInt(1 << 2)
+	reportsCreatePosRequestFieldWarehouseID          = big.NewInt(1 << 3)
+	reportsCreatePosRequestFieldVatLines             = big.NewInt(1 << 4)
+	reportsCreatePosRequestFieldCashAmount           = big.NewInt(1 << 5)
+	reportsCreatePosRequestFieldCardAmount           = big.NewInt(1 << 6)
+	reportsCreatePosRequestFieldItemLines            = big.NewInt(1 << 7)
+	reportsCreatePosRequestFieldCashAccountCode      = big.NewInt(1 << 8)
+	reportsCreatePosRequestFieldCardAccountCode      = big.NewInt(1 << 9)
+	reportsCreatePosRequestFieldRevenueAccountCode   = big.NewInt(1 << 10)
+	reportsCreatePosRequestFieldVatAccountCode       = big.NewInt(1 << 11)
+	reportsCreatePosRequestFieldCogsAccountCode      = big.NewInt(1 << 12)
+	reportsCreatePosRequestFieldInventoryAccountCode = big.NewInt(1 << 13)
+	reportsCreatePosRequestFieldNotes                = big.NewInt(1 << 14)
 )
 
-type PostV1PosReportsCreateRequest struct {
-	ReportNumber         string                                        `json:"reportNumber" url:"-"`
-	Date                 string                                        `json:"date" url:"-"`
-	DeviceID             *string                                       `json:"deviceId,omitempty" url:"-"`
-	WarehouseID          *string                                       `json:"warehouseId,omitempty" url:"-"`
-	VatLines             []*PostV1PosReportsCreateRequestVatLinesItem  `json:"vatLines" url:"-"`
-	CashAmount           *string                                       `json:"cashAmount,omitempty" url:"-"`
-	CardAmount           *string                                       `json:"cardAmount,omitempty" url:"-"`
-	ItemLines            []*PostV1PosReportsCreateRequestItemLinesItem `json:"itemLines,omitempty" url:"-"`
-	CashAccountCode      *string                                       `json:"cashAccountCode,omitempty" url:"-"`
-	CardAccountCode      *string                                       `json:"cardAccountCode,omitempty" url:"-"`
-	RevenueAccountCode   *string                                       `json:"revenueAccountCode,omitempty" url:"-"`
-	VatAccountCode       *string                                       `json:"vatAccountCode,omitempty" url:"-"`
-	CogsAccountCode      *string                                       `json:"cogsAccountCode,omitempty" url:"-"`
-	InventoryAccountCode *string                                       `json:"inventoryAccountCode,omitempty" url:"-"`
-	Notes                *string                                       `json:"notes,omitempty" url:"-"`
+type ReportsCreatePosRequest struct {
+	ReportNumber         string                                  `json:"reportNumber" url:"-"`
+	Date                 time.Time                               `json:"date" url:"-" format:"date"`
+	DeviceID             *string                                 `json:"deviceId,omitempty" url:"-"`
+	WarehouseID          *string                                 `json:"warehouseId,omitempty" url:"-"`
+	VatLines             []*ReportsCreatePosRequestVatLinesItem  `json:"vatLines" url:"-"`
+	CashAmount           *string                                 `json:"cashAmount,omitempty" url:"-"`
+	CardAmount           *string                                 `json:"cardAmount,omitempty" url:"-"`
+	ItemLines            []*ReportsCreatePosRequestItemLinesItem `json:"itemLines,omitempty" url:"-"`
+	CashAccountCode      *string                                 `json:"cashAccountCode,omitempty" url:"-"`
+	CardAccountCode      *string                                 `json:"cardAccountCode,omitempty" url:"-"`
+	RevenueAccountCode   *string                                 `json:"revenueAccountCode,omitempty" url:"-"`
+	VatAccountCode       *string                                 `json:"vatAccountCode,omitempty" url:"-"`
+	CogsAccountCode      *string                                 `json:"cogsAccountCode,omitempty" url:"-"`
+	InventoryAccountCode *string                                 `json:"inventoryAccountCode,omitempty" url:"-"`
+	Notes                *string                                 `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosReportsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsCreatePosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetReportNumber sets the ReportNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetReportNumber(reportNumber string) {
-	p.ReportNumber = reportNumber
-	p.require(postV1PosReportsCreateRequestFieldReportNumber)
+func (r *ReportsCreatePosRequest) SetReportNumber(reportNumber string) {
+	r.ReportNumber = reportNumber
+	r.require(reportsCreatePosRequestFieldReportNumber)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1PosReportsCreateRequestFieldDate)
+func (r *ReportsCreatePosRequest) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reportsCreatePosRequestFieldDate)
 }
 
 // SetDeviceID sets the DeviceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetDeviceID(deviceID *string) {
-	p.DeviceID = deviceID
-	p.require(postV1PosReportsCreateRequestFieldDeviceID)
+func (r *ReportsCreatePosRequest) SetDeviceID(deviceID *string) {
+	r.DeviceID = deviceID
+	r.require(reportsCreatePosRequestFieldDeviceID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1PosReportsCreateRequestFieldWarehouseID)
+func (r *ReportsCreatePosRequest) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reportsCreatePosRequestFieldWarehouseID)
 }
 
 // SetVatLines sets the VatLines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetVatLines(vatLines []*PostV1PosReportsCreateRequestVatLinesItem) {
-	p.VatLines = vatLines
-	p.require(postV1PosReportsCreateRequestFieldVatLines)
+func (r *ReportsCreatePosRequest) SetVatLines(vatLines []*ReportsCreatePosRequestVatLinesItem) {
+	r.VatLines = vatLines
+	r.require(reportsCreatePosRequestFieldVatLines)
 }
 
 // SetCashAmount sets the CashAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetCashAmount(cashAmount *string) {
-	p.CashAmount = cashAmount
-	p.require(postV1PosReportsCreateRequestFieldCashAmount)
+func (r *ReportsCreatePosRequest) SetCashAmount(cashAmount *string) {
+	r.CashAmount = cashAmount
+	r.require(reportsCreatePosRequestFieldCashAmount)
 }
 
 // SetCardAmount sets the CardAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetCardAmount(cardAmount *string) {
-	p.CardAmount = cardAmount
-	p.require(postV1PosReportsCreateRequestFieldCardAmount)
+func (r *ReportsCreatePosRequest) SetCardAmount(cardAmount *string) {
+	r.CardAmount = cardAmount
+	r.require(reportsCreatePosRequestFieldCardAmount)
 }
 
 // SetItemLines sets the ItemLines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetItemLines(itemLines []*PostV1PosReportsCreateRequestItemLinesItem) {
-	p.ItemLines = itemLines
-	p.require(postV1PosReportsCreateRequestFieldItemLines)
+func (r *ReportsCreatePosRequest) SetItemLines(itemLines []*ReportsCreatePosRequestItemLinesItem) {
+	r.ItemLines = itemLines
+	r.require(reportsCreatePosRequestFieldItemLines)
 }
 
 // SetCashAccountCode sets the CashAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetCashAccountCode(cashAccountCode *string) {
-	p.CashAccountCode = cashAccountCode
-	p.require(postV1PosReportsCreateRequestFieldCashAccountCode)
+func (r *ReportsCreatePosRequest) SetCashAccountCode(cashAccountCode *string) {
+	r.CashAccountCode = cashAccountCode
+	r.require(reportsCreatePosRequestFieldCashAccountCode)
 }
 
 // SetCardAccountCode sets the CardAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetCardAccountCode(cardAccountCode *string) {
-	p.CardAccountCode = cardAccountCode
-	p.require(postV1PosReportsCreateRequestFieldCardAccountCode)
+func (r *ReportsCreatePosRequest) SetCardAccountCode(cardAccountCode *string) {
+	r.CardAccountCode = cardAccountCode
+	r.require(reportsCreatePosRequestFieldCardAccountCode)
 }
 
 // SetRevenueAccountCode sets the RevenueAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetRevenueAccountCode(revenueAccountCode *string) {
-	p.RevenueAccountCode = revenueAccountCode
-	p.require(postV1PosReportsCreateRequestFieldRevenueAccountCode)
+func (r *ReportsCreatePosRequest) SetRevenueAccountCode(revenueAccountCode *string) {
+	r.RevenueAccountCode = revenueAccountCode
+	r.require(reportsCreatePosRequestFieldRevenueAccountCode)
 }
 
 // SetVatAccountCode sets the VatAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetVatAccountCode(vatAccountCode *string) {
-	p.VatAccountCode = vatAccountCode
-	p.require(postV1PosReportsCreateRequestFieldVatAccountCode)
+func (r *ReportsCreatePosRequest) SetVatAccountCode(vatAccountCode *string) {
+	r.VatAccountCode = vatAccountCode
+	r.require(reportsCreatePosRequestFieldVatAccountCode)
 }
 
 // SetCogsAccountCode sets the CogsAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetCogsAccountCode(cogsAccountCode *string) {
-	p.CogsAccountCode = cogsAccountCode
-	p.require(postV1PosReportsCreateRequestFieldCogsAccountCode)
+func (r *ReportsCreatePosRequest) SetCogsAccountCode(cogsAccountCode *string) {
+	r.CogsAccountCode = cogsAccountCode
+	r.require(reportsCreatePosRequestFieldCogsAccountCode)
 }
 
 // SetInventoryAccountCode sets the InventoryAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
-	p.InventoryAccountCode = inventoryAccountCode
-	p.require(postV1PosReportsCreateRequestFieldInventoryAccountCode)
+func (r *ReportsCreatePosRequest) SetInventoryAccountCode(inventoryAccountCode *string) {
+	r.InventoryAccountCode = inventoryAccountCode
+	r.require(reportsCreatePosRequestFieldInventoryAccountCode)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1PosReportsCreateRequestFieldNotes)
+func (r *ReportsCreatePosRequest) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reportsCreatePosRequestFieldNotes)
 }
 
-func (p *PostV1PosReportsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsCreateRequest
+func (r *ReportsCreatePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsCreatePosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsCreateRequest(body)
+	*r = ReportsCreatePosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosReportsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsCreateRequest
+func (r *ReportsCreatePosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReportsCreatePosRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
+		Date:  internal.NewDate(r.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosReportsGetRequestFieldID = big.NewInt(1 << 0)
+	reportsGetPosRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1PosReportsGetRequest struct {
+type ReportsGetPosRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosReportsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsGetPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosReportsGetRequestFieldID)
+func (r *ReportsGetPosRequest) SetID(id string) {
+	r.ID = id
+	r.require(reportsGetPosRequestFieldID)
 }
 
-func (p *PostV1PosReportsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsGetRequest
+func (r *ReportsGetPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsGetPosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsGetRequest(body)
+	*r = ReportsGetPosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosReportsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsGetRequest
+func (r *ReportsGetPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReportsGetPosRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosReportsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1PosReportsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1PosReportsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1PosReportsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1PosReportsListRequestFieldTotals   = big.NewInt(1 << 4)
+	reportsListPosRequestFieldPage     = big.NewInt(1 << 0)
+	reportsListPosRequestFieldPageSize = big.NewInt(1 << 1)
+	reportsListPosRequestFieldSort     = big.NewInt(1 << 2)
+	reportsListPosRequestFieldFilter   = big.NewInt(1 << 3)
+	reportsListPosRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1PosReportsListRequest struct {
-	Page     *int64                                   `json:"page,omitempty" url:"-"`
-	PageSize *int64                                   `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1PosReportsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1PosReportsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type ReportsListPosRequest struct {
+	Page     *int64                             `json:"page,omitempty" url:"-"`
+	PageSize *int64                             `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ReportsListPosRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ReportsListPosRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -512,89 +515,89 @@ type PostV1PosReportsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PosReportsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsListPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1PosReportsListRequestFieldPage)
+func (r *ReportsListPosRequest) SetPage(page *int64) {
+	r.Page = page
+	r.require(reportsListPosRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1PosReportsListRequestFieldPageSize)
+func (r *ReportsListPosRequest) SetPageSize(pageSize *int64) {
+	r.PageSize = pageSize
+	r.require(reportsListPosRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequest) SetSort(sort []*PostV1PosReportsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1PosReportsListRequestFieldSort)
+func (r *ReportsListPosRequest) SetSort(sort []*ReportsListPosRequestSortItem) {
+	r.Sort = sort
+	r.require(reportsListPosRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequest) SetFilter(filter []*PostV1PosReportsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1PosReportsListRequestFieldFilter)
+func (r *ReportsListPosRequest) SetFilter(filter []*ReportsListPosRequestFilterItem) {
+	r.Filter = filter
+	r.require(reportsListPosRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1PosReportsListRequestFieldTotals)
+func (r *ReportsListPosRequest) SetTotals(totals []string) {
+	r.Totals = totals
+	r.require(reportsListPosRequestFieldTotals)
 }
 
-func (p *PostV1PosReportsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsListRequest
+func (r *ReportsListPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsListPosRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsListRequest(body)
+	*r = ReportsListPosRequest(body)
 	return nil
 }
 
-func (p *PostV1PosReportsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsListRequest
+func (r *ReportsListPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReportsListPosRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1PosDevicesCreateResponseFieldID                 = big.NewInt(1 << 0)
-	postV1PosDevicesCreateResponseFieldName               = big.NewInt(1 << 1)
-	postV1PosDevicesCreateResponseFieldSerialNumber       = big.NewInt(1 << 2)
-	postV1PosDevicesCreateResponseFieldModel              = big.NewInt(1 << 3)
-	postV1PosDevicesCreateResponseFieldRegistrationNumber = big.NewInt(1 << 4)
-	postV1PosDevicesCreateResponseFieldAddress            = big.NewInt(1 << 5)
-	postV1PosDevicesCreateResponseFieldIsActive           = big.NewInt(1 << 6)
-	postV1PosDevicesCreateResponseFieldCreatedAt          = big.NewInt(1 << 7)
+	devicesCreatePosResponseFieldID                 = big.NewInt(1 << 0)
+	devicesCreatePosResponseFieldName               = big.NewInt(1 << 1)
+	devicesCreatePosResponseFieldSerialNumber       = big.NewInt(1 << 2)
+	devicesCreatePosResponseFieldModel              = big.NewInt(1 << 3)
+	devicesCreatePosResponseFieldRegistrationNumber = big.NewInt(1 << 4)
+	devicesCreatePosResponseFieldAddress            = big.NewInt(1 << 5)
+	devicesCreatePosResponseFieldIsActive           = big.NewInt(1 << 6)
+	devicesCreatePosResponseFieldCreatedAt          = big.NewInt(1 << 7)
 )
 
-type PostV1PosDevicesCreateResponse struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	SerialNumber       string  `json:"serialNumber" url:"serialNumber"`
-	Model              *string `json:"model,omitempty" url:"model,omitempty"`
-	RegistrationNumber *string `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
-	Address            *string `json:"address,omitempty" url:"address,omitempty"`
-	IsActive           bool    `json:"isActive" url:"isActive"`
-	CreatedAt          string  `json:"createdAt" url:"createdAt"`
+type DevicesCreatePosResponse struct {
+	ID                 string    `json:"id" url:"id"`
+	Name               string    `json:"name" url:"name"`
+	SerialNumber       string    `json:"serialNumber" url:"serialNumber"`
+	Model              *string   `json:"model,omitempty" url:"model,omitempty"`
+	RegistrationNumber *string   `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
+	Address            *string   `json:"address,omitempty" url:"address,omitempty"`
+	IsActive           bool      `json:"isActive" url:"isActive"`
+	CreatedAt          time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -603,184 +606,192 @@ type PostV1PosDevicesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetID() string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetName() string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetSerialNumber() string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetSerialNumber() string {
+	if d == nil {
 		return ""
 	}
-	return p.SerialNumber
+	return d.SerialNumber
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetModel() *string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetRegistrationNumber() *string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetRegistrationNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.RegistrationNumber
+	return d.RegistrationNumber
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetAddress() *string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetAddress() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Address
+	return d.Address
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetIsActive() bool {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetIsActive() bool {
+	if d == nil {
 		return false
 	}
-	return p.IsActive
+	return d.IsActive
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DevicesCreatePosResponse) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1PosDevicesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesCreatePosResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesCreatePosResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosDevicesCreateResponseFieldID)
+func (d *DevicesCreatePosResponse) SetID(id string) {
+	d.ID = id
+	d.require(devicesCreatePosResponseFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1PosDevicesCreateResponseFieldName)
+func (d *DevicesCreatePosResponse) SetName(name string) {
+	d.Name = name
+	d.require(devicesCreatePosResponseFieldName)
 }
 
 // SetSerialNumber sets the SerialNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetSerialNumber(serialNumber string) {
-	p.SerialNumber = serialNumber
-	p.require(postV1PosDevicesCreateResponseFieldSerialNumber)
+func (d *DevicesCreatePosResponse) SetSerialNumber(serialNumber string) {
+	d.SerialNumber = serialNumber
+	d.require(devicesCreatePosResponseFieldSerialNumber)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1PosDevicesCreateResponseFieldModel)
+func (d *DevicesCreatePosResponse) SetModel(model *string) {
+	d.Model = model
+	d.require(devicesCreatePosResponseFieldModel)
 }
 
 // SetRegistrationNumber sets the RegistrationNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetRegistrationNumber(registrationNumber *string) {
-	p.RegistrationNumber = registrationNumber
-	p.require(postV1PosDevicesCreateResponseFieldRegistrationNumber)
+func (d *DevicesCreatePosResponse) SetRegistrationNumber(registrationNumber *string) {
+	d.RegistrationNumber = registrationNumber
+	d.require(devicesCreatePosResponseFieldRegistrationNumber)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetAddress(address *string) {
-	p.Address = address
-	p.require(postV1PosDevicesCreateResponseFieldAddress)
+func (d *DevicesCreatePosResponse) SetAddress(address *string) {
+	d.Address = address
+	d.require(devicesCreatePosResponseFieldAddress)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1PosDevicesCreateResponseFieldIsActive)
+func (d *DevicesCreatePosResponse) SetIsActive(isActive bool) {
+	d.IsActive = isActive
+	d.require(devicesCreatePosResponseFieldIsActive)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosDevicesCreateResponseFieldCreatedAt)
+func (d *DevicesCreatePosResponse) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(devicesCreatePosResponseFieldCreatedAt)
 }
 
-func (p *PostV1PosDevicesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DevicesCreatePosResponse) UnmarshalJSON(data []byte) error {
+	type embed DevicesCreatePosResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesCreatePosResponse(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesCreateResponse
+func (d *DevicesCreatePosResponse) MarshalJSON() ([]byte, error) {
+	type embed DevicesCreatePosResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesCreateResponse) String() string {
-	if p == nil {
+func (d *DevicesCreatePosResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1PosDevicesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1PosDevicesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1PosDevicesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	devicesListPosRequestFilterItemFieldField = big.NewInt(1 << 0)
+	devicesListPosRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	devicesListPosRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1PosDevicesListRequestFilterItem struct {
-	Field string                                      `json:"field" url:"field"`
-	Op    PostV1PosDevicesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1PosDevicesListRequestFilterItemValue `json:"value" url:"value"`
+type DevicesListPosRequestFilterItem struct {
+	Field string                                `json:"field" url:"field"`
+	Op    DevicesListPosRequestFilterItemOp     `json:"op" url:"op"`
+	Value *DevicesListPosRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -789,312 +800,312 @@ type PostV1PosDevicesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) GetOp() PostV1PosDevicesListRequestFilterItemOp {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItem) GetOp() DevicesListPosRequestFilterItemOp {
+	if d == nil {
 		return ""
 	}
-	return p.Op
+	return d.Op
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) GetValue() *PostV1PosDevicesListRequestFilterItemValue {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItem) GetValue() *DevicesListPosRequestFilterItemValue {
+	if d == nil {
 		return nil
 	}
-	return p.Value
+	return d.Value
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesListPosRequestFilterItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1PosDevicesListRequestFilterItemFieldField)
+func (d *DevicesListPosRequestFilterItem) SetField(field string) {
+	d.Field = field
+	d.require(devicesListPosRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequestFilterItem) SetOp(op PostV1PosDevicesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1PosDevicesListRequestFilterItemFieldOp)
+func (d *DevicesListPosRequestFilterItem) SetOp(op DevicesListPosRequestFilterItemOp) {
+	d.Op = op
+	d.require(devicesListPosRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequestFilterItem) SetValue(value *PostV1PosDevicesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1PosDevicesListRequestFilterItemFieldValue)
+func (d *DevicesListPosRequestFilterItem) SetValue(value *DevicesListPosRequestFilterItemValue) {
+	d.Value = value
+	d.require(devicesListPosRequestFilterItemFieldValue)
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesListRequestFilterItem
+func (d *DevicesListPosRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesListPosRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesListPosRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesListRequestFilterItem
+func (d *DevicesListPosRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed DevicesListPosRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesListRequestFilterItem) String() string {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1PosDevicesListRequestFilterItemOp string
+type DevicesListPosRequestFilterItemOp string
 
 const (
-	PostV1PosDevicesListRequestFilterItemOpEq       PostV1PosDevicesListRequestFilterItemOp = "eq"
-	PostV1PosDevicesListRequestFilterItemOpNe       PostV1PosDevicesListRequestFilterItemOp = "ne"
-	PostV1PosDevicesListRequestFilterItemOpContains PostV1PosDevicesListRequestFilterItemOp = "contains"
-	PostV1PosDevicesListRequestFilterItemOpGte      PostV1PosDevicesListRequestFilterItemOp = "gte"
-	PostV1PosDevicesListRequestFilterItemOpLte      PostV1PosDevicesListRequestFilterItemOp = "lte"
-	PostV1PosDevicesListRequestFilterItemOpIn       PostV1PosDevicesListRequestFilterItemOp = "in"
+	DevicesListPosRequestFilterItemOpEq       DevicesListPosRequestFilterItemOp = "eq"
+	DevicesListPosRequestFilterItemOpNe       DevicesListPosRequestFilterItemOp = "ne"
+	DevicesListPosRequestFilterItemOpContains DevicesListPosRequestFilterItemOp = "contains"
+	DevicesListPosRequestFilterItemOpGte      DevicesListPosRequestFilterItemOp = "gte"
+	DevicesListPosRequestFilterItemOpLte      DevicesListPosRequestFilterItemOp = "lte"
+	DevicesListPosRequestFilterItemOpIn       DevicesListPosRequestFilterItemOp = "in"
 )
 
-func NewPostV1PosDevicesListRequestFilterItemOpFromString(s string) (PostV1PosDevicesListRequestFilterItemOp, error) {
+func NewDevicesListPosRequestFilterItemOpFromString(s string) (DevicesListPosRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1PosDevicesListRequestFilterItemOpEq, nil
+		return DevicesListPosRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1PosDevicesListRequestFilterItemOpNe, nil
+		return DevicesListPosRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1PosDevicesListRequestFilterItemOpContains, nil
+		return DevicesListPosRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1PosDevicesListRequestFilterItemOpGte, nil
+		return DevicesListPosRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1PosDevicesListRequestFilterItemOpLte, nil
+		return DevicesListPosRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1PosDevicesListRequestFilterItemOpIn, nil
+		return DevicesListPosRequestFilterItemOpIn, nil
 	}
-	var t PostV1PosDevicesListRequestFilterItemOp
+	var t DevicesListPosRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1PosDevicesListRequestFilterItemOp) Ptr() *PostV1PosDevicesListRequestFilterItemOp {
-	return &p
+func (d DevicesListPosRequestFilterItemOp) Ptr() *DevicesListPosRequestFilterItemOp {
+	return &d
 }
 
-type PostV1PosDevicesListRequestFilterItemValue struct {
-	String                                                  string
-	Double                                                  float64
-	Boolean                                                 bool
-	PostV1PosDevicesListRequestFilterItemValueThreeItemList []*PostV1PosDevicesListRequestFilterItemValueThreeItem
+type DevicesListPosRequestFilterItemValue struct {
+	String                                            string
+	Double                                            float64
+	Boolean                                           bool
+	DevicesListPosRequestFilterItemValueThreeItemList []*DevicesListPosRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValue) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValue) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValue) GetBoolean() bool {
+	if d == nil {
 		return false
 	}
-	return p.Boolean
+	return d.Boolean
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) GetPostV1PosDevicesListRequestFilterItemValueThreeItemList() []*PostV1PosDevicesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValue) GetDevicesListPosRequestFilterItemValueThreeItemList() []*DevicesListPosRequestFilterItemValueThreeItem {
+	if d == nil {
 		return nil
 	}
-	return p.PostV1PosDevicesListRequestFilterItemValueThreeItemList
+	return d.DevicesListPosRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (d *DevicesListPosRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		d.typ = "Boolean"
+		d.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1PosDevicesListRequestFilterItemValueThreeItemList []*PostV1PosDevicesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1PosDevicesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1PosDevicesListRequestFilterItemValueThreeItemList"
-		p.PostV1PosDevicesListRequestFilterItemValueThreeItemList = valuePostV1PosDevicesListRequestFilterItemValueThreeItemList
+	var valueDevicesListPosRequestFilterItemValueThreeItemList []*DevicesListPosRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueDevicesListPosRequestFilterItemValueThreeItemList); err == nil {
+		d.typ = "DevicesListPosRequestFilterItemValueThreeItemList"
+		d.DevicesListPosRequestFilterItemValueThreeItemList = valueDevicesListPosRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1PosDevicesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DevicesListPosRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return json.Marshal(d.Boolean)
 	}
-	if p.typ == "PostV1PosDevicesListRequestFilterItemValueThreeItemList" || p.PostV1PosDevicesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1PosDevicesListRequestFilterItemValueThreeItemList)
+	if d.typ == "DevicesListPosRequestFilterItemValueThreeItemList" || d.DevicesListPosRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(d.DevicesListPosRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1PosDevicesListRequestFilterItemValueVisitor interface {
+type DevicesListPosRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1PosDevicesListRequestFilterItemValueThreeItemList([]*PostV1PosDevicesListRequestFilterItemValueThreeItem) error
+	VisitDevicesListPosRequestFilterItemValueThreeItemList([]*DevicesListPosRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValue) Accept(visitor PostV1PosDevicesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DevicesListPosRequestFilterItemValue) Accept(visitor DevicesListPosRequestFilterItemValueVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return visitor.VisitBoolean(d.Boolean)
 	}
-	if p.typ == "PostV1PosDevicesListRequestFilterItemValueThreeItemList" || p.PostV1PosDevicesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1PosDevicesListRequestFilterItemValueThreeItemList(p.PostV1PosDevicesListRequestFilterItemValueThreeItemList)
+	if d.typ == "DevicesListPosRequestFilterItemValueThreeItemList" || d.DevicesListPosRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitDevicesListPosRequestFilterItemValueThreeItemList(d.DevicesListPosRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1PosDevicesListRequestFilterItemValueThreeItem struct {
+type DevicesListPosRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValueThreeItem) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (d *DevicesListPosRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (d *DevicesListPosRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1PosDevicesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DevicesListPosRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1PosDevicesListRequestFilterItemValueThreeItemVisitor interface {
+type DevicesListPosRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1PosDevicesListRequestFilterItemValueThreeItem) Accept(visitor PostV1PosDevicesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DevicesListPosRequestFilterItemValueThreeItem) Accept(visitor DevicesListPosRequestFilterItemValueThreeItemVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
 var (
-	postV1PosDevicesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1PosDevicesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	devicesListPosRequestSortItemFieldField = big.NewInt(1 << 0)
+	devicesListPosRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1PosDevicesListRequestSortItem struct {
-	Field string                                  `json:"field" url:"field"`
-	Dir   *PostV1PosDevicesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type DevicesListPosRequestSortItem struct {
+	Field string                            `json:"field" url:"field"`
+	Dir   *DevicesListPosRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1103,126 +1114,126 @@ type PostV1PosDevicesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) GetField() string {
-	if p == nil {
+func (d *DevicesListPosRequestSortItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) GetDir() *PostV1PosDevicesListRequestSortItemDir {
-	if p == nil {
+func (d *DevicesListPosRequestSortItem) GetDir() *DevicesListPosRequestSortItemDir {
+	if d == nil {
 		return nil
 	}
-	return p.Dir
+	return d.Dir
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesListPosRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesListPosRequestSortItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1PosDevicesListRequestSortItemFieldField)
+func (d *DevicesListPosRequestSortItem) SetField(field string) {
+	d.Field = field
+	d.require(devicesListPosRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListRequestSortItem) SetDir(dir *PostV1PosDevicesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1PosDevicesListRequestSortItemFieldDir)
+func (d *DevicesListPosRequestSortItem) SetDir(dir *DevicesListPosRequestSortItemDir) {
+	d.Dir = dir
+	d.require(devicesListPosRequestSortItemFieldDir)
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesListRequestSortItem
+func (d *DevicesListPosRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesListPosRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesListPosRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesListRequestSortItem
+func (d *DevicesListPosRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed DevicesListPosRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesListRequestSortItem) String() string {
-	if p == nil {
+func (d *DevicesListPosRequestSortItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1PosDevicesListRequestSortItemDir string
+type DevicesListPosRequestSortItemDir string
 
 const (
-	PostV1PosDevicesListRequestSortItemDirAsc  PostV1PosDevicesListRequestSortItemDir = "asc"
-	PostV1PosDevicesListRequestSortItemDirDesc PostV1PosDevicesListRequestSortItemDir = "desc"
+	DevicesListPosRequestSortItemDirAsc  DevicesListPosRequestSortItemDir = "asc"
+	DevicesListPosRequestSortItemDirDesc DevicesListPosRequestSortItemDir = "desc"
 )
 
-func NewPostV1PosDevicesListRequestSortItemDirFromString(s string) (PostV1PosDevicesListRequestSortItemDir, error) {
+func NewDevicesListPosRequestSortItemDirFromString(s string) (DevicesListPosRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1PosDevicesListRequestSortItemDirAsc, nil
+		return DevicesListPosRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1PosDevicesListRequestSortItemDirDesc, nil
+		return DevicesListPosRequestSortItemDirDesc, nil
 	}
-	var t PostV1PosDevicesListRequestSortItemDir
+	var t DevicesListPosRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1PosDevicesListRequestSortItemDir) Ptr() *PostV1PosDevicesListRequestSortItemDir {
-	return &p
+func (d DevicesListPosRequestSortItemDir) Ptr() *DevicesListPosRequestSortItemDir {
+	return &d
 }
 
 var (
-	postV1PosDevicesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1PosDevicesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1PosDevicesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1PosDevicesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1PosDevicesListResponseFieldTotals   = big.NewInt(1 << 4)
+	devicesListPosResponseFieldRows     = big.NewInt(1 << 0)
+	devicesListPosResponseFieldPage     = big.NewInt(1 << 1)
+	devicesListPosResponseFieldPageSize = big.NewInt(1 << 2)
+	devicesListPosResponseFieldTotal    = big.NewInt(1 << 3)
+	devicesListPosResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1PosDevicesListResponse struct {
-	Rows     []*PostV1PosDevicesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                   `json:"page" url:"page"`
-	PageSize int64                                   `json:"pageSize" url:"pageSize"`
-	Total    int64                                   `json:"total" url:"total"`
-	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
+type DevicesListPosResponse struct {
+	Rows     []*DevicesListPosResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                             `json:"page" url:"page"`
+	PageSize int64                             `json:"pageSize" url:"pageSize"`
+	Total    int64                             `json:"total" url:"total"`
+	Totals   map[string]string                 `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1231,152 +1242,152 @@ type PostV1PosDevicesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesListResponse) GetRows() []*PostV1PosDevicesListResponseRowsItem {
-	if p == nil {
+func (d *DevicesListPosResponse) GetRows() []*DevicesListPosResponseRowsItem {
+	if d == nil {
 		return nil
 	}
-	return p.Rows
+	return d.Rows
 }
 
-func (p *PostV1PosDevicesListResponse) GetPage() int64 {
-	if p == nil {
+func (d *DevicesListPosResponse) GetPage() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Page
+	return d.Page
 }
 
-func (p *PostV1PosDevicesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (d *DevicesListPosResponse) GetPageSize() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.PageSize
+	return d.PageSize
 }
 
-func (p *PostV1PosDevicesListResponse) GetTotal() int64 {
-	if p == nil {
+func (d *DevicesListPosResponse) GetTotal() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Total
+	return d.Total
 }
 
-func (p *PostV1PosDevicesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (d *DevicesListPosResponse) GetTotals() map[string]string {
+	if d == nil {
 		return nil
 	}
-	return p.Totals
+	return d.Totals
 }
 
-func (p *PostV1PosDevicesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesListPosResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesListPosResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponse) SetRows(rows []*PostV1PosDevicesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1PosDevicesListResponseFieldRows)
+func (d *DevicesListPosResponse) SetRows(rows []*DevicesListPosResponseRowsItem) {
+	d.Rows = rows
+	d.require(devicesListPosResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1PosDevicesListResponseFieldPage)
+func (d *DevicesListPosResponse) SetPage(page int64) {
+	d.Page = page
+	d.require(devicesListPosResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1PosDevicesListResponseFieldPageSize)
+func (d *DevicesListPosResponse) SetPageSize(pageSize int64) {
+	d.PageSize = pageSize
+	d.require(devicesListPosResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1PosDevicesListResponseFieldTotal)
+func (d *DevicesListPosResponse) SetTotal(total int64) {
+	d.Total = total
+	d.require(devicesListPosResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1PosDevicesListResponseFieldTotals)
+func (d *DevicesListPosResponse) SetTotals(totals map[string]string) {
+	d.Totals = totals
+	d.require(devicesListPosResponseFieldTotals)
 }
 
-func (p *PostV1PosDevicesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesListResponse
+func (d *DevicesListPosResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DevicesListPosResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesListPosResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesListResponse
+func (d *DevicesListPosResponse) MarshalJSON() ([]byte, error) {
+	type embed DevicesListPosResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesListResponse) String() string {
-	if p == nil {
+func (d *DevicesListPosResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1PosDevicesListResponseRowsItemFieldID                 = big.NewInt(1 << 0)
-	postV1PosDevicesListResponseRowsItemFieldName               = big.NewInt(1 << 1)
-	postV1PosDevicesListResponseRowsItemFieldSerialNumber       = big.NewInt(1 << 2)
-	postV1PosDevicesListResponseRowsItemFieldModel              = big.NewInt(1 << 3)
-	postV1PosDevicesListResponseRowsItemFieldRegistrationNumber = big.NewInt(1 << 4)
-	postV1PosDevicesListResponseRowsItemFieldAddress            = big.NewInt(1 << 5)
-	postV1PosDevicesListResponseRowsItemFieldIsActive           = big.NewInt(1 << 6)
-	postV1PosDevicesListResponseRowsItemFieldCreatedAt          = big.NewInt(1 << 7)
+	devicesListPosResponseRowsItemFieldID                 = big.NewInt(1 << 0)
+	devicesListPosResponseRowsItemFieldName               = big.NewInt(1 << 1)
+	devicesListPosResponseRowsItemFieldSerialNumber       = big.NewInt(1 << 2)
+	devicesListPosResponseRowsItemFieldModel              = big.NewInt(1 << 3)
+	devicesListPosResponseRowsItemFieldRegistrationNumber = big.NewInt(1 << 4)
+	devicesListPosResponseRowsItemFieldAddress            = big.NewInt(1 << 5)
+	devicesListPosResponseRowsItemFieldIsActive           = big.NewInt(1 << 6)
+	devicesListPosResponseRowsItemFieldCreatedAt          = big.NewInt(1 << 7)
 )
 
-type PostV1PosDevicesListResponseRowsItem struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	SerialNumber       string  `json:"serialNumber" url:"serialNumber"`
-	Model              *string `json:"model,omitempty" url:"model,omitempty"`
-	RegistrationNumber *string `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
-	Address            *string `json:"address,omitempty" url:"address,omitempty"`
-	IsActive           bool    `json:"isActive" url:"isActive"`
-	CreatedAt          string  `json:"createdAt" url:"createdAt"`
+type DevicesListPosResponseRowsItem struct {
+	ID                 string    `json:"id" url:"id"`
+	Name               string    `json:"name" url:"name"`
+	SerialNumber       string    `json:"serialNumber" url:"serialNumber"`
+	Model              *string   `json:"model,omitempty" url:"model,omitempty"`
+	RegistrationNumber *string   `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
+	Address            *string   `json:"address,omitempty" url:"address,omitempty"`
+	IsActive           bool      `json:"isActive" url:"isActive"`
+	CreatedAt          time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1385,194 +1396,202 @@ type PostV1PosDevicesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetName() string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetSerialNumber() string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetSerialNumber() string {
+	if d == nil {
 		return ""
 	}
-	return p.SerialNumber
+	return d.SerialNumber
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetModel() *string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetRegistrationNumber() *string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetRegistrationNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.RegistrationNumber
+	return d.RegistrationNumber
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetAddress() *string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetAddress() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Address
+	return d.Address
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetIsActive() bool {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetIsActive() bool {
+	if d == nil {
 		return false
 	}
-	return p.IsActive
+	return d.IsActive
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DevicesListPosResponseRowsItem) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesListPosResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosDevicesListResponseRowsItemFieldID)
+func (d *DevicesListPosResponseRowsItem) SetID(id string) {
+	d.ID = id
+	d.require(devicesListPosResponseRowsItemFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1PosDevicesListResponseRowsItemFieldName)
+func (d *DevicesListPosResponseRowsItem) SetName(name string) {
+	d.Name = name
+	d.require(devicesListPosResponseRowsItemFieldName)
 }
 
 // SetSerialNumber sets the SerialNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetSerialNumber(serialNumber string) {
-	p.SerialNumber = serialNumber
-	p.require(postV1PosDevicesListResponseRowsItemFieldSerialNumber)
+func (d *DevicesListPosResponseRowsItem) SetSerialNumber(serialNumber string) {
+	d.SerialNumber = serialNumber
+	d.require(devicesListPosResponseRowsItemFieldSerialNumber)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1PosDevicesListResponseRowsItemFieldModel)
+func (d *DevicesListPosResponseRowsItem) SetModel(model *string) {
+	d.Model = model
+	d.require(devicesListPosResponseRowsItemFieldModel)
 }
 
 // SetRegistrationNumber sets the RegistrationNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetRegistrationNumber(registrationNumber *string) {
-	p.RegistrationNumber = registrationNumber
-	p.require(postV1PosDevicesListResponseRowsItemFieldRegistrationNumber)
+func (d *DevicesListPosResponseRowsItem) SetRegistrationNumber(registrationNumber *string) {
+	d.RegistrationNumber = registrationNumber
+	d.require(devicesListPosResponseRowsItemFieldRegistrationNumber)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetAddress(address *string) {
-	p.Address = address
-	p.require(postV1PosDevicesListResponseRowsItemFieldAddress)
+func (d *DevicesListPosResponseRowsItem) SetAddress(address *string) {
+	d.Address = address
+	d.require(devicesListPosResponseRowsItemFieldAddress)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1PosDevicesListResponseRowsItemFieldIsActive)
+func (d *DevicesListPosResponseRowsItem) SetIsActive(isActive bool) {
+	d.IsActive = isActive
+	d.require(devicesListPosResponseRowsItemFieldIsActive)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosDevicesListResponseRowsItemFieldCreatedAt)
+func (d *DevicesListPosResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(devicesListPosResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DevicesListPosResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DevicesListPosResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesListPosResponseRowsItem(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesListResponseRowsItem
+func (d *DevicesListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DevicesListPosResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesListResponseRowsItem) String() string {
-	if p == nil {
+func (d *DevicesListPosResponseRowsItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1PosDevicesUpdateResponseFieldID                 = big.NewInt(1 << 0)
-	postV1PosDevicesUpdateResponseFieldName               = big.NewInt(1 << 1)
-	postV1PosDevicesUpdateResponseFieldSerialNumber       = big.NewInt(1 << 2)
-	postV1PosDevicesUpdateResponseFieldModel              = big.NewInt(1 << 3)
-	postV1PosDevicesUpdateResponseFieldRegistrationNumber = big.NewInt(1 << 4)
-	postV1PosDevicesUpdateResponseFieldAddress            = big.NewInt(1 << 5)
-	postV1PosDevicesUpdateResponseFieldIsActive           = big.NewInt(1 << 6)
-	postV1PosDevicesUpdateResponseFieldCreatedAt          = big.NewInt(1 << 7)
+	devicesUpdatePosResponseFieldID                 = big.NewInt(1 << 0)
+	devicesUpdatePosResponseFieldName               = big.NewInt(1 << 1)
+	devicesUpdatePosResponseFieldSerialNumber       = big.NewInt(1 << 2)
+	devicesUpdatePosResponseFieldModel              = big.NewInt(1 << 3)
+	devicesUpdatePosResponseFieldRegistrationNumber = big.NewInt(1 << 4)
+	devicesUpdatePosResponseFieldAddress            = big.NewInt(1 << 5)
+	devicesUpdatePosResponseFieldIsActive           = big.NewInt(1 << 6)
+	devicesUpdatePosResponseFieldCreatedAt          = big.NewInt(1 << 7)
 )
 
-type PostV1PosDevicesUpdateResponse struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	SerialNumber       string  `json:"serialNumber" url:"serialNumber"`
-	Model              *string `json:"model,omitempty" url:"model,omitempty"`
-	RegistrationNumber *string `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
-	Address            *string `json:"address,omitempty" url:"address,omitempty"`
-	IsActive           bool    `json:"isActive" url:"isActive"`
-	CreatedAt          string  `json:"createdAt" url:"createdAt"`
+type DevicesUpdatePosResponse struct {
+	ID                 string    `json:"id" url:"id"`
+	Name               string    `json:"name" url:"name"`
+	SerialNumber       string    `json:"serialNumber" url:"serialNumber"`
+	Model              *string   `json:"model,omitempty" url:"model,omitempty"`
+	RegistrationNumber *string   `json:"registrationNumber,omitempty" url:"registrationNumber,omitempty"`
+	Address            *string   `json:"address,omitempty" url:"address,omitempty"`
+	IsActive           bool      `json:"isActive" url:"isActive"`
+	CreatedAt          time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1581,180 +1600,188 @@ type PostV1PosDevicesUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetID() string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetName() string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetSerialNumber() string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetSerialNumber() string {
+	if d == nil {
 		return ""
 	}
-	return p.SerialNumber
+	return d.SerialNumber
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetModel() *string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetRegistrationNumber() *string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetRegistrationNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.RegistrationNumber
+	return d.RegistrationNumber
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetAddress() *string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetAddress() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Address
+	return d.Address
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetIsActive() bool {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetIsActive() bool {
+	if d == nil {
 		return false
 	}
-	return p.IsActive
+	return d.IsActive
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DevicesUpdatePosResponse) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1PosDevicesUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1PosDevicesUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DevicesUpdatePosResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosDevicesUpdateResponseFieldID)
+func (d *DevicesUpdatePosResponse) SetID(id string) {
+	d.ID = id
+	d.require(devicesUpdatePosResponseFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1PosDevicesUpdateResponseFieldName)
+func (d *DevicesUpdatePosResponse) SetName(name string) {
+	d.Name = name
+	d.require(devicesUpdatePosResponseFieldName)
 }
 
 // SetSerialNumber sets the SerialNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetSerialNumber(serialNumber string) {
-	p.SerialNumber = serialNumber
-	p.require(postV1PosDevicesUpdateResponseFieldSerialNumber)
+func (d *DevicesUpdatePosResponse) SetSerialNumber(serialNumber string) {
+	d.SerialNumber = serialNumber
+	d.require(devicesUpdatePosResponseFieldSerialNumber)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1PosDevicesUpdateResponseFieldModel)
+func (d *DevicesUpdatePosResponse) SetModel(model *string) {
+	d.Model = model
+	d.require(devicesUpdatePosResponseFieldModel)
 }
 
 // SetRegistrationNumber sets the RegistrationNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetRegistrationNumber(registrationNumber *string) {
-	p.RegistrationNumber = registrationNumber
-	p.require(postV1PosDevicesUpdateResponseFieldRegistrationNumber)
+func (d *DevicesUpdatePosResponse) SetRegistrationNumber(registrationNumber *string) {
+	d.RegistrationNumber = registrationNumber
+	d.require(devicesUpdatePosResponseFieldRegistrationNumber)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetAddress(address *string) {
-	p.Address = address
-	p.require(postV1PosDevicesUpdateResponseFieldAddress)
+func (d *DevicesUpdatePosResponse) SetAddress(address *string) {
+	d.Address = address
+	d.require(devicesUpdatePosResponseFieldAddress)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetIsActive(isActive bool) {
-	p.IsActive = isActive
-	p.require(postV1PosDevicesUpdateResponseFieldIsActive)
+func (d *DevicesUpdatePosResponse) SetIsActive(isActive bool) {
+	d.IsActive = isActive
+	d.require(devicesUpdatePosResponseFieldIsActive)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosDevicesUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosDevicesUpdateResponseFieldCreatedAt)
+func (d *DevicesUpdatePosResponse) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(devicesUpdatePosResponseFieldCreatedAt)
 }
 
-func (p *PostV1PosDevicesUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosDevicesUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DevicesUpdatePosResponse) UnmarshalJSON(data []byte) error {
+	type embed DevicesUpdatePosResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosDevicesUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DevicesUpdatePosResponse(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosDevicesUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosDevicesUpdateResponse
+func (d *DevicesUpdatePosResponse) MarshalJSON() ([]byte, error) {
+	type embed DevicesUpdatePosResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosDevicesUpdateResponse) String() string {
-	if p == nil {
+func (d *DevicesUpdatePosResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1PosReportsCreateRequestItemLinesItemFieldItemID   = big.NewInt(1 << 0)
-	postV1PosReportsCreateRequestItemLinesItemFieldQuantity = big.NewInt(1 << 1)
+	reportsCreatePosRequestItemLinesItemFieldItemID   = big.NewInt(1 << 0)
+	reportsCreatePosRequestItemLinesItemFieldQuantity = big.NewInt(1 << 1)
 )
 
-type PostV1PosReportsCreateRequestItemLinesItem struct {
+type ReportsCreatePosRequestItemLinesItem struct {
 	ItemID   string `json:"itemId" url:"itemId"`
 	Quantity string `json:"quantity" url:"quantity"`
 
@@ -1765,97 +1792,97 @@ type PostV1PosReportsCreateRequestItemLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) GetItemID() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestItemLinesItem) GetItemID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ItemID
+	return r.ItemID
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) GetQuantity() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestItemLinesItem) GetQuantity() string {
+	if r == nil {
 		return ""
 	}
-	return p.Quantity
+	return r.Quantity
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsCreatePosRequestItemLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsCreatePosRequestItemLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequestItemLinesItem) SetItemID(itemID string) {
-	p.ItemID = itemID
-	p.require(postV1PosReportsCreateRequestItemLinesItemFieldItemID)
+func (r *ReportsCreatePosRequestItemLinesItem) SetItemID(itemID string) {
+	r.ItemID = itemID
+	r.require(reportsCreatePosRequestItemLinesItemFieldItemID)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequestItemLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1PosReportsCreateRequestItemLinesItemFieldQuantity)
+func (r *ReportsCreatePosRequestItemLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(reportsCreatePosRequestItemLinesItemFieldQuantity)
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsCreateRequestItemLinesItem
+func (r *ReportsCreatePosRequestItemLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsCreatePosRequestItemLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsCreateRequestItemLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsCreatePosRequestItemLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsCreateRequestItemLinesItem
+func (r *ReportsCreatePosRequestItemLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsCreatePosRequestItemLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsCreateRequestItemLinesItem) String() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestItemLinesItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsCreateRequestVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
-	postV1PosReportsCreateRequestVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
-	postV1PosReportsCreateRequestVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
+	reportsCreatePosRequestVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
+	reportsCreatePosRequestVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
+	reportsCreatePosRequestVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
 )
 
-type PostV1PosReportsCreateRequestVatLinesItem struct {
+type ReportsCreatePosRequestVatLinesItem struct {
 	VatRatePercent string `json:"vatRatePercent" url:"vatRatePercent"`
 	NetAmount      string `json:"netAmount" url:"netAmount"`
 	VatAmount      string `json:"vatAmount" url:"vatAmount"`
@@ -1867,138 +1894,138 @@ type PostV1PosReportsCreateRequestVatLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestVatLinesItem) GetVatRatePercent() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return r.VatRatePercent
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) GetNetAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestVatLinesItem) GetNetAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetAmount
+	return r.NetAmount
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) GetVatAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestVatLinesItem) GetVatAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatAmount
+	return r.VatAmount
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsCreatePosRequestVatLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsCreatePosRequestVatLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequestVatLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1PosReportsCreateRequestVatLinesItemFieldVatRatePercent)
+func (r *ReportsCreatePosRequestVatLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(reportsCreatePosRequestVatLinesItemFieldVatRatePercent)
 }
 
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequestVatLinesItem) SetNetAmount(netAmount string) {
-	p.NetAmount = netAmount
-	p.require(postV1PosReportsCreateRequestVatLinesItemFieldNetAmount)
+func (r *ReportsCreatePosRequestVatLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(reportsCreatePosRequestVatLinesItemFieldNetAmount)
 }
 
 // SetVatAmount sets the VatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateRequestVatLinesItem) SetVatAmount(vatAmount string) {
-	p.VatAmount = vatAmount
-	p.require(postV1PosReportsCreateRequestVatLinesItemFieldVatAmount)
+func (r *ReportsCreatePosRequestVatLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(reportsCreatePosRequestVatLinesItemFieldVatAmount)
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsCreateRequestVatLinesItem
+func (r *ReportsCreatePosRequestVatLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsCreatePosRequestVatLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsCreateRequestVatLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsCreatePosRequestVatLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsCreateRequestVatLinesItem
+func (r *ReportsCreatePosRequestVatLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsCreatePosRequestVatLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsCreateRequestVatLinesItem) String() string {
-	if p == nil {
+func (r *ReportsCreatePosRequestVatLinesItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PosReportsCreateResponseFieldReportNumber         = big.NewInt(1 << 1)
-	postV1PosReportsCreateResponseFieldDate                 = big.NewInt(1 << 2)
-	postV1PosReportsCreateResponseFieldDeviceID             = big.NewInt(1 << 3)
-	postV1PosReportsCreateResponseFieldWarehouseID          = big.NewInt(1 << 4)
-	postV1PosReportsCreateResponseFieldNetTotal             = big.NewInt(1 << 5)
-	postV1PosReportsCreateResponseFieldVatTotal             = big.NewInt(1 << 6)
-	postV1PosReportsCreateResponseFieldGrossTotal           = big.NewInt(1 << 7)
-	postV1PosReportsCreateResponseFieldCashAmount           = big.NewInt(1 << 8)
-	postV1PosReportsCreateResponseFieldCardAmount           = big.NewInt(1 << 9)
-	postV1PosReportsCreateResponseFieldCogsTotal            = big.NewInt(1 << 10)
-	postV1PosReportsCreateResponseFieldJournalTransactionID = big.NewInt(1 << 11)
-	postV1PosReportsCreateResponseFieldNotes                = big.NewInt(1 << 12)
-	postV1PosReportsCreateResponseFieldCreatedAt            = big.NewInt(1 << 13)
-	postV1PosReportsCreateResponseFieldVatLines             = big.NewInt(1 << 14)
+	reportsCreatePosResponseFieldID                   = big.NewInt(1 << 0)
+	reportsCreatePosResponseFieldReportNumber         = big.NewInt(1 << 1)
+	reportsCreatePosResponseFieldDate                 = big.NewInt(1 << 2)
+	reportsCreatePosResponseFieldDeviceID             = big.NewInt(1 << 3)
+	reportsCreatePosResponseFieldWarehouseID          = big.NewInt(1 << 4)
+	reportsCreatePosResponseFieldNetTotal             = big.NewInt(1 << 5)
+	reportsCreatePosResponseFieldVatTotal             = big.NewInt(1 << 6)
+	reportsCreatePosResponseFieldGrossTotal           = big.NewInt(1 << 7)
+	reportsCreatePosResponseFieldCashAmount           = big.NewInt(1 << 8)
+	reportsCreatePosResponseFieldCardAmount           = big.NewInt(1 << 9)
+	reportsCreatePosResponseFieldCogsTotal            = big.NewInt(1 << 10)
+	reportsCreatePosResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	reportsCreatePosResponseFieldNotes                = big.NewInt(1 << 12)
+	reportsCreatePosResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	reportsCreatePosResponseFieldVatLines             = big.NewInt(1 << 14)
 )
 
-type PostV1PosReportsCreateResponse struct {
-	ID                   string                                        `json:"id" url:"id"`
-	ReportNumber         string                                        `json:"reportNumber" url:"reportNumber"`
-	Date                 string                                        `json:"date" url:"date"`
-	DeviceID             *string                                       `json:"deviceId,omitempty" url:"deviceId,omitempty"`
-	WarehouseID          *string                                       `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	NetTotal             string                                        `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                        `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                        `json:"grossTotal" url:"grossTotal"`
-	CashAmount           string                                        `json:"cashAmount" url:"cashAmount"`
-	CardAmount           string                                        `json:"cardAmount" url:"cardAmount"`
-	CogsTotal            *string                                       `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
-	JournalTransactionID *string                                       `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                        `json:"createdAt" url:"createdAt"`
-	VatLines             []*PostV1PosReportsCreateResponseVatLinesItem `json:"vatLines" url:"vatLines"`
+type ReportsCreatePosResponse struct {
+	ID                   string                                  `json:"id" url:"id"`
+	ReportNumber         string                                  `json:"reportNumber" url:"reportNumber"`
+	Date                 time.Time                               `json:"date" url:"date" format:"date"`
+	DeviceID             *string                                 `json:"deviceId,omitempty" url:"deviceId,omitempty"`
+	WarehouseID          *string                                 `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	NetTotal             string                                  `json:"netTotal" url:"netTotal"`
+	VatTotal             string                                  `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string                                  `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string                                  `json:"cashAmount" url:"cashAmount"`
+	CardAmount           string                                  `json:"cardAmount" url:"cardAmount"`
+	CogsTotal            *string                                 `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                               `json:"createdAt" url:"createdAt"`
+	VatLines             []*ReportsCreatePosResponseVatLinesItem `json:"vatLines" url:"vatLines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2007,279 +2034,291 @@ type PostV1PosReportsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsCreateResponse) GetID() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1PosReportsCreateResponse) GetReportNumber() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetReportNumber() string {
+	if r == nil {
 		return ""
 	}
-	return p.ReportNumber
+	return r.ReportNumber
 }
 
-func (p *PostV1PosReportsCreateResponse) GetDate() string {
-	if p == nil {
-		return ""
+func (r *ReportsCreatePosResponse) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return r.Date
 }
 
-func (p *PostV1PosReportsCreateResponse) GetDeviceID() *string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetDeviceID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.DeviceID
+	return r.DeviceID
 }
 
-func (p *PostV1PosReportsCreateResponse) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1PosReportsCreateResponse) GetNetTotal() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetNetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetTotal
+	return r.NetTotal
 }
 
-func (p *PostV1PosReportsCreateResponse) GetVatTotal() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetVatTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatTotal
+	return r.VatTotal
 }
 
-func (p *PostV1PosReportsCreateResponse) GetGrossTotal() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetGrossTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return r.GrossTotal
 }
 
-func (p *PostV1PosReportsCreateResponse) GetCashAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetCashAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CashAmount
+	return r.CashAmount
 }
 
-func (p *PostV1PosReportsCreateResponse) GetCardAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetCardAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CardAmount
+	return r.CardAmount
 }
 
-func (p *PostV1PosReportsCreateResponse) GetCogsTotal() *string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetCogsTotal() *string {
+	if r == nil {
 		return nil
 	}
-	return p.CogsTotal
+	return r.CogsTotal
 }
 
-func (p *PostV1PosReportsCreateResponse) GetJournalTransactionID() *string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetJournalTransactionID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return r.JournalTransactionID
 }
 
-func (p *PostV1PosReportsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1PosReportsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReportsCreatePosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1PosReportsCreateResponse) GetVatLines() []*PostV1PosReportsCreateResponseVatLinesItem {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetVatLines() []*ReportsCreatePosResponseVatLinesItem {
+	if r == nil {
 		return nil
 	}
-	return p.VatLines
+	return r.VatLines
 }
 
-func (p *PostV1PosReportsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsCreatePosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsCreatePosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosReportsCreateResponseFieldID)
+func (r *ReportsCreatePosResponse) SetID(id string) {
+	r.ID = id
+	r.require(reportsCreatePosResponseFieldID)
 }
 
 // SetReportNumber sets the ReportNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetReportNumber(reportNumber string) {
-	p.ReportNumber = reportNumber
-	p.require(postV1PosReportsCreateResponseFieldReportNumber)
+func (r *ReportsCreatePosResponse) SetReportNumber(reportNumber string) {
+	r.ReportNumber = reportNumber
+	r.require(reportsCreatePosResponseFieldReportNumber)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetDate(date string) {
-	p.Date = date
-	p.require(postV1PosReportsCreateResponseFieldDate)
+func (r *ReportsCreatePosResponse) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reportsCreatePosResponseFieldDate)
 }
 
 // SetDeviceID sets the DeviceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetDeviceID(deviceID *string) {
-	p.DeviceID = deviceID
-	p.require(postV1PosReportsCreateResponseFieldDeviceID)
+func (r *ReportsCreatePosResponse) SetDeviceID(deviceID *string) {
+	r.DeviceID = deviceID
+	r.require(reportsCreatePosResponseFieldDeviceID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1PosReportsCreateResponseFieldWarehouseID)
+func (r *ReportsCreatePosResponse) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reportsCreatePosResponseFieldWarehouseID)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetNetTotal(netTotal string) {
-	p.NetTotal = netTotal
-	p.require(postV1PosReportsCreateResponseFieldNetTotal)
+func (r *ReportsCreatePosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(reportsCreatePosResponseFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetVatTotal(vatTotal string) {
-	p.VatTotal = vatTotal
-	p.require(postV1PosReportsCreateResponseFieldVatTotal)
+func (r *ReportsCreatePosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(reportsCreatePosResponseFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1PosReportsCreateResponseFieldGrossTotal)
+func (r *ReportsCreatePosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(reportsCreatePosResponseFieldGrossTotal)
 }
 
 // SetCashAmount sets the CashAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetCashAmount(cashAmount string) {
-	p.CashAmount = cashAmount
-	p.require(postV1PosReportsCreateResponseFieldCashAmount)
+func (r *ReportsCreatePosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(reportsCreatePosResponseFieldCashAmount)
 }
 
 // SetCardAmount sets the CardAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetCardAmount(cardAmount string) {
-	p.CardAmount = cardAmount
-	p.require(postV1PosReportsCreateResponseFieldCardAmount)
+func (r *ReportsCreatePosResponse) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(reportsCreatePosResponseFieldCardAmount)
 }
 
 // SetCogsTotal sets the CogsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetCogsTotal(cogsTotal *string) {
-	p.CogsTotal = cogsTotal
-	p.require(postV1PosReportsCreateResponseFieldCogsTotal)
+func (r *ReportsCreatePosResponse) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(reportsCreatePosResponseFieldCogsTotal)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1PosReportsCreateResponseFieldJournalTransactionID)
+func (r *ReportsCreatePosResponse) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(reportsCreatePosResponseFieldJournalTransactionID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1PosReportsCreateResponseFieldNotes)
+func (r *ReportsCreatePosResponse) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reportsCreatePosResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosReportsCreateResponseFieldCreatedAt)
+func (r *ReportsCreatePosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reportsCreatePosResponseFieldCreatedAt)
 }
 
 // SetVatLines sets the VatLines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponse) SetVatLines(vatLines []*PostV1PosReportsCreateResponseVatLinesItem) {
-	p.VatLines = vatLines
-	p.require(postV1PosReportsCreateResponseFieldVatLines)
+func (r *ReportsCreatePosResponse) SetVatLines(vatLines []*ReportsCreatePosResponseVatLinesItem) {
+	r.VatLines = vatLines
+	r.require(reportsCreatePosResponseFieldVatLines)
 }
 
-func (p *PostV1PosReportsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReportsCreatePosResponse) UnmarshalJSON(data []byte) error {
+	type embed ReportsCreatePosResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsCreatePosResponse(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsCreateResponse
+func (r *ReportsCreatePosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReportsCreatePosResponse
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsCreateResponse) String() string {
-	if p == nil {
+func (r *ReportsCreatePosResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsCreateResponseVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
-	postV1PosReportsCreateResponseVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
-	postV1PosReportsCreateResponseVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
+	reportsCreatePosResponseVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
+	reportsCreatePosResponseVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
+	reportsCreatePosResponseVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
 )
 
-type PostV1PosReportsCreateResponseVatLinesItem struct {
+type ReportsCreatePosResponseVatLinesItem struct {
 	VatRatePercent string `json:"vatRatePercent" url:"vatRatePercent"`
 	NetAmount      string `json:"netAmount" url:"netAmount"`
 	VatAmount      string `json:"vatAmount" url:"vatAmount"`
@@ -2291,138 +2330,138 @@ type PostV1PosReportsCreateResponseVatLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (r *ReportsCreatePosResponseVatLinesItem) GetVatRatePercent() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return r.VatRatePercent
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) GetNetAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosResponseVatLinesItem) GetNetAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetAmount
+	return r.NetAmount
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) GetVatAmount() string {
-	if p == nil {
+func (r *ReportsCreatePosResponseVatLinesItem) GetVatAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatAmount
+	return r.VatAmount
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsCreatePosResponseVatLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsCreatePosResponseVatLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponseVatLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1PosReportsCreateResponseVatLinesItemFieldVatRatePercent)
+func (r *ReportsCreatePosResponseVatLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(reportsCreatePosResponseVatLinesItemFieldVatRatePercent)
 }
 
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponseVatLinesItem) SetNetAmount(netAmount string) {
-	p.NetAmount = netAmount
-	p.require(postV1PosReportsCreateResponseVatLinesItemFieldNetAmount)
+func (r *ReportsCreatePosResponseVatLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(reportsCreatePosResponseVatLinesItemFieldNetAmount)
 }
 
 // SetVatAmount sets the VatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsCreateResponseVatLinesItem) SetVatAmount(vatAmount string) {
-	p.VatAmount = vatAmount
-	p.require(postV1PosReportsCreateResponseVatLinesItemFieldVatAmount)
+func (r *ReportsCreatePosResponseVatLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(reportsCreatePosResponseVatLinesItemFieldVatAmount)
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsCreateResponseVatLinesItem
+func (r *ReportsCreatePosResponseVatLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsCreatePosResponseVatLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsCreateResponseVatLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsCreatePosResponseVatLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsCreateResponseVatLinesItem
+func (r *ReportsCreatePosResponseVatLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsCreatePosResponseVatLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsCreateResponseVatLinesItem) String() string {
-	if p == nil {
+func (r *ReportsCreatePosResponseVatLinesItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PosReportsGetResponseFieldReportNumber         = big.NewInt(1 << 1)
-	postV1PosReportsGetResponseFieldDate                 = big.NewInt(1 << 2)
-	postV1PosReportsGetResponseFieldDeviceID             = big.NewInt(1 << 3)
-	postV1PosReportsGetResponseFieldWarehouseID          = big.NewInt(1 << 4)
-	postV1PosReportsGetResponseFieldNetTotal             = big.NewInt(1 << 5)
-	postV1PosReportsGetResponseFieldVatTotal             = big.NewInt(1 << 6)
-	postV1PosReportsGetResponseFieldGrossTotal           = big.NewInt(1 << 7)
-	postV1PosReportsGetResponseFieldCashAmount           = big.NewInt(1 << 8)
-	postV1PosReportsGetResponseFieldCardAmount           = big.NewInt(1 << 9)
-	postV1PosReportsGetResponseFieldCogsTotal            = big.NewInt(1 << 10)
-	postV1PosReportsGetResponseFieldJournalTransactionID = big.NewInt(1 << 11)
-	postV1PosReportsGetResponseFieldNotes                = big.NewInt(1 << 12)
-	postV1PosReportsGetResponseFieldCreatedAt            = big.NewInt(1 << 13)
-	postV1PosReportsGetResponseFieldVatLines             = big.NewInt(1 << 14)
+	reportsGetPosResponseFieldID                   = big.NewInt(1 << 0)
+	reportsGetPosResponseFieldReportNumber         = big.NewInt(1 << 1)
+	reportsGetPosResponseFieldDate                 = big.NewInt(1 << 2)
+	reportsGetPosResponseFieldDeviceID             = big.NewInt(1 << 3)
+	reportsGetPosResponseFieldWarehouseID          = big.NewInt(1 << 4)
+	reportsGetPosResponseFieldNetTotal             = big.NewInt(1 << 5)
+	reportsGetPosResponseFieldVatTotal             = big.NewInt(1 << 6)
+	reportsGetPosResponseFieldGrossTotal           = big.NewInt(1 << 7)
+	reportsGetPosResponseFieldCashAmount           = big.NewInt(1 << 8)
+	reportsGetPosResponseFieldCardAmount           = big.NewInt(1 << 9)
+	reportsGetPosResponseFieldCogsTotal            = big.NewInt(1 << 10)
+	reportsGetPosResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	reportsGetPosResponseFieldNotes                = big.NewInt(1 << 12)
+	reportsGetPosResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	reportsGetPosResponseFieldVatLines             = big.NewInt(1 << 14)
 )
 
-type PostV1PosReportsGetResponse struct {
-	ID                   string                                     `json:"id" url:"id"`
-	ReportNumber         string                                     `json:"reportNumber" url:"reportNumber"`
-	Date                 string                                     `json:"date" url:"date"`
-	DeviceID             *string                                    `json:"deviceId,omitempty" url:"deviceId,omitempty"`
-	WarehouseID          *string                                    `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	NetTotal             string                                     `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                     `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                     `json:"grossTotal" url:"grossTotal"`
-	CashAmount           string                                     `json:"cashAmount" url:"cashAmount"`
-	CardAmount           string                                     `json:"cardAmount" url:"cardAmount"`
-	CogsTotal            *string                                    `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
-	JournalTransactionID *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
-	VatLines             []*PostV1PosReportsGetResponseVatLinesItem `json:"vatLines" url:"vatLines"`
+type ReportsGetPosResponse struct {
+	ID                   string                               `json:"id" url:"id"`
+	ReportNumber         string                               `json:"reportNumber" url:"reportNumber"`
+	Date                 time.Time                            `json:"date" url:"date" format:"date"`
+	DeviceID             *string                              `json:"deviceId,omitempty" url:"deviceId,omitempty"`
+	WarehouseID          *string                              `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	NetTotal             string                               `json:"netTotal" url:"netTotal"`
+	VatTotal             string                               `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string                               `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string                               `json:"cashAmount" url:"cashAmount"`
+	CardAmount           string                               `json:"cardAmount" url:"cardAmount"`
+	CogsTotal            *string                              `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                            `json:"createdAt" url:"createdAt"`
+	VatLines             []*ReportsGetPosResponseVatLinesItem `json:"vatLines" url:"vatLines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2431,279 +2470,291 @@ type PostV1PosReportsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsGetResponse) GetID() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1PosReportsGetResponse) GetReportNumber() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetReportNumber() string {
+	if r == nil {
 		return ""
 	}
-	return p.ReportNumber
+	return r.ReportNumber
 }
 
-func (p *PostV1PosReportsGetResponse) GetDate() string {
-	if p == nil {
-		return ""
+func (r *ReportsGetPosResponse) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return r.Date
 }
 
-func (p *PostV1PosReportsGetResponse) GetDeviceID() *string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetDeviceID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.DeviceID
+	return r.DeviceID
 }
 
-func (p *PostV1PosReportsGetResponse) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1PosReportsGetResponse) GetNetTotal() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetNetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetTotal
+	return r.NetTotal
 }
 
-func (p *PostV1PosReportsGetResponse) GetVatTotal() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetVatTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatTotal
+	return r.VatTotal
 }
 
-func (p *PostV1PosReportsGetResponse) GetGrossTotal() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetGrossTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return r.GrossTotal
 }
 
-func (p *PostV1PosReportsGetResponse) GetCashAmount() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetCashAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CashAmount
+	return r.CashAmount
 }
 
-func (p *PostV1PosReportsGetResponse) GetCardAmount() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetCardAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CardAmount
+	return r.CardAmount
 }
 
-func (p *PostV1PosReportsGetResponse) GetCogsTotal() *string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetCogsTotal() *string {
+	if r == nil {
 		return nil
 	}
-	return p.CogsTotal
+	return r.CogsTotal
 }
 
-func (p *PostV1PosReportsGetResponse) GetJournalTransactionID() *string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetJournalTransactionID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return r.JournalTransactionID
 }
 
-func (p *PostV1PosReportsGetResponse) GetNotes() *string {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1PosReportsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReportsGetPosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1PosReportsGetResponse) GetVatLines() []*PostV1PosReportsGetResponseVatLinesItem {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetVatLines() []*ReportsGetPosResponseVatLinesItem {
+	if r == nil {
 		return nil
 	}
-	return p.VatLines
+	return r.VatLines
 }
 
-func (p *PostV1PosReportsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsGetPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsGetPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosReportsGetResponseFieldID)
+func (r *ReportsGetPosResponse) SetID(id string) {
+	r.ID = id
+	r.require(reportsGetPosResponseFieldID)
 }
 
 // SetReportNumber sets the ReportNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetReportNumber(reportNumber string) {
-	p.ReportNumber = reportNumber
-	p.require(postV1PosReportsGetResponseFieldReportNumber)
+func (r *ReportsGetPosResponse) SetReportNumber(reportNumber string) {
+	r.ReportNumber = reportNumber
+	r.require(reportsGetPosResponseFieldReportNumber)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetDate(date string) {
-	p.Date = date
-	p.require(postV1PosReportsGetResponseFieldDate)
+func (r *ReportsGetPosResponse) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reportsGetPosResponseFieldDate)
 }
 
 // SetDeviceID sets the DeviceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetDeviceID(deviceID *string) {
-	p.DeviceID = deviceID
-	p.require(postV1PosReportsGetResponseFieldDeviceID)
+func (r *ReportsGetPosResponse) SetDeviceID(deviceID *string) {
+	r.DeviceID = deviceID
+	r.require(reportsGetPosResponseFieldDeviceID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1PosReportsGetResponseFieldWarehouseID)
+func (r *ReportsGetPosResponse) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reportsGetPosResponseFieldWarehouseID)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetNetTotal(netTotal string) {
-	p.NetTotal = netTotal
-	p.require(postV1PosReportsGetResponseFieldNetTotal)
+func (r *ReportsGetPosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(reportsGetPosResponseFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetVatTotal(vatTotal string) {
-	p.VatTotal = vatTotal
-	p.require(postV1PosReportsGetResponseFieldVatTotal)
+func (r *ReportsGetPosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(reportsGetPosResponseFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1PosReportsGetResponseFieldGrossTotal)
+func (r *ReportsGetPosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(reportsGetPosResponseFieldGrossTotal)
 }
 
 // SetCashAmount sets the CashAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetCashAmount(cashAmount string) {
-	p.CashAmount = cashAmount
-	p.require(postV1PosReportsGetResponseFieldCashAmount)
+func (r *ReportsGetPosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(reportsGetPosResponseFieldCashAmount)
 }
 
 // SetCardAmount sets the CardAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetCardAmount(cardAmount string) {
-	p.CardAmount = cardAmount
-	p.require(postV1PosReportsGetResponseFieldCardAmount)
+func (r *ReportsGetPosResponse) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(reportsGetPosResponseFieldCardAmount)
 }
 
 // SetCogsTotal sets the CogsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetCogsTotal(cogsTotal *string) {
-	p.CogsTotal = cogsTotal
-	p.require(postV1PosReportsGetResponseFieldCogsTotal)
+func (r *ReportsGetPosResponse) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(reportsGetPosResponseFieldCogsTotal)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1PosReportsGetResponseFieldJournalTransactionID)
+func (r *ReportsGetPosResponse) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(reportsGetPosResponseFieldJournalTransactionID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1PosReportsGetResponseFieldNotes)
+func (r *ReportsGetPosResponse) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reportsGetPosResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosReportsGetResponseFieldCreatedAt)
+func (r *ReportsGetPosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reportsGetPosResponseFieldCreatedAt)
 }
 
 // SetVatLines sets the VatLines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponse) SetVatLines(vatLines []*PostV1PosReportsGetResponseVatLinesItem) {
-	p.VatLines = vatLines
-	p.require(postV1PosReportsGetResponseFieldVatLines)
+func (r *ReportsGetPosResponse) SetVatLines(vatLines []*ReportsGetPosResponseVatLinesItem) {
+	r.VatLines = vatLines
+	r.require(reportsGetPosResponseFieldVatLines)
 }
 
-func (p *PostV1PosReportsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReportsGetPosResponse) UnmarshalJSON(data []byte) error {
+	type embed ReportsGetPosResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsGetPosResponse(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsGetResponse
+func (r *ReportsGetPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReportsGetPosResponse
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsGetResponse) String() string {
-	if p == nil {
+func (r *ReportsGetPosResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsGetResponseVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
-	postV1PosReportsGetResponseVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
-	postV1PosReportsGetResponseVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
+	reportsGetPosResponseVatLinesItemFieldVatRatePercent = big.NewInt(1 << 0)
+	reportsGetPosResponseVatLinesItemFieldNetAmount      = big.NewInt(1 << 1)
+	reportsGetPosResponseVatLinesItemFieldVatAmount      = big.NewInt(1 << 2)
 )
 
-type PostV1PosReportsGetResponseVatLinesItem struct {
+type ReportsGetPosResponseVatLinesItem struct {
 	VatRatePercent string `json:"vatRatePercent" url:"vatRatePercent"`
 	NetAmount      string `json:"netAmount" url:"netAmount"`
 	VatAmount      string `json:"vatAmount" url:"vatAmount"`
@@ -2715,114 +2766,114 @@ type PostV1PosReportsGetResponseVatLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (r *ReportsGetPosResponseVatLinesItem) GetVatRatePercent() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return r.VatRatePercent
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) GetNetAmount() string {
-	if p == nil {
+func (r *ReportsGetPosResponseVatLinesItem) GetNetAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetAmount
+	return r.NetAmount
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) GetVatAmount() string {
-	if p == nil {
+func (r *ReportsGetPosResponseVatLinesItem) GetVatAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatAmount
+	return r.VatAmount
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsGetPosResponseVatLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsGetPosResponseVatLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponseVatLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1PosReportsGetResponseVatLinesItemFieldVatRatePercent)
+func (r *ReportsGetPosResponseVatLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(reportsGetPosResponseVatLinesItemFieldVatRatePercent)
 }
 
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponseVatLinesItem) SetNetAmount(netAmount string) {
-	p.NetAmount = netAmount
-	p.require(postV1PosReportsGetResponseVatLinesItemFieldNetAmount)
+func (r *ReportsGetPosResponseVatLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(reportsGetPosResponseVatLinesItemFieldNetAmount)
 }
 
 // SetVatAmount sets the VatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsGetResponseVatLinesItem) SetVatAmount(vatAmount string) {
-	p.VatAmount = vatAmount
-	p.require(postV1PosReportsGetResponseVatLinesItemFieldVatAmount)
+func (r *ReportsGetPosResponseVatLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(reportsGetPosResponseVatLinesItemFieldVatAmount)
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsGetResponseVatLinesItem
+func (r *ReportsGetPosResponseVatLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsGetPosResponseVatLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsGetResponseVatLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsGetPosResponseVatLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsGetResponseVatLinesItem
+func (r *ReportsGetPosResponseVatLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsGetPosResponseVatLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsGetResponseVatLinesItem) String() string {
-	if p == nil {
+func (r *ReportsGetPosResponseVatLinesItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1PosReportsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1PosReportsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	reportsListPosRequestFilterItemFieldField = big.NewInt(1 << 0)
+	reportsListPosRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	reportsListPosRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1PosReportsListRequestFilterItem struct {
-	Field string                                      `json:"field" url:"field"`
-	Op    PostV1PosReportsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1PosReportsListRequestFilterItemValue `json:"value" url:"value"`
+type ReportsListPosRequestFilterItem struct {
+	Field string                                `json:"field" url:"field"`
+	Op    ReportsListPosRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ReportsListPosRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2831,312 +2882,312 @@ type PostV1PosReportsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItem) GetField() string {
+	if r == nil {
 		return ""
 	}
-	return p.Field
+	return r.Field
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) GetOp() PostV1PosReportsListRequestFilterItemOp {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItem) GetOp() ReportsListPosRequestFilterItemOp {
+	if r == nil {
 		return ""
 	}
-	return p.Op
+	return r.Op
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) GetValue() *PostV1PosReportsListRequestFilterItemValue {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItem) GetValue() *ReportsListPosRequestFilterItemValue {
+	if r == nil {
 		return nil
 	}
-	return p.Value
+	return r.Value
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsListPosRequestFilterItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1PosReportsListRequestFilterItemFieldField)
+func (r *ReportsListPosRequestFilterItem) SetField(field string) {
+	r.Field = field
+	r.require(reportsListPosRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequestFilterItem) SetOp(op PostV1PosReportsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1PosReportsListRequestFilterItemFieldOp)
+func (r *ReportsListPosRequestFilterItem) SetOp(op ReportsListPosRequestFilterItemOp) {
+	r.Op = op
+	r.require(reportsListPosRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequestFilterItem) SetValue(value *PostV1PosReportsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1PosReportsListRequestFilterItemFieldValue)
+func (r *ReportsListPosRequestFilterItem) SetValue(value *ReportsListPosRequestFilterItemValue) {
+	r.Value = value
+	r.require(reportsListPosRequestFilterItemFieldValue)
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsListRequestFilterItem
+func (r *ReportsListPosRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsListPosRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsListPosRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsListRequestFilterItem
+func (r *ReportsListPosRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsListPosRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsListRequestFilterItem) String() string {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1PosReportsListRequestFilterItemOp string
+type ReportsListPosRequestFilterItemOp string
 
 const (
-	PostV1PosReportsListRequestFilterItemOpEq       PostV1PosReportsListRequestFilterItemOp = "eq"
-	PostV1PosReportsListRequestFilterItemOpNe       PostV1PosReportsListRequestFilterItemOp = "ne"
-	PostV1PosReportsListRequestFilterItemOpContains PostV1PosReportsListRequestFilterItemOp = "contains"
-	PostV1PosReportsListRequestFilterItemOpGte      PostV1PosReportsListRequestFilterItemOp = "gte"
-	PostV1PosReportsListRequestFilterItemOpLte      PostV1PosReportsListRequestFilterItemOp = "lte"
-	PostV1PosReportsListRequestFilterItemOpIn       PostV1PosReportsListRequestFilterItemOp = "in"
+	ReportsListPosRequestFilterItemOpEq       ReportsListPosRequestFilterItemOp = "eq"
+	ReportsListPosRequestFilterItemOpNe       ReportsListPosRequestFilterItemOp = "ne"
+	ReportsListPosRequestFilterItemOpContains ReportsListPosRequestFilterItemOp = "contains"
+	ReportsListPosRequestFilterItemOpGte      ReportsListPosRequestFilterItemOp = "gte"
+	ReportsListPosRequestFilterItemOpLte      ReportsListPosRequestFilterItemOp = "lte"
+	ReportsListPosRequestFilterItemOpIn       ReportsListPosRequestFilterItemOp = "in"
 )
 
-func NewPostV1PosReportsListRequestFilterItemOpFromString(s string) (PostV1PosReportsListRequestFilterItemOp, error) {
+func NewReportsListPosRequestFilterItemOpFromString(s string) (ReportsListPosRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1PosReportsListRequestFilterItemOpEq, nil
+		return ReportsListPosRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1PosReportsListRequestFilterItemOpNe, nil
+		return ReportsListPosRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1PosReportsListRequestFilterItemOpContains, nil
+		return ReportsListPosRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1PosReportsListRequestFilterItemOpGte, nil
+		return ReportsListPosRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1PosReportsListRequestFilterItemOpLte, nil
+		return ReportsListPosRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1PosReportsListRequestFilterItemOpIn, nil
+		return ReportsListPosRequestFilterItemOpIn, nil
 	}
-	var t PostV1PosReportsListRequestFilterItemOp
+	var t ReportsListPosRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1PosReportsListRequestFilterItemOp) Ptr() *PostV1PosReportsListRequestFilterItemOp {
-	return &p
+func (r ReportsListPosRequestFilterItemOp) Ptr() *ReportsListPosRequestFilterItemOp {
+	return &r
 }
 
-type PostV1PosReportsListRequestFilterItemValue struct {
-	String                                                  string
-	Double                                                  float64
-	Boolean                                                 bool
-	PostV1PosReportsListRequestFilterItemValueThreeItemList []*PostV1PosReportsListRequestFilterItemValueThreeItem
+type ReportsListPosRequestFilterItemValue struct {
+	String                                            string
+	Double                                            float64
+	Boolean                                           bool
+	ReportsListPosRequestFilterItemValueThreeItemList []*ReportsListPosRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValue) GetString() string {
+	if r == nil {
 		return ""
 	}
-	return p.String
+	return r.String
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValue) GetDouble() float64 {
+	if r == nil {
 		return 0
 	}
-	return p.Double
+	return r.Double
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValue) GetBoolean() bool {
+	if r == nil {
 		return false
 	}
-	return p.Boolean
+	return r.Boolean
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) GetPostV1PosReportsListRequestFilterItemValueThreeItemList() []*PostV1PosReportsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValue) GetReportsListPosRequestFilterItemValueThreeItemList() []*ReportsListPosRequestFilterItemValueThreeItem {
+	if r == nil {
 		return nil
 	}
-	return p.PostV1PosReportsListRequestFilterItemValueThreeItemList
+	return r.ReportsListPosRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (r *ReportsListPosRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		r.typ = "String"
+		r.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		r.typ = "Double"
+		r.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		r.typ = "Boolean"
+		r.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1PosReportsListRequestFilterItemValueThreeItemList []*PostV1PosReportsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1PosReportsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1PosReportsListRequestFilterItemValueThreeItemList"
-		p.PostV1PosReportsListRequestFilterItemValueThreeItemList = valuePostV1PosReportsListRequestFilterItemValueThreeItemList
+	var valueReportsListPosRequestFilterItemValueThreeItemList []*ReportsListPosRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueReportsListPosRequestFilterItemValueThreeItemList); err == nil {
+		r.typ = "ReportsListPosRequestFilterItemValueThreeItemList"
+		r.ReportsListPosRequestFilterItemValueThreeItemList = valueReportsListPosRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
 }
 
-func (p PostV1PosReportsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (r ReportsListPosRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if r.typ == "Boolean" || r.Boolean != false {
+		return json.Marshal(r.Boolean)
 	}
-	if p.typ == "PostV1PosReportsListRequestFilterItemValueThreeItemList" || p.PostV1PosReportsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1PosReportsListRequestFilterItemValueThreeItemList)
+	if r.typ == "ReportsListPosRequestFilterItemValueThreeItemList" || r.ReportsListPosRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(r.ReportsListPosRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1PosReportsListRequestFilterItemValueVisitor interface {
+type ReportsListPosRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1PosReportsListRequestFilterItemValueThreeItemList([]*PostV1PosReportsListRequestFilterItemValueThreeItem) error
+	VisitReportsListPosRequestFilterItemValueThreeItemList([]*ReportsListPosRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValue) Accept(visitor PostV1PosReportsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (r *ReportsListPosRequestFilterItemValue) Accept(visitor ReportsListPosRequestFilterItemValueVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if r.typ == "Boolean" || r.Boolean != false {
+		return visitor.VisitBoolean(r.Boolean)
 	}
-	if p.typ == "PostV1PosReportsListRequestFilterItemValueThreeItemList" || p.PostV1PosReportsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1PosReportsListRequestFilterItemValueThreeItemList(p.PostV1PosReportsListRequestFilterItemValueThreeItemList)
+	if r.typ == "ReportsListPosRequestFilterItemValueThreeItemList" || r.ReportsListPosRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitReportsListPosRequestFilterItemValueThreeItemList(r.ReportsListPosRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1PosReportsListRequestFilterItemValueThreeItem struct {
+type ReportsListPosRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValueThreeItem) GetString() string {
+	if r == nil {
 		return ""
 	}
-	return p.String
+	return r.String
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (r *ReportsListPosRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if r == nil {
 		return 0
 	}
-	return p.Double
+	return r.Double
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (r *ReportsListPosRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		r.typ = "String"
+		r.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		r.typ = "Double"
+		r.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
 }
 
-func (p PostV1PosReportsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (r ReportsListPosRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
-type PostV1PosReportsListRequestFilterItemValueThreeItemVisitor interface {
+type ReportsListPosRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1PosReportsListRequestFilterItemValueThreeItem) Accept(visitor PostV1PosReportsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (r *ReportsListPosRequestFilterItemValueThreeItem) Accept(visitor ReportsListPosRequestFilterItemValueThreeItemVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
 }
 
 var (
-	postV1PosReportsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1PosReportsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	reportsListPosRequestSortItemFieldField = big.NewInt(1 << 0)
+	reportsListPosRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1PosReportsListRequestSortItem struct {
-	Field string                                  `json:"field" url:"field"`
-	Dir   *PostV1PosReportsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type ReportsListPosRequestSortItem struct {
+	Field string                            `json:"field" url:"field"`
+	Dir   *ReportsListPosRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3145,126 +3196,126 @@ type PostV1PosReportsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsListRequestSortItem) GetField() string {
-	if p == nil {
+func (r *ReportsListPosRequestSortItem) GetField() string {
+	if r == nil {
 		return ""
 	}
-	return p.Field
+	return r.Field
 }
 
-func (p *PostV1PosReportsListRequestSortItem) GetDir() *PostV1PosReportsListRequestSortItemDir {
-	if p == nil {
+func (r *ReportsListPosRequestSortItem) GetDir() *ReportsListPosRequestSortItemDir {
+	if r == nil {
 		return nil
 	}
-	return p.Dir
+	return r.Dir
 }
 
-func (p *PostV1PosReportsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsListPosRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsListPosRequestSortItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1PosReportsListRequestSortItemFieldField)
+func (r *ReportsListPosRequestSortItem) SetField(field string) {
+	r.Field = field
+	r.require(reportsListPosRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListRequestSortItem) SetDir(dir *PostV1PosReportsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1PosReportsListRequestSortItemFieldDir)
+func (r *ReportsListPosRequestSortItem) SetDir(dir *ReportsListPosRequestSortItemDir) {
+	r.Dir = dir
+	r.require(reportsListPosRequestSortItemFieldDir)
 }
 
-func (p *PostV1PosReportsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsListRequestSortItem
+func (r *ReportsListPosRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsListPosRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsListPosRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsListRequestSortItem
+func (r *ReportsListPosRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsListPosRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsListRequestSortItem) String() string {
-	if p == nil {
+func (r *ReportsListPosRequestSortItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1PosReportsListRequestSortItemDir string
+type ReportsListPosRequestSortItemDir string
 
 const (
-	PostV1PosReportsListRequestSortItemDirAsc  PostV1PosReportsListRequestSortItemDir = "asc"
-	PostV1PosReportsListRequestSortItemDirDesc PostV1PosReportsListRequestSortItemDir = "desc"
+	ReportsListPosRequestSortItemDirAsc  ReportsListPosRequestSortItemDir = "asc"
+	ReportsListPosRequestSortItemDirDesc ReportsListPosRequestSortItemDir = "desc"
 )
 
-func NewPostV1PosReportsListRequestSortItemDirFromString(s string) (PostV1PosReportsListRequestSortItemDir, error) {
+func NewReportsListPosRequestSortItemDirFromString(s string) (ReportsListPosRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1PosReportsListRequestSortItemDirAsc, nil
+		return ReportsListPosRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1PosReportsListRequestSortItemDirDesc, nil
+		return ReportsListPosRequestSortItemDirDesc, nil
 	}
-	var t PostV1PosReportsListRequestSortItemDir
+	var t ReportsListPosRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1PosReportsListRequestSortItemDir) Ptr() *PostV1PosReportsListRequestSortItemDir {
-	return &p
+func (r ReportsListPosRequestSortItemDir) Ptr() *ReportsListPosRequestSortItemDir {
+	return &r
 }
 
 var (
-	postV1PosReportsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1PosReportsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1PosReportsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1PosReportsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1PosReportsListResponseFieldTotals   = big.NewInt(1 << 4)
+	reportsListPosResponseFieldRows     = big.NewInt(1 << 0)
+	reportsListPosResponseFieldPage     = big.NewInt(1 << 1)
+	reportsListPosResponseFieldPageSize = big.NewInt(1 << 2)
+	reportsListPosResponseFieldTotal    = big.NewInt(1 << 3)
+	reportsListPosResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1PosReportsListResponse struct {
-	Rows     []*PostV1PosReportsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                   `json:"page" url:"page"`
-	PageSize int64                                   `json:"pageSize" url:"pageSize"`
-	Total    int64                                   `json:"total" url:"total"`
-	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
+type ReportsListPosResponse struct {
+	Rows     []*ReportsListPosResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                             `json:"page" url:"page"`
+	PageSize int64                             `json:"pageSize" url:"pageSize"`
+	Total    int64                             `json:"total" url:"total"`
+	Totals   map[string]string                 `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3273,164 +3324,164 @@ type PostV1PosReportsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsListResponse) GetRows() []*PostV1PosReportsListResponseRowsItem {
-	if p == nil {
+func (r *ReportsListPosResponse) GetRows() []*ReportsListPosResponseRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1PosReportsListResponse) GetPage() int64 {
-	if p == nil {
+func (r *ReportsListPosResponse) GetPage() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.Page
+	return r.Page
 }
 
-func (p *PostV1PosReportsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (r *ReportsListPosResponse) GetPageSize() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.PageSize
+	return r.PageSize
 }
 
-func (p *PostV1PosReportsListResponse) GetTotal() int64 {
-	if p == nil {
+func (r *ReportsListPosResponse) GetTotal() int64 {
+	if r == nil {
 		return 0
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1PosReportsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (r *ReportsListPosResponse) GetTotals() map[string]string {
+	if r == nil {
 		return nil
 	}
-	return p.Totals
+	return r.Totals
 }
 
-func (p *PostV1PosReportsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsListPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsListPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponse) SetRows(rows []*PostV1PosReportsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1PosReportsListResponseFieldRows)
+func (r *ReportsListPosResponse) SetRows(rows []*ReportsListPosResponseRowsItem) {
+	r.Rows = rows
+	r.require(reportsListPosResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1PosReportsListResponseFieldPage)
+func (r *ReportsListPosResponse) SetPage(page int64) {
+	r.Page = page
+	r.require(reportsListPosResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1PosReportsListResponseFieldPageSize)
+func (r *ReportsListPosResponse) SetPageSize(pageSize int64) {
+	r.PageSize = pageSize
+	r.require(reportsListPosResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1PosReportsListResponseFieldTotal)
+func (r *ReportsListPosResponse) SetTotal(total int64) {
+	r.Total = total
+	r.require(reportsListPosResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1PosReportsListResponseFieldTotals)
+func (r *ReportsListPosResponse) SetTotals(totals map[string]string) {
+	r.Totals = totals
+	r.require(reportsListPosResponseFieldTotals)
 }
 
-func (p *PostV1PosReportsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsListResponse
+func (r *ReportsListPosResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportsListPosResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsListPosResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsListResponse
+func (r *ReportsListPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReportsListPosResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsListResponse) String() string {
-	if p == nil {
+func (r *ReportsListPosResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1PosReportsListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1PosReportsListResponseRowsItemFieldReportNumber         = big.NewInt(1 << 1)
-	postV1PosReportsListResponseRowsItemFieldDate                 = big.NewInt(1 << 2)
-	postV1PosReportsListResponseRowsItemFieldDeviceID             = big.NewInt(1 << 3)
-	postV1PosReportsListResponseRowsItemFieldWarehouseID          = big.NewInt(1 << 4)
-	postV1PosReportsListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 5)
-	postV1PosReportsListResponseRowsItemFieldVatTotal             = big.NewInt(1 << 6)
-	postV1PosReportsListResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 7)
-	postV1PosReportsListResponseRowsItemFieldCashAmount           = big.NewInt(1 << 8)
-	postV1PosReportsListResponseRowsItemFieldCardAmount           = big.NewInt(1 << 9)
-	postV1PosReportsListResponseRowsItemFieldCogsTotal            = big.NewInt(1 << 10)
-	postV1PosReportsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 11)
-	postV1PosReportsListResponseRowsItemFieldNotes                = big.NewInt(1 << 12)
-	postV1PosReportsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 13)
+	reportsListPosResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	reportsListPosResponseRowsItemFieldReportNumber         = big.NewInt(1 << 1)
+	reportsListPosResponseRowsItemFieldDate                 = big.NewInt(1 << 2)
+	reportsListPosResponseRowsItemFieldDeviceID             = big.NewInt(1 << 3)
+	reportsListPosResponseRowsItemFieldWarehouseID          = big.NewInt(1 << 4)
+	reportsListPosResponseRowsItemFieldNetTotal             = big.NewInt(1 << 5)
+	reportsListPosResponseRowsItemFieldVatTotal             = big.NewInt(1 << 6)
+	reportsListPosResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 7)
+	reportsListPosResponseRowsItemFieldCashAmount           = big.NewInt(1 << 8)
+	reportsListPosResponseRowsItemFieldCardAmount           = big.NewInt(1 << 9)
+	reportsListPosResponseRowsItemFieldCogsTotal            = big.NewInt(1 << 10)
+	reportsListPosResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 11)
+	reportsListPosResponseRowsItemFieldNotes                = big.NewInt(1 << 12)
+	reportsListPosResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 13)
 )
 
-type PostV1PosReportsListResponseRowsItem struct {
-	ID                   string  `json:"id" url:"id"`
-	ReportNumber         string  `json:"reportNumber" url:"reportNumber"`
-	Date                 string  `json:"date" url:"date"`
-	DeviceID             *string `json:"deviceId,omitempty" url:"deviceId,omitempty"`
-	WarehouseID          *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
-	NetTotal             string  `json:"netTotal" url:"netTotal"`
-	VatTotal             string  `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string  `json:"grossTotal" url:"grossTotal"`
-	CashAmount           string  `json:"cashAmount" url:"cashAmount"`
-	CardAmount           string  `json:"cardAmount" url:"cardAmount"`
-	CogsTotal            *string `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
-	JournalTransactionID *string `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string  `json:"createdAt" url:"createdAt"`
+type ReportsListPosResponseRowsItem struct {
+	ID                   string    `json:"id" url:"id"`
+	ReportNumber         string    `json:"reportNumber" url:"reportNumber"`
+	Date                 time.Time `json:"date" url:"date" format:"date"`
+	DeviceID             *string   `json:"deviceId,omitempty" url:"deviceId,omitempty"`
+	WarehouseID          *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	NetTotal             string    `json:"netTotal" url:"netTotal"`
+	VatTotal             string    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string    `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string    `json:"cashAmount" url:"cashAmount"`
+	CardAmount           string    `json:"cardAmount" url:"cardAmount"`
+	CogsTotal            *string   `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3439,254 +3490,266 @@ type PostV1PosReportsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return p.ID
+	return r.ID
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetReportNumber() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetReportNumber() string {
+	if r == nil {
 		return ""
 	}
-	return p.ReportNumber
+	return r.ReportNumber
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetDate() string {
-	if p == nil {
-		return ""
+func (r *ReportsListPosResponseRowsItem) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.Date
+	return r.Date
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetDeviceID() *string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetDeviceID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.DeviceID
+	return r.DeviceID
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetWarehouseID() *string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetWarehouseID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.WarehouseID
+	return r.WarehouseID
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetNetTotal() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetNetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetTotal
+	return r.NetTotal
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetVatTotal() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetVatTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.VatTotal
+	return r.VatTotal
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetGrossTotal() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetGrossTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return r.GrossTotal
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetCashAmount() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetCashAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CashAmount
+	return r.CashAmount
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetCardAmount() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetCardAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.CardAmount
+	return r.CardAmount
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetCogsTotal() *string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetCogsTotal() *string {
+	if r == nil {
 		return nil
 	}
-	return p.CogsTotal
+	return r.CogsTotal
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetJournalTransactionID() *string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetJournalTransactionID() *string {
+	if r == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return r.JournalTransactionID
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetNotes() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Notes
+	return r.Notes
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (r *ReportsListPosResponseRowsItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return r.CreatedAt
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportsListPosResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1PosReportsListResponseRowsItemFieldID)
+func (r *ReportsListPosResponseRowsItem) SetID(id string) {
+	r.ID = id
+	r.require(reportsListPosResponseRowsItemFieldID)
 }
 
 // SetReportNumber sets the ReportNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetReportNumber(reportNumber string) {
-	p.ReportNumber = reportNumber
-	p.require(postV1PosReportsListResponseRowsItemFieldReportNumber)
+func (r *ReportsListPosResponseRowsItem) SetReportNumber(reportNumber string) {
+	r.ReportNumber = reportNumber
+	r.require(reportsListPosResponseRowsItemFieldReportNumber)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetDate(date string) {
-	p.Date = date
-	p.require(postV1PosReportsListResponseRowsItemFieldDate)
+func (r *ReportsListPosResponseRowsItem) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reportsListPosResponseRowsItemFieldDate)
 }
 
 // SetDeviceID sets the DeviceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetDeviceID(deviceID *string) {
-	p.DeviceID = deviceID
-	p.require(postV1PosReportsListResponseRowsItemFieldDeviceID)
+func (r *ReportsListPosResponseRowsItem) SetDeviceID(deviceID *string) {
+	r.DeviceID = deviceID
+	r.require(reportsListPosResponseRowsItemFieldDeviceID)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetWarehouseID(warehouseID *string) {
-	p.WarehouseID = warehouseID
-	p.require(postV1PosReportsListResponseRowsItemFieldWarehouseID)
+func (r *ReportsListPosResponseRowsItem) SetWarehouseID(warehouseID *string) {
+	r.WarehouseID = warehouseID
+	r.require(reportsListPosResponseRowsItemFieldWarehouseID)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetNetTotal(netTotal string) {
-	p.NetTotal = netTotal
-	p.require(postV1PosReportsListResponseRowsItemFieldNetTotal)
+func (r *ReportsListPosResponseRowsItem) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(reportsListPosResponseRowsItemFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetVatTotal(vatTotal string) {
-	p.VatTotal = vatTotal
-	p.require(postV1PosReportsListResponseRowsItemFieldVatTotal)
+func (r *ReportsListPosResponseRowsItem) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(reportsListPosResponseRowsItemFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1PosReportsListResponseRowsItemFieldGrossTotal)
+func (r *ReportsListPosResponseRowsItem) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(reportsListPosResponseRowsItemFieldGrossTotal)
 }
 
 // SetCashAmount sets the CashAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetCashAmount(cashAmount string) {
-	p.CashAmount = cashAmount
-	p.require(postV1PosReportsListResponseRowsItemFieldCashAmount)
+func (r *ReportsListPosResponseRowsItem) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(reportsListPosResponseRowsItemFieldCashAmount)
 }
 
 // SetCardAmount sets the CardAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetCardAmount(cardAmount string) {
-	p.CardAmount = cardAmount
-	p.require(postV1PosReportsListResponseRowsItemFieldCardAmount)
+func (r *ReportsListPosResponseRowsItem) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(reportsListPosResponseRowsItemFieldCardAmount)
 }
 
 // SetCogsTotal sets the CogsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetCogsTotal(cogsTotal *string) {
-	p.CogsTotal = cogsTotal
-	p.require(postV1PosReportsListResponseRowsItemFieldCogsTotal)
+func (r *ReportsListPosResponseRowsItem) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(reportsListPosResponseRowsItemFieldCogsTotal)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1PosReportsListResponseRowsItemFieldJournalTransactionID)
+func (r *ReportsListPosResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(reportsListPosResponseRowsItemFieldJournalTransactionID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1PosReportsListResponseRowsItemFieldNotes)
+func (r *ReportsListPosResponseRowsItem) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(reportsListPosResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PosReportsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1PosReportsListResponseRowsItemFieldCreatedAt)
+func (r *ReportsListPosResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reportsListPosResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PosReportsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReportsListPosResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ReportsListPosResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1PosReportsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportsListPosResponseRowsItem(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1PosReportsListResponseRowsItem
+func (r *ReportsListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReportsListPosResponseRowsItem
 	var marshaler = struct {
 		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PosReportsListResponseRowsItem) String() string {
-	if p == nil {
+func (r *ReportsListPosResponseRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }

@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestBillingPostV1BillingAccountGetWithWireMock(
+func TestBillingAccountGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,20 +88,20 @@ func TestBillingPostV1BillingAccountGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingAccountGetRequest{}
-	_, invocationErr := client.Billing.PostV1BillingAccountGet(
+	request := &nordlet.AccountGetBillingRequest{}
+	_, invocationErr := client.Billing.AccountGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingAccountGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingAccountGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingAccountGetWithWireMock", "POST", "/v1/billing/account/get", nil, 1)
+	VerifyRequestCount(t, "TestBillingAccountGetWithWireMock", "POST", "/v1/billing/account/get", nil, 1)
 }
 
-func TestBillingPostV1BillingAccountSetPlanWithWireMock(
+func TestBillingAccountSetPlanWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -112,22 +112,22 @@ func TestBillingPostV1BillingAccountSetPlanWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingAccountSetPlanRequest{
-		Plan: nordlet.PostV1BillingAccountSetPlanRequestPlanStarter,
+	request := &nordlet.AccountSetPlanBillingRequest{
+		Plan: nordlet.AccountSetPlanBillingRequestPlanStarter,
 	}
-	_, invocationErr := client.Billing.PostV1BillingAccountSetPlan(
+	_, invocationErr := client.Billing.AccountSetPlan(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingAccountSetPlanWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingAccountSetPlanWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingAccountSetPlanWithWireMock", "POST", "/v1/billing/account/set-plan", nil, 1)
+	VerifyRequestCount(t, "TestBillingAccountSetPlanWithWireMock", "POST", "/v1/billing/account/set-plan", nil, 1)
 }
 
-func TestBillingPostV1BillingTopupCreateWithWireMock(
+func TestBillingTopupCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -138,22 +138,22 @@ func TestBillingPostV1BillingTopupCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingTopupCreateRequest{
+	request := &nordlet.TopupCreateBillingRequest{
 		AmountCents: int64(1000000),
 	}
-	_, invocationErr := client.Billing.PostV1BillingTopupCreate(
+	_, invocationErr := client.Billing.TopupCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingTopupCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingTopupCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingTopupCreateWithWireMock", "POST", "/v1/billing/topup/create", nil, 1)
+	VerifyRequestCount(t, "TestBillingTopupCreateWithWireMock", "POST", "/v1/billing/topup/create", nil, 1)
 }
 
-func TestBillingPostV1BillingPortalCreateWithWireMock(
+func TestBillingPortalCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -164,20 +164,20 @@ func TestBillingPostV1BillingPortalCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingPortalCreateRequest{}
-	_, invocationErr := client.Billing.PostV1BillingPortalCreate(
+	request := &nordlet.PortalCreateBillingRequest{}
+	_, invocationErr := client.Billing.PortalCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingPortalCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingPortalCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingPortalCreateWithWireMock", "POST", "/v1/billing/portal/create", nil, 1)
+	VerifyRequestCount(t, "TestBillingPortalCreateWithWireMock", "POST", "/v1/billing/portal/create", nil, 1)
 }
 
-func TestBillingPostV1BillingTransactionsListWithWireMock(
+func TestBillingTransactionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -188,20 +188,20 @@ func TestBillingPostV1BillingTransactionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingTransactionsListRequest{}
-	_, invocationErr := client.Billing.PostV1BillingTransactionsList(
+	request := &nordlet.TransactionsListBillingRequest{}
+	_, invocationErr := client.Billing.TransactionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingTransactionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingTransactionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingTransactionsListWithWireMock", "POST", "/v1/billing/transactions/list", nil, 1)
+	VerifyRequestCount(t, "TestBillingTransactionsListWithWireMock", "POST", "/v1/billing/transactions/list", nil, 1)
 }
 
-func TestBillingPostV1BillingUsageListWithWireMock(
+func TestBillingUsageListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -212,18 +212,22 @@ func TestBillingPostV1BillingUsageListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BillingUsageListRequest{
-		From: "from",
-		To:   "to",
+	request := &nordlet.UsageListBillingRequest{
+		From: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		To: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Billing.PostV1BillingUsageList(
+	_, invocationErr := client.Billing.UsageList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBillingPostV1BillingUsageListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBillingUsageListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBillingPostV1BillingUsageListWithWireMock", "POST", "/v1/billing/usage/list", nil, 1)
+	VerifyRequestCount(t, "TestBillingUsageListWithWireMock", "POST", "/v1/billing/usage/list", nil, 1)
 }

@@ -7,404 +7,413 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1AgreementsAgreementsBillingRunRequestFieldAsOfDate = big.NewInt(1 << 0)
+	agreementsBillingRunAgreementsRequestFieldAsOfDate = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsAgreementsBillingRunRequest struct {
-	AsOfDate *string `json:"asOfDate,omitempty" url:"-"`
+type AgreementsBillingRunAgreementsRequest struct {
+	AsOfDate *time.Time `json:"asOfDate,omitempty" url:"-" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsBillingRunAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetAsOfDate sets the AsOfDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunRequest) SetAsOfDate(asOfDate *string) {
-	p.AsOfDate = asOfDate
-	p.require(postV1AgreementsAgreementsBillingRunRequestFieldAsOfDate)
+func (a *AgreementsBillingRunAgreementsRequest) SetAsOfDate(asOfDate *time.Time) {
+	a.AsOfDate = asOfDate
+	a.require(agreementsBillingRunAgreementsRequestFieldAsOfDate)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsBillingRunRequest
+func (a *AgreementsBillingRunAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsBillingRunAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsBillingRunRequest(body)
+	*a = AgreementsBillingRunAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsBillingRunRequest
+func (a *AgreementsBillingRunAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsBillingRunAgreementsRequest
 	var marshaler = struct {
 		embed
+		AsOfDate *internal.Date `json:"asOfDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*a),
+		AsOfDate: internal.NewOptionalDate(a.AsOfDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsCreateRequestFieldTypeID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateRequestFieldKind          = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateRequestFieldPartnerID     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateRequestFieldEmployeeID    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateRequestFieldBankAccountID = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateRequestFieldNumber        = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateRequestFieldName          = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateRequestFieldStartDate     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateRequestFieldEndDate       = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateRequestFieldAutoRenew     = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateRequestFieldValue         = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateRequestFieldBillingPeriod = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsCreateRequestFieldCurrency      = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsCreateRequestFieldStatus        = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsCreateRequestFieldNotes         = big.NewInt(1 << 14)
-	postV1AgreementsAgreementsCreateRequestFieldDocumentRef   = big.NewInt(1 << 15)
-	postV1AgreementsAgreementsCreateRequestFieldItems         = big.NewInt(1 << 16)
+	agreementsCreateAgreementsRequestFieldTypeID        = big.NewInt(1 << 0)
+	agreementsCreateAgreementsRequestFieldKind          = big.NewInt(1 << 1)
+	agreementsCreateAgreementsRequestFieldPartnerID     = big.NewInt(1 << 2)
+	agreementsCreateAgreementsRequestFieldEmployeeID    = big.NewInt(1 << 3)
+	agreementsCreateAgreementsRequestFieldBankAccountID = big.NewInt(1 << 4)
+	agreementsCreateAgreementsRequestFieldNumber        = big.NewInt(1 << 5)
+	agreementsCreateAgreementsRequestFieldName          = big.NewInt(1 << 6)
+	agreementsCreateAgreementsRequestFieldStartDate     = big.NewInt(1 << 7)
+	agreementsCreateAgreementsRequestFieldEndDate       = big.NewInt(1 << 8)
+	agreementsCreateAgreementsRequestFieldAutoRenew     = big.NewInt(1 << 9)
+	agreementsCreateAgreementsRequestFieldValue         = big.NewInt(1 << 10)
+	agreementsCreateAgreementsRequestFieldBillingPeriod = big.NewInt(1 << 11)
+	agreementsCreateAgreementsRequestFieldCurrency      = big.NewInt(1 << 12)
+	agreementsCreateAgreementsRequestFieldStatus        = big.NewInt(1 << 13)
+	agreementsCreateAgreementsRequestFieldNotes         = big.NewInt(1 << 14)
+	agreementsCreateAgreementsRequestFieldDocumentRef   = big.NewInt(1 << 15)
+	agreementsCreateAgreementsRequestFieldItems         = big.NewInt(1 << 16)
 )
 
-type PostV1AgreementsAgreementsCreateRequest struct {
-	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
-	Kind          *PostV1AgreementsAgreementsCreateRequestKind          `json:"kind,omitempty" url:"-"`
-	PartnerID     *string                                               `json:"partnerId,omitempty" url:"-"`
-	EmployeeID    *string                                               `json:"employeeId,omitempty" url:"-"`
-	BankAccountID *string                                               `json:"bankAccountId,omitempty" url:"-"`
-	Number        string                                                `json:"number" url:"-"`
-	Name          *string                                               `json:"name,omitempty" url:"-"`
-	StartDate     string                                                `json:"startDate" url:"-"`
-	EndDate       *string                                               `json:"endDate,omitempty" url:"-"`
-	AutoRenew     *bool                                                 `json:"autoRenew,omitempty" url:"-"`
-	Value         *string                                               `json:"value,omitempty" url:"-"`
-	BillingPeriod *PostV1AgreementsAgreementsCreateRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
-	Currency      *string                                               `json:"currency,omitempty" url:"-"`
-	Status        *PostV1AgreementsAgreementsCreateRequestStatus        `json:"status,omitempty" url:"-"`
-	Notes         *string                                               `json:"notes,omitempty" url:"-"`
-	DocumentRef   *string                                               `json:"documentRef,omitempty" url:"-"`
-	Items         []*PostV1AgreementsAgreementsCreateRequestItemsItem   `json:"items,omitempty" url:"-"`
+type AgreementsCreateAgreementsRequest struct {
+	TypeID        *string                                         `json:"typeId,omitempty" url:"-"`
+	Kind          *AgreementsCreateAgreementsRequestKind          `json:"kind,omitempty" url:"-"`
+	PartnerID     *string                                         `json:"partnerId,omitempty" url:"-"`
+	EmployeeID    *string                                         `json:"employeeId,omitempty" url:"-"`
+	BankAccountID *string                                         `json:"bankAccountId,omitempty" url:"-"`
+	Number        string                                          `json:"number" url:"-"`
+	Name          *string                                         `json:"name,omitempty" url:"-"`
+	StartDate     time.Time                                       `json:"startDate" url:"-" format:"date"`
+	EndDate       *time.Time                                      `json:"endDate,omitempty" url:"-" format:"date"`
+	AutoRenew     *bool                                           `json:"autoRenew,omitempty" url:"-"`
+	Value         *string                                         `json:"value,omitempty" url:"-"`
+	BillingPeriod *AgreementsCreateAgreementsRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
+	Currency      *string                                         `json:"currency,omitempty" url:"-"`
+	Status        *AgreementsCreateAgreementsRequestStatus        `json:"status,omitempty" url:"-"`
+	Notes         *string                                         `json:"notes,omitempty" url:"-"`
+	DocumentRef   *string                                         `json:"documentRef,omitempty" url:"-"`
+	Items         []*AgreementsCreateAgreementsRequestItemsItem   `json:"items,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsCreateAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetTypeID sets the TypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsCreateRequestFieldTypeID)
+func (a *AgreementsCreateAgreementsRequest) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsCreateAgreementsRequestFieldTypeID)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetKind(kind *PostV1AgreementsAgreementsCreateRequestKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsCreateRequestFieldKind)
+func (a *AgreementsCreateAgreementsRequest) SetKind(kind *AgreementsCreateAgreementsRequestKind) {
+	a.Kind = kind
+	a.require(agreementsCreateAgreementsRequestFieldKind)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1AgreementsAgreementsCreateRequestFieldPartnerID)
+func (a *AgreementsCreateAgreementsRequest) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(agreementsCreateAgreementsRequestFieldPartnerID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1AgreementsAgreementsCreateRequestFieldEmployeeID)
+func (a *AgreementsCreateAgreementsRequest) SetEmployeeID(employeeID *string) {
+	a.EmployeeID = employeeID
+	a.require(agreementsCreateAgreementsRequestFieldEmployeeID)
 }
 
 // SetBankAccountID sets the BankAccountID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetBankAccountID(bankAccountID *string) {
-	p.BankAccountID = bankAccountID
-	p.require(postV1AgreementsAgreementsCreateRequestFieldBankAccountID)
+func (a *AgreementsCreateAgreementsRequest) SetBankAccountID(bankAccountID *string) {
+	a.BankAccountID = bankAccountID
+	a.require(agreementsCreateAgreementsRequestFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1AgreementsAgreementsCreateRequestFieldNumber)
+func (a *AgreementsCreateAgreementsRequest) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsCreateAgreementsRequestFieldNumber)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsCreateRequestFieldName)
+func (a *AgreementsCreateAgreementsRequest) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsCreateAgreementsRequestFieldName)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1AgreementsAgreementsCreateRequestFieldStartDate)
+func (a *AgreementsCreateAgreementsRequest) SetStartDate(startDate time.Time) {
+	a.StartDate = startDate
+	a.require(agreementsCreateAgreementsRequestFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsCreateRequestFieldEndDate)
+func (a *AgreementsCreateAgreementsRequest) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsCreateAgreementsRequestFieldEndDate)
 }
 
 // SetAutoRenew sets the AutoRenew field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetAutoRenew(autoRenew *bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsCreateRequestFieldAutoRenew)
+func (a *AgreementsCreateAgreementsRequest) SetAutoRenew(autoRenew *bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsCreateAgreementsRequestFieldAutoRenew)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsCreateRequestFieldValue)
+func (a *AgreementsCreateAgreementsRequest) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsCreateAgreementsRequestFieldValue)
 }
 
 // SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsCreateRequestBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsCreateRequestFieldBillingPeriod)
+func (a *AgreementsCreateAgreementsRequest) SetBillingPeriod(billingPeriod *AgreementsCreateAgreementsRequestBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsCreateAgreementsRequestFieldBillingPeriod)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1AgreementsAgreementsCreateRequestFieldCurrency)
+func (a *AgreementsCreateAgreementsRequest) SetCurrency(currency *string) {
+	a.Currency = currency
+	a.require(agreementsCreateAgreementsRequestFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetStatus(status *PostV1AgreementsAgreementsCreateRequestStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsCreateRequestFieldStatus)
+func (a *AgreementsCreateAgreementsRequest) SetStatus(status *AgreementsCreateAgreementsRequestStatus) {
+	a.Status = status
+	a.require(agreementsCreateAgreementsRequestFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsCreateRequestFieldNotes)
+func (a *AgreementsCreateAgreementsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsCreateAgreementsRequestFieldNotes)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsCreateRequestFieldDocumentRef)
+func (a *AgreementsCreateAgreementsRequest) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsCreateAgreementsRequestFieldDocumentRef)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetItems(items []*PostV1AgreementsAgreementsCreateRequestItemsItem) {
-	p.Items = items
-	p.require(postV1AgreementsAgreementsCreateRequestFieldItems)
+func (a *AgreementsCreateAgreementsRequest) SetItems(items []*AgreementsCreateAgreementsRequestItemsItem) {
+	a.Items = items
+	a.require(agreementsCreateAgreementsRequestFieldItems)
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsCreateRequest
+func (a *AgreementsCreateAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsCreateAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsCreateRequest(body)
+	*a = AgreementsCreateAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsCreateRequest
+func (a *AgreementsCreateAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsCreateAgreementsRequest
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date `json:"startDate"`
+		EndDate   *internal.Date `json:"endDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		StartDate: internal.NewDate(a.StartDate),
+		EndDate:   internal.NewOptionalDate(a.EndDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsDeleteRequestFieldID = big.NewInt(1 << 0)
+	agreementsDeleteAgreementsRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsAgreementsDeleteRequest struct {
+type AgreementsDeleteAgreementsRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsDeleteAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsDeleteRequestFieldID)
+func (a *AgreementsDeleteAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsDeleteAgreementsRequestFieldID)
 }
 
-func (p *PostV1AgreementsAgreementsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsDeleteRequest
+func (a *AgreementsDeleteAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsDeleteAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsDeleteRequest(body)
+	*a = AgreementsDeleteAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsDeleteRequest
+func (a *AgreementsDeleteAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsDeleteAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsGenerateInvoiceRequestFieldID       = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGenerateInvoiceRequestFieldAsOfDate = big.NewInt(1 << 1)
+	agreementsGenerateInvoiceAgreementsRequestFieldID       = big.NewInt(1 << 0)
+	agreementsGenerateInvoiceAgreementsRequestFieldAsOfDate = big.NewInt(1 << 1)
 )
 
-type PostV1AgreementsAgreementsGenerateInvoiceRequest struct {
-	ID       string  `json:"id" url:"-"`
-	AsOfDate *string `json:"asOfDate,omitempty" url:"-"`
+type AgreementsGenerateInvoiceAgreementsRequest struct {
+	ID       string     `json:"id" url:"-"`
+	AsOfDate *time.Time `json:"asOfDate,omitempty" url:"-" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsGenerateInvoiceAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsGenerateInvoiceRequestFieldID)
+func (a *AgreementsGenerateInvoiceAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsGenerateInvoiceAgreementsRequestFieldID)
 }
 
 // SetAsOfDate sets the AsOfDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) SetAsOfDate(asOfDate *string) {
-	p.AsOfDate = asOfDate
-	p.require(postV1AgreementsAgreementsGenerateInvoiceRequestFieldAsOfDate)
+func (a *AgreementsGenerateInvoiceAgreementsRequest) SetAsOfDate(asOfDate *time.Time) {
+	a.AsOfDate = asOfDate
+	a.require(agreementsGenerateInvoiceAgreementsRequestFieldAsOfDate)
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsGenerateInvoiceRequest
+func (a *AgreementsGenerateInvoiceAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsGenerateInvoiceAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsGenerateInvoiceRequest(body)
+	*a = AgreementsGenerateInvoiceAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsGenerateInvoiceRequest
+func (a *AgreementsGenerateInvoiceAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsGenerateInvoiceAgreementsRequest
 	var marshaler = struct {
 		embed
+		AsOfDate *internal.Date `json:"asOfDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*a),
+		AsOfDate: internal.NewOptionalDate(a.AsOfDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsGetRequestFieldID = big.NewInt(1 << 0)
+	agreementsGetAgreementsRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsAgreementsGetRequest struct {
+type AgreementsGetAgreementsRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsGetAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsGetRequestFieldID)
+func (a *AgreementsGetAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsGetAgreementsRequestFieldID)
 }
 
-func (p *PostV1AgreementsAgreementsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsGetRequest
+func (a *AgreementsGetAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsGetAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsGetRequest(body)
+	*a = AgreementsGetAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsGetRequest
+func (a *AgreementsGetAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsGetAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsListRequestFieldTotals   = big.NewInt(1 << 4)
+	agreementsListAgreementsRequestFieldPage     = big.NewInt(1 << 0)
+	agreementsListAgreementsRequestFieldPageSize = big.NewInt(1 << 1)
+	agreementsListAgreementsRequestFieldSort     = big.NewInt(1 << 2)
+	agreementsListAgreementsRequestFieldFilter   = big.NewInt(1 << 3)
+	agreementsListAgreementsRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsAgreementsListRequest struct {
-	Page     *int64                                             `json:"page,omitempty" url:"-"`
-	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AgreementsAgreementsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AgreementsAgreementsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type AgreementsListAgreementsRequest struct {
+	Page     *int64                                       `json:"page,omitempty" url:"-"`
+	PageSize *int64                                       `json:"pageSize,omitempty" url:"-"`
+	Sort     []*AgreementsListAgreementsRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*AgreementsListAgreementsRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -412,373 +421,379 @@ type PostV1AgreementsAgreementsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsListAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AgreementsAgreementsListRequestFieldPage)
+func (a *AgreementsListAgreementsRequest) SetPage(page *int64) {
+	a.Page = page
+	a.require(agreementsListAgreementsRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsAgreementsListRequestFieldPageSize)
+func (a *AgreementsListAgreementsRequest) SetPageSize(pageSize *int64) {
+	a.PageSize = pageSize
+	a.require(agreementsListAgreementsRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequest) SetSort(sort []*PostV1AgreementsAgreementsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AgreementsAgreementsListRequestFieldSort)
+func (a *AgreementsListAgreementsRequest) SetSort(sort []*AgreementsListAgreementsRequestSortItem) {
+	a.Sort = sort
+	a.require(agreementsListAgreementsRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequest) SetFilter(filter []*PostV1AgreementsAgreementsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AgreementsAgreementsListRequestFieldFilter)
+func (a *AgreementsListAgreementsRequest) SetFilter(filter []*AgreementsListAgreementsRequestFilterItem) {
+	a.Filter = filter
+	a.require(agreementsListAgreementsRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AgreementsAgreementsListRequestFieldTotals)
+func (a *AgreementsListAgreementsRequest) SetTotals(totals []string) {
+	a.Totals = totals
+	a.require(agreementsListAgreementsRequestFieldTotals)
 }
 
-func (p *PostV1AgreementsAgreementsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsListRequest
+func (a *AgreementsListAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsListAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsListRequest(body)
+	*a = AgreementsListAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsListRequest
+func (a *AgreementsListAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsListAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsAgreementsUpdateRequestFieldID            = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateRequestFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateRequestFieldKind          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateRequestFieldName          = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateRequestFieldEndDate       = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateRequestFieldAutoRenew     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateRequestFieldValue         = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsUpdateRequestFieldStatus        = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsUpdateRequestFieldNotes         = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsUpdateRequestFieldDocumentRef   = big.NewInt(1 << 10)
+	agreementsUpdateAgreementsRequestFieldID            = big.NewInt(1 << 0)
+	agreementsUpdateAgreementsRequestFieldTypeID        = big.NewInt(1 << 1)
+	agreementsUpdateAgreementsRequestFieldKind          = big.NewInt(1 << 2)
+	agreementsUpdateAgreementsRequestFieldName          = big.NewInt(1 << 3)
+	agreementsUpdateAgreementsRequestFieldEndDate       = big.NewInt(1 << 4)
+	agreementsUpdateAgreementsRequestFieldAutoRenew     = big.NewInt(1 << 5)
+	agreementsUpdateAgreementsRequestFieldValue         = big.NewInt(1 << 6)
+	agreementsUpdateAgreementsRequestFieldBillingPeriod = big.NewInt(1 << 7)
+	agreementsUpdateAgreementsRequestFieldStatus        = big.NewInt(1 << 8)
+	agreementsUpdateAgreementsRequestFieldNotes         = big.NewInt(1 << 9)
+	agreementsUpdateAgreementsRequestFieldDocumentRef   = big.NewInt(1 << 10)
 )
 
-type PostV1AgreementsAgreementsUpdateRequest struct {
-	ID            string                                                `json:"id" url:"-"`
-	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
-	Kind          *PostV1AgreementsAgreementsUpdateRequestKind          `json:"kind,omitempty" url:"-"`
-	Name          *string                                               `json:"name,omitempty" url:"-"`
-	EndDate       *string                                               `json:"endDate,omitempty" url:"-"`
-	AutoRenew     *bool                                                 `json:"autoRenew,omitempty" url:"-"`
-	Value         *string                                               `json:"value,omitempty" url:"-"`
-	BillingPeriod *PostV1AgreementsAgreementsUpdateRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
-	Status        *PostV1AgreementsAgreementsUpdateRequestStatus        `json:"status,omitempty" url:"-"`
-	Notes         *string                                               `json:"notes,omitempty" url:"-"`
-	DocumentRef   *string                                               `json:"documentRef,omitempty" url:"-"`
+type AgreementsUpdateAgreementsRequest struct {
+	ID            string                                          `json:"id" url:"-"`
+	TypeID        *string                                         `json:"typeId,omitempty" url:"-"`
+	Kind          *AgreementsUpdateAgreementsRequestKind          `json:"kind,omitempty" url:"-"`
+	Name          *string                                         `json:"name,omitempty" url:"-"`
+	EndDate       *time.Time                                      `json:"endDate,omitempty" url:"-" format:"date"`
+	AutoRenew     *bool                                           `json:"autoRenew,omitempty" url:"-"`
+	Value         *string                                         `json:"value,omitempty" url:"-"`
+	BillingPeriod *AgreementsUpdateAgreementsRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
+	Status        *AgreementsUpdateAgreementsRequestStatus        `json:"status,omitempty" url:"-"`
+	Notes         *string                                         `json:"notes,omitempty" url:"-"`
+	DocumentRef   *string                                         `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsAgreementsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsUpdateAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldID)
+func (a *AgreementsUpdateAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsUpdateAgreementsRequestFieldID)
 }
 
 // SetTypeID sets the TypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldTypeID)
+func (a *AgreementsUpdateAgreementsRequest) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsUpdateAgreementsRequestFieldTypeID)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetKind(kind *PostV1AgreementsAgreementsUpdateRequestKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldKind)
+func (a *AgreementsUpdateAgreementsRequest) SetKind(kind *AgreementsUpdateAgreementsRequestKind) {
+	a.Kind = kind
+	a.require(agreementsUpdateAgreementsRequestFieldKind)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldName)
+func (a *AgreementsUpdateAgreementsRequest) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsUpdateAgreementsRequestFieldName)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldEndDate)
+func (a *AgreementsUpdateAgreementsRequest) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsUpdateAgreementsRequestFieldEndDate)
 }
 
 // SetAutoRenew sets the AutoRenew field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetAutoRenew(autoRenew *bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldAutoRenew)
+func (a *AgreementsUpdateAgreementsRequest) SetAutoRenew(autoRenew *bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsUpdateAgreementsRequestFieldAutoRenew)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldValue)
+func (a *AgreementsUpdateAgreementsRequest) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsUpdateAgreementsRequestFieldValue)
 }
 
 // SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsUpdateRequestBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod)
+func (a *AgreementsUpdateAgreementsRequest) SetBillingPeriod(billingPeriod *AgreementsUpdateAgreementsRequestBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsUpdateAgreementsRequestFieldBillingPeriod)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetStatus(status *PostV1AgreementsAgreementsUpdateRequestStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldStatus)
+func (a *AgreementsUpdateAgreementsRequest) SetStatus(status *AgreementsUpdateAgreementsRequestStatus) {
+	a.Status = status
+	a.require(agreementsUpdateAgreementsRequestFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldNotes)
+func (a *AgreementsUpdateAgreementsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsUpdateAgreementsRequestFieldNotes)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateRequest) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsUpdateRequestFieldDocumentRef)
+func (a *AgreementsUpdateAgreementsRequest) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsUpdateAgreementsRequestFieldDocumentRef)
 }
 
-func (p *PostV1AgreementsAgreementsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsUpdateRequest
+func (a *AgreementsUpdateAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsUpdateAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsUpdateRequest(body)
+	*a = AgreementsUpdateAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsUpdateRequest
+func (a *AgreementsUpdateAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsUpdateAgreementsRequest
 	var marshaler = struct {
 		embed
+		EndDate *internal.Date `json:"endDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:   embed(*a),
+		EndDate: internal.NewOptionalDate(a.EndDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesCreateRequestFieldInsurerPartnerID = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldPolicyNumber     = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldInsuredObject    = big.NewInt(1 << 2)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldFromDate         = big.NewInt(1 << 3)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldToDate           = big.NewInt(1 << 4)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldPremium          = big.NewInt(1 << 5)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldCurrency         = big.NewInt(1 << 6)
-	postV1AgreementsInsurancePoliciesCreateRequestFieldNotes            = big.NewInt(1 << 7)
+	insurancePoliciesCreateAgreementsRequestFieldInsurerPartnerID = big.NewInt(1 << 0)
+	insurancePoliciesCreateAgreementsRequestFieldPolicyNumber     = big.NewInt(1 << 1)
+	insurancePoliciesCreateAgreementsRequestFieldInsuredObject    = big.NewInt(1 << 2)
+	insurancePoliciesCreateAgreementsRequestFieldFromDate         = big.NewInt(1 << 3)
+	insurancePoliciesCreateAgreementsRequestFieldToDate           = big.NewInt(1 << 4)
+	insurancePoliciesCreateAgreementsRequestFieldPremium          = big.NewInt(1 << 5)
+	insurancePoliciesCreateAgreementsRequestFieldCurrency         = big.NewInt(1 << 6)
+	insurancePoliciesCreateAgreementsRequestFieldNotes            = big.NewInt(1 << 7)
 )
 
-type PostV1AgreementsInsurancePoliciesCreateRequest struct {
-	InsurerPartnerID *string `json:"insurerPartnerId,omitempty" url:"-"`
-	PolicyNumber     string  `json:"policyNumber" url:"-"`
-	InsuredObject    string  `json:"insuredObject" url:"-"`
-	FromDate         string  `json:"fromDate" url:"-"`
-	ToDate           string  `json:"toDate" url:"-"`
-	Premium          *string `json:"premium,omitempty" url:"-"`
-	Currency         *string `json:"currency,omitempty" url:"-"`
-	Notes            *string `json:"notes,omitempty" url:"-"`
+type InsurancePoliciesCreateAgreementsRequest struct {
+	InsurerPartnerID *string   `json:"insurerPartnerId,omitempty" url:"-"`
+	PolicyNumber     string    `json:"policyNumber" url:"-"`
+	InsuredObject    string    `json:"insuredObject" url:"-"`
+	FromDate         time.Time `json:"fromDate" url:"-" format:"date"`
+	ToDate           time.Time `json:"toDate" url:"-" format:"date"`
+	Premium          *string   `json:"premium,omitempty" url:"-"`
+	Currency         *string   `json:"currency,omitempty" url:"-"`
+	Notes            *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesCreateAgreementsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetInsurerPartnerID sets the InsurerPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetInsurerPartnerID(insurerPartnerID *string) {
-	p.InsurerPartnerID = insurerPartnerID
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldInsurerPartnerID)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetInsurerPartnerID(insurerPartnerID *string) {
+	i.InsurerPartnerID = insurerPartnerID
+	i.require(insurancePoliciesCreateAgreementsRequestFieldInsurerPartnerID)
 }
 
 // SetPolicyNumber sets the PolicyNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetPolicyNumber(policyNumber string) {
-	p.PolicyNumber = policyNumber
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldPolicyNumber)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetPolicyNumber(policyNumber string) {
+	i.PolicyNumber = policyNumber
+	i.require(insurancePoliciesCreateAgreementsRequestFieldPolicyNumber)
 }
 
 // SetInsuredObject sets the InsuredObject field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetInsuredObject(insuredObject string) {
-	p.InsuredObject = insuredObject
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldInsuredObject)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetInsuredObject(insuredObject string) {
+	i.InsuredObject = insuredObject
+	i.require(insurancePoliciesCreateAgreementsRequestFieldInsuredObject)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldFromDate)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(insurancePoliciesCreateAgreementsRequestFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldToDate)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(insurancePoliciesCreateAgreementsRequestFieldToDate)
 }
 
 // SetPremium sets the Premium field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetPremium(premium *string) {
-	p.Premium = premium
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldPremium)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetPremium(premium *string) {
+	i.Premium = premium
+	i.require(insurancePoliciesCreateAgreementsRequestFieldPremium)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldCurrency)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(insurancePoliciesCreateAgreementsRequestFieldCurrency)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsInsurancePoliciesCreateRequestFieldNotes)
+func (i *InsurancePoliciesCreateAgreementsRequest) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(insurancePoliciesCreateAgreementsRequestFieldNotes)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesCreateRequest
+func (i *InsurancePoliciesCreateAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesCreateAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesCreateRequest(body)
+	*i = InsurancePoliciesCreateAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesCreateRequest
+func (i *InsurancePoliciesCreateAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesCreateAgreementsRequest
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesDeleteRequestFieldID = big.NewInt(1 << 0)
+	insurancePoliciesDeleteAgreementsRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsInsurancePoliciesDeleteRequest struct {
+type InsurancePoliciesDeleteAgreementsRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesDeleteAgreementsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsInsurancePoliciesDeleteRequestFieldID)
+func (i *InsurancePoliciesDeleteAgreementsRequest) SetID(id string) {
+	i.ID = id
+	i.require(insurancePoliciesDeleteAgreementsRequestFieldID)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesDeleteRequest
+func (i *InsurancePoliciesDeleteAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesDeleteAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesDeleteRequest(body)
+	*i = InsurancePoliciesDeleteAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesDeleteRequest
+func (i *InsurancePoliciesDeleteAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesDeleteAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AgreementsInsurancePoliciesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AgreementsInsurancePoliciesListRequestFieldTotals   = big.NewInt(1 << 4)
+	insurancePoliciesListAgreementsRequestFieldPage     = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsRequestFieldPageSize = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsRequestFieldSort     = big.NewInt(1 << 2)
+	insurancePoliciesListAgreementsRequestFieldFilter   = big.NewInt(1 << 3)
+	insurancePoliciesListAgreementsRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsInsurancePoliciesListRequest struct {
-	Page     *int64                                                    `json:"page,omitempty" url:"-"`
-	PageSize *int64                                                    `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AgreementsInsurancePoliciesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AgreementsInsurancePoliciesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type InsurancePoliciesListAgreementsRequest struct {
+	Page     *int64                                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*InsurancePoliciesListAgreementsRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*InsurancePoliciesListAgreementsRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -786,217 +801,79 @@ type PostV1AgreementsInsurancePoliciesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesListAgreementsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AgreementsInsurancePoliciesListRequestFieldPage)
+func (i *InsurancePoliciesListAgreementsRequest) SetPage(page *int64) {
+	i.Page = page
+	i.require(insurancePoliciesListAgreementsRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsInsurancePoliciesListRequestFieldPageSize)
+func (i *InsurancePoliciesListAgreementsRequest) SetPageSize(pageSize *int64) {
+	i.PageSize = pageSize
+	i.require(insurancePoliciesListAgreementsRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequest) SetSort(sort []*PostV1AgreementsInsurancePoliciesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AgreementsInsurancePoliciesListRequestFieldSort)
+func (i *InsurancePoliciesListAgreementsRequest) SetSort(sort []*InsurancePoliciesListAgreementsRequestSortItem) {
+	i.Sort = sort
+	i.require(insurancePoliciesListAgreementsRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequest) SetFilter(filter []*PostV1AgreementsInsurancePoliciesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AgreementsInsurancePoliciesListRequestFieldFilter)
+func (i *InsurancePoliciesListAgreementsRequest) SetFilter(filter []*InsurancePoliciesListAgreementsRequestFilterItem) {
+	i.Filter = filter
+	i.require(insurancePoliciesListAgreementsRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AgreementsInsurancePoliciesListRequestFieldTotals)
+func (i *InsurancePoliciesListAgreementsRequest) SetTotals(totals []string) {
+	i.Totals = totals
+	i.require(insurancePoliciesListAgreementsRequestFieldTotals)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesListRequest
+func (i *InsurancePoliciesListAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesListAgreementsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesListRequest(body)
+	*i = InsurancePoliciesListAgreementsRequest(body)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesListRequest
+func (i *InsurancePoliciesListAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesListAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AgreementsTypesCreateRequestFieldCode = big.NewInt(1 << 0)
-	postV1AgreementsTypesCreateRequestFieldName = big.NewInt(1 << 1)
+	agreementsBillingRunAgreementsResponseFieldGenerated = big.NewInt(1 << 0)
+	agreementsBillingRunAgreementsResponseFieldExpired   = big.NewInt(1 << 1)
+	agreementsBillingRunAgreementsResponseFieldErrors    = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsTypesCreateRequest struct {
-	Code string `json:"code" url:"-"`
-	Name string `json:"name" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1AgreementsTypesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesCreateRequest) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AgreementsTypesCreateRequestFieldCode)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1AgreementsTypesCreateRequestFieldName)
-}
-
-func (p *PostV1AgreementsTypesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesCreateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1AgreementsTypesCreateRequest(body)
-	return nil
-}
-
-func (p *PostV1AgreementsTypesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesCreateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1AgreementsTypesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AgreementsTypesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AgreementsTypesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AgreementsTypesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AgreementsTypesListRequestFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1AgreementsTypesListRequest struct {
-	Page     *int64                                        `json:"page,omitempty" url:"-"`
-	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AgreementsTypesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AgreementsTypesListRequestFilterItem `json:"filter,omitempty" url:"-"`
-	// Numeric fields to sum over every row matching the filter (not only the current page)
-	Totals []string `json:"totals,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1AgreementsTypesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AgreementsTypesListRequestFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsTypesListRequestFieldPageSize)
-}
-
-// SetSort sets the Sort field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequest) SetSort(sort []*PostV1AgreementsTypesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AgreementsTypesListRequestFieldSort)
-}
-
-// SetFilter sets the Filter field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequest) SetFilter(filter []*PostV1AgreementsTypesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AgreementsTypesListRequestFieldFilter)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AgreementsTypesListRequestFieldTotals)
-}
-
-func (p *PostV1AgreementsTypesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesListRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1AgreementsTypesListRequest(body)
-	return nil
-}
-
-func (p *PostV1AgreementsTypesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesListRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1AgreementsAgreementsBillingRunResponseFieldGenerated = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsBillingRunResponseFieldExpired   = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsBillingRunResponseFieldErrors    = big.NewInt(1 << 2)
-)
-
-type PostV1AgreementsAgreementsBillingRunResponse struct {
-	Generated []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem `json:"generated" url:"generated"`
-	Expired   []string                                                     `json:"expired" url:"expired"`
-	Errors    []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem    `json:"errors" url:"errors"`
+type AgreementsBillingRunAgreementsResponse struct {
+	Generated []*AgreementsBillingRunAgreementsResponseGeneratedItem `json:"generated" url:"generated"`
+	Expired   []string                                               `json:"expired" url:"expired"`
+	Errors    []*AgreementsBillingRunAgreementsResponseErrorsItem    `json:"errors" url:"errors"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1005,110 +882,110 @@ type PostV1AgreementsAgreementsBillingRunResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) GetGenerated() []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponse) GetGenerated() []*AgreementsBillingRunAgreementsResponseGeneratedItem {
+	if a == nil {
 		return nil
 	}
-	return p.Generated
+	return a.Generated
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) GetExpired() []string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponse) GetExpired() []string {
+	if a == nil {
 		return nil
 	}
-	return p.Expired
+	return a.Expired
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) GetErrors() []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponse) GetErrors() []*AgreementsBillingRunAgreementsResponseErrorsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Errors
+	return a.Errors
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsBillingRunAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetGenerated sets the Generated field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponse) SetGenerated(generated []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) {
-	p.Generated = generated
-	p.require(postV1AgreementsAgreementsBillingRunResponseFieldGenerated)
+func (a *AgreementsBillingRunAgreementsResponse) SetGenerated(generated []*AgreementsBillingRunAgreementsResponseGeneratedItem) {
+	a.Generated = generated
+	a.require(agreementsBillingRunAgreementsResponseFieldGenerated)
 }
 
 // SetExpired sets the Expired field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponse) SetExpired(expired []string) {
-	p.Expired = expired
-	p.require(postV1AgreementsAgreementsBillingRunResponseFieldExpired)
+func (a *AgreementsBillingRunAgreementsResponse) SetExpired(expired []string) {
+	a.Expired = expired
+	a.require(agreementsBillingRunAgreementsResponseFieldExpired)
 }
 
 // SetErrors sets the Errors field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponse) SetErrors(errors []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem) {
-	p.Errors = errors
-	p.require(postV1AgreementsAgreementsBillingRunResponseFieldErrors)
+func (a *AgreementsBillingRunAgreementsResponse) SetErrors(errors []*AgreementsBillingRunAgreementsResponseErrorsItem) {
+	a.Errors = errors
+	a.require(agreementsBillingRunAgreementsResponseFieldErrors)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsBillingRunResponse
+func (a *AgreementsBillingRunAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsBillingRunAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsBillingRunResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsBillingRunAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsBillingRunResponse
+func (a *AgreementsBillingRunAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsBillingRunAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponse) String() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldAgreementID = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldMessage     = big.NewInt(1 << 1)
+	agreementsBillingRunAgreementsResponseErrorsItemFieldAgreementID = big.NewInt(1 << 0)
+	agreementsBillingRunAgreementsResponseErrorsItemFieldMessage     = big.NewInt(1 << 1)
 )
 
-type PostV1AgreementsAgreementsBillingRunResponseErrorsItem struct {
+type AgreementsBillingRunAgreementsResponseErrorsItem struct {
 	AgreementID string `json:"agreementId" url:"agreementId"`
 	Message     string `json:"message" url:"message"`
 
@@ -1119,98 +996,98 @@ type PostV1AgreementsAgreementsBillingRunResponseErrorsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetAgreementID() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) GetAgreementID() string {
+	if a == nil {
 		return ""
 	}
-	return p.AgreementID
+	return a.AgreementID
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetMessage() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) GetMessage() string {
+	if a == nil {
 		return ""
 	}
-	return p.Message
+	return a.Message
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetAgreementID sets the AgreementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) SetAgreementID(agreementID string) {
-	p.AgreementID = agreementID
-	p.require(postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldAgreementID)
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) SetAgreementID(agreementID string) {
+	a.AgreementID = agreementID
+	a.require(agreementsBillingRunAgreementsResponseErrorsItemFieldAgreementID)
 }
 
 // SetMessage sets the Message field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) SetMessage(message string) {
-	p.Message = message
-	p.require(postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldMessage)
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) SetMessage(message string) {
+	a.Message = message
+	a.require(agreementsBillingRunAgreementsResponseErrorsItemFieldMessage)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsBillingRunResponseErrorsItem
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsBillingRunAgreementsResponseErrorsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsBillingRunResponseErrorsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsBillingRunAgreementsResponseErrorsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsBillingRunResponseErrorsItem
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsBillingRunAgreementsResponseErrorsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) String() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseErrorsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldAgreementID = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldInvoiceID   = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodStart = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodEnd   = big.NewInt(1 << 3)
+	agreementsBillingRunAgreementsResponseGeneratedItemFieldAgreementID = big.NewInt(1 << 0)
+	agreementsBillingRunAgreementsResponseGeneratedItemFieldInvoiceID   = big.NewInt(1 << 1)
+	agreementsBillingRunAgreementsResponseGeneratedItemFieldPeriodStart = big.NewInt(1 << 2)
+	agreementsBillingRunAgreementsResponseGeneratedItemFieldPeriodEnd   = big.NewInt(1 << 3)
 )
 
-type PostV1AgreementsAgreementsBillingRunResponseGeneratedItem struct {
+type AgreementsBillingRunAgreementsResponseGeneratedItem struct {
 	AgreementID string `json:"agreementId" url:"agreementId"`
 	InvoiceID   string `json:"invoiceId" url:"invoiceId"`
 	PeriodStart string `json:"periodStart" url:"periodStart"`
@@ -1223,152 +1100,152 @@ type PostV1AgreementsAgreementsBillingRunResponseGeneratedItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetAgreementID() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) GetAgreementID() string {
+	if a == nil {
 		return ""
 	}
-	return p.AgreementID
+	return a.AgreementID
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetInvoiceID() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) GetInvoiceID() string {
+	if a == nil {
 		return ""
 	}
-	return p.InvoiceID
+	return a.InvoiceID
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetPeriodStart() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) GetPeriodStart() string {
+	if a == nil {
 		return ""
 	}
-	return p.PeriodStart
+	return a.PeriodStart
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetPeriodEnd() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) GetPeriodEnd() string {
+	if a == nil {
 		return ""
 	}
-	return p.PeriodEnd
+	return a.PeriodEnd
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetAgreementID sets the AgreementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetAgreementID(agreementID string) {
-	p.AgreementID = agreementID
-	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldAgreementID)
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) SetAgreementID(agreementID string) {
+	a.AgreementID = agreementID
+	a.require(agreementsBillingRunAgreementsResponseGeneratedItemFieldAgreementID)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetInvoiceID(invoiceID string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldInvoiceID)
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) SetInvoiceID(invoiceID string) {
+	a.InvoiceID = invoiceID
+	a.require(agreementsBillingRunAgreementsResponseGeneratedItemFieldInvoiceID)
 }
 
 // SetPeriodStart sets the PeriodStart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetPeriodStart(periodStart string) {
-	p.PeriodStart = periodStart
-	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodStart)
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) SetPeriodStart(periodStart string) {
+	a.PeriodStart = periodStart
+	a.require(agreementsBillingRunAgreementsResponseGeneratedItemFieldPeriodStart)
 }
 
 // SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetPeriodEnd(periodEnd string) {
-	p.PeriodEnd = periodEnd
-	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodEnd)
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) SetPeriodEnd(periodEnd string) {
+	a.PeriodEnd = periodEnd
+	a.require(agreementsBillingRunAgreementsResponseGeneratedItemFieldPeriodEnd)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsBillingRunResponseGeneratedItem
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsBillingRunAgreementsResponseGeneratedItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsBillingRunResponseGeneratedItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsBillingRunAgreementsResponseGeneratedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsBillingRunResponseGeneratedItem
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsBillingRunAgreementsResponseGeneratedItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) String() string {
-	if p == nil {
+func (a *AgreementsBillingRunAgreementsResponseGeneratedItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsCreateRequestBillingPeriod string
+type AgreementsCreateAgreementsRequestBillingPeriod string
 
 const (
-	PostV1AgreementsAgreementsCreateRequestBillingPeriodMonthly   PostV1AgreementsAgreementsCreateRequestBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsCreateRequestBillingPeriodQuarterly PostV1AgreementsAgreementsCreateRequestBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsCreateRequestBillingPeriodAnnual    PostV1AgreementsAgreementsCreateRequestBillingPeriod = "annual"
+	AgreementsCreateAgreementsRequestBillingPeriodMonthly   AgreementsCreateAgreementsRequestBillingPeriod = "monthly"
+	AgreementsCreateAgreementsRequestBillingPeriodQuarterly AgreementsCreateAgreementsRequestBillingPeriod = "quarterly"
+	AgreementsCreateAgreementsRequestBillingPeriodAnnual    AgreementsCreateAgreementsRequestBillingPeriod = "annual"
 )
 
-func NewPostV1AgreementsAgreementsCreateRequestBillingPeriodFromString(s string) (PostV1AgreementsAgreementsCreateRequestBillingPeriod, error) {
+func NewAgreementsCreateAgreementsRequestBillingPeriodFromString(s string) (AgreementsCreateAgreementsRequestBillingPeriod, error) {
 	switch s {
 	case "monthly":
-		return PostV1AgreementsAgreementsCreateRequestBillingPeriodMonthly, nil
+		return AgreementsCreateAgreementsRequestBillingPeriodMonthly, nil
 	case "quarterly":
-		return PostV1AgreementsAgreementsCreateRequestBillingPeriodQuarterly, nil
+		return AgreementsCreateAgreementsRequestBillingPeriodQuarterly, nil
 	case "annual":
-		return PostV1AgreementsAgreementsCreateRequestBillingPeriodAnnual, nil
+		return AgreementsCreateAgreementsRequestBillingPeriodAnnual, nil
 	}
-	var t PostV1AgreementsAgreementsCreateRequestBillingPeriod
+	var t AgreementsCreateAgreementsRequestBillingPeriod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateRequestBillingPeriod) Ptr() *PostV1AgreementsAgreementsCreateRequestBillingPeriod {
-	return &p
+func (a AgreementsCreateAgreementsRequestBillingPeriod) Ptr() *AgreementsCreateAgreementsRequestBillingPeriod {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldItemID         = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldDescription    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldQuantity       = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldUnitPrice      = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldVatRatePercent = big.NewInt(1 << 4)
+	agreementsCreateAgreementsRequestItemsItemFieldItemID         = big.NewInt(1 << 0)
+	agreementsCreateAgreementsRequestItemsItemFieldDescription    = big.NewInt(1 << 1)
+	agreementsCreateAgreementsRequestItemsItemFieldQuantity       = big.NewInt(1 << 2)
+	agreementsCreateAgreementsRequestItemsItemFieldUnitPrice      = big.NewInt(1 << 3)
+	agreementsCreateAgreementsRequestItemsItemFieldVatRatePercent = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsAgreementsCreateRequestItemsItem struct {
+type AgreementsCreateAgreementsRequestItemsItem struct {
 	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description    string  `json:"description" url:"description"`
 	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
@@ -1382,239 +1259,239 @@ type PostV1AgreementsAgreementsCreateRequestItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetItemID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetItemID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.ItemID
+	return a.ItemID
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetDescription() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetDescription() string {
+	if a == nil {
 		return ""
 	}
-	return p.Description
+	return a.Description
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetQuantity() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetQuantity() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Quantity
+	return a.Quantity
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetUnitPrice() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetUnitPrice() *string {
+	if a == nil {
 		return nil
 	}
-	return p.UnitPrice
+	return a.UnitPrice
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetVatRatePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return a.VatRatePercent
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsCreateAgreementsRequestItemsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldItemID)
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetItemID(itemID *string) {
+	a.ItemID = itemID
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldDescription)
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetDescription(description string) {
+	a.Description = description
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetQuantity(quantity *string) {
-	p.Quantity = quantity
-	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldQuantity)
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetQuantity(quantity *string) {
+	a.Quantity = quantity
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldQuantity)
 }
 
 // SetUnitPrice sets the UnitPrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetUnitPrice(unitPrice *string) {
-	p.UnitPrice = unitPrice
-	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldUnitPrice)
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetUnitPrice(unitPrice *string) {
+	a.UnitPrice = unitPrice
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldUnitPrice)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldVatRatePercent)
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	a.VatRatePercent = vatRatePercent
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldVatRatePercent)
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsCreateRequestItemsItem
+func (a *AgreementsCreateAgreementsRequestItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsCreateAgreementsRequestItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsCreateRequestItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsCreateAgreementsRequestItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsCreateRequestItemsItem
+func (a *AgreementsCreateAgreementsRequestItemsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsCreateAgreementsRequestItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) String() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsRequestItemsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsCreateRequestKind string
+type AgreementsCreateAgreementsRequestKind string
 
 const (
-	PostV1AgreementsAgreementsCreateRequestKindCustomer   PostV1AgreementsAgreementsCreateRequestKind = "customer"
-	PostV1AgreementsAgreementsCreateRequestKindSupplier   PostV1AgreementsAgreementsCreateRequestKind = "supplier"
-	PostV1AgreementsAgreementsCreateRequestKindEmployment PostV1AgreementsAgreementsCreateRequestKind = "employment"
-	PostV1AgreementsAgreementsCreateRequestKindBank       PostV1AgreementsAgreementsCreateRequestKind = "bank"
-	PostV1AgreementsAgreementsCreateRequestKindLease      PostV1AgreementsAgreementsCreateRequestKind = "lease"
-	PostV1AgreementsAgreementsCreateRequestKindInsurance  PostV1AgreementsAgreementsCreateRequestKind = "insurance"
-	PostV1AgreementsAgreementsCreateRequestKindOther      PostV1AgreementsAgreementsCreateRequestKind = "other"
+	AgreementsCreateAgreementsRequestKindCustomer   AgreementsCreateAgreementsRequestKind = "customer"
+	AgreementsCreateAgreementsRequestKindSupplier   AgreementsCreateAgreementsRequestKind = "supplier"
+	AgreementsCreateAgreementsRequestKindEmployment AgreementsCreateAgreementsRequestKind = "employment"
+	AgreementsCreateAgreementsRequestKindBank       AgreementsCreateAgreementsRequestKind = "bank"
+	AgreementsCreateAgreementsRequestKindLease      AgreementsCreateAgreementsRequestKind = "lease"
+	AgreementsCreateAgreementsRequestKindInsurance  AgreementsCreateAgreementsRequestKind = "insurance"
+	AgreementsCreateAgreementsRequestKindOther      AgreementsCreateAgreementsRequestKind = "other"
 )
 
-func NewPostV1AgreementsAgreementsCreateRequestKindFromString(s string) (PostV1AgreementsAgreementsCreateRequestKind, error) {
+func NewAgreementsCreateAgreementsRequestKindFromString(s string) (AgreementsCreateAgreementsRequestKind, error) {
 	switch s {
 	case "customer":
-		return PostV1AgreementsAgreementsCreateRequestKindCustomer, nil
+		return AgreementsCreateAgreementsRequestKindCustomer, nil
 	case "supplier":
-		return PostV1AgreementsAgreementsCreateRequestKindSupplier, nil
+		return AgreementsCreateAgreementsRequestKindSupplier, nil
 	case "employment":
-		return PostV1AgreementsAgreementsCreateRequestKindEmployment, nil
+		return AgreementsCreateAgreementsRequestKindEmployment, nil
 	case "bank":
-		return PostV1AgreementsAgreementsCreateRequestKindBank, nil
+		return AgreementsCreateAgreementsRequestKindBank, nil
 	case "lease":
-		return PostV1AgreementsAgreementsCreateRequestKindLease, nil
+		return AgreementsCreateAgreementsRequestKindLease, nil
 	case "insurance":
-		return PostV1AgreementsAgreementsCreateRequestKindInsurance, nil
+		return AgreementsCreateAgreementsRequestKindInsurance, nil
 	case "other":
-		return PostV1AgreementsAgreementsCreateRequestKindOther, nil
+		return AgreementsCreateAgreementsRequestKindOther, nil
 	}
-	var t PostV1AgreementsAgreementsCreateRequestKind
+	var t AgreementsCreateAgreementsRequestKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateRequestKind) Ptr() *PostV1AgreementsAgreementsCreateRequestKind {
-	return &p
+func (a AgreementsCreateAgreementsRequestKind) Ptr() *AgreementsCreateAgreementsRequestKind {
+	return &a
 }
 
-type PostV1AgreementsAgreementsCreateRequestStatus string
+type AgreementsCreateAgreementsRequestStatus string
 
 const (
-	PostV1AgreementsAgreementsCreateRequestStatusDraft      PostV1AgreementsAgreementsCreateRequestStatus = "draft"
-	PostV1AgreementsAgreementsCreateRequestStatusActive     PostV1AgreementsAgreementsCreateRequestStatus = "active"
-	PostV1AgreementsAgreementsCreateRequestStatusExpired    PostV1AgreementsAgreementsCreateRequestStatus = "expired"
-	PostV1AgreementsAgreementsCreateRequestStatusTerminated PostV1AgreementsAgreementsCreateRequestStatus = "terminated"
+	AgreementsCreateAgreementsRequestStatusDraft      AgreementsCreateAgreementsRequestStatus = "draft"
+	AgreementsCreateAgreementsRequestStatusActive     AgreementsCreateAgreementsRequestStatus = "active"
+	AgreementsCreateAgreementsRequestStatusExpired    AgreementsCreateAgreementsRequestStatus = "expired"
+	AgreementsCreateAgreementsRequestStatusTerminated AgreementsCreateAgreementsRequestStatus = "terminated"
 )
 
-func NewPostV1AgreementsAgreementsCreateRequestStatusFromString(s string) (PostV1AgreementsAgreementsCreateRequestStatus, error) {
+func NewAgreementsCreateAgreementsRequestStatusFromString(s string) (AgreementsCreateAgreementsRequestStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1AgreementsAgreementsCreateRequestStatusDraft, nil
+		return AgreementsCreateAgreementsRequestStatusDraft, nil
 	case "active":
-		return PostV1AgreementsAgreementsCreateRequestStatusActive, nil
+		return AgreementsCreateAgreementsRequestStatusActive, nil
 	case "expired":
-		return PostV1AgreementsAgreementsCreateRequestStatusExpired, nil
+		return AgreementsCreateAgreementsRequestStatusExpired, nil
 	case "terminated":
-		return PostV1AgreementsAgreementsCreateRequestStatusTerminated, nil
+		return AgreementsCreateAgreementsRequestStatusTerminated, nil
 	}
-	var t PostV1AgreementsAgreementsCreateRequestStatus
+	var t AgreementsCreateAgreementsRequestStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateRequestStatus) Ptr() *PostV1AgreementsAgreementsCreateRequestStatus {
-	return &p
+func (a AgreementsCreateAgreementsRequestStatus) Ptr() *AgreementsCreateAgreementsRequestStatus {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsCreateResponseFieldID            = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateResponseFieldKind          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateResponseFieldPartnerID     = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateResponseFieldEmployeeID    = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateResponseFieldBankAccountID = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateResponseFieldNumber        = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateResponseFieldName          = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateResponseFieldStartDate     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateResponseFieldEndDate       = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateResponseFieldAutoRenew     = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateResponseFieldValue         = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsCreateResponseFieldBillingPeriod = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsCreateResponseFieldCurrency      = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsCreateResponseFieldStatus        = big.NewInt(1 << 14)
-	postV1AgreementsAgreementsCreateResponseFieldNotes         = big.NewInt(1 << 15)
-	postV1AgreementsAgreementsCreateResponseFieldDocumentRef   = big.NewInt(1 << 16)
-	postV1AgreementsAgreementsCreateResponseFieldCreatedAt     = big.NewInt(1 << 17)
-	postV1AgreementsAgreementsCreateResponseFieldItems         = big.NewInt(1 << 18)
+	agreementsCreateAgreementsResponseFieldID            = big.NewInt(1 << 0)
+	agreementsCreateAgreementsResponseFieldTypeID        = big.NewInt(1 << 1)
+	agreementsCreateAgreementsResponseFieldKind          = big.NewInt(1 << 2)
+	agreementsCreateAgreementsResponseFieldPartnerID     = big.NewInt(1 << 3)
+	agreementsCreateAgreementsResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	agreementsCreateAgreementsResponseFieldBankAccountID = big.NewInt(1 << 5)
+	agreementsCreateAgreementsResponseFieldNumber        = big.NewInt(1 << 6)
+	agreementsCreateAgreementsResponseFieldName          = big.NewInt(1 << 7)
+	agreementsCreateAgreementsResponseFieldStartDate     = big.NewInt(1 << 8)
+	agreementsCreateAgreementsResponseFieldEndDate       = big.NewInt(1 << 9)
+	agreementsCreateAgreementsResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	agreementsCreateAgreementsResponseFieldValue         = big.NewInt(1 << 11)
+	agreementsCreateAgreementsResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	agreementsCreateAgreementsResponseFieldCurrency      = big.NewInt(1 << 13)
+	agreementsCreateAgreementsResponseFieldStatus        = big.NewInt(1 << 14)
+	agreementsCreateAgreementsResponseFieldNotes         = big.NewInt(1 << 15)
+	agreementsCreateAgreementsResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	agreementsCreateAgreementsResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	agreementsCreateAgreementsResponseFieldItems         = big.NewInt(1 << 18)
 )
 
-type PostV1AgreementsAgreementsCreateResponse struct {
-	ID            string                                                 `json:"id" url:"id"`
-	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
-	Kind          PostV1AgreementsAgreementsCreateResponseKind           `json:"kind" url:"kind"`
-	PartnerID     *string                                                `json:"partnerId,omitempty" url:"partnerId,omitempty"`
-	EmployeeID    *string                                                `json:"employeeId,omitempty" url:"employeeId,omitempty"`
-	BankAccountID *string                                                `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	Number        string                                                 `json:"number" url:"number"`
-	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
-	StartDate     string                                                 `json:"startDate" url:"startDate"`
-	EndDate       *string                                                `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew     bool                                                   `json:"autoRenew" url:"autoRenew"`
-	Value         *string                                                `json:"value,omitempty" url:"value,omitempty"`
-	BillingPeriod *PostV1AgreementsAgreementsCreateResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
-	Currency      string                                                 `json:"currency" url:"currency"`
-	Status        PostV1AgreementsAgreementsCreateResponseStatus         `json:"status" url:"status"`
-	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef   *string                                                `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
-	Items         []*PostV1AgreementsAgreementsCreateResponseItemsItem   `json:"items" url:"items"`
+type AgreementsCreateAgreementsResponse struct {
+	ID            string                                           `json:"id" url:"id"`
+	TypeID        *string                                          `json:"typeId,omitempty" url:"typeId,omitempty"`
+	Kind          AgreementsCreateAgreementsResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                          `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                          `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                          `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	Number        string                                           `json:"number" url:"number"`
+	Name          *string                                          `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     time.Time                                        `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                       `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	AutoRenew     bool                                             `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                          `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *AgreementsCreateAgreementsResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                           `json:"currency" url:"currency"`
+	Status        AgreementsCreateAgreementsResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                          `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt     time.Time                                        `json:"createdAt" url:"createdAt"`
+	Items         []*AgreementsCreateAgreementsResponseItemsItem   `json:"items" url:"items"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1623,363 +1500,379 @@ type PostV1AgreementsAgreementsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetID() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetTypeID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetTypeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.TypeID
+	return a.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetKind() PostV1AgreementsAgreementsCreateResponseKind {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetKind() AgreementsCreateAgreementsResponseKind {
+	if a == nil {
 		return ""
 	}
-	return p.Kind
+	return a.Kind
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetPartnerID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetPartnerID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.PartnerID
+	return a.PartnerID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetEmployeeID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetEmployeeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetBankAccountID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetBankAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.BankAccountID
+	return a.BankAccountID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetNumber() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.Number
+	return a.Number
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetName() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetStartDate() string {
-	if p == nil {
-		return ""
+func (a *AgreementsCreateAgreementsResponse) GetStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.StartDate
+	return a.StartDate
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetEndDate() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetEndDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.EndDate
+	return a.EndDate
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetAutoRenew() bool {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetAutoRenew() bool {
+	if a == nil {
 		return false
 	}
-	return p.AutoRenew
+	return a.AutoRenew
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetValue() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetValue() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.Value
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetBillingPeriod() *PostV1AgreementsAgreementsCreateResponseBillingPeriod {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetBillingPeriod() *AgreementsCreateAgreementsResponseBillingPeriod {
+	if a == nil {
 		return nil
 	}
-	return p.BillingPeriod
+	return a.BillingPeriod
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetCurrency() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetCurrency() string {
+	if a == nil {
 		return ""
 	}
-	return p.Currency
+	return a.Currency
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetStatus() PostV1AgreementsAgreementsCreateResponseStatus {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetStatus() AgreementsCreateAgreementsResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetDocumentRef() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetDocumentRef() *string {
+	if a == nil {
 		return nil
 	}
-	return p.DocumentRef
+	return a.DocumentRef
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AgreementsCreateAgreementsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetItems() []*PostV1AgreementsAgreementsCreateResponseItemsItem {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetItems() []*AgreementsCreateAgreementsResponseItemsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Items
+	return a.Items
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsCreateAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsCreateResponseFieldID)
+func (a *AgreementsCreateAgreementsResponse) SetID(id string) {
+	a.ID = id
+	a.require(agreementsCreateAgreementsResponseFieldID)
 }
 
 // SetTypeID sets the TypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsCreateResponseFieldTypeID)
+func (a *AgreementsCreateAgreementsResponse) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsCreateAgreementsResponseFieldTypeID)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetKind(kind PostV1AgreementsAgreementsCreateResponseKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsCreateResponseFieldKind)
+func (a *AgreementsCreateAgreementsResponse) SetKind(kind AgreementsCreateAgreementsResponseKind) {
+	a.Kind = kind
+	a.require(agreementsCreateAgreementsResponseFieldKind)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1AgreementsAgreementsCreateResponseFieldPartnerID)
+func (a *AgreementsCreateAgreementsResponse) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(agreementsCreateAgreementsResponseFieldPartnerID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1AgreementsAgreementsCreateResponseFieldEmployeeID)
+func (a *AgreementsCreateAgreementsResponse) SetEmployeeID(employeeID *string) {
+	a.EmployeeID = employeeID
+	a.require(agreementsCreateAgreementsResponseFieldEmployeeID)
 }
 
 // SetBankAccountID sets the BankAccountID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetBankAccountID(bankAccountID *string) {
-	p.BankAccountID = bankAccountID
-	p.require(postV1AgreementsAgreementsCreateResponseFieldBankAccountID)
+func (a *AgreementsCreateAgreementsResponse) SetBankAccountID(bankAccountID *string) {
+	a.BankAccountID = bankAccountID
+	a.require(agreementsCreateAgreementsResponseFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1AgreementsAgreementsCreateResponseFieldNumber)
+func (a *AgreementsCreateAgreementsResponse) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsCreateAgreementsResponseFieldNumber)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsCreateResponseFieldName)
+func (a *AgreementsCreateAgreementsResponse) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsCreateAgreementsResponseFieldName)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1AgreementsAgreementsCreateResponseFieldStartDate)
+func (a *AgreementsCreateAgreementsResponse) SetStartDate(startDate time.Time) {
+	a.StartDate = startDate
+	a.require(agreementsCreateAgreementsResponseFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsCreateResponseFieldEndDate)
+func (a *AgreementsCreateAgreementsResponse) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsCreateAgreementsResponseFieldEndDate)
 }
 
 // SetAutoRenew sets the AutoRenew field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetAutoRenew(autoRenew bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsCreateResponseFieldAutoRenew)
+func (a *AgreementsCreateAgreementsResponse) SetAutoRenew(autoRenew bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsCreateAgreementsResponseFieldAutoRenew)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsCreateResponseFieldValue)
+func (a *AgreementsCreateAgreementsResponse) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsCreateAgreementsResponseFieldValue)
 }
 
 // SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsCreateResponseBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsCreateResponseFieldBillingPeriod)
+func (a *AgreementsCreateAgreementsResponse) SetBillingPeriod(billingPeriod *AgreementsCreateAgreementsResponseBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsCreateAgreementsResponseFieldBillingPeriod)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsAgreementsCreateResponseFieldCurrency)
+func (a *AgreementsCreateAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsCreateAgreementsResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetStatus(status PostV1AgreementsAgreementsCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsCreateResponseFieldStatus)
+func (a *AgreementsCreateAgreementsResponse) SetStatus(status AgreementsCreateAgreementsResponseStatus) {
+	a.Status = status
+	a.require(agreementsCreateAgreementsResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsCreateResponseFieldNotes)
+func (a *AgreementsCreateAgreementsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsCreateAgreementsResponseFieldNotes)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsCreateResponseFieldDocumentRef)
+func (a *AgreementsCreateAgreementsResponse) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsCreateAgreementsResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsAgreementsCreateResponseFieldCreatedAt)
+func (a *AgreementsCreateAgreementsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(agreementsCreateAgreementsResponseFieldCreatedAt)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetItems(items []*PostV1AgreementsAgreementsCreateResponseItemsItem) {
-	p.Items = items
-	p.require(postV1AgreementsAgreementsCreateResponseFieldItems)
+func (a *AgreementsCreateAgreementsResponse) SetItems(items []*AgreementsCreateAgreementsResponseItemsItem) {
+	a.Items = items
+	a.require(agreementsCreateAgreementsResponseFieldItems)
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AgreementsCreateAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type embed AgreementsCreateAgreementsResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsCreateAgreementsResponse(unmarshaler.embed)
+	a.StartDate = unmarshaler.StartDate.Time()
+	a.EndDate = unmarshaler.EndDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsCreateResponse
+func (a *AgreementsCreateAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsCreateAgreementsResponse
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		StartDate: internal.NewDate(a.StartDate),
+		EndDate:   internal.NewOptionalDate(a.EndDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) String() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsCreateResponseBillingPeriod string
+type AgreementsCreateAgreementsResponseBillingPeriod string
 
 const (
-	PostV1AgreementsAgreementsCreateResponseBillingPeriodMonthly   PostV1AgreementsAgreementsCreateResponseBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsCreateResponseBillingPeriodQuarterly PostV1AgreementsAgreementsCreateResponseBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsCreateResponseBillingPeriodAnnual    PostV1AgreementsAgreementsCreateResponseBillingPeriod = "annual"
+	AgreementsCreateAgreementsResponseBillingPeriodMonthly   AgreementsCreateAgreementsResponseBillingPeriod = "monthly"
+	AgreementsCreateAgreementsResponseBillingPeriodQuarterly AgreementsCreateAgreementsResponseBillingPeriod = "quarterly"
+	AgreementsCreateAgreementsResponseBillingPeriodAnnual    AgreementsCreateAgreementsResponseBillingPeriod = "annual"
 )
 
-func NewPostV1AgreementsAgreementsCreateResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsCreateResponseBillingPeriod, error) {
+func NewAgreementsCreateAgreementsResponseBillingPeriodFromString(s string) (AgreementsCreateAgreementsResponseBillingPeriod, error) {
 	switch s {
 	case "monthly":
-		return PostV1AgreementsAgreementsCreateResponseBillingPeriodMonthly, nil
+		return AgreementsCreateAgreementsResponseBillingPeriodMonthly, nil
 	case "quarterly":
-		return PostV1AgreementsAgreementsCreateResponseBillingPeriodQuarterly, nil
+		return AgreementsCreateAgreementsResponseBillingPeriodQuarterly, nil
 	case "annual":
-		return PostV1AgreementsAgreementsCreateResponseBillingPeriodAnnual, nil
+		return AgreementsCreateAgreementsResponseBillingPeriodAnnual, nil
 	}
-	var t PostV1AgreementsAgreementsCreateResponseBillingPeriod
+	var t AgreementsCreateAgreementsResponseBillingPeriod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsCreateResponseBillingPeriod {
-	return &p
+func (a AgreementsCreateAgreementsResponseBillingPeriod) Ptr() *AgreementsCreateAgreementsResponseBillingPeriod {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsCreateAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	agreementsCreateAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	agreementsCreateAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	agreementsCreateAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	agreementsCreateAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	agreementsCreateAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
-type PostV1AgreementsAgreementsCreateResponseItemsItem struct {
+type AgreementsCreateAgreementsResponseItemsItem struct {
 	ID             string  `json:"id" url:"id"`
 	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description    string  `json:"description" url:"description"`
@@ -1994,216 +1887,216 @@ type PostV1AgreementsAgreementsCreateResponseItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetID() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetItemID() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetItemID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.ItemID
+	return a.ItemID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetDescription() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetDescription() string {
+	if a == nil {
 		return ""
 	}
-	return p.Description
+	return a.Description
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetQuantity() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetQuantity() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Quantity
+	return a.Quantity
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetUnitPrice() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetUnitPrice() *string {
+	if a == nil {
 		return nil
 	}
-	return p.UnitPrice
+	return a.UnitPrice
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetVatRatePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return a.VatRatePercent
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsCreateAgreementsResponseItemsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldID)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetID(id string) {
+	a.ID = id
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldItemID)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetItemID(itemID *string) {
+	a.ItemID = itemID
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldDescription)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetDescription(description string) {
+	a.Description = description
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetQuantity(quantity *string) {
-	p.Quantity = quantity
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldQuantity)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetQuantity(quantity *string) {
+	a.Quantity = quantity
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldQuantity)
 }
 
 // SetUnitPrice sets the UnitPrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetUnitPrice(unitPrice *string) {
-	p.UnitPrice = unitPrice
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldUnitPrice)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetUnitPrice(unitPrice *string) {
+	a.UnitPrice = unitPrice
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldUnitPrice)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldVatRatePercent)
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	a.VatRatePercent = vatRatePercent
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldVatRatePercent)
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsCreateResponseItemsItem
+func (a *AgreementsCreateAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsCreateAgreementsResponseItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsCreateResponseItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsCreateAgreementsResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsCreateResponseItemsItem
+func (a *AgreementsCreateAgreementsResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsCreateAgreementsResponseItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) String() string {
-	if p == nil {
+func (a *AgreementsCreateAgreementsResponseItemsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsCreateResponseKind string
+type AgreementsCreateAgreementsResponseKind string
 
 const (
-	PostV1AgreementsAgreementsCreateResponseKindCustomer   PostV1AgreementsAgreementsCreateResponseKind = "customer"
-	PostV1AgreementsAgreementsCreateResponseKindSupplier   PostV1AgreementsAgreementsCreateResponseKind = "supplier"
-	PostV1AgreementsAgreementsCreateResponseKindEmployment PostV1AgreementsAgreementsCreateResponseKind = "employment"
-	PostV1AgreementsAgreementsCreateResponseKindBank       PostV1AgreementsAgreementsCreateResponseKind = "bank"
-	PostV1AgreementsAgreementsCreateResponseKindLease      PostV1AgreementsAgreementsCreateResponseKind = "lease"
-	PostV1AgreementsAgreementsCreateResponseKindInsurance  PostV1AgreementsAgreementsCreateResponseKind = "insurance"
-	PostV1AgreementsAgreementsCreateResponseKindOther      PostV1AgreementsAgreementsCreateResponseKind = "other"
+	AgreementsCreateAgreementsResponseKindCustomer   AgreementsCreateAgreementsResponseKind = "customer"
+	AgreementsCreateAgreementsResponseKindSupplier   AgreementsCreateAgreementsResponseKind = "supplier"
+	AgreementsCreateAgreementsResponseKindEmployment AgreementsCreateAgreementsResponseKind = "employment"
+	AgreementsCreateAgreementsResponseKindBank       AgreementsCreateAgreementsResponseKind = "bank"
+	AgreementsCreateAgreementsResponseKindLease      AgreementsCreateAgreementsResponseKind = "lease"
+	AgreementsCreateAgreementsResponseKindInsurance  AgreementsCreateAgreementsResponseKind = "insurance"
+	AgreementsCreateAgreementsResponseKindOther      AgreementsCreateAgreementsResponseKind = "other"
 )
 
-func NewPostV1AgreementsAgreementsCreateResponseKindFromString(s string) (PostV1AgreementsAgreementsCreateResponseKind, error) {
+func NewAgreementsCreateAgreementsResponseKindFromString(s string) (AgreementsCreateAgreementsResponseKind, error) {
 	switch s {
 	case "customer":
-		return PostV1AgreementsAgreementsCreateResponseKindCustomer, nil
+		return AgreementsCreateAgreementsResponseKindCustomer, nil
 	case "supplier":
-		return PostV1AgreementsAgreementsCreateResponseKindSupplier, nil
+		return AgreementsCreateAgreementsResponseKindSupplier, nil
 	case "employment":
-		return PostV1AgreementsAgreementsCreateResponseKindEmployment, nil
+		return AgreementsCreateAgreementsResponseKindEmployment, nil
 	case "bank":
-		return PostV1AgreementsAgreementsCreateResponseKindBank, nil
+		return AgreementsCreateAgreementsResponseKindBank, nil
 	case "lease":
-		return PostV1AgreementsAgreementsCreateResponseKindLease, nil
+		return AgreementsCreateAgreementsResponseKindLease, nil
 	case "insurance":
-		return PostV1AgreementsAgreementsCreateResponseKindInsurance, nil
+		return AgreementsCreateAgreementsResponseKindInsurance, nil
 	case "other":
-		return PostV1AgreementsAgreementsCreateResponseKindOther, nil
+		return AgreementsCreateAgreementsResponseKindOther, nil
 	}
-	var t PostV1AgreementsAgreementsCreateResponseKind
+	var t AgreementsCreateAgreementsResponseKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateResponseKind) Ptr() *PostV1AgreementsAgreementsCreateResponseKind {
-	return &p
+func (a AgreementsCreateAgreementsResponseKind) Ptr() *AgreementsCreateAgreementsResponseKind {
+	return &a
 }
 
-type PostV1AgreementsAgreementsCreateResponseStatus string
+type AgreementsCreateAgreementsResponseStatus string
 
 const (
-	PostV1AgreementsAgreementsCreateResponseStatusDraft      PostV1AgreementsAgreementsCreateResponseStatus = "draft"
-	PostV1AgreementsAgreementsCreateResponseStatusActive     PostV1AgreementsAgreementsCreateResponseStatus = "active"
-	PostV1AgreementsAgreementsCreateResponseStatusExpired    PostV1AgreementsAgreementsCreateResponseStatus = "expired"
-	PostV1AgreementsAgreementsCreateResponseStatusTerminated PostV1AgreementsAgreementsCreateResponseStatus = "terminated"
+	AgreementsCreateAgreementsResponseStatusDraft      AgreementsCreateAgreementsResponseStatus = "draft"
+	AgreementsCreateAgreementsResponseStatusActive     AgreementsCreateAgreementsResponseStatus = "active"
+	AgreementsCreateAgreementsResponseStatusExpired    AgreementsCreateAgreementsResponseStatus = "expired"
+	AgreementsCreateAgreementsResponseStatusTerminated AgreementsCreateAgreementsResponseStatus = "terminated"
 )
 
-func NewPostV1AgreementsAgreementsCreateResponseStatusFromString(s string) (PostV1AgreementsAgreementsCreateResponseStatus, error) {
+func NewAgreementsCreateAgreementsResponseStatusFromString(s string) (AgreementsCreateAgreementsResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1AgreementsAgreementsCreateResponseStatusDraft, nil
+		return AgreementsCreateAgreementsResponseStatusDraft, nil
 	case "active":
-		return PostV1AgreementsAgreementsCreateResponseStatusActive, nil
+		return AgreementsCreateAgreementsResponseStatusActive, nil
 	case "expired":
-		return PostV1AgreementsAgreementsCreateResponseStatusExpired, nil
+		return AgreementsCreateAgreementsResponseStatusExpired, nil
 	case "terminated":
-		return PostV1AgreementsAgreementsCreateResponseStatusTerminated, nil
+		return AgreementsCreateAgreementsResponseStatusTerminated, nil
 	}
-	var t PostV1AgreementsAgreementsCreateResponseStatus
+	var t AgreementsCreateAgreementsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsCreateResponseStatus) Ptr() *PostV1AgreementsAgreementsCreateResponseStatus {
-	return &p
+func (a AgreementsCreateAgreementsResponseStatus) Ptr() *AgreementsCreateAgreementsResponseStatus {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsDeleteResponseFieldID = big.NewInt(1 << 0)
+	agreementsDeleteAgreementsResponseFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsAgreementsDeleteResponse struct {
+type AgreementsDeleteAgreementsResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2213,88 +2106,88 @@ type PostV1AgreementsAgreementsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) GetID() string {
-	if p == nil {
+func (a *AgreementsDeleteAgreementsResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsDeleteAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsDeleteAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsDeleteResponseFieldID)
+func (a *AgreementsDeleteAgreementsResponse) SetID(id string) {
+	a.ID = id
+	a.require(agreementsDeleteAgreementsResponseFieldID)
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsDeleteResponse
+func (a *AgreementsDeleteAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsDeleteAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsDeleteAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsDeleteResponse
+func (a *AgreementsDeleteAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsDeleteAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsDeleteResponse) String() string {
-	if p == nil {
+func (a *AgreementsDeleteAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AgreementsAgreementsGenerateInvoiceResponseFieldInvoiceID      = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodStart    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodEnd      = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGenerateInvoiceResponseFieldRenewedEndDate = big.NewInt(1 << 3)
+	agreementsGenerateInvoiceAgreementsResponseFieldInvoiceID      = big.NewInt(1 << 0)
+	agreementsGenerateInvoiceAgreementsResponseFieldPeriodStart    = big.NewInt(1 << 1)
+	agreementsGenerateInvoiceAgreementsResponseFieldPeriodEnd      = big.NewInt(1 << 2)
+	agreementsGenerateInvoiceAgreementsResponseFieldRenewedEndDate = big.NewInt(1 << 3)
 )
 
-type PostV1AgreementsAgreementsGenerateInvoiceResponse struct {
-	InvoiceID      string  `json:"invoiceId" url:"invoiceId"`
-	PeriodStart    string  `json:"periodStart" url:"periodStart"`
-	PeriodEnd      string  `json:"periodEnd" url:"periodEnd"`
-	RenewedEndDate *string `json:"renewedEndDate,omitempty" url:"renewedEndDate,omitempty"`
+type AgreementsGenerateInvoiceAgreementsResponse struct {
+	InvoiceID      string     `json:"invoiceId" url:"invoiceId"`
+	PeriodStart    string     `json:"periodStart" url:"periodStart"`
+	PeriodEnd      string     `json:"periodEnd" url:"periodEnd"`
+	RenewedEndDate *time.Time `json:"renewedEndDate,omitempty" url:"renewedEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2303,160 +2196,168 @@ type PostV1AgreementsAgreementsGenerateInvoiceResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetInvoiceID() string {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) GetInvoiceID() string {
+	if a == nil {
 		return ""
 	}
-	return p.InvoiceID
+	return a.InvoiceID
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetPeriodStart() string {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) GetPeriodStart() string {
+	if a == nil {
 		return ""
 	}
-	return p.PeriodStart
+	return a.PeriodStart
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetPeriodEnd() string {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) GetPeriodEnd() string {
+	if a == nil {
 		return ""
 	}
-	return p.PeriodEnd
+	return a.PeriodEnd
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetRenewedEndDate() *string {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) GetRenewedEndDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.RenewedEndDate
+	return a.RenewedEndDate
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsGenerateInvoiceAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetInvoiceID(invoiceID string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldInvoiceID)
+func (a *AgreementsGenerateInvoiceAgreementsResponse) SetInvoiceID(invoiceID string) {
+	a.InvoiceID = invoiceID
+	a.require(agreementsGenerateInvoiceAgreementsResponseFieldInvoiceID)
 }
 
 // SetPeriodStart sets the PeriodStart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetPeriodStart(periodStart string) {
-	p.PeriodStart = periodStart
-	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodStart)
+func (a *AgreementsGenerateInvoiceAgreementsResponse) SetPeriodStart(periodStart string) {
+	a.PeriodStart = periodStart
+	a.require(agreementsGenerateInvoiceAgreementsResponseFieldPeriodStart)
 }
 
 // SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetPeriodEnd(periodEnd string) {
-	p.PeriodEnd = periodEnd
-	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodEnd)
+func (a *AgreementsGenerateInvoiceAgreementsResponse) SetPeriodEnd(periodEnd string) {
+	a.PeriodEnd = periodEnd
+	a.require(agreementsGenerateInvoiceAgreementsResponseFieldPeriodEnd)
 }
 
 // SetRenewedEndDate sets the RenewedEndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetRenewedEndDate(renewedEndDate *string) {
-	p.RenewedEndDate = renewedEndDate
-	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldRenewedEndDate)
+func (a *AgreementsGenerateInvoiceAgreementsResponse) SetRenewedEndDate(renewedEndDate *time.Time) {
+	a.RenewedEndDate = renewedEndDate
+	a.require(agreementsGenerateInvoiceAgreementsResponseFieldRenewedEndDate)
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsGenerateInvoiceResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type embed AgreementsGenerateInvoiceAgreementsResponse
+	var unmarshaler = struct {
+		embed
+		RenewedEndDate *internal.Date `json:"renewedEndDate,omitempty"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsGenerateInvoiceResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsGenerateInvoiceAgreementsResponse(unmarshaler.embed)
+	a.RenewedEndDate = unmarshaler.RenewedEndDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsGenerateInvoiceResponse
+func (a *AgreementsGenerateInvoiceAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsGenerateInvoiceAgreementsResponse
 	var marshaler = struct {
 		embed
+		RenewedEndDate *internal.Date `json:"renewedEndDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:          embed(*a),
+		RenewedEndDate: internal.NewOptionalDate(a.RenewedEndDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) String() string {
-	if p == nil {
+func (a *AgreementsGenerateInvoiceAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AgreementsAgreementsGetResponseFieldID            = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGetResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGetResponseFieldKind          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGetResponseFieldPartnerID     = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsGetResponseFieldEmployeeID    = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsGetResponseFieldBankAccountID = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsGetResponseFieldNumber        = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsGetResponseFieldName          = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsGetResponseFieldStartDate     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsGetResponseFieldEndDate       = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsGetResponseFieldAutoRenew     = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsGetResponseFieldValue         = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsGetResponseFieldBillingPeriod = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsGetResponseFieldCurrency      = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsGetResponseFieldStatus        = big.NewInt(1 << 14)
-	postV1AgreementsAgreementsGetResponseFieldNotes         = big.NewInt(1 << 15)
-	postV1AgreementsAgreementsGetResponseFieldDocumentRef   = big.NewInt(1 << 16)
-	postV1AgreementsAgreementsGetResponseFieldCreatedAt     = big.NewInt(1 << 17)
-	postV1AgreementsAgreementsGetResponseFieldItems         = big.NewInt(1 << 18)
+	agreementsGetAgreementsResponseFieldID            = big.NewInt(1 << 0)
+	agreementsGetAgreementsResponseFieldTypeID        = big.NewInt(1 << 1)
+	agreementsGetAgreementsResponseFieldKind          = big.NewInt(1 << 2)
+	agreementsGetAgreementsResponseFieldPartnerID     = big.NewInt(1 << 3)
+	agreementsGetAgreementsResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	agreementsGetAgreementsResponseFieldBankAccountID = big.NewInt(1 << 5)
+	agreementsGetAgreementsResponseFieldNumber        = big.NewInt(1 << 6)
+	agreementsGetAgreementsResponseFieldName          = big.NewInt(1 << 7)
+	agreementsGetAgreementsResponseFieldStartDate     = big.NewInt(1 << 8)
+	agreementsGetAgreementsResponseFieldEndDate       = big.NewInt(1 << 9)
+	agreementsGetAgreementsResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	agreementsGetAgreementsResponseFieldValue         = big.NewInt(1 << 11)
+	agreementsGetAgreementsResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	agreementsGetAgreementsResponseFieldCurrency      = big.NewInt(1 << 13)
+	agreementsGetAgreementsResponseFieldStatus        = big.NewInt(1 << 14)
+	agreementsGetAgreementsResponseFieldNotes         = big.NewInt(1 << 15)
+	agreementsGetAgreementsResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	agreementsGetAgreementsResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	agreementsGetAgreementsResponseFieldItems         = big.NewInt(1 << 18)
 )
 
-type PostV1AgreementsAgreementsGetResponse struct {
-	ID            string                                              `json:"id" url:"id"`
-	TypeID        *string                                             `json:"typeId,omitempty" url:"typeId,omitempty"`
-	Kind          PostV1AgreementsAgreementsGetResponseKind           `json:"kind" url:"kind"`
-	PartnerID     *string                                             `json:"partnerId,omitempty" url:"partnerId,omitempty"`
-	EmployeeID    *string                                             `json:"employeeId,omitempty" url:"employeeId,omitempty"`
-	BankAccountID *string                                             `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	Number        string                                              `json:"number" url:"number"`
-	Name          *string                                             `json:"name,omitempty" url:"name,omitempty"`
-	StartDate     string                                              `json:"startDate" url:"startDate"`
-	EndDate       *string                                             `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew     bool                                                `json:"autoRenew" url:"autoRenew"`
-	Value         *string                                             `json:"value,omitempty" url:"value,omitempty"`
-	BillingPeriod *PostV1AgreementsAgreementsGetResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
-	Currency      string                                              `json:"currency" url:"currency"`
-	Status        PostV1AgreementsAgreementsGetResponseStatus         `json:"status" url:"status"`
-	Notes         *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef   *string                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt     string                                              `json:"createdAt" url:"createdAt"`
-	Items         []*PostV1AgreementsAgreementsGetResponseItemsItem   `json:"items" url:"items"`
+type AgreementsGetAgreementsResponse struct {
+	ID            string                                        `json:"id" url:"id"`
+	TypeID        *string                                       `json:"typeId,omitempty" url:"typeId,omitempty"`
+	Kind          AgreementsGetAgreementsResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                       `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                       `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                       `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	Number        string                                        `json:"number" url:"number"`
+	Name          *string                                       `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     time.Time                                     `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                    `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	AutoRenew     bool                                          `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                       `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *AgreementsGetAgreementsResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                        `json:"currency" url:"currency"`
+	Status        AgreementsGetAgreementsResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt     time.Time                                     `json:"createdAt" url:"createdAt"`
+	Items         []*AgreementsGetAgreementsResponseItemsItem   `json:"items" url:"items"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2465,363 +2366,379 @@ type PostV1AgreementsAgreementsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetID() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetTypeID() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetTypeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.TypeID
+	return a.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetKind() PostV1AgreementsAgreementsGetResponseKind {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetKind() AgreementsGetAgreementsResponseKind {
+	if a == nil {
 		return ""
 	}
-	return p.Kind
+	return a.Kind
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetPartnerID() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetPartnerID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.PartnerID
+	return a.PartnerID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetEmployeeID() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetEmployeeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetBankAccountID() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetBankAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.BankAccountID
+	return a.BankAccountID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetNumber() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.Number
+	return a.Number
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetName() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetStartDate() string {
-	if p == nil {
-		return ""
+func (a *AgreementsGetAgreementsResponse) GetStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.StartDate
+	return a.StartDate
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetEndDate() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetEndDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.EndDate
+	return a.EndDate
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetAutoRenew() bool {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetAutoRenew() bool {
+	if a == nil {
 		return false
 	}
-	return p.AutoRenew
+	return a.AutoRenew
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetValue() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetValue() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.Value
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetBillingPeriod() *PostV1AgreementsAgreementsGetResponseBillingPeriod {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetBillingPeriod() *AgreementsGetAgreementsResponseBillingPeriod {
+	if a == nil {
 		return nil
 	}
-	return p.BillingPeriod
+	return a.BillingPeriod
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetCurrency() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetCurrency() string {
+	if a == nil {
 		return ""
 	}
-	return p.Currency
+	return a.Currency
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetStatus() PostV1AgreementsAgreementsGetResponseStatus {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetStatus() AgreementsGetAgreementsResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetNotes() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetDocumentRef() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetDocumentRef() *string {
+	if a == nil {
 		return nil
 	}
-	return p.DocumentRef
+	return a.DocumentRef
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AgreementsGetAgreementsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetItems() []*PostV1AgreementsAgreementsGetResponseItemsItem {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetItems() []*AgreementsGetAgreementsResponseItemsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Items
+	return a.Items
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsGetAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsGetResponseFieldID)
+func (a *AgreementsGetAgreementsResponse) SetID(id string) {
+	a.ID = id
+	a.require(agreementsGetAgreementsResponseFieldID)
 }
 
 // SetTypeID sets the TypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsGetResponseFieldTypeID)
+func (a *AgreementsGetAgreementsResponse) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsGetAgreementsResponseFieldTypeID)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetKind(kind PostV1AgreementsAgreementsGetResponseKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsGetResponseFieldKind)
+func (a *AgreementsGetAgreementsResponse) SetKind(kind AgreementsGetAgreementsResponseKind) {
+	a.Kind = kind
+	a.require(agreementsGetAgreementsResponseFieldKind)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1AgreementsAgreementsGetResponseFieldPartnerID)
+func (a *AgreementsGetAgreementsResponse) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(agreementsGetAgreementsResponseFieldPartnerID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1AgreementsAgreementsGetResponseFieldEmployeeID)
+func (a *AgreementsGetAgreementsResponse) SetEmployeeID(employeeID *string) {
+	a.EmployeeID = employeeID
+	a.require(agreementsGetAgreementsResponseFieldEmployeeID)
 }
 
 // SetBankAccountID sets the BankAccountID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetBankAccountID(bankAccountID *string) {
-	p.BankAccountID = bankAccountID
-	p.require(postV1AgreementsAgreementsGetResponseFieldBankAccountID)
+func (a *AgreementsGetAgreementsResponse) SetBankAccountID(bankAccountID *string) {
+	a.BankAccountID = bankAccountID
+	a.require(agreementsGetAgreementsResponseFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1AgreementsAgreementsGetResponseFieldNumber)
+func (a *AgreementsGetAgreementsResponse) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsGetAgreementsResponseFieldNumber)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsGetResponseFieldName)
+func (a *AgreementsGetAgreementsResponse) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsGetAgreementsResponseFieldName)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1AgreementsAgreementsGetResponseFieldStartDate)
+func (a *AgreementsGetAgreementsResponse) SetStartDate(startDate time.Time) {
+	a.StartDate = startDate
+	a.require(agreementsGetAgreementsResponseFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsGetResponseFieldEndDate)
+func (a *AgreementsGetAgreementsResponse) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsGetAgreementsResponseFieldEndDate)
 }
 
 // SetAutoRenew sets the AutoRenew field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetAutoRenew(autoRenew bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsGetResponseFieldAutoRenew)
+func (a *AgreementsGetAgreementsResponse) SetAutoRenew(autoRenew bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsGetAgreementsResponseFieldAutoRenew)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsGetResponseFieldValue)
+func (a *AgreementsGetAgreementsResponse) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsGetAgreementsResponseFieldValue)
 }
 
 // SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsGetResponseBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsGetResponseFieldBillingPeriod)
+func (a *AgreementsGetAgreementsResponse) SetBillingPeriod(billingPeriod *AgreementsGetAgreementsResponseBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsGetAgreementsResponseFieldBillingPeriod)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsAgreementsGetResponseFieldCurrency)
+func (a *AgreementsGetAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsGetAgreementsResponseFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetStatus(status PostV1AgreementsAgreementsGetResponseStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsGetResponseFieldStatus)
+func (a *AgreementsGetAgreementsResponse) SetStatus(status AgreementsGetAgreementsResponseStatus) {
+	a.Status = status
+	a.require(agreementsGetAgreementsResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsGetResponseFieldNotes)
+func (a *AgreementsGetAgreementsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsGetAgreementsResponseFieldNotes)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsGetResponseFieldDocumentRef)
+func (a *AgreementsGetAgreementsResponse) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsGetAgreementsResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsAgreementsGetResponseFieldCreatedAt)
+func (a *AgreementsGetAgreementsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(agreementsGetAgreementsResponseFieldCreatedAt)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetItems(items []*PostV1AgreementsAgreementsGetResponseItemsItem) {
-	p.Items = items
-	p.require(postV1AgreementsAgreementsGetResponseFieldItems)
+func (a *AgreementsGetAgreementsResponse) SetItems(items []*AgreementsGetAgreementsResponseItemsItem) {
+	a.Items = items
+	a.require(agreementsGetAgreementsResponseFieldItems)
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AgreementsGetAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type embed AgreementsGetAgreementsResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsGetAgreementsResponse(unmarshaler.embed)
+	a.StartDate = unmarshaler.StartDate.Time()
+	a.EndDate = unmarshaler.EndDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsGetResponse
+func (a *AgreementsGetAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsGetAgreementsResponse
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		StartDate: internal.NewDate(a.StartDate),
+		EndDate:   internal.NewOptionalDate(a.EndDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) String() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsGetResponseBillingPeriod string
+type AgreementsGetAgreementsResponseBillingPeriod string
 
 const (
-	PostV1AgreementsAgreementsGetResponseBillingPeriodMonthly   PostV1AgreementsAgreementsGetResponseBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsGetResponseBillingPeriodQuarterly PostV1AgreementsAgreementsGetResponseBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsGetResponseBillingPeriodAnnual    PostV1AgreementsAgreementsGetResponseBillingPeriod = "annual"
+	AgreementsGetAgreementsResponseBillingPeriodMonthly   AgreementsGetAgreementsResponseBillingPeriod = "monthly"
+	AgreementsGetAgreementsResponseBillingPeriodQuarterly AgreementsGetAgreementsResponseBillingPeriod = "quarterly"
+	AgreementsGetAgreementsResponseBillingPeriodAnnual    AgreementsGetAgreementsResponseBillingPeriod = "annual"
 )
 
-func NewPostV1AgreementsAgreementsGetResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsGetResponseBillingPeriod, error) {
+func NewAgreementsGetAgreementsResponseBillingPeriodFromString(s string) (AgreementsGetAgreementsResponseBillingPeriod, error) {
 	switch s {
 	case "monthly":
-		return PostV1AgreementsAgreementsGetResponseBillingPeriodMonthly, nil
+		return AgreementsGetAgreementsResponseBillingPeriodMonthly, nil
 	case "quarterly":
-		return PostV1AgreementsAgreementsGetResponseBillingPeriodQuarterly, nil
+		return AgreementsGetAgreementsResponseBillingPeriodQuarterly, nil
 	case "annual":
-		return PostV1AgreementsAgreementsGetResponseBillingPeriodAnnual, nil
+		return AgreementsGetAgreementsResponseBillingPeriodAnnual, nil
 	}
-	var t PostV1AgreementsAgreementsGetResponseBillingPeriod
+	var t AgreementsGetAgreementsResponseBillingPeriod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsGetResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsGetResponseBillingPeriod {
-	return &p
+func (a AgreementsGetAgreementsResponseBillingPeriod) Ptr() *AgreementsGetAgreementsResponseBillingPeriod {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsGetResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsGetAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	agreementsGetAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	agreementsGetAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	agreementsGetAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	agreementsGetAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	agreementsGetAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
-type PostV1AgreementsAgreementsGetResponseItemsItem struct {
+type AgreementsGetAgreementsResponseItemsItem struct {
 	ID             string  `json:"id" url:"id"`
 	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description    string  `json:"description" url:"description"`
@@ -2836,221 +2753,221 @@ type PostV1AgreementsAgreementsGetResponseItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetID() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetItemID() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetItemID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.ItemID
+	return a.ItemID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetDescription() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetDescription() string {
+	if a == nil {
 		return ""
 	}
-	return p.Description
+	return a.Description
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetQuantity() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetQuantity() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Quantity
+	return a.Quantity
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetUnitPrice() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetUnitPrice() *string {
+	if a == nil {
 		return nil
 	}
-	return p.UnitPrice
+	return a.UnitPrice
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetVatRatePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return a.VatRatePercent
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsGetAgreementsResponseItemsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldID)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetID(id string) {
+	a.ID = id
+	a.require(agreementsGetAgreementsResponseItemsItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldItemID)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetItemID(itemID *string) {
+	a.ItemID = itemID
+	a.require(agreementsGetAgreementsResponseItemsItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldDescription)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetDescription(description string) {
+	a.Description = description
+	a.require(agreementsGetAgreementsResponseItemsItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetQuantity(quantity *string) {
-	p.Quantity = quantity
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldQuantity)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetQuantity(quantity *string) {
+	a.Quantity = quantity
+	a.require(agreementsGetAgreementsResponseItemsItemFieldQuantity)
 }
 
 // SetUnitPrice sets the UnitPrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetUnitPrice(unitPrice *string) {
-	p.UnitPrice = unitPrice
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldUnitPrice)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetUnitPrice(unitPrice *string) {
+	a.UnitPrice = unitPrice
+	a.require(agreementsGetAgreementsResponseItemsItemFieldUnitPrice)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldVatRatePercent)
+func (a *AgreementsGetAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	a.VatRatePercent = vatRatePercent
+	a.require(agreementsGetAgreementsResponseItemsItemFieldVatRatePercent)
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsGetResponseItemsItem
+func (a *AgreementsGetAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsGetAgreementsResponseItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsGetResponseItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsGetAgreementsResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsGetResponseItemsItem
+func (a *AgreementsGetAgreementsResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsGetAgreementsResponseItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsGetResponseItemsItem) String() string {
-	if p == nil {
+func (a *AgreementsGetAgreementsResponseItemsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsGetResponseKind string
+type AgreementsGetAgreementsResponseKind string
 
 const (
-	PostV1AgreementsAgreementsGetResponseKindCustomer   PostV1AgreementsAgreementsGetResponseKind = "customer"
-	PostV1AgreementsAgreementsGetResponseKindSupplier   PostV1AgreementsAgreementsGetResponseKind = "supplier"
-	PostV1AgreementsAgreementsGetResponseKindEmployment PostV1AgreementsAgreementsGetResponseKind = "employment"
-	PostV1AgreementsAgreementsGetResponseKindBank       PostV1AgreementsAgreementsGetResponseKind = "bank"
-	PostV1AgreementsAgreementsGetResponseKindLease      PostV1AgreementsAgreementsGetResponseKind = "lease"
-	PostV1AgreementsAgreementsGetResponseKindInsurance  PostV1AgreementsAgreementsGetResponseKind = "insurance"
-	PostV1AgreementsAgreementsGetResponseKindOther      PostV1AgreementsAgreementsGetResponseKind = "other"
+	AgreementsGetAgreementsResponseKindCustomer   AgreementsGetAgreementsResponseKind = "customer"
+	AgreementsGetAgreementsResponseKindSupplier   AgreementsGetAgreementsResponseKind = "supplier"
+	AgreementsGetAgreementsResponseKindEmployment AgreementsGetAgreementsResponseKind = "employment"
+	AgreementsGetAgreementsResponseKindBank       AgreementsGetAgreementsResponseKind = "bank"
+	AgreementsGetAgreementsResponseKindLease      AgreementsGetAgreementsResponseKind = "lease"
+	AgreementsGetAgreementsResponseKindInsurance  AgreementsGetAgreementsResponseKind = "insurance"
+	AgreementsGetAgreementsResponseKindOther      AgreementsGetAgreementsResponseKind = "other"
 )
 
-func NewPostV1AgreementsAgreementsGetResponseKindFromString(s string) (PostV1AgreementsAgreementsGetResponseKind, error) {
+func NewAgreementsGetAgreementsResponseKindFromString(s string) (AgreementsGetAgreementsResponseKind, error) {
 	switch s {
 	case "customer":
-		return PostV1AgreementsAgreementsGetResponseKindCustomer, nil
+		return AgreementsGetAgreementsResponseKindCustomer, nil
 	case "supplier":
-		return PostV1AgreementsAgreementsGetResponseKindSupplier, nil
+		return AgreementsGetAgreementsResponseKindSupplier, nil
 	case "employment":
-		return PostV1AgreementsAgreementsGetResponseKindEmployment, nil
+		return AgreementsGetAgreementsResponseKindEmployment, nil
 	case "bank":
-		return PostV1AgreementsAgreementsGetResponseKindBank, nil
+		return AgreementsGetAgreementsResponseKindBank, nil
 	case "lease":
-		return PostV1AgreementsAgreementsGetResponseKindLease, nil
+		return AgreementsGetAgreementsResponseKindLease, nil
 	case "insurance":
-		return PostV1AgreementsAgreementsGetResponseKindInsurance, nil
+		return AgreementsGetAgreementsResponseKindInsurance, nil
 	case "other":
-		return PostV1AgreementsAgreementsGetResponseKindOther, nil
+		return AgreementsGetAgreementsResponseKindOther, nil
 	}
-	var t PostV1AgreementsAgreementsGetResponseKind
+	var t AgreementsGetAgreementsResponseKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsGetResponseKind) Ptr() *PostV1AgreementsAgreementsGetResponseKind {
-	return &p
+func (a AgreementsGetAgreementsResponseKind) Ptr() *AgreementsGetAgreementsResponseKind {
+	return &a
 }
 
-type PostV1AgreementsAgreementsGetResponseStatus string
+type AgreementsGetAgreementsResponseStatus string
 
 const (
-	PostV1AgreementsAgreementsGetResponseStatusDraft      PostV1AgreementsAgreementsGetResponseStatus = "draft"
-	PostV1AgreementsAgreementsGetResponseStatusActive     PostV1AgreementsAgreementsGetResponseStatus = "active"
-	PostV1AgreementsAgreementsGetResponseStatusExpired    PostV1AgreementsAgreementsGetResponseStatus = "expired"
-	PostV1AgreementsAgreementsGetResponseStatusTerminated PostV1AgreementsAgreementsGetResponseStatus = "terminated"
+	AgreementsGetAgreementsResponseStatusDraft      AgreementsGetAgreementsResponseStatus = "draft"
+	AgreementsGetAgreementsResponseStatusActive     AgreementsGetAgreementsResponseStatus = "active"
+	AgreementsGetAgreementsResponseStatusExpired    AgreementsGetAgreementsResponseStatus = "expired"
+	AgreementsGetAgreementsResponseStatusTerminated AgreementsGetAgreementsResponseStatus = "terminated"
 )
 
-func NewPostV1AgreementsAgreementsGetResponseStatusFromString(s string) (PostV1AgreementsAgreementsGetResponseStatus, error) {
+func NewAgreementsGetAgreementsResponseStatusFromString(s string) (AgreementsGetAgreementsResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1AgreementsAgreementsGetResponseStatusDraft, nil
+		return AgreementsGetAgreementsResponseStatusDraft, nil
 	case "active":
-		return PostV1AgreementsAgreementsGetResponseStatusActive, nil
+		return AgreementsGetAgreementsResponseStatusActive, nil
 	case "expired":
-		return PostV1AgreementsAgreementsGetResponseStatusExpired, nil
+		return AgreementsGetAgreementsResponseStatusExpired, nil
 	case "terminated":
-		return PostV1AgreementsAgreementsGetResponseStatusTerminated, nil
+		return AgreementsGetAgreementsResponseStatusTerminated, nil
 	}
-	var t PostV1AgreementsAgreementsGetResponseStatus
+	var t AgreementsGetAgreementsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsGetResponseStatus) Ptr() *PostV1AgreementsAgreementsGetResponseStatus {
-	return &p
+func (a AgreementsGetAgreementsResponseStatus) Ptr() *AgreementsGetAgreementsResponseStatus {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	agreementsListAgreementsRequestFilterItemFieldField = big.NewInt(1 << 0)
+	agreementsListAgreementsRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	agreementsListAgreementsRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsAgreementsListRequestFilterItem struct {
-	Field string                                                `json:"field" url:"field"`
-	Op    PostV1AgreementsAgreementsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AgreementsAgreementsListRequestFilterItemValue `json:"value" url:"value"`
+type AgreementsListAgreementsRequestFilterItem struct {
+	Field string                                          `json:"field" url:"field"`
+	Op    AgreementsListAgreementsRequestFilterItemOp     `json:"op" url:"op"`
+	Value *AgreementsListAgreementsRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3059,312 +2976,312 @@ type PostV1AgreementsAgreementsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItem) GetField() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Field
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) GetOp() PostV1AgreementsAgreementsListRequestFilterItemOp {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItem) GetOp() AgreementsListAgreementsRequestFilterItemOp {
+	if a == nil {
 		return ""
 	}
-	return p.Op
+	return a.Op
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) GetValue() *PostV1AgreementsAgreementsListRequestFilterItemValue {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItem) GetValue() *AgreementsListAgreementsRequestFilterItemValue {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.Value
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsListAgreementsRequestFilterItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsAgreementsListRequestFilterItemFieldField)
+func (a *AgreementsListAgreementsRequestFilterItem) SetField(field string) {
+	a.Field = field
+	a.require(agreementsListAgreementsRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) SetOp(op PostV1AgreementsAgreementsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AgreementsAgreementsListRequestFilterItemFieldOp)
+func (a *AgreementsListAgreementsRequestFilterItem) SetOp(op AgreementsListAgreementsRequestFilterItemOp) {
+	a.Op = op
+	a.require(agreementsListAgreementsRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) SetValue(value *PostV1AgreementsAgreementsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsListRequestFilterItemFieldValue)
+func (a *AgreementsListAgreementsRequestFilterItem) SetValue(value *AgreementsListAgreementsRequestFilterItemValue) {
+	a.Value = value
+	a.require(agreementsListAgreementsRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsListRequestFilterItem
+func (a *AgreementsListAgreementsRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsListAgreementsRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsListAgreementsRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsListRequestFilterItem
+func (a *AgreementsListAgreementsRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsListAgreementsRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItem) String() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsListRequestFilterItemOp string
+type AgreementsListAgreementsRequestFilterItemOp string
 
 const (
-	PostV1AgreementsAgreementsListRequestFilterItemOpEq       PostV1AgreementsAgreementsListRequestFilterItemOp = "eq"
-	PostV1AgreementsAgreementsListRequestFilterItemOpNe       PostV1AgreementsAgreementsListRequestFilterItemOp = "ne"
-	PostV1AgreementsAgreementsListRequestFilterItemOpContains PostV1AgreementsAgreementsListRequestFilterItemOp = "contains"
-	PostV1AgreementsAgreementsListRequestFilterItemOpGte      PostV1AgreementsAgreementsListRequestFilterItemOp = "gte"
-	PostV1AgreementsAgreementsListRequestFilterItemOpLte      PostV1AgreementsAgreementsListRequestFilterItemOp = "lte"
-	PostV1AgreementsAgreementsListRequestFilterItemOpIn       PostV1AgreementsAgreementsListRequestFilterItemOp = "in"
+	AgreementsListAgreementsRequestFilterItemOpEq       AgreementsListAgreementsRequestFilterItemOp = "eq"
+	AgreementsListAgreementsRequestFilterItemOpNe       AgreementsListAgreementsRequestFilterItemOp = "ne"
+	AgreementsListAgreementsRequestFilterItemOpContains AgreementsListAgreementsRequestFilterItemOp = "contains"
+	AgreementsListAgreementsRequestFilterItemOpGte      AgreementsListAgreementsRequestFilterItemOp = "gte"
+	AgreementsListAgreementsRequestFilterItemOpLte      AgreementsListAgreementsRequestFilterItemOp = "lte"
+	AgreementsListAgreementsRequestFilterItemOpIn       AgreementsListAgreementsRequestFilterItemOp = "in"
 )
 
-func NewPostV1AgreementsAgreementsListRequestFilterItemOpFromString(s string) (PostV1AgreementsAgreementsListRequestFilterItemOp, error) {
+func NewAgreementsListAgreementsRequestFilterItemOpFromString(s string) (AgreementsListAgreementsRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpEq, nil
+		return AgreementsListAgreementsRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpNe, nil
+		return AgreementsListAgreementsRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpContains, nil
+		return AgreementsListAgreementsRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpGte, nil
+		return AgreementsListAgreementsRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpLte, nil
+		return AgreementsListAgreementsRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AgreementsAgreementsListRequestFilterItemOpIn, nil
+		return AgreementsListAgreementsRequestFilterItemOpIn, nil
 	}
-	var t PostV1AgreementsAgreementsListRequestFilterItemOp
+	var t AgreementsListAgreementsRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsListRequestFilterItemOp) Ptr() *PostV1AgreementsAgreementsListRequestFilterItemOp {
-	return &p
+func (a AgreementsListAgreementsRequestFilterItemOp) Ptr() *AgreementsListAgreementsRequestFilterItemOp {
+	return &a
 }
 
-type PostV1AgreementsAgreementsListRequestFilterItemValue struct {
-	String                                                            string
-	Double                                                            float64
-	Boolean                                                           bool
-	PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList []*PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem
+type AgreementsListAgreementsRequestFilterItemValue struct {
+	String                                                      string
+	Double                                                      float64
+	Boolean                                                     bool
+	AgreementsListAgreementsRequestFilterItemValueThreeItemList []*AgreementsListAgreementsRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValue) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValue) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValue) GetBoolean() bool {
+	if a == nil {
 		return false
 	}
-	return p.Boolean
+	return a.Boolean
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) GetPostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList() []*PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValue) GetAgreementsListAgreementsRequestFilterItemValueThreeItemList() []*AgreementsListAgreementsRequestFilterItemValueThreeItem {
+	if a == nil {
 		return nil
 	}
-	return p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList
+	return a.AgreementsListAgreementsRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (a *AgreementsListAgreementsRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		a.typ = "Boolean"
+		a.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList []*PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList"
-		p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList = valuePostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList
+	var valueAgreementsListAgreementsRequestFilterItemValueThreeItemList []*AgreementsListAgreementsRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueAgreementsListAgreementsRequestFilterItemValueThreeItemList); err == nil {
+		a.typ = "AgreementsListAgreementsRequestFilterItemValueThreeItemList"
+		a.AgreementsListAgreementsRequestFilterItemValueThreeItemList = valueAgreementsListAgreementsRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1AgreementsAgreementsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AgreementsListAgreementsRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return json.Marshal(a.Boolean)
 	}
-	if p.typ == "PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AgreementsListAgreementsRequestFilterItemValueThreeItemList" || a.AgreementsListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(a.AgreementsListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AgreementsAgreementsListRequestFilterItemValueVisitor interface {
+type AgreementsListAgreementsRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList([]*PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) error
+	VisitAgreementsListAgreementsRequestFilterItemValueThreeItemList([]*AgreementsListAgreementsRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValue) Accept(visitor PostV1AgreementsAgreementsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AgreementsListAgreementsRequestFilterItemValue) Accept(visitor AgreementsListAgreementsRequestFilterItemValueVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return visitor.VisitBoolean(a.Boolean)
 	}
-	if p.typ == "PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList(p.PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AgreementsListAgreementsRequestFilterItemValueThreeItemList" || a.AgreementsListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitAgreementsListAgreementsRequestFilterItemValueThreeItemList(a.AgreementsListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem struct {
+type AgreementsListAgreementsRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValueThreeItem) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (a *AgreementsListAgreementsRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AgreementsListAgreementsRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemVisitor interface {
+type AgreementsListAgreementsRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AgreementsAgreementsListRequestFilterItemValueThreeItem) Accept(visitor PostV1AgreementsAgreementsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AgreementsListAgreementsRequestFilterItemValueThreeItem) Accept(visitor AgreementsListAgreementsRequestFilterItemValueThreeItemVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
 var (
-	postV1AgreementsAgreementsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	agreementsListAgreementsRequestSortItemFieldField = big.NewInt(1 << 0)
+	agreementsListAgreementsRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AgreementsAgreementsListRequestSortItem struct {
-	Field string                                            `json:"field" url:"field"`
-	Dir   *PostV1AgreementsAgreementsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type AgreementsListAgreementsRequestSortItem struct {
+	Field string                                      `json:"field" url:"field"`
+	Dir   *AgreementsListAgreementsRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3373,126 +3290,126 @@ type PostV1AgreementsAgreementsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) GetField() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestSortItem) GetField() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Field
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) GetDir() *PostV1AgreementsAgreementsListRequestSortItemDir {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestSortItem) GetDir() *AgreementsListAgreementsRequestSortItemDir {
+	if a == nil {
 		return nil
 	}
-	return p.Dir
+	return a.Dir
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsListAgreementsRequestSortItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsAgreementsListRequestSortItemFieldField)
+func (a *AgreementsListAgreementsRequestSortItem) SetField(field string) {
+	a.Field = field
+	a.require(agreementsListAgreementsRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListRequestSortItem) SetDir(dir *PostV1AgreementsAgreementsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AgreementsAgreementsListRequestSortItemFieldDir)
+func (a *AgreementsListAgreementsRequestSortItem) SetDir(dir *AgreementsListAgreementsRequestSortItemDir) {
+	a.Dir = dir
+	a.require(agreementsListAgreementsRequestSortItemFieldDir)
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsListRequestSortItem
+func (a *AgreementsListAgreementsRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsListAgreementsRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsListAgreementsRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsListRequestSortItem
+func (a *AgreementsListAgreementsRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsListAgreementsRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsListRequestSortItem) String() string {
-	if p == nil {
+func (a *AgreementsListAgreementsRequestSortItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsListRequestSortItemDir string
+type AgreementsListAgreementsRequestSortItemDir string
 
 const (
-	PostV1AgreementsAgreementsListRequestSortItemDirAsc  PostV1AgreementsAgreementsListRequestSortItemDir = "asc"
-	PostV1AgreementsAgreementsListRequestSortItemDirDesc PostV1AgreementsAgreementsListRequestSortItemDir = "desc"
+	AgreementsListAgreementsRequestSortItemDirAsc  AgreementsListAgreementsRequestSortItemDir = "asc"
+	AgreementsListAgreementsRequestSortItemDirDesc AgreementsListAgreementsRequestSortItemDir = "desc"
 )
 
-func NewPostV1AgreementsAgreementsListRequestSortItemDirFromString(s string) (PostV1AgreementsAgreementsListRequestSortItemDir, error) {
+func NewAgreementsListAgreementsRequestSortItemDirFromString(s string) (AgreementsListAgreementsRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AgreementsAgreementsListRequestSortItemDirAsc, nil
+		return AgreementsListAgreementsRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AgreementsAgreementsListRequestSortItemDirDesc, nil
+		return AgreementsListAgreementsRequestSortItemDirDesc, nil
 	}
-	var t PostV1AgreementsAgreementsListRequestSortItemDir
+	var t AgreementsListAgreementsRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsListRequestSortItemDir) Ptr() *PostV1AgreementsAgreementsListRequestSortItemDir {
-	return &p
+func (a AgreementsListAgreementsRequestSortItemDir) Ptr() *AgreementsListAgreementsRequestSortItemDir {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsListResponseFieldTotals   = big.NewInt(1 << 4)
+	agreementsListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
+	agreementsListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
+	agreementsListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
+	agreementsListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
+	agreementsListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsAgreementsListResponse struct {
-	Rows     []*PostV1AgreementsAgreementsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                             `json:"page" url:"page"`
-	PageSize int64                                             `json:"pageSize" url:"pageSize"`
-	Total    int64                                             `json:"total" url:"total"`
-	Totals   map[string]string                                 `json:"totals,omitempty" url:"totals,omitempty"`
+type AgreementsListAgreementsResponse struct {
+	Rows     []*AgreementsListAgreementsResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                       `json:"page" url:"page"`
+	PageSize int64                                       `json:"pageSize" url:"pageSize"`
+	Total    int64                                       `json:"total" url:"total"`
+	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3501,710 +3418,174 @@ type PostV1AgreementsAgreementsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetRows() []*PostV1AgreementsAgreementsListResponseRowsItem {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetRows() []*AgreementsListAgreementsResponseRowsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Rows
+	return a.Rows
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetPage() int64 {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetPage() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Page
+	return a.Page
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetPageSize() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.PageSize
+	return a.PageSize
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetTotal() int64 {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetTotal() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Total
+	return a.Total
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetTotals() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return p.Totals
+	return a.Totals
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsListAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponse) SetRows(rows []*PostV1AgreementsAgreementsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AgreementsAgreementsListResponseFieldRows)
+func (a *AgreementsListAgreementsResponse) SetRows(rows []*AgreementsListAgreementsResponseRowsItem) {
+	a.Rows = rows
+	a.require(agreementsListAgreementsResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AgreementsAgreementsListResponseFieldPage)
+func (a *AgreementsListAgreementsResponse) SetPage(page int64) {
+	a.Page = page
+	a.require(agreementsListAgreementsResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsAgreementsListResponseFieldPageSize)
+func (a *AgreementsListAgreementsResponse) SetPageSize(pageSize int64) {
+	a.PageSize = pageSize
+	a.require(agreementsListAgreementsResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AgreementsAgreementsListResponseFieldTotal)
+func (a *AgreementsListAgreementsResponse) SetTotal(total int64) {
+	a.Total = total
+	a.require(agreementsListAgreementsResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AgreementsAgreementsListResponseFieldTotals)
+func (a *AgreementsListAgreementsResponse) SetTotals(totals map[string]string) {
+	a.Totals = totals
+	a.require(agreementsListAgreementsResponseFieldTotals)
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsListResponse
+func (a *AgreementsListAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsListAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsListAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsListResponse
+func (a *AgreementsListAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsListAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsListResponse) String() string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AgreementsAgreementsListResponseRowsItemFieldID            = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListResponseRowsItemFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListResponseRowsItemFieldKind          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID     = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsListResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsListResponseRowsItemFieldBankAccountID = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNumber        = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsListResponseRowsItemFieldName          = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStartDate     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsListResponseRowsItemFieldEndDate       = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew     = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsListResponseRowsItemFieldValue         = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCurrency      = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStatus        = big.NewInt(1 << 14)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNotes         = big.NewInt(1 << 15)
-	postV1AgreementsAgreementsListResponseRowsItemFieldDocumentRef   = big.NewInt(1 << 16)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
+	agreementsListAgreementsResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	agreementsListAgreementsResponseRowsItemFieldTypeID        = big.NewInt(1 << 1)
+	agreementsListAgreementsResponseRowsItemFieldKind          = big.NewInt(1 << 2)
+	agreementsListAgreementsResponseRowsItemFieldPartnerID     = big.NewInt(1 << 3)
+	agreementsListAgreementsResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 4)
+	agreementsListAgreementsResponseRowsItemFieldBankAccountID = big.NewInt(1 << 5)
+	agreementsListAgreementsResponseRowsItemFieldNumber        = big.NewInt(1 << 6)
+	agreementsListAgreementsResponseRowsItemFieldName          = big.NewInt(1 << 7)
+	agreementsListAgreementsResponseRowsItemFieldStartDate     = big.NewInt(1 << 8)
+	agreementsListAgreementsResponseRowsItemFieldEndDate       = big.NewInt(1 << 9)
+	agreementsListAgreementsResponseRowsItemFieldAutoRenew     = big.NewInt(1 << 10)
+	agreementsListAgreementsResponseRowsItemFieldValue         = big.NewInt(1 << 11)
+	agreementsListAgreementsResponseRowsItemFieldBillingPeriod = big.NewInt(1 << 12)
+	agreementsListAgreementsResponseRowsItemFieldCurrency      = big.NewInt(1 << 13)
+	agreementsListAgreementsResponseRowsItemFieldStatus        = big.NewInt(1 << 14)
+	agreementsListAgreementsResponseRowsItemFieldNotes         = big.NewInt(1 << 15)
+	agreementsListAgreementsResponseRowsItemFieldDocumentRef   = big.NewInt(1 << 16)
+	agreementsListAgreementsResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
+	agreementsListAgreementsResponseRowsItemFieldPartnerName   = big.NewInt(1 << 18)
 )
 
-type PostV1AgreementsAgreementsListResponseRowsItem struct {
-	ID            string                                                       `json:"id" url:"id"`
-	TypeID        *string                                                      `json:"typeId,omitempty" url:"typeId,omitempty"`
-	Kind          PostV1AgreementsAgreementsListResponseRowsItemKind           `json:"kind" url:"kind"`
-	PartnerID     *string                                                      `json:"partnerId,omitempty" url:"partnerId,omitempty"`
-	EmployeeID    *string                                                      `json:"employeeId,omitempty" url:"employeeId,omitempty"`
-	BankAccountID *string                                                      `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	Number        string                                                       `json:"number" url:"number"`
-	Name          *string                                                      `json:"name,omitempty" url:"name,omitempty"`
-	StartDate     string                                                       `json:"startDate" url:"startDate"`
-	EndDate       *string                                                      `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew     bool                                                         `json:"autoRenew" url:"autoRenew"`
-	Value         *string                                                      `json:"value,omitempty" url:"value,omitempty"`
-	BillingPeriod *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
-	Currency      string                                                       `json:"currency" url:"currency"`
-	Status        PostV1AgreementsAgreementsListResponseRowsItemStatus         `json:"status" url:"status"`
-	Notes         *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef   *string                                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt     string                                                       `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetTypeID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TypeID
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetKind() PostV1AgreementsAgreementsListResponseRowsItemKind {
-	if p == nil {
-		return ""
-	}
-	return p.Kind
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetPartnerID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PartnerID
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetEmployeeID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetBankAccountID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.BankAccountID
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetNumber() string {
-	if p == nil {
-		return ""
-	}
-	return p.Number
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetName() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Name
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.StartDate
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetEndDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EndDate
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetAutoRenew() bool {
-	if p == nil {
-		return false
-	}
-	return p.AutoRenew
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetValue() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Value
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetBillingPeriod() *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod {
-	if p == nil {
-		return nil
-	}
-	return p.BillingPeriod
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetCurrency() string {
-	if p == nil {
-		return ""
-	}
-	return p.Currency
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetStatus() PostV1AgreementsAgreementsListResponseRowsItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetDocumentRef() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DocumentRef
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldID)
-}
-
-// SetTypeID sets the TypeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldTypeID)
-}
-
-// SetKind sets the Kind field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetKind(kind PostV1AgreementsAgreementsListResponseRowsItemKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldKind)
-}
-
-// SetPartnerID sets the PartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldEmployeeID)
-}
-
-// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetBankAccountID(bankAccountID *string) {
-	p.BankAccountID = bankAccountID
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldBankAccountID)
-}
-
-// SetNumber sets the Number field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldNumber)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldName)
-}
-
-// SetStartDate sets the StartDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldStartDate)
-}
-
-// SetEndDate sets the EndDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldEndDate)
-}
-
-// SetAutoRenew sets the AutoRenew field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetAutoRenew(autoRenew bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldValue)
-}
-
-// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod)
-}
-
-// SetCurrency sets the Currency field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldCurrency)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetStatus(status PostV1AgreementsAgreementsListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldNotes)
-}
-
-// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldDocumentRef)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt)
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AgreementsAgreementsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod string
-
-const (
-	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodMonthly   PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodQuarterly PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodAnnual    PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "annual"
-)
-
-func NewPostV1AgreementsAgreementsListResponseRowsItemBillingPeriodFromString(s string) (PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod, error) {
-	switch s {
-	case "monthly":
-		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodMonthly, nil
-	case "quarterly":
-		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodQuarterly, nil
-	case "annual":
-		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodAnnual, nil
-	}
-	var t PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod {
-	return &p
-}
-
-type PostV1AgreementsAgreementsListResponseRowsItemKind string
-
-const (
-	PostV1AgreementsAgreementsListResponseRowsItemKindCustomer   PostV1AgreementsAgreementsListResponseRowsItemKind = "customer"
-	PostV1AgreementsAgreementsListResponseRowsItemKindSupplier   PostV1AgreementsAgreementsListResponseRowsItemKind = "supplier"
-	PostV1AgreementsAgreementsListResponseRowsItemKindEmployment PostV1AgreementsAgreementsListResponseRowsItemKind = "employment"
-	PostV1AgreementsAgreementsListResponseRowsItemKindBank       PostV1AgreementsAgreementsListResponseRowsItemKind = "bank"
-	PostV1AgreementsAgreementsListResponseRowsItemKindLease      PostV1AgreementsAgreementsListResponseRowsItemKind = "lease"
-	PostV1AgreementsAgreementsListResponseRowsItemKindInsurance  PostV1AgreementsAgreementsListResponseRowsItemKind = "insurance"
-	PostV1AgreementsAgreementsListResponseRowsItemKindOther      PostV1AgreementsAgreementsListResponseRowsItemKind = "other"
-)
-
-func NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString(s string) (PostV1AgreementsAgreementsListResponseRowsItemKind, error) {
-	switch s {
-	case "customer":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindCustomer, nil
-	case "supplier":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindSupplier, nil
-	case "employment":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindEmployment, nil
-	case "bank":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindBank, nil
-	case "lease":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindLease, nil
-	case "insurance":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindInsurance, nil
-	case "other":
-		return PostV1AgreementsAgreementsListResponseRowsItemKindOther, nil
-	}
-	var t PostV1AgreementsAgreementsListResponseRowsItemKind
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsListResponseRowsItemKind) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemKind {
-	return &p
-}
-
-type PostV1AgreementsAgreementsListResponseRowsItemStatus string
-
-const (
-	PostV1AgreementsAgreementsListResponseRowsItemStatusDraft      PostV1AgreementsAgreementsListResponseRowsItemStatus = "draft"
-	PostV1AgreementsAgreementsListResponseRowsItemStatusActive     PostV1AgreementsAgreementsListResponseRowsItemStatus = "active"
-	PostV1AgreementsAgreementsListResponseRowsItemStatusExpired    PostV1AgreementsAgreementsListResponseRowsItemStatus = "expired"
-	PostV1AgreementsAgreementsListResponseRowsItemStatusTerminated PostV1AgreementsAgreementsListResponseRowsItemStatus = "terminated"
-)
-
-func NewPostV1AgreementsAgreementsListResponseRowsItemStatusFromString(s string) (PostV1AgreementsAgreementsListResponseRowsItemStatus, error) {
-	switch s {
-	case "draft":
-		return PostV1AgreementsAgreementsListResponseRowsItemStatusDraft, nil
-	case "active":
-		return PostV1AgreementsAgreementsListResponseRowsItemStatusActive, nil
-	case "expired":
-		return PostV1AgreementsAgreementsListResponseRowsItemStatusExpired, nil
-	case "terminated":
-		return PostV1AgreementsAgreementsListResponseRowsItemStatusTerminated, nil
-	}
-	var t PostV1AgreementsAgreementsListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsListResponseRowsItemStatus) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemStatus {
-	return &p
-}
-
-type PostV1AgreementsAgreementsUpdateRequestBillingPeriod string
-
-const (
-	PostV1AgreementsAgreementsUpdateRequestBillingPeriodMonthly   PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsUpdateRequestBillingPeriodQuarterly PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsUpdateRequestBillingPeriodAnnual    PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "annual"
-)
-
-func NewPostV1AgreementsAgreementsUpdateRequestBillingPeriodFromString(s string) (PostV1AgreementsAgreementsUpdateRequestBillingPeriod, error) {
-	switch s {
-	case "monthly":
-		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodMonthly, nil
-	case "quarterly":
-		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodQuarterly, nil
-	case "annual":
-		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodAnnual, nil
-	}
-	var t PostV1AgreementsAgreementsUpdateRequestBillingPeriod
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsUpdateRequestBillingPeriod) Ptr() *PostV1AgreementsAgreementsUpdateRequestBillingPeriod {
-	return &p
-}
-
-type PostV1AgreementsAgreementsUpdateRequestKind string
-
-const (
-	PostV1AgreementsAgreementsUpdateRequestKindCustomer   PostV1AgreementsAgreementsUpdateRequestKind = "customer"
-	PostV1AgreementsAgreementsUpdateRequestKindSupplier   PostV1AgreementsAgreementsUpdateRequestKind = "supplier"
-	PostV1AgreementsAgreementsUpdateRequestKindEmployment PostV1AgreementsAgreementsUpdateRequestKind = "employment"
-	PostV1AgreementsAgreementsUpdateRequestKindBank       PostV1AgreementsAgreementsUpdateRequestKind = "bank"
-	PostV1AgreementsAgreementsUpdateRequestKindLease      PostV1AgreementsAgreementsUpdateRequestKind = "lease"
-	PostV1AgreementsAgreementsUpdateRequestKindInsurance  PostV1AgreementsAgreementsUpdateRequestKind = "insurance"
-	PostV1AgreementsAgreementsUpdateRequestKindOther      PostV1AgreementsAgreementsUpdateRequestKind = "other"
-)
-
-func NewPostV1AgreementsAgreementsUpdateRequestKindFromString(s string) (PostV1AgreementsAgreementsUpdateRequestKind, error) {
-	switch s {
-	case "customer":
-		return PostV1AgreementsAgreementsUpdateRequestKindCustomer, nil
-	case "supplier":
-		return PostV1AgreementsAgreementsUpdateRequestKindSupplier, nil
-	case "employment":
-		return PostV1AgreementsAgreementsUpdateRequestKindEmployment, nil
-	case "bank":
-		return PostV1AgreementsAgreementsUpdateRequestKindBank, nil
-	case "lease":
-		return PostV1AgreementsAgreementsUpdateRequestKindLease, nil
-	case "insurance":
-		return PostV1AgreementsAgreementsUpdateRequestKindInsurance, nil
-	case "other":
-		return PostV1AgreementsAgreementsUpdateRequestKindOther, nil
-	}
-	var t PostV1AgreementsAgreementsUpdateRequestKind
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsUpdateRequestKind) Ptr() *PostV1AgreementsAgreementsUpdateRequestKind {
-	return &p
-}
-
-type PostV1AgreementsAgreementsUpdateRequestStatus string
-
-const (
-	PostV1AgreementsAgreementsUpdateRequestStatusDraft      PostV1AgreementsAgreementsUpdateRequestStatus = "draft"
-	PostV1AgreementsAgreementsUpdateRequestStatusActive     PostV1AgreementsAgreementsUpdateRequestStatus = "active"
-	PostV1AgreementsAgreementsUpdateRequestStatusExpired    PostV1AgreementsAgreementsUpdateRequestStatus = "expired"
-	PostV1AgreementsAgreementsUpdateRequestStatusTerminated PostV1AgreementsAgreementsUpdateRequestStatus = "terminated"
-)
-
-func NewPostV1AgreementsAgreementsUpdateRequestStatusFromString(s string) (PostV1AgreementsAgreementsUpdateRequestStatus, error) {
-	switch s {
-	case "draft":
-		return PostV1AgreementsAgreementsUpdateRequestStatusDraft, nil
-	case "active":
-		return PostV1AgreementsAgreementsUpdateRequestStatusActive, nil
-	case "expired":
-		return PostV1AgreementsAgreementsUpdateRequestStatusExpired, nil
-	case "terminated":
-		return PostV1AgreementsAgreementsUpdateRequestStatusTerminated, nil
-	}
-	var t PostV1AgreementsAgreementsUpdateRequestStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AgreementsAgreementsUpdateRequestStatus) Ptr() *PostV1AgreementsAgreementsUpdateRequestStatus {
-	return &p
-}
-
-var (
-	postV1AgreementsAgreementsUpdateResponseFieldID            = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateResponseFieldKind          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateResponseFieldPartnerID     = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateResponseFieldEmployeeID    = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateResponseFieldBankAccountID = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateResponseFieldNumber        = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateResponseFieldName          = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsUpdateResponseFieldStartDate     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsUpdateResponseFieldEndDate       = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsUpdateResponseFieldAutoRenew     = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsUpdateResponseFieldValue         = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsUpdateResponseFieldCurrency      = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsUpdateResponseFieldStatus        = big.NewInt(1 << 14)
-	postV1AgreementsAgreementsUpdateResponseFieldNotes         = big.NewInt(1 << 15)
-	postV1AgreementsAgreementsUpdateResponseFieldDocumentRef   = big.NewInt(1 << 16)
-	postV1AgreementsAgreementsUpdateResponseFieldCreatedAt     = big.NewInt(1 << 17)
-	postV1AgreementsAgreementsUpdateResponseFieldItems         = big.NewInt(1 << 18)
-)
-
-type PostV1AgreementsAgreementsUpdateResponse struct {
+type AgreementsListAgreementsResponseRowsItem struct {
 	ID            string                                                 `json:"id" url:"id"`
 	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
-	Kind          PostV1AgreementsAgreementsUpdateResponseKind           `json:"kind" url:"kind"`
+	Kind          AgreementsListAgreementsResponseRowsItemKind           `json:"kind" url:"kind"`
 	PartnerID     *string                                                `json:"partnerId,omitempty" url:"partnerId,omitempty"`
 	EmployeeID    *string                                                `json:"employeeId,omitempty" url:"employeeId,omitempty"`
 	BankAccountID *string                                                `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
 	Number        string                                                 `json:"number" url:"number"`
 	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
-	StartDate     string                                                 `json:"startDate" url:"startDate"`
-	EndDate       *string                                                `json:"endDate,omitempty" url:"endDate,omitempty"`
+	StartDate     time.Time                                              `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                             `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
 	AutoRenew     bool                                                   `json:"autoRenew" url:"autoRenew"`
 	Value         *string                                                `json:"value,omitempty" url:"value,omitempty"`
-	BillingPeriod *PostV1AgreementsAgreementsUpdateResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	BillingPeriod *AgreementsListAgreementsResponseRowsItemBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
 	Currency      string                                                 `json:"currency" url:"currency"`
-	Status        PostV1AgreementsAgreementsUpdateResponseStatus         `json:"status" url:"status"`
+	Status        AgreementsListAgreementsResponseRowsItemStatus         `json:"status" url:"status"`
 	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef   *string                                                `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
-	Items         []*PostV1AgreementsAgreementsUpdateResponseItemsItem   `json:"items" url:"items"`
+	CreatedAt     time.Time                                              `json:"createdAt" url:"createdAt"`
+	PartnerName   *string                                                `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4213,363 +3594,947 @@ type PostV1AgreementsAgreementsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetID() string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetTypeID() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetTypeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.TypeID
+	return a.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetKind() PostV1AgreementsAgreementsUpdateResponseKind {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetKind() AgreementsListAgreementsResponseRowsItemKind {
+	if a == nil {
 		return ""
 	}
-	return p.Kind
+	return a.Kind
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetPartnerID() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetPartnerID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.PartnerID
+	return a.PartnerID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetEmployeeID() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetEmployeeID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetBankAccountID() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetBankAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.BankAccountID
+	return a.BankAccountID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetNumber() string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.Number
+	return a.Number
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetName() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetStartDate() string {
-	if p == nil {
-		return ""
+func (a *AgreementsListAgreementsResponseRowsItem) GetStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.StartDate
+	return a.StartDate
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetEndDate() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetEndDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.EndDate
+	return a.EndDate
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetAutoRenew() bool {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetAutoRenew() bool {
+	if a == nil {
 		return false
 	}
-	return p.AutoRenew
+	return a.AutoRenew
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetValue() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetValue() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.Value
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetBillingPeriod() *PostV1AgreementsAgreementsUpdateResponseBillingPeriod {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetBillingPeriod() *AgreementsListAgreementsResponseRowsItemBillingPeriod {
+	if a == nil {
 		return nil
 	}
-	return p.BillingPeriod
+	return a.BillingPeriod
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetCurrency() string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetCurrency() string {
+	if a == nil {
 		return ""
 	}
-	return p.Currency
+	return a.Currency
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetStatus() PostV1AgreementsAgreementsUpdateResponseStatus {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetStatus() AgreementsListAgreementsResponseRowsItemStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetNotes() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetDocumentRef() *string {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetDocumentRef() *string {
+	if a == nil {
 		return nil
 	}
-	return p.DocumentRef
+	return a.DocumentRef
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AgreementsListAgreementsResponseRowsItem) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetItems() []*PostV1AgreementsAgreementsUpdateResponseItemsItem {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetPartnerName() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Items
+	return a.PartnerName
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsListAgreementsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsListAgreementsResponseRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldID)
+func (a *AgreementsListAgreementsResponseRowsItem) SetID(id string) {
+	a.ID = id
+	a.require(agreementsListAgreementsResponseRowsItemFieldID)
 }
 
 // SetTypeID sets the TypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetTypeID(typeID *string) {
-	p.TypeID = typeID
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldTypeID)
+func (a *AgreementsListAgreementsResponseRowsItem) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsListAgreementsResponseRowsItemFieldTypeID)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetKind(kind PostV1AgreementsAgreementsUpdateResponseKind) {
-	p.Kind = kind
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldKind)
+func (a *AgreementsListAgreementsResponseRowsItem) SetKind(kind AgreementsListAgreementsResponseRowsItemKind) {
+	a.Kind = kind
+	a.require(agreementsListAgreementsResponseRowsItemFieldKind)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldPartnerID)
+func (a *AgreementsListAgreementsResponseRowsItem) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(agreementsListAgreementsResponseRowsItemFieldPartnerID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldEmployeeID)
+func (a *AgreementsListAgreementsResponseRowsItem) SetEmployeeID(employeeID *string) {
+	a.EmployeeID = employeeID
+	a.require(agreementsListAgreementsResponseRowsItemFieldEmployeeID)
 }
 
 // SetBankAccountID sets the BankAccountID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetBankAccountID(bankAccountID *string) {
-	p.BankAccountID = bankAccountID
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldBankAccountID)
+func (a *AgreementsListAgreementsResponseRowsItem) SetBankAccountID(bankAccountID *string) {
+	a.BankAccountID = bankAccountID
+	a.require(agreementsListAgreementsResponseRowsItemFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldNumber)
+func (a *AgreementsListAgreementsResponseRowsItem) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsListAgreementsResponseRowsItemFieldNumber)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldName)
+func (a *AgreementsListAgreementsResponseRowsItem) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsListAgreementsResponseRowsItemFieldName)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldStartDate)
+func (a *AgreementsListAgreementsResponseRowsItem) SetStartDate(startDate time.Time) {
+	a.StartDate = startDate
+	a.require(agreementsListAgreementsResponseRowsItemFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldEndDate)
+func (a *AgreementsListAgreementsResponseRowsItem) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsListAgreementsResponseRowsItemFieldEndDate)
 }
 
 // SetAutoRenew sets the AutoRenew field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetAutoRenew(autoRenew bool) {
-	p.AutoRenew = autoRenew
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldAutoRenew)
+func (a *AgreementsListAgreementsResponseRowsItem) SetAutoRenew(autoRenew bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsListAgreementsResponseRowsItemFieldAutoRenew)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetValue(value *string) {
-	p.Value = value
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldValue)
+func (a *AgreementsListAgreementsResponseRowsItem) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsListAgreementsResponseRowsItemFieldValue)
 }
 
 // SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsUpdateResponseBillingPeriod) {
-	p.BillingPeriod = billingPeriod
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod)
+func (a *AgreementsListAgreementsResponseRowsItem) SetBillingPeriod(billingPeriod *AgreementsListAgreementsResponseRowsItemBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsListAgreementsResponseRowsItemFieldBillingPeriod)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldCurrency)
+func (a *AgreementsListAgreementsResponseRowsItem) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsListAgreementsResponseRowsItemFieldCurrency)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetStatus(status PostV1AgreementsAgreementsUpdateResponseStatus) {
-	p.Status = status
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldStatus)
+func (a *AgreementsListAgreementsResponseRowsItem) SetStatus(status AgreementsListAgreementsResponseRowsItemStatus) {
+	a.Status = status
+	a.require(agreementsListAgreementsResponseRowsItemFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldNotes)
+func (a *AgreementsListAgreementsResponseRowsItem) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsListAgreementsResponseRowsItemFieldNotes)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldDocumentRef)
+func (a *AgreementsListAgreementsResponseRowsItem) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsListAgreementsResponseRowsItemFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldCreatedAt)
+func (a *AgreementsListAgreementsResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(agreementsListAgreementsResponseRowsItemFieldCreatedAt)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsListAgreementsResponseRowsItem) SetPartnerName(partnerName *string) {
+	a.PartnerName = partnerName
+	a.require(agreementsListAgreementsResponseRowsItemFieldPartnerName)
+}
+
+func (a *AgreementsListAgreementsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AgreementsListAgreementsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AgreementsListAgreementsResponseRowsItem(unmarshaler.embed)
+	a.StartDate = unmarshaler.StartDate.Time()
+	a.EndDate = unmarshaler.EndDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsListAgreementsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsListAgreementsResponseRowsItem
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*a),
+		StartDate: internal.NewDate(a.StartDate),
+		EndDate:   internal.NewOptionalDate(a.EndDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsListAgreementsResponseRowsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AgreementsListAgreementsResponseRowsItemBillingPeriod string
+
+const (
+	AgreementsListAgreementsResponseRowsItemBillingPeriodMonthly   AgreementsListAgreementsResponseRowsItemBillingPeriod = "monthly"
+	AgreementsListAgreementsResponseRowsItemBillingPeriodQuarterly AgreementsListAgreementsResponseRowsItemBillingPeriod = "quarterly"
+	AgreementsListAgreementsResponseRowsItemBillingPeriodAnnual    AgreementsListAgreementsResponseRowsItemBillingPeriod = "annual"
+)
+
+func NewAgreementsListAgreementsResponseRowsItemBillingPeriodFromString(s string) (AgreementsListAgreementsResponseRowsItemBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return AgreementsListAgreementsResponseRowsItemBillingPeriodMonthly, nil
+	case "quarterly":
+		return AgreementsListAgreementsResponseRowsItemBillingPeriodQuarterly, nil
+	case "annual":
+		return AgreementsListAgreementsResponseRowsItemBillingPeriodAnnual, nil
+	}
+	var t AgreementsListAgreementsResponseRowsItemBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsListAgreementsResponseRowsItemBillingPeriod) Ptr() *AgreementsListAgreementsResponseRowsItemBillingPeriod {
+	return &a
+}
+
+type AgreementsListAgreementsResponseRowsItemKind string
+
+const (
+	AgreementsListAgreementsResponseRowsItemKindCustomer   AgreementsListAgreementsResponseRowsItemKind = "customer"
+	AgreementsListAgreementsResponseRowsItemKindSupplier   AgreementsListAgreementsResponseRowsItemKind = "supplier"
+	AgreementsListAgreementsResponseRowsItemKindEmployment AgreementsListAgreementsResponseRowsItemKind = "employment"
+	AgreementsListAgreementsResponseRowsItemKindBank       AgreementsListAgreementsResponseRowsItemKind = "bank"
+	AgreementsListAgreementsResponseRowsItemKindLease      AgreementsListAgreementsResponseRowsItemKind = "lease"
+	AgreementsListAgreementsResponseRowsItemKindInsurance  AgreementsListAgreementsResponseRowsItemKind = "insurance"
+	AgreementsListAgreementsResponseRowsItemKindOther      AgreementsListAgreementsResponseRowsItemKind = "other"
+)
+
+func NewAgreementsListAgreementsResponseRowsItemKindFromString(s string) (AgreementsListAgreementsResponseRowsItemKind, error) {
+	switch s {
+	case "customer":
+		return AgreementsListAgreementsResponseRowsItemKindCustomer, nil
+	case "supplier":
+		return AgreementsListAgreementsResponseRowsItemKindSupplier, nil
+	case "employment":
+		return AgreementsListAgreementsResponseRowsItemKindEmployment, nil
+	case "bank":
+		return AgreementsListAgreementsResponseRowsItemKindBank, nil
+	case "lease":
+		return AgreementsListAgreementsResponseRowsItemKindLease, nil
+	case "insurance":
+		return AgreementsListAgreementsResponseRowsItemKindInsurance, nil
+	case "other":
+		return AgreementsListAgreementsResponseRowsItemKindOther, nil
+	}
+	var t AgreementsListAgreementsResponseRowsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsListAgreementsResponseRowsItemKind) Ptr() *AgreementsListAgreementsResponseRowsItemKind {
+	return &a
+}
+
+type AgreementsListAgreementsResponseRowsItemStatus string
+
+const (
+	AgreementsListAgreementsResponseRowsItemStatusDraft      AgreementsListAgreementsResponseRowsItemStatus = "draft"
+	AgreementsListAgreementsResponseRowsItemStatusActive     AgreementsListAgreementsResponseRowsItemStatus = "active"
+	AgreementsListAgreementsResponseRowsItemStatusExpired    AgreementsListAgreementsResponseRowsItemStatus = "expired"
+	AgreementsListAgreementsResponseRowsItemStatusTerminated AgreementsListAgreementsResponseRowsItemStatus = "terminated"
+)
+
+func NewAgreementsListAgreementsResponseRowsItemStatusFromString(s string) (AgreementsListAgreementsResponseRowsItemStatus, error) {
+	switch s {
+	case "draft":
+		return AgreementsListAgreementsResponseRowsItemStatusDraft, nil
+	case "active":
+		return AgreementsListAgreementsResponseRowsItemStatusActive, nil
+	case "expired":
+		return AgreementsListAgreementsResponseRowsItemStatusExpired, nil
+	case "terminated":
+		return AgreementsListAgreementsResponseRowsItemStatusTerminated, nil
+	}
+	var t AgreementsListAgreementsResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsListAgreementsResponseRowsItemStatus) Ptr() *AgreementsListAgreementsResponseRowsItemStatus {
+	return &a
+}
+
+type AgreementsUpdateAgreementsRequestBillingPeriod string
+
+const (
+	AgreementsUpdateAgreementsRequestBillingPeriodMonthly   AgreementsUpdateAgreementsRequestBillingPeriod = "monthly"
+	AgreementsUpdateAgreementsRequestBillingPeriodQuarterly AgreementsUpdateAgreementsRequestBillingPeriod = "quarterly"
+	AgreementsUpdateAgreementsRequestBillingPeriodAnnual    AgreementsUpdateAgreementsRequestBillingPeriod = "annual"
+)
+
+func NewAgreementsUpdateAgreementsRequestBillingPeriodFromString(s string) (AgreementsUpdateAgreementsRequestBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return AgreementsUpdateAgreementsRequestBillingPeriodMonthly, nil
+	case "quarterly":
+		return AgreementsUpdateAgreementsRequestBillingPeriodQuarterly, nil
+	case "annual":
+		return AgreementsUpdateAgreementsRequestBillingPeriodAnnual, nil
+	}
+	var t AgreementsUpdateAgreementsRequestBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsUpdateAgreementsRequestBillingPeriod) Ptr() *AgreementsUpdateAgreementsRequestBillingPeriod {
+	return &a
+}
+
+type AgreementsUpdateAgreementsRequestKind string
+
+const (
+	AgreementsUpdateAgreementsRequestKindCustomer   AgreementsUpdateAgreementsRequestKind = "customer"
+	AgreementsUpdateAgreementsRequestKindSupplier   AgreementsUpdateAgreementsRequestKind = "supplier"
+	AgreementsUpdateAgreementsRequestKindEmployment AgreementsUpdateAgreementsRequestKind = "employment"
+	AgreementsUpdateAgreementsRequestKindBank       AgreementsUpdateAgreementsRequestKind = "bank"
+	AgreementsUpdateAgreementsRequestKindLease      AgreementsUpdateAgreementsRequestKind = "lease"
+	AgreementsUpdateAgreementsRequestKindInsurance  AgreementsUpdateAgreementsRequestKind = "insurance"
+	AgreementsUpdateAgreementsRequestKindOther      AgreementsUpdateAgreementsRequestKind = "other"
+)
+
+func NewAgreementsUpdateAgreementsRequestKindFromString(s string) (AgreementsUpdateAgreementsRequestKind, error) {
+	switch s {
+	case "customer":
+		return AgreementsUpdateAgreementsRequestKindCustomer, nil
+	case "supplier":
+		return AgreementsUpdateAgreementsRequestKindSupplier, nil
+	case "employment":
+		return AgreementsUpdateAgreementsRequestKindEmployment, nil
+	case "bank":
+		return AgreementsUpdateAgreementsRequestKindBank, nil
+	case "lease":
+		return AgreementsUpdateAgreementsRequestKindLease, nil
+	case "insurance":
+		return AgreementsUpdateAgreementsRequestKindInsurance, nil
+	case "other":
+		return AgreementsUpdateAgreementsRequestKindOther, nil
+	}
+	var t AgreementsUpdateAgreementsRequestKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsUpdateAgreementsRequestKind) Ptr() *AgreementsUpdateAgreementsRequestKind {
+	return &a
+}
+
+type AgreementsUpdateAgreementsRequestStatus string
+
+const (
+	AgreementsUpdateAgreementsRequestStatusDraft      AgreementsUpdateAgreementsRequestStatus = "draft"
+	AgreementsUpdateAgreementsRequestStatusActive     AgreementsUpdateAgreementsRequestStatus = "active"
+	AgreementsUpdateAgreementsRequestStatusExpired    AgreementsUpdateAgreementsRequestStatus = "expired"
+	AgreementsUpdateAgreementsRequestStatusTerminated AgreementsUpdateAgreementsRequestStatus = "terminated"
+)
+
+func NewAgreementsUpdateAgreementsRequestStatusFromString(s string) (AgreementsUpdateAgreementsRequestStatus, error) {
+	switch s {
+	case "draft":
+		return AgreementsUpdateAgreementsRequestStatusDraft, nil
+	case "active":
+		return AgreementsUpdateAgreementsRequestStatusActive, nil
+	case "expired":
+		return AgreementsUpdateAgreementsRequestStatusExpired, nil
+	case "terminated":
+		return AgreementsUpdateAgreementsRequestStatusTerminated, nil
+	}
+	var t AgreementsUpdateAgreementsRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsUpdateAgreementsRequestStatus) Ptr() *AgreementsUpdateAgreementsRequestStatus {
+	return &a
+}
+
+var (
+	agreementsUpdateAgreementsResponseFieldID            = big.NewInt(1 << 0)
+	agreementsUpdateAgreementsResponseFieldTypeID        = big.NewInt(1 << 1)
+	agreementsUpdateAgreementsResponseFieldKind          = big.NewInt(1 << 2)
+	agreementsUpdateAgreementsResponseFieldPartnerID     = big.NewInt(1 << 3)
+	agreementsUpdateAgreementsResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	agreementsUpdateAgreementsResponseFieldBankAccountID = big.NewInt(1 << 5)
+	agreementsUpdateAgreementsResponseFieldNumber        = big.NewInt(1 << 6)
+	agreementsUpdateAgreementsResponseFieldName          = big.NewInt(1 << 7)
+	agreementsUpdateAgreementsResponseFieldStartDate     = big.NewInt(1 << 8)
+	agreementsUpdateAgreementsResponseFieldEndDate       = big.NewInt(1 << 9)
+	agreementsUpdateAgreementsResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	agreementsUpdateAgreementsResponseFieldValue         = big.NewInt(1 << 11)
+	agreementsUpdateAgreementsResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	agreementsUpdateAgreementsResponseFieldCurrency      = big.NewInt(1 << 13)
+	agreementsUpdateAgreementsResponseFieldStatus        = big.NewInt(1 << 14)
+	agreementsUpdateAgreementsResponseFieldNotes         = big.NewInt(1 << 15)
+	agreementsUpdateAgreementsResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	agreementsUpdateAgreementsResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	agreementsUpdateAgreementsResponseFieldItems         = big.NewInt(1 << 18)
+)
+
+type AgreementsUpdateAgreementsResponse struct {
+	ID            string                                           `json:"id" url:"id"`
+	TypeID        *string                                          `json:"typeId,omitempty" url:"typeId,omitempty"`
+	Kind          AgreementsUpdateAgreementsResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                          `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                          `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                          `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	Number        string                                           `json:"number" url:"number"`
+	Name          *string                                          `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     time.Time                                        `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                       `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	AutoRenew     bool                                             `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                          `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *AgreementsUpdateAgreementsResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                           `json:"currency" url:"currency"`
+	Status        AgreementsUpdateAgreementsResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                          `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt     time.Time                                        `json:"createdAt" url:"createdAt"`
+	Items         []*AgreementsUpdateAgreementsResponseItemsItem   `json:"items" url:"items"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetTypeID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.TypeID
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetKind() AgreementsUpdateAgreementsResponseKind {
+	if a == nil {
+		return ""
+	}
+	return a.Kind
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetPartnerID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PartnerID
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetEmployeeID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.EmployeeID
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetBankAccountID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankAccountID
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetNumber() string {
+	if a == nil {
+		return ""
+	}
+	return a.Number
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Name
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.StartDate
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetEndDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.EndDate
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetAutoRenew() bool {
+	if a == nil {
+		return false
+	}
+	return a.AutoRenew
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetValue() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Value
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetBillingPeriod() *AgreementsUpdateAgreementsResponseBillingPeriod {
+	if a == nil {
+		return nil
+	}
+	return a.BillingPeriod
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetCurrency() string {
+	if a == nil {
+		return ""
+	}
+	return a.Currency
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetStatus() AgreementsUpdateAgreementsResponseStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetNotes() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Notes
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetDocumentRef() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DocumentRef
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetItems() []*AgreementsUpdateAgreementsResponseItemsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Items
+}
+
+func (a *AgreementsUpdateAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsUpdateAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetID(id string) {
+	a.ID = id
+	a.require(agreementsUpdateAgreementsResponseFieldID)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetTypeID(typeID *string) {
+	a.TypeID = typeID
+	a.require(agreementsUpdateAgreementsResponseFieldTypeID)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetKind(kind AgreementsUpdateAgreementsResponseKind) {
+	a.Kind = kind
+	a.require(agreementsUpdateAgreementsResponseFieldKind)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(agreementsUpdateAgreementsResponseFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetEmployeeID(employeeID *string) {
+	a.EmployeeID = employeeID
+	a.require(agreementsUpdateAgreementsResponseFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetBankAccountID(bankAccountID *string) {
+	a.BankAccountID = bankAccountID
+	a.require(agreementsUpdateAgreementsResponseFieldBankAccountID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsUpdateAgreementsResponseFieldNumber)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetName(name *string) {
+	a.Name = name
+	a.require(agreementsUpdateAgreementsResponseFieldName)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetStartDate(startDate time.Time) {
+	a.StartDate = startDate
+	a.require(agreementsUpdateAgreementsResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetEndDate(endDate *time.Time) {
+	a.EndDate = endDate
+	a.require(agreementsUpdateAgreementsResponseFieldEndDate)
+}
+
+// SetAutoRenew sets the AutoRenew field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetAutoRenew(autoRenew bool) {
+	a.AutoRenew = autoRenew
+	a.require(agreementsUpdateAgreementsResponseFieldAutoRenew)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsUpdateAgreementsResponseFieldValue)
+}
+
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetBillingPeriod(billingPeriod *AgreementsUpdateAgreementsResponseBillingPeriod) {
+	a.BillingPeriod = billingPeriod
+	a.require(agreementsUpdateAgreementsResponseFieldBillingPeriod)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsUpdateAgreementsResponseFieldCurrency)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetStatus(status AgreementsUpdateAgreementsResponseStatus) {
+	a.Status = status
+	a.require(agreementsUpdateAgreementsResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(agreementsUpdateAgreementsResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetDocumentRef(documentRef *string) {
+	a.DocumentRef = documentRef
+	a.require(agreementsUpdateAgreementsResponseFieldDocumentRef)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(agreementsUpdateAgreementsResponseFieldCreatedAt)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetItems(items []*PostV1AgreementsAgreementsUpdateResponseItemsItem) {
-	p.Items = items
-	p.require(postV1AgreementsAgreementsUpdateResponseFieldItems)
+func (a *AgreementsUpdateAgreementsResponse) SetItems(items []*AgreementsUpdateAgreementsResponseItemsItem) {
+	a.Items = items
+	a.require(agreementsUpdateAgreementsResponseFieldItems)
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AgreementsUpdateAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type embed AgreementsUpdateAgreementsResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsUpdateAgreementsResponse(unmarshaler.embed)
+	a.StartDate = unmarshaler.StartDate.Time()
+	a.EndDate = unmarshaler.EndDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsUpdateResponse
+func (a *AgreementsUpdateAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsUpdateAgreementsResponse
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		StartDate: internal.NewDate(a.StartDate),
+		EndDate:   internal.NewOptionalDate(a.EndDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) String() string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsUpdateResponseBillingPeriod string
+type AgreementsUpdateAgreementsResponseBillingPeriod string
 
 const (
-	PostV1AgreementsAgreementsUpdateResponseBillingPeriodMonthly   PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "monthly"
-	PostV1AgreementsAgreementsUpdateResponseBillingPeriodQuarterly PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "quarterly"
-	PostV1AgreementsAgreementsUpdateResponseBillingPeriodAnnual    PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "annual"
+	AgreementsUpdateAgreementsResponseBillingPeriodMonthly   AgreementsUpdateAgreementsResponseBillingPeriod = "monthly"
+	AgreementsUpdateAgreementsResponseBillingPeriodQuarterly AgreementsUpdateAgreementsResponseBillingPeriod = "quarterly"
+	AgreementsUpdateAgreementsResponseBillingPeriodAnnual    AgreementsUpdateAgreementsResponseBillingPeriod = "annual"
 )
 
-func NewPostV1AgreementsAgreementsUpdateResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsUpdateResponseBillingPeriod, error) {
+func NewAgreementsUpdateAgreementsResponseBillingPeriodFromString(s string) (AgreementsUpdateAgreementsResponseBillingPeriod, error) {
 	switch s {
 	case "monthly":
-		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodMonthly, nil
+		return AgreementsUpdateAgreementsResponseBillingPeriodMonthly, nil
 	case "quarterly":
-		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodQuarterly, nil
+		return AgreementsUpdateAgreementsResponseBillingPeriodQuarterly, nil
 	case "annual":
-		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodAnnual, nil
+		return AgreementsUpdateAgreementsResponseBillingPeriodAnnual, nil
 	}
-	var t PostV1AgreementsAgreementsUpdateResponseBillingPeriod
+	var t AgreementsUpdateAgreementsResponseBillingPeriod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsUpdateResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsUpdateResponseBillingPeriod {
-	return &p
+func (a AgreementsUpdateAgreementsResponseBillingPeriod) Ptr() *AgreementsUpdateAgreementsResponseBillingPeriod {
+	return &a
 }
 
 var (
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsUpdateAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	agreementsUpdateAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	agreementsUpdateAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	agreementsUpdateAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	agreementsUpdateAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	agreementsUpdateAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
-type PostV1AgreementsAgreementsUpdateResponseItemsItem struct {
+type AgreementsUpdateAgreementsResponseItemsItem struct {
 	ID             string  `json:"id" url:"id"`
 	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description    string  `json:"description" url:"description"`
@@ -4584,235 +4549,235 @@ type PostV1AgreementsAgreementsUpdateResponseItemsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetID() string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetItemID() *string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetItemID() *string {
+	if a == nil {
 		return nil
 	}
-	return p.ItemID
+	return a.ItemID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetDescription() string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetDescription() string {
+	if a == nil {
 		return ""
 	}
-	return p.Description
+	return a.Description
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetQuantity() *string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetQuantity() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Quantity
+	return a.Quantity
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetUnitPrice() *string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetUnitPrice() *string {
+	if a == nil {
 		return nil
 	}
-	return p.UnitPrice
+	return a.UnitPrice
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetVatRatePercent() *string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetVatRatePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return a.VatRatePercent
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldID)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetID(id string) {
+	a.ID = id
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldItemID)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetItemID(itemID *string) {
+	a.ItemID = itemID
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldDescription)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetDescription(description string) {
+	a.Description = description
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetQuantity(quantity *string) {
-	p.Quantity = quantity
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldQuantity)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetQuantity(quantity *string) {
+	a.Quantity = quantity
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldQuantity)
 }
 
 // SetUnitPrice sets the UnitPrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetUnitPrice(unitPrice *string) {
-	p.UnitPrice = unitPrice
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldUnitPrice)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetUnitPrice(unitPrice *string) {
+	a.UnitPrice = unitPrice
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldUnitPrice)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldVatRatePercent)
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	a.VatRatePercent = vatRatePercent
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldVatRatePercent)
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsAgreementsUpdateResponseItemsItem
+func (a *AgreementsUpdateAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsUpdateAgreementsResponseItemsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsAgreementsUpdateResponseItemsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AgreementsUpdateAgreementsResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsAgreementsUpdateResponseItemsItem
+func (a *AgreementsUpdateAgreementsResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsUpdateAgreementsResponseItemsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) String() string {
-	if p == nil {
+func (a *AgreementsUpdateAgreementsResponseItemsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AgreementsAgreementsUpdateResponseKind string
+type AgreementsUpdateAgreementsResponseKind string
 
 const (
-	PostV1AgreementsAgreementsUpdateResponseKindCustomer   PostV1AgreementsAgreementsUpdateResponseKind = "customer"
-	PostV1AgreementsAgreementsUpdateResponseKindSupplier   PostV1AgreementsAgreementsUpdateResponseKind = "supplier"
-	PostV1AgreementsAgreementsUpdateResponseKindEmployment PostV1AgreementsAgreementsUpdateResponseKind = "employment"
-	PostV1AgreementsAgreementsUpdateResponseKindBank       PostV1AgreementsAgreementsUpdateResponseKind = "bank"
-	PostV1AgreementsAgreementsUpdateResponseKindLease      PostV1AgreementsAgreementsUpdateResponseKind = "lease"
-	PostV1AgreementsAgreementsUpdateResponseKindInsurance  PostV1AgreementsAgreementsUpdateResponseKind = "insurance"
-	PostV1AgreementsAgreementsUpdateResponseKindOther      PostV1AgreementsAgreementsUpdateResponseKind = "other"
+	AgreementsUpdateAgreementsResponseKindCustomer   AgreementsUpdateAgreementsResponseKind = "customer"
+	AgreementsUpdateAgreementsResponseKindSupplier   AgreementsUpdateAgreementsResponseKind = "supplier"
+	AgreementsUpdateAgreementsResponseKindEmployment AgreementsUpdateAgreementsResponseKind = "employment"
+	AgreementsUpdateAgreementsResponseKindBank       AgreementsUpdateAgreementsResponseKind = "bank"
+	AgreementsUpdateAgreementsResponseKindLease      AgreementsUpdateAgreementsResponseKind = "lease"
+	AgreementsUpdateAgreementsResponseKindInsurance  AgreementsUpdateAgreementsResponseKind = "insurance"
+	AgreementsUpdateAgreementsResponseKindOther      AgreementsUpdateAgreementsResponseKind = "other"
 )
 
-func NewPostV1AgreementsAgreementsUpdateResponseKindFromString(s string) (PostV1AgreementsAgreementsUpdateResponseKind, error) {
+func NewAgreementsUpdateAgreementsResponseKindFromString(s string) (AgreementsUpdateAgreementsResponseKind, error) {
 	switch s {
 	case "customer":
-		return PostV1AgreementsAgreementsUpdateResponseKindCustomer, nil
+		return AgreementsUpdateAgreementsResponseKindCustomer, nil
 	case "supplier":
-		return PostV1AgreementsAgreementsUpdateResponseKindSupplier, nil
+		return AgreementsUpdateAgreementsResponseKindSupplier, nil
 	case "employment":
-		return PostV1AgreementsAgreementsUpdateResponseKindEmployment, nil
+		return AgreementsUpdateAgreementsResponseKindEmployment, nil
 	case "bank":
-		return PostV1AgreementsAgreementsUpdateResponseKindBank, nil
+		return AgreementsUpdateAgreementsResponseKindBank, nil
 	case "lease":
-		return PostV1AgreementsAgreementsUpdateResponseKindLease, nil
+		return AgreementsUpdateAgreementsResponseKindLease, nil
 	case "insurance":
-		return PostV1AgreementsAgreementsUpdateResponseKindInsurance, nil
+		return AgreementsUpdateAgreementsResponseKindInsurance, nil
 	case "other":
-		return PostV1AgreementsAgreementsUpdateResponseKindOther, nil
+		return AgreementsUpdateAgreementsResponseKindOther, nil
 	}
-	var t PostV1AgreementsAgreementsUpdateResponseKind
+	var t AgreementsUpdateAgreementsResponseKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsUpdateResponseKind) Ptr() *PostV1AgreementsAgreementsUpdateResponseKind {
-	return &p
+func (a AgreementsUpdateAgreementsResponseKind) Ptr() *AgreementsUpdateAgreementsResponseKind {
+	return &a
 }
 
-type PostV1AgreementsAgreementsUpdateResponseStatus string
+type AgreementsUpdateAgreementsResponseStatus string
 
 const (
-	PostV1AgreementsAgreementsUpdateResponseStatusDraft      PostV1AgreementsAgreementsUpdateResponseStatus = "draft"
-	PostV1AgreementsAgreementsUpdateResponseStatusActive     PostV1AgreementsAgreementsUpdateResponseStatus = "active"
-	PostV1AgreementsAgreementsUpdateResponseStatusExpired    PostV1AgreementsAgreementsUpdateResponseStatus = "expired"
-	PostV1AgreementsAgreementsUpdateResponseStatusTerminated PostV1AgreementsAgreementsUpdateResponseStatus = "terminated"
+	AgreementsUpdateAgreementsResponseStatusDraft      AgreementsUpdateAgreementsResponseStatus = "draft"
+	AgreementsUpdateAgreementsResponseStatusActive     AgreementsUpdateAgreementsResponseStatus = "active"
+	AgreementsUpdateAgreementsResponseStatusExpired    AgreementsUpdateAgreementsResponseStatus = "expired"
+	AgreementsUpdateAgreementsResponseStatusTerminated AgreementsUpdateAgreementsResponseStatus = "terminated"
 )
 
-func NewPostV1AgreementsAgreementsUpdateResponseStatusFromString(s string) (PostV1AgreementsAgreementsUpdateResponseStatus, error) {
+func NewAgreementsUpdateAgreementsResponseStatusFromString(s string) (AgreementsUpdateAgreementsResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1AgreementsAgreementsUpdateResponseStatusDraft, nil
+		return AgreementsUpdateAgreementsResponseStatusDraft, nil
 	case "active":
-		return PostV1AgreementsAgreementsUpdateResponseStatusActive, nil
+		return AgreementsUpdateAgreementsResponseStatusActive, nil
 	case "expired":
-		return PostV1AgreementsAgreementsUpdateResponseStatusExpired, nil
+		return AgreementsUpdateAgreementsResponseStatusExpired, nil
 	case "terminated":
-		return PostV1AgreementsAgreementsUpdateResponseStatusTerminated, nil
+		return AgreementsUpdateAgreementsResponseStatusTerminated, nil
 	}
-	var t PostV1AgreementsAgreementsUpdateResponseStatus
+	var t AgreementsUpdateAgreementsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsAgreementsUpdateResponseStatus) Ptr() *PostV1AgreementsAgreementsUpdateResponseStatus {
-	return &p
+func (a AgreementsUpdateAgreementsResponseStatus) Ptr() *AgreementsUpdateAgreementsResponseStatus {
+	return &a
 }
 
 var (
-	postV1AgreementsInsurancePoliciesCreateResponseFieldID               = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldInsurerPartnerID = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldPolicyNumber     = big.NewInt(1 << 2)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldInsuredObject    = big.NewInt(1 << 3)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldFromDate         = big.NewInt(1 << 4)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldToDate           = big.NewInt(1 << 5)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldPremium          = big.NewInt(1 << 6)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldCurrency         = big.NewInt(1 << 7)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldNotes            = big.NewInt(1 << 8)
-	postV1AgreementsInsurancePoliciesCreateResponseFieldCreatedAt        = big.NewInt(1 << 9)
+	insurancePoliciesCreateAgreementsResponseFieldID               = big.NewInt(1 << 0)
+	insurancePoliciesCreateAgreementsResponseFieldInsurerPartnerID = big.NewInt(1 << 1)
+	insurancePoliciesCreateAgreementsResponseFieldPolicyNumber     = big.NewInt(1 << 2)
+	insurancePoliciesCreateAgreementsResponseFieldInsuredObject    = big.NewInt(1 << 3)
+	insurancePoliciesCreateAgreementsResponseFieldFromDate         = big.NewInt(1 << 4)
+	insurancePoliciesCreateAgreementsResponseFieldToDate           = big.NewInt(1 << 5)
+	insurancePoliciesCreateAgreementsResponseFieldPremium          = big.NewInt(1 << 6)
+	insurancePoliciesCreateAgreementsResponseFieldCurrency         = big.NewInt(1 << 7)
+	insurancePoliciesCreateAgreementsResponseFieldNotes            = big.NewInt(1 << 8)
+	insurancePoliciesCreateAgreementsResponseFieldCreatedAt        = big.NewInt(1 << 9)
 )
 
-type PostV1AgreementsInsurancePoliciesCreateResponse struct {
-	ID               string  `json:"id" url:"id"`
-	InsurerPartnerID *string `json:"insurerPartnerId,omitempty" url:"insurerPartnerId,omitempty"`
-	PolicyNumber     string  `json:"policyNumber" url:"policyNumber"`
-	InsuredObject    string  `json:"insuredObject" url:"insuredObject"`
-	FromDate         string  `json:"fromDate" url:"fromDate"`
-	ToDate           string  `json:"toDate" url:"toDate"`
-	Premium          *string `json:"premium,omitempty" url:"premium,omitempty"`
-	Currency         string  `json:"currency" url:"currency"`
-	Notes            *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt        string  `json:"createdAt" url:"createdAt"`
+type InsurancePoliciesCreateAgreementsResponse struct {
+	ID               string    `json:"id" url:"id"`
+	InsurerPartnerID *string   `json:"insurerPartnerId,omitempty" url:"insurerPartnerId,omitempty"`
+	PolicyNumber     string    `json:"policyNumber" url:"policyNumber"`
+	InsuredObject    string    `json:"insuredObject" url:"insuredObject"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate           time.Time `json:"toDate" url:"toDate" format:"date"`
+	Premium          *string   `json:"premium,omitempty" url:"premium,omitempty"`
+	Currency         string    `json:"currency" url:"currency"`
+	Notes            *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt        time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4821,207 +4786,223 @@ type PostV1AgreementsInsurancePoliciesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetID() string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetInsurerPartnerID() *string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetInsurerPartnerID() *string {
+	if i == nil {
 		return nil
 	}
-	return p.InsurerPartnerID
+	return i.InsurerPartnerID
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetPolicyNumber() string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetPolicyNumber() string {
+	if i == nil {
 		return ""
 	}
-	return p.PolicyNumber
+	return i.PolicyNumber
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetInsuredObject() string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetInsuredObject() string {
+	if i == nil {
 		return ""
 	}
-	return p.InsuredObject
+	return i.InsuredObject
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetFromDate() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesCreateAgreementsResponse) GetFromDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return i.FromDate
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetToDate() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesCreateAgreementsResponse) GetToDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.ToDate
+	return i.ToDate
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetPremium() *string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetPremium() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Premium
+	return i.Premium
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetCurrency() string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetCurrency() string {
+	if i == nil {
 		return ""
 	}
-	return p.Currency
+	return i.Currency
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetNotes() *string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetNotes() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Notes
+	return i.Notes
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesCreateAgreementsResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return i.CreatedAt
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesCreateAgreementsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldID)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetID(id string) {
+	i.ID = id
+	i.require(insurancePoliciesCreateAgreementsResponseFieldID)
 }
 
 // SetInsurerPartnerID sets the InsurerPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetInsurerPartnerID(insurerPartnerID *string) {
-	p.InsurerPartnerID = insurerPartnerID
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldInsurerPartnerID)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetInsurerPartnerID(insurerPartnerID *string) {
+	i.InsurerPartnerID = insurerPartnerID
+	i.require(insurancePoliciesCreateAgreementsResponseFieldInsurerPartnerID)
 }
 
 // SetPolicyNumber sets the PolicyNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetPolicyNumber(policyNumber string) {
-	p.PolicyNumber = policyNumber
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldPolicyNumber)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetPolicyNumber(policyNumber string) {
+	i.PolicyNumber = policyNumber
+	i.require(insurancePoliciesCreateAgreementsResponseFieldPolicyNumber)
 }
 
 // SetInsuredObject sets the InsuredObject field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetInsuredObject(insuredObject string) {
-	p.InsuredObject = insuredObject
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldInsuredObject)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetInsuredObject(insuredObject string) {
+	i.InsuredObject = insuredObject
+	i.require(insurancePoliciesCreateAgreementsResponseFieldInsuredObject)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldFromDate)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(insurancePoliciesCreateAgreementsResponseFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldToDate)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(insurancePoliciesCreateAgreementsResponseFieldToDate)
 }
 
 // SetPremium sets the Premium field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetPremium(premium *string) {
-	p.Premium = premium
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldPremium)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetPremium(premium *string) {
+	i.Premium = premium
+	i.require(insurancePoliciesCreateAgreementsResponseFieldPremium)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldCurrency)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(insurancePoliciesCreateAgreementsResponseFieldCurrency)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldNotes)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(insurancePoliciesCreateAgreementsResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsInsurancePoliciesCreateResponseFieldCreatedAt)
+func (i *InsurancePoliciesCreateAgreementsResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(insurancePoliciesCreateAgreementsResponseFieldCreatedAt)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type embed InsurancePoliciesCreateAgreementsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesCreateAgreementsResponse(unmarshaler.embed)
+	i.FromDate = unmarshaler.FromDate.Time()
+	i.ToDate = unmarshaler.ToDate.Time()
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesCreateResponse
+func (i *InsurancePoliciesCreateAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesCreateAgreementsResponse
 	var marshaler = struct {
 		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*i),
+		FromDate:  internal.NewDate(i.FromDate),
+		ToDate:    internal.NewDate(i.ToDate),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesCreateResponse) String() string {
-	if p == nil {
+func (i *InsurancePoliciesCreateAgreementsResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesDeleteResponseFieldID = big.NewInt(1 << 0)
+	insurancePoliciesDeleteAgreementsResponseFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1AgreementsInsurancePoliciesDeleteResponse struct {
+type InsurancePoliciesDeleteAgreementsResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5031,86 +5012,86 @@ type PostV1AgreementsInsurancePoliciesDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) GetID() string {
-	if p == nil {
+func (i *InsurancePoliciesDeleteAgreementsResponse) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesDeleteAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesDeleteAgreementsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsInsurancePoliciesDeleteResponseFieldID)
+func (i *InsurancePoliciesDeleteAgreementsResponse) SetID(id string) {
+	i.ID = id
+	i.require(insurancePoliciesDeleteAgreementsResponseFieldID)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesDeleteResponse
+func (i *InsurancePoliciesDeleteAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesDeleteAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesDeleteAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesDeleteResponse
+func (i *InsurancePoliciesDeleteAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesDeleteAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesDeleteResponse) String() string {
-	if p == nil {
+func (i *InsurancePoliciesDeleteAgreementsResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	insurancePoliciesListAgreementsRequestFilterItemFieldField = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItem struct {
-	Field string                                                       `json:"field" url:"field"`
-	Op    PostV1AgreementsInsurancePoliciesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue `json:"value" url:"value"`
+type InsurancePoliciesListAgreementsRequestFilterItem struct {
+	Field string                                                 `json:"field" url:"field"`
+	Op    InsurancePoliciesListAgreementsRequestFilterItemOp     `json:"op" url:"op"`
+	Value *InsurancePoliciesListAgreementsRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5119,312 +5100,312 @@ type PostV1AgreementsInsurancePoliciesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) GetField() string {
+	if i == nil {
 		return ""
 	}
-	return p.Field
+	return i.Field
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) GetOp() PostV1AgreementsInsurancePoliciesListRequestFilterItemOp {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) GetOp() InsurancePoliciesListAgreementsRequestFilterItemOp {
+	if i == nil {
 		return ""
 	}
-	return p.Op
+	return i.Op
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) GetValue() *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) GetValue() *InsurancePoliciesListAgreementsRequestFilterItemValue {
+	if i == nil {
 		return nil
 	}
-	return p.Value
+	return i.Value
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsInsurancePoliciesListRequestFilterItemFieldField)
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) SetField(field string) {
+	i.Field = field
+	i.require(insurancePoliciesListAgreementsRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) SetOp(op PostV1AgreementsInsurancePoliciesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AgreementsInsurancePoliciesListRequestFilterItemFieldOp)
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) SetOp(op InsurancePoliciesListAgreementsRequestFilterItemOp) {
+	i.Op = op
+	i.require(insurancePoliciesListAgreementsRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) SetValue(value *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AgreementsInsurancePoliciesListRequestFilterItemFieldValue)
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) SetValue(value *InsurancePoliciesListAgreementsRequestFilterItemValue) {
+	i.Value = value
+	i.require(insurancePoliciesListAgreementsRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesListRequestFilterItem
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesListAgreementsRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesListAgreementsRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesListRequestFilterItem
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesListAgreementsRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItem) String() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItemOp string
+type InsurancePoliciesListAgreementsRequestFilterItemOp string
 
 const (
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpEq       PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "eq"
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpNe       PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "ne"
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpContains PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "contains"
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpGte      PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "gte"
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpLte      PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "lte"
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemOpIn       PostV1AgreementsInsurancePoliciesListRequestFilterItemOp = "in"
+	InsurancePoliciesListAgreementsRequestFilterItemOpEq       InsurancePoliciesListAgreementsRequestFilterItemOp = "eq"
+	InsurancePoliciesListAgreementsRequestFilterItemOpNe       InsurancePoliciesListAgreementsRequestFilterItemOp = "ne"
+	InsurancePoliciesListAgreementsRequestFilterItemOpContains InsurancePoliciesListAgreementsRequestFilterItemOp = "contains"
+	InsurancePoliciesListAgreementsRequestFilterItemOpGte      InsurancePoliciesListAgreementsRequestFilterItemOp = "gte"
+	InsurancePoliciesListAgreementsRequestFilterItemOpLte      InsurancePoliciesListAgreementsRequestFilterItemOp = "lte"
+	InsurancePoliciesListAgreementsRequestFilterItemOpIn       InsurancePoliciesListAgreementsRequestFilterItemOp = "in"
 )
 
-func NewPostV1AgreementsInsurancePoliciesListRequestFilterItemOpFromString(s string) (PostV1AgreementsInsurancePoliciesListRequestFilterItemOp, error) {
+func NewInsurancePoliciesListAgreementsRequestFilterItemOpFromString(s string) (InsurancePoliciesListAgreementsRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpEq, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpNe, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpContains, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpGte, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpLte, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AgreementsInsurancePoliciesListRequestFilterItemOpIn, nil
+		return InsurancePoliciesListAgreementsRequestFilterItemOpIn, nil
 	}
-	var t PostV1AgreementsInsurancePoliciesListRequestFilterItemOp
+	var t InsurancePoliciesListAgreementsRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsInsurancePoliciesListRequestFilterItemOp) Ptr() *PostV1AgreementsInsurancePoliciesListRequestFilterItemOp {
-	return &p
+func (i InsurancePoliciesListAgreementsRequestFilterItemOp) Ptr() *InsurancePoliciesListAgreementsRequestFilterItemOp {
+	return &i
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItemValue struct {
-	String                                                                   string
-	Double                                                                   float64
-	Boolean                                                                  bool
-	PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList []*PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem
+type InsurancePoliciesListAgreementsRequestFilterItemValue struct {
+	String                                                             string
+	Double                                                             float64
+	Boolean                                                            bool
+	InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList []*InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) GetString() string {
+	if i == nil {
 		return ""
 	}
-	return p.String
+	return i.String
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) GetDouble() float64 {
+	if i == nil {
 		return 0
 	}
-	return p.Double
+	return i.Double
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) GetBoolean() bool {
+	if i == nil {
 		return false
 	}
-	return p.Boolean
+	return i.Boolean
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) GetPostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList() []*PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) GetInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList() []*InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem {
+	if i == nil {
 		return nil
 	}
-	return p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList
+	return i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		i.typ = "String"
+		i.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		i.typ = "Double"
+		i.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		i.typ = "Boolean"
+		i.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList []*PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList"
-		p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList = valuePostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList
+	var valueInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList []*InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList); err == nil {
+		i.typ = "InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList"
+		i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList = valueInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
 }
 
-func (p PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (i InsurancePoliciesListAgreementsRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if i.typ == "Boolean" || i.Boolean != false {
+		return json.Marshal(i.Boolean)
 	}
-	if p.typ == "PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList)
+	if i.typ == "InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList" || i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItemValueVisitor interface {
+type InsurancePoliciesListAgreementsRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList([]*PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) error
+	VisitInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList([]*InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValue) Accept(visitor PostV1AgreementsInsurancePoliciesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValue) Accept(visitor InsurancePoliciesListAgreementsRequestFilterItemValueVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if i.typ == "Boolean" || i.Boolean != false {
+		return visitor.VisitBoolean(i.Boolean)
 	}
-	if p.typ == "PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList(p.PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemList)
+	if i.typ == "InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList" || i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitInsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList(i.InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem struct {
+type InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) GetString() string {
+	if i == nil {
 		return ""
 	}
-	return p.String
+	return i.String
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if i == nil {
 		return 0
 	}
-	return p.Double
+	return i.Double
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		i.typ = "String"
+		i.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		i.typ = "Double"
+		i.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
 }
 
-func (p PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (i InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemVisitor interface {
+type InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItem) Accept(visitor PostV1AgreementsInsurancePoliciesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (i *InsurancePoliciesListAgreementsRequestFilterItemValueThreeItem) Accept(visitor InsurancePoliciesListAgreementsRequestFilterItemValueThreeItemVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsRequestSortItemFieldField = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AgreementsInsurancePoliciesListRequestSortItem struct {
-	Field string                                                   `json:"field" url:"field"`
-	Dir   *PostV1AgreementsInsurancePoliciesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type InsurancePoliciesListAgreementsRequestSortItem struct {
+	Field string                                             `json:"field" url:"field"`
+	Dir   *InsurancePoliciesListAgreementsRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5433,126 +5414,126 @@ type PostV1AgreementsInsurancePoliciesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) GetField() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestSortItem) GetField() string {
+	if i == nil {
 		return ""
 	}
-	return p.Field
+	return i.Field
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) GetDir() *PostV1AgreementsInsurancePoliciesListRequestSortItemDir {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestSortItem) GetDir() *InsurancePoliciesListAgreementsRequestSortItemDir {
+	if i == nil {
 		return nil
 	}
-	return p.Dir
+	return i.Dir
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesListAgreementsRequestSortItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsInsurancePoliciesListRequestSortItemFieldField)
+func (i *InsurancePoliciesListAgreementsRequestSortItem) SetField(field string) {
+	i.Field = field
+	i.require(insurancePoliciesListAgreementsRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) SetDir(dir *PostV1AgreementsInsurancePoliciesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AgreementsInsurancePoliciesListRequestSortItemFieldDir)
+func (i *InsurancePoliciesListAgreementsRequestSortItem) SetDir(dir *InsurancePoliciesListAgreementsRequestSortItemDir) {
+	i.Dir = dir
+	i.require(insurancePoliciesListAgreementsRequestSortItemFieldDir)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesListRequestSortItem
+func (i *InsurancePoliciesListAgreementsRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesListAgreementsRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesListAgreementsRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesListRequestSortItem
+func (i *InsurancePoliciesListAgreementsRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesListAgreementsRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListRequestSortItem) String() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsRequestSortItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1AgreementsInsurancePoliciesListRequestSortItemDir string
+type InsurancePoliciesListAgreementsRequestSortItemDir string
 
 const (
-	PostV1AgreementsInsurancePoliciesListRequestSortItemDirAsc  PostV1AgreementsInsurancePoliciesListRequestSortItemDir = "asc"
-	PostV1AgreementsInsurancePoliciesListRequestSortItemDirDesc PostV1AgreementsInsurancePoliciesListRequestSortItemDir = "desc"
+	InsurancePoliciesListAgreementsRequestSortItemDirAsc  InsurancePoliciesListAgreementsRequestSortItemDir = "asc"
+	InsurancePoliciesListAgreementsRequestSortItemDirDesc InsurancePoliciesListAgreementsRequestSortItemDir = "desc"
 )
 
-func NewPostV1AgreementsInsurancePoliciesListRequestSortItemDirFromString(s string) (PostV1AgreementsInsurancePoliciesListRequestSortItemDir, error) {
+func NewInsurancePoliciesListAgreementsRequestSortItemDirFromString(s string) (InsurancePoliciesListAgreementsRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AgreementsInsurancePoliciesListRequestSortItemDirAsc, nil
+		return InsurancePoliciesListAgreementsRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AgreementsInsurancePoliciesListRequestSortItemDirDesc, nil
+		return InsurancePoliciesListAgreementsRequestSortItemDirDesc, nil
 	}
-	var t PostV1AgreementsInsurancePoliciesListRequestSortItemDir
+	var t InsurancePoliciesListAgreementsRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsInsurancePoliciesListRequestSortItemDir) Ptr() *PostV1AgreementsInsurancePoliciesListRequestSortItemDir {
-	return &p
+func (i InsurancePoliciesListAgreementsRequestSortItemDir) Ptr() *InsurancePoliciesListAgreementsRequestSortItemDir {
+	return &i
 }
 
 var (
-	postV1AgreementsInsurancePoliciesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AgreementsInsurancePoliciesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AgreementsInsurancePoliciesListResponseFieldTotals   = big.NewInt(1 << 4)
+	insurancePoliciesListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
+	insurancePoliciesListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
+	insurancePoliciesListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsInsurancePoliciesListResponse struct {
-	Rows     []*PostV1AgreementsInsurancePoliciesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                                    `json:"page" url:"page"`
-	PageSize int64                                                    `json:"pageSize" url:"pageSize"`
-	Total    int64                                                    `json:"total" url:"total"`
-	Totals   map[string]string                                        `json:"totals,omitempty" url:"totals,omitempty"`
+type InsurancePoliciesListAgreementsResponse struct {
+	Rows     []*InsurancePoliciesListAgreementsResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                              `json:"page" url:"page"`
+	PageSize int64                                              `json:"pageSize" url:"pageSize"`
+	Total    int64                                              `json:"total" url:"total"`
+	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5561,156 +5542,156 @@ type PostV1AgreementsInsurancePoliciesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetRows() []*PostV1AgreementsInsurancePoliciesListResponseRowsItem {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetRows() []*InsurancePoliciesListAgreementsResponseRowsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Rows
+	return i.Rows
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetPage() int64 {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetPage() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Page
+	return i.Page
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetPageSize() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.PageSize
+	return i.PageSize
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetTotal() int64 {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetTotal() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Total
+	return i.Total
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetTotals() map[string]string {
+	if i == nil {
 		return nil
 	}
-	return p.Totals
+	return i.Totals
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesListAgreementsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponse) SetRows(rows []*PostV1AgreementsInsurancePoliciesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AgreementsInsurancePoliciesListResponseFieldRows)
+func (i *InsurancePoliciesListAgreementsResponse) SetRows(rows []*InsurancePoliciesListAgreementsResponseRowsItem) {
+	i.Rows = rows
+	i.require(insurancePoliciesListAgreementsResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AgreementsInsurancePoliciesListResponseFieldPage)
+func (i *InsurancePoliciesListAgreementsResponse) SetPage(page int64) {
+	i.Page = page
+	i.require(insurancePoliciesListAgreementsResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsInsurancePoliciesListResponseFieldPageSize)
+func (i *InsurancePoliciesListAgreementsResponse) SetPageSize(pageSize int64) {
+	i.PageSize = pageSize
+	i.require(insurancePoliciesListAgreementsResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AgreementsInsurancePoliciesListResponseFieldTotal)
+func (i *InsurancePoliciesListAgreementsResponse) SetTotal(total int64) {
+	i.Total = total
+	i.require(insurancePoliciesListAgreementsResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AgreementsInsurancePoliciesListResponseFieldTotals)
+func (i *InsurancePoliciesListAgreementsResponse) SetTotals(totals map[string]string) {
+	i.Totals = totals
+	i.require(insurancePoliciesListAgreementsResponseFieldTotals)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesListResponse
+func (i *InsurancePoliciesListAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InsurancePoliciesListAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesListAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesListResponse
+func (i *InsurancePoliciesListAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesListAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponse) String() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldID               = big.NewInt(1 << 0)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldInsurerPartnerID = big.NewInt(1 << 1)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldPolicyNumber     = big.NewInt(1 << 2)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldInsuredObject    = big.NewInt(1 << 3)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldFromDate         = big.NewInt(1 << 4)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldToDate           = big.NewInt(1 << 5)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldPremium          = big.NewInt(1 << 6)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldCurrency         = big.NewInt(1 << 7)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldNotes            = big.NewInt(1 << 8)
-	postV1AgreementsInsurancePoliciesListResponseRowsItemFieldCreatedAt        = big.NewInt(1 << 9)
+	insurancePoliciesListAgreementsResponseRowsItemFieldID               = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsResponseRowsItemFieldInsurerPartnerID = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsResponseRowsItemFieldPolicyNumber     = big.NewInt(1 << 2)
+	insurancePoliciesListAgreementsResponseRowsItemFieldInsuredObject    = big.NewInt(1 << 3)
+	insurancePoliciesListAgreementsResponseRowsItemFieldFromDate         = big.NewInt(1 << 4)
+	insurancePoliciesListAgreementsResponseRowsItemFieldToDate           = big.NewInt(1 << 5)
+	insurancePoliciesListAgreementsResponseRowsItemFieldPremium          = big.NewInt(1 << 6)
+	insurancePoliciesListAgreementsResponseRowsItemFieldCurrency         = big.NewInt(1 << 7)
+	insurancePoliciesListAgreementsResponseRowsItemFieldNotes            = big.NewInt(1 << 8)
+	insurancePoliciesListAgreementsResponseRowsItemFieldCreatedAt        = big.NewInt(1 << 9)
 )
 
-type PostV1AgreementsInsurancePoliciesListResponseRowsItem struct {
-	ID               string  `json:"id" url:"id"`
-	InsurerPartnerID *string `json:"insurerPartnerId,omitempty" url:"insurerPartnerId,omitempty"`
-	PolicyNumber     string  `json:"policyNumber" url:"policyNumber"`
-	InsuredObject    string  `json:"insuredObject" url:"insuredObject"`
-	FromDate         string  `json:"fromDate" url:"fromDate"`
-	ToDate           string  `json:"toDate" url:"toDate"`
-	Premium          *string `json:"premium,omitempty" url:"premium,omitempty"`
-	Currency         string  `json:"currency" url:"currency"`
-	Notes            *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt        string  `json:"createdAt" url:"createdAt"`
+type InsurancePoliciesListAgreementsResponseRowsItem struct {
+	ID               string    `json:"id" url:"id"`
+	InsurerPartnerID *string   `json:"insurerPartnerId,omitempty" url:"insurerPartnerId,omitempty"`
+	PolicyNumber     string    `json:"policyNumber" url:"policyNumber"`
+	InsuredObject    string    `json:"insuredObject" url:"insuredObject"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate           time.Time `json:"toDate" url:"toDate" format:"date"`
+	Premium          *string   `json:"premium,omitempty" url:"premium,omitempty"`
+	Currency         string    `json:"currency" url:"currency"`
+	Notes            *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt        time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5719,209 +5700,225 @@ type PostV1AgreementsInsurancePoliciesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetInsurerPartnerID() *string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetInsurerPartnerID() *string {
+	if i == nil {
 		return nil
 	}
-	return p.InsurerPartnerID
+	return i.InsurerPartnerID
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetPolicyNumber() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetPolicyNumber() string {
+	if i == nil {
 		return ""
 	}
-	return p.PolicyNumber
+	return i.PolicyNumber
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetInsuredObject() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetInsuredObject() string {
+	if i == nil {
 		return ""
 	}
-	return p.InsuredObject
+	return i.InsuredObject
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetFromDate() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetFromDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return i.FromDate
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetToDate() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetToDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.ToDate
+	return i.ToDate
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetPremium() *string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetPremium() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Premium
+	return i.Premium
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetCurrency() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetCurrency() string {
+	if i == nil {
 		return ""
 	}
-	return p.Currency
+	return i.Currency
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetNotes() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Notes
+	return i.Notes
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return i.CreatedAt
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldID)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldID)
 }
 
 // SetInsurerPartnerID sets the InsurerPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetInsurerPartnerID(insurerPartnerID *string) {
-	p.InsurerPartnerID = insurerPartnerID
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldInsurerPartnerID)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetInsurerPartnerID(insurerPartnerID *string) {
+	i.InsurerPartnerID = insurerPartnerID
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldInsurerPartnerID)
 }
 
 // SetPolicyNumber sets the PolicyNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetPolicyNumber(policyNumber string) {
-	p.PolicyNumber = policyNumber
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldPolicyNumber)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetPolicyNumber(policyNumber string) {
+	i.PolicyNumber = policyNumber
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldPolicyNumber)
 }
 
 // SetInsuredObject sets the InsuredObject field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetInsuredObject(insuredObject string) {
-	p.InsuredObject = insuredObject
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldInsuredObject)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetInsuredObject(insuredObject string) {
+	i.InsuredObject = insuredObject
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldInsuredObject)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldFromDate)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldToDate)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldToDate)
 }
 
 // SetPremium sets the Premium field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetPremium(premium *string) {
-	p.Premium = premium
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldPremium)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetPremium(premium *string) {
+	i.Premium = premium
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldPremium)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldCurrency)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldCurrency)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldNotes)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AgreementsInsurancePoliciesListResponseRowsItemFieldCreatedAt)
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(insurancePoliciesListAgreementsResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsInsurancePoliciesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed InsurancePoliciesListAgreementsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsInsurancePoliciesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InsurancePoliciesListAgreementsResponseRowsItem(unmarshaler.embed)
+	i.FromDate = unmarshaler.FromDate.Time()
+	i.ToDate = unmarshaler.ToDate.Time()
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsInsurancePoliciesListResponseRowsItem
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed InsurancePoliciesListAgreementsResponseRowsItem
 	var marshaler = struct {
 		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*i),
+		FromDate:  internal.NewDate(i.FromDate),
+		ToDate:    internal.NewDate(i.ToDate),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsInsurancePoliciesListResponseRowsItem) String() string {
-	if p == nil {
+func (i *InsurancePoliciesListAgreementsResponseRowsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1AgreementsTypesCreateResponseFieldID   = big.NewInt(1 << 0)
-	postV1AgreementsTypesCreateResponseFieldCode = big.NewInt(1 << 1)
-	postV1AgreementsTypesCreateResponseFieldName = big.NewInt(1 << 2)
+	typesCreateAgreementsResponseFieldID   = big.NewInt(1 << 0)
+	typesCreateAgreementsResponseFieldCode = big.NewInt(1 << 1)
+	typesCreateAgreementsResponseFieldName = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsTypesCreateResponse struct {
+type TypesCreateAgreementsResponse struct {
 	ID   string `json:"id" url:"id"`
 	Code string `json:"code" url:"code"`
 	Name string `json:"name" url:"name"`
@@ -5933,114 +5930,114 @@ type PostV1AgreementsTypesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) GetID() string {
-	if p == nil {
+func (t *TypesCreateAgreementsResponse) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) GetCode() string {
-	if p == nil {
+func (t *TypesCreateAgreementsResponse) GetCode() string {
+	if t == nil {
 		return ""
 	}
-	return p.Code
+	return t.Code
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) GetName() string {
-	if p == nil {
+func (t *TypesCreateAgreementsResponse) GetName() string {
+	if t == nil {
 		return ""
 	}
-	return p.Name
+	return t.Name
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TypesCreateAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TypesCreateAgreementsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsTypesCreateResponseFieldID)
+func (t *TypesCreateAgreementsResponse) SetID(id string) {
+	t.ID = id
+	t.require(typesCreateAgreementsResponseFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesCreateResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AgreementsTypesCreateResponseFieldCode)
+func (t *TypesCreateAgreementsResponse) SetCode(code string) {
+	t.Code = code
+	t.require(typesCreateAgreementsResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AgreementsTypesCreateResponseFieldName)
+func (t *TypesCreateAgreementsResponse) SetName(name string) {
+	t.Name = name
+	t.require(typesCreateAgreementsResponseFieldName)
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesCreateResponse
+func (t *TypesCreateAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesCreateAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsTypesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TypesCreateAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesCreateResponse
+func (t *TypesCreateAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesCreateAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsTypesCreateResponse) String() string {
-	if p == nil {
+func (t *TypesCreateAgreementsResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1AgreementsTypesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsTypesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AgreementsTypesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	typesListAgreementsRequestFilterItemFieldField = big.NewInt(1 << 0)
+	typesListAgreementsRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	typesListAgreementsRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsTypesListRequestFilterItem struct {
-	Field string                                           `json:"field" url:"field"`
-	Op    PostV1AgreementsTypesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AgreementsTypesListRequestFilterItemValue `json:"value" url:"value"`
+type TypesListAgreementsRequestFilterItem struct {
+	Field string                                     `json:"field" url:"field"`
+	Op    TypesListAgreementsRequestFilterItemOp     `json:"op" url:"op"`
+	Value *TypesListAgreementsRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6049,312 +6046,312 @@ type PostV1AgreementsTypesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItem) GetField() string {
+	if t == nil {
 		return ""
 	}
-	return p.Field
+	return t.Field
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) GetOp() PostV1AgreementsTypesListRequestFilterItemOp {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItem) GetOp() TypesListAgreementsRequestFilterItemOp {
+	if t == nil {
 		return ""
 	}
-	return p.Op
+	return t.Op
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) GetValue() *PostV1AgreementsTypesListRequestFilterItemValue {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItem) GetValue() *TypesListAgreementsRequestFilterItemValue {
+	if t == nil {
 		return nil
 	}
-	return p.Value
+	return t.Value
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TypesListAgreementsRequestFilterItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsTypesListRequestFilterItemFieldField)
+func (t *TypesListAgreementsRequestFilterItem) SetField(field string) {
+	t.Field = field
+	t.require(typesListAgreementsRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequestFilterItem) SetOp(op PostV1AgreementsTypesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AgreementsTypesListRequestFilterItemFieldOp)
+func (t *TypesListAgreementsRequestFilterItem) SetOp(op TypesListAgreementsRequestFilterItemOp) {
+	t.Op = op
+	t.require(typesListAgreementsRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequestFilterItem) SetValue(value *PostV1AgreementsTypesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AgreementsTypesListRequestFilterItemFieldValue)
+func (t *TypesListAgreementsRequestFilterItem) SetValue(value *TypesListAgreementsRequestFilterItemValue) {
+	t.Value = value
+	t.require(typesListAgreementsRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesListRequestFilterItem
+func (t *TypesListAgreementsRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListAgreementsRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsTypesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TypesListAgreementsRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesListRequestFilterItem
+func (t *TypesListAgreementsRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed TypesListAgreementsRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItem) String() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
-type PostV1AgreementsTypesListRequestFilterItemOp string
+type TypesListAgreementsRequestFilterItemOp string
 
 const (
-	PostV1AgreementsTypesListRequestFilterItemOpEq       PostV1AgreementsTypesListRequestFilterItemOp = "eq"
-	PostV1AgreementsTypesListRequestFilterItemOpNe       PostV1AgreementsTypesListRequestFilterItemOp = "ne"
-	PostV1AgreementsTypesListRequestFilterItemOpContains PostV1AgreementsTypesListRequestFilterItemOp = "contains"
-	PostV1AgreementsTypesListRequestFilterItemOpGte      PostV1AgreementsTypesListRequestFilterItemOp = "gte"
-	PostV1AgreementsTypesListRequestFilterItemOpLte      PostV1AgreementsTypesListRequestFilterItemOp = "lte"
-	PostV1AgreementsTypesListRequestFilterItemOpIn       PostV1AgreementsTypesListRequestFilterItemOp = "in"
+	TypesListAgreementsRequestFilterItemOpEq       TypesListAgreementsRequestFilterItemOp = "eq"
+	TypesListAgreementsRequestFilterItemOpNe       TypesListAgreementsRequestFilterItemOp = "ne"
+	TypesListAgreementsRequestFilterItemOpContains TypesListAgreementsRequestFilterItemOp = "contains"
+	TypesListAgreementsRequestFilterItemOpGte      TypesListAgreementsRequestFilterItemOp = "gte"
+	TypesListAgreementsRequestFilterItemOpLte      TypesListAgreementsRequestFilterItemOp = "lte"
+	TypesListAgreementsRequestFilterItemOpIn       TypesListAgreementsRequestFilterItemOp = "in"
 )
 
-func NewPostV1AgreementsTypesListRequestFilterItemOpFromString(s string) (PostV1AgreementsTypesListRequestFilterItemOp, error) {
+func NewTypesListAgreementsRequestFilterItemOpFromString(s string) (TypesListAgreementsRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AgreementsTypesListRequestFilterItemOpEq, nil
+		return TypesListAgreementsRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AgreementsTypesListRequestFilterItemOpNe, nil
+		return TypesListAgreementsRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AgreementsTypesListRequestFilterItemOpContains, nil
+		return TypesListAgreementsRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AgreementsTypesListRequestFilterItemOpGte, nil
+		return TypesListAgreementsRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AgreementsTypesListRequestFilterItemOpLte, nil
+		return TypesListAgreementsRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AgreementsTypesListRequestFilterItemOpIn, nil
+		return TypesListAgreementsRequestFilterItemOpIn, nil
 	}
-	var t PostV1AgreementsTypesListRequestFilterItemOp
+	var t TypesListAgreementsRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsTypesListRequestFilterItemOp) Ptr() *PostV1AgreementsTypesListRequestFilterItemOp {
-	return &p
+func (t TypesListAgreementsRequestFilterItemOp) Ptr() *TypesListAgreementsRequestFilterItemOp {
+	return &t
 }
 
-type PostV1AgreementsTypesListRequestFilterItemValue struct {
-	String                                                       string
-	Double                                                       float64
-	Boolean                                                      bool
-	PostV1AgreementsTypesListRequestFilterItemValueThreeItemList []*PostV1AgreementsTypesListRequestFilterItemValueThreeItem
+type TypesListAgreementsRequestFilterItemValue struct {
+	String                                                 string
+	Double                                                 float64
+	Boolean                                                bool
+	TypesListAgreementsRequestFilterItemValueThreeItemList []*TypesListAgreementsRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValue) GetString() string {
+	if t == nil {
 		return ""
 	}
-	return p.String
+	return t.String
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValue) GetDouble() float64 {
+	if t == nil {
 		return 0
 	}
-	return p.Double
+	return t.Double
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValue) GetBoolean() bool {
+	if t == nil {
 		return false
 	}
-	return p.Boolean
+	return t.Boolean
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) GetPostV1AgreementsTypesListRequestFilterItemValueThreeItemList() []*PostV1AgreementsTypesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValue) GetTypesListAgreementsRequestFilterItemValueThreeItemList() []*TypesListAgreementsRequestFilterItemValueThreeItem {
+	if t == nil {
 		return nil
 	}
-	return p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList
+	return t.TypesListAgreementsRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (t *TypesListAgreementsRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		t.typ = "String"
+		t.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		t.typ = "Double"
+		t.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		t.typ = "Boolean"
+		t.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AgreementsTypesListRequestFilterItemValueThreeItemList []*PostV1AgreementsTypesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AgreementsTypesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AgreementsTypesListRequestFilterItemValueThreeItemList"
-		p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList = valuePostV1AgreementsTypesListRequestFilterItemValueThreeItemList
+	var valueTypesListAgreementsRequestFilterItemValueThreeItemList []*TypesListAgreementsRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueTypesListAgreementsRequestFilterItemValueThreeItemList); err == nil {
+		t.typ = "TypesListAgreementsRequestFilterItemValueThreeItemList"
+		t.TypesListAgreementsRequestFilterItemValueThreeItemList = valueTypesListAgreementsRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, t)
 }
 
-func (p PostV1AgreementsTypesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (t TypesListAgreementsRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if t.typ == "String" || t.String != "" {
+		return json.Marshal(t.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if t.typ == "Double" || t.Double != 0 {
+		return json.Marshal(t.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if t.typ == "Boolean" || t.Boolean != false {
+		return json.Marshal(t.Boolean)
 	}
-	if p.typ == "PostV1AgreementsTypesListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList)
+	if t.typ == "TypesListAgreementsRequestFilterItemValueThreeItemList" || t.TypesListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(t.TypesListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", t)
 }
 
-type PostV1AgreementsTypesListRequestFilterItemValueVisitor interface {
+type TypesListAgreementsRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AgreementsTypesListRequestFilterItemValueThreeItemList([]*PostV1AgreementsTypesListRequestFilterItemValueThreeItem) error
+	VisitTypesListAgreementsRequestFilterItemValueThreeItemList([]*TypesListAgreementsRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValue) Accept(visitor PostV1AgreementsTypesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (t *TypesListAgreementsRequestFilterItemValue) Accept(visitor TypesListAgreementsRequestFilterItemValueVisitor) error {
+	if t.typ == "String" || t.String != "" {
+		return visitor.VisitString(t.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if t.typ == "Double" || t.Double != 0 {
+		return visitor.VisitDouble(t.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if t.typ == "Boolean" || t.Boolean != false {
+		return visitor.VisitBoolean(t.Boolean)
 	}
-	if p.typ == "PostV1AgreementsTypesListRequestFilterItemValueThreeItemList" || p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AgreementsTypesListRequestFilterItemValueThreeItemList(p.PostV1AgreementsTypesListRequestFilterItemValueThreeItemList)
+	if t.typ == "TypesListAgreementsRequestFilterItemValueThreeItemList" || t.TypesListAgreementsRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitTypesListAgreementsRequestFilterItemValueThreeItemList(t.TypesListAgreementsRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", t)
 }
 
-type PostV1AgreementsTypesListRequestFilterItemValueThreeItem struct {
+type TypesListAgreementsRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValueThreeItem) GetString() string {
+	if t == nil {
 		return ""
 	}
-	return p.String
+	return t.String
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (t *TypesListAgreementsRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if t == nil {
 		return 0
 	}
-	return p.Double
+	return t.Double
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (t *TypesListAgreementsRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		t.typ = "String"
+		t.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		t.typ = "Double"
+		t.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, t)
 }
 
-func (p PostV1AgreementsTypesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (t TypesListAgreementsRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if t.typ == "String" || t.String != "" {
+		return json.Marshal(t.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if t.typ == "Double" || t.Double != 0 {
+		return json.Marshal(t.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", t)
 }
 
-type PostV1AgreementsTypesListRequestFilterItemValueThreeItemVisitor interface {
+type TypesListAgreementsRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AgreementsTypesListRequestFilterItemValueThreeItem) Accept(visitor PostV1AgreementsTypesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (t *TypesListAgreementsRequestFilterItemValueThreeItem) Accept(visitor TypesListAgreementsRequestFilterItemValueThreeItemVisitor) error {
+	if t.typ == "String" || t.String != "" {
+		return visitor.VisitString(t.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if t.typ == "Double" || t.Double != 0 {
+		return visitor.VisitDouble(t.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", t)
 }
 
 var (
-	postV1AgreementsTypesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AgreementsTypesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	typesListAgreementsRequestSortItemFieldField = big.NewInt(1 << 0)
+	typesListAgreementsRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AgreementsTypesListRequestSortItem struct {
-	Field string                                       `json:"field" url:"field"`
-	Dir   *PostV1AgreementsTypesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type TypesListAgreementsRequestSortItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Dir   *TypesListAgreementsRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6363,126 +6360,126 @@ type PostV1AgreementsTypesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) GetField() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestSortItem) GetField() string {
+	if t == nil {
 		return ""
 	}
-	return p.Field
+	return t.Field
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) GetDir() *PostV1AgreementsTypesListRequestSortItemDir {
-	if p == nil {
+func (t *TypesListAgreementsRequestSortItem) GetDir() *TypesListAgreementsRequestSortItemDir {
+	if t == nil {
 		return nil
 	}
-	return p.Dir
+	return t.Dir
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TypesListAgreementsRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TypesListAgreementsRequestSortItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AgreementsTypesListRequestSortItemFieldField)
+func (t *TypesListAgreementsRequestSortItem) SetField(field string) {
+	t.Field = field
+	t.require(typesListAgreementsRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListRequestSortItem) SetDir(dir *PostV1AgreementsTypesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AgreementsTypesListRequestSortItemFieldDir)
+func (t *TypesListAgreementsRequestSortItem) SetDir(dir *TypesListAgreementsRequestSortItemDir) {
+	t.Dir = dir
+	t.require(typesListAgreementsRequestSortItemFieldDir)
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesListRequestSortItem
+func (t *TypesListAgreementsRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListAgreementsRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsTypesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TypesListAgreementsRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesListRequestSortItem
+func (t *TypesListAgreementsRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed TypesListAgreementsRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsTypesListRequestSortItem) String() string {
-	if p == nil {
+func (t *TypesListAgreementsRequestSortItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
-type PostV1AgreementsTypesListRequestSortItemDir string
+type TypesListAgreementsRequestSortItemDir string
 
 const (
-	PostV1AgreementsTypesListRequestSortItemDirAsc  PostV1AgreementsTypesListRequestSortItemDir = "asc"
-	PostV1AgreementsTypesListRequestSortItemDirDesc PostV1AgreementsTypesListRequestSortItemDir = "desc"
+	TypesListAgreementsRequestSortItemDirAsc  TypesListAgreementsRequestSortItemDir = "asc"
+	TypesListAgreementsRequestSortItemDirDesc TypesListAgreementsRequestSortItemDir = "desc"
 )
 
-func NewPostV1AgreementsTypesListRequestSortItemDirFromString(s string) (PostV1AgreementsTypesListRequestSortItemDir, error) {
+func NewTypesListAgreementsRequestSortItemDirFromString(s string) (TypesListAgreementsRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AgreementsTypesListRequestSortItemDirAsc, nil
+		return TypesListAgreementsRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AgreementsTypesListRequestSortItemDirDesc, nil
+		return TypesListAgreementsRequestSortItemDirDesc, nil
 	}
-	var t PostV1AgreementsTypesListRequestSortItemDir
+	var t TypesListAgreementsRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AgreementsTypesListRequestSortItemDir) Ptr() *PostV1AgreementsTypesListRequestSortItemDir {
-	return &p
+func (t TypesListAgreementsRequestSortItemDir) Ptr() *TypesListAgreementsRequestSortItemDir {
+	return &t
 }
 
 var (
-	postV1AgreementsTypesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AgreementsTypesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AgreementsTypesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AgreementsTypesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AgreementsTypesListResponseFieldTotals   = big.NewInt(1 << 4)
+	typesListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
+	typesListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
+	typesListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
+	typesListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
+	typesListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AgreementsTypesListResponse struct {
-	Rows     []*PostV1AgreementsTypesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                        `json:"page" url:"page"`
-	PageSize int64                                        `json:"pageSize" url:"pageSize"`
-	Total    int64                                        `json:"total" url:"total"`
-	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
+type TypesListAgreementsResponse struct {
+	Rows     []*TypesListAgreementsResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                  `json:"page" url:"page"`
+	PageSize int64                                  `json:"pageSize" url:"pageSize"`
+	Total    int64                                  `json:"total" url:"total"`
+	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6491,139 +6488,139 @@ type PostV1AgreementsTypesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetRows() []*PostV1AgreementsTypesListResponseRowsItem {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetRows() []*TypesListAgreementsResponseRowsItem {
+	if t == nil {
 		return nil
 	}
-	return p.Rows
+	return t.Rows
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetPage() int64 {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetPage() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Page
+	return t.Page
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetPageSize() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.PageSize
+	return t.PageSize
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetTotal() int64 {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetTotal() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Total
+	return t.Total
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetTotals() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return p.Totals
+	return t.Totals
 }
 
-func (p *PostV1AgreementsTypesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TypesListAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1AgreementsTypesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TypesListAgreementsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponse) SetRows(rows []*PostV1AgreementsTypesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AgreementsTypesListResponseFieldRows)
+func (t *TypesListAgreementsResponse) SetRows(rows []*TypesListAgreementsResponseRowsItem) {
+	t.Rows = rows
+	t.require(typesListAgreementsResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AgreementsTypesListResponseFieldPage)
+func (t *TypesListAgreementsResponse) SetPage(page int64) {
+	t.Page = page
+	t.require(typesListAgreementsResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AgreementsTypesListResponseFieldPageSize)
+func (t *TypesListAgreementsResponse) SetPageSize(pageSize int64) {
+	t.PageSize = pageSize
+	t.require(typesListAgreementsResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AgreementsTypesListResponseFieldTotal)
+func (t *TypesListAgreementsResponse) SetTotal(total int64) {
+	t.Total = total
+	t.require(typesListAgreementsResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AgreementsTypesListResponseFieldTotals)
+func (t *TypesListAgreementsResponse) SetTotals(totals map[string]string) {
+	t.Totals = totals
+	t.require(typesListAgreementsResponseFieldTotals)
 }
 
-func (p *PostV1AgreementsTypesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesListResponse
+func (t *TypesListAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListAgreementsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsTypesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TypesListAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsTypesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesListResponse
+func (t *TypesListAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesListAgreementsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsTypesListResponse) String() string {
-	if p == nil {
+func (t *TypesListAgreementsResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1AgreementsTypesListResponseRowsItemFieldID   = big.NewInt(1 << 0)
-	postV1AgreementsTypesListResponseRowsItemFieldCode = big.NewInt(1 << 1)
-	postV1AgreementsTypesListResponseRowsItemFieldName = big.NewInt(1 << 2)
+	typesListAgreementsResponseRowsItemFieldID   = big.NewInt(1 << 0)
+	typesListAgreementsResponseRowsItemFieldCode = big.NewInt(1 << 1)
+	typesListAgreementsResponseRowsItemFieldName = big.NewInt(1 << 2)
 )
 
-type PostV1AgreementsTypesListResponseRowsItem struct {
+type TypesListAgreementsResponseRowsItem struct {
 	ID   string `json:"id" url:"id"`
 	Code string `json:"code" url:"code"`
 	Name string `json:"name" url:"name"`
@@ -6635,100 +6632,238 @@ type PostV1AgreementsTypesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (t *TypesListAgreementsResponseRowsItem) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) GetCode() string {
-	if p == nil {
+func (t *TypesListAgreementsResponseRowsItem) GetCode() string {
+	if t == nil {
 		return ""
 	}
-	return p.Code
+	return t.Code
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) GetName() string {
-	if p == nil {
+func (t *TypesListAgreementsResponseRowsItem) GetName() string {
+	if t == nil {
 		return ""
 	}
-	return p.Name
+	return t.Name
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TypesListAgreementsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TypesListAgreementsResponseRowsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AgreementsTypesListResponseRowsItemFieldID)
+func (t *TypesListAgreementsResponseRowsItem) SetID(id string) {
+	t.ID = id
+	t.require(typesListAgreementsResponseRowsItemFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponseRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AgreementsTypesListResponseRowsItemFieldCode)
+func (t *TypesListAgreementsResponseRowsItem) SetCode(code string) {
+	t.Code = code
+	t.require(typesListAgreementsResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsTypesListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AgreementsTypesListResponseRowsItemFieldName)
+func (t *TypesListAgreementsResponseRowsItem) SetName(name string) {
+	t.Name = name
+	t.require(typesListAgreementsResponseRowsItemFieldName)
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AgreementsTypesListResponseRowsItem
+func (t *TypesListAgreementsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListAgreementsResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AgreementsTypesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TypesListAgreementsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AgreementsTypesListResponseRowsItem
+func (t *TypesListAgreementsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed TypesListAgreementsResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AgreementsTypesListResponseRowsItem) String() string {
-	if p == nil {
+func (t *TypesListAgreementsResponseRowsItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesCreateAgreementsRequestFieldCode = big.NewInt(1 << 0)
+	typesCreateAgreementsRequestFieldName = big.NewInt(1 << 1)
+)
+
+type TypesCreateAgreementsRequest struct {
+	Code string `json:"code" url:"-"`
+	Name string `json:"name" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesCreateAgreementsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateAgreementsRequest) SetCode(code string) {
+	t.Code = code
+	t.require(typesCreateAgreementsRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateAgreementsRequest) SetName(name string) {
+	t.Name = name
+	t.require(typesCreateAgreementsRequestFieldName)
+}
+
+func (t *TypesCreateAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesCreateAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TypesCreateAgreementsRequest(body)
+	return nil
+}
+
+func (t *TypesCreateAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed TypesCreateAgreementsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	typesListAgreementsRequestFieldPage     = big.NewInt(1 << 0)
+	typesListAgreementsRequestFieldPageSize = big.NewInt(1 << 1)
+	typesListAgreementsRequestFieldSort     = big.NewInt(1 << 2)
+	typesListAgreementsRequestFieldFilter   = big.NewInt(1 << 3)
+	typesListAgreementsRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type TypesListAgreementsRequest struct {
+	Page     *int64                                  `json:"page,omitempty" url:"-"`
+	PageSize *int64                                  `json:"pageSize,omitempty" url:"-"`
+	Sort     []*TypesListAgreementsRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*TypesListAgreementsRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesListAgreementsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsRequest) SetPage(page *int64) {
+	t.Page = page
+	t.require(typesListAgreementsRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsRequest) SetPageSize(pageSize *int64) {
+	t.PageSize = pageSize
+	t.require(typesListAgreementsRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsRequest) SetSort(sort []*TypesListAgreementsRequestSortItem) {
+	t.Sort = sort
+	t.require(typesListAgreementsRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsRequest) SetFilter(filter []*TypesListAgreementsRequestFilterItem) {
+	t.Filter = filter
+	t.require(typesListAgreementsRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsRequest) SetTotals(totals []string) {
+	t.Totals = totals
+	t.require(typesListAgreementsRequestFieldTotals)
+}
+
+func (t *TypesListAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TypesListAgreementsRequest(body)
+	return nil
+}
+
+func (t *TypesListAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed TypesListAgreementsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

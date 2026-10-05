@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1ProductionWorkCentersCreate(
+func (r *RawClient) WorkCentersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersCreateRequest,
+	request *nordlet.WorkCentersCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionWorkCentersCreateResponse], error) {
+) (*core.Response[*nordlet.WorkCentersCreateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1ProductionWorkCentersCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionWorkCentersCreateResponse
+	var response *nordlet.WorkCentersCreateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1ProductionWorkCentersCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionWorkCentersCreateResponse]{
+	return &core.Response[*nordlet.WorkCentersCreateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionWorkCentersUpdate(
+func (r *RawClient) WorkCentersUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersUpdateRequest,
+	request *nordlet.WorkCentersUpdateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionWorkCentersUpdateResponse], error) {
+) (*core.Response[*nordlet.WorkCentersUpdateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1ProductionWorkCentersUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionWorkCentersUpdateResponse
+	var response *nordlet.WorkCentersUpdateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1ProductionWorkCentersUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionWorkCentersUpdateResponse]{
+	return &core.Response[*nordlet.WorkCentersUpdateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionWorkCentersList(
+func (r *RawClient) WorkCentersList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersListRequest,
+	request *nordlet.WorkCentersListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionWorkCentersListResponse], error) {
+) (*core.Response[*nordlet.WorkCentersListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1ProductionWorkCentersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionWorkCentersListResponse
+	var response *nordlet.WorkCentersListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1ProductionWorkCentersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionWorkCentersListResponse]{
+	return &core.Response[*nordlet.WorkCentersListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionRoutingsCreate(
+func (r *RawClient) RoutingsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsCreateRequest,
+	request *nordlet.RoutingsCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionRoutingsCreateResponse], error) {
+) (*core.Response[*nordlet.RoutingsCreateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1ProductionRoutingsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionRoutingsCreateResponse
+	var response *nordlet.RoutingsCreateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1ProductionRoutingsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionRoutingsCreateResponse]{
+	return &core.Response[*nordlet.RoutingsCreateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionRoutingsGet(
+func (r *RawClient) RoutingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsGetRequest,
+	request *nordlet.RoutingsGetProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionRoutingsGetResponse], error) {
+) (*core.Response[*nordlet.RoutingsGetProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1ProductionRoutingsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionRoutingsGetResponse
+	var response *nordlet.RoutingsGetProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1ProductionRoutingsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionRoutingsGetResponse]{
+	return &core.Response[*nordlet.RoutingsGetProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionRoutingsList(
+func (r *RawClient) RoutingsList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsListRequest,
+	request *nordlet.RoutingsListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionRoutingsListResponse], error) {
+) (*core.Response[*nordlet.RoutingsListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1ProductionRoutingsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionRoutingsListResponse
+	var response *nordlet.RoutingsListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1ProductionRoutingsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionRoutingsListResponse]{
+	return &core.Response[*nordlet.RoutingsListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionMaintenanceCreate(
+func (r *RawClient) MaintenanceCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCreateRequest,
+	request *nordlet.MaintenanceCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionMaintenanceCreateResponse], error) {
+) (*core.Response[*nordlet.MaintenanceCreateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1ProductionMaintenanceCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionMaintenanceCreateResponse
+	var response *nordlet.MaintenanceCreateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1ProductionMaintenanceCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionMaintenanceCreateResponse]{
+	return &core.Response[*nordlet.MaintenanceCreateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionMaintenanceComplete(
+func (r *RawClient) MaintenanceComplete(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCompleteRequest,
+	request *nordlet.MaintenanceCompleteProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionMaintenanceCompleteResponse], error) {
+) (*core.Response[*nordlet.MaintenanceCompleteProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1ProductionMaintenanceComplete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionMaintenanceCompleteResponse
+	var response *nordlet.MaintenanceCompleteProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1ProductionMaintenanceComplete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionMaintenanceCompleteResponse]{
+	return &core.Response[*nordlet.MaintenanceCompleteProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionMaintenanceCancel(
+func (r *RawClient) MaintenanceCancel(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCancelRequest,
+	request *nordlet.MaintenanceCancelProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionMaintenanceCancelResponse], error) {
+) (*core.Response[*nordlet.MaintenanceCancelProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1ProductionMaintenanceCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionMaintenanceCancelResponse
+	var response *nordlet.MaintenanceCancelProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1ProductionMaintenanceCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionMaintenanceCancelResponse]{
+	return &core.Response[*nordlet.MaintenanceCancelProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionMaintenanceList(
+func (r *RawClient) MaintenanceList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceListRequest,
+	request *nordlet.MaintenanceListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionMaintenanceListResponse], error) {
+) (*core.Response[*nordlet.MaintenanceListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1ProductionMaintenanceList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionMaintenanceListResponse
+	var response *nordlet.MaintenanceListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1ProductionMaintenanceList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionMaintenanceListResponse]{
+	return &core.Response[*nordlet.MaintenanceListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionBomsCreate(
+func (r *RawClient) BomsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsCreateRequest,
+	request *nordlet.BomsCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionBomsCreateResponse], error) {
+) (*core.Response[*nordlet.BomsCreateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1ProductionBomsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionBomsCreateResponse
+	var response *nordlet.BomsCreateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1ProductionBomsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionBomsCreateResponse]{
+	return &core.Response[*nordlet.BomsCreateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionBomsGet(
+func (r *RawClient) BomsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsGetRequest,
+	request *nordlet.BomsGetProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionBomsGetResponse], error) {
+) (*core.Response[*nordlet.BomsGetProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1ProductionBomsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionBomsGetResponse
+	var response *nordlet.BomsGetProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1ProductionBomsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionBomsGetResponse]{
+	return &core.Response[*nordlet.BomsGetProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionBomsList(
+func (r *RawClient) BomsList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsListRequest,
+	request *nordlet.BomsListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionBomsListResponse], error) {
+) (*core.Response[*nordlet.BomsListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1ProductionBomsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionBomsListResponse
+	var response *nordlet.BomsListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +597,18 @@ func (r *RawClient) PostV1ProductionBomsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionBomsListResponse]{
+	return &core.Response[*nordlet.BomsListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionOrdersCreate(
+func (r *RawClient) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersCreateRequest,
+	request *nordlet.OrdersCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionOrdersCreateResponse], error) {
+) (*core.Response[*nordlet.OrdersCreateProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +621,7 @@ func (r *RawClient) PostV1ProductionOrdersCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionOrdersCreateResponse
+	var response *nordlet.OrdersCreateProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +641,18 @@ func (r *RawClient) PostV1ProductionOrdersCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionOrdersCreateResponse]{
+	return &core.Response[*nordlet.OrdersCreateProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionOrdersRecordOperation(
+func (r *RawClient) OrdersRecordOperation(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersRecordOperationRequest,
+	request *nordlet.OrdersRecordOperationProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionOrdersRecordOperationResponse], error) {
+) (*core.Response[*nordlet.OrdersRecordOperationProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +665,7 @@ func (r *RawClient) PostV1ProductionOrdersRecordOperation(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionOrdersRecordOperationResponse
+	var response *nordlet.OrdersRecordOperationProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +685,18 @@ func (r *RawClient) PostV1ProductionOrdersRecordOperation(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionOrdersRecordOperationResponse]{
+	return &core.Response[*nordlet.OrdersRecordOperationProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionQualityChecksAdd(
+func (r *RawClient) QualityChecksAdd(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksAddRequest,
+	request *nordlet.QualityChecksAddProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionQualityChecksAddResponse], error) {
+) (*core.Response[*nordlet.QualityChecksAddProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +709,7 @@ func (r *RawClient) PostV1ProductionQualityChecksAdd(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionQualityChecksAddResponse
+	var response *nordlet.QualityChecksAddProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +729,18 @@ func (r *RawClient) PostV1ProductionQualityChecksAdd(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionQualityChecksAddResponse]{
+	return &core.Response[*nordlet.QualityChecksAddProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionQualityChecksRecord(
+func (r *RawClient) QualityChecksRecord(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksRecordRequest,
+	request *nordlet.QualityChecksRecordProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionQualityChecksRecordResponse], error) {
+) (*core.Response[*nordlet.QualityChecksRecordProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +753,7 @@ func (r *RawClient) PostV1ProductionQualityChecksRecord(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionQualityChecksRecordResponse
+	var response *nordlet.QualityChecksRecordProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +773,18 @@ func (r *RawClient) PostV1ProductionQualityChecksRecord(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionQualityChecksRecordResponse]{
+	return &core.Response[*nordlet.QualityChecksRecordProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionQualityChecksList(
+func (r *RawClient) QualityChecksList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksListRequest,
+	request *nordlet.QualityChecksListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionQualityChecksListResponse], error) {
+) (*core.Response[*nordlet.QualityChecksListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +797,7 @@ func (r *RawClient) PostV1ProductionQualityChecksList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionQualityChecksListResponse
+	var response *nordlet.QualityChecksListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +817,18 @@ func (r *RawClient) PostV1ProductionQualityChecksList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionQualityChecksListResponse]{
+	return &core.Response[*nordlet.QualityChecksListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionOrdersComplete(
+func (r *RawClient) OrdersComplete(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersCompleteRequest,
+	request *nordlet.OrdersCompleteProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionOrdersCompleteResponse], error) {
+) (*core.Response[*nordlet.OrdersCompleteProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +841,7 @@ func (r *RawClient) PostV1ProductionOrdersComplete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionOrdersCompleteResponse
+	var response *nordlet.OrdersCompleteProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +861,18 @@ func (r *RawClient) PostV1ProductionOrdersComplete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionOrdersCompleteResponse]{
+	return &core.Response[*nordlet.OrdersCompleteProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionOrdersGet(
+func (r *RawClient) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersGetRequest,
+	request *nordlet.OrdersGetProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionOrdersGetResponse], error) {
+) (*core.Response[*nordlet.OrdersGetProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +885,7 @@ func (r *RawClient) PostV1ProductionOrdersGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionOrdersGetResponse
+	var response *nordlet.OrdersGetProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +905,18 @@ func (r *RawClient) PostV1ProductionOrdersGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionOrdersGetResponse]{
+	return &core.Response[*nordlet.OrdersGetProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ProductionOrdersList(
+func (r *RawClient) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersListRequest,
+	request *nordlet.OrdersListProductionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ProductionOrdersListResponse], error) {
+) (*core.Response[*nordlet.OrdersListProductionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +929,7 @@ func (r *RawClient) PostV1ProductionOrdersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ProductionOrdersListResponse
+	var response *nordlet.OrdersListProductionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,7 +949,7 @@ func (r *RawClient) PostV1ProductionOrdersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ProductionOrdersListResponse]{
+	return &core.Response[*nordlet.OrdersListProductionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

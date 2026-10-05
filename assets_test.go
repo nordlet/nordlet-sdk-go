@@ -7,11 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
+func TestSettersAssetsCreateAssetsRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -19,7 +20,7 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -27,7 +28,7 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -35,23 +36,23 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueDepreciationStartDate *time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -59,7 +60,7 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueSalvageValue *string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -67,7 +68,7 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueUsefulLifeMonths *int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -75,7 +76,7 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -83,8 +84,8 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsCreateRequestDocumentsItem
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueDocuments []*AssetsCreateAssetsRequestDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
@@ -92,11 +93,11 @@ func TestSettersPostV1AssetsAssetsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitAssetsCreateAssetsRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -127,7 +128,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueCode string
 
 		// Act
@@ -158,7 +159,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueName string
 
 		// Act
@@ -189,8 +190,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -220,8 +221,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueDepreciationStartDate *string
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueDepreciationStartDate *time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -251,7 +252,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -282,7 +283,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueSalvageValue *string
 
 		// Act
@@ -313,7 +314,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueUsefulLifeMonths *int64
 
 		// Act
@@ -344,7 +345,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
+		obj := &AssetsCreateAssetsRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -375,8 +376,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequest{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsCreateRequestDocumentsItem
+		obj := &AssetsCreateAssetsRequest{}
+		var fernTestValueDocuments []*AssetsCreateAssetsRequestDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -405,495 +406,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsGetRequest(t *testing.T) {
+func TestSettersAssetsDisposeAssetsRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsGetRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsGetRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsInputVatRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatAmount *string
-		obj.SetInputVatAmount(fernTestValueInputVatAmount)
-		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatFirstUseDate *string
-		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
-		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatDeductiblePercent *string
-		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
-		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatRealEstate bool
-		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
-		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
-		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsInputVatRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatAmount *string
-
-		// Act
-		obj.SetInputVatAmount(fernTestValueInputVatAmount)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatFirstUseDate *string
-
-		// Act
-		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatDeductiblePercent *string
-
-		// Act
-		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatRealEstate bool
-
-		// Act
-		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequest{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-
-		// Act
-		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsListRequest(t *testing.T) {
-	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValuePage *int64
-		obj.SetPage(fernTestValuePage)
-		assert.Equal(t, fernTestValuePage, obj.Page)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValuePageSize *int64
-		obj.SetPageSize(fernTestValuePageSize)
-		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueSort []*PostV1AssetsAssetsListRequestSortItem
-		obj.SetSort(fernTestValueSort)
-		assert.Equal(t, fernTestValueSort, obj.Sort)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueFilter []*PostV1AssetsAssetsListRequestFilterItem
-		obj.SetFilter(fernTestValueFilter)
-		assert.Equal(t, fernTestValueFilter, obj.Filter)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueTotals []string
-		obj.SetTotals(fernTestValueTotals)
-		assert.Equal(t, fernTestValueTotals, obj.Totals)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsListRequest(t *testing.T) {
-	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValuePage *int64
-
-		// Act
-		obj.SetPage(fernTestValuePage)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValuePageSize *int64
-
-		// Act
-		obj.SetPageSize(fernTestValuePageSize)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueSort []*PostV1AssetsAssetsListRequestSortItem
-
-		// Act
-		obj.SetSort(fernTestValueSort)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueFilter []*PostV1AssetsAssetsListRequestFilterItem
-
-		// Act
-		obj.SetFilter(fernTestValueFilter)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsListRequest{}
-		var fernTestValueTotals []string
-
-		// Act
-		obj.SetTotals(fernTestValueTotals)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsModernizeRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeRequest{}
+		obj := &AssetsDisposeAssetsRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -901,31 +416,31 @@ func TestSettersPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueDate string
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueAmount string
-		obj.SetAmount(fernTestValueAmount)
-		assert.Equal(t, fernTestValueAmount, obj.Amount)
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueReason AssetsDisposeAssetsRequestReason
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetAddedLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueAddedLifeMonths *int64
-		obj.SetAddedLifeMonths(fernTestValueAddedLifeMonths)
-		assert.Equal(t, fernTestValueAddedLifeMonths, obj.AddedLifeMonths)
+	t.Run("SetProceeds", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueProceeds *string
+		obj.SetProceeds(fernTestValueProceeds)
+		assert.Equal(t, fernTestValueProceeds, obj.Proceeds)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeRequest{}
+		obj := &AssetsDisposeAssetsRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -934,11 +449,11 @@ func TestSettersPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
+func TestSettersMarkExplicitAssetsDisposeAssetsRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeRequest{}
+		obj := &AssetsDisposeAssetsRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -969,8 +484,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueDate string
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -997,14 +512,14 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueAmount string
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueReason AssetsDisposeAssetsRequestReason
 
 		// Act
-		obj.SetAmount(fernTestValueAmount)
+		obj.SetReason(fernTestValueReason)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1028,14 +543,14 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetAddedLifeMonths_MarksExplicit", func(t *testing.T) {
+	t.Run("SetProceeds_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeRequest{}
-		var fernTestValueAddedLifeMonths *int64
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueProceeds *string
 
 		// Act
-		obj.SetAddedLifeMonths(fernTestValueAddedLifeMonths)
+		obj.SetProceeds(fernTestValueProceeds)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1062,7 +577,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeRequest{}
+		obj := &AssetsDisposeAssetsRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1092,89 +607,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsUpdateRequest(t *testing.T) {
-	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueGroupID *string
-		obj.SetGroupID(fernTestValueGroupID)
-		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueCode *string
-		obj.SetCode(fernTestValueCode)
-		assert.Equal(t, fernTestValueCode, obj.Code)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueName *string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueAcquisitionDate *string
-		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
-		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueDepreciationStartDate *string
-		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
-		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueAcquisitionCost *string
-		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
-		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueSalvageValue *string
-		obj.SetSalvageValue(fernTestValueSalvageValue)
-		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueUsefulLifeMonths *int64
-		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
-		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueNotes *string
-		obj.SetNotes(fernTestValueNotes)
-		assert.Equal(t, fernTestValueNotes, obj.Notes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsUpdateRequestDocumentsItem
-		obj.SetDocuments(fernTestValueDocuments)
-		assert.Equal(t, fernTestValueDocuments, obj.Documents)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
+func TestSettersAssetsGetAssetsRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequest{}
+		obj := &AssetsGetAssetsRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1183,321 +618,11 @@ func TestSettersPostV1AssetsAssetsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsUpdateRequest(t *testing.T) {
-	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueGroupID *string
-
-		// Act
-		obj.SetGroupID(fernTestValueGroupID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueCode *string
-
-		// Act
-		obj.SetCode(fernTestValueCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueName *string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueAcquisitionDate *string
-
-		// Act
-		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueDepreciationStartDate *string
-
-		// Act
-		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueAcquisitionCost *string
-
-		// Act
-		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueSalvageValue *string
-
-		// Act
-		obj.SetSalvageValue(fernTestValueSalvageValue)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueUsefulLifeMonths *int64
-
-		// Act
-		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueNotes *string
-
-		// Act
-		obj.SetNotes(fernTestValueNotes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsUpdateRequestDocumentsItem
-
-		// Act
-		obj.SetDocuments(fernTestValueDocuments)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
+func TestSettersMarkExplicitAssetsGetAssetsRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequest{}
+		obj := &AssetsGetAssetsRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -1527,118 +652,66 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsDepreciationPostRequest(t *testing.T) {
-	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostRequest{}
-		var fernTestValueYear int64
-		obj.SetYear(fernTestValueYear)
-		assert.Equal(t, fernTestValueYear, obj.Year)
+func TestSettersAssetsInputVatAssetsRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostRequest{}
-		var fernTestValueMonth int64
-		obj.SetMonth(fernTestValueMonth)
-		assert.Equal(t, fernTestValueMonth, obj.Month)
+	t.Run("SetInputVatAmount", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatAmount *string
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
+		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-}
-
-func TestSettersMarkExplicitPostV1AssetsDepreciationPostRequest(t *testing.T) {
-	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsDepreciationPostRequest{}
-		var fernTestValueYear int64
-
-		// Act
-		obj.SetYear(fernTestValueYear)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsDepreciationPostRequest{}
-		var fernTestValueMonth int64
-
-		// Act
-		obj.SetMonth(fernTestValueMonth)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsDepreciationPreviewRequest(t *testing.T) {
-	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewRequest{}
-		var fernTestValueYear int64
-		obj.SetYear(fernTestValueYear)
-		assert.Equal(t, fernTestValueYear, obj.Year)
+	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatFirstUseDate *time.Time
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
+		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMonth", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewRequest{}
-		var fernTestValueMonth int64
-		obj.SetMonth(fernTestValueMonth)
-		assert.Equal(t, fernTestValueMonth, obj.Month)
+	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatDeductiblePercent *string
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
+		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatRealEstate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatRealEstate bool
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
+		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatUseChanges", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatUseChanges []*AssetsInputVatAssetsRequestInputVatUseChangesItem
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
+		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewRequest(t *testing.T) {
-	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+func TestSettersMarkExplicitAssetsInputVatAssetsRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewRequest{}
-		var fernTestValueYear int64
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueID string
 
 		// Act
-		obj.SetYear(fernTestValueYear)
+		obj.SetID(fernTestValueID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1662,14 +735,14 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewRequest(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
+	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewRequest{}
-		var fernTestValueMonth int64
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatAmount *string
 
 		// Act
-		obj.SetMonth(fernTestValueMonth)
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1693,68 +766,14 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewRequest(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-}
-
-func TestSettersPostV1AssetsGroupsCreateRequest(t *testing.T) {
-	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueCode string
-		obj.SetCode(fernTestValueCode)
-		assert.Equal(t, fernTestValueCode, obj.Code)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueDefaultUsefulLifeMonths *int64
-		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
-		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAssetAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueAssetAccountCode string
-		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
-		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueDepreciationAccountCode string
-		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
-		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueExpenseAccountCode *string
-		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
-		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsGroupsCreateRequest(t *testing.T) {
-	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueCode string
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
-		obj.SetCode(fernTestValueCode)
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1778,14 +797,14 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueName string
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
-		obj.SetName(fernTestValueName)
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1809,14 +828,14 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
+	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueDefaultUsefulLifeMonths *int64
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatRealEstate bool
 
 		// Act
-		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1840,76 +859,14 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
+	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueAssetAccountCode string
+		obj := &AssetsInputVatAssetsRequest{}
+		var fernTestValueInputVatUseChanges []*AssetsInputVatAssetsRequestInputVatUseChangesItem
 
 		// Act
-		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueDepreciationAccountCode string
-
-		// Act
-		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsGroupsCreateRequest{}
-		var fernTestValueExpenseAccountCode *string
-
-		// Act
-		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1935,9 +892,9 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsGroupsListRequest(t *testing.T) {
+func TestSettersAssetsListAssetsRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -1945,7 +902,7 @@ func TestSettersPostV1AssetsGroupsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -1953,23 +910,23 @@ func TestSettersPostV1AssetsGroupsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequest{}
-		var fernTestValueSort []*PostV1AssetsGroupsListRequestSortItem
+		obj := &AssetsListAssetsRequest{}
+		var fernTestValueSort []*AssetsListAssetsRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequest{}
-		var fernTestValueFilter []*PostV1AssetsGroupsListRequestFilterItem
+		obj := &AssetsListAssetsRequest{}
+		var fernTestValueFilter []*AssetsListAssetsRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -1978,11 +935,11 @@ func TestSettersPostV1AssetsGroupsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -2013,7 +970,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -2044,8 +1001,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequest{}
-		var fernTestValueSort []*PostV1AssetsGroupsListRequestSortItem
+		obj := &AssetsListAssetsRequest{}
+		var fernTestValueSort []*AssetsListAssetsRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -2075,8 +1032,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequest{}
-		var fernTestValueFilter []*PostV1AssetsGroupsListRequestFilterItem
+		obj := &AssetsListAssetsRequest{}
+		var fernTestValueFilter []*AssetsListAssetsRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -2106,7 +1063,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequest{}
+		obj := &AssetsListAssetsRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -2136,262 +1093,274 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var fernTestValueRef string
-		obj.SetRef(fernTestValueRef)
-		assert.Equal(t, fernTestValueRef, obj.Ref)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateRequestDocumentsItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-	t.Run("GetRef", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var expected string
-		obj.Ref = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetRef(), "getter should return the property value")
-	})
-
-	t.Run("GetRef_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateRequestDocumentsItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetRef() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
-		var fernTestValueRef string
-
-		// Act
-		obj.SetRef(fernTestValueRef)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsCreateResponse(t *testing.T) {
+func TestSettersAssetsModernizeAssetsRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsModernizeAssetsRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDate", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueDate time.Time
+		obj.SetDate(fernTestValueDate)
+		assert.Equal(t, fernTestValueDate, obj.Date)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmount", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueAmount string
+		obj.SetAmount(fernTestValueAmount)
+		assert.Equal(t, fernTestValueAmount, obj.Amount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAddedLifeMonths", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueAddedLifeMonths *int64
+		obj.SetAddedLifeMonths(fernTestValueAddedLifeMonths)
+		assert.Equal(t, fernTestValueAddedLifeMonths, obj.AddedLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsModernizeAssetsRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueDate time.Time
+
+		// Act
+		obj.SetDate(fernTestValueDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueAmount string
+
+		// Act
+		obj.SetAmount(fernTestValueAmount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAddedLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueAddedLifeMonths *int64
+
+		// Act
+		obj.SetAddedLifeMonths(fernTestValueAddedLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsRequest{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsUpdateAssetsRequest(t *testing.T) {
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueGroupID string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueGroupID *string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueCode string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueName string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueAcquisitionDate *time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueDepreciationStartDate *time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAcquisitionCost string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueAcquisitionCost *string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueSalvageValue string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueSalvageValue *string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueUsefulLifeMonths int64
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueUsefulLifeMonths *int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueTotalCost string
-		obj.SetTotalCost(fernTestValueTotalCost)
-		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAccumulatedDepreciation string
-		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
-		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueNetBookValue string
-		obj.SetNetBookValue(fernTestValueNetBookValue)
-		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDepreciatedMonths int64
-		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
-		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueTotalLifeMonths int64
-		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
-		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsCreateResponseStatus
-		obj.SetStatus(fernTestValueStatus)
-		assert.Equal(t, fernTestValueStatus, obj.Status)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsUpdateAssetsRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -2399,692 +1368,29 @@ func TestSettersPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsCreateResponseDocumentsItem
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueDocuments []*AssetsUpdateAssetsRequestDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatAmount *string
-		obj.SetInputVatAmount(fernTestValueInputVatAmount)
-		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatFirstUseDate *string
-		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
-		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatDeductiblePercent *string
-		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
-		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatRealEstate bool
-		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
-		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
-		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueCreatedAt string
-		obj.SetCreatedAt(fernTestValueCreatedAt)
-		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1AssetsAssetsCreateResponse(t *testing.T) {
-	t.Run("GetID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.ID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
-	})
-
-	t.Run("GetID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetID() // Should return zero value
-	})
-
-	t.Run("GetGroupID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.GroupID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetGroupID(), "getter should return the property value")
-	})
-
-	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetGroupID() // Should return zero value
-	})
-
-	t.Run("GetCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.Code = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
-	})
-
-	t.Run("GetCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCode() // Should return zero value
-	})
-
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-	t.Run("GetAcquisitionDate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.AcquisitionDate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetAcquisitionDate(), "getter should return the property value")
-	})
-
-	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetAcquisitionDate() // Should return zero value
-	})
-
-	t.Run("GetDepreciationStartDate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.DepreciationStartDate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDepreciationStartDate(), "getter should return the property value")
-	})
-
-	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDepreciationStartDate() // Should return zero value
-	})
-
-	t.Run("GetAcquisitionCost", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.AcquisitionCost = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetAcquisitionCost(), "getter should return the property value")
-	})
-
-	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetAcquisitionCost() // Should return zero value
-	})
-
-	t.Run("GetSalvageValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.SalvageValue = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSalvageValue(), "getter should return the property value")
-	})
-
-	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSalvageValue() // Should return zero value
-	})
-
-	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected int64
-		obj.UsefulLifeMonths = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUsefulLifeMonths(), "getter should return the property value")
-	})
-
-	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUsefulLifeMonths() // Should return zero value
-	})
-
-	t.Run("GetTotalCost", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.TotalCost = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTotalCost(), "getter should return the property value")
-	})
-
-	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTotalCost() // Should return zero value
-	})
-
-	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.AccumulatedDepreciation = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetAccumulatedDepreciation(), "getter should return the property value")
-	})
-
-	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetAccumulatedDepreciation() // Should return zero value
-	})
-
-	t.Run("GetNetBookValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.NetBookValue = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetNetBookValue(), "getter should return the property value")
-	})
-
-	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetNetBookValue() // Should return zero value
-	})
-
-	t.Run("GetDepreciatedMonths", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected int64
-		obj.DepreciatedMonths = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDepreciatedMonths(), "getter should return the property value")
-	})
-
-	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDepreciatedMonths() // Should return zero value
-	})
-
-	t.Run("GetTotalLifeMonths", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected int64
-		obj.TotalLifeMonths = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTotalLifeMonths(), "getter should return the property value")
-	})
-
-	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTotalLifeMonths() // Should return zero value
-	})
-
-	t.Run("GetStatus", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected PostV1AssetsAssetsCreateResponseStatus
-		obj.Status = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
-	})
-
-	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetStatus() // Should return zero value
-	})
-
-	t.Run("GetNotes", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected *string
-		obj.Notes = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetNotes(), "getter should return the property value")
-	})
-
-	t.Run("GetNotes_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.Notes = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetNotes(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetNotes() // Should return zero value
-	})
-
-	t.Run("GetDocuments", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected []*PostV1AssetsAssetsCreateResponseDocumentsItem
-		obj.Documents = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDocuments(), "getter should return the property value")
-	})
-
-	t.Run("GetDocuments_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.Documents = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDocuments(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDocuments() // Should return zero value
-	})
-
-	t.Run("GetInputVatAmount", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected *string
-		obj.InputVatAmount = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInputVatAmount(), "getter should return the property value")
-	})
-
-	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.InputVatAmount = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetInputVatAmount(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInputVatAmount() // Should return zero value
-	})
-
-	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected *string
-		obj.InputVatFirstUseDate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInputVatFirstUseDate(), "getter should return the property value")
-	})
-
-	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.InputVatFirstUseDate = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetInputVatFirstUseDate(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInputVatFirstUseDate() // Should return zero value
-	})
-
-	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected *string
-		obj.InputVatDeductiblePercent = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInputVatDeductiblePercent(), "getter should return the property value")
-	})
-
-	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.InputVatDeductiblePercent = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetInputVatDeductiblePercent(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInputVatDeductiblePercent() // Should return zero value
-	})
-
-	t.Run("GetInputVatRealEstate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected bool
-		obj.InputVatRealEstate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInputVatRealEstate(), "getter should return the property value")
-	})
-
-	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInputVatRealEstate() // Should return zero value
-	})
-
-	t.Run("GetInputVatUseChanges", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-		obj.InputVatUseChanges = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInputVatUseChanges(), "getter should return the property value")
-	})
-
-	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		obj.InputVatUseChanges = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetInputVatUseChanges(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInputVatUseChanges() // Should return zero value
-	})
-
-	t.Run("GetCreatedAt", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var expected string
-		obj.CreatedAt = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
-	})
-
-	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCreatedAt() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
+	t.Run("SetID", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsRequest{}
 		var fernTestValueID string
-
-		// Act
 		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
 	})
 
+}
+
+func TestSettersMarkExplicitAssetsUpdateAssetsRequest(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueGroupID string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueGroupID *string
 
 		// Act
 		obj.SetGroupID(fernTestValueGroupID)
@@ -3114,8 +1420,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueCode string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueCode *string
 
 		// Act
 		obj.SetCode(fernTestValueCode)
@@ -3145,8 +1451,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueName string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueName *string
 
 		// Act
 		obj.SetName(fernTestValueName)
@@ -3176,8 +1482,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueAcquisitionDate *time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -3207,8 +1513,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueDepreciationStartDate *time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -3238,8 +1544,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAcquisitionCost string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueAcquisitionCost *string
 
 		// Act
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
@@ -3269,8 +1575,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueSalvageValue string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueSalvageValue *string
 
 		// Act
 		obj.SetSalvageValue(fernTestValueSalvageValue)
@@ -3300,8 +1606,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueUsefulLifeMonths int64
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueUsefulLifeMonths *int64
 
 		// Act
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
@@ -3328,196 +1634,10 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueTotalCost string
-
-		// Act
-		obj.SetTotalCost(fernTestValueTotalCost)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueAccumulatedDepreciation string
-
-		// Act
-		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueNetBookValue string
-
-		// Act
-		obj.SetNetBookValue(fernTestValueNetBookValue)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDepreciatedMonths int64
-
-		// Act
-		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueTotalLifeMonths int64
-
-		// Act
-		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsCreateResponseStatus
-
-		// Act
-		obj.SetStatus(fernTestValueStatus)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsUpdateAssetsRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -3548,8 +1668,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsCreateResponseDocumentsItem
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueDocuments []*AssetsUpdateAssetsRequestDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -3576,169 +1696,14 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatAmount *string
+		obj := &AssetsUpdateAssetsRequest{}
+		var fernTestValueID string
 
 		// Act
-		obj.SetInputVatAmount(fernTestValueInputVatAmount)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatFirstUseDate *string
-
-		// Act
-		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatDeductiblePercent *string
-
-		// Act
-		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatRealEstate bool
-
-		// Act
-		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-
-		// Act
-		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
-		var fernTestValueCreatedAt string
-
-		// Act
-		obj.SetCreatedAt(fernTestValueCreatedAt)
+		obj.SetID(fernTestValueID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3764,9 +1729,618 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestSettersDepreciationPostAssetsRequest(t *testing.T) {
+	t.Run("SetYear", func(t *testing.T) {
+		obj := &DepreciationPostAssetsRequest{}
+		var fernTestValueYear int64
+		obj.SetYear(fernTestValueYear)
+		assert.Equal(t, fernTestValueYear, obj.Year)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMonth", func(t *testing.T) {
+		obj := &DepreciationPostAssetsRequest{}
+		var fernTestValueMonth int64
+		obj.SetMonth(fernTestValueMonth)
+		assert.Equal(t, fernTestValueMonth, obj.Month)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitDepreciationPostAssetsRequest(t *testing.T) {
+	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPostAssetsRequest{}
+		var fernTestValueYear int64
+
+		// Act
+		obj.SetYear(fernTestValueYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPostAssetsRequest{}
+		var fernTestValueMonth int64
+
+		// Act
+		obj.SetMonth(fernTestValueMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDepreciationPreviewAssetsRequest(t *testing.T) {
+	t.Run("SetYear", func(t *testing.T) {
+		obj := &DepreciationPreviewAssetsRequest{}
+		var fernTestValueYear int64
+		obj.SetYear(fernTestValueYear)
+		assert.Equal(t, fernTestValueYear, obj.Year)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMonth", func(t *testing.T) {
+		obj := &DepreciationPreviewAssetsRequest{}
+		var fernTestValueMonth int64
+		obj.SetMonth(fernTestValueMonth)
+		assert.Equal(t, fernTestValueMonth, obj.Month)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitDepreciationPreviewAssetsRequest(t *testing.T) {
+	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPreviewAssetsRequest{}
+		var fernTestValueYear int64
+
+		// Act
+		obj.SetYear(fernTestValueYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPreviewAssetsRequest{}
+		var fernTestValueMonth int64
+
+		// Act
+		obj.SetMonth(fernTestValueMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersGroupsCreateAssetsRequest(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueDefaultUsefulLifeMonths *int64
+		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
+		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAssetAccountCode", func(t *testing.T) {
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueAssetAccountCode string
+		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
+		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueDepreciationAccountCode string
+		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
+		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExpenseAccountCode", func(t *testing.T) {
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueExpenseAccountCode *string
+		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
+		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitGroupsCreateAssetsRequest(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueDefaultUsefulLifeMonths *int64
+
+		// Act
+		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueAssetAccountCode string
+
+		// Act
+		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueDepreciationAccountCode string
+
+		// Act
+		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsCreateAssetsRequest{}
+		var fernTestValueExpenseAccountCode *string
+
+		// Act
+		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersGroupsListAssetsRequest(t *testing.T) {
+	t.Run("SetPage", func(t *testing.T) {
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValuePage *int64
+		obj.SetPage(fernTestValuePage)
+		assert.Equal(t, fernTestValuePage, obj.Page)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPageSize", func(t *testing.T) {
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValuePageSize *int64
+		obj.SetPageSize(fernTestValuePageSize)
+		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSort", func(t *testing.T) {
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueSort []*GroupsListAssetsRequestSortItem
+		obj.SetSort(fernTestValueSort)
+		assert.Equal(t, fernTestValueSort, obj.Sort)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilter", func(t *testing.T) {
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueFilter []*GroupsListAssetsRequestFilterItem
+		obj.SetFilter(fernTestValueFilter)
+		assert.Equal(t, fernTestValueFilter, obj.Filter)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotals", func(t *testing.T) {
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueTotals []string
+		obj.SetTotals(fernTestValueTotals)
+		assert.Equal(t, fernTestValueTotals, obj.Totals)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitGroupsListAssetsRequest(t *testing.T) {
+	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValuePage *int64
+
+		// Act
+		obj.SetPage(fernTestValuePage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValuePageSize *int64
+
+		// Act
+		obj.SetPageSize(fernTestValuePageSize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueSort []*GroupsListAssetsRequestSortItem
+
+		// Act
+		obj.SetSort(fernTestValueSort)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueFilter []*GroupsListAssetsRequestFilterItem
+
+		// Act
+		obj.SetFilter(fernTestValueFilter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequest{}
+		var fernTestValueTotals []string
+
+		// Act
+		obj.SetTotals(fernTestValueTotals)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
+	t.Run("SetName", func(t *testing.T) {
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -3774,7 +2348,7 @@ func TestSettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -3783,11 +2357,11 @@ func TestSettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestGettersAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -3797,7 +2371,7 @@ func TestGettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj *AssetsCreateAssetsRequestDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3810,7 +2384,7 @@ func TestGettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -3820,7 +2394,7 @@ func TestGettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj *AssetsCreateAssetsRequestDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3832,11 +2406,11 @@ func TestGettersPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -3867,7 +2441,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponseDocumentsItem(t *tes
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -3897,204 +2471,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponseDocumentsItem(t *tes
 
 }
 
-func TestSettersPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
-	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValueYear int64
-		obj.SetYear(fernTestValueYear)
-		assert.Equal(t, fernTestValueYear, obj.Year)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValuePercent string
-		obj.SetPercent(fernTestValuePercent)
-		assert.Equal(t, fernTestValuePercent, obj.Percent)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason
-		obj.SetReason(fernTestValueReason)
-		assert.Equal(t, fernTestValueReason, obj.Reason)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
-	t.Run("GetYear", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var expected int64
-		obj.Year = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetYear(), "getter should return the property value")
-	})
-
-	t.Run("GetYear_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetYear() // Should return zero value
-	})
-
-	t.Run("GetPercent", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var expected string
-		obj.Percent = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPercent(), "getter should return the property value")
-	})
-
-	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPercent() // Should return zero value
-	})
-
-	t.Run("GetReason", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason
-		obj.Reason = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
-	})
-
-	t.Run("GetReason_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetReason() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
-	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValueYear int64
-
-		// Act
-		obj.SetYear(fernTestValueYear)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValuePercent string
-
-		// Act
-		obj.SetPercent(fernTestValuePercent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason
-
-		// Act
-		obj.SetReason(fernTestValueReason)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestSettersAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4102,7 +2481,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -4110,7 +2489,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -4118,7 +2497,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -4126,23 +2505,23 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -4150,7 +2529,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueSalvageValue string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -4158,7 +2537,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -4166,7 +2545,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -4174,7 +2553,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -4182,7 +2561,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueNetBookValue string
 		obj.SetNetBookValue(fernTestValueNetBookValue)
 		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
@@ -4190,7 +2569,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -4198,7 +2577,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
 		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
@@ -4206,15 +2585,15 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsGetResponseStatus
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueStatus AssetsCreateAssetsResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -4222,15 +2601,15 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsGetResponseDocumentsItem
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDocuments []*AssetsCreateAssetsResponseDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
@@ -4238,15 +2617,15 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
@@ -4254,7 +2633,7 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
@@ -4262,16 +2641,48 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsCreateAssetsResponseInputVatUseChangesItem
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsCreateAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -4279,11 +2690,11 @@ func TestSettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestGettersAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -4293,7 +2704,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4306,7 +2717,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.GroupID = expected
 
@@ -4316,7 +2727,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4329,7 +2740,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -4339,7 +2750,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4352,7 +2763,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -4362,7 +2773,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4375,8 +2786,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected string
+		obj := &AssetsCreateAssetsResponse{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -4385,7 +2796,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4398,8 +2809,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected string
+		obj := &AssetsCreateAssetsResponse{}
+		var expected time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -4408,7 +2819,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4421,7 +2832,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -4431,7 +2842,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4444,7 +2855,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.SalvageValue = expected
 
@@ -4454,7 +2865,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4467,7 +2878,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected int64
 		obj.UsefulLifeMonths = expected
 
@@ -4477,7 +2888,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4490,7 +2901,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -4500,7 +2911,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4513,7 +2924,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.AccumulatedDepreciation = expected
 
@@ -4523,7 +2934,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4536,7 +2947,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetNetBookValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected string
 		obj.NetBookValue = expected
 
@@ -4546,7 +2957,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4559,7 +2970,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected int64
 		obj.DepreciatedMonths = expected
 
@@ -4569,7 +2980,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4582,7 +2993,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetTotalLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected int64
 		obj.TotalLifeMonths = expected
 
@@ -4592,7 +3003,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4605,8 +3016,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected PostV1AssetsAssetsGetResponseStatus
+		obj := &AssetsCreateAssetsResponse{}
+		var expected AssetsCreateAssetsResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -4615,7 +3026,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4628,7 +3039,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4639,7 +3050,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4648,7 +3059,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4661,8 +3072,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected []*PostV1AssetsAssetsGetResponseDocumentsItem
+		obj := &AssetsCreateAssetsResponse{}
+		var expected []*AssetsCreateAssetsResponseDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -4672,7 +3083,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -4681,7 +3092,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4694,7 +3105,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected *string
 		obj.InputVatAmount = expected
 
@@ -4705,7 +3116,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.InputVatAmount = nil
 
 		// Act & Assert
@@ -4714,7 +3125,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4727,8 +3138,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected *string
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *time.Time
 		obj.InputVatFirstUseDate = expected
 
 		// Act & Assert
@@ -4738,7 +3149,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.InputVatFirstUseDate = nil
 
 		// Act & Assert
@@ -4747,7 +3158,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4760,7 +3171,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected *string
 		obj.InputVatDeductiblePercent = expected
 
@@ -4771,7 +3182,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.InputVatDeductiblePercent = nil
 
 		// Act & Assert
@@ -4780,7 +3191,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4793,7 +3204,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatRealEstate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var expected bool
 		obj.InputVatRealEstate = expected
 
@@ -4803,7 +3214,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4816,8 +3227,8 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		obj := &AssetsCreateAssetsResponse{}
+		var expected []*AssetsCreateAssetsResponseInputVatUseChangesItem
 		obj.InputVatUseChanges = expected
 
 		// Act & Assert
@@ -4827,7 +3238,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		obj.InputVatUseChanges = nil
 
 		// Act & Assert
@@ -4836,7 +3247,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4846,11 +3257,143 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 		_ = obj.GetInputVatUseChanges() // Should return zero value
 	})
 
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsCreateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *AssetsCreateAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsCreateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsCreateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsCreateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var expected string
+		obj := &AssetsCreateAssetsResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4859,7 +3402,7 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4871,11 +3414,11 @@ func TestGettersPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4906,7 +3449,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -4937,7 +3480,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -4968,7 +3511,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -4999,8 +3542,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -5030,8 +3573,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -5061,7 +3604,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -5092,7 +3635,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueSalvageValue string
 
 		// Act
@@ -5123,7 +3666,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 
 		// Act
@@ -5154,7 +3697,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -5185,7 +3728,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 
 		// Act
@@ -5216,7 +3759,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueNetBookValue string
 
 		// Act
@@ -5247,7 +3790,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 
 		// Act
@@ -5278,7 +3821,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 
 		// Act
@@ -5309,8 +3852,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsGetResponseStatus
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueStatus AssetsCreateAssetsResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -5340,7 +3883,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -5371,8 +3914,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsGetResponseDocumentsItem
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDocuments []*AssetsCreateAssetsResponseDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -5402,7 +3945,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 
 		// Act
@@ -5433,8 +3976,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
@@ -5464,7 +4007,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
@@ -5495,7 +4038,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 
 		// Act
@@ -5526,8 +4069,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsCreateAssetsResponseInputVatUseChangesItem
 
 		// Act
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
@@ -5554,11 +4097,135 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsCreateAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -5587,9 +4254,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestSettersAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -5597,7 +4264,7 @@ func TestSettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -5606,11 +4273,11 @@ func TestSettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestGettersAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -5620,7 +4287,7 @@ func TestGettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj *AssetsCreateAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5633,7 +4300,7 @@ func TestGettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -5643,7 +4310,7 @@ func TestGettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj *AssetsCreateAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5655,11 +4322,11 @@ func TestGettersPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -5690,7 +4357,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseDocumentsItem(t *testin
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -5720,9 +4387,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseDocumentsItem(t *testin
 
 }
 
-func TestSettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -5730,7 +4397,7 @@ func TestSettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 	})
 
 	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 		obj.SetPercent(fernTestValuePercent)
 		assert.Equal(t, fernTestValuePercent, obj.Percent)
@@ -5738,8 +4405,8 @@ func TestSettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 	})
 
 	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsCreateAssetsResponseInputVatUseChangesItemReason
 		obj.SetReason(fernTestValueReason)
 		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
@@ -5747,11 +4414,11 @@ func TestSettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 
 }
 
-func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestGettersAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -5761,7 +4428,7 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj *AssetsCreateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5774,7 +4441,7 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 	t.Run("GetPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var expected string
 		obj.Percent = expected
 
@@ -5784,7 +4451,7 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 
 	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj *AssetsCreateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5797,8 +4464,8 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 	t.Run("GetReason", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsCreateAssetsResponseInputVatUseChangesItemReason
 		obj.Reason = expected
 
 		// Act & Assert
@@ -5807,7 +4474,7 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 
 	t.Run("GetReason_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj *AssetsCreateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5819,11 +4486,11 @@ func TestGettersPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -5854,7 +4521,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseInputVatUseChangesItem(
 	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 
 		// Act
@@ -5885,8 +4552,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseInputVatUseChangesItem(
 	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsCreateAssetsResponseInputVatUseChangesItemReason
 
 		// Act
 		obj.SetReason(fernTestValueReason)
@@ -5915,204 +4582,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsGetResponseInputVatUseChangesItem(
 
 }
 
-func TestSettersPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
-	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValueYear int64
-		obj.SetYear(fernTestValueYear)
-		assert.Equal(t, fernTestValueYear, obj.Year)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValuePercent string
-		obj.SetPercent(fernTestValuePercent)
-		assert.Equal(t, fernTestValuePercent, obj.Percent)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason
-		obj.SetReason(fernTestValueReason)
-		assert.Equal(t, fernTestValueReason, obj.Reason)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
-	t.Run("GetYear", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var expected int64
-		obj.Year = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetYear(), "getter should return the property value")
-	})
-
-	t.Run("GetYear_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetYear() // Should return zero value
-	})
-
-	t.Run("GetPercent", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var expected string
-		obj.Percent = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPercent(), "getter should return the property value")
-	})
-
-	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPercent() // Should return zero value
-	})
-
-	t.Run("GetReason", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason
-		obj.Reason = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
-	})
-
-	t.Run("GetReason_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetReason() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
-	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValueYear int64
-
-		// Act
-		obj.SetYear(fernTestValueYear)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValuePercent string
-
-		// Act
-		obj.SetPercent(fernTestValuePercent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason
-
-		// Act
-		obj.SetReason(fernTestValueReason)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestSettersAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6120,7 +4592,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -6128,7 +4600,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -6136,7 +4608,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -6144,23 +4616,23 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -6168,7 +4640,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueSalvageValue string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -6176,7 +4648,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -6184,7 +4656,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -6192,7 +4664,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -6200,7 +4672,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueNetBookValue string
 		obj.SetNetBookValue(fernTestValueNetBookValue)
 		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
@@ -6208,7 +4680,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -6216,7 +4688,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
 		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
@@ -6224,15 +4696,15 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsInputVatResponseStatus
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueStatus AssetsDisposeAssetsResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -6240,15 +4712,15 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsInputVatResponseDocumentsItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDocuments []*AssetsDisposeAssetsResponseDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
@@ -6256,15 +4728,15 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
@@ -6272,7 +4744,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
@@ -6280,16 +4752,48 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsDisposeAssetsResponseInputVatUseChangesItem
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsDisposeAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -6297,11 +4801,11 @@ func TestSettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestGettersAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -6311,7 +4815,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6324,7 +4828,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.GroupID = expected
 
@@ -6334,7 +4838,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6347,7 +4851,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -6357,7 +4861,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6370,7 +4874,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -6380,7 +4884,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6393,8 +4897,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected string
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -6403,7 +4907,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6416,8 +4920,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected string
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -6426,7 +4930,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6439,7 +4943,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -6449,7 +4953,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6462,7 +4966,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.SalvageValue = expected
 
@@ -6472,7 +4976,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6485,7 +4989,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected int64
 		obj.UsefulLifeMonths = expected
 
@@ -6495,7 +4999,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6508,7 +5012,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -6518,7 +5022,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6531,7 +5035,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.AccumulatedDepreciation = expected
 
@@ -6541,7 +5045,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6554,7 +5058,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetNetBookValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected string
 		obj.NetBookValue = expected
 
@@ -6564,7 +5068,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6577,7 +5081,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected int64
 		obj.DepreciatedMonths = expected
 
@@ -6587,7 +5091,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6600,7 +5104,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetTotalLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected int64
 		obj.TotalLifeMonths = expected
 
@@ -6610,7 +5114,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6623,8 +5127,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected PostV1AssetsAssetsInputVatResponseStatus
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected AssetsDisposeAssetsResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -6633,7 +5137,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6646,7 +5150,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -6657,7 +5161,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -6666,7 +5170,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6679,8 +5183,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected []*PostV1AssetsAssetsInputVatResponseDocumentsItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected []*AssetsDisposeAssetsResponseDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -6690,7 +5194,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -6699,7 +5203,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6712,7 +5216,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected *string
 		obj.InputVatAmount = expected
 
@@ -6723,7 +5227,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.InputVatAmount = nil
 
 		// Act & Assert
@@ -6732,7 +5236,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6745,8 +5249,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected *string
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *time.Time
 		obj.InputVatFirstUseDate = expected
 
 		// Act & Assert
@@ -6756,7 +5260,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.InputVatFirstUseDate = nil
 
 		// Act & Assert
@@ -6765,7 +5269,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6778,7 +5282,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected *string
 		obj.InputVatDeductiblePercent = expected
 
@@ -6789,7 +5293,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.InputVatDeductiblePercent = nil
 
 		// Act & Assert
@@ -6798,7 +5302,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6811,7 +5315,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatRealEstate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var expected bool
 		obj.InputVatRealEstate = expected
 
@@ -6821,7 +5325,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6834,8 +5338,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected []*AssetsDisposeAssetsResponseInputVatUseChangesItem
 		obj.InputVatUseChanges = expected
 
 		// Act & Assert
@@ -6845,7 +5349,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		obj.InputVatUseChanges = nil
 
 		// Act & Assert
@@ -6854,7 +5358,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6864,11 +5368,143 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 		_ = obj.GetInputVatUseChanges() // Should return zero value
 	})
 
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsDisposeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *AssetsDisposeAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsDisposeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsDisposeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsDisposeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var expected string
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6877,7 +5513,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsDisposeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6889,11 +5525,11 @@ func TestGettersPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestSettersMarkExplicitAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -6924,7 +5560,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -6955,7 +5591,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -6986,7 +5622,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -7017,8 +5653,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -7048,8 +5684,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -7079,7 +5715,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -7110,7 +5746,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueSalvageValue string
 
 		// Act
@@ -7141,7 +5777,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 
 		// Act
@@ -7172,7 +5808,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -7203,7 +5839,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 
 		// Act
@@ -7234,7 +5870,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueNetBookValue string
 
 		// Act
@@ -7265,7 +5901,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 
 		// Act
@@ -7296,7 +5932,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 
 		// Act
@@ -7327,8 +5963,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsInputVatResponseStatus
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueStatus AssetsDisposeAssetsResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -7358,7 +5994,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -7389,8 +6025,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsInputVatResponseDocumentsItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDocuments []*AssetsDisposeAssetsResponseDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -7420,7 +6056,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 
 		// Act
@@ -7451,8 +6087,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
@@ -7482,7 +6118,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
@@ -7513,7 +6149,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 
 		// Act
@@ -7544,8 +6180,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsDisposeAssetsResponseInputVatUseChangesItem
 
 		// Act
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
@@ -7572,11 +6208,135 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsDisposeAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -7605,9 +6365,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestSettersAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -7615,7 +6375,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -7624,11 +6384,11 @@ func TestSettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestGettersAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -7638,7 +6398,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj *AssetsDisposeAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7651,7 +6411,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -7661,7 +6421,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj *AssetsDisposeAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7673,11 +6433,11 @@ func TestGettersPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -7708,7 +6468,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseDocumentsItem(t *t
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -7738,9 +6498,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseDocumentsItem(t *t
 
 }
 
-func TestSettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -7748,7 +6508,7 @@ func TestSettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 	})
 
 	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 		obj.SetPercent(fernTestValuePercent)
 		assert.Equal(t, fernTestValuePercent, obj.Percent)
@@ -7756,8 +6516,8 @@ func TestSettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 	})
 
 	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsDisposeAssetsResponseInputVatUseChangesItemReason
 		obj.SetReason(fernTestValueReason)
 		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
@@ -7765,11 +6525,11 @@ func TestSettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 
 }
 
-func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestGettersAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -7779,7 +6539,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj *AssetsDisposeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7792,7 +6552,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 	t.Run("GetPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var expected string
 		obj.Percent = expected
 
@@ -7802,7 +6562,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 
 	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj *AssetsDisposeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7815,8 +6575,8 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 	t.Run("GetReason", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsDisposeAssetsResponseInputVatUseChangesItemReason
 		obj.Reason = expected
 
 		// Act & Assert
@@ -7825,7 +6585,7 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 
 	t.Run("GetReason_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj *AssetsDisposeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7837,11 +6597,11 @@ func TestGettersPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *test
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -7872,7 +6632,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseInputVatUseChanges
 	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 
 		// Act
@@ -7903,8 +6663,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseInputVatUseChanges
 	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsDisposeAssetsResponseInputVatUseChangesItemReason
 
 		// Act
 		obj.SetReason(fernTestValueReason)
@@ -7933,9 +6693,4426 @@ func TestSettersMarkExplicitPostV1AssetsAssetsInputVatResponseInputVatUseChanges
 
 }
 
-func TestSettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestSettersAssetsGetAssetsResponse(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGroupID", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueGroupID string
+		obj.SetGroupID(fernTestValueGroupID)
+		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcquisitionDate", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
+		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
+		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDepreciationStartDate", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
+		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
+		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcquisitionCost", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAcquisitionCost string
+		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
+		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSalvageValue", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueSalvageValue string
+		obj.SetSalvageValue(fernTestValueSalvageValue)
+		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueUsefulLifeMonths int64
+		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
+		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotalCost", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueTotalCost string
+		obj.SetTotalCost(fernTestValueTotalCost)
+		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAccumulatedDepreciation string
+		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
+		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNetBookValue", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueNetBookValue string
+		obj.SetNetBookValue(fernTestValueNetBookValue)
+		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDepreciatedMonths", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDepreciatedMonths int64
+		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
+		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotalLifeMonths", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueTotalLifeMonths int64
+		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
+		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueStatus AssetsGetAssetsResponseStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocuments", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDocuments []*AssetsGetAssetsResponseDocumentsItem
+		obj.SetDocuments(fernTestValueDocuments)
+		assert.Equal(t, fernTestValueDocuments, obj.Documents)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatAmount", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatAmount *string
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
+		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
+		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatDeductiblePercent *string
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
+		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatRealEstate", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatRealEstate bool
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
+		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatUseChanges", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsGetAssetsResponseInputVatUseChangesItem
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
+		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsGetAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsGetAssetsResponse(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetGroupID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.GroupID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetGroupID(), "getter should return the property value")
+	})
+
+	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetGroupID() // Should return zero value
+	})
+
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetAcquisitionDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected time.Time
+		obj.AcquisitionDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcquisitionDate(), "getter should return the property value")
+	})
+
+	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcquisitionDate() // Should return zero value
+	})
+
+	t.Run("GetDepreciationStartDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected time.Time
+		obj.DepreciationStartDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDepreciationStartDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDepreciationStartDate() // Should return zero value
+	})
+
+	t.Run("GetAcquisitionCost", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.AcquisitionCost = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcquisitionCost(), "getter should return the property value")
+	})
+
+	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcquisitionCost() // Should return zero value
+	})
+
+	t.Run("GetSalvageValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.SalvageValue = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSalvageValue(), "getter should return the property value")
+	})
+
+	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSalvageValue() // Should return zero value
+	})
+
+	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected int64
+		obj.UsefulLifeMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUsefulLifeMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUsefulLifeMonths() // Should return zero value
+	})
+
+	t.Run("GetTotalCost", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.TotalCost = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTotalCost(), "getter should return the property value")
+	})
+
+	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTotalCost() // Should return zero value
+	})
+
+	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.AccumulatedDepreciation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAccumulatedDepreciation(), "getter should return the property value")
+	})
+
+	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAccumulatedDepreciation() // Should return zero value
+	})
+
+	t.Run("GetNetBookValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected string
+		obj.NetBookValue = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNetBookValue(), "getter should return the property value")
+	})
+
+	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNetBookValue() // Should return zero value
+	})
+
+	t.Run("GetDepreciatedMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected int64
+		obj.DepreciatedMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDepreciatedMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDepreciatedMonths() // Should return zero value
+	})
+
+	t.Run("GetTotalLifeMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected int64
+		obj.TotalLifeMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTotalLifeMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTotalLifeMonths() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected AssetsGetAssetsResponseStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetNotes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.Notes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNotes(), "getter should return the property value")
+	})
+
+	t.Run("GetNotes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.Notes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNotes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNotes() // Should return zero value
+	})
+
+	t.Run("GetDocuments", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected []*AssetsGetAssetsResponseDocumentsItem
+		obj.Documents = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocuments(), "getter should return the property value")
+	})
+
+	t.Run("GetDocuments_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.Documents = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocuments(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocuments() // Should return zero value
+	})
+
+	t.Run("GetInputVatAmount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.InputVatAmount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatAmount(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.InputVatAmount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatAmount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatAmount() // Should return zero value
+	})
+
+	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *time.Time
+		obj.InputVatFirstUseDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatFirstUseDate(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.InputVatFirstUseDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatFirstUseDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatFirstUseDate() // Should return zero value
+	})
+
+	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.InputVatDeductiblePercent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatDeductiblePercent(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.InputVatDeductiblePercent = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatDeductiblePercent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatDeductiblePercent() // Should return zero value
+	})
+
+	t.Run("GetInputVatRealEstate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected bool
+		obj.InputVatRealEstate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatRealEstate(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatRealEstate() // Should return zero value
+	})
+
+	t.Run("GetInputVatUseChanges", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected []*AssetsGetAssetsResponseInputVatUseChangesItem
+		obj.InputVatUseChanges = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatUseChanges(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.InputVatUseChanges = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatUseChanges(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatUseChanges() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *AssetsGetAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsGetAssetsResponse(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueGroupID string
+
+		// Act
+		obj.SetGroupID(fernTestValueGroupID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
+
+		// Act
+		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
+
+		// Act
+		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAcquisitionCost string
+
+		// Act
+		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueSalvageValue string
+
+		// Act
+		obj.SetSalvageValue(fernTestValueSalvageValue)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueUsefulLifeMonths int64
+
+		// Act
+		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueTotalCost string
+
+		// Act
+		obj.SetTotalCost(fernTestValueTotalCost)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueAccumulatedDepreciation string
+
+		// Act
+		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueNetBookValue string
+
+		// Act
+		obj.SetNetBookValue(fernTestValueNetBookValue)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDepreciatedMonths int64
+
+		// Act
+		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueTotalLifeMonths int64
+
+		// Act
+		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueStatus AssetsGetAssetsResponseStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDocuments []*AssetsGetAssetsResponseDocumentsItem
+
+		// Act
+		obj.SetDocuments(fernTestValueDocuments)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatAmount *string
+
+		// Act
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
+
+		// Act
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatDeductiblePercent *string
+
+		// Act
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatRealEstate bool
+
+		// Act
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsGetAssetsResponseInputVatUseChangesItem
+
+		// Act
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsGetAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("SetName", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRef", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var fernTestValueRef string
+		obj.SetRef(fernTestValueRef)
+		assert.Equal(t, fernTestValueRef, obj.Ref)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponseDocumentsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var expected string
+		obj.Ref = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRef(), "getter should return the property value")
+	})
+
+	t.Run("GetRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponseDocumentsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRef() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
+		var fernTestValueRef string
+
+		// Act
+		obj.SetRef(fernTestValueRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueYear int64
+		obj.SetYear(fernTestValueYear)
+		assert.Equal(t, fernTestValueYear, obj.Year)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPercent", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValuePercent string
+		obj.SetPercent(fernTestValuePercent)
+		assert.Equal(t, fernTestValuePercent, obj.Percent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsGetAssetsResponseInputVatUseChangesItemReason
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("GetYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var expected int64
+		obj.Year = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetYear(), "getter should return the property value")
+	})
+
+	t.Run("GetYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetYear() // Should return zero value
+	})
+
+	t.Run("GetPercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var expected string
+		obj.Percent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPercent(), "getter should return the property value")
+	})
+
+	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPercent() // Should return zero value
+	})
+
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsGetAssetsResponseInputVatUseChangesItemReason
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueYear int64
+
+		// Act
+		obj.SetYear(fernTestValueYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValuePercent string
+
+		// Act
+		obj.SetPercent(fernTestValuePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsGetAssetsResponseInputVatUseChangesItemReason
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValueYear int64
+		obj.SetYear(fernTestValueYear)
+		assert.Equal(t, fernTestValueYear, obj.Year)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPercent", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValuePercent string
+		obj.SetPercent(fernTestValuePercent)
+		assert.Equal(t, fernTestValuePercent, obj.Percent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValueReason AssetsInputVatAssetsRequestInputVatUseChangesItemReason
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
+	t.Run("GetYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var expected int64
+		obj.Year = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetYear(), "getter should return the property value")
+	})
+
+	t.Run("GetYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsRequestInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetYear() // Should return zero value
+	})
+
+	t.Run("GetPercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var expected string
+		obj.Percent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPercent(), "getter should return the property value")
+	})
+
+	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsRequestInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPercent() // Should return zero value
+	})
+
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var expected AssetsInputVatAssetsRequestInputVatUseChangesItemReason
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsRequestInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValueYear int64
+
+		// Act
+		obj.SetYear(fernTestValueYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValuePercent string
+
+		// Act
+		obj.SetPercent(fernTestValuePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
+		var fernTestValueReason AssetsInputVatAssetsRequestInputVatUseChangesItemReason
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsInputVatAssetsResponse(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGroupID", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueGroupID string
+		obj.SetGroupID(fernTestValueGroupID)
+		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcquisitionDate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
+		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
+		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDepreciationStartDate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
+		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
+		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcquisitionCost", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAcquisitionCost string
+		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
+		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSalvageValue", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueSalvageValue string
+		obj.SetSalvageValue(fernTestValueSalvageValue)
+		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueUsefulLifeMonths int64
+		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
+		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotalCost", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueTotalCost string
+		obj.SetTotalCost(fernTestValueTotalCost)
+		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAccumulatedDepreciation string
+		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
+		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNetBookValue", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueNetBookValue string
+		obj.SetNetBookValue(fernTestValueNetBookValue)
+		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDepreciatedMonths", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDepreciatedMonths int64
+		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
+		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotalLifeMonths", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueTotalLifeMonths int64
+		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
+		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueStatus AssetsInputVatAssetsResponseStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocuments", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDocuments []*AssetsInputVatAssetsResponseDocumentsItem
+		obj.SetDocuments(fernTestValueDocuments)
+		assert.Equal(t, fernTestValueDocuments, obj.Documents)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatAmount", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatAmount *string
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
+		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
+		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatDeductiblePercent *string
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
+		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatRealEstate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatRealEstate bool
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
+		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInputVatUseChanges", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsInputVatAssetsResponseInputVatUseChangesItem
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
+		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsInputVatAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsInputVatAssetsResponse(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetGroupID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.GroupID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetGroupID(), "getter should return the property value")
+	})
+
+	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetGroupID() // Should return zero value
+	})
+
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetAcquisitionDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected time.Time
+		obj.AcquisitionDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcquisitionDate(), "getter should return the property value")
+	})
+
+	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcquisitionDate() // Should return zero value
+	})
+
+	t.Run("GetDepreciationStartDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected time.Time
+		obj.DepreciationStartDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDepreciationStartDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDepreciationStartDate() // Should return zero value
+	})
+
+	t.Run("GetAcquisitionCost", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.AcquisitionCost = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcquisitionCost(), "getter should return the property value")
+	})
+
+	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcquisitionCost() // Should return zero value
+	})
+
+	t.Run("GetSalvageValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.SalvageValue = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSalvageValue(), "getter should return the property value")
+	})
+
+	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSalvageValue() // Should return zero value
+	})
+
+	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected int64
+		obj.UsefulLifeMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUsefulLifeMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUsefulLifeMonths() // Should return zero value
+	})
+
+	t.Run("GetTotalCost", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.TotalCost = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTotalCost(), "getter should return the property value")
+	})
+
+	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTotalCost() // Should return zero value
+	})
+
+	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.AccumulatedDepreciation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAccumulatedDepreciation(), "getter should return the property value")
+	})
+
+	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAccumulatedDepreciation() // Should return zero value
+	})
+
+	t.Run("GetNetBookValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected string
+		obj.NetBookValue = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNetBookValue(), "getter should return the property value")
+	})
+
+	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNetBookValue() // Should return zero value
+	})
+
+	t.Run("GetDepreciatedMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected int64
+		obj.DepreciatedMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDepreciatedMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDepreciatedMonths() // Should return zero value
+	})
+
+	t.Run("GetTotalLifeMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected int64
+		obj.TotalLifeMonths = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTotalLifeMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTotalLifeMonths() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected AssetsInputVatAssetsResponseStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetNotes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.Notes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNotes(), "getter should return the property value")
+	})
+
+	t.Run("GetNotes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.Notes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNotes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNotes() // Should return zero value
+	})
+
+	t.Run("GetDocuments", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected []*AssetsInputVatAssetsResponseDocumentsItem
+		obj.Documents = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocuments(), "getter should return the property value")
+	})
+
+	t.Run("GetDocuments_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.Documents = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocuments(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocuments() // Should return zero value
+	})
+
+	t.Run("GetInputVatAmount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.InputVatAmount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatAmount(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.InputVatAmount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatAmount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatAmount() // Should return zero value
+	})
+
+	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *time.Time
+		obj.InputVatFirstUseDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatFirstUseDate(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.InputVatFirstUseDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatFirstUseDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatFirstUseDate() // Should return zero value
+	})
+
+	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.InputVatDeductiblePercent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatDeductiblePercent(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.InputVatDeductiblePercent = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatDeductiblePercent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatDeductiblePercent() // Should return zero value
+	})
+
+	t.Run("GetInputVatRealEstate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected bool
+		obj.InputVatRealEstate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatRealEstate(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatRealEstate() // Should return zero value
+	})
+
+	t.Run("GetInputVatUseChanges", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected []*AssetsInputVatAssetsResponseInputVatUseChangesItem
+		obj.InputVatUseChanges = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInputVatUseChanges(), "getter should return the property value")
+	})
+
+	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.InputVatUseChanges = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInputVatUseChanges(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInputVatUseChanges() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *AssetsInputVatAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsInputVatAssetsResponse(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueGroupID string
+
+		// Act
+		obj.SetGroupID(fernTestValueGroupID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
+
+		// Act
+		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
+
+		// Act
+		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAcquisitionCost string
+
+		// Act
+		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueSalvageValue string
+
+		// Act
+		obj.SetSalvageValue(fernTestValueSalvageValue)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueUsefulLifeMonths int64
+
+		// Act
+		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueTotalCost string
+
+		// Act
+		obj.SetTotalCost(fernTestValueTotalCost)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueAccumulatedDepreciation string
+
+		// Act
+		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueNetBookValue string
+
+		// Act
+		obj.SetNetBookValue(fernTestValueNetBookValue)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDepreciatedMonths int64
+
+		// Act
+		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueTotalLifeMonths int64
+
+		// Act
+		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueStatus AssetsInputVatAssetsResponseStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDocuments []*AssetsInputVatAssetsResponseDocumentsItem
+
+		// Act
+		obj.SetDocuments(fernTestValueDocuments)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatAmount *string
+
+		// Act
+		obj.SetInputVatAmount(fernTestValueInputVatAmount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
+
+		// Act
+		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatDeductiblePercent *string
+
+		// Act
+		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatRealEstate bool
+
+		// Act
+		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsInputVatAssetsResponseInputVatUseChangesItem
+
+		// Act
+		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsInputVatAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("SetName", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRef", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var fernTestValueRef string
+		obj.SetRef(fernTestValueRef)
+		assert.Equal(t, fernTestValueRef, obj.Ref)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponseDocumentsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var expected string
+		obj.Ref = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRef(), "getter should return the property value")
+	})
+
+	t.Run("GetRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponseDocumentsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRef() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
+		var fernTestValueRef string
+
+		// Act
+		obj.SetRef(fernTestValueRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueYear int64
+		obj.SetYear(fernTestValueYear)
+		assert.Equal(t, fernTestValueYear, obj.Year)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPercent", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValuePercent string
+		obj.SetPercent(fernTestValuePercent)
+		assert.Equal(t, fernTestValuePercent, obj.Percent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsInputVatAssetsResponseInputVatUseChangesItemReason
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("GetYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var expected int64
+		obj.Year = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetYear(), "getter should return the property value")
+	})
+
+	t.Run("GetYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetYear() // Should return zero value
+	})
+
+	t.Run("GetPercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var expected string
+		obj.Percent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPercent(), "getter should return the property value")
+	})
+
+	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPercent() // Should return zero value
+	})
+
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsInputVatAssetsResponseInputVatUseChangesItemReason
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponseInputVatUseChangesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
+	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueYear int64
+
+		// Act
+		obj.SetYear(fernTestValueYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValuePercent string
+
+		// Act
+		obj.SetPercent(fernTestValuePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsInputVatAssetsResponseInputVatUseChangesItemReason
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -7943,16 +11120,16 @@ func TestSettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var fernTestValueOp PostV1AssetsAssetsListRequestFilterItemOp
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var fernTestValueOp AssetsListAssetsRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var fernTestValueValue *PostV1AssetsAssetsListRequestFilterItemValue
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var fernTestValueValue *AssetsListAssetsRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -7960,11 +11137,11 @@ func TestSettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestGettersAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -7974,7 +11151,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItem
+		var obj *AssetsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7987,8 +11164,8 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var expected PostV1AssetsAssetsListRequestFilterItemOp
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var expected AssetsListAssetsRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -7997,7 +11174,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItem
+		var obj *AssetsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8010,8 +11187,8 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var expected *PostV1AssetsAssetsListRequestFilterItemValue
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var expected *AssetsListAssetsRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -8021,7 +11198,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -8030,7 +11207,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItem
+		var obj *AssetsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8042,11 +11219,11 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -8077,8 +11254,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListRequestFilterItem(t *testing.T
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var fernTestValueOp PostV1AssetsAssetsListRequestFilterItemOp
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var fernTestValueOp AssetsListAssetsRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -8108,8 +11285,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListRequestFilterItem(t *testing.T
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
-		var fernTestValueValue *PostV1AssetsAssetsListRequestFilterItemValue
+		obj := &AssetsListAssetsRequestFilterItem{}
+		var fernTestValueValue *AssetsListAssetsRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -8138,11 +11315,11 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListRequestFilterItem(t *testing.T
 
 }
 
-func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
+func TestGettersAssetsListAssetsRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValue{}
+		obj := &AssetsListAssetsRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -8152,7 +11329,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValue
+		var obj *AssetsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8165,7 +11342,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValue{}
+		obj := &AssetsListAssetsRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -8175,7 +11352,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValue
+		var obj *AssetsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8188,7 +11365,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValue{}
+		obj := &AssetsListAssetsRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -8198,7 +11375,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValue
+		var obj *AssetsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8208,46 +11385,46 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetAssetsListAssetsRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValue{}
-		var expected []*PostV1AssetsAssetsListRequestFilterItemValueThreeItem
-		obj.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList = expected
+		obj := &AssetsListAssetsRequestFilterItemValue{}
+		var expected []*AssetsListAssetsRequestFilterItemValueThreeItem
+		obj.AssetsListAssetsRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetAssetsListAssetsRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetAssetsListAssetsRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValue{}
-		obj.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList = nil
+		obj := &AssetsListAssetsRequestFilterItemValue{}
+		obj.AssetsListAssetsRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetAssetsListAssetsRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetAssetsListAssetsRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValue
+		var obj *AssetsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetAssetsListAssetsRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1AssetsAssetsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersAssetsListAssetsRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValueThreeItem{}
+		obj := &AssetsListAssetsRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -8257,7 +11434,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValueThreeItem(t *testing
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValueThreeItem
+		var obj *AssetsListAssetsRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8270,7 +11447,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValueThreeItem(t *testing
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItemValueThreeItem{}
+		obj := &AssetsListAssetsRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -8280,7 +11457,7 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValueThreeItem(t *testing
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItemValueThreeItem
+		var obj *AssetsListAssetsRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8292,9 +11469,9 @@ func TestGettersPostV1AssetsAssetsListRequestFilterItemValueThreeItem(t *testing
 
 }
 
-func TestSettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestSettersAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -8302,8 +11479,8 @@ func TestSettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
-		var fernTestValueDir *PostV1AssetsAssetsListRequestSortItemDir
+		obj := &AssetsListAssetsRequestSortItem{}
+		var fernTestValueDir *AssetsListAssetsRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -8311,11 +11488,11 @@ func TestSettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestGettersAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -8325,7 +11502,7 @@ func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestSortItem
+		var obj *AssetsListAssetsRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8338,8 +11515,8 @@ func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
-		var expected *PostV1AssetsAssetsListRequestSortItemDir
+		obj := &AssetsListAssetsRequestSortItem{}
+		var expected *AssetsListAssetsRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -8349,7 +11526,7 @@ func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -8358,7 +11535,7 @@ func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestSortItem
+		var obj *AssetsListAssetsRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8370,11 +11547,11 @@ func TestGettersPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -8405,8 +11582,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListRequestSortItem(t *testing.T) 
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
-		var fernTestValueDir *PostV1AssetsAssetsListRequestSortItemDir
+		obj := &AssetsListAssetsRequestSortItem{}
+		var fernTestValueDir *AssetsListAssetsRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -8435,17 +11612,17 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListRequestSortItem(t *testing.T) 
 
 }
 
-func TestSettersPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestSettersAssetsListAssetsResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponse{}
-		var fernTestValueRows []*PostV1AssetsAssetsListResponseRowsItem
+		obj := &AssetsListAssetsResponse{}
+		var fernTestValueRows []*AssetsListAssetsResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -8453,7 +11630,7 @@ func TestSettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -8461,7 +11638,7 @@ func TestSettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -8469,7 +11646,7 @@ func TestSettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -8478,12 +11655,12 @@ func TestSettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestGettersAssetsListAssetsResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
-		var expected []*PostV1AssetsAssetsListResponseRowsItem
+		obj := &AssetsListAssetsResponse{}
+		var expected []*AssetsListAssetsResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -8493,7 +11670,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -8502,7 +11679,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8515,7 +11692,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -8525,7 +11702,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8538,7 +11715,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -8548,7 +11725,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8561,7 +11738,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -8571,7 +11748,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8584,7 +11761,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -8595,7 +11772,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -8604,7 +11781,7 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8616,12 +11793,12 @@ func TestGettersPostV1AssetsAssetsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
-		var fernTestValueRows []*PostV1AssetsAssetsListResponseRowsItem
+		obj := &AssetsListAssetsResponse{}
+		var fernTestValueRows []*AssetsListAssetsResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -8651,7 +11828,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -8682,7 +11859,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -8713,7 +11890,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -8744,7 +11921,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsListAssetsResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -8774,9 +11951,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestSettersAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8784,7 +11961,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -8792,7 +11969,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -8800,7 +11977,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -8808,23 +11985,23 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDepreciationStartDate time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -8832,7 +12009,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueSalvageValue string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -8840,7 +12017,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueUsefulLifeMonths int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -8848,7 +12025,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -8856,7 +12033,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueAccumulatedDepreciation string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -8864,7 +12041,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueNetBookValue string
 		obj.SetNetBookValue(fernTestValueNetBookValue)
 		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
@@ -8872,7 +12049,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueDepreciatedMonths int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -8880,7 +12057,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueTotalLifeMonths int64
 		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
 		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
@@ -8888,15 +12065,15 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueStatus PostV1AssetsAssetsListResponseRowsItemStatus
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueStatus AssetsListAssetsResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -8904,15 +12081,15 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDocuments []*AssetsListAssetsResponseRowsItemDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatAmount *string
 		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
@@ -8920,15 +12097,15 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatDeductiblePercent *string
 		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
@@ -8936,7 +12113,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatRealEstate bool
 		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
@@ -8944,16 +12121,48 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueInputVatUseChanges []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalReason *AssetsListAssetsResponseRowsItemDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -8961,11 +12170,11 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestGettersAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -8975,7 +12184,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8988,7 +12197,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.GroupID = expected
 
@@ -8998,7 +12207,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9011,7 +12220,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -9021,7 +12230,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9034,7 +12243,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -9044,7 +12253,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9057,8 +12266,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -9067,7 +12276,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9080,8 +12289,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -9090,7 +12299,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9103,7 +12312,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -9113,7 +12322,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9126,7 +12335,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.SalvageValue = expected
 
@@ -9136,7 +12345,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9149,7 +12358,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected int64
 		obj.UsefulLifeMonths = expected
 
@@ -9159,7 +12368,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9172,7 +12381,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -9182,7 +12391,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9195,7 +12404,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.AccumulatedDepreciation = expected
 
@@ -9205,7 +12414,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9218,7 +12427,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNetBookValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected string
 		obj.NetBookValue = expected
 
@@ -9228,7 +12437,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9241,7 +12450,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected int64
 		obj.DepreciatedMonths = expected
 
@@ -9251,7 +12460,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9264,7 +12473,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTotalLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected int64
 		obj.TotalLifeMonths = expected
 
@@ -9274,7 +12483,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9287,8 +12496,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected PostV1AssetsAssetsListResponseRowsItemStatus
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected AssetsListAssetsResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -9297,7 +12506,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9310,7 +12519,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -9321,7 +12530,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -9330,7 +12539,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9343,8 +12552,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected []*AssetsListAssetsResponseRowsItemDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -9354,7 +12563,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -9363,7 +12572,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9376,7 +12585,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected *string
 		obj.InputVatAmount = expected
 
@@ -9387,7 +12596,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.InputVatAmount = nil
 
 		// Act & Assert
@@ -9396,7 +12605,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9409,8 +12618,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected *string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *time.Time
 		obj.InputVatFirstUseDate = expected
 
 		// Act & Assert
@@ -9420,7 +12629,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.InputVatFirstUseDate = nil
 
 		// Act & Assert
@@ -9429,7 +12638,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9442,7 +12651,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected *string
 		obj.InputVatDeductiblePercent = expected
 
@@ -9453,7 +12662,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.InputVatDeductiblePercent = nil
 
 		// Act & Assert
@@ -9462,7 +12671,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9475,7 +12684,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatRealEstate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var expected bool
 		obj.InputVatRealEstate = expected
 
@@ -9485,7 +12694,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9498,8 +12707,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatUseChanges", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		obj.InputVatUseChanges = expected
 
 		// Act & Assert
@@ -9509,7 +12718,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		obj.InputVatUseChanges = nil
 
 		// Act & Assert
@@ -9518,7 +12727,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9528,11 +12737,143 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetInputVatUseChanges() // Should return zero value
 	})
 
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsListAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *AssetsListAssetsResponseRowsItemDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsListAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsListAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsListAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var expected string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -9541,7 +12882,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9553,11 +12894,11 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -9588,7 +12929,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -9619,7 +12960,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -9650,7 +12991,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -9681,8 +13022,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -9712,8 +13053,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDepreciationStartDate time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -9743,7 +13084,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -9774,7 +13115,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueSalvageValue string
 
 		// Act
@@ -9805,7 +13146,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueUsefulLifeMonths int64
 
 		// Act
@@ -9836,7 +13177,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -9867,7 +13208,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueAccumulatedDepreciation string
 
 		// Act
@@ -9898,7 +13239,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueNetBookValue string
 
 		// Act
@@ -9929,7 +13270,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueDepreciatedMonths int64
 
 		// Act
@@ -9960,7 +13301,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueTotalLifeMonths int64
 
 		// Act
@@ -9991,8 +13332,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueStatus PostV1AssetsAssetsListResponseRowsItemStatus
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueStatus AssetsListAssetsResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -10022,7 +13363,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -10053,8 +13394,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDocuments []*AssetsListAssetsResponseRowsItemDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -10084,7 +13425,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatAmount *string
 
 		// Act
@@ -10115,8 +13456,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
@@ -10146,7 +13487,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
@@ -10177,7 +13518,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueInputVatRealEstate bool
 
 		// Act
@@ -10208,8 +13549,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueInputVatUseChanges []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 
 		// Act
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
@@ -10236,11 +13577,135 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalReason *AssetsListAssetsResponseRowsItemDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -10269,9 +13734,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItem(t *testing.T)
 
 }
 
-func TestSettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestSettersAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10279,7 +13744,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -10288,11 +13753,11 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 
 }
 
-func TestGettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestGettersAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10302,7 +13767,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj *AssetsListAssetsResponseRowsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10315,7 +13780,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -10325,7 +13790,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj *AssetsListAssetsResponseRowsItemDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10337,11 +13802,11 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10372,7 +13837,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemDocumentsItem(
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -10402,9 +13867,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemDocumentsItem(
 
 }
 
-func TestSettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestSettersAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -10412,7 +13877,7 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 	})
 
 	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var fernTestValuePercent string
 		obj.SetPercent(fernTestValuePercent)
 		assert.Equal(t, fernTestValuePercent, obj.Percent)
@@ -10420,8 +13885,8 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 	})
 
 	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
+		var fernTestValueReason AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason
 		obj.SetReason(fernTestValueReason)
 		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
@@ -10429,11 +13894,11 @@ func TestSettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 
 }
 
-func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestGettersAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -10443,7 +13908,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj *AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10456,7 +13921,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 	t.Run("GetPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var expected string
 		obj.Percent = expected
 
@@ -10466,7 +13931,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 
 	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj *AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10479,8 +13944,8 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 	t.Run("GetReason", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
+		var expected AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason
 		obj.Reason = expected
 
 		// Act & Assert
@@ -10489,7 +13954,7 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 
 	t.Run("GetReason_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj *AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10501,11 +13966,11 @@ func TestGettersPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -10536,7 +14001,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemInputVatUseCha
 	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		var fernTestValuePercent string
 
 		// Act
@@ -10567,8 +14032,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemInputVatUseCha
 	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
+		var fernTestValueReason AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason
 
 		// Act
 		obj.SetReason(fernTestValueReason)
@@ -10597,9 +14062,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsListResponseRowsItemInputVatUseCha
 
 }
 
-func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestSettersAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10607,7 +14072,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -10615,7 +14080,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10623,7 +14088,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10631,23 +14096,23 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -10655,7 +14120,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueSalvageValue string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -10663,7 +14128,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -10671,7 +14136,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -10679,7 +14144,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -10687,7 +14152,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueNetBookValue string
 		obj.SetNetBookValue(fernTestValueNetBookValue)
 		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
@@ -10695,7 +14160,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -10703,7 +14168,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
 		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
@@ -10711,15 +14176,15 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsModernizeResponseStatus
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueStatus AssetsModernizeAssetsResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -10727,15 +14192,15 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsModernizeResponseDocumentsItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDocuments []*AssetsModernizeAssetsResponseDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
@@ -10743,15 +14208,15 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
@@ -10759,7 +14224,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
@@ -10767,16 +14232,48 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsModernizeAssetsResponseInputVatUseChangesItem
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsModernizeAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -10784,11 +14281,11 @@ func TestSettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestGettersAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -10798,7 +14295,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10811,7 +14308,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.GroupID = expected
 
@@ -10821,7 +14318,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10834,7 +14331,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -10844,7 +14341,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10857,7 +14354,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -10867,7 +14364,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10880,8 +14377,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected string
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -10890,7 +14387,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10903,8 +14400,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected string
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -10913,7 +14410,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10926,7 +14423,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -10936,7 +14433,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10949,7 +14446,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.SalvageValue = expected
 
@@ -10959,7 +14456,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10972,7 +14469,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected int64
 		obj.UsefulLifeMonths = expected
 
@@ -10982,7 +14479,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10995,7 +14492,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -11005,7 +14502,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11018,7 +14515,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.AccumulatedDepreciation = expected
 
@@ -11028,7 +14525,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11041,7 +14538,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetNetBookValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected string
 		obj.NetBookValue = expected
 
@@ -11051,7 +14548,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11064,7 +14561,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected int64
 		obj.DepreciatedMonths = expected
 
@@ -11074,7 +14571,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11087,7 +14584,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetTotalLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected int64
 		obj.TotalLifeMonths = expected
 
@@ -11097,7 +14594,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11110,8 +14607,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected PostV1AssetsAssetsModernizeResponseStatus
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected AssetsModernizeAssetsResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -11120,7 +14617,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11133,7 +14630,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -11144,7 +14641,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -11153,7 +14650,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11166,8 +14663,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected []*PostV1AssetsAssetsModernizeResponseDocumentsItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected []*AssetsModernizeAssetsResponseDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -11177,7 +14674,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -11186,7 +14683,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11199,7 +14696,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected *string
 		obj.InputVatAmount = expected
 
@@ -11210,7 +14707,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.InputVatAmount = nil
 
 		// Act & Assert
@@ -11219,7 +14716,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11232,8 +14729,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected *string
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *time.Time
 		obj.InputVatFirstUseDate = expected
 
 		// Act & Assert
@@ -11243,7 +14740,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.InputVatFirstUseDate = nil
 
 		// Act & Assert
@@ -11252,7 +14749,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11265,7 +14762,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected *string
 		obj.InputVatDeductiblePercent = expected
 
@@ -11276,7 +14773,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.InputVatDeductiblePercent = nil
 
 		// Act & Assert
@@ -11285,7 +14782,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11298,7 +14795,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatRealEstate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var expected bool
 		obj.InputVatRealEstate = expected
 
@@ -11308,7 +14805,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11321,8 +14818,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected []*AssetsModernizeAssetsResponseInputVatUseChangesItem
 		obj.InputVatUseChanges = expected
 
 		// Act & Assert
@@ -11332,7 +14829,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		obj.InputVatUseChanges = nil
 
 		// Act & Assert
@@ -11341,7 +14838,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11351,11 +14848,143 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 		_ = obj.GetInputVatUseChanges() // Should return zero value
 	})
 
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsModernizeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *AssetsModernizeAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsModernizeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsModernizeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsModernizeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var expected string
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -11364,7 +14993,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsModernizeAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11376,11 +15005,11 @@ func TestGettersPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestSettersMarkExplicitAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -11411,7 +15040,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -11442,7 +15071,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -11473,7 +15102,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -11504,8 +15133,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -11535,8 +15164,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -11566,7 +15195,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -11597,7 +15226,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueSalvageValue string
 
 		// Act
@@ -11628,7 +15257,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 
 		// Act
@@ -11659,7 +15288,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -11690,7 +15319,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 
 		// Act
@@ -11721,7 +15350,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueNetBookValue string
 
 		// Act
@@ -11752,7 +15381,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 
 		// Act
@@ -11783,7 +15412,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 
 		// Act
@@ -11814,8 +15443,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsModernizeResponseStatus
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueStatus AssetsModernizeAssetsResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -11845,7 +15474,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -11876,8 +15505,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsModernizeResponseDocumentsItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDocuments []*AssetsModernizeAssetsResponseDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -11907,7 +15536,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 
 		// Act
@@ -11938,8 +15567,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
@@ -11969,7 +15598,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
@@ -12000,7 +15629,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsModernizeAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 
 		// Act
@@ -12031,8 +15660,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsModernizeAssetsResponseInputVatUseChangesItem
 
 		// Act
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
@@ -12059,11 +15688,135 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsModernizeAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -12092,9 +15845,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestSettersAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -12102,7 +15855,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -12111,11 +15864,11 @@ func TestSettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestGettersAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -12125,7 +15878,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj *AssetsModernizeAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12138,7 +15891,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -12148,7 +15901,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj *AssetsModernizeAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12160,11 +15913,11 @@ func TestGettersPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -12195,7 +15948,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseDocumentsItem(t *
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -12225,9 +15978,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseDocumentsItem(t *
 
 }
 
-func TestSettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -12235,7 +15988,7 @@ func TestSettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 	})
 
 	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 		obj.SetPercent(fernTestValuePercent)
 		assert.Equal(t, fernTestValuePercent, obj.Percent)
@@ -12243,8 +15996,8 @@ func TestSettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 	})
 
 	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsModernizeAssetsResponseInputVatUseChangesItemReason
 		obj.SetReason(fernTestValueReason)
 		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
@@ -12252,11 +16005,11 @@ func TestSettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 
 }
 
-func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestGettersAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -12266,7 +16019,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj *AssetsModernizeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12279,7 +16032,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 	t.Run("GetPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var expected string
 		obj.Percent = expected
 
@@ -12289,7 +16042,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 
 	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj *AssetsModernizeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12302,8 +16055,8 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 	t.Run("GetReason", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsModernizeAssetsResponseInputVatUseChangesItemReason
 		obj.Reason = expected
 
 		// Act & Assert
@@ -12312,7 +16065,7 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 
 	t.Run("GetReason_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj *AssetsModernizeAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12324,11 +16077,11 @@ func TestGettersPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *tes
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -12359,7 +16112,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseInputVatUseChange
 	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 
 		// Act
@@ -12390,8 +16143,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseInputVatUseChange
 	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsModernizeAssetsResponseInputVatUseChangesItemReason
 
 		// Act
 		obj.SetReason(fernTestValueReason)
@@ -12420,9 +16173,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsModernizeResponseInputVatUseChange
 
 }
 
-func TestSettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestSettersAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -12430,7 +16183,7 @@ func TestSettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -12439,11 +16192,11 @@ func TestSettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestGettersAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -12453,7 +16206,7 @@ func TestGettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj *AssetsUpdateAssetsRequestDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12466,7 +16219,7 @@ func TestGettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -12476,7 +16229,7 @@ func TestGettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj *AssetsUpdateAssetsRequestDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12488,11 +16241,11 @@ func TestGettersPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -12523,7 +16276,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateRequestDocumentsItem(t *test
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -12553,9 +16306,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateRequestDocumentsItem(t *test
 
 }
 
-func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestSettersAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -12563,7 +16316,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueGroupID string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -12571,7 +16324,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -12579,7 +16332,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -12587,23 +16340,23 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetAcquisitionDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
 		assert.Equal(t, fernTestValueAcquisitionDate, obj.AcquisitionDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDepreciationStartDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
 		assert.Equal(t, fernTestValueDepreciationStartDate, obj.DepreciationStartDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcquisitionCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 		obj.SetAcquisitionCost(fernTestValueAcquisitionCost)
 		assert.Equal(t, fernTestValueAcquisitionCost, obj.AcquisitionCost)
@@ -12611,7 +16364,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSalvageValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueSalvageValue string
 		obj.SetSalvageValue(fernTestValueSalvageValue)
 		assert.Equal(t, fernTestValueSalvageValue, obj.SalvageValue)
@@ -12619,7 +16372,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 		obj.SetUsefulLifeMonths(fernTestValueUsefulLifeMonths)
 		assert.Equal(t, fernTestValueUsefulLifeMonths, obj.UsefulLifeMonths)
@@ -12627,7 +16380,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalCost", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueTotalCost string
 		obj.SetTotalCost(fernTestValueTotalCost)
 		assert.Equal(t, fernTestValueTotalCost, obj.TotalCost)
@@ -12635,7 +16388,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetAccumulatedDepreciation", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 		obj.SetAccumulatedDepreciation(fernTestValueAccumulatedDepreciation)
 		assert.Equal(t, fernTestValueAccumulatedDepreciation, obj.AccumulatedDepreciation)
@@ -12643,7 +16396,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNetBookValue", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueNetBookValue string
 		obj.SetNetBookValue(fernTestValueNetBookValue)
 		assert.Equal(t, fernTestValueNetBookValue, obj.NetBookValue)
@@ -12651,7 +16404,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDepreciatedMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 		obj.SetDepreciatedMonths(fernTestValueDepreciatedMonths)
 		assert.Equal(t, fernTestValueDepreciatedMonths, obj.DepreciatedMonths)
@@ -12659,7 +16412,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotalLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 		obj.SetTotalLifeMonths(fernTestValueTotalLifeMonths)
 		assert.Equal(t, fernTestValueTotalLifeMonths, obj.TotalLifeMonths)
@@ -12667,15 +16420,15 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsUpdateResponseStatus
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueStatus AssetsUpdateAssetsResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -12683,15 +16436,15 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocuments", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsUpdateResponseDocumentsItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDocuments []*AssetsUpdateAssetsResponseDocumentsItem
 		obj.SetDocuments(fernTestValueDocuments)
 		assert.Equal(t, fernTestValueDocuments, obj.Documents)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatAmount", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 		obj.SetInputVatAmount(fernTestValueInputVatAmount)
 		assert.Equal(t, fernTestValueInputVatAmount, obj.InputVatAmount)
@@ -12699,15 +16452,15 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatFirstUseDate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
 		assert.Equal(t, fernTestValueInputVatFirstUseDate, obj.InputVatFirstUseDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInputVatDeductiblePercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 		obj.SetInputVatDeductiblePercent(fernTestValueInputVatDeductiblePercent)
 		assert.Equal(t, fernTestValueInputVatDeductiblePercent, obj.InputVatDeductiblePercent)
@@ -12715,7 +16468,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatRealEstate", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 		obj.SetInputVatRealEstate(fernTestValueInputVatRealEstate)
 		assert.Equal(t, fernTestValueInputVatRealEstate, obj.InputVatRealEstate)
@@ -12723,16 +16476,48 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetInputVatUseChanges", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsUpdateAssetsResponseInputVatUseChangesItem
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
 		assert.Equal(t, fernTestValueInputVatUseChanges, obj.InputVatUseChanges)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalReason", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsUpdateAssetsResponseDisposalReason
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+		assert.Equal(t, fernTestValueDisposalReason, obj.DisposalReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalProceeds", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+		assert.Equal(t, fernTestValueDisposalProceeds, obj.DisposalProceeds)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalJournalTransactionID", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -12740,11 +16525,11 @@ func TestSettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestGettersAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -12754,7 +16539,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12767,7 +16552,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.GroupID = expected
 
@@ -12777,7 +16562,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12790,7 +16575,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -12800,7 +16585,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12813,7 +16598,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -12823,7 +16608,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12836,8 +16621,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetAcquisitionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected string
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected time.Time
 		obj.AcquisitionDate = expected
 
 		// Act & Assert
@@ -12846,7 +16631,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12859,8 +16644,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetDepreciationStartDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected string
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected time.Time
 		obj.DepreciationStartDate = expected
 
 		// Act & Assert
@@ -12869,7 +16654,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDepreciationStartDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12882,7 +16667,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetAcquisitionCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.AcquisitionCost = expected
 
@@ -12892,7 +16677,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetAcquisitionCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12905,7 +16690,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetSalvageValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.SalvageValue = expected
 
@@ -12915,7 +16700,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetSalvageValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12928,7 +16713,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected int64
 		obj.UsefulLifeMonths = expected
 
@@ -12938,7 +16723,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12951,7 +16736,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetTotalCost", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.TotalCost = expected
 
@@ -12961,7 +16746,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetTotalCost_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12974,7 +16759,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetAccumulatedDepreciation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.AccumulatedDepreciation = expected
 
@@ -12984,7 +16769,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetAccumulatedDepreciation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12997,7 +16782,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetNetBookValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected string
 		obj.NetBookValue = expected
 
@@ -13007,7 +16792,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetNetBookValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13020,7 +16805,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetDepreciatedMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected int64
 		obj.DepreciatedMonths = expected
 
@@ -13030,7 +16815,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDepreciatedMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13043,7 +16828,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetTotalLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected int64
 		obj.TotalLifeMonths = expected
 
@@ -13053,7 +16838,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetTotalLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13066,8 +16851,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected PostV1AssetsAssetsUpdateResponseStatus
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected AssetsUpdateAssetsResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -13076,7 +16861,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13089,7 +16874,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -13100,7 +16885,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -13109,7 +16894,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13122,8 +16907,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetDocuments", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected []*PostV1AssetsAssetsUpdateResponseDocumentsItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected []*AssetsUpdateAssetsResponseDocumentsItem
 		obj.Documents = expected
 
 		// Act & Assert
@@ -13133,7 +16918,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetDocuments_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.Documents = nil
 
 		// Act & Assert
@@ -13142,7 +16927,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetDocuments_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13155,7 +16940,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected *string
 		obj.InputVatAmount = expected
 
@@ -13166,7 +16951,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.InputVatAmount = nil
 
 		// Act & Assert
@@ -13175,7 +16960,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetInputVatAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13188,8 +16973,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected *string
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *time.Time
 		obj.InputVatFirstUseDate = expected
 
 		// Act & Assert
@@ -13199,7 +16984,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatFirstUseDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.InputVatFirstUseDate = nil
 
 		// Act & Assert
@@ -13208,7 +16993,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetInputVatFirstUseDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13221,7 +17006,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected *string
 		obj.InputVatDeductiblePercent = expected
 
@@ -13232,7 +17017,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatDeductiblePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.InputVatDeductiblePercent = nil
 
 		// Act & Assert
@@ -13241,7 +17026,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetInputVatDeductiblePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13254,7 +17039,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatRealEstate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var expected bool
 		obj.InputVatRealEstate = expected
 
@@ -13264,7 +17049,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetInputVatRealEstate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13277,8 +17062,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected []*AssetsUpdateAssetsResponseInputVatUseChangesItem
 		obj.InputVatUseChanges = expected
 
 		// Act & Assert
@@ -13288,7 +17073,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("GetInputVatUseChanges_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		obj.InputVatUseChanges = nil
 
 		// Act & Assert
@@ -13297,7 +17082,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetInputVatUseChanges_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13307,11 +17092,143 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 		_ = obj.GetInputVatUseChanges() // Should return zero value
 	})
 
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
+	})
+
+	t.Run("GetDisposalReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *AssetsUpdateAssetsResponseDisposalReason
+		obj.DisposalReason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalReason(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		obj.DisposalReason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalReason() // Should return zero value
+	})
+
+	t.Run("GetDisposalProceeds", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *string
+		obj.DisposalProceeds = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalProceeds(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalProceeds_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		obj.DisposalProceeds = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalProceeds(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalProceeds_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalProceeds() // Should return zero value
+	})
+
+	t.Run("GetDisposalJournalTransactionID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *string
+		obj.DisposalJournalTransactionID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalJournalTransactionID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		obj.DisposalJournalTransactionID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalJournalTransactionID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalJournalTransactionID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var expected string
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -13320,7 +17237,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsUpdateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13332,11 +17249,11 @@ func TestGettersPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -13367,7 +17284,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueGroupID string
 
 		// Act
@@ -13398,7 +17315,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -13429,7 +17346,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -13460,8 +17377,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetAcquisitionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueAcquisitionDate string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueAcquisitionDate time.Time
 
 		// Act
 		obj.SetAcquisitionDate(fernTestValueAcquisitionDate)
@@ -13491,8 +17408,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetDepreciationStartDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueDepreciationStartDate string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDepreciationStartDate time.Time
 
 		// Act
 		obj.SetDepreciationStartDate(fernTestValueDepreciationStartDate)
@@ -13522,7 +17439,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetAcquisitionCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueAcquisitionCost string
 
 		// Act
@@ -13553,7 +17470,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetSalvageValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueSalvageValue string
 
 		// Act
@@ -13584,7 +17501,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueUsefulLifeMonths int64
 
 		// Act
@@ -13615,7 +17532,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetTotalCost_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueTotalCost string
 
 		// Act
@@ -13646,7 +17563,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetAccumulatedDepreciation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueAccumulatedDepreciation string
 
 		// Act
@@ -13677,7 +17594,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetNetBookValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueNetBookValue string
 
 		// Act
@@ -13708,7 +17625,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetDepreciatedMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueDepreciatedMonths int64
 
 		// Act
@@ -13739,7 +17656,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetTotalLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueTotalLifeMonths int64
 
 		// Act
@@ -13770,8 +17687,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueStatus PostV1AssetsAssetsUpdateResponseStatus
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueStatus AssetsUpdateAssetsResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -13801,7 +17718,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -13832,8 +17749,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetDocuments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueDocuments []*PostV1AssetsAssetsUpdateResponseDocumentsItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDocuments []*AssetsUpdateAssetsResponseDocumentsItem
 
 		// Act
 		obj.SetDocuments(fernTestValueDocuments)
@@ -13863,7 +17780,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetInputVatAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatAmount *string
 
 		// Act
@@ -13894,8 +17811,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetInputVatFirstUseDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueInputVatFirstUseDate *string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueInputVatFirstUseDate *time.Time
 
 		// Act
 		obj.SetInputVatFirstUseDate(fernTestValueInputVatFirstUseDate)
@@ -13925,7 +17842,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetInputVatDeductiblePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatDeductiblePercent *string
 
 		// Act
@@ -13956,7 +17873,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetInputVatRealEstate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		var fernTestValueInputVatRealEstate bool
 
 		// Act
@@ -13987,8 +17904,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 	t.Run("SetInputVatUseChanges_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueInputVatUseChanges []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueInputVatUseChanges []*AssetsUpdateAssetsResponseInputVatUseChangesItem
 
 		// Act
 		obj.SetInputVatUseChanges(fernTestValueInputVatUseChanges)
@@ -14015,11 +17932,135 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalReason *AssetsUpdateAssetsResponseDisposalReason
+
+		// Act
+		obj.SetDisposalReason(fernTestValueDisposalReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalProceeds_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalProceeds *string
+
+		// Act
+		obj.SetDisposalProceeds(fernTestValueDisposalProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalJournalTransactionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalJournalTransactionID *string
+
+		// Act
+		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -14048,9 +18089,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestSettersAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -14058,7 +18099,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 	})
 
 	t.Run("SetRef", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 		obj.SetRef(fernTestValueRef)
 		assert.Equal(t, fernTestValueRef, obj.Ref)
@@ -14067,11 +18108,11 @@ func TestSettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestGettersAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -14081,7 +18122,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj *AssetsUpdateAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14094,7 +18135,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 	t.Run("GetRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var expected string
 		obj.Ref = expected
 
@@ -14104,7 +18145,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 
 	t.Run("GetRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj *AssetsUpdateAssetsResponseDocumentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14116,11 +18157,11 @@ func TestGettersPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -14151,7 +18192,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseDocumentsItem(t *tes
 	t.Run("SetRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		var fernTestValueRef string
 
 		// Act
@@ -14181,9 +18222,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseDocumentsItem(t *tes
 
 }
 
-func TestSettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 		obj.SetYear(fernTestValueYear)
 		assert.Equal(t, fernTestValueYear, obj.Year)
@@ -14191,7 +18232,7 @@ func TestSettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 	})
 
 	t.Run("SetPercent", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 		obj.SetPercent(fernTestValuePercent)
 		assert.Equal(t, fernTestValuePercent, obj.Percent)
@@ -14199,8 +18240,8 @@ func TestSettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 	})
 
 	t.Run("SetReason", func(t *testing.T) {
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsUpdateAssetsResponseInputVatUseChangesItemReason
 		obj.SetReason(fernTestValueReason)
 		assert.Equal(t, fernTestValueReason, obj.Reason)
 		assert.NotNil(t, obj.explicitFields)
@@ -14208,11 +18249,11 @@ func TestSettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 
 }
 
-func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestGettersAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var expected int64
 		obj.Year = expected
 
@@ -14222,7 +18263,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 
 	t.Run("GetYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj *AssetsUpdateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14235,7 +18276,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 	t.Run("GetPercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var expected string
 		obj.Percent = expected
 
@@ -14245,7 +18286,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 
 	t.Run("GetPercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj *AssetsUpdateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14258,8 +18299,8 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 	t.Run("GetReason", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
-		var expected PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
+		var expected AssetsUpdateAssetsResponseInputVatUseChangesItemReason
 		obj.Reason = expected
 
 		// Act & Assert
@@ -14268,7 +18309,7 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 
 	t.Run("GetReason_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj *AssetsUpdateAssetsResponseInputVatUseChangesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14280,11 +18321,11 @@ func TestGettersPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestSettersMarkExplicitAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("SetYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValueYear int64
 
 		// Act
@@ -14315,7 +18356,7 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseInputVatUseChangesIt
 	t.Run("SetPercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		var fernTestValuePercent string
 
 		// Act
@@ -14346,8 +18387,8 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseInputVatUseChangesIt
 	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
-		var fernTestValueReason PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
+		var fernTestValueReason AssetsUpdateAssetsResponseInputVatUseChangesItemReason
 
 		// Act
 		obj.SetReason(fernTestValueReason)
@@ -14376,9 +18417,9 @@ func TestSettersMarkExplicitPostV1AssetsAssetsUpdateResponseInputVatUseChangesIt
 
 }
 
-func TestSettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestSettersDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("SetPosted", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValuePosted int64
 		obj.SetPosted(fernTestValuePosted)
 		assert.Equal(t, fernTestValuePosted, obj.Posted)
@@ -14386,7 +18427,7 @@ func TestSettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	})
 
 	t.Run("SetSkipped", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueSkipped int64
 		obj.SetSkipped(fernTestValueSkipped)
 		assert.Equal(t, fernTestValueSkipped, obj.Skipped)
@@ -14394,7 +18435,7 @@ func TestSettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14402,7 +18443,7 @@ func TestSettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -14411,11 +18452,11 @@ func TestSettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestGettersDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("GetPosted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var expected int64
 		obj.Posted = expected
 
@@ -14425,7 +18466,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 	t.Run("GetPosted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *DepreciationPostAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14438,7 +18479,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("GetSkipped", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var expected int64
 		obj.Skipped = expected
 
@@ -14448,7 +18489,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 	t.Run("GetSkipped_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *DepreciationPostAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14461,7 +18502,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var expected string
 		obj.Total = expected
 
@@ -14471,7 +18512,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *DepreciationPostAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14484,7 +18525,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -14495,7 +18536,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -14504,7 +18545,7 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *DepreciationPostAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14516,11 +18557,11 @@ func TestGettersPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestSettersMarkExplicitDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("SetPosted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValuePosted int64
 
 		// Act
@@ -14551,7 +18592,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("SetSkipped_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueSkipped int64
 
 		// Act
@@ -14582,7 +18623,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueTotal string
 
 		// Act
@@ -14613,7 +18654,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPostResponse(t *testing.T) {
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -14643,17 +18684,17 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestSettersDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
-		var fernTestValueRows []*PostV1AssetsDepreciationPreviewResponseRowsItem
+		obj := &DepreciationPreviewAssetsResponse{}
+		var fernTestValueRows []*DepreciationPreviewAssetsResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		var fernTestValueTotal string
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14662,12 +18703,12 @@ func TestSettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestGettersDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
-		var expected []*PostV1AssetsDepreciationPreviewResponseRowsItem
+		obj := &DepreciationPreviewAssetsResponse{}
+		var expected []*DepreciationPreviewAssetsResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -14677,7 +18718,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -14686,7 +18727,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponse
+		var obj *DepreciationPreviewAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14699,7 +18740,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		var expected string
 		obj.Total = expected
 
@@ -14709,7 +18750,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponse
+		var obj *DepreciationPreviewAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14721,12 +18762,12 @@ func TestGettersPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestSettersMarkExplicitDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
-		var fernTestValueRows []*PostV1AssetsDepreciationPreviewResponseRowsItem
+		obj := &DepreciationPreviewAssetsResponse{}
+		var fernTestValueRows []*DepreciationPreviewAssetsResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -14756,7 +18797,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponse(t *testing.T
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		var fernTestValueTotal string
 
 		// Act
@@ -14786,9 +18827,9 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponse(t *testing.T
 
 }
 
-func TestSettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestSettersDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetAssetID", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAssetID string
 		obj.SetAssetID(fernTestValueAssetID)
 		assert.Equal(t, fernTestValueAssetID, obj.AssetID)
@@ -14796,7 +18837,7 @@ func TestSettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -14804,7 +18845,7 @@ func TestSettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -14812,7 +18853,7 @@ func TestSettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAmount", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAmount string
 		obj.SetAmount(fernTestValueAmount)
 		assert.Equal(t, fernTestValueAmount, obj.Amount)
@@ -14820,20 +18861,28 @@ func TestSettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAlreadyPosted", func(t *testing.T) {
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAlreadyPosted bool
 		obj.SetAlreadyPosted(fernTestValueAlreadyPosted)
 		assert.Equal(t, fernTestValueAlreadyPosted, obj.AlreadyPosted)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetMonths", func(t *testing.T) {
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
+		var fernTestValueMonths []string
+		obj.SetMonths(fernTestValueMonths)
+		assert.Equal(t, fernTestValueMonths, obj.Months)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
-func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestGettersDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetAssetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var expected string
 		obj.AssetID = expected
 
@@ -14843,7 +18892,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAssetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14856,7 +18905,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -14866,7 +18915,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14879,7 +18928,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -14889,7 +18938,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14902,7 +18951,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var expected string
 		obj.Amount = expected
 
@@ -14912,7 +18961,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14925,7 +18974,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 	t.Run("GetAlreadyPosted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var expected bool
 		obj.AlreadyPosted = expected
 
@@ -14935,7 +18984,7 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAlreadyPosted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14945,13 +18994,46 @@ func TestGettersPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
 		_ = obj.GetAlreadyPosted() // Should return zero value
 	})
 
+	t.Run("GetMonths", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
+		var expected []string
+		obj.Months = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMonths(), "getter should return the property value")
+	})
+
+	t.Run("GetMonths_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
+		obj.Months = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMonths(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMonths_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DepreciationPreviewAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMonths() // Should return zero value
+	})
+
 }
 
-func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetAssetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAssetID string
 
 		// Act
@@ -14982,7 +19064,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *t
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -15013,7 +19095,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *t
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -15044,7 +19126,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *t
 	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAmount string
 
 		// Act
@@ -15075,7 +19157,7 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *t
 	t.Run("SetAlreadyPosted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		var fernTestValueAlreadyPosted bool
 
 		// Act
@@ -15103,11 +19185,42 @@ func TestSettersMarkExplicitPostV1AssetsDepreciationPreviewResponseRowsItem(t *t
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetMonths_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
+		var fernTestValueMonths []string
+
+		// Act
+		obj.SetMonths(fernTestValueMonths)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
-func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestSettersGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -15115,7 +19228,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -15123,7 +19236,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
 		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
@@ -15131,7 +19244,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetAssetAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueAssetAccountCode string
 		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
 		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
@@ -15139,7 +19252,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueDepreciationAccountCode string
 		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
 		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
@@ -15147,7 +19260,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueExpenseAccountCode string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -15155,7 +19268,7 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -15163,8 +19276,8 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsCreateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -15172,11 +19285,11 @@ func TestSettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestGettersGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.Code = expected
 
@@ -15186,7 +19299,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15199,7 +19312,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.Name = expected
 
@@ -15209,7 +19322,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15222,7 +19335,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected *int64
 		obj.DefaultUsefulLifeMonths = expected
 
@@ -15233,7 +19346,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		obj.DefaultUsefulLifeMonths = nil
 
 		// Act & Assert
@@ -15242,7 +19355,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetDefaultUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15255,7 +19368,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetAssetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.AssetAccountCode = expected
 
@@ -15265,7 +19378,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetAssetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15278,7 +19391,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetDepreciationAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.DepreciationAccountCode = expected
 
@@ -15288,7 +19401,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetDepreciationAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15301,7 +19414,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetExpenseAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.ExpenseAccountCode = expected
 
@@ -15311,7 +19424,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetExpenseAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15324,7 +19437,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -15334,7 +19447,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15347,8 +19460,8 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
-		var expected string
+		obj := &GroupsCreateAssetsResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -15357,7 +19470,7 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *GroupsCreateAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15369,11 +19482,11 @@ func TestGettersPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueCode string
 
 		// Act
@@ -15404,7 +19517,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueName string
 
 		// Act
@@ -15435,7 +19548,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 
 		// Act
@@ -15466,7 +19579,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueAssetAccountCode string
 
 		// Act
@@ -15497,7 +19610,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueDepreciationAccountCode string
 
 		// Act
@@ -15528,7 +19641,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueExpenseAccountCode string
 
 		// Act
@@ -15559,7 +19672,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -15590,8 +19703,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsCreateAssetsResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -15620,9 +19733,9 @@ func TestSettersMarkExplicitPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestSettersGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -15630,16 +19743,16 @@ func TestSettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var fernTestValueOp PostV1AssetsGroupsListRequestFilterItemOp
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var fernTestValueOp GroupsListAssetsRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var fernTestValueValue *PostV1AssetsGroupsListRequestFilterItemValue
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var fernTestValueValue *GroupsListAssetsRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -15647,11 +19760,11 @@ func TestSettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestGettersGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -15661,7 +19774,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItem
+		var obj *GroupsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15674,8 +19787,8 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var expected PostV1AssetsGroupsListRequestFilterItemOp
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var expected GroupsListAssetsRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -15684,7 +19797,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItem
+		var obj *GroupsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15697,8 +19810,8 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var expected *PostV1AssetsGroupsListRequestFilterItemValue
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var expected *GroupsListAssetsRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -15708,7 +19821,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -15717,7 +19830,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItem
+		var obj *GroupsListAssetsRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15729,11 +19842,11 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -15764,8 +19877,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequestFilterItem(t *testing.T
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var fernTestValueOp PostV1AssetsGroupsListRequestFilterItemOp
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var fernTestValueOp GroupsListAssetsRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -15795,8 +19908,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequestFilterItem(t *testing.T
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
-		var fernTestValueValue *PostV1AssetsGroupsListRequestFilterItemValue
+		obj := &GroupsListAssetsRequestFilterItem{}
+		var fernTestValueValue *GroupsListAssetsRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -15825,11 +19938,11 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequestFilterItem(t *testing.T
 
 }
 
-func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
+func TestGettersGroupsListAssetsRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValue{}
+		obj := &GroupsListAssetsRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -15839,7 +19952,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValue
+		var obj *GroupsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15852,7 +19965,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValue{}
+		obj := &GroupsListAssetsRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -15862,7 +19975,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValue
+		var obj *GroupsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15875,7 +19988,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValue{}
+		obj := &GroupsListAssetsRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -15885,7 +19998,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValue
+		var obj *GroupsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15895,46 +20008,46 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetGroupsListAssetsRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValue{}
-		var expected []*PostV1AssetsGroupsListRequestFilterItemValueThreeItem
-		obj.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList = expected
+		obj := &GroupsListAssetsRequestFilterItemValue{}
+		var expected []*GroupsListAssetsRequestFilterItemValueThreeItem
+		obj.GroupsListAssetsRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetGroupsListAssetsRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetGroupsListAssetsRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValue{}
-		obj.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList = nil
+		obj := &GroupsListAssetsRequestFilterItemValue{}
+		obj.GroupsListAssetsRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetGroupsListAssetsRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetGroupsListAssetsRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValue
+		var obj *GroupsListAssetsRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetGroupsListAssetsRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1AssetsGroupsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersGroupsListAssetsRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValueThreeItem{}
+		obj := &GroupsListAssetsRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -15944,7 +20057,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValueThreeItem(t *testing
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValueThreeItem
+		var obj *GroupsListAssetsRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15957,7 +20070,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValueThreeItem(t *testing
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItemValueThreeItem{}
+		obj := &GroupsListAssetsRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -15967,7 +20080,7 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValueThreeItem(t *testing
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItemValueThreeItem
+		var obj *GroupsListAssetsRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15979,9 +20092,9 @@ func TestGettersPostV1AssetsGroupsListRequestFilterItemValueThreeItem(t *testing
 
 }
 
-func TestSettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestSettersGroupsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &GroupsListAssetsRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -15989,8 +20102,8 @@ func TestSettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
-		var fernTestValueDir *PostV1AssetsGroupsListRequestSortItemDir
+		obj := &GroupsListAssetsRequestSortItem{}
+		var fernTestValueDir *GroupsListAssetsRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -15998,11 +20111,11 @@ func TestSettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestGettersGroupsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &GroupsListAssetsRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -16012,7 +20125,7 @@ func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestSortItem
+		var obj *GroupsListAssetsRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16025,8 +20138,8 @@ func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
-		var expected *PostV1AssetsGroupsListRequestSortItemDir
+		obj := &GroupsListAssetsRequestSortItem{}
+		var expected *GroupsListAssetsRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -16036,7 +20149,7 @@ func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &GroupsListAssetsRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -16045,7 +20158,7 @@ func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestSortItem
+		var obj *GroupsListAssetsRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16057,11 +20170,11 @@ func TestGettersPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitGroupsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &GroupsListAssetsRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -16092,8 +20205,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequestSortItem(t *testing.T) 
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
-		var fernTestValueDir *PostV1AssetsGroupsListRequestSortItemDir
+		obj := &GroupsListAssetsRequestSortItem{}
+		var fernTestValueDir *GroupsListAssetsRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -16122,17 +20235,17 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListRequestSortItem(t *testing.T) 
 
 }
 
-func TestSettersPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestSettersGroupsListAssetsResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponse{}
-		var fernTestValueRows []*PostV1AssetsGroupsListResponseRowsItem
+		obj := &GroupsListAssetsResponse{}
+		var fernTestValueRows []*GroupsListAssetsResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -16140,7 +20253,7 @@ func TestSettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -16148,7 +20261,7 @@ func TestSettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -16156,7 +20269,7 @@ func TestSettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -16165,12 +20278,12 @@ func TestSettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestGettersGroupsListAssetsResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
-		var expected []*PostV1AssetsGroupsListResponseRowsItem
+		obj := &GroupsListAssetsResponse{}
+		var expected []*GroupsListAssetsResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -16180,7 +20293,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -16189,7 +20302,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16202,7 +20315,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -16212,7 +20325,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16225,7 +20338,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -16235,7 +20348,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16248,7 +20361,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -16258,7 +20371,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16271,7 +20384,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -16282,7 +20395,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -16291,7 +20404,7 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsListAssetsResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16303,12 +20416,12 @@ func TestGettersPostV1AssetsGroupsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestSettersMarkExplicitGroupsListAssetsResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
-		var fernTestValueRows []*PostV1AssetsGroupsListResponseRowsItem
+		obj := &GroupsListAssetsResponse{}
+		var fernTestValueRows []*GroupsListAssetsResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -16338,7 +20451,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -16369,7 +20482,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -16400,7 +20513,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -16431,7 +20544,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsListAssetsResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -16461,9 +20574,9 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestSettersGroupsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueCode string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16471,7 +20584,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -16479,7 +20592,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDefaultUsefulLifeMonths", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 		obj.SetDefaultUsefulLifeMonths(fernTestValueDefaultUsefulLifeMonths)
 		assert.Equal(t, fernTestValueDefaultUsefulLifeMonths, obj.DefaultUsefulLifeMonths)
@@ -16487,7 +20600,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAssetAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueAssetAccountCode string
 		obj.SetAssetAccountCode(fernTestValueAssetAccountCode)
 		assert.Equal(t, fernTestValueAssetAccountCode, obj.AssetAccountCode)
@@ -16495,7 +20608,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDepreciationAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueDepreciationAccountCode string
 		obj.SetDepreciationAccountCode(fernTestValueDepreciationAccountCode)
 		assert.Equal(t, fernTestValueDepreciationAccountCode, obj.DepreciationAccountCode)
@@ -16503,7 +20616,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetExpenseAccountCode", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueExpenseAccountCode string
 		obj.SetExpenseAccountCode(fernTestValueExpenseAccountCode)
 		assert.Equal(t, fernTestValueExpenseAccountCode, obj.ExpenseAccountCode)
@@ -16511,7 +20624,7 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -16519,8 +20632,8 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsListAssetsResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -16528,11 +20641,11 @@ func TestSettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestGettersGroupsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.Code = expected
 
@@ -16542,7 +20655,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16555,7 +20668,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -16565,7 +20678,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16578,7 +20691,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected *int64
 		obj.DefaultUsefulLifeMonths = expected
 
@@ -16589,7 +20702,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDefaultUsefulLifeMonths_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		obj.DefaultUsefulLifeMonths = nil
 
 		// Act & Assert
@@ -16598,7 +20711,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDefaultUsefulLifeMonths_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16611,7 +20724,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAssetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.AssetAccountCode = expected
 
@@ -16621,7 +20734,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAssetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16634,7 +20747,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDepreciationAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.DepreciationAccountCode = expected
 
@@ -16644,7 +20757,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDepreciationAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16657,7 +20770,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetExpenseAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.ExpenseAccountCode = expected
 
@@ -16667,7 +20780,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExpenseAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16680,7 +20793,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -16690,7 +20803,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16703,8 +20816,8 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
-		var expected string
+		obj := &GroupsListAssetsResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -16713,7 +20826,7 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16725,11 +20838,11 @@ func TestGettersPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitGroupsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueCode string
 
 		// Act
@@ -16760,7 +20873,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -16791,7 +20904,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetDefaultUsefulLifeMonths_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueDefaultUsefulLifeMonths *int64
 
 		// Act
@@ -16822,7 +20935,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetAssetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueAssetAccountCode string
 
 		// Act
@@ -16853,7 +20966,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetDepreciationAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueDepreciationAccountCode string
 
 		// Act
@@ -16884,7 +20997,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetExpenseAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueExpenseAccountCode string
 
 		// Act
@@ -16915,7 +21028,7 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -16946,8 +21059,8 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &GroupsListAssetsResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -16976,11 +21089,11 @@ func TestSettersMarkExplicitPostV1AssetsGroupsListResponseRowsItem(t *testing.T)
 
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -16989,31 +21102,31 @@ func TestJSONMarshalingPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsCreateRequestDocumentsItem
+		var unmarshaled AssetsCreateAssetsRequestDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateRequestDocumentsItem
+		var obj AssetsCreateAssetsRequestDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateRequestDocumentsItem
+		var obj AssetsCreateAssetsRequestDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsCreateResponse(t *testing.T) {
+func TestJSONMarshalingAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17022,31 +21135,31 @@ func TestJSONMarshalingPostV1AssetsAssetsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsCreateResponse
+		var unmarshaled AssetsCreateAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponse
+		var obj AssetsCreateAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponse
+		var obj AssetsCreateAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17055,31 +21168,31 @@ func TestJSONMarshalingPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsCreateResponseDocumentsItem
+		var unmarshaled AssetsCreateAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj AssetsCreateAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj AssetsCreateAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17088,31 +21201,31 @@ func TestJSONMarshalingPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+		var unmarshaled AssetsCreateAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+		var obj AssetsCreateAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+		var obj AssetsCreateAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestJSONMarshalingAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17121,31 +21234,31 @@ func TestJSONMarshalingPostV1AssetsAssetsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsGetResponse
+		var unmarshaled AssetsDisposeAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponse
+		var obj AssetsDisposeAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponse
+		var obj AssetsDisposeAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17154,31 +21267,31 @@ func TestJSONMarshalingPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsGetResponseDocumentsItem
+		var unmarshaled AssetsDisposeAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj AssetsDisposeAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj AssetsDisposeAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17187,31 +21300,31 @@ func TestJSONMarshalingPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var unmarshaled AssetsDisposeAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj AssetsDisposeAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj AssetsDisposeAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsGetAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
+		obj := &AssetsGetAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17220,31 +21333,31 @@ func TestJSONMarshalingPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+		var unmarshaled AssetsGetAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+		var obj AssetsGetAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+		var obj AssetsGetAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestJSONMarshalingAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17253,31 +21366,31 @@ func TestJSONMarshalingPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsInputVatResponse
+		var unmarshaled AssetsGetAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponse
+		var obj AssetsGetAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponse
+		var obj AssetsGetAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17286,31 +21399,31 @@ func TestJSONMarshalingPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var unmarshaled AssetsGetAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj AssetsGetAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj AssetsGetAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17319,31 +21432,31 @@ func TestJSONMarshalingPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var unmarshaled AssetsInputVatAssetsRequestInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj AssetsInputVatAssetsRequestInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj AssetsInputVatAssetsRequestInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingAssetsInputVatAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsInputVatAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17352,31 +21465,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListRequestFilterItem
+		var unmarshaled AssetsInputVatAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListRequestFilterItem
+		var obj AssetsInputVatAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListRequestFilterItem
+		var obj AssetsInputVatAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17385,31 +21498,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListRequestSortItem
+		var unmarshaled AssetsInputVatAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListRequestSortItem
+		var obj AssetsInputVatAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListRequestSortItem
+		var obj AssetsInputVatAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestJSONMarshalingAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17418,31 +21531,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListResponse
+		var unmarshaled AssetsInputVatAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponse
+		var obj AssetsInputVatAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponse
+		var obj AssetsInputVatAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17451,31 +21564,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListResponseRowsItem
+		var unmarshaled AssetsListAssetsRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItem
+		var obj AssetsListAssetsRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItem
+		var obj AssetsListAssetsRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17484,31 +21597,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var unmarshaled AssetsListAssetsRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj AssetsListAssetsRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj AssetsListAssetsRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17517,31 +21630,31 @@ func TestJSONMarshalingPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesI
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var unmarshaled AssetsListAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj AssetsListAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj AssetsListAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17550,31 +21663,31 @@ func TestJSONMarshalingPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsModernizeResponse
+		var unmarshaled AssetsListAssetsResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponse
+		var obj AssetsListAssetsResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponse
+		var obj AssetsListAssetsResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17583,31 +21696,31 @@ func TestJSONMarshalingPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testi
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var unmarshaled AssetsListAssetsResponseRowsItemDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj AssetsListAssetsResponseRowsItemDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj AssetsListAssetsResponseRowsItemDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17616,31 +21729,31 @@ func TestJSONMarshalingPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var unmarshaled AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17649,31 +21762,31 @@ func TestJSONMarshalingPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var unmarshaled AssetsModernizeAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj AssetsModernizeAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj AssetsModernizeAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17682,31 +21795,31 @@ func TestJSONMarshalingPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsUpdateResponse
+		var unmarshaled AssetsModernizeAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponse
+		var obj AssetsModernizeAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponse
+		var obj AssetsModernizeAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestJSONMarshalingAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17715,31 +21828,31 @@ func TestJSONMarshalingPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var unmarshaled AssetsModernizeAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj AssetsModernizeAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj AssetsModernizeAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestJSONMarshalingAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17748,31 +21861,31 @@ func TestJSONMarshalingPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var unmarshaled AssetsUpdateAssetsRequestDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj AssetsUpdateAssetsRequestDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj AssetsUpdateAssetsRequestDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestJSONMarshalingAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17781,31 +21894,31 @@ func TestJSONMarshalingPostV1AssetsDepreciationPostResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsDepreciationPostResponse
+		var unmarshaled AssetsUpdateAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPostResponse
+		var obj AssetsUpdateAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPostResponse
+		var obj AssetsUpdateAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestJSONMarshalingAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17814,31 +21927,31 @@ func TestJSONMarshalingPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsDepreciationPreviewResponse
+		var unmarshaled AssetsUpdateAssetsResponseDocumentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPreviewResponse
+		var obj AssetsUpdateAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPreviewResponse
+		var obj AssetsUpdateAssetsResponseDocumentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17847,31 +21960,31 @@ func TestJSONMarshalingPostV1AssetsDepreciationPreviewResponseRowsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsDepreciationPreviewResponseRowsItem
+		var unmarshaled AssetsUpdateAssetsResponseInputVatUseChangesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj AssetsUpdateAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj AssetsUpdateAssetsResponseInputVatUseChangesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestJSONMarshalingDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17880,31 +21993,31 @@ func TestJSONMarshalingPostV1AssetsGroupsCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsGroupsCreateResponse
+		var unmarshaled DepreciationPostAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsCreateResponse
+		var obj DepreciationPostAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsCreateResponse
+		var obj DepreciationPostAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &DepreciationPreviewAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17913,31 +22026,31 @@ func TestJSONMarshalingPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsGroupsListRequestFilterItem
+		var unmarshaled DepreciationPreviewAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListRequestFilterItem
+		var obj DepreciationPreviewAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListRequestFilterItem
+		var obj DepreciationPreviewAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17946,31 +22059,31 @@ func TestJSONMarshalingPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsGroupsListRequestSortItem
+		var unmarshaled DepreciationPreviewAssetsResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListRequestSortItem
+		var obj DepreciationPreviewAssetsResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListRequestSortItem
+		var obj DepreciationPreviewAssetsResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestJSONMarshalingGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -17979,31 +22092,31 @@ func TestJSONMarshalingPostV1AssetsGroupsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsGroupsListResponse
+		var unmarshaled GroupsCreateAssetsResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListResponse
+		var obj GroupsCreateAssetsResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListResponse
+		var obj GroupsCreateAssetsResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -18012,567 +22125,714 @@ func TestJSONMarshalingPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1AssetsGroupsListResponseRowsItem
+		var unmarshaled GroupsListAssetsRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListResponseRowsItem
+		var obj GroupsListAssetsRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1AssetsGroupsListResponseRowsItem
+		var obj GroupsListAssetsRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
+func TestJSONMarshalingGroupsListAssetsRequestSortItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsRequestSortItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GroupsListAssetsRequestSortItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsRequestSortItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsRequestSortItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingGroupsListAssetsResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GroupsListAssetsResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingGroupsListAssetsResponseRowsItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GroupsListAssetsResponseRowsItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GroupsListAssetsResponseRowsItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsResponseRowsItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GroupsListAssetsResponseRowsItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestStringAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateRequestDocumentsItem
+		var obj *AssetsCreateAssetsRequestDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsCreateResponse(t *testing.T) {
+func TestStringAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
+		var obj *AssetsCreateAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestStringAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj *AssetsCreateAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+		var obj *AssetsCreateAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestStringAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsDisposeAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestStringAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj *AssetsDisposeAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj *AssetsDisposeAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsGetAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
+		obj := &AssetsGetAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+		var obj *AssetsGetAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestStringAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsGetAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestStringAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj *AssetsGetAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj *AssetsInputVatAssetsRequestInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestStringAssetsInputVatAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsInputVatAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItem
+		var obj *AssetsInputVatAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestStringAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestSortItem
+		var obj *AssetsInputVatAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestStringAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsInputVatAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestStringAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestStringAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj *AssetsListAssetsRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsListAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj *AssetsListAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestStringAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsListAssetsResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestStringAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj *AssetsListAssetsResponseRowsItemDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj *AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestStringAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj *AssetsModernizeAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestStringAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsModernizeAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestStringAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj *AssetsModernizeAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestStringAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj *AssetsUpdateAssetsRequestDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestStringAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *AssetsUpdateAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestStringAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponse
+		var obj *AssetsUpdateAssetsResponseDocumentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestStringAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *AssetsUpdateAssetsResponseInputVatUseChangesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestStringDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *DepreciationPostAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestStringDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItem
+		var obj *DepreciationPreviewAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestStringDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestSortItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestStringGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsCreateAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestStringGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason(t *testing.T) {
-	t.Run("NewFromString_use_change", func(t *testing.T) {
+func TestStringGroupsListAssetsRequestSortItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString("use_change")
+		obj := &GroupsListAssetsRequestSortItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsRequestSortItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringGroupsListAssetsResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GroupsListAssetsResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringGroupsListAssetsResponseRowsItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GroupsListAssetsResponseRowsItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsResponseRowsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumAssetsCreateAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsCreateAssetsResponseDisposalReasonFromString("sold")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_sale", func(t *testing.T) {
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsCreateAssetsResponseDisposalReasonFromString("scrapped")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_withdrawal", func(t *testing.T) {
+	t.Run("NewFromString_written_off", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsCreateAssetsResponseDisposalReasonFromString("written_off")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsCreateAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsCreateAssetsResponseDisposalReasonFromString("sold")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18580,35 +22840,71 @@ func TestEnumPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason(t *tes
 	})
 }
 
-func TestEnumPostV1AssetsAssetsCreateResponseStatus(t *testing.T) {
+func TestEnumAssetsCreateAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
+	t.Run("NewFromString_use_change", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsCreateAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString("sale")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsCreateAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_withdrawal", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsCreateAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsCreateAssetsResponseStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseStatusFromString("active")
+		val, err := NewAssetsCreateAssetsResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseStatusFromString("fully_depreciated")
+		val, err := NewAssetsCreateAssetsResponseStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsCreateResponseStatusFromString("disposed")
+		val, err := NewAssetsCreateAssetsResponseStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsCreateResponseStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsCreateAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsCreateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsCreateAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsCreateResponseStatusFromString("active")
+		val, err := NewAssetsCreateAssetsResponseStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18616,35 +22912,107 @@ func TestEnumPostV1AssetsAssetsCreateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsGetResponseInputVatUseChangesItemReason(t *testing.T) {
+func TestEnumAssetsDisposeAssetsRequestReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsRequestReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsRequestReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsRequestReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsRequestReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsRequestReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsRequestReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsDisposeAssetsRequestReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsDisposeAssetsRequestReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsDisposeAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsResponseDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsDisposeAssetsResponseDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsDisposeAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsDisposeAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsDisposeAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsDisposeAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
 	t.Run("NewFromString_use_change", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString("sale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_withdrawal", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18652,35 +23020,35 @@ func TestEnumPostV1AssetsAssetsGetResponseInputVatUseChangesItemReason(t *testin
 	})
 }
 
-func TestEnumPostV1AssetsAssetsGetResponseStatus(t *testing.T) {
+func TestEnumAssetsDisposeAssetsResponseStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseStatusFromString("active")
+		val, err := NewAssetsDisposeAssetsResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseStatusFromString("fully_depreciated")
+		val, err := NewAssetsDisposeAssetsResponseStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsGetResponseStatusFromString("disposed")
+		val, err := NewAssetsDisposeAssetsResponseStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsGetResponseStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsDisposeAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsDisposeAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsGetResponseStatusFromString("active")
+		val, err := NewAssetsDisposeAssetsResponseStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18688,35 +23056,71 @@ func TestEnumPostV1AssetsAssetsGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason(t *testing.T) {
+func TestEnumAssetsGetAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsGetAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsGetAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsGetAssetsResponseDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsGetAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsGetAssetsResponseDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsGetAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsGetAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsGetAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsGetAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
 	t.Run("NewFromString_use_change", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString("sale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_withdrawal", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18724,71 +23128,35 @@ func TestEnumPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason(t *te
 	})
 }
 
-func TestEnumPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason(t *testing.T) {
-	t.Run("NewFromString_use_change", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString("use_change")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_sale", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString("sale")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_withdrawal", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString("withdrawal")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString("use_change")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestEnumPostV1AssetsAssetsInputVatResponseStatus(t *testing.T) {
+func TestEnumAssetsGetAssetsResponseStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseStatusFromString("active")
+		val, err := NewAssetsGetAssetsResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseStatusFromString("fully_depreciated")
+		val, err := NewAssetsGetAssetsResponseStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsInputVatResponseStatusFromString("disposed")
+		val, err := NewAssetsGetAssetsResponseStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsInputVatResponseStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsGetAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsInputVatResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsGetAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsInputVatResponseStatusFromString("active")
+		val, err := NewAssetsGetAssetsResponseStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18796,56 +23164,200 @@ func TestEnumPostV1AssetsAssetsInputVatResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsListRequestFilterItemOp(t *testing.T) {
+func TestEnumAssetsInputVatAssetsRequestInputVatUseChangesItemReason(t *testing.T) {
+	t.Run("NewFromString_use_change", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsRequestInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString("sale")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsRequestInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_withdrawal", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString("withdrawal")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsRequestInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsInputVatAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsInputVatAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsInputVatAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsInputVatAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
+	t.Run("NewFromString_use_change", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString("sale")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_withdrawal", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsInputVatAssetsResponseStatus(t *testing.T) {
+	t.Run("NewFromString_active", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseStatusFromString("active")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseStatus("active"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseStatusFromString("fully_depreciated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disposed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsInputVatAssetsResponseStatusFromString("disposed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsInputVatAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsInputVatAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsInputVatAssetsResponseStatusFromString("active")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsListAssetsRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("eq")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("ne")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("contains")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("gte")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("lte")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("in")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsListAssetsRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsListRequestFilterItemOpFromString("eq")
+		val, err := NewAssetsListAssetsRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18853,28 +23365,28 @@ func TestEnumPostV1AssetsAssetsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsListRequestSortItemDir(t *testing.T) {
+func TestEnumAssetsListAssetsRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestSortItemDirFromString("asc")
+		val, err := NewAssetsListAssetsRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListRequestSortItemDirFromString("desc")
+		val, err := NewAssetsListAssetsRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsListAssetsRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsListRequestSortItemDirFromString("asc")
+		val, err := NewAssetsListAssetsRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18882,35 +23394,71 @@ func TestEnumPostV1AssetsAssetsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason(t *testing.T) {
+func TestEnumAssetsListAssetsResponseRowsItemDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsListAssetsResponseRowsItemDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsListAssetsResponseRowsItemDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsListAssetsResponseRowsItemDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsListAssetsResponseRowsItemDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsListAssetsResponseRowsItemDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsListAssetsResponseRowsItemInputVatUseChangesItemReason(t *testing.T) {
 	t.Run("NewFromString_use_change", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString("sale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_withdrawal", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString("withdrawal")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18918,35 +23466,35 @@ func TestEnumPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason(
 	})
 }
 
-func TestEnumPostV1AssetsAssetsListResponseRowsItemStatus(t *testing.T) {
+func TestEnumAssetsListAssetsResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemStatusFromString("active")
+		val, err := NewAssetsListAssetsResponseRowsItemStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemStatusFromString("fully_depreciated")
+		val, err := NewAssetsListAssetsResponseRowsItemStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemStatusFromString("disposed")
+		val, err := NewAssetsListAssetsResponseRowsItemStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsListResponseRowsItemStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsListAssetsResponseRowsItemStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsListAssetsResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsListResponseRowsItemStatusFromString("active")
+		val, err := NewAssetsListAssetsResponseRowsItemStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18954,35 +23502,71 @@ func TestEnumPostV1AssetsAssetsListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason(t *testing.T) {
+func TestEnumAssetsModernizeAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsModernizeAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsModernizeAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsModernizeAssetsResponseDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsModernizeAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsModernizeAssetsResponseDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsModernizeAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsModernizeAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsModernizeAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsModernizeAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
 	t.Run("NewFromString_use_change", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString("sale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_withdrawal", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18990,35 +23574,35 @@ func TestEnumPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason(t *
 	})
 }
 
-func TestEnumPostV1AssetsAssetsModernizeResponseStatus(t *testing.T) {
+func TestEnumAssetsModernizeAssetsResponseStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseStatusFromString("active")
+		val, err := NewAssetsModernizeAssetsResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseStatusFromString("fully_depreciated")
+		val, err := NewAssetsModernizeAssetsResponseStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsModernizeResponseStatusFromString("disposed")
+		val, err := NewAssetsModernizeAssetsResponseStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsModernizeResponseStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsModernizeAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsModernizeResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsModernizeAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsModernizeResponseStatusFromString("active")
+		val, err := NewAssetsModernizeAssetsResponseStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19026,35 +23610,71 @@ func TestEnumPostV1AssetsAssetsModernizeResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason(t *testing.T) {
+func TestEnumAssetsUpdateAssetsResponseDisposalReason(t *testing.T) {
+	t.Run("NewFromString_sold", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsUpdateAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsUpdateAssetsResponseDisposalReason("sold"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_scrapped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsUpdateAssetsResponseDisposalReasonFromString("scrapped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsUpdateAssetsResponseDisposalReason("scrapped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_written_off", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAssetsUpdateAssetsResponseDisposalReasonFromString("written_off")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AssetsUpdateAssetsResponseDisposalReason("written_off"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAssetsUpdateAssetsResponseDisposalReasonFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAssetsUpdateAssetsResponseDisposalReasonFromString("sold")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAssetsUpdateAssetsResponseInputVatUseChangesItemReason(t *testing.T) {
 	t.Run("NewFromString_use_change", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseInputVatUseChangesItemReason("use_change"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString("sale")
+		val, err := NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString("sale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseInputVatUseChangesItemReason("sale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_withdrawal", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString("withdrawal")
+		val, err := NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString("withdrawal")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseInputVatUseChangesItemReason("withdrawal"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString("use_change")
+		val, err := NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString("use_change")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19062,35 +23682,35 @@ func TestEnumPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason(t *tes
 	})
 }
 
-func TestEnumPostV1AssetsAssetsUpdateResponseStatus(t *testing.T) {
+func TestEnumAssetsUpdateAssetsResponseStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseStatusFromString("active")
+		val, err := NewAssetsUpdateAssetsResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fully_depreciated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseStatusFromString("fully_depreciated")
+		val, err := NewAssetsUpdateAssetsResponseStatusFromString("fully_depreciated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseStatus("fully_depreciated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_disposed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsAssetsUpdateResponseStatusFromString("disposed")
+		val, err := NewAssetsUpdateAssetsResponseStatusFromString("disposed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsAssetsUpdateResponseStatus("disposed"), val, "enum value should match expected wire value")
+		assert.Equal(t, AssetsUpdateAssetsResponseStatus("disposed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsAssetsUpdateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAssetsUpdateAssetsResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsAssetsUpdateResponseStatusFromString("active")
+		val, err := NewAssetsUpdateAssetsResponseStatusFromString("active")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19098,56 +23718,56 @@ func TestEnumPostV1AssetsAssetsUpdateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsGroupsListRequestFilterItemOp(t *testing.T) {
+func TestEnumGroupsListAssetsRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("eq")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("ne")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("contains")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("gte")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("lte")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("in")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewGroupsListAssetsRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsGroupsListRequestFilterItemOpFromString("eq")
+		val, err := NewGroupsListAssetsRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19155,28 +23775,28 @@ func TestEnumPostV1AssetsGroupsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1AssetsGroupsListRequestSortItemDir(t *testing.T) {
+func TestEnumGroupsListAssetsRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestSortItemDirFromString("asc")
+		val, err := NewGroupsListAssetsRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1AssetsGroupsListRequestSortItemDirFromString("desc")
+		val, err := NewGroupsListAssetsRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1AssetsGroupsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, GroupsListAssetsRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1AssetsGroupsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewGroupsListAssetsRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1AssetsGroupsListRequestSortItemDirFromString("asc")
+		val, err := NewGroupsListAssetsRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -19184,10 +23804,10 @@ func TestEnumPostV1AssetsGroupsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateRequestDocumentsItem{}
+		obj := &AssetsCreateAssetsRequestDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19201,16 +23821,16 @@ func TestExtraPropertiesPostV1AssetsAssetsCreateRequestDocumentsItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateRequestDocumentsItem
+		var obj *AssetsCreateAssetsRequestDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsCreateResponse(t *testing.T) {
+func TestExtraPropertiesAssetsCreateAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponse{}
+		obj := &AssetsCreateAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19224,16 +23844,16 @@ func TestExtraPropertiesPostV1AssetsAssetsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponse
+		var obj *AssetsCreateAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsCreateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponseDocumentsItem{}
+		obj := &AssetsCreateAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19247,16 +23867,16 @@ func TestExtraPropertiesPostV1AssetsAssetsCreateResponseDocumentsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseDocumentsItem
+		var obj *AssetsCreateAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsCreateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsCreateResponseInputVatUseChangesItem{}
+		obj := &AssetsCreateAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19270,16 +23890,16 @@ func TestExtraPropertiesPostV1AssetsAssetsCreateResponseInputVatUseChangesItem(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+		var obj *AssetsCreateAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsGetResponse(t *testing.T) {
+func TestExtraPropertiesAssetsDisposeAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponse{}
+		obj := &AssetsDisposeAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19293,16 +23913,16 @@ func TestExtraPropertiesPostV1AssetsAssetsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponse
+		var obj *AssetsDisposeAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsDisposeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponseDocumentsItem{}
+		obj := &AssetsDisposeAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19316,16 +23936,16 @@ func TestExtraPropertiesPostV1AssetsAssetsGetResponseDocumentsItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseDocumentsItem
+		var obj *AssetsDisposeAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsDisposeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsGetResponseInputVatUseChangesItem{}
+		obj := &AssetsDisposeAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19339,16 +23959,16 @@ func TestExtraPropertiesPostV1AssetsAssetsGetResponseInputVatUseChangesItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+		var obj *AssetsDisposeAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsGetAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{}
+		obj := &AssetsGetAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19362,16 +23982,16 @@ func TestExtraPropertiesPostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+		var obj *AssetsGetAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsInputVatResponse(t *testing.T) {
+func TestExtraPropertiesAssetsGetAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponse{}
+		obj := &AssetsGetAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19385,16 +24005,16 @@ func TestExtraPropertiesPostV1AssetsAssetsInputVatResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponse
+		var obj *AssetsGetAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsGetAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponseDocumentsItem{}
+		obj := &AssetsGetAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19408,16 +24028,16 @@ func TestExtraPropertiesPostV1AssetsAssetsInputVatResponseDocumentsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseDocumentsItem
+		var obj *AssetsGetAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsInputVatAssetsRequestInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem{}
+		obj := &AssetsInputVatAssetsRequestInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19431,16 +24051,16 @@ func TestExtraPropertiesPostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+		var obj *AssetsInputVatAssetsRequestInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesAssetsInputVatAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListRequestFilterItem{}
+		obj := &AssetsInputVatAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19454,16 +24074,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestFilterItem
+		var obj *AssetsInputVatAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesAssetsInputVatAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListRequestSortItem{}
+		obj := &AssetsInputVatAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19477,16 +24097,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListRequestSortItem
+		var obj *AssetsInputVatAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListResponse(t *testing.T) {
+func TestExtraPropertiesAssetsInputVatAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponse{}
+		obj := &AssetsInputVatAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19500,16 +24120,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponse
+		var obj *AssetsInputVatAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItem{}
+		obj := &AssetsListAssetsRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19523,16 +24143,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItem
+		var obj *AssetsListAssetsRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItemDocumentsItem{}
+		obj := &AssetsListAssetsRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19546,16 +24166,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItemDocumentsItem(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+		var obj *AssetsListAssetsRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19569,16 +24189,16 @@ func TestExtraPropertiesPostV1AssetsAssetsListResponseRowsItemInputVatUseChanges
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+		var obj *AssetsListAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsModernizeResponse(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponse{}
+		obj := &AssetsListAssetsResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19592,16 +24212,16 @@ func TestExtraPropertiesPostV1AssetsAssetsModernizeResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponse
+		var obj *AssetsListAssetsResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsModernizeResponseDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsResponseRowsItemDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponseDocumentsItem{}
+		obj := &AssetsListAssetsResponseRowsItemDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19615,16 +24235,16 @@ func TestExtraPropertiesPostV1AssetsAssetsModernizeResponseDocumentsItem(t *test
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseDocumentsItem
+		var obj *AssetsListAssetsResponseRowsItemDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsListAssetsResponseRowsItemInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem{}
+		obj := &AssetsListAssetsResponseRowsItemInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19638,16 +24258,16 @@ func TestExtraPropertiesPostV1AssetsAssetsModernizeResponseInputVatUseChangesIte
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+		var obj *AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsModernizeAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateRequestDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19661,16 +24281,16 @@ func TestExtraPropertiesPostV1AssetsAssetsUpdateRequestDocumentsItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateRequestDocumentsItem
+		var obj *AssetsModernizeAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesAssetsModernizeAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponse{}
+		obj := &AssetsModernizeAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19684,16 +24304,16 @@ func TestExtraPropertiesPostV1AssetsAssetsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponse
+		var obj *AssetsModernizeAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing.T) {
+func TestExtraPropertiesAssetsModernizeAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponseDocumentsItem{}
+		obj := &AssetsModernizeAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19707,16 +24327,16 @@ func TestExtraPropertiesPostV1AssetsAssetsUpdateResponseDocumentsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseDocumentsItem
+		var obj *AssetsModernizeAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t *testing.T) {
+func TestExtraPropertiesAssetsUpdateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem{}
+		obj := &AssetsUpdateAssetsRequestDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19730,16 +24350,16 @@ func TestExtraPropertiesPostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+		var obj *AssetsUpdateAssetsRequestDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsDepreciationPostResponse(t *testing.T) {
+func TestExtraPropertiesAssetsUpdateAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPostResponse{}
+		obj := &AssetsUpdateAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19753,16 +24373,16 @@ func TestExtraPropertiesPostV1AssetsDepreciationPostResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPostResponse
+		var obj *AssetsUpdateAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
+func TestExtraPropertiesAssetsUpdateAssetsResponseDocumentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPreviewResponse{}
+		obj := &AssetsUpdateAssetsResponseDocumentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19776,16 +24396,16 @@ func TestExtraPropertiesPostV1AssetsDepreciationPreviewResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponse
+		var obj *AssetsUpdateAssetsResponseDocumentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsDepreciationPreviewResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesAssetsUpdateAssetsResponseInputVatUseChangesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsDepreciationPreviewResponseRowsItem{}
+		obj := &AssetsUpdateAssetsResponseInputVatUseChangesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19799,16 +24419,16 @@ func TestExtraPropertiesPostV1AssetsDepreciationPreviewResponseRowsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsDepreciationPreviewResponseRowsItem
+		var obj *AssetsUpdateAssetsResponseInputVatUseChangesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsGroupsCreateResponse(t *testing.T) {
+func TestExtraPropertiesDepreciationPostAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsCreateResponse{}
+		obj := &DepreciationPostAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19822,16 +24442,16 @@ func TestExtraPropertiesPostV1AssetsGroupsCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsCreateResponse
+		var obj *DepreciationPostAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesDepreciationPreviewAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListRequestFilterItem{}
+		obj := &DepreciationPreviewAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19845,16 +24465,16 @@ func TestExtraPropertiesPostV1AssetsGroupsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestFilterItem
+		var obj *DepreciationPreviewAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesDepreciationPreviewAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListRequestSortItem{}
+		obj := &DepreciationPreviewAssetsResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19868,16 +24488,16 @@ func TestExtraPropertiesPostV1AssetsGroupsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListRequestSortItem
+		var obj *DepreciationPreviewAssetsResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsGroupsListResponse(t *testing.T) {
+func TestExtraPropertiesGroupsCreateAssetsResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListResponse{}
+		obj := &GroupsCreateAssetsResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19891,16 +24511,16 @@ func TestExtraPropertiesPostV1AssetsGroupsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponse
+		var obj *GroupsCreateAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesGroupsListAssetsRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1AssetsGroupsListResponseRowsItem{}
+		obj := &GroupsListAssetsRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -19914,7 +24534,76 @@ func TestExtraPropertiesPostV1AssetsGroupsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1AssetsGroupsListResponseRowsItem
+		var obj *GroupsListAssetsRequestFilterItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesGroupsListAssetsRequestSortItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GroupsListAssetsRequestSortItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsRequestSortItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesGroupsListAssetsResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GroupsListAssetsResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesGroupsListAssetsResponseRowsItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GroupsListAssetsResponseRowsItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GroupsListAssetsResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

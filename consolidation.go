@@ -7,14 +7,15 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1ConsolidationGroupsCreateRequestFieldName                 = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsCreateRequestFieldPresentationCurrency = big.NewInt(1 << 1)
+	groupsCreateConsolidationRequestFieldName                 = big.NewInt(1 << 0)
+	groupsCreateConsolidationRequestFieldPresentationCurrency = big.NewInt(1 << 1)
 )
 
-type PostV1ConsolidationGroupsCreateRequest struct {
+type GroupsCreateConsolidationRequest struct {
 	Name                 string  `json:"name" url:"-"`
 	PresentationCurrency *string `json:"presentationCurrency,omitempty" url:"-"`
 
@@ -22,160 +23,160 @@ type PostV1ConsolidationGroupsCreateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationGroupsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsCreateConsolidationRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsCreateRequestFieldName)
+func (g *GroupsCreateConsolidationRequest) SetName(name string) {
+	g.Name = name
+	g.require(groupsCreateConsolidationRequestFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateRequest) SetPresentationCurrency(presentationCurrency *string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsCreateRequestFieldPresentationCurrency)
+func (g *GroupsCreateConsolidationRequest) SetPresentationCurrency(presentationCurrency *string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsCreateConsolidationRequestFieldPresentationCurrency)
 }
 
-func (p *PostV1ConsolidationGroupsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsCreateRequest
+func (g *GroupsCreateConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsCreateConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsCreateRequest(body)
+	*g = GroupsCreateConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsCreateRequest
+func (g *GroupsCreateConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsCreateConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationGroupsDeleteRequestFieldGroupID = big.NewInt(1 << 0)
+	groupsDeleteConsolidationRequestFieldGroupID = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationGroupsDeleteRequest struct {
+type GroupsDeleteConsolidationRequest struct {
 	GroupID string `json:"groupId" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationGroupsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsDeleteConsolidationRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsDeleteRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationGroupsDeleteRequestFieldGroupID)
+func (g *GroupsDeleteConsolidationRequest) SetGroupID(groupID string) {
+	g.GroupID = groupID
+	g.require(groupsDeleteConsolidationRequestFieldGroupID)
 }
 
-func (p *PostV1ConsolidationGroupsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsDeleteRequest
+func (g *GroupsDeleteConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsDeleteConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsDeleteRequest(body)
+	*g = GroupsDeleteConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsDeleteRequest
+func (g *GroupsDeleteConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsDeleteConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationGroupsGetRequestFieldGroupID = big.NewInt(1 << 0)
+	groupsGetConsolidationRequestFieldGroupID = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationGroupsGetRequest struct {
+type GroupsGetConsolidationRequest struct {
 	GroupID string `json:"groupId" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationGroupsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsGetConsolidationRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationGroupsGetRequestFieldGroupID)
+func (g *GroupsGetConsolidationRequest) SetGroupID(groupID string) {
+	g.GroupID = groupID
+	g.require(groupsGetConsolidationRequestFieldGroupID)
 }
 
-func (p *PostV1ConsolidationGroupsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsGetRequest
+func (g *GroupsGetConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsGetConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsGetRequest(body)
+	*g = GroupsGetConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsGetRequest
+func (g *GroupsGetConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsGetConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-type PostV1ConsolidationGroupsListRequest struct {
+type GroupsListConsolidationRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationGroupsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListConsolidationRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 var (
-	postV1ConsolidationGroupsUpdateRequestFieldGroupID              = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsUpdateRequestFieldName                 = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsUpdateRequestFieldPresentationCurrency = big.NewInt(1 << 2)
+	groupsUpdateConsolidationRequestFieldGroupID              = big.NewInt(1 << 0)
+	groupsUpdateConsolidationRequestFieldName                 = big.NewInt(1 << 1)
+	groupsUpdateConsolidationRequestFieldPresentationCurrency = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationGroupsUpdateRequest struct {
+type GroupsUpdateConsolidationRequest struct {
 	GroupID              string  `json:"groupId" url:"-"`
 	Name                 *string `json:"name,omitempty" url:"-"`
 	PresentationCurrency *string `json:"presentationCurrency,omitempty" url:"-"`
@@ -184,153 +185,153 @@ type PostV1ConsolidationGroupsUpdateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationGroupsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsUpdateConsolidationRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationGroupsUpdateRequestFieldGroupID)
+func (g *GroupsUpdateConsolidationRequest) SetGroupID(groupID string) {
+	g.GroupID = groupID
+	g.require(groupsUpdateConsolidationRequestFieldGroupID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateRequest) SetName(name *string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsUpdateRequestFieldName)
+func (g *GroupsUpdateConsolidationRequest) SetName(name *string) {
+	g.Name = name
+	g.require(groupsUpdateConsolidationRequestFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateRequest) SetPresentationCurrency(presentationCurrency *string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsUpdateRequestFieldPresentationCurrency)
+func (g *GroupsUpdateConsolidationRequest) SetPresentationCurrency(presentationCurrency *string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsUpdateConsolidationRequestFieldPresentationCurrency)
 }
 
-func (p *PostV1ConsolidationGroupsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsUpdateRequest
+func (g *GroupsUpdateConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsUpdateConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsUpdateRequest(body)
+	*g = GroupsUpdateConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsUpdateRequest
+func (g *GroupsUpdateConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsUpdateConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationIntercompanyCandidatesRequestFieldGroupID = big.NewInt(1 << 0)
+	intercompanyCandidatesConsolidationRequestFieldGroupID = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationIntercompanyCandidatesRequest struct {
+type IntercompanyCandidatesConsolidationRequest struct {
 	GroupID string `json:"groupId" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyCandidatesConsolidationRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyCandidatesRequestFieldGroupID)
+func (i *IntercompanyCandidatesConsolidationRequest) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyCandidatesConsolidationRequestFieldGroupID)
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyCandidatesRequest
+func (i *IntercompanyCandidatesConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyCandidatesConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyCandidatesRequest(body)
+	*i = IntercompanyCandidatesConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyCandidatesRequest
+func (i *IntercompanyCandidatesConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyCandidatesConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksListRequestFieldGroupID = big.NewInt(1 << 0)
+	intercompanyLinksListConsolidationRequestFieldGroupID = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationIntercompanyLinksListRequest struct {
+type IntercompanyLinksListConsolidationRequest struct {
 	GroupID string `json:"groupId" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksListConsolidationRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyLinksListRequestFieldGroupID)
+func (i *IntercompanyLinksListConsolidationRequest) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyLinksListConsolidationRequestFieldGroupID)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksListRequest
+func (i *IntercompanyLinksListConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksListConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksListRequest(body)
+	*i = IntercompanyLinksListConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksListRequest
+func (i *IntercompanyLinksListConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksListConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksRemoveRequestFieldGroupID = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyLinksRemoveRequestFieldID      = big.NewInt(1 << 1)
+	intercompanyLinksRemoveConsolidationRequestFieldGroupID = big.NewInt(1 << 0)
+	intercompanyLinksRemoveConsolidationRequestFieldID      = big.NewInt(1 << 1)
 )
 
-type PostV1ConsolidationIntercompanyLinksRemoveRequest struct {
+type IntercompanyLinksRemoveConsolidationRequest struct {
 	GroupID string `json:"groupId" url:"-"`
 	ID      string `json:"id" url:"-"`
 
@@ -338,55 +339,55 @@ type PostV1ConsolidationIntercompanyLinksRemoveRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksRemoveConsolidationRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksRemoveRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyLinksRemoveRequestFieldGroupID)
+func (i *IntercompanyLinksRemoveConsolidationRequest) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyLinksRemoveConsolidationRequestFieldGroupID)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksRemoveRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationIntercompanyLinksRemoveRequestFieldID)
+func (i *IntercompanyLinksRemoveConsolidationRequest) SetID(id string) {
+	i.ID = id
+	i.require(intercompanyLinksRemoveConsolidationRequestFieldID)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksRemoveRequest
+func (i *IntercompanyLinksRemoveConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksRemoveConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksRemoveRequest(body)
+	*i = IntercompanyLinksRemoveConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksRemoveRequest
+func (i *IntercompanyLinksRemoveConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksRemoveConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksSetRequestFieldGroupID               = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyLinksSetRequestFieldPartnerID             = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyLinksSetRequestFieldCounterpartyCompanyID = big.NewInt(1 << 2)
+	intercompanyLinksSetConsolidationRequestFieldGroupID               = big.NewInt(1 << 0)
+	intercompanyLinksSetConsolidationRequestFieldPartnerID             = big.NewInt(1 << 1)
+	intercompanyLinksSetConsolidationRequestFieldCounterpartyCompanyID = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationIntercompanyLinksSetRequest struct {
+type IntercompanyLinksSetConsolidationRequest struct {
 	GroupID               string `json:"groupId" url:"-"`
 	PartnerID             string `json:"partnerId" url:"-"`
 	CounterpartyCompanyID string `json:"counterpartyCompanyId" url:"-"`
@@ -395,198 +396,202 @@ type PostV1ConsolidationIntercompanyLinksSetRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksSetConsolidationRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyLinksSetRequestFieldGroupID)
+func (i *IntercompanyLinksSetConsolidationRequest) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyLinksSetConsolidationRequestFieldGroupID)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1ConsolidationIntercompanyLinksSetRequestFieldPartnerID)
+func (i *IntercompanyLinksSetConsolidationRequest) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(intercompanyLinksSetConsolidationRequestFieldPartnerID)
 }
 
 // SetCounterpartyCompanyID sets the CounterpartyCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) SetCounterpartyCompanyID(counterpartyCompanyID string) {
-	p.CounterpartyCompanyID = counterpartyCompanyID
-	p.require(postV1ConsolidationIntercompanyLinksSetRequestFieldCounterpartyCompanyID)
+func (i *IntercompanyLinksSetConsolidationRequest) SetCounterpartyCompanyID(counterpartyCompanyID string) {
+	i.CounterpartyCompanyID = counterpartyCompanyID
+	i.require(intercompanyLinksSetConsolidationRequestFieldCounterpartyCompanyID)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksSetRequest
+func (i *IntercompanyLinksSetConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksSetConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksSetRequest(body)
+	*i = IntercompanyLinksSetConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksSetRequest
+func (i *IntercompanyLinksSetConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksSetConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportRequestFieldGroupID  = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportRequestFieldFromDate = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportRequestFieldToDate   = big.NewInt(1 << 2)
+	intercompanyReportConsolidationRequestFieldGroupID  = big.NewInt(1 << 0)
+	intercompanyReportConsolidationRequestFieldFromDate = big.NewInt(1 << 1)
+	intercompanyReportConsolidationRequestFieldToDate   = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationIntercompanyReportRequest struct {
-	GroupID  string `json:"groupId" url:"-"`
-	FromDate string `json:"fromDate" url:"-"`
-	ToDate   string `json:"toDate" url:"-"`
+type IntercompanyReportConsolidationRequest struct {
+	GroupID  string    `json:"groupId" url:"-"`
+	FromDate time.Time `json:"fromDate" url:"-" format:"date"`
+	ToDate   time.Time `json:"toDate" url:"-" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationIntercompanyReportRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyReportRequestFieldGroupID)
+func (i *IntercompanyReportConsolidationRequest) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyReportConsolidationRequestFieldGroupID)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportRequest) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1ConsolidationIntercompanyReportRequestFieldFromDate)
+func (i *IntercompanyReportConsolidationRequest) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(intercompanyReportConsolidationRequestFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportRequest) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1ConsolidationIntercompanyReportRequestFieldToDate)
+func (i *IntercompanyReportConsolidationRequest) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(intercompanyReportConsolidationRequestFieldToDate)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportRequest
+func (i *IntercompanyReportConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyReportConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportRequest(body)
+	*i = IntercompanyReportConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportRequest
+func (i *IntercompanyReportConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationRequest
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationMembersAddRequestFieldGroupID          = big.NewInt(1 << 0)
-	postV1ConsolidationMembersAddRequestFieldMemberCompanyID  = big.NewInt(1 << 1)
-	postV1ConsolidationMembersAddRequestFieldOwnershipPercent = big.NewInt(1 << 2)
-	postV1ConsolidationMembersAddRequestFieldMethod           = big.NewInt(1 << 3)
+	membersAddConsolidationRequestFieldGroupID          = big.NewInt(1 << 0)
+	membersAddConsolidationRequestFieldMemberCompanyID  = big.NewInt(1 << 1)
+	membersAddConsolidationRequestFieldOwnershipPercent = big.NewInt(1 << 2)
+	membersAddConsolidationRequestFieldMethod           = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationMembersAddRequest struct {
-	GroupID          string                                      `json:"groupId" url:"-"`
-	MemberCompanyID  string                                      `json:"memberCompanyId" url:"-"`
-	OwnershipPercent *float64                                    `json:"ownershipPercent,omitempty" url:"-"`
-	Method           *PostV1ConsolidationMembersAddRequestMethod `json:"method,omitempty" url:"-"`
+type MembersAddConsolidationRequest struct {
+	GroupID          string                                `json:"groupId" url:"-"`
+	MemberCompanyID  string                                `json:"memberCompanyId" url:"-"`
+	OwnershipPercent *float64                              `json:"ownershipPercent,omitempty" url:"-"`
+	Method           *MembersAddConsolidationRequestMethod `json:"method,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationMembersAddRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (m *MembersAddConsolidationRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	m.explicitFields.Or(m.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationMembersAddRequestFieldGroupID)
+func (m *MembersAddConsolidationRequest) SetGroupID(groupID string) {
+	m.GroupID = groupID
+	m.require(membersAddConsolidationRequestFieldGroupID)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddRequest) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationMembersAddRequestFieldMemberCompanyID)
+func (m *MembersAddConsolidationRequest) SetMemberCompanyID(memberCompanyID string) {
+	m.MemberCompanyID = memberCompanyID
+	m.require(membersAddConsolidationRequestFieldMemberCompanyID)
 }
 
 // SetOwnershipPercent sets the OwnershipPercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddRequest) SetOwnershipPercent(ownershipPercent *float64) {
-	p.OwnershipPercent = ownershipPercent
-	p.require(postV1ConsolidationMembersAddRequestFieldOwnershipPercent)
+func (m *MembersAddConsolidationRequest) SetOwnershipPercent(ownershipPercent *float64) {
+	m.OwnershipPercent = ownershipPercent
+	m.require(membersAddConsolidationRequestFieldOwnershipPercent)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddRequest) SetMethod(method *PostV1ConsolidationMembersAddRequestMethod) {
-	p.Method = method
-	p.require(postV1ConsolidationMembersAddRequestFieldMethod)
+func (m *MembersAddConsolidationRequest) SetMethod(method *MembersAddConsolidationRequestMethod) {
+	m.Method = method
+	m.require(membersAddConsolidationRequestFieldMethod)
 }
 
-func (p *PostV1ConsolidationMembersAddRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationMembersAddRequest
+func (m *MembersAddConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler MembersAddConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationMembersAddRequest(body)
+	*m = MembersAddConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationMembersAddRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationMembersAddRequest
+func (m *MembersAddConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed MembersAddConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*m),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationMembersRemoveRequestFieldGroupID         = big.NewInt(1 << 0)
-	postV1ConsolidationMembersRemoveRequestFieldMemberCompanyID = big.NewInt(1 << 1)
+	membersRemoveConsolidationRequestFieldGroupID         = big.NewInt(1 << 0)
+	membersRemoveConsolidationRequestFieldMemberCompanyID = big.NewInt(1 << 1)
 )
 
-type PostV1ConsolidationMembersRemoveRequest struct {
+type MembersRemoveConsolidationRequest struct {
 	GroupID         string `json:"groupId" url:"-"`
 	MemberCompanyID string `json:"memberCompanyId" url:"-"`
 
@@ -594,146 +599,150 @@ type PostV1ConsolidationMembersRemoveRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationMembersRemoveRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (m *MembersRemoveConsolidationRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	m.explicitFields.Or(m.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersRemoveRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationMembersRemoveRequestFieldGroupID)
+func (m *MembersRemoveConsolidationRequest) SetGroupID(groupID string) {
+	m.GroupID = groupID
+	m.require(membersRemoveConsolidationRequestFieldGroupID)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersRemoveRequest) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationMembersRemoveRequestFieldMemberCompanyID)
+func (m *MembersRemoveConsolidationRequest) SetMemberCompanyID(memberCompanyID string) {
+	m.MemberCompanyID = memberCompanyID
+	m.require(membersRemoveConsolidationRequestFieldMemberCompanyID)
 }
 
-func (p *PostV1ConsolidationMembersRemoveRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationMembersRemoveRequest
+func (m *MembersRemoveConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler MembersRemoveConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationMembersRemoveRequest(body)
+	*m = MembersRemoveConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationMembersRemoveRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationMembersRemoveRequest
+func (m *MembersRemoveConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed MembersRemoveConsolidationRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*m),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationReportRequestFieldGroupID      = big.NewInt(1 << 0)
-	postV1ConsolidationReportRequestFieldFromDate     = big.NewInt(1 << 1)
-	postV1ConsolidationReportRequestFieldToDate       = big.NewInt(1 << 2)
-	postV1ConsolidationReportRequestFieldCategory     = big.NewInt(1 << 3)
-	postV1ConsolidationReportRequestFieldEliminations = big.NewInt(1 << 4)
+	reportConsolidationRequestFieldGroupID      = big.NewInt(1 << 0)
+	reportConsolidationRequestFieldFromDate     = big.NewInt(1 << 1)
+	reportConsolidationRequestFieldToDate       = big.NewInt(1 << 2)
+	reportConsolidationRequestFieldCategory     = big.NewInt(1 << 3)
+	reportConsolidationRequestFieldEliminations = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationReportRequest struct {
-	GroupID      string                                              `json:"groupId" url:"-"`
-	FromDate     string                                              `json:"fromDate" url:"-"`
-	ToDate       string                                              `json:"toDate" url:"-"`
-	Category     *PostV1ConsolidationReportRequestCategory           `json:"category,omitempty" url:"-"`
-	Eliminations []*PostV1ConsolidationReportRequestEliminationsItem `json:"eliminations,omitempty" url:"-"`
+type ReportConsolidationRequest struct {
+	GroupID      string                                        `json:"groupId" url:"-"`
+	FromDate     time.Time                                     `json:"fromDate" url:"-" format:"date"`
+	ToDate       time.Time                                     `json:"toDate" url:"-" format:"date"`
+	Category     *ReportConsolidationRequestCategory           `json:"category,omitempty" url:"-"`
+	Eliminations []*ReportConsolidationRequestEliminationsItem `json:"eliminations,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1ConsolidationReportRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationReportRequestFieldGroupID)
+func (r *ReportConsolidationRequest) SetGroupID(groupID string) {
+	r.GroupID = groupID
+	r.require(reportConsolidationRequestFieldGroupID)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequest) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1ConsolidationReportRequestFieldFromDate)
+func (r *ReportConsolidationRequest) SetFromDate(fromDate time.Time) {
+	r.FromDate = fromDate
+	r.require(reportConsolidationRequestFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequest) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1ConsolidationReportRequestFieldToDate)
+func (r *ReportConsolidationRequest) SetToDate(toDate time.Time) {
+	r.ToDate = toDate
+	r.require(reportConsolidationRequestFieldToDate)
 }
 
 // SetCategory sets the Category field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequest) SetCategory(category *PostV1ConsolidationReportRequestCategory) {
-	p.Category = category
-	p.require(postV1ConsolidationReportRequestFieldCategory)
+func (r *ReportConsolidationRequest) SetCategory(category *ReportConsolidationRequestCategory) {
+	r.Category = category
+	r.require(reportConsolidationRequestFieldCategory)
 }
 
 // SetEliminations sets the Eliminations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequest) SetEliminations(eliminations []*PostV1ConsolidationReportRequestEliminationsItem) {
-	p.Eliminations = eliminations
-	p.require(postV1ConsolidationReportRequestFieldEliminations)
+func (r *ReportConsolidationRequest) SetEliminations(eliminations []*ReportConsolidationRequestEliminationsItem) {
+	r.Eliminations = eliminations
+	r.require(reportConsolidationRequestFieldEliminations)
 }
 
-func (p *PostV1ConsolidationReportRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportRequest
+func (r *ReportConsolidationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportRequest(body)
+	*r = ReportConsolidationRequest(body)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportRequest
+func (r *ReportConsolidationRequest) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationRequest
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*r),
+		FromDate: internal.NewDate(r.FromDate),
+		ToDate:   internal.NewDate(r.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1ConsolidationGroupsCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsCreateResponseFieldName                 = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsCreateResponseFieldPresentationCurrency = big.NewInt(1 << 2)
-	postV1ConsolidationGroupsCreateResponseFieldMemberCount          = big.NewInt(1 << 3)
-	postV1ConsolidationGroupsCreateResponseFieldCreatedAt            = big.NewInt(1 << 4)
-	postV1ConsolidationGroupsCreateResponseFieldUpdatedAt            = big.NewInt(1 << 5)
+	groupsCreateConsolidationResponseFieldID                   = big.NewInt(1 << 0)
+	groupsCreateConsolidationResponseFieldName                 = big.NewInt(1 << 1)
+	groupsCreateConsolidationResponseFieldPresentationCurrency = big.NewInt(1 << 2)
+	groupsCreateConsolidationResponseFieldMemberCount          = big.NewInt(1 << 3)
+	groupsCreateConsolidationResponseFieldCreatedAt            = big.NewInt(1 << 4)
+	groupsCreateConsolidationResponseFieldUpdatedAt            = big.NewInt(1 << 5)
 )
 
-type PostV1ConsolidationGroupsCreateResponse struct {
-	ID                   string `json:"id" url:"id"`
-	Name                 string `json:"name" url:"name"`
-	PresentationCurrency string `json:"presentationCurrency" url:"presentationCurrency"`
-	MemberCount          int64  `json:"memberCount" url:"memberCount"`
-	CreatedAt            string `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string `json:"updatedAt" url:"updatedAt"`
+type GroupsCreateConsolidationResponse struct {
+	ID                   string    `json:"id" url:"id"`
+	Name                 string    `json:"name" url:"name"`
+	PresentationCurrency string    `json:"presentationCurrency" url:"presentationCurrency"`
+	MemberCount          int64     `json:"memberCount" url:"memberCount"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -742,151 +751,163 @@ type PostV1ConsolidationGroupsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetID() string {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetName() string {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetPresentationCurrency() string {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) GetPresentationCurrency() string {
+	if g == nil {
 		return ""
 	}
-	return p.PresentationCurrency
+	return g.PresentationCurrency
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetMemberCount() int64 {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) GetMemberCount() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.MemberCount
+	return g.MemberCount
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsCreateConsolidationResponse) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsCreateConsolidationResponse) GetUpdatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return g.UpdatedAt
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsCreateConsolidationResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationGroupsCreateResponseFieldID)
+func (g *GroupsCreateConsolidationResponse) SetID(id string) {
+	g.ID = id
+	g.require(groupsCreateConsolidationResponseFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsCreateResponseFieldName)
+func (g *GroupsCreateConsolidationResponse) SetName(name string) {
+	g.Name = name
+	g.require(groupsCreateConsolidationResponseFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetPresentationCurrency(presentationCurrency string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsCreateResponseFieldPresentationCurrency)
+func (g *GroupsCreateConsolidationResponse) SetPresentationCurrency(presentationCurrency string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsCreateConsolidationResponseFieldPresentationCurrency)
 }
 
 // SetMemberCount sets the MemberCount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetMemberCount(memberCount int64) {
-	p.MemberCount = memberCount
-	p.require(postV1ConsolidationGroupsCreateResponseFieldMemberCount)
+func (g *GroupsCreateConsolidationResponse) SetMemberCount(memberCount int64) {
+	g.MemberCount = memberCount
+	g.require(groupsCreateConsolidationResponseFieldMemberCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1ConsolidationGroupsCreateResponseFieldCreatedAt)
+func (g *GroupsCreateConsolidationResponse) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsCreateConsolidationResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsCreateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1ConsolidationGroupsCreateResponseFieldUpdatedAt)
+func (g *GroupsCreateConsolidationResponse) SetUpdatedAt(updatedAt time.Time) {
+	g.UpdatedAt = updatedAt
+	g.require(groupsCreateConsolidationResponseFieldUpdatedAt)
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsCreateConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type embed GroupsCreateConsolidationResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsCreateConsolidationResponse(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	g.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsCreateResponse
+func (g *GroupsCreateConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsCreateConsolidationResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
+		UpdatedAt: internal.NewDateTime(g.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsCreateResponse) String() string {
-	if p == nil {
+func (g *GroupsCreateConsolidationResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationGroupsDeleteResponseFieldOk = big.NewInt(1 << 0)
+	groupsDeleteConsolidationResponseFieldOk = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationGroupsDeleteResponse struct {
+type GroupsDeleteConsolidationResponse struct {
 	Ok bool `json:"ok" url:"ok"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -896,94 +917,94 @@ type PostV1ConsolidationGroupsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) GetOk() bool {
-	if p == nil {
+func (g *GroupsDeleteConsolidationResponse) GetOk() bool {
+	if g == nil {
 		return false
 	}
-	return p.Ok
+	return g.Ok
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsDeleteConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsDeleteConsolidationResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetOk sets the Ok field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsDeleteResponse) SetOk(ok bool) {
-	p.Ok = ok
-	p.require(postV1ConsolidationGroupsDeleteResponseFieldOk)
+func (g *GroupsDeleteConsolidationResponse) SetOk(ok bool) {
+	g.Ok = ok
+	g.require(groupsDeleteConsolidationResponseFieldOk)
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsDeleteResponse
+func (g *GroupsDeleteConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsDeleteConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsDeleteConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsDeleteResponse
+func (g *GroupsDeleteConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsDeleteConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsDeleteResponse) String() string {
-	if p == nil {
+func (g *GroupsDeleteConsolidationResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationGroupsGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsGetResponseFieldName                 = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsGetResponseFieldPresentationCurrency = big.NewInt(1 << 2)
-	postV1ConsolidationGroupsGetResponseFieldMemberCount          = big.NewInt(1 << 3)
-	postV1ConsolidationGroupsGetResponseFieldCreatedAt            = big.NewInt(1 << 4)
-	postV1ConsolidationGroupsGetResponseFieldUpdatedAt            = big.NewInt(1 << 5)
-	postV1ConsolidationGroupsGetResponseFieldMembers              = big.NewInt(1 << 6)
+	groupsGetConsolidationResponseFieldID                   = big.NewInt(1 << 0)
+	groupsGetConsolidationResponseFieldName                 = big.NewInt(1 << 1)
+	groupsGetConsolidationResponseFieldPresentationCurrency = big.NewInt(1 << 2)
+	groupsGetConsolidationResponseFieldMemberCount          = big.NewInt(1 << 3)
+	groupsGetConsolidationResponseFieldCreatedAt            = big.NewInt(1 << 4)
+	groupsGetConsolidationResponseFieldUpdatedAt            = big.NewInt(1 << 5)
+	groupsGetConsolidationResponseFieldMembers              = big.NewInt(1 << 6)
 )
 
-type PostV1ConsolidationGroupsGetResponse struct {
-	ID                   string                                             `json:"id" url:"id"`
-	Name                 string                                             `json:"name" url:"name"`
-	PresentationCurrency string                                             `json:"presentationCurrency" url:"presentationCurrency"`
-	MemberCount          int64                                              `json:"memberCount" url:"memberCount"`
-	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                             `json:"updatedAt" url:"updatedAt"`
-	Members              []*PostV1ConsolidationGroupsGetResponseMembersItem `json:"members" url:"members"`
+type GroupsGetConsolidationResponse struct {
+	ID                   string                                       `json:"id" url:"id"`
+	Name                 string                                       `json:"name" url:"name"`
+	PresentationCurrency string                                       `json:"presentationCurrency" url:"presentationCurrency"`
+	MemberCount          int64                                        `json:"memberCount" url:"memberCount"`
+	CreatedAt            time.Time                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                    `json:"updatedAt" url:"updatedAt"`
+	Members              []*GroupsGetConsolidationResponseMembersItem `json:"members" url:"members"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -992,174 +1013,186 @@ type PostV1ConsolidationGroupsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetID() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetName() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetPresentationCurrency() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetPresentationCurrency() string {
+	if g == nil {
 		return ""
 	}
-	return p.PresentationCurrency
+	return g.PresentationCurrency
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetMemberCount() int64 {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetMemberCount() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.MemberCount
+	return g.MemberCount
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsGetConsolidationResponse) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsGetConsolidationResponse) GetUpdatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return g.UpdatedAt
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetMembers() []*PostV1ConsolidationGroupsGetResponseMembersItem {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetMembers() []*GroupsGetConsolidationResponseMembersItem {
+	if g == nil {
 		return nil
 	}
-	return p.Members
+	return g.Members
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsGetConsolidationResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationGroupsGetResponseFieldID)
+func (g *GroupsGetConsolidationResponse) SetID(id string) {
+	g.ID = id
+	g.require(groupsGetConsolidationResponseFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsGetResponseFieldName)
+func (g *GroupsGetConsolidationResponse) SetName(name string) {
+	g.Name = name
+	g.require(groupsGetConsolidationResponseFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetPresentationCurrency(presentationCurrency string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsGetResponseFieldPresentationCurrency)
+func (g *GroupsGetConsolidationResponse) SetPresentationCurrency(presentationCurrency string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsGetConsolidationResponseFieldPresentationCurrency)
 }
 
 // SetMemberCount sets the MemberCount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetMemberCount(memberCount int64) {
-	p.MemberCount = memberCount
-	p.require(postV1ConsolidationGroupsGetResponseFieldMemberCount)
+func (g *GroupsGetConsolidationResponse) SetMemberCount(memberCount int64) {
+	g.MemberCount = memberCount
+	g.require(groupsGetConsolidationResponseFieldMemberCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1ConsolidationGroupsGetResponseFieldCreatedAt)
+func (g *GroupsGetConsolidationResponse) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsGetConsolidationResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1ConsolidationGroupsGetResponseFieldUpdatedAt)
+func (g *GroupsGetConsolidationResponse) SetUpdatedAt(updatedAt time.Time) {
+	g.UpdatedAt = updatedAt
+	g.require(groupsGetConsolidationResponseFieldUpdatedAt)
 }
 
 // SetMembers sets the Members field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponse) SetMembers(members []*PostV1ConsolidationGroupsGetResponseMembersItem) {
-	p.Members = members
-	p.require(postV1ConsolidationGroupsGetResponseFieldMembers)
+func (g *GroupsGetConsolidationResponse) SetMembers(members []*GroupsGetConsolidationResponseMembersItem) {
+	g.Members = members
+	g.require(groupsGetConsolidationResponseFieldMembers)
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsGetConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type embed GroupsGetConsolidationResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsGetConsolidationResponse(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	g.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsGetResponse
+func (g *GroupsGetConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsGetConsolidationResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
+		UpdatedAt: internal.NewDateTime(g.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsGetResponse) String() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationGroupsGetResponseMembersItemFieldMemberCompanyID  = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsGetResponseMembersItemFieldName             = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsGetResponseMembersItemFieldBaseCurrency     = big.NewInt(1 << 2)
-	postV1ConsolidationGroupsGetResponseMembersItemFieldOwnershipPercent = big.NewInt(1 << 3)
-	postV1ConsolidationGroupsGetResponseMembersItemFieldMethod           = big.NewInt(1 << 4)
+	groupsGetConsolidationResponseMembersItemFieldMemberCompanyID  = big.NewInt(1 << 0)
+	groupsGetConsolidationResponseMembersItemFieldName             = big.NewInt(1 << 1)
+	groupsGetConsolidationResponseMembersItemFieldBaseCurrency     = big.NewInt(1 << 2)
+	groupsGetConsolidationResponseMembersItemFieldOwnershipPercent = big.NewInt(1 << 3)
+	groupsGetConsolidationResponseMembersItemFieldMethod           = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationGroupsGetResponseMembersItem struct {
-	MemberCompanyID  string                                                `json:"memberCompanyId" url:"memberCompanyId"`
-	Name             string                                                `json:"name" url:"name"`
-	BaseCurrency     string                                                `json:"baseCurrency" url:"baseCurrency"`
-	OwnershipPercent string                                                `json:"ownershipPercent" url:"ownershipPercent"`
-	Method           PostV1ConsolidationGroupsGetResponseMembersItemMethod `json:"method" url:"method"`
+type GroupsGetConsolidationResponseMembersItem struct {
+	MemberCompanyID  string                                          `json:"memberCompanyId" url:"memberCompanyId"`
+	Name             string                                          `json:"name" url:"name"`
+	BaseCurrency     string                                          `json:"baseCurrency" url:"baseCurrency"`
+	OwnershipPercent string                                          `json:"ownershipPercent" url:"ownershipPercent"`
+	Method           GroupsGetConsolidationResponseMembersItemMethod `json:"method" url:"method"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1168,163 +1201,163 @@ type PostV1ConsolidationGroupsGetResponseMembersItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetMemberCompanyID() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetMemberCompanyID() string {
+	if g == nil {
 		return ""
 	}
-	return p.MemberCompanyID
+	return g.MemberCompanyID
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetName() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetBaseCurrency() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetBaseCurrency() string {
+	if g == nil {
 		return ""
 	}
-	return p.BaseCurrency
+	return g.BaseCurrency
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetOwnershipPercent() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetOwnershipPercent() string {
+	if g == nil {
 		return ""
 	}
-	return p.OwnershipPercent
+	return g.OwnershipPercent
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetMethod() PostV1ConsolidationGroupsGetResponseMembersItemMethod {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetMethod() GroupsGetConsolidationResponseMembersItemMethod {
+	if g == nil {
 		return ""
 	}
-	return p.Method
+	return g.Method
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsGetConsolidationResponseMembersItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationGroupsGetResponseMembersItemFieldMemberCompanyID)
+func (g *GroupsGetConsolidationResponseMembersItem) SetMemberCompanyID(memberCompanyID string) {
+	g.MemberCompanyID = memberCompanyID
+	g.require(groupsGetConsolidationResponseMembersItemFieldMemberCompanyID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsGetResponseMembersItemFieldName)
+func (g *GroupsGetConsolidationResponseMembersItem) SetName(name string) {
+	g.Name = name
+	g.require(groupsGetConsolidationResponseMembersItemFieldName)
 }
 
 // SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) SetBaseCurrency(baseCurrency string) {
-	p.BaseCurrency = baseCurrency
-	p.require(postV1ConsolidationGroupsGetResponseMembersItemFieldBaseCurrency)
+func (g *GroupsGetConsolidationResponseMembersItem) SetBaseCurrency(baseCurrency string) {
+	g.BaseCurrency = baseCurrency
+	g.require(groupsGetConsolidationResponseMembersItemFieldBaseCurrency)
 }
 
 // SetOwnershipPercent sets the OwnershipPercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) SetOwnershipPercent(ownershipPercent string) {
-	p.OwnershipPercent = ownershipPercent
-	p.require(postV1ConsolidationGroupsGetResponseMembersItemFieldOwnershipPercent)
+func (g *GroupsGetConsolidationResponseMembersItem) SetOwnershipPercent(ownershipPercent string) {
+	g.OwnershipPercent = ownershipPercent
+	g.require(groupsGetConsolidationResponseMembersItemFieldOwnershipPercent)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) SetMethod(method PostV1ConsolidationGroupsGetResponseMembersItemMethod) {
-	p.Method = method
-	p.require(postV1ConsolidationGroupsGetResponseMembersItemFieldMethod)
+func (g *GroupsGetConsolidationResponseMembersItem) SetMethod(method GroupsGetConsolidationResponseMembersItemMethod) {
+	g.Method = method
+	g.require(groupsGetConsolidationResponseMembersItemFieldMethod)
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsGetResponseMembersItem
+func (g *GroupsGetConsolidationResponseMembersItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsGetConsolidationResponseMembersItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsGetResponseMembersItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsGetConsolidationResponseMembersItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsGetResponseMembersItem
+func (g *GroupsGetConsolidationResponseMembersItem) MarshalJSON() ([]byte, error) {
+	type embed GroupsGetConsolidationResponseMembersItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsGetResponseMembersItem) String() string {
-	if p == nil {
+func (g *GroupsGetConsolidationResponseMembersItem) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
-type PostV1ConsolidationGroupsGetResponseMembersItemMethod string
+type GroupsGetConsolidationResponseMembersItemMethod string
 
 const (
-	PostV1ConsolidationGroupsGetResponseMembersItemMethodFull         PostV1ConsolidationGroupsGetResponseMembersItemMethod = "full"
-	PostV1ConsolidationGroupsGetResponseMembersItemMethodProportional PostV1ConsolidationGroupsGetResponseMembersItemMethod = "proportional"
-	PostV1ConsolidationGroupsGetResponseMembersItemMethodEquity       PostV1ConsolidationGroupsGetResponseMembersItemMethod = "equity"
+	GroupsGetConsolidationResponseMembersItemMethodFull         GroupsGetConsolidationResponseMembersItemMethod = "full"
+	GroupsGetConsolidationResponseMembersItemMethodProportional GroupsGetConsolidationResponseMembersItemMethod = "proportional"
+	GroupsGetConsolidationResponseMembersItemMethodEquity       GroupsGetConsolidationResponseMembersItemMethod = "equity"
 )
 
-func NewPostV1ConsolidationGroupsGetResponseMembersItemMethodFromString(s string) (PostV1ConsolidationGroupsGetResponseMembersItemMethod, error) {
+func NewGroupsGetConsolidationResponseMembersItemMethodFromString(s string) (GroupsGetConsolidationResponseMembersItemMethod, error) {
 	switch s {
 	case "full":
-		return PostV1ConsolidationGroupsGetResponseMembersItemMethodFull, nil
+		return GroupsGetConsolidationResponseMembersItemMethodFull, nil
 	case "proportional":
-		return PostV1ConsolidationGroupsGetResponseMembersItemMethodProportional, nil
+		return GroupsGetConsolidationResponseMembersItemMethodProportional, nil
 	case "equity":
-		return PostV1ConsolidationGroupsGetResponseMembersItemMethodEquity, nil
+		return GroupsGetConsolidationResponseMembersItemMethodEquity, nil
 	}
-	var t PostV1ConsolidationGroupsGetResponseMembersItemMethod
+	var t GroupsGetConsolidationResponseMembersItemMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationGroupsGetResponseMembersItemMethod) Ptr() *PostV1ConsolidationGroupsGetResponseMembersItemMethod {
-	return &p
+func (g GroupsGetConsolidationResponseMembersItemMethod) Ptr() *GroupsGetConsolidationResponseMembersItemMethod {
+	return &g
 }
 
 var (
-	postV1ConsolidationGroupsListResponseFieldRows = big.NewInt(1 << 0)
+	groupsListConsolidationResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationGroupsListResponse struct {
-	Rows []*PostV1ConsolidationGroupsListResponseRowsItem `json:"rows" url:"rows"`
+type GroupsListConsolidationResponse struct {
+	Rows []*GroupsListConsolidationResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1333,92 +1366,92 @@ type PostV1ConsolidationGroupsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) GetRows() []*PostV1ConsolidationGroupsListResponseRowsItem {
-	if p == nil {
+func (g *GroupsListConsolidationResponse) GetRows() []*GroupsListConsolidationResponseRowsItem {
+	if g == nil {
 		return nil
 	}
-	return p.Rows
+	return g.Rows
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListConsolidationResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponse) SetRows(rows []*PostV1ConsolidationGroupsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationGroupsListResponseFieldRows)
+func (g *GroupsListConsolidationResponse) SetRows(rows []*GroupsListConsolidationResponseRowsItem) {
+	g.Rows = rows
+	g.require(groupsListConsolidationResponseFieldRows)
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsListResponse
+func (g *GroupsListConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsListConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsListResponse
+func (g *GroupsListConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsListConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsListResponse) String() string {
-	if p == nil {
+func (g *GroupsListConsolidationResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationGroupsListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsListResponseRowsItemFieldName                 = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsListResponseRowsItemFieldPresentationCurrency = big.NewInt(1 << 2)
-	postV1ConsolidationGroupsListResponseRowsItemFieldMemberCount          = big.NewInt(1 << 3)
-	postV1ConsolidationGroupsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 4)
-	postV1ConsolidationGroupsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 5)
+	groupsListConsolidationResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	groupsListConsolidationResponseRowsItemFieldName                 = big.NewInt(1 << 1)
+	groupsListConsolidationResponseRowsItemFieldPresentationCurrency = big.NewInt(1 << 2)
+	groupsListConsolidationResponseRowsItemFieldMemberCount          = big.NewInt(1 << 3)
+	groupsListConsolidationResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 4)
+	groupsListConsolidationResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 5)
 )
 
-type PostV1ConsolidationGroupsListResponseRowsItem struct {
-	ID                   string `json:"id" url:"id"`
-	Name                 string `json:"name" url:"name"`
-	PresentationCurrency string `json:"presentationCurrency" url:"presentationCurrency"`
-	MemberCount          int64  `json:"memberCount" url:"memberCount"`
-	CreatedAt            string `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string `json:"updatedAt" url:"updatedAt"`
+type GroupsListConsolidationResponseRowsItem struct {
+	ID                   string    `json:"id" url:"id"`
+	Name                 string    `json:"name" url:"name"`
+	PresentationCurrency string    `json:"presentationCurrency" url:"presentationCurrency"`
+	MemberCount          int64     `json:"memberCount" url:"memberCount"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1427,162 +1460,174 @@ type PostV1ConsolidationGroupsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetName() string {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetPresentationCurrency() string {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) GetPresentationCurrency() string {
+	if g == nil {
 		return ""
 	}
-	return p.PresentationCurrency
+	return g.PresentationCurrency
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetMemberCount() int64 {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) GetMemberCount() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.MemberCount
+	return g.MemberCount
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsListConsolidationResponseRowsItem) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsListConsolidationResponseRowsItem) GetUpdatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return g.UpdatedAt
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListConsolidationResponseRowsItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldID)
+func (g *GroupsListConsolidationResponseRowsItem) SetID(id string) {
+	g.ID = id
+	g.require(groupsListConsolidationResponseRowsItemFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldName)
+func (g *GroupsListConsolidationResponseRowsItem) SetName(name string) {
+	g.Name = name
+	g.require(groupsListConsolidationResponseRowsItemFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetPresentationCurrency(presentationCurrency string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldPresentationCurrency)
+func (g *GroupsListConsolidationResponseRowsItem) SetPresentationCurrency(presentationCurrency string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsListConsolidationResponseRowsItemFieldPresentationCurrency)
 }
 
 // SetMemberCount sets the MemberCount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetMemberCount(memberCount int64) {
-	p.MemberCount = memberCount
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldMemberCount)
+func (g *GroupsListConsolidationResponseRowsItem) SetMemberCount(memberCount int64) {
+	g.MemberCount = memberCount
+	g.require(groupsListConsolidationResponseRowsItemFieldMemberCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldCreatedAt)
+func (g *GroupsListConsolidationResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsListConsolidationResponseRowsItemFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1ConsolidationGroupsListResponseRowsItemFieldUpdatedAt)
+func (g *GroupsListConsolidationResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	g.UpdatedAt = updatedAt
+	g.require(groupsListConsolidationResponseRowsItemFieldUpdatedAt)
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsListConsolidationResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed GroupsListConsolidationResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListConsolidationResponseRowsItem(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	g.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsListResponseRowsItem
+func (g *GroupsListConsolidationResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed GroupsListConsolidationResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
+		UpdatedAt: internal.NewDateTime(g.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsListResponseRowsItem) String() string {
-	if p == nil {
+func (g *GroupsListConsolidationResponseRowsItem) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationGroupsUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1ConsolidationGroupsUpdateResponseFieldName                 = big.NewInt(1 << 1)
-	postV1ConsolidationGroupsUpdateResponseFieldPresentationCurrency = big.NewInt(1 << 2)
-	postV1ConsolidationGroupsUpdateResponseFieldMemberCount          = big.NewInt(1 << 3)
-	postV1ConsolidationGroupsUpdateResponseFieldCreatedAt            = big.NewInt(1 << 4)
-	postV1ConsolidationGroupsUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 5)
+	groupsUpdateConsolidationResponseFieldID                   = big.NewInt(1 << 0)
+	groupsUpdateConsolidationResponseFieldName                 = big.NewInt(1 << 1)
+	groupsUpdateConsolidationResponseFieldPresentationCurrency = big.NewInt(1 << 2)
+	groupsUpdateConsolidationResponseFieldMemberCount          = big.NewInt(1 << 3)
+	groupsUpdateConsolidationResponseFieldCreatedAt            = big.NewInt(1 << 4)
+	groupsUpdateConsolidationResponseFieldUpdatedAt            = big.NewInt(1 << 5)
 )
 
-type PostV1ConsolidationGroupsUpdateResponse struct {
-	ID                   string `json:"id" url:"id"`
-	Name                 string `json:"name" url:"name"`
-	PresentationCurrency string `json:"presentationCurrency" url:"presentationCurrency"`
-	MemberCount          int64  `json:"memberCount" url:"memberCount"`
-	CreatedAt            string `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string `json:"updatedAt" url:"updatedAt"`
+type GroupsUpdateConsolidationResponse struct {
+	ID                   string    `json:"id" url:"id"`
+	Name                 string    `json:"name" url:"name"`
+	PresentationCurrency string    `json:"presentationCurrency" url:"presentationCurrency"`
+	MemberCount          int64     `json:"memberCount" url:"memberCount"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1591,152 +1636,164 @@ type PostV1ConsolidationGroupsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetID() string {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetName() string {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetPresentationCurrency() string {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) GetPresentationCurrency() string {
+	if g == nil {
 		return ""
 	}
-	return p.PresentationCurrency
+	return g.PresentationCurrency
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetMemberCount() int64 {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) GetMemberCount() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.MemberCount
+	return g.MemberCount
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsUpdateConsolidationResponse) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsUpdateConsolidationResponse) GetUpdatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return g.UpdatedAt
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsUpdateConsolidationResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldID)
+func (g *GroupsUpdateConsolidationResponse) SetID(id string) {
+	g.ID = id
+	g.require(groupsUpdateConsolidationResponseFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldName)
+func (g *GroupsUpdateConsolidationResponse) SetName(name string) {
+	g.Name = name
+	g.require(groupsUpdateConsolidationResponseFieldName)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetPresentationCurrency(presentationCurrency string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldPresentationCurrency)
+func (g *GroupsUpdateConsolidationResponse) SetPresentationCurrency(presentationCurrency string) {
+	g.PresentationCurrency = presentationCurrency
+	g.require(groupsUpdateConsolidationResponseFieldPresentationCurrency)
 }
 
 // SetMemberCount sets the MemberCount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetMemberCount(memberCount int64) {
-	p.MemberCount = memberCount
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldMemberCount)
+func (g *GroupsUpdateConsolidationResponse) SetMemberCount(memberCount int64) {
+	g.MemberCount = memberCount
+	g.require(groupsUpdateConsolidationResponseFieldMemberCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldCreatedAt)
+func (g *GroupsUpdateConsolidationResponse) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsUpdateConsolidationResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationGroupsUpdateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1ConsolidationGroupsUpdateResponseFieldUpdatedAt)
+func (g *GroupsUpdateConsolidationResponse) SetUpdatedAt(updatedAt time.Time) {
+	g.UpdatedAt = updatedAt
+	g.require(groupsUpdateConsolidationResponseFieldUpdatedAt)
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationGroupsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsUpdateConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type embed GroupsUpdateConsolidationResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationGroupsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsUpdateConsolidationResponse(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	g.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationGroupsUpdateResponse
+func (g *GroupsUpdateConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsUpdateConsolidationResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
+		UpdatedAt: internal.NewDateTime(g.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationGroupsUpdateResponse) String() string {
-	if p == nil {
+func (g *GroupsUpdateConsolidationResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1ConsolidationIntercompanyCandidatesResponseFieldRows = big.NewInt(1 << 0)
+	intercompanyCandidatesConsolidationResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationIntercompanyCandidatesResponse struct {
-	Rows []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem `json:"rows" url:"rows"`
+type IntercompanyCandidatesConsolidationResponse struct {
+	Rows []*IntercompanyCandidatesConsolidationResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1745,98 +1802,98 @@ type PostV1ConsolidationIntercompanyCandidatesResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) GetRows() []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponse) GetRows() []*IntercompanyCandidatesConsolidationResponseRowsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Rows
+	return i.Rows
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyCandidatesConsolidationResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) SetRows(rows []*PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseFieldRows)
+func (i *IntercompanyCandidatesConsolidationResponse) SetRows(rows []*IntercompanyCandidatesConsolidationResponseRowsItem) {
+	i.Rows = rows
+	i.require(intercompanyCandidatesConsolidationResponseFieldRows)
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyCandidatesResponse
+func (i *IntercompanyCandidatesConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyCandidatesConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyCandidatesResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyCandidatesConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyCandidatesResponse
+func (i *IntercompanyCandidatesConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyCandidatesConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponse) String() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMemberCompanyID    = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMemberName         = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerID          = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerName        = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerCode        = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchesCompanyID   = big.NewInt(1 << 5)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchesCompanyName = big.NewInt(1 << 6)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchedOn          = big.NewInt(1 << 7)
-	postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldLinkID             = big.NewInt(1 << 8)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldMemberCompanyID    = big.NewInt(1 << 0)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldMemberName         = big.NewInt(1 << 1)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerID          = big.NewInt(1 << 2)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerName        = big.NewInt(1 << 3)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerCode        = big.NewInt(1 << 4)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldMatchesCompanyID   = big.NewInt(1 << 5)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldMatchesCompanyName = big.NewInt(1 << 6)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldMatchedOn          = big.NewInt(1 << 7)
+	intercompanyCandidatesConsolidationResponseRowsItemFieldLinkID             = big.NewInt(1 << 8)
 )
 
-type PostV1ConsolidationIntercompanyCandidatesResponseRowsItem struct {
-	MemberCompanyID    string                                                             `json:"memberCompanyId" url:"memberCompanyId"`
-	MemberName         string                                                             `json:"memberName" url:"memberName"`
-	PartnerID          string                                                             `json:"partnerId" url:"partnerId"`
-	PartnerName        string                                                             `json:"partnerName" url:"partnerName"`
-	PartnerCode        *string                                                            `json:"partnerCode,omitempty" url:"partnerCode,omitempty"`
-	MatchesCompanyID   string                                                             `json:"matchesCompanyId" url:"matchesCompanyId"`
-	MatchesCompanyName string                                                             `json:"matchesCompanyName" url:"matchesCompanyName"`
-	MatchedOn          PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn `json:"matchedOn" url:"matchedOn"`
-	LinkID             *string                                                            `json:"linkId,omitempty" url:"linkId,omitempty"`
+type IntercompanyCandidatesConsolidationResponseRowsItem struct {
+	MemberCompanyID    string                                                       `json:"memberCompanyId" url:"memberCompanyId"`
+	MemberName         string                                                       `json:"memberName" url:"memberName"`
+	PartnerID          string                                                       `json:"partnerId" url:"partnerId"`
+	PartnerName        string                                                       `json:"partnerName" url:"partnerName"`
+	PartnerCode        *string                                                      `json:"partnerCode,omitempty" url:"partnerCode,omitempty"`
+	MatchesCompanyID   string                                                       `json:"matchesCompanyId" url:"matchesCompanyId"`
+	MatchesCompanyName string                                                       `json:"matchesCompanyName" url:"matchesCompanyName"`
+	MatchedOn          IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn `json:"matchedOn" url:"matchedOn"`
+	LinkID             *string                                                      `json:"linkId,omitempty" url:"linkId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1845,216 +1902,216 @@ type PostV1ConsolidationIntercompanyCandidatesResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetMemberCompanyID() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetMemberCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.MemberCompanyID
+	return i.MemberCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetMemberName() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetMemberName() string {
+	if i == nil {
 		return ""
 	}
-	return p.MemberName
+	return i.MemberName
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetPartnerID() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetPartnerID() string {
+	if i == nil {
 		return ""
 	}
-	return p.PartnerID
+	return i.PartnerID
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetPartnerName() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetPartnerName() string {
+	if i == nil {
 		return ""
 	}
-	return p.PartnerName
+	return i.PartnerName
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetPartnerCode() *string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetPartnerCode() *string {
+	if i == nil {
 		return nil
 	}
-	return p.PartnerCode
+	return i.PartnerCode
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetMatchesCompanyID() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetMatchesCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.MatchesCompanyID
+	return i.MatchesCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetMatchesCompanyName() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetMatchesCompanyName() string {
+	if i == nil {
 		return ""
 	}
-	return p.MatchesCompanyName
+	return i.MatchesCompanyName
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetMatchedOn() PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetMatchedOn() IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn {
+	if i == nil {
 		return ""
 	}
-	return p.MatchedOn
+	return i.MatchedOn
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetLinkID() *string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetLinkID() *string {
+	if i == nil {
 		return nil
 	}
-	return p.LinkID
+	return i.LinkID
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMemberCompanyID)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetMemberCompanyID(memberCompanyID string) {
+	i.MemberCompanyID = memberCompanyID
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldMemberCompanyID)
 }
 
 // SetMemberName sets the MemberName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetMemberName(memberName string) {
-	p.MemberName = memberName
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMemberName)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetMemberName(memberName string) {
+	i.MemberName = memberName
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldMemberName)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerID)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerID)
 }
 
 // SetPartnerName sets the PartnerName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetPartnerName(partnerName string) {
-	p.PartnerName = partnerName
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerName)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetPartnerName(partnerName string) {
+	i.PartnerName = partnerName
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerName)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetPartnerCode(partnerCode *string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldPartnerCode)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetPartnerCode(partnerCode *string) {
+	i.PartnerCode = partnerCode
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldPartnerCode)
 }
 
 // SetMatchesCompanyID sets the MatchesCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetMatchesCompanyID(matchesCompanyID string) {
-	p.MatchesCompanyID = matchesCompanyID
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchesCompanyID)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetMatchesCompanyID(matchesCompanyID string) {
+	i.MatchesCompanyID = matchesCompanyID
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldMatchesCompanyID)
 }
 
 // SetMatchesCompanyName sets the MatchesCompanyName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetMatchesCompanyName(matchesCompanyName string) {
-	p.MatchesCompanyName = matchesCompanyName
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchesCompanyName)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetMatchesCompanyName(matchesCompanyName string) {
+	i.MatchesCompanyName = matchesCompanyName
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldMatchesCompanyName)
 }
 
 // SetMatchedOn sets the MatchedOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetMatchedOn(matchedOn PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn) {
-	p.MatchedOn = matchedOn
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldMatchedOn)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetMatchedOn(matchedOn IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn) {
+	i.MatchedOn = matchedOn
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldMatchedOn)
 }
 
 // SetLinkID sets the LinkID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) SetLinkID(linkID *string) {
-	p.LinkID = linkID
-	p.require(postV1ConsolidationIntercompanyCandidatesResponseRowsItemFieldLinkID)
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) SetLinkID(linkID *string) {
+	i.LinkID = linkID
+	i.require(intercompanyCandidatesConsolidationResponseRowsItemFieldLinkID)
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyCandidatesConsolidationResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyCandidatesResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyCandidatesConsolidationResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyCandidatesResponseRowsItem
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyCandidatesConsolidationResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyCandidatesResponseRowsItem) String() string {
-	if p == nil {
+func (i *IntercompanyCandidatesConsolidationResponseRowsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn string
+type IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn string
 
 const (
-	PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnCode    PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn = "code"
-	PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnVatCode PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn = "vatCode"
+	IntercompanyCandidatesConsolidationResponseRowsItemMatchedOnCode    IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn = "code"
+	IntercompanyCandidatesConsolidationResponseRowsItemMatchedOnVatCode IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn = "vatCode"
 )
 
-func NewPostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnFromString(s string) (PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn, error) {
+func NewIntercompanyCandidatesConsolidationResponseRowsItemMatchedOnFromString(s string) (IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn, error) {
 	switch s {
 	case "code":
-		return PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnCode, nil
+		return IntercompanyCandidatesConsolidationResponseRowsItemMatchedOnCode, nil
 	case "vatCode":
-		return PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOnVatCode, nil
+		return IntercompanyCandidatesConsolidationResponseRowsItemMatchedOnVatCode, nil
 	}
-	var t PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn
+	var t IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn) Ptr() *PostV1ConsolidationIntercompanyCandidatesResponseRowsItemMatchedOn {
-	return &p
+func (i IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn) Ptr() *IntercompanyCandidatesConsolidationResponseRowsItemMatchedOn {
+	return &i
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksListResponseFieldRows = big.NewInt(1 << 0)
+	intercompanyLinksListConsolidationResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationIntercompanyLinksListResponse struct {
-	Rows []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem `json:"rows" url:"rows"`
+type IntercompanyLinksListConsolidationResponse struct {
+	Rows []*IntercompanyLinksListConsolidationResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2063,96 +2120,96 @@ type PostV1ConsolidationIntercompanyLinksListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) GetRows() []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponse) GetRows() []*IntercompanyLinksListConsolidationResponseRowsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Rows
+	return i.Rows
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksListConsolidationResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) SetRows(rows []*PostV1ConsolidationIntercompanyLinksListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationIntercompanyLinksListResponseFieldRows)
+func (i *IntercompanyLinksListConsolidationResponse) SetRows(rows []*IntercompanyLinksListConsolidationResponseRowsItem) {
+	i.Rows = rows
+	i.require(intercompanyLinksListConsolidationResponseFieldRows)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksListResponse
+func (i *IntercompanyLinksListConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksListConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyLinksListConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksListResponse
+func (i *IntercompanyLinksListConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksListConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponse) String() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldID                      = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCompanyID               = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCompanyName             = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldPartnerID               = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldPartnerName             = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCounterpartyCompanyID   = big.NewInt(1 << 5)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCounterpartyCompanyName = big.NewInt(1 << 6)
-	postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 7)
+	intercompanyLinksListConsolidationResponseRowsItemFieldID                      = big.NewInt(1 << 0)
+	intercompanyLinksListConsolidationResponseRowsItemFieldCompanyID               = big.NewInt(1 << 1)
+	intercompanyLinksListConsolidationResponseRowsItemFieldCompanyName             = big.NewInt(1 << 2)
+	intercompanyLinksListConsolidationResponseRowsItemFieldPartnerID               = big.NewInt(1 << 3)
+	intercompanyLinksListConsolidationResponseRowsItemFieldPartnerName             = big.NewInt(1 << 4)
+	intercompanyLinksListConsolidationResponseRowsItemFieldCounterpartyCompanyID   = big.NewInt(1 << 5)
+	intercompanyLinksListConsolidationResponseRowsItemFieldCounterpartyCompanyName = big.NewInt(1 << 6)
+	intercompanyLinksListConsolidationResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 7)
 )
 
-type PostV1ConsolidationIntercompanyLinksListResponseRowsItem struct {
-	ID                      string `json:"id" url:"id"`
-	CompanyID               string `json:"companyId" url:"companyId"`
-	CompanyName             string `json:"companyName" url:"companyName"`
-	PartnerID               string `json:"partnerId" url:"partnerId"`
-	PartnerName             string `json:"partnerName" url:"partnerName"`
-	CounterpartyCompanyID   string `json:"counterpartyCompanyId" url:"counterpartyCompanyId"`
-	CounterpartyCompanyName string `json:"counterpartyCompanyName" url:"counterpartyCompanyName"`
-	CreatedAt               string `json:"createdAt" url:"createdAt"`
+type IntercompanyLinksListConsolidationResponseRowsItem struct {
+	ID                      string    `json:"id" url:"id"`
+	CompanyID               string    `json:"companyId" url:"companyId"`
+	CompanyName             string    `json:"companyName" url:"companyName"`
+	PartnerID               string    `json:"partnerId" url:"partnerId"`
+	PartnerName             string    `json:"partnerName" url:"partnerName"`
+	CounterpartyCompanyID   string    `json:"counterpartyCompanyId" url:"counterpartyCompanyId"`
+	CounterpartyCompanyName string    `json:"counterpartyCompanyName" url:"counterpartyCompanyName"`
+	CreatedAt               time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2161,179 +2218,187 @@ type PostV1ConsolidationIntercompanyLinksListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetID() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetCompanyID() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.CompanyID
+	return i.CompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetCompanyName() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetCompanyName() string {
+	if i == nil {
 		return ""
 	}
-	return p.CompanyName
+	return i.CompanyName
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetPartnerID() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetPartnerID() string {
+	if i == nil {
 		return ""
 	}
-	return p.PartnerID
+	return i.PartnerID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetPartnerName() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetPartnerName() string {
+	if i == nil {
 		return ""
 	}
-	return p.PartnerName
+	return i.PartnerName
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetCounterpartyCompanyID() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetCounterpartyCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.CounterpartyCompanyID
+	return i.CounterpartyCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetCounterpartyCompanyName() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetCounterpartyCompanyName() string {
+	if i == nil {
 		return ""
 	}
-	return p.CounterpartyCompanyName
+	return i.CounterpartyCompanyName
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return i.CreatedAt
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldID)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldID)
 }
 
 // SetCompanyID sets the CompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetCompanyID(companyID string) {
-	p.CompanyID = companyID
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCompanyID)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetCompanyID(companyID string) {
+	i.CompanyID = companyID
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldCompanyID)
 }
 
 // SetCompanyName sets the CompanyName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetCompanyName(companyName string) {
-	p.CompanyName = companyName
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCompanyName)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetCompanyName(companyName string) {
+	i.CompanyName = companyName
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldCompanyName)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldPartnerID)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldPartnerID)
 }
 
 // SetPartnerName sets the PartnerName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetPartnerName(partnerName string) {
-	p.PartnerName = partnerName
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldPartnerName)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetPartnerName(partnerName string) {
+	i.PartnerName = partnerName
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldPartnerName)
 }
 
 // SetCounterpartyCompanyID sets the CounterpartyCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetCounterpartyCompanyID(counterpartyCompanyID string) {
-	p.CounterpartyCompanyID = counterpartyCompanyID
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCounterpartyCompanyID)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetCounterpartyCompanyID(counterpartyCompanyID string) {
+	i.CounterpartyCompanyID = counterpartyCompanyID
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldCounterpartyCompanyID)
 }
 
 // SetCounterpartyCompanyName sets the CounterpartyCompanyName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetCounterpartyCompanyName(counterpartyCompanyName string) {
-	p.CounterpartyCompanyName = counterpartyCompanyName
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCounterpartyCompanyName)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetCounterpartyCompanyName(counterpartyCompanyName string) {
+	i.CounterpartyCompanyName = counterpartyCompanyName
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldCounterpartyCompanyName)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1ConsolidationIntercompanyLinksListResponseRowsItemFieldCreatedAt)
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(intercompanyLinksListConsolidationResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed IntercompanyLinksListConsolidationResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyLinksListConsolidationResponseRowsItem(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksListResponseRowsItem
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksListConsolidationResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksListResponseRowsItem) String() string {
-	if p == nil {
+func (i *IntercompanyLinksListConsolidationResponseRowsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksRemoveResponseFieldOk = big.NewInt(1 << 0)
+	intercompanyLinksRemoveConsolidationResponseFieldOk = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationIntercompanyLinksRemoveResponse struct {
+type IntercompanyLinksRemoveConsolidationResponse struct {
 	Ok bool `json:"ok" url:"ok"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2343,85 +2408,85 @@ type PostV1ConsolidationIntercompanyLinksRemoveResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) GetOk() bool {
-	if p == nil {
+func (i *IntercompanyLinksRemoveConsolidationResponse) GetOk() bool {
+	if i == nil {
 		return false
 	}
-	return p.Ok
+	return i.Ok
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyLinksRemoveConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksRemoveConsolidationResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetOk sets the Ok field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) SetOk(ok bool) {
-	p.Ok = ok
-	p.require(postV1ConsolidationIntercompanyLinksRemoveResponseFieldOk)
+func (i *IntercompanyLinksRemoveConsolidationResponse) SetOk(ok bool) {
+	i.Ok = ok
+	i.require(intercompanyLinksRemoveConsolidationResponseFieldOk)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksRemoveResponse
+func (i *IntercompanyLinksRemoveConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksRemoveConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksRemoveResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyLinksRemoveConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksRemoveResponse
+func (i *IntercompanyLinksRemoveConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksRemoveConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksRemoveResponse) String() string {
-	if p == nil {
+func (i *IntercompanyLinksRemoveConsolidationResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyLinksSetResponseFieldID                    = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyLinksSetResponseFieldGroupID               = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyLinksSetResponseFieldCompanyID             = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyLinksSetResponseFieldPartnerID             = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyLinksSetResponseFieldCounterpartyCompanyID = big.NewInt(1 << 4)
+	intercompanyLinksSetConsolidationResponseFieldID                    = big.NewInt(1 << 0)
+	intercompanyLinksSetConsolidationResponseFieldGroupID               = big.NewInt(1 << 1)
+	intercompanyLinksSetConsolidationResponseFieldCompanyID             = big.NewInt(1 << 2)
+	intercompanyLinksSetConsolidationResponseFieldPartnerID             = big.NewInt(1 << 3)
+	intercompanyLinksSetConsolidationResponseFieldCounterpartyCompanyID = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationIntercompanyLinksSetResponse struct {
+type IntercompanyLinksSetConsolidationResponse struct {
 	ID                    string `json:"id" url:"id"`
 	GroupID               string `json:"groupId" url:"groupId"`
 	CompanyID             string `json:"companyId" url:"companyId"`
@@ -2435,142 +2500,142 @@ type PostV1ConsolidationIntercompanyLinksSetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetID() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetGroupID() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetGroupID() string {
+	if i == nil {
 		return ""
 	}
-	return p.GroupID
+	return i.GroupID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetCompanyID() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.CompanyID
+	return i.CompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetPartnerID() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetPartnerID() string {
+	if i == nil {
 		return ""
 	}
-	return p.PartnerID
+	return i.PartnerID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetCounterpartyCompanyID() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetCounterpartyCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.CounterpartyCompanyID
+	return i.CounterpartyCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyLinksSetConsolidationResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1ConsolidationIntercompanyLinksSetResponseFieldID)
+func (i *IntercompanyLinksSetConsolidationResponse) SetID(id string) {
+	i.ID = id
+	i.require(intercompanyLinksSetConsolidationResponseFieldID)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1ConsolidationIntercompanyLinksSetResponseFieldGroupID)
+func (i *IntercompanyLinksSetConsolidationResponse) SetGroupID(groupID string) {
+	i.GroupID = groupID
+	i.require(intercompanyLinksSetConsolidationResponseFieldGroupID)
 }
 
 // SetCompanyID sets the CompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) SetCompanyID(companyID string) {
-	p.CompanyID = companyID
-	p.require(postV1ConsolidationIntercompanyLinksSetResponseFieldCompanyID)
+func (i *IntercompanyLinksSetConsolidationResponse) SetCompanyID(companyID string) {
+	i.CompanyID = companyID
+	i.require(intercompanyLinksSetConsolidationResponseFieldCompanyID)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1ConsolidationIntercompanyLinksSetResponseFieldPartnerID)
+func (i *IntercompanyLinksSetConsolidationResponse) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(intercompanyLinksSetConsolidationResponseFieldPartnerID)
 }
 
 // SetCounterpartyCompanyID sets the CounterpartyCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) SetCounterpartyCompanyID(counterpartyCompanyID string) {
-	p.CounterpartyCompanyID = counterpartyCompanyID
-	p.require(postV1ConsolidationIntercompanyLinksSetResponseFieldCounterpartyCompanyID)
+func (i *IntercompanyLinksSetConsolidationResponse) SetCounterpartyCompanyID(counterpartyCompanyID string) {
+	i.CounterpartyCompanyID = counterpartyCompanyID
+	i.require(intercompanyLinksSetConsolidationResponseFieldCounterpartyCompanyID)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyLinksSetResponse
+func (i *IntercompanyLinksSetConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyLinksSetConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyLinksSetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyLinksSetConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyLinksSetResponse
+func (i *IntercompanyLinksSetConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyLinksSetConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyLinksSetResponse) String() string {
-	if p == nil {
+func (i *IntercompanyLinksSetConsolidationResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseFieldFromDate   = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseFieldToDate     = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseFieldDirections = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseFieldFromDate   = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseFieldToDate     = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseFieldDirections = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationIntercompanyReportResponse struct {
-	FromDate   string                                                         `json:"fromDate" url:"fromDate"`
-	ToDate     string                                                         `json:"toDate" url:"toDate"`
-	Directions []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem `json:"directions" url:"directions"`
+type IntercompanyReportConsolidationResponse struct {
+	FromDate   time.Time                                                `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate     time.Time                                                `json:"toDate" url:"toDate" format:"date"`
+	Directions []*IntercompanyReportConsolidationResponseDirectionsItem `json:"directions" url:"directions"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2579,122 +2644,134 @@ type PostV1ConsolidationIntercompanyReportResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) GetFromDate() string {
-	if p == nil {
-		return ""
+func (i *IntercompanyReportConsolidationResponse) GetFromDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return i.FromDate
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) GetToDate() string {
-	if p == nil {
-		return ""
+func (i *IntercompanyReportConsolidationResponse) GetToDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.ToDate
+	return i.ToDate
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) GetDirections() []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponse) GetDirections() []*IntercompanyReportConsolidationResponseDirectionsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Directions
+	return i.Directions
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1ConsolidationIntercompanyReportResponseFieldFromDate)
+func (i *IntercompanyReportConsolidationResponse) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(intercompanyReportConsolidationResponseFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponse) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1ConsolidationIntercompanyReportResponseFieldToDate)
+func (i *IntercompanyReportConsolidationResponse) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(intercompanyReportConsolidationResponseFieldToDate)
 }
 
 // SetDirections sets the Directions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponse) SetDirections(directions []*PostV1ConsolidationIntercompanyReportResponseDirectionsItem) {
-	p.Directions = directions
-	p.require(postV1ConsolidationIntercompanyReportResponseFieldDirections)
+func (i *IntercompanyReportConsolidationResponse) SetDirections(directions []*IntercompanyReportConsolidationResponseDirectionsItem) {
+	i.Directions = directions
+	i.require(intercompanyReportConsolidationResponseFieldDirections)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *IntercompanyReportConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type embed IntercompanyReportConsolidationResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponse(unmarshaler.embed)
+	i.FromDate = unmarshaler.FromDate.Time()
+	i.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponse
+func (i *IntercompanyReportConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponse
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponse) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldSellerCompanyID    = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldSellerName         = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldBuyerCompanyID     = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldBuyerName          = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldDocuments          = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldUnmatchedPurchases = big.NewInt(1 << 5)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldTotals             = big.NewInt(1 << 6)
+	intercompanyReportConsolidationResponseDirectionsItemFieldSellerCompanyID    = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseDirectionsItemFieldSellerName         = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseDirectionsItemFieldBuyerCompanyID     = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseDirectionsItemFieldBuyerName          = big.NewInt(1 << 3)
+	intercompanyReportConsolidationResponseDirectionsItemFieldDocuments          = big.NewInt(1 << 4)
+	intercompanyReportConsolidationResponseDirectionsItemFieldUnmatchedPurchases = big.NewInt(1 << 5)
+	intercompanyReportConsolidationResponseDirectionsItemFieldTotals             = big.NewInt(1 << 6)
 )
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItem struct {
-	SellerCompanyID    string                                                                               `json:"sellerCompanyId" url:"sellerCompanyId"`
-	SellerName         string                                                                               `json:"sellerName" url:"sellerName"`
-	BuyerCompanyID     string                                                                               `json:"buyerCompanyId" url:"buyerCompanyId"`
-	BuyerName          string                                                                               `json:"buyerName" url:"buyerName"`
-	Documents          []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem          `json:"documents" url:"documents"`
-	UnmatchedPurchases []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem `json:"unmatchedPurchases" url:"unmatchedPurchases"`
-	Totals             []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem             `json:"totals" url:"totals"`
+type IntercompanyReportConsolidationResponseDirectionsItem struct {
+	SellerCompanyID    string                                                                         `json:"sellerCompanyId" url:"sellerCompanyId"`
+	SellerName         string                                                                         `json:"sellerName" url:"sellerName"`
+	BuyerCompanyID     string                                                                         `json:"buyerCompanyId" url:"buyerCompanyId"`
+	BuyerName          string                                                                         `json:"buyerName" url:"buyerName"`
+	Documents          []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem          `json:"documents" url:"documents"`
+	UnmatchedPurchases []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem `json:"unmatchedPurchases" url:"unmatchedPurchases"`
+	Totals             []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem             `json:"totals" url:"totals"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2703,182 +2780,182 @@ type PostV1ConsolidationIntercompanyReportResponseDirectionsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetSellerCompanyID() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetSellerCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.SellerCompanyID
+	return i.SellerCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetSellerName() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetSellerName() string {
+	if i == nil {
 		return ""
 	}
-	return p.SellerName
+	return i.SellerName
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetBuyerCompanyID() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetBuyerCompanyID() string {
+	if i == nil {
 		return ""
 	}
-	return p.BuyerCompanyID
+	return i.BuyerCompanyID
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetBuyerName() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetBuyerName() string {
+	if i == nil {
 		return ""
 	}
-	return p.BuyerName
+	return i.BuyerName
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetDocuments() []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetDocuments() []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Documents
+	return i.Documents
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetUnmatchedPurchases() []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetUnmatchedPurchases() []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem {
+	if i == nil {
 		return nil
 	}
-	return p.UnmatchedPurchases
+	return i.UnmatchedPurchases
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetTotals() []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetTotals() []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Totals
+	return i.Totals
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetSellerCompanyID sets the SellerCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetSellerCompanyID(sellerCompanyID string) {
-	p.SellerCompanyID = sellerCompanyID
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldSellerCompanyID)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetSellerCompanyID(sellerCompanyID string) {
+	i.SellerCompanyID = sellerCompanyID
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldSellerCompanyID)
 }
 
 // SetSellerName sets the SellerName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetSellerName(sellerName string) {
-	p.SellerName = sellerName
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldSellerName)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetSellerName(sellerName string) {
+	i.SellerName = sellerName
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldSellerName)
 }
 
 // SetBuyerCompanyID sets the BuyerCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetBuyerCompanyID(buyerCompanyID string) {
-	p.BuyerCompanyID = buyerCompanyID
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldBuyerCompanyID)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetBuyerCompanyID(buyerCompanyID string) {
+	i.BuyerCompanyID = buyerCompanyID
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldBuyerCompanyID)
 }
 
 // SetBuyerName sets the BuyerName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetBuyerName(buyerName string) {
-	p.BuyerName = buyerName
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldBuyerName)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetBuyerName(buyerName string) {
+	i.BuyerName = buyerName
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldBuyerName)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetDocuments(documents []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldDocuments)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetDocuments(documents []*IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) {
+	i.Documents = documents
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldDocuments)
 }
 
 // SetUnmatchedPurchases sets the UnmatchedPurchases field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetUnmatchedPurchases(unmatchedPurchases []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) {
-	p.UnmatchedPurchases = unmatchedPurchases
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldUnmatchedPurchases)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetUnmatchedPurchases(unmatchedPurchases []*IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) {
+	i.UnmatchedPurchases = unmatchedPurchases
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldUnmatchedPurchases)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) SetTotals(totals []*PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) {
-	p.Totals = totals
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemFieldTotals)
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) SetTotals(totals []*IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) {
+	i.Totals = totals
+	i.require(intercompanyReportConsolidationResponseDirectionsItemFieldTotals)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyReportConsolidationResponseDirectionsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponseDirectionsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponseDirectionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponseDirectionsItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponseDirectionsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItem) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldSourceInvoiceID = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldFullNumber      = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldIssueDate       = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldType            = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldCurrency        = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldGrossTotal      = big.NewInt(1 << 5)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldPaymentStatus   = big.NewInt(1 << 6)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldMatch           = big.NewInt(1 << 7)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldCounterpart     = big.NewInt(1 << 8)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldSourceInvoiceID = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldFullNumber      = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldIssueDate       = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldType            = big.NewInt(1 << 3)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldCurrency        = big.NewInt(1 << 4)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldGrossTotal      = big.NewInt(1 << 5)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldPaymentStatus   = big.NewInt(1 << 6)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldMatch           = big.NewInt(1 << 7)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldCounterpart     = big.NewInt(1 << 8)
 )
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem struct {
-	SourceInvoiceID string                                                                                `json:"sourceInvoiceId" url:"sourceInvoiceId"`
-	FullNumber      string                                                                                `json:"fullNumber" url:"fullNumber"`
-	IssueDate       string                                                                                `json:"issueDate" url:"issueDate"`
-	Type            PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType          `json:"type" url:"type"`
-	Currency        string                                                                                `json:"currency" url:"currency"`
-	GrossTotal      string                                                                                `json:"grossTotal" url:"grossTotal"`
-	PaymentStatus   PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Match           PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch         `json:"match" url:"match"`
-	Counterpart     *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart  `json:"counterpart,omitempty" url:"counterpart,omitempty"`
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem struct {
+	SourceInvoiceID string                                                                          `json:"sourceInvoiceId" url:"sourceInvoiceId"`
+	FullNumber      string                                                                          `json:"fullNumber" url:"fullNumber"`
+	IssueDate       time.Time                                                                       `json:"issueDate" url:"issueDate" format:"date"`
+	Type            IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType          `json:"type" url:"type"`
+	Currency        string                                                                          `json:"currency" url:"currency"`
+	GrossTotal      string                                                                          `json:"grossTotal" url:"grossTotal"`
+	PaymentStatus   IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Match           IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch         `json:"match" url:"match"`
+	Counterpart     *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart  `json:"counterpart,omitempty" url:"counterpart,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2887,202 +2964,210 @@ type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem st
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetSourceInvoiceID() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetSourceInvoiceID() string {
+	if i == nil {
 		return ""
 	}
-	return p.SourceInvoiceID
+	return i.SourceInvoiceID
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetFullNumber() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetFullNumber() string {
+	if i == nil {
 		return ""
 	}
-	return p.FullNumber
+	return i.FullNumber
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetIssueDate() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetIssueDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.IssueDate
+}
+
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetType() IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType {
+	if i == nil {
 		return ""
 	}
-	return p.IssueDate
+	return i.Type
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetType() PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetCurrency() string {
+	if i == nil {
 		return ""
 	}
-	return p.Type
+	return i.Currency
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetCurrency() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetGrossTotal() string {
+	if i == nil {
 		return ""
 	}
-	return p.Currency
+	return i.GrossTotal
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetGrossTotal() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetPaymentStatus() IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus {
+	if i == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return i.PaymentStatus
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetPaymentStatus() PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetMatch() IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch {
+	if i == nil {
 		return ""
 	}
-	return p.PaymentStatus
+	return i.Match
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetMatch() PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch {
-	if p == nil {
-		return ""
-	}
-	return p.Match
-}
-
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetCounterpart() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetCounterpart() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart {
+	if i == nil {
 		return nil
 	}
-	return p.Counterpart
+	return i.Counterpart
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetSourceInvoiceID sets the SourceInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetSourceInvoiceID(sourceInvoiceID string) {
-	p.SourceInvoiceID = sourceInvoiceID
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldSourceInvoiceID)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetSourceInvoiceID(sourceInvoiceID string) {
+	i.SourceInvoiceID = sourceInvoiceID
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldSourceInvoiceID)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetFullNumber(fullNumber string) {
-	p.FullNumber = fullNumber
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldFullNumber)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetFullNumber(fullNumber string) {
+	i.FullNumber = fullNumber
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldFullNumber)
 }
 
 // SetIssueDate sets the IssueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetIssueDate(issueDate string) {
-	p.IssueDate = issueDate
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldIssueDate)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetIssueDate(issueDate time.Time) {
+	i.IssueDate = issueDate
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldIssueDate)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetType(type_ PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType) {
-	p.Type = type_
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldType)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetType(type_ IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType) {
+	i.Type = type_
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldType)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldCurrency)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldGrossTotal)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetGrossTotal(grossTotal string) {
+	i.GrossTotal = grossTotal
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldGrossTotal)
 }
 
 // SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetPaymentStatus(paymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus) {
-	p.PaymentStatus = paymentStatus
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldPaymentStatus)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetPaymentStatus(paymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus) {
+	i.PaymentStatus = paymentStatus
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldPaymentStatus)
 }
 
 // SetMatch sets the Match field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetMatch(match PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch) {
-	p.Match = match
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldMatch)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetMatch(match IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch) {
+	i.Match = match
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldMatch)
 }
 
 // SetCounterpart sets the Counterpart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) SetCounterpart(counterpart *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) {
-	p.Counterpart = counterpart
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemFieldCounterpart)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) SetCounterpart(counterpart *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) {
+	i.Counterpart = counterpart
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemFieldCounterpart)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) UnmarshalJSON(data []byte) error {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
+	var unmarshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem(unmarshaler.embed)
+	i.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem
 	var marshaler = struct {
 		embed
+		IssueDate *internal.Date `json:"issueDate"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*i),
+		IssueDate: internal.NewDate(i.IssueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItem) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldInvoiceID     = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldStatus        = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldPaymentStatus = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldGrossTotal    = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldAmountsMatch  = big.NewInt(1 << 4)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldInvoiceID     = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldStatus        = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldPaymentStatus = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldGrossTotal    = big.NewInt(1 << 3)
+	intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldAmountsMatch  = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart struct {
-	InvoiceID     string                                                                                           `json:"invoiceId" url:"invoiceId"`
-	Status        PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus        `json:"status" url:"status"`
-	PaymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	GrossTotal    string                                                                                           `json:"grossTotal" url:"grossTotal"`
-	AmountsMatch  bool                                                                                             `json:"amountsMatch" url:"amountsMatch"`
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart struct {
+	InvoiceID     string                                                                                     `json:"invoiceId" url:"invoiceId"`
+	Status        IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus        `json:"status" url:"status"`
+	PaymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	GrossTotal    string                                                                                     `json:"grossTotal" url:"grossTotal"`
+	AmountsMatch  bool                                                                                       `json:"amountsMatch" url:"amountsMatch"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3091,262 +3176,262 @@ type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCou
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetInvoiceID() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetInvoiceID() string {
+	if i == nil {
 		return ""
 	}
-	return p.InvoiceID
+	return i.InvoiceID
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetStatus() PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetStatus() IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus {
+	if i == nil {
 		return ""
 	}
-	return p.Status
+	return i.Status
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetPaymentStatus() PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetPaymentStatus() IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus {
+	if i == nil {
 		return ""
 	}
-	return p.PaymentStatus
+	return i.PaymentStatus
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetGrossTotal() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetGrossTotal() string {
+	if i == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return i.GrossTotal
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetAmountsMatch() bool {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetAmountsMatch() bool {
+	if i == nil {
 		return false
 	}
-	return p.AmountsMatch
+	return i.AmountsMatch
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) SetInvoiceID(invoiceID string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldInvoiceID)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) SetInvoiceID(invoiceID string) {
+	i.InvoiceID = invoiceID
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldInvoiceID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) SetStatus(status PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus) {
-	p.Status = status
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldStatus)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) SetStatus(status IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus) {
+	i.Status = status
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldStatus)
 }
 
 // SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) SetPaymentStatus(paymentStatus PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus) {
-	p.PaymentStatus = paymentStatus
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldPaymentStatus)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) SetPaymentStatus(paymentStatus IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus) {
+	i.PaymentStatus = paymentStatus
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldPaymentStatus)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldGrossTotal)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) SetGrossTotal(grossTotal string) {
+	i.GrossTotal = grossTotal
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldGrossTotal)
 }
 
 // SetAmountsMatch sets the AmountsMatch field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) SetAmountsMatch(amountsMatch bool) {
-	p.AmountsMatch = amountsMatch
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartFieldAmountsMatch)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) SetAmountsMatch(amountsMatch bool) {
+	i.AmountsMatch = amountsMatch
+	i.require(intercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartFieldAmountsMatch)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpart) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpart) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus string
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusUnpaid  PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "unpaid"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPartial PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "partial"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPaid    PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "paid"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusUnpaid  IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "unpaid"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPartial IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "partial"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPaid    IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus = "paid"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus, error) {
 	switch s {
 	case "unpaid":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusUnpaid, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusUnpaid, nil
 	case "partial":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPartial, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPartial, nil
 	case "paid":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPaid, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatusPaid, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
+	var t IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartPaymentStatus {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartPaymentStatus {
+	return &i
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus string
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusDraft      PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus = "draft"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusRegistered PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus = "registered"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusDraft      IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus = "draft"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusRegistered IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus = "registered"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusDraft, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusDraft, nil
 	case "registered":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatusRegistered, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatusRegistered, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus
+	var t IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemCounterpartStatus {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemCounterpartStatus {
+	return &i
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch string
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMirrored        PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch = "mirrored"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMatchedByNumber PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch = "matched_by_number"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMissing         PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch = "missing"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMirrored        IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch = "mirrored"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMatchedByNumber IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch = "matched_by_number"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMissing         IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch = "missing"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch, error) {
 	switch s {
 	case "mirrored":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMirrored, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMirrored, nil
 	case "matched_by_number":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMatchedByNumber, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMatchedByNumber, nil
 	case "missing":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatchMissing, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatchMissing, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch
+	var t IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemMatch {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemMatch {
+	return &i
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus string
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusUnpaid  PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus = "unpaid"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusPartial PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus = "partial"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusPaid    PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus = "paid"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusUnpaid  IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus = "unpaid"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusPartial IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus = "partial"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusPaid    IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus = "paid"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus, error) {
 	switch s {
 	case "unpaid":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusUnpaid, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusUnpaid, nil
 	case "partial":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusPartial, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusPartial, nil
 	case "paid":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatusPaid, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatusPaid, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus
+	var t IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemPaymentStatus {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemPaymentStatus {
+	return &i
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType string
+type IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeInvoice    PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType = "invoice"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeCreditNote PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType = "credit_note"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeInvoice    IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType = "invoice"
+	IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeCreditNote IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType = "credit_note"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType, error) {
 	switch s {
 	case "invoice":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeInvoice, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeInvoice, nil
 	case "credit_note":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemTypeCreditNote, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemTypeCreditNote, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType
+	var t IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemDocumentsItemType {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemDocumentsItemType {
+	return &i
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldCurrency        = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldSalesGross      = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldPurchasesGross  = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldGrossDifference = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenReceivable  = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenPayable     = big.NewInt(1 << 5)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenDifference  = big.NewInt(1 << 6)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldCurrency        = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldSalesGross      = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldPurchasesGross  = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldGrossDifference = big.NewInt(1 << 3)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenReceivable  = big.NewInt(1 << 4)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenPayable     = big.NewInt(1 << 5)
+	intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenDifference  = big.NewInt(1 << 6)
 )
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem struct {
+type IntercompanyReportConsolidationResponseDirectionsItemTotalsItem struct {
 	Currency        string `json:"currency" url:"currency"`
 	SalesGross      string `json:"salesGross" url:"salesGross"`
 	PurchasesGross  string `json:"purchasesGross" url:"purchasesGross"`
@@ -3362,176 +3447,176 @@ type PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem struc
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetCurrency() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetCurrency() string {
+	if i == nil {
 		return ""
 	}
-	return p.Currency
+	return i.Currency
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetSalesGross() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetSalesGross() string {
+	if i == nil {
 		return ""
 	}
-	return p.SalesGross
+	return i.SalesGross
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetPurchasesGross() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetPurchasesGross() string {
+	if i == nil {
 		return ""
 	}
-	return p.PurchasesGross
+	return i.PurchasesGross
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetGrossDifference() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetGrossDifference() string {
+	if i == nil {
 		return ""
 	}
-	return p.GrossDifference
+	return i.GrossDifference
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetOpenReceivable() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetOpenReceivable() string {
+	if i == nil {
 		return ""
 	}
-	return p.OpenReceivable
+	return i.OpenReceivable
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetOpenPayable() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetOpenPayable() string {
+	if i == nil {
 		return ""
 	}
-	return p.OpenPayable
+	return i.OpenPayable
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetOpenDifference() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetOpenDifference() string {
+	if i == nil {
 		return ""
 	}
-	return p.OpenDifference
+	return i.OpenDifference
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldCurrency)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldCurrency)
 }
 
 // SetSalesGross sets the SalesGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetSalesGross(salesGross string) {
-	p.SalesGross = salesGross
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldSalesGross)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetSalesGross(salesGross string) {
+	i.SalesGross = salesGross
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldSalesGross)
 }
 
 // SetPurchasesGross sets the PurchasesGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetPurchasesGross(purchasesGross string) {
-	p.PurchasesGross = purchasesGross
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldPurchasesGross)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetPurchasesGross(purchasesGross string) {
+	i.PurchasesGross = purchasesGross
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldPurchasesGross)
 }
 
 // SetGrossDifference sets the GrossDifference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetGrossDifference(grossDifference string) {
-	p.GrossDifference = grossDifference
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldGrossDifference)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetGrossDifference(grossDifference string) {
+	i.GrossDifference = grossDifference
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldGrossDifference)
 }
 
 // SetOpenReceivable sets the OpenReceivable field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetOpenReceivable(openReceivable string) {
-	p.OpenReceivable = openReceivable
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenReceivable)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetOpenReceivable(openReceivable string) {
+	i.OpenReceivable = openReceivable
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenReceivable)
 }
 
 // SetOpenPayable sets the OpenPayable field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetOpenPayable(openPayable string) {
-	p.OpenPayable = openPayable
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenPayable)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetOpenPayable(openPayable string) {
+	i.OpenPayable = openPayable
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenPayable)
 }
 
 // SetOpenDifference sets the OpenDifference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) SetOpenDifference(openDifference string) {
-	p.OpenDifference = openDifference
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItemFieldOpenDifference)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) SetOpenDifference(openDifference string) {
+	i.OpenDifference = openDifference
+	i.require(intercompanyReportConsolidationResponseDirectionsItemTotalsItemFieldOpenDifference)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponseDirectionsItemTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemTotalsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemTotalsItem) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemTotalsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldInvoiceID      = big.NewInt(1 << 0)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldCurrency       = big.NewInt(1 << 3)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldGrossTotal     = big.NewInt(1 << 4)
-	postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldStatus         = big.NewInt(1 << 5)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldInvoiceID      = big.NewInt(1 << 0)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentNumber = big.NewInt(1 << 1)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentDate   = big.NewInt(1 << 2)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldCurrency       = big.NewInt(1 << 3)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldGrossTotal     = big.NewInt(1 << 4)
+	intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldStatus         = big.NewInt(1 << 5)
 )
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem struct {
-	InvoiceID      string                                                                                  `json:"invoiceId" url:"invoiceId"`
-	DocumentNumber string                                                                                  `json:"documentNumber" url:"documentNumber"`
-	DocumentDate   string                                                                                  `json:"documentDate" url:"documentDate"`
-	Currency       string                                                                                  `json:"currency" url:"currency"`
-	GrossTotal     string                                                                                  `json:"grossTotal" url:"grossTotal"`
-	Status         PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus `json:"status" url:"status"`
+type IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem struct {
+	InvoiceID      string                                                                            `json:"invoiceId" url:"invoiceId"`
+	DocumentNumber string                                                                            `json:"documentNumber" url:"documentNumber"`
+	DocumentDate   time.Time                                                                         `json:"documentDate" url:"documentDate" format:"date"`
+	Currency       string                                                                            `json:"currency" url:"currency"`
+	GrossTotal     string                                                                            `json:"grossTotal" url:"grossTotal"`
+	Status         IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus `json:"status" url:"status"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3540,207 +3625,215 @@ type PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchas
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetInvoiceID() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetInvoiceID() string {
+	if i == nil {
 		return ""
 	}
-	return p.InvoiceID
+	return i.InvoiceID
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetDocumentNumber() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetDocumentNumber() string {
+	if i == nil {
 		return ""
 	}
-	return p.DocumentNumber
+	return i.DocumentNumber
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetDocumentDate() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetDocumentDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.DocumentDate
+}
+
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetCurrency() string {
+	if i == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return i.Currency
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetCurrency() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetGrossTotal() string {
+	if i == nil {
 		return ""
 	}
-	return p.Currency
+	return i.GrossTotal
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetGrossTotal() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetStatus() IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus {
+	if i == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return i.Status
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetStatus() PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetInvoiceID sets the InvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetInvoiceID(invoiceID string) {
-	p.InvoiceID = invoiceID
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldInvoiceID)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetInvoiceID(invoiceID string) {
+	i.InvoiceID = invoiceID
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldInvoiceID)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetDocumentNumber(documentNumber string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentNumber)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetDocumentNumber(documentNumber string) {
+	i.DocumentNumber = documentNumber
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentDate)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetDocumentDate(documentDate time.Time) {
+	i.DocumentDate = documentDate
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldDocumentDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldCurrency)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldCurrency)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldGrossTotal)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetGrossTotal(grossTotal string) {
+	i.GrossTotal = grossTotal
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldGrossTotal)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) SetStatus(status PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus) {
-	p.Status = status
-	p.require(postV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemFieldStatus)
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) SetStatus(status IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus) {
+	i.Status = status
+	i.require(intercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemFieldStatus)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) UnmarshalJSON(data []byte) error {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem(unmarshaler.embed)
+	i.DocumentDate = unmarshaler.DocumentDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) MarshalJSON() ([]byte, error) {
+	type embed IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem
 	var marshaler = struct {
 		embed
+		DocumentDate *internal.Date `json:"documentDate"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*i),
+		DocumentDate: internal.NewDate(i.DocumentDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItem) String() string {
-	if p == nil {
+func (i *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus string
+type IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus string
 
 const (
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusDraft      PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus = "draft"
-	PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusRegistered PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus = "registered"
+	IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusDraft      IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus = "draft"
+	IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusRegistered IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus = "registered"
 )
 
-func NewPostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusFromString(s string) (PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus, error) {
+func NewIntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusFromString(s string) (IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusDraft, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusDraft, nil
 	case "registered":
-		return PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatusRegistered, nil
+		return IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatusRegistered, nil
 	}
-	var t PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus
+	var t IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus) Ptr() *PostV1ConsolidationIntercompanyReportResponseDirectionsItemUnmatchedPurchasesItemStatus {
-	return &p
+func (i IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus) Ptr() *IntercompanyReportConsolidationResponseDirectionsItemUnmatchedPurchasesItemStatus {
+	return &i
 }
 
-type PostV1ConsolidationMembersAddRequestMethod string
+type MembersAddConsolidationRequestMethod string
 
 const (
-	PostV1ConsolidationMembersAddRequestMethodFull         PostV1ConsolidationMembersAddRequestMethod = "full"
-	PostV1ConsolidationMembersAddRequestMethodProportional PostV1ConsolidationMembersAddRequestMethod = "proportional"
-	PostV1ConsolidationMembersAddRequestMethodEquity       PostV1ConsolidationMembersAddRequestMethod = "equity"
+	MembersAddConsolidationRequestMethodFull         MembersAddConsolidationRequestMethod = "full"
+	MembersAddConsolidationRequestMethodProportional MembersAddConsolidationRequestMethod = "proportional"
+	MembersAddConsolidationRequestMethodEquity       MembersAddConsolidationRequestMethod = "equity"
 )
 
-func NewPostV1ConsolidationMembersAddRequestMethodFromString(s string) (PostV1ConsolidationMembersAddRequestMethod, error) {
+func NewMembersAddConsolidationRequestMethodFromString(s string) (MembersAddConsolidationRequestMethod, error) {
 	switch s {
 	case "full":
-		return PostV1ConsolidationMembersAddRequestMethodFull, nil
+		return MembersAddConsolidationRequestMethodFull, nil
 	case "proportional":
-		return PostV1ConsolidationMembersAddRequestMethodProportional, nil
+		return MembersAddConsolidationRequestMethodProportional, nil
 	case "equity":
-		return PostV1ConsolidationMembersAddRequestMethodEquity, nil
+		return MembersAddConsolidationRequestMethodEquity, nil
 	}
-	var t PostV1ConsolidationMembersAddRequestMethod
+	var t MembersAddConsolidationRequestMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationMembersAddRequestMethod) Ptr() *PostV1ConsolidationMembersAddRequestMethod {
-	return &p
+func (m MembersAddConsolidationRequestMethod) Ptr() *MembersAddConsolidationRequestMethod {
+	return &m
 }
 
 var (
-	postV1ConsolidationMembersAddResponseFieldMemberCompanyID  = big.NewInt(1 << 0)
-	postV1ConsolidationMembersAddResponseFieldName             = big.NewInt(1 << 1)
-	postV1ConsolidationMembersAddResponseFieldBaseCurrency     = big.NewInt(1 << 2)
-	postV1ConsolidationMembersAddResponseFieldOwnershipPercent = big.NewInt(1 << 3)
-	postV1ConsolidationMembersAddResponseFieldMethod           = big.NewInt(1 << 4)
+	membersAddConsolidationResponseFieldMemberCompanyID  = big.NewInt(1 << 0)
+	membersAddConsolidationResponseFieldName             = big.NewInt(1 << 1)
+	membersAddConsolidationResponseFieldBaseCurrency     = big.NewInt(1 << 2)
+	membersAddConsolidationResponseFieldOwnershipPercent = big.NewInt(1 << 3)
+	membersAddConsolidationResponseFieldMethod           = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationMembersAddResponse struct {
-	MemberCompanyID  string                                      `json:"memberCompanyId" url:"memberCompanyId"`
-	Name             string                                      `json:"name" url:"name"`
-	BaseCurrency     string                                      `json:"baseCurrency" url:"baseCurrency"`
-	OwnershipPercent string                                      `json:"ownershipPercent" url:"ownershipPercent"`
-	Method           PostV1ConsolidationMembersAddResponseMethod `json:"method" url:"method"`
+type MembersAddConsolidationResponse struct {
+	MemberCompanyID  string                                `json:"memberCompanyId" url:"memberCompanyId"`
+	Name             string                                `json:"name" url:"name"`
+	BaseCurrency     string                                `json:"baseCurrency" url:"baseCurrency"`
+	OwnershipPercent string                                `json:"ownershipPercent" url:"ownershipPercent"`
+	Method           MembersAddConsolidationResponseMethod `json:"method" url:"method"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3749,162 +3842,162 @@ type PostV1ConsolidationMembersAddResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetMemberCompanyID() string {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetMemberCompanyID() string {
+	if m == nil {
 		return ""
 	}
-	return p.MemberCompanyID
+	return m.MemberCompanyID
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetName() string {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetName() string {
+	if m == nil {
 		return ""
 	}
-	return p.Name
+	return m.Name
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetBaseCurrency() string {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetBaseCurrency() string {
+	if m == nil {
 		return ""
 	}
-	return p.BaseCurrency
+	return m.BaseCurrency
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetOwnershipPercent() string {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetOwnershipPercent() string {
+	if m == nil {
 		return ""
 	}
-	return p.OwnershipPercent
+	return m.OwnershipPercent
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetMethod() PostV1ConsolidationMembersAddResponseMethod {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetMethod() MembersAddConsolidationResponseMethod {
+	if m == nil {
 		return ""
 	}
-	return p.Method
+	return m.Method
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if m == nil {
 		return nil
 	}
-	return p.extraProperties
+	return m.extraProperties
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (m *MembersAddConsolidationResponse) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	m.explicitFields.Or(m.explicitFields, field)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddResponse) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationMembersAddResponseFieldMemberCompanyID)
+func (m *MembersAddConsolidationResponse) SetMemberCompanyID(memberCompanyID string) {
+	m.MemberCompanyID = memberCompanyID
+	m.require(membersAddConsolidationResponseFieldMemberCompanyID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationMembersAddResponseFieldName)
+func (m *MembersAddConsolidationResponse) SetName(name string) {
+	m.Name = name
+	m.require(membersAddConsolidationResponseFieldName)
 }
 
 // SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddResponse) SetBaseCurrency(baseCurrency string) {
-	p.BaseCurrency = baseCurrency
-	p.require(postV1ConsolidationMembersAddResponseFieldBaseCurrency)
+func (m *MembersAddConsolidationResponse) SetBaseCurrency(baseCurrency string) {
+	m.BaseCurrency = baseCurrency
+	m.require(membersAddConsolidationResponseFieldBaseCurrency)
 }
 
 // SetOwnershipPercent sets the OwnershipPercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddResponse) SetOwnershipPercent(ownershipPercent string) {
-	p.OwnershipPercent = ownershipPercent
-	p.require(postV1ConsolidationMembersAddResponseFieldOwnershipPercent)
+func (m *MembersAddConsolidationResponse) SetOwnershipPercent(ownershipPercent string) {
+	m.OwnershipPercent = ownershipPercent
+	m.require(membersAddConsolidationResponseFieldOwnershipPercent)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersAddResponse) SetMethod(method PostV1ConsolidationMembersAddResponseMethod) {
-	p.Method = method
-	p.require(postV1ConsolidationMembersAddResponseFieldMethod)
+func (m *MembersAddConsolidationResponse) SetMethod(method MembersAddConsolidationResponseMethod) {
+	m.Method = method
+	m.require(membersAddConsolidationResponseFieldMethod)
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationMembersAddResponse
+func (m *MembersAddConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler MembersAddConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationMembersAddResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*m = MembersAddConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationMembersAddResponse
+func (m *MembersAddConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed MembersAddConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*m),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationMembersAddResponse) String() string {
-	if p == nil {
+func (m *MembersAddConsolidationResponse) String() string {
+	if m == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(m); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", m)
 }
 
-type PostV1ConsolidationMembersAddResponseMethod string
+type MembersAddConsolidationResponseMethod string
 
 const (
-	PostV1ConsolidationMembersAddResponseMethodFull         PostV1ConsolidationMembersAddResponseMethod = "full"
-	PostV1ConsolidationMembersAddResponseMethodProportional PostV1ConsolidationMembersAddResponseMethod = "proportional"
-	PostV1ConsolidationMembersAddResponseMethodEquity       PostV1ConsolidationMembersAddResponseMethod = "equity"
+	MembersAddConsolidationResponseMethodFull         MembersAddConsolidationResponseMethod = "full"
+	MembersAddConsolidationResponseMethodProportional MembersAddConsolidationResponseMethod = "proportional"
+	MembersAddConsolidationResponseMethodEquity       MembersAddConsolidationResponseMethod = "equity"
 )
 
-func NewPostV1ConsolidationMembersAddResponseMethodFromString(s string) (PostV1ConsolidationMembersAddResponseMethod, error) {
+func NewMembersAddConsolidationResponseMethodFromString(s string) (MembersAddConsolidationResponseMethod, error) {
 	switch s {
 	case "full":
-		return PostV1ConsolidationMembersAddResponseMethodFull, nil
+		return MembersAddConsolidationResponseMethodFull, nil
 	case "proportional":
-		return PostV1ConsolidationMembersAddResponseMethodProportional, nil
+		return MembersAddConsolidationResponseMethodProportional, nil
 	case "equity":
-		return PostV1ConsolidationMembersAddResponseMethodEquity, nil
+		return MembersAddConsolidationResponseMethodEquity, nil
 	}
-	var t PostV1ConsolidationMembersAddResponseMethod
+	var t MembersAddConsolidationResponseMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationMembersAddResponseMethod) Ptr() *PostV1ConsolidationMembersAddResponseMethod {
-	return &p
+func (m MembersAddConsolidationResponseMethod) Ptr() *MembersAddConsolidationResponseMethod {
+	return &m
 }
 
 var (
-	postV1ConsolidationMembersRemoveResponseFieldOk = big.NewInt(1 << 0)
+	membersRemoveConsolidationResponseFieldOk = big.NewInt(1 << 0)
 )
 
-type PostV1ConsolidationMembersRemoveResponse struct {
+type MembersRemoveConsolidationResponse struct {
 	Ok bool `json:"ok" url:"ok"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3914,111 +4007,111 @@ type PostV1ConsolidationMembersRemoveResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) GetOk() bool {
-	if p == nil {
+func (m *MembersRemoveConsolidationResponse) GetOk() bool {
+	if m == nil {
 		return false
 	}
-	return p.Ok
+	return m.Ok
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (m *MembersRemoveConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if m == nil {
 		return nil
 	}
-	return p.extraProperties
+	return m.extraProperties
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (m *MembersRemoveConsolidationResponse) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	m.explicitFields.Or(m.explicitFields, field)
 }
 
 // SetOk sets the Ok field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationMembersRemoveResponse) SetOk(ok bool) {
-	p.Ok = ok
-	p.require(postV1ConsolidationMembersRemoveResponseFieldOk)
+func (m *MembersRemoveConsolidationResponse) SetOk(ok bool) {
+	m.Ok = ok
+	m.require(membersRemoveConsolidationResponseFieldOk)
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationMembersRemoveResponse
+func (m *MembersRemoveConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler MembersRemoveConsolidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationMembersRemoveResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*m = MembersRemoveConsolidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationMembersRemoveResponse
+func (m *MembersRemoveConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed MembersRemoveConsolidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*m),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationMembersRemoveResponse) String() string {
-	if p == nil {
+func (m *MembersRemoveConsolidationResponse) String() string {
+	if m == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(m); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", m)
 }
 
-type PostV1ConsolidationReportRequestCategory string
+type ReportConsolidationRequestCategory string
 
 const (
-	PostV1ConsolidationReportRequestCategoryMicro  PostV1ConsolidationReportRequestCategory = "micro"
-	PostV1ConsolidationReportRequestCategorySmall  PostV1ConsolidationReportRequestCategory = "small"
-	PostV1ConsolidationReportRequestCategoryMedium PostV1ConsolidationReportRequestCategory = "medium"
-	PostV1ConsolidationReportRequestCategoryLarge  PostV1ConsolidationReportRequestCategory = "large"
+	ReportConsolidationRequestCategoryMicro  ReportConsolidationRequestCategory = "micro"
+	ReportConsolidationRequestCategorySmall  ReportConsolidationRequestCategory = "small"
+	ReportConsolidationRequestCategoryMedium ReportConsolidationRequestCategory = "medium"
+	ReportConsolidationRequestCategoryLarge  ReportConsolidationRequestCategory = "large"
 )
 
-func NewPostV1ConsolidationReportRequestCategoryFromString(s string) (PostV1ConsolidationReportRequestCategory, error) {
+func NewReportConsolidationRequestCategoryFromString(s string) (ReportConsolidationRequestCategory, error) {
 	switch s {
 	case "micro":
-		return PostV1ConsolidationReportRequestCategoryMicro, nil
+		return ReportConsolidationRequestCategoryMicro, nil
 	case "small":
-		return PostV1ConsolidationReportRequestCategorySmall, nil
+		return ReportConsolidationRequestCategorySmall, nil
 	case "medium":
-		return PostV1ConsolidationReportRequestCategoryMedium, nil
+		return ReportConsolidationRequestCategoryMedium, nil
 	case "large":
-		return PostV1ConsolidationReportRequestCategoryLarge, nil
+		return ReportConsolidationRequestCategoryLarge, nil
 	}
-	var t PostV1ConsolidationReportRequestCategory
+	var t ReportConsolidationRequestCategory
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationReportRequestCategory) Ptr() *PostV1ConsolidationReportRequestCategory {
-	return &p
+func (r ReportConsolidationRequestCategory) Ptr() *ReportConsolidationRequestCategory {
+	return &r
 }
 
 var (
-	postV1ConsolidationReportRequestEliminationsItemFieldCode   = big.NewInt(1 << 0)
-	postV1ConsolidationReportRequestEliminationsItemFieldAmount = big.NewInt(1 << 1)
-	postV1ConsolidationReportRequestEliminationsItemFieldNote   = big.NewInt(1 << 2)
+	reportConsolidationRequestEliminationsItemFieldCode   = big.NewInt(1 << 0)
+	reportConsolidationRequestEliminationsItemFieldAmount = big.NewInt(1 << 1)
+	reportConsolidationRequestEliminationsItemFieldNote   = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationReportRequestEliminationsItem struct {
+type ReportConsolidationRequestEliminationsItem struct {
 	Code   string  `json:"code" url:"code"`
 	Amount string  `json:"amount" url:"amount"`
 	Note   *string `json:"note,omitempty" url:"note,omitempty"`
@@ -4030,132 +4123,132 @@ type PostV1ConsolidationReportRequestEliminationsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationRequestEliminationsItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) GetAmount() string {
-	if p == nil {
+func (r *ReportConsolidationRequestEliminationsItem) GetAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.Amount
+	return r.Amount
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) GetNote() *string {
-	if p == nil {
+func (r *ReportConsolidationRequestEliminationsItem) GetNote() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Note
+	return r.Note
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationRequestEliminationsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationRequestEliminationsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequestEliminationsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportRequestEliminationsItemFieldCode)
+func (r *ReportConsolidationRequestEliminationsItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationRequestEliminationsItemFieldCode)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequestEliminationsItem) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1ConsolidationReportRequestEliminationsItemFieldAmount)
+func (r *ReportConsolidationRequestEliminationsItem) SetAmount(amount string) {
+	r.Amount = amount
+	r.require(reportConsolidationRequestEliminationsItemFieldAmount)
 }
 
 // SetNote sets the Note field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportRequestEliminationsItem) SetNote(note *string) {
-	p.Note = note
-	p.require(postV1ConsolidationReportRequestEliminationsItemFieldNote)
+func (r *ReportConsolidationRequestEliminationsItem) SetNote(note *string) {
+	r.Note = note
+	r.require(reportConsolidationRequestEliminationsItemFieldNote)
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportRequestEliminationsItem
+func (r *ReportConsolidationRequestEliminationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationRequestEliminationsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportRequestEliminationsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationRequestEliminationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportRequestEliminationsItem
+func (r *ReportConsolidationRequestEliminationsItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationRequestEliminationsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportRequestEliminationsItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationRequestEliminationsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseFieldPresentationCurrency   = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseFieldFromDate               = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseFieldToDate                 = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseFieldCategory               = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseFieldStatements             = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseFieldTrialBalance           = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseFieldNonControllingInterest = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseFieldEquityMethod           = big.NewInt(1 << 7)
-	postV1ConsolidationReportResponseFieldMembers                = big.NewInt(1 << 8)
-	postV1ConsolidationReportResponseFieldEliminations           = big.NewInt(1 << 9)
-	postV1ConsolidationReportResponseFieldCashFlow               = big.NewInt(1 << 10)
-	postV1ConsolidationReportResponseFieldIntercompanyCandidates = big.NewInt(1 << 11)
+	reportConsolidationResponseFieldPresentationCurrency   = big.NewInt(1 << 0)
+	reportConsolidationResponseFieldFromDate               = big.NewInt(1 << 1)
+	reportConsolidationResponseFieldToDate                 = big.NewInt(1 << 2)
+	reportConsolidationResponseFieldCategory               = big.NewInt(1 << 3)
+	reportConsolidationResponseFieldStatements             = big.NewInt(1 << 4)
+	reportConsolidationResponseFieldTrialBalance           = big.NewInt(1 << 5)
+	reportConsolidationResponseFieldNonControllingInterest = big.NewInt(1 << 6)
+	reportConsolidationResponseFieldEquityMethod           = big.NewInt(1 << 7)
+	reportConsolidationResponseFieldMembers                = big.NewInt(1 << 8)
+	reportConsolidationResponseFieldEliminations           = big.NewInt(1 << 9)
+	reportConsolidationResponseFieldCashFlow               = big.NewInt(1 << 10)
+	reportConsolidationResponseFieldIntercompanyCandidates = big.NewInt(1 << 11)
 )
 
-type PostV1ConsolidationReportResponse struct {
-	PresentationCurrency   string                                                         `json:"presentationCurrency" url:"presentationCurrency"`
-	FromDate               string                                                         `json:"fromDate" url:"fromDate"`
-	ToDate                 string                                                         `json:"toDate" url:"toDate"`
-	Category               PostV1ConsolidationReportResponseCategory                      `json:"category" url:"category"`
-	Statements             *PostV1ConsolidationReportResponseStatements                   `json:"statements" url:"statements"`
-	TrialBalance           []*PostV1ConsolidationReportResponseTrialBalanceItem           `json:"trialBalance" url:"trialBalance"`
-	NonControllingInterest *PostV1ConsolidationReportResponseNonControllingInterest       `json:"nonControllingInterest" url:"nonControllingInterest"`
-	EquityMethod           *PostV1ConsolidationReportResponseEquityMethod                 `json:"equityMethod" url:"equityMethod"`
-	Members                []*PostV1ConsolidationReportResponseMembersItem                `json:"members" url:"members"`
-	Eliminations           *PostV1ConsolidationReportResponseEliminations                 `json:"eliminations" url:"eliminations"`
-	CashFlow               *PostV1ConsolidationReportResponseCashFlow                     `json:"cashFlow" url:"cashFlow"`
-	IntercompanyCandidates []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem `json:"intercompanyCandidates" url:"intercompanyCandidates"`
+type ReportConsolidationResponse struct {
+	PresentationCurrency   string                                                   `json:"presentationCurrency" url:"presentationCurrency"`
+	FromDate               time.Time                                                `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate                 time.Time                                                `json:"toDate" url:"toDate" format:"date"`
+	Category               ReportConsolidationResponseCategory                      `json:"category" url:"category"`
+	Statements             *ReportConsolidationResponseStatements                   `json:"statements" url:"statements"`
+	TrialBalance           []*ReportConsolidationResponseTrialBalanceItem           `json:"trialBalance" url:"trialBalance"`
+	NonControllingInterest *ReportConsolidationResponseNonControllingInterest       `json:"nonControllingInterest" url:"nonControllingInterest"`
+	EquityMethod           *ReportConsolidationResponseEquityMethod                 `json:"equityMethod" url:"equityMethod"`
+	Members                []*ReportConsolidationResponseMembersItem                `json:"members" url:"members"`
+	Eliminations           *ReportConsolidationResponseEliminations                 `json:"eliminations" url:"eliminations"`
+	CashFlow               *ReportConsolidationResponseCashFlow                     `json:"cashFlow" url:"cashFlow"`
+	IntercompanyCandidates []*ReportConsolidationResponseIntercompanyCandidatesItem `json:"intercompanyCandidates" url:"intercompanyCandidates"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4164,248 +4257,260 @@ type PostV1ConsolidationReportResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponse) GetPresentationCurrency() string {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetPresentationCurrency() string {
+	if r == nil {
 		return ""
 	}
-	return p.PresentationCurrency
+	return r.PresentationCurrency
 }
 
-func (p *PostV1ConsolidationReportResponse) GetFromDate() string {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetFromDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.FromDate
+}
+
+func (r *ReportConsolidationResponse) GetToDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.ToDate
+}
+
+func (r *ReportConsolidationResponse) GetCategory() ReportConsolidationResponseCategory {
+	if r == nil {
 		return ""
 	}
-	return p.FromDate
+	return r.Category
 }
 
-func (p *PostV1ConsolidationReportResponse) GetToDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.ToDate
-}
-
-func (p *PostV1ConsolidationReportResponse) GetCategory() PostV1ConsolidationReportResponseCategory {
-	if p == nil {
-		return ""
-	}
-	return p.Category
-}
-
-func (p *PostV1ConsolidationReportResponse) GetStatements() *PostV1ConsolidationReportResponseStatements {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetStatements() *ReportConsolidationResponseStatements {
+	if r == nil {
 		return nil
 	}
-	return p.Statements
+	return r.Statements
 }
 
-func (p *PostV1ConsolidationReportResponse) GetTrialBalance() []*PostV1ConsolidationReportResponseTrialBalanceItem {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetTrialBalance() []*ReportConsolidationResponseTrialBalanceItem {
+	if r == nil {
 		return nil
 	}
-	return p.TrialBalance
+	return r.TrialBalance
 }
 
-func (p *PostV1ConsolidationReportResponse) GetNonControllingInterest() *PostV1ConsolidationReportResponseNonControllingInterest {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetNonControllingInterest() *ReportConsolidationResponseNonControllingInterest {
+	if r == nil {
 		return nil
 	}
-	return p.NonControllingInterest
+	return r.NonControllingInterest
 }
 
-func (p *PostV1ConsolidationReportResponse) GetEquityMethod() *PostV1ConsolidationReportResponseEquityMethod {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetEquityMethod() *ReportConsolidationResponseEquityMethod {
+	if r == nil {
 		return nil
 	}
-	return p.EquityMethod
+	return r.EquityMethod
 }
 
-func (p *PostV1ConsolidationReportResponse) GetMembers() []*PostV1ConsolidationReportResponseMembersItem {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetMembers() []*ReportConsolidationResponseMembersItem {
+	if r == nil {
 		return nil
 	}
-	return p.Members
+	return r.Members
 }
 
-func (p *PostV1ConsolidationReportResponse) GetEliminations() *PostV1ConsolidationReportResponseEliminations {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetEliminations() *ReportConsolidationResponseEliminations {
+	if r == nil {
 		return nil
 	}
-	return p.Eliminations
+	return r.Eliminations
 }
 
-func (p *PostV1ConsolidationReportResponse) GetCashFlow() *PostV1ConsolidationReportResponseCashFlow {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetCashFlow() *ReportConsolidationResponseCashFlow {
+	if r == nil {
 		return nil
 	}
-	return p.CashFlow
+	return r.CashFlow
 }
 
-func (p *PostV1ConsolidationReportResponse) GetIntercompanyCandidates() []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetIntercompanyCandidates() []*ReportConsolidationResponseIntercompanyCandidatesItem {
+	if r == nil {
 		return nil
 	}
-	return p.IntercompanyCandidates
+	return r.IntercompanyCandidates
 }
 
-func (p *PostV1ConsolidationReportResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetPresentationCurrency sets the PresentationCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetPresentationCurrency(presentationCurrency string) {
-	p.PresentationCurrency = presentationCurrency
-	p.require(postV1ConsolidationReportResponseFieldPresentationCurrency)
+func (r *ReportConsolidationResponse) SetPresentationCurrency(presentationCurrency string) {
+	r.PresentationCurrency = presentationCurrency
+	r.require(reportConsolidationResponseFieldPresentationCurrency)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1ConsolidationReportResponseFieldFromDate)
+func (r *ReportConsolidationResponse) SetFromDate(fromDate time.Time) {
+	r.FromDate = fromDate
+	r.require(reportConsolidationResponseFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1ConsolidationReportResponseFieldToDate)
+func (r *ReportConsolidationResponse) SetToDate(toDate time.Time) {
+	r.ToDate = toDate
+	r.require(reportConsolidationResponseFieldToDate)
 }
 
 // SetCategory sets the Category field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetCategory(category PostV1ConsolidationReportResponseCategory) {
-	p.Category = category
-	p.require(postV1ConsolidationReportResponseFieldCategory)
+func (r *ReportConsolidationResponse) SetCategory(category ReportConsolidationResponseCategory) {
+	r.Category = category
+	r.require(reportConsolidationResponseFieldCategory)
 }
 
 // SetStatements sets the Statements field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetStatements(statements *PostV1ConsolidationReportResponseStatements) {
-	p.Statements = statements
-	p.require(postV1ConsolidationReportResponseFieldStatements)
+func (r *ReportConsolidationResponse) SetStatements(statements *ReportConsolidationResponseStatements) {
+	r.Statements = statements
+	r.require(reportConsolidationResponseFieldStatements)
 }
 
 // SetTrialBalance sets the TrialBalance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetTrialBalance(trialBalance []*PostV1ConsolidationReportResponseTrialBalanceItem) {
-	p.TrialBalance = trialBalance
-	p.require(postV1ConsolidationReportResponseFieldTrialBalance)
+func (r *ReportConsolidationResponse) SetTrialBalance(trialBalance []*ReportConsolidationResponseTrialBalanceItem) {
+	r.TrialBalance = trialBalance
+	r.require(reportConsolidationResponseFieldTrialBalance)
 }
 
 // SetNonControllingInterest sets the NonControllingInterest field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetNonControllingInterest(nonControllingInterest *PostV1ConsolidationReportResponseNonControllingInterest) {
-	p.NonControllingInterest = nonControllingInterest
-	p.require(postV1ConsolidationReportResponseFieldNonControllingInterest)
+func (r *ReportConsolidationResponse) SetNonControllingInterest(nonControllingInterest *ReportConsolidationResponseNonControllingInterest) {
+	r.NonControllingInterest = nonControllingInterest
+	r.require(reportConsolidationResponseFieldNonControllingInterest)
 }
 
 // SetEquityMethod sets the EquityMethod field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetEquityMethod(equityMethod *PostV1ConsolidationReportResponseEquityMethod) {
-	p.EquityMethod = equityMethod
-	p.require(postV1ConsolidationReportResponseFieldEquityMethod)
+func (r *ReportConsolidationResponse) SetEquityMethod(equityMethod *ReportConsolidationResponseEquityMethod) {
+	r.EquityMethod = equityMethod
+	r.require(reportConsolidationResponseFieldEquityMethod)
 }
 
 // SetMembers sets the Members field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetMembers(members []*PostV1ConsolidationReportResponseMembersItem) {
-	p.Members = members
-	p.require(postV1ConsolidationReportResponseFieldMembers)
+func (r *ReportConsolidationResponse) SetMembers(members []*ReportConsolidationResponseMembersItem) {
+	r.Members = members
+	r.require(reportConsolidationResponseFieldMembers)
 }
 
 // SetEliminations sets the Eliminations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetEliminations(eliminations *PostV1ConsolidationReportResponseEliminations) {
-	p.Eliminations = eliminations
-	p.require(postV1ConsolidationReportResponseFieldEliminations)
+func (r *ReportConsolidationResponse) SetEliminations(eliminations *ReportConsolidationResponseEliminations) {
+	r.Eliminations = eliminations
+	r.require(reportConsolidationResponseFieldEliminations)
 }
 
 // SetCashFlow sets the CashFlow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetCashFlow(cashFlow *PostV1ConsolidationReportResponseCashFlow) {
-	p.CashFlow = cashFlow
-	p.require(postV1ConsolidationReportResponseFieldCashFlow)
+func (r *ReportConsolidationResponse) SetCashFlow(cashFlow *ReportConsolidationResponseCashFlow) {
+	r.CashFlow = cashFlow
+	r.require(reportConsolidationResponseFieldCashFlow)
 }
 
 // SetIntercompanyCandidates sets the IntercompanyCandidates field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponse) SetIntercompanyCandidates(intercompanyCandidates []*PostV1ConsolidationReportResponseIntercompanyCandidatesItem) {
-	p.IntercompanyCandidates = intercompanyCandidates
-	p.require(postV1ConsolidationReportResponseFieldIntercompanyCandidates)
+func (r *ReportConsolidationResponse) SetIntercompanyCandidates(intercompanyCandidates []*ReportConsolidationResponseIntercompanyCandidatesItem) {
+	r.IntercompanyCandidates = intercompanyCandidates
+	r.require(reportConsolidationResponseFieldIntercompanyCandidates)
 }
 
-func (p *PostV1ConsolidationReportResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReportConsolidationResponse) UnmarshalJSON(data []byte) error {
+	type embed ReportConsolidationResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponse(unmarshaler.embed)
+	r.FromDate = unmarshaler.FromDate.Time()
+	r.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponse
+func (r *ReportConsolidationResponse) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponse
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*r),
+		FromDate: internal.NewDate(r.FromDate),
+		ToDate:   internal.NewDate(r.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponse) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponse) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowFieldOpeningCash = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowFieldClosingCash = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowFieldNetChange   = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowFieldOperating   = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseCashFlowFieldInvesting   = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseCashFlowFieldFinancing   = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseCashFlowFieldBalanced    = big.NewInt(1 << 6)
+	reportConsolidationResponseCashFlowFieldOpeningCash = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowFieldClosingCash = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowFieldNetChange   = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowFieldOperating   = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowFieldInvesting   = big.NewInt(1 << 4)
+	reportConsolidationResponseCashFlowFieldFinancing   = big.NewInt(1 << 5)
+	reportConsolidationResponseCashFlowFieldBalanced    = big.NewInt(1 << 6)
 )
 
-type PostV1ConsolidationReportResponseCashFlow struct {
-	OpeningCash string                                              `json:"openingCash" url:"openingCash"`
-	ClosingCash string                                              `json:"closingCash" url:"closingCash"`
-	NetChange   string                                              `json:"netChange" url:"netChange"`
-	Operating   *PostV1ConsolidationReportResponseCashFlowOperating `json:"operating" url:"operating"`
-	Investing   *PostV1ConsolidationReportResponseCashFlowInvesting `json:"investing" url:"investing"`
-	Financing   *PostV1ConsolidationReportResponseCashFlowFinancing `json:"financing" url:"financing"`
-	Balanced    bool                                                `json:"balanced" url:"balanced"`
+type ReportConsolidationResponseCashFlow struct {
+	OpeningCash string                                        `json:"openingCash" url:"openingCash"`
+	ClosingCash string                                        `json:"closingCash" url:"closingCash"`
+	NetChange   string                                        `json:"netChange" url:"netChange"`
+	Operating   *ReportConsolidationResponseCashFlowOperating `json:"operating" url:"operating"`
+	Investing   *ReportConsolidationResponseCashFlowInvesting `json:"investing" url:"investing"`
+	Financing   *ReportConsolidationResponseCashFlowFinancing `json:"financing" url:"financing"`
+	Balanced    bool                                          `json:"balanced" url:"balanced"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4414,172 +4519,172 @@ type PostV1ConsolidationReportResponseCashFlow struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetOpeningCash() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetOpeningCash() string {
+	if r == nil {
 		return ""
 	}
-	return p.OpeningCash
+	return r.OpeningCash
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetClosingCash() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetClosingCash() string {
+	if r == nil {
 		return ""
 	}
-	return p.ClosingCash
+	return r.ClosingCash
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetNetChange() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetNetChange() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetChange
+	return r.NetChange
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetOperating() *PostV1ConsolidationReportResponseCashFlowOperating {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetOperating() *ReportConsolidationResponseCashFlowOperating {
+	if r == nil {
 		return nil
 	}
-	return p.Operating
+	return r.Operating
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetInvesting() *PostV1ConsolidationReportResponseCashFlowInvesting {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetInvesting() *ReportConsolidationResponseCashFlowInvesting {
+	if r == nil {
 		return nil
 	}
-	return p.Investing
+	return r.Investing
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetFinancing() *PostV1ConsolidationReportResponseCashFlowFinancing {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetFinancing() *ReportConsolidationResponseCashFlowFinancing {
+	if r == nil {
 		return nil
 	}
-	return p.Financing
+	return r.Financing
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetBalanced() bool {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetBalanced() bool {
+	if r == nil {
 		return false
 	}
-	return p.Balanced
+	return r.Balanced
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlow) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetOpeningCash sets the OpeningCash field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetOpeningCash(openingCash string) {
-	p.OpeningCash = openingCash
-	p.require(postV1ConsolidationReportResponseCashFlowFieldOpeningCash)
+func (r *ReportConsolidationResponseCashFlow) SetOpeningCash(openingCash string) {
+	r.OpeningCash = openingCash
+	r.require(reportConsolidationResponseCashFlowFieldOpeningCash)
 }
 
 // SetClosingCash sets the ClosingCash field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetClosingCash(closingCash string) {
-	p.ClosingCash = closingCash
-	p.require(postV1ConsolidationReportResponseCashFlowFieldClosingCash)
+func (r *ReportConsolidationResponseCashFlow) SetClosingCash(closingCash string) {
+	r.ClosingCash = closingCash
+	r.require(reportConsolidationResponseCashFlowFieldClosingCash)
 }
 
 // SetNetChange sets the NetChange field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetNetChange(netChange string) {
-	p.NetChange = netChange
-	p.require(postV1ConsolidationReportResponseCashFlowFieldNetChange)
+func (r *ReportConsolidationResponseCashFlow) SetNetChange(netChange string) {
+	r.NetChange = netChange
+	r.require(reportConsolidationResponseCashFlowFieldNetChange)
 }
 
 // SetOperating sets the Operating field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetOperating(operating *PostV1ConsolidationReportResponseCashFlowOperating) {
-	p.Operating = operating
-	p.require(postV1ConsolidationReportResponseCashFlowFieldOperating)
+func (r *ReportConsolidationResponseCashFlow) SetOperating(operating *ReportConsolidationResponseCashFlowOperating) {
+	r.Operating = operating
+	r.require(reportConsolidationResponseCashFlowFieldOperating)
 }
 
 // SetInvesting sets the Investing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetInvesting(investing *PostV1ConsolidationReportResponseCashFlowInvesting) {
-	p.Investing = investing
-	p.require(postV1ConsolidationReportResponseCashFlowFieldInvesting)
+func (r *ReportConsolidationResponseCashFlow) SetInvesting(investing *ReportConsolidationResponseCashFlowInvesting) {
+	r.Investing = investing
+	r.require(reportConsolidationResponseCashFlowFieldInvesting)
 }
 
 // SetFinancing sets the Financing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetFinancing(financing *PostV1ConsolidationReportResponseCashFlowFinancing) {
-	p.Financing = financing
-	p.require(postV1ConsolidationReportResponseCashFlowFieldFinancing)
+func (r *ReportConsolidationResponseCashFlow) SetFinancing(financing *ReportConsolidationResponseCashFlowFinancing) {
+	r.Financing = financing
+	r.require(reportConsolidationResponseCashFlowFieldFinancing)
 }
 
 // SetBalanced sets the Balanced field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlow) SetBalanced(balanced bool) {
-	p.Balanced = balanced
-	p.require(postV1ConsolidationReportResponseCashFlowFieldBalanced)
+func (r *ReportConsolidationResponseCashFlow) SetBalanced(balanced bool) {
+	r.Balanced = balanced
+	r.require(reportConsolidationResponseCashFlowFieldBalanced)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlow
+func (r *ReportConsolidationResponseCashFlow) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlow
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlow(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlow(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlow
+func (r *ReportConsolidationResponseCashFlow) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlow
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlow) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlow) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowFinancingFieldInflow  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowFinancingFieldOutflow = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowFinancingFieldNet     = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowFinancingFieldRows    = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowFinancingFieldInflow  = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowFinancingFieldOutflow = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowFinancingFieldNet     = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowFinancingFieldRows    = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowFinancing struct {
-	Inflow  string                                                        `json:"inflow" url:"inflow"`
-	Outflow string                                                        `json:"outflow" url:"outflow"`
-	Net     string                                                        `json:"net" url:"net"`
-	Rows    []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem `json:"rows" url:"rows"`
+type ReportConsolidationResponseCashFlowFinancing struct {
+	Inflow  string                                                  `json:"inflow" url:"inflow"`
+	Outflow string                                                  `json:"outflow" url:"outflow"`
+	Net     string                                                  `json:"net" url:"net"`
+	Rows    []*ReportConsolidationResponseCashFlowFinancingRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4588,126 +4693,126 @@ type PostV1ConsolidationReportResponseCashFlowFinancing struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) GetNet() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) GetNet() string {
+	if r == nil {
 		return ""
 	}
-	return p.Net
+	return r.Net
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) GetRows() []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) GetRows() []*ReportConsolidationResponseCashFlowFinancingRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowFinancing) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingFieldInflow)
+func (r *ReportConsolidationResponseCashFlowFinancing) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowFinancingFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowFinancing) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowFinancingFieldOutflow)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) SetNet(net string) {
-	p.Net = net
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingFieldNet)
+func (r *ReportConsolidationResponseCashFlowFinancing) SetNet(net string) {
+	r.Net = net
+	r.require(reportConsolidationResponseCashFlowFinancingFieldNet)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) SetRows(rows []*PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingFieldRows)
+func (r *ReportConsolidationResponseCashFlowFinancing) SetRows(rows []*ReportConsolidationResponseCashFlowFinancingRowsItem) {
+	r.Rows = rows
+	r.require(reportConsolidationResponseCashFlowFinancingFieldRows)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowFinancing
+func (r *ReportConsolidationResponseCashFlowFinancing) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowFinancing
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowFinancing(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowFinancing(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowFinancing
+func (r *ReportConsolidationResponseCashFlowFinancing) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowFinancing
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancing) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancing) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldCode    = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldName    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldInflow  = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldOutflow = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowFinancingRowsItemFieldCode    = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowFinancingRowsItemFieldName    = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowFinancingRowsItemFieldInflow  = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowFinancingRowsItemFieldOutflow = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowFinancingRowsItem struct {
+type ReportConsolidationResponseCashFlowFinancingRowsItem struct {
 	Code    string `json:"code" url:"code"`
 	Name    string `json:"name" url:"name"`
 	Inflow  string `json:"inflow" url:"inflow"`
@@ -4720,130 +4825,130 @@ type PostV1ConsolidationReportResponseCashFlowFinancingRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) GetName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return p.Name
+	return r.Name
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldCode)
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationResponseCashFlowFinancingRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldName)
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) SetName(name string) {
+	r.Name = name
+	r.require(reportConsolidationResponseCashFlowFinancingRowsItemFieldName)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldInflow)
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowFinancingRowsItemFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowFinancingRowsItemFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowFinancingRowsItemFieldOutflow)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowFinancingRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowFinancingRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowFinancingRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowFinancingRowsItem
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowFinancingRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowFinancingRowsItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowFinancingRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowInvestingFieldInflow  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowInvestingFieldOutflow = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowInvestingFieldNet     = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowInvestingFieldRows    = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowInvestingFieldInflow  = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowInvestingFieldOutflow = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowInvestingFieldNet     = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowInvestingFieldRows    = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowInvesting struct {
-	Inflow  string                                                        `json:"inflow" url:"inflow"`
-	Outflow string                                                        `json:"outflow" url:"outflow"`
-	Net     string                                                        `json:"net" url:"net"`
-	Rows    []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem `json:"rows" url:"rows"`
+type ReportConsolidationResponseCashFlowInvesting struct {
+	Inflow  string                                                  `json:"inflow" url:"inflow"`
+	Outflow string                                                  `json:"outflow" url:"outflow"`
+	Net     string                                                  `json:"net" url:"net"`
+	Rows    []*ReportConsolidationResponseCashFlowInvestingRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4852,126 +4957,126 @@ type PostV1ConsolidationReportResponseCashFlowInvesting struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) GetNet() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) GetNet() string {
+	if r == nil {
 		return ""
 	}
-	return p.Net
+	return r.Net
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) GetRows() []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) GetRows() []*ReportConsolidationResponseCashFlowInvestingRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowInvesting) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingFieldInflow)
+func (r *ReportConsolidationResponseCashFlowInvesting) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowInvestingFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowInvesting) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowInvestingFieldOutflow)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) SetNet(net string) {
-	p.Net = net
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingFieldNet)
+func (r *ReportConsolidationResponseCashFlowInvesting) SetNet(net string) {
+	r.Net = net
+	r.require(reportConsolidationResponseCashFlowInvestingFieldNet)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) SetRows(rows []*PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingFieldRows)
+func (r *ReportConsolidationResponseCashFlowInvesting) SetRows(rows []*ReportConsolidationResponseCashFlowInvestingRowsItem) {
+	r.Rows = rows
+	r.require(reportConsolidationResponseCashFlowInvestingFieldRows)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowInvesting
+func (r *ReportConsolidationResponseCashFlowInvesting) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowInvesting
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowInvesting(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowInvesting(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowInvesting
+func (r *ReportConsolidationResponseCashFlowInvesting) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowInvesting
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvesting) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvesting) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldCode    = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldName    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldInflow  = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldOutflow = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowInvestingRowsItemFieldCode    = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowInvestingRowsItemFieldName    = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowInvestingRowsItemFieldInflow  = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowInvestingRowsItemFieldOutflow = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowInvestingRowsItem struct {
+type ReportConsolidationResponseCashFlowInvestingRowsItem struct {
 	Code    string `json:"code" url:"code"`
 	Name    string `json:"name" url:"name"`
 	Inflow  string `json:"inflow" url:"inflow"`
@@ -4984,130 +5089,130 @@ type PostV1ConsolidationReportResponseCashFlowInvestingRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) GetName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return p.Name
+	return r.Name
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldCode)
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationResponseCashFlowInvestingRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldName)
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) SetName(name string) {
+	r.Name = name
+	r.require(reportConsolidationResponseCashFlowInvestingRowsItemFieldName)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldInflow)
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowInvestingRowsItemFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowInvestingRowsItemFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowInvestingRowsItemFieldOutflow)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowInvestingRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowInvestingRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowInvestingRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowInvestingRowsItem
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowInvestingRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowInvestingRowsItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowInvestingRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowOperatingFieldInflow  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowOperatingFieldOutflow = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowOperatingFieldNet     = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowOperatingFieldRows    = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowOperatingFieldInflow  = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowOperatingFieldOutflow = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowOperatingFieldNet     = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowOperatingFieldRows    = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowOperating struct {
-	Inflow  string                                                        `json:"inflow" url:"inflow"`
-	Outflow string                                                        `json:"outflow" url:"outflow"`
-	Net     string                                                        `json:"net" url:"net"`
-	Rows    []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem `json:"rows" url:"rows"`
+type ReportConsolidationResponseCashFlowOperating struct {
+	Inflow  string                                                  `json:"inflow" url:"inflow"`
+	Outflow string                                                  `json:"outflow" url:"outflow"`
+	Net     string                                                  `json:"net" url:"net"`
+	Rows    []*ReportConsolidationResponseCashFlowOperatingRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5116,126 +5221,126 @@ type PostV1ConsolidationReportResponseCashFlowOperating struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) GetNet() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) GetNet() string {
+	if r == nil {
 		return ""
 	}
-	return p.Net
+	return r.Net
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) GetRows() []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) GetRows() []*ReportConsolidationResponseCashFlowOperatingRowsItem {
+	if r == nil {
 		return nil
 	}
-	return p.Rows
+	return r.Rows
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowOperating) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingFieldInflow)
+func (r *ReportConsolidationResponseCashFlowOperating) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowOperatingFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowOperating) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowOperatingFieldOutflow)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) SetNet(net string) {
-	p.Net = net
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingFieldNet)
+func (r *ReportConsolidationResponseCashFlowOperating) SetNet(net string) {
+	r.Net = net
+	r.require(reportConsolidationResponseCashFlowOperatingFieldNet)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) SetRows(rows []*PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) {
-	p.Rows = rows
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingFieldRows)
+func (r *ReportConsolidationResponseCashFlowOperating) SetRows(rows []*ReportConsolidationResponseCashFlowOperatingRowsItem) {
+	r.Rows = rows
+	r.require(reportConsolidationResponseCashFlowOperatingFieldRows)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowOperating
+func (r *ReportConsolidationResponseCashFlowOperating) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowOperating
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowOperating(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowOperating(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowOperating
+func (r *ReportConsolidationResponseCashFlowOperating) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowOperating
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperating) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperating) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldCode    = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldName    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldInflow  = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldOutflow = big.NewInt(1 << 3)
+	reportConsolidationResponseCashFlowOperatingRowsItemFieldCode    = big.NewInt(1 << 0)
+	reportConsolidationResponseCashFlowOperatingRowsItemFieldName    = big.NewInt(1 << 1)
+	reportConsolidationResponseCashFlowOperatingRowsItemFieldInflow  = big.NewInt(1 << 2)
+	reportConsolidationResponseCashFlowOperatingRowsItemFieldOutflow = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseCashFlowOperatingRowsItem struct {
+type ReportConsolidationResponseCashFlowOperatingRowsItem struct {
 	Code    string `json:"code" url:"code"`
 	Name    string `json:"name" url:"name"`
 	Inflow  string `json:"inflow" url:"inflow"`
@@ -5248,156 +5353,156 @@ type PostV1ConsolidationReportResponseCashFlowOperatingRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) GetName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return p.Name
+	return r.Name
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) GetInflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) GetInflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inflow
+	return r.Inflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) GetOutflow() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) GetOutflow() string {
+	if r == nil {
 		return ""
 	}
-	return p.Outflow
+	return r.Outflow
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldCode)
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationResponseCashFlowOperatingRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldName)
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) SetName(name string) {
+	r.Name = name
+	r.require(reportConsolidationResponseCashFlowOperatingRowsItemFieldName)
 }
 
 // SetInflow sets the Inflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) SetInflow(inflow string) {
-	p.Inflow = inflow
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldInflow)
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) SetInflow(inflow string) {
+	r.Inflow = inflow
+	r.require(reportConsolidationResponseCashFlowOperatingRowsItemFieldInflow)
 }
 
 // SetOutflow sets the Outflow field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) SetOutflow(outflow string) {
-	p.Outflow = outflow
-	p.require(postV1ConsolidationReportResponseCashFlowOperatingRowsItemFieldOutflow)
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) SetOutflow(outflow string) {
+	r.Outflow = outflow
+	r.require(reportConsolidationResponseCashFlowOperatingRowsItemFieldOutflow)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseCashFlowOperatingRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseCashFlowOperatingRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseCashFlowOperatingRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseCashFlowOperatingRowsItem
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseCashFlowOperatingRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseCashFlowOperatingRowsItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseCashFlowOperatingRowsItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1ConsolidationReportResponseCategory string
+type ReportConsolidationResponseCategory string
 
 const (
-	PostV1ConsolidationReportResponseCategoryMicro  PostV1ConsolidationReportResponseCategory = "micro"
-	PostV1ConsolidationReportResponseCategorySmall  PostV1ConsolidationReportResponseCategory = "small"
-	PostV1ConsolidationReportResponseCategoryMedium PostV1ConsolidationReportResponseCategory = "medium"
-	PostV1ConsolidationReportResponseCategoryLarge  PostV1ConsolidationReportResponseCategory = "large"
+	ReportConsolidationResponseCategoryMicro  ReportConsolidationResponseCategory = "micro"
+	ReportConsolidationResponseCategorySmall  ReportConsolidationResponseCategory = "small"
+	ReportConsolidationResponseCategoryMedium ReportConsolidationResponseCategory = "medium"
+	ReportConsolidationResponseCategoryLarge  ReportConsolidationResponseCategory = "large"
 )
 
-func NewPostV1ConsolidationReportResponseCategoryFromString(s string) (PostV1ConsolidationReportResponseCategory, error) {
+func NewReportConsolidationResponseCategoryFromString(s string) (ReportConsolidationResponseCategory, error) {
 	switch s {
 	case "micro":
-		return PostV1ConsolidationReportResponseCategoryMicro, nil
+		return ReportConsolidationResponseCategoryMicro, nil
 	case "small":
-		return PostV1ConsolidationReportResponseCategorySmall, nil
+		return ReportConsolidationResponseCategorySmall, nil
 	case "medium":
-		return PostV1ConsolidationReportResponseCategoryMedium, nil
+		return ReportConsolidationResponseCategoryMedium, nil
 	case "large":
-		return PostV1ConsolidationReportResponseCategoryLarge, nil
+		return ReportConsolidationResponseCategoryLarge, nil
 	}
-	var t PostV1ConsolidationReportResponseCategory
+	var t ReportConsolidationResponseCategory
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationReportResponseCategory) Ptr() *PostV1ConsolidationReportResponseCategory {
-	return &p
+func (r ReportConsolidationResponseCategory) Ptr() *ReportConsolidationResponseCategory {
+	return &r
 }
 
 var (
-	postV1ConsolidationReportResponseEliminationsFieldApplied  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseEliminationsFieldBalanced = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseEliminationsFieldNet      = big.NewInt(1 << 2)
+	reportConsolidationResponseEliminationsFieldApplied  = big.NewInt(1 << 0)
+	reportConsolidationResponseEliminationsFieldBalanced = big.NewInt(1 << 1)
+	reportConsolidationResponseEliminationsFieldNet      = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationReportResponseEliminations struct {
-	Applied  []*PostV1ConsolidationReportResponseEliminationsAppliedItem `json:"applied" url:"applied"`
-	Balanced bool                                                        `json:"balanced" url:"balanced"`
-	Net      string                                                      `json:"net" url:"net"`
+type ReportConsolidationResponseEliminations struct {
+	Applied  []*ReportConsolidationResponseEliminationsAppliedItem `json:"applied" url:"applied"`
+	Balanced bool                                                  `json:"balanced" url:"balanced"`
+	Net      string                                                `json:"net" url:"net"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5406,111 +5511,111 @@ type PostV1ConsolidationReportResponseEliminations struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) GetApplied() []*PostV1ConsolidationReportResponseEliminationsAppliedItem {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminations) GetApplied() []*ReportConsolidationResponseEliminationsAppliedItem {
+	if r == nil {
 		return nil
 	}
-	return p.Applied
+	return r.Applied
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) GetBalanced() bool {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminations) GetBalanced() bool {
+	if r == nil {
 		return false
 	}
-	return p.Balanced
+	return r.Balanced
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) GetNet() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminations) GetNet() string {
+	if r == nil {
 		return ""
 	}
-	return p.Net
+	return r.Net
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminations) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseEliminations) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetApplied sets the Applied field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminations) SetApplied(applied []*PostV1ConsolidationReportResponseEliminationsAppliedItem) {
-	p.Applied = applied
-	p.require(postV1ConsolidationReportResponseEliminationsFieldApplied)
+func (r *ReportConsolidationResponseEliminations) SetApplied(applied []*ReportConsolidationResponseEliminationsAppliedItem) {
+	r.Applied = applied
+	r.require(reportConsolidationResponseEliminationsFieldApplied)
 }
 
 // SetBalanced sets the Balanced field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminations) SetBalanced(balanced bool) {
-	p.Balanced = balanced
-	p.require(postV1ConsolidationReportResponseEliminationsFieldBalanced)
+func (r *ReportConsolidationResponseEliminations) SetBalanced(balanced bool) {
+	r.Balanced = balanced
+	r.require(reportConsolidationResponseEliminationsFieldBalanced)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminations) SetNet(net string) {
-	p.Net = net
-	p.require(postV1ConsolidationReportResponseEliminationsFieldNet)
+func (r *ReportConsolidationResponseEliminations) SetNet(net string) {
+	r.Net = net
+	r.require(reportConsolidationResponseEliminationsFieldNet)
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseEliminations
+func (r *ReportConsolidationResponseEliminations) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseEliminations
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseEliminations(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseEliminations(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseEliminations
+func (r *ReportConsolidationResponseEliminations) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseEliminations
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseEliminations) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminations) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseEliminationsAppliedItemFieldCode   = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseEliminationsAppliedItemFieldAmount = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseEliminationsAppliedItemFieldNote   = big.NewInt(1 << 2)
+	reportConsolidationResponseEliminationsAppliedItemFieldCode   = big.NewInt(1 << 0)
+	reportConsolidationResponseEliminationsAppliedItemFieldAmount = big.NewInt(1 << 1)
+	reportConsolidationResponseEliminationsAppliedItemFieldNote   = big.NewInt(1 << 2)
 )
 
-type PostV1ConsolidationReportResponseEliminationsAppliedItem struct {
+type ReportConsolidationResponseEliminationsAppliedItem struct {
 	Code   string  `json:"code" url:"code"`
 	Amount string  `json:"amount" url:"amount"`
 	Note   *string `json:"note,omitempty" url:"note,omitempty"`
@@ -5522,110 +5627,110 @@ type PostV1ConsolidationReportResponseEliminationsAppliedItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminationsAppliedItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) GetAmount() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminationsAppliedItem) GetAmount() string {
+	if r == nil {
 		return ""
 	}
-	return p.Amount
+	return r.Amount
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) GetNote() *string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminationsAppliedItem) GetNote() *string {
+	if r == nil {
 		return nil
 	}
-	return p.Note
+	return r.Note
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminationsAppliedItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseEliminationsAppliedItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportResponseEliminationsAppliedItemFieldCode)
+func (r *ReportConsolidationResponseEliminationsAppliedItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationResponseEliminationsAppliedItemFieldCode)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1ConsolidationReportResponseEliminationsAppliedItemFieldAmount)
+func (r *ReportConsolidationResponseEliminationsAppliedItem) SetAmount(amount string) {
+	r.Amount = amount
+	r.require(reportConsolidationResponseEliminationsAppliedItemFieldAmount)
 }
 
 // SetNote sets the Note field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) SetNote(note *string) {
-	p.Note = note
-	p.require(postV1ConsolidationReportResponseEliminationsAppliedItemFieldNote)
+func (r *ReportConsolidationResponseEliminationsAppliedItem) SetNote(note *string) {
+	r.Note = note
+	r.require(reportConsolidationResponseEliminationsAppliedItemFieldNote)
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseEliminationsAppliedItem
+func (r *ReportConsolidationResponseEliminationsAppliedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseEliminationsAppliedItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseEliminationsAppliedItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseEliminationsAppliedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseEliminationsAppliedItem
+func (r *ReportConsolidationResponseEliminationsAppliedItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseEliminationsAppliedItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseEliminationsAppliedItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEliminationsAppliedItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseEquityMethodFieldInvestmentsInAssociates = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseEquityMethodFieldShareOfAssociatesResult = big.NewInt(1 << 1)
+	reportConsolidationResponseEquityMethodFieldInvestmentsInAssociates = big.NewInt(1 << 0)
+	reportConsolidationResponseEquityMethodFieldShareOfAssociatesResult = big.NewInt(1 << 1)
 )
 
-type PostV1ConsolidationReportResponseEquityMethod struct {
+type ReportConsolidationResponseEquityMethod struct {
 	InvestmentsInAssociates string `json:"investmentsInAssociates" url:"investmentsInAssociates"`
 	ShareOfAssociatesResult string `json:"shareOfAssociatesResult" url:"shareOfAssociatesResult"`
 
@@ -5636,110 +5741,110 @@ type PostV1ConsolidationReportResponseEquityMethod struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) GetInvestmentsInAssociates() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEquityMethod) GetInvestmentsInAssociates() string {
+	if r == nil {
 		return ""
 	}
-	return p.InvestmentsInAssociates
+	return r.InvestmentsInAssociates
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) GetShareOfAssociatesResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEquityMethod) GetShareOfAssociatesResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.ShareOfAssociatesResult
+	return r.ShareOfAssociatesResult
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseEquityMethod) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseEquityMethod) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetInvestmentsInAssociates sets the InvestmentsInAssociates field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEquityMethod) SetInvestmentsInAssociates(investmentsInAssociates string) {
-	p.InvestmentsInAssociates = investmentsInAssociates
-	p.require(postV1ConsolidationReportResponseEquityMethodFieldInvestmentsInAssociates)
+func (r *ReportConsolidationResponseEquityMethod) SetInvestmentsInAssociates(investmentsInAssociates string) {
+	r.InvestmentsInAssociates = investmentsInAssociates
+	r.require(reportConsolidationResponseEquityMethodFieldInvestmentsInAssociates)
 }
 
 // SetShareOfAssociatesResult sets the ShareOfAssociatesResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseEquityMethod) SetShareOfAssociatesResult(shareOfAssociatesResult string) {
-	p.ShareOfAssociatesResult = shareOfAssociatesResult
-	p.require(postV1ConsolidationReportResponseEquityMethodFieldShareOfAssociatesResult)
+func (r *ReportConsolidationResponseEquityMethod) SetShareOfAssociatesResult(shareOfAssociatesResult string) {
+	r.ShareOfAssociatesResult = shareOfAssociatesResult
+	r.require(reportConsolidationResponseEquityMethodFieldShareOfAssociatesResult)
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseEquityMethod
+func (r *ReportConsolidationResponseEquityMethod) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseEquityMethod
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseEquityMethod(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseEquityMethod(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseEquityMethod
+func (r *ReportConsolidationResponseEquityMethod) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseEquityMethod
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseEquityMethod) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseEquityMethod) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMemberCompanyID    = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMemberName         = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerID          = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerName        = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerCode        = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchesCompanyID   = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchesCompanyName = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchedOn          = big.NewInt(1 << 7)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldMemberCompanyID    = big.NewInt(1 << 0)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldMemberName         = big.NewInt(1 << 1)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerID          = big.NewInt(1 << 2)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerName        = big.NewInt(1 << 3)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerCode        = big.NewInt(1 << 4)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldMatchesCompanyID   = big.NewInt(1 << 5)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldMatchesCompanyName = big.NewInt(1 << 6)
+	reportConsolidationResponseIntercompanyCandidatesItemFieldMatchedOn          = big.NewInt(1 << 7)
 )
 
-type PostV1ConsolidationReportResponseIntercompanyCandidatesItem struct {
-	MemberCompanyID    string                                                               `json:"memberCompanyId" url:"memberCompanyId"`
-	MemberName         string                                                               `json:"memberName" url:"memberName"`
-	PartnerID          string                                                               `json:"partnerId" url:"partnerId"`
-	PartnerName        string                                                               `json:"partnerName" url:"partnerName"`
-	PartnerCode        *string                                                              `json:"partnerCode,omitempty" url:"partnerCode,omitempty"`
-	MatchesCompanyID   string                                                               `json:"matchesCompanyId" url:"matchesCompanyId"`
-	MatchesCompanyName string                                                               `json:"matchesCompanyName" url:"matchesCompanyName"`
-	MatchedOn          PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn `json:"matchedOn" url:"matchedOn"`
+type ReportConsolidationResponseIntercompanyCandidatesItem struct {
+	MemberCompanyID    string                                                         `json:"memberCompanyId" url:"memberCompanyId"`
+	MemberName         string                                                         `json:"memberName" url:"memberName"`
+	PartnerID          string                                                         `json:"partnerId" url:"partnerId"`
+	PartnerName        string                                                         `json:"partnerName" url:"partnerName"`
+	PartnerCode        *string                                                        `json:"partnerCode,omitempty" url:"partnerCode,omitempty"`
+	MatchesCompanyID   string                                                         `json:"matchesCompanyId" url:"matchesCompanyId"`
+	MatchesCompanyName string                                                         `json:"matchesCompanyName" url:"matchesCompanyName"`
+	MatchedOn          ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn `json:"matchedOn" url:"matchedOn"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5748,222 +5853,222 @@ type PostV1ConsolidationReportResponseIntercompanyCandidatesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetMemberCompanyID() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetMemberCompanyID() string {
+	if r == nil {
 		return ""
 	}
-	return p.MemberCompanyID
+	return r.MemberCompanyID
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetMemberName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetMemberName() string {
+	if r == nil {
 		return ""
 	}
-	return p.MemberName
+	return r.MemberName
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetPartnerID() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetPartnerID() string {
+	if r == nil {
 		return ""
 	}
-	return p.PartnerID
+	return r.PartnerID
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetPartnerName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetPartnerName() string {
+	if r == nil {
 		return ""
 	}
-	return p.PartnerName
+	return r.PartnerName
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetPartnerCode() *string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetPartnerCode() *string {
+	if r == nil {
 		return nil
 	}
-	return p.PartnerCode
+	return r.PartnerCode
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetMatchesCompanyID() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetMatchesCompanyID() string {
+	if r == nil {
 		return ""
 	}
-	return p.MatchesCompanyID
+	return r.MatchesCompanyID
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetMatchesCompanyName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetMatchesCompanyName() string {
+	if r == nil {
 		return ""
 	}
-	return p.MatchesCompanyName
+	return r.MatchesCompanyName
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetMatchedOn() PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetMatchedOn() ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn {
+	if r == nil {
 		return ""
 	}
-	return p.MatchedOn
+	return r.MatchedOn
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetMemberCompanyID sets the MemberCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetMemberCompanyID(memberCompanyID string) {
-	p.MemberCompanyID = memberCompanyID
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMemberCompanyID)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetMemberCompanyID(memberCompanyID string) {
+	r.MemberCompanyID = memberCompanyID
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldMemberCompanyID)
 }
 
 // SetMemberName sets the MemberName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetMemberName(memberName string) {
-	p.MemberName = memberName
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMemberName)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetMemberName(memberName string) {
+	r.MemberName = memberName
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldMemberName)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerID)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerID)
 }
 
 // SetPartnerName sets the PartnerName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetPartnerName(partnerName string) {
-	p.PartnerName = partnerName
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerName)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetPartnerName(partnerName string) {
+	r.PartnerName = partnerName
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerName)
 }
 
 // SetPartnerCode sets the PartnerCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetPartnerCode(partnerCode *string) {
-	p.PartnerCode = partnerCode
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldPartnerCode)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetPartnerCode(partnerCode *string) {
+	r.PartnerCode = partnerCode
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldPartnerCode)
 }
 
 // SetMatchesCompanyID sets the MatchesCompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetMatchesCompanyID(matchesCompanyID string) {
-	p.MatchesCompanyID = matchesCompanyID
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchesCompanyID)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetMatchesCompanyID(matchesCompanyID string) {
+	r.MatchesCompanyID = matchesCompanyID
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldMatchesCompanyID)
 }
 
 // SetMatchesCompanyName sets the MatchesCompanyName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetMatchesCompanyName(matchesCompanyName string) {
-	p.MatchesCompanyName = matchesCompanyName
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchesCompanyName)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetMatchesCompanyName(matchesCompanyName string) {
+	r.MatchesCompanyName = matchesCompanyName
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldMatchesCompanyName)
 }
 
 // SetMatchedOn sets the MatchedOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) SetMatchedOn(matchedOn PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn) {
-	p.MatchedOn = matchedOn
-	p.require(postV1ConsolidationReportResponseIntercompanyCandidatesItemFieldMatchedOn)
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) SetMatchedOn(matchedOn ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn) {
+	r.MatchedOn = matchedOn
+	r.require(reportConsolidationResponseIntercompanyCandidatesItemFieldMatchedOn)
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseIntercompanyCandidatesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseIntercompanyCandidatesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseIntercompanyCandidatesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseIntercompanyCandidatesItem
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseIntercompanyCandidatesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseIntercompanyCandidatesItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseIntercompanyCandidatesItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn string
+type ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn string
 
 const (
-	PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnCode    PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn = "code"
-	PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnVatCode PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn = "vatCode"
+	ReportConsolidationResponseIntercompanyCandidatesItemMatchedOnCode    ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn = "code"
+	ReportConsolidationResponseIntercompanyCandidatesItemMatchedOnVatCode ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn = "vatCode"
 )
 
-func NewPostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnFromString(s string) (PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn, error) {
+func NewReportConsolidationResponseIntercompanyCandidatesItemMatchedOnFromString(s string) (ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn, error) {
 	switch s {
 	case "code":
-		return PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnCode, nil
+		return ReportConsolidationResponseIntercompanyCandidatesItemMatchedOnCode, nil
 	case "vatCode":
-		return PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOnVatCode, nil
+		return ReportConsolidationResponseIntercompanyCandidatesItemMatchedOnVatCode, nil
 	}
-	var t PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn
+	var t ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn) Ptr() *PostV1ConsolidationReportResponseIntercompanyCandidatesItemMatchedOn {
-	return &p
+func (r ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn) Ptr() *ReportConsolidationResponseIntercompanyCandidatesItemMatchedOn {
+	return &r
 }
 
 var (
-	postV1ConsolidationReportResponseMembersItemFieldCompanyID        = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseMembersItemFieldName             = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseMembersItemFieldBaseCurrency     = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseMembersItemFieldOwnershipPercent = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseMembersItemFieldMethod           = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseMembersItemFieldFxFactor         = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseMembersItemFieldRateFrom         = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseMembersItemFieldRateTo           = big.NewInt(1 << 7)
-	postV1ConsolidationReportResponseMembersItemFieldTotalAssets      = big.NewInt(1 << 8)
-	postV1ConsolidationReportResponseMembersItemFieldNetEquity        = big.NewInt(1 << 9)
-	postV1ConsolidationReportResponseMembersItemFieldPeriodResult     = big.NewInt(1 << 10)
+	reportConsolidationResponseMembersItemFieldCompanyID        = big.NewInt(1 << 0)
+	reportConsolidationResponseMembersItemFieldName             = big.NewInt(1 << 1)
+	reportConsolidationResponseMembersItemFieldBaseCurrency     = big.NewInt(1 << 2)
+	reportConsolidationResponseMembersItemFieldOwnershipPercent = big.NewInt(1 << 3)
+	reportConsolidationResponseMembersItemFieldMethod           = big.NewInt(1 << 4)
+	reportConsolidationResponseMembersItemFieldFxFactor         = big.NewInt(1 << 5)
+	reportConsolidationResponseMembersItemFieldRateFrom         = big.NewInt(1 << 6)
+	reportConsolidationResponseMembersItemFieldRateTo           = big.NewInt(1 << 7)
+	reportConsolidationResponseMembersItemFieldTotalAssets      = big.NewInt(1 << 8)
+	reportConsolidationResponseMembersItemFieldNetEquity        = big.NewInt(1 << 9)
+	reportConsolidationResponseMembersItemFieldPeriodResult     = big.NewInt(1 << 10)
 )
 
-type PostV1ConsolidationReportResponseMembersItem struct {
-	CompanyID        string                                             `json:"companyId" url:"companyId"`
-	Name             string                                             `json:"name" url:"name"`
-	BaseCurrency     string                                             `json:"baseCurrency" url:"baseCurrency"`
-	OwnershipPercent string                                             `json:"ownershipPercent" url:"ownershipPercent"`
-	Method           PostV1ConsolidationReportResponseMembersItemMethod `json:"method" url:"method"`
-	FxFactor         string                                             `json:"fxFactor" url:"fxFactor"`
-	RateFrom         string                                             `json:"rateFrom" url:"rateFrom"`
-	RateTo           string                                             `json:"rateTo" url:"rateTo"`
-	TotalAssets      string                                             `json:"totalAssets" url:"totalAssets"`
-	NetEquity        string                                             `json:"netEquity" url:"netEquity"`
-	PeriodResult     string                                             `json:"periodResult" url:"periodResult"`
+type ReportConsolidationResponseMembersItem struct {
+	CompanyID        string                                       `json:"companyId" url:"companyId"`
+	Name             string                                       `json:"name" url:"name"`
+	BaseCurrency     string                                       `json:"baseCurrency" url:"baseCurrency"`
+	OwnershipPercent string                                       `json:"ownershipPercent" url:"ownershipPercent"`
+	Method           ReportConsolidationResponseMembersItemMethod `json:"method" url:"method"`
+	FxFactor         string                                       `json:"fxFactor" url:"fxFactor"`
+	RateFrom         string                                       `json:"rateFrom" url:"rateFrom"`
+	RateTo           string                                       `json:"rateTo" url:"rateTo"`
+	TotalAssets      string                                       `json:"totalAssets" url:"totalAssets"`
+	NetEquity        string                                       `json:"netEquity" url:"netEquity"`
+	PeriodResult     string                                       `json:"periodResult" url:"periodResult"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5972,247 +6077,247 @@ type PostV1ConsolidationReportResponseMembersItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetCompanyID() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetCompanyID() string {
+	if r == nil {
 		return ""
 	}
-	return p.CompanyID
+	return r.CompanyID
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetName() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return p.Name
+	return r.Name
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetBaseCurrency() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetBaseCurrency() string {
+	if r == nil {
 		return ""
 	}
-	return p.BaseCurrency
+	return r.BaseCurrency
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetOwnershipPercent() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetOwnershipPercent() string {
+	if r == nil {
 		return ""
 	}
-	return p.OwnershipPercent
+	return r.OwnershipPercent
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetMethod() PostV1ConsolidationReportResponseMembersItemMethod {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetMethod() ReportConsolidationResponseMembersItemMethod {
+	if r == nil {
 		return ""
 	}
-	return p.Method
+	return r.Method
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetFxFactor() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetFxFactor() string {
+	if r == nil {
 		return ""
 	}
-	return p.FxFactor
+	return r.FxFactor
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetRateFrom() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetRateFrom() string {
+	if r == nil {
 		return ""
 	}
-	return p.RateFrom
+	return r.RateFrom
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetRateTo() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetRateTo() string {
+	if r == nil {
 		return ""
 	}
-	return p.RateTo
+	return r.RateTo
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetTotalAssets() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetTotalAssets() string {
+	if r == nil {
 		return ""
 	}
-	return p.TotalAssets
+	return r.TotalAssets
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetNetEquity() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetNetEquity() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetEquity
+	return r.NetEquity
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetPeriodResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetPeriodResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.PeriodResult
+	return r.PeriodResult
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseMembersItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCompanyID sets the CompanyID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetCompanyID(companyID string) {
-	p.CompanyID = companyID
-	p.require(postV1ConsolidationReportResponseMembersItemFieldCompanyID)
+func (r *ReportConsolidationResponseMembersItem) SetCompanyID(companyID string) {
+	r.CompanyID = companyID
+	r.require(reportConsolidationResponseMembersItemFieldCompanyID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1ConsolidationReportResponseMembersItemFieldName)
+func (r *ReportConsolidationResponseMembersItem) SetName(name string) {
+	r.Name = name
+	r.require(reportConsolidationResponseMembersItemFieldName)
 }
 
 // SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetBaseCurrency(baseCurrency string) {
-	p.BaseCurrency = baseCurrency
-	p.require(postV1ConsolidationReportResponseMembersItemFieldBaseCurrency)
+func (r *ReportConsolidationResponseMembersItem) SetBaseCurrency(baseCurrency string) {
+	r.BaseCurrency = baseCurrency
+	r.require(reportConsolidationResponseMembersItemFieldBaseCurrency)
 }
 
 // SetOwnershipPercent sets the OwnershipPercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetOwnershipPercent(ownershipPercent string) {
-	p.OwnershipPercent = ownershipPercent
-	p.require(postV1ConsolidationReportResponseMembersItemFieldOwnershipPercent)
+func (r *ReportConsolidationResponseMembersItem) SetOwnershipPercent(ownershipPercent string) {
+	r.OwnershipPercent = ownershipPercent
+	r.require(reportConsolidationResponseMembersItemFieldOwnershipPercent)
 }
 
 // SetMethod sets the Method field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetMethod(method PostV1ConsolidationReportResponseMembersItemMethod) {
-	p.Method = method
-	p.require(postV1ConsolidationReportResponseMembersItemFieldMethod)
+func (r *ReportConsolidationResponseMembersItem) SetMethod(method ReportConsolidationResponseMembersItemMethod) {
+	r.Method = method
+	r.require(reportConsolidationResponseMembersItemFieldMethod)
 }
 
 // SetFxFactor sets the FxFactor field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetFxFactor(fxFactor string) {
-	p.FxFactor = fxFactor
-	p.require(postV1ConsolidationReportResponseMembersItemFieldFxFactor)
+func (r *ReportConsolidationResponseMembersItem) SetFxFactor(fxFactor string) {
+	r.FxFactor = fxFactor
+	r.require(reportConsolidationResponseMembersItemFieldFxFactor)
 }
 
 // SetRateFrom sets the RateFrom field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetRateFrom(rateFrom string) {
-	p.RateFrom = rateFrom
-	p.require(postV1ConsolidationReportResponseMembersItemFieldRateFrom)
+func (r *ReportConsolidationResponseMembersItem) SetRateFrom(rateFrom string) {
+	r.RateFrom = rateFrom
+	r.require(reportConsolidationResponseMembersItemFieldRateFrom)
 }
 
 // SetRateTo sets the RateTo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetRateTo(rateTo string) {
-	p.RateTo = rateTo
-	p.require(postV1ConsolidationReportResponseMembersItemFieldRateTo)
+func (r *ReportConsolidationResponseMembersItem) SetRateTo(rateTo string) {
+	r.RateTo = rateTo
+	r.require(reportConsolidationResponseMembersItemFieldRateTo)
 }
 
 // SetTotalAssets sets the TotalAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetTotalAssets(totalAssets string) {
-	p.TotalAssets = totalAssets
-	p.require(postV1ConsolidationReportResponseMembersItemFieldTotalAssets)
+func (r *ReportConsolidationResponseMembersItem) SetTotalAssets(totalAssets string) {
+	r.TotalAssets = totalAssets
+	r.require(reportConsolidationResponseMembersItemFieldTotalAssets)
 }
 
 // SetNetEquity sets the NetEquity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetNetEquity(netEquity string) {
-	p.NetEquity = netEquity
-	p.require(postV1ConsolidationReportResponseMembersItemFieldNetEquity)
+func (r *ReportConsolidationResponseMembersItem) SetNetEquity(netEquity string) {
+	r.NetEquity = netEquity
+	r.require(reportConsolidationResponseMembersItemFieldNetEquity)
 }
 
 // SetPeriodResult sets the PeriodResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseMembersItem) SetPeriodResult(periodResult string) {
-	p.PeriodResult = periodResult
-	p.require(postV1ConsolidationReportResponseMembersItemFieldPeriodResult)
+func (r *ReportConsolidationResponseMembersItem) SetPeriodResult(periodResult string) {
+	r.PeriodResult = periodResult
+	r.require(reportConsolidationResponseMembersItemFieldPeriodResult)
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseMembersItem
+func (r *ReportConsolidationResponseMembersItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseMembersItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseMembersItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseMembersItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseMembersItem
+func (r *ReportConsolidationResponseMembersItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseMembersItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseMembersItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseMembersItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1ConsolidationReportResponseMembersItemMethod string
+type ReportConsolidationResponseMembersItemMethod string
 
 const (
-	PostV1ConsolidationReportResponseMembersItemMethodFull         PostV1ConsolidationReportResponseMembersItemMethod = "full"
-	PostV1ConsolidationReportResponseMembersItemMethodProportional PostV1ConsolidationReportResponseMembersItemMethod = "proportional"
-	PostV1ConsolidationReportResponseMembersItemMethodEquity       PostV1ConsolidationReportResponseMembersItemMethod = "equity"
+	ReportConsolidationResponseMembersItemMethodFull         ReportConsolidationResponseMembersItemMethod = "full"
+	ReportConsolidationResponseMembersItemMethodProportional ReportConsolidationResponseMembersItemMethod = "proportional"
+	ReportConsolidationResponseMembersItemMethodEquity       ReportConsolidationResponseMembersItemMethod = "equity"
 )
 
-func NewPostV1ConsolidationReportResponseMembersItemMethodFromString(s string) (PostV1ConsolidationReportResponseMembersItemMethod, error) {
+func NewReportConsolidationResponseMembersItemMethodFromString(s string) (ReportConsolidationResponseMembersItemMethod, error) {
 	switch s {
 	case "full":
-		return PostV1ConsolidationReportResponseMembersItemMethodFull, nil
+		return ReportConsolidationResponseMembersItemMethodFull, nil
 	case "proportional":
-		return PostV1ConsolidationReportResponseMembersItemMethodProportional, nil
+		return ReportConsolidationResponseMembersItemMethodProportional, nil
 	case "equity":
-		return PostV1ConsolidationReportResponseMembersItemMethodEquity, nil
+		return ReportConsolidationResponseMembersItemMethodEquity, nil
 	}
-	var t PostV1ConsolidationReportResponseMembersItemMethod
+	var t ReportConsolidationResponseMembersItemMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationReportResponseMembersItemMethod) Ptr() *PostV1ConsolidationReportResponseMembersItemMethod {
-	return &p
+func (r ReportConsolidationResponseMembersItemMethod) Ptr() *ReportConsolidationResponseMembersItemMethod {
+	return &r
 }
 
 var (
-	postV1ConsolidationReportResponseNonControllingInterestFieldEquity = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseNonControllingInterestFieldResult = big.NewInt(1 << 1)
+	reportConsolidationResponseNonControllingInterestFieldEquity = big.NewInt(1 << 0)
+	reportConsolidationResponseNonControllingInterestFieldResult = big.NewInt(1 << 1)
 )
 
-type PostV1ConsolidationReportResponseNonControllingInterest struct {
+type ReportConsolidationResponseNonControllingInterest struct {
 	Equity string `json:"equity" url:"equity"`
 	Result string `json:"result" url:"result"`
 
@@ -6223,110 +6328,110 @@ type PostV1ConsolidationReportResponseNonControllingInterest struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) GetEquity() string {
-	if p == nil {
+func (r *ReportConsolidationResponseNonControllingInterest) GetEquity() string {
+	if r == nil {
 		return ""
 	}
-	return p.Equity
+	return r.Equity
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) GetResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseNonControllingInterest) GetResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.Result
+	return r.Result
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseNonControllingInterest) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseNonControllingInterest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetEquity sets the Equity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) SetEquity(equity string) {
-	p.Equity = equity
-	p.require(postV1ConsolidationReportResponseNonControllingInterestFieldEquity)
+func (r *ReportConsolidationResponseNonControllingInterest) SetEquity(equity string) {
+	r.Equity = equity
+	r.require(reportConsolidationResponseNonControllingInterestFieldEquity)
 }
 
 // SetResult sets the Result field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) SetResult(result string) {
-	p.Result = result
-	p.require(postV1ConsolidationReportResponseNonControllingInterestFieldResult)
+func (r *ReportConsolidationResponseNonControllingInterest) SetResult(result string) {
+	r.Result = result
+	r.require(reportConsolidationResponseNonControllingInterestFieldResult)
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseNonControllingInterest
+func (r *ReportConsolidationResponseNonControllingInterest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseNonControllingInterest
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseNonControllingInterest(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseNonControllingInterest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseNonControllingInterest
+func (r *ReportConsolidationResponseNonControllingInterest) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseNonControllingInterest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseNonControllingInterest) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseNonControllingInterest) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsFieldCategory           = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsFieldLayout             = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsFieldRequiredStatements = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsFieldAsOf               = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsFieldBalanceSheet       = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseStatementsFieldProfitLoss         = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseStatementsFieldBalanceSheetDetail = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseStatementsFieldProfitLossDetail   = big.NewInt(1 << 7)
+	reportConsolidationResponseStatementsFieldCategory           = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsFieldLayout             = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsFieldRequiredStatements = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsFieldAsOf               = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsFieldBalanceSheet       = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsFieldProfitLoss         = big.NewInt(1 << 5)
+	reportConsolidationResponseStatementsFieldBalanceSheetDetail = big.NewInt(1 << 6)
+	reportConsolidationResponseStatementsFieldProfitLossDetail   = big.NewInt(1 << 7)
 )
 
-type PostV1ConsolidationReportResponseStatements struct {
-	Category           PostV1ConsolidationReportResponseStatementsCategory            `json:"category" url:"category"`
-	Layout             string                                                         `json:"layout" url:"layout"`
-	RequiredStatements []string                                                       `json:"requiredStatements" url:"requiredStatements"`
-	AsOf               string                                                         `json:"asOf" url:"asOf"`
-	BalanceSheet       *PostV1ConsolidationReportResponseStatementsBalanceSheet       `json:"balanceSheet" url:"balanceSheet"`
-	ProfitLoss         *PostV1ConsolidationReportResponseStatementsProfitLoss         `json:"profitLoss" url:"profitLoss"`
-	BalanceSheetDetail *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail `json:"balanceSheetDetail,omitempty" url:"balanceSheetDetail,omitempty"`
-	ProfitLossDetail   *PostV1ConsolidationReportResponseStatementsProfitLossDetail   `json:"profitLossDetail,omitempty" url:"profitLossDetail,omitempty"`
+type ReportConsolidationResponseStatements struct {
+	Category           ReportConsolidationResponseStatementsCategory            `json:"category" url:"category"`
+	Layout             string                                                   `json:"layout" url:"layout"`
+	RequiredStatements []string                                                 `json:"requiredStatements" url:"requiredStatements"`
+	AsOf               string                                                   `json:"asOf" url:"asOf"`
+	BalanceSheet       *ReportConsolidationResponseStatementsBalanceSheet       `json:"balanceSheet" url:"balanceSheet"`
+	ProfitLoss         *ReportConsolidationResponseStatementsProfitLoss         `json:"profitLoss" url:"profitLoss"`
+	BalanceSheetDetail *ReportConsolidationResponseStatementsBalanceSheetDetail `json:"balanceSheetDetail,omitempty" url:"balanceSheetDetail,omitempty"`
+	ProfitLossDetail   *ReportConsolidationResponseStatementsProfitLossDetail   `json:"profitLossDetail,omitempty" url:"profitLossDetail,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6335,186 +6440,186 @@ type PostV1ConsolidationReportResponseStatements struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetCategory() PostV1ConsolidationReportResponseStatementsCategory {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetCategory() ReportConsolidationResponseStatementsCategory {
+	if r == nil {
 		return ""
 	}
-	return p.Category
+	return r.Category
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetLayout() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetLayout() string {
+	if r == nil {
 		return ""
 	}
-	return p.Layout
+	return r.Layout
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetRequiredStatements() []string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetRequiredStatements() []string {
+	if r == nil {
 		return nil
 	}
-	return p.RequiredStatements
+	return r.RequiredStatements
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetAsOf() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetAsOf() string {
+	if r == nil {
 		return ""
 	}
-	return p.AsOf
+	return r.AsOf
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetBalanceSheet() *PostV1ConsolidationReportResponseStatementsBalanceSheet {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetBalanceSheet() *ReportConsolidationResponseStatementsBalanceSheet {
+	if r == nil {
 		return nil
 	}
-	return p.BalanceSheet
+	return r.BalanceSheet
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetProfitLoss() *PostV1ConsolidationReportResponseStatementsProfitLoss {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetProfitLoss() *ReportConsolidationResponseStatementsProfitLoss {
+	if r == nil {
 		return nil
 	}
-	return p.ProfitLoss
+	return r.ProfitLoss
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetBalanceSheetDetail() *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetBalanceSheetDetail() *ReportConsolidationResponseStatementsBalanceSheetDetail {
+	if r == nil {
 		return nil
 	}
-	return p.BalanceSheetDetail
+	return r.BalanceSheetDetail
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetProfitLossDetail() *PostV1ConsolidationReportResponseStatementsProfitLossDetail {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetProfitLossDetail() *ReportConsolidationResponseStatementsProfitLossDetail {
+	if r == nil {
 		return nil
 	}
-	return p.ProfitLossDetail
+	return r.ProfitLossDetail
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatements) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCategory sets the Category field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetCategory(category PostV1ConsolidationReportResponseStatementsCategory) {
-	p.Category = category
-	p.require(postV1ConsolidationReportResponseStatementsFieldCategory)
+func (r *ReportConsolidationResponseStatements) SetCategory(category ReportConsolidationResponseStatementsCategory) {
+	r.Category = category
+	r.require(reportConsolidationResponseStatementsFieldCategory)
 }
 
 // SetLayout sets the Layout field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetLayout(layout string) {
-	p.Layout = layout
-	p.require(postV1ConsolidationReportResponseStatementsFieldLayout)
+func (r *ReportConsolidationResponseStatements) SetLayout(layout string) {
+	r.Layout = layout
+	r.require(reportConsolidationResponseStatementsFieldLayout)
 }
 
 // SetRequiredStatements sets the RequiredStatements field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetRequiredStatements(requiredStatements []string) {
-	p.RequiredStatements = requiredStatements
-	p.require(postV1ConsolidationReportResponseStatementsFieldRequiredStatements)
+func (r *ReportConsolidationResponseStatements) SetRequiredStatements(requiredStatements []string) {
+	r.RequiredStatements = requiredStatements
+	r.require(reportConsolidationResponseStatementsFieldRequiredStatements)
 }
 
 // SetAsOf sets the AsOf field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetAsOf(asOf string) {
-	p.AsOf = asOf
-	p.require(postV1ConsolidationReportResponseStatementsFieldAsOf)
+func (r *ReportConsolidationResponseStatements) SetAsOf(asOf string) {
+	r.AsOf = asOf
+	r.require(reportConsolidationResponseStatementsFieldAsOf)
 }
 
 // SetBalanceSheet sets the BalanceSheet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetBalanceSheet(balanceSheet *PostV1ConsolidationReportResponseStatementsBalanceSheet) {
-	p.BalanceSheet = balanceSheet
-	p.require(postV1ConsolidationReportResponseStatementsFieldBalanceSheet)
+func (r *ReportConsolidationResponseStatements) SetBalanceSheet(balanceSheet *ReportConsolidationResponseStatementsBalanceSheet) {
+	r.BalanceSheet = balanceSheet
+	r.require(reportConsolidationResponseStatementsFieldBalanceSheet)
 }
 
 // SetProfitLoss sets the ProfitLoss field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetProfitLoss(profitLoss *PostV1ConsolidationReportResponseStatementsProfitLoss) {
-	p.ProfitLoss = profitLoss
-	p.require(postV1ConsolidationReportResponseStatementsFieldProfitLoss)
+func (r *ReportConsolidationResponseStatements) SetProfitLoss(profitLoss *ReportConsolidationResponseStatementsProfitLoss) {
+	r.ProfitLoss = profitLoss
+	r.require(reportConsolidationResponseStatementsFieldProfitLoss)
 }
 
 // SetBalanceSheetDetail sets the BalanceSheetDetail field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetBalanceSheetDetail(balanceSheetDetail *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) {
-	p.BalanceSheetDetail = balanceSheetDetail
-	p.require(postV1ConsolidationReportResponseStatementsFieldBalanceSheetDetail)
+func (r *ReportConsolidationResponseStatements) SetBalanceSheetDetail(balanceSheetDetail *ReportConsolidationResponseStatementsBalanceSheetDetail) {
+	r.BalanceSheetDetail = balanceSheetDetail
+	r.require(reportConsolidationResponseStatementsFieldBalanceSheetDetail)
 }
 
 // SetProfitLossDetail sets the ProfitLossDetail field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatements) SetProfitLossDetail(profitLossDetail *PostV1ConsolidationReportResponseStatementsProfitLossDetail) {
-	p.ProfitLossDetail = profitLossDetail
-	p.require(postV1ConsolidationReportResponseStatementsFieldProfitLossDetail)
+func (r *ReportConsolidationResponseStatements) SetProfitLossDetail(profitLossDetail *ReportConsolidationResponseStatementsProfitLossDetail) {
+	r.ProfitLossDetail = profitLossDetail
+	r.require(reportConsolidationResponseStatementsFieldProfitLossDetail)
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatements
+func (r *ReportConsolidationResponseStatements) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatements
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatements(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatements(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatements
+func (r *ReportConsolidationResponseStatements) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatements
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatements) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatements) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldNonCurrentAssets          = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldCurrentAssets             = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldTotalAssets               = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldEquity                    = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldOfWhichResult             = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldLiabilities               = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldTotalEquityAndLiabilities = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseStatementsBalanceSheetFieldBalanced                  = big.NewInt(1 << 7)
+	reportConsolidationResponseStatementsBalanceSheetFieldNonCurrentAssets          = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetFieldCurrentAssets             = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetFieldTotalAssets               = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetFieldEquity                    = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetFieldOfWhichResult             = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsBalanceSheetFieldLiabilities               = big.NewInt(1 << 5)
+	reportConsolidationResponseStatementsBalanceSheetFieldTotalEquityAndLiabilities = big.NewInt(1 << 6)
+	reportConsolidationResponseStatementsBalanceSheetFieldBalanced                  = big.NewInt(1 << 7)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheet struct {
+type ReportConsolidationResponseStatementsBalanceSheet struct {
 	NonCurrentAssets          string `json:"nonCurrentAssets" url:"nonCurrentAssets"`
 	CurrentAssets             string `json:"currentAssets" url:"currentAssets"`
 	TotalAssets               string `json:"totalAssets" url:"totalAssets"`
@@ -6531,186 +6636,186 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheet struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetNonCurrentAssets() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetNonCurrentAssets() string {
+	if r == nil {
 		return ""
 	}
-	return p.NonCurrentAssets
+	return r.NonCurrentAssets
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetCurrentAssets() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetCurrentAssets() string {
+	if r == nil {
 		return ""
 	}
-	return p.CurrentAssets
+	return r.CurrentAssets
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetTotalAssets() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetTotalAssets() string {
+	if r == nil {
 		return ""
 	}
-	return p.TotalAssets
+	return r.TotalAssets
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetEquity() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetEquity() string {
+	if r == nil {
 		return ""
 	}
-	return p.Equity
+	return r.Equity
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetOfWhichResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetOfWhichResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.OfWhichResult
+	return r.OfWhichResult
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetLiabilities() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetLiabilities() string {
+	if r == nil {
 		return ""
 	}
-	return p.Liabilities
+	return r.Liabilities
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetTotalEquityAndLiabilities() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetTotalEquityAndLiabilities() string {
+	if r == nil {
 		return ""
 	}
-	return p.TotalEquityAndLiabilities
+	return r.TotalEquityAndLiabilities
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetBalanced() bool {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetBalanced() bool {
+	if r == nil {
 		return false
 	}
-	return p.Balanced
+	return r.Balanced
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetNonCurrentAssets sets the NonCurrentAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetNonCurrentAssets(nonCurrentAssets string) {
-	p.NonCurrentAssets = nonCurrentAssets
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldNonCurrentAssets)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetNonCurrentAssets(nonCurrentAssets string) {
+	r.NonCurrentAssets = nonCurrentAssets
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldNonCurrentAssets)
 }
 
 // SetCurrentAssets sets the CurrentAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetCurrentAssets(currentAssets string) {
-	p.CurrentAssets = currentAssets
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldCurrentAssets)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetCurrentAssets(currentAssets string) {
+	r.CurrentAssets = currentAssets
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldCurrentAssets)
 }
 
 // SetTotalAssets sets the TotalAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetTotalAssets(totalAssets string) {
-	p.TotalAssets = totalAssets
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldTotalAssets)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetTotalAssets(totalAssets string) {
+	r.TotalAssets = totalAssets
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldTotalAssets)
 }
 
 // SetEquity sets the Equity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetEquity(equity string) {
-	p.Equity = equity
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldEquity)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetEquity(equity string) {
+	r.Equity = equity
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldEquity)
 }
 
 // SetOfWhichResult sets the OfWhichResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetOfWhichResult(ofWhichResult string) {
-	p.OfWhichResult = ofWhichResult
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldOfWhichResult)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetOfWhichResult(ofWhichResult string) {
+	r.OfWhichResult = ofWhichResult
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldOfWhichResult)
 }
 
 // SetLiabilities sets the Liabilities field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetLiabilities(liabilities string) {
-	p.Liabilities = liabilities
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldLiabilities)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetLiabilities(liabilities string) {
+	r.Liabilities = liabilities
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldLiabilities)
 }
 
 // SetTotalEquityAndLiabilities sets the TotalEquityAndLiabilities field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetTotalEquityAndLiabilities(totalEquityAndLiabilities string) {
-	p.TotalEquityAndLiabilities = totalEquityAndLiabilities
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldTotalEquityAndLiabilities)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetTotalEquityAndLiabilities(totalEquityAndLiabilities string) {
+	r.TotalEquityAndLiabilities = totalEquityAndLiabilities
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldTotalEquityAndLiabilities)
 }
 
 // SetBalanced sets the Balanced field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) SetBalanced(balanced bool) {
-	p.Balanced = balanced
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetFieldBalanced)
+func (r *ReportConsolidationResponseStatementsBalanceSheet) SetBalanced(balanced bool) {
+	r.Balanced = balanced
+	r.require(reportConsolidationResponseStatementsBalanceSheetFieldBalanced)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheet
+func (r *ReportConsolidationResponseStatementsBalanceSheet) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheet
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheet(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheet(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheet
+func (r *ReportConsolidationResponseStatementsBalanceSheet) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheet
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheet) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheet) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldNonCurrentAssets = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldCurrentAssets    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldEquity           = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldLiabilities      = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetDetailFieldNonCurrentAssets = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetDetailFieldCurrentAssets    = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetDetailFieldEquity           = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetDetailFieldLiabilities      = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheetDetail struct {
-	NonCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets `json:"nonCurrentAssets" url:"nonCurrentAssets"`
-	CurrentAssets    *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets    `json:"currentAssets" url:"currentAssets"`
-	Equity           *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity           `json:"equity" url:"equity"`
-	Liabilities      *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities      `json:"liabilities" url:"liabilities"`
+type ReportConsolidationResponseStatementsBalanceSheetDetail struct {
+	NonCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets `json:"nonCurrentAssets" url:"nonCurrentAssets"`
+	CurrentAssets    *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets    `json:"currentAssets" url:"currentAssets"`
+	Equity           *ReportConsolidationResponseStatementsBalanceSheetDetailEquity           `json:"equity" url:"equity"`
+	Liabilities      *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities      `json:"liabilities" url:"liabilities"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6719,127 +6824,127 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheetDetail struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) GetNonCurrentAssets() *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) GetNonCurrentAssets() *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets {
+	if r == nil {
 		return nil
 	}
-	return p.NonCurrentAssets
+	return r.NonCurrentAssets
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) GetCurrentAssets() *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) GetCurrentAssets() *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets {
+	if r == nil {
 		return nil
 	}
-	return p.CurrentAssets
+	return r.CurrentAssets
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) GetEquity() *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) GetEquity() *ReportConsolidationResponseStatementsBalanceSheetDetailEquity {
+	if r == nil {
 		return nil
 	}
-	return p.Equity
+	return r.Equity
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) GetLiabilities() *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) GetLiabilities() *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities {
+	if r == nil {
 		return nil
 	}
-	return p.Liabilities
+	return r.Liabilities
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetNonCurrentAssets sets the NonCurrentAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) SetNonCurrentAssets(nonCurrentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) {
-	p.NonCurrentAssets = nonCurrentAssets
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldNonCurrentAssets)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) SetNonCurrentAssets(nonCurrentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) {
+	r.NonCurrentAssets = nonCurrentAssets
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailFieldNonCurrentAssets)
 }
 
 // SetCurrentAssets sets the CurrentAssets field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) SetCurrentAssets(currentAssets *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) {
-	p.CurrentAssets = currentAssets
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldCurrentAssets)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) SetCurrentAssets(currentAssets *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) {
+	r.CurrentAssets = currentAssets
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailFieldCurrentAssets)
 }
 
 // SetEquity sets the Equity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) SetEquity(equity *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) {
-	p.Equity = equity
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldEquity)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) SetEquity(equity *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) {
+	r.Equity = equity
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailFieldEquity)
 }
 
 // SetLiabilities sets the Liabilities field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) SetLiabilities(liabilities *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) {
-	p.Liabilities = liabilities
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailFieldLiabilities)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) SetLiabilities(liabilities *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) {
+	r.Liabilities = liabilities
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailFieldLiabilities)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheetDetail
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheetDetail(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheetDetail(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheetDetail
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheetDetail
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetail) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetail) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldInventories  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldReceivables  = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldOtherCurrent = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldCash         = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldTotal        = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldInventories  = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldReceivables  = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldOtherCurrent = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldCash         = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldTotal        = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets struct {
+type ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets struct {
 	Inventories  string `json:"inventories" url:"inventories"`
 	Receivables  string `json:"receivables" url:"receivables"`
 	OtherCurrent string `json:"otherCurrent" url:"otherCurrent"`
@@ -6853,142 +6958,142 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets 
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetInventories() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetInventories() string {
+	if r == nil {
 		return ""
 	}
-	return p.Inventories
+	return r.Inventories
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetReceivables() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetReceivables() string {
+	if r == nil {
 		return ""
 	}
-	return p.Receivables
+	return r.Receivables
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetOtherCurrent() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetOtherCurrent() string {
+	if r == nil {
 		return ""
 	}
-	return p.OtherCurrent
+	return r.OtherCurrent
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetCash() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetCash() string {
+	if r == nil {
 		return ""
 	}
-	return p.Cash
+	return r.Cash
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetTotal() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetInventories sets the Inventories field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) SetInventories(inventories string) {
-	p.Inventories = inventories
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldInventories)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) SetInventories(inventories string) {
+	r.Inventories = inventories
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldInventories)
 }
 
 // SetReceivables sets the Receivables field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) SetReceivables(receivables string) {
-	p.Receivables = receivables
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldReceivables)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) SetReceivables(receivables string) {
+	r.Receivables = receivables
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldReceivables)
 }
 
 // SetOtherCurrent sets the OtherCurrent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) SetOtherCurrent(otherCurrent string) {
-	p.OtherCurrent = otherCurrent
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldOtherCurrent)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) SetOtherCurrent(otherCurrent string) {
+	r.OtherCurrent = otherCurrent
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldOtherCurrent)
 }
 
 // SetCash sets the Cash field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) SetCash(cash string) {
-	p.Cash = cash
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldCash)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) SetCash(cash string) {
+	r.Cash = cash
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldCash)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssetsFieldTotal)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) SetTotal(total string) {
+	r.Total = total
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailCurrentAssetsFieldTotal)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailCurrentAssets) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailCurrentAssets) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldCapital          = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldReserves         = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldRetainedEarnings = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldOtherEquity      = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldPeriodResult     = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldTotal            = big.NewInt(1 << 5)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldCapital          = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldReserves         = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldRetainedEarnings = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldOtherEquity      = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldPeriodResult     = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldTotal            = big.NewInt(1 << 5)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity struct {
+type ReportConsolidationResponseStatementsBalanceSheetDetailEquity struct {
 	Capital          string `json:"capital" url:"capital"`
 	Reserves         string `json:"reserves" url:"reserves"`
 	RetainedEarnings string `json:"retainedEarnings" url:"retainedEarnings"`
@@ -7003,154 +7108,154 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity struct 
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetCapital() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetCapital() string {
+	if r == nil {
 		return ""
 	}
-	return p.Capital
+	return r.Capital
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetReserves() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetReserves() string {
+	if r == nil {
 		return ""
 	}
-	return p.Reserves
+	return r.Reserves
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetRetainedEarnings() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetRetainedEarnings() string {
+	if r == nil {
 		return ""
 	}
-	return p.RetainedEarnings
+	return r.RetainedEarnings
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetOtherEquity() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetOtherEquity() string {
+	if r == nil {
 		return ""
 	}
-	return p.OtherEquity
+	return r.OtherEquity
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetPeriodResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetPeriodResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.PeriodResult
+	return r.PeriodResult
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetTotal() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCapital sets the Capital field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetCapital(capital string) {
-	p.Capital = capital
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldCapital)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetCapital(capital string) {
+	r.Capital = capital
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldCapital)
 }
 
 // SetReserves sets the Reserves field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetReserves(reserves string) {
-	p.Reserves = reserves
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldReserves)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetReserves(reserves string) {
+	r.Reserves = reserves
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldReserves)
 }
 
 // SetRetainedEarnings sets the RetainedEarnings field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetRetainedEarnings(retainedEarnings string) {
-	p.RetainedEarnings = retainedEarnings
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldRetainedEarnings)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetRetainedEarnings(retainedEarnings string) {
+	r.RetainedEarnings = retainedEarnings
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldRetainedEarnings)
 }
 
 // SetOtherEquity sets the OtherEquity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetOtherEquity(otherEquity string) {
-	p.OtherEquity = otherEquity
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldOtherEquity)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetOtherEquity(otherEquity string) {
+	r.OtherEquity = otherEquity
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldOtherEquity)
 }
 
 // SetPeriodResult sets the PeriodResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetPeriodResult(periodResult string) {
-	p.PeriodResult = periodResult
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldPeriodResult)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetPeriodResult(periodResult string) {
+	r.PeriodResult = periodResult
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldPeriodResult)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailEquityFieldTotal)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) SetTotal(total string) {
+	r.Total = total
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailEquityFieldTotal)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheetDetailEquity(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheetDetailEquity
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailEquity) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailEquity) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldNonCurrent = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldCurrent    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldOther      = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldTotal      = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldNonCurrent = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldCurrent    = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldOther      = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldTotal      = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities struct {
+type ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities struct {
 	NonCurrent string `json:"nonCurrent" url:"nonCurrent"`
 	Current    string `json:"current" url:"current"`
 	Other      string `json:"other" url:"other"`
@@ -7163,127 +7268,127 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities st
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) GetNonCurrent() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) GetNonCurrent() string {
+	if r == nil {
 		return ""
 	}
-	return p.NonCurrent
+	return r.NonCurrent
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) GetCurrent() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) GetCurrent() string {
+	if r == nil {
 		return ""
 	}
-	return p.Current
+	return r.Current
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) GetOther() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) GetOther() string {
+	if r == nil {
 		return ""
 	}
-	return p.Other
+	return r.Other
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) GetTotal() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) GetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetNonCurrent sets the NonCurrent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) SetNonCurrent(nonCurrent string) {
-	p.NonCurrent = nonCurrent
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldNonCurrent)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) SetNonCurrent(nonCurrent string) {
+	r.NonCurrent = nonCurrent
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldNonCurrent)
 }
 
 // SetCurrent sets the Current field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) SetCurrent(current string) {
-	p.Current = current
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldCurrent)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) SetCurrent(current string) {
+	r.Current = current
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldCurrent)
 }
 
 // SetOther sets the Other field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) SetOther(other string) {
-	p.Other = other
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldOther)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) SetOther(other string) {
+	r.Other = other
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldOther)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilitiesFieldTotal)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) SetTotal(total string) {
+	r.Total = total
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailLiabilitiesFieldTotal)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailLiabilities) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailLiabilities) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldIntangible = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTangible   = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldFinancial  = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldOther      = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTotal      = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldIntangible = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTangible   = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldFinancial  = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldOther      = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTotal      = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets struct {
+type ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets struct {
 	Intangible string `json:"intangible" url:"intangible"`
 	Tangible   string `json:"tangible" url:"tangible"`
 	Financial  string `json:"financial" url:"financial"`
@@ -7297,174 +7402,174 @@ type PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAsse
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetIntangible() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetIntangible() string {
+	if r == nil {
 		return ""
 	}
-	return p.Intangible
+	return r.Intangible
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetTangible() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetTangible() string {
+	if r == nil {
 		return ""
 	}
-	return p.Tangible
+	return r.Tangible
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetFinancial() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetFinancial() string {
+	if r == nil {
 		return ""
 	}
-	return p.Financial
+	return r.Financial
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetOther() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetOther() string {
+	if r == nil {
 		return ""
 	}
-	return p.Other
+	return r.Other
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetTotal() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetTotal() string {
+	if r == nil {
 		return ""
 	}
-	return p.Total
+	return r.Total
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetIntangible sets the Intangible field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) SetIntangible(intangible string) {
-	p.Intangible = intangible
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldIntangible)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) SetIntangible(intangible string) {
+	r.Intangible = intangible
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldIntangible)
 }
 
 // SetTangible sets the Tangible field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) SetTangible(tangible string) {
-	p.Tangible = tangible
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTangible)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) SetTangible(tangible string) {
+	r.Tangible = tangible
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTangible)
 }
 
 // SetFinancial sets the Financial field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) SetFinancial(financial string) {
-	p.Financial = financial
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldFinancial)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) SetFinancial(financial string) {
+	r.Financial = financial
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldFinancial)
 }
 
 // SetOther sets the Other field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) SetOther(other string) {
-	p.Other = other
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldOther)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) SetOther(other string) {
+	r.Other = other
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldOther)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTotal)
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) SetTotal(total string) {
+	r.Total = total
+	r.require(reportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssetsFieldTotal)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsBalanceSheetDetailNonCurrentAssets) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsBalanceSheetDetailNonCurrentAssets) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
-type PostV1ConsolidationReportResponseStatementsCategory string
+type ReportConsolidationResponseStatementsCategory string
 
 const (
-	PostV1ConsolidationReportResponseStatementsCategoryMicro  PostV1ConsolidationReportResponseStatementsCategory = "micro"
-	PostV1ConsolidationReportResponseStatementsCategorySmall  PostV1ConsolidationReportResponseStatementsCategory = "small"
-	PostV1ConsolidationReportResponseStatementsCategoryMedium PostV1ConsolidationReportResponseStatementsCategory = "medium"
-	PostV1ConsolidationReportResponseStatementsCategoryLarge  PostV1ConsolidationReportResponseStatementsCategory = "large"
+	ReportConsolidationResponseStatementsCategoryMicro  ReportConsolidationResponseStatementsCategory = "micro"
+	ReportConsolidationResponseStatementsCategorySmall  ReportConsolidationResponseStatementsCategory = "small"
+	ReportConsolidationResponseStatementsCategoryMedium ReportConsolidationResponseStatementsCategory = "medium"
+	ReportConsolidationResponseStatementsCategoryLarge  ReportConsolidationResponseStatementsCategory = "large"
 )
 
-func NewPostV1ConsolidationReportResponseStatementsCategoryFromString(s string) (PostV1ConsolidationReportResponseStatementsCategory, error) {
+func NewReportConsolidationResponseStatementsCategoryFromString(s string) (ReportConsolidationResponseStatementsCategory, error) {
 	switch s {
 	case "micro":
-		return PostV1ConsolidationReportResponseStatementsCategoryMicro, nil
+		return ReportConsolidationResponseStatementsCategoryMicro, nil
 	case "small":
-		return PostV1ConsolidationReportResponseStatementsCategorySmall, nil
+		return ReportConsolidationResponseStatementsCategorySmall, nil
 	case "medium":
-		return PostV1ConsolidationReportResponseStatementsCategoryMedium, nil
+		return ReportConsolidationResponseStatementsCategoryMedium, nil
 	case "large":
-		return PostV1ConsolidationReportResponseStatementsCategoryLarge, nil
+		return ReportConsolidationResponseStatementsCategoryLarge, nil
 	}
-	var t PostV1ConsolidationReportResponseStatementsCategory
+	var t ReportConsolidationResponseStatementsCategory
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1ConsolidationReportResponseStatementsCategory) Ptr() *PostV1ConsolidationReportResponseStatementsCategory {
-	return &p
+func (r ReportConsolidationResponseStatementsCategory) Ptr() *ReportConsolidationResponseStatementsCategory {
+	return &r
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsProfitLossFieldFromDate  = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsProfitLossFieldToDate    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsProfitLossFieldRevenue   = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsProfitLossFieldExpenses  = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsProfitLossFieldNetResult = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsProfitLossFieldFromDate  = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsProfitLossFieldToDate    = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsProfitLossFieldRevenue   = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsProfitLossFieldExpenses  = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsProfitLossFieldNetResult = big.NewInt(1 << 4)
 )
 
-type PostV1ConsolidationReportResponseStatementsProfitLoss struct {
-	FromDate  string `json:"fromDate" url:"fromDate"`
-	ToDate    string `json:"toDate" url:"toDate"`
-	Revenue   string `json:"revenue" url:"revenue"`
-	Expenses  string `json:"expenses" url:"expenses"`
-	NetResult string `json:"netResult" url:"netResult"`
+type ReportConsolidationResponseStatementsProfitLoss struct {
+	FromDate  time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate    time.Time `json:"toDate" url:"toDate" format:"date"`
+	Revenue   string    `json:"revenue" url:"revenue"`
+	Expenses  string    `json:"expenses" url:"expenses"`
+	NetResult string    `json:"netResult" url:"netResult"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7473,147 +7578,159 @@ type PostV1ConsolidationReportResponseStatementsProfitLoss struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetFromDate() string {
-	if p == nil {
-		return ""
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetFromDate() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return r.FromDate
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetToDate() string {
-	if p == nil {
-		return ""
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetToDate() time.Time {
+	if r == nil {
+		return time.Time{}
 	}
-	return p.ToDate
+	return r.ToDate
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetRevenue() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetRevenue() string {
+	if r == nil {
 		return ""
 	}
-	return p.Revenue
+	return r.Revenue
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetExpenses() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetExpenses() string {
+	if r == nil {
 		return ""
 	}
-	return p.Expenses
+	return r.Expenses
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetNetResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetNetResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetResult
+	return r.NetResult
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsProfitLoss) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossFieldFromDate)
+func (r *ReportConsolidationResponseStatementsProfitLoss) SetFromDate(fromDate time.Time) {
+	r.FromDate = fromDate
+	r.require(reportConsolidationResponseStatementsProfitLossFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossFieldToDate)
+func (r *ReportConsolidationResponseStatementsProfitLoss) SetToDate(toDate time.Time) {
+	r.ToDate = toDate
+	r.require(reportConsolidationResponseStatementsProfitLossFieldToDate)
 }
 
 // SetRevenue sets the Revenue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) SetRevenue(revenue string) {
-	p.Revenue = revenue
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossFieldRevenue)
+func (r *ReportConsolidationResponseStatementsProfitLoss) SetRevenue(revenue string) {
+	r.Revenue = revenue
+	r.require(reportConsolidationResponseStatementsProfitLossFieldRevenue)
 }
 
 // SetExpenses sets the Expenses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) SetExpenses(expenses string) {
-	p.Expenses = expenses
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossFieldExpenses)
+func (r *ReportConsolidationResponseStatementsProfitLoss) SetExpenses(expenses string) {
+	r.Expenses = expenses
+	r.require(reportConsolidationResponseStatementsProfitLossFieldExpenses)
 }
 
 // SetNetResult sets the NetResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) SetNetResult(netResult string) {
-	p.NetResult = netResult
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossFieldNetResult)
+func (r *ReportConsolidationResponseStatementsProfitLoss) SetNetResult(netResult string) {
+	r.NetResult = netResult
+	r.require(reportConsolidationResponseStatementsProfitLossFieldNetResult)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsProfitLoss
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) UnmarshalJSON(data []byte) error {
+	type embed ReportConsolidationResponseStatementsProfitLoss
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsProfitLoss(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsProfitLoss(unmarshaler.embed)
+	r.FromDate = unmarshaler.FromDate.Time()
+	r.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsProfitLoss
+func (r *ReportConsolidationResponseStatementsProfitLoss) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsProfitLoss
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*r),
+		FromDate: internal.NewDate(r.FromDate),
+		ToDate:   internal.NewDate(r.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLoss) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLoss) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldSalesRevenue            = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldCostOfSales             = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldGrossProfit             = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldSellingExpenses         = big.NewInt(1 << 3)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldAdminExpenses           = big.NewInt(1 << 4)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldOperatingProfit         = big.NewInt(1 << 5)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldOtherActivityResult     = big.NewInt(1 << 6)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldFinancialActivityResult = big.NewInt(1 << 7)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldProfitBeforeTax         = big.NewInt(1 << 8)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldIncomeTax               = big.NewInt(1 << 9)
-	postV1ConsolidationReportResponseStatementsProfitLossDetailFieldNetProfit               = big.NewInt(1 << 10)
+	reportConsolidationResponseStatementsProfitLossDetailFieldSalesRevenue            = big.NewInt(1 << 0)
+	reportConsolidationResponseStatementsProfitLossDetailFieldCostOfSales             = big.NewInt(1 << 1)
+	reportConsolidationResponseStatementsProfitLossDetailFieldGrossProfit             = big.NewInt(1 << 2)
+	reportConsolidationResponseStatementsProfitLossDetailFieldSellingExpenses         = big.NewInt(1 << 3)
+	reportConsolidationResponseStatementsProfitLossDetailFieldAdminExpenses           = big.NewInt(1 << 4)
+	reportConsolidationResponseStatementsProfitLossDetailFieldOperatingProfit         = big.NewInt(1 << 5)
+	reportConsolidationResponseStatementsProfitLossDetailFieldOtherActivityResult     = big.NewInt(1 << 6)
+	reportConsolidationResponseStatementsProfitLossDetailFieldFinancialActivityResult = big.NewInt(1 << 7)
+	reportConsolidationResponseStatementsProfitLossDetailFieldProfitBeforeTax         = big.NewInt(1 << 8)
+	reportConsolidationResponseStatementsProfitLossDetailFieldIncomeTax               = big.NewInt(1 << 9)
+	reportConsolidationResponseStatementsProfitLossDetailFieldNetProfit               = big.NewInt(1 << 10)
 )
 
-type PostV1ConsolidationReportResponseStatementsProfitLossDetail struct {
+type ReportConsolidationResponseStatementsProfitLossDetail struct {
 	SalesRevenue            string `json:"salesRevenue" url:"salesRevenue"`
 	CostOfSales             string `json:"costOfSales" url:"costOfSales"`
 	GrossProfit             string `json:"grossProfit" url:"grossProfit"`
@@ -7633,224 +7750,224 @@ type PostV1ConsolidationReportResponseStatementsProfitLossDetail struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetSalesRevenue() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetSalesRevenue() string {
+	if r == nil {
 		return ""
 	}
-	return p.SalesRevenue
+	return r.SalesRevenue
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetCostOfSales() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetCostOfSales() string {
+	if r == nil {
 		return ""
 	}
-	return p.CostOfSales
+	return r.CostOfSales
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetGrossProfit() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetGrossProfit() string {
+	if r == nil {
 		return ""
 	}
-	return p.GrossProfit
+	return r.GrossProfit
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetSellingExpenses() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetSellingExpenses() string {
+	if r == nil {
 		return ""
 	}
-	return p.SellingExpenses
+	return r.SellingExpenses
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetAdminExpenses() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetAdminExpenses() string {
+	if r == nil {
 		return ""
 	}
-	return p.AdminExpenses
+	return r.AdminExpenses
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetOperatingProfit() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetOperatingProfit() string {
+	if r == nil {
 		return ""
 	}
-	return p.OperatingProfit
+	return r.OperatingProfit
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetOtherActivityResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetOtherActivityResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.OtherActivityResult
+	return r.OtherActivityResult
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetFinancialActivityResult() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetFinancialActivityResult() string {
+	if r == nil {
 		return ""
 	}
-	return p.FinancialActivityResult
+	return r.FinancialActivityResult
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetProfitBeforeTax() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetProfitBeforeTax() string {
+	if r == nil {
 		return ""
 	}
-	return p.ProfitBeforeTax
+	return r.ProfitBeforeTax
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetIncomeTax() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetIncomeTax() string {
+	if r == nil {
 		return ""
 	}
-	return p.IncomeTax
+	return r.IncomeTax
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetNetProfit() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetNetProfit() string {
+	if r == nil {
 		return ""
 	}
-	return p.NetProfit
+	return r.NetProfit
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetSalesRevenue sets the SalesRevenue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetSalesRevenue(salesRevenue string) {
-	p.SalesRevenue = salesRevenue
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldSalesRevenue)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetSalesRevenue(salesRevenue string) {
+	r.SalesRevenue = salesRevenue
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldSalesRevenue)
 }
 
 // SetCostOfSales sets the CostOfSales field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetCostOfSales(costOfSales string) {
-	p.CostOfSales = costOfSales
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldCostOfSales)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetCostOfSales(costOfSales string) {
+	r.CostOfSales = costOfSales
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldCostOfSales)
 }
 
 // SetGrossProfit sets the GrossProfit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetGrossProfit(grossProfit string) {
-	p.GrossProfit = grossProfit
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldGrossProfit)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetGrossProfit(grossProfit string) {
+	r.GrossProfit = grossProfit
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldGrossProfit)
 }
 
 // SetSellingExpenses sets the SellingExpenses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetSellingExpenses(sellingExpenses string) {
-	p.SellingExpenses = sellingExpenses
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldSellingExpenses)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetSellingExpenses(sellingExpenses string) {
+	r.SellingExpenses = sellingExpenses
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldSellingExpenses)
 }
 
 // SetAdminExpenses sets the AdminExpenses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetAdminExpenses(adminExpenses string) {
-	p.AdminExpenses = adminExpenses
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldAdminExpenses)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetAdminExpenses(adminExpenses string) {
+	r.AdminExpenses = adminExpenses
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldAdminExpenses)
 }
 
 // SetOperatingProfit sets the OperatingProfit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetOperatingProfit(operatingProfit string) {
-	p.OperatingProfit = operatingProfit
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldOperatingProfit)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetOperatingProfit(operatingProfit string) {
+	r.OperatingProfit = operatingProfit
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldOperatingProfit)
 }
 
 // SetOtherActivityResult sets the OtherActivityResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetOtherActivityResult(otherActivityResult string) {
-	p.OtherActivityResult = otherActivityResult
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldOtherActivityResult)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetOtherActivityResult(otherActivityResult string) {
+	r.OtherActivityResult = otherActivityResult
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldOtherActivityResult)
 }
 
 // SetFinancialActivityResult sets the FinancialActivityResult field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetFinancialActivityResult(financialActivityResult string) {
-	p.FinancialActivityResult = financialActivityResult
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldFinancialActivityResult)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetFinancialActivityResult(financialActivityResult string) {
+	r.FinancialActivityResult = financialActivityResult
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldFinancialActivityResult)
 }
 
 // SetProfitBeforeTax sets the ProfitBeforeTax field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetProfitBeforeTax(profitBeforeTax string) {
-	p.ProfitBeforeTax = profitBeforeTax
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldProfitBeforeTax)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetProfitBeforeTax(profitBeforeTax string) {
+	r.ProfitBeforeTax = profitBeforeTax
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldProfitBeforeTax)
 }
 
 // SetIncomeTax sets the IncomeTax field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetIncomeTax(incomeTax string) {
-	p.IncomeTax = incomeTax
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldIncomeTax)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetIncomeTax(incomeTax string) {
+	r.IncomeTax = incomeTax
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldIncomeTax)
 }
 
 // SetNetProfit sets the NetProfit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) SetNetProfit(netProfit string) {
-	p.NetProfit = netProfit
-	p.require(postV1ConsolidationReportResponseStatementsProfitLossDetailFieldNetProfit)
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) SetNetProfit(netProfit string) {
+	r.NetProfit = netProfit
+	r.require(reportConsolidationResponseStatementsProfitLossDetailFieldNetProfit)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseStatementsProfitLossDetail
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseStatementsProfitLossDetail
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseStatementsProfitLossDetail(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseStatementsProfitLossDetail(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseStatementsProfitLossDetail
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseStatementsProfitLossDetail
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseStatementsProfitLossDetail) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseStatementsProfitLossDetail) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
-	postV1ConsolidationReportResponseTrialBalanceItemFieldCode    = big.NewInt(1 << 0)
-	postV1ConsolidationReportResponseTrialBalanceItemFieldType    = big.NewInt(1 << 1)
-	postV1ConsolidationReportResponseTrialBalanceItemFieldClosing = big.NewInt(1 << 2)
-	postV1ConsolidationReportResponseTrialBalanceItemFieldPeriod  = big.NewInt(1 << 3)
+	reportConsolidationResponseTrialBalanceItemFieldCode    = big.NewInt(1 << 0)
+	reportConsolidationResponseTrialBalanceItemFieldType    = big.NewInt(1 << 1)
+	reportConsolidationResponseTrialBalanceItemFieldClosing = big.NewInt(1 << 2)
+	reportConsolidationResponseTrialBalanceItemFieldPeriod  = big.NewInt(1 << 3)
 )
 
-type PostV1ConsolidationReportResponseTrialBalanceItem struct {
+type ReportConsolidationResponseTrialBalanceItem struct {
 	Code    string `json:"code" url:"code"`
 	Type    string `json:"type" url:"type"`
 	Closing string `json:"closing" url:"closing"`
@@ -7863,114 +7980,114 @@ type PostV1ConsolidationReportResponseTrialBalanceItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) GetCode() string {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) GetCode() string {
+	if r == nil {
 		return ""
 	}
-	return p.Code
+	return r.Code
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) GetType() string {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) GetType() string {
+	if r == nil {
 		return ""
 	}
-	return p.Type
+	return r.Type
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) GetClosing() string {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) GetClosing() string {
+	if r == nil {
 		return ""
 	}
-	return p.Closing
+	return r.Closing
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) GetPeriod() string {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) GetPeriod() string {
+	if r == nil {
 		return ""
 	}
-	return p.Period
+	return r.Period
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
 		return nil
 	}
-	return p.extraProperties
+	return r.extraProperties
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (r *ReportConsolidationResponseTrialBalanceItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	r.explicitFields.Or(r.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1ConsolidationReportResponseTrialBalanceItemFieldCode)
+func (r *ReportConsolidationResponseTrialBalanceItem) SetCode(code string) {
+	r.Code = code
+	r.require(reportConsolidationResponseTrialBalanceItemFieldCode)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) SetType(type_ string) {
-	p.Type = type_
-	p.require(postV1ConsolidationReportResponseTrialBalanceItemFieldType)
+func (r *ReportConsolidationResponseTrialBalanceItem) SetType(type_ string) {
+	r.Type = type_
+	r.require(reportConsolidationResponseTrialBalanceItemFieldType)
 }
 
 // SetClosing sets the Closing field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) SetClosing(closing string) {
-	p.Closing = closing
-	p.require(postV1ConsolidationReportResponseTrialBalanceItemFieldClosing)
+func (r *ReportConsolidationResponseTrialBalanceItem) SetClosing(closing string) {
+	r.Closing = closing
+	r.require(reportConsolidationResponseTrialBalanceItemFieldClosing)
 }
 
 // SetPeriod sets the Period field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) SetPeriod(period string) {
-	p.Period = period
-	p.require(postV1ConsolidationReportResponseTrialBalanceItemFieldPeriod)
+func (r *ReportConsolidationResponseTrialBalanceItem) SetPeriod(period string) {
+	r.Period = period
+	r.require(reportConsolidationResponseTrialBalanceItemFieldPeriod)
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ConsolidationReportResponseTrialBalanceItem
+func (r *ReportConsolidationResponseTrialBalanceItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReportConsolidationResponseTrialBalanceItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1ConsolidationReportResponseTrialBalanceItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*r = ReportConsolidationResponseTrialBalanceItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1ConsolidationReportResponseTrialBalanceItem
+func (r *ReportConsolidationResponseTrialBalanceItem) MarshalJSON() ([]byte, error) {
+	type embed ReportConsolidationResponseTrialBalanceItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*r),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1ConsolidationReportResponseTrialBalanceItem) String() string {
-	if p == nil {
+func (r *ReportConsolidationResponseTrialBalanceItem) String() string {
+	if r == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(r); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", r)
 }

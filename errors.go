@@ -55,6 +55,30 @@ func (c *ConflictError) Unwrap() error {
 	return c.APIError
 }
 
+// The request body or uploaded file is larger than allowed
+type ContentTooLargeError struct {
+	*core.APIError
+	Body *ErrorResponse
+}
+
+func (c *ContentTooLargeError) UnmarshalJSON(data []byte) error {
+	var body *ErrorResponse
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	c.StatusCode = 413
+	c.Body = body
+	return nil
+}
+
+func (c *ContentTooLargeError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(c.Body)
+}
+
+func (c *ContentTooLargeError) Unwrap() error {
+	return c.APIError
+}
+
 // The API key lacks the required scope
 type ForbiddenError struct {
 	*core.APIError
@@ -125,6 +149,30 @@ func (n *NotFoundError) MarshalJSON() ([]byte, error) {
 
 func (n *NotFoundError) Unwrap() error {
 	return n.APIError
+}
+
+// The trial or the prepaid credit has ended; top up or subscribe to continue
+type PaymentRequiredError struct {
+	*core.APIError
+	Body *ErrorResponse
+}
+
+func (p *PaymentRequiredError) UnmarshalJSON(data []byte) error {
+	var body *ErrorResponse
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	p.StatusCode = 402
+	p.Body = body
+	return nil
+}
+
+func (p *PaymentRequiredError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(p.Body)
+}
+
+func (p *PaymentRequiredError) Unwrap() error {
+	return p.APIError
 }
 
 // Rate limit exceeded

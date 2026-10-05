@@ -512,6 +512,13 @@ func TestEnumErrorResponseErrorCode(t *testing.T) {
 		assert.Equal(t, ErrorResponseErrorCode("rate_limited"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_payment_required", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewErrorResponseErrorCodeFromString("payment_required")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ErrorResponseErrorCode("payment_required"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_internal", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewErrorResponseErrorCodeFromString("internal")

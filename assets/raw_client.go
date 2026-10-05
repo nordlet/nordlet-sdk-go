@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1AssetsGroupsCreate(
+func (r *RawClient) GroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsGroupsCreateRequest,
+	request *nordlet.GroupsCreateAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsGroupsCreateResponse], error) {
+) (*core.Response[*nordlet.GroupsCreateAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1AssetsGroupsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsGroupsCreateResponse
+	var response *nordlet.GroupsCreateAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1AssetsGroupsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsGroupsCreateResponse]{
+	return &core.Response[*nordlet.GroupsCreateAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsGroupsList(
+func (r *RawClient) GroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsGroupsListRequest,
+	request *nordlet.GroupsListAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsGroupsListResponse], error) {
+) (*core.Response[*nordlet.GroupsListAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1AssetsGroupsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsGroupsListResponse
+	var response *nordlet.GroupsListAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1AssetsGroupsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsGroupsListResponse]{
+	return &core.Response[*nordlet.GroupsListAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsCreate(
+func (r *RawClient) AssetsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsCreateRequest,
+	request *nordlet.AssetsCreateAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsCreateResponse], error) {
+) (*core.Response[*nordlet.AssetsCreateAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1AssetsAssetsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsCreateResponse
+	var response *nordlet.AssetsCreateAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1AssetsAssetsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsCreateResponse]{
+	return &core.Response[*nordlet.AssetsCreateAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsUpdate(
+func (r *RawClient) AssetsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsUpdateRequest,
+	request *nordlet.AssetsUpdateAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsUpdateResponse], error) {
+) (*core.Response[*nordlet.AssetsUpdateAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1AssetsAssetsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsUpdateResponse
+	var response *nordlet.AssetsUpdateAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1AssetsAssetsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsUpdateResponse]{
+	return &core.Response[*nordlet.AssetsUpdateAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsInputVat(
+func (r *RawClient) AssetsInputVat(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsInputVatRequest,
+	request *nordlet.AssetsInputVatAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsInputVatResponse], error) {
+) (*core.Response[*nordlet.AssetsInputVatAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1AssetsAssetsInputVat(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsInputVatResponse
+	var response *nordlet.AssetsInputVatAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1AssetsAssetsInputVat(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsInputVatResponse]{
+	return &core.Response[*nordlet.AssetsInputVatAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsGet(
+func (r *RawClient) AssetsGet(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsGetRequest,
+	request *nordlet.AssetsGetAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsGetResponse], error) {
+) (*core.Response[*nordlet.AssetsGetAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1AssetsAssetsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsGetResponse
+	var response *nordlet.AssetsGetAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1AssetsAssetsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsGetResponse]{
+	return &core.Response[*nordlet.AssetsGetAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsList(
+func (r *RawClient) AssetsList(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsListRequest,
+	request *nordlet.AssetsListAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsListResponse], error) {
+) (*core.Response[*nordlet.AssetsListAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1AssetsAssetsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsListResponse
+	var response *nordlet.AssetsListAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1AssetsAssetsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsListResponse]{
+	return &core.Response[*nordlet.AssetsListAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsAssetsModernize(
+func (r *RawClient) AssetsModernize(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsModernizeRequest,
+	request *nordlet.AssetsModernizeAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsAssetsModernizeResponse], error) {
+) (*core.Response[*nordlet.AssetsModernizeAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1AssetsAssetsModernize(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsAssetsModernizeResponse
+	var response *nordlet.AssetsModernizeAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,62 @@ func (r *RawClient) PostV1AssetsAssetsModernize(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsAssetsModernizeResponse]{
+	return &core.Response[*nordlet.AssetsModernizeAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsDepreciationPreview(
+func (r *RawClient) AssetsDispose(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsDepreciationPreviewRequest,
+	request *nordlet.AssetsDisposeAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsDepreciationPreviewResponse], error) {
+) (*core.Response[*nordlet.AssetsDisposeAssetsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/assets/assets/dispose"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.AssetsDisposeAssetsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.AssetsDisposeAssetsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) DepreciationPreview(
+	ctx context.Context,
+	request *nordlet.DepreciationPreviewAssetsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.DepreciationPreviewAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +445,7 @@ func (r *RawClient) PostV1AssetsDepreciationPreview(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsDepreciationPreviewResponse
+	var response *nordlet.DepreciationPreviewAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +465,18 @@ func (r *RawClient) PostV1AssetsDepreciationPreview(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsDepreciationPreviewResponse]{
+	return &core.Response[*nordlet.DepreciationPreviewAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1AssetsDepreciationPost(
+func (r *RawClient) DepreciationPost(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsDepreciationPostRequest,
+	request *nordlet.DepreciationPostAssetsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AssetsDepreciationPostResponse], error) {
+) (*core.Response[*nordlet.DepreciationPostAssetsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +489,7 @@ func (r *RawClient) PostV1AssetsDepreciationPost(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AssetsDepreciationPostResponse
+	var response *nordlet.DepreciationPostAssetsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,7 +509,7 @@ func (r *RawClient) PostV1AssetsDepreciationPost(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AssetsDepreciationPostResponse]{
+	return &core.Response[*nordlet.DepreciationPostAssetsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

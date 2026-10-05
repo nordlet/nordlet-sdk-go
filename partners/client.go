@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1PartnersAddressesCreate(
+func (c *Client) AddressesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersAddressesCreateRequest,
+	request *nordlet.AddressesCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersAddressesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersAddressesCreate(
+) (*nordlet.AddressesCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.AddressesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1PartnersAddressesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersAddressesUpdate(
+func (c *Client) AddressesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersAddressesUpdateRequest,
+	request *nordlet.AddressesUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersAddressesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersAddressesUpdate(
+) (*nordlet.AddressesUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.AddressesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1PartnersAddressesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersAddressesDelete(
+func (c *Client) AddressesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersAddressesDeleteRequest,
+	request *nordlet.AddressesDeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersAddressesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersAddressesDelete(
+) (*nordlet.AddressesDeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.AddressesDelete(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1PartnersAddressesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersAddressesList(
+func (c *Client) AddressesList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersAddressesListRequest,
+	request *nordlet.AddressesListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersAddressesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersAddressesList(
+) (*nordlet.AddressesListPartnersResponse, error) {
+	response, err := c.WithRawResponse.AddressesList(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1PartnersAddressesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersContactsCreate(
+func (c *Client) ContactsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersContactsCreateRequest,
+	request *nordlet.ContactsCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersContactsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersContactsCreate(
+) (*nordlet.ContactsCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.ContactsCreate(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1PartnersContactsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersContactsUpdate(
+func (c *Client) ContactsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersContactsUpdateRequest,
+	request *nordlet.ContactsUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersContactsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersContactsUpdate(
+) (*nordlet.ContactsUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.ContactsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1PartnersContactsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersContactsDelete(
+func (c *Client) ContactsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersContactsDeleteRequest,
+	request *nordlet.ContactsDeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersContactsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersContactsDelete(
+) (*nordlet.ContactsDeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.ContactsDelete(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1PartnersContactsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersContactsList(
+func (c *Client) ContactsList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersContactsListRequest,
+	request *nordlet.ContactsListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersContactsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersContactsList(
+) (*nordlet.ContactsListPartnersResponse, error) {
+	response, err := c.WithRawResponse.ContactsList(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1PartnersContactsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersBankAccountsCreate(
+func (c *Client) BankAccountsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersBankAccountsCreateRequest,
+	request *nordlet.BankAccountsCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersBankAccountsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersBankAccountsCreate(
+) (*nordlet.BankAccountsCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.BankAccountsCreate(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1PartnersBankAccountsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersBankAccountsUpdate(
+func (c *Client) BankAccountsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersBankAccountsUpdateRequest,
+	request *nordlet.BankAccountsUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersBankAccountsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersBankAccountsUpdate(
+) (*nordlet.BankAccountsUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.BankAccountsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1PartnersBankAccountsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersBankAccountsDelete(
+func (c *Client) BankAccountsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersBankAccountsDeleteRequest,
+	request *nordlet.BankAccountsDeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersBankAccountsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersBankAccountsDelete(
+) (*nordlet.BankAccountsDeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.BankAccountsDelete(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1PartnersBankAccountsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersBankAccountsList(
+func (c *Client) BankAccountsList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersBankAccountsListRequest,
+	request *nordlet.BankAccountsListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersBankAccountsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersBankAccountsList(
+) (*nordlet.BankAccountsListPartnersResponse, error) {
+	response, err := c.WithRawResponse.BankAccountsList(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1PartnersBankAccountsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersFilesList(
+func (c *Client) FilesList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersFilesListRequest,
+	request *nordlet.FilesListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersFilesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersFilesList(
+) (*nordlet.FilesListPartnersResponse, error) {
+	response, err := c.WithRawResponse.FilesList(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1PartnersFilesList(
 	return response.Body, nil
 }
 
-func (c *Client) RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+func (c *Client) DebtRemindersPreview(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersDebtRemindersPreviewRequest,
+	request *nordlet.DebtRemindersPreviewPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersDebtRemindersPreviewResponse, error) {
-	response, err := c.WithRawResponse.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+) (*nordlet.DebtRemindersPreviewPartnersResponse, error) {
+	response, err := c.WithRawResponse.DebtRemindersPreview(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompan
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersDebtRemindersList(
+func (c *Client) DebtRemindersList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersDebtRemindersListRequest,
+	request *nordlet.DebtRemindersListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersDebtRemindersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersDebtRemindersList(
+) (*nordlet.DebtRemindersListPartnersResponse, error) {
+	response, err := c.WithRawResponse.DebtRemindersList(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1PartnersDebtRemindersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersValidateVat(
+func (c *Client) ValidateVat(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersValidateVatRequest,
+	request *nordlet.ValidateVatPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersValidateVatResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersValidateVat(
+) (*nordlet.ValidateVatPartnersResponse, error) {
+	response, err := c.WithRawResponse.ValidateVat(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1PartnersValidateVat(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersVatReviewsList(
+func (c *Client) VatReviewsList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersVatReviewsListRequest,
+	request *nordlet.VatReviewsListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersVatReviewsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersVatReviewsList(
+) (*nordlet.VatReviewsListPartnersResponse, error) {
+	response, err := c.WithRawResponse.VatReviewsList(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1PartnersVatReviewsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersVatReviewsResolve(
+func (c *Client) VatReviewsResolve(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersVatReviewsResolveRequest,
+	request *nordlet.VatReviewsResolvePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersVatReviewsResolveResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersVatReviewsResolve(
+) (*nordlet.VatReviewsResolvePartnersResponse, error) {
+	response, err := c.WithRawResponse.VatReviewsResolve(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1PartnersVatReviewsResolve(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersCreate(
+func (c *Client) Create(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersCreateRequest,
+	request *nordlet.CreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersCreate(
+) (*nordlet.CreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1PartnersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersFindOrCreate(
+func (c *Client) FindOrCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersFindOrCreateRequest,
+	request *nordlet.FindOrCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersFindOrCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersFindOrCreate(
+) (*nordlet.FindOrCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.FindOrCreate(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +354,12 @@ func (c *Client) PostV1PartnersFindOrCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersGet(
+func (c *Client) Get(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersGetRequest,
+	request *nordlet.GetPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersGet(
+) (*nordlet.GetPartnersResponse, error) {
+	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
 		opts...,
@@ -370,12 +370,12 @@ func (c *Client) PostV1PartnersGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersUpdate(
+func (c *Client) Update(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersUpdateRequest,
+	request *nordlet.UpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersUpdate(
+) (*nordlet.UpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
 		opts...,
@@ -386,12 +386,12 @@ func (c *Client) PostV1PartnersUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersDelete(
+func (c *Client) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersDeleteRequest,
+	request *nordlet.DeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersDelete(
+) (*nordlet.DeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
 		opts...,
@@ -403,12 +403,12 @@ func (c *Client) PostV1PartnersDelete(
 }
 
 // Removes birth date, self-employment certificate number, email, phone, address, notes, contacts, addresses and bank accounts, then hides the partner. The name, code and VAT number stay because issued invoices must keep identifying the counterparty for the statutory retention period.
-func (c *Client) BlankAPartnersPersonalDataAndHideTheRecord(
+func (c *Client) Anonymize(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersAnonymizeRequest,
+	request *nordlet.AnonymizePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersAnonymizeResponse, error) {
-	response, err := c.WithRawResponse.BlankAPartnersPersonalDataAndHideTheRecord(
+) (*nordlet.AnonymizePartnersResponse, error) {
+	response, err := c.WithRawResponse.Anonymize(
 		ctx,
 		request,
 		opts...,
@@ -419,12 +419,12 @@ func (c *Client) BlankAPartnersPersonalDataAndHideTheRecord(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersList(
+func (c *Client) List(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersListRequest,
+	request *nordlet.ListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersList(
+) (*nordlet.ListPartnersResponse, error) {
+	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
 		opts...,
@@ -435,12 +435,12 @@ func (c *Client) PostV1PartnersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersGroupsCreate(
+func (c *Client) GroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersGroupsCreateRequest,
+	request *nordlet.GroupsCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersGroupsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersGroupsCreate(
+) (*nordlet.GroupsCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.GroupsCreate(
 		ctx,
 		request,
 		opts...,
@@ -451,12 +451,12 @@ func (c *Client) PostV1PartnersGroupsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersGroupsUpdate(
+func (c *Client) GroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersGroupsUpdateRequest,
+	request *nordlet.GroupsUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersGroupsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersGroupsUpdate(
+) (*nordlet.GroupsUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.GroupsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -467,12 +467,12 @@ func (c *Client) PostV1PartnersGroupsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersGroupsDelete(
+func (c *Client) GroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersGroupsDeleteRequest,
+	request *nordlet.GroupsDeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersGroupsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersGroupsDelete(
+) (*nordlet.GroupsDeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.GroupsDelete(
 		ctx,
 		request,
 		opts...,
@@ -483,12 +483,12 @@ func (c *Client) PostV1PartnersGroupsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersGroupsList(
+func (c *Client) GroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersGroupsListRequest,
+	request *nordlet.GroupsListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersGroupsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersGroupsList(
+) (*nordlet.GroupsListPartnersResponse, error) {
+	response, err := c.WithRawResponse.GroupsList(
 		ctx,
 		request,
 		opts...,
@@ -499,12 +499,12 @@ func (c *Client) PostV1PartnersGroupsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersStatusesCreate(
+func (c *Client) StatusesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersStatusesCreateRequest,
+	request *nordlet.StatusesCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersStatusesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersStatusesCreate(
+) (*nordlet.StatusesCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.StatusesCreate(
 		ctx,
 		request,
 		opts...,
@@ -515,12 +515,12 @@ func (c *Client) PostV1PartnersStatusesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersStatusesUpdate(
+func (c *Client) StatusesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersStatusesUpdateRequest,
+	request *nordlet.StatusesUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersStatusesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersStatusesUpdate(
+) (*nordlet.StatusesUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.StatusesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -531,12 +531,12 @@ func (c *Client) PostV1PartnersStatusesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersStatusesDelete(
+func (c *Client) StatusesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersStatusesDeleteRequest,
+	request *nordlet.StatusesDeletePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersStatusesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersStatusesDelete(
+) (*nordlet.StatusesDeletePartnersResponse, error) {
+	response, err := c.WithRawResponse.StatusesDelete(
 		ctx,
 		request,
 		opts...,
@@ -547,12 +547,12 @@ func (c *Client) PostV1PartnersStatusesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersStatusesList(
+func (c *Client) StatusesList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersStatusesListRequest,
+	request *nordlet.StatusesListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersStatusesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersStatusesList(
+) (*nordlet.StatusesListPartnersResponse, error) {
+	response, err := c.WithRawResponse.StatusesList(
 		ctx,
 		request,
 		opts...,
@@ -563,12 +563,12 @@ func (c *Client) PostV1PartnersStatusesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersInquiriesCreate(
+func (c *Client) InquiriesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersInquiriesCreateRequest,
+	request *nordlet.InquiriesCreatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersInquiriesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersInquiriesCreate(
+) (*nordlet.InquiriesCreatePartnersResponse, error) {
+	response, err := c.WithRawResponse.InquiriesCreate(
 		ctx,
 		request,
 		opts...,
@@ -579,12 +579,12 @@ func (c *Client) PostV1PartnersInquiriesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersInquiriesUpdate(
+func (c *Client) InquiriesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersInquiriesUpdateRequest,
+	request *nordlet.InquiriesUpdatePartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersInquiriesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersInquiriesUpdate(
+) (*nordlet.InquiriesUpdatePartnersResponse, error) {
+	response, err := c.WithRawResponse.InquiriesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -595,12 +595,12 @@ func (c *Client) PostV1PartnersInquiriesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersInquiriesGet(
+func (c *Client) InquiriesGet(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersInquiriesGetRequest,
+	request *nordlet.InquiriesGetPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersInquiriesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersInquiriesGet(
+) (*nordlet.InquiriesGetPartnersResponse, error) {
+	response, err := c.WithRawResponse.InquiriesGet(
 		ctx,
 		request,
 		opts...,
@@ -611,12 +611,12 @@ func (c *Client) PostV1PartnersInquiriesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersInquiriesList(
+func (c *Client) InquiriesList(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersInquiriesListRequest,
+	request *nordlet.InquiriesListPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersInquiriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersInquiriesList(
+) (*nordlet.InquiriesListPartnersResponse, error) {
+	response, err := c.WithRawResponse.InquiriesList(
 		ctx,
 		request,
 		opts...,
@@ -627,253 +627,12 @@ func (c *Client) PostV1PartnersInquiriesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PartnersCreditCheck(
+func (c *Client) CreditCheck(
 	ctx context.Context,
-	request *nordlet.PostV1PartnersCreditCheckRequest,
+	request *nordlet.CreditCheckPartnersRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PartnersCreditCheckResponse, error) {
-	response, err := c.WithRawResponse.PostV1PartnersCreditCheck(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsCreate(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsCreateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsCreate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsGet(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsGetRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsGet(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsUpdate(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsUpdateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsUpdate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsDelete(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsDelete(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsList(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsNotesCreate(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsNotesCreateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsNotesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsNotesCreate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsNotesDelete(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsNotesDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsNotesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsNotesDelete(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsNotesList(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsNotesListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsNotesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsNotesList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsFilesList(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsFilesListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsFilesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsFilesList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsSourcesCreate(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsSourcesCreateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsSourcesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsSourcesCreate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsSourcesUpdate(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsSourcesUpdateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsSourcesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsSourcesUpdate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsSourcesDelete(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsSourcesDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsSourcesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsSourcesDelete(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsSourcesList(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsSourcesListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsSourcesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsSourcesList(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) PostV1LeadsSourcesOptions(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsSourcesOptionsRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsSourcesOptionsResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsSourcesOptions(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Create a customer partner from the lead, move the lead files to the partner, copy the lead notes into the partner notes and mark the lead as converted.
-func (c *Client) PostV1LeadsConvert(
-	ctx context.Context,
-	request *nordlet.PostV1LeadsConvertRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1LeadsConvertResponse, error) {
-	response, err := c.WithRawResponse.PostV1LeadsConvert(
+) (*nordlet.CreditCheckPartnersResponse, error) {
+	response, err := c.WithRawResponse.CreditCheck(
 		ctx,
 		request,
 		opts...,

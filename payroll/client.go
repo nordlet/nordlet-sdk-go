@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1PayrollDepartmentsCreate(
+func (c *Client) DepartmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollDepartmentsCreateRequest,
+	request *nordlet.DepartmentsCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollDepartmentsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollDepartmentsCreate(
+) (*nordlet.DepartmentsCreatePayrollResponse, error) {
+	response, err := c.WithRawResponse.DepartmentsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1PayrollDepartmentsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollDepartmentsList(
+func (c *Client) DepartmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollDepartmentsListRequest,
+	request *nordlet.DepartmentsListPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollDepartmentsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollDepartmentsList(
+) (*nordlet.DepartmentsListPayrollResponse, error) {
+	response, err := c.WithRawResponse.DepartmentsList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1PayrollDepartmentsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollSchedulesCreate(
+func (c *Client) SchedulesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollSchedulesCreateRequest,
+	request *nordlet.SchedulesCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollSchedulesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollSchedulesCreate(
+) (*nordlet.SchedulesCreatePayrollResponse, error) {
+	response, err := c.WithRawResponse.SchedulesCreate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1PayrollSchedulesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollSchedulesList(
+func (c *Client) SchedulesList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollSchedulesListRequest,
+	request *nordlet.SchedulesListPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollSchedulesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollSchedulesList(
+) (*nordlet.SchedulesListPayrollResponse, error) {
+	response, err := c.WithRawResponse.SchedulesList(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1PayrollSchedulesList(
 	return response.Body, nil
 }
 
-func (c *Client) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
+func (c *Client) Calc(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollCalcRequest,
+	request *nordlet.CalcPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollCalcResponse, error) {
-	response, err := c.WithRawResponse.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
+) (*nordlet.CalcPayrollResponse, error) {
+	response, err := c.WithRawResponse.Calc(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollRunsCreate(
+func (c *Client) RunsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsCreateRequest,
+	request *nordlet.RunsCreatePayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollRunsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollRunsCreate(
+) (*nordlet.RunsCreatePayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsCreate(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1PayrollRunsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollRunsGet(
+func (c *Client) RunsGet(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsGetRequest,
+	request *nordlet.RunsGetPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollRunsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollRunsGet(
+) (*nordlet.RunsGetPayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsGet(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1PayrollRunsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollRunsList(
+func (c *Client) RunsList(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsListRequest,
+	request *nordlet.RunsListPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollRunsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollRunsList(
+) (*nordlet.RunsListPayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsList(
 		ctx,
 		request,
 		opts...,
@@ -163,12 +163,12 @@ func (c *Client) PostV1PayrollRunsList(
 }
 
 // The days and hours worked, the days on the register and the average hourly earnings that some countries report per employment. The Czech monthly employer report asks for all four. They can be set while the run is a draft.
-func (c *Client) RecordTheTimeAPersonWorkedInAPayrollLine(
+func (c *Client) LinesAttendance(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollLinesAttendanceRequest,
+	request *nordlet.LinesAttendancePayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollLinesAttendanceResponse, error) {
-	response, err := c.WithRawResponse.RecordTheTimeAPersonWorkedInAPayrollLine(
+) (*nordlet.LinesAttendancePayrollResponse, error) {
+	response, err := c.WithRawResponse.LinesAttendance(
 		ctx,
 		request,
 		opts...,
@@ -179,12 +179,12 @@ func (c *Client) RecordTheTimeAPersonWorkedInAPayrollLine(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollRunsApprove(
+func (c *Client) RunsApprove(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsApproveRequest,
+	request *nordlet.RunsApprovePayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollRunsApproveResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollRunsApprove(
+) (*nordlet.RunsApprovePayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsApprove(
 		ctx,
 		request,
 		opts...,
@@ -195,12 +195,12 @@ func (c *Client) PostV1PayrollRunsApprove(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollRunsCancel(
+func (c *Client) RunsCancel(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollRunsCancelRequest,
+	request *nordlet.RunsCancelPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollRunsCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollRunsCancel(
+) (*nordlet.RunsCancelPayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsCancel(
 		ctx,
 		request,
 		opts...,
@@ -211,12 +211,12 @@ func (c *Client) PostV1PayrollRunsCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollPaymentsExport(
+func (c *Client) PaymentsExport(
 	ctx context.Context,
-	request *nordlet.PostV1PayrollPaymentsExportRequest,
+	request *nordlet.PaymentsExportPayrollRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PayrollPaymentsExportResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollPaymentsExport(
+) (*nordlet.PaymentsExportPayrollResponse, error) {
+	response, err := c.WithRawResponse.PaymentsExport(
 		ctx,
 		request,
 		opts...,

@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1ConsolidationGroupsCreate(
+func (r *RawClient) GroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsCreateRequest,
+	request *nordlet.GroupsCreateConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationGroupsCreateResponse], error) {
+) (*core.Response[*nordlet.GroupsCreateConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1ConsolidationGroupsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationGroupsCreateResponse
+	var response *nordlet.GroupsCreateConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1ConsolidationGroupsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationGroupsCreateResponse]{
+	return &core.Response[*nordlet.GroupsCreateConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationGroupsList(
+func (r *RawClient) GroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsListRequest,
+	request *nordlet.GroupsListConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationGroupsListResponse], error) {
+) (*core.Response[*nordlet.GroupsListConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1ConsolidationGroupsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationGroupsListResponse
+	var response *nordlet.GroupsListConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1ConsolidationGroupsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationGroupsListResponse]{
+	return &core.Response[*nordlet.GroupsListConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationGroupsGet(
+func (r *RawClient) GroupsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsGetRequest,
+	request *nordlet.GroupsGetConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationGroupsGetResponse], error) {
+) (*core.Response[*nordlet.GroupsGetConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1ConsolidationGroupsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationGroupsGetResponse
+	var response *nordlet.GroupsGetConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1ConsolidationGroupsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationGroupsGetResponse]{
+	return &core.Response[*nordlet.GroupsGetConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationGroupsUpdate(
+func (r *RawClient) GroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsUpdateRequest,
+	request *nordlet.GroupsUpdateConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationGroupsUpdateResponse], error) {
+) (*core.Response[*nordlet.GroupsUpdateConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1ConsolidationGroupsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationGroupsUpdateResponse
+	var response *nordlet.GroupsUpdateConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1ConsolidationGroupsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationGroupsUpdateResponse]{
+	return &core.Response[*nordlet.GroupsUpdateConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationGroupsDelete(
+func (r *RawClient) GroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsDeleteRequest,
+	request *nordlet.GroupsDeleteConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationGroupsDeleteResponse], error) {
+) (*core.Response[*nordlet.GroupsDeleteConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1ConsolidationGroupsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationGroupsDeleteResponse
+	var response *nordlet.GroupsDeleteConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1ConsolidationGroupsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationGroupsDeleteResponse]{
+	return &core.Response[*nordlet.GroupsDeleteConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationMembersAdd(
+func (r *RawClient) MembersAdd(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationMembersAddRequest,
+	request *nordlet.MembersAddConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationMembersAddResponse], error) {
+) (*core.Response[*nordlet.MembersAddConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1ConsolidationMembersAdd(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationMembersAddResponse
+	var response *nordlet.MembersAddConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1ConsolidationMembersAdd(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationMembersAddResponse]{
+	return &core.Response[*nordlet.MembersAddConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationMembersRemove(
+func (r *RawClient) MembersRemove(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationMembersRemoveRequest,
+	request *nordlet.MembersRemoveConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationMembersRemoveResponse], error) {
+) (*core.Response[*nordlet.MembersRemoveConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1ConsolidationMembersRemove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationMembersRemoveResponse
+	var response *nordlet.MembersRemoveConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1ConsolidationMembersRemove(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationMembersRemoveResponse]{
+	return &core.Response[*nordlet.MembersRemoveConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationIntercompanyCandidates(
+func (r *RawClient) IntercompanyCandidates(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyCandidatesRequest,
+	request *nordlet.IntercompanyCandidatesConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationIntercompanyCandidatesResponse], error) {
+) (*core.Response[*nordlet.IntercompanyCandidatesConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1ConsolidationIntercompanyCandidates(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationIntercompanyCandidatesResponse
+	var response *nordlet.IntercompanyCandidatesConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1ConsolidationIntercompanyCandidates(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationIntercompanyCandidatesResponse]{
+	return &core.Response[*nordlet.IntercompanyCandidatesConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationIntercompanyLinksSet(
+func (r *RawClient) IntercompanyLinksSet(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksSetRequest,
+	request *nordlet.IntercompanyLinksSetConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksSetResponse], error) {
+) (*core.Response[*nordlet.IntercompanyLinksSetConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksSet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationIntercompanyLinksSetResponse
+	var response *nordlet.IntercompanyLinksSetConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksSet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksSetResponse]{
+	return &core.Response[*nordlet.IntercompanyLinksSetConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationIntercompanyLinksList(
+func (r *RawClient) IntercompanyLinksList(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksListRequest,
+	request *nordlet.IntercompanyLinksListConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksListResponse], error) {
+) (*core.Response[*nordlet.IntercompanyLinksListConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationIntercompanyLinksListResponse
+	var response *nordlet.IntercompanyLinksListConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksListResponse]{
+	return &core.Response[*nordlet.IntercompanyLinksListConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationIntercompanyLinksRemove(
+func (r *RawClient) IntercompanyLinksRemove(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest,
+	request *nordlet.IntercompanyLinksRemoveConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse], error) {
+) (*core.Response[*nordlet.IntercompanyLinksRemoveConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksRemove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse
+	var response *nordlet.IntercompanyLinksRemoveConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1ConsolidationIntercompanyLinksRemove(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse]{
+	return &core.Response[*nordlet.IntercompanyLinksRemoveConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationIntercompanyReport(
+func (r *RawClient) IntercompanyReport(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyReportRequest,
+	request *nordlet.IntercompanyReportConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationIntercompanyReportResponse], error) {
+) (*core.Response[*nordlet.IntercompanyReportConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1ConsolidationIntercompanyReport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationIntercompanyReportResponse
+	var response *nordlet.IntercompanyReportConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1ConsolidationIntercompanyReport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationIntercompanyReportResponse]{
+	return &core.Response[*nordlet.IntercompanyReportConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1ConsolidationReport(
+func (r *RawClient) Report(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationReportRequest,
+	request *nordlet.ReportConsolidationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1ConsolidationReportResponse], error) {
+) (*core.Response[*nordlet.ReportConsolidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1ConsolidationReport(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1ConsolidationReportResponse
+	var response *nordlet.ReportConsolidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,7 +597,7 @@ func (r *RawClient) PostV1ConsolidationReport(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1ConsolidationReportResponse]{
+	return &core.Response[*nordlet.ReportConsolidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

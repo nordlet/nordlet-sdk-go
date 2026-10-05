@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1TransportWaybillsCreate(
+func (c *Client) WaybillsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsCreateRequest,
+	request *nordlet.WaybillsCreateTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsCreate(
+) (*nordlet.WaybillsCreateTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1TransportWaybillsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1TransportWaybillsUpdate(
+func (c *Client) WaybillsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsUpdateRequest,
+	request *nordlet.WaybillsUpdateTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsUpdate(
+) (*nordlet.WaybillsUpdateTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1TransportWaybillsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1TransportWaybillsIssue(
+func (c *Client) WaybillsIssue(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsIssueRequest,
+	request *nordlet.WaybillsIssueTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsIssueResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsIssue(
+) (*nordlet.WaybillsIssueTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsIssue(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1TransportWaybillsIssue(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1TransportWaybillsCancel(
+func (c *Client) WaybillsCancel(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsCancelRequest,
+	request *nordlet.WaybillsCancelTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsCancel(
+) (*nordlet.WaybillsCancelTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsCancel(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1TransportWaybillsCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1TransportWaybillsGet(
+func (c *Client) WaybillsGet(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsGetRequest,
+	request *nordlet.WaybillsGetTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsGet(
+) (*nordlet.WaybillsGetTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsGet(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1TransportWaybillsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1TransportWaybillsList(
+func (c *Client) WaybillsList(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsListRequest,
+	request *nordlet.WaybillsListTransportRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1TransportWaybillsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1TransportWaybillsList(
+) (*nordlet.WaybillsListTransportResponse, error) {
+	response, err := c.WithRawResponse.WaybillsList(
 		ctx,
 		request,
 		opts...,

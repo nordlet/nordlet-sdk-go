@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1TransportWaybillsCreate(
+func (r *RawClient) WaybillsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsCreateRequest,
+	request *nordlet.WaybillsCreateTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsCreateResponse], error) {
+) (*core.Response[*nordlet.WaybillsCreateTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1TransportWaybillsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsCreateResponse
+	var response *nordlet.WaybillsCreateTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1TransportWaybillsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsCreateResponse]{
+	return &core.Response[*nordlet.WaybillsCreateTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1TransportWaybillsUpdate(
+func (r *RawClient) WaybillsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsUpdateRequest,
+	request *nordlet.WaybillsUpdateTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsUpdateResponse], error) {
+) (*core.Response[*nordlet.WaybillsUpdateTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1TransportWaybillsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsUpdateResponse
+	var response *nordlet.WaybillsUpdateTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1TransportWaybillsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsUpdateResponse]{
+	return &core.Response[*nordlet.WaybillsUpdateTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1TransportWaybillsIssue(
+func (r *RawClient) WaybillsIssue(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsIssueRequest,
+	request *nordlet.WaybillsIssueTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsIssueResponse], error) {
+) (*core.Response[*nordlet.WaybillsIssueTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1TransportWaybillsIssue(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsIssueResponse
+	var response *nordlet.WaybillsIssueTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1TransportWaybillsIssue(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsIssueResponse]{
+	return &core.Response[*nordlet.WaybillsIssueTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1TransportWaybillsCancel(
+func (r *RawClient) WaybillsCancel(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsCancelRequest,
+	request *nordlet.WaybillsCancelTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsCancelResponse], error) {
+) (*core.Response[*nordlet.WaybillsCancelTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1TransportWaybillsCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsCancelResponse
+	var response *nordlet.WaybillsCancelTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1TransportWaybillsCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsCancelResponse]{
+	return &core.Response[*nordlet.WaybillsCancelTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1TransportWaybillsGet(
+func (r *RawClient) WaybillsGet(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsGetRequest,
+	request *nordlet.WaybillsGetTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsGetResponse], error) {
+) (*core.Response[*nordlet.WaybillsGetTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1TransportWaybillsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsGetResponse
+	var response *nordlet.WaybillsGetTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1TransportWaybillsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsGetResponse]{
+	return &core.Response[*nordlet.WaybillsGetTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1TransportWaybillsList(
+func (r *RawClient) WaybillsList(
 	ctx context.Context,
-	request *nordlet.PostV1TransportWaybillsListRequest,
+	request *nordlet.WaybillsListTransportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1TransportWaybillsListResponse], error) {
+) (*core.Response[*nordlet.WaybillsListTransportResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1TransportWaybillsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1TransportWaybillsListResponse
+	var response *nordlet.WaybillsListTransportResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,7 +289,7 @@ func (r *RawClient) PostV1TransportWaybillsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1TransportWaybillsListResponse]{
+	return &core.Response[*nordlet.WaybillsListTransportResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

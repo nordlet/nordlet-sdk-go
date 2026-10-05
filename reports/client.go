@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1ReportsTrialBalance(
+func (c *Client) TrialBalance(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsTrialBalanceRequest,
+	request *nordlet.TrialBalanceReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsTrialBalanceResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsTrialBalance(
+) (*nordlet.TrialBalanceReportsResponse, error) {
+	response, err := c.WithRawResponse.TrialBalance(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1ReportsTrialBalance(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsSizeCategory(
+func (c *Client) SizeCategory(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsSizeCategoryRequest,
+	request *nordlet.SizeCategoryReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsSizeCategoryResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsSizeCategory(
+) (*nordlet.SizeCategoryReportsResponse, error) {
+	response, err := c.WithRawResponse.SizeCategory(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1ReportsSizeCategory(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsFinancialStatements(
+func (c *Client) FinancialStatements(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsFinancialStatementsRequest,
+	request *nordlet.FinancialStatementsReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsFinancialStatementsResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsFinancialStatements(
+) (*nordlet.FinancialStatementsReportsResponse, error) {
+	response, err := c.WithRawResponse.FinancialStatements(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1ReportsFinancialStatements(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsGeneralJournal(
+func (c *Client) GeneralJournal(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsGeneralJournalRequest,
+	request *nordlet.GeneralJournalReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsGeneralJournalResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsGeneralJournal(
+) (*nordlet.GeneralJournalReportsResponse, error) {
+	response, err := c.WithRawResponse.GeneralJournal(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1ReportsGeneralJournal(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsGlDetail(
+func (c *Client) GlDetail(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsGlDetailRequest,
+	request *nordlet.GlDetailReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsGlDetailResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsGlDetail(
+) (*nordlet.GlDetailReportsResponse, error) {
+	response, err := c.WithRawResponse.GlDetail(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1ReportsGlDetail(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsPartnerBalances(
+func (c *Client) PartnerBalances(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsPartnerBalancesRequest,
+	request *nordlet.PartnerBalancesReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsPartnerBalancesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsPartnerBalances(
+) (*nordlet.PartnerBalancesReportsResponse, error) {
+	response, err := c.WithRawResponse.PartnerBalances(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1ReportsPartnerBalances(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsDebtAging(
+func (c *Client) DebtAging(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsDebtAgingRequest,
+	request *nordlet.DebtAgingReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsDebtAgingResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsDebtAging(
+) (*nordlet.DebtAgingReportsResponse, error) {
+	response, err := c.WithRawResponse.DebtAging(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1ReportsDebtAging(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsMonthlySummary(
+func (c *Client) MonthlySummary(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsMonthlySummaryRequest,
+	request *nordlet.MonthlySummaryReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsMonthlySummaryResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsMonthlySummary(
+) (*nordlet.MonthlySummaryReportsResponse, error) {
+	response, err := c.WithRawResponse.MonthlySummary(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1ReportsMonthlySummary(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsStockBalance(
+func (c *Client) StockBalance(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsStockBalanceRequest,
+	request *nordlet.StockBalanceReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsStockBalanceResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsStockBalance(
+) (*nordlet.StockBalanceReportsResponse, error) {
+	response, err := c.WithRawResponse.StockBalance(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1ReportsStockBalance(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsStockMovement(
+func (c *Client) StockMovement(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsStockMovementRequest,
+	request *nordlet.StockMovementReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsStockMovementResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsStockMovement(
+) (*nordlet.StockMovementReportsResponse, error) {
+	response, err := c.WithRawResponse.StockMovement(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1ReportsStockMovement(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsVatSummary(
+func (c *Client) VatSummary(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsVatSummaryRequest,
+	request *nordlet.VatSummaryReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsVatSummaryResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsVatSummary(
+) (*nordlet.VatSummaryReportsResponse, error) {
+	response, err := c.WithRawResponse.VatSummary(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1ReportsVatSummary(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsCashFlow(
+func (c *Client) CashFlow(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsCashFlowRequest,
+	request *nordlet.CashFlowReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsCashFlowResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsCashFlow(
+) (*nordlet.CashFlowReportsResponse, error) {
+	response, err := c.WithRawResponse.CashFlow(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1ReportsCashFlow(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsStockAging(
+func (c *Client) StockAging(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsStockAgingRequest,
+	request *nordlet.StockAgingReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsStockAgingResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsStockAging(
+) (*nordlet.StockAgingReportsResponse, error) {
+	response, err := c.WithRawResponse.StockAging(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1ReportsStockAging(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsStockShortage(
+func (c *Client) StockShortage(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsStockShortageRequest,
+	request *nordlet.StockShortageReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsStockShortageResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsStockShortage(
+) (*nordlet.StockShortageReportsResponse, error) {
+	response, err := c.WithRawResponse.StockShortage(
 		ctx,
 		request,
 		opts...,
@@ -259,12 +259,12 @@ func (c *Client) PostV1ReportsStockShortage(
 }
 
 // Export the ledger of one financial year as an SIE file (the Swedish standard accounting interchange format, specification 4B). The file carries the chart of accounts, the opening and closing balance of every balance sheet account and the turnover of every result account for the year and the year before it, and, when asked for, every posted voucher of the year with its lines. Cost centres travel as dimension 1 and projects as dimension 6. Services that build a Swedish annual report read this file.
-func (c *Client) PostV1ReportsSie(
+func (c *Client) Sie(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsSieRequest,
+	request *nordlet.SieReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsSieResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsSie(
+) (*nordlet.SieReportsResponse, error) {
+	response, err := c.WithRawResponse.Sie(
 		ctx,
 		request,
 		opts...,
@@ -276,12 +276,12 @@ func (c *Client) PostV1ReportsSie(
 }
 
 // Export the posted ledger of a period as a DATEV Buchungsstapel file (DATEV format, category 21, version 700). Every transaction becomes one or more bookings of an amount between an account and a contra account; a transaction with more than two lines is split into pairs whose totals match it. The file is semicolon separated and written in the Windows-1252 character set DATEV expects.
-func (c *Client) PostV1ReportsDatev(
+func (c *Client) Datev(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsDatevRequest,
+	request *nordlet.DatevReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsDatevResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsDatev(
+) (*nordlet.DatevReportsResponse, error) {
+	response, err := c.WithRawResponse.Datev(
 		ctx,
 		request,
 		opts...,
@@ -293,12 +293,12 @@ func (c *Client) PostV1ReportsDatev(
 }
 
 // Export the posted ledger of a period as a French FEC file (fichier des écritures comptables, order of 29 July 2013). One line per journal entry line, with the eighteen fields the order names, in their order, after a header line. Tab separated, UTF-8, comma as the decimal separator.
-func (c *Client) PostV1ReportsFec(
+func (c *Client) Fec(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsFecRequest,
+	request *nordlet.FecReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsFecResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsFec(
+) (*nordlet.FecReportsResponse, error) {
+	response, err := c.WithRawResponse.Fec(
 		ctx,
 		request,
 		opts...,
@@ -309,12 +309,12 @@ func (c *Client) PostV1ReportsFec(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsEuPurchases(
+func (c *Client) EuPurchases(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsEuPurchasesRequest,
+	request *nordlet.EuPurchasesReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsEuPurchasesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsEuPurchases(
+) (*nordlet.EuPurchasesReportsResponse, error) {
+	response, err := c.WithRawResponse.EuPurchases(
 		ctx,
 		request,
 		opts...,
@@ -325,12 +325,12 @@ func (c *Client) PostV1ReportsEuPurchases(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsVatDetail(
+func (c *Client) VatDetail(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsVatDetailRequest,
+	request *nordlet.VatDetailReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsVatDetailResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsVatDetail(
+) (*nordlet.VatDetailReportsResponse, error) {
+	response, err := c.WithRawResponse.VatDetail(
 		ctx,
 		request,
 		opts...,
@@ -341,12 +341,12 @@ func (c *Client) PostV1ReportsVatDetail(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsPosSales(
+func (c *Client) PosSales(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsPosSalesRequest,
+	request *nordlet.PosSalesReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsPosSalesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsPosSales(
+) (*nordlet.PosSalesReportsResponse, error) {
+	response, err := c.WithRawResponse.PosSales(
 		ctx,
 		request,
 		opts...,
@@ -357,12 +357,12 @@ func (c *Client) PostV1ReportsPosSales(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsOnlineSales(
+func (c *Client) OnlineSales(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsOnlineSalesRequest,
+	request *nordlet.OnlineSalesReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsOnlineSalesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsOnlineSales(
+) (*nordlet.OnlineSalesReportsResponse, error) {
+	response, err := c.WithRawResponse.OnlineSales(
 		ctx,
 		request,
 		opts...,
@@ -373,12 +373,12 @@ func (c *Client) PostV1ReportsOnlineSales(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsOss(
+func (c *Client) Oss(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsOssRequest,
+	request *nordlet.OssReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsOssResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsOss(
+) (*nordlet.OssReportsResponse, error) {
+	response, err := c.WithRawResponse.Oss(
 		ctx,
 		request,
 		opts...,
@@ -389,12 +389,12 @@ func (c *Client) PostV1ReportsOss(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsAdvanceReconciliation(
+func (c *Client) AdvanceReconciliation(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsAdvanceReconciliationRequest,
+	request *nordlet.AdvanceReconciliationReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsAdvanceReconciliationResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsAdvanceReconciliation(
+) (*nordlet.AdvanceReconciliationReportsResponse, error) {
+	response, err := c.WithRawResponse.AdvanceReconciliation(
 		ctx,
 		request,
 		opts...,
@@ -405,12 +405,12 @@ func (c *Client) PostV1ReportsAdvanceReconciliation(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsWriteOffActs(
+func (c *Client) WriteOffActs(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsWriteOffActsRequest,
+	request *nordlet.WriteOffActsReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsWriteOffActsResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsWriteOffActs(
+) (*nordlet.WriteOffActsReportsResponse, error) {
+	response, err := c.WithRawResponse.WriteOffActs(
 		ctx,
 		request,
 		opts...,
@@ -421,12 +421,12 @@ func (c *Client) PostV1ReportsWriteOffActs(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsCostCenters(
+func (c *Client) CostCenters(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsCostCentersRequest,
+	request *nordlet.CostCentersReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsCostCentersResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsCostCenters(
+) (*nordlet.CostCentersReportsResponse, error) {
+	response, err := c.WithRawResponse.CostCenters(
 		ctx,
 		request,
 		opts...,
@@ -437,12 +437,12 @@ func (c *Client) PostV1ReportsCostCenters(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsCostCenterActivity(
+func (c *Client) CostCenterActivity(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsCostCenterActivityRequest,
+	request *nordlet.CostCenterActivityReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsCostCenterActivityResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsCostCenterActivity(
+) (*nordlet.CostCenterActivityReportsResponse, error) {
+	response, err := c.WithRawResponse.CostCenterActivity(
 		ctx,
 		request,
 		opts...,
@@ -453,12 +453,12 @@ func (c *Client) PostV1ReportsCostCenterActivity(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsCostCenterItems(
+func (c *Client) CostCenterItems(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsCostCenterItemsRequest,
+	request *nordlet.CostCenterItemsReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsCostCenterItemsResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsCostCenterItems(
+) (*nordlet.CostCenterItemsReportsResponse, error) {
+	response, err := c.WithRawResponse.CostCenterItems(
 		ctx,
 		request,
 		opts...,
@@ -469,12 +469,12 @@ func (c *Client) PostV1ReportsCostCenterItems(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsJobsCreate(
+func (c *Client) JobsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsJobsCreateRequest,
+	request *nordlet.JobsCreateReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsJobsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsJobsCreate(
+) (*nordlet.JobsCreateReportsResponse, error) {
+	response, err := c.WithRawResponse.JobsCreate(
 		ctx,
 		request,
 		opts...,
@@ -485,12 +485,12 @@ func (c *Client) PostV1ReportsJobsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsJobsGet(
+func (c *Client) JobsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsJobsGetRequest,
+	request *nordlet.JobsGetReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsJobsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsJobsGet(
+) (*nordlet.JobsGetReportsResponse, error) {
+	response, err := c.WithRawResponse.JobsGet(
 		ctx,
 		request,
 		opts...,
@@ -501,12 +501,12 @@ func (c *Client) PostV1ReportsJobsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReportsJobsList(
+func (c *Client) JobsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReportsJobsListRequest,
+	request *nordlet.JobsListReportsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReportsJobsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReportsJobsList(
+) (*nordlet.JobsListReportsResponse, error) {
+	response, err := c.WithRawResponse.JobsList(
 		ctx,
 		request,
 		opts...,

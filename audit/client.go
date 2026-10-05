@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1AuditList(
+func (c *Client) List(
 	ctx context.Context,
-	request *nordlet.PostV1AuditListRequest,
+	request *nordlet.ListAuditRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AuditListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AuditList(
+) (*nordlet.ListAuditResponse, error) {
+	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
 		opts...,

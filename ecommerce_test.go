@@ -10,9 +10,9 @@ import (
 	time "time"
 )
 
-func TestSettersPostV1EcommerceOrdersCancelRequest(t *testing.T) {
+func TestSettersOrdersCancelEcommerceRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelRequest{}
+		obj := &OrdersCancelEcommerceRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -21,11 +21,11 @@ func TestSettersPostV1EcommerceOrdersCancelRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCancelRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersCancelEcommerceRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelRequest{}
+		obj := &OrdersCancelEcommerceRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -55,9 +55,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
+func TestSettersOrdersCreateEcommerceRequest(t *testing.T) {
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueChannel *string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -65,7 +65,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -73,7 +73,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -81,15 +81,15 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetPartner", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
-		var fernTestValuePartner *PostV1EcommerceOrdersCreateRequestPartner
+		obj := &OrdersCreateEcommerceRequest{}
+		var fernTestValuePartner *OrdersCreateEcommerceRequestPartner
 		obj.SetPartner(fernTestValuePartner)
 		assert.Equal(t, fernTestValuePartner, obj.Partner)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -97,7 +97,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -105,7 +105,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -113,7 +113,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -121,7 +121,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -129,8 +129,8 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequest{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCreateRequestLinesItem
+		obj := &OrdersCreateEcommerceRequest{}
+		var fernTestValueLines []*OrdersCreateEcommerceRequestLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -138,11 +138,11 @@ func TestSettersPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersCreateEcommerceRequest(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueChannel *string
 
 		// Act
@@ -173,7 +173,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -204,7 +204,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValuePartnerID *string
 
 		// Act
@@ -235,8 +235,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetPartner_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
-		var fernTestValuePartner *PostV1EcommerceOrdersCreateRequestPartner
+		obj := &OrdersCreateEcommerceRequest{}
+		var fernTestValuePartner *OrdersCreateEcommerceRequestPartner
 
 		// Act
 		obj.SetPartner(fernTestValuePartner)
@@ -266,7 +266,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -297,7 +297,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -328,7 +328,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -359,7 +359,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -390,7 +390,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
+		obj := &OrdersCreateEcommerceRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -421,8 +421,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequest{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCreateRequestLinesItem
+		obj := &OrdersCreateEcommerceRequest{}
+		var fernTestValueLines []*OrdersCreateEcommerceRequestLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -451,9 +451,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
+func TestSettersOrdersFulfillEcommerceRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -461,15 +461,15 @@ func TestSettersPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
-		var fernTestValueDate *string
+		obj := &OrdersFulfillEcommerceRequest{}
+		var fernTestValueDate *time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCogsAccountCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueCogsAccountCode *string
 		obj.SetCogsAccountCode(fernTestValueCogsAccountCode)
 		assert.Equal(t, fernTestValueCogsAccountCode, obj.CogsAccountCode)
@@ -477,7 +477,7 @@ func TestSettersPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 	})
 
 	t.Run("SetInventoryAccountCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueInventoryAccountCode *string
 		obj.SetInventoryAccountCode(fernTestValueInventoryAccountCode)
 		assert.Equal(t, fernTestValueInventoryAccountCode, obj.InventoryAccountCode)
@@ -486,11 +486,11 @@ func TestSettersPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersFulfillEcommerceRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -521,8 +521,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
-		var fernTestValueDate *string
+		obj := &OrdersFulfillEcommerceRequest{}
+		var fernTestValueDate *time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -552,7 +552,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 	t.Run("SetCogsAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueCogsAccountCode *string
 
 		// Act
@@ -583,7 +583,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 	t.Run("SetInventoryAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillRequest{}
+		obj := &OrdersFulfillEcommerceRequest{}
 		var fernTestValueInventoryAccountCode *string
 
 		// Act
@@ -613,9 +613,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersGetRequest(t *testing.T) {
+func TestSettersOrdersGetEcommerceRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetRequest{}
+		obj := &OrdersGetEcommerceRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -624,11 +624,11 @@ func TestSettersPostV1EcommerceOrdersGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersGetRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersGetEcommerceRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetRequest{}
+		obj := &OrdersGetEcommerceRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -658,9 +658,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersListRequest(t *testing.T) {
+func TestSettersOrdersListEcommerceRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -668,7 +668,7 @@ func TestSettersPostV1EcommerceOrdersListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -676,23 +676,23 @@ func TestSettersPostV1EcommerceOrdersListRequest(t *testing.T) {
 	})
 
 	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequest{}
-		var fernTestValueSort []*PostV1EcommerceOrdersListRequestSortItem
+		obj := &OrdersListEcommerceRequest{}
+		var fernTestValueSort []*OrdersListEcommerceRequestSortItem
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequest{}
-		var fernTestValueFilter []*PostV1EcommerceOrdersListRequestFilterItem
+		obj := &OrdersListEcommerceRequest{}
+		var fernTestValueFilter []*OrdersListEcommerceRequestFilterItem
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValueTotals []string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -701,11 +701,11 @@ func TestSettersPostV1EcommerceOrdersListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersListEcommerceRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -736,7 +736,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -767,8 +767,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
 	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequest{}
-		var fernTestValueSort []*PostV1EcommerceOrdersListRequestSortItem
+		obj := &OrdersListEcommerceRequest{}
+		var fernTestValueSort []*OrdersListEcommerceRequestSortItem
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -798,8 +798,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
 	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequest{}
-		var fernTestValueFilter []*PostV1EcommerceOrdersListRequestFilterItem
+		obj := &OrdersListEcommerceRequest{}
+		var fernTestValueFilter []*OrdersListEcommerceRequestFilterItem
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -829,7 +829,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequest{}
+		obj := &OrdersListEcommerceRequest{}
 		var fernTestValueTotals []string
 
 		// Act
@@ -859,9 +859,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersReserveRequest(t *testing.T) {
+func TestSettersOrdersReserveEcommerceRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveRequest{}
+		obj := &OrdersReserveEcommerceRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -869,7 +869,7 @@ func TestSettersPostV1EcommerceOrdersReserveRequest(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveRequest{}
+		obj := &OrdersReserveEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -878,11 +878,11 @@ func TestSettersPostV1EcommerceOrdersReserveRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersReserveRequest(t *testing.T) {
+func TestSettersMarkExplicitOrdersReserveEcommerceRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveRequest{}
+		obj := &OrdersReserveEcommerceRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -913,7 +913,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveRequest{}
+		obj := &OrdersReserveEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -943,9 +943,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
+func TestSettersProductsListEcommerceRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -953,7 +953,7 @@ func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPriceListID", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePriceListID *string
 		obj.SetPriceListID(fernTestValuePriceListID)
 		assert.Equal(t, fernTestValuePriceListID, obj.PriceListID)
@@ -961,7 +961,7 @@ func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetUpdatedSince", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValueUpdatedSince *time.Time
 		obj.SetUpdatedSince(fernTestValueUpdatedSince)
 		assert.Equal(t, fernTestValueUpdatedSince, obj.UpdatedSince)
@@ -969,7 +969,7 @@ func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePage *int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -977,7 +977,7 @@ func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePageSize *int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -986,11 +986,11 @@ func TestSettersPostV1EcommerceProductsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
+func TestSettersMarkExplicitProductsListEcommerceRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -1021,7 +1021,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
 	t.Run("SetPriceListID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePriceListID *string
 
 		// Act
@@ -1052,7 +1052,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
 	t.Run("SetUpdatedSince_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValueUpdatedSince *time.Time
 
 		// Act
@@ -1083,7 +1083,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePage *int64
 
 		// Act
@@ -1114,7 +1114,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListRequest{}
+		obj := &ProductsListEcommerceRequest{}
 		var fernTestValuePageSize *int64
 
 		// Act
@@ -1144,9 +1144,9 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceStockListRequest(t *testing.T) {
+func TestSettersStockListEcommerceRequest(t *testing.T) {
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListRequest{}
+		obj := &StockListEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -1155,11 +1155,11 @@ func TestSettersPostV1EcommerceStockListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceStockListRequest(t *testing.T) {
+func TestSettersMarkExplicitStockListEcommerceRequest(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListRequest{}
+		obj := &StockListEcommerceRequest{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -1189,9 +1189,9 @@ func TestSettersMarkExplicitPostV1EcommerceStockListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestSettersOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1199,7 +1199,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -1207,7 +1207,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -1215,7 +1215,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -1223,7 +1223,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -1231,7 +1231,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -1239,15 +1239,15 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersCancelResponseStatus
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueStatus OrdersCancelEcommerceResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -1255,7 +1255,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -1263,7 +1263,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -1271,7 +1271,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -1279,16 +1279,16 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCancelResponseLinesItem
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueLines []*OrdersCancelEcommerceResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -1296,11 +1296,11 @@ func TestSettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestGettersOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -1310,7 +1310,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1323,7 +1323,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected string
 		obj.Channel = expected
 
@@ -1333,7 +1333,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1346,7 +1346,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -1357,7 +1357,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -1366,7 +1366,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1379,7 +1379,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -1389,7 +1389,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1402,7 +1402,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -1413,7 +1413,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -1422,7 +1422,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1435,7 +1435,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected string
 		obj.Currency = expected
 
@@ -1445,7 +1445,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1458,8 +1458,8 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var expected PostV1EcommerceOrdersCancelResponseStatus
+		obj := &OrdersCancelEcommerceResponse{}
+		var expected OrdersCancelEcommerceResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -1468,7 +1468,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1481,7 +1481,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -1492,7 +1492,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -1501,7 +1501,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1514,7 +1514,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -1525,7 +1525,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -1534,7 +1534,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1547,7 +1547,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -1558,7 +1558,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -1567,7 +1567,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1580,7 +1580,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -1591,7 +1591,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -1600,7 +1600,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1613,8 +1613,8 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var expected string
+		obj := &OrdersCancelEcommerceResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -1623,7 +1623,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1636,8 +1636,8 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var expected []*PostV1EcommerceOrdersCancelResponseLinesItem
+		obj := &OrdersCancelEcommerceResponse{}
+		var expected []*OrdersCancelEcommerceResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -1647,7 +1647,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -1656,7 +1656,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1668,11 +1668,11 @@ func TestGettersPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -1703,7 +1703,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueChannel string
 
 		// Act
@@ -1734,7 +1734,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -1765,7 +1765,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -1796,7 +1796,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -1827,7 +1827,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -1858,8 +1858,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersCancelResponseStatus
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueStatus OrdersCancelEcommerceResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -1889,7 +1889,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -1920,7 +1920,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -1951,7 +1951,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -1982,7 +1982,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -2013,8 +2013,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -2044,8 +2044,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCancelResponseLinesItem
+		obj := &OrdersCancelEcommerceResponse{}
+		var fernTestValueLines []*OrdersCancelEcommerceResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -2074,9 +2074,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestSettersOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -2084,7 +2084,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -2092,7 +2092,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -2100,7 +2100,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -2108,7 +2108,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -2116,7 +2116,7 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -2125,11 +2125,11 @@ func TestSettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestGettersOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -2139,7 +2139,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2152,7 +2152,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -2163,7 +2163,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -2172,7 +2172,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2185,7 +2185,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -2195,7 +2195,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2208,7 +2208,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -2218,7 +2218,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2231,7 +2231,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -2241,7 +2241,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2254,7 +2254,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -2264,7 +2264,7 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2276,11 +2276,11 @@ func TestGettersPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -2311,7 +2311,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -2342,7 +2342,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -2373,7 +2373,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -2404,7 +2404,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -2435,7 +2435,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -2465,9 +2465,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCancelResponseLinesItem(t *test
 
 }
 
-func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestSettersOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -2475,7 +2475,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -2483,7 +2483,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -2491,7 +2491,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -2499,7 +2499,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -2508,11 +2508,11 @@ func TestSettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestGettersOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -2523,7 +2523,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -2532,7 +2532,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2545,7 +2545,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -2555,7 +2555,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2568,7 +2568,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -2578,7 +2578,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2591,7 +2591,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -2601,7 +2601,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2614,7 +2614,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -2625,7 +2625,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -2634,7 +2634,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2646,11 +2646,11 @@ func TestGettersPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -2681,7 +2681,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testi
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -2712,7 +2712,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testi
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -2743,7 +2743,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testi
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -2774,7 +2774,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testi
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -2804,9 +2804,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestLinesItem(t *testi
 
 }
 
-func TestSettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestSettersOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -2814,7 +2814,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	})
 
 	t.Run("SetEmail", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueEmail *string
 		obj.SetEmail(fernTestValueEmail)
 		assert.Equal(t, fernTestValueEmail, obj.Email)
@@ -2822,7 +2822,7 @@ func TestSettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -2831,11 +2831,11 @@ func TestSettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestGettersOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var expected string
 		obj.Name = expected
 
@@ -2845,7 +2845,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestPartner
+		var obj *OrdersCreateEcommerceRequestPartner
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2858,7 +2858,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	t.Run("GetEmail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var expected *string
 		obj.Email = expected
 
@@ -2869,7 +2869,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	t.Run("GetEmail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		obj.Email = nil
 
 		// Act & Assert
@@ -2878,7 +2878,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 
 	t.Run("GetEmail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestPartner
+		var obj *OrdersCreateEcommerceRequestPartner
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2891,7 +2891,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var expected *string
 		obj.Code = expected
 
@@ -2902,7 +2902,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -2911,7 +2911,7 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestPartner
+		var obj *OrdersCreateEcommerceRequestPartner
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2923,11 +2923,11 @@ func TestGettersPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestSettersMarkExplicitOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueName string
 
 		// Act
@@ -2958,7 +2958,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestPartner(t *testing
 	t.Run("SetEmail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueEmail *string
 
 		// Act
@@ -2989,7 +2989,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestPartner(t *testing
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		var fernTestValueCode *string
 
 		// Act
@@ -3019,9 +3019,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateRequestPartner(t *testing
 
 }
 
-func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestSettersOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3029,7 +3029,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -3037,7 +3037,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -3045,7 +3045,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -3053,7 +3053,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -3061,7 +3061,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -3069,15 +3069,15 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersCreateResponseStatus
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueStatus OrdersCreateEcommerceResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -3085,7 +3085,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -3093,7 +3093,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -3101,7 +3101,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -3109,16 +3109,16 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCreateResponseLinesItem
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueLines []*OrdersCreateEcommerceResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -3126,11 +3126,11 @@ func TestSettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestGettersOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -3140,7 +3140,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3153,7 +3153,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected string
 		obj.Channel = expected
 
@@ -3163,7 +3163,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3176,7 +3176,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -3187,7 +3187,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -3196,7 +3196,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3209,7 +3209,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -3219,7 +3219,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3232,7 +3232,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -3243,7 +3243,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -3252,7 +3252,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3265,7 +3265,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected string
 		obj.Currency = expected
 
@@ -3275,7 +3275,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3288,8 +3288,8 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var expected PostV1EcommerceOrdersCreateResponseStatus
+		obj := &OrdersCreateEcommerceResponse{}
+		var expected OrdersCreateEcommerceResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -3298,7 +3298,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3311,7 +3311,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -3322,7 +3322,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -3331,7 +3331,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3344,7 +3344,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -3355,7 +3355,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -3364,7 +3364,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3377,7 +3377,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -3388,7 +3388,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -3397,7 +3397,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3410,7 +3410,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -3421,7 +3421,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -3430,7 +3430,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3443,8 +3443,8 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var expected string
+		obj := &OrdersCreateEcommerceResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -3453,7 +3453,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3466,8 +3466,8 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var expected []*PostV1EcommerceOrdersCreateResponseLinesItem
+		obj := &OrdersCreateEcommerceResponse{}
+		var expected []*OrdersCreateEcommerceResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -3477,7 +3477,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -3486,7 +3486,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3498,11 +3498,11 @@ func TestGettersPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -3533,7 +3533,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueChannel string
 
 		// Act
@@ -3564,7 +3564,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -3595,7 +3595,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -3626,7 +3626,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -3657,7 +3657,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -3688,8 +3688,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersCreateResponseStatus
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueStatus OrdersCreateEcommerceResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -3719,7 +3719,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -3750,7 +3750,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -3781,7 +3781,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -3812,7 +3812,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -3843,8 +3843,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3874,8 +3874,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersCreateResponseLinesItem
+		obj := &OrdersCreateEcommerceResponse{}
+		var fernTestValueLines []*OrdersCreateEcommerceResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -3904,9 +3904,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestSettersOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -3914,7 +3914,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -3922,7 +3922,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -3930,7 +3930,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -3938,7 +3938,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -3946,7 +3946,7 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -3955,11 +3955,11 @@ func TestSettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestGettersOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -3969,7 +3969,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3982,7 +3982,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -3993,7 +3993,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -4002,7 +4002,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4015,7 +4015,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -4025,7 +4025,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4038,7 +4038,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -4048,7 +4048,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4061,7 +4061,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -4071,7 +4071,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4084,7 +4084,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -4094,7 +4094,7 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4106,11 +4106,11 @@ func TestGettersPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -4141,7 +4141,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -4172,7 +4172,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -4203,7 +4203,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -4234,7 +4234,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -4265,7 +4265,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -4295,9 +4295,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersCreateResponseLinesItem(t *test
 
 }
 
-func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestSettersOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4305,7 +4305,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -4313,7 +4313,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -4321,7 +4321,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -4329,7 +4329,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -4337,7 +4337,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -4345,15 +4345,15 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersFulfillResponseStatus
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueStatus OrdersFulfillEcommerceResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -4361,7 +4361,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -4369,7 +4369,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -4377,7 +4377,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -4385,16 +4385,16 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersFulfillResponseLinesItem
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueLines []*OrdersFulfillEcommerceResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -4402,11 +4402,11 @@ func TestSettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestGettersOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -4416,7 +4416,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4429,7 +4429,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected string
 		obj.Channel = expected
 
@@ -4439,7 +4439,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4452,7 +4452,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -4463,7 +4463,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -4472,7 +4472,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4485,7 +4485,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -4495,7 +4495,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4508,7 +4508,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -4519,7 +4519,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -4528,7 +4528,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4541,7 +4541,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected string
 		obj.Currency = expected
 
@@ -4551,7 +4551,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4564,8 +4564,8 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var expected PostV1EcommerceOrdersFulfillResponseStatus
+		obj := &OrdersFulfillEcommerceResponse{}
+		var expected OrdersFulfillEcommerceResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -4574,7 +4574,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4587,7 +4587,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -4598,7 +4598,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -4607,7 +4607,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4620,7 +4620,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -4631,7 +4631,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -4640,7 +4640,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4653,7 +4653,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -4664,7 +4664,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -4673,7 +4673,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4686,7 +4686,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4697,7 +4697,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4706,7 +4706,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4719,8 +4719,8 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var expected string
+		obj := &OrdersFulfillEcommerceResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4729,7 +4729,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4742,8 +4742,8 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var expected []*PostV1EcommerceOrdersFulfillResponseLinesItem
+		obj := &OrdersFulfillEcommerceResponse{}
+		var expected []*OrdersFulfillEcommerceResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -4753,7 +4753,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -4762,7 +4762,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4774,11 +4774,11 @@ func TestGettersPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -4809,7 +4809,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueChannel string
 
 		// Act
@@ -4840,7 +4840,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -4871,7 +4871,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -4902,7 +4902,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -4933,7 +4933,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -4964,8 +4964,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersFulfillResponseStatus
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueStatus OrdersFulfillEcommerceResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -4995,7 +4995,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -5026,7 +5026,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -5057,7 +5057,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -5088,7 +5088,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -5119,8 +5119,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -5150,8 +5150,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersFulfillResponseLinesItem
+		obj := &OrdersFulfillEcommerceResponse{}
+		var fernTestValueLines []*OrdersFulfillEcommerceResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -5180,9 +5180,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestSettersOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5190,7 +5190,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -5198,7 +5198,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -5206,7 +5206,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -5214,7 +5214,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -5222,7 +5222,7 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -5231,11 +5231,11 @@ func TestSettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestGettersOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -5245,7 +5245,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5258,7 +5258,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -5269,7 +5269,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -5278,7 +5278,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5291,7 +5291,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -5301,7 +5301,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5314,7 +5314,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -5324,7 +5324,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5337,7 +5337,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -5347,7 +5347,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5360,7 +5360,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -5370,7 +5370,7 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5382,11 +5382,11 @@ func TestGettersPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -5417,7 +5417,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -5448,7 +5448,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -5479,7 +5479,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -5510,7 +5510,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -5541,7 +5541,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -5571,9 +5571,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersFulfillResponseLinesItem(t *tes
 
 }
 
-func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestSettersOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5581,7 +5581,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -5589,7 +5589,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -5597,7 +5597,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -5605,7 +5605,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -5613,7 +5613,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -5621,15 +5621,15 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersGetResponseStatus
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueStatus OrdersGetEcommerceResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -5637,7 +5637,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -5645,7 +5645,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -5653,7 +5653,7 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -5661,16 +5661,16 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersGetResponseLinesItem
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueLines []*OrdersGetEcommerceResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -5678,11 +5678,11 @@ func TestSettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestGettersOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -5692,7 +5692,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5705,7 +5705,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected string
 		obj.Channel = expected
 
@@ -5715,7 +5715,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5728,7 +5728,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -5739,7 +5739,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -5748,7 +5748,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5761,7 +5761,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -5771,7 +5771,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5784,7 +5784,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -5795,7 +5795,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -5804,7 +5804,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5817,7 +5817,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected string
 		obj.Currency = expected
 
@@ -5827,7 +5827,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5840,8 +5840,8 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var expected PostV1EcommerceOrdersGetResponseStatus
+		obj := &OrdersGetEcommerceResponse{}
+		var expected OrdersGetEcommerceResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -5850,7 +5850,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5863,7 +5863,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -5874,7 +5874,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -5883,7 +5883,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5896,7 +5896,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -5907,7 +5907,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -5916,7 +5916,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5929,7 +5929,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -5940,7 +5940,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -5949,7 +5949,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5962,7 +5962,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -5973,7 +5973,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -5982,7 +5982,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5995,8 +5995,8 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var expected string
+		obj := &OrdersGetEcommerceResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6005,7 +6005,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6018,8 +6018,8 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var expected []*PostV1EcommerceOrdersGetResponseLinesItem
+		obj := &OrdersGetEcommerceResponse{}
+		var expected []*OrdersGetEcommerceResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -6029,7 +6029,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -6038,7 +6038,7 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6050,11 +6050,11 @@ func TestGettersPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -6085,7 +6085,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueChannel string
 
 		// Act
@@ -6116,7 +6116,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -6147,7 +6147,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -6178,7 +6178,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -6209,7 +6209,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -6240,8 +6240,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersGetResponseStatus
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueStatus OrdersGetEcommerceResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -6271,7 +6271,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -6302,7 +6302,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -6333,7 +6333,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -6364,7 +6364,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6395,8 +6395,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6426,8 +6426,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersGetResponseLinesItem
+		obj := &OrdersGetEcommerceResponse{}
+		var fernTestValueLines []*OrdersGetEcommerceResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -6456,9 +6456,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestSettersOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6466,7 +6466,7 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -6474,7 +6474,7 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -6482,7 +6482,7 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -6490,7 +6490,7 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -6498,7 +6498,7 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -6507,11 +6507,11 @@ func TestSettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestGettersOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -6521,7 +6521,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6534,7 +6534,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -6545,7 +6545,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -6554,7 +6554,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6567,7 +6567,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -6577,7 +6577,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6590,7 +6590,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -6600,7 +6600,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6613,7 +6613,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -6623,7 +6623,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6636,7 +6636,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -6646,7 +6646,7 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6658,11 +6658,11 @@ func TestGettersPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -6693,7 +6693,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -6724,7 +6724,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -6755,7 +6755,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -6786,7 +6786,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -6817,7 +6817,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -6847,9 +6847,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersGetResponseLinesItem(t *testing
 
 }
 
-func TestSettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestSettersOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -6857,16 +6857,16 @@ func TestSettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var fernTestValueOp PostV1EcommerceOrdersListRequestFilterItemOp
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var fernTestValueOp OrdersListEcommerceRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var fernTestValueValue *PostV1EcommerceOrdersListRequestFilterItemValue
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var fernTestValueValue *OrdersListEcommerceRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -6874,11 +6874,11 @@ func TestSettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestGettersOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -6888,7 +6888,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItem
+		var obj *OrdersListEcommerceRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6901,8 +6901,8 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var expected PostV1EcommerceOrdersListRequestFilterItemOp
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var expected OrdersListEcommerceRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -6911,7 +6911,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItem
+		var obj *OrdersListEcommerceRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6924,8 +6924,8 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var expected *PostV1EcommerceOrdersListRequestFilterItemValue
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var expected *OrdersListEcommerceRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -6935,7 +6935,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -6944,7 +6944,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItem
+		var obj *OrdersListEcommerceRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6956,11 +6956,11 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -6991,8 +6991,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestFilterItem(t *testin
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var fernTestValueOp PostV1EcommerceOrdersListRequestFilterItemOp
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var fernTestValueOp OrdersListEcommerceRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -7022,8 +7022,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestFilterItem(t *testin
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
-		var fernTestValueValue *PostV1EcommerceOrdersListRequestFilterItemValue
+		obj := &OrdersListEcommerceRequestFilterItem{}
+		var fernTestValueValue *OrdersListEcommerceRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -7052,11 +7052,11 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestFilterItem(t *testin
 
 }
 
-func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
+func TestGettersOrdersListEcommerceRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValue{}
+		obj := &OrdersListEcommerceRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -7066,7 +7066,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValue
+		var obj *OrdersListEcommerceRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7079,7 +7079,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValue{}
+		obj := &OrdersListEcommerceRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -7089,7 +7089,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValue
+		var obj *OrdersListEcommerceRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7102,7 +7102,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValue{}
+		obj := &OrdersListEcommerceRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -7112,7 +7112,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValue
+		var obj *OrdersListEcommerceRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7122,46 +7122,46 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetOrdersListEcommerceRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValue{}
-		var expected []*PostV1EcommerceOrdersListRequestFilterItemValueThreeItem
-		obj.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList = expected
+		obj := &OrdersListEcommerceRequestFilterItemValue{}
+		var expected []*OrdersListEcommerceRequestFilterItemValueThreeItem
+		obj.OrdersListEcommerceRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetOrdersListEcommerceRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetOrdersListEcommerceRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValue{}
-		obj.PostV1EcommerceOrdersListRequestFilterItemValueThreeItemList = nil
+		obj := &OrdersListEcommerceRequestFilterItemValue{}
+		obj.OrdersListEcommerceRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetOrdersListEcommerceRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetOrdersListEcommerceRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValue
+		var obj *OrdersListEcommerceRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1EcommerceOrdersListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetOrdersListEcommerceRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1EcommerceOrdersListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersOrdersListEcommerceRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValueThreeItem{}
+		obj := &OrdersListEcommerceRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -7171,7 +7171,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValueThreeItem(t *test
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem
+		var obj *OrdersListEcommerceRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7184,7 +7184,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValueThreeItem(t *test
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItemValueThreeItem{}
+		obj := &OrdersListEcommerceRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -7194,7 +7194,7 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValueThreeItem(t *test
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItemValueThreeItem
+		var obj *OrdersListEcommerceRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7206,9 +7206,9 @@ func TestGettersPostV1EcommerceOrdersListRequestFilterItemValueThreeItem(t *test
 
 }
 
-func TestSettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestSettersOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -7216,8 +7216,8 @@ func TestSettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
-		var fernTestValueDir *PostV1EcommerceOrdersListRequestSortItemDir
+		obj := &OrdersListEcommerceRequestSortItem{}
+		var fernTestValueDir *OrdersListEcommerceRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -7225,11 +7225,11 @@ func TestSettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestGettersOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -7239,7 +7239,7 @@ func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestSortItem
+		var obj *OrdersListEcommerceRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7252,8 +7252,8 @@ func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
-		var expected *PostV1EcommerceOrdersListRequestSortItemDir
+		obj := &OrdersListEcommerceRequestSortItem{}
+		var expected *OrdersListEcommerceRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -7263,7 +7263,7 @@ func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -7272,7 +7272,7 @@ func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestSortItem
+		var obj *OrdersListEcommerceRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7284,11 +7284,11 @@ func TestGettersPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -7319,8 +7319,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestSortItem(t *testing.
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
-		var fernTestValueDir *PostV1EcommerceOrdersListRequestSortItemDir
+		obj := &OrdersListEcommerceRequestSortItem{}
+		var fernTestValueDir *OrdersListEcommerceRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -7349,17 +7349,17 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListRequestSortItem(t *testing.
 
 }
 
-func TestSettersPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestSettersOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponse{}
-		var fernTestValueRows []*PostV1EcommerceOrdersListResponseRowsItem
+		obj := &OrdersListEcommerceResponse{}
+		var fernTestValueRows []*OrdersListEcommerceResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -7367,7 +7367,7 @@ func TestSettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -7375,7 +7375,7 @@ func TestSettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -7383,7 +7383,7 @@ func TestSettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -7392,12 +7392,12 @@ func TestSettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestGettersOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
-		var expected []*PostV1EcommerceOrdersListResponseRowsItem
+		obj := &OrdersListEcommerceResponse{}
+		var expected []*OrdersListEcommerceResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -7407,7 +7407,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -7416,7 +7416,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7429,7 +7429,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -7439,7 +7439,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7452,7 +7452,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -7462,7 +7462,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7475,7 +7475,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -7485,7 +7485,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7498,7 +7498,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -7509,7 +7509,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -7518,7 +7518,7 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7530,12 +7530,12 @@ func TestGettersPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
-		var fernTestValueRows []*PostV1EcommerceOrdersListResponseRowsItem
+		obj := &OrdersListEcommerceResponse{}
+		var fernTestValueRows []*OrdersListEcommerceResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -7565,7 +7565,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -7596,7 +7596,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -7627,7 +7627,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -7658,7 +7658,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -7688,9 +7688,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestSettersOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7698,7 +7698,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -7706,7 +7706,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -7714,7 +7714,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -7722,7 +7722,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -7730,7 +7730,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -7738,15 +7738,15 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var fernTestValueStatus PostV1EcommerceOrdersListResponseRowsItemStatus
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var fernTestValueStatus OrdersListEcommerceResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -7754,7 +7754,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -7762,7 +7762,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -7770,7 +7770,7 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -7778,8 +7778,8 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -7787,11 +7787,11 @@ func TestSettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestGettersOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -7801,7 +7801,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7814,7 +7814,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Channel = expected
 
@@ -7824,7 +7824,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7837,7 +7837,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -7848,7 +7848,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -7857,7 +7857,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7870,7 +7870,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -7880,7 +7880,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7893,7 +7893,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -7904,7 +7904,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -7913,7 +7913,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7926,7 +7926,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Currency = expected
 
@@ -7936,7 +7936,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7949,8 +7949,8 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var expected PostV1EcommerceOrdersListResponseRowsItemStatus
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var expected OrdersListEcommerceResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -7959,7 +7959,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7972,7 +7972,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -7983,7 +7983,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -7992,7 +7992,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8005,7 +8005,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -8016,7 +8016,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -8025,7 +8025,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8038,7 +8038,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -8049,7 +8049,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -8058,7 +8058,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8071,7 +8071,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -8082,7 +8082,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -8091,7 +8091,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8104,8 +8104,8 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var expected string
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8114,7 +8114,7 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8126,11 +8126,11 @@ func TestGettersPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -8161,7 +8161,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueChannel string
 
 		// Act
@@ -8192,7 +8192,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -8223,7 +8223,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -8254,7 +8254,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -8285,7 +8285,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -8316,8 +8316,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var fernTestValueStatus PostV1EcommerceOrdersListResponseRowsItemStatus
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var fernTestValueStatus OrdersListEcommerceResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -8347,7 +8347,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -8378,7 +8378,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -8409,7 +8409,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -8440,7 +8440,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -8471,8 +8471,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersListEcommerceResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -8501,9 +8501,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersListResponseRowsItem(t *testing
 
 }
 
-func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestSettersOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8511,7 +8511,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetChannel", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueChannel string
 		obj.SetChannel(fernTestValueChannel)
 		assert.Equal(t, fernTestValueChannel, obj.Channel)
@@ -8519,7 +8519,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -8527,7 +8527,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -8535,7 +8535,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -8543,7 +8543,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -8551,15 +8551,15 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersReserveResponseStatus
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueStatus OrdersReserveEcommerceResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetInvoiceID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 		obj.SetInvoiceID(fernTestValueInvoiceID)
 		assert.Equal(t, fernTestValueInvoiceID, obj.InvoiceID)
@@ -8567,7 +8567,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetShipToCountryCode", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 		obj.SetShipToCountryCode(fernTestValueShipToCountryCode)
 		assert.Equal(t, fernTestValueShipToCountryCode, obj.ShipToCountryCode)
@@ -8575,7 +8575,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetMarketplace", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueMarketplace *string
 		obj.SetMarketplace(fernTestValueMarketplace)
 		assert.Equal(t, fernTestValueMarketplace, obj.Marketplace)
@@ -8583,7 +8583,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -8591,16 +8591,16 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersReserveResponseLinesItem
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueLines []*OrdersReserveEcommerceResponseLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -8608,11 +8608,11 @@ func TestSettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestGettersOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -8622,7 +8622,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8635,7 +8635,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetChannel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected string
 		obj.Channel = expected
 
@@ -8645,7 +8645,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetChannel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8658,7 +8658,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -8669,7 +8669,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -8678,7 +8678,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8691,7 +8691,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -8701,7 +8701,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8714,7 +8714,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.WarehouseID = expected
 
@@ -8725,7 +8725,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetWarehouseID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.WarehouseID = nil
 
 		// Act & Assert
@@ -8734,7 +8734,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8747,7 +8747,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected string
 		obj.Currency = expected
 
@@ -8757,7 +8757,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8770,8 +8770,8 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var expected PostV1EcommerceOrdersReserveResponseStatus
+		obj := &OrdersReserveEcommerceResponse{}
+		var expected OrdersReserveEcommerceResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -8780,7 +8780,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8793,7 +8793,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.InvoiceID = expected
 
@@ -8804,7 +8804,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.InvoiceID = nil
 
 		// Act & Assert
@@ -8813,7 +8813,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8826,7 +8826,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.ShipToCountryCode = expected
 
@@ -8837,7 +8837,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetShipToCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.ShipToCountryCode = nil
 
 		// Act & Assert
@@ -8846,7 +8846,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetShipToCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8859,7 +8859,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetMarketplace", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.Marketplace = expected
 
@@ -8870,7 +8870,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetMarketplace_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.Marketplace = nil
 
 		// Act & Assert
@@ -8879,7 +8879,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetMarketplace_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8892,7 +8892,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -8903,7 +8903,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -8912,7 +8912,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8925,8 +8925,8 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var expected string
+		obj := &OrdersReserveEcommerceResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8935,7 +8935,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8948,8 +8948,8 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var expected []*PostV1EcommerceOrdersReserveResponseLinesItem
+		obj := &OrdersReserveEcommerceResponse{}
+		var expected []*OrdersReserveEcommerceResponseLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -8959,7 +8959,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -8968,7 +8968,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8980,11 +8980,11 @@ func TestGettersPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestSettersMarkExplicitOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -9015,7 +9015,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetChannel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueChannel string
 
 		// Act
@@ -9046,7 +9046,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -9077,7 +9077,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -9108,7 +9108,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueWarehouseID *string
 
 		// Act
@@ -9139,7 +9139,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -9170,8 +9170,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueStatus PostV1EcommerceOrdersReserveResponseStatus
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueStatus OrdersReserveEcommerceResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -9201,7 +9201,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueInvoiceID *string
 
 		// Act
@@ -9232,7 +9232,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetShipToCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueShipToCountryCode *string
 
 		// Act
@@ -9263,7 +9263,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetMarketplace_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueMarketplace *string
 
 		// Act
@@ -9294,7 +9294,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -9325,8 +9325,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueCreatedAt string
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -9356,8 +9356,8 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
-		var fernTestValueLines []*PostV1EcommerceOrdersReserveResponseLinesItem
+		obj := &OrdersReserveEcommerceResponse{}
+		var fernTestValueLines []*OrdersReserveEcommerceResponseLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -9386,9 +9386,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestSettersOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -9396,7 +9396,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -9404,7 +9404,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -9412,7 +9412,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -9420,7 +9420,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -9428,7 +9428,7 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -9437,11 +9437,11 @@ func TestSettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestGettersOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -9451,7 +9451,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9464,7 +9464,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -9475,7 +9475,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -9484,7 +9484,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9497,7 +9497,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -9507,7 +9507,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9520,7 +9520,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -9530,7 +9530,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9543,7 +9543,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected string
 		obj.UnitPriceExclVat = expected
 
@@ -9553,7 +9553,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9566,7 +9566,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -9576,7 +9576,7 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9588,11 +9588,11 @@ func TestGettersPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestSettersMarkExplicitOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -9623,7 +9623,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -9654,7 +9654,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -9685,7 +9685,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -9716,7 +9716,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueUnitPriceExclVat string
 
 		// Act
@@ -9747,7 +9747,7 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -9777,9 +9777,9 @@ func TestSettersMarkExplicitPostV1EcommerceOrdersReserveResponseLinesItem(t *tes
 
 }
 
-func TestSettersPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestSettersProductsListEcommerceResponse(t *testing.T) {
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -9787,7 +9787,7 @@ func TestSettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -9795,7 +9795,7 @@ func TestSettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -9803,8 +9803,8 @@ func TestSettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponse{}
-		var fernTestValueRows []*PostV1EcommerceProductsListResponseRowsItem
+		obj := &ProductsListEcommerceResponse{}
+		var fernTestValueRows []*ProductsListEcommerceResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -9812,11 +9812,11 @@ func TestSettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestGettersProductsListEcommerceResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -9826,7 +9826,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9839,7 +9839,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -9849,7 +9849,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9862,7 +9862,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -9872,7 +9872,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9885,8 +9885,8 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
-		var expected []*PostV1EcommerceProductsListResponseRowsItem
+		obj := &ProductsListEcommerceResponse{}
+		var expected []*ProductsListEcommerceResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -9896,7 +9896,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -9905,7 +9905,7 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9917,11 +9917,11 @@ func TestGettersPostV1EcommerceProductsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestSettersMarkExplicitProductsListEcommerceResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -9952,7 +9952,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -9983,7 +9983,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -10014,8 +10014,8 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
-		var fernTestValueRows []*PostV1EcommerceProductsListResponseRowsItem
+		obj := &ProductsListEcommerceResponse{}
+		var fernTestValueRows []*ProductsListEcommerceResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -10044,9 +10044,9 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestSettersProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -10054,15 +10054,15 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueType PostV1EcommerceProductsListResponseRowsItemType
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueType ProductsListEcommerceResponseRowsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10070,7 +10070,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10078,7 +10078,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetBarcode", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueBarcode *string
 		obj.SetBarcode(fernTestValueBarcode)
 		assert.Equal(t, fernTestValueBarcode, obj.Barcode)
@@ -10086,7 +10086,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -10094,7 +10094,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -10102,15 +10102,15 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTranslations", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueTranslations map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueTranslations map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue
 		obj.SetTranslations(fernTestValueTranslations)
 		assert.Equal(t, fernTestValueTranslations, obj.Translations)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttributes", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueAttributes map[string]*string
 		obj.SetAttributes(fernTestValueAttributes)
 		assert.Equal(t, fernTestValueAttributes, obj.Attributes)
@@ -10118,7 +10118,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetGroupID", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueGroupID *string
 		obj.SetGroupID(fernTestValueGroupID)
 		assert.Equal(t, fernTestValueGroupID, obj.GroupID)
@@ -10126,7 +10126,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetGroupName", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueGroupName *string
 		obj.SetGroupName(fernTestValueGroupName)
 		assert.Equal(t, fernTestValueGroupName, obj.GroupName)
@@ -10134,7 +10134,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -10142,7 +10142,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPrice", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValuePrice *string
 		obj.SetPrice(fernTestValuePrice)
 		assert.Equal(t, fernTestValuePrice, obj.Price)
@@ -10150,7 +10150,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -10158,15 +10158,15 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetComponents", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueComponents []*PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueComponents []*ProductsListEcommerceResponseRowsItemComponentsItem
 		obj.SetComponents(fernTestValueComponents)
 		assert.Equal(t, fernTestValueComponents, obj.Components)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueOnHand *string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -10174,7 +10174,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReserved", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueReserved *string
 		obj.SetReserved(fernTestValueReserved)
 		assert.Equal(t, fernTestValueReserved, obj.Reserved)
@@ -10182,7 +10182,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAvailable", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueAvailable *string
 		obj.SetAvailable(fernTestValueAvailable)
 		assert.Equal(t, fernTestValueAvailable, obj.Available)
@@ -10190,7 +10190,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDeleted", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueDeleted bool
 		obj.SetDeleted(fernTestValueDeleted)
 		assert.Equal(t, fernTestValueDeleted, obj.Deleted)
@@ -10198,8 +10198,8 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -10207,11 +10207,11 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestGettersProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -10221,7 +10221,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10234,8 +10234,8 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var expected PostV1EcommerceProductsListResponseRowsItemType
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var expected ProductsListEcommerceResponseRowsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -10244,7 +10244,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10257,7 +10257,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Name = expected
 
@@ -10267,7 +10267,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10280,7 +10280,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Code = expected
 
@@ -10291,7 +10291,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -10300,7 +10300,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10313,7 +10313,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetBarcode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Barcode = expected
 
@@ -10324,7 +10324,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetBarcode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Barcode = nil
 
 		// Act & Assert
@@ -10333,7 +10333,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetBarcode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10346,7 +10346,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -10356,7 +10356,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10369,7 +10369,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Description = expected
 
@@ -10380,7 +10380,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -10389,7 +10389,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10402,8 +10402,8 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTranslations", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var expected map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var expected map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue
 		obj.Translations = expected
 
 		// Act & Assert
@@ -10413,7 +10413,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetTranslations_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Translations = nil
 
 		// Act & Assert
@@ -10422,7 +10422,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTranslations_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10435,7 +10435,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAttributes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected map[string]*string
 		obj.Attributes = expected
 
@@ -10446,7 +10446,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAttributes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Attributes = nil
 
 		// Act & Assert
@@ -10455,7 +10455,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAttributes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10468,7 +10468,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGroupID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.GroupID = expected
 
@@ -10479,7 +10479,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGroupID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.GroupID = nil
 
 		// Act & Assert
@@ -10488,7 +10488,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetGroupID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10501,7 +10501,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGroupName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.GroupName = expected
 
@@ -10512,7 +10512,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetGroupName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.GroupName = nil
 
 		// Act & Assert
@@ -10521,7 +10521,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetGroupName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10534,7 +10534,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -10545,7 +10545,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -10554,7 +10554,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10567,7 +10567,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPrice", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Price = expected
 
@@ -10578,7 +10578,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPrice_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Price = nil
 
 		// Act & Assert
@@ -10587,7 +10587,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPrice_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10600,7 +10600,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Currency = expected
 
@@ -10610,7 +10610,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10623,8 +10623,8 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetComponents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var expected []*PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var expected []*ProductsListEcommerceResponseRowsItemComponentsItem
 		obj.Components = expected
 
 		// Act & Assert
@@ -10634,7 +10634,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetComponents_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Components = nil
 
 		// Act & Assert
@@ -10643,7 +10643,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetComponents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10656,7 +10656,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.OnHand = expected
 
@@ -10667,7 +10667,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.OnHand = nil
 
 		// Act & Assert
@@ -10676,7 +10676,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10689,7 +10689,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetReserved", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Reserved = expected
 
@@ -10700,7 +10700,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetReserved_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Reserved = nil
 
 		// Act & Assert
@@ -10709,7 +10709,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReserved_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10722,7 +10722,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAvailable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected *string
 		obj.Available = expected
 
@@ -10733,7 +10733,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAvailable_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		obj.Available = nil
 
 		// Act & Assert
@@ -10742,7 +10742,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAvailable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10755,7 +10755,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDeleted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var expected bool
 		obj.Deleted = expected
 
@@ -10765,7 +10765,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDeleted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10778,8 +10778,8 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var expected string
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -10788,7 +10788,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10800,11 +10800,11 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -10835,8 +10835,8 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueType PostV1EcommerceProductsListResponseRowsItemType
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueType ProductsListEcommerceResponseRowsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -10866,7 +10866,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueName string
 
 		// Act
@@ -10897,7 +10897,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueCode *string
 
 		// Act
@@ -10928,7 +10928,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetBarcode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueBarcode *string
 
 		// Act
@@ -10959,7 +10959,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -10990,7 +10990,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -11021,8 +11021,8 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueTranslations map[string]*PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueTranslations map[string]*ProductsListEcommerceResponseRowsItemTranslationsValue
 
 		// Act
 		obj.SetTranslations(fernTestValueTranslations)
@@ -11052,7 +11052,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetAttributes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueAttributes map[string]*string
 
 		// Act
@@ -11083,7 +11083,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetGroupID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueGroupID *string
 
 		// Act
@@ -11114,7 +11114,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetGroupName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueGroupName *string
 
 		// Act
@@ -11145,7 +11145,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -11176,7 +11176,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetPrice_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValuePrice *string
 
 		// Act
@@ -11207,7 +11207,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -11238,8 +11238,8 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetComponents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueComponents []*PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueComponents []*ProductsListEcommerceResponseRowsItemComponentsItem
 
 		// Act
 		obj.SetComponents(fernTestValueComponents)
@@ -11269,7 +11269,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueOnHand *string
 
 		// Act
@@ -11300,7 +11300,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetReserved_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueReserved *string
 
 		// Act
@@ -11331,7 +11331,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetAvailable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueAvailable *string
 
 		// Act
@@ -11362,7 +11362,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetDeleted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		var fernTestValueDeleted bool
 
 		// Act
@@ -11393,8 +11393,8 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &ProductsListEcommerceResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -11423,9 +11423,9 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItem(t *testi
 
 }
 
-func TestSettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestSettersProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -11433,7 +11433,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -11442,11 +11442,11 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 
 }
 
-func TestGettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestGettersProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -11456,7 +11456,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj *ProductsListEcommerceResponseRowsItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11469,7 +11469,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -11479,7 +11479,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj *ProductsListEcommerceResponseRowsItemComponentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11491,11 +11491,11 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *tes
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestSettersMarkExplicitProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -11526,7 +11526,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemComponent
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -11556,9 +11556,9 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemComponent
 
 }
 
-func TestSettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestSettersProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -11566,7 +11566,7 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -11575,11 +11575,11 @@ func TestSettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 
 }
 
-func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestGettersProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var expected string
 		obj.Name = expected
 
@@ -11589,7 +11589,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj *ProductsListEcommerceResponseRowsItemTranslationsValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11602,7 +11602,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var expected *string
 		obj.Description = expected
 
@@ -11613,7 +11613,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 	t.Run("GetDescription_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		obj.Description = nil
 
 		// Act & Assert
@@ -11622,7 +11622,7 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj *ProductsListEcommerceResponseRowsItemTranslationsValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11634,11 +11634,11 @@ func TestGettersPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestSettersMarkExplicitProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var fernTestValueName string
 
 		// Act
@@ -11669,7 +11669,7 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemTranslati
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		var fernTestValueDescription *string
 
 		// Act
@@ -11699,10 +11699,10 @@ func TestSettersMarkExplicitPostV1EcommerceProductsListResponseRowsItemTranslati
 
 }
 
-func TestSettersPostV1EcommerceStockListResponse(t *testing.T) {
+func TestSettersStockListEcommerceResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponse{}
-		var fernTestValueRows []*PostV1EcommerceStockListResponseRowsItem
+		obj := &StockListEcommerceResponse{}
+		var fernTestValueRows []*StockListEcommerceResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -11710,12 +11710,12 @@ func TestSettersPostV1EcommerceStockListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceStockListResponse(t *testing.T) {
+func TestGettersStockListEcommerceResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponse{}
-		var expected []*PostV1EcommerceStockListResponseRowsItem
+		obj := &StockListEcommerceResponse{}
+		var expected []*StockListEcommerceResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -11725,7 +11725,7 @@ func TestGettersPostV1EcommerceStockListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponse{}
+		obj := &StockListEcommerceResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -11734,7 +11734,7 @@ func TestGettersPostV1EcommerceStockListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponse
+		var obj *StockListEcommerceResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11746,12 +11746,12 @@ func TestGettersPostV1EcommerceStockListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceStockListResponse(t *testing.T) {
+func TestSettersMarkExplicitStockListEcommerceResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponse{}
-		var fernTestValueRows []*PostV1EcommerceStockListResponseRowsItem
+		obj := &StockListEcommerceResponse{}
+		var fernTestValueRows []*StockListEcommerceResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -11780,9 +11780,9 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestSettersStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueItemID string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -11790,7 +11790,7 @@ func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetWarehouseID", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueWarehouseID string
 		obj.SetWarehouseID(fernTestValueWarehouseID)
 		assert.Equal(t, fernTestValueWarehouseID, obj.WarehouseID)
@@ -11798,7 +11798,7 @@ func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetOnHand", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueOnHand string
 		obj.SetOnHand(fernTestValueOnHand)
 		assert.Equal(t, fernTestValueOnHand, obj.OnHand)
@@ -11806,7 +11806,7 @@ func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReserved", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueReserved string
 		obj.SetReserved(fernTestValueReserved)
 		assert.Equal(t, fernTestValueReserved, obj.Reserved)
@@ -11814,7 +11814,7 @@ func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAvailable", func(t *testing.T) {
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueAvailable string
 		obj.SetAvailable(fernTestValueAvailable)
 		assert.Equal(t, fernTestValueAvailable, obj.Available)
@@ -11823,11 +11823,11 @@ func TestSettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestGettersStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var expected string
 		obj.ItemID = expected
 
@@ -11837,7 +11837,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11850,7 +11850,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	t.Run("GetWarehouseID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var expected string
 		obj.WarehouseID = expected
 
@@ -11860,7 +11860,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetWarehouseID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11873,7 +11873,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	t.Run("GetOnHand", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var expected string
 		obj.OnHand = expected
 
@@ -11883,7 +11883,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetOnHand_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11896,7 +11896,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	t.Run("GetReserved", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Reserved = expected
 
@@ -11906,7 +11906,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReserved_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11919,7 +11919,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 	t.Run("GetAvailable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var expected string
 		obj.Available = expected
 
@@ -11929,7 +11929,7 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAvailable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11941,11 +11941,11 @@ func TestGettersPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueItemID string
 
 		// Act
@@ -11976,7 +11976,7 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.
 	t.Run("SetWarehouseID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueWarehouseID string
 
 		// Act
@@ -12007,7 +12007,7 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.
 	t.Run("SetOnHand_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueOnHand string
 
 		// Act
@@ -12038,7 +12038,7 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.
 	t.Run("SetReserved_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueReserved string
 
 		// Act
@@ -12069,7 +12069,7 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.
 	t.Run("SetAvailable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		var fernTestValueAvailable string
 
 		// Act
@@ -12099,11 +12099,11 @@ func TestSettersMarkExplicitPostV1EcommerceStockListResponseRowsItem(t *testing.
 
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestJSONMarshalingOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12112,31 +12112,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCancelResponse
+		var unmarshaled OrdersCancelEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCancelResponse
+		var obj OrdersCancelEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCancelResponse
+		var obj OrdersCancelEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12145,31 +12145,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCancelResponseLinesItem
+		var unmarshaled OrdersCancelEcommerceResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj OrdersCancelEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj OrdersCancelEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12178,31 +12178,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCreateRequestLinesItem
+		var unmarshaled OrdersCreateEcommerceRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj OrdersCreateEcommerceRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj OrdersCreateEcommerceRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestJSONMarshalingOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12211,31 +12211,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCreateRequestPartner
+		var unmarshaled OrdersCreateEcommerceRequestPartner
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateRequestPartner
+		var obj OrdersCreateEcommerceRequestPartner
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateRequestPartner
+		var obj OrdersCreateEcommerceRequestPartner
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestJSONMarshalingOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12244,31 +12244,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCreateResponse
+		var unmarshaled OrdersCreateEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateResponse
+		var obj OrdersCreateEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateResponse
+		var obj OrdersCreateEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12277,31 +12277,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersCreateResponseLinesItem
+		var unmarshaled OrdersCreateEcommerceResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj OrdersCreateEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj OrdersCreateEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestJSONMarshalingOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12310,31 +12310,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersFulfillResponse
+		var unmarshaled OrdersFulfillEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersFulfillResponse
+		var obj OrdersFulfillEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersFulfillResponse
+		var obj OrdersFulfillEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12343,31 +12343,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersFulfillResponseLinesItem
+		var unmarshaled OrdersFulfillEcommerceResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj OrdersFulfillEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj OrdersFulfillEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestJSONMarshalingOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12376,31 +12376,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersGetResponse
+		var unmarshaled OrdersGetEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersGetResponse
+		var obj OrdersGetEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersGetResponse
+		var obj OrdersGetEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12409,31 +12409,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersGetResponseLinesItem
+		var unmarshaled OrdersGetEcommerceResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersGetResponseLinesItem
+		var obj OrdersGetEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersGetResponseLinesItem
+		var obj OrdersGetEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12442,31 +12442,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersListRequestFilterItem
+		var unmarshaled OrdersListEcommerceRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListRequestFilterItem
+		var obj OrdersListEcommerceRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListRequestFilterItem
+		var obj OrdersListEcommerceRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12475,31 +12475,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersListRequestSortItem
+		var unmarshaled OrdersListEcommerceRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListRequestSortItem
+		var obj OrdersListEcommerceRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListRequestSortItem
+		var obj OrdersListEcommerceRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestJSONMarshalingOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12508,31 +12508,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersListResponse
+		var unmarshaled OrdersListEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListResponse
+		var obj OrdersListEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListResponse
+		var obj OrdersListEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12541,31 +12541,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersListResponseRowsItem
+		var unmarshaled OrdersListEcommerceResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListResponseRowsItem
+		var obj OrdersListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersListResponseRowsItem
+		var obj OrdersListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestJSONMarshalingOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12574,31 +12574,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersReserveResponse
+		var unmarshaled OrdersReserveEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersReserveResponse
+		var obj OrdersReserveEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersReserveResponse
+		var obj OrdersReserveEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestJSONMarshalingOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12607,31 +12607,31 @@ func TestJSONMarshalingPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceOrdersReserveResponseLinesItem
+		var unmarshaled OrdersReserveEcommerceResponseLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj OrdersReserveEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj OrdersReserveEcommerceResponseLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestJSONMarshalingProductsListEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12640,31 +12640,31 @@ func TestJSONMarshalingPostV1EcommerceProductsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceProductsListResponse
+		var unmarshaled ProductsListEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponse
+		var obj ProductsListEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponse
+		var obj ProductsListEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12673,31 +12673,31 @@ func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceProductsListResponseRowsItem
+		var unmarshaled ProductsListEcommerceResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItem
+		var obj ProductsListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItem
+		var obj ProductsListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestJSONMarshalingProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12706,31 +12706,31 @@ func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItemComponentsItem
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var unmarshaled ProductsListEcommerceResponseRowsItemComponentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj ProductsListEcommerceResponseRowsItemComponentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj ProductsListEcommerceResponseRowsItemComponentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestJSONMarshalingProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12739,31 +12739,31 @@ func TestJSONMarshalingPostV1EcommerceProductsListResponseRowsItemTranslationsVa
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var unmarshaled ProductsListEcommerceResponseRowsItemTranslationsValue
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj ProductsListEcommerceResponseRowsItemTranslationsValue
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj ProductsListEcommerceResponseRowsItemTranslationsValue
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceStockListResponse(t *testing.T) {
+func TestJSONMarshalingStockListEcommerceResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponse{}
+		obj := &StockListEcommerceResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12772,31 +12772,31 @@ func TestJSONMarshalingPostV1EcommerceStockListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceStockListResponse
+		var unmarshaled StockListEcommerceResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceStockListResponse
+		var obj StockListEcommerceResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceStockListResponse
+		var obj StockListEcommerceResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -12805,414 +12805,414 @@ func TestJSONMarshalingPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1EcommerceStockListResponseRowsItem
+		var unmarshaled StockListEcommerceResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceStockListResponseRowsItem
+		var obj StockListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1EcommerceStockListResponseRowsItem
+		var obj StockListEcommerceResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestStringOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestStringOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestStringOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestStringOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestPartner
+		var obj *OrdersCreateEcommerceRequestPartner
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestStringOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestStringOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestStringOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestStringOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestStringOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestStringOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestStringOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItem
+		var obj *OrdersListEcommerceRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestStringOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestSortItem
+		var obj *OrdersListEcommerceRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestStringOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestStringOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestStringOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestStringOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestStringProductsListEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestStringProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestStringProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj *ProductsListEcommerceResponseRowsItemComponentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestStringProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj *ProductsListEcommerceResponseRowsItemTranslationsValue
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceStockListResponse(t *testing.T) {
+func TestStringStockListEcommerceResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceStockListResponse{}
+		obj := &StockListEcommerceResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponse
+		var obj *StockListEcommerceResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestStringStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersCancelResponseStatus(t *testing.T) {
+func TestEnumOrdersCancelEcommerceResponseStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("new")
+		val, err := NewOrdersCancelEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCancelResponseStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCancelEcommerceResponseStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("reserved")
+		val, err := NewOrdersCancelEcommerceResponseStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCancelResponseStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCancelEcommerceResponseStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("fulfilled")
+		val, err := NewOrdersCancelEcommerceResponseStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCancelResponseStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCancelEcommerceResponseStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("cancelled")
+		val, err := NewOrdersCancelEcommerceResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCancelResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCancelEcommerceResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersCancelEcommerceResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersCancelResponseStatusFromString("new")
+		val, err := NewOrdersCancelEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13220,42 +13220,42 @@ func TestEnumPostV1EcommerceOrdersCancelResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersCreateResponseStatus(t *testing.T) {
+func TestEnumOrdersCreateEcommerceResponseStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("new")
+		val, err := NewOrdersCreateEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCreateResponseStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCreateEcommerceResponseStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("reserved")
+		val, err := NewOrdersCreateEcommerceResponseStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCreateResponseStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCreateEcommerceResponseStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("fulfilled")
+		val, err := NewOrdersCreateEcommerceResponseStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCreateResponseStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCreateEcommerceResponseStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("cancelled")
+		val, err := NewOrdersCreateEcommerceResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersCreateResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersCreateEcommerceResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersCreateEcommerceResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersCreateResponseStatusFromString("new")
+		val, err := NewOrdersCreateEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13263,42 +13263,42 @@ func TestEnumPostV1EcommerceOrdersCreateResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersFulfillResponseStatus(t *testing.T) {
+func TestEnumOrdersFulfillEcommerceResponseStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("new")
+		val, err := NewOrdersFulfillEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersFulfillResponseStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersFulfillEcommerceResponseStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("reserved")
+		val, err := NewOrdersFulfillEcommerceResponseStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersFulfillResponseStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersFulfillEcommerceResponseStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("fulfilled")
+		val, err := NewOrdersFulfillEcommerceResponseStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersFulfillResponseStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersFulfillEcommerceResponseStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("cancelled")
+		val, err := NewOrdersFulfillEcommerceResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersFulfillResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersFulfillEcommerceResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersFulfillEcommerceResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersFulfillResponseStatusFromString("new")
+		val, err := NewOrdersFulfillEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13306,42 +13306,42 @@ func TestEnumPostV1EcommerceOrdersFulfillResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersGetResponseStatus(t *testing.T) {
+func TestEnumOrdersGetEcommerceResponseStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("new")
+		val, err := NewOrdersGetEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersGetResponseStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersGetEcommerceResponseStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("reserved")
+		val, err := NewOrdersGetEcommerceResponseStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersGetResponseStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersGetEcommerceResponseStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("fulfilled")
+		val, err := NewOrdersGetEcommerceResponseStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersGetResponseStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersGetEcommerceResponseStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("cancelled")
+		val, err := NewOrdersGetEcommerceResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersGetResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersGetEcommerceResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersGetEcommerceResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersGetResponseStatusFromString("new")
+		val, err := NewOrdersGetEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13349,56 +13349,56 @@ func TestEnumPostV1EcommerceOrdersGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersListRequestFilterItemOp(t *testing.T) {
+func TestEnumOrdersListEcommerceRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("eq")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("ne")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("contains")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("gte")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("lte")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("in")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersListEcommerceRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersListRequestFilterItemOpFromString("eq")
+		val, err := NewOrdersListEcommerceRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13406,28 +13406,28 @@ func TestEnumPostV1EcommerceOrdersListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersListRequestSortItemDir(t *testing.T) {
+func TestEnumOrdersListEcommerceRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestSortItemDirFromString("asc")
+		val, err := NewOrdersListEcommerceRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListRequestSortItemDirFromString("desc")
+		val, err := NewOrdersListEcommerceRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersListEcommerceRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersListRequestSortItemDirFromString("asc")
+		val, err := NewOrdersListEcommerceRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13435,42 +13435,42 @@ func TestEnumPostV1EcommerceOrdersListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersListResponseRowsItemStatus(t *testing.T) {
+func TestEnumOrdersListEcommerceResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("new")
+		val, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListResponseRowsItemStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceResponseRowsItemStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("reserved")
+		val, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListResponseRowsItemStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceResponseRowsItemStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("fulfilled")
+		val, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListResponseRowsItemStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceResponseRowsItemStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("cancelled")
+		val, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersListResponseRowsItemStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersListEcommerceResponseRowsItemStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersListResponseRowsItemStatusFromString("new")
+		val, err := NewOrdersListEcommerceResponseRowsItemStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13478,42 +13478,42 @@ func TestEnumPostV1EcommerceOrdersListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceOrdersReserveResponseStatus(t *testing.T) {
+func TestEnumOrdersReserveEcommerceResponseStatus(t *testing.T) {
 	t.Run("NewFromString_new", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("new")
+		val, err := NewOrdersReserveEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersReserveResponseStatus("new"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersReserveEcommerceResponseStatus("new"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_reserved", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("reserved")
+		val, err := NewOrdersReserveEcommerceResponseStatusFromString("reserved")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersReserveResponseStatus("reserved"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersReserveEcommerceResponseStatus("reserved"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_fulfilled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("fulfilled")
+		val, err := NewOrdersReserveEcommerceResponseStatusFromString("fulfilled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersReserveResponseStatus("fulfilled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersReserveEcommerceResponseStatus("fulfilled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_cancelled", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("cancelled")
+		val, err := NewOrdersReserveEcommerceResponseStatusFromString("cancelled")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceOrdersReserveResponseStatus("cancelled"), val, "enum value should match expected wire value")
+		assert.Equal(t, OrdersReserveEcommerceResponseStatus("cancelled"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewOrdersReserveEcommerceResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceOrdersReserveResponseStatusFromString("new")
+		val, err := NewOrdersReserveEcommerceResponseStatusFromString("new")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13521,35 +13521,35 @@ func TestEnumPostV1EcommerceOrdersReserveResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1EcommerceProductsListResponseRowsItemType(t *testing.T) {
+func TestEnumProductsListEcommerceResponseRowsItemType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceProductsListResponseRowsItemTypeFromString("product")
+		val, err := NewProductsListEcommerceResponseRowsItemTypeFromString("product")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceProductsListResponseRowsItemType("product"), val, "enum value should match expected wire value")
+		assert.Equal(t, ProductsListEcommerceResponseRowsItemType("product"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_service", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceProductsListResponseRowsItemTypeFromString("service")
+		val, err := NewProductsListEcommerceResponseRowsItemTypeFromString("service")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceProductsListResponseRowsItemType("service"), val, "enum value should match expected wire value")
+		assert.Equal(t, ProductsListEcommerceResponseRowsItemType("service"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_set", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1EcommerceProductsListResponseRowsItemTypeFromString("set")
+		val, err := NewProductsListEcommerceResponseRowsItemTypeFromString("set")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1EcommerceProductsListResponseRowsItemType("set"), val, "enum value should match expected wire value")
+		assert.Equal(t, ProductsListEcommerceResponseRowsItemType("set"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1EcommerceProductsListResponseRowsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewProductsListEcommerceResponseRowsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1EcommerceProductsListResponseRowsItemTypeFromString("product")
+		val, err := NewProductsListEcommerceResponseRowsItemTypeFromString("product")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -13557,10 +13557,10 @@ func TestEnumPostV1EcommerceProductsListResponseRowsItemType(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCancelResponse(t *testing.T) {
+func TestExtraPropertiesOrdersCancelEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCancelResponse{}
+		obj := &OrdersCancelEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13574,16 +13574,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCancelResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponse
+		var obj *OrdersCancelEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersCancelEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCancelResponseLinesItem{}
+		obj := &OrdersCancelEcommerceResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13597,16 +13597,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCancelResponseLinesItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCancelResponseLinesItem
+		var obj *OrdersCancelEcommerceResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersCreateEcommerceRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateRequestLinesItem{}
+		obj := &OrdersCreateEcommerceRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13620,16 +13620,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCreateRequestLinesItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestLinesItem
+		var obj *OrdersCreateEcommerceRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) {
+func TestExtraPropertiesOrdersCreateEcommerceRequestPartner(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateRequestPartner{}
+		obj := &OrdersCreateEcommerceRequestPartner{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13643,16 +13643,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCreateRequestPartner(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateRequestPartner
+		var obj *OrdersCreateEcommerceRequestPartner
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCreateResponse(t *testing.T) {
+func TestExtraPropertiesOrdersCreateEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateResponse{}
+		obj := &OrdersCreateEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13666,16 +13666,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponse
+		var obj *OrdersCreateEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersCreateEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersCreateResponseLinesItem{}
+		obj := &OrdersCreateEcommerceResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13689,16 +13689,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersCreateResponseLinesItem(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersCreateResponseLinesItem
+		var obj *OrdersCreateEcommerceResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
+func TestExtraPropertiesOrdersFulfillEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersFulfillResponse{}
+		obj := &OrdersFulfillEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13712,16 +13712,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersFulfillResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponse
+		var obj *OrdersFulfillEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersFulfillEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersFulfillResponseLinesItem{}
+		obj := &OrdersFulfillEcommerceResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13735,16 +13735,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersFulfillResponseLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersFulfillResponseLinesItem
+		var obj *OrdersFulfillEcommerceResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersGetResponse(t *testing.T) {
+func TestExtraPropertiesOrdersGetEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersGetResponse{}
+		obj := &OrdersGetEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13758,16 +13758,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponse
+		var obj *OrdersGetEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersGetEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersGetResponseLinesItem{}
+		obj := &OrdersGetEcommerceResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13781,16 +13781,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersGetResponseLinesItem(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersGetResponseLinesItem
+		var obj *OrdersGetEcommerceResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesOrdersListEcommerceRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListRequestFilterItem{}
+		obj := &OrdersListEcommerceRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13804,16 +13804,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersListRequestFilterItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestFilterItem
+		var obj *OrdersListEcommerceRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesOrdersListEcommerceRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListRequestSortItem{}
+		obj := &OrdersListEcommerceRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13827,16 +13827,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersListRequestSortItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListRequestSortItem
+		var obj *OrdersListEcommerceRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersListResponse(t *testing.T) {
+func TestExtraPropertiesOrdersListEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListResponse{}
+		obj := &OrdersListEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13850,16 +13850,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponse
+		var obj *OrdersListEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesOrdersListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersListResponseRowsItem{}
+		obj := &OrdersListEcommerceResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13873,16 +13873,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersListResponseRowsItem(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersListResponseRowsItem
+		var obj *OrdersListEcommerceResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersReserveResponse(t *testing.T) {
+func TestExtraPropertiesOrdersReserveEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersReserveResponse{}
+		obj := &OrdersReserveEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13896,16 +13896,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersReserveResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponse
+		var obj *OrdersReserveEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceOrdersReserveResponseLinesItem(t *testing.T) {
+func TestExtraPropertiesOrdersReserveEcommerceResponseLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceOrdersReserveResponseLinesItem{}
+		obj := &OrdersReserveEcommerceResponseLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13919,16 +13919,16 @@ func TestExtraPropertiesPostV1EcommerceOrdersReserveResponseLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceOrdersReserveResponseLinesItem
+		var obj *OrdersReserveEcommerceResponseLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceProductsListResponse(t *testing.T) {
+func TestExtraPropertiesProductsListEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponse{}
+		obj := &ProductsListEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13942,16 +13942,16 @@ func TestExtraPropertiesPostV1EcommerceProductsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponse
+		var obj *ProductsListEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesProductsListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItem{}
+		obj := &ProductsListEcommerceResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13965,16 +13965,16 @@ func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItem
+		var obj *ProductsListEcommerceResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItemComponentsItem(t *testing.T) {
+func TestExtraPropertiesProductsListEcommerceResponseRowsItemComponentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItemComponentsItem{}
+		obj := &ProductsListEcommerceResponseRowsItemComponentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -13988,16 +13988,16 @@ func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItemComponentsIte
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemComponentsItem
+		var obj *ProductsListEcommerceResponseRowsItemComponentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItemTranslationsValue(t *testing.T) {
+func TestExtraPropertiesProductsListEcommerceResponseRowsItemTranslationsValue(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceProductsListResponseRowsItemTranslationsValue{}
+		obj := &ProductsListEcommerceResponseRowsItemTranslationsValue{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -14011,16 +14011,16 @@ func TestExtraPropertiesPostV1EcommerceProductsListResponseRowsItemTranslationsV
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceProductsListResponseRowsItemTranslationsValue
+		var obj *ProductsListEcommerceResponseRowsItemTranslationsValue
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceStockListResponse(t *testing.T) {
+func TestExtraPropertiesStockListEcommerceResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceStockListResponse{}
+		obj := &StockListEcommerceResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -14034,16 +14034,16 @@ func TestExtraPropertiesPostV1EcommerceStockListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponse
+		var obj *StockListEcommerceResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesStockListEcommerceResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1EcommerceStockListResponseRowsItem{}
+		obj := &StockListEcommerceResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -14057,7 +14057,7 @@ func TestExtraPropertiesPostV1EcommerceStockListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1EcommerceStockListResponseRowsItem
+		var obj *StockListEcommerceResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

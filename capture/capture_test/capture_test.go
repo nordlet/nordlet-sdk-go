@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestCapturePostV1CaptureSettingsGetWithWireMock(
+func TestCaptureSettingsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,20 +88,20 @@ func TestCapturePostV1CaptureSettingsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureSettingsGetRequest{}
-	_, invocationErr := client.Capture.PostV1CaptureSettingsGet(
+	request := &nordlet.SettingsGetCaptureRequest{}
+	_, invocationErr := client.Capture.SettingsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureSettingsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsGetWithWireMock", "POST", "/v1/capture/settings/get", nil, 1)
+	VerifyRequestCount(t, "TestCaptureSettingsGetWithWireMock", "POST", "/v1/capture/settings/get", nil, 1)
 }
 
-func TestCapturePostV1CaptureSettingsUpdateWithWireMock(
+func TestCaptureSettingsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -112,20 +112,20 @@ func TestCapturePostV1CaptureSettingsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureSettingsUpdateRequest{}
-	_, invocationErr := client.Capture.PostV1CaptureSettingsUpdate(
+	request := &nordlet.SettingsUpdateCaptureRequest{}
+	_, invocationErr := client.Capture.SettingsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureSettingsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsUpdateWithWireMock", "POST", "/v1/capture/settings/update", nil, 1)
+	VerifyRequestCount(t, "TestCaptureSettingsUpdateWithWireMock", "POST", "/v1/capture/settings/update", nil, 1)
 }
 
-func TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock(
+func TestCaptureSettingsRegenerateIntakeWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -136,20 +136,20 @@ func TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureSettingsRegenerateIntakeRequest{}
-	_, invocationErr := client.Capture.PostV1CaptureSettingsRegenerateIntake(
+	request := &nordlet.SettingsRegenerateIntakeCaptureRequest{}
+	_, invocationErr := client.Capture.SettingsRegenerateIntake(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureSettingsRegenerateIntakeWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock", "POST", "/v1/capture/settings/regenerate-intake", nil, 1)
+	VerifyRequestCount(t, "TestCaptureSettingsRegenerateIntakeWithWireMock", "POST", "/v1/capture/settings/regenerate-intake", nil, 1)
 }
 
-func TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock(
+func TestCaptureInboundEmailWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -160,20 +160,20 @@ func TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleO
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureInboundEmailRequest{}
-	_, invocationErr := client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+	request := &nordlet.InboundEmailCaptureRequest{}
+	_, invocationErr := client.Capture.InboundEmail(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureInboundEmailWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock", "POST", "/v1/capture/inbound-email", nil, 1)
+	VerifyRequestCount(t, "TestCaptureInboundEmailWithWireMock", "POST", "/v1/capture/inbound-email", nil, 1)
 }
 
-func TestCaptureReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraftWithWireMock(
+func TestCaptureDocumentsUploadWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -184,24 +184,24 @@ func TestCaptureReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraftW
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsUploadRequest{
+	request := &nordlet.DocumentsUploadCaptureRequest{
 		FileName: "fileName",
 		MimeType: "mimeType",
 		Content:  "content",
 	}
-	_, invocationErr := client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+	_, invocationErr := client.Capture.DocumentsUpload(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCaptureReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraftWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsUploadWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCaptureReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraftWithWireMock", "POST", "/v1/capture/documents/upload", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsUploadWithWireMock", "POST", "/v1/capture/documents/upload", nil, 1)
 }
 
-func TestCaptureReReadAStoredCaptureReplacingThePreviousDraftWithWireMock(
+func TestCaptureDocumentsExtractWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -212,22 +212,22 @@ func TestCaptureReReadAStoredCaptureReplacingThePreviousDraftWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsExtractRequest{
+	request := &nordlet.DocumentsExtractCaptureRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(
+	_, invocationErr := client.Capture.DocumentsExtract(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCaptureReReadAStoredCaptureReplacingThePreviousDraftWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsExtractWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCaptureReReadAStoredCaptureReplacingThePreviousDraftWithWireMock", "POST", "/v1/capture/documents/extract", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsExtractWithWireMock", "POST", "/v1/capture/documents/extract", nil, 1)
 }
 
-func TestCapturePostV1CaptureDocumentsGetWithWireMock(
+func TestCaptureDocumentsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -238,22 +238,22 @@ func TestCapturePostV1CaptureDocumentsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsGetRequest{
+	request := &nordlet.DocumentsGetCaptureRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Capture.PostV1CaptureDocumentsGet(
+	_, invocationErr := client.Capture.DocumentsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureDocumentsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureDocumentsGetWithWireMock", "POST", "/v1/capture/documents/get", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsGetWithWireMock", "POST", "/v1/capture/documents/get", nil, 1)
 }
 
-func TestCapturePostV1CaptureDocumentsListWithWireMock(
+func TestCaptureDocumentsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -264,20 +264,20 @@ func TestCapturePostV1CaptureDocumentsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsListRequest{}
-	_, invocationErr := client.Capture.PostV1CaptureDocumentsList(
+	request := &nordlet.DocumentsListCaptureRequest{}
+	_, invocationErr := client.Capture.DocumentsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureDocumentsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureDocumentsListWithWireMock", "POST", "/v1/capture/documents/list", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsListWithWireMock", "POST", "/v1/capture/documents/list", nil, 1)
 }
 
-func TestCapturePostV1CaptureDocumentsDeleteWithWireMock(
+func TestCaptureDocumentsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -288,22 +288,22 @@ func TestCapturePostV1CaptureDocumentsDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsDeleteRequest{
+	request := &nordlet.DocumentsDeleteCaptureRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Capture.PostV1CaptureDocumentsDelete(
+	_, invocationErr := client.Capture.DocumentsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureDocumentsDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCapturePostV1CaptureDocumentsDeleteWithWireMock", "POST", "/v1/capture/documents/delete", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsDeleteWithWireMock", "POST", "/v1/capture/documents/delete", nil, 1)
 }
 
-func TestCaptureSaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumentWithWireMock(
+func TestCaptureDocumentsConfirmWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -314,22 +314,24 @@ func TestCaptureSaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocume
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CaptureDocumentsConfirmRequest{
+	request := &nordlet.DocumentsConfirmCaptureRequest{
 		ID:             "id",
 		DocumentNumber: "documentNumber",
-		DocumentDate:   "documentDate",
-		Lines: []*nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{
-			&nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{},
+		DocumentDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Lines: []*nordlet.DocumentsConfirmCaptureRequestLinesItem{
+			&nordlet.DocumentsConfirmCaptureRequestLinesItem{},
 		},
 	}
-	_, invocationErr := client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+	_, invocationErr := client.Capture.DocumentsConfirm(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCaptureSaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumentWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCaptureDocumentsConfirmWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCaptureSaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumentWithWireMock", "POST", "/v1/capture/documents/confirm", nil, 1)
+	VerifyRequestCount(t, "TestCaptureDocumentsConfirmWithWireMock", "POST", "/v1/capture/documents/confirm", nil, 1)
 }

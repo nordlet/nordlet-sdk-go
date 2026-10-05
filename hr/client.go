@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1HrPositionsCreate(
+func (c *Client) PositionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1HrPositionsCreateRequest,
+	request *nordlet.PositionsCreateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrPositionsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrPositionsCreate(
+) (*nordlet.PositionsCreateHrResponse, error) {
+	response, err := c.WithRawResponse.PositionsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1HrPositionsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrPositionsUpdate(
+func (c *Client) PositionsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1HrPositionsUpdateRequest,
+	request *nordlet.PositionsUpdateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrPositionsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrPositionsUpdate(
+) (*nordlet.PositionsUpdateHrResponse, error) {
+	response, err := c.WithRawResponse.PositionsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1HrPositionsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrPositionsList(
+func (c *Client) PositionsList(
 	ctx context.Context,
-	request *nordlet.PostV1HrPositionsListRequest,
+	request *nordlet.PositionsListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrPositionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrPositionsList(
+) (*nordlet.PositionsListHrResponse, error) {
+	response, err := c.WithRawResponse.PositionsList(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1HrPositionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesCreate(
+func (c *Client) EmployeesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesCreateRequest,
+	request *nordlet.EmployeesCreateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesCreate(
+) (*nordlet.EmployeesCreateHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesCreate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1HrEmployeesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesUpdate(
+func (c *Client) EmployeesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesUpdateRequest,
+	request *nordlet.EmployeesUpdateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesUpdate(
+) (*nordlet.EmployeesUpdateHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1HrEmployeesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesGet(
+func (c *Client) EmployeesGet(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesGetRequest,
+	request *nordlet.EmployeesGetHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesGet(
+) (*nordlet.EmployeesGetHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesGet(
 		ctx,
 		request,
 		opts...,
@@ -131,12 +131,12 @@ func (c *Client) PostV1HrEmployeesGet(
 }
 
 // Attributes a filing of the company country needs about a person that the shared employee record does not carry, such as the sex and place of birth an Italian income certificate asks for. Their values are kept in the payrollOptions of the employee.
-func (c *Client) ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+func (c *Client) EmployeesFields(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesFieldsRequest,
+	request *nordlet.EmployeesFieldsHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesFieldsResponse, error) {
-	response, err := c.WithRawResponse.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+) (*nordlet.EmployeesFieldsHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesFields(
 		ctx,
 		request,
 		opts...,
@@ -147,12 +147,12 @@ func (c *Client) ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesList(
+func (c *Client) EmployeesList(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesListRequest,
+	request *nordlet.EmployeesListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesList(
+) (*nordlet.EmployeesListHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesList(
 		ctx,
 		request,
 		opts...,
@@ -163,12 +163,12 @@ func (c *Client) PostV1HrEmployeesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesDelete(
+func (c *Client) EmployeesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesDeleteRequest,
+	request *nordlet.EmployeesDeleteHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesDelete(
+) (*nordlet.EmployeesDeleteHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesDelete(
 		ctx,
 		request,
 		opts...,
@@ -180,12 +180,12 @@ func (c *Client) PostV1HrEmployeesDelete(
 }
 
 // Replaces the name with a placeholder and removes personal code, birth date, contact details, address, bank account, social-insurance number, notes and sick-leave reasons. Payroll and contract rows stay linked to the record for the statutory retention period.
-func (c *Client) BlankAnEmployeesPersonalDataAndHideTheRecord(
+func (c *Client) EmployeesAnonymize(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesAnonymizeRequest,
+	request *nordlet.EmployeesAnonymizeHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesAnonymizeResponse, error) {
-	response, err := c.WithRawResponse.BlankAnEmployeesPersonalDataAndHideTheRecord(
+) (*nordlet.EmployeesAnonymizeHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesAnonymize(
 		ctx,
 		request,
 		opts...,
@@ -196,12 +196,12 @@ func (c *Client) BlankAnEmployeesPersonalDataAndHideTheRecord(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrContractsCreate(
+func (c *Client) ContractsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1HrContractsCreateRequest,
+	request *nordlet.ContractsCreateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrContractsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrContractsCreate(
+) (*nordlet.ContractsCreateHrResponse, error) {
+	response, err := c.WithRawResponse.ContractsCreate(
 		ctx,
 		request,
 		opts...,
@@ -212,12 +212,12 @@ func (c *Client) PostV1HrContractsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrContractsEnd(
+func (c *Client) ContractsEnd(
 	ctx context.Context,
-	request *nordlet.PostV1HrContractsEndRequest,
+	request *nordlet.ContractsEndHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrContractsEndResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrContractsEnd(
+) (*nordlet.ContractsEndHrResponse, error) {
+	response, err := c.WithRawResponse.ContractsEnd(
 		ctx,
 		request,
 		opts...,
@@ -228,12 +228,12 @@ func (c *Client) PostV1HrContractsEnd(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrContractsList(
+func (c *Client) ContractsList(
 	ctx context.Context,
-	request *nordlet.PostV1HrContractsListRequest,
+	request *nordlet.ContractsListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrContractsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrContractsList(
+) (*nordlet.ContractsListHrResponse, error) {
+	response, err := c.WithRawResponse.ContractsList(
 		ctx,
 		request,
 		opts...,
@@ -244,12 +244,12 @@ func (c *Client) PostV1HrContractsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrLeaveBalancesSet(
+func (c *Client) LeaveBalancesSet(
 	ctx context.Context,
-	request *nordlet.PostV1HrLeaveBalancesSetRequest,
+	request *nordlet.LeaveBalancesSetHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrLeaveBalancesSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrLeaveBalancesSet(
+) (*nordlet.LeaveBalancesSetHrResponse, error) {
+	response, err := c.WithRawResponse.LeaveBalancesSet(
 		ctx,
 		request,
 		opts...,
@@ -260,12 +260,12 @@ func (c *Client) PostV1HrLeaveBalancesSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrLeaveBalancesList(
+func (c *Client) LeaveBalancesList(
 	ctx context.Context,
-	request *nordlet.PostV1HrLeaveBalancesListRequest,
+	request *nordlet.LeaveBalancesListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrLeaveBalancesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrLeaveBalancesList(
+) (*nordlet.LeaveBalancesListHrResponse, error) {
+	response, err := c.WithRawResponse.LeaveBalancesList(
 		ctx,
 		request,
 		opts...,
@@ -276,12 +276,12 @@ func (c *Client) PostV1HrLeaveBalancesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrIncapacityCertificatesCreate(
+func (c *Client) IncapacityCertificatesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1HrIncapacityCertificatesCreateRequest,
+	request *nordlet.IncapacityCertificatesCreateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrIncapacityCertificatesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrIncapacityCertificatesCreate(
+) (*nordlet.IncapacityCertificatesCreateHrResponse, error) {
+	response, err := c.WithRawResponse.IncapacityCertificatesCreate(
 		ctx,
 		request,
 		opts...,
@@ -292,12 +292,12 @@ func (c *Client) PostV1HrIncapacityCertificatesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrIncapacityCertificatesList(
+func (c *Client) IncapacityCertificatesList(
 	ctx context.Context,
-	request *nordlet.PostV1HrIncapacityCertificatesListRequest,
+	request *nordlet.IncapacityCertificatesListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrIncapacityCertificatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrIncapacityCertificatesList(
+) (*nordlet.IncapacityCertificatesListHrResponse, error) {
+	response, err := c.WithRawResponse.IncapacityCertificatesList(
 		ctx,
 		request,
 		opts...,
@@ -308,12 +308,12 @@ func (c *Client) PostV1HrIncapacityCertificatesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesRecordsCreate(
+func (c *Client) EmployeesRecordsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesRecordsCreateRequest,
+	request *nordlet.EmployeesRecordsCreateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesRecordsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesRecordsCreate(
+) (*nordlet.EmployeesRecordsCreateHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesRecordsCreate(
 		ctx,
 		request,
 		opts...,
@@ -324,12 +324,12 @@ func (c *Client) PostV1HrEmployeesRecordsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesRecordsUpdate(
+func (c *Client) EmployeesRecordsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesRecordsUpdateRequest,
+	request *nordlet.EmployeesRecordsUpdateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesRecordsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesRecordsUpdate(
+) (*nordlet.EmployeesRecordsUpdateHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesRecordsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -340,12 +340,12 @@ func (c *Client) PostV1HrEmployeesRecordsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesRecordsDelete(
+func (c *Client) EmployeesRecordsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesRecordsDeleteRequest,
+	request *nordlet.EmployeesRecordsDeleteHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesRecordsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesRecordsDelete(
+) (*nordlet.EmployeesRecordsDeleteHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesRecordsDelete(
 		ctx,
 		request,
 		opts...,
@@ -356,12 +356,12 @@ func (c *Client) PostV1HrEmployeesRecordsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesRecordsList(
+func (c *Client) EmployeesRecordsList(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesRecordsListRequest,
+	request *nordlet.EmployeesRecordsListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesRecordsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesRecordsList(
+) (*nordlet.EmployeesRecordsListHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesRecordsList(
 		ctx,
 		request,
 		opts...,
@@ -372,12 +372,12 @@ func (c *Client) PostV1HrEmployeesRecordsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrEmployeesAttachmentsList(
+func (c *Client) EmployeesAttachmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1HrEmployeesAttachmentsListRequest,
+	request *nordlet.EmployeesAttachmentsListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrEmployeesAttachmentsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrEmployeesAttachmentsList(
+) (*nordlet.EmployeesAttachmentsListHrResponse, error) {
+	response, err := c.WithRawResponse.EmployeesAttachmentsList(
 		ctx,
 		request,
 		opts...,
@@ -388,12 +388,12 @@ func (c *Client) PostV1HrEmployeesAttachmentsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrTimesheetsGenerate(
+func (c *Client) TimesheetsGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1HrTimesheetsGenerateRequest,
+	request *nordlet.TimesheetsGenerateHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrTimesheetsGenerateResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrTimesheetsGenerate(
+) (*nordlet.TimesheetsGenerateHrResponse, error) {
+	response, err := c.WithRawResponse.TimesheetsGenerate(
 		ctx,
 		request,
 		opts...,
@@ -404,12 +404,12 @@ func (c *Client) PostV1HrTimesheetsGenerate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrTimesheetsUpsert(
+func (c *Client) TimesheetsUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1HrTimesheetsUpsertRequest,
+	request *nordlet.TimesheetsUpsertHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrTimesheetsUpsertResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrTimesheetsUpsert(
+) (*nordlet.TimesheetsUpsertHrResponse, error) {
+	response, err := c.WithRawResponse.TimesheetsUpsert(
 		ctx,
 		request,
 		opts...,
@@ -420,12 +420,12 @@ func (c *Client) PostV1HrTimesheetsUpsert(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrTimesheetsGet(
+func (c *Client) TimesheetsGet(
 	ctx context.Context,
-	request *nordlet.PostV1HrTimesheetsGetRequest,
+	request *nordlet.TimesheetsGetHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrTimesheetsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrTimesheetsGet(
+) (*nordlet.TimesheetsGetHrResponse, error) {
+	response, err := c.WithRawResponse.TimesheetsGet(
 		ctx,
 		request,
 		opts...,
@@ -436,12 +436,12 @@ func (c *Client) PostV1HrTimesheetsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrTimesheetsList(
+func (c *Client) TimesheetsList(
 	ctx context.Context,
-	request *nordlet.PostV1HrTimesheetsListRequest,
+	request *nordlet.TimesheetsListHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrTimesheetsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrTimesheetsList(
+) (*nordlet.TimesheetsListHrResponse, error) {
+	response, err := c.WithRawResponse.TimesheetsList(
 		ctx,
 		request,
 		opts...,
@@ -452,12 +452,12 @@ func (c *Client) PostV1HrTimesheetsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1HrTimesheetsDelete(
+func (c *Client) TimesheetsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1HrTimesheetsDeleteRequest,
+	request *nordlet.TimesheetsDeleteHrRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1HrTimesheetsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1HrTimesheetsDelete(
+) (*nordlet.TimesheetsDeleteHrResponse, error) {
+	response, err := c.WithRawResponse.TimesheetsDelete(
 		ctx,
 		request,
 		opts...,

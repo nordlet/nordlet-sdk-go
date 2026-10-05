@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1DeclarationsLtIntrastatCompute(
+func (r *RawClient) LtIntrastatCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIntrastatComputeRequest,
+	request *nordlet.LtIntrastatComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIntrastatComputeResponse], error) {
+) (*core.Response[*nordlet.LtIntrastatComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1DeclarationsLtIntrastatCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIntrastatComputeResponse
+	var response *nordlet.LtIntrastatComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1DeclarationsLtIntrastatCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIntrastatComputeResponse]{
+	return &core.Response[*nordlet.LtIntrastatComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtIvazGenerate(
+func (r *RawClient) LtIvazGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazGenerateRequest,
+	request *nordlet.LtIvazGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIvazGenerateResponse], error) {
+) (*core.Response[*nordlet.LtIvazGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1DeclarationsLtIvazGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIvazGenerateResponse
+	var response *nordlet.LtIvazGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1DeclarationsLtIvazGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIvazGenerateResponse]{
+	return &core.Response[*nordlet.LtIvazGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtIntrastatObligation(
+func (r *RawClient) LtIntrastatObligation(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIntrastatObligationRequest,
+	request *nordlet.LtIntrastatObligationDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIntrastatObligationResponse], error) {
+) (*core.Response[*nordlet.LtIntrastatObligationDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1DeclarationsLtIntrastatObligation(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIntrastatObligationResponse
+	var response *nordlet.LtIntrastatObligationDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1DeclarationsLtIntrastatObligation(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIntrastatObligationResponse]{
+	return &core.Response[*nordlet.LtIntrastatObligationDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtIsafGenerate(
+func (r *RawClient) LtIsafGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIsafGenerateRequest,
+	request *nordlet.LtIsafGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIsafGenerateResponse], error) {
+) (*core.Response[*nordlet.LtIsafGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1DeclarationsLtIsafGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIsafGenerateResponse
+	var response *nordlet.LtIsafGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1DeclarationsLtIsafGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIsafGenerateResponse]{
+	return &core.Response[*nordlet.LtIsafGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtFr0600Compute(
+func (r *RawClient) LtFr0600Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtFr0600ComputeRequest,
+	request *nordlet.LtFr0600ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtFr0600ComputeResponse], error) {
+) (*core.Response[*nordlet.LtFr0600ComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1DeclarationsLtFr0600Compute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtFr0600ComputeResponse
+	var response *nordlet.LtFr0600ComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1DeclarationsLtFr0600Compute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtFr0600ComputeResponse]{
+	return &core.Response[*nordlet.LtFr0600ComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtGpm313Compute(
+func (r *RawClient) LtGpm313Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtGpm313ComputeRequest,
+	request *nordlet.LtGpm313ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtGpm313ComputeResponse], error) {
+) (*core.Response[*nordlet.LtGpm313ComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1DeclarationsLtGpm313Compute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtGpm313ComputeResponse
+	var response *nordlet.LtGpm313ComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1DeclarationsLtGpm313Compute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtGpm313ComputeResponse]{
+	return &core.Response[*nordlet.LtGpm313ComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtSamCompute(
+func (r *RawClient) LtSamCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSamComputeRequest,
+	request *nordlet.LtSamComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtSamComputeResponse], error) {
+) (*core.Response[*nordlet.LtSamComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1DeclarationsLtSamCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtSamComputeResponse
+	var response *nordlet.LtSamComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1DeclarationsLtSamCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtSamComputeResponse]{
+	return &core.Response[*nordlet.LtSamComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtSdGenerate(
+func (r *RawClient) LtSdGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSdGenerateRequest,
+	request *nordlet.LtSdGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtSdGenerateResponse], error) {
+) (*core.Response[*nordlet.LtSdGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1DeclarationsLtSdGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtSdGenerateResponse
+	var response *nordlet.LtSdGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1DeclarationsLtSdGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtSdGenerateResponse]{
+	return &core.Response[*nordlet.LtSdGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtSaftGenerate(
+func (r *RawClient) LtSaftGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSaftGenerateRequest,
+	request *nordlet.LtSaftGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtSaftGenerateResponse], error) {
+) (*core.Response[*nordlet.LtSaftGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1DeclarationsLtSaftGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtSaftGenerateResponse
+	var response *nordlet.LtSaftGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1DeclarationsLtSaftGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtSaftGenerateResponse]{
+	return &core.Response[*nordlet.LtSaftGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtIvazAmend(
+func (r *RawClient) LtIvazAmend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazAmendRequest,
+	request *nordlet.LtIvazAmendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIvazAmendResponse], error) {
+) (*core.Response[*nordlet.LtIvazAmendDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) PostV1DeclarationsLtIvazAmend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIvazAmendResponse
+	var response *nordlet.LtIvazAmendDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,18 +465,18 @@ func (r *RawClient) PostV1DeclarationsLtIvazAmend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIvazAmendResponse]{
+	return &core.Response[*nordlet.LtIvazAmendDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtIvazCancel(
+func (r *RawClient) LtIvazCancel(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtIvazCancelRequest,
+	request *nordlet.LtIvazCancelDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtIvazCancelResponse], error) {
+) (*core.Response[*nordlet.LtIvazCancelDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -489,7 +489,7 @@ func (r *RawClient) PostV1DeclarationsLtIvazCancel(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtIvazCancelResponse
+	var response *nordlet.LtIvazCancelDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -509,18 +509,18 @@ func (r *RawClient) PostV1DeclarationsLtIvazCancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtIvazCancelResponse]{
+	return &core.Response[*nordlet.LtIvazCancelDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtFr0564Compute(
+func (r *RawClient) LtFr0564Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtFr0564ComputeRequest,
+	request *nordlet.LtFr0564ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtFr0564ComputeResponse], error) {
+) (*core.Response[*nordlet.LtFr0564ComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -533,7 +533,7 @@ func (r *RawClient) PostV1DeclarationsLtFr0564Compute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtFr0564ComputeResponse
+	var response *nordlet.LtFr0564ComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -553,18 +553,18 @@ func (r *RawClient) PostV1DeclarationsLtFr0564Compute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtFr0564ComputeResponse]{
+	return &core.Response[*nordlet.LtFr0564ComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtGpm312Compute(
+func (r *RawClient) LtGpm312Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtGpm312ComputeRequest,
+	request *nordlet.LtGpm312ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtGpm312ComputeResponse], error) {
+) (*core.Response[*nordlet.LtGpm312ComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -577,7 +577,7 @@ func (r *RawClient) PostV1DeclarationsLtGpm312Compute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtGpm312ComputeResponse
+	var response *nordlet.LtGpm312ComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -597,18 +597,18 @@ func (r *RawClient) PostV1DeclarationsLtGpm312Compute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtGpm312ComputeResponse]{
+	return &core.Response[*nordlet.LtGpm312ComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtPln204Compute(
+func (r *RawClient) LtPln204Compute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtPln204ComputeRequest,
+	request *nordlet.LtPln204ComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtPln204ComputeResponse], error) {
+) (*core.Response[*nordlet.LtPln204ComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -621,7 +621,7 @@ func (r *RawClient) PostV1DeclarationsLtPln204Compute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtPln204ComputeResponse
+	var response *nordlet.LtPln204ComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -641,18 +641,18 @@ func (r *RawClient) PostV1DeclarationsLtPln204Compute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtPln204ComputeResponse]{
+	return &core.Response[*nordlet.LtPln204ComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuOssCompute(
+func (r *RawClient) EuOssCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuOssComputeRequest,
+	request *nordlet.EuOssComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuOssComputeResponse], error) {
+) (*core.Response[*nordlet.EuOssComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -665,7 +665,7 @@ func (r *RawClient) PostV1DeclarationsEuOssCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuOssComputeResponse
+	var response *nordlet.EuOssComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -685,18 +685,18 @@ func (r *RawClient) PostV1DeclarationsEuOssCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuOssComputeResponse]{
+	return &core.Response[*nordlet.EuOssComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuIossCompute(
+func (r *RawClient) EuIossCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuIossComputeRequest,
+	request *nordlet.EuIossComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuIossComputeResponse], error) {
+) (*core.Response[*nordlet.EuIossComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -709,7 +709,7 @@ func (r *RawClient) PostV1DeclarationsEuIossCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuIossComputeResponse
+	var response *nordlet.EuIossComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -729,18 +729,18 @@ func (r *RawClient) PostV1DeclarationsEuIossCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuIossComputeResponse]{
+	return &core.Response[*nordlet.EuIossComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuDistanceSalesThresholdGet(
+func (r *RawClient) EuDistanceSalesThresholdGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetRequest,
+	request *nordlet.EuDistanceSalesThresholdGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse], error) {
+) (*core.Response[*nordlet.EuDistanceSalesThresholdGetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -753,7 +753,7 @@ func (r *RawClient) PostV1DeclarationsEuDistanceSalesThresholdGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse
+	var response *nordlet.EuDistanceSalesThresholdGetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -773,18 +773,18 @@ func (r *RawClient) PostV1DeclarationsEuDistanceSalesThresholdGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse]{
+	return &core.Response[*nordlet.EuDistanceSalesThresholdGetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuUnionTurnoverGet(
+func (r *RawClient) EuUnionTurnoverGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuUnionTurnoverGetRequest,
+	request *nordlet.EuUnionTurnoverGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse], error) {
+) (*core.Response[*nordlet.EuUnionTurnoverGetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -797,7 +797,7 @@ func (r *RawClient) PostV1DeclarationsEuUnionTurnoverGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse
+	var response *nordlet.EuUnionTurnoverGetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -817,18 +817,18 @@ func (r *RawClient) PostV1DeclarationsEuUnionTurnoverGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse]{
+	return &core.Response[*nordlet.EuUnionTurnoverGetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuSmeCrossBorderReportCompute(
+func (r *RawClient) EuSmeCrossBorderReportCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeRequest,
+	request *nordlet.EuSmeCrossBorderReportComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse], error) {
+) (*core.Response[*nordlet.EuSmeCrossBorderReportComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -841,7 +841,7 @@ func (r *RawClient) PostV1DeclarationsEuSmeCrossBorderReportCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse
+	var response *nordlet.EuSmeCrossBorderReportComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -861,18 +861,18 @@ func (r *RawClient) PostV1DeclarationsEuSmeCrossBorderReportCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse]{
+	return &core.Response[*nordlet.EuSmeCrossBorderReportComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuSmeThresholdsList(
+func (r *RawClient) EuSmeThresholdsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeThresholdsListRequest,
+	request *nordlet.EuSmeThresholdsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuSmeThresholdsListResponse], error) {
+) (*core.Response[*nordlet.EuSmeThresholdsListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -885,7 +885,7 @@ func (r *RawClient) PostV1DeclarationsEuSmeThresholdsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuSmeThresholdsListResponse
+	var response *nordlet.EuSmeThresholdsListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -905,18 +905,18 @@ func (r *RawClient) PostV1DeclarationsEuSmeThresholdsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuSmeThresholdsListResponse]{
+	return &core.Response[*nordlet.EuSmeThresholdsListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuSmeThresholdGet(
+func (r *RawClient) EuSmeThresholdGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuSmeThresholdGetRequest,
+	request *nordlet.EuSmeThresholdGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuSmeThresholdGetResponse], error) {
+) (*core.Response[*nordlet.EuSmeThresholdGetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -929,7 +929,7 @@ func (r *RawClient) PostV1DeclarationsEuSmeThresholdGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuSmeThresholdGetResponse
+	var response *nordlet.EuSmeThresholdGetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -949,18 +949,18 @@ func (r *RawClient) PostV1DeclarationsEuSmeThresholdGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuSmeThresholdGetResponse]{
+	return &core.Response[*nordlet.EuSmeThresholdGetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuVatReturnPacksList(
+func (r *RawClient) EuVatReturnPacksList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuVatReturnPacksListRequest,
+	request *nordlet.EuVatReturnPacksListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuVatReturnPacksListResponse], error) {
+) (*core.Response[*nordlet.EuVatReturnPacksListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -973,7 +973,7 @@ func (r *RawClient) PostV1DeclarationsEuVatReturnPacksList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuVatReturnPacksListResponse
+	var response *nordlet.EuVatReturnPacksListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -993,18 +993,18 @@ func (r *RawClient) PostV1DeclarationsEuVatReturnPacksList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuVatReturnPacksListResponse]{
+	return &core.Response[*nordlet.EuVatReturnPacksListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEuVatReturnCompute(
+func (r *RawClient) EuVatReturnCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEuVatReturnComputeRequest,
+	request *nordlet.EuVatReturnComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEuVatReturnComputeResponse], error) {
+) (*core.Response[*nordlet.EuVatReturnComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1017,7 +1017,7 @@ func (r *RawClient) PostV1DeclarationsEuVatReturnCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEuVatReturnComputeResponse
+	var response *nordlet.EuVatReturnComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1037,18 +1037,18 @@ func (r *RawClient) PostV1DeclarationsEuVatReturnCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEuVatReturnComputeResponse]{
+	return &core.Response[*nordlet.EuVatReturnComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlJpkV7MGenerate(
+func (r *RawClient) PlJpkV7MGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest,
+	request *nordlet.PlJpkV7MGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse], error) {
+) (*core.Response[*nordlet.PlJpkV7MGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1061,7 +1061,7 @@ func (r *RawClient) PostV1DeclarationsPlJpkV7MGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse
+	var response *nordlet.PlJpkV7MGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1081,18 +1081,18 @@ func (r *RawClient) PostV1DeclarationsPlJpkV7MGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse]{
+	return &core.Response[*nordlet.PlJpkV7MGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlVatUeGenerate(
+func (r *RawClient) PlVatUeGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlVatUeGenerateRequest,
+	request *nordlet.PlVatUeGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlVatUeGenerateResponse], error) {
+) (*core.Response[*nordlet.PlVatUeGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1105,7 +1105,7 @@ func (r *RawClient) PostV1DeclarationsPlVatUeGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlVatUeGenerateResponse
+	var response *nordlet.PlVatUeGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1125,18 +1125,18 @@ func (r *RawClient) PostV1DeclarationsPlVatUeGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlVatUeGenerateResponse]{
+	return &core.Response[*nordlet.PlVatUeGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlIntrastatGenerate(
+func (r *RawClient) PlIntrastatGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlIntrastatGenerateRequest,
+	request *nordlet.PlIntrastatGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlIntrastatGenerateResponse], error) {
+) (*core.Response[*nordlet.PlIntrastatGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1149,7 +1149,7 @@ func (r *RawClient) PostV1DeclarationsPlIntrastatGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlIntrastatGenerateResponse
+	var response *nordlet.PlIntrastatGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1169,18 +1169,18 @@ func (r *RawClient) PostV1DeclarationsPlIntrastatGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlIntrastatGenerateResponse]{
+	return &core.Response[*nordlet.PlIntrastatGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlKsefReceivedList(
+func (r *RawClient) PlKsefReceivedList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceivedListRequest,
+	request *nordlet.PlKsefReceivedListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlKsefReceivedListResponse], error) {
+) (*core.Response[*nordlet.PlKsefReceivedListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1193,7 +1193,7 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceivedList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlKsefReceivedListResponse
+	var response *nordlet.PlKsefReceivedListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1213,18 +1213,18 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceivedList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlKsefReceivedListResponse]{
+	return &core.Response[*nordlet.PlKsefReceivedListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlKsefReceivedFetch(
+func (r *RawClient) PlKsefReceivedFetch(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceivedFetchRequest,
+	request *nordlet.PlKsefReceivedFetchDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlKsefReceivedFetchResponse], error) {
+) (*core.Response[*nordlet.PlKsefReceivedFetchDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1237,7 +1237,7 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceivedFetch(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlKsefReceivedFetchResponse
+	var response *nordlet.PlKsefReceivedFetchDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1257,18 +1257,18 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceivedFetch(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlKsefReceivedFetchResponse]{
+	return &core.Response[*nordlet.PlKsefReceivedFetchDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlKsefReceipt(
+func (r *RawClient) PlKsefReceipt(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlKsefReceiptRequest,
+	request *nordlet.PlKsefReceiptDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlKsefReceiptResponse], error) {
+) (*core.Response[*nordlet.PlKsefReceiptDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1281,7 +1281,7 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceipt(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlKsefReceiptResponse
+	var response *nordlet.PlKsefReceiptDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1301,18 +1301,18 @@ func (r *RawClient) PostV1DeclarationsPlKsefReceipt(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlKsefReceiptResponse]{
+	return &core.Response[*nordlet.PlKsefReceiptDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) TaxAdjustmentsRecordedForATaxYear(
+func (r *RawClient) TaxAdjustmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsListRequest,
+	request *nordlet.TaxAdjustmentsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsListResponse], error) {
+) (*core.Response[*nordlet.TaxAdjustmentsListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1325,7 +1325,7 @@ func (r *RawClient) TaxAdjustmentsRecordedForATaxYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxAdjustmentsListResponse
+	var response *nordlet.TaxAdjustmentsListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1345,18 +1345,18 @@ func (r *RawClient) TaxAdjustmentsRecordedForATaxYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsListResponse]{
+	return &core.Response[*nordlet.TaxAdjustmentsListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordATaxAdjustmentForATaxYear(
+func (r *RawClient) TaxAdjustmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequest,
+	request *nordlet.TaxAdjustmentsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsCreateResponse], error) {
+) (*core.Response[*nordlet.TaxAdjustmentsCreateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1369,7 +1369,7 @@ func (r *RawClient) RecordATaxAdjustmentForATaxYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxAdjustmentsCreateResponse
+	var response *nordlet.TaxAdjustmentsCreateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1389,18 +1389,18 @@ func (r *RawClient) RecordATaxAdjustmentForATaxYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsCreateResponse]{
+	return &core.Response[*nordlet.TaxAdjustmentsCreateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ChangeARecordedTaxAdjustment(
+func (r *RawClient) TaxAdjustmentsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsUpdateRequest,
+	request *nordlet.TaxAdjustmentsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsUpdateResponse], error) {
+) (*core.Response[*nordlet.TaxAdjustmentsUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1413,7 +1413,7 @@ func (r *RawClient) ChangeARecordedTaxAdjustment(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxAdjustmentsUpdateResponse
+	var response *nordlet.TaxAdjustmentsUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1433,18 +1433,18 @@ func (r *RawClient) ChangeARecordedTaxAdjustment(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsUpdateResponse]{
+	return &core.Response[*nordlet.TaxAdjustmentsUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RemoveARecordedTaxAdjustment(
+func (r *RawClient) TaxAdjustmentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxAdjustmentsDeleteRequest,
+	request *nordlet.TaxAdjustmentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsDeleteResponse], error) {
+) (*core.Response[*nordlet.TaxAdjustmentsDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1457,7 +1457,7 @@ func (r *RawClient) RemoveARecordedTaxAdjustment(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxAdjustmentsDeleteResponse
+	var response *nordlet.TaxAdjustmentsDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1477,18 +1477,18 @@ func (r *RawClient) RemoveARecordedTaxAdjustment(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxAdjustmentsDeleteResponse]{
+	return &core.Response[*nordlet.TaxAdjustmentsDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PaymentsAlreadyMadeTowardsATaxOfAYear(
+func (r *RawClient) TaxPaymentsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsListRequest,
+	request *nordlet.TaxPaymentsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxPaymentsListResponse], error) {
+) (*core.Response[*nordlet.TaxPaymentsListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1501,7 +1501,7 @@ func (r *RawClient) PaymentsAlreadyMadeTowardsATaxOfAYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxPaymentsListResponse
+	var response *nordlet.TaxPaymentsListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1521,18 +1521,18 @@ func (r *RawClient) PaymentsAlreadyMadeTowardsATaxOfAYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxPaymentsListResponse]{
+	return &core.Response[*nordlet.TaxPaymentsListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordAPaymentMadeTowardsATax(
+func (r *RawClient) TaxPaymentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsCreateRequest,
+	request *nordlet.TaxPaymentsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxPaymentsCreateResponse], error) {
+) (*core.Response[*nordlet.TaxPaymentsCreateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1545,7 +1545,7 @@ func (r *RawClient) RecordAPaymentMadeTowardsATax(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxPaymentsCreateResponse
+	var response *nordlet.TaxPaymentsCreateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1565,18 +1565,18 @@ func (r *RawClient) RecordAPaymentMadeTowardsATax(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxPaymentsCreateResponse]{
+	return &core.Response[*nordlet.TaxPaymentsCreateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ChangeARecordedTaxPayment(
+func (r *RawClient) TaxPaymentsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsUpdateRequest,
+	request *nordlet.TaxPaymentsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxPaymentsUpdateResponse], error) {
+) (*core.Response[*nordlet.TaxPaymentsUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1589,7 +1589,7 @@ func (r *RawClient) ChangeARecordedTaxPayment(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxPaymentsUpdateResponse
+	var response *nordlet.TaxPaymentsUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1609,18 +1609,18 @@ func (r *RawClient) ChangeARecordedTaxPayment(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxPaymentsUpdateResponse]{
+	return &core.Response[*nordlet.TaxPaymentsUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RemoveARecordedTaxPayment(
+func (r *RawClient) TaxPaymentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsTaxPaymentsDeleteRequest,
+	request *nordlet.TaxPaymentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsTaxPaymentsDeleteResponse], error) {
+) (*core.Response[*nordlet.TaxPaymentsDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1633,7 +1633,7 @@ func (r *RawClient) RemoveARecordedTaxPayment(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsTaxPaymentsDeleteResponse
+	var response *nordlet.TaxPaymentsDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1653,18 +1653,18 @@ func (r *RawClient) RemoveARecordedTaxPayment(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsTaxPaymentsDeleteResponse]{
+	return &core.Response[*nordlet.TaxPaymentsDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
+func (r *RawClient) AnnualAccountsGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsGetRequest,
+	request *nordlet.AnnualAccountsGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsGetResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsGetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1677,7 +1677,7 @@ func (r *RawClient) AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsGetResponse
+	var response *nordlet.AnnualAccountsGetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1697,18 +1697,18 @@ func (r *RawClient) AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsGetResponse]{
+	return &core.Response[*nordlet.AnnualAccountsGetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
+func (r *RawClient) AnnualAccountsSet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSetRequest,
+	request *nordlet.AnnualAccountsSetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSetResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsSetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1721,7 +1721,7 @@ func (r *RawClient) RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsSetResponse
+	var response *nordlet.AnnualAccountsSetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1741,18 +1741,18 @@ func (r *RawClient) RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSetResponse]{
+	return &core.Response[*nordlet.AnnualAccountsSetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
+func (r *RawClient) AnnualAccountsSignaturesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequest,
+	request *nordlet.AnnualAccountsSignaturesCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsSignaturesCreateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1765,7 +1765,7 @@ func (r *RawClient) RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateResponse
+	var response *nordlet.AnnualAccountsSignaturesCreateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1785,18 +1785,18 @@ func (r *RawClient) RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateResponse]{
+	return &core.Response[*nordlet.AnnualAccountsSignaturesCreateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ChangeARecordedDirectorSignature(
+func (r *RawClient) AnnualAccountsSignaturesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequest,
+	request *nordlet.AnnualAccountsSignaturesUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsSignaturesUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1809,7 +1809,7 @@ func (r *RawClient) ChangeARecordedDirectorSignature(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateResponse
+	var response *nordlet.AnnualAccountsSignaturesUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1829,18 +1829,18 @@ func (r *RawClient) ChangeARecordedDirectorSignature(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateResponse]{
+	return &core.Response[*nordlet.AnnualAccountsSignaturesUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RemoveARecordedDirectorSignature(
+func (r *RawClient) AnnualAccountsSignaturesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteRequest,
+	request *nordlet.AnnualAccountsSignaturesDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsSignaturesDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1853,7 +1853,7 @@ func (r *RawClient) RemoveARecordedDirectorSignature(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteResponse
+	var response *nordlet.AnnualAccountsSignaturesDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1873,18 +1873,18 @@ func (r *RawClient) RemoveARecordedDirectorSignature(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteResponse]{
+	return &core.Response[*nordlet.AnnualAccountsSignaturesDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(
+func (r *RawClient) AnnualAccountsDistributionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequest,
+	request *nordlet.AnnualAccountsDistributionsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsDistributionsCreateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1897,7 +1897,7 @@ func (r *RawClient) RecordADecisionToDistributeProfitADividendAnInterimDividendO
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateResponse
+	var response *nordlet.AnnualAccountsDistributionsCreateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1917,18 +1917,18 @@ func (r *RawClient) RecordADecisionToDistributeProfitADividendAnInterimDividendO
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateResponse]{
+	return &core.Response[*nordlet.AnnualAccountsDistributionsCreateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ChangeARecordedProfitDistribution(
+func (r *RawClient) AnnualAccountsDistributionsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequest,
+	request *nordlet.AnnualAccountsDistributionsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsDistributionsUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1941,7 +1941,7 @@ func (r *RawClient) ChangeARecordedProfitDistribution(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateResponse
+	var response *nordlet.AnnualAccountsDistributionsUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -1961,18 +1961,18 @@ func (r *RawClient) ChangeARecordedProfitDistribution(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateResponse]{
+	return &core.Response[*nordlet.AnnualAccountsDistributionsUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RemoveARecordedProfitDistribution(
+func (r *RawClient) AnnualAccountsDistributionsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteRequest,
+	request *nordlet.AnnualAccountsDistributionsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsDistributionsDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -1985,7 +1985,7 @@ func (r *RawClient) RemoveARecordedProfitDistribution(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteResponse
+	var response *nordlet.AnnualAccountsDistributionsDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2005,18 +2005,18 @@ func (r *RawClient) RemoveARecordedProfitDistribution(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteResponse]{
+	return &core.Response[*nordlet.AnnualAccountsDistributionsDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
+func (r *RawClient) AnnualAccountsAttachmentsAdd(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequest,
+	request *nordlet.AnnualAccountsAttachmentsAddDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsAttachmentsAddDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2029,7 +2029,7 @@ func (r *RawClient) AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddResponse
+	var response *nordlet.AnnualAccountsAttachmentsAddDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2049,18 +2049,18 @@ func (r *RawClient) AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddResponse]{
+	return &core.Response[*nordlet.AnnualAccountsAttachmentsAddDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
+func (r *RawClient) AnnualAccountsAttachmentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteRequest,
+	request *nordlet.AnnualAccountsAttachmentsDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteResponse], error) {
+) (*core.Response[*nordlet.AnnualAccountsAttachmentsDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2073,7 +2073,7 @@ func (r *RawClient) RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteResponse
+	var response *nordlet.AnnualAccountsAttachmentsDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2093,18 +2093,18 @@ func (r *RawClient) RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteResponse]{
+	return &core.Response[*nordlet.AnnualAccountsAttachmentsDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsCyTd4Generate(
+func (r *RawClient) CyTd4Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCyTd4GenerateRequest,
+	request *nordlet.CyTd4GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsCyTd4GenerateResponse], error) {
+) (*core.Response[*nordlet.CyTd4GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2117,7 +2117,7 @@ func (r *RawClient) PostV1DeclarationsCyTd4Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsCyTd4GenerateResponse
+	var response *nordlet.CyTd4GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2137,18 +2137,18 @@ func (r *RawClient) PostV1DeclarationsCyTd4Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsCyTd4GenerateResponse]{
+	return &core.Response[*nordlet.CyTd4GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsCyHe32Generate(
+func (r *RawClient) CyHe32Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCyHe32GenerateRequest,
+	request *nordlet.CyHe32GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsCyHe32GenerateResponse], error) {
+) (*core.Response[*nordlet.CyHe32GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2161,7 +2161,7 @@ func (r *RawClient) PostV1DeclarationsCyHe32Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsCyHe32GenerateResponse
+	var response *nordlet.CyHe32GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2181,18 +2181,18 @@ func (r *RawClient) PostV1DeclarationsCyHe32Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsCyHe32GenerateResponse]{
+	return &core.Response[*nordlet.CyHe32GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDeReturnsGenerate(
+func (r *RawClient) DeReturnsGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnsGenerateRequest,
+	request *nordlet.DeReturnsGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDeReturnsGenerateResponse], error) {
+) (*core.Response[*nordlet.DeReturnsGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2205,7 +2205,7 @@ func (r *RawClient) PostV1DeclarationsDeReturnsGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDeReturnsGenerateResponse
+	var response *nordlet.DeReturnsGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2225,18 +2225,18 @@ func (r *RawClient) PostV1DeclarationsDeReturnsGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDeReturnsGenerateResponse]{
+	return &core.Response[*nordlet.DeReturnsGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDeReturnFactsGet(
+func (r *RawClient) DeReturnFactsGet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnFactsGetRequest,
+	request *nordlet.DeReturnFactsGetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDeReturnFactsGetResponse], error) {
+) (*core.Response[*nordlet.DeReturnFactsGetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2249,7 +2249,7 @@ func (r *RawClient) PostV1DeclarationsDeReturnFactsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDeReturnFactsGetResponse
+	var response *nordlet.DeReturnFactsGetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2269,18 +2269,18 @@ func (r *RawClient) PostV1DeclarationsDeReturnFactsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDeReturnFactsGetResponse]{
+	return &core.Response[*nordlet.DeReturnFactsGetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDeReturnFactsSet(
+func (r *RawClient) DeReturnFactsSet(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeReturnFactsSetRequest,
+	request *nordlet.DeReturnFactsSetDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDeReturnFactsSetResponse], error) {
+) (*core.Response[*nordlet.DeReturnFactsSetDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2293,7 +2293,7 @@ func (r *RawClient) PostV1DeclarationsDeReturnFactsSet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDeReturnFactsSetResponse
+	var response *nordlet.DeReturnFactsSetDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2313,18 +2313,18 @@ func (r *RawClient) PostV1DeclarationsDeReturnFactsSet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDeReturnFactsSetResponse]{
+	return &core.Response[*nordlet.DeReturnFactsSetDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDeDeuevGenerate(
+func (r *RawClient) DeDeuevGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeDeuevGenerateRequest,
+	request *nordlet.DeDeuevGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDeDeuevGenerateResponse], error) {
+) (*core.Response[*nordlet.DeDeuevGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2337,7 +2337,7 @@ func (r *RawClient) PostV1DeclarationsDeDeuevGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDeDeuevGenerateResponse
+	var response *nordlet.DeDeuevGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2357,18 +2357,18 @@ func (r *RawClient) PostV1DeclarationsDeDeuevGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDeDeuevGenerateResponse]{
+	return &core.Response[*nordlet.DeDeuevGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDeBeitragsnachweisGenerate(
+func (r *RawClient) DeBeitragsnachweisGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateRequest,
+	request *nordlet.DeBeitragsnachweisGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateResponse], error) {
+) (*core.Response[*nordlet.DeBeitragsnachweisGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2381,7 +2381,7 @@ func (r *RawClient) PostV1DeclarationsDeBeitragsnachweisGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateResponse
+	var response *nordlet.DeBeitragsnachweisGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2401,18 +2401,18 @@ func (r *RawClient) PostV1DeclarationsDeBeitragsnachweisGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateResponse]{
+	return &core.Response[*nordlet.DeBeitragsnachweisGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsDkSelskabsskatGenerate(
+func (r *RawClient) DkSelskabsskatGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsDkSelskabsskatGenerateRequest,
+	request *nordlet.DkSelskabsskatGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsDkSelskabsskatGenerateResponse], error) {
+) (*core.Response[*nordlet.DkSelskabsskatGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2425,7 +2425,7 @@ func (r *RawClient) PostV1DeclarationsDkSelskabsskatGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsDkSelskabsskatGenerateResponse
+	var response *nordlet.DkSelskabsskatGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2445,18 +2445,18 @@ func (r *RawClient) PostV1DeclarationsDkSelskabsskatGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsDkSelskabsskatGenerateResponse]{
+	return &core.Response[*nordlet.DkSelskabsskatGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEeEmploymentRegisterSend(
+func (r *RawClient) EeEmploymentRegisterSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequest,
+	request *nordlet.EeEmploymentRegisterSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEeEmploymentRegisterSendResponse], error) {
+) (*core.Response[*nordlet.EeEmploymentRegisterSendDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2469,7 +2469,7 @@ func (r *RawClient) PostV1DeclarationsEeEmploymentRegisterSend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEeEmploymentRegisterSendResponse
+	var response *nordlet.EeEmploymentRegisterSendDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2489,18 +2489,18 @@ func (r *RawClient) PostV1DeclarationsEeEmploymentRegisterSend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEeEmploymentRegisterSendResponse]{
+	return &core.Response[*nordlet.EeEmploymentRegisterSendDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsEsVerifactuDeclaracionResponsable(
+func (r *RawClient) EsVerifactuDeclaracionResponsable(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableRequest,
+	request *nordlet.EsVerifactuDeclaracionResponsableDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableResponse], error) {
+) (*core.Response[*nordlet.EsVerifactuDeclaracionResponsableDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2513,7 +2513,7 @@ func (r *RawClient) PostV1DeclarationsEsVerifactuDeclaracionResponsable(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableResponse
+	var response *nordlet.EsVerifactuDeclaracionResponsableDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2533,18 +2533,18 @@ func (r *RawClient) PostV1DeclarationsEsVerifactuDeclaracionResponsable(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableResponse]{
+	return &core.Response[*nordlet.EsVerifactuDeclaracionResponsableDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsIeCt1Generate(
+func (r *RawClient) IeCt1Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsIeCt1GenerateRequest,
+	request *nordlet.IeCt1GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsIeCt1GenerateResponse], error) {
+) (*core.Response[*nordlet.IeCt1GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2557,7 +2557,7 @@ func (r *RawClient) PostV1DeclarationsIeCt1Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsIeCt1GenerateResponse
+	var response *nordlet.IeCt1GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2577,18 +2577,18 @@ func (r *RawClient) PostV1DeclarationsIeCt1Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsIeCt1GenerateResponse]{
+	return &core.Response[*nordlet.IeCt1GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsIeB1Generate(
+func (r *RawClient) IeB1Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsIeB1GenerateRequest,
+	request *nordlet.IeB1GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsIeB1GenerateResponse], error) {
+) (*core.Response[*nordlet.IeB1GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2601,7 +2601,7 @@ func (r *RawClient) PostV1DeclarationsIeB1Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsIeB1GenerateResponse
+	var response *nordlet.IeB1GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2621,18 +2621,18 @@ func (r *RawClient) PostV1DeclarationsIeB1Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsIeB1GenerateResponse]{
+	return &core.Response[*nordlet.IeB1GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsItSdiPurchaseSend(
+func (r *RawClient) ItSdiPurchaseSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsItSdiPurchaseSendRequest,
+	request *nordlet.ItSdiPurchaseSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsItSdiPurchaseSendResponse], error) {
+) (*core.Response[*nordlet.ItSdiPurchaseSendDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2645,7 +2645,7 @@ func (r *RawClient) PostV1DeclarationsItSdiPurchaseSend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsItSdiPurchaseSendResponse
+	var response *nordlet.ItSdiPurchaseSendDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2665,18 +2665,18 @@ func (r *RawClient) PostV1DeclarationsItSdiPurchaseSend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsItSdiPurchaseSendResponse]{
+	return &core.Response[*nordlet.ItSdiPurchaseSendDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsItSdiPurchasePreview(
+func (r *RawClient) ItSdiPurchasePreview(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsItSdiPurchasePreviewRequest,
+	request *nordlet.ItSdiPurchasePreviewDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsItSdiPurchasePreviewResponse], error) {
+) (*core.Response[*nordlet.ItSdiPurchasePreviewDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2689,7 +2689,7 @@ func (r *RawClient) PostV1DeclarationsItSdiPurchasePreview(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsItSdiPurchasePreviewResponse
+	var response *nordlet.ItSdiPurchasePreviewDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2709,18 +2709,18 @@ func (r *RawClient) PostV1DeclarationsItSdiPurchasePreview(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsItSdiPurchasePreviewResponse]{
+	return &core.Response[*nordlet.ItSdiPurchasePreviewDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtSaftSend(
+func (r *RawClient) LtSaftSend(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSaftSendRequest,
+	request *nordlet.LtSaftSendDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtSaftSendResponse], error) {
+) (*core.Response[*nordlet.LtSaftSendDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2733,7 +2733,7 @@ func (r *RawClient) PostV1DeclarationsLtSaftSend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtSaftSendResponse
+	var response *nordlet.LtSaftSendDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2753,18 +2753,18 @@ func (r *RawClient) PostV1DeclarationsLtSaftSend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtSaftSendResponse]{
+	return &core.Response[*nordlet.LtSaftSendDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtSdFfdata(
+func (r *RawClient) LtSdFfdata(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtSdFfdataRequest,
+	request *nordlet.LtSdFfdataDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtSdFfdataResponse], error) {
+) (*core.Response[*nordlet.LtSdFfdataDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2777,7 +2777,7 @@ func (r *RawClient) PostV1DeclarationsLtSdFfdata(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtSdFfdataResponse
+	var response *nordlet.LtSdFfdataDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2797,18 +2797,18 @@ func (r *RawClient) PostV1DeclarationsLtSdFfdata(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtSdFfdataResponse]{
+	return &core.Response[*nordlet.LtSdFfdataDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLtPln204Ffdata(
+func (r *RawClient) LtPln204Ffdata(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLtPln204FfdataRequest,
+	request *nordlet.LtPln204FfdataDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLtPln204FfdataResponse], error) {
+) (*core.Response[*nordlet.LtPln204FfdataDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2821,7 +2821,7 @@ func (r *RawClient) PostV1DeclarationsLtPln204Ffdata(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLtPln204FfdataResponse
+	var response *nordlet.LtPln204FfdataDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2841,18 +2841,18 @@ func (r *RawClient) PostV1DeclarationsLtPln204Ffdata(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLtPln204FfdataResponse]{
+	return &core.Response[*nordlet.LtPln204FfdataDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsMtCompanyTaxGenerate(
+func (r *RawClient) MtCompanyTaxGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsMtCompanyTaxGenerateRequest,
+	request *nordlet.MtCompanyTaxGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsMtCompanyTaxGenerateResponse], error) {
+) (*core.Response[*nordlet.MtCompanyTaxGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2865,7 +2865,7 @@ func (r *RawClient) PostV1DeclarationsMtCompanyTaxGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsMtCompanyTaxGenerateResponse
+	var response *nordlet.MtCompanyTaxGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2885,18 +2885,18 @@ func (r *RawClient) PostV1DeclarationsMtCompanyTaxGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsMtCompanyTaxGenerateResponse]{
+	return &core.Response[*nordlet.MtCompanyTaxGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsMtAnnualReturnGenerate(
+func (r *RawClient) MtAnnualReturnGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsMtAnnualReturnGenerateRequest,
+	request *nordlet.MtAnnualReturnGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsMtAnnualReturnGenerateResponse], error) {
+) (*core.Response[*nordlet.MtAnnualReturnGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2909,7 +2909,7 @@ func (r *RawClient) PostV1DeclarationsMtAnnualReturnGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsMtAnnualReturnGenerateResponse
+	var response *nordlet.MtAnnualReturnGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2929,18 +2929,18 @@ func (r *RawClient) PostV1DeclarationsMtAnnualReturnGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsMtAnnualReturnGenerateResponse]{
+	return &core.Response[*nordlet.MtAnnualReturnGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlJpkFaGenerate(
+func (r *RawClient) PlJpkFaGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkFaGenerateRequest,
+	request *nordlet.PlJpkFaGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlJpkFaGenerateResponse], error) {
+) (*core.Response[*nordlet.PlJpkFaGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2953,7 +2953,7 @@ func (r *RawClient) PostV1DeclarationsPlJpkFaGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlJpkFaGenerateResponse
+	var response *nordlet.PlJpkFaGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -2973,18 +2973,18 @@ func (r *RawClient) PostV1DeclarationsPlJpkFaGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlJpkFaGenerateResponse]{
+	return &core.Response[*nordlet.PlJpkFaGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlJpkKrGenerate(
+func (r *RawClient) PlJpkKrGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkKrGenerateRequest,
+	request *nordlet.PlJpkKrGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlJpkKrGenerateResponse], error) {
+) (*core.Response[*nordlet.PlJpkKrGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -2997,7 +2997,7 @@ func (r *RawClient) PostV1DeclarationsPlJpkKrGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlJpkKrGenerateResponse
+	var response *nordlet.PlJpkKrGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3017,18 +3017,18 @@ func (r *RawClient) PostV1DeclarationsPlJpkKrGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlJpkKrGenerateResponse]{
+	return &core.Response[*nordlet.PlJpkKrGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlJpkMagGenerate(
+func (r *RawClient) PlJpkMagGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlJpkMagGenerateRequest,
+	request *nordlet.PlJpkMagGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlJpkMagGenerateResponse], error) {
+) (*core.Response[*nordlet.PlJpkMagGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3041,7 +3041,7 @@ func (r *RawClient) PostV1DeclarationsPlJpkMagGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlJpkMagGenerateResponse
+	var response *nordlet.PlJpkMagGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3061,18 +3061,18 @@ func (r *RawClient) PostV1DeclarationsPlJpkMagGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlJpkMagGenerateResponse]{
+	return &core.Response[*nordlet.PlJpkMagGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlPit11Generate(
+func (r *RawClient) PlPit11Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlPit11GenerateRequest,
+	request *nordlet.PlPit11GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlPit11GenerateResponse], error) {
+) (*core.Response[*nordlet.PlPit11GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3085,7 +3085,7 @@ func (r *RawClient) PostV1DeclarationsPlPit11Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlPit11GenerateResponse
+	var response *nordlet.PlPit11GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3105,18 +3105,18 @@ func (r *RawClient) PostV1DeclarationsPlPit11Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlPit11GenerateResponse]{
+	return &core.Response[*nordlet.PlPit11GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlCit8Generate(
+func (r *RawClient) PlCit8Generate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlCit8GenerateRequest,
+	request *nordlet.PlCit8GenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlCit8GenerateResponse], error) {
+) (*core.Response[*nordlet.PlCit8GenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3129,7 +3129,7 @@ func (r *RawClient) PostV1DeclarationsPlCit8Generate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlCit8GenerateResponse
+	var response *nordlet.PlCit8GenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3149,18 +3149,18 @@ func (r *RawClient) PostV1DeclarationsPlCit8Generate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlCit8GenerateResponse]{
+	return &core.Response[*nordlet.PlCit8GenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlZusDraCompute(
+func (r *RawClient) PlZusDraCompute(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraComputeRequest,
+	request *nordlet.PlZusDraComputeDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlZusDraComputeResponse], error) {
+) (*core.Response[*nordlet.PlZusDraComputeDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3173,7 +3173,7 @@ func (r *RawClient) PostV1DeclarationsPlZusDraCompute(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlZusDraComputeResponse
+	var response *nordlet.PlZusDraComputeDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3193,18 +3193,18 @@ func (r *RawClient) PostV1DeclarationsPlZusDraCompute(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlZusDraComputeResponse]{
+	return &core.Response[*nordlet.PlZusDraComputeDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlZusDraKedu(
+func (r *RawClient) PlZusDraKedu(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraKeduRequest,
+	request *nordlet.PlZusDraKeduDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlZusDraKeduResponse], error) {
+) (*core.Response[*nordlet.PlZusDraKeduDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3217,7 +3217,7 @@ func (r *RawClient) PostV1DeclarationsPlZusDraKedu(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlZusDraKeduResponse
+	var response *nordlet.PlZusDraKeduDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3237,18 +3237,18 @@ func (r *RawClient) PostV1DeclarationsPlZusDraKedu(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlZusDraKeduResponse]{
+	return &core.Response[*nordlet.PlZusDraKeduDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsPlZusDraPdf(
+func (r *RawClient) PlZusDraPdf(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsPlZusDraPdfRequest,
+	request *nordlet.PlZusDraPdfDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsPlZusDraPdfResponse], error) {
+) (*core.Response[*nordlet.PlZusDraPdfDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3261,7 +3261,7 @@ func (r *RawClient) PostV1DeclarationsPlZusDraPdf(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsPlZusDraPdfResponse
+	var response *nordlet.PlZusDraPdfDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3281,18 +3281,18 @@ func (r *RawClient) PostV1DeclarationsPlZusDraPdf(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsPlZusDraPdfResponse]{
+	return &core.Response[*nordlet.PlZusDraPdfDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsRoEtransportBuild(
+func (r *RawClient) RoEtransportBuild(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportBuildRequest,
+	request *nordlet.RoEtransportBuildDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsRoEtransportBuildResponse], error) {
+) (*core.Response[*nordlet.RoEtransportBuildDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3305,7 +3305,7 @@ func (r *RawClient) PostV1DeclarationsRoEtransportBuild(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsRoEtransportBuildResponse
+	var response *nordlet.RoEtransportBuildDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3325,18 +3325,18 @@ func (r *RawClient) PostV1DeclarationsRoEtransportBuild(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsRoEtransportBuildResponse]{
+	return &core.Response[*nordlet.RoEtransportBuildDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsRoEtransportSubmit(
+func (r *RawClient) RoEtransportSubmit(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportSubmitRequest,
+	request *nordlet.RoEtransportSubmitDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsRoEtransportSubmitResponse], error) {
+) (*core.Response[*nordlet.RoEtransportSubmitDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3349,7 +3349,7 @@ func (r *RawClient) PostV1DeclarationsRoEtransportSubmit(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsRoEtransportSubmitResponse
+	var response *nordlet.RoEtransportSubmitDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3369,18 +3369,18 @@ func (r *RawClient) PostV1DeclarationsRoEtransportSubmit(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsRoEtransportSubmitResponse]{
+	return &core.Response[*nordlet.RoEtransportSubmitDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsRoEtransportStatus(
+func (r *RawClient) RoEtransportStatus(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsRoEtransportStatusRequest,
+	request *nordlet.RoEtransportStatusDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsRoEtransportStatusResponse], error) {
+) (*core.Response[*nordlet.RoEtransportStatusDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3393,7 +3393,7 @@ func (r *RawClient) PostV1DeclarationsRoEtransportStatus(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsRoEtransportStatusResponse
+	var response *nordlet.RoEtransportStatusDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3413,18 +3413,18 @@ func (r *RawClient) PostV1DeclarationsRoEtransportStatus(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsRoEtransportStatusResponse]{
+	return &core.Response[*nordlet.RoEtransportStatusDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLiLohndeklarationGenerate(
+func (r *RawClient) LiLohndeklarationGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLiLohndeklarationGenerateRequest,
+	request *nordlet.LiLohndeklarationGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLiLohndeklarationGenerateResponse], error) {
+) (*core.Response[*nordlet.LiLohndeklarationGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3437,7 +3437,7 @@ func (r *RawClient) PostV1DeclarationsLiLohndeklarationGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLiLohndeklarationGenerateResponse
+	var response *nordlet.LiLohndeklarationGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3457,18 +3457,18 @@ func (r *RawClient) PostV1DeclarationsLiLohndeklarationGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLiLohndeklarationGenerateResponse]{
+	return &core.Response[*nordlet.LiLohndeklarationGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsLiLohnlistenGenerate(
+func (r *RawClient) LiLohnlistenGenerate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsLiLohnlistenGenerateRequest,
+	request *nordlet.LiLohnlistenGenerateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsLiLohnlistenGenerateResponse], error) {
+) (*core.Response[*nordlet.LiLohnlistenGenerateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3481,7 +3481,7 @@ func (r *RawClient) PostV1DeclarationsLiLohnlistenGenerate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsLiLohnlistenGenerateResponse
+	var response *nordlet.LiLohnlistenGenerateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3501,18 +3501,18 @@ func (r *RawClient) PostV1DeclarationsLiLohnlistenGenerate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsLiLohnlistenGenerateResponse]{
+	return &core.Response[*nordlet.LiLohnlistenGenerateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsConfigsList(
+func (r *RawClient) ConfigsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsConfigsListRequest,
+	request *nordlet.ConfigsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsConfigsListResponse], error) {
+) (*core.Response[*nordlet.ConfigsListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3525,7 +3525,7 @@ func (r *RawClient) PostV1DeclarationsConfigsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsConfigsListResponse
+	var response *nordlet.ConfigsListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3545,18 +3545,18 @@ func (r *RawClient) PostV1DeclarationsConfigsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsConfigsListResponse]{
+	return &core.Response[*nordlet.ConfigsListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsConfigsUpdate(
+func (r *RawClient) ConfigsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsConfigsUpdateRequest,
+	request *nordlet.ConfigsUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsConfigsUpdateResponse], error) {
+) (*core.Response[*nordlet.ConfigsUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3569,7 +3569,7 @@ func (r *RawClient) PostV1DeclarationsConfigsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsConfigsUpdateResponse
+	var response *nordlet.ConfigsUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3589,18 +3589,18 @@ func (r *RawClient) PostV1DeclarationsConfigsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsConfigsUpdateResponse]{
+	return &core.Response[*nordlet.ConfigsUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
+func (r *RawClient) CertificatesUpload(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesUploadRequest,
+	request *nordlet.CertificatesUploadDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsCertificatesUploadResponse], error) {
+) (*core.Response[*nordlet.CertificatesUploadDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3613,7 +3613,7 @@ func (r *RawClient) StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWit
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsCertificatesUploadResponse
+	var response *nordlet.CertificatesUploadDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3633,18 +3633,18 @@ func (r *RawClient) StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWit
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsCertificatesUploadResponse]{
+	return &core.Response[*nordlet.CertificatesUploadDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsCertificatesList(
+func (r *RawClient) CertificatesList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesListRequest,
+	request *nordlet.CertificatesListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsCertificatesListResponse], error) {
+) (*core.Response[*nordlet.CertificatesListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3657,7 +3657,7 @@ func (r *RawClient) PostV1DeclarationsCertificatesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsCertificatesListResponse
+	var response *nordlet.CertificatesListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3677,18 +3677,18 @@ func (r *RawClient) PostV1DeclarationsCertificatesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsCertificatesListResponse]{
+	return &core.Response[*nordlet.CertificatesListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsCertificatesDelete(
+func (r *RawClient) CertificatesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsCertificatesDeleteRequest,
+	request *nordlet.CertificatesDeleteDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsCertificatesDeleteResponse], error) {
+) (*core.Response[*nordlet.CertificatesDeleteDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3701,7 +3701,7 @@ func (r *RawClient) PostV1DeclarationsCertificatesDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsCertificatesDeleteResponse
+	var response *nordlet.CertificatesDeleteDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3721,18 +3721,18 @@ func (r *RawClient) PostV1DeclarationsCertificatesDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsCertificatesDeleteResponse]{
+	return &core.Response[*nordlet.CertificatesDeleteDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(
+func (r *RawClient) AutomationList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAutomationListRequest,
+	request *nordlet.AutomationListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAutomationListResponse], error) {
+) (*core.Response[*nordlet.AutomationListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3745,7 +3745,7 @@ func (r *RawClient) WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAr
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAutomationListResponse
+	var response *nordlet.AutomationListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3765,18 +3765,18 @@ func (r *RawClient) WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAr
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAutomationListResponse]{
+	return &core.Response[*nordlet.AutomationListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsAutomationUpdate(
+func (r *RawClient) AutomationUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsAutomationUpdateRequest,
+	request *nordlet.AutomationUpdateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsAutomationUpdateResponse], error) {
+) (*core.Response[*nordlet.AutomationUpdateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3789,7 +3789,7 @@ func (r *RawClient) PostV1DeclarationsAutomationUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsAutomationUpdateResponse
+	var response *nordlet.AutomationUpdateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3809,18 +3809,18 @@ func (r *RawClient) PostV1DeclarationsAutomationUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsAutomationUpdateResponse]{
+	return &core.Response[*nordlet.AutomationUpdateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(
+func (r *RawClient) SubmissionsRetry(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsRetryRequest,
+	request *nordlet.SubmissionsRetryDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsSubmissionsRetryResponse], error) {
+) (*core.Response[*nordlet.SubmissionsRetryDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3833,7 +3833,7 @@ func (r *RawClient) SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGe
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsSubmissionsRetryResponse
+	var response *nordlet.SubmissionsRetryDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3853,18 +3853,18 @@ func (r *RawClient) SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGe
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsSubmissionsRetryResponse]{
+	return &core.Response[*nordlet.SubmissionsRetryDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsSubmissionsCreate(
+func (r *RawClient) SubmissionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsCreateRequest,
+	request *nordlet.SubmissionsCreateDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsSubmissionsCreateResponse], error) {
+) (*core.Response[*nordlet.SubmissionsCreateDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3877,7 +3877,7 @@ func (r *RawClient) PostV1DeclarationsSubmissionsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsSubmissionsCreateResponse
+	var response *nordlet.SubmissionsCreateDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3897,18 +3897,18 @@ func (r *RawClient) PostV1DeclarationsSubmissionsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsSubmissionsCreateResponse]{
+	return &core.Response[*nordlet.SubmissionsCreateDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsSubmissionsMark(
+func (r *RawClient) SubmissionsMark(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsMarkRequest,
+	request *nordlet.SubmissionsMarkDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsSubmissionsMarkResponse], error) {
+) (*core.Response[*nordlet.SubmissionsMarkDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3921,7 +3921,7 @@ func (r *RawClient) PostV1DeclarationsSubmissionsMark(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsSubmissionsMarkResponse
+	var response *nordlet.SubmissionsMarkDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3941,18 +3941,18 @@ func (r *RawClient) PostV1DeclarationsSubmissionsMark(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsSubmissionsMarkResponse]{
+	return &core.Response[*nordlet.SubmissionsMarkDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1DeclarationsSubmissionsList(
+func (r *RawClient) SubmissionsList(
 	ctx context.Context,
-	request *nordlet.PostV1DeclarationsSubmissionsListRequest,
+	request *nordlet.SubmissionsListDeclarationsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1DeclarationsSubmissionsListResponse], error) {
+) (*core.Response[*nordlet.SubmissionsListDeclarationsResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -3965,7 +3965,7 @@ func (r *RawClient) PostV1DeclarationsSubmissionsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1DeclarationsSubmissionsListResponse
+	var response *nordlet.SubmissionsListDeclarationsResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -3985,7 +3985,7 @@ func (r *RawClient) PostV1DeclarationsSubmissionsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1DeclarationsSubmissionsListResponse]{
+	return &core.Response[*nordlet.SubmissionsListDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

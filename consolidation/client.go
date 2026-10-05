@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1ConsolidationGroupsCreate(
+func (c *Client) GroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsCreateRequest,
+	request *nordlet.GroupsCreateConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationGroupsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationGroupsCreate(
+) (*nordlet.GroupsCreateConsolidationResponse, error) {
+	response, err := c.WithRawResponse.GroupsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1ConsolidationGroupsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationGroupsList(
+func (c *Client) GroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsListRequest,
+	request *nordlet.GroupsListConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationGroupsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationGroupsList(
+) (*nordlet.GroupsListConsolidationResponse, error) {
+	response, err := c.WithRawResponse.GroupsList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1ConsolidationGroupsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationGroupsGet(
+func (c *Client) GroupsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsGetRequest,
+	request *nordlet.GroupsGetConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationGroupsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationGroupsGet(
+) (*nordlet.GroupsGetConsolidationResponse, error) {
+	response, err := c.WithRawResponse.GroupsGet(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1ConsolidationGroupsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationGroupsUpdate(
+func (c *Client) GroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsUpdateRequest,
+	request *nordlet.GroupsUpdateConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationGroupsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationGroupsUpdate(
+) (*nordlet.GroupsUpdateConsolidationResponse, error) {
+	response, err := c.WithRawResponse.GroupsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1ConsolidationGroupsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationGroupsDelete(
+func (c *Client) GroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationGroupsDeleteRequest,
+	request *nordlet.GroupsDeleteConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationGroupsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationGroupsDelete(
+) (*nordlet.GroupsDeleteConsolidationResponse, error) {
+	response, err := c.WithRawResponse.GroupsDelete(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1ConsolidationGroupsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationMembersAdd(
+func (c *Client) MembersAdd(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationMembersAddRequest,
+	request *nordlet.MembersAddConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationMembersAddResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationMembersAdd(
+) (*nordlet.MembersAddConsolidationResponse, error) {
+	response, err := c.WithRawResponse.MembersAdd(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1ConsolidationMembersAdd(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationMembersRemove(
+func (c *Client) MembersRemove(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationMembersRemoveRequest,
+	request *nordlet.MembersRemoveConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationMembersRemoveResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationMembersRemove(
+) (*nordlet.MembersRemoveConsolidationResponse, error) {
+	response, err := c.WithRawResponse.MembersRemove(
 		ctx,
 		request,
 		opts...,
@@ -147,12 +147,12 @@ func (c *Client) PostV1ConsolidationMembersRemove(
 }
 
 // Partners in member companies that look like other members of the same group (matched on company code or VAT code), with any existing intercompany link. Confirming a candidate via intercompany/links/set enables invoice mirroring.
-func (c *Client) PostV1ConsolidationIntercompanyCandidates(
+func (c *Client) IntercompanyCandidates(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyCandidatesRequest,
+	request *nordlet.IntercompanyCandidatesConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationIntercompanyCandidatesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyCandidates(
+) (*nordlet.IntercompanyCandidatesConsolidationResponse, error) {
+	response, err := c.WithRawResponse.IntercompanyCandidates(
 		ctx,
 		request,
 		opts...,
@@ -164,12 +164,12 @@ func (c *Client) PostV1ConsolidationIntercompanyCandidates(
 }
 
 // Confirm that a partner record in one member company represents another member company of the group. Once links exist in both directions, issuing an intercompany sale invoice automatically creates the matching draft purchase invoice in the counterparty.
-func (c *Client) PostV1ConsolidationIntercompanyLinksSet(
+func (c *Client) IntercompanyLinksSet(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksSetRequest,
+	request *nordlet.IntercompanyLinksSetConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationIntercompanyLinksSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksSet(
+) (*nordlet.IntercompanyLinksSetConsolidationResponse, error) {
+	response, err := c.WithRawResponse.IntercompanyLinksSet(
 		ctx,
 		request,
 		opts...,
@@ -180,12 +180,12 @@ func (c *Client) PostV1ConsolidationIntercompanyLinksSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationIntercompanyLinksList(
+func (c *Client) IntercompanyLinksList(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksListRequest,
+	request *nordlet.IntercompanyLinksListConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationIntercompanyLinksListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksList(
+) (*nordlet.IntercompanyLinksListConsolidationResponse, error) {
+	response, err := c.WithRawResponse.IntercompanyLinksList(
 		ctx,
 		request,
 		opts...,
@@ -196,12 +196,12 @@ func (c *Client) PostV1ConsolidationIntercompanyLinksList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationIntercompanyLinksRemove(
+func (c *Client) IntercompanyLinksRemove(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest,
+	request *nordlet.IntercompanyLinksRemoveConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksRemove(
+) (*nordlet.IntercompanyLinksRemoveConsolidationResponse, error) {
+	response, err := c.WithRawResponse.IntercompanyLinksRemove(
 		ctx,
 		request,
 		opts...,
@@ -213,12 +213,12 @@ func (c *Client) PostV1ConsolidationIntercompanyLinksRemove(
 }
 
 // Intercompany reconciliation for a period: every issued intercompany sale invoice with its mirrored or manually recorded counterpart, unmatched documents on both sides, and per-currency totals with differences. Confirmed pairs are the basis for consolidation eliminations.
-func (c *Client) PostV1ConsolidationIntercompanyReport(
+func (c *Client) IntercompanyReport(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationIntercompanyReportRequest,
+	request *nordlet.IntercompanyReportConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationIntercompanyReportResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyReport(
+) (*nordlet.IntercompanyReportConsolidationResponse, error) {
+	response, err := c.WithRawResponse.IntercompanyReport(
 		ctx,
 		request,
 		opts...,
@@ -229,12 +229,12 @@ func (c *Client) PostV1ConsolidationIntercompanyReport(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ConsolidationReport(
+func (c *Client) Report(
 	ctx context.Context,
-	request *nordlet.PostV1ConsolidationReportRequest,
+	request *nordlet.ReportConsolidationRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ConsolidationReportResponse, error) {
-	response, err := c.WithRawResponse.PostV1ConsolidationReport(
+) (*nordlet.ReportConsolidationResponse, error) {
+	response, err := c.WithRawResponse.Report(
 		ctx,
 		request,
 		opts...,

@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1CalendarList(
+func (c *Client) List(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarListRequest,
+	request *nordlet.ListCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CalendarList(
+) (*nordlet.ListCalendarResponse, error) {
+	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1CalendarList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CalendarGet(
+func (c *Client) Get(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarGetRequest,
+	request *nordlet.GetCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CalendarGet(
+) (*nordlet.GetCalendarResponse, error) {
+	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,13 @@ func (c *Client) PostV1CalendarGet(
 	return response.Body, nil
 }
 
-func (c *Client) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+// With amend: true the return is filed again as a correction of the one already submitted or accepted for the period; only returns whose format has a correction mark accept it.
+func (c *Client) Submit(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarSubmitRequest,
+	request *nordlet.SubmitCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarSubmitResponse, error) {
-	response, err := c.WithRawResponse.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+) (*nordlet.SubmitCalendarResponse, error) {
+	response, err := c.WithRawResponse.Submit(
 		ctx,
 		request,
 		opts...,
@@ -83,12 +84,12 @@ func (c *Client) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
 }
 
 // Builds the file of a deadline whose format Nordlet produces but whose administration takes it only through the company's own account or program. Nothing is sent and no filing is recorded.
-func (c *Client) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+func (c *Client) Download(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarDownloadRequest,
+	request *nordlet.DownloadCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarDownloadResponse, error) {
-	response, err := c.WithRawResponse.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+) (*nordlet.DownloadCalendarResponse, error) {
+	response, err := c.WithRawResponse.Download(
 		ctx,
 		request,
 		opts...,
@@ -99,12 +100,12 @@ func (c *Client) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CalendarCreate(
+func (c *Client) Create(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarCreateRequest,
+	request *nordlet.CreateCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CalendarCreate(
+) (*nordlet.CreateCalendarResponse, error) {
+	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
 		opts...,
@@ -115,12 +116,12 @@ func (c *Client) PostV1CalendarCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CalendarUpdate(
+func (c *Client) Update(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarUpdateRequest,
+	request *nordlet.UpdateCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CalendarUpdate(
+) (*nordlet.UpdateCalendarResponse, error) {
+	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
 		opts...,
@@ -131,12 +132,12 @@ func (c *Client) PostV1CalendarUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CalendarDelete(
+func (c *Client) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarDeleteRequest,
+	request *nordlet.DeleteCalendarRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CalendarDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CalendarDelete(
+) (*nordlet.DeleteCalendarResponse, error) {
+	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
 		opts...,

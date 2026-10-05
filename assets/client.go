@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1AssetsGroupsCreate(
+func (c *Client) GroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsGroupsCreateRequest,
+	request *nordlet.GroupsCreateAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsGroupsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsGroupsCreate(
+) (*nordlet.GroupsCreateAssetsResponse, error) {
+	response, err := c.WithRawResponse.GroupsCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1AssetsGroupsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsGroupsList(
+func (c *Client) GroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsGroupsListRequest,
+	request *nordlet.GroupsListAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsGroupsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsGroupsList(
+) (*nordlet.GroupsListAssetsResponse, error) {
+	response, err := c.WithRawResponse.GroupsList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1AssetsGroupsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsAssetsCreate(
+func (c *Client) AssetsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsCreateRequest,
+	request *nordlet.AssetsCreateAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsCreate(
+) (*nordlet.AssetsCreateAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsCreate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1AssetsAssetsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsAssetsUpdate(
+func (c *Client) AssetsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsUpdateRequest,
+	request *nordlet.AssetsUpdateAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsUpdate(
+) (*nordlet.AssetsUpdateAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -99,12 +99,12 @@ func (c *Client) PostV1AssetsAssetsUpdate(
 }
 
 // Record the input VAT facts of a capital good that the annual VAT return needs for the adjustment of the deduction over the adjustment period (Article 187 of the VAT Directive, § 15a UStG): the input VAT on the acquisition, the date of first use, the share of use for deductible turnover at first use, whether it is land or a building (ten-year period instead of five), and every later year in which the share changed or the good was sold or withdrawn. Allowed also after depreciation has been posted.
-func (c *Client) PostV1AssetsAssetsInputVat(
+func (c *Client) AssetsInputVat(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsInputVatRequest,
+	request *nordlet.AssetsInputVatAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsInputVatResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsInputVat(
+) (*nordlet.AssetsInputVatAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsInputVat(
 		ctx,
 		request,
 		opts...,
@@ -115,12 +115,12 @@ func (c *Client) PostV1AssetsAssetsInputVat(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsAssetsGet(
+func (c *Client) AssetsGet(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsGetRequest,
+	request *nordlet.AssetsGetAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsGet(
+) (*nordlet.AssetsGetAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsGet(
 		ctx,
 		request,
 		opts...,
@@ -131,12 +131,12 @@ func (c *Client) PostV1AssetsAssetsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsAssetsList(
+func (c *Client) AssetsList(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsListRequest,
+	request *nordlet.AssetsListAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsList(
+) (*nordlet.AssetsListAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsList(
 		ctx,
 		request,
 		opts...,
@@ -147,12 +147,12 @@ func (c *Client) PostV1AssetsAssetsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsAssetsModernize(
+func (c *Client) AssetsModernize(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsAssetsModernizeRequest,
+	request *nordlet.AssetsModernizeAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsAssetsModernizeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsAssetsModernize(
+) (*nordlet.AssetsModernizeAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsModernize(
 		ctx,
 		request,
 		opts...,
@@ -163,12 +163,13 @@ func (c *Client) PostV1AssetsAssetsModernize(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsDepreciationPreview(
+// Dispose of a fixed asset (sold, scrapped or written off). Removes its cost and accumulated depreciation, books the net book value as a disposal loss and the proceeds as a disposal gain (posting rules assets.disposalLoss, assets.disposalGain, assets.disposalProceeds), and stops its depreciation. Depreciation must be posted for every month before the disposal month.
+func (c *Client) AssetsDispose(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsDepreciationPreviewRequest,
+	request *nordlet.AssetsDisposeAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsDepreciationPreviewResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsDepreciationPreview(
+) (*nordlet.AssetsDisposeAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsDispose(
 		ctx,
 		request,
 		opts...,
@@ -179,12 +180,28 @@ func (c *Client) PostV1AssetsDepreciationPreview(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AssetsDepreciationPost(
+func (c *Client) DepreciationPreview(
 	ctx context.Context,
-	request *nordlet.PostV1AssetsDepreciationPostRequest,
+	request *nordlet.DepreciationPreviewAssetsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AssetsDepreciationPostResponse, error) {
-	response, err := c.WithRawResponse.PostV1AssetsDepreciationPost(
+) (*nordlet.DepreciationPreviewAssetsResponse, error) {
+	response, err := c.WithRawResponse.DepreciationPreview(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) DepreciationPost(
+	ctx context.Context,
+	request *nordlet.DepreciationPostAssetsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.DepreciationPostAssetsResponse, error) {
+	response, err := c.WithRawResponse.DepreciationPost(
 		ctx,
 		request,
 		opts...,

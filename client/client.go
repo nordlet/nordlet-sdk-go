@@ -16,14 +16,18 @@ import (
 	consolidation "github.com/nordlet/nordlet-sdk-go/consolidation"
 	core "github.com/nordlet/nordlet-sdk-go/core"
 	declarations "github.com/nordlet/nordlet-sdk-go/declarations"
+	documentseries "github.com/nordlet/nordlet-sdk-go/documentseries"
 	ecommerce "github.com/nordlet/nordlet-sdk-go/ecommerce"
 	files "github.com/nordlet/nordlet-sdk-go/files"
 	fleet "github.com/nordlet/nordlet-sdk-go/fleet"
 	hr "github.com/nordlet/nordlet-sdk-go/hr"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	inventory "github.com/nordlet/nordlet-sdk-go/inventory"
+	leads "github.com/nordlet/nordlet-sdk-go/leads"
 	ledger "github.com/nordlet/nordlet-sdk-go/ledger"
 	migration "github.com/nordlet/nordlet-sdk-go/migration"
+	officers "github.com/nordlet/nordlet-sdk-go/officers"
+	operationtypes "github.com/nordlet/nordlet-sdk-go/operationtypes"
 	option "github.com/nordlet/nordlet-sdk-go/option"
 	partners "github.com/nordlet/nordlet-sdk-go/partners"
 	payroll "github.com/nordlet/nordlet-sdk-go/payroll"
@@ -40,37 +44,41 @@ import (
 )
 
 type Client struct {
-	Reference     *reference.Client
-	Partners      *partners.Client
-	Catalog       *catalog.Client
-	Sales         *sales.Client
-	Purchases     *purchases.Client
-	Capture       *capture.Client
-	Declarations  *declarations.Client
-	Ledger        *ledger.Client
-	Migration     *migration.Client
-	Assets        *assets.Client
-	Hr            *hr.Client
-	Fleet         *fleet.Client
-	Payroll       *payroll.Client
-	Agreements    *agreements.Client
-	Inventory     *inventory.Client
-	Production    *production.Client
-	Ecommerce     *ecommerce.Client
-	Cash          *cash.Client
-	Projects      *projects.Client
-	Transport     *transport.Client
-	Pos           *pos.Client
-	Calendar      *calendar.Client
-	Audit         *audit.Client
-	Webhooks      *webhooks.Client
-	Bank          *bank.Client
-	Files         *files.Client
-	Reports       *reports.Client
-	Consolidation *consolidation.Client
-	Public        *public.Client
-	Billing       *billing.Client
-	Account       *account.Client
+	Reference      *reference.Client
+	Partners       *partners.Client
+	Leads          *leads.Client
+	Catalog        *catalog.Client
+	Sales          *sales.Client
+	OperationTypes *operationtypes.Client
+	DocumentSeries *documentseries.Client
+	Purchases      *purchases.Client
+	Capture        *capture.Client
+	Declarations   *declarations.Client
+	Ledger         *ledger.Client
+	Officers       *officers.Client
+	Migration      *migration.Client
+	Assets         *assets.Client
+	Hr             *hr.Client
+	Fleet          *fleet.Client
+	Payroll        *payroll.Client
+	Agreements     *agreements.Client
+	Inventory      *inventory.Client
+	Production     *production.Client
+	Ecommerce      *ecommerce.Client
+	Cash           *cash.Client
+	Projects       *projects.Client
+	Transport      *transport.Client
+	Pos            *pos.Client
+	Calendar       *calendar.Client
+	Audit          *audit.Client
+	Webhooks       *webhooks.Client
+	Bank           *bank.Client
+	Files          *files.Client
+	Reports        *reports.Client
+	Consolidation  *consolidation.Client
+	Public         *public.Client
+	Billing        *billing.Client
+	Account        *account.Client
 
 	options *core.RequestOptions
 	baseURL string
@@ -80,39 +88,43 @@ type Client struct {
 func NewClient(opts ...option.RequestOption) *Client {
 	options := core.NewRequestOptions(opts...)
 	return &Client{
-		Reference:     reference.NewClient(options),
-		Partners:      partners.NewClient(options),
-		Catalog:       catalog.NewClient(options),
-		Sales:         sales.NewClient(options),
-		Purchases:     purchases.NewClient(options),
-		Capture:       capture.NewClient(options),
-		Declarations:  declarations.NewClient(options),
-		Ledger:        ledger.NewClient(options),
-		Migration:     migration.NewClient(options),
-		Assets:        assets.NewClient(options),
-		Hr:            hr.NewClient(options),
-		Fleet:         fleet.NewClient(options),
-		Payroll:       payroll.NewClient(options),
-		Agreements:    agreements.NewClient(options),
-		Inventory:     inventory.NewClient(options),
-		Production:    production.NewClient(options),
-		Ecommerce:     ecommerce.NewClient(options),
-		Cash:          cash.NewClient(options),
-		Projects:      projects.NewClient(options),
-		Transport:     transport.NewClient(options),
-		Pos:           pos.NewClient(options),
-		Calendar:      calendar.NewClient(options),
-		Audit:         audit.NewClient(options),
-		Webhooks:      webhooks.NewClient(options),
-		Bank:          bank.NewClient(options),
-		Files:         files.NewClient(options),
-		Reports:       reports.NewClient(options),
-		Consolidation: consolidation.NewClient(options),
-		Public:        public.NewClient(options),
-		Billing:       billing.NewClient(options),
-		Account:       account.NewClient(options),
-		options:       options,
-		baseURL:       options.BaseURL,
+		Reference:      reference.NewClient(options),
+		Partners:       partners.NewClient(options),
+		Leads:          leads.NewClient(options),
+		Catalog:        catalog.NewClient(options),
+		Sales:          sales.NewClient(options),
+		OperationTypes: operationtypes.NewClient(options),
+		DocumentSeries: documentseries.NewClient(options),
+		Purchases:      purchases.NewClient(options),
+		Capture:        capture.NewClient(options),
+		Declarations:   declarations.NewClient(options),
+		Ledger:         ledger.NewClient(options),
+		Officers:       officers.NewClient(options),
+		Migration:      migration.NewClient(options),
+		Assets:         assets.NewClient(options),
+		Hr:             hr.NewClient(options),
+		Fleet:          fleet.NewClient(options),
+		Payroll:        payroll.NewClient(options),
+		Agreements:     agreements.NewClient(options),
+		Inventory:      inventory.NewClient(options),
+		Production:     production.NewClient(options),
+		Ecommerce:      ecommerce.NewClient(options),
+		Cash:           cash.NewClient(options),
+		Projects:       projects.NewClient(options),
+		Transport:      transport.NewClient(options),
+		Pos:            pos.NewClient(options),
+		Calendar:       calendar.NewClient(options),
+		Audit:          audit.NewClient(options),
+		Webhooks:       webhooks.NewClient(options),
+		Bank:           bank.NewClient(options),
+		Files:          files.NewClient(options),
+		Reports:        reports.NewClient(options),
+		Consolidation:  consolidation.NewClient(options),
+		Public:         public.NewClient(options),
+		Billing:        billing.NewClient(options),
+		Account:        account.NewClient(options),
+		options:        options,
+		baseURL:        options.BaseURL,
 		caller: internal.NewCaller(
 			&internal.CallerParams{
 				Client:         options.HTTPClient,

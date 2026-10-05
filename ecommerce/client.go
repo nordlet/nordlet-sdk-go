@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1EcommerceOrdersCreate(
+func (c *Client) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersCreateRequest,
+	request *nordlet.OrdersCreateEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersCreate(
+) (*nordlet.OrdersCreateEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1EcommerceOrdersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceOrdersGet(
+func (c *Client) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersGetRequest,
+	request *nordlet.OrdersGetEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersGet(
+) (*nordlet.OrdersGetEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersGet(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1EcommerceOrdersGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceOrdersList(
+func (c *Client) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersListRequest,
+	request *nordlet.OrdersListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersList(
+) (*nordlet.OrdersListEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersList(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1EcommerceOrdersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceOrdersReserve(
+func (c *Client) OrdersReserve(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersReserveRequest,
+	request *nordlet.OrdersReserveEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersReserveResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersReserve(
+) (*nordlet.OrdersReserveEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersReserve(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1EcommerceOrdersReserve(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceOrdersFulfill(
+func (c *Client) OrdersFulfill(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersFulfillRequest,
+	request *nordlet.OrdersFulfillEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersFulfillResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersFulfill(
+) (*nordlet.OrdersFulfillEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersFulfill(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1EcommerceOrdersFulfill(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceOrdersCancel(
+func (c *Client) OrdersCancel(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceOrdersCancelRequest,
+	request *nordlet.OrdersCancelEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceOrdersCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceOrdersCancel(
+) (*nordlet.OrdersCancelEcommerceResponse, error) {
+	response, err := c.WithRawResponse.OrdersCancel(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1EcommerceOrdersCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceProductsList(
+func (c *Client) ProductsList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceProductsListRequest,
+	request *nordlet.ProductsListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceProductsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceProductsList(
+) (*nordlet.ProductsListEcommerceResponse, error) {
+	response, err := c.WithRawResponse.ProductsList(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1EcommerceProductsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1EcommerceStockList(
+func (c *Client) StockList(
 	ctx context.Context,
-	request *nordlet.PostV1EcommerceStockListRequest,
+	request *nordlet.StockListEcommerceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1EcommerceStockListResponse, error) {
-	response, err := c.WithRawResponse.PostV1EcommerceStockList(
+) (*nordlet.StockListEcommerceResponse, error) {
+	response, err := c.WithRawResponse.StockList(
 		ctx,
 		request,
 		opts...,

@@ -7,176 +7,183 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1FleetAssignmentsCreateRequestFieldVehicleID        = big.NewInt(1 << 0)
-	postV1FleetAssignmentsCreateRequestFieldEmployeeID       = big.NewInt(1 << 1)
-	postV1FleetAssignmentsCreateRequestFieldFromDate         = big.NewInt(1 << 2)
-	postV1FleetAssignmentsCreateRequestFieldToDate           = big.NewInt(1 << 3)
-	postV1FleetAssignmentsCreateRequestFieldPrivateUse       = big.NewInt(1 << 4)
-	postV1FleetAssignmentsCreateRequestFieldEmployerPaysFuel = big.NewInt(1 << 5)
-	postV1FleetAssignmentsCreateRequestFieldNotes            = big.NewInt(1 << 6)
+	assignmentsCreateFleetRequestFieldVehicleID        = big.NewInt(1 << 0)
+	assignmentsCreateFleetRequestFieldEmployeeID       = big.NewInt(1 << 1)
+	assignmentsCreateFleetRequestFieldFromDate         = big.NewInt(1 << 2)
+	assignmentsCreateFleetRequestFieldToDate           = big.NewInt(1 << 3)
+	assignmentsCreateFleetRequestFieldPrivateUse       = big.NewInt(1 << 4)
+	assignmentsCreateFleetRequestFieldEmployerPaysFuel = big.NewInt(1 << 5)
+	assignmentsCreateFleetRequestFieldNotes            = big.NewInt(1 << 6)
 )
 
-type PostV1FleetAssignmentsCreateRequest struct {
-	VehicleID        string  `json:"vehicleId" url:"-"`
-	EmployeeID       string  `json:"employeeId" url:"-"`
-	FromDate         string  `json:"fromDate" url:"-"`
-	ToDate           *string `json:"toDate,omitempty" url:"-"`
-	PrivateUse       *bool   `json:"privateUse,omitempty" url:"-"`
-	EmployerPaysFuel *bool   `json:"employerPaysFuel,omitempty" url:"-"`
-	Notes            *string `json:"notes,omitempty" url:"-"`
+type AssignmentsCreateFleetRequest struct {
+	VehicleID        string     `json:"vehicleId" url:"-"`
+	EmployeeID       string     `json:"employeeId" url:"-"`
+	FromDate         time.Time  `json:"fromDate" url:"-" format:"date"`
+	ToDate           *time.Time `json:"toDate,omitempty" url:"-" format:"date"`
+	PrivateUse       *bool      `json:"privateUse,omitempty" url:"-"`
+	EmployerPaysFuel *bool      `json:"employerPaysFuel,omitempty" url:"-"`
+	Notes            *string    `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FleetAssignmentsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsCreateFleetRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetVehicleID sets the VehicleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetVehicleID(vehicleID string) {
-	p.VehicleID = vehicleID
-	p.require(postV1FleetAssignmentsCreateRequestFieldVehicleID)
+func (a *AssignmentsCreateFleetRequest) SetVehicleID(vehicleID string) {
+	a.VehicleID = vehicleID
+	a.require(assignmentsCreateFleetRequestFieldVehicleID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetAssignmentsCreateRequestFieldEmployeeID)
+func (a *AssignmentsCreateFleetRequest) SetEmployeeID(employeeID string) {
+	a.EmployeeID = employeeID
+	a.require(assignmentsCreateFleetRequestFieldEmployeeID)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetAssignmentsCreateRequestFieldFromDate)
+func (a *AssignmentsCreateFleetRequest) SetFromDate(fromDate time.Time) {
+	a.FromDate = fromDate
+	a.require(assignmentsCreateFleetRequestFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetToDate(toDate *string) {
-	p.ToDate = toDate
-	p.require(postV1FleetAssignmentsCreateRequestFieldToDate)
+func (a *AssignmentsCreateFleetRequest) SetToDate(toDate *time.Time) {
+	a.ToDate = toDate
+	a.require(assignmentsCreateFleetRequestFieldToDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetPrivateUse(privateUse *bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetAssignmentsCreateRequestFieldPrivateUse)
+func (a *AssignmentsCreateFleetRequest) SetPrivateUse(privateUse *bool) {
+	a.PrivateUse = privateUse
+	a.require(assignmentsCreateFleetRequestFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetEmployerPaysFuel(employerPaysFuel *bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetAssignmentsCreateRequestFieldEmployerPaysFuel)
+func (a *AssignmentsCreateFleetRequest) SetEmployerPaysFuel(employerPaysFuel *bool) {
+	a.EmployerPaysFuel = employerPaysFuel
+	a.require(assignmentsCreateFleetRequestFieldEmployerPaysFuel)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetAssignmentsCreateRequestFieldNotes)
+func (a *AssignmentsCreateFleetRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assignmentsCreateFleetRequestFieldNotes)
 }
 
-func (p *PostV1FleetAssignmentsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsCreateRequest
+func (a *AssignmentsCreateFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsCreateFleetRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsCreateRequest(body)
+	*a = AssignmentsCreateFleetRequest(body)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsCreateRequest
+func (a *AssignmentsCreateFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsCreateFleetRequest
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*a),
+		FromDate: internal.NewDate(a.FromDate),
+		ToDate:   internal.NewOptionalDate(a.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FleetAssignmentsEndRequestFieldID     = big.NewInt(1 << 0)
-	postV1FleetAssignmentsEndRequestFieldToDate = big.NewInt(1 << 1)
+	assignmentsEndFleetRequestFieldID     = big.NewInt(1 << 0)
+	assignmentsEndFleetRequestFieldToDate = big.NewInt(1 << 1)
 )
 
-type PostV1FleetAssignmentsEndRequest struct {
-	ID     string `json:"id" url:"-"`
-	ToDate string `json:"toDate" url:"-"`
+type AssignmentsEndFleetRequest struct {
+	ID     string    `json:"id" url:"-"`
+	ToDate time.Time `json:"toDate" url:"-" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FleetAssignmentsEndRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsEndFleetRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetAssignmentsEndRequestFieldID)
+func (a *AssignmentsEndFleetRequest) SetID(id string) {
+	a.ID = id
+	a.require(assignmentsEndFleetRequestFieldID)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndRequest) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1FleetAssignmentsEndRequestFieldToDate)
+func (a *AssignmentsEndFleetRequest) SetToDate(toDate time.Time) {
+	a.ToDate = toDate
+	a.require(assignmentsEndFleetRequestFieldToDate)
 }
 
-func (p *PostV1FleetAssignmentsEndRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsEndRequest
+func (a *AssignmentsEndFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsEndFleetRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsEndRequest(body)
+	*a = AssignmentsEndFleetRequest(body)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsEndRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsEndRequest
+func (a *AssignmentsEndFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsEndFleetRequest
 	var marshaler = struct {
 		embed
+		ToDate *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:  embed(*a),
+		ToDate: internal.NewDate(a.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FleetAssignmentsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1FleetAssignmentsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1FleetAssignmentsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1FleetAssignmentsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1FleetAssignmentsListRequestFieldTotals   = big.NewInt(1 << 4)
+	assignmentsListFleetRequestFieldPage     = big.NewInt(1 << 0)
+	assignmentsListFleetRequestFieldPageSize = big.NewInt(1 << 1)
+	assignmentsListFleetRequestFieldSort     = big.NewInt(1 << 2)
+	assignmentsListFleetRequestFieldFilter   = big.NewInt(1 << 3)
+	assignmentsListFleetRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1FleetAssignmentsListRequest struct {
-	Page     *int64                                         `json:"page,omitempty" url:"-"`
-	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1FleetAssignmentsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1FleetAssignmentsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type AssignmentsListFleetRequest struct {
+	Page     *int64                                   `json:"page,omitempty" url:"-"`
+	PageSize *int64                                   `json:"pageSize,omitempty" url:"-"`
+	Sort     []*AssignmentsListFleetRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*AssignmentsListFleetRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -184,75 +191,75 @@ type PostV1FleetAssignmentsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FleetAssignmentsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsListFleetRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1FleetAssignmentsListRequestFieldPage)
+func (a *AssignmentsListFleetRequest) SetPage(page *int64) {
+	a.Page = page
+	a.require(assignmentsListFleetRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1FleetAssignmentsListRequestFieldPageSize)
+func (a *AssignmentsListFleetRequest) SetPageSize(pageSize *int64) {
+	a.PageSize = pageSize
+	a.require(assignmentsListFleetRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequest) SetSort(sort []*PostV1FleetAssignmentsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1FleetAssignmentsListRequestFieldSort)
+func (a *AssignmentsListFleetRequest) SetSort(sort []*AssignmentsListFleetRequestSortItem) {
+	a.Sort = sort
+	a.require(assignmentsListFleetRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequest) SetFilter(filter []*PostV1FleetAssignmentsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1FleetAssignmentsListRequestFieldFilter)
+func (a *AssignmentsListFleetRequest) SetFilter(filter []*AssignmentsListFleetRequestFilterItem) {
+	a.Filter = filter
+	a.require(assignmentsListFleetRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1FleetAssignmentsListRequestFieldTotals)
+func (a *AssignmentsListFleetRequest) SetTotals(totals []string) {
+	a.Totals = totals
+	a.require(assignmentsListFleetRequestFieldTotals)
 }
 
-func (p *PostV1FleetAssignmentsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsListRequest
+func (a *AssignmentsListFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsListFleetRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsListRequest(body)
+	*a = AssignmentsListFleetRequest(body)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsListRequest
+func (a *AssignmentsListFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsListFleetRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FleetNaturaPreviewRequestFieldYear  = big.NewInt(1 << 0)
-	postV1FleetNaturaPreviewRequestFieldMonth = big.NewInt(1 << 1)
+	naturaPreviewFleetRequestFieldYear  = big.NewInt(1 << 0)
+	naturaPreviewFleetRequestFieldMonth = big.NewInt(1 << 1)
 )
 
-type PostV1FleetNaturaPreviewRequest struct {
+type NaturaPreviewFleetRequest struct {
 	Year  int64 `json:"year" url:"-"`
 	Month int64 `json:"month" url:"-"`
 
@@ -260,520 +267,74 @@ type PostV1FleetNaturaPreviewRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FleetNaturaPreviewRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (n *NaturaPreviewFleetRequest) require(field *big.Int) {
+	if n.explicitFields == nil {
+		n.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	n.explicitFields.Or(n.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1FleetNaturaPreviewRequestFieldYear)
+func (n *NaturaPreviewFleetRequest) SetYear(year int64) {
+	n.Year = year
+	n.require(naturaPreviewFleetRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1FleetNaturaPreviewRequestFieldMonth)
+func (n *NaturaPreviewFleetRequest) SetMonth(month int64) {
+	n.Month = month
+	n.require(naturaPreviewFleetRequestFieldMonth)
 }
 
-func (p *PostV1FleetNaturaPreviewRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetNaturaPreviewRequest
+func (n *NaturaPreviewFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler NaturaPreviewFleetRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FleetNaturaPreviewRequest(body)
+	*n = NaturaPreviewFleetRequest(body)
 	return nil
 }
 
-func (p *PostV1FleetNaturaPreviewRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetNaturaPreviewRequest
+func (n *NaturaPreviewFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed NaturaPreviewFleetRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*n),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, n.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FleetVehiclesCreateRequestFieldPlateNumber            = big.NewInt(1 << 0)
-	postV1FleetVehiclesCreateRequestFieldMake                   = big.NewInt(1 << 1)
-	postV1FleetVehiclesCreateRequestFieldModel                  = big.NewInt(1 << 2)
-	postV1FleetVehiclesCreateRequestFieldYear                   = big.NewInt(1 << 3)
-	postV1FleetVehiclesCreateRequestFieldVin                    = big.NewInt(1 << 4)
-	postV1FleetVehiclesCreateRequestFieldFuelType               = big.NewInt(1 << 5)
-	postV1FleetVehiclesCreateRequestFieldAcquisitionDate        = big.NewInt(1 << 6)
-	postV1FleetVehiclesCreateRequestFieldMarketValue            = big.NewInt(1 << 7)
-	postV1FleetVehiclesCreateRequestFieldFixedAssetID           = big.NewInt(1 << 8)
-	postV1FleetVehiclesCreateRequestFieldTechnicalInspectionDue = big.NewInt(1 << 9)
-	postV1FleetVehiclesCreateRequestFieldInsuranceDue           = big.NewInt(1 << 10)
-	postV1FleetVehiclesCreateRequestFieldNotes                  = big.NewInt(1 << 11)
-	postV1FleetVehiclesCreateRequestFieldDocuments              = big.NewInt(1 << 12)
+	assignmentsCreateFleetResponseFieldID               = big.NewInt(1 << 0)
+	assignmentsCreateFleetResponseFieldVehicleID        = big.NewInt(1 << 1)
+	assignmentsCreateFleetResponseFieldPlateNumber      = big.NewInt(1 << 2)
+	assignmentsCreateFleetResponseFieldEmployeeID       = big.NewInt(1 << 3)
+	assignmentsCreateFleetResponseFieldEmployeeName     = big.NewInt(1 << 4)
+	assignmentsCreateFleetResponseFieldFromDate         = big.NewInt(1 << 5)
+	assignmentsCreateFleetResponseFieldToDate           = big.NewInt(1 << 6)
+	assignmentsCreateFleetResponseFieldPrivateUse       = big.NewInt(1 << 7)
+	assignmentsCreateFleetResponseFieldEmployerPaysFuel = big.NewInt(1 << 8)
+	assignmentsCreateFleetResponseFieldNotes            = big.NewInt(1 << 9)
+	assignmentsCreateFleetResponseFieldCreatedAt        = big.NewInt(1 << 10)
 )
 
-type PostV1FleetVehiclesCreateRequest struct {
-	PlateNumber            string                                           `json:"plateNumber" url:"-"`
-	Make                   string                                           `json:"make" url:"-"`
-	Model                  string                                           `json:"model" url:"-"`
-	Year                   *int64                                           `json:"year,omitempty" url:"-"`
-	Vin                    *string                                          `json:"vin,omitempty" url:"-"`
-	FuelType               *PostV1FleetVehiclesCreateRequestFuelType        `json:"fuelType,omitempty" url:"-"`
-	AcquisitionDate        *string                                          `json:"acquisitionDate,omitempty" url:"-"`
-	MarketValue            *string                                          `json:"marketValue,omitempty" url:"-"`
-	FixedAssetID           *string                                          `json:"fixedAssetId,omitempty" url:"-"`
-	TechnicalInspectionDue *string                                          `json:"technicalInspectionDue,omitempty" url:"-"`
-	InsuranceDue           *string                                          `json:"insuranceDue,omitempty" url:"-"`
-	Notes                  *string                                          `json:"notes,omitempty" url:"-"`
-	Documents              []*PostV1FleetVehiclesCreateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1FleetVehiclesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesCreateRequestFieldPlateNumber)
-}
-
-// SetMake sets the Make field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesCreateRequestFieldMake)
-}
-
-// SetModel sets the Model field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesCreateRequestFieldModel)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesCreateRequestFieldYear)
-}
-
-// SetVin sets the Vin field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesCreateRequestFieldVin)
-}
-
-// SetFuelType sets the FuelType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetFuelType(fuelType *PostV1FleetVehiclesCreateRequestFuelType) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesCreateRequestFieldFuelType)
-}
-
-// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesCreateRequestFieldAcquisitionDate)
-}
-
-// SetMarketValue sets the MarketValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetMarketValue(marketValue *string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesCreateRequestFieldMarketValue)
-}
-
-// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesCreateRequestFieldFixedAssetID)
-}
-
-// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesCreateRequestFieldTechnicalInspectionDue)
-}
-
-// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesCreateRequestFieldInsuranceDue)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesCreateRequestFieldNotes)
-}
-
-// SetDocuments sets the Documents field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequest) SetDocuments(documents []*PostV1FleetVehiclesCreateRequestDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1FleetVehiclesCreateRequestFieldDocuments)
-}
-
-func (p *PostV1FleetVehiclesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesCreateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesCreateRequest(body)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesCreateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1FleetVehiclesGetRequestFieldID = big.NewInt(1 << 0)
-)
-
-type PostV1FleetVehiclesGetRequest struct {
-	ID string `json:"id" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1FleetVehiclesGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesGetRequestFieldID)
-}
-
-func (p *PostV1FleetVehiclesGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesGetRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesGetRequest(body)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesGetRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1FleetVehiclesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1FleetVehiclesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1FleetVehiclesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1FleetVehiclesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1FleetVehiclesListRequestFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1FleetVehiclesListRequest struct {
-	Page     *int64                                      `json:"page,omitempty" url:"-"`
-	PageSize *int64                                      `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1FleetVehiclesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1FleetVehiclesListRequestFilterItem `json:"filter,omitempty" url:"-"`
-	// Numeric fields to sum over every row matching the filter (not only the current page)
-	Totals []string `json:"totals,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1FleetVehiclesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1FleetVehiclesListRequestFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1FleetVehiclesListRequestFieldPageSize)
-}
-
-// SetSort sets the Sort field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequest) SetSort(sort []*PostV1FleetVehiclesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1FleetVehiclesListRequestFieldSort)
-}
-
-// SetFilter sets the Filter field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequest) SetFilter(filter []*PostV1FleetVehiclesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1FleetVehiclesListRequestFieldFilter)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1FleetVehiclesListRequestFieldTotals)
-}
-
-func (p *PostV1FleetVehiclesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesListRequest(body)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1FleetVehiclesUpdateRequestFieldID                     = big.NewInt(1 << 0)
-	postV1FleetVehiclesUpdateRequestFieldPlateNumber            = big.NewInt(1 << 1)
-	postV1FleetVehiclesUpdateRequestFieldMake                   = big.NewInt(1 << 2)
-	postV1FleetVehiclesUpdateRequestFieldModel                  = big.NewInt(1 << 3)
-	postV1FleetVehiclesUpdateRequestFieldYear                   = big.NewInt(1 << 4)
-	postV1FleetVehiclesUpdateRequestFieldVin                    = big.NewInt(1 << 5)
-	postV1FleetVehiclesUpdateRequestFieldFuelType               = big.NewInt(1 << 6)
-	postV1FleetVehiclesUpdateRequestFieldAcquisitionDate        = big.NewInt(1 << 7)
-	postV1FleetVehiclesUpdateRequestFieldMarketValue            = big.NewInt(1 << 8)
-	postV1FleetVehiclesUpdateRequestFieldFixedAssetID           = big.NewInt(1 << 9)
-	postV1FleetVehiclesUpdateRequestFieldTechnicalInspectionDue = big.NewInt(1 << 10)
-	postV1FleetVehiclesUpdateRequestFieldInsuranceDue           = big.NewInt(1 << 11)
-	postV1FleetVehiclesUpdateRequestFieldStatus                 = big.NewInt(1 << 12)
-	postV1FleetVehiclesUpdateRequestFieldNotes                  = big.NewInt(1 << 13)
-)
-
-type PostV1FleetVehiclesUpdateRequest struct {
-	ID                     string                                    `json:"id" url:"-"`
-	PlateNumber            *string                                   `json:"plateNumber,omitempty" url:"-"`
-	Make                   *string                                   `json:"make,omitempty" url:"-"`
-	Model                  *string                                   `json:"model,omitempty" url:"-"`
-	Year                   *int64                                    `json:"year,omitempty" url:"-"`
-	Vin                    *string                                   `json:"vin,omitempty" url:"-"`
-	FuelType               *PostV1FleetVehiclesUpdateRequestFuelType `json:"fuelType,omitempty" url:"-"`
-	AcquisitionDate        *string                                   `json:"acquisitionDate,omitempty" url:"-"`
-	MarketValue            *string                                   `json:"marketValue,omitempty" url:"-"`
-	FixedAssetID           *string                                   `json:"fixedAssetId,omitempty" url:"-"`
-	TechnicalInspectionDue *string                                   `json:"technicalInspectionDue,omitempty" url:"-"`
-	InsuranceDue           *string                                   `json:"insuranceDue,omitempty" url:"-"`
-	Status                 *PostV1FleetVehiclesUpdateRequestStatus   `json:"status,omitempty" url:"-"`
-	Notes                  *string                                   `json:"notes,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1FleetVehiclesUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesUpdateRequestFieldID)
-}
-
-// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetPlateNumber(plateNumber *string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesUpdateRequestFieldPlateNumber)
-}
-
-// SetMake sets the Make field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetMake(make_ *string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesUpdateRequestFieldMake)
-}
-
-// SetModel sets the Model field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesUpdateRequestFieldModel)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesUpdateRequestFieldYear)
-}
-
-// SetVin sets the Vin field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesUpdateRequestFieldVin)
-}
-
-// SetFuelType sets the FuelType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetFuelType(fuelType *PostV1FleetVehiclesUpdateRequestFuelType) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesUpdateRequestFieldFuelType)
-}
-
-// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesUpdateRequestFieldAcquisitionDate)
-}
-
-// SetMarketValue sets the MarketValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetMarketValue(marketValue *string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesUpdateRequestFieldMarketValue)
-}
-
-// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesUpdateRequestFieldFixedAssetID)
-}
-
-// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesUpdateRequestFieldTechnicalInspectionDue)
-}
-
-// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesUpdateRequestFieldInsuranceDue)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetStatus(status *PostV1FleetVehiclesUpdateRequestStatus) {
-	p.Status = status
-	p.require(postV1FleetVehiclesUpdateRequestFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesUpdateRequestFieldNotes)
-}
-
-func (p *PostV1FleetVehiclesUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesUpdateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesUpdateRequest(body)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesUpdateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1FleetAssignmentsCreateResponseFieldID               = big.NewInt(1 << 0)
-	postV1FleetAssignmentsCreateResponseFieldVehicleID        = big.NewInt(1 << 1)
-	postV1FleetAssignmentsCreateResponseFieldPlateNumber      = big.NewInt(1 << 2)
-	postV1FleetAssignmentsCreateResponseFieldEmployeeID       = big.NewInt(1 << 3)
-	postV1FleetAssignmentsCreateResponseFieldEmployeeName     = big.NewInt(1 << 4)
-	postV1FleetAssignmentsCreateResponseFieldFromDate         = big.NewInt(1 << 5)
-	postV1FleetAssignmentsCreateResponseFieldToDate           = big.NewInt(1 << 6)
-	postV1FleetAssignmentsCreateResponseFieldPrivateUse       = big.NewInt(1 << 7)
-	postV1FleetAssignmentsCreateResponseFieldEmployerPaysFuel = big.NewInt(1 << 8)
-	postV1FleetAssignmentsCreateResponseFieldNotes            = big.NewInt(1 << 9)
-	postV1FleetAssignmentsCreateResponseFieldCreatedAt        = big.NewInt(1 << 10)
-)
-
-type PostV1FleetAssignmentsCreateResponse struct {
-	ID               string  `json:"id" url:"id"`
-	VehicleID        string  `json:"vehicleId" url:"vehicleId"`
-	PlateNumber      string  `json:"plateNumber" url:"plateNumber"`
-	EmployeeID       string  `json:"employeeId" url:"employeeId"`
-	EmployeeName     string  `json:"employeeName" url:"employeeName"`
-	FromDate         string  `json:"fromDate" url:"fromDate"`
-	ToDate           *string `json:"toDate,omitempty" url:"toDate,omitempty"`
-	PrivateUse       bool    `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool    `json:"employerPaysFuel" url:"employerPaysFuel"`
-	Notes            *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt        string  `json:"createdAt" url:"createdAt"`
+type AssignmentsCreateFleetResponse struct {
+	ID               string     `json:"id" url:"id"`
+	VehicleID        string     `json:"vehicleId" url:"vehicleId"`
+	PlateNumber      string     `json:"plateNumber" url:"plateNumber"`
+	EmployeeID       string     `json:"employeeId" url:"employeeId"`
+	EmployeeName     string     `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time  `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate           *time.Time `json:"toDate,omitempty" url:"toDate,omitempty" format:"date"`
+	PrivateUse       bool       `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool       `json:"employerPaysFuel" url:"employerPaysFuel"`
+	Notes            *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt        time.Time  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -782,242 +343,258 @@ type PostV1FleetAssignmentsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetID() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetVehicleID() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetVehicleID() string {
+	if a == nil {
 		return ""
 	}
-	return p.VehicleID
+	return a.VehicleID
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetPlateNumber() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetPlateNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return a.PlateNumber
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetEmployeeID() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetEmployeeID() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetEmployeeName() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetEmployeeName() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return a.EmployeeName
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetFromDate() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsCreateFleetResponse) GetFromDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return a.FromDate
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetToDate() *string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetToDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.ToDate
+	return a.ToDate
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetPrivateUse() bool {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetPrivateUse() bool {
+	if a == nil {
 		return false
 	}
-	return p.PrivateUse
+	return a.PrivateUse
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetEmployerPaysFuel() bool {
+	if a == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return a.EmployerPaysFuel
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsCreateFleetResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsCreateFleetResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetAssignmentsCreateResponseFieldID)
+func (a *AssignmentsCreateFleetResponse) SetID(id string) {
+	a.ID = id
+	a.require(assignmentsCreateFleetResponseFieldID)
 }
 
 // SetVehicleID sets the VehicleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetVehicleID(vehicleID string) {
-	p.VehicleID = vehicleID
-	p.require(postV1FleetAssignmentsCreateResponseFieldVehicleID)
+func (a *AssignmentsCreateFleetResponse) SetVehicleID(vehicleID string) {
+	a.VehicleID = vehicleID
+	a.require(assignmentsCreateFleetResponseFieldVehicleID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetAssignmentsCreateResponseFieldPlateNumber)
+func (a *AssignmentsCreateFleetResponse) SetPlateNumber(plateNumber string) {
+	a.PlateNumber = plateNumber
+	a.require(assignmentsCreateFleetResponseFieldPlateNumber)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetAssignmentsCreateResponseFieldEmployeeID)
+func (a *AssignmentsCreateFleetResponse) SetEmployeeID(employeeID string) {
+	a.EmployeeID = employeeID
+	a.require(assignmentsCreateFleetResponseFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetAssignmentsCreateResponseFieldEmployeeName)
+func (a *AssignmentsCreateFleetResponse) SetEmployeeName(employeeName string) {
+	a.EmployeeName = employeeName
+	a.require(assignmentsCreateFleetResponseFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetAssignmentsCreateResponseFieldFromDate)
+func (a *AssignmentsCreateFleetResponse) SetFromDate(fromDate time.Time) {
+	a.FromDate = fromDate
+	a.require(assignmentsCreateFleetResponseFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetToDate(toDate *string) {
-	p.ToDate = toDate
-	p.require(postV1FleetAssignmentsCreateResponseFieldToDate)
+func (a *AssignmentsCreateFleetResponse) SetToDate(toDate *time.Time) {
+	a.ToDate = toDate
+	a.require(assignmentsCreateFleetResponseFieldToDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetAssignmentsCreateResponseFieldPrivateUse)
+func (a *AssignmentsCreateFleetResponse) SetPrivateUse(privateUse bool) {
+	a.PrivateUse = privateUse
+	a.require(assignmentsCreateFleetResponseFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetAssignmentsCreateResponseFieldEmployerPaysFuel)
+func (a *AssignmentsCreateFleetResponse) SetEmployerPaysFuel(employerPaysFuel bool) {
+	a.EmployerPaysFuel = employerPaysFuel
+	a.require(assignmentsCreateFleetResponseFieldEmployerPaysFuel)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetAssignmentsCreateResponseFieldNotes)
+func (a *AssignmentsCreateFleetResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assignmentsCreateFleetResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetAssignmentsCreateResponseFieldCreatedAt)
+func (a *AssignmentsCreateFleetResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assignmentsCreateFleetResponseFieldCreatedAt)
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssignmentsCreateFleetResponse) UnmarshalJSON(data []byte) error {
+	type embed AssignmentsCreateFleetResponse
+	var unmarshaler = struct {
+		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsCreateFleetResponse(unmarshaler.embed)
+	a.FromDate = unmarshaler.FromDate.Time()
+	a.ToDate = unmarshaler.ToDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsCreateResponse
+func (a *AssignmentsCreateFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsCreateFleetResponse
 	var marshaler = struct {
 		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		FromDate:  internal.NewDate(a.FromDate),
+		ToDate:    internal.NewOptionalDate(a.ToDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsCreateResponse) String() string {
-	if p == nil {
+func (a *AssignmentsCreateFleetResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1FleetAssignmentsEndResponseFieldID               = big.NewInt(1 << 0)
-	postV1FleetAssignmentsEndResponseFieldVehicleID        = big.NewInt(1 << 1)
-	postV1FleetAssignmentsEndResponseFieldPlateNumber      = big.NewInt(1 << 2)
-	postV1FleetAssignmentsEndResponseFieldEmployeeID       = big.NewInt(1 << 3)
-	postV1FleetAssignmentsEndResponseFieldEmployeeName     = big.NewInt(1 << 4)
-	postV1FleetAssignmentsEndResponseFieldFromDate         = big.NewInt(1 << 5)
-	postV1FleetAssignmentsEndResponseFieldToDate           = big.NewInt(1 << 6)
-	postV1FleetAssignmentsEndResponseFieldPrivateUse       = big.NewInt(1 << 7)
-	postV1FleetAssignmentsEndResponseFieldEmployerPaysFuel = big.NewInt(1 << 8)
-	postV1FleetAssignmentsEndResponseFieldNotes            = big.NewInt(1 << 9)
-	postV1FleetAssignmentsEndResponseFieldCreatedAt        = big.NewInt(1 << 10)
+	assignmentsEndFleetResponseFieldID               = big.NewInt(1 << 0)
+	assignmentsEndFleetResponseFieldVehicleID        = big.NewInt(1 << 1)
+	assignmentsEndFleetResponseFieldPlateNumber      = big.NewInt(1 << 2)
+	assignmentsEndFleetResponseFieldEmployeeID       = big.NewInt(1 << 3)
+	assignmentsEndFleetResponseFieldEmployeeName     = big.NewInt(1 << 4)
+	assignmentsEndFleetResponseFieldFromDate         = big.NewInt(1 << 5)
+	assignmentsEndFleetResponseFieldToDate           = big.NewInt(1 << 6)
+	assignmentsEndFleetResponseFieldPrivateUse       = big.NewInt(1 << 7)
+	assignmentsEndFleetResponseFieldEmployerPaysFuel = big.NewInt(1 << 8)
+	assignmentsEndFleetResponseFieldNotes            = big.NewInt(1 << 9)
+	assignmentsEndFleetResponseFieldCreatedAt        = big.NewInt(1 << 10)
 )
 
-type PostV1FleetAssignmentsEndResponse struct {
-	ID               string  `json:"id" url:"id"`
-	VehicleID        string  `json:"vehicleId" url:"vehicleId"`
-	PlateNumber      string  `json:"plateNumber" url:"plateNumber"`
-	EmployeeID       string  `json:"employeeId" url:"employeeId"`
-	EmployeeName     string  `json:"employeeName" url:"employeeName"`
-	FromDate         string  `json:"fromDate" url:"fromDate"`
-	ToDate           *string `json:"toDate,omitempty" url:"toDate,omitempty"`
-	PrivateUse       bool    `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool    `json:"employerPaysFuel" url:"employerPaysFuel"`
-	Notes            *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt        string  `json:"createdAt" url:"createdAt"`
+type AssignmentsEndFleetResponse struct {
+	ID               string     `json:"id" url:"id"`
+	VehicleID        string     `json:"vehicleId" url:"vehicleId"`
+	PlateNumber      string     `json:"plateNumber" url:"plateNumber"`
+	EmployeeID       string     `json:"employeeId" url:"employeeId"`
+	EmployeeName     string     `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time  `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate           *time.Time `json:"toDate,omitempty" url:"toDate,omitempty" format:"date"`
+	PrivateUse       bool       `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool       `json:"employerPaysFuel" url:"employerPaysFuel"`
+	Notes            *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt        time.Time  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1026,226 +603,242 @@ type PostV1FleetAssignmentsEndResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetID() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetVehicleID() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetVehicleID() string {
+	if a == nil {
 		return ""
 	}
-	return p.VehicleID
+	return a.VehicleID
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetPlateNumber() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetPlateNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return a.PlateNumber
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetEmployeeID() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetEmployeeID() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetEmployeeName() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetEmployeeName() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return a.EmployeeName
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetFromDate() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsEndFleetResponse) GetFromDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return a.FromDate
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetToDate() *string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetToDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.ToDate
+	return a.ToDate
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetPrivateUse() bool {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetPrivateUse() bool {
+	if a == nil {
 		return false
 	}
-	return p.PrivateUse
+	return a.PrivateUse
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetEmployerPaysFuel() bool {
+	if a == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return a.EmployerPaysFuel
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetNotes() *string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsEndFleetResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsEndFleetResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetAssignmentsEndResponseFieldID)
+func (a *AssignmentsEndFleetResponse) SetID(id string) {
+	a.ID = id
+	a.require(assignmentsEndFleetResponseFieldID)
 }
 
 // SetVehicleID sets the VehicleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetVehicleID(vehicleID string) {
-	p.VehicleID = vehicleID
-	p.require(postV1FleetAssignmentsEndResponseFieldVehicleID)
+func (a *AssignmentsEndFleetResponse) SetVehicleID(vehicleID string) {
+	a.VehicleID = vehicleID
+	a.require(assignmentsEndFleetResponseFieldVehicleID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetAssignmentsEndResponseFieldPlateNumber)
+func (a *AssignmentsEndFleetResponse) SetPlateNumber(plateNumber string) {
+	a.PlateNumber = plateNumber
+	a.require(assignmentsEndFleetResponseFieldPlateNumber)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetAssignmentsEndResponseFieldEmployeeID)
+func (a *AssignmentsEndFleetResponse) SetEmployeeID(employeeID string) {
+	a.EmployeeID = employeeID
+	a.require(assignmentsEndFleetResponseFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetAssignmentsEndResponseFieldEmployeeName)
+func (a *AssignmentsEndFleetResponse) SetEmployeeName(employeeName string) {
+	a.EmployeeName = employeeName
+	a.require(assignmentsEndFleetResponseFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetAssignmentsEndResponseFieldFromDate)
+func (a *AssignmentsEndFleetResponse) SetFromDate(fromDate time.Time) {
+	a.FromDate = fromDate
+	a.require(assignmentsEndFleetResponseFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetToDate(toDate *string) {
-	p.ToDate = toDate
-	p.require(postV1FleetAssignmentsEndResponseFieldToDate)
+func (a *AssignmentsEndFleetResponse) SetToDate(toDate *time.Time) {
+	a.ToDate = toDate
+	a.require(assignmentsEndFleetResponseFieldToDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetAssignmentsEndResponseFieldPrivateUse)
+func (a *AssignmentsEndFleetResponse) SetPrivateUse(privateUse bool) {
+	a.PrivateUse = privateUse
+	a.require(assignmentsEndFleetResponseFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetAssignmentsEndResponseFieldEmployerPaysFuel)
+func (a *AssignmentsEndFleetResponse) SetEmployerPaysFuel(employerPaysFuel bool) {
+	a.EmployerPaysFuel = employerPaysFuel
+	a.require(assignmentsEndFleetResponseFieldEmployerPaysFuel)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetAssignmentsEndResponseFieldNotes)
+func (a *AssignmentsEndFleetResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assignmentsEndFleetResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsEndResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetAssignmentsEndResponseFieldCreatedAt)
+func (a *AssignmentsEndFleetResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assignmentsEndFleetResponseFieldCreatedAt)
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsEndResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssignmentsEndFleetResponse) UnmarshalJSON(data []byte) error {
+	type embed AssignmentsEndFleetResponse
+	var unmarshaler = struct {
+		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsEndResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsEndFleetResponse(unmarshaler.embed)
+	a.FromDate = unmarshaler.FromDate.Time()
+	a.ToDate = unmarshaler.ToDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsEndResponse
+func (a *AssignmentsEndFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsEndFleetResponse
 	var marshaler = struct {
 		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		FromDate:  internal.NewDate(a.FromDate),
+		ToDate:    internal.NewOptionalDate(a.ToDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsEndResponse) String() string {
-	if p == nil {
+func (a *AssignmentsEndFleetResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1FleetAssignmentsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1FleetAssignmentsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1FleetAssignmentsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	assignmentsListFleetRequestFilterItemFieldField = big.NewInt(1 << 0)
+	assignmentsListFleetRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	assignmentsListFleetRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1FleetAssignmentsListRequestFilterItem struct {
-	Field string                                            `json:"field" url:"field"`
-	Op    PostV1FleetAssignmentsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1FleetAssignmentsListRequestFilterItemValue `json:"value" url:"value"`
+type AssignmentsListFleetRequestFilterItem struct {
+	Field string                                      `json:"field" url:"field"`
+	Op    AssignmentsListFleetRequestFilterItemOp     `json:"op" url:"op"`
+	Value *AssignmentsListFleetRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1254,312 +847,312 @@ type PostV1FleetAssignmentsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItem) GetField() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Field
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) GetOp() PostV1FleetAssignmentsListRequestFilterItemOp {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItem) GetOp() AssignmentsListFleetRequestFilterItemOp {
+	if a == nil {
 		return ""
 	}
-	return p.Op
+	return a.Op
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) GetValue() *PostV1FleetAssignmentsListRequestFilterItemValue {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItem) GetValue() *AssignmentsListFleetRequestFilterItemValue {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.Value
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsListFleetRequestFilterItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FleetAssignmentsListRequestFilterItemFieldField)
+func (a *AssignmentsListFleetRequestFilterItem) SetField(field string) {
+	a.Field = field
+	a.require(assignmentsListFleetRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequestFilterItem) SetOp(op PostV1FleetAssignmentsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1FleetAssignmentsListRequestFilterItemFieldOp)
+func (a *AssignmentsListFleetRequestFilterItem) SetOp(op AssignmentsListFleetRequestFilterItemOp) {
+	a.Op = op
+	a.require(assignmentsListFleetRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequestFilterItem) SetValue(value *PostV1FleetAssignmentsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1FleetAssignmentsListRequestFilterItemFieldValue)
+func (a *AssignmentsListFleetRequestFilterItem) SetValue(value *AssignmentsListFleetRequestFilterItemValue) {
+	a.Value = value
+	a.require(assignmentsListFleetRequestFilterItemFieldValue)
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsListRequestFilterItem
+func (a *AssignmentsListFleetRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsListFleetRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsListFleetRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsListRequestFilterItem
+func (a *AssignmentsListFleetRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsListFleetRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItem) String() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1FleetAssignmentsListRequestFilterItemOp string
+type AssignmentsListFleetRequestFilterItemOp string
 
 const (
-	PostV1FleetAssignmentsListRequestFilterItemOpEq       PostV1FleetAssignmentsListRequestFilterItemOp = "eq"
-	PostV1FleetAssignmentsListRequestFilterItemOpNe       PostV1FleetAssignmentsListRequestFilterItemOp = "ne"
-	PostV1FleetAssignmentsListRequestFilterItemOpContains PostV1FleetAssignmentsListRequestFilterItemOp = "contains"
-	PostV1FleetAssignmentsListRequestFilterItemOpGte      PostV1FleetAssignmentsListRequestFilterItemOp = "gte"
-	PostV1FleetAssignmentsListRequestFilterItemOpLte      PostV1FleetAssignmentsListRequestFilterItemOp = "lte"
-	PostV1FleetAssignmentsListRequestFilterItemOpIn       PostV1FleetAssignmentsListRequestFilterItemOp = "in"
+	AssignmentsListFleetRequestFilterItemOpEq       AssignmentsListFleetRequestFilterItemOp = "eq"
+	AssignmentsListFleetRequestFilterItemOpNe       AssignmentsListFleetRequestFilterItemOp = "ne"
+	AssignmentsListFleetRequestFilterItemOpContains AssignmentsListFleetRequestFilterItemOp = "contains"
+	AssignmentsListFleetRequestFilterItemOpGte      AssignmentsListFleetRequestFilterItemOp = "gte"
+	AssignmentsListFleetRequestFilterItemOpLte      AssignmentsListFleetRequestFilterItemOp = "lte"
+	AssignmentsListFleetRequestFilterItemOpIn       AssignmentsListFleetRequestFilterItemOp = "in"
 )
 
-func NewPostV1FleetAssignmentsListRequestFilterItemOpFromString(s string) (PostV1FleetAssignmentsListRequestFilterItemOp, error) {
+func NewAssignmentsListFleetRequestFilterItemOpFromString(s string) (AssignmentsListFleetRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1FleetAssignmentsListRequestFilterItemOpEq, nil
+		return AssignmentsListFleetRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1FleetAssignmentsListRequestFilterItemOpNe, nil
+		return AssignmentsListFleetRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1FleetAssignmentsListRequestFilterItemOpContains, nil
+		return AssignmentsListFleetRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1FleetAssignmentsListRequestFilterItemOpGte, nil
+		return AssignmentsListFleetRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1FleetAssignmentsListRequestFilterItemOpLte, nil
+		return AssignmentsListFleetRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1FleetAssignmentsListRequestFilterItemOpIn, nil
+		return AssignmentsListFleetRequestFilterItemOpIn, nil
 	}
-	var t PostV1FleetAssignmentsListRequestFilterItemOp
+	var t AssignmentsListFleetRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetAssignmentsListRequestFilterItemOp) Ptr() *PostV1FleetAssignmentsListRequestFilterItemOp {
-	return &p
+func (a AssignmentsListFleetRequestFilterItemOp) Ptr() *AssignmentsListFleetRequestFilterItemOp {
+	return &a
 }
 
-type PostV1FleetAssignmentsListRequestFilterItemValue struct {
-	String                                                        string
-	Double                                                        float64
-	Boolean                                                       bool
-	PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList []*PostV1FleetAssignmentsListRequestFilterItemValueThreeItem
+type AssignmentsListFleetRequestFilterItemValue struct {
+	String                                                  string
+	Double                                                  float64
+	Boolean                                                 bool
+	AssignmentsListFleetRequestFilterItemValueThreeItemList []*AssignmentsListFleetRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValue) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValue) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValue) GetBoolean() bool {
+	if a == nil {
 		return false
 	}
-	return p.Boolean
+	return a.Boolean
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) GetPostV1FleetAssignmentsListRequestFilterItemValueThreeItemList() []*PostV1FleetAssignmentsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValue) GetAssignmentsListFleetRequestFilterItemValueThreeItemList() []*AssignmentsListFleetRequestFilterItemValueThreeItem {
+	if a == nil {
 		return nil
 	}
-	return p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList
+	return a.AssignmentsListFleetRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (a *AssignmentsListFleetRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		a.typ = "Boolean"
+		a.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1FleetAssignmentsListRequestFilterItemValueThreeItemList []*PostV1FleetAssignmentsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1FleetAssignmentsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList"
-		p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList = valuePostV1FleetAssignmentsListRequestFilterItemValueThreeItemList
+	var valueAssignmentsListFleetRequestFilterItemValueThreeItemList []*AssignmentsListFleetRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueAssignmentsListFleetRequestFilterItemValueThreeItemList); err == nil {
+		a.typ = "AssignmentsListFleetRequestFilterItemValueThreeItemList"
+		a.AssignmentsListFleetRequestFilterItemValueThreeItemList = valueAssignmentsListFleetRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1FleetAssignmentsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AssignmentsListFleetRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return json.Marshal(a.Boolean)
 	}
-	if p.typ == "PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList" || p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AssignmentsListFleetRequestFilterItemValueThreeItemList" || a.AssignmentsListFleetRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(a.AssignmentsListFleetRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1FleetAssignmentsListRequestFilterItemValueVisitor interface {
+type AssignmentsListFleetRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1FleetAssignmentsListRequestFilterItemValueThreeItemList([]*PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) error
+	VisitAssignmentsListFleetRequestFilterItemValueThreeItemList([]*AssignmentsListFleetRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValue) Accept(visitor PostV1FleetAssignmentsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AssignmentsListFleetRequestFilterItemValue) Accept(visitor AssignmentsListFleetRequestFilterItemValueVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return visitor.VisitBoolean(a.Boolean)
 	}
-	if p.typ == "PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList" || p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1FleetAssignmentsListRequestFilterItemValueThreeItemList(p.PostV1FleetAssignmentsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AssignmentsListFleetRequestFilterItemValueThreeItemList" || a.AssignmentsListFleetRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitAssignmentsListFleetRequestFilterItemValueThreeItemList(a.AssignmentsListFleetRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1FleetAssignmentsListRequestFilterItemValueThreeItem struct {
+type AssignmentsListFleetRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValueThreeItem) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (a *AssignmentsListFleetRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (a *AssignmentsListFleetRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AssignmentsListFleetRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1FleetAssignmentsListRequestFilterItemValueThreeItemVisitor interface {
+type AssignmentsListFleetRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1FleetAssignmentsListRequestFilterItemValueThreeItem) Accept(visitor PostV1FleetAssignmentsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AssignmentsListFleetRequestFilterItemValueThreeItem) Accept(visitor AssignmentsListFleetRequestFilterItemValueThreeItemVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
 var (
-	postV1FleetAssignmentsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1FleetAssignmentsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	assignmentsListFleetRequestSortItemFieldField = big.NewInt(1 << 0)
+	assignmentsListFleetRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1FleetAssignmentsListRequestSortItem struct {
-	Field string                                        `json:"field" url:"field"`
-	Dir   *PostV1FleetAssignmentsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type AssignmentsListFleetRequestSortItem struct {
+	Field string                                  `json:"field" url:"field"`
+	Dir   *AssignmentsListFleetRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1568,126 +1161,126 @@ type PostV1FleetAssignmentsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) GetField() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestSortItem) GetField() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Field
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) GetDir() *PostV1FleetAssignmentsListRequestSortItemDir {
-	if p == nil {
+func (a *AssignmentsListFleetRequestSortItem) GetDir() *AssignmentsListFleetRequestSortItemDir {
+	if a == nil {
 		return nil
 	}
-	return p.Dir
+	return a.Dir
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsListFleetRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsListFleetRequestSortItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FleetAssignmentsListRequestSortItemFieldField)
+func (a *AssignmentsListFleetRequestSortItem) SetField(field string) {
+	a.Field = field
+	a.require(assignmentsListFleetRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListRequestSortItem) SetDir(dir *PostV1FleetAssignmentsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1FleetAssignmentsListRequestSortItemFieldDir)
+func (a *AssignmentsListFleetRequestSortItem) SetDir(dir *AssignmentsListFleetRequestSortItemDir) {
+	a.Dir = dir
+	a.require(assignmentsListFleetRequestSortItemFieldDir)
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsListRequestSortItem
+func (a *AssignmentsListFleetRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsListFleetRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsListFleetRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsListRequestSortItem
+func (a *AssignmentsListFleetRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsListFleetRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsListRequestSortItem) String() string {
-	if p == nil {
+func (a *AssignmentsListFleetRequestSortItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1FleetAssignmentsListRequestSortItemDir string
+type AssignmentsListFleetRequestSortItemDir string
 
 const (
-	PostV1FleetAssignmentsListRequestSortItemDirAsc  PostV1FleetAssignmentsListRequestSortItemDir = "asc"
-	PostV1FleetAssignmentsListRequestSortItemDirDesc PostV1FleetAssignmentsListRequestSortItemDir = "desc"
+	AssignmentsListFleetRequestSortItemDirAsc  AssignmentsListFleetRequestSortItemDir = "asc"
+	AssignmentsListFleetRequestSortItemDirDesc AssignmentsListFleetRequestSortItemDir = "desc"
 )
 
-func NewPostV1FleetAssignmentsListRequestSortItemDirFromString(s string) (PostV1FleetAssignmentsListRequestSortItemDir, error) {
+func NewAssignmentsListFleetRequestSortItemDirFromString(s string) (AssignmentsListFleetRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1FleetAssignmentsListRequestSortItemDirAsc, nil
+		return AssignmentsListFleetRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1FleetAssignmentsListRequestSortItemDirDesc, nil
+		return AssignmentsListFleetRequestSortItemDirDesc, nil
 	}
-	var t PostV1FleetAssignmentsListRequestSortItemDir
+	var t AssignmentsListFleetRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetAssignmentsListRequestSortItemDir) Ptr() *PostV1FleetAssignmentsListRequestSortItemDir {
-	return &p
+func (a AssignmentsListFleetRequestSortItemDir) Ptr() *AssignmentsListFleetRequestSortItemDir {
+	return &a
 }
 
 var (
-	postV1FleetAssignmentsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1FleetAssignmentsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1FleetAssignmentsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1FleetAssignmentsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1FleetAssignmentsListResponseFieldTotals   = big.NewInt(1 << 4)
+	assignmentsListFleetResponseFieldRows     = big.NewInt(1 << 0)
+	assignmentsListFleetResponseFieldPage     = big.NewInt(1 << 1)
+	assignmentsListFleetResponseFieldPageSize = big.NewInt(1 << 2)
+	assignmentsListFleetResponseFieldTotal    = big.NewInt(1 << 3)
+	assignmentsListFleetResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1FleetAssignmentsListResponse struct {
-	Rows     []*PostV1FleetAssignmentsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                         `json:"page" url:"page"`
-	PageSize int64                                         `json:"pageSize" url:"pageSize"`
-	Total    int64                                         `json:"total" url:"total"`
-	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+type AssignmentsListFleetResponse struct {
+	Rows     []*AssignmentsListFleetResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                   `json:"page" url:"page"`
+	PageSize int64                                   `json:"pageSize" url:"pageSize"`
+	Total    int64                                   `json:"total" url:"total"`
+	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1696,158 +1289,158 @@ type PostV1FleetAssignmentsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetRows() []*PostV1FleetAssignmentsListResponseRowsItem {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetRows() []*AssignmentsListFleetResponseRowsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Rows
+	return a.Rows
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetPage() int64 {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetPage() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Page
+	return a.Page
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetPageSize() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.PageSize
+	return a.PageSize
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetTotal() int64 {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetTotal() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Total
+	return a.Total
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetTotals() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return p.Totals
+	return a.Totals
 }
 
-func (p *PostV1FleetAssignmentsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsListFleetResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponse) SetRows(rows []*PostV1FleetAssignmentsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1FleetAssignmentsListResponseFieldRows)
+func (a *AssignmentsListFleetResponse) SetRows(rows []*AssignmentsListFleetResponseRowsItem) {
+	a.Rows = rows
+	a.require(assignmentsListFleetResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1FleetAssignmentsListResponseFieldPage)
+func (a *AssignmentsListFleetResponse) SetPage(page int64) {
+	a.Page = page
+	a.require(assignmentsListFleetResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1FleetAssignmentsListResponseFieldPageSize)
+func (a *AssignmentsListFleetResponse) SetPageSize(pageSize int64) {
+	a.PageSize = pageSize
+	a.require(assignmentsListFleetResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1FleetAssignmentsListResponseFieldTotal)
+func (a *AssignmentsListFleetResponse) SetTotal(total int64) {
+	a.Total = total
+	a.require(assignmentsListFleetResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1FleetAssignmentsListResponseFieldTotals)
+func (a *AssignmentsListFleetResponse) SetTotals(totals map[string]string) {
+	a.Totals = totals
+	a.require(assignmentsListFleetResponseFieldTotals)
 }
 
-func (p *PostV1FleetAssignmentsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsListResponse
+func (a *AssignmentsListFleetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssignmentsListFleetResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsListFleetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsListResponse
+func (a *AssignmentsListFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsListFleetResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsListResponse) String() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1FleetAssignmentsListResponseRowsItemFieldID               = big.NewInt(1 << 0)
-	postV1FleetAssignmentsListResponseRowsItemFieldVehicleID        = big.NewInt(1 << 1)
-	postV1FleetAssignmentsListResponseRowsItemFieldPlateNumber      = big.NewInt(1 << 2)
-	postV1FleetAssignmentsListResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 3)
-	postV1FleetAssignmentsListResponseRowsItemFieldEmployeeName     = big.NewInt(1 << 4)
-	postV1FleetAssignmentsListResponseRowsItemFieldFromDate         = big.NewInt(1 << 5)
-	postV1FleetAssignmentsListResponseRowsItemFieldToDate           = big.NewInt(1 << 6)
-	postV1FleetAssignmentsListResponseRowsItemFieldPrivateUse       = big.NewInt(1 << 7)
-	postV1FleetAssignmentsListResponseRowsItemFieldEmployerPaysFuel = big.NewInt(1 << 8)
-	postV1FleetAssignmentsListResponseRowsItemFieldNotes            = big.NewInt(1 << 9)
-	postV1FleetAssignmentsListResponseRowsItemFieldCreatedAt        = big.NewInt(1 << 10)
+	assignmentsListFleetResponseRowsItemFieldID               = big.NewInt(1 << 0)
+	assignmentsListFleetResponseRowsItemFieldVehicleID        = big.NewInt(1 << 1)
+	assignmentsListFleetResponseRowsItemFieldPlateNumber      = big.NewInt(1 << 2)
+	assignmentsListFleetResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 3)
+	assignmentsListFleetResponseRowsItemFieldEmployeeName     = big.NewInt(1 << 4)
+	assignmentsListFleetResponseRowsItemFieldFromDate         = big.NewInt(1 << 5)
+	assignmentsListFleetResponseRowsItemFieldToDate           = big.NewInt(1 << 6)
+	assignmentsListFleetResponseRowsItemFieldPrivateUse       = big.NewInt(1 << 7)
+	assignmentsListFleetResponseRowsItemFieldEmployerPaysFuel = big.NewInt(1 << 8)
+	assignmentsListFleetResponseRowsItemFieldNotes            = big.NewInt(1 << 9)
+	assignmentsListFleetResponseRowsItemFieldCreatedAt        = big.NewInt(1 << 10)
 )
 
-type PostV1FleetAssignmentsListResponseRowsItem struct {
-	ID               string  `json:"id" url:"id"`
-	VehicleID        string  `json:"vehicleId" url:"vehicleId"`
-	PlateNumber      string  `json:"plateNumber" url:"plateNumber"`
-	EmployeeID       string  `json:"employeeId" url:"employeeId"`
-	EmployeeName     string  `json:"employeeName" url:"employeeName"`
-	FromDate         string  `json:"fromDate" url:"fromDate"`
-	ToDate           *string `json:"toDate,omitempty" url:"toDate,omitempty"`
-	PrivateUse       bool    `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool    `json:"employerPaysFuel" url:"employerPaysFuel"`
-	Notes            *string `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt        string  `json:"createdAt" url:"createdAt"`
+type AssignmentsListFleetResponseRowsItem struct {
+	ID               string     `json:"id" url:"id"`
+	VehicleID        string     `json:"vehicleId" url:"vehicleId"`
+	PlateNumber      string     `json:"plateNumber" url:"plateNumber"`
+	EmployeeID       string     `json:"employeeId" url:"employeeId"`
+	EmployeeName     string     `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time  `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate           *time.Time `json:"toDate,omitempty" url:"toDate,omitempty" format:"date"`
+	PrivateUse       bool       `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool       `json:"employerPaysFuel" url:"employerPaysFuel"`
+	Notes            *string    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt        time.Time  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1856,224 +1449,240 @@ type PostV1FleetAssignmentsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetVehicleID() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetVehicleID() string {
+	if a == nil {
 		return ""
 	}
-	return p.VehicleID
+	return a.VehicleID
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetPlateNumber() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetPlateNumber() string {
+	if a == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return a.PlateNumber
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetEmployeeID() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return a.EmployeeID
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetEmployeeName() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetEmployeeName() string {
+	if a == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return a.EmployeeName
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetFromDate() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsListFleetResponseRowsItem) GetFromDate() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return a.FromDate
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetToDate() *string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetToDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.ToDate
+	return a.ToDate
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetPrivateUse() bool {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetPrivateUse() bool {
+	if a == nil {
 		return false
 	}
-	return p.PrivateUse
+	return a.PrivateUse
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetEmployerPaysFuel() bool {
+	if a == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return a.EmployerPaysFuel
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (a *AssignmentsListFleetResponseRowsItem) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return a.CreatedAt
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssignmentsListFleetResponseRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldID)
+func (a *AssignmentsListFleetResponseRowsItem) SetID(id string) {
+	a.ID = id
+	a.require(assignmentsListFleetResponseRowsItemFieldID)
 }
 
 // SetVehicleID sets the VehicleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetVehicleID(vehicleID string) {
-	p.VehicleID = vehicleID
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldVehicleID)
+func (a *AssignmentsListFleetResponseRowsItem) SetVehicleID(vehicleID string) {
+	a.VehicleID = vehicleID
+	a.require(assignmentsListFleetResponseRowsItemFieldVehicleID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldPlateNumber)
+func (a *AssignmentsListFleetResponseRowsItem) SetPlateNumber(plateNumber string) {
+	a.PlateNumber = plateNumber
+	a.require(assignmentsListFleetResponseRowsItemFieldPlateNumber)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldEmployeeID)
+func (a *AssignmentsListFleetResponseRowsItem) SetEmployeeID(employeeID string) {
+	a.EmployeeID = employeeID
+	a.require(assignmentsListFleetResponseRowsItemFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldEmployeeName)
+func (a *AssignmentsListFleetResponseRowsItem) SetEmployeeName(employeeName string) {
+	a.EmployeeName = employeeName
+	a.require(assignmentsListFleetResponseRowsItemFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldFromDate)
+func (a *AssignmentsListFleetResponseRowsItem) SetFromDate(fromDate time.Time) {
+	a.FromDate = fromDate
+	a.require(assignmentsListFleetResponseRowsItemFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetToDate(toDate *string) {
-	p.ToDate = toDate
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldToDate)
+func (a *AssignmentsListFleetResponseRowsItem) SetToDate(toDate *time.Time) {
+	a.ToDate = toDate
+	a.require(assignmentsListFleetResponseRowsItemFieldToDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldPrivateUse)
+func (a *AssignmentsListFleetResponseRowsItem) SetPrivateUse(privateUse bool) {
+	a.PrivateUse = privateUse
+	a.require(assignmentsListFleetResponseRowsItemFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldEmployerPaysFuel)
+func (a *AssignmentsListFleetResponseRowsItem) SetEmployerPaysFuel(employerPaysFuel bool) {
+	a.EmployerPaysFuel = employerPaysFuel
+	a.require(assignmentsListFleetResponseRowsItemFieldEmployerPaysFuel)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldNotes)
+func (a *AssignmentsListFleetResponseRowsItem) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assignmentsListFleetResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetAssignmentsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetAssignmentsListResponseRowsItemFieldCreatedAt)
+func (a *AssignmentsListFleetResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assignmentsListFleetResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetAssignmentsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssignmentsListFleetResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AssignmentsListFleetResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetAssignmentsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssignmentsListFleetResponseRowsItem(unmarshaler.embed)
+	a.FromDate = unmarshaler.FromDate.Time()
+	a.ToDate = unmarshaler.ToDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetAssignmentsListResponseRowsItem
+func (a *AssignmentsListFleetResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AssignmentsListFleetResponseRowsItem
 	var marshaler = struct {
 		embed
+		FromDate  *internal.Date     `json:"fromDate"`
+		ToDate    *internal.Date     `json:"toDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*a),
+		FromDate:  internal.NewDate(a.FromDate),
+		ToDate:    internal.NewOptionalDate(a.ToDate),
+		CreatedAt: internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetAssignmentsListResponseRowsItem) String() string {
-	if p == nil {
+func (a *AssignmentsListFleetResponseRowsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1FleetNaturaPreviewResponseFieldRows  = big.NewInt(1 << 0)
-	postV1FleetNaturaPreviewResponseFieldTotal = big.NewInt(1 << 1)
+	naturaPreviewFleetResponseFieldRows  = big.NewInt(1 << 0)
+	naturaPreviewFleetResponseFieldTotal = big.NewInt(1 << 1)
 )
 
-type PostV1FleetNaturaPreviewResponse struct {
-	Rows  []*PostV1FleetNaturaPreviewResponseRowsItem `json:"rows" url:"rows"`
-	Total string                                      `json:"total" url:"total"`
+type NaturaPreviewFleetResponse struct {
+	Rows  []*NaturaPreviewFleetResponseRowsItem `json:"rows" url:"rows"`
+	Total string                                `json:"total" url:"total"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2082,104 +1691,104 @@ type PostV1FleetNaturaPreviewResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) GetRows() []*PostV1FleetNaturaPreviewResponseRowsItem {
-	if p == nil {
+func (n *NaturaPreviewFleetResponse) GetRows() []*NaturaPreviewFleetResponseRowsItem {
+	if n == nil {
 		return nil
 	}
-	return p.Rows
+	return n.Rows
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) GetTotal() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponse) GetTotal() string {
+	if n == nil {
 		return ""
 	}
-	return p.Total
+	return n.Total
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (n *NaturaPreviewFleetResponse) GetExtraProperties() map[string]interface{} {
+	if n == nil {
 		return nil
 	}
-	return p.extraProperties
+	return n.extraProperties
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (n *NaturaPreviewFleetResponse) require(field *big.Int) {
+	if n.explicitFields == nil {
+		n.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	n.explicitFields.Or(n.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponse) SetRows(rows []*PostV1FleetNaturaPreviewResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1FleetNaturaPreviewResponseFieldRows)
+func (n *NaturaPreviewFleetResponse) SetRows(rows []*NaturaPreviewFleetResponseRowsItem) {
+	n.Rows = rows
+	n.require(naturaPreviewFleetResponseFieldRows)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponse) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1FleetNaturaPreviewResponseFieldTotal)
+func (n *NaturaPreviewFleetResponse) SetTotal(total string) {
+	n.Total = total
+	n.require(naturaPreviewFleetResponseFieldTotal)
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetNaturaPreviewResponse
+func (n *NaturaPreviewFleetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler NaturaPreviewFleetResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetNaturaPreviewResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*n = NaturaPreviewFleetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *n)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	n.extraProperties = extraProperties
+	n.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetNaturaPreviewResponse
+func (n *NaturaPreviewFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed NaturaPreviewFleetResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*n),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, n.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetNaturaPreviewResponse) String() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponse) String() string {
+	if n == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(n.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(n.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(n); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", n)
 }
 
 var (
-	postV1FleetNaturaPreviewResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 0)
-	postV1FleetNaturaPreviewResponseRowsItemFieldEmployeeName     = big.NewInt(1 << 1)
-	postV1FleetNaturaPreviewResponseRowsItemFieldVehicleID        = big.NewInt(1 << 2)
-	postV1FleetNaturaPreviewResponseRowsItemFieldPlateNumber      = big.NewInt(1 << 3)
-	postV1FleetNaturaPreviewResponseRowsItemFieldMake             = big.NewInt(1 << 4)
-	postV1FleetNaturaPreviewResponseRowsItemFieldModel            = big.NewInt(1 << 5)
-	postV1FleetNaturaPreviewResponseRowsItemFieldMarketValue      = big.NewInt(1 << 6)
-	postV1FleetNaturaPreviewResponseRowsItemFieldEmployerPaysFuel = big.NewInt(1 << 7)
-	postV1FleetNaturaPreviewResponseRowsItemFieldRatePercent      = big.NewInt(1 << 8)
-	postV1FleetNaturaPreviewResponseRowsItemFieldAmount           = big.NewInt(1 << 9)
+	naturaPreviewFleetResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 0)
+	naturaPreviewFleetResponseRowsItemFieldEmployeeName     = big.NewInt(1 << 1)
+	naturaPreviewFleetResponseRowsItemFieldVehicleID        = big.NewInt(1 << 2)
+	naturaPreviewFleetResponseRowsItemFieldPlateNumber      = big.NewInt(1 << 3)
+	naturaPreviewFleetResponseRowsItemFieldMake             = big.NewInt(1 << 4)
+	naturaPreviewFleetResponseRowsItemFieldModel            = big.NewInt(1 << 5)
+	naturaPreviewFleetResponseRowsItemFieldMarketValue      = big.NewInt(1 << 6)
+	naturaPreviewFleetResponseRowsItemFieldEmployerPaysFuel = big.NewInt(1 << 7)
+	naturaPreviewFleetResponseRowsItemFieldRatePercent      = big.NewInt(1 << 8)
+	naturaPreviewFleetResponseRowsItemFieldAmount           = big.NewInt(1 << 9)
 )
 
-type PostV1FleetNaturaPreviewResponseRowsItem struct {
+type NaturaPreviewFleetResponseRowsItem struct {
 	EmployeeID       string `json:"employeeId" url:"employeeId"`
 	EmployeeName     string `json:"employeeName" url:"employeeName"`
 	VehicleID        string `json:"vehicleId" url:"vehicleId"`
@@ -2198,208 +1807,208 @@ type PostV1FleetNaturaPreviewResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetEmployeeID() string {
+	if n == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return n.EmployeeID
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetEmployeeName() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetEmployeeName() string {
+	if n == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return n.EmployeeName
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetVehicleID() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetVehicleID() string {
+	if n == nil {
 		return ""
 	}
-	return p.VehicleID
+	return n.VehicleID
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetPlateNumber() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetPlateNumber() string {
+	if n == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return n.PlateNumber
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetMake() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetMake() string {
+	if n == nil {
 		return ""
 	}
-	return p.Make
+	return n.Make
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetModel() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetModel() string {
+	if n == nil {
 		return ""
 	}
-	return p.Model
+	return n.Model
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetMarketValue() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetMarketValue() string {
+	if n == nil {
 		return ""
 	}
-	return p.MarketValue
+	return n.MarketValue
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetEmployerPaysFuel() bool {
+	if n == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return n.EmployerPaysFuel
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetRatePercent() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetRatePercent() string {
+	if n == nil {
 		return ""
 	}
-	return p.RatePercent
+	return n.RatePercent
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetAmount() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetAmount() string {
+	if n == nil {
 		return ""
 	}
-	return p.Amount
+	return n.Amount
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if n == nil {
 		return nil
 	}
-	return p.extraProperties
+	return n.extraProperties
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (n *NaturaPreviewFleetResponseRowsItem) require(field *big.Int) {
+	if n.explicitFields == nil {
+		n.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	n.explicitFields.Or(n.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldEmployeeID)
+func (n *NaturaPreviewFleetResponseRowsItem) SetEmployeeID(employeeID string) {
+	n.EmployeeID = employeeID
+	n.require(naturaPreviewFleetResponseRowsItemFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldEmployeeName)
+func (n *NaturaPreviewFleetResponseRowsItem) SetEmployeeName(employeeName string) {
+	n.EmployeeName = employeeName
+	n.require(naturaPreviewFleetResponseRowsItemFieldEmployeeName)
 }
 
 // SetVehicleID sets the VehicleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetVehicleID(vehicleID string) {
-	p.VehicleID = vehicleID
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldVehicleID)
+func (n *NaturaPreviewFleetResponseRowsItem) SetVehicleID(vehicleID string) {
+	n.VehicleID = vehicleID
+	n.require(naturaPreviewFleetResponseRowsItemFieldVehicleID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldPlateNumber)
+func (n *NaturaPreviewFleetResponseRowsItem) SetPlateNumber(plateNumber string) {
+	n.PlateNumber = plateNumber
+	n.require(naturaPreviewFleetResponseRowsItemFieldPlateNumber)
 }
 
 // SetMake sets the Make field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldMake)
+func (n *NaturaPreviewFleetResponseRowsItem) SetMake(make_ string) {
+	n.Make = make_
+	n.require(naturaPreviewFleetResponseRowsItemFieldMake)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldModel)
+func (n *NaturaPreviewFleetResponseRowsItem) SetModel(model string) {
+	n.Model = model
+	n.require(naturaPreviewFleetResponseRowsItemFieldModel)
 }
 
 // SetMarketValue sets the MarketValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetMarketValue(marketValue string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldMarketValue)
+func (n *NaturaPreviewFleetResponseRowsItem) SetMarketValue(marketValue string) {
+	n.MarketValue = marketValue
+	n.require(naturaPreviewFleetResponseRowsItemFieldMarketValue)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldEmployerPaysFuel)
+func (n *NaturaPreviewFleetResponseRowsItem) SetEmployerPaysFuel(employerPaysFuel bool) {
+	n.EmployerPaysFuel = employerPaysFuel
+	n.require(naturaPreviewFleetResponseRowsItemFieldEmployerPaysFuel)
 }
 
 // SetRatePercent sets the RatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetRatePercent(ratePercent string) {
-	p.RatePercent = ratePercent
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldRatePercent)
+func (n *NaturaPreviewFleetResponseRowsItem) SetRatePercent(ratePercent string) {
+	n.RatePercent = ratePercent
+	n.require(naturaPreviewFleetResponseRowsItemFieldRatePercent)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1FleetNaturaPreviewResponseRowsItemFieldAmount)
+func (n *NaturaPreviewFleetResponseRowsItem) SetAmount(amount string) {
+	n.Amount = amount
+	n.require(naturaPreviewFleetResponseRowsItemFieldAmount)
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetNaturaPreviewResponseRowsItem
+func (n *NaturaPreviewFleetResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler NaturaPreviewFleetResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetNaturaPreviewResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*n = NaturaPreviewFleetResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *n)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	n.extraProperties = extraProperties
+	n.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetNaturaPreviewResponseRowsItem
+func (n *NaturaPreviewFleetResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed NaturaPreviewFleetResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*n),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, n.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetNaturaPreviewResponseRowsItem) String() string {
-	if p == nil {
+func (n *NaturaPreviewFleetResponseRowsItem) String() string {
+	if n == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(n.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(n.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(n); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", n)
 }
 
 var (
-	postV1FleetVehiclesCreateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1FleetVehiclesCreateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	vehiclesCreateFleetRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	vehiclesCreateFleetRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1FleetVehiclesCreateRequestDocumentsItem struct {
+type VehiclesCreateFleetRequestDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -2410,162 +2019,162 @@ type PostV1FleetVehiclesCreateRequestDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetName() string {
-	if p == nil {
+func (v *VehiclesCreateFleetRequestDocumentsItem) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return p.Name
+	return v.Name
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetRef() string {
-	if p == nil {
+func (v *VehiclesCreateFleetRequestDocumentsItem) GetRef() string {
+	if v == nil {
 		return ""
 	}
-	return p.Ref
+	return v.Ref
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesCreateFleetRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesCreateFleetRequestDocumentsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1FleetVehiclesCreateRequestDocumentsItemFieldName)
+func (v *VehiclesCreateFleetRequestDocumentsItem) SetName(name string) {
+	v.Name = name
+	v.require(vehiclesCreateFleetRequestDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1FleetVehiclesCreateRequestDocumentsItemFieldRef)
+func (v *VehiclesCreateFleetRequestDocumentsItem) SetRef(ref string) {
+	v.Ref = ref
+	v.require(vehiclesCreateFleetRequestDocumentsItemFieldRef)
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesCreateRequestDocumentsItem
+func (v *VehiclesCreateFleetRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesCreateFleetRequestDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesCreateRequestDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesCreateFleetRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesCreateRequestDocumentsItem
+func (v *VehiclesCreateFleetRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesCreateFleetRequestDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) String() string {
-	if p == nil {
+func (v *VehiclesCreateFleetRequestDocumentsItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesCreateRequestFuelType string
+type VehiclesCreateFleetRequestFuelType string
 
 const (
-	PostV1FleetVehiclesCreateRequestFuelTypePetrol   PostV1FleetVehiclesCreateRequestFuelType = "petrol"
-	PostV1FleetVehiclesCreateRequestFuelTypeDiesel   PostV1FleetVehiclesCreateRequestFuelType = "diesel"
-	PostV1FleetVehiclesCreateRequestFuelTypeElectric PostV1FleetVehiclesCreateRequestFuelType = "electric"
-	PostV1FleetVehiclesCreateRequestFuelTypeHybrid   PostV1FleetVehiclesCreateRequestFuelType = "hybrid"
-	PostV1FleetVehiclesCreateRequestFuelTypeLpg      PostV1FleetVehiclesCreateRequestFuelType = "lpg"
-	PostV1FleetVehiclesCreateRequestFuelTypeOther    PostV1FleetVehiclesCreateRequestFuelType = "other"
+	VehiclesCreateFleetRequestFuelTypePetrol   VehiclesCreateFleetRequestFuelType = "petrol"
+	VehiclesCreateFleetRequestFuelTypeDiesel   VehiclesCreateFleetRequestFuelType = "diesel"
+	VehiclesCreateFleetRequestFuelTypeElectric VehiclesCreateFleetRequestFuelType = "electric"
+	VehiclesCreateFleetRequestFuelTypeHybrid   VehiclesCreateFleetRequestFuelType = "hybrid"
+	VehiclesCreateFleetRequestFuelTypeLpg      VehiclesCreateFleetRequestFuelType = "lpg"
+	VehiclesCreateFleetRequestFuelTypeOther    VehiclesCreateFleetRequestFuelType = "other"
 )
 
-func NewPostV1FleetVehiclesCreateRequestFuelTypeFromString(s string) (PostV1FleetVehiclesCreateRequestFuelType, error) {
+func NewVehiclesCreateFleetRequestFuelTypeFromString(s string) (VehiclesCreateFleetRequestFuelType, error) {
 	switch s {
 	case "petrol":
-		return PostV1FleetVehiclesCreateRequestFuelTypePetrol, nil
+		return VehiclesCreateFleetRequestFuelTypePetrol, nil
 	case "diesel":
-		return PostV1FleetVehiclesCreateRequestFuelTypeDiesel, nil
+		return VehiclesCreateFleetRequestFuelTypeDiesel, nil
 	case "electric":
-		return PostV1FleetVehiclesCreateRequestFuelTypeElectric, nil
+		return VehiclesCreateFleetRequestFuelTypeElectric, nil
 	case "hybrid":
-		return PostV1FleetVehiclesCreateRequestFuelTypeHybrid, nil
+		return VehiclesCreateFleetRequestFuelTypeHybrid, nil
 	case "lpg":
-		return PostV1FleetVehiclesCreateRequestFuelTypeLpg, nil
+		return VehiclesCreateFleetRequestFuelTypeLpg, nil
 	case "other":
-		return PostV1FleetVehiclesCreateRequestFuelTypeOther, nil
+		return VehiclesCreateFleetRequestFuelTypeOther, nil
 	}
-	var t PostV1FleetVehiclesCreateRequestFuelType
+	var t VehiclesCreateFleetRequestFuelType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesCreateRequestFuelType) Ptr() *PostV1FleetVehiclesCreateRequestFuelType {
-	return &p
+func (v VehiclesCreateFleetRequestFuelType) Ptr() *VehiclesCreateFleetRequestFuelType {
+	return &v
 }
 
 var (
-	postV1FleetVehiclesCreateResponseFieldID                     = big.NewInt(1 << 0)
-	postV1FleetVehiclesCreateResponseFieldPlateNumber            = big.NewInt(1 << 1)
-	postV1FleetVehiclesCreateResponseFieldMake                   = big.NewInt(1 << 2)
-	postV1FleetVehiclesCreateResponseFieldModel                  = big.NewInt(1 << 3)
-	postV1FleetVehiclesCreateResponseFieldYear                   = big.NewInt(1 << 4)
-	postV1FleetVehiclesCreateResponseFieldVin                    = big.NewInt(1 << 5)
-	postV1FleetVehiclesCreateResponseFieldFuelType               = big.NewInt(1 << 6)
-	postV1FleetVehiclesCreateResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
-	postV1FleetVehiclesCreateResponseFieldMarketValue            = big.NewInt(1 << 8)
-	postV1FleetVehiclesCreateResponseFieldFixedAssetID           = big.NewInt(1 << 9)
-	postV1FleetVehiclesCreateResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
-	postV1FleetVehiclesCreateResponseFieldInsuranceDue           = big.NewInt(1 << 11)
-	postV1FleetVehiclesCreateResponseFieldStatus                 = big.NewInt(1 << 12)
-	postV1FleetVehiclesCreateResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesCreateResponseFieldDocuments              = big.NewInt(1 << 14)
-	postV1FleetVehiclesCreateResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	postV1FleetVehiclesCreateResponseFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesCreateFleetResponseFieldID                     = big.NewInt(1 << 0)
+	vehiclesCreateFleetResponseFieldPlateNumber            = big.NewInt(1 << 1)
+	vehiclesCreateFleetResponseFieldMake                   = big.NewInt(1 << 2)
+	vehiclesCreateFleetResponseFieldModel                  = big.NewInt(1 << 3)
+	vehiclesCreateFleetResponseFieldYear                   = big.NewInt(1 << 4)
+	vehiclesCreateFleetResponseFieldVin                    = big.NewInt(1 << 5)
+	vehiclesCreateFleetResponseFieldFuelType               = big.NewInt(1 << 6)
+	vehiclesCreateFleetResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
+	vehiclesCreateFleetResponseFieldMarketValue            = big.NewInt(1 << 8)
+	vehiclesCreateFleetResponseFieldFixedAssetID           = big.NewInt(1 << 9)
+	vehiclesCreateFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
+	vehiclesCreateFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
+	vehiclesCreateFleetResponseFieldStatus                 = big.NewInt(1 << 12)
+	vehiclesCreateFleetResponseFieldNotes                  = big.NewInt(1 << 13)
+	vehiclesCreateFleetResponseFieldDocuments              = big.NewInt(1 << 14)
+	vehiclesCreateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	vehiclesCreateFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
-type PostV1FleetVehiclesCreateResponse struct {
-	ID                     string                                              `json:"id" url:"id"`
-	PlateNumber            string                                              `json:"plateNumber" url:"plateNumber"`
-	Make                   string                                              `json:"make" url:"make"`
-	Model                  string                                              `json:"model" url:"model"`
-	Year                   *int64                                              `json:"year,omitempty" url:"year,omitempty"`
-	Vin                    *string                                             `json:"vin,omitempty" url:"vin,omitempty"`
-	FuelType               *string                                             `json:"fuelType,omitempty" url:"fuelType,omitempty"`
-	AcquisitionDate        *string                                             `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty"`
-	MarketValue            string                                              `json:"marketValue" url:"marketValue"`
-	FixedAssetID           *string                                             `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
-	TechnicalInspectionDue *string                                             `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
-	InsuranceDue           *string                                             `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
-	Status                 PostV1FleetVehiclesCreateResponseStatus             `json:"status" url:"status"`
-	Notes                  *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents              []*PostV1FleetVehiclesCreateResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
-	CurrentAssignment      *PostV1FleetVehiclesCreateResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
-	CreatedAt              string                                              `json:"createdAt" url:"createdAt"`
+type VehiclesCreateFleetResponse struct {
+	ID                     string                                        `json:"id" url:"id"`
+	PlateNumber            string                                        `json:"plateNumber" url:"plateNumber"`
+	Make                   string                                        `json:"make" url:"make"`
+	Model                  string                                        `json:"model" url:"model"`
+	Year                   *int64                                        `json:"year,omitempty" url:"year,omitempty"`
+	Vin                    *string                                       `json:"vin,omitempty" url:"vin,omitempty"`
+	FuelType               *string                                       `json:"fuelType,omitempty" url:"fuelType,omitempty"`
+	AcquisitionDate        *time.Time                                    `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty" format:"date"`
+	MarketValue            string                                        `json:"marketValue" url:"marketValue"`
+	FixedAssetID           *string                                       `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
+	TechnicalInspectionDue *string                                       `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
+	InsuranceDue           *string                                       `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
+	Status                 VehiclesCreateFleetResponseStatus             `json:"status" url:"status"`
+	Notes                  *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*VehiclesCreateFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
+	CurrentAssignment      *VehiclesCreateFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
+	CreatedAt              time.Time                                     `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2574,316 +2183,328 @@ type PostV1FleetVehiclesCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetID() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetPlateNumber() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetPlateNumber() string {
+	if v == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return v.PlateNumber
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetMake() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetMake() string {
+	if v == nil {
 		return ""
 	}
-	return p.Make
+	return v.Make
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetModel() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetModel() string {
+	if v == nil {
 		return ""
 	}
-	return p.Model
+	return v.Model
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetYear() *int64 {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetYear() *int64 {
+	if v == nil {
 		return nil
 	}
-	return p.Year
+	return v.Year
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetVin() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetVin() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Vin
+	return v.Vin
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetFuelType() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetFuelType() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FuelType
+	return v.FuelType
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetAcquisitionDate() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetAcquisitionDate() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return p.AcquisitionDate
+	return v.AcquisitionDate
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetMarketValue() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetMarketValue() string {
+	if v == nil {
 		return ""
 	}
-	return p.MarketValue
+	return v.MarketValue
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetFixedAssetID() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetFixedAssetID() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FixedAssetID
+	return v.FixedAssetID
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetTechnicalInspectionDue() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetTechnicalInspectionDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.TechnicalInspectionDue
+	return v.TechnicalInspectionDue
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetInsuranceDue() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetInsuranceDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.InsuranceDue
+	return v.InsuranceDue
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetStatus() PostV1FleetVehiclesCreateResponseStatus {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetStatus() VehiclesCreateFleetResponseStatus {
+	if v == nil {
 		return ""
 	}
-	return p.Status
+	return v.Status
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetNotes() *string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetNotes() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Notes
+	return v.Notes
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetDocuments() []*PostV1FleetVehiclesCreateResponseDocumentsItem {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetDocuments() []*VehiclesCreateFleetResponseDocumentsItem {
+	if v == nil {
 		return nil
 	}
-	return p.Documents
+	return v.Documents
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetCurrentAssignment() *PostV1FleetVehiclesCreateResponseCurrentAssignment {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetCurrentAssignment() *VehiclesCreateFleetResponseCurrentAssignment {
+	if v == nil {
 		return nil
 	}
-	return p.CurrentAssignment
+	return v.CurrentAssignment
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (v *VehiclesCreateFleetResponse) GetCreatedAt() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return v.CreatedAt
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesCreateFleetResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesCreateResponseFieldID)
+func (v *VehiclesCreateFleetResponse) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesCreateFleetResponseFieldID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesCreateResponseFieldPlateNumber)
+func (v *VehiclesCreateFleetResponse) SetPlateNumber(plateNumber string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesCreateFleetResponseFieldPlateNumber)
 }
 
 // SetMake sets the Make field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesCreateResponseFieldMake)
+func (v *VehiclesCreateFleetResponse) SetMake(make_ string) {
+	v.Make = make_
+	v.require(vehiclesCreateFleetResponseFieldMake)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesCreateResponseFieldModel)
+func (v *VehiclesCreateFleetResponse) SetModel(model string) {
+	v.Model = model
+	v.require(vehiclesCreateFleetResponseFieldModel)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesCreateResponseFieldYear)
+func (v *VehiclesCreateFleetResponse) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesCreateFleetResponseFieldYear)
 }
 
 // SetVin sets the Vin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesCreateResponseFieldVin)
+func (v *VehiclesCreateFleetResponse) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesCreateFleetResponseFieldVin)
 }
 
 // SetFuelType sets the FuelType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetFuelType(fuelType *string) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesCreateResponseFieldFuelType)
+func (v *VehiclesCreateFleetResponse) SetFuelType(fuelType *string) {
+	v.FuelType = fuelType
+	v.require(vehiclesCreateFleetResponseFieldFuelType)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesCreateResponseFieldAcquisitionDate)
+func (v *VehiclesCreateFleetResponse) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesCreateFleetResponseFieldAcquisitionDate)
 }
 
 // SetMarketValue sets the MarketValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetMarketValue(marketValue string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesCreateResponseFieldMarketValue)
+func (v *VehiclesCreateFleetResponse) SetMarketValue(marketValue string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesCreateFleetResponseFieldMarketValue)
 }
 
 // SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesCreateResponseFieldFixedAssetID)
+func (v *VehiclesCreateFleetResponse) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesCreateFleetResponseFieldFixedAssetID)
 }
 
 // SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesCreateResponseFieldTechnicalInspectionDue)
+func (v *VehiclesCreateFleetResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesCreateFleetResponseFieldTechnicalInspectionDue)
 }
 
 // SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesCreateResponseFieldInsuranceDue)
+func (v *VehiclesCreateFleetResponse) SetInsuranceDue(insuranceDue *string) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesCreateFleetResponseFieldInsuranceDue)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetStatus(status PostV1FleetVehiclesCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1FleetVehiclesCreateResponseFieldStatus)
+func (v *VehiclesCreateFleetResponse) SetStatus(status VehiclesCreateFleetResponseStatus) {
+	v.Status = status
+	v.require(vehiclesCreateFleetResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesCreateResponseFieldNotes)
+func (v *VehiclesCreateFleetResponse) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesCreateFleetResponseFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetDocuments(documents []*PostV1FleetVehiclesCreateResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1FleetVehiclesCreateResponseFieldDocuments)
+func (v *VehiclesCreateFleetResponse) SetDocuments(documents []*VehiclesCreateFleetResponseDocumentsItem) {
+	v.Documents = documents
+	v.require(vehiclesCreateFleetResponseFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetCurrentAssignment(currentAssignment *PostV1FleetVehiclesCreateResponseCurrentAssignment) {
-	p.CurrentAssignment = currentAssignment
-	p.require(postV1FleetVehiclesCreateResponseFieldCurrentAssignment)
+func (v *VehiclesCreateFleetResponse) SetCurrentAssignment(currentAssignment *VehiclesCreateFleetResponseCurrentAssignment) {
+	v.CurrentAssignment = currentAssignment
+	v.require(vehiclesCreateFleetResponseFieldCurrentAssignment)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetVehiclesCreateResponseFieldCreatedAt)
+func (v *VehiclesCreateFleetResponse) SetCreatedAt(createdAt time.Time) {
+	v.CreatedAt = createdAt
+	v.require(vehiclesCreateFleetResponseFieldCreatedAt)
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesCreateFleetResponse) UnmarshalJSON(data []byte) error {
+	type embed VehiclesCreateFleetResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesCreateFleetResponse(unmarshaler.embed)
+	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesCreateResponse
+func (v *VehiclesCreateFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed VehiclesCreateFleetResponse
 	var marshaler = struct {
 		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*v),
+		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesCreateResponse) String() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponse) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
-	postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
+	vehiclesCreateFleetResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
 )
 
-type PostV1FleetVehiclesCreateResponseCurrentAssignment struct {
-	ID               string `json:"id" url:"id"`
-	EmployeeID       string `json:"employeeId" url:"employeeId"`
-	EmployeeName     string `json:"employeeName" url:"employeeName"`
-	FromDate         string `json:"fromDate" url:"fromDate"`
-	PrivateUse       bool   `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool   `json:"employerPaysFuel" url:"employerPaysFuel"`
+type VehiclesCreateFleetResponseCurrentAssignment struct {
+	ID               string    `json:"id" url:"id"`
+	EmployeeID       string    `json:"employeeId" url:"employeeId"`
+	EmployeeName     string    `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	PrivateUse       bool      `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool      `json:"employerPaysFuel" url:"employerPaysFuel"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2892,152 +2513,160 @@ type PostV1FleetVehiclesCreateResponseCurrentAssignment struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetID() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetEmployeeID() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetEmployeeID() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return v.EmployeeID
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetEmployeeName() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetEmployeeName() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return v.EmployeeName
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetFromDate() string {
-	if p == nil {
-		return ""
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetFromDate() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return v.FromDate
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetPrivateUse() bool {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetPrivateUse() bool {
+	if v == nil {
 		return false
 	}
-	return p.PrivateUse
+	return v.PrivateUse
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetEmployerPaysFuel() bool {
+	if v == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return v.EmployerPaysFuel
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldID)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployeeID)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetEmployeeID(employeeID string) {
+	v.EmployeeID = employeeID
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployeeName)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetEmployeeName(employeeName string) {
+	v.EmployeeName = employeeName
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldFromDate)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetFromDate(fromDate time.Time) {
+	v.FromDate = fromDate
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldFromDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldPrivateUse)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
+	v.PrivateUse = privateUse
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetVehiclesCreateResponseCurrentAssignmentFieldEmployerPaysFuel)
+func (v *VehiclesCreateFleetResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
+	v.EmployerPaysFuel = employerPaysFuel
+	v.require(vehiclesCreateFleetResponseCurrentAssignmentFieldEmployerPaysFuel)
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesCreateResponseCurrentAssignment
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
+	type embed VehiclesCreateFleetResponseCurrentAssignment
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesCreateResponseCurrentAssignment(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesCreateFleetResponseCurrentAssignment(unmarshaler.embed)
+	v.FromDate = unmarshaler.FromDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesCreateResponseCurrentAssignment
+func (v *VehiclesCreateFleetResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
+	type embed VehiclesCreateFleetResponseCurrentAssignment
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*v),
+		FromDate: internal.NewDate(v.FromDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) String() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseCurrentAssignment) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesCreateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1FleetVehiclesCreateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	vehiclesCreateFleetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	vehiclesCreateFleetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1FleetVehiclesCreateResponseDocumentsItem struct {
+type VehiclesCreateFleetResponseDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -3048,153 +2677,153 @@ type PostV1FleetVehiclesCreateResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseDocumentsItem) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return p.Name
+	return v.Name
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseDocumentsItem) GetRef() string {
+	if v == nil {
 		return ""
 	}
-	return p.Ref
+	return v.Ref
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesCreateFleetResponseDocumentsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1FleetVehiclesCreateResponseDocumentsItemFieldName)
+func (v *VehiclesCreateFleetResponseDocumentsItem) SetName(name string) {
+	v.Name = name
+	v.require(vehiclesCreateFleetResponseDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1FleetVehiclesCreateResponseDocumentsItemFieldRef)
+func (v *VehiclesCreateFleetResponseDocumentsItem) SetRef(ref string) {
+	v.Ref = ref
+	v.require(vehiclesCreateFleetResponseDocumentsItemFieldRef)
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesCreateResponseDocumentsItem
+func (v *VehiclesCreateFleetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesCreateFleetResponseDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesCreateResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesCreateFleetResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesCreateResponseDocumentsItem
+func (v *VehiclesCreateFleetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesCreateFleetResponseDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) String() string {
-	if p == nil {
+func (v *VehiclesCreateFleetResponseDocumentsItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesCreateResponseStatus string
+type VehiclesCreateFleetResponseStatus string
 
 const (
-	PostV1FleetVehiclesCreateResponseStatusActive   PostV1FleetVehiclesCreateResponseStatus = "active"
-	PostV1FleetVehiclesCreateResponseStatusSold     PostV1FleetVehiclesCreateResponseStatus = "sold"
-	PostV1FleetVehiclesCreateResponseStatusScrapped PostV1FleetVehiclesCreateResponseStatus = "scrapped"
+	VehiclesCreateFleetResponseStatusActive   VehiclesCreateFleetResponseStatus = "active"
+	VehiclesCreateFleetResponseStatusSold     VehiclesCreateFleetResponseStatus = "sold"
+	VehiclesCreateFleetResponseStatusScrapped VehiclesCreateFleetResponseStatus = "scrapped"
 )
 
-func NewPostV1FleetVehiclesCreateResponseStatusFromString(s string) (PostV1FleetVehiclesCreateResponseStatus, error) {
+func NewVehiclesCreateFleetResponseStatusFromString(s string) (VehiclesCreateFleetResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1FleetVehiclesCreateResponseStatusActive, nil
+		return VehiclesCreateFleetResponseStatusActive, nil
 	case "sold":
-		return PostV1FleetVehiclesCreateResponseStatusSold, nil
+		return VehiclesCreateFleetResponseStatusSold, nil
 	case "scrapped":
-		return PostV1FleetVehiclesCreateResponseStatusScrapped, nil
+		return VehiclesCreateFleetResponseStatusScrapped, nil
 	}
-	var t PostV1FleetVehiclesCreateResponseStatus
+	var t VehiclesCreateFleetResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesCreateResponseStatus) Ptr() *PostV1FleetVehiclesCreateResponseStatus {
-	return &p
+func (v VehiclesCreateFleetResponseStatus) Ptr() *VehiclesCreateFleetResponseStatus {
+	return &v
 }
 
 var (
-	postV1FleetVehiclesGetResponseFieldID                     = big.NewInt(1 << 0)
-	postV1FleetVehiclesGetResponseFieldPlateNumber            = big.NewInt(1 << 1)
-	postV1FleetVehiclesGetResponseFieldMake                   = big.NewInt(1 << 2)
-	postV1FleetVehiclesGetResponseFieldModel                  = big.NewInt(1 << 3)
-	postV1FleetVehiclesGetResponseFieldYear                   = big.NewInt(1 << 4)
-	postV1FleetVehiclesGetResponseFieldVin                    = big.NewInt(1 << 5)
-	postV1FleetVehiclesGetResponseFieldFuelType               = big.NewInt(1 << 6)
-	postV1FleetVehiclesGetResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
-	postV1FleetVehiclesGetResponseFieldMarketValue            = big.NewInt(1 << 8)
-	postV1FleetVehiclesGetResponseFieldFixedAssetID           = big.NewInt(1 << 9)
-	postV1FleetVehiclesGetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
-	postV1FleetVehiclesGetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
-	postV1FleetVehiclesGetResponseFieldStatus                 = big.NewInt(1 << 12)
-	postV1FleetVehiclesGetResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesGetResponseFieldDocuments              = big.NewInt(1 << 14)
-	postV1FleetVehiclesGetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	postV1FleetVehiclesGetResponseFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesGetFleetResponseFieldID                     = big.NewInt(1 << 0)
+	vehiclesGetFleetResponseFieldPlateNumber            = big.NewInt(1 << 1)
+	vehiclesGetFleetResponseFieldMake                   = big.NewInt(1 << 2)
+	vehiclesGetFleetResponseFieldModel                  = big.NewInt(1 << 3)
+	vehiclesGetFleetResponseFieldYear                   = big.NewInt(1 << 4)
+	vehiclesGetFleetResponseFieldVin                    = big.NewInt(1 << 5)
+	vehiclesGetFleetResponseFieldFuelType               = big.NewInt(1 << 6)
+	vehiclesGetFleetResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
+	vehiclesGetFleetResponseFieldMarketValue            = big.NewInt(1 << 8)
+	vehiclesGetFleetResponseFieldFixedAssetID           = big.NewInt(1 << 9)
+	vehiclesGetFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
+	vehiclesGetFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
+	vehiclesGetFleetResponseFieldStatus                 = big.NewInt(1 << 12)
+	vehiclesGetFleetResponseFieldNotes                  = big.NewInt(1 << 13)
+	vehiclesGetFleetResponseFieldDocuments              = big.NewInt(1 << 14)
+	vehiclesGetFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	vehiclesGetFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
-type PostV1FleetVehiclesGetResponse struct {
-	ID                     string                                           `json:"id" url:"id"`
-	PlateNumber            string                                           `json:"plateNumber" url:"plateNumber"`
-	Make                   string                                           `json:"make" url:"make"`
-	Model                  string                                           `json:"model" url:"model"`
-	Year                   *int64                                           `json:"year,omitempty" url:"year,omitempty"`
-	Vin                    *string                                          `json:"vin,omitempty" url:"vin,omitempty"`
-	FuelType               *string                                          `json:"fuelType,omitempty" url:"fuelType,omitempty"`
-	AcquisitionDate        *string                                          `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty"`
-	MarketValue            string                                           `json:"marketValue" url:"marketValue"`
-	FixedAssetID           *string                                          `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
-	TechnicalInspectionDue *string                                          `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
-	InsuranceDue           *string                                          `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
-	Status                 PostV1FleetVehiclesGetResponseStatus             `json:"status" url:"status"`
-	Notes                  *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents              []*PostV1FleetVehiclesGetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
-	CurrentAssignment      *PostV1FleetVehiclesGetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
-	CreatedAt              string                                           `json:"createdAt" url:"createdAt"`
+type VehiclesGetFleetResponse struct {
+	ID                     string                                     `json:"id" url:"id"`
+	PlateNumber            string                                     `json:"plateNumber" url:"plateNumber"`
+	Make                   string                                     `json:"make" url:"make"`
+	Model                  string                                     `json:"model" url:"model"`
+	Year                   *int64                                     `json:"year,omitempty" url:"year,omitempty"`
+	Vin                    *string                                    `json:"vin,omitempty" url:"vin,omitempty"`
+	FuelType               *string                                    `json:"fuelType,omitempty" url:"fuelType,omitempty"`
+	AcquisitionDate        *time.Time                                 `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty" format:"date"`
+	MarketValue            string                                     `json:"marketValue" url:"marketValue"`
+	FixedAssetID           *string                                    `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
+	TechnicalInspectionDue *string                                    `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
+	InsuranceDue           *string                                    `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
+	Status                 VehiclesGetFleetResponseStatus             `json:"status" url:"status"`
+	Notes                  *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*VehiclesGetFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
+	CurrentAssignment      *VehiclesGetFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
+	CreatedAt              time.Time                                  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3203,316 +2832,328 @@ type PostV1FleetVehiclesGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetID() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetPlateNumber() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetPlateNumber() string {
+	if v == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return v.PlateNumber
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetMake() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetMake() string {
+	if v == nil {
 		return ""
 	}
-	return p.Make
+	return v.Make
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetModel() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetModel() string {
+	if v == nil {
 		return ""
 	}
-	return p.Model
+	return v.Model
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetYear() *int64 {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetYear() *int64 {
+	if v == nil {
 		return nil
 	}
-	return p.Year
+	return v.Year
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetVin() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetVin() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Vin
+	return v.Vin
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetFuelType() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetFuelType() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FuelType
+	return v.FuelType
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetAcquisitionDate() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetAcquisitionDate() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return p.AcquisitionDate
+	return v.AcquisitionDate
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetMarketValue() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetMarketValue() string {
+	if v == nil {
 		return ""
 	}
-	return p.MarketValue
+	return v.MarketValue
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetFixedAssetID() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetFixedAssetID() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FixedAssetID
+	return v.FixedAssetID
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetTechnicalInspectionDue() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetTechnicalInspectionDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.TechnicalInspectionDue
+	return v.TechnicalInspectionDue
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetInsuranceDue() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetInsuranceDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.InsuranceDue
+	return v.InsuranceDue
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetStatus() PostV1FleetVehiclesGetResponseStatus {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetStatus() VehiclesGetFleetResponseStatus {
+	if v == nil {
 		return ""
 	}
-	return p.Status
+	return v.Status
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetNotes() *string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetNotes() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Notes
+	return v.Notes
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetDocuments() []*PostV1FleetVehiclesGetResponseDocumentsItem {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetDocuments() []*VehiclesGetFleetResponseDocumentsItem {
+	if v == nil {
 		return nil
 	}
-	return p.Documents
+	return v.Documents
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetCurrentAssignment() *PostV1FleetVehiclesGetResponseCurrentAssignment {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetCurrentAssignment() *VehiclesGetFleetResponseCurrentAssignment {
+	if v == nil {
 		return nil
 	}
-	return p.CurrentAssignment
+	return v.CurrentAssignment
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (v *VehiclesGetFleetResponse) GetCreatedAt() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return v.CreatedAt
 }
 
-func (p *PostV1FleetVehiclesGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesGetFleetResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesGetResponseFieldID)
+func (v *VehiclesGetFleetResponse) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesGetFleetResponseFieldID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesGetResponseFieldPlateNumber)
+func (v *VehiclesGetFleetResponse) SetPlateNumber(plateNumber string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesGetFleetResponseFieldPlateNumber)
 }
 
 // SetMake sets the Make field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesGetResponseFieldMake)
+func (v *VehiclesGetFleetResponse) SetMake(make_ string) {
+	v.Make = make_
+	v.require(vehiclesGetFleetResponseFieldMake)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesGetResponseFieldModel)
+func (v *VehiclesGetFleetResponse) SetModel(model string) {
+	v.Model = model
+	v.require(vehiclesGetFleetResponseFieldModel)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesGetResponseFieldYear)
+func (v *VehiclesGetFleetResponse) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesGetFleetResponseFieldYear)
 }
 
 // SetVin sets the Vin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesGetResponseFieldVin)
+func (v *VehiclesGetFleetResponse) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesGetFleetResponseFieldVin)
 }
 
 // SetFuelType sets the FuelType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetFuelType(fuelType *string) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesGetResponseFieldFuelType)
+func (v *VehiclesGetFleetResponse) SetFuelType(fuelType *string) {
+	v.FuelType = fuelType
+	v.require(vehiclesGetFleetResponseFieldFuelType)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesGetResponseFieldAcquisitionDate)
+func (v *VehiclesGetFleetResponse) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesGetFleetResponseFieldAcquisitionDate)
 }
 
 // SetMarketValue sets the MarketValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetMarketValue(marketValue string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesGetResponseFieldMarketValue)
+func (v *VehiclesGetFleetResponse) SetMarketValue(marketValue string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesGetFleetResponseFieldMarketValue)
 }
 
 // SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesGetResponseFieldFixedAssetID)
+func (v *VehiclesGetFleetResponse) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesGetFleetResponseFieldFixedAssetID)
 }
 
 // SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesGetResponseFieldTechnicalInspectionDue)
+func (v *VehiclesGetFleetResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesGetFleetResponseFieldTechnicalInspectionDue)
 }
 
 // SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesGetResponseFieldInsuranceDue)
+func (v *VehiclesGetFleetResponse) SetInsuranceDue(insuranceDue *string) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesGetFleetResponseFieldInsuranceDue)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetStatus(status PostV1FleetVehiclesGetResponseStatus) {
-	p.Status = status
-	p.require(postV1FleetVehiclesGetResponseFieldStatus)
+func (v *VehiclesGetFleetResponse) SetStatus(status VehiclesGetFleetResponseStatus) {
+	v.Status = status
+	v.require(vehiclesGetFleetResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesGetResponseFieldNotes)
+func (v *VehiclesGetFleetResponse) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesGetFleetResponseFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetDocuments(documents []*PostV1FleetVehiclesGetResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1FleetVehiclesGetResponseFieldDocuments)
+func (v *VehiclesGetFleetResponse) SetDocuments(documents []*VehiclesGetFleetResponseDocumentsItem) {
+	v.Documents = documents
+	v.require(vehiclesGetFleetResponseFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetCurrentAssignment(currentAssignment *PostV1FleetVehiclesGetResponseCurrentAssignment) {
-	p.CurrentAssignment = currentAssignment
-	p.require(postV1FleetVehiclesGetResponseFieldCurrentAssignment)
+func (v *VehiclesGetFleetResponse) SetCurrentAssignment(currentAssignment *VehiclesGetFleetResponseCurrentAssignment) {
+	v.CurrentAssignment = currentAssignment
+	v.require(vehiclesGetFleetResponseFieldCurrentAssignment)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetVehiclesGetResponseFieldCreatedAt)
+func (v *VehiclesGetFleetResponse) SetCreatedAt(createdAt time.Time) {
+	v.CreatedAt = createdAt
+	v.require(vehiclesGetFleetResponseFieldCreatedAt)
 }
 
-func (p *PostV1FleetVehiclesGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesGetFleetResponse) UnmarshalJSON(data []byte) error {
+	type embed VehiclesGetFleetResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesGetFleetResponse(unmarshaler.embed)
+	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesGetResponse
+func (v *VehiclesGetFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed VehiclesGetFleetResponse
 	var marshaler = struct {
 		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*v),
+		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesGetResponse) String() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponse) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
-	postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
+	vehiclesGetFleetResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
+	vehiclesGetFleetResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
+	vehiclesGetFleetResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
+	vehiclesGetFleetResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
+	vehiclesGetFleetResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
+	vehiclesGetFleetResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
 )
 
-type PostV1FleetVehiclesGetResponseCurrentAssignment struct {
-	ID               string `json:"id" url:"id"`
-	EmployeeID       string `json:"employeeId" url:"employeeId"`
-	EmployeeName     string `json:"employeeName" url:"employeeName"`
-	FromDate         string `json:"fromDate" url:"fromDate"`
-	PrivateUse       bool   `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool   `json:"employerPaysFuel" url:"employerPaysFuel"`
+type VehiclesGetFleetResponseCurrentAssignment struct {
+	ID               string    `json:"id" url:"id"`
+	EmployeeID       string    `json:"employeeId" url:"employeeId"`
+	EmployeeName     string    `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	PrivateUse       bool      `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool      `json:"employerPaysFuel" url:"employerPaysFuel"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3521,152 +3162,160 @@ type PostV1FleetVehiclesGetResponseCurrentAssignment struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetID() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetEmployeeID() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetEmployeeID() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return v.EmployeeID
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetEmployeeName() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetEmployeeName() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return v.EmployeeName
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetFromDate() string {
-	if p == nil {
-		return ""
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetFromDate() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return v.FromDate
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetPrivateUse() bool {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetPrivateUse() bool {
+	if v == nil {
 		return false
 	}
-	return p.PrivateUse
+	return v.PrivateUse
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetEmployerPaysFuel() bool {
+	if v == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return v.EmployerPaysFuel
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesGetFleetResponseCurrentAssignment) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldID)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployeeID)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetEmployeeID(employeeID string) {
+	v.EmployeeID = employeeID
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployeeName)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetEmployeeName(employeeName string) {
+	v.EmployeeName = employeeName
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldFromDate)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetFromDate(fromDate time.Time) {
+	v.FromDate = fromDate
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldFromDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldPrivateUse)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
+	v.PrivateUse = privateUse
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetVehiclesGetResponseCurrentAssignmentFieldEmployerPaysFuel)
+func (v *VehiclesGetFleetResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
+	v.EmployerPaysFuel = employerPaysFuel
+	v.require(vehiclesGetFleetResponseCurrentAssignmentFieldEmployerPaysFuel)
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesGetResponseCurrentAssignment
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
+	type embed VehiclesGetFleetResponseCurrentAssignment
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesGetResponseCurrentAssignment(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesGetFleetResponseCurrentAssignment(unmarshaler.embed)
+	v.FromDate = unmarshaler.FromDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesGetResponseCurrentAssignment
+func (v *VehiclesGetFleetResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
+	type embed VehiclesGetFleetResponseCurrentAssignment
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*v),
+		FromDate: internal.NewDate(v.FromDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) String() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseCurrentAssignment) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesGetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1FleetVehiclesGetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	vehiclesGetFleetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	vehiclesGetFleetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1FleetVehiclesGetResponseDocumentsItem struct {
+type VehiclesGetFleetResponseDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -3677,125 +3326,125 @@ type PostV1FleetVehiclesGetResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseDocumentsItem) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return p.Name
+	return v.Name
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseDocumentsItem) GetRef() string {
+	if v == nil {
 		return ""
 	}
-	return p.Ref
+	return v.Ref
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesGetFleetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesGetFleetResponseDocumentsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1FleetVehiclesGetResponseDocumentsItemFieldName)
+func (v *VehiclesGetFleetResponseDocumentsItem) SetName(name string) {
+	v.Name = name
+	v.require(vehiclesGetFleetResponseDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1FleetVehiclesGetResponseDocumentsItemFieldRef)
+func (v *VehiclesGetFleetResponseDocumentsItem) SetRef(ref string) {
+	v.Ref = ref
+	v.require(vehiclesGetFleetResponseDocumentsItemFieldRef)
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesGetResponseDocumentsItem
+func (v *VehiclesGetFleetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesGetFleetResponseDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesGetResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesGetFleetResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesGetResponseDocumentsItem
+func (v *VehiclesGetFleetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesGetFleetResponseDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesGetResponseDocumentsItem) String() string {
-	if p == nil {
+func (v *VehiclesGetFleetResponseDocumentsItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesGetResponseStatus string
+type VehiclesGetFleetResponseStatus string
 
 const (
-	PostV1FleetVehiclesGetResponseStatusActive   PostV1FleetVehiclesGetResponseStatus = "active"
-	PostV1FleetVehiclesGetResponseStatusSold     PostV1FleetVehiclesGetResponseStatus = "sold"
-	PostV1FleetVehiclesGetResponseStatusScrapped PostV1FleetVehiclesGetResponseStatus = "scrapped"
+	VehiclesGetFleetResponseStatusActive   VehiclesGetFleetResponseStatus = "active"
+	VehiclesGetFleetResponseStatusSold     VehiclesGetFleetResponseStatus = "sold"
+	VehiclesGetFleetResponseStatusScrapped VehiclesGetFleetResponseStatus = "scrapped"
 )
 
-func NewPostV1FleetVehiclesGetResponseStatusFromString(s string) (PostV1FleetVehiclesGetResponseStatus, error) {
+func NewVehiclesGetFleetResponseStatusFromString(s string) (VehiclesGetFleetResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1FleetVehiclesGetResponseStatusActive, nil
+		return VehiclesGetFleetResponseStatusActive, nil
 	case "sold":
-		return PostV1FleetVehiclesGetResponseStatusSold, nil
+		return VehiclesGetFleetResponseStatusSold, nil
 	case "scrapped":
-		return PostV1FleetVehiclesGetResponseStatusScrapped, nil
+		return VehiclesGetFleetResponseStatusScrapped, nil
 	}
-	var t PostV1FleetVehiclesGetResponseStatus
+	var t VehiclesGetFleetResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesGetResponseStatus) Ptr() *PostV1FleetVehiclesGetResponseStatus {
-	return &p
+func (v VehiclesGetFleetResponseStatus) Ptr() *VehiclesGetFleetResponseStatus {
+	return &v
 }
 
 var (
-	postV1FleetVehiclesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1FleetVehiclesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1FleetVehiclesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	vehiclesListFleetRequestFilterItemFieldField = big.NewInt(1 << 0)
+	vehiclesListFleetRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	vehiclesListFleetRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1FleetVehiclesListRequestFilterItem struct {
-	Field string                                         `json:"field" url:"field"`
-	Op    PostV1FleetVehiclesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1FleetVehiclesListRequestFilterItemValue `json:"value" url:"value"`
+type VehiclesListFleetRequestFilterItem struct {
+	Field string                                   `json:"field" url:"field"`
+	Op    VehiclesListFleetRequestFilterItemOp     `json:"op" url:"op"`
+	Value *VehiclesListFleetRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3804,312 +3453,312 @@ type PostV1FleetVehiclesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItem) GetField() string {
+	if v == nil {
 		return ""
 	}
-	return p.Field
+	return v.Field
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) GetOp() PostV1FleetVehiclesListRequestFilterItemOp {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItem) GetOp() VehiclesListFleetRequestFilterItemOp {
+	if v == nil {
 		return ""
 	}
-	return p.Op
+	return v.Op
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) GetValue() *PostV1FleetVehiclesListRequestFilterItemValue {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItem) GetValue() *VehiclesListFleetRequestFilterItemValue {
+	if v == nil {
 		return nil
 	}
-	return p.Value
+	return v.Value
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetRequestFilterItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FleetVehiclesListRequestFilterItemFieldField)
+func (v *VehiclesListFleetRequestFilterItem) SetField(field string) {
+	v.Field = field
+	v.require(vehiclesListFleetRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequestFilterItem) SetOp(op PostV1FleetVehiclesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1FleetVehiclesListRequestFilterItemFieldOp)
+func (v *VehiclesListFleetRequestFilterItem) SetOp(op VehiclesListFleetRequestFilterItemOp) {
+	v.Op = op
+	v.require(vehiclesListFleetRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequestFilterItem) SetValue(value *PostV1FleetVehiclesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1FleetVehiclesListRequestFilterItemFieldValue)
+func (v *VehiclesListFleetRequestFilterItem) SetValue(value *VehiclesListFleetRequestFilterItemValue) {
+	v.Value = value
+	v.require(vehiclesListFleetRequestFilterItemFieldValue)
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListRequestFilterItem
+func (v *VehiclesListFleetRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesListFleetRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListRequestFilterItem
+func (v *VehiclesListFleetRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItem) String() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesListRequestFilterItemOp string
+type VehiclesListFleetRequestFilterItemOp string
 
 const (
-	PostV1FleetVehiclesListRequestFilterItemOpEq       PostV1FleetVehiclesListRequestFilterItemOp = "eq"
-	PostV1FleetVehiclesListRequestFilterItemOpNe       PostV1FleetVehiclesListRequestFilterItemOp = "ne"
-	PostV1FleetVehiclesListRequestFilterItemOpContains PostV1FleetVehiclesListRequestFilterItemOp = "contains"
-	PostV1FleetVehiclesListRequestFilterItemOpGte      PostV1FleetVehiclesListRequestFilterItemOp = "gte"
-	PostV1FleetVehiclesListRequestFilterItemOpLte      PostV1FleetVehiclesListRequestFilterItemOp = "lte"
-	PostV1FleetVehiclesListRequestFilterItemOpIn       PostV1FleetVehiclesListRequestFilterItemOp = "in"
+	VehiclesListFleetRequestFilterItemOpEq       VehiclesListFleetRequestFilterItemOp = "eq"
+	VehiclesListFleetRequestFilterItemOpNe       VehiclesListFleetRequestFilterItemOp = "ne"
+	VehiclesListFleetRequestFilterItemOpContains VehiclesListFleetRequestFilterItemOp = "contains"
+	VehiclesListFleetRequestFilterItemOpGte      VehiclesListFleetRequestFilterItemOp = "gte"
+	VehiclesListFleetRequestFilterItemOpLte      VehiclesListFleetRequestFilterItemOp = "lte"
+	VehiclesListFleetRequestFilterItemOpIn       VehiclesListFleetRequestFilterItemOp = "in"
 )
 
-func NewPostV1FleetVehiclesListRequestFilterItemOpFromString(s string) (PostV1FleetVehiclesListRequestFilterItemOp, error) {
+func NewVehiclesListFleetRequestFilterItemOpFromString(s string) (VehiclesListFleetRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1FleetVehiclesListRequestFilterItemOpEq, nil
+		return VehiclesListFleetRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1FleetVehiclesListRequestFilterItemOpNe, nil
+		return VehiclesListFleetRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1FleetVehiclesListRequestFilterItemOpContains, nil
+		return VehiclesListFleetRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1FleetVehiclesListRequestFilterItemOpGte, nil
+		return VehiclesListFleetRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1FleetVehiclesListRequestFilterItemOpLte, nil
+		return VehiclesListFleetRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1FleetVehiclesListRequestFilterItemOpIn, nil
+		return VehiclesListFleetRequestFilterItemOpIn, nil
 	}
-	var t PostV1FleetVehiclesListRequestFilterItemOp
+	var t VehiclesListFleetRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesListRequestFilterItemOp) Ptr() *PostV1FleetVehiclesListRequestFilterItemOp {
-	return &p
+func (v VehiclesListFleetRequestFilterItemOp) Ptr() *VehiclesListFleetRequestFilterItemOp {
+	return &v
 }
 
-type PostV1FleetVehiclesListRequestFilterItemValue struct {
-	String                                                     string
-	Double                                                     float64
-	Boolean                                                    bool
-	PostV1FleetVehiclesListRequestFilterItemValueThreeItemList []*PostV1FleetVehiclesListRequestFilterItemValueThreeItem
+type VehiclesListFleetRequestFilterItemValue struct {
+	String                                               string
+	Double                                               float64
+	Boolean                                              bool
+	VehiclesListFleetRequestFilterItemValueThreeItemList []*VehiclesListFleetRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValue) GetString() string {
+	if v == nil {
 		return ""
 	}
-	return p.String
+	return v.String
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValue) GetDouble() float64 {
+	if v == nil {
 		return 0
 	}
-	return p.Double
+	return v.Double
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValue) GetBoolean() bool {
+	if v == nil {
 		return false
 	}
-	return p.Boolean
+	return v.Boolean
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) GetPostV1FleetVehiclesListRequestFilterItemValueThreeItemList() []*PostV1FleetVehiclesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValue) GetVehiclesListFleetRequestFilterItemValueThreeItemList() []*VehiclesListFleetRequestFilterItemValueThreeItem {
+	if v == nil {
 		return nil
 	}
-	return p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList
+	return v.VehiclesListFleetRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (v *VehiclesListFleetRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		v.typ = "String"
+		v.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		v.typ = "Double"
+		v.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		v.typ = "Boolean"
+		v.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1FleetVehiclesListRequestFilterItemValueThreeItemList []*PostV1FleetVehiclesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1FleetVehiclesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1FleetVehiclesListRequestFilterItemValueThreeItemList"
-		p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList = valuePostV1FleetVehiclesListRequestFilterItemValueThreeItemList
+	var valueVehiclesListFleetRequestFilterItemValueThreeItemList []*VehiclesListFleetRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueVehiclesListFleetRequestFilterItemValueThreeItemList); err == nil {
+		v.typ = "VehiclesListFleetRequestFilterItemValueThreeItemList"
+		v.VehiclesListFleetRequestFilterItemValueThreeItemList = valueVehiclesListFleetRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, v)
 }
 
-func (p PostV1FleetVehiclesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (v VehiclesListFleetRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if v.typ == "String" || v.String != "" {
+		return json.Marshal(v.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if v.typ == "Double" || v.Double != 0 {
+		return json.Marshal(v.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if v.typ == "Boolean" || v.Boolean != false {
+		return json.Marshal(v.Boolean)
 	}
-	if p.typ == "PostV1FleetVehiclesListRequestFilterItemValueThreeItemList" || p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList)
+	if v.typ == "VehiclesListFleetRequestFilterItemValueThreeItemList" || v.VehiclesListFleetRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(v.VehiclesListFleetRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", v)
 }
 
-type PostV1FleetVehiclesListRequestFilterItemValueVisitor interface {
+type VehiclesListFleetRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1FleetVehiclesListRequestFilterItemValueThreeItemList([]*PostV1FleetVehiclesListRequestFilterItemValueThreeItem) error
+	VisitVehiclesListFleetRequestFilterItemValueThreeItemList([]*VehiclesListFleetRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValue) Accept(visitor PostV1FleetVehiclesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (v *VehiclesListFleetRequestFilterItemValue) Accept(visitor VehiclesListFleetRequestFilterItemValueVisitor) error {
+	if v.typ == "String" || v.String != "" {
+		return visitor.VisitString(v.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if v.typ == "Double" || v.Double != 0 {
+		return visitor.VisitDouble(v.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if v.typ == "Boolean" || v.Boolean != false {
+		return visitor.VisitBoolean(v.Boolean)
 	}
-	if p.typ == "PostV1FleetVehiclesListRequestFilterItemValueThreeItemList" || p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1FleetVehiclesListRequestFilterItemValueThreeItemList(p.PostV1FleetVehiclesListRequestFilterItemValueThreeItemList)
+	if v.typ == "VehiclesListFleetRequestFilterItemValueThreeItemList" || v.VehiclesListFleetRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitVehiclesListFleetRequestFilterItemValueThreeItemList(v.VehiclesListFleetRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", v)
 }
 
-type PostV1FleetVehiclesListRequestFilterItemValueThreeItem struct {
+type VehiclesListFleetRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValueThreeItem) GetString() string {
+	if v == nil {
 		return ""
 	}
-	return p.String
+	return v.String
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (v *VehiclesListFleetRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if v == nil {
 		return 0
 	}
-	return p.Double
+	return v.Double
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (v *VehiclesListFleetRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		v.typ = "String"
+		v.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		v.typ = "Double"
+		v.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, v)
 }
 
-func (p PostV1FleetVehiclesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (v VehiclesListFleetRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if v.typ == "String" || v.String != "" {
+		return json.Marshal(v.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if v.typ == "Double" || v.Double != 0 {
+		return json.Marshal(v.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", v)
 }
 
-type PostV1FleetVehiclesListRequestFilterItemValueThreeItemVisitor interface {
+type VehiclesListFleetRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1FleetVehiclesListRequestFilterItemValueThreeItem) Accept(visitor PostV1FleetVehiclesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (v *VehiclesListFleetRequestFilterItemValueThreeItem) Accept(visitor VehiclesListFleetRequestFilterItemValueThreeItemVisitor) error {
+	if v.typ == "String" || v.String != "" {
+		return visitor.VisitString(v.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if v.typ == "Double" || v.Double != 0 {
+		return visitor.VisitDouble(v.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", v)
 }
 
 var (
-	postV1FleetVehiclesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1FleetVehiclesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	vehiclesListFleetRequestSortItemFieldField = big.NewInt(1 << 0)
+	vehiclesListFleetRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1FleetVehiclesListRequestSortItem struct {
-	Field string                                     `json:"field" url:"field"`
-	Dir   *PostV1FleetVehiclesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type VehiclesListFleetRequestSortItem struct {
+	Field string                               `json:"field" url:"field"`
+	Dir   *VehiclesListFleetRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4118,126 +3767,126 @@ type PostV1FleetVehiclesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) GetField() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestSortItem) GetField() string {
+	if v == nil {
 		return ""
 	}
-	return p.Field
+	return v.Field
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) GetDir() *PostV1FleetVehiclesListRequestSortItemDir {
-	if p == nil {
+func (v *VehiclesListFleetRequestSortItem) GetDir() *VehiclesListFleetRequestSortItemDir {
+	if v == nil {
 		return nil
 	}
-	return p.Dir
+	return v.Dir
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetRequestSortItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FleetVehiclesListRequestSortItemFieldField)
+func (v *VehiclesListFleetRequestSortItem) SetField(field string) {
+	v.Field = field
+	v.require(vehiclesListFleetRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListRequestSortItem) SetDir(dir *PostV1FleetVehiclesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1FleetVehiclesListRequestSortItemFieldDir)
+func (v *VehiclesListFleetRequestSortItem) SetDir(dir *VehiclesListFleetRequestSortItemDir) {
+	v.Dir = dir
+	v.require(vehiclesListFleetRequestSortItemFieldDir)
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListRequestSortItem
+func (v *VehiclesListFleetRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesListFleetRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListRequestSortItem
+func (v *VehiclesListFleetRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesListRequestSortItem) String() string {
-	if p == nil {
+func (v *VehiclesListFleetRequestSortItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesListRequestSortItemDir string
+type VehiclesListFleetRequestSortItemDir string
 
 const (
-	PostV1FleetVehiclesListRequestSortItemDirAsc  PostV1FleetVehiclesListRequestSortItemDir = "asc"
-	PostV1FleetVehiclesListRequestSortItemDirDesc PostV1FleetVehiclesListRequestSortItemDir = "desc"
+	VehiclesListFleetRequestSortItemDirAsc  VehiclesListFleetRequestSortItemDir = "asc"
+	VehiclesListFleetRequestSortItemDirDesc VehiclesListFleetRequestSortItemDir = "desc"
 )
 
-func NewPostV1FleetVehiclesListRequestSortItemDirFromString(s string) (PostV1FleetVehiclesListRequestSortItemDir, error) {
+func NewVehiclesListFleetRequestSortItemDirFromString(s string) (VehiclesListFleetRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1FleetVehiclesListRequestSortItemDirAsc, nil
+		return VehiclesListFleetRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1FleetVehiclesListRequestSortItemDirDesc, nil
+		return VehiclesListFleetRequestSortItemDirDesc, nil
 	}
-	var t PostV1FleetVehiclesListRequestSortItemDir
+	var t VehiclesListFleetRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesListRequestSortItemDir) Ptr() *PostV1FleetVehiclesListRequestSortItemDir {
-	return &p
+func (v VehiclesListFleetRequestSortItemDir) Ptr() *VehiclesListFleetRequestSortItemDir {
+	return &v
 }
 
 var (
-	postV1FleetVehiclesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1FleetVehiclesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1FleetVehiclesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1FleetVehiclesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1FleetVehiclesListResponseFieldTotals   = big.NewInt(1 << 4)
+	vehiclesListFleetResponseFieldRows     = big.NewInt(1 << 0)
+	vehiclesListFleetResponseFieldPage     = big.NewInt(1 << 1)
+	vehiclesListFleetResponseFieldPageSize = big.NewInt(1 << 2)
+	vehiclesListFleetResponseFieldTotal    = big.NewInt(1 << 3)
+	vehiclesListFleetResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1FleetVehiclesListResponse struct {
-	Rows     []*PostV1FleetVehiclesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                      `json:"page" url:"page"`
-	PageSize int64                                      `json:"pageSize" url:"pageSize"`
-	Total    int64                                      `json:"total" url:"total"`
-	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
+type VehiclesListFleetResponse struct {
+	Rows     []*VehiclesListFleetResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                `json:"page" url:"page"`
+	PageSize int64                                `json:"pageSize" url:"pageSize"`
+	Total    int64                                `json:"total" url:"total"`
+	Totals   map[string]string                    `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4246,841 +3895,153 @@ type PostV1FleetVehiclesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetRows() []*PostV1FleetVehiclesListResponseRowsItem {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetRows() []*VehiclesListFleetResponseRowsItem {
+	if v == nil {
 		return nil
 	}
-	return p.Rows
+	return v.Rows
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetPage() int64 {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetPage() int64 {
+	if v == nil {
 		return 0
 	}
-	return p.Page
+	return v.Page
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetPageSize() int64 {
+	if v == nil {
 		return 0
 	}
-	return p.PageSize
+	return v.PageSize
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetTotal() int64 {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetTotal() int64 {
+	if v == nil {
 		return 0
 	}
-	return p.Total
+	return v.Total
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetTotals() map[string]string {
+	if v == nil {
 		return nil
 	}
-	return p.Totals
+	return v.Totals
 }
 
-func (p *PostV1FleetVehiclesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponse) SetRows(rows []*PostV1FleetVehiclesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1FleetVehiclesListResponseFieldRows)
+func (v *VehiclesListFleetResponse) SetRows(rows []*VehiclesListFleetResponseRowsItem) {
+	v.Rows = rows
+	v.require(vehiclesListFleetResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1FleetVehiclesListResponseFieldPage)
+func (v *VehiclesListFleetResponse) SetPage(page int64) {
+	v.Page = page
+	v.require(vehiclesListFleetResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1FleetVehiclesListResponseFieldPageSize)
+func (v *VehiclesListFleetResponse) SetPageSize(pageSize int64) {
+	v.PageSize = pageSize
+	v.require(vehiclesListFleetResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1FleetVehiclesListResponseFieldTotal)
+func (v *VehiclesListFleetResponse) SetTotal(total int64) {
+	v.Total = total
+	v.require(vehiclesListFleetResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1FleetVehiclesListResponseFieldTotals)
+func (v *VehiclesListFleetResponse) SetTotals(totals map[string]string) {
+	v.Totals = totals
+	v.require(vehiclesListFleetResponseFieldTotals)
 }
 
-func (p *PostV1FleetVehiclesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListResponse
+func (v *VehiclesListFleetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesListFleetResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListResponse
+func (v *VehiclesListFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesListResponse) String() string {
-	if p == nil {
+func (v *VehiclesListFleetResponse) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesListResponseRowsItemFieldID                     = big.NewInt(1 << 0)
-	postV1FleetVehiclesListResponseRowsItemFieldPlateNumber            = big.NewInt(1 << 1)
-	postV1FleetVehiclesListResponseRowsItemFieldMake                   = big.NewInt(1 << 2)
-	postV1FleetVehiclesListResponseRowsItemFieldModel                  = big.NewInt(1 << 3)
-	postV1FleetVehiclesListResponseRowsItemFieldYear                   = big.NewInt(1 << 4)
-	postV1FleetVehiclesListResponseRowsItemFieldVin                    = big.NewInt(1 << 5)
-	postV1FleetVehiclesListResponseRowsItemFieldFuelType               = big.NewInt(1 << 6)
-	postV1FleetVehiclesListResponseRowsItemFieldAcquisitionDate        = big.NewInt(1 << 7)
-	postV1FleetVehiclesListResponseRowsItemFieldMarketValue            = big.NewInt(1 << 8)
-	postV1FleetVehiclesListResponseRowsItemFieldFixedAssetID           = big.NewInt(1 << 9)
-	postV1FleetVehiclesListResponseRowsItemFieldTechnicalInspectionDue = big.NewInt(1 << 10)
-	postV1FleetVehiclesListResponseRowsItemFieldInsuranceDue           = big.NewInt(1 << 11)
-	postV1FleetVehiclesListResponseRowsItemFieldStatus                 = big.NewInt(1 << 12)
-	postV1FleetVehiclesListResponseRowsItemFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesListResponseRowsItemFieldDocuments              = big.NewInt(1 << 14)
-	postV1FleetVehiclesListResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 15)
-	postV1FleetVehiclesListResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesListFleetResponseRowsItemFieldID                     = big.NewInt(1 << 0)
+	vehiclesListFleetResponseRowsItemFieldPlateNumber            = big.NewInt(1 << 1)
+	vehiclesListFleetResponseRowsItemFieldMake                   = big.NewInt(1 << 2)
+	vehiclesListFleetResponseRowsItemFieldModel                  = big.NewInt(1 << 3)
+	vehiclesListFleetResponseRowsItemFieldYear                   = big.NewInt(1 << 4)
+	vehiclesListFleetResponseRowsItemFieldVin                    = big.NewInt(1 << 5)
+	vehiclesListFleetResponseRowsItemFieldFuelType               = big.NewInt(1 << 6)
+	vehiclesListFleetResponseRowsItemFieldAcquisitionDate        = big.NewInt(1 << 7)
+	vehiclesListFleetResponseRowsItemFieldMarketValue            = big.NewInt(1 << 8)
+	vehiclesListFleetResponseRowsItemFieldFixedAssetID           = big.NewInt(1 << 9)
+	vehiclesListFleetResponseRowsItemFieldTechnicalInspectionDue = big.NewInt(1 << 10)
+	vehiclesListFleetResponseRowsItemFieldInsuranceDue           = big.NewInt(1 << 11)
+	vehiclesListFleetResponseRowsItemFieldStatus                 = big.NewInt(1 << 12)
+	vehiclesListFleetResponseRowsItemFieldNotes                  = big.NewInt(1 << 13)
+	vehiclesListFleetResponseRowsItemFieldDocuments              = big.NewInt(1 << 14)
+	vehiclesListFleetResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 15)
+	vehiclesListFleetResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
-type PostV1FleetVehiclesListResponseRowsItem struct {
-	ID                     string                                                    `json:"id" url:"id"`
-	PlateNumber            string                                                    `json:"plateNumber" url:"plateNumber"`
-	Make                   string                                                    `json:"make" url:"make"`
-	Model                  string                                                    `json:"model" url:"model"`
-	Year                   *int64                                                    `json:"year,omitempty" url:"year,omitempty"`
-	Vin                    *string                                                   `json:"vin,omitempty" url:"vin,omitempty"`
-	FuelType               *string                                                   `json:"fuelType,omitempty" url:"fuelType,omitempty"`
-	AcquisitionDate        *string                                                   `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty"`
-	MarketValue            string                                                    `json:"marketValue" url:"marketValue"`
-	FixedAssetID           *string                                                   `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
-	TechnicalInspectionDue *string                                                   `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
-	InsuranceDue           *string                                                   `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
-	Status                 PostV1FleetVehiclesListResponseRowsItemStatus             `json:"status" url:"status"`
-	Notes                  *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents              []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
-	CurrentAssignment      *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
-	CreatedAt              string                                                    `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetPlateNumber() string {
-	if p == nil {
-		return ""
-	}
-	return p.PlateNumber
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetMake() string {
-	if p == nil {
-		return ""
-	}
-	return p.Make
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetModel() string {
-	if p == nil {
-		return ""
-	}
-	return p.Model
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetYear() *int64 {
-	if p == nil {
-		return nil
-	}
-	return p.Year
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetVin() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Vin
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetFuelType() *string {
-	if p == nil {
-		return nil
-	}
-	return p.FuelType
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetAcquisitionDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AcquisitionDate
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetMarketValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.MarketValue
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetFixedAssetID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.FixedAssetID
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetTechnicalInspectionDue() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TechnicalInspectionDue
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetInsuranceDue() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InsuranceDue
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetStatus() PostV1FleetVehiclesListResponseRowsItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetDocuments() []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Documents
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetCurrentAssignment() *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment {
-	if p == nil {
-		return nil
-	}
-	return p.CurrentAssignment
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldID)
-}
-
-// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldPlateNumber)
-}
-
-// SetMake sets the Make field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldMake)
-}
-
-// SetModel sets the Model field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldModel)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldYear)
-}
-
-// SetVin sets the Vin field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldVin)
-}
-
-// SetFuelType sets the FuelType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetFuelType(fuelType *string) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldFuelType)
-}
-
-// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldAcquisitionDate)
-}
-
-// SetMarketValue sets the MarketValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetMarketValue(marketValue string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldMarketValue)
-}
-
-// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldFixedAssetID)
-}
-
-// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldTechnicalInspectionDue)
-}
-
-// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldInsuranceDue)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetStatus(status PostV1FleetVehiclesListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldNotes)
-}
-
-// SetDocuments sets the Documents field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetDocuments(documents []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldDocuments)
-}
-
-// SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetCurrentAssignment(currentAssignment *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) {
-	p.CurrentAssignment = currentAssignment
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldCurrentAssignment)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetVehiclesListResponseRowsItemFieldCreatedAt)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldID               = big.NewInt(1 << 0)
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
-	postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
-)
-
-type PostV1FleetVehiclesListResponseRowsItemCurrentAssignment struct {
-	ID               string `json:"id" url:"id"`
-	EmployeeID       string `json:"employeeId" url:"employeeId"`
-	EmployeeName     string `json:"employeeName" url:"employeeName"`
-	FromDate         string `json:"fromDate" url:"fromDate"`
-	PrivateUse       bool   `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool   `json:"employerPaysFuel" url:"employerPaysFuel"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetEmployeeName() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeName
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetFromDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.FromDate
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetPrivateUse() bool {
-	if p == nil {
-		return false
-	}
-	return p.PrivateUse
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetEmployerPaysFuel() bool {
-	if p == nil {
-		return false
-	}
-	return p.EmployerPaysFuel
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployeeID)
-}
-
-// SetEmployeeName sets the EmployeeName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployeeName)
-}
-
-// SetFromDate sets the FromDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldFromDate)
-}
-
-// SetPrivateUse sets the PrivateUse field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldPrivateUse)
-}
-
-// SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetVehiclesListResponseRowsItemCurrentAssignmentFieldEmployerPaysFuel)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListResponseRowsItemCurrentAssignment
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesListResponseRowsItemCurrentAssignment(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListResponseRowsItemCurrentAssignment
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
-)
-
-type PostV1FleetVehiclesListResponseRowsItemDocumentsItem struct {
-	Name string `json:"name" url:"name"`
-	Ref  string `json:"ref" url:"ref"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetRef() string {
-	if p == nil {
-		return ""
-	}
-	return p.Ref
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldName)
-}
-
-// SetRef sets the Ref field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldRef)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesListResponseRowsItemDocumentsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1FleetVehiclesListResponseRowsItemDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesListResponseRowsItemDocumentsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1FleetVehiclesListResponseRowsItemStatus string
-
-const (
-	PostV1FleetVehiclesListResponseRowsItemStatusActive   PostV1FleetVehiclesListResponseRowsItemStatus = "active"
-	PostV1FleetVehiclesListResponseRowsItemStatusSold     PostV1FleetVehiclesListResponseRowsItemStatus = "sold"
-	PostV1FleetVehiclesListResponseRowsItemStatusScrapped PostV1FleetVehiclesListResponseRowsItemStatus = "scrapped"
-)
-
-func NewPostV1FleetVehiclesListResponseRowsItemStatusFromString(s string) (PostV1FleetVehiclesListResponseRowsItemStatus, error) {
-	switch s {
-	case "active":
-		return PostV1FleetVehiclesListResponseRowsItemStatusActive, nil
-	case "sold":
-		return PostV1FleetVehiclesListResponseRowsItemStatusSold, nil
-	case "scrapped":
-		return PostV1FleetVehiclesListResponseRowsItemStatusScrapped, nil
-	}
-	var t PostV1FleetVehiclesListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1FleetVehiclesListResponseRowsItemStatus) Ptr() *PostV1FleetVehiclesListResponseRowsItemStatus {
-	return &p
-}
-
-type PostV1FleetVehiclesUpdateRequestFuelType string
-
-const (
-	PostV1FleetVehiclesUpdateRequestFuelTypePetrol   PostV1FleetVehiclesUpdateRequestFuelType = "petrol"
-	PostV1FleetVehiclesUpdateRequestFuelTypeDiesel   PostV1FleetVehiclesUpdateRequestFuelType = "diesel"
-	PostV1FleetVehiclesUpdateRequestFuelTypeElectric PostV1FleetVehiclesUpdateRequestFuelType = "electric"
-	PostV1FleetVehiclesUpdateRequestFuelTypeHybrid   PostV1FleetVehiclesUpdateRequestFuelType = "hybrid"
-	PostV1FleetVehiclesUpdateRequestFuelTypeLpg      PostV1FleetVehiclesUpdateRequestFuelType = "lpg"
-	PostV1FleetVehiclesUpdateRequestFuelTypeOther    PostV1FleetVehiclesUpdateRequestFuelType = "other"
-)
-
-func NewPostV1FleetVehiclesUpdateRequestFuelTypeFromString(s string) (PostV1FleetVehiclesUpdateRequestFuelType, error) {
-	switch s {
-	case "petrol":
-		return PostV1FleetVehiclesUpdateRequestFuelTypePetrol, nil
-	case "diesel":
-		return PostV1FleetVehiclesUpdateRequestFuelTypeDiesel, nil
-	case "electric":
-		return PostV1FleetVehiclesUpdateRequestFuelTypeElectric, nil
-	case "hybrid":
-		return PostV1FleetVehiclesUpdateRequestFuelTypeHybrid, nil
-	case "lpg":
-		return PostV1FleetVehiclesUpdateRequestFuelTypeLpg, nil
-	case "other":
-		return PostV1FleetVehiclesUpdateRequestFuelTypeOther, nil
-	}
-	var t PostV1FleetVehiclesUpdateRequestFuelType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1FleetVehiclesUpdateRequestFuelType) Ptr() *PostV1FleetVehiclesUpdateRequestFuelType {
-	return &p
-}
-
-type PostV1FleetVehiclesUpdateRequestStatus string
-
-const (
-	PostV1FleetVehiclesUpdateRequestStatusActive   PostV1FleetVehiclesUpdateRequestStatus = "active"
-	PostV1FleetVehiclesUpdateRequestStatusSold     PostV1FleetVehiclesUpdateRequestStatus = "sold"
-	PostV1FleetVehiclesUpdateRequestStatusScrapped PostV1FleetVehiclesUpdateRequestStatus = "scrapped"
-)
-
-func NewPostV1FleetVehiclesUpdateRequestStatusFromString(s string) (PostV1FleetVehiclesUpdateRequestStatus, error) {
-	switch s {
-	case "active":
-		return PostV1FleetVehiclesUpdateRequestStatusActive, nil
-	case "sold":
-		return PostV1FleetVehiclesUpdateRequestStatusSold, nil
-	case "scrapped":
-		return PostV1FleetVehiclesUpdateRequestStatusScrapped, nil
-	}
-	var t PostV1FleetVehiclesUpdateRequestStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1FleetVehiclesUpdateRequestStatus) Ptr() *PostV1FleetVehiclesUpdateRequestStatus {
-	return &p
-}
-
-var (
-	postV1FleetVehiclesUpdateResponseFieldID                     = big.NewInt(1 << 0)
-	postV1FleetVehiclesUpdateResponseFieldPlateNumber            = big.NewInt(1 << 1)
-	postV1FleetVehiclesUpdateResponseFieldMake                   = big.NewInt(1 << 2)
-	postV1FleetVehiclesUpdateResponseFieldModel                  = big.NewInt(1 << 3)
-	postV1FleetVehiclesUpdateResponseFieldYear                   = big.NewInt(1 << 4)
-	postV1FleetVehiclesUpdateResponseFieldVin                    = big.NewInt(1 << 5)
-	postV1FleetVehiclesUpdateResponseFieldFuelType               = big.NewInt(1 << 6)
-	postV1FleetVehiclesUpdateResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
-	postV1FleetVehiclesUpdateResponseFieldMarketValue            = big.NewInt(1 << 8)
-	postV1FleetVehiclesUpdateResponseFieldFixedAssetID           = big.NewInt(1 << 9)
-	postV1FleetVehiclesUpdateResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
-	postV1FleetVehiclesUpdateResponseFieldInsuranceDue           = big.NewInt(1 << 11)
-	postV1FleetVehiclesUpdateResponseFieldStatus                 = big.NewInt(1 << 12)
-	postV1FleetVehiclesUpdateResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesUpdateResponseFieldDocuments              = big.NewInt(1 << 14)
-	postV1FleetVehiclesUpdateResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	postV1FleetVehiclesUpdateResponseFieldCreatedAt              = big.NewInt(1 << 16)
-)
-
-type PostV1FleetVehiclesUpdateResponse struct {
+type VehiclesListFleetResponseRowsItem struct {
 	ID                     string                                              `json:"id" url:"id"`
 	PlateNumber            string                                              `json:"plateNumber" url:"plateNumber"`
 	Make                   string                                              `json:"make" url:"make"`
@@ -5088,16 +4049,16 @@ type PostV1FleetVehiclesUpdateResponse struct {
 	Year                   *int64                                              `json:"year,omitempty" url:"year,omitempty"`
 	Vin                    *string                                             `json:"vin,omitempty" url:"vin,omitempty"`
 	FuelType               *string                                             `json:"fuelType,omitempty" url:"fuelType,omitempty"`
-	AcquisitionDate        *string                                             `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty"`
+	AcquisitionDate        *time.Time                                          `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty" format:"date"`
 	MarketValue            string                                              `json:"marketValue" url:"marketValue"`
 	FixedAssetID           *string                                             `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
 	TechnicalInspectionDue *string                                             `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
 	InsuranceDue           *string                                             `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
-	Status                 PostV1FleetVehiclesUpdateResponseStatus             `json:"status" url:"status"`
+	Status                 VehiclesListFleetResponseRowsItemStatus             `json:"status" url:"status"`
 	Notes                  *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents              []*PostV1FleetVehiclesUpdateResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
-	CurrentAssignment      *PostV1FleetVehiclesUpdateResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
-	CreatedAt              string                                              `json:"createdAt" url:"createdAt"`
+	Documents              []*VehiclesListFleetResponseRowsItemDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
+	CurrentAssignment      *VehiclesListFleetResponseRowsItemCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
+	CreatedAt              time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5106,316 +4067,328 @@ type PostV1FleetVehiclesUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetID() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetPlateNumber() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetPlateNumber() string {
+	if v == nil {
 		return ""
 	}
-	return p.PlateNumber
+	return v.PlateNumber
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetMake() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetMake() string {
+	if v == nil {
 		return ""
 	}
-	return p.Make
+	return v.Make
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetModel() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetModel() string {
+	if v == nil {
 		return ""
 	}
-	return p.Model
+	return v.Model
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetYear() *int64 {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetYear() *int64 {
+	if v == nil {
 		return nil
 	}
-	return p.Year
+	return v.Year
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetVin() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetVin() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Vin
+	return v.Vin
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetFuelType() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetFuelType() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FuelType
+	return v.FuelType
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetAcquisitionDate() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetAcquisitionDate() *time.Time {
+	if v == nil {
 		return nil
 	}
-	return p.AcquisitionDate
+	return v.AcquisitionDate
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetMarketValue() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetMarketValue() string {
+	if v == nil {
 		return ""
 	}
-	return p.MarketValue
+	return v.MarketValue
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetFixedAssetID() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetFixedAssetID() *string {
+	if v == nil {
 		return nil
 	}
-	return p.FixedAssetID
+	return v.FixedAssetID
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetTechnicalInspectionDue() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetTechnicalInspectionDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.TechnicalInspectionDue
+	return v.TechnicalInspectionDue
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetInsuranceDue() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetInsuranceDue() *string {
+	if v == nil {
 		return nil
 	}
-	return p.InsuranceDue
+	return v.InsuranceDue
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetStatus() PostV1FleetVehiclesUpdateResponseStatus {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetStatus() VehiclesListFleetResponseRowsItemStatus {
+	if v == nil {
 		return ""
 	}
-	return p.Status
+	return v.Status
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetNotes() *string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetNotes() *string {
+	if v == nil {
 		return nil
 	}
-	return p.Notes
+	return v.Notes
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetDocuments() []*PostV1FleetVehiclesUpdateResponseDocumentsItem {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetDocuments() []*VehiclesListFleetResponseRowsItemDocumentsItem {
+	if v == nil {
 		return nil
 	}
-	return p.Documents
+	return v.Documents
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetCurrentAssignment() *PostV1FleetVehiclesUpdateResponseCurrentAssignment {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetCurrentAssignment() *VehiclesListFleetResponseRowsItemCurrentAssignment {
+	if v == nil {
 		return nil
 	}
-	return p.CurrentAssignment
+	return v.CurrentAssignment
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (v *VehiclesListFleetResponseRowsItem) GetCreatedAt() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return v.CreatedAt
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetResponseRowsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesUpdateResponseFieldID)
+func (v *VehiclesListFleetResponseRowsItem) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesListFleetResponseRowsItemFieldID)
 }
 
 // SetPlateNumber sets the PlateNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetPlateNumber(plateNumber string) {
-	p.PlateNumber = plateNumber
-	p.require(postV1FleetVehiclesUpdateResponseFieldPlateNumber)
+func (v *VehiclesListFleetResponseRowsItem) SetPlateNumber(plateNumber string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesListFleetResponseRowsItemFieldPlateNumber)
 }
 
 // SetMake sets the Make field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetMake(make_ string) {
-	p.Make = make_
-	p.require(postV1FleetVehiclesUpdateResponseFieldMake)
+func (v *VehiclesListFleetResponseRowsItem) SetMake(make_ string) {
+	v.Make = make_
+	v.require(vehiclesListFleetResponseRowsItemFieldMake)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetModel(model string) {
-	p.Model = model
-	p.require(postV1FleetVehiclesUpdateResponseFieldModel)
+func (v *VehiclesListFleetResponseRowsItem) SetModel(model string) {
+	v.Model = model
+	v.require(vehiclesListFleetResponseRowsItemFieldModel)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1FleetVehiclesUpdateResponseFieldYear)
+func (v *VehiclesListFleetResponseRowsItem) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesListFleetResponseRowsItemFieldYear)
 }
 
 // SetVin sets the Vin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetVin(vin *string) {
-	p.Vin = vin
-	p.require(postV1FleetVehiclesUpdateResponseFieldVin)
+func (v *VehiclesListFleetResponseRowsItem) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesListFleetResponseRowsItemFieldVin)
 }
 
 // SetFuelType sets the FuelType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetFuelType(fuelType *string) {
-	p.FuelType = fuelType
-	p.require(postV1FleetVehiclesUpdateResponseFieldFuelType)
+func (v *VehiclesListFleetResponseRowsItem) SetFuelType(fuelType *string) {
+	v.FuelType = fuelType
+	v.require(vehiclesListFleetResponseRowsItemFieldFuelType)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1FleetVehiclesUpdateResponseFieldAcquisitionDate)
+func (v *VehiclesListFleetResponseRowsItem) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesListFleetResponseRowsItemFieldAcquisitionDate)
 }
 
 // SetMarketValue sets the MarketValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetMarketValue(marketValue string) {
-	p.MarketValue = marketValue
-	p.require(postV1FleetVehiclesUpdateResponseFieldMarketValue)
+func (v *VehiclesListFleetResponseRowsItem) SetMarketValue(marketValue string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesListFleetResponseRowsItemFieldMarketValue)
 }
 
 // SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetFixedAssetID(fixedAssetID *string) {
-	p.FixedAssetID = fixedAssetID
-	p.require(postV1FleetVehiclesUpdateResponseFieldFixedAssetID)
+func (v *VehiclesListFleetResponseRowsItem) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesListFleetResponseRowsItemFieldFixedAssetID)
 }
 
 // SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
-	p.TechnicalInspectionDue = technicalInspectionDue
-	p.require(postV1FleetVehiclesUpdateResponseFieldTechnicalInspectionDue)
+func (v *VehiclesListFleetResponseRowsItem) SetTechnicalInspectionDue(technicalInspectionDue *string) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesListFleetResponseRowsItemFieldTechnicalInspectionDue)
 }
 
 // SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetInsuranceDue(insuranceDue *string) {
-	p.InsuranceDue = insuranceDue
-	p.require(postV1FleetVehiclesUpdateResponseFieldInsuranceDue)
+func (v *VehiclesListFleetResponseRowsItem) SetInsuranceDue(insuranceDue *string) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesListFleetResponseRowsItemFieldInsuranceDue)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetStatus(status PostV1FleetVehiclesUpdateResponseStatus) {
-	p.Status = status
-	p.require(postV1FleetVehiclesUpdateResponseFieldStatus)
+func (v *VehiclesListFleetResponseRowsItem) SetStatus(status VehiclesListFleetResponseRowsItemStatus) {
+	v.Status = status
+	v.require(vehiclesListFleetResponseRowsItemFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1FleetVehiclesUpdateResponseFieldNotes)
+func (v *VehiclesListFleetResponseRowsItem) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesListFleetResponseRowsItemFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetDocuments(documents []*PostV1FleetVehiclesUpdateResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1FleetVehiclesUpdateResponseFieldDocuments)
+func (v *VehiclesListFleetResponseRowsItem) SetDocuments(documents []*VehiclesListFleetResponseRowsItemDocumentsItem) {
+	v.Documents = documents
+	v.require(vehiclesListFleetResponseRowsItemFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetCurrentAssignment(currentAssignment *PostV1FleetVehiclesUpdateResponseCurrentAssignment) {
-	p.CurrentAssignment = currentAssignment
-	p.require(postV1FleetVehiclesUpdateResponseFieldCurrentAssignment)
+func (v *VehiclesListFleetResponseRowsItem) SetCurrentAssignment(currentAssignment *VehiclesListFleetResponseRowsItemCurrentAssignment) {
+	v.CurrentAssignment = currentAssignment
+	v.require(vehiclesListFleetResponseRowsItemFieldCurrentAssignment)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FleetVehiclesUpdateResponseFieldCreatedAt)
+func (v *VehiclesListFleetResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	v.CreatedAt = createdAt
+	v.require(vehiclesListFleetResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesListFleetResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed VehiclesListFleetResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetResponseRowsItem(unmarshaler.embed)
+	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesUpdateResponse
+func (v *VehiclesListFleetResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetResponseRowsItem
 	var marshaler = struct {
 		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*v),
+		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponse) String() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
-	postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldID               = big.NewInt(1 << 0)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
+	vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
 )
 
-type PostV1FleetVehiclesUpdateResponseCurrentAssignment struct {
-	ID               string `json:"id" url:"id"`
-	EmployeeID       string `json:"employeeId" url:"employeeId"`
-	EmployeeName     string `json:"employeeName" url:"employeeName"`
-	FromDate         string `json:"fromDate" url:"fromDate"`
-	PrivateUse       bool   `json:"privateUse" url:"privateUse"`
-	EmployerPaysFuel bool   `json:"employerPaysFuel" url:"employerPaysFuel"`
+type VehiclesListFleetResponseRowsItemCurrentAssignment struct {
+	ID               string    `json:"id" url:"id"`
+	EmployeeID       string    `json:"employeeId" url:"employeeId"`
+	EmployeeName     string    `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	PrivateUse       bool      `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool      `json:"employerPaysFuel" url:"employerPaysFuel"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5424,152 +4397,160 @@ type PostV1FleetVehiclesUpdateResponseCurrentAssignment struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetID() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetID() string {
+	if v == nil {
 		return ""
 	}
-	return p.ID
+	return v.ID
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetEmployeeID() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetEmployeeID() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return v.EmployeeID
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetEmployeeName() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetEmployeeName() string {
+	if v == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return v.EmployeeName
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetFromDate() string {
-	if p == nil {
-		return ""
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetFromDate() time.Time {
+	if v == nil {
+		return time.Time{}
 	}
-	return p.FromDate
+	return v.FromDate
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetPrivateUse() bool {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetPrivateUse() bool {
+	if v == nil {
 		return false
 	}
-	return p.PrivateUse
+	return v.PrivateUse
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetEmployerPaysFuel() bool {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetEmployerPaysFuel() bool {
+	if v == nil {
 		return false
 	}
-	return p.EmployerPaysFuel
+	return v.EmployerPaysFuel
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetID(id string) {
-	p.ID = id
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldID)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployeeID)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetEmployeeID(employeeID string) {
+	v.EmployeeID = employeeID
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployeeName)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetEmployeeName(employeeName string) {
+	v.EmployeeName = employeeName
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployeeName)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldFromDate)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetFromDate(fromDate time.Time) {
+	v.FromDate = fromDate
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldFromDate)
 }
 
 // SetPrivateUse sets the PrivateUse field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
-	p.PrivateUse = privateUse
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldPrivateUse)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetPrivateUse(privateUse bool) {
+	v.PrivateUse = privateUse
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldPrivateUse)
 }
 
 // SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
-	p.EmployerPaysFuel = employerPaysFuel
-	p.require(postV1FleetVehiclesUpdateResponseCurrentAssignmentFieldEmployerPaysFuel)
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
+	v.EmployerPaysFuel = employerPaysFuel
+	v.require(vehiclesListFleetResponseRowsItemCurrentAssignmentFieldEmployerPaysFuel)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesUpdateResponseCurrentAssignment
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) UnmarshalJSON(data []byte) error {
+	type embed VehiclesListFleetResponseRowsItemCurrentAssignment
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesUpdateResponseCurrentAssignment(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetResponseRowsItemCurrentAssignment(unmarshaler.embed)
+	v.FromDate = unmarshaler.FromDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesUpdateResponseCurrentAssignment
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetResponseRowsItemCurrentAssignment
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*v),
+		FromDate: internal.NewDate(v.FromDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) String() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemCurrentAssignment) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
 var (
-	postV1FleetVehiclesUpdateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1FleetVehiclesUpdateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	vehiclesListFleetResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
+	vehiclesListFleetResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1FleetVehiclesUpdateResponseDocumentsItem struct {
+type VehiclesListFleetResponseRowsItemDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -5580,111 +4561,1277 @@ type PostV1FleetVehiclesUpdateResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) GetName() string {
+	if v == nil {
 		return ""
 	}
-	return p.Name
+	return v.Name
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) GetRef() string {
+	if v == nil {
 		return ""
 	}
-	return p.Ref
+	return v.Ref
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
 		return nil
 	}
-	return p.extraProperties
+	return v.extraProperties
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	v.explicitFields.Or(v.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1FleetVehiclesUpdateResponseDocumentsItemFieldName)
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) SetName(name string) {
+	v.Name = name
+	v.require(vehiclesListFleetResponseRowsItemDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1FleetVehiclesUpdateResponseDocumentsItemFieldRef)
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) SetRef(ref string) {
+	v.Ref = ref
+	v.require(vehiclesListFleetResponseRowsItemDocumentsItemFieldRef)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FleetVehiclesUpdateResponseDocumentsItem
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesListFleetResponseRowsItemDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FleetVehiclesUpdateResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*v = VehiclesListFleetResponseRowsItemDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FleetVehiclesUpdateResponseDocumentsItem
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetResponseRowsItemDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*v),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) String() string {
-	if p == nil {
+func (v *VehiclesListFleetResponseRowsItemDocumentsItem) String() string {
+	if v == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(v); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", v)
 }
 
-type PostV1FleetVehiclesUpdateResponseStatus string
+type VehiclesListFleetResponseRowsItemStatus string
 
 const (
-	PostV1FleetVehiclesUpdateResponseStatusActive   PostV1FleetVehiclesUpdateResponseStatus = "active"
-	PostV1FleetVehiclesUpdateResponseStatusSold     PostV1FleetVehiclesUpdateResponseStatus = "sold"
-	PostV1FleetVehiclesUpdateResponseStatusScrapped PostV1FleetVehiclesUpdateResponseStatus = "scrapped"
+	VehiclesListFleetResponseRowsItemStatusActive   VehiclesListFleetResponseRowsItemStatus = "active"
+	VehiclesListFleetResponseRowsItemStatusSold     VehiclesListFleetResponseRowsItemStatus = "sold"
+	VehiclesListFleetResponseRowsItemStatusScrapped VehiclesListFleetResponseRowsItemStatus = "scrapped"
 )
 
-func NewPostV1FleetVehiclesUpdateResponseStatusFromString(s string) (PostV1FleetVehiclesUpdateResponseStatus, error) {
+func NewVehiclesListFleetResponseRowsItemStatusFromString(s string) (VehiclesListFleetResponseRowsItemStatus, error) {
 	switch s {
 	case "active":
-		return PostV1FleetVehiclesUpdateResponseStatusActive, nil
+		return VehiclesListFleetResponseRowsItemStatusActive, nil
 	case "sold":
-		return PostV1FleetVehiclesUpdateResponseStatusSold, nil
+		return VehiclesListFleetResponseRowsItemStatusSold, nil
 	case "scrapped":
-		return PostV1FleetVehiclesUpdateResponseStatusScrapped, nil
+		return VehiclesListFleetResponseRowsItemStatusScrapped, nil
 	}
-	var t PostV1FleetVehiclesUpdateResponseStatus
+	var t VehiclesListFleetResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FleetVehiclesUpdateResponseStatus) Ptr() *PostV1FleetVehiclesUpdateResponseStatus {
-	return &p
+func (v VehiclesListFleetResponseRowsItemStatus) Ptr() *VehiclesListFleetResponseRowsItemStatus {
+	return &v
+}
+
+type VehiclesUpdateFleetRequestFuelType string
+
+const (
+	VehiclesUpdateFleetRequestFuelTypePetrol   VehiclesUpdateFleetRequestFuelType = "petrol"
+	VehiclesUpdateFleetRequestFuelTypeDiesel   VehiclesUpdateFleetRequestFuelType = "diesel"
+	VehiclesUpdateFleetRequestFuelTypeElectric VehiclesUpdateFleetRequestFuelType = "electric"
+	VehiclesUpdateFleetRequestFuelTypeHybrid   VehiclesUpdateFleetRequestFuelType = "hybrid"
+	VehiclesUpdateFleetRequestFuelTypeLpg      VehiclesUpdateFleetRequestFuelType = "lpg"
+	VehiclesUpdateFleetRequestFuelTypeOther    VehiclesUpdateFleetRequestFuelType = "other"
+)
+
+func NewVehiclesUpdateFleetRequestFuelTypeFromString(s string) (VehiclesUpdateFleetRequestFuelType, error) {
+	switch s {
+	case "petrol":
+		return VehiclesUpdateFleetRequestFuelTypePetrol, nil
+	case "diesel":
+		return VehiclesUpdateFleetRequestFuelTypeDiesel, nil
+	case "electric":
+		return VehiclesUpdateFleetRequestFuelTypeElectric, nil
+	case "hybrid":
+		return VehiclesUpdateFleetRequestFuelTypeHybrid, nil
+	case "lpg":
+		return VehiclesUpdateFleetRequestFuelTypeLpg, nil
+	case "other":
+		return VehiclesUpdateFleetRequestFuelTypeOther, nil
+	}
+	var t VehiclesUpdateFleetRequestFuelType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VehiclesUpdateFleetRequestFuelType) Ptr() *VehiclesUpdateFleetRequestFuelType {
+	return &v
+}
+
+type VehiclesUpdateFleetRequestStatus string
+
+const (
+	VehiclesUpdateFleetRequestStatusActive   VehiclesUpdateFleetRequestStatus = "active"
+	VehiclesUpdateFleetRequestStatusSold     VehiclesUpdateFleetRequestStatus = "sold"
+	VehiclesUpdateFleetRequestStatusScrapped VehiclesUpdateFleetRequestStatus = "scrapped"
+)
+
+func NewVehiclesUpdateFleetRequestStatusFromString(s string) (VehiclesUpdateFleetRequestStatus, error) {
+	switch s {
+	case "active":
+		return VehiclesUpdateFleetRequestStatusActive, nil
+	case "sold":
+		return VehiclesUpdateFleetRequestStatusSold, nil
+	case "scrapped":
+		return VehiclesUpdateFleetRequestStatusScrapped, nil
+	}
+	var t VehiclesUpdateFleetRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VehiclesUpdateFleetRequestStatus) Ptr() *VehiclesUpdateFleetRequestStatus {
+	return &v
+}
+
+var (
+	vehiclesUpdateFleetResponseFieldID                     = big.NewInt(1 << 0)
+	vehiclesUpdateFleetResponseFieldPlateNumber            = big.NewInt(1 << 1)
+	vehiclesUpdateFleetResponseFieldMake                   = big.NewInt(1 << 2)
+	vehiclesUpdateFleetResponseFieldModel                  = big.NewInt(1 << 3)
+	vehiclesUpdateFleetResponseFieldYear                   = big.NewInt(1 << 4)
+	vehiclesUpdateFleetResponseFieldVin                    = big.NewInt(1 << 5)
+	vehiclesUpdateFleetResponseFieldFuelType               = big.NewInt(1 << 6)
+	vehiclesUpdateFleetResponseFieldAcquisitionDate        = big.NewInt(1 << 7)
+	vehiclesUpdateFleetResponseFieldMarketValue            = big.NewInt(1 << 8)
+	vehiclesUpdateFleetResponseFieldFixedAssetID           = big.NewInt(1 << 9)
+	vehiclesUpdateFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
+	vehiclesUpdateFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
+	vehiclesUpdateFleetResponseFieldStatus                 = big.NewInt(1 << 12)
+	vehiclesUpdateFleetResponseFieldNotes                  = big.NewInt(1 << 13)
+	vehiclesUpdateFleetResponseFieldDocuments              = big.NewInt(1 << 14)
+	vehiclesUpdateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	vehiclesUpdateFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
+)
+
+type VehiclesUpdateFleetResponse struct {
+	ID                     string                                        `json:"id" url:"id"`
+	PlateNumber            string                                        `json:"plateNumber" url:"plateNumber"`
+	Make                   string                                        `json:"make" url:"make"`
+	Model                  string                                        `json:"model" url:"model"`
+	Year                   *int64                                        `json:"year,omitempty" url:"year,omitempty"`
+	Vin                    *string                                       `json:"vin,omitempty" url:"vin,omitempty"`
+	FuelType               *string                                       `json:"fuelType,omitempty" url:"fuelType,omitempty"`
+	AcquisitionDate        *time.Time                                    `json:"acquisitionDate,omitempty" url:"acquisitionDate,omitempty" format:"date"`
+	MarketValue            string                                        `json:"marketValue" url:"marketValue"`
+	FixedAssetID           *string                                       `json:"fixedAssetId,omitempty" url:"fixedAssetId,omitempty"`
+	TechnicalInspectionDue *string                                       `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
+	InsuranceDue           *string                                       `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
+	Status                 VehiclesUpdateFleetResponseStatus             `json:"status" url:"status"`
+	Notes                  *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*VehiclesUpdateFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
+	CurrentAssignment      *VehiclesUpdateFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
+	CreatedAt              time.Time                                     `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VehiclesUpdateFleetResponse) GetID() string {
+	if v == nil {
+		return ""
+	}
+	return v.ID
+}
+
+func (v *VehiclesUpdateFleetResponse) GetPlateNumber() string {
+	if v == nil {
+		return ""
+	}
+	return v.PlateNumber
+}
+
+func (v *VehiclesUpdateFleetResponse) GetMake() string {
+	if v == nil {
+		return ""
+	}
+	return v.Make
+}
+
+func (v *VehiclesUpdateFleetResponse) GetModel() string {
+	if v == nil {
+		return ""
+	}
+	return v.Model
+}
+
+func (v *VehiclesUpdateFleetResponse) GetYear() *int64 {
+	if v == nil {
+		return nil
+	}
+	return v.Year
+}
+
+func (v *VehiclesUpdateFleetResponse) GetVin() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Vin
+}
+
+func (v *VehiclesUpdateFleetResponse) GetFuelType() *string {
+	if v == nil {
+		return nil
+	}
+	return v.FuelType
+}
+
+func (v *VehiclesUpdateFleetResponse) GetAcquisitionDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.AcquisitionDate
+}
+
+func (v *VehiclesUpdateFleetResponse) GetMarketValue() string {
+	if v == nil {
+		return ""
+	}
+	return v.MarketValue
+}
+
+func (v *VehiclesUpdateFleetResponse) GetFixedAssetID() *string {
+	if v == nil {
+		return nil
+	}
+	return v.FixedAssetID
+}
+
+func (v *VehiclesUpdateFleetResponse) GetTechnicalInspectionDue() *string {
+	if v == nil {
+		return nil
+	}
+	return v.TechnicalInspectionDue
+}
+
+func (v *VehiclesUpdateFleetResponse) GetInsuranceDue() *string {
+	if v == nil {
+		return nil
+	}
+	return v.InsuranceDue
+}
+
+func (v *VehiclesUpdateFleetResponse) GetStatus() VehiclesUpdateFleetResponseStatus {
+	if v == nil {
+		return ""
+	}
+	return v.Status
+}
+
+func (v *VehiclesUpdateFleetResponse) GetNotes() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Notes
+}
+
+func (v *VehiclesUpdateFleetResponse) GetDocuments() []*VehiclesUpdateFleetResponseDocumentsItem {
+	if v == nil {
+		return nil
+	}
+	return v.Documents
+}
+
+func (v *VehiclesUpdateFleetResponse) GetCurrentAssignment() *VehiclesUpdateFleetResponseCurrentAssignment {
+	if v == nil {
+		return nil
+	}
+	return v.CurrentAssignment
+}
+
+func (v *VehiclesUpdateFleetResponse) GetCreatedAt() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.CreatedAt
+}
+
+func (v *VehiclesUpdateFleetResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VehiclesUpdateFleetResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesUpdateFleetResponseFieldID)
+}
+
+// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetPlateNumber(plateNumber string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesUpdateFleetResponseFieldPlateNumber)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetMake(make_ string) {
+	v.Make = make_
+	v.require(vehiclesUpdateFleetResponseFieldMake)
+}
+
+// SetModel sets the Model field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetModel(model string) {
+	v.Model = model
+	v.require(vehiclesUpdateFleetResponseFieldModel)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesUpdateFleetResponseFieldYear)
+}
+
+// SetVin sets the Vin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesUpdateFleetResponseFieldVin)
+}
+
+// SetFuelType sets the FuelType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetFuelType(fuelType *string) {
+	v.FuelType = fuelType
+	v.require(vehiclesUpdateFleetResponseFieldFuelType)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesUpdateFleetResponseFieldAcquisitionDate)
+}
+
+// SetMarketValue sets the MarketValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetMarketValue(marketValue string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesUpdateFleetResponseFieldMarketValue)
+}
+
+// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesUpdateFleetResponseFieldFixedAssetID)
+}
+
+// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetTechnicalInspectionDue(technicalInspectionDue *string) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesUpdateFleetResponseFieldTechnicalInspectionDue)
+}
+
+// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetInsuranceDue(insuranceDue *string) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesUpdateFleetResponseFieldInsuranceDue)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetStatus(status VehiclesUpdateFleetResponseStatus) {
+	v.Status = status
+	v.require(vehiclesUpdateFleetResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesUpdateFleetResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetDocuments(documents []*VehiclesUpdateFleetResponseDocumentsItem) {
+	v.Documents = documents
+	v.require(vehiclesUpdateFleetResponseFieldDocuments)
+}
+
+// SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetCurrentAssignment(currentAssignment *VehiclesUpdateFleetResponseCurrentAssignment) {
+	v.CurrentAssignment = currentAssignment
+	v.require(vehiclesUpdateFleetResponseFieldCurrentAssignment)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetCreatedAt(createdAt time.Time) {
+	v.CreatedAt = createdAt
+	v.require(vehiclesUpdateFleetResponseFieldCreatedAt)
+}
+
+func (v *VehiclesUpdateFleetResponse) UnmarshalJSON(data []byte) error {
+	type embed VehiclesUpdateFleetResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*v = VehiclesUpdateFleetResponse(unmarshaler.embed)
+	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VehiclesUpdateFleetResponse) MarshalJSON() ([]byte, error) {
+	type embed VehiclesUpdateFleetResponse
+	var marshaler = struct {
+		embed
+		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed:           embed(*v),
+		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		CreatedAt:       internal.NewDateTime(v.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VehiclesUpdateFleetResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldID               = big.NewInt(1 << 0)
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployeeID       = big.NewInt(1 << 1)
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployeeName     = big.NewInt(1 << 2)
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldFromDate         = big.NewInt(1 << 3)
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldPrivateUse       = big.NewInt(1 << 4)
+	vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployerPaysFuel = big.NewInt(1 << 5)
+)
+
+type VehiclesUpdateFleetResponseCurrentAssignment struct {
+	ID               string    `json:"id" url:"id"`
+	EmployeeID       string    `json:"employeeId" url:"employeeId"`
+	EmployeeName     string    `json:"employeeName" url:"employeeName"`
+	FromDate         time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	PrivateUse       bool      `json:"privateUse" url:"privateUse"`
+	EmployerPaysFuel bool      `json:"employerPaysFuel" url:"employerPaysFuel"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetID() string {
+	if v == nil {
+		return ""
+	}
+	return v.ID
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetEmployeeID() string {
+	if v == nil {
+		return ""
+	}
+	return v.EmployeeID
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetEmployeeName() string {
+	if v == nil {
+		return ""
+	}
+	return v.EmployeeName
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetFromDate() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.FromDate
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetPrivateUse() bool {
+	if v == nil {
+		return false
+	}
+	return v.PrivateUse
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetEmployerPaysFuel() bool {
+	if v == nil {
+		return false
+	}
+	return v.EmployerPaysFuel
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetEmployeeID(employeeID string) {
+	v.EmployeeID = employeeID
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployeeID)
+}
+
+// SetEmployeeName sets the EmployeeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetEmployeeName(employeeName string) {
+	v.EmployeeName = employeeName
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployeeName)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetFromDate(fromDate time.Time) {
+	v.FromDate = fromDate
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldFromDate)
+}
+
+// SetPrivateUse sets the PrivateUse field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetPrivateUse(privateUse bool) {
+	v.PrivateUse = privateUse
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldPrivateUse)
+}
+
+// SetEmployerPaysFuel sets the EmployerPaysFuel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) SetEmployerPaysFuel(employerPaysFuel bool) {
+	v.EmployerPaysFuel = employerPaysFuel
+	v.require(vehiclesUpdateFleetResponseCurrentAssignmentFieldEmployerPaysFuel)
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) UnmarshalJSON(data []byte) error {
+	type embed VehiclesUpdateFleetResponseCurrentAssignment
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*v = VehiclesUpdateFleetResponseCurrentAssignment(unmarshaler.embed)
+	v.FromDate = unmarshaler.FromDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) MarshalJSON() ([]byte, error) {
+	type embed VehiclesUpdateFleetResponseCurrentAssignment
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+	}{
+		embed:    embed(*v),
+		FromDate: internal.NewDate(v.FromDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VehiclesUpdateFleetResponseCurrentAssignment) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vehiclesUpdateFleetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	vehiclesUpdateFleetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type VehiclesUpdateFleetResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) GetName() string {
+	if v == nil {
+		return ""
+	}
+	return v.Name
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) GetRef() string {
+	if v == nil {
+		return ""
+	}
+	return v.Ref
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseDocumentsItem) SetName(name string) {
+	v.Name = name
+	v.require(vehiclesUpdateFleetResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponseDocumentsItem) SetRef(ref string) {
+	v.Ref = ref
+	v.require(vehiclesUpdateFleetResponseDocumentsItemFieldRef)
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesUpdateFleetResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VehiclesUpdateFleetResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed VehiclesUpdateFleetResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VehiclesUpdateFleetResponseDocumentsItem) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+type VehiclesUpdateFleetResponseStatus string
+
+const (
+	VehiclesUpdateFleetResponseStatusActive   VehiclesUpdateFleetResponseStatus = "active"
+	VehiclesUpdateFleetResponseStatusSold     VehiclesUpdateFleetResponseStatus = "sold"
+	VehiclesUpdateFleetResponseStatusScrapped VehiclesUpdateFleetResponseStatus = "scrapped"
+)
+
+func NewVehiclesUpdateFleetResponseStatusFromString(s string) (VehiclesUpdateFleetResponseStatus, error) {
+	switch s {
+	case "active":
+		return VehiclesUpdateFleetResponseStatusActive, nil
+	case "sold":
+		return VehiclesUpdateFleetResponseStatusSold, nil
+	case "scrapped":
+		return VehiclesUpdateFleetResponseStatusScrapped, nil
+	}
+	var t VehiclesUpdateFleetResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VehiclesUpdateFleetResponseStatus) Ptr() *VehiclesUpdateFleetResponseStatus {
+	return &v
+}
+
+var (
+	vehiclesCreateFleetRequestFieldPlateNumber            = big.NewInt(1 << 0)
+	vehiclesCreateFleetRequestFieldMake                   = big.NewInt(1 << 1)
+	vehiclesCreateFleetRequestFieldModel                  = big.NewInt(1 << 2)
+	vehiclesCreateFleetRequestFieldYear                   = big.NewInt(1 << 3)
+	vehiclesCreateFleetRequestFieldVin                    = big.NewInt(1 << 4)
+	vehiclesCreateFleetRequestFieldFuelType               = big.NewInt(1 << 5)
+	vehiclesCreateFleetRequestFieldAcquisitionDate        = big.NewInt(1 << 6)
+	vehiclesCreateFleetRequestFieldMarketValue            = big.NewInt(1 << 7)
+	vehiclesCreateFleetRequestFieldFixedAssetID           = big.NewInt(1 << 8)
+	vehiclesCreateFleetRequestFieldTechnicalInspectionDue = big.NewInt(1 << 9)
+	vehiclesCreateFleetRequestFieldInsuranceDue           = big.NewInt(1 << 10)
+	vehiclesCreateFleetRequestFieldNotes                  = big.NewInt(1 << 11)
+	vehiclesCreateFleetRequestFieldDocuments              = big.NewInt(1 << 12)
+)
+
+type VehiclesCreateFleetRequest struct {
+	PlateNumber            string                                     `json:"plateNumber" url:"-"`
+	Make                   string                                     `json:"make" url:"-"`
+	Model                  string                                     `json:"model" url:"-"`
+	Year                   *int64                                     `json:"year,omitempty" url:"-"`
+	Vin                    *string                                    `json:"vin,omitempty" url:"-"`
+	FuelType               *VehiclesCreateFleetRequestFuelType        `json:"fuelType,omitempty" url:"-"`
+	AcquisitionDate        *time.Time                                 `json:"acquisitionDate,omitempty" url:"-" format:"date"`
+	MarketValue            *string                                    `json:"marketValue,omitempty" url:"-"`
+	FixedAssetID           *string                                    `json:"fixedAssetId,omitempty" url:"-"`
+	TechnicalInspectionDue *time.Time                                 `json:"technicalInspectionDue,omitempty" url:"-" format:"date"`
+	InsuranceDue           *time.Time                                 `json:"insuranceDue,omitempty" url:"-" format:"date"`
+	Notes                  *string                                    `json:"notes,omitempty" url:"-"`
+	Documents              []*VehiclesCreateFleetRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VehiclesCreateFleetRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetPlateNumber(plateNumber string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesCreateFleetRequestFieldPlateNumber)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetMake(make_ string) {
+	v.Make = make_
+	v.require(vehiclesCreateFleetRequestFieldMake)
+}
+
+// SetModel sets the Model field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetModel(model string) {
+	v.Model = model
+	v.require(vehiclesCreateFleetRequestFieldModel)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesCreateFleetRequestFieldYear)
+}
+
+// SetVin sets the Vin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesCreateFleetRequestFieldVin)
+}
+
+// SetFuelType sets the FuelType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetFuelType(fuelType *VehiclesCreateFleetRequestFuelType) {
+	v.FuelType = fuelType
+	v.require(vehiclesCreateFleetRequestFieldFuelType)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesCreateFleetRequestFieldAcquisitionDate)
+}
+
+// SetMarketValue sets the MarketValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetMarketValue(marketValue *string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesCreateFleetRequestFieldMarketValue)
+}
+
+// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesCreateFleetRequestFieldFixedAssetID)
+}
+
+// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetTechnicalInspectionDue(technicalInspectionDue *time.Time) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesCreateFleetRequestFieldTechnicalInspectionDue)
+}
+
+// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetInsuranceDue(insuranceDue *time.Time) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesCreateFleetRequestFieldInsuranceDue)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesCreateFleetRequestFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetDocuments(documents []*VehiclesCreateFleetRequestDocumentsItem) {
+	v.Documents = documents
+	v.require(vehiclesCreateFleetRequestFieldDocuments)
+}
+
+func (v *VehiclesCreateFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesCreateFleetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VehiclesCreateFleetRequest(body)
+	return nil
+}
+
+func (v *VehiclesCreateFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed VehiclesCreateFleetRequest
+	var marshaler = struct {
+		embed
+		AcquisitionDate        *internal.Date `json:"acquisitionDate,omitempty"`
+		TechnicalInspectionDue *internal.Date `json:"technicalInspectionDue,omitempty"`
+		InsuranceDue           *internal.Date `json:"insuranceDue,omitempty"`
+	}{
+		embed:                  embed(*v),
+		AcquisitionDate:        internal.NewOptionalDate(v.AcquisitionDate),
+		TechnicalInspectionDue: internal.NewOptionalDate(v.TechnicalInspectionDue),
+		InsuranceDue:           internal.NewOptionalDate(v.InsuranceDue),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	vehiclesGetFleetRequestFieldID = big.NewInt(1 << 0)
+)
+
+type VehiclesGetFleetRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VehiclesGetFleetRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesGetFleetRequest) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesGetFleetRequestFieldID)
+}
+
+func (v *VehiclesGetFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesGetFleetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VehiclesGetFleetRequest(body)
+	return nil
+}
+
+func (v *VehiclesGetFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed VehiclesGetFleetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	vehiclesListFleetRequestFieldPage     = big.NewInt(1 << 0)
+	vehiclesListFleetRequestFieldPageSize = big.NewInt(1 << 1)
+	vehiclesListFleetRequestFieldSort     = big.NewInt(1 << 2)
+	vehiclesListFleetRequestFieldFilter   = big.NewInt(1 << 3)
+	vehiclesListFleetRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type VehiclesListFleetRequest struct {
+	Page     *int64                                `json:"page,omitempty" url:"-"`
+	PageSize *int64                                `json:"pageSize,omitempty" url:"-"`
+	Sort     []*VehiclesListFleetRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*VehiclesListFleetRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VehiclesListFleetRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetRequest) SetPage(page *int64) {
+	v.Page = page
+	v.require(vehiclesListFleetRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetRequest) SetPageSize(pageSize *int64) {
+	v.PageSize = pageSize
+	v.require(vehiclesListFleetRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetRequest) SetSort(sort []*VehiclesListFleetRequestSortItem) {
+	v.Sort = sort
+	v.require(vehiclesListFleetRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetRequest) SetFilter(filter []*VehiclesListFleetRequestFilterItem) {
+	v.Filter = filter
+	v.require(vehiclesListFleetRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetRequest) SetTotals(totals []string) {
+	v.Totals = totals
+	v.require(vehiclesListFleetRequestFieldTotals)
+}
+
+func (v *VehiclesListFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesListFleetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VehiclesListFleetRequest(body)
+	return nil
+}
+
+func (v *VehiclesListFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed VehiclesListFleetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	vehiclesUpdateFleetRequestFieldID                     = big.NewInt(1 << 0)
+	vehiclesUpdateFleetRequestFieldPlateNumber            = big.NewInt(1 << 1)
+	vehiclesUpdateFleetRequestFieldMake                   = big.NewInt(1 << 2)
+	vehiclesUpdateFleetRequestFieldModel                  = big.NewInt(1 << 3)
+	vehiclesUpdateFleetRequestFieldYear                   = big.NewInt(1 << 4)
+	vehiclesUpdateFleetRequestFieldVin                    = big.NewInt(1 << 5)
+	vehiclesUpdateFleetRequestFieldFuelType               = big.NewInt(1 << 6)
+	vehiclesUpdateFleetRequestFieldAcquisitionDate        = big.NewInt(1 << 7)
+	vehiclesUpdateFleetRequestFieldMarketValue            = big.NewInt(1 << 8)
+	vehiclesUpdateFleetRequestFieldFixedAssetID           = big.NewInt(1 << 9)
+	vehiclesUpdateFleetRequestFieldTechnicalInspectionDue = big.NewInt(1 << 10)
+	vehiclesUpdateFleetRequestFieldInsuranceDue           = big.NewInt(1 << 11)
+	vehiclesUpdateFleetRequestFieldStatus                 = big.NewInt(1 << 12)
+	vehiclesUpdateFleetRequestFieldNotes                  = big.NewInt(1 << 13)
+)
+
+type VehiclesUpdateFleetRequest struct {
+	ID                     string                              `json:"id" url:"-"`
+	PlateNumber            *string                             `json:"plateNumber,omitempty" url:"-"`
+	Make                   *string                             `json:"make,omitempty" url:"-"`
+	Model                  *string                             `json:"model,omitempty" url:"-"`
+	Year                   *int64                              `json:"year,omitempty" url:"-"`
+	Vin                    *string                             `json:"vin,omitempty" url:"-"`
+	FuelType               *VehiclesUpdateFleetRequestFuelType `json:"fuelType,omitempty" url:"-"`
+	AcquisitionDate        *time.Time                          `json:"acquisitionDate,omitempty" url:"-" format:"date"`
+	MarketValue            *string                             `json:"marketValue,omitempty" url:"-"`
+	FixedAssetID           *string                             `json:"fixedAssetId,omitempty" url:"-"`
+	TechnicalInspectionDue *time.Time                          `json:"technicalInspectionDue,omitempty" url:"-" format:"date"`
+	InsuranceDue           *time.Time                          `json:"insuranceDue,omitempty" url:"-" format:"date"`
+	Status                 *VehiclesUpdateFleetRequestStatus   `json:"status,omitempty" url:"-"`
+	Notes                  *string                             `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VehiclesUpdateFleetRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetID(id string) {
+	v.ID = id
+	v.require(vehiclesUpdateFleetRequestFieldID)
+}
+
+// SetPlateNumber sets the PlateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetPlateNumber(plateNumber *string) {
+	v.PlateNumber = plateNumber
+	v.require(vehiclesUpdateFleetRequestFieldPlateNumber)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetMake(make_ *string) {
+	v.Make = make_
+	v.require(vehiclesUpdateFleetRequestFieldMake)
+}
+
+// SetModel sets the Model field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetModel(model *string) {
+	v.Model = model
+	v.require(vehiclesUpdateFleetRequestFieldModel)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetYear(year *int64) {
+	v.Year = year
+	v.require(vehiclesUpdateFleetRequestFieldYear)
+}
+
+// SetVin sets the Vin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetVin(vin *string) {
+	v.Vin = vin
+	v.require(vehiclesUpdateFleetRequestFieldVin)
+}
+
+// SetFuelType sets the FuelType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetFuelType(fuelType *VehiclesUpdateFleetRequestFuelType) {
+	v.FuelType = fuelType
+	v.require(vehiclesUpdateFleetRequestFieldFuelType)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetAcquisitionDate(acquisitionDate *time.Time) {
+	v.AcquisitionDate = acquisitionDate
+	v.require(vehiclesUpdateFleetRequestFieldAcquisitionDate)
+}
+
+// SetMarketValue sets the MarketValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetMarketValue(marketValue *string) {
+	v.MarketValue = marketValue
+	v.require(vehiclesUpdateFleetRequestFieldMarketValue)
+}
+
+// SetFixedAssetID sets the FixedAssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetFixedAssetID(fixedAssetID *string) {
+	v.FixedAssetID = fixedAssetID
+	v.require(vehiclesUpdateFleetRequestFieldFixedAssetID)
+}
+
+// SetTechnicalInspectionDue sets the TechnicalInspectionDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetTechnicalInspectionDue(technicalInspectionDue *time.Time) {
+	v.TechnicalInspectionDue = technicalInspectionDue
+	v.require(vehiclesUpdateFleetRequestFieldTechnicalInspectionDue)
+}
+
+// SetInsuranceDue sets the InsuranceDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetInsuranceDue(insuranceDue *time.Time) {
+	v.InsuranceDue = insuranceDue
+	v.require(vehiclesUpdateFleetRequestFieldInsuranceDue)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetStatus(status *VehiclesUpdateFleetRequestStatus) {
+	v.Status = status
+	v.require(vehiclesUpdateFleetRequestFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetNotes(notes *string) {
+	v.Notes = notes
+	v.require(vehiclesUpdateFleetRequestFieldNotes)
+}
+
+func (v *VehiclesUpdateFleetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VehiclesUpdateFleetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VehiclesUpdateFleetRequest(body)
+	return nil
+}
+
+func (v *VehiclesUpdateFleetRequest) MarshalJSON() ([]byte, error) {
+	type embed VehiclesUpdateFleetRequest
+	var marshaler = struct {
+		embed
+		AcquisitionDate        *internal.Date `json:"acquisitionDate,omitempty"`
+		TechnicalInspectionDue *internal.Date `json:"technicalInspectionDue,omitempty"`
+		InsuranceDue           *internal.Date `json:"insuranceDue,omitempty"`
+	}{
+		embed:                  embed(*v),
+		AcquisitionDate:        internal.NewOptionalDate(v.AcquisitionDate),
+		TechnicalInspectionDue: internal.NewOptionalDate(v.TechnicalInspectionDue),
+		InsuranceDue:           internal.NewOptionalDate(v.InsuranceDue),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

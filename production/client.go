@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1ProductionWorkCentersCreate(
+func (c *Client) WorkCentersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersCreateRequest,
+	request *nordlet.WorkCentersCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionWorkCentersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionWorkCentersCreate(
+) (*nordlet.WorkCentersCreateProductionResponse, error) {
+	response, err := c.WithRawResponse.WorkCentersCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1ProductionWorkCentersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionWorkCentersUpdate(
+func (c *Client) WorkCentersUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersUpdateRequest,
+	request *nordlet.WorkCentersUpdateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionWorkCentersUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionWorkCentersUpdate(
+) (*nordlet.WorkCentersUpdateProductionResponse, error) {
+	response, err := c.WithRawResponse.WorkCentersUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1ProductionWorkCentersUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionWorkCentersList(
+func (c *Client) WorkCentersList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionWorkCentersListRequest,
+	request *nordlet.WorkCentersListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionWorkCentersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionWorkCentersList(
+) (*nordlet.WorkCentersListProductionResponse, error) {
+	response, err := c.WithRawResponse.WorkCentersList(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1ProductionWorkCentersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionRoutingsCreate(
+func (c *Client) RoutingsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsCreateRequest,
+	request *nordlet.RoutingsCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionRoutingsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionRoutingsCreate(
+) (*nordlet.RoutingsCreateProductionResponse, error) {
+	response, err := c.WithRawResponse.RoutingsCreate(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1ProductionRoutingsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionRoutingsGet(
+func (c *Client) RoutingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsGetRequest,
+	request *nordlet.RoutingsGetProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionRoutingsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionRoutingsGet(
+) (*nordlet.RoutingsGetProductionResponse, error) {
+	response, err := c.WithRawResponse.RoutingsGet(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1ProductionRoutingsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionRoutingsList(
+func (c *Client) RoutingsList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionRoutingsListRequest,
+	request *nordlet.RoutingsListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionRoutingsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionRoutingsList(
+) (*nordlet.RoutingsListProductionResponse, error) {
+	response, err := c.WithRawResponse.RoutingsList(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1ProductionRoutingsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionMaintenanceCreate(
+func (c *Client) MaintenanceCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCreateRequest,
+	request *nordlet.MaintenanceCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionMaintenanceCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionMaintenanceCreate(
+) (*nordlet.MaintenanceCreateProductionResponse, error) {
+	response, err := c.WithRawResponse.MaintenanceCreate(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1ProductionMaintenanceCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionMaintenanceComplete(
+func (c *Client) MaintenanceComplete(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCompleteRequest,
+	request *nordlet.MaintenanceCompleteProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionMaintenanceCompleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionMaintenanceComplete(
+) (*nordlet.MaintenanceCompleteProductionResponse, error) {
+	response, err := c.WithRawResponse.MaintenanceComplete(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1ProductionMaintenanceComplete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionMaintenanceCancel(
+func (c *Client) MaintenanceCancel(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceCancelRequest,
+	request *nordlet.MaintenanceCancelProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionMaintenanceCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionMaintenanceCancel(
+) (*nordlet.MaintenanceCancelProductionResponse, error) {
+	response, err := c.WithRawResponse.MaintenanceCancel(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1ProductionMaintenanceCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionMaintenanceList(
+func (c *Client) MaintenanceList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionMaintenanceListRequest,
+	request *nordlet.MaintenanceListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionMaintenanceListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionMaintenanceList(
+) (*nordlet.MaintenanceListProductionResponse, error) {
+	response, err := c.WithRawResponse.MaintenanceList(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1ProductionMaintenanceList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionBomsCreate(
+func (c *Client) BomsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsCreateRequest,
+	request *nordlet.BomsCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionBomsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionBomsCreate(
+) (*nordlet.BomsCreateProductionResponse, error) {
+	response, err := c.WithRawResponse.BomsCreate(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1ProductionBomsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionBomsGet(
+func (c *Client) BomsGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsGetRequest,
+	request *nordlet.BomsGetProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionBomsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionBomsGet(
+) (*nordlet.BomsGetProductionResponse, error) {
+	response, err := c.WithRawResponse.BomsGet(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1ProductionBomsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionBomsList(
+func (c *Client) BomsList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionBomsListRequest,
+	request *nordlet.BomsListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionBomsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionBomsList(
+) (*nordlet.BomsListProductionResponse, error) {
+	response, err := c.WithRawResponse.BomsList(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1ProductionBomsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionOrdersCreate(
+func (c *Client) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersCreateRequest,
+	request *nordlet.OrdersCreateProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionOrdersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionOrdersCreate(
+) (*nordlet.OrdersCreateProductionResponse, error) {
+	response, err := c.WithRawResponse.OrdersCreate(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1ProductionOrdersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionOrdersRecordOperation(
+func (c *Client) OrdersRecordOperation(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersRecordOperationRequest,
+	request *nordlet.OrdersRecordOperationProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionOrdersRecordOperationResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionOrdersRecordOperation(
+) (*nordlet.OrdersRecordOperationProductionResponse, error) {
+	response, err := c.WithRawResponse.OrdersRecordOperation(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1ProductionOrdersRecordOperation(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionQualityChecksAdd(
+func (c *Client) QualityChecksAdd(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksAddRequest,
+	request *nordlet.QualityChecksAddProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionQualityChecksAddResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionQualityChecksAdd(
+) (*nordlet.QualityChecksAddProductionResponse, error) {
+	response, err := c.WithRawResponse.QualityChecksAdd(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1ProductionQualityChecksAdd(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionQualityChecksRecord(
+func (c *Client) QualityChecksRecord(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksRecordRequest,
+	request *nordlet.QualityChecksRecordProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionQualityChecksRecordResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionQualityChecksRecord(
+) (*nordlet.QualityChecksRecordProductionResponse, error) {
+	response, err := c.WithRawResponse.QualityChecksRecord(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1ProductionQualityChecksRecord(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionQualityChecksList(
+func (c *Client) QualityChecksList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionQualityChecksListRequest,
+	request *nordlet.QualityChecksListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionQualityChecksListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionQualityChecksList(
+) (*nordlet.QualityChecksListProductionResponse, error) {
+	response, err := c.WithRawResponse.QualityChecksList(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1ProductionQualityChecksList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionOrdersComplete(
+func (c *Client) OrdersComplete(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersCompleteRequest,
+	request *nordlet.OrdersCompleteProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionOrdersCompleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionOrdersComplete(
+) (*nordlet.OrdersCompleteProductionResponse, error) {
+	response, err := c.WithRawResponse.OrdersComplete(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1ProductionOrdersComplete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionOrdersGet(
+func (c *Client) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersGetRequest,
+	request *nordlet.OrdersGetProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionOrdersGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionOrdersGet(
+) (*nordlet.OrdersGetProductionResponse, error) {
+	response, err := c.WithRawResponse.OrdersGet(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +354,12 @@ func (c *Client) PostV1ProductionOrdersGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProductionOrdersList(
+func (c *Client) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1ProductionOrdersListRequest,
+	request *nordlet.OrdersListProductionRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProductionOrdersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProductionOrdersList(
+) (*nordlet.OrdersListProductionResponse, error) {
+	response, err := c.WithRawResponse.OrdersList(
 		ctx,
 		request,
 		opts...,

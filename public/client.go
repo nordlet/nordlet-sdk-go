@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1PublicIntegrationRequests(
+func (c *Client) IntegrationRequests(
 	ctx context.Context,
-	request *nordlet.PostV1PublicIntegrationRequestsRequest,
+	request *nordlet.IntegrationRequestsPublicRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PublicIntegrationRequestsResponse, error) {
-	response, err := c.WithRawResponse.PostV1PublicIntegrationRequests(
+) (*nordlet.IntegrationRequestsPublicResponse, error) {
+	response, err := c.WithRawResponse.IntegrationRequests(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1PublicIntegrationRequests(
 	return response.Body, nil
 }
 
-func (c *Client) GetV1PublicPayToken(
+func (c *Client) Pay(
 	ctx context.Context,
-	request *nordlet.GetV1PublicPayTokenRequest,
+	request *nordlet.PayPublicRequest,
 	opts ...option.RequestOption,
 ) error {
-	_, err := c.WithRawResponse.GetV1PublicPayToken(
+	_, err := c.WithRawResponse.Pay(
 		ctx,
 		request,
 		opts...,

@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1AccountLoginLinkRequest(
+func (c *Client) LoginLinkRequest(
 	ctx context.Context,
-	request *nordlet.PostV1AccountLoginLinkRequestRequest,
+	request *nordlet.LoginLinkRequestAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountLoginLinkRequestResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountLoginLinkRequest(
+) (*nordlet.LoginLinkRequestAccountResponse, error) {
+	response, err := c.WithRawResponse.LoginLinkRequest(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1AccountLoginLinkRequest(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountLoginLinkConsume(
+func (c *Client) LoginLinkConsume(
 	ctx context.Context,
-	request *nordlet.PostV1AccountLoginLinkConsumeRequest,
+	request *nordlet.LoginLinkConsumeAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountLoginLinkConsumeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountLoginLinkConsume(
+) (*nordlet.LoginLinkConsumeAccountResponse, error) {
+	response, err := c.WithRawResponse.LoginLinkConsume(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1AccountLoginLinkConsume(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountLogout(
+func (c *Client) Logout(
 	ctx context.Context,
-	request *nordlet.PostV1AccountLogoutRequest,
+	request *nordlet.LogoutAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountLogoutResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountLogout(
+) (*nordlet.LogoutAccountResponse, error) {
+	response, err := c.WithRawResponse.Logout(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1AccountLogout(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountMe(
+func (c *Client) Me(
 	ctx context.Context,
-	request *nordlet.PostV1AccountMeRequest,
+	request *nordlet.MeAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountMeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountMe(
+) (*nordlet.MeAccountResponse, error) {
+	response, err := c.WithRawResponse.Me(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1AccountMe(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountMembersList(
+func (c *Client) MembersList(
 	ctx context.Context,
-	request *nordlet.PostV1AccountMembersListRequest,
+	request *nordlet.MembersListAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountMembersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountMembersList(
+) (*nordlet.MembersListAccountResponse, error) {
+	response, err := c.WithRawResponse.MembersList(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1AccountMembersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountMembersSetRole(
+func (c *Client) MembersSetRole(
 	ctx context.Context,
-	request *nordlet.PostV1AccountMembersSetRoleRequest,
+	request *nordlet.MembersSetRoleAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountMembersSetRoleResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountMembersSetRole(
+) (*nordlet.MembersSetRoleAccountResponse, error) {
+	response, err := c.WithRawResponse.MembersSetRole(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1AccountMembersSetRole(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountMembersTransferOwnership(
+func (c *Client) MembersTransferOwnership(
 	ctx context.Context,
-	request *nordlet.PostV1AccountMembersTransferOwnershipRequest,
+	request *nordlet.MembersTransferOwnershipAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountMembersTransferOwnershipResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountMembersTransferOwnership(
+) (*nordlet.MembersTransferOwnershipAccountResponse, error) {
+	response, err := c.WithRawResponse.MembersTransferOwnership(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1AccountMembersTransferOwnership(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountMembersRemove(
+func (c *Client) MembersRemove(
 	ctx context.Context,
-	request *nordlet.PostV1AccountMembersRemoveRequest,
+	request *nordlet.MembersRemoveAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountMembersRemoveResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountMembersRemove(
+) (*nordlet.MembersRemoveAccountResponse, error) {
+	response, err := c.WithRawResponse.MembersRemove(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1AccountMembersRemove(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountInvitesCreate(
+func (c *Client) InvitesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountInvitesCreateRequest,
+	request *nordlet.InvitesCreateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountInvitesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountInvitesCreate(
+) (*nordlet.InvitesCreateAccountResponse, error) {
+	response, err := c.WithRawResponse.InvitesCreate(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1AccountInvitesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountInvitesList(
+func (c *Client) InvitesList(
 	ctx context.Context,
-	request *nordlet.PostV1AccountInvitesListRequest,
+	request *nordlet.InvitesListAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountInvitesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountInvitesList(
+) (*nordlet.InvitesListAccountResponse, error) {
+	response, err := c.WithRawResponse.InvitesList(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1AccountInvitesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountInvitesRevoke(
+func (c *Client) InvitesRevoke(
 	ctx context.Context,
-	request *nordlet.PostV1AccountInvitesRevokeRequest,
+	request *nordlet.InvitesRevokeAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountInvitesRevokeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountInvitesRevoke(
+) (*nordlet.InvitesRevokeAccountResponse, error) {
+	response, err := c.WithRawResponse.InvitesRevoke(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1AccountInvitesRevoke(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountInvitesGet(
+func (c *Client) InvitesGet(
 	ctx context.Context,
-	request *nordlet.PostV1AccountInvitesGetRequest,
+	request *nordlet.InvitesGetAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountInvitesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountInvitesGet(
+) (*nordlet.InvitesGetAccountResponse, error) {
+	response, err := c.WithRawResponse.InvitesGet(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1AccountInvitesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountInvitesAccept(
+func (c *Client) InvitesAccept(
 	ctx context.Context,
-	request *nordlet.PostV1AccountInvitesAcceptRequest,
+	request *nordlet.InvitesAcceptAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountInvitesAcceptResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountInvitesAccept(
+) (*nordlet.InvitesAcceptAccountResponse, error) {
+	response, err := c.WithRawResponse.InvitesAccept(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1AccountInvitesAccept(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountLocaleSet(
+func (c *Client) LocaleSet(
 	ctx context.Context,
-	request *nordlet.PostV1AccountLocaleSetRequest,
+	request *nordlet.LocaleSetAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountLocaleSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountLocaleSet(
+) (*nordlet.LocaleSetAccountResponse, error) {
+	response, err := c.WithRawResponse.LocaleSet(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1AccountLocaleSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesCreate(
+func (c *Client) CompaniesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesCreateRequest,
+	request *nordlet.CompaniesCreateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesCreate(
+) (*nordlet.CompaniesCreateAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesCreate(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1AccountCompaniesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesSelect(
+func (c *Client) CompaniesSelect(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesSelectRequest,
+	request *nordlet.CompaniesSelectAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesSelectResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesSelect(
+) (*nordlet.CompaniesSelectAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesSelect(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1AccountCompaniesSelect(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesProfile(
+func (c *Client) CompaniesProfile(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesProfileRequest,
+	request *nordlet.CompaniesProfileAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesProfileResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesProfile(
+) (*nordlet.CompaniesProfileAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesProfile(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1AccountCompaniesProfile(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesUpdate(
+func (c *Client) CompaniesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesUpdateRequest,
+	request *nordlet.CompaniesUpdateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesUpdate(
+) (*nordlet.CompaniesUpdateAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1AccountCompaniesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesArchive(
+func (c *Client) CompaniesArchive(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesArchiveRequest,
+	request *nordlet.CompaniesArchiveAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesArchiveResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesArchive(
+) (*nordlet.CompaniesArchiveAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesArchive(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1AccountCompaniesArchive(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesDelete(
+func (c *Client) CompaniesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesDeleteRequest,
+	request *nordlet.CompaniesDeleteAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesDelete(
+) (*nordlet.CompaniesDeleteAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesDelete(
 		ctx,
 		request,
 		opts...,
@@ -354,12 +354,12 @@ func (c *Client) PostV1AccountCompaniesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountCompaniesActivate(
+func (c *Client) CompaniesActivate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountCompaniesActivateRequest,
+	request *nordlet.CompaniesActivateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountCompaniesActivateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountCompaniesActivate(
+) (*nordlet.CompaniesActivateAccountResponse, error) {
+	response, err := c.WithRawResponse.CompaniesActivate(
 		ctx,
 		request,
 		opts...,
@@ -370,12 +370,12 @@ func (c *Client) PostV1AccountCompaniesActivate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountAPIKeysCreate(
+func (c *Client) APIKeysCreate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountAPIKeysCreateRequest,
+	request *nordlet.APIKeysCreateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountAPIKeysCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountAPIKeysCreate(
+) (*nordlet.APIKeysCreateAccountResponse, error) {
+	response, err := c.WithRawResponse.APIKeysCreate(
 		ctx,
 		request,
 		opts...,
@@ -386,12 +386,12 @@ func (c *Client) PostV1AccountAPIKeysCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountAPIKeysList(
+func (c *Client) APIKeysList(
 	ctx context.Context,
-	request *nordlet.PostV1AccountAPIKeysListRequest,
+	request *nordlet.APIKeysListAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountAPIKeysListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountAPIKeysList(
+) (*nordlet.APIKeysListAccountResponse, error) {
+	response, err := c.WithRawResponse.APIKeysList(
 		ctx,
 		request,
 		opts...,
@@ -402,12 +402,12 @@ func (c *Client) PostV1AccountAPIKeysList(
 	return response.Body, nil
 }
 
-func (c *Client) IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+func (c *Client) APIKeysRotate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountAPIKeysRotateRequest,
+	request *nordlet.APIKeysRotateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountAPIKeysRotateResponse, error) {
-	response, err := c.WithRawResponse.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+) (*nordlet.APIKeysRotateAccountResponse, error) {
+	response, err := c.WithRawResponse.APIKeysRotate(
 		ctx,
 		request,
 		opts...,
@@ -418,12 +418,12 @@ func (c *Client) IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAS
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountAPIKeysRevoke(
+func (c *Client) APIKeysRevoke(
 	ctx context.Context,
-	request *nordlet.PostV1AccountAPIKeysRevokeRequest,
+	request *nordlet.APIKeysRevokeAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountAPIKeysRevokeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountAPIKeysRevoke(
+) (*nordlet.APIKeysRevokeAccountResponse, error) {
+	response, err := c.WithRawResponse.APIKeysRevoke(
 		ctx,
 		request,
 		opts...,
@@ -434,12 +434,12 @@ func (c *Client) PostV1AccountAPIKeysRevoke(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountConsentAccept(
+func (c *Client) ConsentAccept(
 	ctx context.Context,
-	request *nordlet.PostV1AccountConsentAcceptRequest,
+	request *nordlet.ConsentAcceptAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountConsentAcceptResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountConsentAccept(
+) (*nordlet.ConsentAcceptAccountResponse, error) {
+	response, err := c.WithRawResponse.ConsentAccept(
 		ctx,
 		request,
 		opts...,
@@ -450,12 +450,12 @@ func (c *Client) PostV1AccountConsentAccept(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountProfileUpdate(
+func (c *Client) ProfileUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1AccountProfileUpdateRequest,
+	request *nordlet.ProfileUpdateAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountProfileUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountProfileUpdate(
+) (*nordlet.ProfileUpdateAccountResponse, error) {
+	response, err := c.WithRawResponse.ProfileUpdate(
 		ctx,
 		request,
 		opts...,
@@ -466,12 +466,12 @@ func (c *Client) PostV1AccountProfileUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountEmailChangeRequest(
+func (c *Client) EmailChangeRequest(
 	ctx context.Context,
-	request *nordlet.PostV1AccountEmailChangeRequestRequest,
+	request *nordlet.EmailChangeRequestAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountEmailChangeRequestResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountEmailChangeRequest(
+) (*nordlet.EmailChangeRequestAccountResponse, error) {
+	response, err := c.WithRawResponse.EmailChangeRequest(
 		ctx,
 		request,
 		opts...,
@@ -482,12 +482,12 @@ func (c *Client) PostV1AccountEmailChangeRequest(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountSessionsList(
+func (c *Client) SessionsList(
 	ctx context.Context,
-	request *nordlet.PostV1AccountSessionsListRequest,
+	request *nordlet.SessionsListAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountSessionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountSessionsList(
+) (*nordlet.SessionsListAccountResponse, error) {
+	response, err := c.WithRawResponse.SessionsList(
 		ctx,
 		request,
 		opts...,
@@ -498,12 +498,12 @@ func (c *Client) PostV1AccountSessionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountSessionsRevoke(
+func (c *Client) SessionsRevoke(
 	ctx context.Context,
-	request *nordlet.PostV1AccountSessionsRevokeRequest,
+	request *nordlet.SessionsRevokeAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountSessionsRevokeResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountSessionsRevoke(
+) (*nordlet.SessionsRevokeAccountResponse, error) {
+	response, err := c.WithRawResponse.SessionsRevoke(
 		ctx,
 		request,
 		opts...,
@@ -514,12 +514,12 @@ func (c *Client) PostV1AccountSessionsRevoke(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountSessionsRevokeOthers(
+func (c *Client) SessionsRevokeOthers(
 	ctx context.Context,
-	request *nordlet.PostV1AccountSessionsRevokeOthersRequest,
+	request *nordlet.SessionsRevokeOthersAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountSessionsRevokeOthersResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountSessionsRevokeOthers(
+) (*nordlet.SessionsRevokeOthersAccountResponse, error) {
+	response, err := c.WithRawResponse.SessionsRevokeOthers(
 		ctx,
 		request,
 		opts...,
@@ -530,12 +530,12 @@ func (c *Client) PostV1AccountSessionsRevokeOthers(
 	return response.Body, nil
 }
 
-func (c *Client) DownloadEverythingNordletStoresAboutTheSignedInUser(
+func (c *Client) Export(
 	ctx context.Context,
-	request *nordlet.PostV1AccountExportRequest,
+	request *nordlet.ExportAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountExportResponse, error) {
-	response, err := c.WithRawResponse.DownloadEverythingNordletStoresAboutTheSignedInUser(
+) (*nordlet.ExportAccountResponse, error) {
+	response, err := c.WithRawResponse.Export(
 		ctx,
 		request,
 		opts...,
@@ -547,12 +547,12 @@ func (c *Client) DownloadEverythingNordletStoresAboutTheSignedInUser(
 }
 
 // Removes the user: sessions, sign-in links, memberships and pending invitations are deleted at once; the email and name are replaced by an anonymous placeholder immediately and the remaining row is removed after 30 days. Refused while the user still owns or pays for a company that is not deleted.
-func (c *Client) DeleteTheSignedInUserAccount(
+func (c *Client) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1AccountDeleteRequest,
+	request *nordlet.DeleteAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountDeleteResponse, error) {
-	response, err := c.WithRawResponse.DeleteTheSignedInUserAccount(
+) (*nordlet.DeleteAccountResponse, error) {
+	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
 		opts...,
@@ -563,12 +563,12 @@ func (c *Client) DeleteTheSignedInUserAccount(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountReferralGet(
+func (c *Client) ReferralGet(
 	ctx context.Context,
-	request *nordlet.PostV1AccountReferralGetRequest,
+	request *nordlet.ReferralGetAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountReferralGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountReferralGet(
+) (*nordlet.ReferralGetAccountResponse, error) {
+	response, err := c.WithRawResponse.ReferralGet(
 		ctx,
 		request,
 		opts...,
@@ -579,12 +579,12 @@ func (c *Client) PostV1AccountReferralGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountReferralConvert(
+func (c *Client) ReferralConvert(
 	ctx context.Context,
-	request *nordlet.PostV1AccountReferralConvertRequest,
+	request *nordlet.ReferralConvertAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountReferralConvertResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountReferralConvert(
+) (*nordlet.ReferralConvertAccountResponse, error) {
+	response, err := c.WithRawResponse.ReferralConvert(
 		ctx,
 		request,
 		opts...,
@@ -595,12 +595,12 @@ func (c *Client) PostV1AccountReferralConvert(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountTableSettingsGet(
+func (c *Client) TableSettingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1AccountTableSettingsGetRequest,
+	request *nordlet.TableSettingsGetAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountTableSettingsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountTableSettingsGet(
+) (*nordlet.TableSettingsGetAccountResponse, error) {
+	response, err := c.WithRawResponse.TableSettingsGet(
 		ctx,
 		request,
 		opts...,
@@ -611,12 +611,12 @@ func (c *Client) PostV1AccountTableSettingsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountTableSettingsSet(
+func (c *Client) TableSettingsSet(
 	ctx context.Context,
-	request *nordlet.PostV1AccountTableSettingsSetRequest,
+	request *nordlet.TableSettingsSetAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountTableSettingsSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountTableSettingsSet(
+) (*nordlet.TableSettingsSetAccountResponse, error) {
+	response, err := c.WithRawResponse.TableSettingsSet(
 		ctx,
 		request,
 		opts...,
@@ -627,12 +627,12 @@ func (c *Client) PostV1AccountTableSettingsSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1AccountTableSettingsList(
+func (c *Client) TableSettingsList(
 	ctx context.Context,
-	request *nordlet.PostV1AccountTableSettingsListRequest,
+	request *nordlet.TableSettingsListAccountRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1AccountTableSettingsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1AccountTableSettingsList(
+) (*nordlet.TableSettingsListAccountResponse, error) {
+	response, err := c.WithRawResponse.TableSettingsList(
 		ctx,
 		request,
 		opts...,

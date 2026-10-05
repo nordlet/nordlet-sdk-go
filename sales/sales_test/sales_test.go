@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestSalesPostV1SalesInvoicesCreateWithWireMock(
+func TestSalesInvoicesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,25 +88,25 @@ func TestSalesPostV1SalesInvoicesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesCreateRequest{
+	request := &nordlet.InvoicesCreateSalesRequest{
 		PartnerID: "partnerId",
-		Lines: []*nordlet.PostV1SalesInvoicesCreateRequestLinesItem{
-			&nordlet.PostV1SalesInvoicesCreateRequestLinesItem{},
+		Lines: []*nordlet.InvoicesCreateSalesRequestLinesItem{
+			&nordlet.InvoicesCreateSalesRequestLinesItem{},
 		},
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesCreate(
+	_, invocationErr := client.Sales.InvoicesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesCreateWithWireMock", "POST", "/v1/sales/invoices/create", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesCreateWithWireMock", "POST", "/v1/sales/invoices/create", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesGetWithWireMock(
+func TestSalesInvoicesGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -117,22 +117,22 @@ func TestSalesPostV1SalesInvoicesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesGetRequest{
+	request := &nordlet.InvoicesGetSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesGet(
+	_, invocationErr := client.Sales.InvoicesGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesGetWithWireMock", "POST", "/v1/sales/invoices/get", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesGetWithWireMock", "POST", "/v1/sales/invoices/get", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPdfWithWireMock(
+func TestSalesInvoicesPdfWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -143,22 +143,22 @@ func TestSalesPostV1SalesInvoicesPdfWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPdfRequest{
+	request := &nordlet.InvoicesPdfSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPdf(
+	_, invocationErr := client.Sales.InvoicesPdf(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPdfWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPdfWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPdfWithWireMock", "POST", "/v1/sales/invoices/pdf", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPdfWithWireMock", "POST", "/v1/sales/invoices/pdf", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesSendWithWireMock(
+func TestSalesInvoicesSendWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -169,22 +169,22 @@ func TestSalesPostV1SalesInvoicesSendWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesSendRequest{
+	request := &nordlet.InvoicesSendSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesSend(
+	_, invocationErr := client.Sales.InvoicesSend(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesSendWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesSendWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesSendWithWireMock", "POST", "/v1/sales/invoices/send", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesSendWithWireMock", "POST", "/v1/sales/invoices/send", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPeppolXMLWithWireMock(
+func TestSalesInvoicesPeppolXMLWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -195,22 +195,22 @@ func TestSalesPostV1SalesInvoicesPeppolXMLWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPeppolXMLRequest{
+	request := &nordlet.InvoicesPeppolXMLSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPeppolXML(
+	_, invocationErr := client.Sales.InvoicesPeppolXML(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPeppolXMLWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPeppolXMLWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPeppolXMLWithWireMock", "POST", "/v1/sales/invoices/peppol-xml", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPeppolXMLWithWireMock", "POST", "/v1/sales/invoices/peppol-xml", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPeppolSendWithWireMock(
+func TestSalesInvoicesPeppolSendWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -221,22 +221,22 @@ func TestSalesPostV1SalesInvoicesPeppolSendWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPeppolSendRequest{
+	request := &nordlet.InvoicesPeppolSendSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPeppolSend(
+	_, invocationErr := client.Sales.InvoicesPeppolSend(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPeppolSendWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPeppolSendWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPeppolSendWithWireMock", "POST", "/v1/sales/invoices/peppol-send", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPeppolSendWithWireMock", "POST", "/v1/sales/invoices/peppol-send", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesEinvoiceXMLWithWireMock(
+func TestSalesInvoicesEinvoiceXMLWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -247,22 +247,22 @@ func TestSalesPostV1SalesInvoicesEinvoiceXMLWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesEinvoiceXMLRequest{
+	request := &nordlet.InvoicesEinvoiceXMLSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesEinvoiceXML(
+	_, invocationErr := client.Sales.InvoicesEinvoiceXML(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesEinvoiceXMLWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesEinvoiceXMLWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesEinvoiceXMLWithWireMock", "POST", "/v1/sales/invoices/einvoice-xml", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesEinvoiceXMLWithWireMock", "POST", "/v1/sales/invoices/einvoice-xml", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesEinvoiceSendWithWireMock(
+func TestSalesInvoicesEinvoiceSendWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -273,22 +273,22 @@ func TestSalesPostV1SalesInvoicesEinvoiceSendWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesEinvoiceSendRequest{
+	request := &nordlet.InvoicesEinvoiceSendSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesEinvoiceSend(
+	_, invocationErr := client.Sales.InvoicesEinvoiceSend(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesEinvoiceSendWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesEinvoiceSendWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesEinvoiceSendWithWireMock", "POST", "/v1/sales/invoices/einvoice-send", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesEinvoiceSendWithWireMock", "POST", "/v1/sales/invoices/einvoice-send", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesEinvoiceStatusWithWireMock(
+func TestSalesInvoicesEinvoiceStatusWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -299,22 +299,22 @@ func TestSalesPostV1SalesInvoicesEinvoiceStatusWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesEinvoiceStatusRequest{
+	request := &nordlet.InvoicesEinvoiceStatusSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesEinvoiceStatus(
+	_, invocationErr := client.Sales.InvoicesEinvoiceStatus(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesEinvoiceStatusWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesEinvoiceStatusWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesEinvoiceStatusWithWireMock", "POST", "/v1/sales/invoices/einvoice-status", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesEinvoiceStatusWithWireMock", "POST", "/v1/sales/invoices/einvoice-status", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesUpdateWithWireMock(
+func TestSalesInvoicesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -325,22 +325,22 @@ func TestSalesPostV1SalesInvoicesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesUpdateRequest{
+	request := &nordlet.InvoicesUpdateSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesUpdate(
+	_, invocationErr := client.Sales.InvoicesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesUpdateWithWireMock", "POST", "/v1/sales/invoices/update", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesUpdateWithWireMock", "POST", "/v1/sales/invoices/update", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesDeleteWithWireMock(
+func TestSalesInvoicesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -351,22 +351,22 @@ func TestSalesPostV1SalesInvoicesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesDeleteRequest{
+	request := &nordlet.InvoicesDeleteSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesDelete(
+	_, invocationErr := client.Sales.InvoicesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesDeleteWithWireMock", "POST", "/v1/sales/invoices/delete", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesDeleteWithWireMock", "POST", "/v1/sales/invoices/delete", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesIssueWithWireMock(
+func TestSalesInvoicesIssueWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -377,22 +377,22 @@ func TestSalesPostV1SalesInvoicesIssueWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesIssueRequest{
+	request := &nordlet.InvoicesIssueSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesIssue(
+	_, invocationErr := client.Sales.InvoicesIssue(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesIssueWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesIssueWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesIssueWithWireMock", "POST", "/v1/sales/invoices/issue", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesIssueWithWireMock", "POST", "/v1/sales/invoices/issue", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesLockWithWireMock(
+func TestSalesInvoicesLockWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -403,22 +403,22 @@ func TestSalesPostV1SalesInvoicesLockWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesLockRequest{
+	request := &nordlet.InvoicesLockSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesLock(
+	_, invocationErr := client.Sales.InvoicesLock(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesLockWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesLockWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesLockWithWireMock", "POST", "/v1/sales/invoices/lock", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesLockWithWireMock", "POST", "/v1/sales/invoices/lock", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesUnlockWithWireMock(
+func TestSalesInvoicesUnlockWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -429,22 +429,22 @@ func TestSalesPostV1SalesInvoicesUnlockWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesUnlockRequest{
+	request := &nordlet.InvoicesUnlockSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesUnlock(
+	_, invocationErr := client.Sales.InvoicesUnlock(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesUnlockWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesUnlockWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesUnlockWithWireMock", "POST", "/v1/sales/invoices/unlock", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesUnlockWithWireMock", "POST", "/v1/sales/invoices/unlock", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPaymentLinkWithWireMock(
+func TestSalesInvoicesPaymentLinkWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -455,22 +455,22 @@ func TestSalesPostV1SalesInvoicesPaymentLinkWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPaymentLinkRequest{
+	request := &nordlet.InvoicesPaymentLinkSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPaymentLink(
+	_, invocationErr := client.Sales.InvoicesPaymentLink(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPaymentLinkWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPaymentLinkWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPaymentLinkWithWireMock", "POST", "/v1/sales/invoices/payment-link", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPaymentLinkWithWireMock", "POST", "/v1/sales/invoices/payment-link", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPaymentSettingsGetWithWireMock(
+func TestSalesInvoicesPaymentSettingsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -481,20 +481,20 @@ func TestSalesPostV1SalesInvoicesPaymentSettingsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPaymentSettingsGetRequest{}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPaymentSettingsGet(
+	request := &nordlet.InvoicesPaymentSettingsGetSalesRequest{}
+	_, invocationErr := client.Sales.InvoicesPaymentSettingsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPaymentSettingsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPaymentSettingsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPaymentSettingsGetWithWireMock", "POST", "/v1/sales/invoices/payment-settings/get", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPaymentSettingsGetWithWireMock", "POST", "/v1/sales/invoices/payment-settings/get", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesPaymentSettingsUpdateWithWireMock(
+func TestSalesInvoicesPaymentSettingsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -505,20 +505,20 @@ func TestSalesPostV1SalesInvoicesPaymentSettingsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesPaymentSettingsUpdateRequest{}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(
+	request := &nordlet.InvoicesPaymentSettingsUpdateSalesRequest{}
+	_, invocationErr := client.Sales.InvoicesPaymentSettingsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesPaymentSettingsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesPaymentSettingsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesPaymentSettingsUpdateWithWireMock", "POST", "/v1/sales/invoices/payment-settings/update", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesPaymentSettingsUpdateWithWireMock", "POST", "/v1/sales/invoices/payment-settings/update", nil, 1)
 }
 
-func TestSalesPostV1SalesRecognitionSchedulesListWithWireMock(
+func TestSalesRecognitionSchedulesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -529,20 +529,20 @@ func TestSalesPostV1SalesRecognitionSchedulesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRecognitionSchedulesListRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionSchedulesList(
+	request := &nordlet.RecognitionSchedulesListSalesRequest{}
+	_, invocationErr := client.Sales.RecognitionSchedulesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionSchedulesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionSchedulesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionSchedulesListWithWireMock", "POST", "/v1/sales/recognition-schedules/list", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionSchedulesListWithWireMock", "POST", "/v1/sales/recognition-schedules/list", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesApplyAdvanceWithWireMock(
+func TestSalesInvoicesApplyAdvanceWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -553,23 +553,23 @@ func TestSalesPostV1SalesInvoicesApplyAdvanceWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesApplyAdvanceRequest{
+	request := &nordlet.InvoicesApplyAdvanceSalesRequest{
 		AdvanceID: "advanceId",
 		InvoiceID: "invoiceId",
 	}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesApplyAdvance(
+	_, invocationErr := client.Sales.InvoicesApplyAdvance(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesApplyAdvanceWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesApplyAdvanceWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesApplyAdvanceWithWireMock", "POST", "/v1/sales/invoices/apply-advance", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesApplyAdvanceWithWireMock", "POST", "/v1/sales/invoices/apply-advance", nil, 1)
 }
 
-func TestSalesPostV1SalesInvoicesListWithWireMock(
+func TestSalesInvoicesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -580,20 +580,20 @@ func TestSalesPostV1SalesInvoicesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesInvoicesListRequest{}
-	_, invocationErr := client.Sales.PostV1SalesInvoicesList(
+	request := &nordlet.InvoicesListSalesRequest{}
+	_, invocationErr := client.Sales.InvoicesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesInvoicesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesInvoicesListWithWireMock", "POST", "/v1/sales/invoices/list", nil, 1)
+	VerifyRequestCount(t, "TestSalesInvoicesListWithWireMock", "POST", "/v1/sales/invoices/list", nil, 1)
 }
 
-func TestSalesPostV1SalesActsCreateWithWireMock(
+func TestSalesActsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -604,22 +604,22 @@ func TestSalesPostV1SalesActsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsCreateRequest{
+	request := &nordlet.ActsCreateSalesRequest{
 		PartnerID: "partnerId",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsCreate(
+	_, invocationErr := client.Sales.ActsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsCreateWithWireMock", "POST", "/v1/sales/acts/create", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsCreateWithWireMock", "POST", "/v1/sales/acts/create", nil, 1)
 }
 
-func TestSalesPostV1SalesActsUpdateWithWireMock(
+func TestSalesActsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -630,22 +630,22 @@ func TestSalesPostV1SalesActsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsUpdateRequest{
+	request := &nordlet.ActsUpdateSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsUpdate(
+	_, invocationErr := client.Sales.ActsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsUpdateWithWireMock", "POST", "/v1/sales/acts/update", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsUpdateWithWireMock", "POST", "/v1/sales/acts/update", nil, 1)
 }
 
-func TestSalesPostV1SalesActsIssueWithWireMock(
+func TestSalesActsIssueWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -656,22 +656,22 @@ func TestSalesPostV1SalesActsIssueWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsIssueRequest{
+	request := &nordlet.ActsIssueSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsIssue(
+	_, invocationErr := client.Sales.ActsIssue(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsIssueWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsIssueWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsIssueWithWireMock", "POST", "/v1/sales/acts/issue", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsIssueWithWireMock", "POST", "/v1/sales/acts/issue", nil, 1)
 }
 
-func TestSalesPostV1SalesActsCancelWithWireMock(
+func TestSalesActsCancelWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -682,22 +682,22 @@ func TestSalesPostV1SalesActsCancelWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsCancelRequest{
+	request := &nordlet.ActsCancelSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsCancel(
+	_, invocationErr := client.Sales.ActsCancel(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsCancelWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsCancelWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsCancelWithWireMock", "POST", "/v1/sales/acts/cancel", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsCancelWithWireMock", "POST", "/v1/sales/acts/cancel", nil, 1)
 }
 
-func TestSalesPostV1SalesActsGetWithWireMock(
+func TestSalesActsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -708,22 +708,22 @@ func TestSalesPostV1SalesActsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsGetRequest{
+	request := &nordlet.ActsGetSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsGet(
+	_, invocationErr := client.Sales.ActsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsGetWithWireMock", "POST", "/v1/sales/acts/get", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsGetWithWireMock", "POST", "/v1/sales/acts/get", nil, 1)
 }
 
-func TestSalesPostV1SalesActsListWithWireMock(
+func TestSalesActsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -734,20 +734,20 @@ func TestSalesPostV1SalesActsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsListRequest{}
-	_, invocationErr := client.Sales.PostV1SalesActsList(
+	request := &nordlet.ActsListSalesRequest{}
+	_, invocationErr := client.Sales.ActsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsListWithWireMock", "POST", "/v1/sales/acts/list", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsListWithWireMock", "POST", "/v1/sales/acts/list", nil, 1)
 }
 
-func TestSalesPostV1SalesActsPdfWithWireMock(
+func TestSalesActsPdfWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -758,22 +758,22 @@ func TestSalesPostV1SalesActsPdfWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesActsPdfRequest{
+	request := &nordlet.ActsPdfSalesRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Sales.PostV1SalesActsPdf(
+	_, invocationErr := client.Sales.ActsPdf(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesActsPdfWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesActsPdfWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesActsPdfWithWireMock", "POST", "/v1/sales/acts/pdf", nil, 1)
+	VerifyRequestCount(t, "TestSalesActsPdfWithWireMock", "POST", "/v1/sales/acts/pdf", nil, 1)
 }
 
-func TestSalesPostV1OperationTypesCreateWithWireMock(
+func TestSalesRecognitionComputeWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -784,23 +784,20 @@ func TestSalesPostV1OperationTypesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1OperationTypesCreateRequest{
-		Code: "code",
-		Name: "name",
-	}
-	_, invocationErr := client.Sales.PostV1OperationTypesCreate(
+	request := &nordlet.RecognitionComputeSalesRequest{}
+	_, invocationErr := client.Sales.RecognitionCompute(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1OperationTypesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionComputeWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1OperationTypesCreateWithWireMock", "POST", "/v1/operation-types/create", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionComputeWithWireMock", "POST", "/v1/sales/recognition/compute", nil, 1)
 }
 
-func TestSalesPostV1OperationTypesUpdateWithWireMock(
+func TestSalesRecognitionRunWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -811,22 +808,20 @@ func TestSalesPostV1OperationTypesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1OperationTypesUpdateRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1OperationTypesUpdate(
+	request := &nordlet.RecognitionRunSalesRequest{}
+	_, invocationErr := client.Sales.RecognitionRun(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1OperationTypesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionRunWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1OperationTypesUpdateWithWireMock", "POST", "/v1/operation-types/update", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionRunWithWireMock", "POST", "/v1/sales/recognition/run", nil, 1)
 }
 
-func TestSalesPostV1OperationTypesGetWithWireMock(
+func TestSalesRecognitionProgressWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -837,275 +832,23 @@ func TestSalesPostV1OperationTypesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1OperationTypesGetRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1OperationTypesGet(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1OperationTypesGetWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1OperationTypesGetWithWireMock", "POST", "/v1/operation-types/get", nil, 1)
-}
-
-func TestSalesPostV1OperationTypesDeleteWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OperationTypesDeleteRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1OperationTypesDelete(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1OperationTypesDeleteWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1OperationTypesDeleteWithWireMock", "POST", "/v1/operation-types/delete", nil, 1)
-}
-
-func TestSalesPostV1OperationTypesListWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1OperationTypesListRequest{}
-	_, invocationErr := client.Sales.PostV1OperationTypesList(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1OperationTypesListWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1OperationTypesListWithWireMock", "POST", "/v1/operation-types/list", nil, 1)
-}
-
-func TestSalesPostV1DocumentSeriesCreateWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1DocumentSeriesCreateRequest{
-		Prefix: "prefix",
-	}
-	_, invocationErr := client.Sales.PostV1DocumentSeriesCreate(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1DocumentSeriesCreateWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1DocumentSeriesCreateWithWireMock", "POST", "/v1/document-series/create", nil, 1)
-}
-
-func TestSalesPostV1DocumentSeriesUpdateWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1DocumentSeriesUpdateRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1DocumentSeriesUpdate(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1DocumentSeriesUpdateWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1DocumentSeriesUpdateWithWireMock", "POST", "/v1/document-series/update", nil, 1)
-}
-
-func TestSalesPostV1DocumentSeriesGetWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1DocumentSeriesGetRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1DocumentSeriesGet(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1DocumentSeriesGetWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1DocumentSeriesGetWithWireMock", "POST", "/v1/document-series/get", nil, 1)
-}
-
-func TestSalesPostV1DocumentSeriesDeleteWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1DocumentSeriesDeleteRequest{
-		ID: "id",
-	}
-	_, invocationErr := client.Sales.PostV1DocumentSeriesDelete(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1DocumentSeriesDeleteWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1DocumentSeriesDeleteWithWireMock", "POST", "/v1/document-series/delete", nil, 1)
-}
-
-func TestSalesPostV1DocumentSeriesListWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1DocumentSeriesListRequest{}
-	_, invocationErr := client.Sales.PostV1DocumentSeriesList(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1DocumentSeriesListWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1DocumentSeriesListWithWireMock", "POST", "/v1/document-series/list", nil, 1)
-}
-
-func TestSalesPostV1SalesRecognitionComputeWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1SalesRecognitionComputeRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionCompute(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionComputeWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionComputeWithWireMock", "POST", "/v1/sales/recognition/compute", nil, 1)
-}
-
-func TestSalesPostV1SalesRecognitionRunWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1SalesRecognitionRunRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionRun(
-		context.TODO(),
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionRunWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionRunWithWireMock", "POST", "/v1/sales/recognition/run", nil, 1)
-}
-
-func TestSalesPostV1SalesRecognitionProgressWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.NewClient(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithToken("test-token"),
-	)
-	request := &nordlet.PostV1SalesRecognitionProgressRequest{
+	request := &nordlet.RecognitionProgressSalesRequest{
 		InvoiceLineID:   "invoiceLineId",
-		PercentComplete: "percentComplete",
+		PercentComplete: "121.00",
 	}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionProgress(
+	_, invocationErr := client.Sales.RecognitionProgress(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionProgressWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionProgressWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionProgressWithWireMock", "POST", "/v1/sales/recognition/progress", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionProgressWithWireMock", "POST", "/v1/sales/recognition/progress", nil, 1)
 }
 
-func TestSalesPostV1SalesRecognitionModifyWithWireMock(
+func TestSalesRecognitionModifyWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1116,23 +859,23 @@ func TestSalesPostV1SalesRecognitionModifyWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRecognitionModifyRequest{
+	request := &nordlet.RecognitionModifySalesRequest{
 		InvoiceLineID: "invoiceLineId",
-		Approach:      nordlet.PostV1SalesRecognitionModifyRequestApproachProspective,
+		Approach:      nordlet.RecognitionModifySalesRequestApproachProspective,
 	}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionModify(
+	_, invocationErr := client.Sales.RecognitionModify(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionModifyWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionModifyWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionModifyWithWireMock", "POST", "/v1/sales/recognition/modify", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionModifyWithWireMock", "POST", "/v1/sales/recognition/modify", nil, 1)
 }
 
-func TestSalesPostV1SalesRecognitionRunsListWithWireMock(
+func TestSalesRecognitionRunsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1143,20 +886,20 @@ func TestSalesPostV1SalesRecognitionRunsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRecognitionRunsListRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionRunsList(
+	request := &nordlet.RecognitionRunsListSalesRequest{}
+	_, invocationErr := client.Sales.RecognitionRunsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionRunsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionRunsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionRunsListWithWireMock", "POST", "/v1/sales/recognition/runs/list", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionRunsListWithWireMock", "POST", "/v1/sales/recognition/runs/list", nil, 1)
 }
 
-func TestSalesPostV1SalesRecognitionSummaryWithWireMock(
+func TestSalesRecognitionSummaryWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1167,20 +910,20 @@ func TestSalesPostV1SalesRecognitionSummaryWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRecognitionSummaryRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRecognitionSummary(
+	request := &nordlet.RecognitionSummarySalesRequest{}
+	_, invocationErr := client.Sales.RecognitionSummary(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRecognitionSummaryWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRecognitionSummaryWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRecognitionSummaryWithWireMock", "POST", "/v1/sales/recognition/summary", nil, 1)
+	VerifyRequestCount(t, "TestSalesRecognitionSummaryWithWireMock", "POST", "/v1/sales/recognition/summary", nil, 1)
 }
 
-func TestSalesPostV1SalesRefundLiabilityListWithWireMock(
+func TestSalesRefundLiabilityListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1191,20 +934,20 @@ func TestSalesPostV1SalesRefundLiabilityListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRefundLiabilityListRequest{}
-	_, invocationErr := client.Sales.PostV1SalesRefundLiabilityList(
+	request := &nordlet.RefundLiabilityListSalesRequest{}
+	_, invocationErr := client.Sales.RefundLiabilityList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRefundLiabilityListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRefundLiabilityListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRefundLiabilityListWithWireMock", "POST", "/v1/sales/refund-liability/list", nil, 1)
+	VerifyRequestCount(t, "TestSalesRefundLiabilityListWithWireMock", "POST", "/v1/sales/refund-liability/list", nil, 1)
 }
 
-func TestSalesPostV1SalesRefundLiabilityTrueUpWithWireMock(
+func TestSalesRefundLiabilityTrueUpWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1215,18 +958,18 @@ func TestSalesPostV1SalesRefundLiabilityTrueUpWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1SalesRefundLiabilityTrueUpRequest{
+	request := &nordlet.RefundLiabilityTrueUpSalesRequest{
 		InvoiceID:      "invoiceId",
-		EstimatedTotal: "estimatedTotal",
+		EstimatedTotal: "121.0000",
 	}
-	_, invocationErr := client.Sales.PostV1SalesRefundLiabilityTrueUp(
+	_, invocationErr := client.Sales.RefundLiabilityTrueUp(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSalesPostV1SalesRefundLiabilityTrueUpWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestSalesRefundLiabilityTrueUpWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSalesPostV1SalesRefundLiabilityTrueUpWithWireMock", "POST", "/v1/sales/refund-liability/true-up", nil, 1)
+	VerifyRequestCount(t, "TestSalesRefundLiabilityTrueUpWithWireMock", "POST", "/v1/sales/refund-liability/true-up", nil, 1)
 }

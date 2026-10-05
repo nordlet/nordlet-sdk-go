@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1CaptureSettingsGet(
+func (c *Client) SettingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsGetRequest,
+	request *nordlet.SettingsGetCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureSettingsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureSettingsGet(
+) (*nordlet.SettingsGetCaptureResponse, error) {
+	response, err := c.WithRawResponse.SettingsGet(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1CaptureSettingsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CaptureSettingsUpdate(
+func (c *Client) SettingsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsUpdateRequest,
+	request *nordlet.SettingsUpdateCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureSettingsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureSettingsUpdate(
+) (*nordlet.SettingsUpdateCaptureResponse, error) {
+	response, err := c.WithRawResponse.SettingsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1CaptureSettingsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CaptureSettingsRegenerateIntake(
+func (c *Client) SettingsRegenerateIntake(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsRegenerateIntakeRequest,
+	request *nordlet.SettingsRegenerateIntakeCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureSettingsRegenerateIntakeResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureSettingsRegenerateIntake(
+) (*nordlet.SettingsRegenerateIntakeCaptureResponse, error) {
+	response, err := c.WithRawResponse.SettingsRegenerateIntake(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1CaptureSettingsRegenerateIntake(
 	return response.Body, nil
 }
 
-func (c *Client) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+func (c *Client) InboundEmail(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureInboundEmailRequest,
+	request *nordlet.InboundEmailCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureInboundEmailResponse, error) {
-	response, err := c.WithRawResponse.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+) (*nordlet.InboundEmailCaptureResponse, error) {
+	response, err := c.WithRawResponse.InboundEmail(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyle
 	return response.Body, nil
 }
 
-func (c *Client) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+func (c *Client) DocumentsUpload(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsUploadRequest,
+	request *nordlet.DocumentsUploadCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsUploadResponse, error) {
-	response, err := c.WithRawResponse.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+) (*nordlet.DocumentsUploadCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsUpload(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft
 	return response.Body, nil
 }
 
-func (c *Client) ReReadAStoredCaptureReplacingThePreviousDraft(
+func (c *Client) DocumentsExtract(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsExtractRequest,
+	request *nordlet.DocumentsExtractCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsExtractResponse, error) {
-	response, err := c.WithRawResponse.ReReadAStoredCaptureReplacingThePreviousDraft(
+) (*nordlet.DocumentsExtractCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsExtract(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) ReReadAStoredCaptureReplacingThePreviousDraft(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CaptureDocumentsGet(
+func (c *Client) DocumentsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsGetRequest,
+	request *nordlet.DocumentsGetCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureDocumentsGet(
+) (*nordlet.DocumentsGetCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsGet(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1CaptureDocumentsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CaptureDocumentsList(
+func (c *Client) DocumentsList(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsListRequest,
+	request *nordlet.DocumentsListCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureDocumentsList(
+) (*nordlet.DocumentsListCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsList(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1CaptureDocumentsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1CaptureDocumentsDelete(
+func (c *Client) DocumentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsDeleteRequest,
+	request *nordlet.DocumentsDeleteCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1CaptureDocumentsDelete(
+) (*nordlet.DocumentsDeleteCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsDelete(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1CaptureDocumentsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+func (c *Client) DocumentsConfirm(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsConfirmRequest,
+	request *nordlet.DocumentsConfirmCaptureRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1CaptureDocumentsConfirmResponse, error) {
-	response, err := c.WithRawResponse.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+) (*nordlet.DocumentsConfirmCaptureResponse, error) {
+	response, err := c.WithRawResponse.DocumentsConfirm(
 		ctx,
 		request,
 		opts...,

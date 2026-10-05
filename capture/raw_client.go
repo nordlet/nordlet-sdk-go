@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1CaptureSettingsGet(
+func (r *RawClient) SettingsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsGetRequest,
+	request *nordlet.SettingsGetCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureSettingsGetResponse], error) {
+) (*core.Response[*nordlet.SettingsGetCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1CaptureSettingsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureSettingsGetResponse
+	var response *nordlet.SettingsGetCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1CaptureSettingsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureSettingsGetResponse]{
+	return &core.Response[*nordlet.SettingsGetCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CaptureSettingsUpdate(
+func (r *RawClient) SettingsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsUpdateRequest,
+	request *nordlet.SettingsUpdateCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureSettingsUpdateResponse], error) {
+) (*core.Response[*nordlet.SettingsUpdateCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1CaptureSettingsUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureSettingsUpdateResponse
+	var response *nordlet.SettingsUpdateCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1CaptureSettingsUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureSettingsUpdateResponse]{
+	return &core.Response[*nordlet.SettingsUpdateCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CaptureSettingsRegenerateIntake(
+func (r *RawClient) SettingsRegenerateIntake(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureSettingsRegenerateIntakeRequest,
+	request *nordlet.SettingsRegenerateIntakeCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureSettingsRegenerateIntakeResponse], error) {
+) (*core.Response[*nordlet.SettingsRegenerateIntakeCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1CaptureSettingsRegenerateIntake(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureSettingsRegenerateIntakeResponse
+	var response *nordlet.SettingsRegenerateIntakeCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1CaptureSettingsRegenerateIntake(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureSettingsRegenerateIntakeResponse]{
+	return &core.Response[*nordlet.SettingsRegenerateIntakeCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+func (r *RawClient) InboundEmail(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureInboundEmailRequest,
+	request *nordlet.InboundEmailCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureInboundEmailResponse], error) {
+) (*core.Response[*nordlet.InboundEmailCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkSt
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureInboundEmailResponse
+	var response *nordlet.InboundEmailCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkSt
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureInboundEmailResponse]{
+	return &core.Response[*nordlet.InboundEmailCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+func (r *RawClient) DocumentsUpload(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsUploadRequest,
+	request *nordlet.DocumentsUploadCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsUploadResponse], error) {
+) (*core.Response[*nordlet.DocumentsUploadCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDr
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsUploadResponse
+	var response *nordlet.DocumentsUploadCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDr
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsUploadResponse]{
+	return &core.Response[*nordlet.DocumentsUploadCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) ReReadAStoredCaptureReplacingThePreviousDraft(
+func (r *RawClient) DocumentsExtract(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsExtractRequest,
+	request *nordlet.DocumentsExtractCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsExtractResponse], error) {
+) (*core.Response[*nordlet.DocumentsExtractCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) ReReadAStoredCaptureReplacingThePreviousDraft(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsExtractResponse
+	var response *nordlet.DocumentsExtractCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) ReReadAStoredCaptureReplacingThePreviousDraft(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsExtractResponse]{
+	return &core.Response[*nordlet.DocumentsExtractCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CaptureDocumentsGet(
+func (r *RawClient) DocumentsGet(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsGetRequest,
+	request *nordlet.DocumentsGetCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsGetResponse], error) {
+) (*core.Response[*nordlet.DocumentsGetCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1CaptureDocumentsGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsGetResponse
+	var response *nordlet.DocumentsGetCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1CaptureDocumentsGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsGetResponse]{
+	return &core.Response[*nordlet.DocumentsGetCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CaptureDocumentsList(
+func (r *RawClient) DocumentsList(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsListRequest,
+	request *nordlet.DocumentsListCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsListResponse], error) {
+) (*core.Response[*nordlet.DocumentsListCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1CaptureDocumentsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsListResponse
+	var response *nordlet.DocumentsListCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,18 +377,18 @@ func (r *RawClient) PostV1CaptureDocumentsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsListResponse]{
+	return &core.Response[*nordlet.DocumentsListCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CaptureDocumentsDelete(
+func (r *RawClient) DocumentsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsDeleteRequest,
+	request *nordlet.DocumentsDeleteCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsDeleteResponse], error) {
+) (*core.Response[*nordlet.DocumentsDeleteCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -401,7 +401,7 @@ func (r *RawClient) PostV1CaptureDocumentsDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsDeleteResponse
+	var response *nordlet.DocumentsDeleteCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -421,18 +421,18 @@ func (r *RawClient) PostV1CaptureDocumentsDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsDeleteResponse]{
+	return &core.Response[*nordlet.DocumentsDeleteCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+func (r *RawClient) DocumentsConfirm(
 	ctx context.Context,
-	request *nordlet.PostV1CaptureDocumentsConfirmRequest,
+	request *nordlet.DocumentsConfirmCaptureRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CaptureDocumentsConfirmResponse], error) {
+) (*core.Response[*nordlet.DocumentsConfirmCaptureResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -445,7 +445,7 @@ func (r *RawClient) SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDo
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CaptureDocumentsConfirmResponse
+	var response *nordlet.DocumentsConfirmCaptureResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -465,7 +465,7 @@ func (r *RawClient) SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDo
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CaptureDocumentsConfirmResponse]{
+	return &core.Response[*nordlet.DocumentsConfirmCaptureResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

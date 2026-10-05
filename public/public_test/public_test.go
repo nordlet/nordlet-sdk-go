@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestPublicPostV1PublicIntegrationRequestsWithWireMock(
+func TestPublicIntegrationRequestsWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,24 +88,24 @@ func TestPublicPostV1PublicIntegrationRequestsWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PublicIntegrationRequestsRequest{
+	request := &nordlet.IntegrationRequestsPublicRequest{
 		Integration: "integration",
 		Name:        "name",
 		Email:       "email",
 	}
-	_, invocationErr := client.Public.PostV1PublicIntegrationRequests(
+	_, invocationErr := client.Public.IntegrationRequests(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPublicPostV1PublicIntegrationRequestsWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPublicIntegrationRequestsWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPublicPostV1PublicIntegrationRequestsWithWireMock", "POST", "/v1/public/integration-requests", nil, 1)
+	VerifyRequestCount(t, "TestPublicIntegrationRequestsWithWireMock", "POST", "/v1/public/integration-requests", nil, 1)
 }
 
-func TestPublicGetV1PublicPayTokenWithWireMock(
+func TestPublicPayWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -116,17 +116,17 @@ func TestPublicGetV1PublicPayTokenWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.GetV1PublicPayTokenRequest{
+	request := &nordlet.PayPublicRequest{
 		Token: "token",
 	}
-	invocationErr := client.Public.GetV1PublicPayToken(
+	invocationErr := client.Public.Pay(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPublicGetV1PublicPayTokenWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPublicPayWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPublicGetV1PublicPayTokenWithWireMock", "GET", "/v1/public/pay/token", nil, 1)
+	VerifyRequestCount(t, "TestPublicPayWithWireMock", "GET", "/v1/public/pay/token", nil, 1)
 }

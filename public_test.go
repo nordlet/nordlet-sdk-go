@@ -9,54 +9,9 @@ import (
 	testing "testing"
 )
 
-func TestSettersGetV1PublicPayTokenRequest(t *testing.T) {
-	t.Run("SetToken", func(t *testing.T) {
-		obj := &GetV1PublicPayTokenRequest{}
-		var fernTestValueToken string
-		obj.SetToken(fernTestValueToken)
-		assert.Equal(t, fernTestValueToken, obj.Token)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitGetV1PublicPayTokenRequest(t *testing.T) {
-	t.Run("SetToken_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetV1PublicPayTokenRequest{}
-		var fernTestValueToken string
-
-		// Act
-		obj.SetToken(fernTestValueToken)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
+func TestSettersIntegrationRequestsPublicRequest(t *testing.T) {
 	t.Run("SetIntegration", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueIntegration string
 		obj.SetIntegration(fernTestValueIntegration)
 		assert.Equal(t, fernTestValueIntegration, obj.Integration)
@@ -64,7 +19,7 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 	})
 
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -72,7 +27,7 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 	})
 
 	t.Run("SetCompany", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueCompany *string
 		obj.SetCompany(fernTestValueCompany)
 		assert.Equal(t, fernTestValueCompany, obj.Company)
@@ -80,7 +35,7 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 	})
 
 	t.Run("SetEmail", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueEmail string
 		obj.SetEmail(fernTestValueEmail)
 		assert.Equal(t, fernTestValueEmail, obj.Email)
@@ -88,7 +43,7 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 	})
 
 	t.Run("SetDetails", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueDetails *string
 		obj.SetDetails(fernTestValueDetails)
 		assert.Equal(t, fernTestValueDetails, obj.Details)
@@ -96,7 +51,7 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 	})
 
 	t.Run("SetWebsite", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueWebsite *string
 		obj.SetWebsite(fernTestValueWebsite)
 		assert.Equal(t, fernTestValueWebsite, obj.Website)
@@ -105,11 +60,11 @@ func TestSettersPostV1PublicIntegrationRequestsRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T) {
+func TestSettersMarkExplicitIntegrationRequestsPublicRequest(t *testing.T) {
 	t.Run("SetIntegration_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueIntegration string
 
 		// Act
@@ -140,7 +95,7 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueName string
 
 		// Act
@@ -171,7 +126,7 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 	t.Run("SetCompany_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueCompany *string
 
 		// Act
@@ -202,7 +157,7 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 	t.Run("SetEmail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueEmail string
 
 		// Act
@@ -233,7 +188,7 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 	t.Run("SetDetails_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueDetails *string
 
 		// Act
@@ -264,7 +219,7 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 	t.Run("SetWebsite_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsRequest{}
+		obj := &IntegrationRequestsPublicRequest{}
 		var fernTestValueWebsite *string
 
 		// Act
@@ -294,9 +249,54 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsRequest(t *testing.T)
 
 }
 
-func TestSettersPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestSettersPayPublicRequest(t *testing.T) {
+	t.Run("SetToken", func(t *testing.T) {
+		obj := &PayPublicRequest{}
+		var fernTestValueToken string
+		obj.SetToken(fernTestValueToken)
+		assert.Equal(t, fernTestValueToken, obj.Token)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitPayPublicRequest(t *testing.T) {
+	t.Run("SetToken_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PayPublicRequest{}
+		var fernTestValueToken string
+
+		// Act
+		obj.SetToken(fernTestValueToken)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("SetReceived", func(t *testing.T) {
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 		var fernTestValueReceived bool
 		obj.SetReceived(fernTestValueReceived)
 		assert.Equal(t, fernTestValueReceived, obj.Received)
@@ -305,11 +305,11 @@ func TestSettersPostV1PublicIntegrationRequestsResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestGettersIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("GetReceived", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 		var expected bool
 		obj.Received = expected
 
@@ -319,7 +319,7 @@ func TestGettersPostV1PublicIntegrationRequestsResponse(t *testing.T) {
 
 	t.Run("GetReceived_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PublicIntegrationRequestsResponse
+		var obj *IntegrationRequestsPublicResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -331,11 +331,11 @@ func TestGettersPostV1PublicIntegrationRequestsResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestSettersMarkExplicitIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("SetReceived_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 		var fernTestValueReceived bool
 
 		// Act
@@ -365,11 +365,11 @@ func TestSettersMarkExplicitPostV1PublicIntegrationRequestsResponse(t *testing.T
 
 }
 
-func TestJSONMarshalingPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestJSONMarshalingIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -378,46 +378,46 @@ func TestJSONMarshalingPostV1PublicIntegrationRequestsResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1PublicIntegrationRequestsResponse
+		var unmarshaled IntegrationRequestsPublicResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PublicIntegrationRequestsResponse
+		var obj IntegrationRequestsPublicResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1PublicIntegrationRequestsResponse
+		var obj IntegrationRequestsPublicResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestStringIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PublicIntegrationRequestsResponse
+		var obj *IntegrationRequestsPublicResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestExtraPropertiesPostV1PublicIntegrationRequestsResponse(t *testing.T) {
+func TestExtraPropertiesIntegrationRequestsPublicResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1PublicIntegrationRequestsResponse{}
+		obj := &IntegrationRequestsPublicResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -431,7 +431,7 @@ func TestExtraPropertiesPostV1PublicIntegrationRequestsResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1PublicIntegrationRequestsResponse
+		var obj *IntegrationRequestsPublicResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

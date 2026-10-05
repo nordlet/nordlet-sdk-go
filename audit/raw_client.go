@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1AuditList(
+func (r *RawClient) List(
 	ctx context.Context,
-	request *nordlet.PostV1AuditListRequest,
+	request *nordlet.ListAuditRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1AuditListResponse], error) {
+) (*core.Response[*nordlet.ListAuditResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1AuditList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1AuditListResponse
+	var response *nordlet.ListAuditResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,7 +69,7 @@ func (r *RawClient) PostV1AuditList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1AuditListResponse]{
+	return &core.Response[*nordlet.ListAuditResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

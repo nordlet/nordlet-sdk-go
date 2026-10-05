@@ -7,21 +7,22 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1AuditListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AuditListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AuditListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AuditListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AuditListRequestFieldTotals   = big.NewInt(1 << 4)
+	listAuditRequestFieldPage     = big.NewInt(1 << 0)
+	listAuditRequestFieldPageSize = big.NewInt(1 << 1)
+	listAuditRequestFieldSort     = big.NewInt(1 << 2)
+	listAuditRequestFieldFilter   = big.NewInt(1 << 3)
+	listAuditRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AuditListRequest struct {
-	Page     *int64                              `json:"page,omitempty" url:"-"`
-	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AuditListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AuditListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type ListAuditRequest struct {
+	Page     *int64                        `json:"page,omitempty" url:"-"`
+	PageSize *int64                        `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ListAuditRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ListAuditRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -29,79 +30,79 @@ type PostV1AuditListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AuditListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListAuditRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AuditListRequestFieldPage)
+func (l *ListAuditRequest) SetPage(page *int64) {
+	l.Page = page
+	l.require(listAuditRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AuditListRequestFieldPageSize)
+func (l *ListAuditRequest) SetPageSize(pageSize *int64) {
+	l.PageSize = pageSize
+	l.require(listAuditRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequest) SetSort(sort []*PostV1AuditListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AuditListRequestFieldSort)
+func (l *ListAuditRequest) SetSort(sort []*ListAuditRequestSortItem) {
+	l.Sort = sort
+	l.require(listAuditRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequest) SetFilter(filter []*PostV1AuditListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AuditListRequestFieldFilter)
+func (l *ListAuditRequest) SetFilter(filter []*ListAuditRequestFilterItem) {
+	l.Filter = filter
+	l.require(listAuditRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AuditListRequestFieldTotals)
+func (l *ListAuditRequest) SetTotals(totals []string) {
+	l.Totals = totals
+	l.require(listAuditRequestFieldTotals)
 }
 
-func (p *PostV1AuditListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AuditListRequest
+func (l *ListAuditRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListAuditRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AuditListRequest(body)
+	*l = ListAuditRequest(body)
 	return nil
 }
 
-func (p *PostV1AuditListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AuditListRequest
+func (l *ListAuditRequest) MarshalJSON() ([]byte, error) {
+	type embed ListAuditRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AuditListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AuditListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AuditListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	listAuditRequestFilterItemFieldField = big.NewInt(1 << 0)
+	listAuditRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	listAuditRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1AuditListRequestFilterItem struct {
-	Field string                                 `json:"field" url:"field"`
-	Op    PostV1AuditListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AuditListRequestFilterItemValue `json:"value" url:"value"`
+type ListAuditRequestFilterItem struct {
+	Field string                           `json:"field" url:"field"`
+	Op    ListAuditRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ListAuditRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -110,312 +111,312 @@ type PostV1AuditListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AuditListRequestFilterItem) GetField() string {
-	if p == nil {
+func (l *ListAuditRequestFilterItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1AuditListRequestFilterItem) GetOp() PostV1AuditListRequestFilterItemOp {
-	if p == nil {
+func (l *ListAuditRequestFilterItem) GetOp() ListAuditRequestFilterItemOp {
+	if l == nil {
 		return ""
 	}
-	return p.Op
+	return l.Op
 }
 
-func (p *PostV1AuditListRequestFilterItem) GetValue() *PostV1AuditListRequestFilterItemValue {
-	if p == nil {
+func (l *ListAuditRequestFilterItem) GetValue() *ListAuditRequestFilterItemValue {
+	if l == nil {
 		return nil
 	}
-	return p.Value
+	return l.Value
 }
 
-func (p *PostV1AuditListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListAuditRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1AuditListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListAuditRequestFilterItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AuditListRequestFilterItemFieldField)
+func (l *ListAuditRequestFilterItem) SetField(field string) {
+	l.Field = field
+	l.require(listAuditRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequestFilterItem) SetOp(op PostV1AuditListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AuditListRequestFilterItemFieldOp)
+func (l *ListAuditRequestFilterItem) SetOp(op ListAuditRequestFilterItemOp) {
+	l.Op = op
+	l.require(listAuditRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequestFilterItem) SetValue(value *PostV1AuditListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AuditListRequestFilterItemFieldValue)
+func (l *ListAuditRequestFilterItem) SetValue(value *ListAuditRequestFilterItemValue) {
+	l.Value = value
+	l.require(listAuditRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AuditListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AuditListRequestFilterItem
+func (l *ListAuditRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListAuditRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AuditListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListAuditRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AuditListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AuditListRequestFilterItem
+func (l *ListAuditRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ListAuditRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AuditListRequestFilterItem) String() string {
-	if p == nil {
+func (l *ListAuditRequestFilterItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1AuditListRequestFilterItemOp string
+type ListAuditRequestFilterItemOp string
 
 const (
-	PostV1AuditListRequestFilterItemOpEq       PostV1AuditListRequestFilterItemOp = "eq"
-	PostV1AuditListRequestFilterItemOpNe       PostV1AuditListRequestFilterItemOp = "ne"
-	PostV1AuditListRequestFilterItemOpContains PostV1AuditListRequestFilterItemOp = "contains"
-	PostV1AuditListRequestFilterItemOpGte      PostV1AuditListRequestFilterItemOp = "gte"
-	PostV1AuditListRequestFilterItemOpLte      PostV1AuditListRequestFilterItemOp = "lte"
-	PostV1AuditListRequestFilterItemOpIn       PostV1AuditListRequestFilterItemOp = "in"
+	ListAuditRequestFilterItemOpEq       ListAuditRequestFilterItemOp = "eq"
+	ListAuditRequestFilterItemOpNe       ListAuditRequestFilterItemOp = "ne"
+	ListAuditRequestFilterItemOpContains ListAuditRequestFilterItemOp = "contains"
+	ListAuditRequestFilterItemOpGte      ListAuditRequestFilterItemOp = "gte"
+	ListAuditRequestFilterItemOpLte      ListAuditRequestFilterItemOp = "lte"
+	ListAuditRequestFilterItemOpIn       ListAuditRequestFilterItemOp = "in"
 )
 
-func NewPostV1AuditListRequestFilterItemOpFromString(s string) (PostV1AuditListRequestFilterItemOp, error) {
+func NewListAuditRequestFilterItemOpFromString(s string) (ListAuditRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AuditListRequestFilterItemOpEq, nil
+		return ListAuditRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AuditListRequestFilterItemOpNe, nil
+		return ListAuditRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AuditListRequestFilterItemOpContains, nil
+		return ListAuditRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AuditListRequestFilterItemOpGte, nil
+		return ListAuditRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AuditListRequestFilterItemOpLte, nil
+		return ListAuditRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AuditListRequestFilterItemOpIn, nil
+		return ListAuditRequestFilterItemOpIn, nil
 	}
-	var t PostV1AuditListRequestFilterItemOp
+	var t ListAuditRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AuditListRequestFilterItemOp) Ptr() *PostV1AuditListRequestFilterItemOp {
-	return &p
+func (l ListAuditRequestFilterItemOp) Ptr() *ListAuditRequestFilterItemOp {
+	return &l
 }
 
-type PostV1AuditListRequestFilterItemValue struct {
-	String                                             string
-	Double                                             float64
-	Boolean                                            bool
-	PostV1AuditListRequestFilterItemValueThreeItemList []*PostV1AuditListRequestFilterItemValueThreeItem
+type ListAuditRequestFilterItemValue struct {
+	String                                       string
+	Double                                       float64
+	Boolean                                      bool
+	ListAuditRequestFilterItemValueThreeItemList []*ListAuditRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValue) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValue) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValue) GetBoolean() bool {
+	if l == nil {
 		return false
 	}
-	return p.Boolean
+	return l.Boolean
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) GetPostV1AuditListRequestFilterItemValueThreeItemList() []*PostV1AuditListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValue) GetListAuditRequestFilterItemValueThreeItemList() []*ListAuditRequestFilterItemValueThreeItem {
+	if l == nil {
 		return nil
 	}
-	return p.PostV1AuditListRequestFilterItemValueThreeItemList
+	return l.ListAuditRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (l *ListAuditRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		l.typ = "Boolean"
+		l.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AuditListRequestFilterItemValueThreeItemList []*PostV1AuditListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AuditListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AuditListRequestFilterItemValueThreeItemList"
-		p.PostV1AuditListRequestFilterItemValueThreeItemList = valuePostV1AuditListRequestFilterItemValueThreeItemList
+	var valueListAuditRequestFilterItemValueThreeItemList []*ListAuditRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueListAuditRequestFilterItemValueThreeItemList); err == nil {
+		l.typ = "ListAuditRequestFilterItemValueThreeItemList"
+		l.ListAuditRequestFilterItemValueThreeItemList = valueListAuditRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1AuditListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l ListAuditRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return json.Marshal(l.Boolean)
 	}
-	if p.typ == "PostV1AuditListRequestFilterItemValueThreeItemList" || p.PostV1AuditListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AuditListRequestFilterItemValueThreeItemList)
+	if l.typ == "ListAuditRequestFilterItemValueThreeItemList" || l.ListAuditRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(l.ListAuditRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1AuditListRequestFilterItemValueVisitor interface {
+type ListAuditRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AuditListRequestFilterItemValueThreeItemList([]*PostV1AuditListRequestFilterItemValueThreeItem) error
+	VisitListAuditRequestFilterItemValueThreeItemList([]*ListAuditRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AuditListRequestFilterItemValue) Accept(visitor PostV1AuditListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *ListAuditRequestFilterItemValue) Accept(visitor ListAuditRequestFilterItemValueVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return visitor.VisitBoolean(l.Boolean)
 	}
-	if p.typ == "PostV1AuditListRequestFilterItemValueThreeItemList" || p.PostV1AuditListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AuditListRequestFilterItemValueThreeItemList(p.PostV1AuditListRequestFilterItemValueThreeItemList)
+	if l.typ == "ListAuditRequestFilterItemValueThreeItemList" || l.ListAuditRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitListAuditRequestFilterItemValueThreeItemList(l.ListAuditRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1AuditListRequestFilterItemValueThreeItem struct {
+type ListAuditRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AuditListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValueThreeItem) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1AuditListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (l *ListAuditRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1AuditListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (l *ListAuditRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1AuditListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l ListAuditRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1AuditListRequestFilterItemValueThreeItemVisitor interface {
+type ListAuditRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AuditListRequestFilterItemValueThreeItem) Accept(visitor PostV1AuditListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *ListAuditRequestFilterItemValueThreeItem) Accept(visitor ListAuditRequestFilterItemValueThreeItemVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
 var (
-	postV1AuditListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AuditListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	listAuditRequestSortItemFieldField = big.NewInt(1 << 0)
+	listAuditRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AuditListRequestSortItem struct {
-	Field string                             `json:"field" url:"field"`
-	Dir   *PostV1AuditListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type ListAuditRequestSortItem struct {
+	Field string                       `json:"field" url:"field"`
+	Dir   *ListAuditRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -424,126 +425,126 @@ type PostV1AuditListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AuditListRequestSortItem) GetField() string {
-	if p == nil {
+func (l *ListAuditRequestSortItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1AuditListRequestSortItem) GetDir() *PostV1AuditListRequestSortItemDir {
-	if p == nil {
+func (l *ListAuditRequestSortItem) GetDir() *ListAuditRequestSortItemDir {
+	if l == nil {
 		return nil
 	}
-	return p.Dir
+	return l.Dir
 }
 
-func (p *PostV1AuditListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListAuditRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1AuditListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListAuditRequestSortItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AuditListRequestSortItemFieldField)
+func (l *ListAuditRequestSortItem) SetField(field string) {
+	l.Field = field
+	l.require(listAuditRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListRequestSortItem) SetDir(dir *PostV1AuditListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AuditListRequestSortItemFieldDir)
+func (l *ListAuditRequestSortItem) SetDir(dir *ListAuditRequestSortItemDir) {
+	l.Dir = dir
+	l.require(listAuditRequestSortItemFieldDir)
 }
 
-func (p *PostV1AuditListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AuditListRequestSortItem
+func (l *ListAuditRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListAuditRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AuditListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListAuditRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AuditListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AuditListRequestSortItem
+func (l *ListAuditRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ListAuditRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AuditListRequestSortItem) String() string {
-	if p == nil {
+func (l *ListAuditRequestSortItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1AuditListRequestSortItemDir string
+type ListAuditRequestSortItemDir string
 
 const (
-	PostV1AuditListRequestSortItemDirAsc  PostV1AuditListRequestSortItemDir = "asc"
-	PostV1AuditListRequestSortItemDirDesc PostV1AuditListRequestSortItemDir = "desc"
+	ListAuditRequestSortItemDirAsc  ListAuditRequestSortItemDir = "asc"
+	ListAuditRequestSortItemDirDesc ListAuditRequestSortItemDir = "desc"
 )
 
-func NewPostV1AuditListRequestSortItemDirFromString(s string) (PostV1AuditListRequestSortItemDir, error) {
+func NewListAuditRequestSortItemDirFromString(s string) (ListAuditRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AuditListRequestSortItemDirAsc, nil
+		return ListAuditRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AuditListRequestSortItemDirDesc, nil
+		return ListAuditRequestSortItemDirDesc, nil
 	}
-	var t PostV1AuditListRequestSortItemDir
+	var t ListAuditRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AuditListRequestSortItemDir) Ptr() *PostV1AuditListRequestSortItemDir {
-	return &p
+func (l ListAuditRequestSortItemDir) Ptr() *ListAuditRequestSortItemDir {
+	return &l
 }
 
 var (
-	postV1AuditListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AuditListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AuditListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AuditListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AuditListResponseFieldTotals   = big.NewInt(1 << 4)
+	listAuditResponseFieldRows     = big.NewInt(1 << 0)
+	listAuditResponseFieldPage     = big.NewInt(1 << 1)
+	listAuditResponseFieldPageSize = big.NewInt(1 << 2)
+	listAuditResponseFieldTotal    = big.NewInt(1 << 3)
+	listAuditResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AuditListResponse struct {
-	Rows     []*PostV1AuditListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                              `json:"page" url:"page"`
-	PageSize int64                              `json:"pageSize" url:"pageSize"`
-	Total    int64                              `json:"total" url:"total"`
-	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+type ListAuditResponse struct {
+	Rows     []*ListAuditResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                        `json:"page" url:"page"`
+	PageSize int64                        `json:"pageSize" url:"pageSize"`
+	Total    int64                        `json:"total" url:"total"`
+	Totals   map[string]string            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -552,152 +553,152 @@ type PostV1AuditListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AuditListResponse) GetRows() []*PostV1AuditListResponseRowsItem {
-	if p == nil {
+func (l *ListAuditResponse) GetRows() []*ListAuditResponseRowsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Rows
+	return l.Rows
 }
 
-func (p *PostV1AuditListResponse) GetPage() int64 {
-	if p == nil {
+func (l *ListAuditResponse) GetPage() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Page
+	return l.Page
 }
 
-func (p *PostV1AuditListResponse) GetPageSize() int64 {
-	if p == nil {
+func (l *ListAuditResponse) GetPageSize() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.PageSize
+	return l.PageSize
 }
 
-func (p *PostV1AuditListResponse) GetTotal() int64 {
-	if p == nil {
+func (l *ListAuditResponse) GetTotal() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Total
+	return l.Total
 }
 
-func (p *PostV1AuditListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (l *ListAuditResponse) GetTotals() map[string]string {
+	if l == nil {
 		return nil
 	}
-	return p.Totals
+	return l.Totals
 }
 
-func (p *PostV1AuditListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListAuditResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1AuditListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListAuditResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponse) SetRows(rows []*PostV1AuditListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AuditListResponseFieldRows)
+func (l *ListAuditResponse) SetRows(rows []*ListAuditResponseRowsItem) {
+	l.Rows = rows
+	l.require(listAuditResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AuditListResponseFieldPage)
+func (l *ListAuditResponse) SetPage(page int64) {
+	l.Page = page
+	l.require(listAuditResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AuditListResponseFieldPageSize)
+func (l *ListAuditResponse) SetPageSize(pageSize int64) {
+	l.PageSize = pageSize
+	l.require(listAuditResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AuditListResponseFieldTotal)
+func (l *ListAuditResponse) SetTotal(total int64) {
+	l.Total = total
+	l.require(listAuditResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AuditListResponseFieldTotals)
+func (l *ListAuditResponse) SetTotals(totals map[string]string) {
+	l.Totals = totals
+	l.require(listAuditResponseFieldTotals)
 }
 
-func (p *PostV1AuditListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AuditListResponse
+func (l *ListAuditResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListAuditResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AuditListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListAuditResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AuditListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AuditListResponse
+func (l *ListAuditResponse) MarshalJSON() ([]byte, error) {
+	type embed ListAuditResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AuditListResponse) String() string {
-	if p == nil {
+func (l *ListAuditResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1AuditListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1AuditListResponseRowsItemFieldActorType = big.NewInt(1 << 1)
-	postV1AuditListResponseRowsItemFieldActorID   = big.NewInt(1 << 2)
-	postV1AuditListResponseRowsItemFieldAction    = big.NewInt(1 << 3)
-	postV1AuditListResponseRowsItemFieldEntity    = big.NewInt(1 << 4)
-	postV1AuditListResponseRowsItemFieldEntityID  = big.NewInt(1 << 5)
-	postV1AuditListResponseRowsItemFieldDiff      = big.NewInt(1 << 6)
-	postV1AuditListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 7)
+	listAuditResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	listAuditResponseRowsItemFieldActorType = big.NewInt(1 << 1)
+	listAuditResponseRowsItemFieldActorID   = big.NewInt(1 << 2)
+	listAuditResponseRowsItemFieldAction    = big.NewInt(1 << 3)
+	listAuditResponseRowsItemFieldEntity    = big.NewInt(1 << 4)
+	listAuditResponseRowsItemFieldEntityID  = big.NewInt(1 << 5)
+	listAuditResponseRowsItemFieldDiff      = big.NewInt(1 << 6)
+	listAuditResponseRowsItemFieldCreatedAt = big.NewInt(1 << 7)
 )
 
-type PostV1AuditListResponseRowsItem struct {
-	ID        int64                                    `json:"id" url:"id"`
-	ActorType PostV1AuditListResponseRowsItemActorType `json:"actorType" url:"actorType"`
-	ActorID   *string                                  `json:"actorId,omitempty" url:"actorId,omitempty"`
-	Action    string                                   `json:"action" url:"action"`
-	Entity    string                                   `json:"entity" url:"entity"`
-	EntityID  *string                                  `json:"entityId,omitempty" url:"entityId,omitempty"`
-	Diff      any                                      `json:"diff,omitempty" url:"diff,omitempty"`
-	CreatedAt string                                   `json:"createdAt" url:"createdAt"`
+type ListAuditResponseRowsItem struct {
+	ID        int64                              `json:"id" url:"id"`
+	ActorType ListAuditResponseRowsItemActorType `json:"actorType" url:"actorType"`
+	ActorID   *string                            `json:"actorId,omitempty" url:"actorId,omitempty"`
+	Action    string                             `json:"action" url:"action"`
+	Entity    string                             `json:"entity" url:"entity"`
+	EntityID  *string                            `json:"entityId,omitempty" url:"entityId,omitempty"`
+	Diff      any                                `json:"diff,omitempty" url:"diff,omitempty"`
+	CreatedAt time.Time                          `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -706,195 +707,203 @@ type PostV1AuditListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetID() int64 {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetID() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetActorType() PostV1AuditListResponseRowsItemActorType {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetActorType() ListAuditResponseRowsItemActorType {
+	if l == nil {
 		return ""
 	}
-	return p.ActorType
+	return l.ActorType
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetActorID() *string {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetActorID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.ActorID
+	return l.ActorID
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetAction() string {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetAction() string {
+	if l == nil {
 		return ""
 	}
-	return p.Action
+	return l.Action
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetEntity() string {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetEntity() string {
+	if l == nil {
 		return ""
 	}
-	return p.Entity
+	return l.Entity
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetEntityID() *string {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetEntityID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.EntityID
+	return l.EntityID
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetDiff() any {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetDiff() any {
+	if l == nil {
 		return nil
 	}
-	return p.Diff
+	return l.Diff
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *ListAuditResponseRowsItem) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1AuditListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1AuditListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListAuditResponseRowsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetID(id int64) {
-	p.ID = id
-	p.require(postV1AuditListResponseRowsItemFieldID)
+func (l *ListAuditResponseRowsItem) SetID(id int64) {
+	l.ID = id
+	l.require(listAuditResponseRowsItemFieldID)
 }
 
 // SetActorType sets the ActorType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetActorType(actorType PostV1AuditListResponseRowsItemActorType) {
-	p.ActorType = actorType
-	p.require(postV1AuditListResponseRowsItemFieldActorType)
+func (l *ListAuditResponseRowsItem) SetActorType(actorType ListAuditResponseRowsItemActorType) {
+	l.ActorType = actorType
+	l.require(listAuditResponseRowsItemFieldActorType)
 }
 
 // SetActorID sets the ActorID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetActorID(actorID *string) {
-	p.ActorID = actorID
-	p.require(postV1AuditListResponseRowsItemFieldActorID)
+func (l *ListAuditResponseRowsItem) SetActorID(actorID *string) {
+	l.ActorID = actorID
+	l.require(listAuditResponseRowsItemFieldActorID)
 }
 
 // SetAction sets the Action field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetAction(action string) {
-	p.Action = action
-	p.require(postV1AuditListResponseRowsItemFieldAction)
+func (l *ListAuditResponseRowsItem) SetAction(action string) {
+	l.Action = action
+	l.require(listAuditResponseRowsItemFieldAction)
 }
 
 // SetEntity sets the Entity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetEntity(entity string) {
-	p.Entity = entity
-	p.require(postV1AuditListResponseRowsItemFieldEntity)
+func (l *ListAuditResponseRowsItem) SetEntity(entity string) {
+	l.Entity = entity
+	l.require(listAuditResponseRowsItemFieldEntity)
 }
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetEntityID(entityID *string) {
-	p.EntityID = entityID
-	p.require(postV1AuditListResponseRowsItemFieldEntityID)
+func (l *ListAuditResponseRowsItem) SetEntityID(entityID *string) {
+	l.EntityID = entityID
+	l.require(listAuditResponseRowsItemFieldEntityID)
 }
 
 // SetDiff sets the Diff field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetDiff(diff any) {
-	p.Diff = diff
-	p.require(postV1AuditListResponseRowsItemFieldDiff)
+func (l *ListAuditResponseRowsItem) SetDiff(diff any) {
+	l.Diff = diff
+	l.require(listAuditResponseRowsItemFieldDiff)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AuditListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AuditListResponseRowsItemFieldCreatedAt)
+func (l *ListAuditResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(listAuditResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1AuditListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AuditListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *ListAuditResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ListAuditResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AuditListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListAuditResponseRowsItem(unmarshaler.embed)
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AuditListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AuditListResponseRowsItem
+func (l *ListAuditResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ListAuditResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AuditListResponseRowsItem) String() string {
-	if p == nil {
+func (l *ListAuditResponseRowsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1AuditListResponseRowsItemActorType string
+type ListAuditResponseRowsItemActorType string
 
 const (
-	PostV1AuditListResponseRowsItemActorTypeUser   PostV1AuditListResponseRowsItemActorType = "user"
-	PostV1AuditListResponseRowsItemActorTypeAPIKey PostV1AuditListResponseRowsItemActorType = "api_key"
-	PostV1AuditListResponseRowsItemActorTypeSystem PostV1AuditListResponseRowsItemActorType = "system"
+	ListAuditResponseRowsItemActorTypeUser   ListAuditResponseRowsItemActorType = "user"
+	ListAuditResponseRowsItemActorTypeAPIKey ListAuditResponseRowsItemActorType = "api_key"
+	ListAuditResponseRowsItemActorTypeSystem ListAuditResponseRowsItemActorType = "system"
 )
 
-func NewPostV1AuditListResponseRowsItemActorTypeFromString(s string) (PostV1AuditListResponseRowsItemActorType, error) {
+func NewListAuditResponseRowsItemActorTypeFromString(s string) (ListAuditResponseRowsItemActorType, error) {
 	switch s {
 	case "user":
-		return PostV1AuditListResponseRowsItemActorTypeUser, nil
+		return ListAuditResponseRowsItemActorTypeUser, nil
 	case "api_key":
-		return PostV1AuditListResponseRowsItemActorTypeAPIKey, nil
+		return ListAuditResponseRowsItemActorTypeAPIKey, nil
 	case "system":
-		return PostV1AuditListResponseRowsItemActorTypeSystem, nil
+		return ListAuditResponseRowsItemActorTypeSystem, nil
 	}
-	var t PostV1AuditListResponseRowsItemActorType
+	var t ListAuditResponseRowsItemActorType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AuditListResponseRowsItemActorType) Ptr() *PostV1AuditListResponseRowsItemActorType {
-	return &p
+func (l ListAuditResponseRowsItemActorType) Ptr() *ListAuditResponseRowsItemActorType {
+	return &l
 }

@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestEcommercePostV1EcommerceOrdersCreateWithWireMock(
+func TestEcommerceOrdersCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,28 +88,28 @@ func TestEcommercePostV1EcommerceOrdersCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersCreateRequest{
-		Lines: []*nordlet.PostV1EcommerceOrdersCreateRequestLinesItem{
-			&nordlet.PostV1EcommerceOrdersCreateRequestLinesItem{
+	request := &nordlet.OrdersCreateEcommerceRequest{
+		Lines: []*nordlet.OrdersCreateEcommerceRequestLinesItem{
+			&nordlet.OrdersCreateEcommerceRequestLinesItem{
 				Description:      "description",
-				Quantity:         "quantity",
-				UnitPriceExclVat: "unitPriceExclVat",
+				Quantity:         "121.0000",
+				UnitPriceExclVat: "121.0000",
 			},
 		},
 	}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersCreate(
+	_, invocationErr := client.Ecommerce.OrdersCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersCreateWithWireMock", "POST", "/v1/ecommerce/orders/create", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersCreateWithWireMock", "POST", "/v1/ecommerce/orders/create", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceOrdersGetWithWireMock(
+func TestEcommerceOrdersGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -120,22 +120,22 @@ func TestEcommercePostV1EcommerceOrdersGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersGetRequest{
+	request := &nordlet.OrdersGetEcommerceRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersGet(
+	_, invocationErr := client.Ecommerce.OrdersGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersGetWithWireMock", "POST", "/v1/ecommerce/orders/get", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersGetWithWireMock", "POST", "/v1/ecommerce/orders/get", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceOrdersListWithWireMock(
+func TestEcommerceOrdersListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -146,20 +146,20 @@ func TestEcommercePostV1EcommerceOrdersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersListRequest{}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersList(
+	request := &nordlet.OrdersListEcommerceRequest{}
+	_, invocationErr := client.Ecommerce.OrdersList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersListWithWireMock", "POST", "/v1/ecommerce/orders/list", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersListWithWireMock", "POST", "/v1/ecommerce/orders/list", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceOrdersReserveWithWireMock(
+func TestEcommerceOrdersReserveWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -170,22 +170,22 @@ func TestEcommercePostV1EcommerceOrdersReserveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersReserveRequest{
+	request := &nordlet.OrdersReserveEcommerceRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersReserve(
+	_, invocationErr := client.Ecommerce.OrdersReserve(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersReserveWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersReserveWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersReserveWithWireMock", "POST", "/v1/ecommerce/orders/reserve", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersReserveWithWireMock", "POST", "/v1/ecommerce/orders/reserve", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceOrdersFulfillWithWireMock(
+func TestEcommerceOrdersFulfillWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -196,22 +196,22 @@ func TestEcommercePostV1EcommerceOrdersFulfillWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersFulfillRequest{
+	request := &nordlet.OrdersFulfillEcommerceRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersFulfill(
+	_, invocationErr := client.Ecommerce.OrdersFulfill(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersFulfillWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersFulfillWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersFulfillWithWireMock", "POST", "/v1/ecommerce/orders/fulfill", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersFulfillWithWireMock", "POST", "/v1/ecommerce/orders/fulfill", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceOrdersCancelWithWireMock(
+func TestEcommerceOrdersCancelWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -222,22 +222,22 @@ func TestEcommercePostV1EcommerceOrdersCancelWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceOrdersCancelRequest{
+	request := &nordlet.OrdersCancelEcommerceRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceOrdersCancel(
+	_, invocationErr := client.Ecommerce.OrdersCancel(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceOrdersCancelWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceOrdersCancelWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceOrdersCancelWithWireMock", "POST", "/v1/ecommerce/orders/cancel", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceOrdersCancelWithWireMock", "POST", "/v1/ecommerce/orders/cancel", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceProductsListWithWireMock(
+func TestEcommerceProductsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -248,20 +248,20 @@ func TestEcommercePostV1EcommerceProductsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceProductsListRequest{}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceProductsList(
+	request := &nordlet.ProductsListEcommerceRequest{}
+	_, invocationErr := client.Ecommerce.ProductsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceProductsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceProductsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceProductsListWithWireMock", "POST", "/v1/ecommerce/products/list", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceProductsListWithWireMock", "POST", "/v1/ecommerce/products/list", nil, 1)
 }
 
-func TestEcommercePostV1EcommerceStockListWithWireMock(
+func TestEcommerceStockListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -272,15 +272,15 @@ func TestEcommercePostV1EcommerceStockListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1EcommerceStockListRequest{}
-	_, invocationErr := client.Ecommerce.PostV1EcommerceStockList(
+	request := &nordlet.StockListEcommerceRequest{}
+	_, invocationErr := client.Ecommerce.StockList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestEcommercePostV1EcommerceStockListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestEcommerceStockListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestEcommercePostV1EcommerceStockListWithWireMock", "POST", "/v1/ecommerce/stock/list", nil, 1)
+	VerifyRequestCount(t, "TestEcommerceStockListWithWireMock", "POST", "/v1/ecommerce/stock/list", nil, 1)
 }

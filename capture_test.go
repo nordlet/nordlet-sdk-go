@@ -7,911 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1CaptureDocumentsDeleteRequest(t *testing.T) {
+func TestSettersDocumentsConfirmCaptureRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsDeleteRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsDeleteRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsDeleteRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsGetRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsGetRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsGetRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsListRequest(t *testing.T) {
-	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValuePage *int64
-		obj.SetPage(fernTestValuePage)
-		assert.Equal(t, fernTestValuePage, obj.Page)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValuePageSize *int64
-		obj.SetPageSize(fernTestValuePageSize)
-		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSort", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueSort []*PostV1CaptureDocumentsListRequestSortItem
-		obj.SetSort(fernTestValueSort)
-		assert.Equal(t, fernTestValueSort, obj.Sort)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFilter", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueFilter []*PostV1CaptureDocumentsListRequestFilterItem
-		obj.SetFilter(fernTestValueFilter)
-		assert.Equal(t, fernTestValueFilter, obj.Filter)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueTotals []string
-		obj.SetTotals(fernTestValueTotals)
-		assert.Equal(t, fernTestValueTotals, obj.Totals)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsListRequest(t *testing.T) {
-	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValuePage *int64
-
-		// Act
-		obj.SetPage(fernTestValuePage)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValuePageSize *int64
-
-		// Act
-		obj.SetPageSize(fernTestValuePageSize)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueSort []*PostV1CaptureDocumentsListRequestSortItem
-
-		// Act
-		obj.SetSort(fernTestValueSort)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueFilter []*PostV1CaptureDocumentsListRequestFilterItem
-
-		// Act
-		obj.SetFilter(fernTestValueFilter)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsListRequest{}
-		var fernTestValueTotals []string
-
-		// Act
-		obj.SetTotals(fernTestValueTotals)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureSettingsUpdateRequest(t *testing.T) {
-	t.Run("SetIntakeEnabled", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateRequest{}
-		var fernTestValueIntakeEnabled *bool
-		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
-		assert.Equal(t, fernTestValueIntakeEnabled, obj.IntakeEnabled)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCaptureAutoExtract", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateRequest{}
-		var fernTestValueCaptureAutoExtract *bool
-		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
-		assert.Equal(t, fernTestValueCaptureAutoExtract, obj.CaptureAutoExtract)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureSettingsUpdateRequest(t *testing.T) {
-	t.Run("SetIntakeEnabled_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureSettingsUpdateRequest{}
-		var fernTestValueIntakeEnabled *bool
-
-		// Act
-		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCaptureAutoExtract_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureSettingsUpdateRequest{}
-		var fernTestValueCaptureAutoExtract *bool
-
-		// Act
-		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsExtractRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractRequest{}
-		var fernTestValueID string
-		obj.SetID(fernTestValueID)
-		assert.Equal(t, fernTestValueID, obj.ID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsExtractRequest(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsExtractRequest{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsUploadRequest(t *testing.T) {
-	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueFileName string
-		obj.SetFileName(fernTestValueFileName)
-		assert.Equal(t, fernTestValueFileName, obj.FileName)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueMimeType string
-		obj.SetMimeType(fernTestValueMimeType)
-		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetContent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueContent string
-		obj.SetContent(fernTestValueContent)
-		assert.Equal(t, fernTestValueContent, obj.Content)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsUploadRequest(t *testing.T) {
-	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueFileName string
-
-		// Act
-		obj.SetFileName(fernTestValueFileName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueMimeType string
-
-		// Act
-		obj.SetMimeType(fernTestValueMimeType)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsUploadRequest{}
-		var fernTestValueContent string
-
-		// Act
-		obj.SetContent(fernTestValueContent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureInboundEmailRequest(t *testing.T) {
-	t.Run("SetPostmarkTo", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkTo *string
-		obj.SetPostmarkTo(fernTestValuePostmarkTo)
-		assert.Equal(t, fernTestValuePostmarkTo, obj.PostmarkTo)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetToFull", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueToFull []*PostV1CaptureInboundEmailRequestToFullItem
-		obj.SetToFull(fernTestValueToFull)
-		assert.Equal(t, fernTestValueToFull, obj.ToFull)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPostmarkFrom", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkFrom *string
-		obj.SetPostmarkFrom(fernTestValuePostmarkFrom)
-		assert.Equal(t, fernTestValuePostmarkFrom, obj.PostmarkFrom)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPostmarkSubject", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkSubject *string
-		obj.SetPostmarkSubject(fernTestValuePostmarkSubject)
-		assert.Equal(t, fernTestValuePostmarkSubject, obj.PostmarkSubject)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPostmarkAttachments", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem
-		obj.SetPostmarkAttachments(fernTestValuePostmarkAttachments)
-		assert.Equal(t, fernTestValuePostmarkAttachments, obj.PostmarkAttachments)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTo", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueTo *PostV1CaptureInboundEmailRequestTo
-		obj.SetTo(fernTestValueTo)
-		assert.Equal(t, fernTestValueTo, obj.To)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetFrom", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueFrom *string
-		obj.SetFrom(fernTestValueFrom)
-		assert.Equal(t, fernTestValueFrom, obj.From)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSubject", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueSubject *string
-		obj.SetSubject(fernTestValueSubject)
-		assert.Equal(t, fernTestValueSubject, obj.Subject)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAttachments", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem
-		obj.SetAttachments(fernTestValueAttachments)
-		assert.Equal(t, fernTestValueAttachments, obj.Attachments)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureInboundEmailRequest(t *testing.T) {
-	t.Run("SetPostmarkTo_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkTo *string
-
-		// Act
-		obj.SetPostmarkTo(fernTestValuePostmarkTo)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetToFull_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueToFull []*PostV1CaptureInboundEmailRequestToFullItem
-
-		// Act
-		obj.SetToFull(fernTestValueToFull)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPostmarkFrom_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkFrom *string
-
-		// Act
-		obj.SetPostmarkFrom(fernTestValuePostmarkFrom)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPostmarkSubject_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkSubject *string
-
-		// Act
-		obj.SetPostmarkSubject(fernTestValuePostmarkSubject)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPostmarkAttachments_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValuePostmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem
-
-		// Act
-		obj.SetPostmarkAttachments(fernTestValuePostmarkAttachments)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueTo *PostV1CaptureInboundEmailRequestTo
-
-		// Act
-		obj.SetTo(fernTestValueTo)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueFrom *string
-
-		// Act
-		obj.SetFrom(fernTestValueFrom)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSubject_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueSubject *string
-
-		// Act
-		obj.SetSubject(fernTestValueSubject)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAttachments_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureInboundEmailRequest{}
-		var fernTestValueAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem
-
-		// Act
-		obj.SetAttachments(fernTestValueAttachments)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
-	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -919,7 +20,7 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -927,15 +28,15 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	})
 
 	t.Run("SetNewSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueNewSupplier *PostV1CaptureDocumentsConfirmRequestNewSupplier
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueNewSupplier *DocumentsConfirmCaptureRequestNewSupplier
 		obj.SetNewSupplier(fernTestValueNewSupplier)
 		assert.Equal(t, fernTestValueNewSupplier, obj.NewSupplier)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueDocumentNumber string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -943,23 +44,23 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueDocumentDate string
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -967,7 +68,7 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -975,8 +76,8 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmRequestLinesItem
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueLines []*DocumentsConfirmCaptureRequestLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -984,11 +85,11 @@ func TestSettersPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
+func TestSettersMarkExplicitDocumentsConfirmCaptureRequest(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueID string
 
 		// Act
@@ -1019,7 +120,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValuePartnerID *string
 
 		// Act
@@ -1050,8 +151,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetNewSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueNewSupplier *PostV1CaptureDocumentsConfirmRequestNewSupplier
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueNewSupplier *DocumentsConfirmCaptureRequestNewSupplier
 
 		// Act
 		obj.SetNewSupplier(fernTestValueNewSupplier)
@@ -1081,7 +182,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueDocumentNumber string
 
 		// Act
@@ -1112,8 +213,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueDocumentDate string
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -1143,8 +244,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -1174,7 +275,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -1205,7 +306,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
+		obj := &DocumentsConfirmCaptureRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1236,8 +337,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequest{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmRequestLinesItem
+		obj := &DocumentsConfirmCaptureRequest{}
+		var fernTestValueLines []*DocumentsConfirmCaptureRequestLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -1266,1315 +367,345 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
-	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueItemID *string
-		obj.SetItemID(fernTestValueItemID)
-		assert.Equal(t, fernTestValueItemID, obj.ItemID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueDescription *string
-		obj.SetDescription(fernTestValueDescription)
-		assert.Equal(t, fernTestValueDescription, obj.Description)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnit *string
-		obj.SetUnit(fernTestValueUnit)
-		assert.Equal(t, fernTestValueUnit, obj.Unit)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueQuantity *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity
-		obj.SetQuantity(fernTestValueQuantity)
-		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnitPriceExclVat *string
-		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
-		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUnitPriceInclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnitPriceInclVat *string
-		obj.SetUnitPriceInclVat(fernTestValueUnitPriceInclVat)
-		assert.Equal(t, fernTestValueUnitPriceInclVat, obj.UnitPriceInclVat)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueVatRatePercent *string
-		obj.SetVatRatePercent(fernTestValueVatRatePercent)
-		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetVatClassifierCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueVatClassifierCode *string
-		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
-		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCostCenterID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueCostCenterID *string
-		obj.SetCostCenterID(fernTestValueCostCenterID)
-		assert.Equal(t, fernTestValueCostCenterID, obj.CostCenterID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetProjectID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueProjectID *string
-		obj.SetProjectID(fernTestValueProjectID)
-		assert.Equal(t, fernTestValueProjectID, obj.ProjectID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueAccountCode *string
-		obj.SetAccountCode(fernTestValueAccountCode)
-		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
-	t.Run("GetItemID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.ItemID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetItemID(), "getter should return the property value")
-	})
-
-	t.Run("GetItemID_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.ItemID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetItemID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetItemID() // Should return zero value
-	})
-
-	t.Run("GetDescription", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.Description = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDescription(), "getter should return the property value")
-	})
-
-	t.Run("GetDescription_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.Description = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDescription(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDescription() // Should return zero value
-	})
-
-	t.Run("GetUnit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.Unit = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnit(), "getter should return the property value")
-	})
-
-	t.Run("GetUnit_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.Unit = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnit(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnit() // Should return zero value
-	})
-
-	t.Run("GetQuantity", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity
-		obj.Quantity = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetQuantity(), "getter should return the property value")
-	})
-
-	t.Run("GetQuantity_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.Quantity = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetQuantity(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetQuantity() // Should return zero value
-	})
-
-	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.UnitPriceExclVat = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnitPriceExclVat(), "getter should return the property value")
-	})
-
-	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.UnitPriceExclVat = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnitPriceExclVat(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnitPriceExclVat() // Should return zero value
-	})
-
-	t.Run("GetUnitPriceInclVat", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.UnitPriceInclVat = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnitPriceInclVat(), "getter should return the property value")
-	})
-
-	t.Run("GetUnitPriceInclVat_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.UnitPriceInclVat = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnitPriceInclVat(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnitPriceInclVat_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnitPriceInclVat() // Should return zero value
-	})
-
-	t.Run("GetVatRatePercent", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.VatRatePercent = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetVatRatePercent(), "getter should return the property value")
-	})
-
-	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.VatRatePercent = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetVatRatePercent(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetVatRatePercent() // Should return zero value
-	})
-
-	t.Run("GetVatClassifierCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.VatClassifierCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
-	})
-
-	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.VatClassifierCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetVatClassifierCode() // Should return zero value
-	})
-
-	t.Run("GetCostCenterID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.CostCenterID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCostCenterID(), "getter should return the property value")
-	})
-
-	t.Run("GetCostCenterID_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.CostCenterID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetCostCenterID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetCostCenterID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCostCenterID() // Should return zero value
-	})
-
-	t.Run("GetProjectID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.ProjectID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetProjectID(), "getter should return the property value")
-	})
-
-	t.Run("GetProjectID_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.ProjectID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetProjectID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetProjectID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetProjectID() // Should return zero value
-	})
-
-	t.Run("GetAccountCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var expected *string
-		obj.AccountCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetAccountCode(), "getter should return the property value")
-	})
-
-	t.Run("GetAccountCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		obj.AccountCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetAccountCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetAccountCode() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
-	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueItemID *string
-
-		// Act
-		obj.SetItemID(fernTestValueItemID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueDescription *string
-
-		// Act
-		obj.SetDescription(fernTestValueDescription)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnit *string
-
-		// Act
-		obj.SetUnit(fernTestValueUnit)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueQuantity *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity
-
-		// Act
-		obj.SetQuantity(fernTestValueQuantity)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnitPriceExclVat *string
-
-		// Act
-		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUnitPriceInclVat_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueUnitPriceInclVat *string
-
-		// Act
-		obj.SetUnitPriceInclVat(fernTestValueUnitPriceInclVat)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueVatRatePercent *string
-
-		// Act
-		obj.SetVatRatePercent(fernTestValueVatRatePercent)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueVatClassifierCode *string
-
-		// Act
-		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCostCenterID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueCostCenterID *string
-
-		// Act
-		obj.SetCostCenterID(fernTestValueCostCenterID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetProjectID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueProjectID *string
-
-		// Act
-		obj.SetProjectID(fernTestValueProjectID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
-		var fernTestValueAccountCode *string
-
-		// Act
-		obj.SetAccountCode(fernTestValueAccountCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestGettersPostV1CaptureDocumentsConfirmRequestLinesItemQuantity(t *testing.T) {
-	t.Run("GetDouble", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItemQuantity{}
-		var expected float64
-		obj.Double = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDouble(), "getter should return the property value")
-	})
-
-	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDouble() // Should return zero value
-	})
-
-	t.Run("GetString", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItemQuantity{}
-		var expected string
-		obj.String = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetString(), "getter should return the property value")
-	})
-
-	t.Run("GetString_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetString() // Should return zero value
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueCode *string
-		obj.SetCode(fernTestValueCode)
-		assert.Equal(t, fernTestValueCode, obj.Code)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueVatCode *string
-		obj.SetVatCode(fernTestValueVatCode)
-		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueCountryCode *string
-		obj.SetCountryCode(fernTestValueCountryCode)
-		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-	t.Run("GetCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var expected *string
-		obj.Code = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
-	})
-
-	t.Run("GetCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		obj.Code = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCode() // Should return zero value
-	})
-
-	t.Run("GetVatCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var expected *string
-		obj.VatCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetVatCode(), "getter should return the property value")
-	})
-
-	t.Run("GetVatCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		obj.VatCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetVatCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetVatCode() // Should return zero value
-	})
-
-	t.Run("GetCountryCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var expected *string
-		obj.CountryCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCountryCode(), "getter should return the property value")
-	})
-
-	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		obj.CountryCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetCountryCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCountryCode() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueCode *string
-
-		// Act
-		obj.SetCode(fernTestValueCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueVatCode *string
-
-		// Act
-		obj.SetVatCode(fernTestValueVatCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
-		var fernTestValueCountryCode *string
-
-		// Act
-		obj.SetCountryCode(fernTestValueCountryCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
-	t.Run("SetCapture", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var fernTestValueCapture *PostV1CaptureDocumentsConfirmResponseCapture
-		obj.SetCapture(fernTestValueCapture)
-		assert.Equal(t, fernTestValueCapture, obj.Capture)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetInvoice", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var fernTestValueInvoice *PostV1CaptureDocumentsConfirmResponseInvoice
-		obj.SetInvoice(fernTestValueInvoice)
-		assert.Equal(t, fernTestValueInvoice, obj.Invoice)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
-	t.Run("GetCapture", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var expected *PostV1CaptureDocumentsConfirmResponseCapture
-		obj.Capture = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCapture(), "getter should return the property value")
-	})
-
-	t.Run("GetCapture_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		obj.Capture = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetCapture(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetCapture_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCapture() // Should return zero value
-	})
-
-	t.Run("GetInvoice", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var expected *PostV1CaptureDocumentsConfirmResponseInvoice
-		obj.Invoice = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetInvoice(), "getter should return the property value")
-	})
-
-	t.Run("GetInvoice_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		obj.Invoice = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetInvoice(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetInvoice_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetInvoice() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
-	t.Run("SetCapture_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var fernTestValueCapture *PostV1CaptureDocumentsConfirmResponseCapture
-
-		// Act
-		obj.SetCapture(fernTestValueCapture)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetInvoice_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
-		var fernTestValueInvoice *PostV1CaptureDocumentsConfirmResponseInvoice
-
-		// Act
-		obj.SetInvoice(fernTestValueInvoice)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
+func TestSettersDocumentsDeleteCaptureRequest(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsDeleteCaptureRequest{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueFileID string
-		obj.SetFileID(fernTestValueFileID)
-		assert.Equal(t, fernTestValueFileID, obj.FileID)
+}
+
+func TestSettersMarkExplicitDocumentsDeleteCaptureRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsDeleteCaptureRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsExtractCaptureRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &DocumentsExtractCaptureRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+}
+
+func TestSettersMarkExplicitDocumentsExtractCaptureRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsExtractCaptureRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsGetCaptureRequest(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &DocumentsGetCaptureRequest{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsGetCaptureRequest(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsGetCaptureRequest{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsListCaptureRequest(t *testing.T) {
+	t.Run("SetPage", func(t *testing.T) {
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValuePage *int64
+		obj.SetPage(fernTestValuePage)
+		assert.Equal(t, fernTestValuePage, obj.Page)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPageSize", func(t *testing.T) {
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValuePageSize *int64
+		obj.SetPageSize(fernTestValuePageSize)
+		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSort", func(t *testing.T) {
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueSort []*DocumentsListCaptureRequestSortItem
+		obj.SetSort(fernTestValueSort)
+		assert.Equal(t, fernTestValueSort, obj.Sort)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilter", func(t *testing.T) {
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueFilter []*DocumentsListCaptureRequestFilterItem
+		obj.SetFilter(fernTestValueFilter)
+		assert.Equal(t, fernTestValueFilter, obj.Filter)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTotals", func(t *testing.T) {
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueTotals []string
+		obj.SetTotals(fernTestValueTotals)
+		assert.Equal(t, fernTestValueTotals, obj.Totals)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsListCaptureRequest(t *testing.T) {
+	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValuePage *int64
+
+		// Act
+		obj.SetPage(fernTestValuePage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValuePageSize *int64
+
+		// Act
+		obj.SetPageSize(fernTestValuePageSize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSort_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueSort []*DocumentsListCaptureRequestSortItem
+
+		// Act
+		obj.SetSort(fernTestValueSort)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueFilter []*DocumentsListCaptureRequestFilterItem
+
+		// Act
+		obj.SetFilter(fernTestValueFilter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsListCaptureRequest{}
+		var fernTestValueTotals []string
+
+		// Act
+		obj.SetTotals(fernTestValueTotals)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsUploadCaptureRequest(t *testing.T) {
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsUploadCaptureRequest{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -2582,588 +713,28 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsUploadCaptureRequest{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueSizeBytes int64
-		obj.SetSizeBytes(fernTestValueSizeBytes)
-		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueStatus PostV1CaptureDocumentsConfirmResponseCaptureStatus
-		obj.SetStatus(fernTestValueStatus)
-		assert.Equal(t, fernTestValueStatus, obj.Status)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetProvider", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueProvider *string
-		obj.SetProvider(fernTestValueProvider)
-		assert.Equal(t, fernTestValueProvider, obj.Provider)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetModel", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueModel *string
-		obj.SetModel(fernTestValueModel)
-		assert.Equal(t, fernTestValueModel, obj.Model)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPagesProcessed", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValuePagesProcessed *int64
-		obj.SetPagesProcessed(fernTestValuePagesProcessed)
-		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetExtraction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		obj.SetExtraction(fernTestValueExtraction)
-		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMatchedPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueMatchedPartnerID *string
-		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
-		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValuePurchaseInvoiceID *string
-		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
-		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetError", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueError *string
-		obj.SetError(fernTestValueError)
-		assert.Equal(t, fernTestValueError, obj.Error)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueCreatedAt string
-		obj.SetCreatedAt(fernTestValueCreatedAt)
-		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueUpdatedAt string
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
-		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &DocumentsUploadCaptureRequest{}
+		var fernTestValueContent string
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
-	t.Run("GetID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.ID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
-	})
-
-	t.Run("GetID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetID() // Should return zero value
-	})
-
-	t.Run("GetFileID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.FileID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
-	})
-
-	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetFileID() // Should return zero value
-	})
-
-	t.Run("GetFileName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.FileName = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
-	})
-
-	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetFileName() // Should return zero value
-	})
-
-	t.Run("GetMimeType", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.MimeType = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetMimeType(), "getter should return the property value")
-	})
-
-	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetMimeType() // Should return zero value
-	})
-
-	t.Run("GetSizeBytes", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected int64
-		obj.SizeBytes = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSizeBytes(), "getter should return the property value")
-	})
-
-	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSizeBytes() // Should return zero value
-	})
-
-	t.Run("GetStatus", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected PostV1CaptureDocumentsConfirmResponseCaptureStatus
-		obj.Status = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
-	})
-
-	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetStatus() // Should return zero value
-	})
-
-	t.Run("GetProvider", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *string
-		obj.Provider = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetProvider(), "getter should return the property value")
-	})
-
-	t.Run("GetProvider_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.Provider = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetProvider(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetProvider() // Should return zero value
-	})
-
-	t.Run("GetModel", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *string
-		obj.Model = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetModel(), "getter should return the property value")
-	})
-
-	t.Run("GetModel_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.Model = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetModel(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetModel_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetModel() // Should return zero value
-	})
-
-	t.Run("GetPagesProcessed", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *int64
-		obj.PagesProcessed = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPagesProcessed(), "getter should return the property value")
-	})
-
-	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.PagesProcessed = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPagesProcessed(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPagesProcessed() // Should return zero value
-	})
-
-	t.Run("GetExtraction", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		obj.Extraction = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetExtraction(), "getter should return the property value")
-	})
-
-	t.Run("GetExtraction_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.Extraction = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetExtraction(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetExtraction() // Should return zero value
-	})
-
-	t.Run("GetMatchedPartnerID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *string
-		obj.MatchedPartnerID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetMatchedPartnerID(), "getter should return the property value")
-	})
-
-	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.MatchedPartnerID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetMatchedPartnerID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetMatchedPartnerID() // Should return zero value
-	})
-
-	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *string
-		obj.PurchaseInvoiceID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPurchaseInvoiceID(), "getter should return the property value")
-	})
-
-	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.PurchaseInvoiceID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPurchaseInvoiceID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPurchaseInvoiceID() // Should return zero value
-	})
-
-	t.Run("GetError", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected *string
-		obj.Error = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetError(), "getter should return the property value")
-	})
-
-	t.Run("GetError_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		obj.Error = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetError(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetError_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetError() // Should return zero value
-	})
-
-	t.Run("GetCreatedAt", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.CreatedAt = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
-	})
-
-	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCreatedAt() // Should return zero value
-	})
-
-	t.Run("GetUpdatedAt", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var expected string
-		obj.UpdatedAt = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
-	})
-
-	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUpdatedAt() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
-	t.Run("SetID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueID string
-
-		// Act
-		obj.SetID(fernTestValueID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueFileID string
-
-		// Act
-		obj.SetFileID(fernTestValueFileID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
+func TestSettersMarkExplicitDocumentsUploadCaptureRequest(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsUploadCaptureRequest{}
 		var fernTestValueFileName string
 
 		// Act
@@ -3194,7 +765,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCapture(t *test
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsUploadCaptureRequest{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -3222,324 +793,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCapture(t *test
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueSizeBytes int64
+		obj := &DocumentsUploadCaptureRequest{}
+		var fernTestValueContent string
 
 		// Act
-		obj.SetSizeBytes(fernTestValueSizeBytes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueStatus PostV1CaptureDocumentsConfirmResponseCaptureStatus
-
-		// Act
-		obj.SetStatus(fernTestValueStatus)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueProvider *string
-
-		// Act
-		obj.SetProvider(fernTestValueProvider)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueModel *string
-
-		// Act
-		obj.SetModel(fernTestValueModel)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValuePagesProcessed *int64
-
-		// Act
-		obj.SetPagesProcessed(fernTestValuePagesProcessed)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-
-		// Act
-		obj.SetExtraction(fernTestValueExtraction)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueMatchedPartnerID *string
-
-		// Act
-		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValuePurchaseInvoiceID *string
-
-		// Act
-		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetError_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueError *string
-
-		// Act
-		obj.SetError(fernTestValueError)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueCreatedAt string
-
-		// Act
-		obj.SetCreatedAt(fernTestValueCreatedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
-		var fernTestValueUpdatedAt string
-
-		// Act
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		obj.SetContent(fernTestValueContent)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3565,431 +826,90 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCapture(t *test
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
-	t.Run("SetSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
-		obj.SetSupplier(fernTestValueSupplier)
-		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
+func TestSettersInboundEmailCaptureRequest(t *testing.T) {
+	t.Run("SetPostmarkTo", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkTo *string
+		obj.SetPostmarkTo(fernTestValuePostmarkTo)
+		assert.Equal(t, fernTestValuePostmarkTo, obj.PostmarkTo)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDocumentNumber *string
-		obj.SetDocumentNumber(fernTestValueDocumentNumber)
-		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
+	t.Run("SetToFull", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueToFull []*InboundEmailCaptureRequestToFullItem
+		obj.SetToFull(fernTestValueToFull)
+		assert.Equal(t, fernTestValueToFull, obj.ToFull)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDocumentDate *string
-		obj.SetDocumentDate(fernTestValueDocumentDate)
-		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
+	t.Run("SetPostmarkFrom", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkFrom *string
+		obj.SetPostmarkFrom(fernTestValuePostmarkFrom)
+		assert.Equal(t, fernTestValuePostmarkFrom, obj.PostmarkFrom)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDueDate *string
-		obj.SetDueDate(fernTestValueDueDate)
-		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
+	t.Run("SetPostmarkSubject", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkSubject *string
+		obj.SetPostmarkSubject(fernTestValuePostmarkSubject)
+		assert.Equal(t, fernTestValuePostmarkSubject, obj.PostmarkSubject)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueCurrency *string
-		obj.SetCurrency(fernTestValueCurrency)
-		assert.Equal(t, fernTestValueCurrency, obj.Currency)
+	t.Run("SetPostmarkAttachments", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkAttachments []*InboundEmailCaptureRequestAttachmentsItem
+		obj.SetPostmarkAttachments(fernTestValuePostmarkAttachments)
+		assert.Equal(t, fernTestValuePostmarkAttachments, obj.PostmarkAttachments)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueNetTotal *string
-		obj.SetNetTotal(fernTestValueNetTotal)
-		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueTo *InboundEmailCaptureRequestTo
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueVatTotal *string
-		obj.SetVatTotal(fernTestValueVatTotal)
-		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueFrom *string
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueGrossTotal *string
-		obj.SetGrossTotal(fernTestValueGrossTotal)
-		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
+	t.Run("SetSubject", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueSubject *string
+		obj.SetSubject(fernTestValueSubject)
+		assert.Equal(t, fernTestValueSubject, obj.Subject)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueNotes *string
-		obj.SetNotes(fernTestValueNotes)
-		assert.Equal(t, fernTestValueNotes, obj.Notes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
-		obj.SetLines(fernTestValueLines)
-		assert.Equal(t, fernTestValueLines, obj.Lines)
+	t.Run("SetAttachments", func(t *testing.T) {
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueAttachments []*InboundEmailCaptureRequestAttachmentsItem
+		obj.SetAttachments(fernTestValueAttachments)
+		assert.Equal(t, fernTestValueAttachments, obj.Attachments)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
-	t.Run("GetSupplier", func(t *testing.T) {
+func TestSettersMarkExplicitInboundEmailCaptureRequest(t *testing.T) {
+	t.Run("SetPostmarkTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
-		obj.Supplier = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSupplier(), "getter should return the property value")
-	})
-
-	t.Run("GetSupplier_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.Supplier = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetSupplier(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSupplier() // Should return zero value
-	})
-
-	t.Run("GetDocumentNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.DocumentNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDocumentNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.DocumentNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDocumentNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDocumentNumber() // Should return zero value
-	})
-
-	t.Run("GetDocumentDate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.DocumentDate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDocumentDate(), "getter should return the property value")
-	})
-
-	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.DocumentDate = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDocumentDate(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDocumentDate() // Should return zero value
-	})
-
-	t.Run("GetDueDate", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.DueDate = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDueDate(), "getter should return the property value")
-	})
-
-	t.Run("GetDueDate_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.DueDate = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDueDate(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDueDate() // Should return zero value
-	})
-
-	t.Run("GetCurrency", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.Currency = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetCurrency(), "getter should return the property value")
-	})
-
-	t.Run("GetCurrency_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.Currency = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetCurrency(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetCurrency() // Should return zero value
-	})
-
-	t.Run("GetNetTotal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.NetTotal = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetNetTotal(), "getter should return the property value")
-	})
-
-	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.NetTotal = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetNetTotal(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetNetTotal() // Should return zero value
-	})
-
-	t.Run("GetVatTotal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.VatTotal = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetVatTotal(), "getter should return the property value")
-	})
-
-	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.VatTotal = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetVatTotal(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetVatTotal() // Should return zero value
-	})
-
-	t.Run("GetGrossTotal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.GrossTotal = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetGrossTotal(), "getter should return the property value")
-	})
-
-	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.GrossTotal = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetGrossTotal(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetGrossTotal() // Should return zero value
-	})
-
-	t.Run("GetNotes", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected *string
-		obj.Notes = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetNotes(), "getter should return the property value")
-	})
-
-	t.Run("GetNotes_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.Notes = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetNotes(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetNotes() // Should return zero value
-	})
-
-	t.Run("GetLines", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var expected []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
-		obj.Lines = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetLines(), "getter should return the property value")
-	})
-
-	t.Run("GetLines_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		obj.Lines = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetLines(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetLines_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetLines() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
-	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkTo *string
 
 		// Act
-		obj.SetSupplier(fernTestValueSupplier)
+		obj.SetPostmarkTo(fernTestValuePostmarkTo)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4013,14 +933,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
+	t.Run("SetToFull_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDocumentNumber *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueToFull []*InboundEmailCaptureRequestToFullItem
 
 		// Act
-		obj.SetDocumentNumber(fernTestValueDocumentNumber)
+		obj.SetToFull(fernTestValueToFull)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4044,14 +964,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
+	t.Run("SetPostmarkFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkFrom *string
 
 		// Act
-		obj.SetDocumentDate(fernTestValueDocumentDate)
+		obj.SetPostmarkFrom(fernTestValuePostmarkFrom)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4075,14 +995,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
+	t.Run("SetPostmarkSubject_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueDueDate *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkSubject *string
 
 		// Act
-		obj.SetDueDate(fernTestValueDueDate)
+		obj.SetPostmarkSubject(fernTestValuePostmarkSubject)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4106,14 +1026,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
+	t.Run("SetPostmarkAttachments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueCurrency *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValuePostmarkAttachments []*InboundEmailCaptureRequestAttachmentsItem
 
 		// Act
-		obj.SetCurrency(fernTestValueCurrency)
+		obj.SetPostmarkAttachments(fernTestValuePostmarkAttachments)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4137,14 +1057,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueNetTotal *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueTo *InboundEmailCaptureRequestTo
 
 		// Act
-		obj.SetNetTotal(fernTestValueNetTotal)
+		obj.SetTo(fernTestValueTo)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4168,14 +1088,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueVatTotal *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueFrom *string
 
 		// Act
-		obj.SetVatTotal(fernTestValueVatTotal)
+		obj.SetFrom(fernTestValueFrom)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4199,14 +1119,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
+	t.Run("SetSubject_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueGrossTotal *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueSubject *string
 
 		// Act
-		obj.SetGrossTotal(fernTestValueGrossTotal)
+		obj.SetSubject(fernTestValueSubject)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4230,45 +1150,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+	t.Run("SetAttachments_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueNotes *string
+		obj := &InboundEmailCaptureRequest{}
+		var fernTestValueAttachments []*InboundEmailCaptureRequestAttachmentsItem
 
 		// Act
-		obj.SetNotes(fernTestValueNotes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
-
-		// Act
-		obj.SetLines(fernTestValueLines)
+		obj.SetAttachments(fernTestValueAttachments)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4294,88 +1183,239 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
+func TestSettersSettingsUpdateCaptureRequest(t *testing.T) {
+	t.Run("SetIntakeEnabled", func(t *testing.T) {
+		obj := &SettingsUpdateCaptureRequest{}
+		var fernTestValueIntakeEnabled *bool
+		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
+		assert.Equal(t, fernTestValueIntakeEnabled, obj.IntakeEnabled)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCaptureAutoExtract", func(t *testing.T) {
+		obj := &SettingsUpdateCaptureRequest{}
+		var fernTestValueCaptureAutoExtract *bool
+		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
+		assert.Equal(t, fernTestValueCaptureAutoExtract, obj.CaptureAutoExtract)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitSettingsUpdateCaptureRequest(t *testing.T) {
+	t.Run("SetIntakeEnabled_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateCaptureRequest{}
+		var fernTestValueIntakeEnabled *bool
+
+		// Act
+		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCaptureAutoExtract_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateCaptureRequest{}
+		var fernTestValueCaptureAutoExtract *bool
+
+		// Act
+		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
+	t.Run("SetItemID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueItemID *string
+		obj.SetItemID(fernTestValueItemID)
+		assert.Equal(t, fernTestValueItemID, obj.ItemID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueDescription string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDescription *string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueQuantity string
-		obj.SetQuantity(fernTestValueQuantity)
-		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetQuantity", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueQuantity *DocumentsConfirmCaptureRequestLinesItemQuantity
+		obj.SetQuantity(fernTestValueQuantity)
+		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetUnitPriceInclVat", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueUnitPriceInclVat *string
+		obj.SetUnitPriceInclVat(fernTestValueUnitPriceInclVat)
+		assert.Equal(t, fernTestValueUnitPriceInclVat, obj.UnitPriceInclVat)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineNet *string
-		obj.SetLineNet(fernTestValueLineNet)
-		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineVat *string
-		obj.SetLineVat(fernTestValueLineVat)
-		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
+	t.Run("SetCostCenterID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueCostCenterID *string
+		obj.SetCostCenterID(fernTestValueCostCenterID)
+		assert.Equal(t, fernTestValueCostCenterID, obj.CostCenterID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineGross *string
-		obj.SetLineGross(fernTestValueLineGross)
-		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
+	t.Run("SetProjectID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueProjectID *string
+		obj.SetProjectID(fernTestValueProjectID)
+		assert.Equal(t, fernTestValueProjectID, obj.ProjectID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAccountCode", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueAccountCode *string
+		obj.SetAccountCode(fernTestValueAccountCode)
+		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
+func TestGettersDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
+	t.Run("GetItemID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *string
+		obj.ItemID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetItemID(), "getter should return the property value")
+	})
+
+	t.Run("GetItemID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.ItemID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetItemID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetItemID() // Should return zero value
+	})
+
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var expected string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *string
 		obj.Description = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetDescription(), "getter should return the property value")
 	})
 
+	t.Run("GetDescription_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.Description = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDescription(), "getter should return nil when property is nil")
+	})
+
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4385,33 +1425,10 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 		_ = obj.GetDescription() // Should return zero value
 	})
 
-	t.Run("GetQuantity", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var expected string
-		obj.Quantity = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetQuantity(), "getter should return the property value")
-	})
-
-	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetQuantity() // Should return zero value
-	})
-
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -4422,7 +1439,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -4431,7 +1448,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4441,10 +1458,43 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 		_ = obj.GetUnit() // Should return zero value
 	})
 
+	t.Run("GetQuantity", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *DocumentsConfirmCaptureRequestLinesItemQuantity
+		obj.Quantity = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQuantity(), "getter should return the property value")
+	})
+
+	t.Run("GetQuantity_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.Quantity = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetQuantity(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQuantity() // Should return zero value
+	})
+
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -4455,7 +1505,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -4464,7 +1514,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4474,10 +1524,43 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 		_ = obj.GetUnitPriceExclVat() // Should return zero value
 	})
 
+	t.Run("GetUnitPriceInclVat", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *string
+		obj.UnitPriceInclVat = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUnitPriceInclVat(), "getter should return the property value")
+	})
+
+	t.Run("GetUnitPriceInclVat_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.UnitPriceInclVat = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUnitPriceInclVat(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUnitPriceInclVat_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUnitPriceInclVat() // Should return zero value
+	})
+
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -4488,7 +1571,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -4497,7 +1580,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4507,116 +1590,149 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(
 		_ = obj.GetVatRatePercent() // Should return zero value
 	})
 
-	t.Run("GetLineNet", func(t *testing.T) {
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
-		obj.LineNet = expected
+		obj.VatClassifierCode = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetLineNet(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
 	})
 
-	t.Run("GetLineNet_NilValue", func(t *testing.T) {
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		obj.LineNet = nil
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.VatClassifierCode = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetLineNet(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetLineNet() // Should return zero value
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
-	t.Run("GetLineVat", func(t *testing.T) {
+	t.Run("GetCostCenterID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
-		obj.LineVat = expected
+		obj.CostCenterID = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetLineVat(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetCostCenterID(), "getter should return the property value")
 	})
 
-	t.Run("GetLineVat_NilValue", func(t *testing.T) {
+	t.Run("GetCostCenterID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		obj.LineVat = nil
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.CostCenterID = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetLineVat(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetCostCenterID(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
+	t.Run("GetCostCenterID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetLineVat() // Should return zero value
+		_ = obj.GetCostCenterID() // Should return zero value
 	})
 
-	t.Run("GetLineGross", func(t *testing.T) {
+	t.Run("GetProjectID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var expected *string
-		obj.LineGross = expected
+		obj.ProjectID = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetLineGross(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetProjectID(), "getter should return the property value")
 	})
 
-	t.Run("GetLineGross_NilValue", func(t *testing.T) {
+	t.Run("GetProjectID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		obj.LineGross = nil
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.ProjectID = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetLineGross(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetProjectID(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
+	t.Run("GetProjectID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetLineGross() // Should return zero value
+		_ = obj.GetProjectID() // Should return zero value
+	})
+
+	t.Run("GetAccountCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *string
+		obj.AccountCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAccountCode(), "getter should return the property value")
+	})
+
+	t.Run("GetAccountCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.AccountCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAccountCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAccountCode() // Should return zero value
 	})
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
-	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
+func TestSettersMarkExplicitDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
+	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueDescription string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueItemID *string
 
 		// Act
-		obj.SetDescription(fernTestValueDescription)
+		obj.SetItemID(fernTestValueItemID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4640,14 +1756,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
+	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueQuantity string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDescription *string
 
 		// Act
-		obj.SetQuantity(fernTestValueQuantity)
+		obj.SetDescription(fernTestValueDescription)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4674,7 +1790,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -4702,10 +1818,41 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueQuantity *DocumentsConfirmCaptureRequestLinesItemQuantity
+
+		// Act
+		obj.SetQuantity(fernTestValueQuantity)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -4733,10 +1880,41 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetUnitPriceInclVat_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueUnitPriceInclVat *string
+
+		// Act
+		obj.SetUnitPriceInclVat(fernTestValueUnitPriceInclVat)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -4764,14 +1942,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineNet *string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
 
 		// Act
-		obj.SetLineNet(fernTestValueLineNet)
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4795,14 +1973,14 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
+	t.Run("SetCostCenterID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineVat *string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueCostCenterID *string
 
 		// Act
-		obj.SetLineVat(fernTestValueLineVat)
+		obj.SetCostCenterID(fernTestValueCostCenterID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4826,14 +2004,45 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
+	t.Run("SetProjectID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
-		var fernTestValueLineGross *string
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueProjectID *string
 
 		// Act
-		obj.SetLineGross(fernTestValueLineGross)
+		obj.SetProjectID(fernTestValueProjectID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueAccountCode *string
+
+		// Act
+		obj.SetAccountCode(fernTestValueAccountCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4859,17 +2068,66 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsConfirmCaptureRequestLinesItemQuantity(t *testing.T) {
+	t.Run("GetDouble", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItemQuantity{}
+		var expected float64
+		obj.Double = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDouble(), "getter should return the property value")
+	})
+
+	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItemQuantity
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDouble() // Should return zero value
+	})
+
+	t.Run("GetString", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItemQuantity{}
+		var expected string
+		obj.String = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetString(), "getter should return the property value")
+	})
+
+	t.Run("GetString_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItemQuantity
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetString() // Should return zero value
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		var fernTestValueName *string
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
+		var fernTestValueName string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -4877,7 +2135,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -4885,48 +2143,30 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetIban", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		var fernTestValueIban *string
-		obj.SetIban(fernTestValueIban)
-		assert.Equal(t, fernTestValueIban, obj.Iban)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		var expected *string
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
+		var expected string
 		obj.Name = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
 	})
 
-	t.Run("GetName_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		obj.Name = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetName(), "getter should return nil when property is nil")
-	})
-
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4939,7 +2179,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var expected *string
 		obj.Code = expected
 
@@ -4950,7 +2190,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -4959,7 +2199,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4972,7 +2212,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -4983,7 +2223,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -4992,7 +2232,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5005,7 +2245,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -5016,7 +2256,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -5025,7 +2265,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5035,47 +2275,14 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
-	t.Run("GetIban", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		var expected *string
-		obj.Iban = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetIban(), "getter should return the property value")
-	})
-
-	t.Run("GetIban_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		obj.Iban = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetIban(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetIban_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetIban() // Should return zero value
-	})
-
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestSettersMarkExplicitDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
-		var fernTestValueName *string
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
+		var fernTestValueName string
 
 		// Act
 		obj.SetName(fernTestValueName)
@@ -5105,7 +2312,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var fernTestValueCode *string
 
 		// Act
@@ -5136,7 +2343,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -5167,7 +2374,2801 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
+		var fernTestValueCountryCode *string
+
+		// Act
+		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureResponse(t *testing.T) {
+	t.Run("SetCapture", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponse{}
+		var fernTestValueCapture *DocumentsConfirmCaptureResponseCapture
+		obj.SetCapture(fernTestValueCapture)
+		assert.Equal(t, fernTestValueCapture, obj.Capture)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoice", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponse{}
+		var fernTestValueInvoice *DocumentsConfirmCaptureResponseInvoice
+		obj.SetInvoice(fernTestValueInvoice)
+		assert.Equal(t, fernTestValueInvoice, obj.Invoice)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersDocumentsConfirmCaptureResponse(t *testing.T) {
+	t.Run("GetCapture", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		var expected *DocumentsConfirmCaptureResponseCapture
+		obj.Capture = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCapture(), "getter should return the property value")
+	})
+
+	t.Run("GetCapture_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		obj.Capture = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCapture(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCapture_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCapture() // Should return zero value
+	})
+
+	t.Run("GetInvoice", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		var expected *DocumentsConfirmCaptureResponseInvoice
+		obj.Invoice = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoice(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoice_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		obj.Invoice = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoice(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoice_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoice() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponse(t *testing.T) {
+	t.Run("SetCapture_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		var fernTestValueCapture *DocumentsConfirmCaptureResponseCapture
+
+		// Act
+		obj.SetCapture(fernTestValueCapture)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoice_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponse{}
+		var fernTestValueInvoice *DocumentsConfirmCaptureResponseInvoice
+
+		// Act
+		obj.SetInvoice(fernTestValueInvoice)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureResponseCapture(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueFileID string
+		obj.SetFileID(fernTestValueFileID)
+		assert.Equal(t, fernTestValueFileID, obj.FileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMimeType", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueMimeType string
+		obj.SetMimeType(fernTestValueMimeType)
+		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSizeBytes", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueSizeBytes int64
+		obj.SetSizeBytes(fernTestValueSizeBytes)
+		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueStatus DocumentsConfirmCaptureResponseCaptureStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProvider", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueProvider *string
+		obj.SetProvider(fernTestValueProvider)
+		assert.Equal(t, fernTestValueProvider, obj.Provider)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetModel", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueModel *string
+		obj.SetModel(fernTestValueModel)
+		assert.Equal(t, fernTestValueModel, obj.Model)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPagesProcessed", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValuePagesProcessed *int64
+		obj.SetPagesProcessed(fernTestValuePagesProcessed)
+		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExtraction", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueExtraction *DocumentsConfirmCaptureResponseCaptureExtraction
+		obj.SetExtraction(fernTestValueExtraction)
+		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMatchedPartnerID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueMatchedPartnerID *string
+		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
+		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValuePurchaseInvoiceID *string
+		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
+		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetError", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueError *string
+		obj.SetError(fernTestValueError)
+		assert.Equal(t, fernTestValueError, obj.Error)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueUpdatedAt time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersDocumentsConfirmCaptureResponseCapture(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetFileID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected string
+		obj.FileID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
+	})
+
+	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileID() // Should return zero value
+	})
+
+	t.Run("GetFileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected string
+		obj.FileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
+	})
+
+	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileName() // Should return zero value
+	})
+
+	t.Run("GetMimeType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected string
+		obj.MimeType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMimeType(), "getter should return the property value")
+	})
+
+	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMimeType() // Should return zero value
+	})
+
+	t.Run("GetSizeBytes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected int64
+		obj.SizeBytes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSizeBytes(), "getter should return the property value")
+	})
+
+	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSizeBytes() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected DocumentsConfirmCaptureResponseCaptureStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetProvider", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *string
+		obj.Provider = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProvider(), "getter should return the property value")
+	})
+
+	t.Run("GetProvider_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.Provider = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProvider(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProvider() // Should return zero value
+	})
+
+	t.Run("GetModel", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *string
+		obj.Model = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetModel(), "getter should return the property value")
+	})
+
+	t.Run("GetModel_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.Model = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetModel(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetModel_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetModel() // Should return zero value
+	})
+
+	t.Run("GetPagesProcessed", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *int64
+		obj.PagesProcessed = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPagesProcessed(), "getter should return the property value")
+	})
+
+	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.PagesProcessed = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPagesProcessed(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPagesProcessed() // Should return zero value
+	})
+
+	t.Run("GetExtraction", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *DocumentsConfirmCaptureResponseCaptureExtraction
+		obj.Extraction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExtraction(), "getter should return the property value")
+	})
+
+	t.Run("GetExtraction_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.Extraction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExtraction(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExtraction() // Should return zero value
+	})
+
+	t.Run("GetMatchedPartnerID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *string
+		obj.MatchedPartnerID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMatchedPartnerID(), "getter should return the property value")
+	})
+
+	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.MatchedPartnerID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMatchedPartnerID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMatchedPartnerID() // Should return zero value
+	})
+
+	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *string
+		obj.PurchaseInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPurchaseInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.PurchaseInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPurchaseInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPurchaseInvoiceID() // Should return zero value
+	})
+
+	t.Run("GetError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected *string
+		obj.Error = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetError(), "getter should return the property value")
+	})
+
+	t.Run("GetError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		obj.Error = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetError() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var expected time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCapture
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseCapture(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueFileID string
+
+		// Act
+		obj.SetFileID(fernTestValueFileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueMimeType string
+
+		// Act
+		obj.SetMimeType(fernTestValueMimeType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueSizeBytes int64
+
+		// Act
+		obj.SetSizeBytes(fernTestValueSizeBytes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueStatus DocumentsConfirmCaptureResponseCaptureStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueProvider *string
+
+		// Act
+		obj.SetProvider(fernTestValueProvider)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueModel *string
+
+		// Act
+		obj.SetModel(fernTestValueModel)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValuePagesProcessed *int64
+
+		// Act
+		obj.SetPagesProcessed(fernTestValuePagesProcessed)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueExtraction *DocumentsConfirmCaptureResponseCaptureExtraction
+
+		// Act
+		obj.SetExtraction(fernTestValueExtraction)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueMatchedPartnerID *string
+
+		// Act
+		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValuePurchaseInvoiceID *string
+
+		// Act
+		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueError *string
+
+		// Act
+		obj.SetError(fernTestValueError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCapture{}
+		var fernTestValueUpdatedAt time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
+	t.Run("SetSupplier", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueSupplier *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		obj.SetSupplier(fernTestValueSupplier)
+		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentNumber", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDocumentNumber *string
+		obj.SetDocumentNumber(fernTestValueDocumentNumber)
+		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDocumentDate *time.Time
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDueDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDueDate *time.Time
+		obj.SetDueDate(fernTestValueDueDate)
+		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCurrency", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueCurrency *string
+		obj.SetCurrency(fernTestValueCurrency)
+		assert.Equal(t, fernTestValueCurrency, obj.Currency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNetTotal", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueNetTotal *string
+		obj.SetNetTotal(fernTestValueNetTotal)
+		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVatTotal", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueVatTotal *string
+		obj.SetVatTotal(fernTestValueVatTotal)
+		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGrossTotal", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueGrossTotal *string
+		obj.SetGrossTotal(fernTestValueGrossTotal)
+		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLines", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueLines []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		obj.SetLines(fernTestValueLines)
+		assert.Equal(t, fernTestValueLines, obj.Lines)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
+	t.Run("GetSupplier", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		obj.Supplier = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSupplier(), "getter should return the property value")
+	})
+
+	t.Run("GetSupplier_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.Supplier = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSupplier(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSupplier() // Should return zero value
+	})
+
+	t.Run("GetDocumentNumber", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.DocumentNumber = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentNumber(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.DocumentNumber = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentNumber(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentNumber() // Should return zero value
+	})
+
+	t.Run("GetDocumentDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *time.Time
+		obj.DocumentDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.DocumentDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentDate() // Should return zero value
+	})
+
+	t.Run("GetDueDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *time.Time
+		obj.DueDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDueDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDueDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.DueDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDueDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDueDate() // Should return zero value
+	})
+
+	t.Run("GetCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.Currency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.Currency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCurrency() // Should return zero value
+	})
+
+	t.Run("GetNetTotal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.NetTotal = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNetTotal(), "getter should return the property value")
+	})
+
+	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.NetTotal = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNetTotal(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNetTotal() // Should return zero value
+	})
+
+	t.Run("GetVatTotal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.VatTotal = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatTotal(), "getter should return the property value")
+	})
+
+	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.VatTotal = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatTotal(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatTotal() // Should return zero value
+	})
+
+	t.Run("GetGrossTotal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.GrossTotal = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetGrossTotal(), "getter should return the property value")
+	})
+
+	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.GrossTotal = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetGrossTotal(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetGrossTotal() // Should return zero value
+	})
+
+	t.Run("GetNotes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected *string
+		obj.Notes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNotes(), "getter should return the property value")
+	})
+
+	t.Run("GetNotes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.Notes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNotes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNotes() // Should return zero value
+	})
+
+	t.Run("GetLines", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var expected []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		obj.Lines = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLines(), "getter should return the property value")
+	})
+
+	t.Run("GetLines_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		obj.Lines = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLines(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLines_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLines() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
+	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueSupplier *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+
+		// Act
+		obj.SetSupplier(fernTestValueSupplier)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDocumentNumber *string
+
+		// Act
+		obj.SetDocumentNumber(fernTestValueDocumentNumber)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDocumentDate *time.Time
+
+		// Act
+		obj.SetDocumentDate(fernTestValueDocumentDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueDueDate *time.Time
+
+		// Act
+		obj.SetDueDate(fernTestValueDueDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueCurrency *string
+
+		// Act
+		obj.SetCurrency(fernTestValueCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueNetTotal *string
+
+		// Act
+		obj.SetNetTotal(fernTestValueNetTotal)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueVatTotal *string
+
+		// Act
+		obj.SetVatTotal(fernTestValueVatTotal)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueGrossTotal *string
+
+		// Act
+		obj.SetGrossTotal(fernTestValueGrossTotal)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
+		var fernTestValueLines []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+
+		// Act
+		obj.SetLines(fernTestValueLines)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
+	t.Run("SetDescription", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueDescription string
+		obj.SetDescription(fernTestValueDescription)
+		assert.Equal(t, fernTestValueDescription, obj.Description)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetQuantity", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueQuantity string
+		obj.SetQuantity(fernTestValueQuantity)
+		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnit", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueUnit *string
+		obj.SetUnit(fernTestValueUnit)
+		assert.Equal(t, fernTestValueUnit, obj.Unit)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueUnitPriceExclVat *string
+		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
+		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVatRatePercent", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueVatRatePercent *string
+		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLineNet", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineNet *string
+		obj.SetLineNet(fernTestValueLineNet)
+		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLineVat", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineVat *string
+		obj.SetLineVat(fernTestValueLineVat)
+		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLineGross", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineGross *string
+		obj.SetLineGross(fernTestValueLineGross)
+		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
+	t.Run("GetDescription", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected string
+		obj.Description = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDescription(), "getter should return the property value")
+	})
+
+	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDescription() // Should return zero value
+	})
+
+	t.Run("GetQuantity", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected string
+		obj.Quantity = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQuantity(), "getter should return the property value")
+	})
+
+	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQuantity() // Should return zero value
+	})
+
+	t.Run("GetUnit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.Unit = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUnit(), "getter should return the property value")
+	})
+
+	t.Run("GetUnit_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.Unit = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUnit(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUnit() // Should return zero value
+	})
+
+	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.UnitPriceExclVat = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUnitPriceExclVat(), "getter should return the property value")
+	})
+
+	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.UnitPriceExclVat = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUnitPriceExclVat(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUnitPriceExclVat() // Should return zero value
+	})
+
+	t.Run("GetVatRatePercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.VatRatePercent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatRatePercent(), "getter should return the property value")
+	})
+
+	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.VatRatePercent = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatRatePercent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetLineNet", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.LineNet = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLineNet(), "getter should return the property value")
+	})
+
+	t.Run("GetLineNet_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.LineNet = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLineNet(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLineNet() // Should return zero value
+	})
+
+	t.Run("GetLineVat", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.LineVat = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLineVat(), "getter should return the property value")
+	})
+
+	t.Run("GetLineVat_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.LineVat = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLineVat(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLineVat() // Should return zero value
+	})
+
+	t.Run("GetLineGross", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var expected *string
+		obj.LineGross = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLineGross(), "getter should return the property value")
+	})
+
+	t.Run("GetLineGross_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		obj.LineGross = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLineGross(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLineGross() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
+	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueDescription string
+
+		// Act
+		obj.SetDescription(fernTestValueDescription)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueQuantity string
+
+		// Act
+		obj.SetQuantity(fernTestValueQuantity)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueUnit *string
+
+		// Act
+		obj.SetUnit(fernTestValueUnit)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueUnitPriceExclVat *string
+
+		// Act
+		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueVatRatePercent *string
+
+		// Act
+		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineNet *string
+
+		// Act
+		obj.SetLineNet(fernTestValueLineNet)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineVat *string
+
+		// Act
+		obj.SetLineVat(fernTestValueLineVat)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
+		var fernTestValueLineGross *string
+
+		// Act
+		obj.SetLineGross(fernTestValueLineGross)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
+	t.Run("SetName", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueName *string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueCode *string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVatCode", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueVatCode *string
+		obj.SetVatCode(fernTestValueVatCode)
+		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCountryCode", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueCountryCode *string
+		obj.SetCountryCode(fernTestValueCountryCode)
+		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetIban", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueIban *string
+		obj.SetIban(fernTestValueIban)
+		assert.Equal(t, fernTestValueIban, obj.Iban)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var expected *string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		obj.Name = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetName(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var expected *string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		obj.Code = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetVatCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var expected *string
+		obj.VatCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		obj.VatCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatCode() // Should return zero value
+	})
+
+	t.Run("GetCountryCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var expected *string
+		obj.CountryCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCountryCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		obj.CountryCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCountryCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetIban", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var expected *string
+		obj.Iban = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIban(), "getter should return the property value")
+	})
+
+	t.Run("GetIban_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		obj.Iban = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIban(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIban_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIban() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueName *string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueCode *string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
+		var fernTestValueVatCode *string
+
+		// Act
+		obj.SetVatCode(fernTestValueVatCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -5198,7 +5199,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 	t.Run("SetIban_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
 		var fernTestValueIban *string
 
 		// Act
@@ -5228,9 +5229,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseCaptureExtracti
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestSettersDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -5238,7 +5239,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePartnerID string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
@@ -5246,31 +5247,31 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueType PostV1CaptureDocumentsConfirmResponseInvoiceType
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueType DocumentsConfirmCaptureResponseInvoiceType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueStatus PostV1CaptureDocumentsConfirmResponseInvoiceStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueStatus DocumentsConfirmCaptureResponseInvoiceStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValuePaymentStatus PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValuePaymentStatus DocumentsConfirmCaptureResponseInvoicePaymentStatus
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
 		assert.Equal(t, fernTestValuePaymentStatus, obj.PaymentStatus)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueDocumentNumber string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -5278,31 +5279,31 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueDocumentDate string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueDocumentDate time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRegistrationDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueRegistrationDate *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueRegistrationDate *time.Time
 		obj.SetRegistrationDate(fernTestValueRegistrationDate)
 		assert.Equal(t, fernTestValueRegistrationDate, obj.RegistrationDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueCurrency string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -5310,7 +5311,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueNetTotal string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -5318,7 +5319,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueVatTotal string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -5326,7 +5327,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueGrossTotal string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -5334,7 +5335,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetPaidAmount", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePaidAmount string
 		obj.SetPaidAmount(fernTestValuePaidAmount)
 		assert.Equal(t, fernTestValuePaidAmount, obj.PaidAmount)
@@ -5342,7 +5343,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetJournalTransactionID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueJournalTransactionID *string
 		obj.SetJournalTransactionID(fernTestValueJournalTransactionID)
 		assert.Equal(t, fernTestValueJournalTransactionID, obj.JournalTransactionID)
@@ -5350,7 +5351,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetCreditedInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueCreditedInvoiceID *string
 		obj.SetCreditedInvoiceID(fernTestValueCreditedInvoiceID)
 		assert.Equal(t, fernTestValueCreditedInvoiceID, obj.CreditedInvoiceID)
@@ -5358,7 +5359,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetPurchaseOrderID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePurchaseOrderID *string
 		obj.SetPurchaseOrderID(fernTestValuePurchaseOrderID)
 		assert.Equal(t, fernTestValuePurchaseOrderID, obj.PurchaseOrderID)
@@ -5366,7 +5367,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetOperationTypeID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueOperationTypeID *string
 		obj.SetOperationTypeID(fernTestValueOperationTypeID)
 		assert.Equal(t, fernTestValueOperationTypeID, obj.OperationTypeID)
@@ -5374,7 +5375,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -5382,7 +5383,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetIntrastatTransportMode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatTransportMode *string
 		obj.SetIntrastatTransportMode(fernTestValueIntrastatTransportMode)
 		assert.Equal(t, fernTestValueIntrastatTransportMode, obj.IntrastatTransportMode)
@@ -5390,7 +5391,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetIntrastatDeliveryTerms", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatDeliveryTerms *string
 		obj.SetIntrastatDeliveryTerms(fernTestValueIntrastatDeliveryTerms)
 		assert.Equal(t, fernTestValueIntrastatDeliveryTerms, obj.IntrastatDeliveryTerms)
@@ -5398,7 +5399,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetIntrastatRegion", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatRegion *string
 		obj.SetIntrastatRegion(fernTestValueIntrastatRegion)
 		assert.Equal(t, fernTestValueIntrastatRegion, obj.IntrastatRegion)
@@ -5406,7 +5407,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetIntrastatNatureOfTransaction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatNatureOfTransaction *string
 		obj.SetIntrastatNatureOfTransaction(fernTestValueIntrastatNatureOfTransaction)
 		assert.Equal(t, fernTestValueIntrastatNatureOfTransaction, obj.IntrastatNatureOfTransaction)
@@ -5414,7 +5415,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetEinvoiceNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueEinvoiceNumber *string
 		obj.SetEinvoiceNumber(fernTestValueEinvoiceNumber)
 		assert.Equal(t, fernTestValueEinvoiceNumber, obj.EinvoiceNumber)
@@ -5422,7 +5423,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetDocumentRef", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueDocumentRef *string
 		obj.SetDocumentRef(fernTestValueDocumentRef)
 		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
@@ -5430,24 +5431,24 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueLines []*DocumentsConfirmCaptureResponseInvoiceLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -5455,11 +5456,11 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestGettersDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.ID = expected
 
@@ -5469,7 +5470,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5482,7 +5483,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.PartnerID = expected
 
@@ -5492,7 +5493,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5505,8 +5506,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected PostV1CaptureDocumentsConfirmResponseInvoiceType
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected DocumentsConfirmCaptureResponseInvoiceType
 		obj.Type = expected
 
 		// Act & Assert
@@ -5515,7 +5516,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5528,8 +5529,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected PostV1CaptureDocumentsConfirmResponseInvoiceStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected DocumentsConfirmCaptureResponseInvoiceStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -5538,7 +5539,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5551,8 +5552,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetPaymentStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected DocumentsConfirmCaptureResponseInvoicePaymentStatus
 		obj.PaymentStatus = expected
 
 		// Act & Assert
@@ -5561,7 +5562,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetPaymentStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5574,7 +5575,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.DocumentNumber = expected
 
@@ -5584,7 +5585,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5597,8 +5598,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -5607,7 +5608,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5620,8 +5621,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -5631,7 +5632,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -5640,7 +5641,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5653,8 +5654,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetRegistrationDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected *time.Time
 		obj.RegistrationDate = expected
 
 		// Act & Assert
@@ -5664,7 +5665,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetRegistrationDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.RegistrationDate = nil
 
 		// Act & Assert
@@ -5673,7 +5674,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetRegistrationDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5686,7 +5687,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.Currency = expected
 
@@ -5696,7 +5697,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5709,7 +5710,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.NetTotal = expected
 
@@ -5719,7 +5720,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5732,7 +5733,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.VatTotal = expected
 
@@ -5742,7 +5743,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5755,7 +5756,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.GrossTotal = expected
 
@@ -5765,7 +5766,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5778,7 +5779,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetPaidAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected string
 		obj.PaidAmount = expected
 
@@ -5788,7 +5789,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetPaidAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5801,7 +5802,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetJournalTransactionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.JournalTransactionID = expected
 
@@ -5812,7 +5813,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetJournalTransactionID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.JournalTransactionID = nil
 
 		// Act & Assert
@@ -5821,7 +5822,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetJournalTransactionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5834,7 +5835,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetCreditedInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.CreditedInvoiceID = expected
 
@@ -5845,7 +5846,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetCreditedInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.CreditedInvoiceID = nil
 
 		// Act & Assert
@@ -5854,7 +5855,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetCreditedInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5867,7 +5868,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetPurchaseOrderID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.PurchaseOrderID = expected
 
@@ -5878,7 +5879,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetPurchaseOrderID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.PurchaseOrderID = nil
 
 		// Act & Assert
@@ -5887,7 +5888,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetPurchaseOrderID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5900,7 +5901,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetOperationTypeID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.OperationTypeID = expected
 
@@ -5911,7 +5912,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetOperationTypeID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.OperationTypeID = nil
 
 		// Act & Assert
@@ -5920,7 +5921,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetOperationTypeID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5933,7 +5934,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.Notes = expected
 
@@ -5944,7 +5945,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -5953,7 +5954,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5966,7 +5967,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatTransportMode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.IntrastatTransportMode = expected
 
@@ -5977,7 +5978,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatTransportMode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.IntrastatTransportMode = nil
 
 		// Act & Assert
@@ -5986,7 +5987,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetIntrastatTransportMode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5999,7 +6000,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatDeliveryTerms", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.IntrastatDeliveryTerms = expected
 
@@ -6010,7 +6011,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatDeliveryTerms_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.IntrastatDeliveryTerms = nil
 
 		// Act & Assert
@@ -6019,7 +6020,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetIntrastatDeliveryTerms_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6032,7 +6033,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatRegion", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.IntrastatRegion = expected
 
@@ -6043,7 +6044,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatRegion_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.IntrastatRegion = nil
 
 		// Act & Assert
@@ -6052,7 +6053,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetIntrastatRegion_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6065,7 +6066,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatNatureOfTransaction", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.IntrastatNatureOfTransaction = expected
 
@@ -6076,7 +6077,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetIntrastatNatureOfTransaction_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.IntrastatNatureOfTransaction = nil
 
 		// Act & Assert
@@ -6085,7 +6086,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetIntrastatNatureOfTransaction_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6098,7 +6099,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetEinvoiceNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.EinvoiceNumber = expected
 
@@ -6109,7 +6110,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetEinvoiceNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.EinvoiceNumber = nil
 
 		// Act & Assert
@@ -6118,7 +6119,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetEinvoiceNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6131,7 +6132,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDocumentRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var expected *string
 		obj.DocumentRef = expected
 
@@ -6142,7 +6143,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetDocumentRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.DocumentRef = nil
 
 		// Act & Assert
@@ -6151,7 +6152,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetDocumentRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6164,8 +6165,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -6174,7 +6175,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6187,8 +6188,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -6197,7 +6198,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6210,8 +6211,8 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var expected []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var expected []*DocumentsConfirmCaptureResponseInvoiceLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -6221,7 +6222,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -6230,7 +6231,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6242,11 +6243,11 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueID string
 
 		// Act
@@ -6277,7 +6278,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePartnerID string
 
 		// Act
@@ -6308,8 +6309,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueType PostV1CaptureDocumentsConfirmResponseInvoiceType
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueType DocumentsConfirmCaptureResponseInvoiceType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -6339,8 +6340,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueStatus PostV1CaptureDocumentsConfirmResponseInvoiceStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueStatus DocumentsConfirmCaptureResponseInvoiceStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -6370,8 +6371,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetPaymentStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValuePaymentStatus PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValuePaymentStatus DocumentsConfirmCaptureResponseInvoicePaymentStatus
 
 		// Act
 		obj.SetPaymentStatus(fernTestValuePaymentStatus)
@@ -6401,7 +6402,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueDocumentNumber string
 
 		// Act
@@ -6432,8 +6433,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueDocumentDate string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueDocumentDate time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -6463,8 +6464,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -6494,8 +6495,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetRegistrationDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueRegistrationDate *string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueRegistrationDate *time.Time
 
 		// Act
 		obj.SetRegistrationDate(fernTestValueRegistrationDate)
@@ -6525,7 +6526,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueCurrency string
 
 		// Act
@@ -6556,7 +6557,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueNetTotal string
 
 		// Act
@@ -6587,7 +6588,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueVatTotal string
 
 		// Act
@@ -6618,7 +6619,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueGrossTotal string
 
 		// Act
@@ -6649,7 +6650,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetPaidAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePaidAmount string
 
 		// Act
@@ -6680,7 +6681,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetJournalTransactionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueJournalTransactionID *string
 
 		// Act
@@ -6711,7 +6712,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetCreditedInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueCreditedInvoiceID *string
 
 		// Act
@@ -6742,7 +6743,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetPurchaseOrderID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValuePurchaseOrderID *string
 
 		// Act
@@ -6773,7 +6774,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetOperationTypeID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueOperationTypeID *string
 
 		// Act
@@ -6804,7 +6805,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -6835,7 +6836,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetIntrastatTransportMode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatTransportMode *string
 
 		// Act
@@ -6866,7 +6867,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetIntrastatDeliveryTerms_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatDeliveryTerms *string
 
 		// Act
@@ -6897,7 +6898,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetIntrastatRegion_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatRegion *string
 
 		// Act
@@ -6928,7 +6929,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetIntrastatNatureOfTransaction_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueIntrastatNatureOfTransaction *string
 
 		// Act
@@ -6959,7 +6960,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetEinvoiceNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueEinvoiceNumber *string
 
 		// Act
@@ -6990,7 +6991,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		var fernTestValueDocumentRef *string
 
 		// Act
@@ -7021,8 +7022,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -7052,8 +7053,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -7083,8 +7084,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
-		var fernTestValueLines []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
+		var fernTestValueLines []*DocumentsConfirmCaptureResponseInvoiceLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -7113,9 +7114,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoice(t *test
 
 }
 
-func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestSettersDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7123,7 +7124,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetItemID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueItemID *string
 		obj.SetItemID(fernTestValueItemID)
 		assert.Equal(t, fernTestValueItemID, obj.ItemID)
@@ -7131,7 +7132,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -7139,7 +7140,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnit string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -7147,7 +7148,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -7155,7 +7156,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -7163,7 +7164,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetUnitPriceInclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnitPriceInclVat *string
 		obj.SetUnitPriceInclVat(fernTestValueUnitPriceInclVat)
 		assert.Equal(t, fernTestValueUnitPriceInclVat, obj.UnitPriceInclVat)
@@ -7171,7 +7172,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueVatRatePercent string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -7179,7 +7180,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetVatClassifierCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueVatClassifierCode *string
 		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
@@ -7187,7 +7188,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetCostCenterID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueCostCenterID *string
 		obj.SetCostCenterID(fernTestValueCostCenterID)
 		assert.Equal(t, fernTestValueCostCenterID, obj.CostCenterID)
@@ -7195,7 +7196,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetProjectID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueProjectID *string
 		obj.SetProjectID(fernTestValueProjectID)
 		assert.Equal(t, fernTestValueProjectID, obj.ProjectID)
@@ -7203,7 +7204,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetAccountCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueAccountCode *string
 		obj.SetAccountCode(fernTestValueAccountCode)
 		assert.Equal(t, fernTestValueAccountCode, obj.AccountCode)
@@ -7211,7 +7212,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineNet string
 		obj.SetLineNet(fernTestValueLineNet)
 		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
@@ -7219,7 +7220,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineVat string
 		obj.SetLineVat(fernTestValueLineVat)
 		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
@@ -7227,7 +7228,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineGross string
 		obj.SetLineGross(fernTestValueLineGross)
 		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
@@ -7235,7 +7236,7 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	})
 
 	t.Run("SetSortOrder", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueSortOrder int64
 		obj.SetSortOrder(fernTestValueSortOrder)
 		assert.Equal(t, fernTestValueSortOrder, obj.SortOrder)
@@ -7244,11 +7245,11 @@ func TestSettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 }
 
-func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestGettersDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.ID = expected
 
@@ -7258,7 +7259,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7271,7 +7272,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetItemID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.ItemID = expected
 
@@ -7282,7 +7283,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetItemID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.ItemID = nil
 
 		// Act & Assert
@@ -7291,7 +7292,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetItemID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7304,7 +7305,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -7314,7 +7315,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7327,7 +7328,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.Unit = expected
 
@@ -7337,7 +7338,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7350,7 +7351,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -7360,7 +7361,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7373,7 +7374,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -7384,7 +7385,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -7393,7 +7394,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7406,7 +7407,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetUnitPriceInclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.UnitPriceInclVat = expected
 
@@ -7417,7 +7418,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetUnitPriceInclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.UnitPriceInclVat = nil
 
 		// Act & Assert
@@ -7426,7 +7427,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetUnitPriceInclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7439,7 +7440,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.VatRatePercent = expected
 
@@ -7449,7 +7450,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7462,7 +7463,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetVatClassifierCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.VatClassifierCode = expected
 
@@ -7473,7 +7474,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.VatClassifierCode = nil
 
 		// Act & Assert
@@ -7482,7 +7483,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7495,7 +7496,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetCostCenterID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.CostCenterID = expected
 
@@ -7506,7 +7507,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetCostCenterID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.CostCenterID = nil
 
 		// Act & Assert
@@ -7515,7 +7516,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetCostCenterID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7528,7 +7529,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetProjectID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.ProjectID = expected
 
@@ -7539,7 +7540,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetProjectID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.ProjectID = nil
 
 		// Act & Assert
@@ -7548,7 +7549,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetProjectID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7561,7 +7562,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetAccountCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected *string
 		obj.AccountCode = expected
 
@@ -7572,7 +7573,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetAccountCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		obj.AccountCode = nil
 
 		// Act & Assert
@@ -7581,7 +7582,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetAccountCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7594,7 +7595,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetLineNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.LineNet = expected
 
@@ -7604,7 +7605,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7617,7 +7618,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetLineVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.LineVat = expected
 
@@ -7627,7 +7628,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7640,7 +7641,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetLineGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected string
 		obj.LineGross = expected
 
@@ -7650,7 +7651,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7663,7 +7664,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 	t.Run("GetSortOrder", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var expected int64
 		obj.SortOrder = expected
 
@@ -7673,7 +7674,7 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 	t.Run("GetSortOrder_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7685,11 +7686,11 @@ func TestGettersPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueID string
 
 		// Act
@@ -7720,7 +7721,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetItemID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueItemID *string
 
 		// Act
@@ -7751,7 +7752,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -7782,7 +7783,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnit string
 
 		// Act
@@ -7813,7 +7814,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -7844,7 +7845,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -7875,7 +7876,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetUnitPriceInclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueUnitPriceInclVat *string
 
 		// Act
@@ -7906,7 +7907,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueVatRatePercent string
 
 		// Act
@@ -7937,7 +7938,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueVatClassifierCode *string
 
 		// Act
@@ -7968,7 +7969,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetCostCenterID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueCostCenterID *string
 
 		// Act
@@ -7999,7 +8000,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetProjectID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueProjectID *string
 
 		// Act
@@ -8030,7 +8031,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetAccountCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueAccountCode *string
 
 		// Act
@@ -8061,7 +8062,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineNet string
 
 		// Act
@@ -8092,7 +8093,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineVat string
 
 		// Act
@@ -8123,7 +8124,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineGross string
 
 		// Act
@@ -8154,7 +8155,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 	t.Run("SetSortOrder_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueSortOrder int64
 
 		// Act
@@ -8184,9 +8185,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsConfirmResponseInvoiceLinesIte
 
 }
 
-func TestSettersPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestSettersDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("SetDeleted", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 		var fernTestValueDeleted bool
 		obj.SetDeleted(fernTestValueDeleted)
 		assert.Equal(t, fernTestValueDeleted, obj.Deleted)
@@ -8195,11 +8196,11 @@ func TestSettersPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestGettersDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("GetDeleted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 		var expected bool
 		obj.Deleted = expected
 
@@ -8209,7 +8210,7 @@ func TestGettersPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 
 	t.Run("GetDeleted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsDeleteResponse
+		var obj *DocumentsDeleteCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8221,11 +8222,11 @@ func TestGettersPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("SetDeleted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 		var fernTestValueDeleted bool
 
 		// Act
@@ -8255,9 +8256,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestSettersDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -8265,7 +8266,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueFileID string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -8273,7 +8274,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -8281,7 +8282,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -8289,7 +8290,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -8297,15 +8298,15 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsExtractResponseStatus
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueStatus DocumentsExtractCaptureResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProvider", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueProvider *string
 		obj.SetProvider(fernTestValueProvider)
 		assert.Equal(t, fernTestValueProvider, obj.Provider)
@@ -8313,7 +8314,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetModel", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueModel *string
 		obj.SetModel(fernTestValueModel)
 		assert.Equal(t, fernTestValueModel, obj.Model)
@@ -8321,7 +8322,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetPagesProcessed", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 		obj.SetPagesProcessed(fernTestValuePagesProcessed)
 		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
@@ -8329,15 +8330,15 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetExtraction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsExtractResponseExtraction
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueExtraction *DocumentsExtractCaptureResponseExtraction
 		obj.SetExtraction(fernTestValueExtraction)
 		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMatchedPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
 		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
@@ -8345,7 +8346,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
 		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
@@ -8353,7 +8354,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetError", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueError *string
 		obj.SetError(fernTestValueError)
 		assert.Equal(t, fernTestValueError, obj.Error)
@@ -8361,23 +8362,23 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRawText", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueRawText *string
 		obj.SetRawText(fernTestValueRawText)
 		assert.Equal(t, fernTestValueRawText, obj.RawText)
@@ -8386,11 +8387,11 @@ func TestSettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestGettersDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -8400,7 +8401,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8413,7 +8414,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected string
 		obj.FileID = expected
 
@@ -8423,7 +8424,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8436,7 +8437,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -8446,7 +8447,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8459,7 +8460,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -8469,7 +8470,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8482,7 +8483,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -8492,7 +8493,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8505,8 +8506,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var expected PostV1CaptureDocumentsExtractResponseStatus
+		obj := &DocumentsExtractCaptureResponse{}
+		var expected DocumentsExtractCaptureResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -8515,7 +8516,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8528,7 +8529,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetProvider", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.Provider = expected
 
@@ -8539,7 +8540,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetProvider_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.Provider = nil
 
 		// Act & Assert
@@ -8548,7 +8549,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8561,7 +8562,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetModel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.Model = expected
 
@@ -8572,7 +8573,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetModel_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.Model = nil
 
 		// Act & Assert
@@ -8581,7 +8582,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetModel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8594,7 +8595,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetPagesProcessed", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *int64
 		obj.PagesProcessed = expected
 
@@ -8605,7 +8606,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.PagesProcessed = nil
 
 		// Act & Assert
@@ -8614,7 +8615,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8627,8 +8628,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetExtraction", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var expected *PostV1CaptureDocumentsExtractResponseExtraction
+		obj := &DocumentsExtractCaptureResponse{}
+		var expected *DocumentsExtractCaptureResponseExtraction
 		obj.Extraction = expected
 
 		// Act & Assert
@@ -8638,7 +8639,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetExtraction_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.Extraction = nil
 
 		// Act & Assert
@@ -8647,7 +8648,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8660,7 +8661,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.MatchedPartnerID = expected
 
@@ -8671,7 +8672,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.MatchedPartnerID = nil
 
 		// Act & Assert
@@ -8680,7 +8681,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8693,7 +8694,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.PurchaseInvoiceID = expected
 
@@ -8704,7 +8705,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.PurchaseInvoiceID = nil
 
 		// Act & Assert
@@ -8713,7 +8714,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8726,7 +8727,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.Error = expected
 
@@ -8737,7 +8738,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.Error = nil
 
 		// Act & Assert
@@ -8746,7 +8747,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8759,8 +8760,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var expected string
+		obj := &DocumentsExtractCaptureResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8769,7 +8770,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8782,8 +8783,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var expected string
+		obj := &DocumentsExtractCaptureResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -8792,7 +8793,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8805,7 +8806,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetRawText", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var expected *string
 		obj.RawText = expected
 
@@ -8816,7 +8817,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 	t.Run("GetRawText_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		obj.RawText = nil
 
 		// Act & Assert
@@ -8825,7 +8826,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetRawText_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8837,11 +8838,11 @@ func TestGettersPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestSettersMarkExplicitDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -8872,7 +8873,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueFileID string
 
 		// Act
@@ -8903,7 +8904,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -8934,7 +8935,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -8965,7 +8966,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -8996,8 +8997,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsExtractResponseStatus
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueStatus DocumentsExtractCaptureResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -9027,7 +9028,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueProvider *string
 
 		// Act
@@ -9058,7 +9059,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueModel *string
 
 		// Act
@@ -9089,7 +9090,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 
 		// Act
@@ -9120,8 +9121,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsExtractResponseExtraction
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueExtraction *DocumentsExtractCaptureResponseExtraction
 
 		// Act
 		obj.SetExtraction(fernTestValueExtraction)
@@ -9151,7 +9152,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 
 		// Act
@@ -9182,7 +9183,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 
 		// Act
@@ -9213,7 +9214,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueError *string
 
 		// Act
@@ -9244,8 +9245,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -9275,8 +9276,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsExtractCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -9306,7 +9307,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 	t.Run("SetRawText_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		var fernTestValueRawText *string
 
 		// Act
@@ -9336,17 +9337,17 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestSettersDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsExtractCaptureResponseExtractionSupplier
 		obj.SetSupplier(fernTestValueSupplier)
 		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -9354,23 +9355,23 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -9378,7 +9379,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -9386,7 +9387,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -9394,7 +9395,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -9402,7 +9403,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -9410,8 +9411,8 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsExtractCaptureResponseExtractionLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -9419,12 +9420,12 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestGettersDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var expected *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var expected *DocumentsExtractCaptureResponseExtractionSupplier
 		obj.Supplier = expected
 
 		// Act & Assert
@@ -9434,7 +9435,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.Supplier = nil
 
 		// Act & Assert
@@ -9443,7 +9444,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9456,7 +9457,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.DocumentNumber = expected
 
@@ -9467,7 +9468,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.DocumentNumber = nil
 
 		// Act & Assert
@@ -9476,7 +9477,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9489,8 +9490,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var expected *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -9500,7 +9501,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.DocumentDate = nil
 
 		// Act & Assert
@@ -9509,7 +9510,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9522,8 +9523,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var expected *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -9533,7 +9534,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -9542,7 +9543,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9555,7 +9556,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.Currency = expected
 
@@ -9566,7 +9567,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -9575,7 +9576,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9588,7 +9589,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.NetTotal = expected
 
@@ -9599,7 +9600,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.NetTotal = nil
 
 		// Act & Assert
@@ -9608,7 +9609,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9621,7 +9622,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -9632,7 +9633,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -9641,7 +9642,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9654,7 +9655,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.GrossTotal = expected
 
@@ -9665,7 +9666,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.GrossTotal = nil
 
 		// Act & Assert
@@ -9674,7 +9675,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9687,7 +9688,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var expected *string
 		obj.Notes = expected
 
@@ -9698,7 +9699,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -9707,7 +9708,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9720,8 +9721,8 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var expected []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var expected []*DocumentsExtractCaptureResponseExtractionLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -9731,7 +9732,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -9740,7 +9741,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -9752,12 +9753,12 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestSettersMarkExplicitDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsExtractCaptureResponseExtractionSupplier
 
 		// Act
 		obj.SetSupplier(fernTestValueSupplier)
@@ -9787,7 +9788,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 
 		// Act
@@ -9818,8 +9819,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -9849,8 +9850,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -9880,7 +9881,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -9911,7 +9912,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 
 		// Act
@@ -9942,7 +9943,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -9973,7 +9974,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 
 		// Act
@@ -10004,7 +10005,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -10035,8 +10036,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		obj := &DocumentsExtractCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsExtractCaptureResponseExtractionLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -10065,9 +10066,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtraction(t *t
 
 }
 
-func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestSettersDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -10075,7 +10076,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -10083,7 +10084,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -10091,7 +10092,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -10099,7 +10100,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -10107,7 +10108,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 		obj.SetLineNet(fernTestValueLineNet)
 		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
@@ -10115,7 +10116,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 		obj.SetLineVat(fernTestValueLineVat)
 		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
@@ -10123,7 +10124,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	})
 
 	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 		obj.SetLineGross(fernTestValueLineGross)
 		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
@@ -10132,11 +10133,11 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 }
 
-func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestGettersDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -10146,7 +10147,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10159,7 +10160,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -10169,7 +10170,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10182,7 +10183,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -10193,7 +10194,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -10202,7 +10203,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10215,7 +10216,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -10226,7 +10227,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -10235,7 +10236,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10248,7 +10249,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -10259,7 +10260,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -10268,7 +10269,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10281,7 +10282,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineNet = expected
 
@@ -10292,7 +10293,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineNet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.LineNet = nil
 
 		// Act & Assert
@@ -10301,7 +10302,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10314,7 +10315,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineVat = expected
 
@@ -10325,7 +10326,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.LineVat = nil
 
 		// Act & Assert
@@ -10334,7 +10335,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10347,7 +10348,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineGross = expected
 
@@ -10358,7 +10359,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 	t.Run("GetLineGross_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		obj.LineGross = nil
 
 		// Act & Assert
@@ -10367,7 +10368,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10379,11 +10380,11 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *test
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -10414,7 +10415,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -10445,7 +10446,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -10476,7 +10477,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -10507,7 +10508,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -10538,7 +10539,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 
 		// Act
@@ -10569,7 +10570,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 
 		// Act
@@ -10600,7 +10601,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 
 		// Act
@@ -10630,9 +10631,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionLines
 
 }
 
-func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestSettersDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -10640,7 +10641,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -10648,7 +10649,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -10656,7 +10657,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -10664,7 +10665,7 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	})
 
 	t.Run("SetIban", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 		obj.SetIban(fernTestValueIban)
 		assert.Equal(t, fernTestValueIban, obj.Iban)
@@ -10673,11 +10674,11 @@ func TestSettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 }
 
-func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Name = expected
 
@@ -10688,7 +10689,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		obj.Name = nil
 
 		// Act & Assert
@@ -10697,7 +10698,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10710,7 +10711,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Code = expected
 
@@ -10721,7 +10722,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -10730,7 +10731,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10743,7 +10744,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -10754,7 +10755,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -10763,7 +10764,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10776,7 +10777,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -10787,7 +10788,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -10796,7 +10797,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10809,7 +10810,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetIban", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Iban = expected
 
@@ -10820,7 +10821,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 	t.Run("GetIban_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		obj.Iban = nil
 
 		// Act & Assert
@@ -10829,7 +10830,7 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 	t.Run("GetIban_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10841,11 +10842,11 @@ func TestGettersPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testi
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestSettersMarkExplicitDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 
 		// Act
@@ -10876,7 +10877,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSuppl
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 
 		// Act
@@ -10907,7 +10908,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSuppl
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -10938,7 +10939,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSuppl
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -10969,7 +10970,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSuppl
 	t.Run("SetIban_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 
 		// Act
@@ -10999,9 +11000,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsExtractResponseExtractionSuppl
 
 }
 
-func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestSettersDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -11009,7 +11010,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueFileID string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -11017,7 +11018,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -11025,7 +11026,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -11033,7 +11034,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -11041,15 +11042,15 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsGetResponseStatus
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueStatus DocumentsGetCaptureResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProvider", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueProvider *string
 		obj.SetProvider(fernTestValueProvider)
 		assert.Equal(t, fernTestValueProvider, obj.Provider)
@@ -11057,7 +11058,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetModel", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueModel *string
 		obj.SetModel(fernTestValueModel)
 		assert.Equal(t, fernTestValueModel, obj.Model)
@@ -11065,7 +11066,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPagesProcessed", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 		obj.SetPagesProcessed(fernTestValuePagesProcessed)
 		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
@@ -11073,15 +11074,15 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetExtraction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsGetResponseExtraction
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueExtraction *DocumentsGetCaptureResponseExtraction
 		obj.SetExtraction(fernTestValueExtraction)
 		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMatchedPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
 		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
@@ -11089,7 +11090,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
 		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
@@ -11097,7 +11098,7 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetError", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueError *string
 		obj.SetError(fernTestValueError)
 		assert.Equal(t, fernTestValueError, obj.Error)
@@ -11105,23 +11106,23 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRawText", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueRawText *string
 		obj.SetRawText(fernTestValueRawText)
 		assert.Equal(t, fernTestValueRawText, obj.RawText)
@@ -11130,11 +11131,11 @@ func TestSettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestGettersDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -11144,7 +11145,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11157,7 +11158,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected string
 		obj.FileID = expected
 
@@ -11167,7 +11168,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11180,7 +11181,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -11190,7 +11191,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11203,7 +11204,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -11213,7 +11214,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11226,7 +11227,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -11236,7 +11237,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11249,8 +11250,8 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var expected PostV1CaptureDocumentsGetResponseStatus
+		obj := &DocumentsGetCaptureResponse{}
+		var expected DocumentsGetCaptureResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -11259,7 +11260,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11272,7 +11273,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetProvider", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.Provider = expected
 
@@ -11283,7 +11284,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetProvider_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.Provider = nil
 
 		// Act & Assert
@@ -11292,7 +11293,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11305,7 +11306,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetModel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.Model = expected
 
@@ -11316,7 +11317,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetModel_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.Model = nil
 
 		// Act & Assert
@@ -11325,7 +11326,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetModel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11338,7 +11339,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetPagesProcessed", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *int64
 		obj.PagesProcessed = expected
 
@@ -11349,7 +11350,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.PagesProcessed = nil
 
 		// Act & Assert
@@ -11358,7 +11359,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11371,8 +11372,8 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetExtraction", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var expected *PostV1CaptureDocumentsGetResponseExtraction
+		obj := &DocumentsGetCaptureResponse{}
+		var expected *DocumentsGetCaptureResponseExtraction
 		obj.Extraction = expected
 
 		// Act & Assert
@@ -11382,7 +11383,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetExtraction_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.Extraction = nil
 
 		// Act & Assert
@@ -11391,7 +11392,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11404,7 +11405,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.MatchedPartnerID = expected
 
@@ -11415,7 +11416,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.MatchedPartnerID = nil
 
 		// Act & Assert
@@ -11424,7 +11425,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11437,7 +11438,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.PurchaseInvoiceID = expected
 
@@ -11448,7 +11449,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.PurchaseInvoiceID = nil
 
 		// Act & Assert
@@ -11457,7 +11458,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11470,7 +11471,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.Error = expected
 
@@ -11481,7 +11482,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.Error = nil
 
 		// Act & Assert
@@ -11490,7 +11491,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11503,8 +11504,8 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var expected string
+		obj := &DocumentsGetCaptureResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -11513,7 +11514,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11526,8 +11527,8 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var expected string
+		obj := &DocumentsGetCaptureResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -11536,7 +11537,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11549,7 +11550,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetRawText", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var expected *string
 		obj.RawText = expected
 
@@ -11560,7 +11561,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("GetRawText_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		obj.RawText = nil
 
 		// Act & Assert
@@ -11569,7 +11570,7 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetRawText_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11581,11 +11582,11 @@ func TestGettersPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -11616,7 +11617,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueFileID string
 
 		// Act
@@ -11647,7 +11648,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -11678,7 +11679,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -11709,7 +11710,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -11740,8 +11741,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsGetResponseStatus
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueStatus DocumentsGetCaptureResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -11771,7 +11772,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueProvider *string
 
 		// Act
@@ -11802,7 +11803,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueModel *string
 
 		// Act
@@ -11833,7 +11834,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 
 		// Act
@@ -11864,8 +11865,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsGetResponseExtraction
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueExtraction *DocumentsGetCaptureResponseExtraction
 
 		// Act
 		obj.SetExtraction(fernTestValueExtraction)
@@ -11895,7 +11896,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 
 		// Act
@@ -11926,7 +11927,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 
 		// Act
@@ -11957,7 +11958,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueError *string
 
 		// Act
@@ -11988,8 +11989,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -12019,8 +12020,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsGetCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -12050,7 +12051,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 	t.Run("SetRawText_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		var fernTestValueRawText *string
 
 		// Act
@@ -12080,17 +12081,17 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestSettersDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsGetCaptureResponseExtractionSupplier
 		obj.SetSupplier(fernTestValueSupplier)
 		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -12098,23 +12099,23 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -12122,7 +12123,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -12130,7 +12131,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -12138,7 +12139,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -12146,7 +12147,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -12154,8 +12155,8 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsGetCaptureResponseExtractionLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -12163,12 +12164,12 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestGettersDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var expected *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var expected *DocumentsGetCaptureResponseExtractionSupplier
 		obj.Supplier = expected
 
 		// Act & Assert
@@ -12178,7 +12179,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.Supplier = nil
 
 		// Act & Assert
@@ -12187,7 +12188,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12200,7 +12201,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.DocumentNumber = expected
 
@@ -12211,7 +12212,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.DocumentNumber = nil
 
 		// Act & Assert
@@ -12220,7 +12221,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12233,8 +12234,8 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var expected *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -12244,7 +12245,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.DocumentDate = nil
 
 		// Act & Assert
@@ -12253,7 +12254,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12266,8 +12267,8 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var expected *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -12277,7 +12278,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -12286,7 +12287,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12299,7 +12300,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.Currency = expected
 
@@ -12310,7 +12311,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -12319,7 +12320,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12332,7 +12333,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.NetTotal = expected
 
@@ -12343,7 +12344,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.NetTotal = nil
 
 		// Act & Assert
@@ -12352,7 +12353,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12365,7 +12366,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -12376,7 +12377,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -12385,7 +12386,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12398,7 +12399,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.GrossTotal = expected
 
@@ -12409,7 +12410,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.GrossTotal = nil
 
 		// Act & Assert
@@ -12418,7 +12419,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12431,7 +12432,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var expected *string
 		obj.Notes = expected
 
@@ -12442,7 +12443,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -12451,7 +12452,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12464,8 +12465,8 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var expected []*PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var expected []*DocumentsGetCaptureResponseExtractionLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -12475,7 +12476,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -12484,7 +12485,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12496,12 +12497,12 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestSettersMarkExplicitDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsGetCaptureResponseExtractionSupplier
 
 		// Act
 		obj.SetSupplier(fernTestValueSupplier)
@@ -12531,7 +12532,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 
 		// Act
@@ -12562,8 +12563,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -12593,8 +12594,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -12624,7 +12625,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -12655,7 +12656,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 
 		// Act
@@ -12686,7 +12687,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -12717,7 +12718,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 
 		// Act
@@ -12748,7 +12749,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -12779,8 +12780,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		obj := &DocumentsGetCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsGetCaptureResponseExtractionLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -12809,9 +12810,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtraction(t *testi
 
 }
 
-func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestSettersDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -12819,7 +12820,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -12827,7 +12828,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -12835,7 +12836,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -12843,7 +12844,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -12851,7 +12852,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 		obj.SetLineNet(fernTestValueLineNet)
 		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
@@ -12859,7 +12860,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 		obj.SetLineVat(fernTestValueLineVat)
 		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
@@ -12867,7 +12868,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	})
 
 	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 		obj.SetLineGross(fernTestValueLineGross)
 		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
@@ -12876,11 +12877,11 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 }
 
-func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestGettersDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -12890,7 +12891,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12903,7 +12904,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -12913,7 +12914,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12926,7 +12927,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -12937,7 +12938,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -12946,7 +12947,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12959,7 +12960,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -12970,7 +12971,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -12979,7 +12980,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12992,7 +12993,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -13003,7 +13004,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -13012,7 +13013,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13025,7 +13026,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineNet = expected
 
@@ -13036,7 +13037,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineNet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.LineNet = nil
 
 		// Act & Assert
@@ -13045,7 +13046,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13058,7 +13059,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineVat = expected
 
@@ -13069,7 +13070,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.LineVat = nil
 
 		// Act & Assert
@@ -13078,7 +13079,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13091,7 +13092,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineGross = expected
 
@@ -13102,7 +13103,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 	t.Run("GetLineGross_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		obj.LineGross = nil
 
 		// Act & Assert
@@ -13111,7 +13112,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13123,11 +13124,11 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -13158,7 +13159,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -13189,7 +13190,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -13220,7 +13221,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -13251,7 +13252,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -13282,7 +13283,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 
 		// Act
@@ -13313,7 +13314,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 
 		// Act
@@ -13344,7 +13345,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 
 		// Act
@@ -13374,9 +13375,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionLinesItem
 
 }
 
-func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestSettersDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -13384,7 +13385,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -13392,7 +13393,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -13400,7 +13401,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -13408,7 +13409,7 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	})
 
 	t.Run("SetIban", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 		obj.SetIban(fernTestValueIban)
 		assert.Equal(t, fernTestValueIban, obj.Iban)
@@ -13417,11 +13418,11 @@ func TestSettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 }
 
-func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Name = expected
 
@@ -13432,7 +13433,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		obj.Name = nil
 
 		// Act & Assert
@@ -13441,7 +13442,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13454,7 +13455,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Code = expected
 
@@ -13465,7 +13466,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -13474,7 +13475,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13487,7 +13488,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -13498,7 +13499,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -13507,7 +13508,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13520,7 +13521,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -13531,7 +13532,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -13540,7 +13541,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13553,7 +13554,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetIban", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Iban = expected
 
@@ -13564,7 +13565,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 	t.Run("GetIban_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		obj.Iban = nil
 
 		// Act & Assert
@@ -13573,7 +13574,7 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 	t.Run("GetIban_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13585,11 +13586,11 @@ func TestGettersPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestSettersMarkExplicitDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 
 		// Act
@@ -13620,7 +13621,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 
 		// Act
@@ -13651,7 +13652,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -13682,7 +13683,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -13713,7 +13714,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(
 	t.Run("SetIban_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 
 		// Act
@@ -13743,9 +13744,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsGetResponseExtractionSupplier(
 
 }
 
-func TestSettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestSettersDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -13753,16 +13754,16 @@ func TestSettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 	})
 
 	t.Run("SetOp", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var fernTestValueOp PostV1CaptureDocumentsListRequestFilterItemOp
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var fernTestValueOp DocumentsListCaptureRequestFilterItemOp
 		obj.SetOp(fernTestValueOp)
 		assert.Equal(t, fernTestValueOp, obj.Op)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetValue", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var fernTestValueValue *PostV1CaptureDocumentsListRequestFilterItemValue
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var fernTestValueValue *DocumentsListCaptureRequestFilterItemValue
 		obj.SetValue(fernTestValueValue)
 		assert.Equal(t, fernTestValueValue, obj.Value)
 		assert.NotNil(t, obj.explicitFields)
@@ -13770,11 +13771,11 @@ func TestSettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestGettersDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		var expected string
 		obj.Field = expected
 
@@ -13784,7 +13785,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItem
+		var obj *DocumentsListCaptureRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13797,8 +13798,8 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 	t.Run("GetOp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var expected PostV1CaptureDocumentsListRequestFilterItemOp
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var expected DocumentsListCaptureRequestFilterItemOp
 		obj.Op = expected
 
 		// Act & Assert
@@ -13807,7 +13808,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetOp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItem
+		var obj *DocumentsListCaptureRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13820,8 +13821,8 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var expected *PostV1CaptureDocumentsListRequestFilterItemValue
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var expected *DocumentsListCaptureRequestFilterItemValue
 		obj.Value = expected
 
 		// Act & Assert
@@ -13831,7 +13832,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 	t.Run("GetValue_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		obj.Value = nil
 
 		// Act & Assert
@@ -13840,7 +13841,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 
 	t.Run("GetValue_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItem
+		var obj *DocumentsListCaptureRequestFilterItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13852,11 +13853,11 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		var fernTestValueField string
 
 		// Act
@@ -13887,8 +13888,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestFilterItem(t *testi
 	t.Run("SetOp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var fernTestValueOp PostV1CaptureDocumentsListRequestFilterItemOp
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var fernTestValueOp DocumentsListCaptureRequestFilterItemOp
 
 		// Act
 		obj.SetOp(fernTestValueOp)
@@ -13918,8 +13919,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestFilterItem(t *testi
 	t.Run("SetValue_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
-		var fernTestValueValue *PostV1CaptureDocumentsListRequestFilterItemValue
+		obj := &DocumentsListCaptureRequestFilterItem{}
+		var fernTestValueValue *DocumentsListCaptureRequestFilterItemValue
 
 		// Act
 		obj.SetValue(fernTestValueValue)
@@ -13948,11 +13949,11 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestFilterItem(t *testi
 
 }
 
-func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
+func TestGettersDocumentsListCaptureRequestFilterItemValue(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValue{}
+		obj := &DocumentsListCaptureRequestFilterItemValue{}
 		var expected string
 		obj.String = expected
 
@@ -13962,7 +13963,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValue
+		var obj *DocumentsListCaptureRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13975,7 +13976,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValue{}
+		obj := &DocumentsListCaptureRequestFilterItemValue{}
 		var expected float64
 		obj.Double = expected
 
@@ -13985,7 +13986,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValue
+		var obj *DocumentsListCaptureRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13998,7 +13999,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 	t.Run("GetBoolean", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValue{}
+		obj := &DocumentsListCaptureRequestFilterItemValue{}
 		var expected bool
 		obj.Boolean = expected
 
@@ -14008,7 +14009,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 
 	t.Run("GetBoolean_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValue
+		var obj *DocumentsListCaptureRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14018,46 +14019,46 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValue(t *testing.T) {
 		_ = obj.GetBoolean() // Should return zero value
 	})
 
-	t.Run("GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList", func(t *testing.T) {
+	t.Run("GetDocumentsListCaptureRequestFilterItemValueThreeItemList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValue{}
-		var expected []*PostV1CaptureDocumentsListRequestFilterItemValueThreeItem
-		obj.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList = expected
+		obj := &DocumentsListCaptureRequestFilterItemValue{}
+		var expected []*DocumentsListCaptureRequestFilterItemValueThreeItem
+		obj.DocumentsListCaptureRequestFilterItemValueThreeItemList = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetDocumentsListCaptureRequestFilterItemValueThreeItemList(), "getter should return the property value")
 	})
 
-	t.Run("GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
+	t.Run("GetDocumentsListCaptureRequestFilterItemValueThreeItemList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValue{}
-		obj.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList = nil
+		obj := &DocumentsListCaptureRequestFilterItemValue{}
+		obj.DocumentsListCaptureRequestFilterItemValueThreeItemList = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetDocumentsListCaptureRequestFilterItemValueThreeItemList(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
+	t.Run("GetDocumentsListCaptureRequestFilterItemValueThreeItemList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValue
+		var obj *DocumentsListCaptureRequestFilterItemValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList() // Should return zero value
+		_ = obj.GetDocumentsListCaptureRequestFilterItemValueThreeItemList() // Should return zero value
 	})
 
 }
 
-func TestGettersPostV1CaptureDocumentsListRequestFilterItemValueThreeItem(t *testing.T) {
+func TestGettersDocumentsListCaptureRequestFilterItemValueThreeItem(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValueThreeItem{}
+		obj := &DocumentsListCaptureRequestFilterItemValueThreeItem{}
 		var expected string
 		obj.String = expected
 
@@ -14067,7 +14068,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValueThreeItem(t *tes
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem
+		var obj *DocumentsListCaptureRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14080,7 +14081,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValueThreeItem(t *tes
 	t.Run("GetDouble", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItemValueThreeItem{}
+		obj := &DocumentsListCaptureRequestFilterItemValueThreeItem{}
 		var expected float64
 		obj.Double = expected
 
@@ -14090,7 +14091,7 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValueThreeItem(t *tes
 
 	t.Run("GetDouble_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem
+		var obj *DocumentsListCaptureRequestFilterItemValueThreeItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14102,9 +14103,9 @@ func TestGettersPostV1CaptureDocumentsListRequestFilterItemValueThreeItem(t *tes
 
 }
 
-func TestSettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestSettersDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("SetField", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		var fernTestValueField string
 		obj.SetField(fernTestValueField)
 		assert.Equal(t, fernTestValueField, obj.Field)
@@ -14112,8 +14113,8 @@ func TestSettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 	})
 
 	t.Run("SetDir", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
-		var fernTestValueDir *PostV1CaptureDocumentsListRequestSortItemDir
+		obj := &DocumentsListCaptureRequestSortItem{}
+		var fernTestValueDir *DocumentsListCaptureRequestSortItemDir
 		obj.SetDir(fernTestValueDir)
 		assert.Equal(t, fernTestValueDir, obj.Dir)
 		assert.NotNil(t, obj.explicitFields)
@@ -14121,11 +14122,11 @@ func TestSettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestGettersDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("GetField", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		var expected string
 		obj.Field = expected
 
@@ -14135,7 +14136,7 @@ func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetField_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestSortItem
+		var obj *DocumentsListCaptureRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14148,8 +14149,8 @@ func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
-		var expected *PostV1CaptureDocumentsListRequestSortItemDir
+		obj := &DocumentsListCaptureRequestSortItem{}
+		var expected *DocumentsListCaptureRequestSortItemDir
 		obj.Dir = expected
 
 		// Act & Assert
@@ -14159,7 +14160,7 @@ func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 	t.Run("GetDir_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		obj.Dir = nil
 
 		// Act & Assert
@@ -14168,7 +14169,7 @@ func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 
 	t.Run("GetDir_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestSortItem
+		var obj *DocumentsListCaptureRequestSortItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14180,11 +14181,11 @@ func TestGettersPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("SetField_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		var fernTestValueField string
 
 		// Act
@@ -14215,8 +14216,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestSortItem(t *testing
 	t.Run("SetDir_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
-		var fernTestValueDir *PostV1CaptureDocumentsListRequestSortItemDir
+		obj := &DocumentsListCaptureRequestSortItem{}
+		var fernTestValueDir *DocumentsListCaptureRequestSortItemDir
 
 		// Act
 		obj.SetDir(fernTestValueDir)
@@ -14245,17 +14246,17 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListRequestSortItem(t *testing
 
 }
 
-func TestSettersPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestSettersDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponse{}
-		var fernTestValueRows []*PostV1CaptureDocumentsListResponseRowsItem
+		obj := &DocumentsListCaptureResponse{}
+		var fernTestValueRows []*DocumentsListCaptureResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPage", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValuePage int64
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
@@ -14263,7 +14264,7 @@ func TestSettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetPageSize", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValuePageSize int64
 		obj.SetPageSize(fernTestValuePageSize)
 		assert.Equal(t, fernTestValuePageSize, obj.PageSize)
@@ -14271,7 +14272,7 @@ func TestSettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValueTotal int64
 		obj.SetTotal(fernTestValueTotal)
 		assert.Equal(t, fernTestValueTotal, obj.Total)
@@ -14279,7 +14280,7 @@ func TestSettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	})
 
 	t.Run("SetTotals", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValueTotals map[string]string
 		obj.SetTotals(fernTestValueTotals)
 		assert.Equal(t, fernTestValueTotals, obj.Totals)
@@ -14288,12 +14289,12 @@ func TestSettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestGettersDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
-		var expected []*PostV1CaptureDocumentsListResponseRowsItem
+		obj := &DocumentsListCaptureResponse{}
+		var expected []*DocumentsListCaptureResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -14303,7 +14304,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -14312,7 +14313,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14325,7 +14326,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetPage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var expected int64
 		obj.Page = expected
 
@@ -14335,7 +14336,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetPage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14348,7 +14349,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetPageSize", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var expected int64
 		obj.PageSize = expected
 
@@ -14358,7 +14359,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetPageSize_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14371,7 +14372,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var expected int64
 		obj.Total = expected
 
@@ -14381,7 +14382,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14394,7 +14395,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetTotals", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var expected map[string]string
 		obj.Totals = expected
 
@@ -14405,7 +14406,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("GetTotals_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		obj.Totals = nil
 
 		// Act & Assert
@@ -14414,7 +14415,7 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetTotals_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14426,12 +14427,12 @@ func TestGettersPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
-		var fernTestValueRows []*PostV1CaptureDocumentsListResponseRowsItem
+		obj := &DocumentsListCaptureResponse{}
+		var fernTestValueRows []*DocumentsListCaptureResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -14461,7 +14462,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("SetPage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValuePage int64
 
 		// Act
@@ -14492,7 +14493,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("SetPageSize_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValuePageSize int64
 
 		// Act
@@ -14523,7 +14524,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("SetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValueTotal int64
 
 		// Act
@@ -14554,7 +14555,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
 	t.Run("SetTotals_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		var fernTestValueTotals map[string]string
 
 		// Act
@@ -14584,9 +14585,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestSettersDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -14594,7 +14595,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueFileID string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -14602,7 +14603,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -14610,7 +14611,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -14618,7 +14619,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -14626,15 +14627,15 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueStatus PostV1CaptureDocumentsListResponseRowsItemStatus
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueStatus DocumentsListCaptureResponseRowsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProvider", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueProvider *string
 		obj.SetProvider(fernTestValueProvider)
 		assert.Equal(t, fernTestValueProvider, obj.Provider)
@@ -14642,7 +14643,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetModel", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueModel *string
 		obj.SetModel(fernTestValueModel)
 		assert.Equal(t, fernTestValueModel, obj.Model)
@@ -14650,7 +14651,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPagesProcessed", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValuePagesProcessed *int64
 		obj.SetPagesProcessed(fernTestValuePagesProcessed)
 		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
@@ -14658,15 +14659,15 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetExtraction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueExtraction *DocumentsListCaptureResponseRowsItemExtraction
 		obj.SetExtraction(fernTestValueExtraction)
 		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMatchedPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueMatchedPartnerID *string
 		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
 		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
@@ -14674,7 +14675,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValuePurchaseInvoiceID *string
 		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
 		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
@@ -14682,7 +14683,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetError", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueError *string
 		obj.SetError(fernTestValueError)
 		assert.Equal(t, fernTestValueError, obj.Error)
@@ -14690,16 +14691,16 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -14707,11 +14708,11 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestGettersDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -14721,7 +14722,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14734,7 +14735,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected string
 		obj.FileID = expected
 
@@ -14744,7 +14745,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14757,7 +14758,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected string
 		obj.FileName = expected
 
@@ -14767,7 +14768,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14780,7 +14781,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected string
 		obj.MimeType = expected
 
@@ -14790,7 +14791,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14803,7 +14804,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -14813,7 +14814,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14826,8 +14827,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var expected PostV1CaptureDocumentsListResponseRowsItemStatus
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var expected DocumentsListCaptureResponseRowsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -14836,7 +14837,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14849,7 +14850,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetProvider", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *string
 		obj.Provider = expected
 
@@ -14860,7 +14861,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetProvider_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.Provider = nil
 
 		// Act & Assert
@@ -14869,7 +14870,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14882,7 +14883,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetModel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *string
 		obj.Model = expected
 
@@ -14893,7 +14894,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetModel_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.Model = nil
 
 		// Act & Assert
@@ -14902,7 +14903,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetModel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14915,7 +14916,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPagesProcessed", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *int64
 		obj.PagesProcessed = expected
 
@@ -14926,7 +14927,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.PagesProcessed = nil
 
 		// Act & Assert
@@ -14935,7 +14936,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14948,8 +14949,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraction", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var expected *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var expected *DocumentsListCaptureResponseRowsItemExtraction
 		obj.Extraction = expected
 
 		// Act & Assert
@@ -14959,7 +14960,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraction_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.Extraction = nil
 
 		// Act & Assert
@@ -14968,7 +14969,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -14981,7 +14982,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMatchedPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *string
 		obj.MatchedPartnerID = expected
 
@@ -14992,7 +14993,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.MatchedPartnerID = nil
 
 		// Act & Assert
@@ -15001,7 +15002,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15014,7 +15015,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *string
 		obj.PurchaseInvoiceID = expected
 
@@ -15025,7 +15026,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.PurchaseInvoiceID = nil
 
 		// Act & Assert
@@ -15034,7 +15035,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15047,7 +15048,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var expected *string
 		obj.Error = expected
 
@@ -15058,7 +15059,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		obj.Error = nil
 
 		// Act & Assert
@@ -15067,7 +15068,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15080,8 +15081,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var expected string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -15090,7 +15091,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15103,8 +15104,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var expected string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -15113,7 +15114,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15125,11 +15126,11 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -15160,7 +15161,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueFileID string
 
 		// Act
@@ -15191,7 +15192,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueFileName string
 
 		// Act
@@ -15222,7 +15223,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -15253,7 +15254,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -15284,8 +15285,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueStatus PostV1CaptureDocumentsListResponseRowsItemStatus
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueStatus DocumentsListCaptureResponseRowsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -15315,7 +15316,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueProvider *string
 
 		// Act
@@ -15346,7 +15347,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueModel *string
 
 		// Act
@@ -15377,7 +15378,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValuePagesProcessed *int64
 
 		// Act
@@ -15408,8 +15409,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueExtraction *DocumentsListCaptureResponseRowsItemExtraction
 
 		// Act
 		obj.SetExtraction(fernTestValueExtraction)
@@ -15439,7 +15440,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueMatchedPartnerID *string
 
 		// Act
@@ -15470,7 +15471,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValuePurchaseInvoiceID *string
 
 		// Act
@@ -15501,7 +15502,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		var fernTestValueError *string
 
 		// Act
@@ -15532,8 +15533,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -15563,8 +15564,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsListCaptureResponseRowsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -15593,17 +15594,17 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItem(t *testin
 
 }
 
-func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestSettersDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("SetSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueSupplier *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		obj.SetSupplier(fernTestValueSupplier)
 		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueDocumentNumber *string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -15611,23 +15612,23 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueDocumentDate *time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -15635,7 +15636,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueNetTotal *string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -15643,7 +15644,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -15651,7 +15652,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueGrossTotal *string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -15659,7 +15660,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -15667,8 +15668,8 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueLines []*DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -15676,12 +15677,12 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 }
 
-func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestGettersDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("GetSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var expected *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var expected *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		obj.Supplier = expected
 
 		// Act & Assert
@@ -15691,7 +15692,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.Supplier = nil
 
 		// Act & Assert
@@ -15700,7 +15701,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15713,7 +15714,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.DocumentNumber = expected
 
@@ -15724,7 +15725,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.DocumentNumber = nil
 
 		// Act & Assert
@@ -15733,7 +15734,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15746,8 +15747,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var expected *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var expected *time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -15757,7 +15758,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.DocumentDate = nil
 
 		// Act & Assert
@@ -15766,7 +15767,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15779,8 +15780,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var expected *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -15790,7 +15791,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -15799,7 +15800,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15812,7 +15813,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.Currency = expected
 
@@ -15823,7 +15824,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -15832,7 +15833,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15845,7 +15846,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.NetTotal = expected
 
@@ -15856,7 +15857,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.NetTotal = nil
 
 		// Act & Assert
@@ -15865,7 +15866,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15878,7 +15879,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -15889,7 +15890,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -15898,7 +15899,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15911,7 +15912,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.GrossTotal = expected
 
@@ -15922,7 +15923,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.GrossTotal = nil
 
 		// Act & Assert
@@ -15931,7 +15932,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15944,7 +15945,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var expected *string
 		obj.Notes = expected
 
@@ -15955,7 +15956,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -15964,7 +15965,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -15977,8 +15978,8 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var expected []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var expected []*DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -15988,7 +15989,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -15997,7 +15998,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16009,12 +16010,12 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueSupplier *DocumentsListCaptureResponseRowsItemExtractionSupplier
 
 		// Act
 		obj.SetSupplier(fernTestValueSupplier)
@@ -16044,7 +16045,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueDocumentNumber *string
 
 		// Act
@@ -16075,8 +16076,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueDocumentDate *time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -16106,8 +16107,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -16137,7 +16138,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -16168,7 +16169,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueNetTotal *string
 
 		// Act
@@ -16199,7 +16200,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -16230,7 +16231,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueGrossTotal *string
 
 		// Act
@@ -16261,7 +16262,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -16292,8 +16293,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
+		var fernTestValueLines []*DocumentsListCaptureResponseRowsItemExtractionLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -16322,9 +16323,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 
 }
 
-func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestSettersDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -16332,7 +16333,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -16340,7 +16341,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -16348,7 +16349,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -16356,7 +16357,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -16364,7 +16365,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineNet *string
 		obj.SetLineNet(fernTestValueLineNet)
 		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
@@ -16372,7 +16373,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineVat *string
 		obj.SetLineVat(fernTestValueLineVat)
 		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
@@ -16380,7 +16381,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	})
 
 	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineGross *string
 		obj.SetLineGross(fernTestValueLineGross)
 		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
@@ -16389,11 +16390,11 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 }
 
-func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestGettersDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -16403,7 +16404,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16416,7 +16417,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -16426,7 +16427,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16439,7 +16440,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -16450,7 +16451,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -16459,7 +16460,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16472,7 +16473,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -16483,7 +16484,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -16492,7 +16493,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16505,7 +16506,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -16516,7 +16517,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -16525,7 +16526,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16538,7 +16539,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.LineNet = expected
 
@@ -16549,7 +16550,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineNet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.LineNet = nil
 
 		// Act & Assert
@@ -16558,7 +16559,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16571,7 +16572,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.LineVat = expected
 
@@ -16582,7 +16583,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.LineVat = nil
 
 		// Act & Assert
@@ -16591,7 +16592,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16604,7 +16605,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var expected *string
 		obj.LineGross = expected
 
@@ -16615,7 +16616,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 	t.Run("GetLineGross_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		obj.LineGross = nil
 
 		// Act & Assert
@@ -16624,7 +16625,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16636,11 +16637,11 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t 
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -16671,7 +16672,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -16702,7 +16703,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -16733,7 +16734,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -16764,7 +16765,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -16795,7 +16796,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineNet *string
 
 		// Act
@@ -16826,7 +16827,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineVat *string
 
 		// Act
@@ -16857,7 +16858,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		var fernTestValueLineGross *string
 
 		// Act
@@ -16887,9 +16888,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 
 }
 
-func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestSettersDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -16897,7 +16898,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -16905,7 +16906,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -16913,7 +16914,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -16921,7 +16922,7 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	})
 
 	t.Run("SetIban", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueIban *string
 		obj.SetIban(fernTestValueIban)
 		assert.Equal(t, fernTestValueIban, obj.Iban)
@@ -16930,11 +16931,11 @@ func TestSettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 }
 
-func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var expected *string
 		obj.Name = expected
 
@@ -16945,7 +16946,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		obj.Name = nil
 
 		// Act & Assert
@@ -16954,7 +16955,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -16967,7 +16968,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var expected *string
 		obj.Code = expected
 
@@ -16978,7 +16979,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -16987,7 +16988,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17000,7 +17001,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -17011,7 +17012,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -17020,7 +17021,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17033,7 +17034,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -17044,7 +17045,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -17053,7 +17054,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17066,7 +17067,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetIban", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var expected *string
 		obj.Iban = expected
 
@@ -17077,7 +17078,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 	t.Run("GetIban_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		obj.Iban = nil
 
 		// Act & Assert
@@ -17086,7 +17087,7 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 	t.Run("GetIban_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17098,11 +17099,11 @@ func TestGettersPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestSettersMarkExplicitDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueName *string
 
 		// Act
@@ -17133,7 +17134,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueCode *string
 
 		// Act
@@ -17164,7 +17165,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -17195,7 +17196,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -17226,7 +17227,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 	t.Run("SetIban_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		var fernTestValueIban *string
 
 		// Act
@@ -17256,9 +17257,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsListResponseRowsItemExtraction
 
 }
 
-func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestSettersDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -17266,7 +17267,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueFileID string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -17274,7 +17275,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -17282,7 +17283,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -17290,7 +17291,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetSizeBytes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueSizeBytes int64
 		obj.SetSizeBytes(fernTestValueSizeBytes)
 		assert.Equal(t, fernTestValueSizeBytes, obj.SizeBytes)
@@ -17298,15 +17299,15 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsUploadResponseStatus
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueStatus DocumentsUploadCaptureResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetProvider", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueProvider *string
 		obj.SetProvider(fernTestValueProvider)
 		assert.Equal(t, fernTestValueProvider, obj.Provider)
@@ -17314,7 +17315,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetModel", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueModel *string
 		obj.SetModel(fernTestValueModel)
 		assert.Equal(t, fernTestValueModel, obj.Model)
@@ -17322,7 +17323,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetPagesProcessed", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 		obj.SetPagesProcessed(fernTestValuePagesProcessed)
 		assert.Equal(t, fernTestValuePagesProcessed, obj.PagesProcessed)
@@ -17330,15 +17331,15 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetExtraction", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsUploadResponseExtraction
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueExtraction *DocumentsUploadCaptureResponseExtraction
 		obj.SetExtraction(fernTestValueExtraction)
 		assert.Equal(t, fernTestValueExtraction, obj.Extraction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMatchedPartnerID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 		obj.SetMatchedPartnerID(fernTestValueMatchedPartnerID)
 		assert.Equal(t, fernTestValueMatchedPartnerID, obj.MatchedPartnerID)
@@ -17346,7 +17347,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetPurchaseInvoiceID", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 		obj.SetPurchaseInvoiceID(fernTestValuePurchaseInvoiceID)
 		assert.Equal(t, fernTestValuePurchaseInvoiceID, obj.PurchaseInvoiceID)
@@ -17354,7 +17355,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetError", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueError *string
 		obj.SetError(fernTestValueError)
 		assert.Equal(t, fernTestValueError, obj.Error)
@@ -17362,23 +17363,23 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRawText", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueRawText *string
 		obj.SetRawText(fernTestValueRawText)
 		assert.Equal(t, fernTestValueRawText, obj.RawText)
@@ -17387,11 +17388,11 @@ func TestSettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestGettersDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected string
 		obj.ID = expected
 
@@ -17401,7 +17402,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17414,7 +17415,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected string
 		obj.FileID = expected
 
@@ -17424,7 +17425,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17437,7 +17438,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -17447,7 +17448,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17460,7 +17461,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -17470,7 +17471,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17483,7 +17484,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetSizeBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected int64
 		obj.SizeBytes = expected
 
@@ -17493,7 +17494,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetSizeBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17506,8 +17507,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var expected PostV1CaptureDocumentsUploadResponseStatus
+		obj := &DocumentsUploadCaptureResponse{}
+		var expected DocumentsUploadCaptureResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -17516,7 +17517,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17529,7 +17530,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetProvider", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.Provider = expected
 
@@ -17540,7 +17541,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetProvider_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.Provider = nil
 
 		// Act & Assert
@@ -17549,7 +17550,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetProvider_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17562,7 +17563,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetModel", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.Model = expected
 
@@ -17573,7 +17574,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetModel_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.Model = nil
 
 		// Act & Assert
@@ -17582,7 +17583,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetModel_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17595,7 +17596,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetPagesProcessed", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *int64
 		obj.PagesProcessed = expected
 
@@ -17606,7 +17607,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetPagesProcessed_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.PagesProcessed = nil
 
 		// Act & Assert
@@ -17615,7 +17616,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetPagesProcessed_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17628,8 +17629,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetExtraction", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var expected *PostV1CaptureDocumentsUploadResponseExtraction
+		obj := &DocumentsUploadCaptureResponse{}
+		var expected *DocumentsUploadCaptureResponseExtraction
 		obj.Extraction = expected
 
 		// Act & Assert
@@ -17639,7 +17640,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetExtraction_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.Extraction = nil
 
 		// Act & Assert
@@ -17648,7 +17649,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetExtraction_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17661,7 +17662,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.MatchedPartnerID = expected
 
@@ -17672,7 +17673,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetMatchedPartnerID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.MatchedPartnerID = nil
 
 		// Act & Assert
@@ -17681,7 +17682,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetMatchedPartnerID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17694,7 +17695,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.PurchaseInvoiceID = expected
 
@@ -17705,7 +17706,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetPurchaseInvoiceID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.PurchaseInvoiceID = nil
 
 		// Act & Assert
@@ -17714,7 +17715,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetPurchaseInvoiceID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17727,7 +17728,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.Error = expected
 
@@ -17738,7 +17739,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.Error = nil
 
 		// Act & Assert
@@ -17747,7 +17748,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17760,8 +17761,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var expected string
+		obj := &DocumentsUploadCaptureResponse{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -17770,7 +17771,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17783,8 +17784,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var expected string
+		obj := &DocumentsUploadCaptureResponse{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -17793,7 +17794,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17806,7 +17807,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetRawText", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var expected *string
 		obj.RawText = expected
 
@@ -17817,7 +17818,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("GetRawText_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		obj.RawText = nil
 
 		// Act & Assert
@@ -17826,7 +17827,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetRawText_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -17838,11 +17839,11 @@ func TestGettersPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestSettersMarkExplicitDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueID string
 
 		// Act
@@ -17873,7 +17874,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueFileID string
 
 		// Act
@@ -17904,7 +17905,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -17935,7 +17936,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -17966,7 +17967,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetSizeBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueSizeBytes int64
 
 		// Act
@@ -17997,8 +17998,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueStatus PostV1CaptureDocumentsUploadResponseStatus
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueStatus DocumentsUploadCaptureResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -18028,7 +18029,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetProvider_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueProvider *string
 
 		// Act
@@ -18059,7 +18060,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetModel_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueModel *string
 
 		// Act
@@ -18090,7 +18091,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetPagesProcessed_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValuePagesProcessed *int64
 
 		// Act
@@ -18121,8 +18122,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetExtraction_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueExtraction *PostV1CaptureDocumentsUploadResponseExtraction
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueExtraction *DocumentsUploadCaptureResponseExtraction
 
 		// Act
 		obj.SetExtraction(fernTestValueExtraction)
@@ -18152,7 +18153,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetMatchedPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueMatchedPartnerID *string
 
 		// Act
@@ -18183,7 +18184,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetPurchaseInvoiceID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValuePurchaseInvoiceID *string
 
 		// Act
@@ -18214,7 +18215,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueError *string
 
 		// Act
@@ -18245,8 +18246,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueCreatedAt string
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -18276,8 +18277,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &DocumentsUploadCaptureResponse{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -18307,7 +18308,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 	t.Run("SetRawText_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		var fernTestValueRawText *string
 
 		// Act
@@ -18337,17 +18338,17 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestSettersDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsUploadCaptureResponseExtractionSupplier
 		obj.SetSupplier(fernTestValueSupplier)
 		assert.Equal(t, fernTestValueSupplier, obj.Supplier)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDocumentNumber", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 		obj.SetDocumentNumber(fernTestValueDocumentNumber)
 		assert.Equal(t, fernTestValueDocumentNumber, obj.DocumentNumber)
@@ -18355,23 +18356,23 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetDocumentDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 		obj.SetDocumentDate(fernTestValueDocumentDate)
 		assert.Equal(t, fernTestValueDocumentDate, obj.DocumentDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCurrency", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 		obj.SetCurrency(fernTestValueCurrency)
 		assert.Equal(t, fernTestValueCurrency, obj.Currency)
@@ -18379,7 +18380,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNetTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 		obj.SetNetTotal(fernTestValueNetTotal)
 		assert.Equal(t, fernTestValueNetTotal, obj.NetTotal)
@@ -18387,7 +18388,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetVatTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 		obj.SetVatTotal(fernTestValueVatTotal)
 		assert.Equal(t, fernTestValueVatTotal, obj.VatTotal)
@@ -18395,7 +18396,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetGrossTotal", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 		obj.SetGrossTotal(fernTestValueGrossTotal)
 		assert.Equal(t, fernTestValueGrossTotal, obj.GrossTotal)
@@ -18403,7 +18404,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -18411,8 +18412,8 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	})
 
 	t.Run("SetLines", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsUploadCaptureResponseExtractionLinesItem
 		obj.SetLines(fernTestValueLines)
 		assert.Equal(t, fernTestValueLines, obj.Lines)
 		assert.NotNil(t, obj.explicitFields)
@@ -18420,12 +18421,12 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestGettersDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var expected *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var expected *DocumentsUploadCaptureResponseExtractionSupplier
 		obj.Supplier = expected
 
 		// Act & Assert
@@ -18435,7 +18436,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetSupplier_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.Supplier = nil
 
 		// Act & Assert
@@ -18444,7 +18445,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetSupplier_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18457,7 +18458,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.DocumentNumber = expected
 
@@ -18468,7 +18469,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentNumber_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.DocumentNumber = nil
 
 		// Act & Assert
@@ -18477,7 +18478,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18490,8 +18491,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var expected *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DocumentDate = expected
 
 		// Act & Assert
@@ -18501,7 +18502,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDocumentDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.DocumentDate = nil
 
 		// Act & Assert
@@ -18510,7 +18511,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetDocumentDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18523,8 +18524,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var expected *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var expected *time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -18534,7 +18535,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetDueDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.DueDate = nil
 
 		// Act & Assert
@@ -18543,7 +18544,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18556,7 +18557,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.Currency = expected
 
@@ -18567,7 +18568,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetCurrency_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.Currency = nil
 
 		// Act & Assert
@@ -18576,7 +18577,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetCurrency_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18589,7 +18590,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.NetTotal = expected
 
@@ -18600,7 +18601,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetNetTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.NetTotal = nil
 
 		// Act & Assert
@@ -18609,7 +18610,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetNetTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18622,7 +18623,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.VatTotal = expected
 
@@ -18633,7 +18634,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetVatTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.VatTotal = nil
 
 		// Act & Assert
@@ -18642,7 +18643,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetVatTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18655,7 +18656,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.GrossTotal = expected
 
@@ -18666,7 +18667,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetGrossTotal_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.GrossTotal = nil
 
 		// Act & Assert
@@ -18675,7 +18676,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetGrossTotal_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18688,7 +18689,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var expected *string
 		obj.Notes = expected
 
@@ -18699,7 +18700,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -18708,7 +18709,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18721,8 +18722,8 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetLines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var expected []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var expected []*DocumentsUploadCaptureResponseExtractionLinesItem
 		obj.Lines = expected
 
 		// Act & Assert
@@ -18732,7 +18733,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 	t.Run("GetLines_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		obj.Lines = nil
 
 		// Act & Assert
@@ -18741,7 +18742,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 	t.Run("GetLines_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -18753,12 +18754,12 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestSettersMarkExplicitDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("SetSupplier_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueSupplier *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueSupplier *DocumentsUploadCaptureResponseExtractionSupplier
 
 		// Act
 		obj.SetSupplier(fernTestValueSupplier)
@@ -18788,7 +18789,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetDocumentNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueDocumentNumber *string
 
 		// Act
@@ -18819,8 +18820,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetDocumentDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueDocumentDate *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueDocumentDate *time.Time
 
 		// Act
 		obj.SetDocumentDate(fernTestValueDocumentDate)
@@ -18850,8 +18851,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueDueDate *string
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueDueDate *time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -18881,7 +18882,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetCurrency_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueCurrency *string
 
 		// Act
@@ -18912,7 +18913,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetNetTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueNetTotal *string
 
 		// Act
@@ -18943,7 +18944,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetVatTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueVatTotal *string
 
 		// Act
@@ -18974,7 +18975,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetGrossTotal_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueGrossTotal *string
 
 		// Act
@@ -19005,7 +19006,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -19036,8 +19037,8 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 	t.Run("SetLines_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
-		var fernTestValueLines []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		obj := &DocumentsUploadCaptureResponseExtraction{}
+		var fernTestValueLines []*DocumentsUploadCaptureResponseExtractionLinesItem
 
 		// Act
 		obj.SetLines(fernTestValueLines)
@@ -19066,9 +19067,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtraction(t *te
 
 }
 
-func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestSettersDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -19076,7 +19077,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -19084,7 +19085,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetUnit", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 		obj.SetUnit(fernTestValueUnit)
 		assert.Equal(t, fernTestValueUnit, obj.Unit)
@@ -19092,7 +19093,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetUnitPriceExclVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 		obj.SetUnitPriceExclVat(fernTestValueUnitPriceExclVat)
 		assert.Equal(t, fernTestValueUnitPriceExclVat, obj.UnitPriceExclVat)
@@ -19100,7 +19101,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetVatRatePercent", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
@@ -19108,7 +19109,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetLineNet", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 		obj.SetLineNet(fernTestValueLineNet)
 		assert.Equal(t, fernTestValueLineNet, obj.LineNet)
@@ -19116,7 +19117,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetLineVat", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 		obj.SetLineVat(fernTestValueLineVat)
 		assert.Equal(t, fernTestValueLineVat, obj.LineVat)
@@ -19124,7 +19125,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	})
 
 	t.Run("SetLineGross", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 		obj.SetLineGross(fernTestValueLineGross)
 		assert.Equal(t, fernTestValueLineGross, obj.LineGross)
@@ -19133,11 +19134,11 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 }
 
-func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestGettersDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Description = expected
 
@@ -19147,7 +19148,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19160,7 +19161,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected string
 		obj.Quantity = expected
 
@@ -19170,7 +19171,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19183,7 +19184,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetUnit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.Unit = expected
 
@@ -19194,7 +19195,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetUnit_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.Unit = nil
 
 		// Act & Assert
@@ -19203,7 +19204,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetUnit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19216,7 +19217,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetUnitPriceExclVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.UnitPriceExclVat = expected
 
@@ -19227,7 +19228,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetUnitPriceExclVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.UnitPriceExclVat = nil
 
 		// Act & Assert
@@ -19236,7 +19237,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetUnitPriceExclVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19249,7 +19250,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetVatRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.VatRatePercent = expected
 
@@ -19260,7 +19261,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetVatRatePercent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.VatRatePercent = nil
 
 		// Act & Assert
@@ -19269,7 +19270,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetVatRatePercent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19282,7 +19283,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineNet", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineNet = expected
 
@@ -19293,7 +19294,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineNet_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.LineNet = nil
 
 		// Act & Assert
@@ -19302,7 +19303,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetLineNet_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19315,7 +19316,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineVat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineVat = expected
 
@@ -19326,7 +19327,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineVat_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.LineVat = nil
 
 		// Act & Assert
@@ -19335,7 +19336,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetLineVat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19348,7 +19349,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineGross", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var expected *string
 		obj.LineGross = expected
 
@@ -19359,7 +19360,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 	t.Run("GetLineGross_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		obj.LineGross = nil
 
 		// Act & Assert
@@ -19368,7 +19369,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 	t.Run("GetLineGross_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19380,11 +19381,11 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testi
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestSettersMarkExplicitDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -19415,7 +19416,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueQuantity string
 
 		// Act
@@ -19446,7 +19447,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetUnit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnit *string
 
 		// Act
@@ -19477,7 +19478,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetUnitPriceExclVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueUnitPriceExclVat *string
 
 		// Act
@@ -19508,7 +19509,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetVatRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueVatRatePercent *string
 
 		// Act
@@ -19539,7 +19540,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetLineNet_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineNet *string
 
 		// Act
@@ -19570,7 +19571,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetLineVat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineVat *string
 
 		// Act
@@ -19601,7 +19602,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 	t.Run("SetLineGross_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		var fernTestValueLineGross *string
 
 		// Act
@@ -19631,9 +19632,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionLinesI
 
 }
 
-func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestSettersDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 		obj.SetName(fernTestValueName)
 		assert.Equal(t, fernTestValueName, obj.Name)
@@ -19641,7 +19642,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	})
 
 	t.Run("SetCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 		obj.SetCode(fernTestValueCode)
 		assert.Equal(t, fernTestValueCode, obj.Code)
@@ -19649,7 +19650,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	})
 
 	t.Run("SetVatCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 		obj.SetVatCode(fernTestValueVatCode)
 		assert.Equal(t, fernTestValueVatCode, obj.VatCode)
@@ -19657,7 +19658,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -19665,7 +19666,7 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	})
 
 	t.Run("SetIban", func(t *testing.T) {
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 		obj.SetIban(fernTestValueIban)
 		assert.Equal(t, fernTestValueIban, obj.Iban)
@@ -19674,11 +19675,11 @@ func TestSettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 }
 
-func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestGettersDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Name = expected
 
@@ -19689,7 +19690,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		obj.Name = nil
 
 		// Act & Assert
@@ -19698,7 +19699,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 	t.Run("GetName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19711,7 +19712,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Code = expected
 
@@ -19722,7 +19723,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		obj.Code = nil
 
 		// Act & Assert
@@ -19731,7 +19732,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 	t.Run("GetCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19744,7 +19745,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetVatCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.VatCode = expected
 
@@ -19755,7 +19756,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetVatCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		obj.VatCode = nil
 
 		// Act & Assert
@@ -19764,7 +19765,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 	t.Run("GetVatCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19777,7 +19778,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -19788,7 +19789,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -19797,7 +19798,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19810,7 +19811,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetIban", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var expected *string
 		obj.Iban = expected
 
@@ -19821,7 +19822,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 	t.Run("GetIban_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		obj.Iban = nil
 
 		// Act & Assert
@@ -19830,7 +19831,7 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 	t.Run("GetIban_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -19842,11 +19843,11 @@ func TestGettersPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testin
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestSettersMarkExplicitDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("SetName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueName *string
 
 		// Act
@@ -19877,7 +19878,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSuppli
 	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueCode *string
 
 		// Act
@@ -19908,7 +19909,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSuppli
 	t.Run("SetVatCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueVatCode *string
 
 		// Act
@@ -19939,7 +19940,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSuppli
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -19970,7 +19971,7 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSuppli
 	t.Run("SetIban_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		var fernTestValueIban *string
 
 		// Act
@@ -20000,9 +20001,9 @@ func TestSettersMarkExplicitPostV1CaptureDocumentsUploadResponseExtractionSuppli
 
 }
 
-func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestSettersInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("SetPostmarkName", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkName *string
 		obj.SetPostmarkName(fernTestValuePostmarkName)
 		assert.Equal(t, fernTestValuePostmarkName, obj.PostmarkName)
@@ -20010,7 +20011,7 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	})
 
 	t.Run("SetPostmarkContent", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkContent *string
 		obj.SetPostmarkContent(fernTestValuePostmarkContent)
 		assert.Equal(t, fernTestValuePostmarkContent, obj.PostmarkContent)
@@ -20018,7 +20019,7 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	})
 
 	t.Run("SetPostmarkContentType", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkContentType *string
 		obj.SetPostmarkContentType(fernTestValuePostmarkContentType)
 		assert.Equal(t, fernTestValuePostmarkContentType, obj.PostmarkContentType)
@@ -20026,7 +20027,7 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueFileName *string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -20034,7 +20035,7 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueMimeType *string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -20042,7 +20043,7 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	})
 
 	t.Run("SetContent", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueContent *string
 		obj.SetContent(fernTestValueContent)
 		assert.Equal(t, fernTestValueContent, obj.Content)
@@ -20051,11 +20052,11 @@ func TestSettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestGettersInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.PostmarkName = expected
 
@@ -20066,7 +20067,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.PostmarkName = nil
 
 		// Act & Assert
@@ -20075,7 +20076,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetPostmarkName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20088,7 +20089,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkContent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.PostmarkContent = expected
 
@@ -20099,7 +20100,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkContent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.PostmarkContent = nil
 
 		// Act & Assert
@@ -20108,7 +20109,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetPostmarkContent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20121,7 +20122,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkContentType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.PostmarkContentType = expected
 
@@ -20132,7 +20133,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetPostmarkContentType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.PostmarkContentType = nil
 
 		// Act & Assert
@@ -20141,7 +20142,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetPostmarkContentType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20154,7 +20155,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.FileName = expected
 
@@ -20165,7 +20166,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetFileName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.FileName = nil
 
 		// Act & Assert
@@ -20174,7 +20175,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20187,7 +20188,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.MimeType = expected
 
@@ -20198,7 +20199,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetMimeType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.MimeType = nil
 
 		// Act & Assert
@@ -20207,7 +20208,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20220,7 +20221,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetContent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var expected *string
 		obj.Content = expected
 
@@ -20231,7 +20232,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetContent_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		obj.Content = nil
 
 		// Act & Assert
@@ -20240,7 +20241,7 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 	t.Run("GetContent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20252,11 +20253,11 @@ func TestGettersPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestSettersMarkExplicitInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("SetPostmarkName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkName *string
 
 		// Act
@@ -20287,7 +20288,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 	t.Run("SetPostmarkContent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkContent *string
 
 		// Act
@@ -20318,7 +20319,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 	t.Run("SetPostmarkContentType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValuePostmarkContentType *string
 
 		// Act
@@ -20349,7 +20350,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueFileName *string
 
 		// Act
@@ -20380,7 +20381,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueMimeType *string
 
 		// Act
@@ -20411,7 +20412,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		var fernTestValueContent *string
 
 		// Act
@@ -20441,11 +20442,11 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestAttachmentsItem(t *t
 
 }
 
-func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
+func TestGettersInboundEmailCaptureRequestTo(t *testing.T) {
 	t.Run("GetString", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestTo{}
+		obj := &InboundEmailCaptureRequestTo{}
 		var expected string
 		obj.String = expected
 
@@ -20455,7 +20456,7 @@ func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
 
 	t.Run("GetString_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestTo
+		var obj *InboundEmailCaptureRequestTo
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20468,7 +20469,7 @@ func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
 	t.Run("GetStringList", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestTo{}
+		obj := &InboundEmailCaptureRequestTo{}
 		var expected []string
 		obj.StringList = expected
 
@@ -20479,7 +20480,7 @@ func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
 	t.Run("GetStringList_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestTo{}
+		obj := &InboundEmailCaptureRequestTo{}
 		obj.StringList = nil
 
 		// Act & Assert
@@ -20488,7 +20489,7 @@ func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
 
 	t.Run("GetStringList_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestTo
+		var obj *InboundEmailCaptureRequestTo
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20500,9 +20501,9 @@ func TestGettersPostV1CaptureInboundEmailRequestTo(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestSettersInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("SetEmail", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		var fernTestValueEmail *string
 		obj.SetEmail(fernTestValueEmail)
 		assert.Equal(t, fernTestValueEmail, obj.Email)
@@ -20511,11 +20512,11 @@ func TestSettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestGettersInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("GetEmail", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		var expected *string
 		obj.Email = expected
 
@@ -20526,7 +20527,7 @@ func TestGettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
 	t.Run("GetEmail_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		obj.Email = nil
 
 		// Act & Assert
@@ -20535,7 +20536,7 @@ func TestGettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
 
 	t.Run("GetEmail_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestToFullItem
+		var obj *InboundEmailCaptureRequestToFullItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20547,11 +20548,11 @@ func TestGettersPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestSettersMarkExplicitInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("SetEmail_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		var fernTestValueEmail *string
 
 		// Act
@@ -20581,9 +20582,9 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailRequestToFullItem(t *testin
 
 }
 
-func TestSettersPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestSettersInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("SetAccepted", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueAccepted int64
 		obj.SetAccepted(fernTestValueAccepted)
 		assert.Equal(t, fernTestValueAccepted, obj.Accepted)
@@ -20591,7 +20592,7 @@ func TestSettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 	})
 
 	t.Run("SetSkipped", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueSkipped int64
 		obj.SetSkipped(fernTestValueSkipped)
 		assert.Equal(t, fernTestValueSkipped, obj.Skipped)
@@ -20599,7 +20600,7 @@ func TestSettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 	})
 
 	t.Run("SetCaptureIDs", func(t *testing.T) {
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueCaptureIDs []string
 		obj.SetCaptureIDs(fernTestValueCaptureIDs)
 		assert.Equal(t, fernTestValueCaptureIDs, obj.CaptureIDs)
@@ -20608,11 +20609,11 @@ func TestSettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestGettersInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("GetAccepted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var expected int64
 		obj.Accepted = expected
 
@@ -20622,7 +20623,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 	t.Run("GetAccepted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailResponse
+		var obj *InboundEmailCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20635,7 +20636,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 	t.Run("GetSkipped", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var expected int64
 		obj.Skipped = expected
 
@@ -20645,7 +20646,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 	t.Run("GetSkipped_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailResponse
+		var obj *InboundEmailCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20658,7 +20659,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 	t.Run("GetCaptureIDs", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var expected []string
 		obj.CaptureIDs = expected
 
@@ -20669,7 +20670,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 	t.Run("GetCaptureIDs_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		obj.CaptureIDs = nil
 
 		// Act & Assert
@@ -20678,7 +20679,7 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 	t.Run("GetCaptureIDs_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailResponse
+		var obj *InboundEmailCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20690,11 +20691,11 @@ func TestGettersPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestSettersMarkExplicitInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("SetAccepted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueAccepted int64
 
 		// Act
@@ -20725,7 +20726,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailResponse(t *testing.T) {
 	t.Run("SetSkipped_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueSkipped int64
 
 		// Act
@@ -20756,7 +20757,7 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailResponse(t *testing.T) {
 	t.Run("SetCaptureIDs_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		var fernTestValueCaptureIDs []string
 
 		// Act
@@ -20786,9 +20787,9 @@ func TestSettersMarkExplicitPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestSettersSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
 		assert.Equal(t, fernTestValueIntakeEnabled, obj.IntakeEnabled)
@@ -20796,7 +20797,7 @@ func TestSettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetCaptureAutoExtract", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
 		assert.Equal(t, fernTestValueCaptureAutoExtract, obj.CaptureAutoExtract)
@@ -20804,7 +20805,7 @@ func TestSettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetIntakeAddress", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 		obj.SetIntakeAddress(fernTestValueIntakeAddress)
 		assert.Equal(t, fernTestValueIntakeAddress, obj.IntakeAddress)
@@ -20812,7 +20813,7 @@ func TestSettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetOcrConfigured", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 		obj.SetOcrConfigured(fernTestValueOcrConfigured)
 		assert.Equal(t, fernTestValueOcrConfigured, obj.OcrConfigured)
@@ -20821,11 +20822,11 @@ func TestSettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestGettersSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("GetIntakeEnabled", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var expected bool
 		obj.IntakeEnabled = expected
 
@@ -20835,7 +20836,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 	t.Run("GetIntakeEnabled_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20848,7 +20849,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("GetCaptureAutoExtract", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var expected bool
 		obj.CaptureAutoExtract = expected
 
@@ -20858,7 +20859,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 	t.Run("GetCaptureAutoExtract_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20871,7 +20872,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("GetIntakeAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var expected *string
 		obj.IntakeAddress = expected
 
@@ -20882,7 +20883,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("GetIntakeAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		obj.IntakeAddress = nil
 
 		// Act & Assert
@@ -20891,7 +20892,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 	t.Run("GetIntakeAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20904,7 +20905,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("GetOcrConfigured", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var expected bool
 		obj.OcrConfigured = expected
 
@@ -20914,7 +20915,7 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 	t.Run("GetOcrConfigured_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -20926,11 +20927,11 @@ func TestGettersPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestSettersMarkExplicitSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 
 		// Act
@@ -20961,7 +20962,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("SetCaptureAutoExtract_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 
 		// Act
@@ -20992,7 +20993,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("SetIntakeAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 
 		// Act
@@ -21023,7 +21024,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsGetResponse(t *testing.T) {
 	t.Run("SetOcrConfigured_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 
 		// Act
@@ -21053,9 +21054,9 @@ func TestSettersMarkExplicitPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestSettersSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
 		assert.Equal(t, fernTestValueIntakeEnabled, obj.IntakeEnabled)
@@ -21063,7 +21064,7 @@ func TestSettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	})
 
 	t.Run("SetCaptureAutoExtract", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
 		assert.Equal(t, fernTestValueCaptureAutoExtract, obj.CaptureAutoExtract)
@@ -21071,7 +21072,7 @@ func TestSettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	})
 
 	t.Run("SetIntakeAddress", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 		obj.SetIntakeAddress(fernTestValueIntakeAddress)
 		assert.Equal(t, fernTestValueIntakeAddress, obj.IntakeAddress)
@@ -21079,7 +21080,7 @@ func TestSettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	})
 
 	t.Run("SetOcrConfigured", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 		obj.SetOcrConfigured(fernTestValueOcrConfigured)
 		assert.Equal(t, fernTestValueOcrConfigured, obj.OcrConfigured)
@@ -21088,11 +21089,11 @@ func TestSettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestGettersSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("GetIntakeEnabled", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var expected bool
 		obj.IntakeEnabled = expected
 
@@ -21102,7 +21103,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 	t.Run("GetIntakeEnabled_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21115,7 +21116,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	t.Run("GetCaptureAutoExtract", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var expected bool
 		obj.CaptureAutoExtract = expected
 
@@ -21125,7 +21126,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 	t.Run("GetCaptureAutoExtract_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21138,7 +21139,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	t.Run("GetIntakeAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var expected *string
 		obj.IntakeAddress = expected
 
@@ -21149,7 +21150,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	t.Run("GetIntakeAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		obj.IntakeAddress = nil
 
 		// Act & Assert
@@ -21158,7 +21159,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 	t.Run("GetIntakeAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21171,7 +21172,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 	t.Run("GetOcrConfigured", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var expected bool
 		obj.OcrConfigured = expected
 
@@ -21181,7 +21182,7 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 	t.Run("GetOcrConfigured_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21193,11 +21194,11 @@ func TestGettersPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestSettersMarkExplicitSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 
 		// Act
@@ -21228,7 +21229,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsRegenerateIntakeResponse(t *tes
 	t.Run("SetCaptureAutoExtract_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 
 		// Act
@@ -21259,7 +21260,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsRegenerateIntakeResponse(t *tes
 	t.Run("SetIntakeAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 
 		// Act
@@ -21290,7 +21291,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsRegenerateIntakeResponse(t *tes
 	t.Run("SetOcrConfigured_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 
 		// Act
@@ -21320,9 +21321,9 @@ func TestSettersMarkExplicitPostV1CaptureSettingsRegenerateIntakeResponse(t *tes
 
 }
 
-func TestSettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestSettersSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 		obj.SetIntakeEnabled(fernTestValueIntakeEnabled)
 		assert.Equal(t, fernTestValueIntakeEnabled, obj.IntakeEnabled)
@@ -21330,7 +21331,7 @@ func TestSettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetCaptureAutoExtract", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 		obj.SetCaptureAutoExtract(fernTestValueCaptureAutoExtract)
 		assert.Equal(t, fernTestValueCaptureAutoExtract, obj.CaptureAutoExtract)
@@ -21338,7 +21339,7 @@ func TestSettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetIntakeAddress", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 		obj.SetIntakeAddress(fernTestValueIntakeAddress)
 		assert.Equal(t, fernTestValueIntakeAddress, obj.IntakeAddress)
@@ -21346,7 +21347,7 @@ func TestSettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetOcrConfigured", func(t *testing.T) {
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 		obj.SetOcrConfigured(fernTestValueOcrConfigured)
 		assert.Equal(t, fernTestValueOcrConfigured, obj.OcrConfigured)
@@ -21355,11 +21356,11 @@ func TestSettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestGettersSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("GetIntakeEnabled", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var expected bool
 		obj.IntakeEnabled = expected
 
@@ -21369,7 +21370,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetIntakeEnabled_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21382,7 +21383,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("GetCaptureAutoExtract", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var expected bool
 		obj.CaptureAutoExtract = expected
 
@@ -21392,7 +21393,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetCaptureAutoExtract_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21405,7 +21406,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("GetIntakeAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var expected *string
 		obj.IntakeAddress = expected
 
@@ -21416,7 +21417,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("GetIntakeAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		obj.IntakeAddress = nil
 
 		// Act & Assert
@@ -21425,7 +21426,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetIntakeAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21438,7 +21439,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("GetOcrConfigured", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var expected bool
 		obj.OcrConfigured = expected
 
@@ -21448,7 +21449,7 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetOcrConfigured_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -21460,11 +21461,11 @@ func TestGettersPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("SetIntakeEnabled_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueIntakeEnabled bool
 
 		// Act
@@ -21495,7 +21496,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("SetCaptureAutoExtract_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueCaptureAutoExtract bool
 
 		// Act
@@ -21526,7 +21527,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("SetIntakeAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueIntakeAddress *string
 
 		// Act
@@ -21557,7 +21558,7 @@ func TestSettersMarkExplicitPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 	t.Run("SetOcrConfigured_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		var fernTestValueOcrConfigured bool
 
 		// Act
@@ -21587,11 +21588,11 @@ func TestSettersMarkExplicitPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21600,31 +21601,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmRequestLinesItem
+		var unmarshaled DocumentsConfirmCaptureRequestLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmRequestLinesItem
+		var obj DocumentsConfirmCaptureRequestLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmRequestLinesItem
+		var obj DocumentsConfirmCaptureRequestLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21633,31 +21634,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmRequestNewSupplier
+		var unmarshaled DocumentsConfirmCaptureRequestNewSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmRequestNewSupplier
+		var obj DocumentsConfirmCaptureRequestNewSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmRequestNewSupplier
+		var obj DocumentsConfirmCaptureRequestNewSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
+		obj := &DocumentsConfirmCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21666,31 +21667,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponse
+		var unmarshaled DocumentsConfirmCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponse
+		var obj DocumentsConfirmCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponse
+		var obj DocumentsConfirmCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseCapture(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsConfirmCaptureResponseCapture{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21699,31 +21700,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseCapture
+		var unmarshaled DocumentsConfirmCaptureResponseCapture
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCapture
+		var obj DocumentsConfirmCaptureResponseCapture
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCapture
+		var obj DocumentsConfirmCaptureResponseCapture
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21732,31 +21733,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+		var unmarshaled DocumentsConfirmCaptureResponseCaptureExtraction
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+		var obj DocumentsConfirmCaptureResponseCaptureExtraction
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+		var obj DocumentsConfirmCaptureResponseCaptureExtraction
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21765,31 +21766,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtractionLin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var unmarshaled DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21798,31 +21799,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseCaptureExtractionSup
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var unmarshaled DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21831,31 +21832,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseInvoice
+		var unmarshaled DocumentsConfirmCaptureResponseInvoice
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj DocumentsConfirmCaptureResponseInvoice
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj DocumentsConfirmCaptureResponseInvoice
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21864,31 +21865,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var unmarshaled DocumentsConfirmCaptureResponseInvoiceLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj DocumentsConfirmCaptureResponseInvoiceLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj DocumentsConfirmCaptureResponseInvoiceLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21897,31 +21898,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsDeleteResponse
+		var unmarshaled DocumentsDeleteCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsDeleteResponse
+		var obj DocumentsDeleteCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsDeleteResponse
+		var obj DocumentsDeleteCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21930,31 +21931,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsExtractResponse
+		var unmarshaled DocumentsExtractCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponse
+		var obj DocumentsExtractCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponse
+		var obj DocumentsExtractCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestJSONMarshalingDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21963,31 +21964,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtraction(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsExtractResponseExtraction
+		var unmarshaled DocumentsExtractCaptureResponseExtraction
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtraction
+		var obj DocumentsExtractCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtraction
+		var obj DocumentsExtractCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -21996,31 +21997,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtractionLinesItem(
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var unmarshaled DocumentsExtractCaptureResponseExtractionLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj DocumentsExtractCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj DocumentsExtractCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22029,31 +22030,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsExtractResponseExtractionSupplier(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var unmarshaled DocumentsExtractCaptureResponseExtractionSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj DocumentsExtractCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj DocumentsExtractCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22062,31 +22063,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsGetResponse
+		var unmarshaled DocumentsGetCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponse
+		var obj DocumentsGetCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponse
+		var obj DocumentsGetCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestJSONMarshalingDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22095,31 +22096,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtraction(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsGetResponseExtraction
+		var unmarshaled DocumentsGetCaptureResponseExtraction
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtraction
+		var obj DocumentsGetCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtraction
+		var obj DocumentsGetCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22128,31 +22129,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var unmarshaled DocumentsGetCaptureResponseExtractionLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj DocumentsGetCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj DocumentsGetCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22161,31 +22162,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsGetResponseExtractionSupplier(t *te
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var unmarshaled DocumentsGetCaptureResponseExtractionSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj DocumentsGetCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj DocumentsGetCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22194,31 +22195,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListRequestFilterItem(t *testing.T)
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListRequestFilterItem
+		var unmarshaled DocumentsListCaptureRequestFilterItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListRequestFilterItem
+		var obj DocumentsListCaptureRequestFilterItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListRequestFilterItem
+		var obj DocumentsListCaptureRequestFilterItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22227,31 +22228,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListRequestSortItem
+		var unmarshaled DocumentsListCaptureRequestSortItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListRequestSortItem
+		var obj DocumentsListCaptureRequestSortItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListRequestSortItem
+		var obj DocumentsListCaptureRequestSortItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22260,31 +22261,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListResponse
+		var unmarshaled DocumentsListCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponse
+		var obj DocumentsListCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponse
+		var obj DocumentsListCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22293,31 +22294,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListResponseRowsItem
+		var unmarshaled DocumentsListCaptureResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItem
+		var obj DocumentsListCaptureResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItem
+		var obj DocumentsListCaptureResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22326,31 +22327,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtraction(t *t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var unmarshaled DocumentsListCaptureResponseRowsItemExtraction
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj DocumentsListCaptureResponseRowsItemExtraction
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj DocumentsListCaptureResponseRowsItemExtraction
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22359,31 +22360,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtractionLines
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var unmarshaled DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22392,31 +22393,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsListResponseRowsItemExtractionSuppl
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var unmarshaled DocumentsListCaptureResponseRowsItemExtractionSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj DocumentsListCaptureResponseRowsItemExtractionSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj DocumentsListCaptureResponseRowsItemExtractionSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestJSONMarshalingDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22425,31 +22426,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsUploadResponse
+		var unmarshaled DocumentsUploadCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponse
+		var obj DocumentsUploadCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponse
+		var obj DocumentsUploadCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestJSONMarshalingDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22458,31 +22459,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtraction(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsUploadResponseExtraction
+		var unmarshaled DocumentsUploadCaptureResponseExtraction
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtraction
+		var obj DocumentsUploadCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtraction
+		var obj DocumentsUploadCaptureResponseExtraction
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestJSONMarshalingDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22491,31 +22492,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var unmarshaled DocumentsUploadCaptureResponseExtractionLinesItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj DocumentsUploadCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj DocumentsUploadCaptureResponseExtractionLinesItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestJSONMarshalingDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22524,31 +22525,31 @@ func TestJSONMarshalingPostV1CaptureDocumentsUploadResponseExtractionSupplier(t 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var unmarshaled DocumentsUploadCaptureResponseExtractionSupplier
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj DocumentsUploadCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj DocumentsUploadCaptureResponseExtractionSupplier
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestJSONMarshalingInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22557,31 +22558,31 @@ func TestJSONMarshalingPostV1CaptureInboundEmailRequestAttachmentsItem(t *testin
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureInboundEmailRequestAttachmentsItem
+		var unmarshaled InboundEmailCaptureRequestAttachmentsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj InboundEmailCaptureRequestAttachmentsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj InboundEmailCaptureRequestAttachmentsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestJSONMarshalingInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22590,31 +22591,31 @@ func TestJSONMarshalingPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureInboundEmailRequestToFullItem
+		var unmarshaled InboundEmailCaptureRequestToFullItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailRequestToFullItem
+		var obj InboundEmailCaptureRequestToFullItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailRequestToFullItem
+		var obj InboundEmailCaptureRequestToFullItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestJSONMarshalingInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22623,31 +22624,31 @@ func TestJSONMarshalingPostV1CaptureInboundEmailResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureInboundEmailResponse
+		var unmarshaled InboundEmailCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailResponse
+		var obj InboundEmailCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureInboundEmailResponse
+		var obj InboundEmailCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestJSONMarshalingSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22656,31 +22657,31 @@ func TestJSONMarshalingPostV1CaptureSettingsGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureSettingsGetResponse
+		var unmarshaled SettingsGetCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsGetResponse
+		var obj SettingsGetCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsGetResponse
+		var obj SettingsGetCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestJSONMarshalingSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22689,31 +22690,31 @@ func TestJSONMarshalingPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureSettingsRegenerateIntakeResponse
+		var unmarshaled SettingsRegenerateIntakeCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj SettingsRegenerateIntakeCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj SettingsRegenerateIntakeCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestJSONMarshalingSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -22722,622 +22723,622 @@ func TestJSONMarshalingPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CaptureSettingsUpdateResponse
+		var unmarshaled SettingsUpdateCaptureResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsUpdateResponse
+		var obj SettingsUpdateCaptureResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CaptureSettingsUpdateResponse
+		var obj SettingsUpdateCaptureResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
+func TestStringDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
+func TestStringDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
+		obj := &DocumentsConfirmCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponse
+		var obj *DocumentsConfirmCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseCapture(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsConfirmCaptureResponseCapture{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
+		var obj *DocumentsConfirmCaptureResponseCapture
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestStringDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestStringDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsDeleteResponse
+		var obj *DocumentsDeleteCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestStringDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestStringDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestStringDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestStringDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestStringDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestStringDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestStringDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestStringDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestStringDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItem
+		var obj *DocumentsListCaptureRequestFilterItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestStringDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestSortItem
+		var obj *DocumentsListCaptureRequestSortItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestStringDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestStringDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestStringDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestStringDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestStringDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestStringDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestStringDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestStringDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestStringDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestStringInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestStringInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestToFullItem
+		var obj *InboundEmailCaptureRequestToFullItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestStringInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailResponse
+		var obj *InboundEmailCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestStringSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestStringSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestStringSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsConfirmResponseCaptureStatus(t *testing.T) {
+func TestEnumDocumentsConfirmCaptureResponseCaptureStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("pending")
+		val, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseCaptureStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseCaptureStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_extracted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("extracted")
+		val, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("extracted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseCaptureStatus("extracted"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseCaptureStatus("extracted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("failed")
+		val, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseCaptureStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseCaptureStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_linked", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("linked")
+		val, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("linked")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseCaptureStatus("linked"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseCaptureStatus("linked"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString("pending")
+		val, err := NewDocumentsConfirmCaptureResponseCaptureStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23345,35 +23346,35 @@ func TestEnumPostV1CaptureDocumentsConfirmResponseCaptureStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus(t *testing.T) {
+func TestEnumDocumentsConfirmCaptureResponseInvoicePaymentStatus(t *testing.T) {
 	t.Run("NewFromString_unpaid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString("unpaid")
+		val, err := NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString("unpaid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus("unpaid"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoicePaymentStatus("unpaid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_partial", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString("partial")
+		val, err := NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString("partial")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus("partial"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoicePaymentStatus("partial"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_paid", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString("paid")
+		val, err := NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString("paid")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus("paid"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoicePaymentStatus("paid"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString("unpaid")
+		val, err := NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString("unpaid")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23381,28 +23382,28 @@ func TestEnumPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus(t *testin
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsConfirmResponseInvoiceStatus(t *testing.T) {
+func TestEnumDocumentsConfirmCaptureResponseInvoiceStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceStatusFromString("draft")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceStatusFromString("draft")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoiceStatus("draft"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoiceStatus("draft"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_registered", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceStatusFromString("registered")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceStatusFromString("registered")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoiceStatus("registered"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoiceStatus("registered"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsConfirmCaptureResponseInvoiceStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceStatusFromString("draft")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23410,28 +23411,28 @@ func TestEnumPostV1CaptureDocumentsConfirmResponseInvoiceStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsConfirmResponseInvoiceType(t *testing.T) {
+func TestEnumDocumentsConfirmCaptureResponseInvoiceType(t *testing.T) {
 	t.Run("NewFromString_invoice", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceTypeFromString("invoice")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceTypeFromString("invoice")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoiceType("invoice"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoiceType("invoice"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_credit_note", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceTypeFromString("credit_note")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceTypeFromString("credit_note")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsConfirmResponseInvoiceType("credit_note"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsConfirmCaptureResponseInvoiceType("credit_note"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsConfirmCaptureResponseInvoiceTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsConfirmResponseInvoiceTypeFromString("invoice")
+		val, err := NewDocumentsConfirmCaptureResponseInvoiceTypeFromString("invoice")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23439,42 +23440,42 @@ func TestEnumPostV1CaptureDocumentsConfirmResponseInvoiceType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsExtractResponseStatus(t *testing.T) {
+func TestEnumDocumentsExtractCaptureResponseStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("pending")
+		val, err := NewDocumentsExtractCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsExtractResponseStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsExtractCaptureResponseStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_extracted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("extracted")
+		val, err := NewDocumentsExtractCaptureResponseStatusFromString("extracted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsExtractResponseStatus("extracted"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsExtractCaptureResponseStatus("extracted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("failed")
+		val, err := NewDocumentsExtractCaptureResponseStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsExtractResponseStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsExtractCaptureResponseStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_linked", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("linked")
+		val, err := NewDocumentsExtractCaptureResponseStatusFromString("linked")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsExtractResponseStatus("linked"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsExtractCaptureResponseStatus("linked"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsExtractCaptureResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsExtractResponseStatusFromString("pending")
+		val, err := NewDocumentsExtractCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23482,42 +23483,42 @@ func TestEnumPostV1CaptureDocumentsExtractResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsGetResponseStatus(t *testing.T) {
+func TestEnumDocumentsGetCaptureResponseStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("pending")
+		val, err := NewDocumentsGetCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsGetResponseStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsGetCaptureResponseStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_extracted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("extracted")
+		val, err := NewDocumentsGetCaptureResponseStatusFromString("extracted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsGetResponseStatus("extracted"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsGetCaptureResponseStatus("extracted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("failed")
+		val, err := NewDocumentsGetCaptureResponseStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsGetResponseStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsGetCaptureResponseStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_linked", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("linked")
+		val, err := NewDocumentsGetCaptureResponseStatusFromString("linked")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsGetResponseStatus("linked"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsGetCaptureResponseStatus("linked"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsGetCaptureResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsGetResponseStatusFromString("pending")
+		val, err := NewDocumentsGetCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23525,56 +23526,56 @@ func TestEnumPostV1CaptureDocumentsGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsListRequestFilterItemOp(t *testing.T) {
+func TestEnumDocumentsListCaptureRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("eq")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("eq"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ne", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("ne")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("ne")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("ne"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_contains", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("contains")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("contains")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("contains"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_gte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("gte")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("gte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("gte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lte", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("lte")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("lte")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("lte"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_in", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("in")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("in")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestFilterItemOp("in"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestFilterItemOp("in"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsListCaptureRequestFilterItemOpFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsListRequestFilterItemOpFromString("eq")
+		val, err := NewDocumentsListCaptureRequestFilterItemOpFromString("eq")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23582,28 +23583,28 @@ func TestEnumPostV1CaptureDocumentsListRequestFilterItemOp(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsListRequestSortItemDir(t *testing.T) {
+func TestEnumDocumentsListCaptureRequestSortItemDir(t *testing.T) {
 	t.Run("NewFromString_asc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestSortItemDirFromString("asc")
+		val, err := NewDocumentsListCaptureRequestSortItemDirFromString("asc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestSortItemDir("asc"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestSortItemDir("asc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_desc", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListRequestSortItemDirFromString("desc")
+		val, err := NewDocumentsListCaptureRequestSortItemDirFromString("desc")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListRequestSortItemDir("desc"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureRequestSortItemDir("desc"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsListRequestSortItemDirFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsListCaptureRequestSortItemDirFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsListRequestSortItemDirFromString("asc")
+		val, err := NewDocumentsListCaptureRequestSortItemDirFromString("asc")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23611,42 +23612,42 @@ func TestEnumPostV1CaptureDocumentsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsListResponseRowsItemStatus(t *testing.T) {
+func TestEnumDocumentsListCaptureResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("pending")
+		val, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListResponseRowsItemStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureResponseRowsItemStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_extracted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("extracted")
+		val, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("extracted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListResponseRowsItemStatus("extracted"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureResponseRowsItemStatus("extracted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("failed")
+		val, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListResponseRowsItemStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureResponseRowsItemStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_linked", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("linked")
+		val, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("linked")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsListResponseRowsItemStatus("linked"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsListCaptureResponseRowsItemStatus("linked"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString("pending")
+		val, err := NewDocumentsListCaptureResponseRowsItemStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23654,42 +23655,42 @@ func TestEnumPostV1CaptureDocumentsListResponseRowsItemStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CaptureDocumentsUploadResponseStatus(t *testing.T) {
+func TestEnumDocumentsUploadCaptureResponseStatus(t *testing.T) {
 	t.Run("NewFromString_pending", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("pending")
+		val, err := NewDocumentsUploadCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsUploadResponseStatus("pending"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsUploadCaptureResponseStatus("pending"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_extracted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("extracted")
+		val, err := NewDocumentsUploadCaptureResponseStatusFromString("extracted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsUploadResponseStatus("extracted"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsUploadCaptureResponseStatus("extracted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_failed", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("failed")
+		val, err := NewDocumentsUploadCaptureResponseStatusFromString("failed")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsUploadResponseStatus("failed"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsUploadCaptureResponseStatus("failed"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_linked", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("linked")
+		val, err := NewDocumentsUploadCaptureResponseStatusFromString("linked")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CaptureDocumentsUploadResponseStatus("linked"), val, "enum value should match expected wire value")
+		assert.Equal(t, DocumentsUploadCaptureResponseStatus("linked"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewDocumentsUploadCaptureResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CaptureDocumentsUploadResponseStatusFromString("pending")
+		val, err := NewDocumentsUploadCaptureResponseStatusFromString("pending")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -23697,10 +23698,10 @@ func TestEnumPostV1CaptureDocumentsUploadResponseStatus(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmRequestLinesItem{}
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23714,16 +23715,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmRequestLinesItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestLinesItem
+		var obj *DocumentsConfirmCaptureRequestLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureRequestNewSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmRequestNewSupplier{}
+		obj := &DocumentsConfirmCaptureRequestNewSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23737,16 +23738,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmRequestNewSupplier(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmRequestNewSupplier
+		var obj *DocumentsConfirmCaptureRequestNewSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponse{}
+		obj := &DocumentsConfirmCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23760,16 +23761,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponse
+		var obj *DocumentsConfirmCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCapture(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseCapture(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCapture{}
+		obj := &DocumentsConfirmCaptureResponseCapture{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23783,16 +23784,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCapture(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCapture
+		var obj *DocumentsConfirmCaptureResponseCapture
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseCaptureExtraction(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtraction{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtraction{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23806,16 +23807,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtraction(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+		var obj *DocumentsConfirmCaptureResponseCaptureExtraction
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseCaptureExtractionLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23829,16 +23830,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtractionLi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseCaptureExtractionSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier{}
+		obj := &DocumentsConfirmCaptureResponseCaptureExtractionSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23852,16 +23853,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseCaptureExtractionSu
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+		var obj *DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseInvoice(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoice{}
+		obj := &DocumentsConfirmCaptureResponseInvoice{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23875,16 +23876,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseInvoice(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoice
+		var obj *DocumentsConfirmCaptureResponseInvoice
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem{}
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23898,16 +23899,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(t 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsDeleteCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsDeleteResponse{}
+		obj := &DocumentsDeleteCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23921,16 +23922,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsDeleteResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsDeleteResponse
+		var obj *DocumentsDeleteCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsExtractResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsExtractCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponse{}
+		obj := &DocumentsExtractCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23944,16 +23945,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsExtractResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponse
+		var obj *DocumentsExtractCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtraction(t *testing.T) {
+func TestExtraPropertiesDocumentsExtractCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtraction{}
+		obj := &DocumentsExtractCaptureResponseExtraction{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23967,16 +23968,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtraction(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtraction
+		var obj *DocumentsExtractCaptureResponseExtraction
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtractionLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsExtractCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionLinesItem{}
+		obj := &DocumentsExtractCaptureResponseExtractionLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -23990,16 +23991,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtractionLinesItem
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+		var obj *DocumentsExtractCaptureResponseExtractionLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtractionSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsExtractCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsExtractResponseExtractionSupplier{}
+		obj := &DocumentsExtractCaptureResponseExtractionSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24013,16 +24014,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsExtractResponseExtractionSupplier(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsExtractResponseExtractionSupplier
+		var obj *DocumentsExtractCaptureResponseExtractionSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsGetResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsGetCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponse{}
+		obj := &DocumentsGetCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24036,16 +24037,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponse
+		var obj *DocumentsGetCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtraction(t *testing.T) {
+func TestExtraPropertiesDocumentsGetCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtraction{}
+		obj := &DocumentsGetCaptureResponseExtraction{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24059,16 +24060,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtraction(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtraction
+		var obj *DocumentsGetCaptureResponseExtraction
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsGetCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtractionLinesItem{}
+		obj := &DocumentsGetCaptureResponseExtractionLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24082,16 +24083,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtractionLinesItem(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionLinesItem
+		var obj *DocumentsGetCaptureResponseExtractionLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtractionSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsGetCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsGetResponseExtractionSupplier{}
+		obj := &DocumentsGetCaptureResponseExtractionSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24105,16 +24106,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsGetResponseExtractionSupplier(t *t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsGetResponseExtractionSupplier
+		var obj *DocumentsGetCaptureResponseExtractionSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListRequestFilterItem(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureRequestFilterItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListRequestFilterItem{}
+		obj := &DocumentsListCaptureRequestFilterItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24128,16 +24129,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListRequestFilterItem(t *testing.T
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestFilterItem
+		var obj *DocumentsListCaptureRequestFilterItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListRequestSortItem(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureRequestSortItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListRequestSortItem{}
+		obj := &DocumentsListCaptureRequestSortItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24151,16 +24152,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListRequestSortItem(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListRequestSortItem
+		var obj *DocumentsListCaptureRequestSortItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponse{}
+		obj := &DocumentsListCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24174,16 +24175,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponse
+		var obj *DocumentsListCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItem{}
+		obj := &DocumentsListCaptureResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24197,16 +24198,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItem
+		var obj *DocumentsListCaptureResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtraction(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureResponseRowsItemExtraction(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtraction{}
+		obj := &DocumentsListCaptureResponseRowsItemExtraction{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24220,16 +24221,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtraction(t *
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtraction
+		var obj *DocumentsListCaptureResponseRowsItemExtraction
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureResponseRowsItemExtractionLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24243,16 +24244,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtractionLine
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
+		var obj *DocumentsListCaptureResponseRowsItemExtractionLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsListCaptureResponseRowsItemExtractionSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier{}
+		obj := &DocumentsListCaptureResponseRowsItemExtractionSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24266,16 +24267,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsListResponseRowsItemExtractionSupp
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
+		var obj *DocumentsListCaptureResponseRowsItemExtractionSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsUploadResponse(t *testing.T) {
+func TestExtraPropertiesDocumentsUploadCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponse{}
+		obj := &DocumentsUploadCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24289,16 +24290,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsUploadResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponse
+		var obj *DocumentsUploadCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtraction(t *testing.T) {
+func TestExtraPropertiesDocumentsUploadCaptureResponseExtraction(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtraction{}
+		obj := &DocumentsUploadCaptureResponseExtraction{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24312,16 +24313,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtraction(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtraction
+		var obj *DocumentsUploadCaptureResponseExtraction
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtractionLinesItem(t *testing.T) {
+func TestExtraPropertiesDocumentsUploadCaptureResponseExtractionLinesItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionLinesItem{}
+		obj := &DocumentsUploadCaptureResponseExtractionLinesItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24335,16 +24336,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtractionLinesItem(
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+		var obj *DocumentsUploadCaptureResponseExtractionLinesItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtractionSupplier(t *testing.T) {
+func TestExtraPropertiesDocumentsUploadCaptureResponseExtractionSupplier(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureDocumentsUploadResponseExtractionSupplier{}
+		obj := &DocumentsUploadCaptureResponseExtractionSupplier{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24358,16 +24359,16 @@ func TestExtraPropertiesPostV1CaptureDocumentsUploadResponseExtractionSupplier(t
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureDocumentsUploadResponseExtractionSupplier
+		var obj *DocumentsUploadCaptureResponseExtractionSupplier
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureInboundEmailRequestAttachmentsItem(t *testing.T) {
+func TestExtraPropertiesInboundEmailCaptureRequestAttachmentsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailRequestAttachmentsItem{}
+		obj := &InboundEmailCaptureRequestAttachmentsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24381,16 +24382,16 @@ func TestExtraPropertiesPostV1CaptureInboundEmailRequestAttachmentsItem(t *testi
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestAttachmentsItem
+		var obj *InboundEmailCaptureRequestAttachmentsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureInboundEmailRequestToFullItem(t *testing.T) {
+func TestExtraPropertiesInboundEmailCaptureRequestToFullItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailRequestToFullItem{}
+		obj := &InboundEmailCaptureRequestToFullItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24404,16 +24405,16 @@ func TestExtraPropertiesPostV1CaptureInboundEmailRequestToFullItem(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailRequestToFullItem
+		var obj *InboundEmailCaptureRequestToFullItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureInboundEmailResponse(t *testing.T) {
+func TestExtraPropertiesInboundEmailCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureInboundEmailResponse{}
+		obj := &InboundEmailCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24427,16 +24428,16 @@ func TestExtraPropertiesPostV1CaptureInboundEmailResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureInboundEmailResponse
+		var obj *InboundEmailCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureSettingsGetResponse(t *testing.T) {
+func TestExtraPropertiesSettingsGetCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsGetResponse{}
+		obj := &SettingsGetCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24450,16 +24451,16 @@ func TestExtraPropertiesPostV1CaptureSettingsGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsGetResponse
+		var obj *SettingsGetCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureSettingsRegenerateIntakeResponse(t *testing.T) {
+func TestExtraPropertiesSettingsRegenerateIntakeCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsRegenerateIntakeResponse{}
+		obj := &SettingsRegenerateIntakeCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24473,16 +24474,16 @@ func TestExtraPropertiesPostV1CaptureSettingsRegenerateIntakeResponse(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsRegenerateIntakeResponse
+		var obj *SettingsRegenerateIntakeCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CaptureSettingsUpdateResponse(t *testing.T) {
+func TestExtraPropertiesSettingsUpdateCaptureResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CaptureSettingsUpdateResponse{}
+		obj := &SettingsUpdateCaptureResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -24496,7 +24497,7 @@ func TestExtraPropertiesPostV1CaptureSettingsUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CaptureSettingsUpdateResponse
+		var obj *SettingsUpdateCaptureResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

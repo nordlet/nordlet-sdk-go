@@ -7,101 +7,12 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1CalendarDownloadRequest(t *testing.T) {
-	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadRequest{}
-		var fernTestValueKey string
-		obj.SetKey(fernTestValueKey)
-		assert.Equal(t, fernTestValueKey, obj.Key)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CalendarDownloadRequest(t *testing.T) {
-	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CalendarDownloadRequest{}
-		var fernTestValueKey string
-
-		// Act
-		obj.SetKey(fernTestValueKey)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CalendarSubmitRequest(t *testing.T) {
-	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitRequest{}
-		var fernTestValueKey string
-		obj.SetKey(fernTestValueKey)
-		assert.Equal(t, fernTestValueKey, obj.Key)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1CalendarSubmitRequest(t *testing.T) {
-	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CalendarSubmitRequest{}
-		var fernTestValueKey string
-
-		// Act
-		obj.SetKey(fernTestValueKey)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1CalendarCreateRequest(t *testing.T) {
+func TestSettersCreateCalendarRequest(t *testing.T) {
 	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueTitle string
 		obj.SetTitle(fernTestValueTitle)
 		assert.Equal(t, fernTestValueTitle, obj.Title)
@@ -109,15 +20,15 @@ func TestSettersPostV1CalendarCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarCreateRequest{}
-		var fernTestValueDueDate string
+		obj := &CreateCalendarRequest{}
+		var fernTestValueDueDate time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -125,7 +36,7 @@ func TestSettersPostV1CalendarCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueDone *bool
 		obj.SetDone(fernTestValueDone)
 		assert.Equal(t, fernTestValueDone, obj.Done)
@@ -134,11 +45,11 @@ func TestSettersPostV1CalendarCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitCreateCalendarRequest(t *testing.T) {
 	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueTitle string
 
 		// Act
@@ -169,8 +80,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateRequest(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateRequest{}
-		var fernTestValueDueDate string
+		obj := &CreateCalendarRequest{}
+		var fernTestValueDueDate time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -200,7 +111,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateRequest(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -231,7 +142,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateRequest(t *testing.T) {
 	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateRequest{}
+		obj := &CreateCalendarRequest{}
 		var fernTestValueDone *bool
 
 		// Act
@@ -261,9 +172,9 @@ func TestSettersMarkExplicitPostV1CalendarCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarDeleteRequest(t *testing.T) {
+func TestSettersDeleteCalendarRequest(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarDeleteRequest{}
+		obj := &DeleteCalendarRequest{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -272,11 +183,11 @@ func TestSettersPostV1CalendarDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarDeleteRequest(t *testing.T) {
+func TestSettersMarkExplicitDeleteCalendarRequest(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDeleteRequest{}
+		obj := &DeleteCalendarRequest{}
 		var fernTestValueKey string
 
 		// Act
@@ -306,9 +217,9 @@ func TestSettersMarkExplicitPostV1CalendarDeleteRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarGetRequest(t *testing.T) {
+func TestSettersDownloadCalendarRequest(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarGetRequest{}
+		obj := &DownloadCalendarRequest{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -317,11 +228,11 @@ func TestSettersPostV1CalendarGetRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarGetRequest(t *testing.T) {
+func TestSettersMarkExplicitDownloadCalendarRequest(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetRequest{}
+		obj := &DownloadCalendarRequest{}
 		var fernTestValueKey string
 
 		// Act
@@ -351,25 +262,70 @@ func TestSettersMarkExplicitPostV1CalendarGetRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarListRequest(t *testing.T) {
+func TestSettersGetCalendarRequest(t *testing.T) {
+	t.Run("SetKey", func(t *testing.T) {
+		obj := &GetCalendarRequest{}
+		var fernTestValueKey string
+		obj.SetKey(fernTestValueKey)
+		assert.Equal(t, fernTestValueKey, obj.Key)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarRequest(t *testing.T) {
+	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarRequest{}
+		var fernTestValueKey string
+
+		// Act
+		obj.SetKey(fernTestValueKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersListCalendarRequest(t *testing.T) {
 	t.Run("SetFrom", func(t *testing.T) {
-		obj := &PostV1CalendarListRequest{}
-		var fernTestValueFrom *string
+		obj := &ListCalendarRequest{}
+		var fernTestValueFrom *time.Time
 		obj.SetFrom(fernTestValueFrom)
 		assert.Equal(t, fernTestValueFrom, obj.From)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTo", func(t *testing.T) {
-		obj := &PostV1CalendarListRequest{}
-		var fernTestValueTo *string
+		obj := &ListCalendarRequest{}
+		var fernTestValueTo *time.Time
 		obj.SetTo(fernTestValueTo)
 		assert.Equal(t, fernTestValueTo, obj.To)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetIncludeDone", func(t *testing.T) {
-		obj := &PostV1CalendarListRequest{}
+		obj := &ListCalendarRequest{}
 		var fernTestValueIncludeDone *bool
 		obj.SetIncludeDone(fernTestValueIncludeDone)
 		assert.Equal(t, fernTestValueIncludeDone, obj.IncludeDone)
@@ -378,12 +334,12 @@ func TestSettersPostV1CalendarListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarListRequest(t *testing.T) {
+func TestSettersMarkExplicitListCalendarRequest(t *testing.T) {
 	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListRequest{}
-		var fernTestValueFrom *string
+		obj := &ListCalendarRequest{}
+		var fernTestValueFrom *time.Time
 
 		// Act
 		obj.SetFrom(fernTestValueFrom)
@@ -413,8 +369,8 @@ func TestSettersMarkExplicitPostV1CalendarListRequest(t *testing.T) {
 	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListRequest{}
-		var fernTestValueTo *string
+		obj := &ListCalendarRequest{}
+		var fernTestValueTo *time.Time
 
 		// Act
 		obj.SetTo(fernTestValueTo)
@@ -444,7 +400,7 @@ func TestSettersMarkExplicitPostV1CalendarListRequest(t *testing.T) {
 	t.Run("SetIncludeDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListRequest{}
+		obj := &ListCalendarRequest{}
 		var fernTestValueIncludeDone *bool
 
 		// Act
@@ -474,54 +430,30 @@ func TestSettersMarkExplicitPostV1CalendarListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarUpdateRequest(t *testing.T) {
+func TestSettersSubmitCalendarRequest(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateRequest{}
+		obj := &SubmitCalendarRequest{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueTitle *string
-		obj.SetTitle(fernTestValueTitle)
-		assert.Equal(t, fernTestValueTitle, obj.Title)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueDueDate *string
-		obj.SetDueDate(fernTestValueDueDate)
-		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueNotes *string
-		obj.SetNotes(fernTestValueNotes)
-		assert.Equal(t, fernTestValueNotes, obj.Notes)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueDone *bool
-		obj.SetDone(fernTestValueDone)
-		assert.Equal(t, fernTestValueDone, obj.Done)
+	t.Run("SetAmend", func(t *testing.T) {
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueAmend *bool
+		obj.SetAmend(fernTestValueAmend)
+		assert.Equal(t, fernTestValueAmend, obj.Amend)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarUpdateRequest(t *testing.T) {
+func TestSettersMarkExplicitSubmitCalendarRequest(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateRequest{}
+		obj := &SubmitCalendarRequest{}
 		var fernTestValueKey string
 
 		// Act
@@ -549,107 +481,14 @@ func TestSettersMarkExplicitPostV1CalendarUpdateRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+	t.Run("SetAmend_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueTitle *string
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueAmend *bool
 
 		// Act
-		obj.SetTitle(fernTestValueTitle)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueDueDate *string
-
-		// Act
-		obj.SetDueDate(fernTestValueDueDate)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueNotes *string
-
-		// Act
-		obj.SetNotes(fernTestValueNotes)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1CalendarUpdateRequest{}
-		var fernTestValueDone *bool
-
-		// Act
-		obj.SetDone(fernTestValueDone)
+		obj.SetAmend(fernTestValueAmend)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -675,9 +514,9 @@ func TestSettersMarkExplicitPostV1CalendarUpdateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
+func TestSettersCreateCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -685,7 +524,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueID *string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -693,15 +532,15 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueKind PostV1CalendarCreateResponseKind
+		obj := &CreateCalendarResponse{}
+		var fernTestValueKind CreateCalendarResponseKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -709,7 +548,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -717,7 +556,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueTitle string
 		obj.SetTitle(fernTestValueTitle)
 		assert.Equal(t, fernTestValueTitle, obj.Title)
@@ -725,15 +564,15 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueDueDate string
+		obj := &CreateCalendarResponse{}
+		var fernTestValueDueDate time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -741,7 +580,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueDone bool
 		obj.SetDone(fernTestValueDone)
 		assert.Equal(t, fernTestValueDone, obj.Done)
@@ -749,7 +588,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetHref", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueHref *string
 		obj.SetHref(fernTestValueHref)
 		assert.Equal(t, fernTestValueHref, obj.Href)
@@ -757,23 +596,39 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSubmission", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueSubmission *PostV1CalendarCreateResponseSubmission
+		obj := &CreateCalendarResponse{}
+		var fernTestValueSubmission *CreateCalendarResponseSubmission
 		obj.SetSubmission(fernTestValueSubmission)
 		assert.Equal(t, fernTestValueSubmission, obj.Submission)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubmissions", func(t *testing.T) {
+		obj := &CreateCalendarResponse{}
+		var fernTestValueSubmissions []*CreateCalendarResponseSubmissionsItem
+		obj.SetSubmissions(fernTestValueSubmissions)
+		assert.Equal(t, fernTestValueSubmissions, obj.Submissions)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanSubmit", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueCanSubmit bool
 		obj.SetCanSubmit(fernTestValueCanSubmit)
 		assert.Equal(t, fernTestValueCanSubmit, obj.CanSubmit)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCanAmend", func(t *testing.T) {
+		obj := &CreateCalendarResponse{}
+		var fernTestValueCanAmend bool
+		obj.SetCanAmend(fernTestValueCanAmend)
+		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanDownload", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueCanDownload bool
 		obj.SetCanDownload(fernTestValueCanDownload)
 		assert.Equal(t, fernTestValueCanDownload, obj.CanDownload)
@@ -781,7 +636,7 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetAutomated", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueAutomated bool
 		obj.SetAutomated(fernTestValueAutomated)
 		assert.Equal(t, fernTestValueAutomated, obj.Automated)
@@ -790,11 +645,11 @@ func TestSettersPostV1CalendarCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
+func TestGettersCreateCalendarResponse(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected string
 		obj.Key = expected
 
@@ -804,7 +659,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -817,7 +672,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected *string
 		obj.ID = expected
 
@@ -828,7 +683,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -837,7 +692,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -850,8 +705,8 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var expected PostV1CalendarCreateResponseKind
+		obj := &CreateCalendarResponse{}
+		var expected CreateCalendarResponseKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -860,7 +715,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -873,7 +728,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -884,7 +739,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -893,7 +748,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -906,7 +761,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected *string
 		obj.Period = expected
 
@@ -917,7 +772,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -926,7 +781,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -939,7 +794,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetTitle", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected string
 		obj.Title = expected
 
@@ -949,7 +804,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -962,8 +817,8 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var expected string
+		obj := &CreateCalendarResponse{}
+		var expected time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -972,7 +827,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -985,7 +840,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -996,7 +851,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -1005,7 +860,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1018,7 +873,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetDone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected bool
 		obj.Done = expected
 
@@ -1028,7 +883,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetDone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1041,7 +896,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetHref", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected *string
 		obj.Href = expected
 
@@ -1052,7 +907,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetHref_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.Href = nil
 
 		// Act & Assert
@@ -1061,7 +916,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetHref_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1074,8 +929,8 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetSubmission", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var expected *PostV1CalendarCreateResponseSubmission
+		obj := &CreateCalendarResponse{}
+		var expected *CreateCalendarResponseSubmission
 		obj.Submission = expected
 
 		// Act & Assert
@@ -1085,7 +940,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetSubmission_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		obj.Submission = nil
 
 		// Act & Assert
@@ -1094,7 +949,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetSubmission_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1104,10 +959,43 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 		_ = obj.GetSubmission() // Should return zero value
 	})
 
+	t.Run("GetSubmissions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var expected []*CreateCalendarResponseSubmissionsItem
+		obj.Submissions = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmissions(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmissions_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		obj.Submissions = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmissions(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmissions_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmissions() // Should return zero value
+	})
+
 	t.Run("GetCanSubmit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected bool
 		obj.CanSubmit = expected
 
@@ -1117,7 +1005,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetCanSubmit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1127,10 +1015,33 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 		_ = obj.GetCanSubmit() // Should return zero value
 	})
 
+	t.Run("GetCanAmend", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var expected bool
+		obj.CanAmend = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCanAmend(), "getter should return the property value")
+	})
+
+	t.Run("GetCanAmend_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCanAmend() // Should return zero value
+	})
+
 	t.Run("GetCanDownload", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected bool
 		obj.CanDownload = expected
 
@@ -1140,7 +1051,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetCanDownload_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1153,7 +1064,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("GetAutomated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var expected bool
 		obj.Automated = expected
 
@@ -1163,7 +1074,7 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetAutomated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1175,11 +1086,11 @@ func TestGettersPostV1CalendarCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitCreateCalendarResponse(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueKey string
 
 		// Act
@@ -1210,7 +1121,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueID *string
 
 		// Act
@@ -1241,8 +1152,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueKind PostV1CalendarCreateResponseKind
+		obj := &CreateCalendarResponse{}
+		var fernTestValueKind CreateCalendarResponseKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -1272,7 +1183,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -1303,7 +1214,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -1334,7 +1245,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueTitle string
 
 		// Act
@@ -1365,8 +1276,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueDueDate string
+		obj := &CreateCalendarResponse{}
+		var fernTestValueDueDate time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -1396,7 +1307,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -1427,7 +1338,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueDone bool
 
 		// Act
@@ -1458,7 +1369,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetHref_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueHref *string
 
 		// Act
@@ -1489,8 +1400,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetSubmission_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
-		var fernTestValueSubmission *PostV1CalendarCreateResponseSubmission
+		obj := &CreateCalendarResponse{}
+		var fernTestValueSubmission *CreateCalendarResponseSubmission
 
 		// Act
 		obj.SetSubmission(fernTestValueSubmission)
@@ -1517,10 +1428,41 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSubmissions_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var fernTestValueSubmissions []*CreateCalendarResponseSubmissionsItem
+
+		// Act
+		obj.SetSubmissions(fernTestValueSubmissions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanSubmit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueCanSubmit bool
 
 		// Act
@@ -1548,10 +1490,41 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCanAmend_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var fernTestValueCanAmend bool
+
+		// Act
+		obj.SetCanAmend(fernTestValueCanAmend)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueCanDownload bool
 
 		// Act
@@ -1582,7 +1555,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 	t.Run("SetAutomated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		var fernTestValueAutomated bool
 
 		// Act
@@ -1612,9 +1585,9 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestSettersCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -1622,7 +1595,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetObligation", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueObligation string
 		obj.SetObligation(fernTestValueObligation)
 		assert.Equal(t, fernTestValueObligation, obj.Obligation)
@@ -1630,7 +1603,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodYear", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 		obj.SetPeriodYear(fernTestValuePeriodYear)
 		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
@@ -1638,7 +1611,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodMonth", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 		obj.SetPeriodMonth(fernTestValuePeriodMonth)
 		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
@@ -1646,7 +1619,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -1654,15 +1627,15 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarCreateResponseSubmissionStatus
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueStatus CreateCalendarResponseSubmissionStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -1670,7 +1643,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -1678,7 +1651,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -1686,7 +1659,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetMessage", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 		obj.SetMessage(fernTestValueMessage)
 		assert.Equal(t, fernTestValueMessage, obj.Message)
@@ -1694,7 +1667,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -1702,7 +1675,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -1710,15 +1683,23 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDocumentKey", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 		obj.SetDocumentKey(fernTestValueDocumentKey)
 		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOrigin", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 		obj.SetOrigin(fernTestValueOrigin)
 		assert.Equal(t, fernTestValueOrigin, obj.Origin)
@@ -1726,55 +1707,63 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetTransportSystem", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 		obj.SetTransportSystem(fernTestValueTransportSystem)
 		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueEnvironment *CreateCalendarResponseSubmissionEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSubmittedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
 		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcceptedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
 		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRejectedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 		obj.SetRejectedAt(fernTestValueRejectedAt)
 		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCheckedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 		obj.SetCheckedAt(fernTestValueCheckedAt)
 		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNextCheckAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
 		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -1782,7 +1771,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDeliveryError", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
@@ -1790,7 +1779,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSentSha256", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 		obj.SetSentSha256(fernTestValueSentSha256)
 		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
@@ -1798,7 +1787,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCertificateFingerprint", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
 		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
@@ -1806,7 +1795,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorType", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
 		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
@@ -1814,7 +1803,7 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorID", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
 		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
@@ -1822,16 +1811,16 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -1839,11 +1828,11 @@ func TestSettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestGettersCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected string
 		obj.ID = expected
 
@@ -1853,7 +1842,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1866,7 +1855,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetObligation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected string
 		obj.Obligation = expected
 
@@ -1876,7 +1865,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1889,7 +1878,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected int64
 		obj.PeriodYear = expected
 
@@ -1899,7 +1888,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1912,7 +1901,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *int64
 		obj.PeriodMonth = expected
 
@@ -1923,7 +1912,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.PeriodMonth = nil
 
 		// Act & Assert
@@ -1932,7 +1921,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1945,7 +1934,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.Variant = expected
 
@@ -1956,7 +1945,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -1965,7 +1954,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1978,8 +1967,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected PostV1CalendarCreateResponseSubmissionStatus
+		obj := &CreateCalendarResponseSubmission{}
+		var expected CreateCalendarResponseSubmissionStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -1988,7 +1977,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2001,7 +1990,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected string
 		obj.FileName = expected
 
@@ -2011,7 +2000,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2024,7 +2013,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.FileID = expected
 
@@ -2035,7 +2024,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetFileID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.FileID = nil
 
 		// Act & Assert
@@ -2044,7 +2033,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2057,7 +2046,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -2068,7 +2057,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -2077,7 +2066,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2090,7 +2079,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.Message = expected
 
@@ -2101,7 +2090,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.Message = nil
 
 		// Act & Assert
@@ -2110,7 +2099,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2123,7 +2112,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -2134,7 +2123,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -2143,7 +2132,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2156,7 +2145,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.Period = expected
 
@@ -2167,7 +2156,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -2176,7 +2165,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2189,7 +2178,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.DocumentKey = expected
 
@@ -2200,7 +2189,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.DocumentKey = nil
 
 		// Act & Assert
@@ -2209,7 +2198,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2219,10 +2208,33 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 		_ = obj.GetDocumentKey() // Should return zero value
 	})
 
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
 	t.Run("GetOrigin", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected string
 		obj.Origin = expected
 
@@ -2232,7 +2244,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2245,7 +2257,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.TransportSystem = expected
 
@@ -2256,7 +2268,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.TransportSystem = nil
 
 		// Act & Assert
@@ -2265,7 +2277,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2275,11 +2287,44 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 		_ = obj.GetTransportSystem() // Should return zero value
 	})
 
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *CreateCalendarResponseSubmissionEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
 	t.Run("GetSubmittedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected *string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.SubmittedAt = expected
 
 		// Act & Assert
@@ -2289,7 +2334,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.SubmittedAt = nil
 
 		// Act & Assert
@@ -2298,7 +2343,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2311,8 +2356,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected *string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.AcceptedAt = expected
 
 		// Act & Assert
@@ -2322,7 +2367,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.AcceptedAt = nil
 
 		// Act & Assert
@@ -2331,7 +2376,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2344,8 +2389,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected *string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.RejectedAt = expected
 
 		// Act & Assert
@@ -2355,7 +2400,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.RejectedAt = nil
 
 		// Act & Assert
@@ -2364,7 +2409,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2377,8 +2422,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected *string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.CheckedAt = expected
 
 		// Act & Assert
@@ -2388,7 +2433,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.CheckedAt = nil
 
 		// Act & Assert
@@ -2397,7 +2442,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2410,8 +2455,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected *string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.NextCheckAt = expected
 
 		// Act & Assert
@@ -2421,7 +2466,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.NextCheckAt = nil
 
 		// Act & Assert
@@ -2430,7 +2475,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2443,7 +2488,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -2453,7 +2498,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2466,7 +2511,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.DeliveryError = expected
 
@@ -2477,7 +2522,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.DeliveryError = nil
 
 		// Act & Assert
@@ -2486,7 +2531,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2499,7 +2544,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.SentSha256 = expected
 
@@ -2510,7 +2555,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.SentSha256 = nil
 
 		// Act & Assert
@@ -2519,7 +2564,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2532,7 +2577,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.CertificateFingerprint = expected
 
@@ -2543,7 +2588,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.CertificateFingerprint = nil
 
 		// Act & Assert
@@ -2552,7 +2597,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2565,7 +2610,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorType = expected
 
@@ -2576,7 +2621,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.SubmittedByActorType = nil
 
 		// Act & Assert
@@ -2585,7 +2630,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2598,7 +2643,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorID = expected
 
@@ -2609,7 +2654,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		obj.SubmittedByActorID = nil
 
 		// Act & Assert
@@ -2618,7 +2663,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2631,8 +2676,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -2641,7 +2686,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2654,8 +2699,8 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var expected string
+		obj := &CreateCalendarResponseSubmission{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -2664,7 +2709,7 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2676,11 +2721,11 @@ func TestGettersPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestSettersMarkExplicitCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueID string
 
 		// Act
@@ -2711,7 +2756,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueObligation string
 
 		// Act
@@ -2742,7 +2787,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 
 		// Act
@@ -2773,7 +2818,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 
 		// Act
@@ -2804,7 +2849,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -2835,8 +2880,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarCreateResponseSubmissionStatus
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueStatus CreateCalendarResponseSubmissionStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -2866,7 +2911,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueFileName string
 
 		// Act
@@ -2897,7 +2942,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 
 		// Act
@@ -2928,7 +2973,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -2959,7 +3004,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 
 		// Act
@@ -2990,7 +3035,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -3021,7 +3066,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -3052,7 +3097,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 
 		// Act
@@ -3080,10 +3125,41 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 
 		// Act
@@ -3114,7 +3190,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 
 		// Act
@@ -3142,11 +3218,42 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueEnvironment *CreateCalendarResponseSubmissionEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 
 		// Act
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
@@ -3176,8 +3283,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 
 		// Act
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
@@ -3207,8 +3314,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 
 		// Act
 		obj.SetRejectedAt(fernTestValueRejectedAt)
@@ -3238,8 +3345,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 
 		// Act
 		obj.SetCheckedAt(fernTestValueCheckedAt)
@@ -3269,8 +3376,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 
 		// Act
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
@@ -3300,7 +3407,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -3331,7 +3438,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 
 		// Act
@@ -3362,7 +3469,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 
 		// Act
@@ -3393,7 +3500,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 
 		// Act
@@ -3424,7 +3531,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 
 		// Act
@@ -3455,7 +3562,7 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 
 		// Act
@@ -3486,8 +3593,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -3517,8 +3624,8 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -3547,9 +3654,2078 @@ func TestSettersMarkExplicitPostV1CalendarCreateResponseSubmission(t *testing.T)
 
 }
 
-func TestSettersPostV1CalendarDeleteResponse(t *testing.T) {
+func TestSettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetObligation", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+		obj.SetObligation(fernTestValueObligation)
+		assert.Equal(t, fernTestValueObligation, obj.Obligation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodYear", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodMonth", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVariant", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+		obj.SetVariant(fernTestValueVariant)
+		assert.Equal(t, fernTestValueVariant, obj.Variant)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus CreateCalendarResponseSubmissionsItemStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileID", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+		obj.SetFileID(fernTestValueFileID)
+		assert.Equal(t, fernTestValueFileID, obj.FileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExternalRef", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+		obj.SetExternalRef(fernTestValueExternalRef)
+		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMessage", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+		obj.SetMessage(fernTestValueMessage)
+		assert.Equal(t, fernTestValueMessage, obj.Message)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRuleKey", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+		obj.SetRuleKey(fernTestValueRuleKey)
+		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriod", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+		obj.SetPeriod(fernTestValuePeriod)
+		assert.Equal(t, fernTestValuePeriod, obj.Period)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentKey", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOrigin", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+		obj.SetOrigin(fernTestValueOrigin)
+		assert.Equal(t, fernTestValueOrigin, obj.Origin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransportSystem", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *CreateCalendarResponseSubmissionsItemEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcceptedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRejectedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCheckedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNextCheckAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAttempts", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+		obj.SetAttempts(fernTestValueAttempts)
+		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeliveryError", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSentSha256", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+		obj.SetSentSha256(fernTestValueSentSha256)
+		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCertificateFingerprint", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorType", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorID", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetObligation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Obligation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetObligation(), "getter should return the property value")
+	})
+
+	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetObligation() // Should return zero value
+	})
+
+	t.Run("GetPeriodYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.PeriodYear = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodYear(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodYear() // Should return zero value
+	})
+
+	t.Run("GetPeriodMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *int64
+		obj.PeriodMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.PeriodMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriodMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodMonth() // Should return zero value
+	})
+
+	t.Run("GetVariant", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Variant = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVariant(), "getter should return the property value")
+	})
+
+	t.Run("GetVariant_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.Variant = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVariant(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVariant() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected CreateCalendarResponseSubmissionsItemStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetFileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.FileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
+	})
+
+	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileName() // Should return zero value
+	})
+
+	t.Run("GetFileID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.FileID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
+	})
+
+	t.Run("GetFileID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.FileID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFileID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileID() // Should return zero value
+	})
+
+	t.Run("GetExternalRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.ExternalRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExternalRef(), "getter should return the property value")
+	})
+
+	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.ExternalRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExternalRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExternalRef() // Should return zero value
+	})
+
+	t.Run("GetMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Message = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.Message = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessage() // Should return zero value
+	})
+
+	t.Run("GetRuleKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.RuleKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRuleKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.RuleKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRuleKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRuleKey() // Should return zero value
+	})
+
+	t.Run("GetPeriod", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Period = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriod(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriod_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.Period = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriod(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriod() // Should return zero value
+	})
+
+	t.Run("GetDocumentKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DocumentKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentKey(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.DocumentKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentKey() // Should return zero value
+	})
+
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetOrigin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Origin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOrigin(), "getter should return the property value")
+	})
+
+	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOrigin() // Should return zero value
+	})
+
+	t.Run("GetTransportSystem", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.TransportSystem = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTransportSystem(), "getter should return the property value")
+	})
+
+	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.TransportSystem = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTransportSystem(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTransportSystem() // Should return zero value
+	})
+
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *CreateCalendarResponseSubmissionsItemEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
+	t.Run("GetSubmittedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.SubmittedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.SubmittedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedAt() // Should return zero value
+	})
+
+	t.Run("GetAcceptedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.AcceptedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcceptedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.AcceptedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAcceptedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcceptedAt() // Should return zero value
+	})
+
+	t.Run("GetRejectedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.RejectedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRejectedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.RejectedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRejectedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRejectedAt() // Should return zero value
+	})
+
+	t.Run("GetCheckedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.CheckedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCheckedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.CheckedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCheckedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCheckedAt() // Should return zero value
+	})
+
+	t.Run("GetNextCheckAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.NextCheckAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNextCheckAt(), "getter should return the property value")
+	})
+
+	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.NextCheckAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNextCheckAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNextCheckAt() // Should return zero value
+	})
+
+	t.Run("GetAttempts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Attempts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAttempts(), "getter should return the property value")
+	})
+
+	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAttempts() // Should return zero value
+	})
+
+	t.Run("GetDeliveryError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DeliveryError = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeliveryError(), "getter should return the property value")
+	})
+
+	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.DeliveryError = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeliveryError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetSentSha256", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SentSha256 = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSentSha256(), "getter should return the property value")
+	})
+
+	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.SentSha256 = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSentSha256(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSentSha256() // Should return zero value
+	})
+
+	t.Run("GetCertificateFingerprint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.CertificateFingerprint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCertificateFingerprint(), "getter should return the property value")
+	})
+
+	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.CertificateFingerprint = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCertificateFingerprint(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCertificateFingerprint() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorType(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorType() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorID(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+
+		// Act
+		obj.SetObligation(fernTestValueObligation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+
+		// Act
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+
+		// Act
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+
+		// Act
+		obj.SetVariant(fernTestValueVariant)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus CreateCalendarResponseSubmissionsItemStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+
+		// Act
+		obj.SetFileID(fernTestValueFileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+
+		// Act
+		obj.SetExternalRef(fernTestValueExternalRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+
+		// Act
+		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+
+		// Act
+		obj.SetRuleKey(fernTestValueRuleKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+
+		// Act
+		obj.SetPeriod(fernTestValuePeriod)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+
+		// Act
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+
+		// Act
+		obj.SetOrigin(fernTestValueOrigin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+
+		// Act
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *CreateCalendarResponseSubmissionsItemEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+
+		// Act
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+
+		// Act
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+
+		// Act
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+
+		// Act
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+
+		// Act
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+
+		// Act
+		obj.SetAttempts(fernTestValueAttempts)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+
+		// Act
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+
+		// Act
+		obj.SetSentSha256(fernTestValueSentSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+
+		// Act
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+
+		// Act
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+
+		// Act
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersDeleteCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &DeleteCalendarResponse{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -3558,11 +5734,11 @@ func TestSettersPostV1CalendarDeleteResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarDeleteResponse(t *testing.T) {
+func TestGettersDeleteCalendarResponse(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &DeleteCalendarResponse{}
 		var expected string
 		obj.Key = expected
 
@@ -3572,7 +5748,7 @@ func TestGettersPostV1CalendarDeleteResponse(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDeleteResponse
+		var obj *DeleteCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3584,11 +5760,11 @@ func TestGettersPostV1CalendarDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarDeleteResponse(t *testing.T) {
+func TestSettersMarkExplicitDeleteCalendarResponse(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &DeleteCalendarResponse{}
 		var fernTestValueKey string
 
 		// Act
@@ -3618,9 +5794,9 @@ func TestSettersMarkExplicitPostV1CalendarDeleteResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
+func TestSettersDownloadCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -3628,7 +5804,7 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -3636,7 +5812,7 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 	})
 
 	t.Run("SetMimeType", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueMimeType string
 		obj.SetMimeType(fernTestValueMimeType)
 		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
@@ -3644,7 +5820,7 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -3652,7 +5828,7 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 	})
 
 	t.Run("SetContent", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueContent string
 		obj.SetContent(fernTestValueContent)
 		assert.Equal(t, fernTestValueContent, obj.Content)
@@ -3660,7 +5836,7 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 	})
 
 	t.Run("SetWarnings", func(t *testing.T) {
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueWarnings []string
 		obj.SetWarnings(fernTestValueWarnings)
 		assert.Equal(t, fernTestValueWarnings, obj.Warnings)
@@ -3669,11 +5845,11 @@ func TestSettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
+func TestGettersDownloadCalendarResponse(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected string
 		obj.Key = expected
 
@@ -3683,7 +5859,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3696,7 +5872,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected string
 		obj.FileName = expected
 
@@ -3706,7 +5882,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3719,7 +5895,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetMimeType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected string
 		obj.MimeType = expected
 
@@ -3729,7 +5905,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3742,7 +5918,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected *string
 		obj.Variant = expected
 
@@ -3753,7 +5929,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -3762,7 +5938,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3775,7 +5951,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetContent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected string
 		obj.Content = expected
 
@@ -3785,7 +5961,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetContent_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3798,7 +5974,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetWarnings", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var expected []string
 		obj.Warnings = expected
 
@@ -3809,7 +5985,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("GetWarnings_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		obj.Warnings = nil
 
 		// Act & Assert
@@ -3818,7 +5994,7 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetWarnings_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DownloadCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3830,11 +6006,11 @@ func TestGettersPostV1CalendarDownloadResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
+func TestSettersMarkExplicitDownloadCalendarResponse(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueKey string
 
 		// Act
@@ -3865,7 +6041,7 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueFileName string
 
 		// Act
@@ -3896,7 +6072,7 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueMimeType string
 
 		// Act
@@ -3927,7 +6103,7 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -3958,7 +6134,7 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueContent string
 
 		// Act
@@ -3989,7 +6165,7 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 	t.Run("SetWarnings_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DownloadCalendarResponse{}
 		var fernTestValueWarnings []string
 
 		// Act
@@ -4019,9 +6195,9 @@ func TestSettersMarkExplicitPostV1CalendarDownloadResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarGetResponse(t *testing.T) {
+func TestSettersGetCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -4029,7 +6205,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueID *string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4037,15 +6213,15 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueKind PostV1CalendarGetResponseKind
+		obj := &GetCalendarResponse{}
+		var fernTestValueKind GetCalendarResponseKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -4053,7 +6229,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -4061,7 +6237,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueTitle string
 		obj.SetTitle(fernTestValueTitle)
 		assert.Equal(t, fernTestValueTitle, obj.Title)
@@ -4069,15 +6245,15 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueDueDate string
+		obj := &GetCalendarResponse{}
+		var fernTestValueDueDate time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -4085,7 +6261,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueDone bool
 		obj.SetDone(fernTestValueDone)
 		assert.Equal(t, fernTestValueDone, obj.Done)
@@ -4093,7 +6269,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetHref", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueHref *string
 		obj.SetHref(fernTestValueHref)
 		assert.Equal(t, fernTestValueHref, obj.Href)
@@ -4101,23 +6277,39 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetSubmission", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueSubmission *PostV1CalendarGetResponseSubmission
+		obj := &GetCalendarResponse{}
+		var fernTestValueSubmission *GetCalendarResponseSubmission
 		obj.SetSubmission(fernTestValueSubmission)
 		assert.Equal(t, fernTestValueSubmission, obj.Submission)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubmissions", func(t *testing.T) {
+		obj := &GetCalendarResponse{}
+		var fernTestValueSubmissions []*GetCalendarResponseSubmissionsItem
+		obj.SetSubmissions(fernTestValueSubmissions)
+		assert.Equal(t, fernTestValueSubmissions, obj.Submissions)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanSubmit", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueCanSubmit bool
 		obj.SetCanSubmit(fernTestValueCanSubmit)
 		assert.Equal(t, fernTestValueCanSubmit, obj.CanSubmit)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCanAmend", func(t *testing.T) {
+		obj := &GetCalendarResponse{}
+		var fernTestValueCanAmend bool
+		obj.SetCanAmend(fernTestValueCanAmend)
+		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanDownload", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueCanDownload bool
 		obj.SetCanDownload(fernTestValueCanDownload)
 		assert.Equal(t, fernTestValueCanDownload, obj.CanDownload)
@@ -4125,7 +6317,7 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetAutomated", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueAutomated bool
 		obj.SetAutomated(fernTestValueAutomated)
 		assert.Equal(t, fernTestValueAutomated, obj.Automated)
@@ -4134,11 +6326,11 @@ func TestSettersPostV1CalendarGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarGetResponse(t *testing.T) {
+func TestGettersGetCalendarResponse(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected string
 		obj.Key = expected
 
@@ -4148,7 +6340,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4161,7 +6353,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected *string
 		obj.ID = expected
 
@@ -4172,7 +6364,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -4181,7 +6373,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4194,8 +6386,8 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var expected PostV1CalendarGetResponseKind
+		obj := &GetCalendarResponse{}
+		var expected GetCalendarResponseKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -4204,7 +6396,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4217,7 +6409,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -4228,7 +6420,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -4237,7 +6429,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4250,7 +6442,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected *string
 		obj.Period = expected
 
@@ -4261,7 +6453,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -4270,7 +6462,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4283,7 +6475,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetTitle", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected string
 		obj.Title = expected
 
@@ -4293,7 +6485,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4306,8 +6498,8 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var expected string
+		obj := &GetCalendarResponse{}
+		var expected time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -4316,7 +6508,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4329,7 +6521,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -4340,7 +6532,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -4349,7 +6541,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4362,7 +6554,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetDone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected bool
 		obj.Done = expected
 
@@ -4372,7 +6564,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetDone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4385,7 +6577,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetHref", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected *string
 		obj.Href = expected
 
@@ -4396,7 +6588,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetHref_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.Href = nil
 
 		// Act & Assert
@@ -4405,7 +6597,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetHref_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4418,8 +6610,8 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetSubmission", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var expected *PostV1CalendarGetResponseSubmission
+		obj := &GetCalendarResponse{}
+		var expected *GetCalendarResponseSubmission
 		obj.Submission = expected
 
 		// Act & Assert
@@ -4429,7 +6621,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetSubmission_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		obj.Submission = nil
 
 		// Act & Assert
@@ -4438,7 +6630,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetSubmission_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4448,10 +6640,43 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 		_ = obj.GetSubmission() // Should return zero value
 	})
 
+	t.Run("GetSubmissions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var expected []*GetCalendarResponseSubmissionsItem
+		obj.Submissions = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmissions(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmissions_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		obj.Submissions = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmissions(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmissions_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmissions() // Should return zero value
+	})
+
 	t.Run("GetCanSubmit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected bool
 		obj.CanSubmit = expected
 
@@ -4461,7 +6686,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetCanSubmit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4471,10 +6696,33 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 		_ = obj.GetCanSubmit() // Should return zero value
 	})
 
+	t.Run("GetCanAmend", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var expected bool
+		obj.CanAmend = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCanAmend(), "getter should return the property value")
+	})
+
+	t.Run("GetCanAmend_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCanAmend() // Should return zero value
+	})
+
 	t.Run("GetCanDownload", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected bool
 		obj.CanDownload = expected
 
@@ -4484,7 +6732,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetCanDownload_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4497,7 +6745,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("GetAutomated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var expected bool
 		obj.Automated = expected
 
@@ -4507,7 +6755,7 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetAutomated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *GetCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4519,11 +6767,11 @@ func TestGettersPostV1CalendarGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
+func TestSettersMarkExplicitGetCalendarResponse(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueKey string
 
 		// Act
@@ -4554,7 +6802,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueID *string
 
 		// Act
@@ -4585,8 +6833,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueKind PostV1CalendarGetResponseKind
+		obj := &GetCalendarResponse{}
+		var fernTestValueKind GetCalendarResponseKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -4616,7 +6864,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -4647,7 +6895,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -4678,7 +6926,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueTitle string
 
 		// Act
@@ -4709,8 +6957,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueDueDate string
+		obj := &GetCalendarResponse{}
+		var fernTestValueDueDate time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -4740,7 +6988,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -4771,7 +7019,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueDone bool
 
 		// Act
@@ -4802,7 +7050,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetHref_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueHref *string
 
 		// Act
@@ -4833,8 +7081,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetSubmission_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
-		var fernTestValueSubmission *PostV1CalendarGetResponseSubmission
+		obj := &GetCalendarResponse{}
+		var fernTestValueSubmission *GetCalendarResponseSubmission
 
 		// Act
 		obj.SetSubmission(fernTestValueSubmission)
@@ -4861,10 +7109,41 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSubmissions_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var fernTestValueSubmissions []*GetCalendarResponseSubmissionsItem
+
+		// Act
+		obj.SetSubmissions(fernTestValueSubmissions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanSubmit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueCanSubmit bool
 
 		// Act
@@ -4892,10 +7171,41 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCanAmend_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var fernTestValueCanAmend bool
+
+		// Act
+		obj.SetCanAmend(fernTestValueCanAmend)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueCanDownload bool
 
 		// Act
@@ -4926,7 +7236,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 	t.Run("SetAutomated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &GetCalendarResponse{}
 		var fernTestValueAutomated bool
 
 		// Act
@@ -4956,9 +7266,9 @@ func TestSettersMarkExplicitPostV1CalendarGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestSettersGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4966,7 +7276,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetObligation", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueObligation string
 		obj.SetObligation(fernTestValueObligation)
 		assert.Equal(t, fernTestValueObligation, obj.Obligation)
@@ -4974,7 +7284,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodYear", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 		obj.SetPeriodYear(fernTestValuePeriodYear)
 		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
@@ -4982,7 +7292,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodMonth", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 		obj.SetPeriodMonth(fernTestValuePeriodMonth)
 		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
@@ -4990,7 +7300,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -4998,15 +7308,15 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarGetResponseSubmissionStatus
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueStatus GetCalendarResponseSubmissionStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -5014,7 +7324,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -5022,7 +7332,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -5030,7 +7340,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetMessage", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 		obj.SetMessage(fernTestValueMessage)
 		assert.Equal(t, fernTestValueMessage, obj.Message)
@@ -5038,7 +7348,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -5046,7 +7356,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -5054,15 +7364,23 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDocumentKey", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 		obj.SetDocumentKey(fernTestValueDocumentKey)
 		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOrigin", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 		obj.SetOrigin(fernTestValueOrigin)
 		assert.Equal(t, fernTestValueOrigin, obj.Origin)
@@ -5070,55 +7388,63 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetTransportSystem", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 		obj.SetTransportSystem(fernTestValueTransportSystem)
 		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueEnvironment *GetCalendarResponseSubmissionEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSubmittedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
 		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcceptedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
 		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRejectedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 		obj.SetRejectedAt(fernTestValueRejectedAt)
 		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCheckedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 		obj.SetCheckedAt(fernTestValueCheckedAt)
 		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNextCheckAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
 		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -5126,7 +7452,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDeliveryError", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
@@ -5134,7 +7460,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSentSha256", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 		obj.SetSentSha256(fernTestValueSentSha256)
 		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
@@ -5142,7 +7468,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCertificateFingerprint", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
 		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
@@ -5150,7 +7476,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorType", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
 		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
@@ -5158,7 +7484,7 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorID", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
 		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
@@ -5166,16 +7492,16 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -5183,11 +7509,11 @@ func TestSettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestGettersGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected string
 		obj.ID = expected
 
@@ -5197,7 +7523,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5210,7 +7536,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetObligation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected string
 		obj.Obligation = expected
 
@@ -5220,7 +7546,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5233,7 +7559,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected int64
 		obj.PeriodYear = expected
 
@@ -5243,7 +7569,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5256,7 +7582,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *int64
 		obj.PeriodMonth = expected
 
@@ -5267,7 +7593,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.PeriodMonth = nil
 
 		// Act & Assert
@@ -5276,7 +7602,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5289,7 +7615,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.Variant = expected
 
@@ -5300,7 +7626,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -5309,7 +7635,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5322,8 +7648,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected PostV1CalendarGetResponseSubmissionStatus
+		obj := &GetCalendarResponseSubmission{}
+		var expected GetCalendarResponseSubmissionStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -5332,7 +7658,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5345,7 +7671,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected string
 		obj.FileName = expected
 
@@ -5355,7 +7681,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5368,7 +7694,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.FileID = expected
 
@@ -5379,7 +7705,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetFileID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.FileID = nil
 
 		// Act & Assert
@@ -5388,7 +7714,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5401,7 +7727,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -5412,7 +7738,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -5421,7 +7747,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5434,7 +7760,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.Message = expected
 
@@ -5445,7 +7771,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.Message = nil
 
 		// Act & Assert
@@ -5454,7 +7780,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5467,7 +7793,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -5478,7 +7804,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -5487,7 +7813,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5500,7 +7826,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.Period = expected
 
@@ -5511,7 +7837,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -5520,7 +7846,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5533,7 +7859,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.DocumentKey = expected
 
@@ -5544,7 +7870,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.DocumentKey = nil
 
 		// Act & Assert
@@ -5553,7 +7879,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5563,10 +7889,33 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 		_ = obj.GetDocumentKey() // Should return zero value
 	})
 
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
 	t.Run("GetOrigin", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected string
 		obj.Origin = expected
 
@@ -5576,7 +7925,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5589,7 +7938,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.TransportSystem = expected
 
@@ -5600,7 +7949,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.TransportSystem = nil
 
 		// Act & Assert
@@ -5609,7 +7958,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5619,11 +7968,44 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 		_ = obj.GetTransportSystem() // Should return zero value
 	})
 
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var expected *GetCalendarResponseSubmissionEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
 	t.Run("GetSubmittedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected *string
+		obj := &GetCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.SubmittedAt = expected
 
 		// Act & Assert
@@ -5633,7 +8015,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.SubmittedAt = nil
 
 		// Act & Assert
@@ -5642,7 +8024,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5655,8 +8037,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected *string
+		obj := &GetCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.AcceptedAt = expected
 
 		// Act & Assert
@@ -5666,7 +8048,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.AcceptedAt = nil
 
 		// Act & Assert
@@ -5675,7 +8057,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5688,8 +8070,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected *string
+		obj := &GetCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.RejectedAt = expected
 
 		// Act & Assert
@@ -5699,7 +8081,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.RejectedAt = nil
 
 		// Act & Assert
@@ -5708,7 +8090,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5721,8 +8103,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected *string
+		obj := &GetCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.CheckedAt = expected
 
 		// Act & Assert
@@ -5732,7 +8114,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.CheckedAt = nil
 
 		// Act & Assert
@@ -5741,7 +8123,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5754,8 +8136,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected *string
+		obj := &GetCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.NextCheckAt = expected
 
 		// Act & Assert
@@ -5765,7 +8147,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.NextCheckAt = nil
 
 		// Act & Assert
@@ -5774,7 +8156,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5787,7 +8169,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -5797,7 +8179,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5810,7 +8192,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.DeliveryError = expected
 
@@ -5821,7 +8203,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.DeliveryError = nil
 
 		// Act & Assert
@@ -5830,7 +8212,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5843,7 +8225,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.SentSha256 = expected
 
@@ -5854,7 +8236,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.SentSha256 = nil
 
 		// Act & Assert
@@ -5863,7 +8245,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5876,7 +8258,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.CertificateFingerprint = expected
 
@@ -5887,7 +8269,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.CertificateFingerprint = nil
 
 		// Act & Assert
@@ -5896,7 +8278,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5909,7 +8291,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorType = expected
 
@@ -5920,7 +8302,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.SubmittedByActorType = nil
 
 		// Act & Assert
@@ -5929,7 +8311,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5942,7 +8324,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorID = expected
 
@@ -5953,7 +8335,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		obj.SubmittedByActorID = nil
 
 		// Act & Assert
@@ -5962,7 +8344,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5975,8 +8357,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected string
+		obj := &GetCalendarResponseSubmission{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -5985,7 +8367,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5998,8 +8380,8 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var expected string
+		obj := &GetCalendarResponseSubmission{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -6008,7 +8390,7 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6020,11 +8402,11 @@ func TestGettersPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestSettersMarkExplicitGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueID string
 
 		// Act
@@ -6055,7 +8437,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueObligation string
 
 		// Act
@@ -6086,7 +8468,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 
 		// Act
@@ -6117,7 +8499,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 
 		// Act
@@ -6148,7 +8530,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -6179,8 +8561,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarGetResponseSubmissionStatus
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueStatus GetCalendarResponseSubmissionStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -6210,7 +8592,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueFileName string
 
 		// Act
@@ -6241,7 +8623,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 
 		// Act
@@ -6272,7 +8654,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -6303,7 +8685,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 
 		// Act
@@ -6334,7 +8716,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -6365,7 +8747,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -6396,7 +8778,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 
 		// Act
@@ -6424,10 +8806,41 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 
 		// Act
@@ -6458,7 +8871,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 
 		// Act
@@ -6486,11 +8899,42 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueEnvironment *GetCalendarResponseSubmissionEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 
 		// Act
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
@@ -6520,8 +8964,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 
 		// Act
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
@@ -6551,8 +8995,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 
 		// Act
 		obj.SetRejectedAt(fernTestValueRejectedAt)
@@ -6582,8 +9026,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 
 		// Act
 		obj.SetCheckedAt(fernTestValueCheckedAt)
@@ -6613,8 +9057,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 
 		// Act
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
@@ -6644,7 +9088,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -6675,7 +9119,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 
 		// Act
@@ -6706,7 +9150,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 
 		// Act
@@ -6737,7 +9181,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 
 		// Act
@@ -6768,7 +9212,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 
 		// Act
@@ -6799,7 +9243,7 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 
 		// Act
@@ -6830,8 +9274,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -6861,8 +9305,8 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -6891,10 +9335,2079 @@ func TestSettersMarkExplicitPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarListResponse(t *testing.T) {
+func TestSettersGetCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetObligation", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+		obj.SetObligation(fernTestValueObligation)
+		assert.Equal(t, fernTestValueObligation, obj.Obligation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodYear", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodMonth", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVariant", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+		obj.SetVariant(fernTestValueVariant)
+		assert.Equal(t, fernTestValueVariant, obj.Variant)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus GetCalendarResponseSubmissionsItemStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileID", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+		obj.SetFileID(fernTestValueFileID)
+		assert.Equal(t, fernTestValueFileID, obj.FileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExternalRef", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+		obj.SetExternalRef(fernTestValueExternalRef)
+		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMessage", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+		obj.SetMessage(fernTestValueMessage)
+		assert.Equal(t, fernTestValueMessage, obj.Message)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRuleKey", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+		obj.SetRuleKey(fernTestValueRuleKey)
+		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriod", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+		obj.SetPeriod(fernTestValuePeriod)
+		assert.Equal(t, fernTestValuePeriod, obj.Period)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentKey", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOrigin", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+		obj.SetOrigin(fernTestValueOrigin)
+		assert.Equal(t, fernTestValueOrigin, obj.Origin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransportSystem", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *GetCalendarResponseSubmissionsItemEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcceptedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRejectedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCheckedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNextCheckAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAttempts", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+		obj.SetAttempts(fernTestValueAttempts)
+		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeliveryError", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSentSha256", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+		obj.SetSentSha256(fernTestValueSentSha256)
+		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCertificateFingerprint", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorType", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorID", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersGetCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetObligation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Obligation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetObligation(), "getter should return the property value")
+	})
+
+	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetObligation() // Should return zero value
+	})
+
+	t.Run("GetPeriodYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.PeriodYear = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodYear(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodYear() // Should return zero value
+	})
+
+	t.Run("GetPeriodMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *int64
+		obj.PeriodMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.PeriodMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriodMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodMonth() // Should return zero value
+	})
+
+	t.Run("GetVariant", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Variant = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVariant(), "getter should return the property value")
+	})
+
+	t.Run("GetVariant_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.Variant = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVariant(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVariant() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected GetCalendarResponseSubmissionsItemStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetFileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.FileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
+	})
+
+	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileName() // Should return zero value
+	})
+
+	t.Run("GetFileID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.FileID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
+	})
+
+	t.Run("GetFileID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.FileID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFileID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileID() // Should return zero value
+	})
+
+	t.Run("GetExternalRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.ExternalRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExternalRef(), "getter should return the property value")
+	})
+
+	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.ExternalRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExternalRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExternalRef() // Should return zero value
+	})
+
+	t.Run("GetMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Message = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.Message = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessage() // Should return zero value
+	})
+
+	t.Run("GetRuleKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.RuleKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRuleKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.RuleKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRuleKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRuleKey() // Should return zero value
+	})
+
+	t.Run("GetPeriod", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Period = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriod(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriod_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.Period = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriod(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriod() // Should return zero value
+	})
+
+	t.Run("GetDocumentKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DocumentKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentKey(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.DocumentKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentKey() // Should return zero value
+	})
+
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetOrigin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Origin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOrigin(), "getter should return the property value")
+	})
+
+	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOrigin() // Should return zero value
+	})
+
+	t.Run("GetTransportSystem", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.TransportSystem = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTransportSystem(), "getter should return the property value")
+	})
+
+	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.TransportSystem = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTransportSystem(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTransportSystem() // Should return zero value
+	})
+
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *GetCalendarResponseSubmissionsItemEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
+	t.Run("GetSubmittedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.SubmittedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.SubmittedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedAt() // Should return zero value
+	})
+
+	t.Run("GetAcceptedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.AcceptedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcceptedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.AcceptedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAcceptedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcceptedAt() // Should return zero value
+	})
+
+	t.Run("GetRejectedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.RejectedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRejectedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.RejectedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRejectedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRejectedAt() // Should return zero value
+	})
+
+	t.Run("GetCheckedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.CheckedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCheckedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.CheckedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCheckedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCheckedAt() // Should return zero value
+	})
+
+	t.Run("GetNextCheckAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.NextCheckAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNextCheckAt(), "getter should return the property value")
+	})
+
+	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.NextCheckAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNextCheckAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNextCheckAt() // Should return zero value
+	})
+
+	t.Run("GetAttempts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Attempts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAttempts(), "getter should return the property value")
+	})
+
+	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAttempts() // Should return zero value
+	})
+
+	t.Run("GetDeliveryError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DeliveryError = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeliveryError(), "getter should return the property value")
+	})
+
+	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.DeliveryError = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeliveryError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetSentSha256", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SentSha256 = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSentSha256(), "getter should return the property value")
+	})
+
+	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.SentSha256 = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSentSha256(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSentSha256() // Should return zero value
+	})
+
+	t.Run("GetCertificateFingerprint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.CertificateFingerprint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCertificateFingerprint(), "getter should return the property value")
+	})
+
+	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.CertificateFingerprint = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCertificateFingerprint(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCertificateFingerprint() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorType(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorType() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorID(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+
+		// Act
+		obj.SetObligation(fernTestValueObligation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+
+		// Act
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+
+		// Act
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+
+		// Act
+		obj.SetVariant(fernTestValueVariant)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus GetCalendarResponseSubmissionsItemStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+
+		// Act
+		obj.SetFileID(fernTestValueFileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+
+		// Act
+		obj.SetExternalRef(fernTestValueExternalRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+
+		// Act
+		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+
+		// Act
+		obj.SetRuleKey(fernTestValueRuleKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+
+		// Act
+		obj.SetPeriod(fernTestValuePeriod)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+
+		// Act
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+
+		// Act
+		obj.SetOrigin(fernTestValueOrigin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+
+		// Act
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *GetCalendarResponseSubmissionsItemEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+
+		// Act
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+
+		// Act
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+
+		// Act
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+
+		// Act
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+
+		// Act
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+
+		// Act
+		obj.SetAttempts(fernTestValueAttempts)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+
+		// Act
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+
+		// Act
+		obj.SetSentSha256(fernTestValueSentSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+
+		// Act
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+
+		// Act
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+
+		// Act
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersListCalendarResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1CalendarListResponse{}
-		var fernTestValueRows []*PostV1CalendarListResponseRowsItem
+		obj := &ListCalendarResponse{}
+		var fernTestValueRows []*ListCalendarResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -6902,12 +11415,12 @@ func TestSettersPostV1CalendarListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarListResponse(t *testing.T) {
+func TestGettersListCalendarResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponse{}
-		var expected []*PostV1CalendarListResponseRowsItem
+		obj := &ListCalendarResponse{}
+		var expected []*ListCalendarResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -6917,7 +11430,7 @@ func TestGettersPostV1CalendarListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponse{}
+		obj := &ListCalendarResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -6926,7 +11439,7 @@ func TestGettersPostV1CalendarListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponse
+		var obj *ListCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -6938,12 +11451,12 @@ func TestGettersPostV1CalendarListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarListResponse(t *testing.T) {
+func TestSettersMarkExplicitListCalendarResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponse{}
-		var fernTestValueRows []*PostV1CalendarListResponseRowsItem
+		obj := &ListCalendarResponse{}
+		var fernTestValueRows []*ListCalendarResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -6972,9 +11485,9 @@ func TestSettersMarkExplicitPostV1CalendarListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestSettersListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -6982,7 +11495,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueID *string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -6990,15 +11503,15 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueKind PostV1CalendarListResponseRowsItemKind
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueKind ListCalendarResponseRowsItemKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -7006,7 +11519,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -7014,7 +11527,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueTitle string
 		obj.SetTitle(fernTestValueTitle)
 		assert.Equal(t, fernTestValueTitle, obj.Title)
@@ -7022,15 +11535,15 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueDueDate string
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueDueDate time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -7038,7 +11551,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueDone bool
 		obj.SetDone(fernTestValueDone)
 		assert.Equal(t, fernTestValueDone, obj.Done)
@@ -7046,7 +11559,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetHref", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueHref *string
 		obj.SetHref(fernTestValueHref)
 		assert.Equal(t, fernTestValueHref, obj.Href)
@@ -7054,23 +11567,39 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetSubmission", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueSubmission *PostV1CalendarListResponseRowsItemSubmission
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueSubmission *ListCalendarResponseRowsItemSubmission
 		obj.SetSubmission(fernTestValueSubmission)
 		assert.Equal(t, fernTestValueSubmission, obj.Submission)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubmissions", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueSubmissions []*ListCalendarResponseRowsItemSubmissionsItem
+		obj.SetSubmissions(fernTestValueSubmissions)
+		assert.Equal(t, fernTestValueSubmissions, obj.Submissions)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanSubmit", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueCanSubmit bool
 		obj.SetCanSubmit(fernTestValueCanSubmit)
 		assert.Equal(t, fernTestValueCanSubmit, obj.CanSubmit)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCanAmend", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueCanAmend bool
+		obj.SetCanAmend(fernTestValueCanAmend)
+		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanDownload", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueCanDownload bool
 		obj.SetCanDownload(fernTestValueCanDownload)
 		assert.Equal(t, fernTestValueCanDownload, obj.CanDownload)
@@ -7078,7 +11607,7 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetAutomated", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueAutomated bool
 		obj.SetAutomated(fernTestValueAutomated)
 		assert.Equal(t, fernTestValueAutomated, obj.Automated)
@@ -7087,11 +11616,11 @@ func TestSettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestGettersListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected string
 		obj.Key = expected
 
@@ -7101,7 +11630,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7114,7 +11643,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected *string
 		obj.ID = expected
 
@@ -7125,7 +11654,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -7134,7 +11663,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7147,8 +11676,8 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var expected PostV1CalendarListResponseRowsItemKind
+		obj := &ListCalendarResponseRowsItem{}
+		var expected ListCalendarResponseRowsItemKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -7157,7 +11686,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7170,7 +11699,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -7181,7 +11710,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -7190,7 +11719,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7203,7 +11732,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected *string
 		obj.Period = expected
 
@@ -7214,7 +11743,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -7223,7 +11752,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7236,7 +11765,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetTitle", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected string
 		obj.Title = expected
 
@@ -7246,7 +11775,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7259,8 +11788,8 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var expected string
+		obj := &ListCalendarResponseRowsItem{}
+		var expected time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -7269,7 +11798,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7282,7 +11811,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected *string
 		obj.Notes = expected
 
@@ -7293,7 +11822,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -7302,7 +11831,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7315,7 +11844,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetDone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected bool
 		obj.Done = expected
 
@@ -7325,7 +11854,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7338,7 +11867,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetHref", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected *string
 		obj.Href = expected
 
@@ -7349,7 +11878,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetHref_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.Href = nil
 
 		// Act & Assert
@@ -7358,7 +11887,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetHref_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7371,8 +11900,8 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetSubmission", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var expected *PostV1CalendarListResponseRowsItemSubmission
+		obj := &ListCalendarResponseRowsItem{}
+		var expected *ListCalendarResponseRowsItemSubmission
 		obj.Submission = expected
 
 		// Act & Assert
@@ -7382,7 +11911,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetSubmission_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		obj.Submission = nil
 
 		// Act & Assert
@@ -7391,7 +11920,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetSubmission_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7401,10 +11930,43 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 		_ = obj.GetSubmission() // Should return zero value
 	})
 
+	t.Run("GetSubmissions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var expected []*ListCalendarResponseRowsItemSubmissionsItem
+		obj.Submissions = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmissions(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmissions_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		obj.Submissions = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmissions(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmissions_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmissions() // Should return zero value
+	})
+
 	t.Run("GetCanSubmit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected bool
 		obj.CanSubmit = expected
 
@@ -7414,7 +11976,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCanSubmit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7424,10 +11986,33 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 		_ = obj.GetCanSubmit() // Should return zero value
 	})
 
+	t.Run("GetCanAmend", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var expected bool
+		obj.CanAmend = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCanAmend(), "getter should return the property value")
+	})
+
+	t.Run("GetCanAmend_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCanAmend() // Should return zero value
+	})
+
 	t.Run("GetCanDownload", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected bool
 		obj.CanDownload = expected
 
@@ -7437,7 +12022,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCanDownload_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7450,7 +12035,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("GetAutomated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var expected bool
 		obj.Automated = expected
 
@@ -7460,7 +12045,7 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAutomated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *ListCalendarResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7472,11 +12057,11 @@ func TestGettersPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueKey string
 
 		// Act
@@ -7507,7 +12092,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueID *string
 
 		// Act
@@ -7538,8 +12123,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueKind PostV1CalendarListResponseRowsItemKind
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueKind ListCalendarResponseRowsItemKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -7569,7 +12154,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -7600,7 +12185,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -7631,7 +12216,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueTitle string
 
 		// Act
@@ -7662,8 +12247,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueDueDate string
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueDueDate time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -7693,7 +12278,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -7724,7 +12309,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueDone bool
 
 		// Act
@@ -7755,7 +12340,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetHref_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueHref *string
 
 		// Act
@@ -7786,8 +12371,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetSubmission_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
-		var fernTestValueSubmission *PostV1CalendarListResponseRowsItemSubmission
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueSubmission *ListCalendarResponseRowsItemSubmission
 
 		// Act
 		obj.SetSubmission(fernTestValueSubmission)
@@ -7814,10 +12399,41 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSubmissions_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueSubmissions []*ListCalendarResponseRowsItemSubmissionsItem
+
+		// Act
+		obj.SetSubmissions(fernTestValueSubmissions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanSubmit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueCanSubmit bool
 
 		// Act
@@ -7845,10 +12461,41 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCanAmend_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueCanAmend bool
+
+		// Act
+		obj.SetCanAmend(fernTestValueCanAmend)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueCanDownload bool
 
 		// Act
@@ -7879,7 +12526,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 	t.Run("SetAutomated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &ListCalendarResponseRowsItem{}
 		var fernTestValueAutomated bool
 
 		// Act
@@ -7909,9 +12556,9 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestSettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7919,7 +12566,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetObligation", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueObligation string
 		obj.SetObligation(fernTestValueObligation)
 		assert.Equal(t, fernTestValueObligation, obj.Obligation)
@@ -7927,7 +12574,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodYear", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriodYear int64
 		obj.SetPeriodYear(fernTestValuePeriodYear)
 		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
@@ -7935,7 +12582,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodMonth", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriodMonth *int64
 		obj.SetPeriodMonth(fernTestValuePeriodMonth)
 		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
@@ -7943,7 +12590,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -7951,15 +12598,15 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueStatus PostV1CalendarListResponseRowsItemSubmissionStatus
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueStatus ListCalendarResponseRowsItemSubmissionStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -7967,7 +12614,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueFileID *string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -7975,7 +12622,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -7983,7 +12630,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetMessage", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueMessage *string
 		obj.SetMessage(fernTestValueMessage)
 		assert.Equal(t, fernTestValueMessage, obj.Message)
@@ -7991,7 +12638,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -7999,7 +12646,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -8007,15 +12654,23 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDocumentKey", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueDocumentKey *string
 		obj.SetDocumentKey(fernTestValueDocumentKey)
 		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOrigin", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueOrigin string
 		obj.SetOrigin(fernTestValueOrigin)
 		assert.Equal(t, fernTestValueOrigin, obj.Origin)
@@ -8023,55 +12678,63 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetTransportSystem", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueTransportSystem *string
 		obj.SetTransportSystem(fernTestValueTransportSystem)
 		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueEnvironment *ListCalendarResponseRowsItemSubmissionEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSubmittedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
 		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcceptedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
 		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRejectedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueRejectedAt *time.Time
 		obj.SetRejectedAt(fernTestValueRejectedAt)
 		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCheckedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCheckedAt *time.Time
 		obj.SetCheckedAt(fernTestValueCheckedAt)
 		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNextCheckAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
 		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -8079,7 +12742,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDeliveryError", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
@@ -8087,7 +12750,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSentSha256", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSentSha256 *string
 		obj.SetSentSha256(fernTestValueSentSha256)
 		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
@@ -8095,7 +12758,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCertificateFingerprint", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueCertificateFingerprint *string
 		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
 		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
@@ -8103,7 +12766,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorType", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSubmittedByActorType *string
 		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
 		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
@@ -8111,7 +12774,7 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorID", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSubmittedByActorID *string
 		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
 		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
@@ -8119,16 +12782,16 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -8136,11 +12799,11 @@ func TestSettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestGettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected string
 		obj.ID = expected
 
@@ -8150,7 +12813,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8163,7 +12826,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetObligation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected string
 		obj.Obligation = expected
 
@@ -8173,7 +12836,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8186,7 +12849,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetPeriodYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected int64
 		obj.PeriodYear = expected
 
@@ -8196,7 +12859,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8209,7 +12872,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *int64
 		obj.PeriodMonth = expected
 
@@ -8220,7 +12883,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.PeriodMonth = nil
 
 		// Act & Assert
@@ -8229,7 +12892,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8242,7 +12905,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.Variant = expected
 
@@ -8253,7 +12916,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -8262,7 +12925,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8275,8 +12938,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected PostV1CalendarListResponseRowsItemSubmissionStatus
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected ListCalendarResponseRowsItemSubmissionStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -8285,7 +12948,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8298,7 +12961,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected string
 		obj.FileName = expected
 
@@ -8308,7 +12971,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8321,7 +12984,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.FileID = expected
 
@@ -8332,7 +12995,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetFileID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.FileID = nil
 
 		// Act & Assert
@@ -8341,7 +13004,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8354,7 +13017,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -8365,7 +13028,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -8374,7 +13037,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8387,7 +13050,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.Message = expected
 
@@ -8398,7 +13061,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.Message = nil
 
 		// Act & Assert
@@ -8407,7 +13070,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8420,7 +13083,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -8431,7 +13094,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -8440,7 +13103,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8453,7 +13116,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.Period = expected
 
@@ -8464,7 +13127,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -8473,7 +13136,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8486,7 +13149,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetDocumentKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.DocumentKey = expected
 
@@ -8497,7 +13160,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.DocumentKey = nil
 
 		// Act & Assert
@@ -8506,7 +13169,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8516,10 +13179,33 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 		_ = obj.GetDocumentKey() // Should return zero value
 	})
 
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
 	t.Run("GetOrigin", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected string
 		obj.Origin = expected
 
@@ -8529,7 +13215,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8542,7 +13228,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetTransportSystem", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.TransportSystem = expected
 
@@ -8553,7 +13239,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.TransportSystem = nil
 
 		// Act & Assert
@@ -8562,7 +13248,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8572,11 +13258,44 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 		_ = obj.GetTransportSystem() // Should return zero value
 	})
 
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *ListCalendarResponseRowsItemSubmissionEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
 	t.Run("GetSubmittedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *time.Time
 		obj.SubmittedAt = expected
 
 		// Act & Assert
@@ -8586,7 +13305,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.SubmittedAt = nil
 
 		// Act & Assert
@@ -8595,7 +13314,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8608,8 +13327,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *time.Time
 		obj.AcceptedAt = expected
 
 		// Act & Assert
@@ -8619,7 +13338,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.AcceptedAt = nil
 
 		// Act & Assert
@@ -8628,7 +13347,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8641,8 +13360,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetRejectedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *time.Time
 		obj.RejectedAt = expected
 
 		// Act & Assert
@@ -8652,7 +13371,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.RejectedAt = nil
 
 		// Act & Assert
@@ -8661,7 +13380,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8674,8 +13393,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetCheckedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *time.Time
 		obj.CheckedAt = expected
 
 		// Act & Assert
@@ -8685,7 +13404,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.CheckedAt = nil
 
 		// Act & Assert
@@ -8694,7 +13413,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8707,8 +13426,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *time.Time
 		obj.NextCheckAt = expected
 
 		// Act & Assert
@@ -8718,7 +13437,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.NextCheckAt = nil
 
 		// Act & Assert
@@ -8727,7 +13446,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8740,7 +13459,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -8750,7 +13469,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8763,7 +13482,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetDeliveryError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.DeliveryError = expected
 
@@ -8774,7 +13493,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.DeliveryError = nil
 
 		// Act & Assert
@@ -8783,7 +13502,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8796,7 +13515,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSentSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.SentSha256 = expected
 
@@ -8807,7 +13526,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.SentSha256 = nil
 
 		// Act & Assert
@@ -8816,7 +13535,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8829,7 +13548,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.CertificateFingerprint = expected
 
@@ -8840,7 +13559,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.CertificateFingerprint = nil
 
 		// Act & Assert
@@ -8849,7 +13568,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8862,7 +13581,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.SubmittedByActorType = expected
 
@@ -8873,7 +13592,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.SubmittedByActorType = nil
 
 		// Act & Assert
@@ -8882,7 +13601,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8895,7 +13614,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var expected *string
 		obj.SubmittedByActorID = expected
 
@@ -8906,7 +13625,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		obj.SubmittedByActorID = nil
 
 		// Act & Assert
@@ -8915,7 +13634,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8928,8 +13647,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -8938,7 +13657,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8951,8 +13670,8 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var expected string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -8961,7 +13680,7 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponseRowsItemSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -8973,11 +13692,11 @@ func TestGettersPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestSettersMarkExplicitListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueID string
 
 		// Act
@@ -9008,7 +13727,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueObligation string
 
 		// Act
@@ -9039,7 +13758,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriodYear int64
 
 		// Act
@@ -9070,7 +13789,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriodMonth *int64
 
 		// Act
@@ -9101,7 +13820,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -9132,8 +13851,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueStatus PostV1CalendarListResponseRowsItemSubmissionStatus
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueStatus ListCalendarResponseRowsItemSubmissionStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -9163,7 +13882,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueFileName string
 
 		// Act
@@ -9194,7 +13913,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueFileID *string
 
 		// Act
@@ -9225,7 +13944,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -9256,7 +13975,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueMessage *string
 
 		// Act
@@ -9287,7 +14006,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -9318,7 +14037,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -9349,7 +14068,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueDocumentKey *string
 
 		// Act
@@ -9377,10 +14096,41 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueOrigin string
 
 		// Act
@@ -9411,7 +14161,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueTransportSystem *string
 
 		// Act
@@ -9439,11 +14189,42 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueEnvironment *ListCalendarResponseRowsItemSubmissionEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 
 		// Act
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
@@ -9473,8 +14254,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 
 		// Act
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
@@ -9504,8 +14285,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueRejectedAt *time.Time
 
 		// Act
 		obj.SetRejectedAt(fernTestValueRejectedAt)
@@ -9535,8 +14316,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCheckedAt *time.Time
 
 		// Act
 		obj.SetCheckedAt(fernTestValueCheckedAt)
@@ -9566,8 +14347,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 
 		// Act
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
@@ -9597,7 +14378,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -9628,7 +14409,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueDeliveryError *string
 
 		// Act
@@ -9659,7 +14440,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSentSha256 *string
 
 		// Act
@@ -9690,7 +14471,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueCertificateFingerprint *string
 
 		// Act
@@ -9721,7 +14502,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSubmittedByActorType *string
 
 		// Act
@@ -9752,7 +14533,7 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSubmittedByActorID *string
 
 		// Act
@@ -9783,8 +14564,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -9814,8 +14595,8 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -9844,9 +14625,9 @@ func TestSettersMarkExplicitPostV1CalendarListResponseRowsItemSubmission(t *test
 
 }
 
-func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
+func TestSettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -9854,7 +14635,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetObligation", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueObligation string
 		obj.SetObligation(fernTestValueObligation)
 		assert.Equal(t, fernTestValueObligation, obj.Obligation)
@@ -9862,7 +14643,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriodYear", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriodYear int64
 		obj.SetPeriodYear(fernTestValuePeriodYear)
 		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
@@ -9870,7 +14651,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriodMonth", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriodMonth *int64
 		obj.SetPeriodMonth(fernTestValuePeriodMonth)
 		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
@@ -9878,7 +14659,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -9886,15 +14667,15 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueStatus PostV1CalendarSubmitResponseStatus
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueStatus ListCalendarResponseRowsItemSubmissionsItemStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -9902,7 +14683,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueFileID *string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -9910,7 +14691,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -9918,7 +14699,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetMessage", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueMessage *string
 		obj.SetMessage(fernTestValueMessage)
 		assert.Equal(t, fernTestValueMessage, obj.Message)
@@ -9926,7 +14707,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -9934,7 +14715,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -9942,15 +14723,23 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocumentKey", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueDocumentKey *string
 		obj.SetDocumentKey(fernTestValueDocumentKey)
 		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOrigin", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueOrigin string
 		obj.SetOrigin(fernTestValueOrigin)
 		assert.Equal(t, fernTestValueOrigin, obj.Origin)
@@ -9958,55 +14747,63 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetTransportSystem", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueTransportSystem *string
 		obj.SetTransportSystem(fernTestValueTransportSystem)
 		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueEnvironment *ListCalendarResponseRowsItemSubmissionsItemEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSubmittedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueSubmittedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
 		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcceptedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueAcceptedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
 		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRejectedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueRejectedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
 		obj.SetRejectedAt(fernTestValueRejectedAt)
 		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCheckedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueCheckedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
 		obj.SetCheckedAt(fernTestValueCheckedAt)
 		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNextCheckAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueNextCheckAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
 		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -10014,7 +14811,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetDeliveryError", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
@@ -10022,7 +14819,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetSentSha256", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSentSha256 *string
 		obj.SetSentSha256(fernTestValueSentSha256)
 		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
@@ -10030,7 +14827,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetCertificateFingerprint", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueCertificateFingerprint *string
 		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
 		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
@@ -10038,7 +14835,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorType", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSubmittedByActorType *string
 		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
 		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
@@ -10046,7 +14843,7 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorID", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSubmittedByActorID *string
 		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
 		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
@@ -10054,16 +14851,16 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -10071,11 +14868,11 @@ func TestSettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
+func TestGettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -10085,7 +14882,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10098,7 +14895,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetObligation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected string
 		obj.Obligation = expected
 
@@ -10108,7 +14905,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10121,7 +14918,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetPeriodYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected int64
 		obj.PeriodYear = expected
 
@@ -10131,7 +14928,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10144,7 +14941,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetPeriodMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *int64
 		obj.PeriodMonth = expected
 
@@ -10155,7 +14952,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.PeriodMonth = nil
 
 		// Act & Assert
@@ -10164,7 +14961,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10177,7 +14974,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.Variant = expected
 
@@ -10188,7 +14985,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -10197,7 +14994,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10210,8 +15007,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected PostV1CalendarSubmitResponseStatus
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected ListCalendarResponseRowsItemSubmissionsItemStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -10220,7 +15017,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10233,7 +15030,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected string
 		obj.FileName = expected
 
@@ -10243,7 +15040,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10256,7 +15053,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.FileID = expected
 
@@ -10267,7 +15064,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetFileID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.FileID = nil
 
 		// Act & Assert
@@ -10276,7 +15073,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10289,7 +15086,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -10300,7 +15097,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -10309,7 +15106,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10322,7 +15119,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.Message = expected
 
@@ -10333,7 +15130,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.Message = nil
 
 		// Act & Assert
@@ -10342,7 +15139,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10355,7 +15152,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -10366,7 +15163,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -10375,7 +15172,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10388,7 +15185,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.Period = expected
 
@@ -10399,7 +15196,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -10408,7 +15205,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10421,7 +15218,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetDocumentKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.DocumentKey = expected
 
@@ -10432,7 +15229,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.DocumentKey = nil
 
 		// Act & Assert
@@ -10441,7 +15238,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10451,10 +15248,33 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 		_ = obj.GetDocumentKey() // Should return zero value
 	})
 
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
 	t.Run("GetOrigin", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected string
 		obj.Origin = expected
 
@@ -10464,7 +15284,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10477,7 +15297,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetTransportSystem", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.TransportSystem = expected
 
@@ -10488,7 +15308,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.TransportSystem = nil
 
 		// Act & Assert
@@ -10497,7 +15317,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10507,11 +15327,44 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 		_ = obj.GetTransportSystem() // Should return zero value
 	})
 
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *ListCalendarResponseRowsItemSubmissionsItemEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
 	t.Run("GetSubmittedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *time.Time
 		obj.SubmittedAt = expected
 
 		// Act & Assert
@@ -10521,7 +15374,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.SubmittedAt = nil
 
 		// Act & Assert
@@ -10530,7 +15383,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10543,8 +15396,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetAcceptedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *time.Time
 		obj.AcceptedAt = expected
 
 		// Act & Assert
@@ -10554,7 +15407,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.AcceptedAt = nil
 
 		// Act & Assert
@@ -10563,7 +15416,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10576,8 +15429,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetRejectedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *time.Time
 		obj.RejectedAt = expected
 
 		// Act & Assert
@@ -10587,7 +15440,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.RejectedAt = nil
 
 		// Act & Assert
@@ -10596,7 +15449,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10609,8 +15462,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetCheckedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *time.Time
 		obj.CheckedAt = expected
 
 		// Act & Assert
@@ -10620,7 +15473,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.CheckedAt = nil
 
 		// Act & Assert
@@ -10629,7 +15482,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10642,8 +15495,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetNextCheckAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *time.Time
 		obj.NextCheckAt = expected
 
 		// Act & Assert
@@ -10653,7 +15506,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.NextCheckAt = nil
 
 		// Act & Assert
@@ -10662,7 +15515,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10675,7 +15528,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -10685,7 +15538,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10698,7 +15551,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetDeliveryError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.DeliveryError = expected
 
@@ -10709,7 +15562,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.DeliveryError = nil
 
 		// Act & Assert
@@ -10718,7 +15571,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10731,7 +15584,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSentSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.SentSha256 = expected
 
@@ -10742,7 +15595,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.SentSha256 = nil
 
 		// Act & Assert
@@ -10751,7 +15604,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10764,7 +15617,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetCertificateFingerprint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.CertificateFingerprint = expected
 
@@ -10775,7 +15628,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.CertificateFingerprint = nil
 
 		// Act & Assert
@@ -10784,7 +15637,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10797,7 +15650,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSubmittedByActorType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.SubmittedByActorType = expected
 
@@ -10808,7 +15661,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.SubmittedByActorType = nil
 
 		// Act & Assert
@@ -10817,7 +15670,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10830,7 +15683,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSubmittedByActorID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var expected *string
 		obj.SubmittedByActorID = expected
 
@@ -10841,7 +15694,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		obj.SubmittedByActorID = nil
 
 		// Act & Assert
@@ -10850,7 +15703,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10863,8 +15716,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -10873,7 +15726,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10886,8 +15739,8 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var expected string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -10896,7 +15749,7 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -10908,11 +15761,11 @@ func TestGettersPostV1CalendarSubmitResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
+func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -10943,7 +15796,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueObligation string
 
 		// Act
@@ -10974,7 +15827,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriodYear int64
 
 		// Act
@@ -11005,7 +15858,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriodMonth *int64
 
 		// Act
@@ -11036,7 +15889,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -11067,8 +15920,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueStatus PostV1CalendarSubmitResponseStatus
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueStatus ListCalendarResponseRowsItemSubmissionsItemStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -11098,7 +15951,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueFileName string
 
 		// Act
@@ -11129,7 +15982,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueFileID *string
 
 		// Act
@@ -11160,7 +16013,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -11191,7 +16044,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueMessage *string
 
 		// Act
@@ -11222,7 +16075,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -11253,7 +16106,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -11284,7 +16137,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueDocumentKey *string
 
 		// Act
@@ -11312,10 +16165,41 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueOrigin string
 
 		// Act
@@ -11346,7 +16230,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueTransportSystem *string
 
 		// Act
@@ -11374,11 +16258,42 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueEnvironment *ListCalendarResponseRowsItemSubmissionsItemEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueSubmittedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
 
 		// Act
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
@@ -11408,8 +16323,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueAcceptedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
 
 		// Act
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
@@ -11439,8 +16354,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueRejectedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
 
 		// Act
 		obj.SetRejectedAt(fernTestValueRejectedAt)
@@ -11470,8 +16385,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueCheckedAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
 
 		// Act
 		obj.SetCheckedAt(fernTestValueCheckedAt)
@@ -11501,8 +16416,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueNextCheckAt *string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
 
 		// Act
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
@@ -11532,7 +16447,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -11563,7 +16478,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueDeliveryError *string
 
 		// Act
@@ -11594,7 +16509,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSentSha256 *string
 
 		// Act
@@ -11625,7 +16540,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueCertificateFingerprint *string
 
 		// Act
@@ -11656,7 +16571,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSubmittedByActorType *string
 
 		// Act
@@ -11687,7 +16602,7 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		var fernTestValueSubmittedByActorID *string
 
 		// Act
@@ -11718,8 +16633,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueCreatedAt string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -11749,8 +16664,8 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
-		var fernTestValueUpdatedAt string
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -11779,9 +16694,2078 @@ func TestSettersMarkExplicitPostV1CalendarSubmitResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
+func TestSettersSubmitCalendarResponse(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetObligation", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueObligation string
+		obj.SetObligation(fernTestValueObligation)
+		assert.Equal(t, fernTestValueObligation, obj.Obligation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodYear", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriodYear int64
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodMonth", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriodMonth *int64
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVariant", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueVariant *string
+		obj.SetVariant(fernTestValueVariant)
+		assert.Equal(t, fernTestValueVariant, obj.Variant)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueStatus SubmitCalendarResponseStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileID", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueFileID *string
+		obj.SetFileID(fernTestValueFileID)
+		assert.Equal(t, fernTestValueFileID, obj.FileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExternalRef", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueExternalRef *string
+		obj.SetExternalRef(fernTestValueExternalRef)
+		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMessage", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueMessage *string
+		obj.SetMessage(fernTestValueMessage)
+		assert.Equal(t, fernTestValueMessage, obj.Message)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRuleKey", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueRuleKey *string
+		obj.SetRuleKey(fernTestValueRuleKey)
+		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriod", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriod *string
+		obj.SetPeriod(fernTestValuePeriod)
+		assert.Equal(t, fernTestValuePeriod, obj.Period)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentKey", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueDocumentKey *string
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOrigin", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueOrigin string
+		obj.SetOrigin(fernTestValueOrigin)
+		assert.Equal(t, fernTestValueOrigin, obj.Origin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransportSystem", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueTransportSystem *string
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueEnvironment *SubmitCalendarResponseEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedAt *time.Time
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcceptedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAcceptedAt *time.Time
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRejectedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueRejectedAt *time.Time
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCheckedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCheckedAt *time.Time
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNextCheckAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueNextCheckAt *time.Time
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAttempts", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAttempts int64
+		obj.SetAttempts(fernTestValueAttempts)
+		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeliveryError", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueDeliveryError *string
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSentSha256", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSentSha256 *string
+		obj.SetSentSha256(fernTestValueSentSha256)
+		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCertificateFingerprint", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCertificateFingerprint *string
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorType", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedByActorType *string
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorID", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedByActorID *string
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueUpdatedAt time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubmitCalendarResponse(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetObligation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected string
+		obj.Obligation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetObligation(), "getter should return the property value")
+	})
+
+	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetObligation() // Should return zero value
+	})
+
+	t.Run("GetPeriodYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected int64
+		obj.PeriodYear = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodYear(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodYear() // Should return zero value
+	})
+
+	t.Run("GetPeriodMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *int64
+		obj.PeriodMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.PeriodMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriodMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodMonth() // Should return zero value
+	})
+
+	t.Run("GetVariant", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.Variant = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVariant(), "getter should return the property value")
+	})
+
+	t.Run("GetVariant_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.Variant = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVariant(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVariant() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected SubmitCalendarResponseStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetFileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected string
+		obj.FileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
+	})
+
+	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileName() // Should return zero value
+	})
+
+	t.Run("GetFileID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.FileID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
+	})
+
+	t.Run("GetFileID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.FileID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFileID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileID() // Should return zero value
+	})
+
+	t.Run("GetExternalRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.ExternalRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExternalRef(), "getter should return the property value")
+	})
+
+	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.ExternalRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExternalRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExternalRef() // Should return zero value
+	})
+
+	t.Run("GetMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.Message = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.Message = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessage() // Should return zero value
+	})
+
+	t.Run("GetRuleKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.RuleKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRuleKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.RuleKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRuleKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRuleKey() // Should return zero value
+	})
+
+	t.Run("GetPeriod", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.Period = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriod(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriod_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.Period = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriod(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriod() // Should return zero value
+	})
+
+	t.Run("GetDocumentKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.DocumentKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentKey(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.DocumentKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentKey() // Should return zero value
+	})
+
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetOrigin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected string
+		obj.Origin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOrigin(), "getter should return the property value")
+	})
+
+	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOrigin() // Should return zero value
+	})
+
+	t.Run("GetTransportSystem", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.TransportSystem = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTransportSystem(), "getter should return the property value")
+	})
+
+	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.TransportSystem = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTransportSystem(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTransportSystem() // Should return zero value
+	})
+
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *SubmitCalendarResponseEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
+	t.Run("GetSubmittedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *time.Time
+		obj.SubmittedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.SubmittedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedAt() // Should return zero value
+	})
+
+	t.Run("GetAcceptedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *time.Time
+		obj.AcceptedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcceptedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.AcceptedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAcceptedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcceptedAt() // Should return zero value
+	})
+
+	t.Run("GetRejectedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *time.Time
+		obj.RejectedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRejectedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.RejectedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRejectedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRejectedAt() // Should return zero value
+	})
+
+	t.Run("GetCheckedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *time.Time
+		obj.CheckedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCheckedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.CheckedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCheckedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCheckedAt() // Should return zero value
+	})
+
+	t.Run("GetNextCheckAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *time.Time
+		obj.NextCheckAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNextCheckAt(), "getter should return the property value")
+	})
+
+	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.NextCheckAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNextCheckAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNextCheckAt() // Should return zero value
+	})
+
+	t.Run("GetAttempts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected int64
+		obj.Attempts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAttempts(), "getter should return the property value")
+	})
+
+	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAttempts() // Should return zero value
+	})
+
+	t.Run("GetDeliveryError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.DeliveryError = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeliveryError(), "getter should return the property value")
+	})
+
+	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.DeliveryError = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeliveryError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetSentSha256", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.SentSha256 = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSentSha256(), "getter should return the property value")
+	})
+
+	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.SentSha256 = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSentSha256(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSentSha256() // Should return zero value
+	})
+
+	t.Run("GetCertificateFingerprint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.CertificateFingerprint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCertificateFingerprint(), "getter should return the property value")
+	})
+
+	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.CertificateFingerprint = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCertificateFingerprint(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCertificateFingerprint() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.SubmittedByActorType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorType(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.SubmittedByActorType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorType() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.SubmittedByActorID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorID(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.SubmittedByActorID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubmitCalendarResponse(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueObligation string
+
+		// Act
+		obj.SetObligation(fernTestValueObligation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriodYear int64
+
+		// Act
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriodMonth *int64
+
+		// Act
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueVariant *string
+
+		// Act
+		obj.SetVariant(fernTestValueVariant)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueStatus SubmitCalendarResponseStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueFileID *string
+
+		// Act
+		obj.SetFileID(fernTestValueFileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueExternalRef *string
+
+		// Act
+		obj.SetExternalRef(fernTestValueExternalRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueMessage *string
+
+		// Act
+		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueRuleKey *string
+
+		// Act
+		obj.SetRuleKey(fernTestValueRuleKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValuePeriod *string
+
+		// Act
+		obj.SetPeriod(fernTestValuePeriod)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueDocumentKey *string
+
+		// Act
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueOrigin string
+
+		// Act
+		obj.SetOrigin(fernTestValueOrigin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueTransportSystem *string
+
+		// Act
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueEnvironment *SubmitCalendarResponseEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedAt *time.Time
+
+		// Act
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAcceptedAt *time.Time
+
+		// Act
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueRejectedAt *time.Time
+
+		// Act
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCheckedAt *time.Time
+
+		// Act
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueNextCheckAt *time.Time
+
+		// Act
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAttempts int64
+
+		// Act
+		obj.SetAttempts(fernTestValueAttempts)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueDeliveryError *string
+
+		// Act
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSentSha256 *string
+
+		// Act
+		obj.SetSentSha256(fernTestValueSentSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCertificateFingerprint *string
+
+		// Act
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedByActorType *string
+
+		// Act
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueSubmittedByActorID *string
+
+		// Act
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueUpdatedAt time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersUpdateCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueKey string
 		obj.SetKey(fernTestValueKey)
 		assert.Equal(t, fernTestValueKey, obj.Key)
@@ -11789,7 +18773,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueID *string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -11797,15 +18781,15 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetKind", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueKind PostV1CalendarUpdateResponseKind
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueKind UpdateCalendarResponseKind
 		obj.SetKind(fernTestValueKind)
 		assert.Equal(t, fernTestValueKind, obj.Kind)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -11813,7 +18797,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -11821,7 +18805,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetTitle", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueTitle string
 		obj.SetTitle(fernTestValueTitle)
 		assert.Equal(t, fernTestValueTitle, obj.Title)
@@ -11829,15 +18813,15 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDueDate", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueDueDate string
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueDueDate time.Time
 		obj.SetDueDate(fernTestValueDueDate)
 		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNotes", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueNotes *string
 		obj.SetNotes(fernTestValueNotes)
 		assert.Equal(t, fernTestValueNotes, obj.Notes)
@@ -11845,7 +18829,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetDone", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueDone bool
 		obj.SetDone(fernTestValueDone)
 		assert.Equal(t, fernTestValueDone, obj.Done)
@@ -11853,7 +18837,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetHref", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueHref *string
 		obj.SetHref(fernTestValueHref)
 		assert.Equal(t, fernTestValueHref, obj.Href)
@@ -11861,23 +18845,39 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSubmission", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueSubmission *PostV1CalendarUpdateResponseSubmission
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueSubmission *UpdateCalendarResponseSubmission
 		obj.SetSubmission(fernTestValueSubmission)
 		assert.Equal(t, fernTestValueSubmission, obj.Submission)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubmissions", func(t *testing.T) {
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueSubmissions []*UpdateCalendarResponseSubmissionsItem
+		obj.SetSubmissions(fernTestValueSubmissions)
+		assert.Equal(t, fernTestValueSubmissions, obj.Submissions)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanSubmit", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueCanSubmit bool
 		obj.SetCanSubmit(fernTestValueCanSubmit)
 		assert.Equal(t, fernTestValueCanSubmit, obj.CanSubmit)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCanAmend", func(t *testing.T) {
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueCanAmend bool
+		obj.SetCanAmend(fernTestValueCanAmend)
+		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanDownload", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueCanDownload bool
 		obj.SetCanDownload(fernTestValueCanDownload)
 		assert.Equal(t, fernTestValueCanDownload, obj.CanDownload)
@@ -11885,7 +18885,7 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 	})
 
 	t.Run("SetAutomated", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueAutomated bool
 		obj.SetAutomated(fernTestValueAutomated)
 		assert.Equal(t, fernTestValueAutomated, obj.Automated)
@@ -11894,11 +18894,11 @@ func TestSettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
+func TestGettersUpdateCalendarResponse(t *testing.T) {
 	t.Run("GetKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected string
 		obj.Key = expected
 
@@ -11908,7 +18908,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11921,7 +18921,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected *string
 		obj.ID = expected
 
@@ -11932,7 +18932,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -11941,7 +18941,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11954,8 +18954,8 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetKind", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var expected PostV1CalendarUpdateResponseKind
+		obj := &UpdateCalendarResponse{}
+		var expected UpdateCalendarResponseKind
 		obj.Kind = expected
 
 		// Act & Assert
@@ -11964,7 +18964,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetKind_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -11977,7 +18977,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -11988,7 +18988,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -11997,7 +18997,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12010,7 +19010,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected *string
 		obj.Period = expected
 
@@ -12021,7 +19021,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -12030,7 +19030,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12043,7 +19043,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetTitle", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected string
 		obj.Title = expected
 
@@ -12053,7 +19053,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12066,8 +19066,8 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetDueDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var expected string
+		obj := &UpdateCalendarResponse{}
+		var expected time.Time
 		obj.DueDate = expected
 
 		// Act & Assert
@@ -12076,7 +19076,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetDueDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12089,7 +19089,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetNotes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected *string
 		obj.Notes = expected
 
@@ -12100,7 +19100,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetNotes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.Notes = nil
 
 		// Act & Assert
@@ -12109,7 +19109,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetNotes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12122,7 +19122,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetDone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected bool
 		obj.Done = expected
 
@@ -12132,7 +19132,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetDone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12145,7 +19145,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetHref", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected *string
 		obj.Href = expected
 
@@ -12156,7 +19156,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetHref_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.Href = nil
 
 		// Act & Assert
@@ -12165,7 +19165,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetHref_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12178,8 +19178,8 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetSubmission", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var expected *PostV1CalendarUpdateResponseSubmission
+		obj := &UpdateCalendarResponse{}
+		var expected *UpdateCalendarResponseSubmission
 		obj.Submission = expected
 
 		// Act & Assert
@@ -12189,7 +19189,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetSubmission_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		obj.Submission = nil
 
 		// Act & Assert
@@ -12198,7 +19198,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetSubmission_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12208,10 +19208,43 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 		_ = obj.GetSubmission() // Should return zero value
 	})
 
+	t.Run("GetSubmissions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var expected []*UpdateCalendarResponseSubmissionsItem
+		obj.Submissions = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmissions(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmissions_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		obj.Submissions = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmissions(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmissions_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmissions() // Should return zero value
+	})
+
 	t.Run("GetCanSubmit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected bool
 		obj.CanSubmit = expected
 
@@ -12221,7 +19254,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetCanSubmit_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12231,10 +19264,33 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 		_ = obj.GetCanSubmit() // Should return zero value
 	})
 
+	t.Run("GetCanAmend", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var expected bool
+		obj.CanAmend = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCanAmend(), "getter should return the property value")
+	})
+
+	t.Run("GetCanAmend_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCanAmend() // Should return zero value
+	})
+
 	t.Run("GetCanDownload", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected bool
 		obj.CanDownload = expected
 
@@ -12244,7 +19300,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetCanDownload_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12257,7 +19313,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("GetAutomated", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var expected bool
 		obj.Automated = expected
 
@@ -12267,7 +19323,7 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetAutomated_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *UpdateCalendarResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12279,11 +19335,11 @@ func TestGettersPostV1CalendarUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
+func TestSettersMarkExplicitUpdateCalendarResponse(t *testing.T) {
 	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueKey string
 
 		// Act
@@ -12314,7 +19370,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueID *string
 
 		// Act
@@ -12345,8 +19401,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueKind PostV1CalendarUpdateResponseKind
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueKind UpdateCalendarResponseKind
 
 		// Act
 		obj.SetKind(fernTestValueKind)
@@ -12376,7 +19432,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -12407,7 +19463,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -12438,7 +19494,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueTitle string
 
 		// Act
@@ -12469,8 +19525,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueDueDate string
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueDueDate time.Time
 
 		// Act
 		obj.SetDueDate(fernTestValueDueDate)
@@ -12500,7 +19556,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueNotes *string
 
 		// Act
@@ -12531,7 +19587,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueDone bool
 
 		// Act
@@ -12562,7 +19618,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetHref_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueHref *string
 
 		// Act
@@ -12593,8 +19649,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetSubmission_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
-		var fernTestValueSubmission *PostV1CalendarUpdateResponseSubmission
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueSubmission *UpdateCalendarResponseSubmission
 
 		// Act
 		obj.SetSubmission(fernTestValueSubmission)
@@ -12621,10 +19677,41 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSubmissions_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueSubmissions []*UpdateCalendarResponseSubmissionsItem
+
+		// Act
+		obj.SetSubmissions(fernTestValueSubmissions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanSubmit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueCanSubmit bool
 
 		// Act
@@ -12652,10 +19739,41 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCanAmend_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueCanAmend bool
+
+		// Act
+		obj.SetCanAmend(fernTestValueCanAmend)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueCanDownload bool
 
 		// Act
@@ -12686,7 +19804,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 	t.Run("SetAutomated_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &UpdateCalendarResponse{}
 		var fernTestValueAutomated bool
 
 		// Act
@@ -12716,9 +19834,9 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestSettersUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -12726,7 +19844,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetObligation", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueObligation string
 		obj.SetObligation(fernTestValueObligation)
 		assert.Equal(t, fernTestValueObligation, obj.Obligation)
@@ -12734,7 +19852,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodYear", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 		obj.SetPeriodYear(fernTestValuePeriodYear)
 		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
@@ -12742,7 +19860,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriodMonth", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 		obj.SetPeriodMonth(fernTestValuePeriodMonth)
 		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
@@ -12750,7 +19868,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetVariant", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 		obj.SetVariant(fernTestValueVariant)
 		assert.Equal(t, fernTestValueVariant, obj.Variant)
@@ -12758,15 +19876,15 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarUpdateResponseSubmissionStatus
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueStatus UpdateCalendarResponseSubmissionStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFileName", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueFileName string
 		obj.SetFileName(fernTestValueFileName)
 		assert.Equal(t, fernTestValueFileName, obj.FileName)
@@ -12774,7 +19892,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetFileID", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 		obj.SetFileID(fernTestValueFileID)
 		assert.Equal(t, fernTestValueFileID, obj.FileID)
@@ -12782,7 +19900,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetExternalRef", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 		obj.SetExternalRef(fernTestValueExternalRef)
 		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
@@ -12790,7 +19908,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetMessage", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 		obj.SetMessage(fernTestValueMessage)
 		assert.Equal(t, fernTestValueMessage, obj.Message)
@@ -12798,7 +19916,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetRuleKey", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 		obj.SetRuleKey(fernTestValueRuleKey)
 		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
@@ -12806,7 +19924,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetPeriod", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 		obj.SetPeriod(fernTestValuePeriod)
 		assert.Equal(t, fernTestValuePeriod, obj.Period)
@@ -12814,15 +19932,23 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDocumentKey", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 		obj.SetDocumentKey(fernTestValueDocumentKey)
 		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOrigin", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 		obj.SetOrigin(fernTestValueOrigin)
 		assert.Equal(t, fernTestValueOrigin, obj.Origin)
@@ -12830,55 +19956,63 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetTransportSystem", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 		obj.SetTransportSystem(fernTestValueTransportSystem)
 		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueEnvironment *UpdateCalendarResponseSubmissionEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSubmittedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
 		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAcceptedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
 		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetRejectedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 		obj.SetRejectedAt(fernTestValueRejectedAt)
 		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCheckedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 		obj.SetCheckedAt(fernTestValueCheckedAt)
 		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetNextCheckAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
 		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAttempts", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 		obj.SetAttempts(fernTestValueAttempts)
 		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
@@ -12886,7 +20020,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetDeliveryError", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
@@ -12894,7 +20028,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSentSha256", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 		obj.SetSentSha256(fernTestValueSentSha256)
 		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
@@ -12902,7 +20036,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCertificateFingerprint", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
 		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
@@ -12910,7 +20044,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorType", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
 		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
@@ -12918,7 +20052,7 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetSubmittedByActorID", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
 		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
@@ -12926,16 +20060,16 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
 		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -12943,11 +20077,11 @@ func TestSettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 }
 
-func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestGettersUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected string
 		obj.ID = expected
 
@@ -12957,7 +20091,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12970,7 +20104,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetObligation", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected string
 		obj.Obligation = expected
 
@@ -12980,7 +20114,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -12993,7 +20127,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodYear", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected int64
 		obj.PeriodYear = expected
 
@@ -13003,7 +20137,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13016,7 +20150,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *int64
 		obj.PeriodMonth = expected
 
@@ -13027,7 +20161,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.PeriodMonth = nil
 
 		// Act & Assert
@@ -13036,7 +20170,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13049,7 +20183,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetVariant", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.Variant = expected
 
@@ -13060,7 +20194,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetVariant_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.Variant = nil
 
 		// Act & Assert
@@ -13069,7 +20203,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13082,8 +20216,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected PostV1CalendarUpdateResponseSubmissionStatus
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected UpdateCalendarResponseSubmissionStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -13092,7 +20226,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13105,7 +20239,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetFileName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected string
 		obj.FileName = expected
 
@@ -13115,7 +20249,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13128,7 +20262,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetFileID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.FileID = expected
 
@@ -13139,7 +20273,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetFileID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.FileID = nil
 
 		// Act & Assert
@@ -13148,7 +20282,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13161,7 +20295,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.ExternalRef = expected
 
@@ -13172,7 +20306,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.ExternalRef = nil
 
 		// Act & Assert
@@ -13181,7 +20315,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13194,7 +20328,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.Message = expected
 
@@ -13205,7 +20339,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.Message = nil
 
 		// Act & Assert
@@ -13214,7 +20348,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13227,7 +20361,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.RuleKey = expected
 
@@ -13238,7 +20372,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.RuleKey = nil
 
 		// Act & Assert
@@ -13247,7 +20381,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13260,7 +20394,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.Period = expected
 
@@ -13271,7 +20405,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetPeriod_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.Period = nil
 
 		// Act & Assert
@@ -13280,7 +20414,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13293,7 +20427,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.DocumentKey = expected
 
@@ -13304,7 +20438,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.DocumentKey = nil
 
 		// Act & Assert
@@ -13313,7 +20447,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13323,10 +20457,33 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 		_ = obj.GetDocumentKey() // Should return zero value
 	})
 
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
 	t.Run("GetOrigin", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected string
 		obj.Origin = expected
 
@@ -13336,7 +20493,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13349,7 +20506,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.TransportSystem = expected
 
@@ -13360,7 +20517,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.TransportSystem = nil
 
 		// Act & Assert
@@ -13369,7 +20526,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13379,11 +20536,44 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 		_ = obj.GetTransportSystem() // Should return zero value
 	})
 
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *UpdateCalendarResponseSubmissionEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
 	t.Run("GetSubmittedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.SubmittedAt = expected
 
 		// Act & Assert
@@ -13393,7 +20583,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.SubmittedAt = nil
 
 		// Act & Assert
@@ -13402,7 +20592,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13415,8 +20605,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.AcceptedAt = expected
 
 		// Act & Assert
@@ -13426,7 +20616,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.AcceptedAt = nil
 
 		// Act & Assert
@@ -13435,7 +20625,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13448,8 +20638,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.RejectedAt = expected
 
 		// Act & Assert
@@ -13459,7 +20649,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.RejectedAt = nil
 
 		// Act & Assert
@@ -13468,7 +20658,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13481,8 +20671,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.CheckedAt = expected
 
 		// Act & Assert
@@ -13492,7 +20682,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.CheckedAt = nil
 
 		// Act & Assert
@@ -13501,7 +20691,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13514,8 +20704,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *time.Time
 		obj.NextCheckAt = expected
 
 		// Act & Assert
@@ -13525,7 +20715,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.NextCheckAt = nil
 
 		// Act & Assert
@@ -13534,7 +20724,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13547,7 +20737,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetAttempts", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected int64
 		obj.Attempts = expected
 
@@ -13557,7 +20747,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13570,7 +20760,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.DeliveryError = expected
 
@@ -13581,7 +20771,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.DeliveryError = nil
 
 		// Act & Assert
@@ -13590,7 +20780,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13603,7 +20793,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.SentSha256 = expected
 
@@ -13614,7 +20804,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.SentSha256 = nil
 
 		// Act & Assert
@@ -13623,7 +20813,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13636,7 +20826,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.CertificateFingerprint = expected
 
@@ -13647,7 +20837,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.CertificateFingerprint = nil
 
 		// Act & Assert
@@ -13656,7 +20846,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13669,7 +20859,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorType = expected
 
@@ -13680,7 +20870,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.SubmittedByActorType = nil
 
 		// Act & Assert
@@ -13689,7 +20879,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13702,7 +20892,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var expected *string
 		obj.SubmittedByActorID = expected
 
@@ -13713,7 +20903,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		obj.SubmittedByActorID = nil
 
 		// Act & Assert
@@ -13722,7 +20912,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13735,8 +20925,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -13745,7 +20935,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13758,8 +20948,8 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 	t.Run("GetUpdatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var expected string
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected time.Time
 		obj.UpdatedAt = expected
 
 		// Act & Assert
@@ -13768,7 +20958,7 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *UpdateCalendarResponseSubmission
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -13780,11 +20970,11 @@ func TestGettersPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestSettersMarkExplicitUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueID string
 
 		// Act
@@ -13815,7 +21005,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueObligation string
 
 		// Act
@@ -13846,7 +21036,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriodYear int64
 
 		// Act
@@ -13877,7 +21067,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriodMonth *int64
 
 		// Act
@@ -13908,7 +21098,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueVariant *string
 
 		// Act
@@ -13939,8 +21129,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueStatus PostV1CalendarUpdateResponseSubmissionStatus
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueStatus UpdateCalendarResponseSubmissionStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -13970,7 +21160,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueFileName string
 
 		// Act
@@ -14001,7 +21191,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueFileID *string
 
 		// Act
@@ -14032,7 +21222,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueExternalRef *string
 
 		// Act
@@ -14063,7 +21253,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueMessage *string
 
 		// Act
@@ -14094,7 +21284,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueRuleKey *string
 
 		// Act
@@ -14125,7 +21315,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValuePeriod *string
 
 		// Act
@@ -14156,7 +21346,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueDocumentKey *string
 
 		// Act
@@ -14184,10 +21374,41 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueOrigin string
 
 		// Act
@@ -14218,7 +21439,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueTransportSystem *string
 
 		// Act
@@ -14246,11 +21467,42 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueEnvironment *UpdateCalendarResponseSubmissionEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueSubmittedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueSubmittedAt *time.Time
 
 		// Act
 		obj.SetSubmittedAt(fernTestValueSubmittedAt)
@@ -14280,8 +21532,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueAcceptedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAcceptedAt *time.Time
 
 		// Act
 		obj.SetAcceptedAt(fernTestValueAcceptedAt)
@@ -14311,8 +21563,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueRejectedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueRejectedAt *time.Time
 
 		// Act
 		obj.SetRejectedAt(fernTestValueRejectedAt)
@@ -14342,8 +21594,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueCheckedAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCheckedAt *time.Time
 
 		// Act
 		obj.SetCheckedAt(fernTestValueCheckedAt)
@@ -14373,8 +21625,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueNextCheckAt *string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueNextCheckAt *time.Time
 
 		// Act
 		obj.SetNextCheckAt(fernTestValueNextCheckAt)
@@ -14404,7 +21656,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueAttempts int64
 
 		// Act
@@ -14435,7 +21687,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueDeliveryError *string
 
 		// Act
@@ -14466,7 +21718,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
 
 		// Act
@@ -14497,7 +21749,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueCertificateFingerprint *string
 
 		// Act
@@ -14528,7 +21780,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorType *string
 
 		// Act
@@ -14559,7 +21811,7 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSubmittedByActorID *string
 
 		// Act
@@ -14590,8 +21842,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueCreatedAt string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -14621,8 +21873,8 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
-		var fernTestValueUpdatedAt string
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueUpdatedAt time.Time
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
@@ -14651,11 +21903,2281 @@ func TestSettersMarkExplicitPostV1CalendarUpdateResponseSubmission(t *testing.T)
 
 }
 
-func TestJSONMarshalingPostV1CalendarCreateResponse(t *testing.T) {
+func TestSettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetObligation", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+		obj.SetObligation(fernTestValueObligation)
+		assert.Equal(t, fernTestValueObligation, obj.Obligation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodYear", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+		assert.Equal(t, fernTestValuePeriodYear, obj.PeriodYear)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriodMonth", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+		assert.Equal(t, fernTestValuePeriodMonth, obj.PeriodMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVariant", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+		obj.SetVariant(fernTestValueVariant)
+		assert.Equal(t, fernTestValueVariant, obj.Variant)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus UpdateCalendarResponseSubmissionsItemStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileName", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+		obj.SetFileName(fernTestValueFileName)
+		assert.Equal(t, fernTestValueFileName, obj.FileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFileID", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+		obj.SetFileID(fernTestValueFileID)
+		assert.Equal(t, fernTestValueFileID, obj.FileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExternalRef", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+		obj.SetExternalRef(fernTestValueExternalRef)
+		assert.Equal(t, fernTestValueExternalRef, obj.ExternalRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMessage", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+		obj.SetMessage(fernTestValueMessage)
+		assert.Equal(t, fernTestValueMessage, obj.Message)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRuleKey", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+		obj.SetRuleKey(fernTestValueRuleKey)
+		assert.Equal(t, fernTestValueRuleKey, obj.RuleKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPeriod", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+		obj.SetPeriod(fernTestValuePeriod)
+		assert.Equal(t, fernTestValuePeriod, obj.Period)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentKey", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+		assert.Equal(t, fernTestValueDocumentKey, obj.DocumentKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmendment", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+		obj.SetAmendment(fernTestValueAmendment)
+		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOrigin", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+		obj.SetOrigin(fernTestValueOrigin)
+		assert.Equal(t, fernTestValueOrigin, obj.Origin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTransportSystem", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+		assert.Equal(t, fernTestValueTransportSystem, obj.TransportSystem)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *UpdateCalendarResponseSubmissionsItemEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+		assert.Equal(t, fernTestValueSubmittedAt, obj.SubmittedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAcceptedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+		assert.Equal(t, fernTestValueAcceptedAt, obj.AcceptedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRejectedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+		assert.Equal(t, fernTestValueRejectedAt, obj.RejectedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCheckedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+		assert.Equal(t, fernTestValueCheckedAt, obj.CheckedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNextCheckAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+		assert.Equal(t, fernTestValueNextCheckAt, obj.NextCheckAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAttempts", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+		obj.SetAttempts(fernTestValueAttempts)
+		assert.Equal(t, fernTestValueAttempts, obj.Attempts)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeliveryError", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSentSha256", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+		obj.SetSentSha256(fernTestValueSentSha256)
+		assert.Equal(t, fernTestValueSentSha256, obj.SentSha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCertificateFingerprint", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+		assert.Equal(t, fernTestValueCertificateFingerprint, obj.CertificateFingerprint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorType", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+		assert.Equal(t, fernTestValueSubmittedByActorType, obj.SubmittedByActorType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubmittedByActorID", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+		assert.Equal(t, fernTestValueSubmittedByActorID, obj.SubmittedByActorID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetObligation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Obligation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetObligation(), "getter should return the property value")
+	})
+
+	t.Run("GetObligation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetObligation() // Should return zero value
+	})
+
+	t.Run("GetPeriodYear", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.PeriodYear = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodYear(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodYear_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodYear() // Should return zero value
+	})
+
+	t.Run("GetPeriodMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *int64
+		obj.PeriodMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriodMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriodMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.PeriodMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriodMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriodMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriodMonth() // Should return zero value
+	})
+
+	t.Run("GetVariant", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Variant = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVariant(), "getter should return the property value")
+	})
+
+	t.Run("GetVariant_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.Variant = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVariant(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVariant_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVariant() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected UpdateCalendarResponseSubmissionsItemStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetFileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.FileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileName(), "getter should return the property value")
+	})
+
+	t.Run("GetFileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileName() // Should return zero value
+	})
+
+	t.Run("GetFileID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.FileID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFileID(), "getter should return the property value")
+	})
+
+	t.Run("GetFileID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.FileID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFileID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFileID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFileID() // Should return zero value
+	})
+
+	t.Run("GetExternalRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.ExternalRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExternalRef(), "getter should return the property value")
+	})
+
+	t.Run("GetExternalRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.ExternalRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExternalRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExternalRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExternalRef() // Should return zero value
+	})
+
+	t.Run("GetMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Message = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.Message = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessage() // Should return zero value
+	})
+
+	t.Run("GetRuleKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.RuleKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRuleKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRuleKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.RuleKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRuleKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRuleKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRuleKey() // Should return zero value
+	})
+
+	t.Run("GetPeriod", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.Period = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPeriod(), "getter should return the property value")
+	})
+
+	t.Run("GetPeriod_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.Period = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPeriod(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPeriod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPeriod() // Should return zero value
+	})
+
+	t.Run("GetDocumentKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DocumentKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentKey(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.DocumentKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentKey() // Should return zero value
+	})
+
+	t.Run("GetAmendment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Amendment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmendment(), "getter should return the property value")
+	})
+
+	t.Run("GetAmendment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetOrigin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected string
+		obj.Origin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOrigin(), "getter should return the property value")
+	})
+
+	t.Run("GetOrigin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOrigin() // Should return zero value
+	})
+
+	t.Run("GetTransportSystem", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.TransportSystem = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTransportSystem(), "getter should return the property value")
+	})
+
+	t.Run("GetTransportSystem_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.TransportSystem = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTransportSystem(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTransportSystem_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTransportSystem() // Should return zero value
+	})
+
+	t.Run("GetEnvironment", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *UpdateCalendarResponseSubmissionsItemEnvironment
+		obj.Environment = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnvironment(), "getter should return the property value")
+	})
+
+	t.Run("GetEnvironment_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.Environment = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnvironment(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnvironment_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnvironment() // Should return zero value
+	})
+
+	t.Run("GetSubmittedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.SubmittedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.SubmittedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedAt() // Should return zero value
+	})
+
+	t.Run("GetAcceptedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.AcceptedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAcceptedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetAcceptedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.AcceptedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAcceptedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAcceptedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAcceptedAt() // Should return zero value
+	})
+
+	t.Run("GetRejectedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.RejectedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRejectedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetRejectedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.RejectedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRejectedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRejectedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRejectedAt() // Should return zero value
+	})
+
+	t.Run("GetCheckedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.CheckedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCheckedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCheckedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.CheckedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCheckedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCheckedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCheckedAt() // Should return zero value
+	})
+
+	t.Run("GetNextCheckAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *time.Time
+		obj.NextCheckAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNextCheckAt(), "getter should return the property value")
+	})
+
+	t.Run("GetNextCheckAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.NextCheckAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNextCheckAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNextCheckAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNextCheckAt() // Should return zero value
+	})
+
+	t.Run("GetAttempts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected int64
+		obj.Attempts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAttempts(), "getter should return the property value")
+	})
+
+	t.Run("GetAttempts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAttempts() // Should return zero value
+	})
+
+	t.Run("GetDeliveryError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.DeliveryError = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeliveryError(), "getter should return the property value")
+	})
+
+	t.Run("GetDeliveryError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.DeliveryError = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeliveryError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeliveryError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetSentSha256", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SentSha256 = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSentSha256(), "getter should return the property value")
+	})
+
+	t.Run("GetSentSha256_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.SentSha256 = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSentSha256(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSentSha256_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSentSha256() // Should return zero value
+	})
+
+	t.Run("GetCertificateFingerprint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.CertificateFingerprint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCertificateFingerprint(), "getter should return the property value")
+	})
+
+	t.Run("GetCertificateFingerprint_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.CertificateFingerprint = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCertificateFingerprint(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCertificateFingerprint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCertificateFingerprint() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorType(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorType() // Should return zero value
+	})
+
+	t.Run("GetSubmittedByActorID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.SubmittedByActorID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubmittedByActorID(), "getter should return the property value")
+	})
+
+	t.Run("GetSubmittedByActorID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.SubmittedByActorID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubmittedByActorID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubmittedByActorID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubmittedByActorID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetObligation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueObligation string
+
+		// Act
+		obj.SetObligation(fernTestValueObligation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodYear_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodYear int64
+
+		// Act
+		obj.SetPeriodYear(fernTestValuePeriodYear)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriodMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriodMonth *int64
+
+		// Act
+		obj.SetPeriodMonth(fernTestValuePeriodMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVariant_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueVariant *string
+
+		// Act
+		obj.SetVariant(fernTestValueVariant)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueStatus UpdateCalendarResponseSubmissionsItemStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileName string
+
+		// Act
+		obj.SetFileName(fernTestValueFileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueFileID *string
+
+		// Act
+		obj.SetFileID(fernTestValueFileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExternalRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueExternalRef *string
+
+		// Act
+		obj.SetExternalRef(fernTestValueExternalRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueMessage *string
+
+		// Act
+		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRuleKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueRuleKey *string
+
+		// Act
+		obj.SetRuleKey(fernTestValueRuleKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPeriod_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValuePeriod *string
+
+		// Act
+		obj.SetPeriod(fernTestValuePeriod)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueDocumentKey *string
+
+		// Act
+		obj.SetDocumentKey(fernTestValueDocumentKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmendment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAmendment int64
+
+		// Act
+		obj.SetAmendment(fernTestValueAmendment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueOrigin string
+
+		// Act
+		obj.SetOrigin(fernTestValueOrigin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransportSystem_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueTransportSystem *string
+
+		// Act
+		obj.SetTransportSystem(fernTestValueTransportSystem)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueEnvironment *UpdateCalendarResponseSubmissionsItemEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedAt *time.Time
+
+		// Act
+		obj.SetSubmittedAt(fernTestValueSubmittedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAcceptedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAcceptedAt *time.Time
+
+		// Act
+		obj.SetAcceptedAt(fernTestValueAcceptedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRejectedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueRejectedAt *time.Time
+
+		// Act
+		obj.SetRejectedAt(fernTestValueRejectedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCheckedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCheckedAt *time.Time
+
+		// Act
+		obj.SetCheckedAt(fernTestValueCheckedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNextCheckAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueNextCheckAt *time.Time
+
+		// Act
+		obj.SetNextCheckAt(fernTestValueNextCheckAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAttempts_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAttempts int64
+
+		// Act
+		obj.SetAttempts(fernTestValueAttempts)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeliveryError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueDeliveryError *string
+
+		// Act
+		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSentSha256 *string
+
+		// Act
+		obj.SetSentSha256(fernTestValueSentSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCertificateFingerprint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCertificateFingerprint *string
+
+		// Act
+		obj.SetCertificateFingerprint(fernTestValueCertificateFingerprint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorType *string
+
+		// Act
+		obj.SetSubmittedByActorType(fernTestValueSubmittedByActorType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubmittedByActorID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueSubmittedByActorID *string
+
+		// Act
+		obj.SetSubmittedByActorID(fernTestValueSubmittedByActorID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueUpdatedAt time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersUpdateCalendarRequest(t *testing.T) {
+	t.Run("SetKey", func(t *testing.T) {
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueKey string
+		obj.SetKey(fernTestValueKey)
+		assert.Equal(t, fernTestValueKey, obj.Key)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueTitle *string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDueDate", func(t *testing.T) {
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueDueDate *time.Time
+		obj.SetDueDate(fernTestValueDueDate)
+		assert.Equal(t, fernTestValueDueDate, obj.DueDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotes", func(t *testing.T) {
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueNotes *string
+		obj.SetNotes(fernTestValueNotes)
+		assert.Equal(t, fernTestValueNotes, obj.Notes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDone", func(t *testing.T) {
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueDone *bool
+		obj.SetDone(fernTestValueDone)
+		assert.Equal(t, fernTestValueDone, obj.Done)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarRequest(t *testing.T) {
+	t.Run("SetKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueKey string
+
+		// Act
+		obj.SetKey(fernTestValueKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueTitle *string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDueDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueDueDate *time.Time
+
+		// Act
+		obj.SetDueDate(fernTestValueDueDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueNotes *string
+
+		// Act
+		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDone_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarRequest{}
+		var fernTestValueDone *bool
+
+		// Act
+		obj.SetDone(fernTestValueDone)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingCreateCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14664,31 +24186,31 @@ func TestJSONMarshalingPostV1CalendarCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarCreateResponse
+		var unmarshaled CreateCalendarResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarCreateResponse
+		var obj CreateCalendarResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarCreateResponse
+		var obj CreateCalendarResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestJSONMarshalingCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14697,31 +24219,31 @@ func TestJSONMarshalingPostV1CalendarCreateResponseSubmission(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarCreateResponseSubmission
+		var unmarshaled CreateCalendarResponseSubmission
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarCreateResponseSubmission
+		var obj CreateCalendarResponseSubmission
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarCreateResponseSubmission
+		var obj CreateCalendarResponseSubmission
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarDeleteResponse(t *testing.T) {
+func TestJSONMarshalingCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &CreateCalendarResponseSubmissionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14730,31 +24252,31 @@ func TestJSONMarshalingPostV1CalendarDeleteResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarDeleteResponse
+		var unmarshaled CreateCalendarResponseSubmissionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarDeleteResponse
+		var obj CreateCalendarResponseSubmissionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarDeleteResponse
+		var obj CreateCalendarResponseSubmissionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarDownloadResponse(t *testing.T) {
+func TestJSONMarshalingDeleteCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DeleteCalendarResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14763,31 +24285,31 @@ func TestJSONMarshalingPostV1CalendarDownloadResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarDownloadResponse
+		var unmarshaled DeleteCalendarResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarDownloadResponse
+		var obj DeleteCalendarResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarDownloadResponse
+		var obj DeleteCalendarResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarGetResponse(t *testing.T) {
+func TestJSONMarshalingDownloadCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponse{}
+		obj := &DownloadCalendarResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14796,31 +24318,31 @@ func TestJSONMarshalingPostV1CalendarGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarGetResponse
+		var unmarshaled DownloadCalendarResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarGetResponse
+		var obj DownloadCalendarResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarGetResponse
+		var obj DownloadCalendarResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestJSONMarshalingGetCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14829,31 +24351,31 @@ func TestJSONMarshalingPostV1CalendarGetResponseSubmission(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarGetResponseSubmission
+		var unmarshaled GetCalendarResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarGetResponseSubmission
+		var obj GetCalendarResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarGetResponseSubmission
+		var obj GetCalendarResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarListResponse(t *testing.T) {
+func TestJSONMarshalingGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponse{}
+		obj := &GetCalendarResponseSubmission{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14862,31 +24384,31 @@ func TestJSONMarshalingPostV1CalendarListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarListResponse
+		var unmarshaled GetCalendarResponseSubmission
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponse
+		var obj GetCalendarResponseSubmission
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponse
+		var obj GetCalendarResponseSubmission
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &GetCalendarResponseSubmissionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14895,31 +24417,31 @@ func TestJSONMarshalingPostV1CalendarListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarListResponseRowsItem
+		var unmarshaled GetCalendarResponseSubmissionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponseRowsItem
+		var obj GetCalendarResponseSubmissionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponseRowsItem
+		var obj GetCalendarResponseSubmissionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestJSONMarshalingListCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14928,31 +24450,31 @@ func TestJSONMarshalingPostV1CalendarListResponseRowsItemSubmission(t *testing.T
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarListResponseRowsItemSubmission
+		var unmarshaled ListCalendarResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponseRowsItemSubmission
+		var obj ListCalendarResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarListResponseRowsItemSubmission
+		var obj ListCalendarResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarSubmitResponse(t *testing.T) {
+func TestJSONMarshalingListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14961,31 +24483,31 @@ func TestJSONMarshalingPostV1CalendarSubmitResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarSubmitResponse
+		var unmarshaled ListCalendarResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarSubmitResponse
+		var obj ListCalendarResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarSubmitResponse
+		var obj ListCalendarResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarUpdateResponse(t *testing.T) {
+func TestJSONMarshalingListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14994,31 +24516,31 @@ func TestJSONMarshalingPostV1CalendarUpdateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarUpdateResponse
+		var unmarshaled ListCalendarResponseRowsItemSubmission
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarUpdateResponse
+		var obj ListCalendarResponseRowsItemSubmission
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarUpdateResponse
+		var obj ListCalendarResponseRowsItemSubmission
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestJSONMarshalingListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -15027,240 +24549,436 @@ func TestJSONMarshalingPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1CalendarUpdateResponseSubmission
+		var unmarshaled ListCalendarResponseRowsItemSubmissionsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarUpdateResponseSubmission
+		var obj ListCalendarResponseRowsItemSubmissionsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1CalendarUpdateResponseSubmission
+		var obj ListCalendarResponseRowsItemSubmissionsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1CalendarCreateResponse(t *testing.T) {
+func TestJSONMarshalingSubmitCalendarResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubmitCalendarResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingUpdateCalendarResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingUpdateCalendarResponseSubmission(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseSubmission
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmission
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmission
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseSubmissionsItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionsItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionsItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestStringCreateCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestStringCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarDeleteResponse(t *testing.T) {
+func TestStringCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &CreateCalendarResponseSubmissionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDeleteResponse
+		var obj *CreateCalendarResponseSubmissionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarDownloadResponse(t *testing.T) {
+func TestStringDeleteCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DeleteCalendarResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DeleteCalendarResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarGetResponse(t *testing.T) {
+func TestStringDownloadCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarGetResponse{}
+		obj := &DownloadCalendarResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *DownloadCalendarResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestStringGetCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarListResponse(t *testing.T) {
+func TestStringGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponse{}
+		obj := &GetCalendarResponseSubmission{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponse
+		var obj *GetCalendarResponseSubmission
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestStringGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &GetCalendarResponseSubmissionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *GetCalendarResponseSubmissionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestStringListCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarSubmitResponse(t *testing.T) {
+func TestStringListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarUpdateResponse(t *testing.T) {
+func TestStringListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *ListCalendarResponseRowsItemSubmission
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestStringListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1CalendarCreateResponseKind(t *testing.T) {
+func TestStringSubmitCalendarResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponseSubmission(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmission{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumCreateCalendarResponseKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseKindFromString("custom")
+		val, err := NewCreateCalendarResponseKindFromString("custom")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseKind("custom"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseKind("custom"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_obligation", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseKindFromString("obligation")
+		val, err := NewCreateCalendarResponseKindFromString("obligation")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseKind("obligation"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseKind("obligation"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarCreateResponseKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewCreateCalendarResponseKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarCreateResponseKindFromString("custom")
+		val, err := NewCreateCalendarResponseKindFromString("custom")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15268,42 +24986,71 @@ func TestEnumPostV1CalendarCreateResponseKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarCreateResponseSubmissionStatus(t *testing.T) {
+func TestEnumCreateCalendarResponseSubmissionEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateCalendarResponseSubmissionEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreateCalendarResponseSubmissionStatus(t *testing.T) {
 	t.Run("NewFromString_generated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("generated")
+		val, err := NewCreateCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_submitted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("submitted")
+		val, err := NewCreateCalendarResponseSubmissionStatusFromString("submitted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_accepted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("accepted")
+		val, err := NewCreateCalendarResponseSubmissionStatusFromString("accepted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_rejected", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("rejected")
+		val, err := NewCreateCalendarResponseSubmissionStatusFromString("rejected")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarCreateResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreateCalendarResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewCreateCalendarResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarCreateResponseSubmissionStatusFromString("generated")
+		val, err := NewCreateCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15311,28 +25058,100 @@ func TestEnumPostV1CalendarCreateResponseSubmissionStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarGetResponseKind(t *testing.T) {
+func TestEnumCreateCalendarResponseSubmissionsItemEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateCalendarResponseSubmissionsItemEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreateCalendarResponseSubmissionsItemStatus(t *testing.T) {
+	t.Run("NewFromString_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemStatus("generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_submitted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("submitted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemStatus("submitted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_accepted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("accepted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemStatus("accepted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseSubmissionsItemStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumGetCalendarResponseKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseKindFromString("custom")
+		val, err := NewGetCalendarResponseKindFromString("custom")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseKind("custom"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseKind("custom"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_obligation", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseKindFromString("obligation")
+		val, err := NewGetCalendarResponseKindFromString("obligation")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseKind("obligation"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseKind("obligation"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarGetResponseKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewGetCalendarResponseKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarGetResponseKindFromString("custom")
+		val, err := NewGetCalendarResponseKindFromString("custom")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15340,42 +25159,71 @@ func TestEnumPostV1CalendarGetResponseKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarGetResponseSubmissionStatus(t *testing.T) {
+func TestEnumGetCalendarResponseSubmissionEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewGetCalendarResponseSubmissionEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewGetCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumGetCalendarResponseSubmissionStatus(t *testing.T) {
 	t.Run("NewFromString_generated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("generated")
+		val, err := NewGetCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_submitted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("submitted")
+		val, err := NewGetCalendarResponseSubmissionStatusFromString("submitted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_accepted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("accepted")
+		val, err := NewGetCalendarResponseSubmissionStatusFromString("accepted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_rejected", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("rejected")
+		val, err := NewGetCalendarResponseSubmissionStatusFromString("rejected")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarGetResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetCalendarResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewGetCalendarResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarGetResponseSubmissionStatusFromString("generated")
+		val, err := NewGetCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15383,28 +25231,100 @@ func TestEnumPostV1CalendarGetResponseSubmissionStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarListResponseRowsItemKind(t *testing.T) {
+func TestEnumGetCalendarResponseSubmissionsItemEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewGetCalendarResponseSubmissionsItemEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewGetCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumGetCalendarResponseSubmissionsItemStatus(t *testing.T) {
+	t.Run("NewFromString_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemStatus("generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_submitted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("submitted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemStatus("submitted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_accepted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("accepted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemStatus("accepted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseSubmissionsItemStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewGetCalendarResponseSubmissionsItemStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListCalendarResponseRowsItemKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemKindFromString("custom")
+		val, err := NewListCalendarResponseRowsItemKindFromString("custom")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemKind("custom"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemKind("custom"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_obligation", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemKindFromString("obligation")
+		val, err := NewListCalendarResponseRowsItemKindFromString("obligation")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemKind("obligation"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemKind("obligation"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarListResponseRowsItemKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewListCalendarResponseRowsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarListResponseRowsItemKindFromString("custom")
+		val, err := NewListCalendarResponseRowsItemKindFromString("custom")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15412,42 +25332,71 @@ func TestEnumPostV1CalendarListResponseRowsItemKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarListResponseRowsItemSubmissionStatus(t *testing.T) {
+func TestEnumListCalendarResponseRowsItemSubmissionEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemSubmissionEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListCalendarResponseRowsItemSubmissionEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListCalendarResponseRowsItemSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListCalendarResponseRowsItemSubmissionStatus(t *testing.T) {
 	t.Run("NewFromString_generated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("generated")
+		val, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("generated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemSubmissionStatus("generated"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionStatus("generated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_submitted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("submitted")
+		val, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("submitted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemSubmissionStatus("submitted"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionStatus("submitted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_accepted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("accepted")
+		val, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("accepted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemSubmissionStatus("accepted"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionStatus("accepted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_rejected", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("rejected")
+		val, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("rejected")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarListResponseRowsItemSubmissionStatus("rejected"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionStatus("rejected"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString("generated")
+		val, err := NewListCalendarResponseRowsItemSubmissionStatusFromString("generated")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15455,42 +25404,71 @@ func TestEnumPostV1CalendarListResponseRowsItemSubmissionStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarSubmitResponseStatus(t *testing.T) {
+func TestEnumListCalendarResponseRowsItemSubmissionsItemEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListCalendarResponseRowsItemSubmissionsItemEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListCalendarResponseRowsItemSubmissionsItemStatus(t *testing.T) {
 	t.Run("NewFromString_generated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarSubmitResponseStatusFromString("generated")
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("generated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarSubmitResponseStatus("generated"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemStatus("generated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_submitted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarSubmitResponseStatusFromString("submitted")
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("submitted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarSubmitResponseStatus("submitted"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemStatus("submitted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_accepted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarSubmitResponseStatusFromString("accepted")
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("accepted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarSubmitResponseStatus("accepted"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemStatus("accepted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_rejected", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarSubmitResponseStatusFromString("rejected")
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("rejected")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarSubmitResponseStatus("rejected"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListCalendarResponseRowsItemSubmissionsItemStatus("rejected"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarSubmitResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarSubmitResponseStatusFromString("generated")
+		val, err := NewListCalendarResponseRowsItemSubmissionsItemStatusFromString("generated")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15498,28 +25476,100 @@ func TestEnumPostV1CalendarSubmitResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarUpdateResponseKind(t *testing.T) {
+func TestEnumSubmitCalendarResponseEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubmitCalendarResponseEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubmitCalendarResponseEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubmitCalendarResponseStatus(t *testing.T) {
+	t.Run("NewFromString_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseStatusFromString("generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseStatus("generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_submitted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseStatusFromString("submitted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseStatus("submitted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_accepted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseStatusFromString("accepted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseStatus("accepted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubmitCalendarResponseStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubmitCalendarResponseStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubmitCalendarResponseStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubmitCalendarResponseStatusFromString("generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdateCalendarResponseKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseKindFromString("custom")
+		val, err := NewUpdateCalendarResponseKindFromString("custom")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseKind("custom"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseKind("custom"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_obligation", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseKindFromString("obligation")
+		val, err := NewUpdateCalendarResponseKindFromString("obligation")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseKind("obligation"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseKind("obligation"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarUpdateResponseKindFromString("invalid_value_that_does_not_exist")
+		_, err := NewUpdateCalendarResponseKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarUpdateResponseKindFromString("custom")
+		val, err := NewUpdateCalendarResponseKindFromString("custom")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15527,42 +25577,71 @@ func TestEnumPostV1CalendarUpdateResponseKind(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1CalendarUpdateResponseSubmissionStatus(t *testing.T) {
+func TestEnumUpdateCalendarResponseSubmissionEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdateCalendarResponseSubmissionEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdateCalendarResponseSubmissionEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdateCalendarResponseSubmissionStatus(t *testing.T) {
 	t.Run("NewFromString_generated", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("generated")
+		val, err := NewUpdateCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseSubmissionStatus("generated"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_submitted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("submitted")
+		val, err := NewUpdateCalendarResponseSubmissionStatusFromString("submitted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseSubmissionStatus("submitted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_accepted", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("accepted")
+		val, err := NewUpdateCalendarResponseSubmissionStatusFromString("accepted")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseSubmissionStatus("accepted"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_rejected", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("rejected")
+		val, err := NewUpdateCalendarResponseSubmissionStatusFromString("rejected")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CalendarUpdateResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdateCalendarResponseSubmissionStatus("rejected"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewUpdateCalendarResponseSubmissionStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CalendarUpdateResponseSubmissionStatusFromString("generated")
+		val, err := NewUpdateCalendarResponseSubmissionStatusFromString("generated")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15570,10 +25649,82 @@ func TestEnumPostV1CalendarUpdateResponseSubmissionStatus(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarCreateResponse(t *testing.T) {
+func TestEnumUpdateCalendarResponseSubmissionsItemEnvironment(t *testing.T) {
+	t.Run("NewFromString_test", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemEnvironment("test"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdateCalendarResponseSubmissionsItemEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdateCalendarResponseSubmissionsItemEnvironmentFromString("test")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdateCalendarResponseSubmissionsItemStatus(t *testing.T) {
+	t.Run("NewFromString_generated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemStatus("generated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_submitted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("submitted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemStatus("submitted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_accepted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("accepted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemStatus("accepted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseSubmissionsItemStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdateCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestExtraPropertiesCreateCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarCreateResponse{}
+		obj := &CreateCalendarResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15587,16 +25738,16 @@ func TestExtraPropertiesPostV1CalendarCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponse
+		var obj *CreateCalendarResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarCreateResponseSubmission(t *testing.T) {
+func TestExtraPropertiesCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarCreateResponseSubmission{}
+		obj := &CreateCalendarResponseSubmission{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15610,16 +25761,16 @@ func TestExtraPropertiesPostV1CalendarCreateResponseSubmission(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarCreateResponseSubmission
+		var obj *CreateCalendarResponseSubmission
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarDeleteResponse(t *testing.T) {
+func TestExtraPropertiesCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarDeleteResponse{}
+		obj := &CreateCalendarResponseSubmissionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15633,16 +25784,16 @@ func TestExtraPropertiesPostV1CalendarDeleteResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDeleteResponse
+		var obj *CreateCalendarResponseSubmissionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarDownloadResponse(t *testing.T) {
+func TestExtraPropertiesDeleteCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarDownloadResponse{}
+		obj := &DeleteCalendarResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15656,16 +25807,16 @@ func TestExtraPropertiesPostV1CalendarDownloadResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarDownloadResponse
+		var obj *DeleteCalendarResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarGetResponse(t *testing.T) {
+func TestExtraPropertiesDownloadCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarGetResponse{}
+		obj := &DownloadCalendarResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15679,16 +25830,16 @@ func TestExtraPropertiesPostV1CalendarGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponse
+		var obj *DownloadCalendarResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarGetResponseSubmission(t *testing.T) {
+func TestExtraPropertiesGetCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarGetResponseSubmission{}
+		obj := &GetCalendarResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15702,16 +25853,16 @@ func TestExtraPropertiesPostV1CalendarGetResponseSubmission(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarGetResponseSubmission
+		var obj *GetCalendarResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarListResponse(t *testing.T) {
+func TestExtraPropertiesGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponse{}
+		obj := &GetCalendarResponseSubmission{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15725,16 +25876,16 @@ func TestExtraPropertiesPostV1CalendarListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponse
+		var obj *GetCalendarResponseSubmission
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponseRowsItem{}
+		obj := &GetCalendarResponseSubmissionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15748,16 +25899,16 @@ func TestExtraPropertiesPostV1CalendarListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItem
+		var obj *GetCalendarResponseSubmissionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarListResponseRowsItemSubmission(t *testing.T) {
+func TestExtraPropertiesListCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarListResponseRowsItemSubmission{}
+		obj := &ListCalendarResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15771,16 +25922,16 @@ func TestExtraPropertiesPostV1CalendarListResponseRowsItemSubmission(t *testing.
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarListResponseRowsItemSubmission
+		var obj *ListCalendarResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarSubmitResponse(t *testing.T) {
+func TestExtraPropertiesListCalendarResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarSubmitResponse{}
+		obj := &ListCalendarResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15794,16 +25945,16 @@ func TestExtraPropertiesPostV1CalendarSubmitResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarSubmitResponse
+		var obj *ListCalendarResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarUpdateResponse(t *testing.T) {
+func TestExtraPropertiesListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarUpdateResponse{}
+		obj := &ListCalendarResponseRowsItemSubmission{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15817,16 +25968,16 @@ func TestExtraPropertiesPostV1CalendarUpdateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponse
+		var obj *ListCalendarResponseRowsItemSubmission
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1CalendarUpdateResponseSubmission(t *testing.T) {
+func TestExtraPropertiesListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1CalendarUpdateResponseSubmission{}
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15840,7 +25991,99 @@ func TestExtraPropertiesPostV1CalendarUpdateResponseSubmission(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1CalendarUpdateResponseSubmission
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubmitCalendarResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesUpdateCalendarResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesUpdateCalendarResponseSubmission(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmission{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesUpdateCalendarResponseSubmissionsItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

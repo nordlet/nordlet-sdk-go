@@ -7,113 +7,114 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1FilesDeleteRequestFieldID = big.NewInt(1 << 0)
+	deleteFilesRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1FilesDeleteRequest struct {
+type DeleteFilesRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FilesDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeleteFilesRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1FilesDeleteRequestFieldID)
+func (d *DeleteFilesRequest) SetID(id string) {
+	d.ID = id
+	d.require(deleteFilesRequestFieldID)
 }
 
-func (p *PostV1FilesDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesDeleteRequest
+func (d *DeleteFilesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeleteFilesRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FilesDeleteRequest(body)
+	*d = DeleteFilesRequest(body)
 	return nil
 }
 
-func (p *PostV1FilesDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesDeleteRequest
+func (d *DeleteFilesRequest) MarshalJSON() ([]byte, error) {
+	type embed DeleteFilesRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FilesGetRequestFieldID = big.NewInt(1 << 0)
+	getFilesRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1FilesGetRequest struct {
+type GetFilesRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FilesGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GetFilesRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1FilesGetRequestFieldID)
+func (g *GetFilesRequest) SetID(id string) {
+	g.ID = id
+	g.require(getFilesRequestFieldID)
 }
 
-func (p *PostV1FilesGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesGetRequest
+func (g *GetFilesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetFilesRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FilesGetRequest(body)
+	*g = GetFilesRequest(body)
 	return nil
 }
 
-func (p *PostV1FilesGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesGetRequest
+func (g *GetFilesRequest) MarshalJSON() ([]byte, error) {
+	type embed GetFilesRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FilesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1FilesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1FilesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1FilesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1FilesListRequestFieldTotals   = big.NewInt(1 << 4)
+	listFilesRequestFieldPage     = big.NewInt(1 << 0)
+	listFilesRequestFieldPageSize = big.NewInt(1 << 1)
+	listFilesRequestFieldSort     = big.NewInt(1 << 2)
+	listFilesRequestFieldFilter   = big.NewInt(1 << 3)
+	listFilesRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1FilesListRequest struct {
-	Page     *int64                              `json:"page,omitempty" url:"-"`
-	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1FilesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1FilesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type ListFilesRequest struct {
+	Page     *int64                        `json:"page,omitempty" url:"-"`
+	PageSize *int64                        `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ListFilesRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ListFilesRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -121,157 +122,74 @@ type PostV1FilesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1FilesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListFilesRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1FilesListRequestFieldPage)
+func (l *ListFilesRequest) SetPage(page *int64) {
+	l.Page = page
+	l.require(listFilesRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1FilesListRequestFieldPageSize)
+func (l *ListFilesRequest) SetPageSize(pageSize *int64) {
+	l.PageSize = pageSize
+	l.require(listFilesRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequest) SetSort(sort []*PostV1FilesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1FilesListRequestFieldSort)
+func (l *ListFilesRequest) SetSort(sort []*ListFilesRequestSortItem) {
+	l.Sort = sort
+	l.require(listFilesRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequest) SetFilter(filter []*PostV1FilesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1FilesListRequestFieldFilter)
+func (l *ListFilesRequest) SetFilter(filter []*ListFilesRequestFilterItem) {
+	l.Filter = filter
+	l.require(listFilesRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1FilesListRequestFieldTotals)
+func (l *ListFilesRequest) SetTotals(totals []string) {
+	l.Totals = totals
+	l.require(listFilesRequestFieldTotals)
 }
 
-func (p *PostV1FilesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesListRequest
+func (l *ListFilesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListFilesRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1FilesListRequest(body)
+	*l = ListFilesRequest(body)
 	return nil
 }
 
-func (p *PostV1FilesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesListRequest
+func (l *ListFilesRequest) MarshalJSON() ([]byte, error) {
+	type embed ListFilesRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1FilesUploadRequestFieldEntity   = big.NewInt(1 << 0)
-	postV1FilesUploadRequestFieldEntityID = big.NewInt(1 << 1)
-	postV1FilesUploadRequestFieldFileName = big.NewInt(1 << 2)
-	postV1FilesUploadRequestFieldMimeType = big.NewInt(1 << 3)
-	postV1FilesUploadRequestFieldContent  = big.NewInt(1 << 4)
+	deleteFilesResponseFieldDeleted = big.NewInt(1 << 0)
 )
 
-type PostV1FilesUploadRequest struct {
-	Entity   string  `json:"entity" url:"-"`
-	EntityID *string `json:"entityId,omitempty" url:"-"`
-	FileName string  `json:"fileName" url:"-"`
-	MimeType string  `json:"mimeType" url:"-"`
-	// Base64-encoded file content
-	Content string `json:"content" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1FilesUploadRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetEntity sets the Entity field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetEntity(entity string) {
-	p.Entity = entity
-	p.require(postV1FilesUploadRequestFieldEntity)
-}
-
-// SetEntityID sets the EntityID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetEntityID(entityID *string) {
-	p.EntityID = entityID
-	p.require(postV1FilesUploadRequestFieldEntityID)
-}
-
-// SetFileName sets the FileName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1FilesUploadRequestFieldFileName)
-}
-
-// SetMimeType sets the MimeType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1FilesUploadRequestFieldMimeType)
-}
-
-// SetContent sets the Content field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetContent(content string) {
-	p.Content = content
-	p.require(postV1FilesUploadRequestFieldContent)
-}
-
-func (p *PostV1FilesUploadRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesUploadRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1FilesUploadRequest(body)
-	return nil
-}
-
-func (p *PostV1FilesUploadRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesUploadRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1FilesDeleteResponseFieldDeleted = big.NewInt(1 << 0)
-)
-
-type PostV1FilesDeleteResponse struct {
+type DeleteFilesResponse struct {
 	Deleted bool `json:"deleted" url:"deleted"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -281,100 +199,100 @@ type PostV1FilesDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesDeleteResponse) GetDeleted() bool {
-	if p == nil {
+func (d *DeleteFilesResponse) GetDeleted() bool {
+	if d == nil {
 		return false
 	}
-	return p.Deleted
+	return d.Deleted
 }
 
-func (p *PostV1FilesDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DeleteFilesResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1FilesDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DeleteFilesResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDeleted sets the Deleted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesDeleteResponse) SetDeleted(deleted bool) {
-	p.Deleted = deleted
-	p.require(postV1FilesDeleteResponseFieldDeleted)
+func (d *DeleteFilesResponse) SetDeleted(deleted bool) {
+	d.Deleted = deleted
+	d.require(deleteFilesResponseFieldDeleted)
 }
 
-func (p *PostV1FilesDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesDeleteResponse
+func (d *DeleteFilesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeleteFilesResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FilesDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DeleteFilesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesDeleteResponse
+func (d *DeleteFilesResponse) MarshalJSON() ([]byte, error) {
+	type embed DeleteFilesResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesDeleteResponse) String() string {
-	if p == nil {
+func (d *DeleteFilesResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1FilesGetResponseFieldID         = big.NewInt(1 << 0)
-	postV1FilesGetResponseFieldEntity     = big.NewInt(1 << 1)
-	postV1FilesGetResponseFieldEntityID   = big.NewInt(1 << 2)
-	postV1FilesGetResponseFieldFileName   = big.NewInt(1 << 3)
-	postV1FilesGetResponseFieldMimeType   = big.NewInt(1 << 4)
-	postV1FilesGetResponseFieldSizeBytes  = big.NewInt(1 << 5)
-	postV1FilesGetResponseFieldSha256     = big.NewInt(1 << 6)
-	postV1FilesGetResponseFieldStorageKey = big.NewInt(1 << 7)
-	postV1FilesGetResponseFieldCreatedAt  = big.NewInt(1 << 8)
-	postV1FilesGetResponseFieldContent    = big.NewInt(1 << 9)
+	getFilesResponseFieldID         = big.NewInt(1 << 0)
+	getFilesResponseFieldEntity     = big.NewInt(1 << 1)
+	getFilesResponseFieldEntityID   = big.NewInt(1 << 2)
+	getFilesResponseFieldFileName   = big.NewInt(1 << 3)
+	getFilesResponseFieldMimeType   = big.NewInt(1 << 4)
+	getFilesResponseFieldSizeBytes  = big.NewInt(1 << 5)
+	getFilesResponseFieldSha256     = big.NewInt(1 << 6)
+	getFilesResponseFieldStorageKey = big.NewInt(1 << 7)
+	getFilesResponseFieldCreatedAt  = big.NewInt(1 << 8)
+	getFilesResponseFieldContent    = big.NewInt(1 << 9)
 )
 
-type PostV1FilesGetResponse struct {
-	ID         string  `json:"id" url:"id"`
-	Entity     string  `json:"entity" url:"entity"`
-	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
-	FileName   string  `json:"fileName" url:"fileName"`
-	MimeType   string  `json:"mimeType" url:"mimeType"`
-	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
-	Sha256     string  `json:"sha256" url:"sha256"`
-	StorageKey string  `json:"storageKey" url:"storageKey"`
-	CreatedAt  string  `json:"createdAt" url:"createdAt"`
-	Content    string  `json:"content" url:"content"`
+type GetFilesResponse struct {
+	ID         string    `json:"id" url:"id"`
+	Entity     string    `json:"entity" url:"entity"`
+	EntityID   *string   `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string    `json:"fileName" url:"fileName"`
+	MimeType   string    `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64     `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string    `json:"sha256" url:"sha256"`
+	StorageKey string    `json:"storageKey" url:"storageKey"`
+	CreatedAt  time.Time `json:"createdAt" url:"createdAt"`
+	Content    string    `json:"content" url:"content"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -383,212 +301,220 @@ type PostV1FilesGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesGetResponse) GetID() string {
-	if p == nil {
+func (g *GetFilesResponse) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1FilesGetResponse) GetEntity() string {
-	if p == nil {
+func (g *GetFilesResponse) GetEntity() string {
+	if g == nil {
 		return ""
 	}
-	return p.Entity
+	return g.Entity
 }
 
-func (p *PostV1FilesGetResponse) GetEntityID() *string {
-	if p == nil {
+func (g *GetFilesResponse) GetEntityID() *string {
+	if g == nil {
 		return nil
 	}
-	return p.EntityID
+	return g.EntityID
 }
 
-func (p *PostV1FilesGetResponse) GetFileName() string {
-	if p == nil {
+func (g *GetFilesResponse) GetFileName() string {
+	if g == nil {
 		return ""
 	}
-	return p.FileName
+	return g.FileName
 }
 
-func (p *PostV1FilesGetResponse) GetMimeType() string {
-	if p == nil {
+func (g *GetFilesResponse) GetMimeType() string {
+	if g == nil {
 		return ""
 	}
-	return p.MimeType
+	return g.MimeType
 }
 
-func (p *PostV1FilesGetResponse) GetSizeBytes() int64 {
-	if p == nil {
+func (g *GetFilesResponse) GetSizeBytes() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return g.SizeBytes
 }
 
-func (p *PostV1FilesGetResponse) GetSha256() string {
-	if p == nil {
+func (g *GetFilesResponse) GetSha256() string {
+	if g == nil {
 		return ""
 	}
-	return p.Sha256
+	return g.Sha256
 }
 
-func (p *PostV1FilesGetResponse) GetStorageKey() string {
-	if p == nil {
+func (g *GetFilesResponse) GetStorageKey() string {
+	if g == nil {
 		return ""
 	}
-	return p.StorageKey
+	return g.StorageKey
 }
 
-func (p *PostV1FilesGetResponse) GetCreatedAt() string {
-	if p == nil {
+func (g *GetFilesResponse) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.CreatedAt
+}
+
+func (g *GetFilesResponse) GetContent() string {
+	if g == nil {
 		return ""
 	}
-	return p.CreatedAt
+	return g.Content
 }
 
-func (p *PostV1FilesGetResponse) GetContent() string {
-	if p == nil {
-		return ""
-	}
-	return p.Content
-}
-
-func (p *PostV1FilesGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GetFilesResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1FilesGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GetFilesResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FilesGetResponseFieldID)
+func (g *GetFilesResponse) SetID(id string) {
+	g.ID = id
+	g.require(getFilesResponseFieldID)
 }
 
 // SetEntity sets the Entity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetEntity(entity string) {
-	p.Entity = entity
-	p.require(postV1FilesGetResponseFieldEntity)
+func (g *GetFilesResponse) SetEntity(entity string) {
+	g.Entity = entity
+	g.require(getFilesResponseFieldEntity)
 }
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetEntityID(entityID *string) {
-	p.EntityID = entityID
-	p.require(postV1FilesGetResponseFieldEntityID)
+func (g *GetFilesResponse) SetEntityID(entityID *string) {
+	g.EntityID = entityID
+	g.require(getFilesResponseFieldEntityID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1FilesGetResponseFieldFileName)
+func (g *GetFilesResponse) SetFileName(fileName string) {
+	g.FileName = fileName
+	g.require(getFilesResponseFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1FilesGetResponseFieldMimeType)
+func (g *GetFilesResponse) SetMimeType(mimeType string) {
+	g.MimeType = mimeType
+	g.require(getFilesResponseFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1FilesGetResponseFieldSizeBytes)
+func (g *GetFilesResponse) SetSizeBytes(sizeBytes int64) {
+	g.SizeBytes = sizeBytes
+	g.require(getFilesResponseFieldSizeBytes)
 }
 
 // SetSha256 sets the Sha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetSha256(sha256 string) {
-	p.Sha256 = sha256
-	p.require(postV1FilesGetResponseFieldSha256)
+func (g *GetFilesResponse) SetSha256(sha256 string) {
+	g.Sha256 = sha256
+	g.require(getFilesResponseFieldSha256)
 }
 
 // SetStorageKey sets the StorageKey field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetStorageKey(storageKey string) {
-	p.StorageKey = storageKey
-	p.require(postV1FilesGetResponseFieldStorageKey)
+func (g *GetFilesResponse) SetStorageKey(storageKey string) {
+	g.StorageKey = storageKey
+	g.require(getFilesResponseFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FilesGetResponseFieldCreatedAt)
+func (g *GetFilesResponse) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(getFilesResponseFieldCreatedAt)
 }
 
 // SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetContent(content string) {
-	p.Content = content
-	p.require(postV1FilesGetResponseFieldContent)
+func (g *GetFilesResponse) SetContent(content string) {
+	g.Content = content
+	g.require(getFilesResponseFieldContent)
 }
 
-func (p *PostV1FilesGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GetFilesResponse) UnmarshalJSON(data []byte) error {
+	type embed GetFilesResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FilesGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GetFilesResponse(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesGetResponse
+func (g *GetFilesResponse) MarshalJSON() ([]byte, error) {
+	type embed GetFilesResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesGetResponse) String() string {
-	if p == nil {
+func (g *GetFilesResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1FilesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1FilesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1FilesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	listFilesRequestFilterItemFieldField = big.NewInt(1 << 0)
+	listFilesRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	listFilesRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1FilesListRequestFilterItem struct {
-	Field string                                 `json:"field" url:"field"`
-	Op    PostV1FilesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1FilesListRequestFilterItemValue `json:"value" url:"value"`
+type ListFilesRequestFilterItem struct {
+	Field string                           `json:"field" url:"field"`
+	Op    ListFilesRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ListFilesRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -597,312 +523,312 @@ type PostV1FilesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesListRequestFilterItem) GetField() string {
-	if p == nil {
+func (l *ListFilesRequestFilterItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1FilesListRequestFilterItem) GetOp() PostV1FilesListRequestFilterItemOp {
-	if p == nil {
+func (l *ListFilesRequestFilterItem) GetOp() ListFilesRequestFilterItemOp {
+	if l == nil {
 		return ""
 	}
-	return p.Op
+	return l.Op
 }
 
-func (p *PostV1FilesListRequestFilterItem) GetValue() *PostV1FilesListRequestFilterItemValue {
-	if p == nil {
+func (l *ListFilesRequestFilterItem) GetValue() *ListFilesRequestFilterItemValue {
+	if l == nil {
 		return nil
 	}
-	return p.Value
+	return l.Value
 }
 
-func (p *PostV1FilesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListFilesRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1FilesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListFilesRequestFilterItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FilesListRequestFilterItemFieldField)
+func (l *ListFilesRequestFilterItem) SetField(field string) {
+	l.Field = field
+	l.require(listFilesRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequestFilterItem) SetOp(op PostV1FilesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1FilesListRequestFilterItemFieldOp)
+func (l *ListFilesRequestFilterItem) SetOp(op ListFilesRequestFilterItemOp) {
+	l.Op = op
+	l.require(listFilesRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequestFilterItem) SetValue(value *PostV1FilesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1FilesListRequestFilterItemFieldValue)
+func (l *ListFilesRequestFilterItem) SetValue(value *ListFilesRequestFilterItemValue) {
+	l.Value = value
+	l.require(listFilesRequestFilterItemFieldValue)
 }
 
-func (p *PostV1FilesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesListRequestFilterItem
+func (l *ListFilesRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListFilesRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FilesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListFilesRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesListRequestFilterItem
+func (l *ListFilesRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ListFilesRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesListRequestFilterItem) String() string {
-	if p == nil {
+func (l *ListFilesRequestFilterItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1FilesListRequestFilterItemOp string
+type ListFilesRequestFilterItemOp string
 
 const (
-	PostV1FilesListRequestFilterItemOpEq       PostV1FilesListRequestFilterItemOp = "eq"
-	PostV1FilesListRequestFilterItemOpNe       PostV1FilesListRequestFilterItemOp = "ne"
-	PostV1FilesListRequestFilterItemOpContains PostV1FilesListRequestFilterItemOp = "contains"
-	PostV1FilesListRequestFilterItemOpGte      PostV1FilesListRequestFilterItemOp = "gte"
-	PostV1FilesListRequestFilterItemOpLte      PostV1FilesListRequestFilterItemOp = "lte"
-	PostV1FilesListRequestFilterItemOpIn       PostV1FilesListRequestFilterItemOp = "in"
+	ListFilesRequestFilterItemOpEq       ListFilesRequestFilterItemOp = "eq"
+	ListFilesRequestFilterItemOpNe       ListFilesRequestFilterItemOp = "ne"
+	ListFilesRequestFilterItemOpContains ListFilesRequestFilterItemOp = "contains"
+	ListFilesRequestFilterItemOpGte      ListFilesRequestFilterItemOp = "gte"
+	ListFilesRequestFilterItemOpLte      ListFilesRequestFilterItemOp = "lte"
+	ListFilesRequestFilterItemOpIn       ListFilesRequestFilterItemOp = "in"
 )
 
-func NewPostV1FilesListRequestFilterItemOpFromString(s string) (PostV1FilesListRequestFilterItemOp, error) {
+func NewListFilesRequestFilterItemOpFromString(s string) (ListFilesRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1FilesListRequestFilterItemOpEq, nil
+		return ListFilesRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1FilesListRequestFilterItemOpNe, nil
+		return ListFilesRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1FilesListRequestFilterItemOpContains, nil
+		return ListFilesRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1FilesListRequestFilterItemOpGte, nil
+		return ListFilesRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1FilesListRequestFilterItemOpLte, nil
+		return ListFilesRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1FilesListRequestFilterItemOpIn, nil
+		return ListFilesRequestFilterItemOpIn, nil
 	}
-	var t PostV1FilesListRequestFilterItemOp
+	var t ListFilesRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FilesListRequestFilterItemOp) Ptr() *PostV1FilesListRequestFilterItemOp {
-	return &p
+func (l ListFilesRequestFilterItemOp) Ptr() *ListFilesRequestFilterItemOp {
+	return &l
 }
 
-type PostV1FilesListRequestFilterItemValue struct {
-	String                                             string
-	Double                                             float64
-	Boolean                                            bool
-	PostV1FilesListRequestFilterItemValueThreeItemList []*PostV1FilesListRequestFilterItemValueThreeItem
+type ListFilesRequestFilterItemValue struct {
+	String                                       string
+	Double                                       float64
+	Boolean                                      bool
+	ListFilesRequestFilterItemValueThreeItemList []*ListFilesRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValue) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValue) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValue) GetBoolean() bool {
+	if l == nil {
 		return false
 	}
-	return p.Boolean
+	return l.Boolean
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) GetPostV1FilesListRequestFilterItemValueThreeItemList() []*PostV1FilesListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValue) GetListFilesRequestFilterItemValueThreeItemList() []*ListFilesRequestFilterItemValueThreeItem {
+	if l == nil {
 		return nil
 	}
-	return p.PostV1FilesListRequestFilterItemValueThreeItemList
+	return l.ListFilesRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (l *ListFilesRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		l.typ = "Boolean"
+		l.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1FilesListRequestFilterItemValueThreeItemList []*PostV1FilesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1FilesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1FilesListRequestFilterItemValueThreeItemList"
-		p.PostV1FilesListRequestFilterItemValueThreeItemList = valuePostV1FilesListRequestFilterItemValueThreeItemList
+	var valueListFilesRequestFilterItemValueThreeItemList []*ListFilesRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueListFilesRequestFilterItemValueThreeItemList); err == nil {
+		l.typ = "ListFilesRequestFilterItemValueThreeItemList"
+		l.ListFilesRequestFilterItemValueThreeItemList = valueListFilesRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1FilesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l ListFilesRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return json.Marshal(l.Boolean)
 	}
-	if p.typ == "PostV1FilesListRequestFilterItemValueThreeItemList" || p.PostV1FilesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1FilesListRequestFilterItemValueThreeItemList)
+	if l.typ == "ListFilesRequestFilterItemValueThreeItemList" || l.ListFilesRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(l.ListFilesRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1FilesListRequestFilterItemValueVisitor interface {
+type ListFilesRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1FilesListRequestFilterItemValueThreeItemList([]*PostV1FilesListRequestFilterItemValueThreeItem) error
+	VisitListFilesRequestFilterItemValueThreeItemList([]*ListFilesRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1FilesListRequestFilterItemValue) Accept(visitor PostV1FilesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *ListFilesRequestFilterItemValue) Accept(visitor ListFilesRequestFilterItemValueVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if l.typ == "Boolean" || l.Boolean != false {
+		return visitor.VisitBoolean(l.Boolean)
 	}
-	if p.typ == "PostV1FilesListRequestFilterItemValueThreeItemList" || p.PostV1FilesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1FilesListRequestFilterItemValueThreeItemList(p.PostV1FilesListRequestFilterItemValueThreeItemList)
+	if l.typ == "ListFilesRequestFilterItemValueThreeItemList" || l.ListFilesRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitListFilesRequestFilterItemValueThreeItemList(l.ListFilesRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1FilesListRequestFilterItemValueThreeItem struct {
+type ListFilesRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1FilesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValueThreeItem) GetString() string {
+	if l == nil {
 		return ""
 	}
-	return p.String
+	return l.String
 }
 
-func (p *PostV1FilesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (l *ListFilesRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if l == nil {
 		return 0
 	}
-	return p.Double
+	return l.Double
 }
 
-func (p *PostV1FilesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (l *ListFilesRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		l.typ = "String"
+		l.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		l.typ = "Double"
+		l.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, l)
 }
 
-func (p PostV1FilesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (l ListFilesRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if l.typ == "String" || l.String != "" {
+		return json.Marshal(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return json.Marshal(l.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
-type PostV1FilesListRequestFilterItemValueThreeItemVisitor interface {
+type ListFilesRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1FilesListRequestFilterItemValueThreeItem) Accept(visitor PostV1FilesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (l *ListFilesRequestFilterItemValueThreeItem) Accept(visitor ListFilesRequestFilterItemValueThreeItemVisitor) error {
+	if l.typ == "String" || l.String != "" {
+		return visitor.VisitString(l.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if l.typ == "Double" || l.Double != 0 {
+		return visitor.VisitDouble(l.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", l)
 }
 
 var (
-	postV1FilesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1FilesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	listFilesRequestSortItemFieldField = big.NewInt(1 << 0)
+	listFilesRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1FilesListRequestSortItem struct {
-	Field string                             `json:"field" url:"field"`
-	Dir   *PostV1FilesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type ListFilesRequestSortItem struct {
+	Field string                       `json:"field" url:"field"`
+	Dir   *ListFilesRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -911,126 +837,126 @@ type PostV1FilesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesListRequestSortItem) GetField() string {
-	if p == nil {
+func (l *ListFilesRequestSortItem) GetField() string {
+	if l == nil {
 		return ""
 	}
-	return p.Field
+	return l.Field
 }
 
-func (p *PostV1FilesListRequestSortItem) GetDir() *PostV1FilesListRequestSortItemDir {
-	if p == nil {
+func (l *ListFilesRequestSortItem) GetDir() *ListFilesRequestSortItemDir {
+	if l == nil {
 		return nil
 	}
-	return p.Dir
+	return l.Dir
 }
 
-func (p *PostV1FilesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListFilesRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1FilesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListFilesRequestSortItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1FilesListRequestSortItemFieldField)
+func (l *ListFilesRequestSortItem) SetField(field string) {
+	l.Field = field
+	l.require(listFilesRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListRequestSortItem) SetDir(dir *PostV1FilesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1FilesListRequestSortItemFieldDir)
+func (l *ListFilesRequestSortItem) SetDir(dir *ListFilesRequestSortItemDir) {
+	l.Dir = dir
+	l.require(listFilesRequestSortItemFieldDir)
 }
 
-func (p *PostV1FilesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesListRequestSortItem
+func (l *ListFilesRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListFilesRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FilesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListFilesRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesListRequestSortItem
+func (l *ListFilesRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ListFilesRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesListRequestSortItem) String() string {
-	if p == nil {
+func (l *ListFilesRequestSortItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
-type PostV1FilesListRequestSortItemDir string
+type ListFilesRequestSortItemDir string
 
 const (
-	PostV1FilesListRequestSortItemDirAsc  PostV1FilesListRequestSortItemDir = "asc"
-	PostV1FilesListRequestSortItemDirDesc PostV1FilesListRequestSortItemDir = "desc"
+	ListFilesRequestSortItemDirAsc  ListFilesRequestSortItemDir = "asc"
+	ListFilesRequestSortItemDirDesc ListFilesRequestSortItemDir = "desc"
 )
 
-func NewPostV1FilesListRequestSortItemDirFromString(s string) (PostV1FilesListRequestSortItemDir, error) {
+func NewListFilesRequestSortItemDirFromString(s string) (ListFilesRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1FilesListRequestSortItemDirAsc, nil
+		return ListFilesRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1FilesListRequestSortItemDirDesc, nil
+		return ListFilesRequestSortItemDirDesc, nil
 	}
-	var t PostV1FilesListRequestSortItemDir
+	var t ListFilesRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1FilesListRequestSortItemDir) Ptr() *PostV1FilesListRequestSortItemDir {
-	return &p
+func (l ListFilesRequestSortItemDir) Ptr() *ListFilesRequestSortItemDir {
+	return &l
 }
 
 var (
-	postV1FilesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1FilesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1FilesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1FilesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1FilesListResponseFieldTotals   = big.NewInt(1 << 4)
+	listFilesResponseFieldRows     = big.NewInt(1 << 0)
+	listFilesResponseFieldPage     = big.NewInt(1 << 1)
+	listFilesResponseFieldPageSize = big.NewInt(1 << 2)
+	listFilesResponseFieldTotal    = big.NewInt(1 << 3)
+	listFilesResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1FilesListResponse struct {
-	Rows     []*PostV1FilesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                              `json:"page" url:"page"`
-	PageSize int64                              `json:"pageSize" url:"pageSize"`
-	Total    int64                              `json:"total" url:"total"`
-	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+type ListFilesResponse struct {
+	Rows     []*ListFilesResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                        `json:"page" url:"page"`
+	PageSize int64                        `json:"pageSize" url:"pageSize"`
+	Total    int64                        `json:"total" url:"total"`
+	Totals   map[string]string            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1039,154 +965,154 @@ type PostV1FilesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesListResponse) GetRows() []*PostV1FilesListResponseRowsItem {
-	if p == nil {
+func (l *ListFilesResponse) GetRows() []*ListFilesResponseRowsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Rows
+	return l.Rows
 }
 
-func (p *PostV1FilesListResponse) GetPage() int64 {
-	if p == nil {
+func (l *ListFilesResponse) GetPage() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Page
+	return l.Page
 }
 
-func (p *PostV1FilesListResponse) GetPageSize() int64 {
-	if p == nil {
+func (l *ListFilesResponse) GetPageSize() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.PageSize
+	return l.PageSize
 }
 
-func (p *PostV1FilesListResponse) GetTotal() int64 {
-	if p == nil {
+func (l *ListFilesResponse) GetTotal() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.Total
+	return l.Total
 }
 
-func (p *PostV1FilesListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (l *ListFilesResponse) GetTotals() map[string]string {
+	if l == nil {
 		return nil
 	}
-	return p.Totals
+	return l.Totals
 }
 
-func (p *PostV1FilesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListFilesResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1FilesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListFilesResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponse) SetRows(rows []*PostV1FilesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1FilesListResponseFieldRows)
+func (l *ListFilesResponse) SetRows(rows []*ListFilesResponseRowsItem) {
+	l.Rows = rows
+	l.require(listFilesResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1FilesListResponseFieldPage)
+func (l *ListFilesResponse) SetPage(page int64) {
+	l.Page = page
+	l.require(listFilesResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1FilesListResponseFieldPageSize)
+func (l *ListFilesResponse) SetPageSize(pageSize int64) {
+	l.PageSize = pageSize
+	l.require(listFilesResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1FilesListResponseFieldTotal)
+func (l *ListFilesResponse) SetTotal(total int64) {
+	l.Total = total
+	l.require(listFilesResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1FilesListResponseFieldTotals)
+func (l *ListFilesResponse) SetTotals(totals map[string]string) {
+	l.Totals = totals
+	l.require(listFilesResponseFieldTotals)
 }
 
-func (p *PostV1FilesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesListResponse
+func (l *ListFilesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListFilesResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1FilesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListFilesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesListResponse
+func (l *ListFilesResponse) MarshalJSON() ([]byte, error) {
+	type embed ListFilesResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesListResponse) String() string {
-	if p == nil {
+func (l *ListFilesResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1FilesListResponseRowsItemFieldID         = big.NewInt(1 << 0)
-	postV1FilesListResponseRowsItemFieldEntity     = big.NewInt(1 << 1)
-	postV1FilesListResponseRowsItemFieldEntityID   = big.NewInt(1 << 2)
-	postV1FilesListResponseRowsItemFieldFileName   = big.NewInt(1 << 3)
-	postV1FilesListResponseRowsItemFieldMimeType   = big.NewInt(1 << 4)
-	postV1FilesListResponseRowsItemFieldSizeBytes  = big.NewInt(1 << 5)
-	postV1FilesListResponseRowsItemFieldSha256     = big.NewInt(1 << 6)
-	postV1FilesListResponseRowsItemFieldStorageKey = big.NewInt(1 << 7)
-	postV1FilesListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
+	listFilesResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	listFilesResponseRowsItemFieldEntity     = big.NewInt(1 << 1)
+	listFilesResponseRowsItemFieldEntityID   = big.NewInt(1 << 2)
+	listFilesResponseRowsItemFieldFileName   = big.NewInt(1 << 3)
+	listFilesResponseRowsItemFieldMimeType   = big.NewInt(1 << 4)
+	listFilesResponseRowsItemFieldSizeBytes  = big.NewInt(1 << 5)
+	listFilesResponseRowsItemFieldSha256     = big.NewInt(1 << 6)
+	listFilesResponseRowsItemFieldStorageKey = big.NewInt(1 << 7)
+	listFilesResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
 )
 
-type PostV1FilesListResponseRowsItem struct {
-	ID         string  `json:"id" url:"id"`
-	Entity     string  `json:"entity" url:"entity"`
-	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
-	FileName   string  `json:"fileName" url:"fileName"`
-	MimeType   string  `json:"mimeType" url:"mimeType"`
-	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
-	Sha256     string  `json:"sha256" url:"sha256"`
-	StorageKey string  `json:"storageKey" url:"storageKey"`
-	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+type ListFilesResponseRowsItem struct {
+	ID         string    `json:"id" url:"id"`
+	Entity     string    `json:"entity" url:"entity"`
+	EntityID   *string   `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string    `json:"fileName" url:"fileName"`
+	MimeType   string    `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64     `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string    `json:"sha256" url:"sha256"`
+	StorageKey string    `json:"storageKey" url:"storageKey"`
+	CreatedAt  time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1195,210 +1121,218 @@ type PostV1FilesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetID() string {
+	if l == nil {
 		return ""
 	}
-	return p.ID
+	return l.ID
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetEntity() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetEntity() string {
+	if l == nil {
 		return ""
 	}
-	return p.Entity
+	return l.Entity
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetEntityID() *string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetEntityID() *string {
+	if l == nil {
 		return nil
 	}
-	return p.EntityID
+	return l.EntityID
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetFileName() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetFileName() string {
+	if l == nil {
 		return ""
 	}
-	return p.FileName
+	return l.FileName
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetMimeType() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetMimeType() string {
+	if l == nil {
 		return ""
 	}
-	return p.MimeType
+	return l.MimeType
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetSizeBytes() int64 {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetSizeBytes() int64 {
+	if l == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return l.SizeBytes
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetSha256() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetSha256() string {
+	if l == nil {
 		return ""
 	}
-	return p.Sha256
+	return l.Sha256
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetStorageKey() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetStorageKey() string {
+	if l == nil {
 		return ""
 	}
-	return p.StorageKey
+	return l.StorageKey
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (l *ListFilesResponseRowsItem) GetCreatedAt() time.Time {
+	if l == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return l.CreatedAt
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.extraProperties
+	return l.extraProperties
 }
 
-func (p *PostV1FilesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *ListFilesResponseRowsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1FilesListResponseRowsItemFieldID)
+func (l *ListFilesResponseRowsItem) SetID(id string) {
+	l.ID = id
+	l.require(listFilesResponseRowsItemFieldID)
 }
 
 // SetEntity sets the Entity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetEntity(entity string) {
-	p.Entity = entity
-	p.require(postV1FilesListResponseRowsItemFieldEntity)
+func (l *ListFilesResponseRowsItem) SetEntity(entity string) {
+	l.Entity = entity
+	l.require(listFilesResponseRowsItemFieldEntity)
 }
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetEntityID(entityID *string) {
-	p.EntityID = entityID
-	p.require(postV1FilesListResponseRowsItemFieldEntityID)
+func (l *ListFilesResponseRowsItem) SetEntityID(entityID *string) {
+	l.EntityID = entityID
+	l.require(listFilesResponseRowsItemFieldEntityID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1FilesListResponseRowsItemFieldFileName)
+func (l *ListFilesResponseRowsItem) SetFileName(fileName string) {
+	l.FileName = fileName
+	l.require(listFilesResponseRowsItemFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1FilesListResponseRowsItemFieldMimeType)
+func (l *ListFilesResponseRowsItem) SetMimeType(mimeType string) {
+	l.MimeType = mimeType
+	l.require(listFilesResponseRowsItemFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1FilesListResponseRowsItemFieldSizeBytes)
+func (l *ListFilesResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	l.SizeBytes = sizeBytes
+	l.require(listFilesResponseRowsItemFieldSizeBytes)
 }
 
 // SetSha256 sets the Sha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetSha256(sha256 string) {
-	p.Sha256 = sha256
-	p.require(postV1FilesListResponseRowsItemFieldSha256)
+func (l *ListFilesResponseRowsItem) SetSha256(sha256 string) {
+	l.Sha256 = sha256
+	l.require(listFilesResponseRowsItemFieldSha256)
 }
 
 // SetStorageKey sets the StorageKey field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetStorageKey(storageKey string) {
-	p.StorageKey = storageKey
-	p.require(postV1FilesListResponseRowsItemFieldStorageKey)
+func (l *ListFilesResponseRowsItem) SetStorageKey(storageKey string) {
+	l.StorageKey = storageKey
+	l.require(listFilesResponseRowsItemFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FilesListResponseRowsItemFieldCreatedAt)
+func (l *ListFilesResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	l.CreatedAt = createdAt
+	l.require(listFilesResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1FilesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (l *ListFilesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ListFilesResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FilesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = ListFilesResponseRowsItem(unmarshaler.embed)
+	l.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesListResponseRowsItem
+func (l *ListFilesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ListFilesResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*l),
+		CreatedAt: internal.NewDateTime(l.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesListResponseRowsItem) String() string {
-	if p == nil {
+func (l *ListFilesResponseRowsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1FilesUploadResponseFieldID         = big.NewInt(1 << 0)
-	postV1FilesUploadResponseFieldEntity     = big.NewInt(1 << 1)
-	postV1FilesUploadResponseFieldEntityID   = big.NewInt(1 << 2)
-	postV1FilesUploadResponseFieldFileName   = big.NewInt(1 << 3)
-	postV1FilesUploadResponseFieldMimeType   = big.NewInt(1 << 4)
-	postV1FilesUploadResponseFieldSizeBytes  = big.NewInt(1 << 5)
-	postV1FilesUploadResponseFieldSha256     = big.NewInt(1 << 6)
-	postV1FilesUploadResponseFieldStorageKey = big.NewInt(1 << 7)
-	postV1FilesUploadResponseFieldCreatedAt  = big.NewInt(1 << 8)
+	uploadFilesResponseFieldID         = big.NewInt(1 << 0)
+	uploadFilesResponseFieldEntity     = big.NewInt(1 << 1)
+	uploadFilesResponseFieldEntityID   = big.NewInt(1 << 2)
+	uploadFilesResponseFieldFileName   = big.NewInt(1 << 3)
+	uploadFilesResponseFieldMimeType   = big.NewInt(1 << 4)
+	uploadFilesResponseFieldSizeBytes  = big.NewInt(1 << 5)
+	uploadFilesResponseFieldSha256     = big.NewInt(1 << 6)
+	uploadFilesResponseFieldStorageKey = big.NewInt(1 << 7)
+	uploadFilesResponseFieldCreatedAt  = big.NewInt(1 << 8)
 )
 
-type PostV1FilesUploadResponse struct {
-	ID         string  `json:"id" url:"id"`
-	Entity     string  `json:"entity" url:"entity"`
-	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
-	FileName   string  `json:"fileName" url:"fileName"`
-	MimeType   string  `json:"mimeType" url:"mimeType"`
-	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
-	Sha256     string  `json:"sha256" url:"sha256"`
-	StorageKey string  `json:"storageKey" url:"storageKey"`
-	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+type UploadFilesResponse struct {
+	ID         string    `json:"id" url:"id"`
+	Entity     string    `json:"entity" url:"entity"`
+	EntityID   *string   `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string    `json:"fileName" url:"fileName"`
+	MimeType   string    `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64     `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string    `json:"sha256" url:"sha256"`
+	StorageKey string    `json:"storageKey" url:"storageKey"`
+	CreatedAt  time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1407,184 +1341,276 @@ type PostV1FilesUploadResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1FilesUploadResponse) GetID() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetID() string {
+	if u == nil {
 		return ""
 	}
-	return p.ID
+	return u.ID
 }
 
-func (p *PostV1FilesUploadResponse) GetEntity() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetEntity() string {
+	if u == nil {
 		return ""
 	}
-	return p.Entity
+	return u.Entity
 }
 
-func (p *PostV1FilesUploadResponse) GetEntityID() *string {
-	if p == nil {
+func (u *UploadFilesResponse) GetEntityID() *string {
+	if u == nil {
 		return nil
 	}
-	return p.EntityID
+	return u.EntityID
 }
 
-func (p *PostV1FilesUploadResponse) GetFileName() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetFileName() string {
+	if u == nil {
 		return ""
 	}
-	return p.FileName
+	return u.FileName
 }
 
-func (p *PostV1FilesUploadResponse) GetMimeType() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetMimeType() string {
+	if u == nil {
 		return ""
 	}
-	return p.MimeType
+	return u.MimeType
 }
 
-func (p *PostV1FilesUploadResponse) GetSizeBytes() int64 {
-	if p == nil {
+func (u *UploadFilesResponse) GetSizeBytes() int64 {
+	if u == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return u.SizeBytes
 }
 
-func (p *PostV1FilesUploadResponse) GetSha256() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetSha256() string {
+	if u == nil {
 		return ""
 	}
-	return p.Sha256
+	return u.Sha256
 }
 
-func (p *PostV1FilesUploadResponse) GetStorageKey() string {
-	if p == nil {
+func (u *UploadFilesResponse) GetStorageKey() string {
+	if u == nil {
 		return ""
 	}
-	return p.StorageKey
+	return u.StorageKey
 }
 
-func (p *PostV1FilesUploadResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (u *UploadFilesResponse) GetCreatedAt() time.Time {
+	if u == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return u.CreatedAt
 }
 
-func (p *PostV1FilesUploadResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (u *UploadFilesResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
 		return nil
 	}
-	return p.extraProperties
+	return u.extraProperties
 }
 
-func (p *PostV1FilesUploadResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (u *UploadFilesResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	u.explicitFields.Or(u.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1FilesUploadResponseFieldID)
+func (u *UploadFilesResponse) SetID(id string) {
+	u.ID = id
+	u.require(uploadFilesResponseFieldID)
 }
 
 // SetEntity sets the Entity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetEntity(entity string) {
-	p.Entity = entity
-	p.require(postV1FilesUploadResponseFieldEntity)
+func (u *UploadFilesResponse) SetEntity(entity string) {
+	u.Entity = entity
+	u.require(uploadFilesResponseFieldEntity)
 }
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetEntityID(entityID *string) {
-	p.EntityID = entityID
-	p.require(postV1FilesUploadResponseFieldEntityID)
+func (u *UploadFilesResponse) SetEntityID(entityID *string) {
+	u.EntityID = entityID
+	u.require(uploadFilesResponseFieldEntityID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1FilesUploadResponseFieldFileName)
+func (u *UploadFilesResponse) SetFileName(fileName string) {
+	u.FileName = fileName
+	u.require(uploadFilesResponseFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1FilesUploadResponseFieldMimeType)
+func (u *UploadFilesResponse) SetMimeType(mimeType string) {
+	u.MimeType = mimeType
+	u.require(uploadFilesResponseFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1FilesUploadResponseFieldSizeBytes)
+func (u *UploadFilesResponse) SetSizeBytes(sizeBytes int64) {
+	u.SizeBytes = sizeBytes
+	u.require(uploadFilesResponseFieldSizeBytes)
 }
 
 // SetSha256 sets the Sha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetSha256(sha256 string) {
-	p.Sha256 = sha256
-	p.require(postV1FilesUploadResponseFieldSha256)
+func (u *UploadFilesResponse) SetSha256(sha256 string) {
+	u.Sha256 = sha256
+	u.require(uploadFilesResponseFieldSha256)
 }
 
 // SetStorageKey sets the StorageKey field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetStorageKey(storageKey string) {
-	p.StorageKey = storageKey
-	p.require(postV1FilesUploadResponseFieldStorageKey)
+func (u *UploadFilesResponse) SetStorageKey(storageKey string) {
+	u.StorageKey = storageKey
+	u.require(uploadFilesResponseFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1FilesUploadResponseFieldCreatedAt)
+func (u *UploadFilesResponse) SetCreatedAt(createdAt time.Time) {
+	u.CreatedAt = createdAt
+	u.require(uploadFilesResponseFieldCreatedAt)
 }
 
-func (p *PostV1FilesUploadResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1FilesUploadResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (u *UploadFilesResponse) UnmarshalJSON(data []byte) error {
+	type embed UploadFilesResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1FilesUploadResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*u = UploadFilesResponse(unmarshaler.embed)
+	u.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1FilesUploadResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1FilesUploadResponse
+func (u *UploadFilesResponse) MarshalJSON() ([]byte, error) {
+	type embed UploadFilesResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*u),
+		CreatedAt: internal.NewDateTime(u.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1FilesUploadResponse) String() string {
-	if p == nil {
+func (u *UploadFilesResponse) String() string {
+	if u == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(u); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	uploadFilesRequestFieldEntity   = big.NewInt(1 << 0)
+	uploadFilesRequestFieldEntityID = big.NewInt(1 << 1)
+	uploadFilesRequestFieldFileName = big.NewInt(1 << 2)
+	uploadFilesRequestFieldMimeType = big.NewInt(1 << 3)
+	uploadFilesRequestFieldContent  = big.NewInt(1 << 4)
+)
+
+type UploadFilesRequest struct {
+	Entity   string  `json:"entity" url:"-"`
+	EntityID *string `json:"entityId,omitempty" url:"-"`
+	FileName string  `json:"fileName" url:"-"`
+	// Stored as the bare media type; only PNG, JPEG, GIF, WebP and PDF files are shown in the browser, every other type is downloaded
+	MimeType string `json:"mimeType" url:"-"`
+	// Base64-encoded file content
+	Content string `json:"content" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UploadFilesRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetEntity sets the Entity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadFilesRequest) SetEntity(entity string) {
+	u.Entity = entity
+	u.require(uploadFilesRequestFieldEntity)
+}
+
+// SetEntityID sets the EntityID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadFilesRequest) SetEntityID(entityID *string) {
+	u.EntityID = entityID
+	u.require(uploadFilesRequestFieldEntityID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadFilesRequest) SetFileName(fileName string) {
+	u.FileName = fileName
+	u.require(uploadFilesRequestFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadFilesRequest) SetMimeType(mimeType string) {
+	u.MimeType = mimeType
+	u.require(uploadFilesRequestFieldMimeType)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadFilesRequest) SetContent(content string) {
+	u.Content = content
+	u.require(uploadFilesRequestFieldContent)
+}
+
+func (u *UploadFilesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UploadFilesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UploadFilesRequest(body)
+	return nil
+}
+
+func (u *UploadFilesRequest) MarshalJSON() ([]byte, error) {
+	type embed UploadFilesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

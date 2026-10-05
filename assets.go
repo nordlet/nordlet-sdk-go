@@ -7,285 +7,377 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1AssetsAssetsCreateRequestFieldGroupID               = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateRequestFieldCode                  = big.NewInt(1 << 1)
-	postV1AssetsAssetsCreateRequestFieldName                  = big.NewInt(1 << 2)
-	postV1AssetsAssetsCreateRequestFieldAcquisitionDate       = big.NewInt(1 << 3)
-	postV1AssetsAssetsCreateRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
-	postV1AssetsAssetsCreateRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
-	postV1AssetsAssetsCreateRequestFieldSalvageValue          = big.NewInt(1 << 6)
-	postV1AssetsAssetsCreateRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
-	postV1AssetsAssetsCreateRequestFieldNotes                 = big.NewInt(1 << 8)
-	postV1AssetsAssetsCreateRequestFieldDocuments             = big.NewInt(1 << 9)
+	assetsCreateAssetsRequestFieldGroupID               = big.NewInt(1 << 0)
+	assetsCreateAssetsRequestFieldCode                  = big.NewInt(1 << 1)
+	assetsCreateAssetsRequestFieldName                  = big.NewInt(1 << 2)
+	assetsCreateAssetsRequestFieldAcquisitionDate       = big.NewInt(1 << 3)
+	assetsCreateAssetsRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
+	assetsCreateAssetsRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
+	assetsCreateAssetsRequestFieldSalvageValue          = big.NewInt(1 << 6)
+	assetsCreateAssetsRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
+	assetsCreateAssetsRequestFieldNotes                 = big.NewInt(1 << 8)
+	assetsCreateAssetsRequestFieldDocuments             = big.NewInt(1 << 9)
 )
 
-type PostV1AssetsAssetsCreateRequest struct {
-	GroupID               string                                          `json:"groupId" url:"-"`
-	Code                  string                                          `json:"code" url:"-"`
-	Name                  string                                          `json:"name" url:"-"`
-	AcquisitionDate       string                                          `json:"acquisitionDate" url:"-"`
-	DepreciationStartDate *string                                         `json:"depreciationStartDate,omitempty" url:"-"`
-	AcquisitionCost       string                                          `json:"acquisitionCost" url:"-"`
-	SalvageValue          *string                                         `json:"salvageValue,omitempty" url:"-"`
-	UsefulLifeMonths      *int64                                          `json:"usefulLifeMonths,omitempty" url:"-"`
-	Notes                 *string                                         `json:"notes,omitempty" url:"-"`
-	Documents             []*PostV1AssetsAssetsCreateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+type AssetsCreateAssetsRequest struct {
+	GroupID               string                                    `json:"groupId" url:"-"`
+	Code                  string                                    `json:"code" url:"-"`
+	Name                  string                                    `json:"name" url:"-"`
+	AcquisitionDate       time.Time                                 `json:"acquisitionDate" url:"-" format:"date"`
+	DepreciationStartDate *time.Time                                `json:"depreciationStartDate,omitempty" url:"-" format:"date"`
+	AcquisitionCost       string                                    `json:"acquisitionCost" url:"-"`
+	SalvageValue          *string                                   `json:"salvageValue,omitempty" url:"-"`
+	UsefulLifeMonths      *int64                                    `json:"usefulLifeMonths,omitempty" url:"-"`
+	Notes                 *string                                   `json:"notes,omitempty" url:"-"`
+	Documents             []*AssetsCreateAssetsRequestDocumentsItem `json:"documents,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsCreateAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsCreateRequestFieldGroupID)
+func (a *AssetsCreateAssetsRequest) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsCreateAssetsRequestFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsCreateRequestFieldCode)
+func (a *AssetsCreateAssetsRequest) SetCode(code string) {
+	a.Code = code
+	a.require(assetsCreateAssetsRequestFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsCreateRequestFieldName)
+func (a *AssetsCreateAssetsRequest) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateAssetsRequestFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsCreateRequestFieldAcquisitionDate)
+func (a *AssetsCreateAssetsRequest) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsCreateAssetsRequestFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetDepreciationStartDate(depreciationStartDate *string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsCreateRequestFieldDepreciationStartDate)
+func (a *AssetsCreateAssetsRequest) SetDepreciationStartDate(depreciationStartDate *time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsCreateAssetsRequestFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsCreateRequestFieldAcquisitionCost)
+func (a *AssetsCreateAssetsRequest) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsCreateAssetsRequestFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetSalvageValue(salvageValue *string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsCreateRequestFieldSalvageValue)
+func (a *AssetsCreateAssetsRequest) SetSalvageValue(salvageValue *string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsCreateAssetsRequestFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsCreateRequestFieldUsefulLifeMonths)
+func (a *AssetsCreateAssetsRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsCreateAssetsRequestFieldUsefulLifeMonths)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsCreateRequestFieldNotes)
+func (a *AssetsCreateAssetsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsCreateAssetsRequestFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequest) SetDocuments(documents []*PostV1AssetsAssetsCreateRequestDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsCreateRequestFieldDocuments)
+func (a *AssetsCreateAssetsRequest) SetDocuments(documents []*AssetsCreateAssetsRequestDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsCreateAssetsRequestFieldDocuments)
 }
 
-func (p *PostV1AssetsAssetsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsCreateRequest
+func (a *AssetsCreateAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsCreateRequest(body)
+	*a = AssetsCreateAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsCreateRequest
+func (a *AssetsCreateAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateAssetsRequest
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewOptionalDate(a.DepreciationStartDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsGetRequestFieldID = big.NewInt(1 << 0)
+	assetsDisposeAssetsRequestFieldID       = big.NewInt(1 << 0)
+	assetsDisposeAssetsRequestFieldDate     = big.NewInt(1 << 1)
+	assetsDisposeAssetsRequestFieldReason   = big.NewInt(1 << 2)
+	assetsDisposeAssetsRequestFieldProceeds = big.NewInt(1 << 3)
+	assetsDisposeAssetsRequestFieldNotes    = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsAssetsGetRequest struct {
+type AssetsDisposeAssetsRequest struct {
+	ID     string                           `json:"id" url:"-"`
+	Date   time.Time                        `json:"date" url:"-" format:"date"`
+	Reason AssetsDisposeAssetsRequestReason `json:"reason" url:"-"`
+	// Sale price excluding VAT; 0 when scrapped or written off
+	Proceeds *string `json:"proceeds,omitempty" url:"-"`
+	Notes    *string `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AssetsDisposeAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetID(id string) {
+	a.ID = id
+	a.require(assetsDisposeAssetsRequestFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetDate(date time.Time) {
+	a.Date = date
+	a.require(assetsDisposeAssetsRequestFieldDate)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetReason(reason AssetsDisposeAssetsRequestReason) {
+	a.Reason = reason
+	a.require(assetsDisposeAssetsRequestFieldReason)
+}
+
+// SetProceeds sets the Proceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetProceeds(proceeds *string) {
+	a.Proceeds = proceeds
+	a.require(assetsDisposeAssetsRequestFieldProceeds)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsDisposeAssetsRequestFieldNotes)
+}
+
+func (a *AssetsDisposeAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsDisposeAssetsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AssetsDisposeAssetsRequest(body)
+	return nil
+}
+
+func (a *AssetsDisposeAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsDisposeAssetsRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*a),
+		Date:  internal.NewDate(a.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	assetsGetAssetsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type AssetsGetAssetsRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsGetAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsGetRequestFieldID)
+func (a *AssetsGetAssetsRequest) SetID(id string) {
+	a.ID = id
+	a.require(assetsGetAssetsRequestFieldID)
 }
 
-func (p *PostV1AssetsAssetsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsGetRequest
+func (a *AssetsGetAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsGetAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsGetRequest(body)
+	*a = AssetsGetAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsGetRequest
+func (a *AssetsGetAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsGetAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsInputVatRequestFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsInputVatRequestFieldInputVatAmount            = big.NewInt(1 << 1)
-	postV1AssetsAssetsInputVatRequestFieldInputVatFirstUseDate      = big.NewInt(1 << 2)
-	postV1AssetsAssetsInputVatRequestFieldInputVatDeductiblePercent = big.NewInt(1 << 3)
-	postV1AssetsAssetsInputVatRequestFieldInputVatRealEstate        = big.NewInt(1 << 4)
-	postV1AssetsAssetsInputVatRequestFieldInputVatUseChanges        = big.NewInt(1 << 5)
+	assetsInputVatAssetsRequestFieldID                        = big.NewInt(1 << 0)
+	assetsInputVatAssetsRequestFieldInputVatAmount            = big.NewInt(1 << 1)
+	assetsInputVatAssetsRequestFieldInputVatFirstUseDate      = big.NewInt(1 << 2)
+	assetsInputVatAssetsRequestFieldInputVatDeductiblePercent = big.NewInt(1 << 3)
+	assetsInputVatAssetsRequestFieldInputVatRealEstate        = big.NewInt(1 << 4)
+	assetsInputVatAssetsRequestFieldInputVatUseChanges        = big.NewInt(1 << 5)
 )
 
-type PostV1AssetsAssetsInputVatRequest struct {
-	ID                        string                                                     `json:"id" url:"-"`
-	InputVatAmount            *string                                                    `json:"inputVatAmount,omitempty" url:"-"`
-	InputVatFirstUseDate      *string                                                    `json:"inputVatFirstUseDate,omitempty" url:"-"`
-	InputVatDeductiblePercent *string                                                    `json:"inputVatDeductiblePercent,omitempty" url:"-"`
-	InputVatRealEstate        bool                                                       `json:"inputVatRealEstate" url:"-"`
-	InputVatUseChanges        []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem `json:"inputVatUseChanges" url:"-"`
+type AssetsInputVatAssetsRequest struct {
+	ID                        string                                               `json:"id" url:"-"`
+	InputVatAmount            *string                                              `json:"inputVatAmount,omitempty" url:"-"`
+	InputVatFirstUseDate      *time.Time                                           `json:"inputVatFirstUseDate,omitempty" url:"-" format:"date"`
+	InputVatDeductiblePercent *string                                              `json:"inputVatDeductiblePercent,omitempty" url:"-"`
+	InputVatRealEstate        bool                                                 `json:"inputVatRealEstate" url:"-"`
+	InputVatUseChanges        []*AssetsInputVatAssetsRequestInputVatUseChangesItem `json:"inputVatUseChanges" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsInputVatRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsInputVatAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsInputVatRequestFieldID)
+func (a *AssetsInputVatAssetsRequest) SetID(id string) {
+	a.ID = id
+	a.require(assetsInputVatAssetsRequestFieldID)
 }
 
 // SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatAmount)
+func (a *AssetsInputVatAssetsRequest) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsInputVatAssetsRequestFieldInputVatAmount)
 }
 
 // SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatFirstUseDate)
+func (a *AssetsInputVatAssetsRequest) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsInputVatAssetsRequestFieldInputVatFirstUseDate)
 }
 
 // SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatDeductiblePercent)
+func (a *AssetsInputVatAssetsRequest) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsInputVatAssetsRequestFieldInputVatDeductiblePercent)
 }
 
 // SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatRealEstate)
+func (a *AssetsInputVatAssetsRequest) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsInputVatAssetsRequestFieldInputVatRealEstate)
 }
 
 // SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatUseChanges)
+func (a *AssetsInputVatAssetsRequest) SetInputVatUseChanges(inputVatUseChanges []*AssetsInputVatAssetsRequestInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsInputVatAssetsRequestFieldInputVatUseChanges)
 }
 
-func (p *PostV1AssetsAssetsInputVatRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsInputVatRequest
+func (a *AssetsInputVatAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsInputVatAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsInputVatRequest(body)
+	*a = AssetsInputVatAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsInputVatRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsInputVatRequest
+func (a *AssetsInputVatAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsInputVatAssetsRequest
 	var marshaler = struct {
 		embed
+		InputVatFirstUseDate *internal.Date `json:"inputVatFirstUseDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                embed(*a),
+		InputVatFirstUseDate: internal.NewOptionalDate(a.InputVatFirstUseDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AssetsAssetsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AssetsAssetsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AssetsAssetsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AssetsAssetsListRequestFieldTotals   = big.NewInt(1 << 4)
+	assetsListAssetsRequestFieldPage     = big.NewInt(1 << 0)
+	assetsListAssetsRequestFieldPageSize = big.NewInt(1 << 1)
+	assetsListAssetsRequestFieldSort     = big.NewInt(1 << 2)
+	assetsListAssetsRequestFieldFilter   = big.NewInt(1 << 3)
+	assetsListAssetsRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsAssetsListRequest struct {
-	Page     *int64                                     `json:"page,omitempty" url:"-"`
-	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AssetsAssetsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AssetsAssetsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type AssetsListAssetsRequest struct {
+	Page     *int64                               `json:"page,omitempty" url:"-"`
+	PageSize *int64                               `json:"pageSize,omitempty" url:"-"`
+	Sort     []*AssetsListAssetsRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*AssetsListAssetsRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -293,293 +385,299 @@ type PostV1AssetsAssetsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AssetsAssetsListRequestFieldPage)
+func (a *AssetsListAssetsRequest) SetPage(page *int64) {
+	a.Page = page
+	a.require(assetsListAssetsRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AssetsAssetsListRequestFieldPageSize)
+func (a *AssetsListAssetsRequest) SetPageSize(pageSize *int64) {
+	a.PageSize = pageSize
+	a.require(assetsListAssetsRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequest) SetSort(sort []*PostV1AssetsAssetsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AssetsAssetsListRequestFieldSort)
+func (a *AssetsListAssetsRequest) SetSort(sort []*AssetsListAssetsRequestSortItem) {
+	a.Sort = sort
+	a.require(assetsListAssetsRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequest) SetFilter(filter []*PostV1AssetsAssetsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AssetsAssetsListRequestFieldFilter)
+func (a *AssetsListAssetsRequest) SetFilter(filter []*AssetsListAssetsRequestFilterItem) {
+	a.Filter = filter
+	a.require(assetsListAssetsRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AssetsAssetsListRequestFieldTotals)
+func (a *AssetsListAssetsRequest) SetTotals(totals []string) {
+	a.Totals = totals
+	a.require(assetsListAssetsRequestFieldTotals)
 }
 
-func (p *PostV1AssetsAssetsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListRequest
+func (a *AssetsListAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListRequest(body)
+	*a = AssetsListAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListRequest
+func (a *AssetsListAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsModernizeRequestFieldID              = big.NewInt(1 << 0)
-	postV1AssetsAssetsModernizeRequestFieldDate            = big.NewInt(1 << 1)
-	postV1AssetsAssetsModernizeRequestFieldAmount          = big.NewInt(1 << 2)
-	postV1AssetsAssetsModernizeRequestFieldAddedLifeMonths = big.NewInt(1 << 3)
-	postV1AssetsAssetsModernizeRequestFieldNotes           = big.NewInt(1 << 4)
+	assetsModernizeAssetsRequestFieldID              = big.NewInt(1 << 0)
+	assetsModernizeAssetsRequestFieldDate            = big.NewInt(1 << 1)
+	assetsModernizeAssetsRequestFieldAmount          = big.NewInt(1 << 2)
+	assetsModernizeAssetsRequestFieldAddedLifeMonths = big.NewInt(1 << 3)
+	assetsModernizeAssetsRequestFieldNotes           = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsAssetsModernizeRequest struct {
-	ID              string  `json:"id" url:"-"`
-	Date            string  `json:"date" url:"-"`
-	Amount          string  `json:"amount" url:"-"`
-	AddedLifeMonths *int64  `json:"addedLifeMonths,omitempty" url:"-"`
-	Notes           *string `json:"notes,omitempty" url:"-"`
+type AssetsModernizeAssetsRequest struct {
+	ID              string    `json:"id" url:"-"`
+	Date            time.Time `json:"date" url:"-" format:"date"`
+	Amount          string    `json:"amount" url:"-"`
+	AddedLifeMonths *int64    `json:"addedLifeMonths,omitempty" url:"-"`
+	Notes           *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsModernizeRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsModernizeAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsModernizeRequestFieldID)
+func (a *AssetsModernizeAssetsRequest) SetID(id string) {
+	a.ID = id
+	a.require(assetsModernizeAssetsRequestFieldID)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeRequest) SetDate(date string) {
-	p.Date = date
-	p.require(postV1AssetsAssetsModernizeRequestFieldDate)
+func (a *AssetsModernizeAssetsRequest) SetDate(date time.Time) {
+	a.Date = date
+	a.require(assetsModernizeAssetsRequestFieldDate)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeRequest) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1AssetsAssetsModernizeRequestFieldAmount)
+func (a *AssetsModernizeAssetsRequest) SetAmount(amount string) {
+	a.Amount = amount
+	a.require(assetsModernizeAssetsRequestFieldAmount)
 }
 
 // SetAddedLifeMonths sets the AddedLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeRequest) SetAddedLifeMonths(addedLifeMonths *int64) {
-	p.AddedLifeMonths = addedLifeMonths
-	p.require(postV1AssetsAssetsModernizeRequestFieldAddedLifeMonths)
+func (a *AssetsModernizeAssetsRequest) SetAddedLifeMonths(addedLifeMonths *int64) {
+	a.AddedLifeMonths = addedLifeMonths
+	a.require(assetsModernizeAssetsRequestFieldAddedLifeMonths)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsModernizeRequestFieldNotes)
+func (a *AssetsModernizeAssetsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsModernizeAssetsRequestFieldNotes)
 }
 
-func (p *PostV1AssetsAssetsModernizeRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsModernizeRequest
+func (a *AssetsModernizeAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsModernizeAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsModernizeRequest(body)
+	*a = AssetsModernizeAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsModernizeRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsModernizeRequest
+func (a *AssetsModernizeAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsModernizeAssetsRequest
 	var marshaler = struct {
 		embed
+		Date *internal.Date `json:"date"`
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
+		Date:  internal.NewDate(a.Date),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsUpdateRequestFieldGroupID               = big.NewInt(1 << 0)
-	postV1AssetsAssetsUpdateRequestFieldCode                  = big.NewInt(1 << 1)
-	postV1AssetsAssetsUpdateRequestFieldName                  = big.NewInt(1 << 2)
-	postV1AssetsAssetsUpdateRequestFieldAcquisitionDate       = big.NewInt(1 << 3)
-	postV1AssetsAssetsUpdateRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
-	postV1AssetsAssetsUpdateRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
-	postV1AssetsAssetsUpdateRequestFieldSalvageValue          = big.NewInt(1 << 6)
-	postV1AssetsAssetsUpdateRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
-	postV1AssetsAssetsUpdateRequestFieldNotes                 = big.NewInt(1 << 8)
-	postV1AssetsAssetsUpdateRequestFieldDocuments             = big.NewInt(1 << 9)
-	postV1AssetsAssetsUpdateRequestFieldID                    = big.NewInt(1 << 10)
+	assetsUpdateAssetsRequestFieldGroupID               = big.NewInt(1 << 0)
+	assetsUpdateAssetsRequestFieldCode                  = big.NewInt(1 << 1)
+	assetsUpdateAssetsRequestFieldName                  = big.NewInt(1 << 2)
+	assetsUpdateAssetsRequestFieldAcquisitionDate       = big.NewInt(1 << 3)
+	assetsUpdateAssetsRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
+	assetsUpdateAssetsRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
+	assetsUpdateAssetsRequestFieldSalvageValue          = big.NewInt(1 << 6)
+	assetsUpdateAssetsRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
+	assetsUpdateAssetsRequestFieldNotes                 = big.NewInt(1 << 8)
+	assetsUpdateAssetsRequestFieldDocuments             = big.NewInt(1 << 9)
+	assetsUpdateAssetsRequestFieldID                    = big.NewInt(1 << 10)
 )
 
-type PostV1AssetsAssetsUpdateRequest struct {
-	GroupID               *string                                         `json:"groupId,omitempty" url:"-"`
-	Code                  *string                                         `json:"code,omitempty" url:"-"`
-	Name                  *string                                         `json:"name,omitempty" url:"-"`
-	AcquisitionDate       *string                                         `json:"acquisitionDate,omitempty" url:"-"`
-	DepreciationStartDate *string                                         `json:"depreciationStartDate,omitempty" url:"-"`
-	AcquisitionCost       *string                                         `json:"acquisitionCost,omitempty" url:"-"`
-	SalvageValue          *string                                         `json:"salvageValue,omitempty" url:"-"`
-	UsefulLifeMonths      *int64                                          `json:"usefulLifeMonths,omitempty" url:"-"`
-	Notes                 *string                                         `json:"notes,omitempty" url:"-"`
-	Documents             []*PostV1AssetsAssetsUpdateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
-	ID                    string                                          `json:"id" url:"-"`
+type AssetsUpdateAssetsRequest struct {
+	GroupID               *string                                   `json:"groupId,omitempty" url:"-"`
+	Code                  *string                                   `json:"code,omitempty" url:"-"`
+	Name                  *string                                   `json:"name,omitempty" url:"-"`
+	AcquisitionDate       *time.Time                                `json:"acquisitionDate,omitempty" url:"-" format:"date"`
+	DepreciationStartDate *time.Time                                `json:"depreciationStartDate,omitempty" url:"-" format:"date"`
+	AcquisitionCost       *string                                   `json:"acquisitionCost,omitempty" url:"-"`
+	SalvageValue          *string                                   `json:"salvageValue,omitempty" url:"-"`
+	UsefulLifeMonths      *int64                                    `json:"usefulLifeMonths,omitempty" url:"-"`
+	Notes                 *string                                   `json:"notes,omitempty" url:"-"`
+	Documents             []*AssetsUpdateAssetsRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+	ID                    string                                    `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsAssetsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsUpdateAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetGroupID(groupID *string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsUpdateRequestFieldGroupID)
+func (a *AssetsUpdateAssetsRequest) SetGroupID(groupID *string) {
+	a.GroupID = groupID
+	a.require(assetsUpdateAssetsRequestFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsUpdateRequestFieldCode)
+func (a *AssetsUpdateAssetsRequest) SetCode(code *string) {
+	a.Code = code
+	a.require(assetsUpdateAssetsRequestFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetName(name *string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsUpdateRequestFieldName)
+func (a *AssetsUpdateAssetsRequest) SetName(name *string) {
+	a.Name = name
+	a.require(assetsUpdateAssetsRequestFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetAcquisitionDate(acquisitionDate *string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsUpdateRequestFieldAcquisitionDate)
+func (a *AssetsUpdateAssetsRequest) SetAcquisitionDate(acquisitionDate *time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsUpdateAssetsRequestFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetDepreciationStartDate(depreciationStartDate *string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsUpdateRequestFieldDepreciationStartDate)
+func (a *AssetsUpdateAssetsRequest) SetDepreciationStartDate(depreciationStartDate *time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsUpdateAssetsRequestFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetAcquisitionCost(acquisitionCost *string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsUpdateRequestFieldAcquisitionCost)
+func (a *AssetsUpdateAssetsRequest) SetAcquisitionCost(acquisitionCost *string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsUpdateAssetsRequestFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetSalvageValue(salvageValue *string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsUpdateRequestFieldSalvageValue)
+func (a *AssetsUpdateAssetsRequest) SetSalvageValue(salvageValue *string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsUpdateAssetsRequestFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsUpdateRequestFieldUsefulLifeMonths)
+func (a *AssetsUpdateAssetsRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsUpdateAssetsRequestFieldUsefulLifeMonths)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsUpdateRequestFieldNotes)
+func (a *AssetsUpdateAssetsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsUpdateAssetsRequestFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetDocuments(documents []*PostV1AssetsAssetsUpdateRequestDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsUpdateRequestFieldDocuments)
+func (a *AssetsUpdateAssetsRequest) SetDocuments(documents []*AssetsUpdateAssetsRequestDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsUpdateAssetsRequestFieldDocuments)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsUpdateRequestFieldID)
+func (a *AssetsUpdateAssetsRequest) SetID(id string) {
+	a.ID = id
+	a.require(assetsUpdateAssetsRequestFieldID)
 }
 
-func (p *PostV1AssetsAssetsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsUpdateRequest
+func (a *AssetsUpdateAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsUpdateAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsUpdateRequest(body)
+	*a = AssetsUpdateAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsUpdateRequest
+func (a *AssetsUpdateAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsUpdateAssetsRequest
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date `json:"acquisitionDate,omitempty"`
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewOptionalDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewOptionalDate(a.DepreciationStartDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsDepreciationPostRequestFieldYear  = big.NewInt(1 << 0)
-	postV1AssetsDepreciationPostRequestFieldMonth = big.NewInt(1 << 1)
+	depreciationPostAssetsRequestFieldYear  = big.NewInt(1 << 0)
+	depreciationPostAssetsRequestFieldMonth = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsDepreciationPostRequest struct {
+type DepreciationPostAssetsRequest struct {
 	Year  int64 `json:"year" url:"-"`
 	Month int64 `json:"month" url:"-"`
 
@@ -587,54 +685,54 @@ type PostV1AssetsDepreciationPostRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsDepreciationPostRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DepreciationPostAssetsRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsDepreciationPostRequestFieldYear)
+func (d *DepreciationPostAssetsRequest) SetYear(year int64) {
+	d.Year = year
+	d.require(depreciationPostAssetsRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1AssetsDepreciationPostRequestFieldMonth)
+func (d *DepreciationPostAssetsRequest) SetMonth(month int64) {
+	d.Month = month
+	d.require(depreciationPostAssetsRequestFieldMonth)
 }
 
-func (p *PostV1AssetsDepreciationPostRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsDepreciationPostRequest
+func (d *DepreciationPostAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DepreciationPostAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsDepreciationPostRequest(body)
+	*d = DepreciationPostAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsDepreciationPostRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsDepreciationPostRequest
+func (d *DepreciationPostAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed DepreciationPostAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsDepreciationPreviewRequestFieldYear  = big.NewInt(1 << 0)
-	postV1AssetsDepreciationPreviewRequestFieldMonth = big.NewInt(1 << 1)
+	depreciationPreviewAssetsRequestFieldYear  = big.NewInt(1 << 0)
+	depreciationPreviewAssetsRequestFieldMonth = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsDepreciationPreviewRequest struct {
+type DepreciationPreviewAssetsRequest struct {
 	Year  int64 `json:"year" url:"-"`
 	Month int64 `json:"month" url:"-"`
 
@@ -642,58 +740,58 @@ type PostV1AssetsDepreciationPreviewRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsDepreciationPreviewRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DepreciationPreviewAssetsRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsDepreciationPreviewRequestFieldYear)
+func (d *DepreciationPreviewAssetsRequest) SetYear(year int64) {
+	d.Year = year
+	d.require(depreciationPreviewAssetsRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1AssetsDepreciationPreviewRequestFieldMonth)
+func (d *DepreciationPreviewAssetsRequest) SetMonth(month int64) {
+	d.Month = month
+	d.require(depreciationPreviewAssetsRequestFieldMonth)
 }
 
-func (p *PostV1AssetsDepreciationPreviewRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsDepreciationPreviewRequest
+func (d *DepreciationPreviewAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DepreciationPreviewAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsDepreciationPreviewRequest(body)
+	*d = DepreciationPreviewAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsDepreciationPreviewRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsDepreciationPreviewRequest
+func (d *DepreciationPreviewAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed DepreciationPreviewAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsGroupsCreateRequestFieldCode                    = big.NewInt(1 << 0)
-	postV1AssetsGroupsCreateRequestFieldName                    = big.NewInt(1 << 1)
-	postV1AssetsGroupsCreateRequestFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
-	postV1AssetsGroupsCreateRequestFieldAssetAccountCode        = big.NewInt(1 << 3)
-	postV1AssetsGroupsCreateRequestFieldDepreciationAccountCode = big.NewInt(1 << 4)
-	postV1AssetsGroupsCreateRequestFieldExpenseAccountCode      = big.NewInt(1 << 5)
+	groupsCreateAssetsRequestFieldCode                    = big.NewInt(1 << 0)
+	groupsCreateAssetsRequestFieldName                    = big.NewInt(1 << 1)
+	groupsCreateAssetsRequestFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
+	groupsCreateAssetsRequestFieldAssetAccountCode        = big.NewInt(1 << 3)
+	groupsCreateAssetsRequestFieldDepreciationAccountCode = big.NewInt(1 << 4)
+	groupsCreateAssetsRequestFieldExpenseAccountCode      = big.NewInt(1 << 5)
 )
 
-type PostV1AssetsGroupsCreateRequest struct {
+type GroupsCreateAssetsRequest struct {
 	Code                    string  `json:"code" url:"-"`
 	Name                    string  `json:"name" url:"-"`
 	DefaultUsefulLifeMonths *int64  `json:"defaultUsefulLifeMonths,omitempty" url:"-"`
@@ -705,89 +803,89 @@ type PostV1AssetsGroupsCreateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsGroupsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsCreateAssetsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsGroupsCreateRequestFieldCode)
+func (g *GroupsCreateAssetsRequest) SetCode(code string) {
+	g.Code = code
+	g.require(groupsCreateAssetsRequestFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsGroupsCreateRequestFieldName)
+func (g *GroupsCreateAssetsRequest) SetName(name string) {
+	g.Name = name
+	g.require(groupsCreateAssetsRequestFieldName)
 }
 
 // SetDefaultUsefulLifeMonths sets the DefaultUsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
-	p.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
-	p.require(postV1AssetsGroupsCreateRequestFieldDefaultUsefulLifeMonths)
+func (g *GroupsCreateAssetsRequest) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
+	g.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
+	g.require(groupsCreateAssetsRequestFieldDefaultUsefulLifeMonths)
 }
 
 // SetAssetAccountCode sets the AssetAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetAssetAccountCode(assetAccountCode string) {
-	p.AssetAccountCode = assetAccountCode
-	p.require(postV1AssetsGroupsCreateRequestFieldAssetAccountCode)
+func (g *GroupsCreateAssetsRequest) SetAssetAccountCode(assetAccountCode string) {
+	g.AssetAccountCode = assetAccountCode
+	g.require(groupsCreateAssetsRequestFieldAssetAccountCode)
 }
 
 // SetDepreciationAccountCode sets the DepreciationAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetDepreciationAccountCode(depreciationAccountCode string) {
-	p.DepreciationAccountCode = depreciationAccountCode
-	p.require(postV1AssetsGroupsCreateRequestFieldDepreciationAccountCode)
+func (g *GroupsCreateAssetsRequest) SetDepreciationAccountCode(depreciationAccountCode string) {
+	g.DepreciationAccountCode = depreciationAccountCode
+	g.require(groupsCreateAssetsRequestFieldDepreciationAccountCode)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateRequest) SetExpenseAccountCode(expenseAccountCode *string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1AssetsGroupsCreateRequestFieldExpenseAccountCode)
+func (g *GroupsCreateAssetsRequest) SetExpenseAccountCode(expenseAccountCode *string) {
+	g.ExpenseAccountCode = expenseAccountCode
+	g.require(groupsCreateAssetsRequestFieldExpenseAccountCode)
 }
 
-func (p *PostV1AssetsGroupsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsCreateRequest
+func (g *GroupsCreateAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsCreateAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsCreateRequest(body)
+	*g = GroupsCreateAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsCreateRequest
+func (g *GroupsCreateAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsCreateAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsGroupsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1AssetsGroupsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1AssetsGroupsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1AssetsGroupsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1AssetsGroupsListRequestFieldTotals   = big.NewInt(1 << 4)
+	groupsListAssetsRequestFieldPage     = big.NewInt(1 << 0)
+	groupsListAssetsRequestFieldPageSize = big.NewInt(1 << 1)
+	groupsListAssetsRequestFieldSort     = big.NewInt(1 << 2)
+	groupsListAssetsRequestFieldFilter   = big.NewInt(1 << 3)
+	groupsListAssetsRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsGroupsListRequest struct {
-	Page     *int64                                     `json:"page,omitempty" url:"-"`
-	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1AssetsGroupsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1AssetsGroupsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type GroupsListAssetsRequest struct {
+	Page     *int64                               `json:"page,omitempty" url:"-"`
+	PageSize *int64                               `json:"pageSize,omitempty" url:"-"`
+	Sort     []*GroupsListAssetsRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*GroupsListAssetsRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -795,75 +893,75 @@ type PostV1AssetsGroupsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1AssetsGroupsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListAssetsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1AssetsGroupsListRequestFieldPage)
+func (g *GroupsListAssetsRequest) SetPage(page *int64) {
+	g.Page = page
+	g.require(groupsListAssetsRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1AssetsGroupsListRequestFieldPageSize)
+func (g *GroupsListAssetsRequest) SetPageSize(pageSize *int64) {
+	g.PageSize = pageSize
+	g.require(groupsListAssetsRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequest) SetSort(sort []*PostV1AssetsGroupsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1AssetsGroupsListRequestFieldSort)
+func (g *GroupsListAssetsRequest) SetSort(sort []*GroupsListAssetsRequestSortItem) {
+	g.Sort = sort
+	g.require(groupsListAssetsRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequest) SetFilter(filter []*PostV1AssetsGroupsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1AssetsGroupsListRequestFieldFilter)
+func (g *GroupsListAssetsRequest) SetFilter(filter []*GroupsListAssetsRequestFilterItem) {
+	g.Filter = filter
+	g.require(groupsListAssetsRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1AssetsGroupsListRequestFieldTotals)
+func (g *GroupsListAssetsRequest) SetTotals(totals []string) {
+	g.Totals = totals
+	g.require(groupsListAssetsRequestFieldTotals)
 }
 
-func (p *PostV1AssetsGroupsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsListRequest
+func (g *GroupsListAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsListAssetsRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsListRequest(body)
+	*g = GroupsListAssetsRequest(body)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsListRequest
+func (g *GroupsListAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed GroupsListAssetsRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1AssetsAssetsCreateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	assetsCreateAssetsRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsCreateAssetsRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsCreateRequestDocumentsItem struct {
+type AssetsCreateAssetsRequestDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -874,140 +972,148 @@ type PostV1AssetsAssetsCreateRequestDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetName() string {
-	if p == nil {
+func (a *AssetsCreateAssetsRequestDocumentsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetRef() string {
-	if p == nil {
+func (a *AssetsCreateAssetsRequestDocumentsItem) GetRef() string {
+	if a == nil {
 		return ""
 	}
-	return p.Ref
+	return a.Ref
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsCreateAssetsRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsCreateAssetsRequestDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsCreateRequestDocumentsItemFieldName)
+func (a *AssetsCreateAssetsRequestDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateAssetsRequestDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsCreateRequestDocumentsItemFieldRef)
+func (a *AssetsCreateAssetsRequestDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsCreateAssetsRequestDocumentsItemFieldRef)
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsCreateRequestDocumentsItem
+func (a *AssetsCreateAssetsRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateAssetsRequestDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsCreateRequestDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsCreateAssetsRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsCreateRequestDocumentsItem
+func (a *AssetsCreateAssetsRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateAssetsRequestDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) String() string {
-	if p == nil {
+func (a *AssetsCreateAssetsRequestDocumentsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsCreateResponseFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateResponseFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsCreateResponseFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsCreateResponseFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsCreateResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsCreateResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsCreateResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsCreateResponseFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsCreateResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsCreateResponseFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsCreateResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsCreateResponseFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsCreateResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsCreateResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsCreateResponseFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsCreateResponseFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsCreateResponseFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsCreateResponseFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsCreateResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsCreateResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsCreateResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsCreateResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsCreateResponseFieldCreatedAt                 = big.NewInt(1 << 22)
+	assetsCreateAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsCreateAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsCreateAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsCreateAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsCreateAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsCreateAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsCreateAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsCreateAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsCreateAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsCreateAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsCreateAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsCreateAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsCreateAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsCreateAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsCreateAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsCreateAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsCreateAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsCreateAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsCreateAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsCreateAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsCreateAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsCreateAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsCreateAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsCreateAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsCreateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsCreateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsCreateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
 )
 
-type PostV1AssetsAssetsCreateResponse struct {
-	ID                        string                                                    `json:"id" url:"id"`
-	GroupID                   string                                                    `json:"groupId" url:"groupId"`
-	Code                      string                                                    `json:"code" url:"code"`
-	Name                      string                                                    `json:"name" url:"name"`
-	AcquisitionDate           string                                                    `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                    `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                    `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                    `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                    `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                    `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsCreateResponseStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsCreateResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                   `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                   `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                   `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                      `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                    `json:"createdAt" url:"createdAt"`
+type AssetsCreateAssetsResponse struct {
+	ID                           string                                              `json:"id" url:"id"`
+	GroupID                      string                                              `json:"groupId" url:"groupId"`
+	Code                         string                                              `json:"code" url:"code"`
+	Name                         string                                              `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                           `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                           `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                              `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                              `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                               `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                              `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                              `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                              `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                               `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                               `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsCreateAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsCreateAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                             `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                          `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                             `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsCreateAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                          `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsCreateAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1016,390 +1122,495 @@ type PostV1AssetsAssetsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetID() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetGroupID() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetGroupID() string {
+	if a == nil {
 		return ""
 	}
-	return p.GroupID
+	return a.GroupID
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetCode() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetCode() string {
+	if a == nil {
 		return ""
 	}
-	return p.Code
+	return a.Code
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetName() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetAcquisitionDate() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsCreateAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsCreateAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.AcquisitionDate
+	return a.AcquisitionCost
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetDepreciationStartDate() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetSalvageValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.DepreciationStartDate
+	return a.SalvageValue
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsCreateResponse) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsCreateResponse) GetUsefulLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.UsefulLifeMonths
+	return a.UsefulLifeMonths
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetTotalCost() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetTotalCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.TotalCost
+	return a.TotalCost
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetAccumulatedDepreciation() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
 		return ""
 	}
-	return p.AccumulatedDepreciation
+	return a.AccumulatedDepreciation
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetNetBookValue() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetNetBookValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.NetBookValue
+	return a.NetBookValue
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetDepreciatedMonths() int64 {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.DepreciatedMonths
+	return a.DepreciatedMonths
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetTotalLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.TotalLifeMonths
+	return a.TotalLifeMonths
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetStatus() PostV1AssetsAssetsCreateResponseStatus {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetStatus() AssetsCreateAssetsResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetDocuments() []*PostV1AssetsAssetsCreateResponseDocumentsItem {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetDocuments() []*AssetsCreateAssetsResponseDocumentsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Documents
+	return a.Documents
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetInputVatAmount() *string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatAmount
+	return a.InputVatAmount
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetInputVatFirstUseDate() *string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatFirstUseDate
+	return a.InputVatFirstUseDate
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetInputVatDeductiblePercent() *string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatDeductiblePercent
+	return a.InputVatDeductiblePercent
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetInputVatRealEstate() bool {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
 		return false
 	}
-	return p.InputVatRealEstate
+	return a.InputVatRealEstate
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetInputVatUseChanges() []*AssetsCreateAssetsResponseInputVatUseChangesItem {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatUseChanges
+	return a.InputVatUseChanges
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.DisposalDate
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsCreateAssetsResponse) GetDisposalReason() *AssetsCreateAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return a.DisposalReason
+}
+
+func (a *AssetsCreateAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsCreateAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsCreateAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsCreateAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsCreateAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsCreateResponseFieldID)
+func (a *AssetsCreateAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsCreateAssetsResponseFieldID)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsCreateResponseFieldGroupID)
+func (a *AssetsCreateAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsCreateAssetsResponseFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsCreateResponseFieldCode)
+func (a *AssetsCreateAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsCreateAssetsResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsCreateResponseFieldName)
+func (a *AssetsCreateAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateAssetsResponseFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsCreateResponseFieldAcquisitionDate)
+func (a *AssetsCreateAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsCreateAssetsResponseFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsCreateResponseFieldDepreciationStartDate)
+func (a *AssetsCreateAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsCreateAssetsResponseFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsCreateResponseFieldAcquisitionCost)
+func (a *AssetsCreateAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsCreateAssetsResponseFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsCreateResponseFieldSalvageValue)
+func (a *AssetsCreateAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsCreateAssetsResponseFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsCreateResponseFieldUsefulLifeMonths)
+func (a *AssetsCreateAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsCreateAssetsResponseFieldUsefulLifeMonths)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsCreateResponseFieldTotalCost)
+func (a *AssetsCreateAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsCreateAssetsResponseFieldTotalCost)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsCreateResponseFieldAccumulatedDepreciation)
+func (a *AssetsCreateAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsCreateAssetsResponseFieldAccumulatedDepreciation)
 }
 
 // SetNetBookValue sets the NetBookValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsCreateResponseFieldNetBookValue)
+func (a *AssetsCreateAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsCreateAssetsResponseFieldNetBookValue)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsCreateResponseFieldDepreciatedMonths)
+func (a *AssetsCreateAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsCreateAssetsResponseFieldDepreciatedMonths)
 }
 
 // SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsCreateResponseFieldTotalLifeMonths)
+func (a *AssetsCreateAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsCreateAssetsResponseFieldTotalLifeMonths)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetStatus(status PostV1AssetsAssetsCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsCreateResponseFieldStatus)
+func (a *AssetsCreateAssetsResponse) SetStatus(status AssetsCreateAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsCreateAssetsResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsCreateResponseFieldNotes)
+func (a *AssetsCreateAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsCreateAssetsResponseFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetDocuments(documents []*PostV1AssetsAssetsCreateResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsCreateResponseFieldDocuments)
+func (a *AssetsCreateAssetsResponse) SetDocuments(documents []*AssetsCreateAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsCreateAssetsResponseFieldDocuments)
 }
 
 // SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsCreateResponseFieldInputVatAmount)
+func (a *AssetsCreateAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsCreateAssetsResponseFieldInputVatAmount)
 }
 
 // SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsCreateResponseFieldInputVatFirstUseDate)
+func (a *AssetsCreateAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsCreateAssetsResponseFieldInputVatFirstUseDate)
 }
 
 // SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsCreateResponseFieldInputVatDeductiblePercent)
+func (a *AssetsCreateAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsCreateAssetsResponseFieldInputVatDeductiblePercent)
 }
 
 // SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsCreateResponseFieldInputVatRealEstate)
+func (a *AssetsCreateAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsCreateAssetsResponseFieldInputVatRealEstate)
 }
 
 // SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsCreateResponseFieldInputVatUseChanges)
+func (a *AssetsCreateAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsCreateAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsCreateAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsCreateAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetDisposalReason(disposalReason *AssetsCreateAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsCreateAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsCreateAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsCreateAssetsResponseFieldDisposalJournalTransactionID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsCreateResponseFieldCreatedAt)
+func (a *AssetsCreateAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsCreateAssetsResponseFieldCreatedAt)
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssetsCreateAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsCreateAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsCreateAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsCreateResponse
+func (a *AssetsCreateAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateAssetsResponse
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsCreateResponse) String() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsCreateAssetsResponseDisposalReason string
+
+const (
+	AssetsCreateAssetsResponseDisposalReasonSold       AssetsCreateAssetsResponseDisposalReason = "sold"
+	AssetsCreateAssetsResponseDisposalReasonScrapped   AssetsCreateAssetsResponseDisposalReason = "scrapped"
+	AssetsCreateAssetsResponseDisposalReasonWrittenOff AssetsCreateAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsCreateAssetsResponseDisposalReasonFromString(s string) (AssetsCreateAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsCreateAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsCreateAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsCreateAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsCreateAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsCreateAssetsResponseDisposalReason) Ptr() *AssetsCreateAssetsResponseDisposalReason {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsCreateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	assetsCreateAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsCreateAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsCreateResponseDocumentsItem struct {
+type AssetsCreateAssetsResponseDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -1410,100 +1621,100 @@ type PostV1AssetsAssetsCreateResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
 		return ""
 	}
-	return p.Ref
+	return a.Ref
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsCreateAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsCreateResponseDocumentsItemFieldName)
+func (a *AssetsCreateAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateAssetsResponseDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsCreateResponseDocumentsItemFieldRef)
+func (a *AssetsCreateAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsCreateAssetsResponseDocumentsItemFieldRef)
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsCreateResponseDocumentsItem
+func (a *AssetsCreateAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateAssetsResponseDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsCreateResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsCreateAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsCreateResponseDocumentsItem
+func (a *AssetsCreateAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateAssetsResponseDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) String() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseDocumentsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+	assetsCreateAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsCreateAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsCreateAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsAssetsCreateResponseInputVatUseChangesItem struct {
-	Year    int64                                                        `json:"year" url:"year"`
-	Percent string                                                       `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+type AssetsCreateAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                  `json:"year" url:"year"`
+	Percent string                                                 `json:"percent" url:"percent"`
+	Reason  AssetsCreateAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1512,204 +1723,237 @@ type PostV1AssetsAssetsCreateResponseInputVatUseChangesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Year
+	return a.Year
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
 		return ""
 	}
-	return p.Percent
+	return a.Percent
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) GetReason() AssetsCreateAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
 		return ""
 	}
-	return p.Reason
+	return a.Reason
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldYear)
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsCreateAssetsResponseInputVatUseChangesItemFieldYear)
 }
 
 // SetPercent sets the Percent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldPercent)
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsCreateAssetsResponseInputVatUseChangesItemFieldPercent)
 }
 
 // SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldReason)
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsCreateAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsCreateAssetsResponseInputVatUseChangesItemFieldReason)
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateAssetsResponseInputVatUseChangesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsCreateResponseInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsCreateAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateAssetsResponseInputVatUseChangesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) String() string {
-	if p == nil {
+func (a *AssetsCreateAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason string
+type AssetsCreateAssetsResponseInputVatUseChangesItemReason string
 
 const (
-	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "withdrawal"
+	AssetsCreateAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsCreateAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsCreateAssetsResponseInputVatUseChangesItemReasonSale       AssetsCreateAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsCreateAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsCreateAssetsResponseInputVatUseChangesItemReason = "withdrawal"
 )
 
-func NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason, error) {
+func NewAssetsCreateAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsCreateAssetsResponseInputVatUseChangesItemReason, error) {
 	switch s {
 	case "use_change":
-		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonUseChange, nil
+		return AssetsCreateAssetsResponseInputVatUseChangesItemReasonUseChange, nil
 	case "sale":
-		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonSale, nil
+		return AssetsCreateAssetsResponseInputVatUseChangesItemReasonSale, nil
 	case "withdrawal":
-		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonWithdrawal, nil
+		return AssetsCreateAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
 	}
-	var t PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason
+	var t AssetsCreateAssetsResponseInputVatUseChangesItemReason
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason {
-	return &p
+func (a AssetsCreateAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsCreateAssetsResponseInputVatUseChangesItemReason {
+	return &a
 }
 
-type PostV1AssetsAssetsCreateResponseStatus string
+type AssetsCreateAssetsResponseStatus string
 
 const (
-	PostV1AssetsAssetsCreateResponseStatusActive           PostV1AssetsAssetsCreateResponseStatus = "active"
-	PostV1AssetsAssetsCreateResponseStatusFullyDepreciated PostV1AssetsAssetsCreateResponseStatus = "fully_depreciated"
-	PostV1AssetsAssetsCreateResponseStatusDisposed         PostV1AssetsAssetsCreateResponseStatus = "disposed"
+	AssetsCreateAssetsResponseStatusActive           AssetsCreateAssetsResponseStatus = "active"
+	AssetsCreateAssetsResponseStatusFullyDepreciated AssetsCreateAssetsResponseStatus = "fully_depreciated"
+	AssetsCreateAssetsResponseStatusDisposed         AssetsCreateAssetsResponseStatus = "disposed"
 )
 
-func NewPostV1AssetsAssetsCreateResponseStatusFromString(s string) (PostV1AssetsAssetsCreateResponseStatus, error) {
+func NewAssetsCreateAssetsResponseStatusFromString(s string) (AssetsCreateAssetsResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1AssetsAssetsCreateResponseStatusActive, nil
+		return AssetsCreateAssetsResponseStatusActive, nil
 	case "fully_depreciated":
-		return PostV1AssetsAssetsCreateResponseStatusFullyDepreciated, nil
+		return AssetsCreateAssetsResponseStatusFullyDepreciated, nil
 	case "disposed":
-		return PostV1AssetsAssetsCreateResponseStatusDisposed, nil
+		return AssetsCreateAssetsResponseStatusDisposed, nil
 	}
-	var t PostV1AssetsAssetsCreateResponseStatus
+	var t AssetsCreateAssetsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsCreateResponseStatus) Ptr() *PostV1AssetsAssetsCreateResponseStatus {
-	return &p
+func (a AssetsCreateAssetsResponseStatus) Ptr() *AssetsCreateAssetsResponseStatus {
+	return &a
+}
+
+type AssetsDisposeAssetsRequestReason string
+
+const (
+	AssetsDisposeAssetsRequestReasonSold       AssetsDisposeAssetsRequestReason = "sold"
+	AssetsDisposeAssetsRequestReasonScrapped   AssetsDisposeAssetsRequestReason = "scrapped"
+	AssetsDisposeAssetsRequestReasonWrittenOff AssetsDisposeAssetsRequestReason = "written_off"
+)
+
+func NewAssetsDisposeAssetsRequestReasonFromString(s string) (AssetsDisposeAssetsRequestReason, error) {
+	switch s {
+	case "sold":
+		return AssetsDisposeAssetsRequestReasonSold, nil
+	case "scrapped":
+		return AssetsDisposeAssetsRequestReasonScrapped, nil
+	case "written_off":
+		return AssetsDisposeAssetsRequestReasonWrittenOff, nil
+	}
+	var t AssetsDisposeAssetsRequestReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsDisposeAssetsRequestReason) Ptr() *AssetsDisposeAssetsRequestReason {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsGetResponseFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsGetResponseFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsGetResponseFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsGetResponseFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsGetResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsGetResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsGetResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsGetResponseFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsGetResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsGetResponseFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsGetResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsGetResponseFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsGetResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsGetResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsGetResponseFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsGetResponseFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsGetResponseFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsGetResponseFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsGetResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsGetResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsGetResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsGetResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsGetResponseFieldCreatedAt                 = big.NewInt(1 << 22)
+	assetsDisposeAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsDisposeAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsDisposeAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsDisposeAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsDisposeAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsDisposeAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsDisposeAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsDisposeAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsDisposeAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsDisposeAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsDisposeAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsDisposeAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsDisposeAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsDisposeAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsDisposeAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsDisposeAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsDisposeAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsDisposeAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsDisposeAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsDisposeAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsDisposeAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsDisposeAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsDisposeAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsDisposeAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsDisposeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsDisposeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsDisposeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
 )
 
-type PostV1AssetsAssetsGetResponse struct {
-	ID                        string                                                 `json:"id" url:"id"`
-	GroupID                   string                                                 `json:"groupId" url:"groupId"`
-	Code                      string                                                 `json:"code" url:"code"`
-	Name                      string                                                 `json:"name" url:"name"`
-	AcquisitionDate           string                                                 `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                 `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                 `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                 `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                 `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                 `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsGetResponseStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsGetResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                   `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                 `json:"createdAt" url:"createdAt"`
+type AssetsDisposeAssetsResponse struct {
+	ID                           string                                               `json:"id" url:"id"`
+	GroupID                      string                                               `json:"groupId" url:"groupId"`
+	Code                         string                                               `json:"code" url:"code"`
+	Name                         string                                               `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                            `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                            `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                               `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                               `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                                `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                               `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                               `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                               `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                                `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                                `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsDisposeAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsDisposeAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                              `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                           `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                              `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                 `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsDisposeAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                           `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsDisposeAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                              `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                              `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1718,390 +1962,495 @@ type PostV1AssetsAssetsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetID() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetGroupID() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetGroupID() string {
+	if a == nil {
 		return ""
 	}
-	return p.GroupID
+	return a.GroupID
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetCode() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetCode() string {
+	if a == nil {
 		return ""
 	}
-	return p.Code
+	return a.Code
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetName() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetAcquisitionDate() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsDisposeAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsDisposeAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.AcquisitionDate
+	return a.AcquisitionCost
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetDepreciationStartDate() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetSalvageValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.DepreciationStartDate
+	return a.SalvageValue
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsGetResponse) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsGetResponse) GetUsefulLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.UsefulLifeMonths
+	return a.UsefulLifeMonths
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetTotalCost() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetTotalCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.TotalCost
+	return a.TotalCost
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetAccumulatedDepreciation() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
 		return ""
 	}
-	return p.AccumulatedDepreciation
+	return a.AccumulatedDepreciation
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetNetBookValue() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetNetBookValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.NetBookValue
+	return a.NetBookValue
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetDepreciatedMonths() int64 {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.DepreciatedMonths
+	return a.DepreciatedMonths
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetTotalLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.TotalLifeMonths
+	return a.TotalLifeMonths
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetStatus() PostV1AssetsAssetsGetResponseStatus {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetStatus() AssetsDisposeAssetsResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetNotes() *string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetDocuments() []*PostV1AssetsAssetsGetResponseDocumentsItem {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetDocuments() []*AssetsDisposeAssetsResponseDocumentsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Documents
+	return a.Documents
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetInputVatAmount() *string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatAmount
+	return a.InputVatAmount
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetInputVatFirstUseDate() *string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatFirstUseDate
+	return a.InputVatFirstUseDate
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetInputVatDeductiblePercent() *string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatDeductiblePercent
+	return a.InputVatDeductiblePercent
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetInputVatRealEstate() bool {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
 		return false
 	}
-	return p.InputVatRealEstate
+	return a.InputVatRealEstate
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetInputVatUseChanges() []*AssetsDisposeAssetsResponseInputVatUseChangesItem {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatUseChanges
+	return a.InputVatUseChanges
 }
 
-func (p *PostV1AssetsAssetsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.DisposalDate
 }
 
-func (p *PostV1AssetsAssetsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsDisposeAssetsResponse) GetDisposalReason() *AssetsDisposeAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return a.DisposalReason
+}
+
+func (a *AssetsDisposeAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsDisposeAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsDisposeAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsDisposeAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsDisposeAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsGetResponseFieldID)
+func (a *AssetsDisposeAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsDisposeAssetsResponseFieldID)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsGetResponseFieldGroupID)
+func (a *AssetsDisposeAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsDisposeAssetsResponseFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsGetResponseFieldCode)
+func (a *AssetsDisposeAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsDisposeAssetsResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsGetResponseFieldName)
+func (a *AssetsDisposeAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsDisposeAssetsResponseFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsGetResponseFieldAcquisitionDate)
+func (a *AssetsDisposeAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsDisposeAssetsResponseFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsGetResponseFieldDepreciationStartDate)
+func (a *AssetsDisposeAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsDisposeAssetsResponseFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsGetResponseFieldAcquisitionCost)
+func (a *AssetsDisposeAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsDisposeAssetsResponseFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsGetResponseFieldSalvageValue)
+func (a *AssetsDisposeAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsDisposeAssetsResponseFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsGetResponseFieldUsefulLifeMonths)
+func (a *AssetsDisposeAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsDisposeAssetsResponseFieldUsefulLifeMonths)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsGetResponseFieldTotalCost)
+func (a *AssetsDisposeAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsDisposeAssetsResponseFieldTotalCost)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsGetResponseFieldAccumulatedDepreciation)
+func (a *AssetsDisposeAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsDisposeAssetsResponseFieldAccumulatedDepreciation)
 }
 
 // SetNetBookValue sets the NetBookValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsGetResponseFieldNetBookValue)
+func (a *AssetsDisposeAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsDisposeAssetsResponseFieldNetBookValue)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsGetResponseFieldDepreciatedMonths)
+func (a *AssetsDisposeAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsDisposeAssetsResponseFieldDepreciatedMonths)
 }
 
 // SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsGetResponseFieldTotalLifeMonths)
+func (a *AssetsDisposeAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsDisposeAssetsResponseFieldTotalLifeMonths)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetStatus(status PostV1AssetsAssetsGetResponseStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsGetResponseFieldStatus)
+func (a *AssetsDisposeAssetsResponse) SetStatus(status AssetsDisposeAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsDisposeAssetsResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsGetResponseFieldNotes)
+func (a *AssetsDisposeAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsDisposeAssetsResponseFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetDocuments(documents []*PostV1AssetsAssetsGetResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsGetResponseFieldDocuments)
+func (a *AssetsDisposeAssetsResponse) SetDocuments(documents []*AssetsDisposeAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsDisposeAssetsResponseFieldDocuments)
 }
 
 // SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsGetResponseFieldInputVatAmount)
+func (a *AssetsDisposeAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsDisposeAssetsResponseFieldInputVatAmount)
 }
 
 // SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsGetResponseFieldInputVatFirstUseDate)
+func (a *AssetsDisposeAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsDisposeAssetsResponseFieldInputVatFirstUseDate)
 }
 
 // SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsGetResponseFieldInputVatDeductiblePercent)
+func (a *AssetsDisposeAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsDisposeAssetsResponseFieldInputVatDeductiblePercent)
 }
 
 // SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsGetResponseFieldInputVatRealEstate)
+func (a *AssetsDisposeAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsDisposeAssetsResponseFieldInputVatRealEstate)
 }
 
 // SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsGetResponseFieldInputVatUseChanges)
+func (a *AssetsDisposeAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsDisposeAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsDisposeAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsDisposeAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetDisposalReason(disposalReason *AssetsDisposeAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsDisposeAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsDisposeAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsDisposeAssetsResponseFieldDisposalJournalTransactionID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsGetResponseFieldCreatedAt)
+func (a *AssetsDisposeAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsDisposeAssetsResponseFieldCreatedAt)
 }
 
-func (p *PostV1AssetsAssetsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssetsDisposeAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsDisposeAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsDisposeAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsGetResponse
+func (a *AssetsDisposeAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsDisposeAssetsResponse
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsGetResponse) String() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsDisposeAssetsResponseDisposalReason string
+
+const (
+	AssetsDisposeAssetsResponseDisposalReasonSold       AssetsDisposeAssetsResponseDisposalReason = "sold"
+	AssetsDisposeAssetsResponseDisposalReasonScrapped   AssetsDisposeAssetsResponseDisposalReason = "scrapped"
+	AssetsDisposeAssetsResponseDisposalReasonWrittenOff AssetsDisposeAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsDisposeAssetsResponseDisposalReasonFromString(s string) (AssetsDisposeAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsDisposeAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsDisposeAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsDisposeAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsDisposeAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsDisposeAssetsResponseDisposalReason) Ptr() *AssetsDisposeAssetsResponseDisposalReason {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsGetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsGetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	assetsDisposeAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsDisposeAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsGetResponseDocumentsItem struct {
+type AssetsDisposeAssetsResponseDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -2112,100 +2461,100 @@ type PostV1AssetsAssetsGetResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
 		return ""
 	}
-	return p.Ref
+	return a.Ref
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsDisposeAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsGetResponseDocumentsItemFieldName)
+func (a *AssetsDisposeAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsDisposeAssetsResponseDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsGetResponseDocumentsItemFieldRef)
+func (a *AssetsDisposeAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsDisposeAssetsResponseDocumentsItemFieldRef)
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsGetResponseDocumentsItem
+func (a *AssetsDisposeAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsDisposeAssetsResponseDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsGetResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsDisposeAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsGetResponseDocumentsItem
+func (a *AssetsDisposeAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsDisposeAssetsResponseDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsGetResponseDocumentsItem) String() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseDocumentsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+	assetsDisposeAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsDisposeAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsDisposeAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsAssetsGetResponseInputVatUseChangesItem struct {
-	Year    int64                                                     `json:"year" url:"year"`
-	Percent string                                                    `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+type AssetsDisposeAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                   `json:"year" url:"year"`
+	Percent string                                                  `json:"percent" url:"percent"`
+	Reason  AssetsDisposeAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2214,164 +2563,212 @@ type PostV1AssetsAssetsGetResponseInputVatUseChangesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Year
+	return a.Year
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
 		return ""
 	}
-	return p.Percent
+	return a.Percent
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) GetReason() AssetsDisposeAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
 		return ""
 	}
-	return p.Reason
+	return a.Reason
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldYear)
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsDisposeAssetsResponseInputVatUseChangesItemFieldYear)
 }
 
 // SetPercent sets the Percent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldPercent)
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsDisposeAssetsResponseInputVatUseChangesItemFieldPercent)
 }
 
 // SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldReason)
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsDisposeAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsDisposeAssetsResponseInputVatUseChangesItemFieldReason)
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsDisposeAssetsResponseInputVatUseChangesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsGetResponseInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsDisposeAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsDisposeAssetsResponseInputVatUseChangesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) String() string {
-	if p == nil {
+func (a *AssetsDisposeAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason string
+type AssetsDisposeAssetsResponseInputVatUseChangesItemReason string
 
 const (
-	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "withdrawal"
+	AssetsDisposeAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsDisposeAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsDisposeAssetsResponseInputVatUseChangesItemReasonSale       AssetsDisposeAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsDisposeAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsDisposeAssetsResponseInputVatUseChangesItemReason = "withdrawal"
 )
 
-func NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason, error) {
+func NewAssetsDisposeAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsDisposeAssetsResponseInputVatUseChangesItemReason, error) {
 	switch s {
 	case "use_change":
-		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonUseChange, nil
+		return AssetsDisposeAssetsResponseInputVatUseChangesItemReasonUseChange, nil
 	case "sale":
-		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonSale, nil
+		return AssetsDisposeAssetsResponseInputVatUseChangesItemReasonSale, nil
 	case "withdrawal":
-		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonWithdrawal, nil
+		return AssetsDisposeAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
 	}
-	var t PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason
+	var t AssetsDisposeAssetsResponseInputVatUseChangesItemReason
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason {
-	return &p
+func (a AssetsDisposeAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsDisposeAssetsResponseInputVatUseChangesItemReason {
+	return &a
 }
 
-type PostV1AssetsAssetsGetResponseStatus string
+type AssetsDisposeAssetsResponseStatus string
 
 const (
-	PostV1AssetsAssetsGetResponseStatusActive           PostV1AssetsAssetsGetResponseStatus = "active"
-	PostV1AssetsAssetsGetResponseStatusFullyDepreciated PostV1AssetsAssetsGetResponseStatus = "fully_depreciated"
-	PostV1AssetsAssetsGetResponseStatusDisposed         PostV1AssetsAssetsGetResponseStatus = "disposed"
+	AssetsDisposeAssetsResponseStatusActive           AssetsDisposeAssetsResponseStatus = "active"
+	AssetsDisposeAssetsResponseStatusFullyDepreciated AssetsDisposeAssetsResponseStatus = "fully_depreciated"
+	AssetsDisposeAssetsResponseStatusDisposed         AssetsDisposeAssetsResponseStatus = "disposed"
 )
 
-func NewPostV1AssetsAssetsGetResponseStatusFromString(s string) (PostV1AssetsAssetsGetResponseStatus, error) {
+func NewAssetsDisposeAssetsResponseStatusFromString(s string) (AssetsDisposeAssetsResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1AssetsAssetsGetResponseStatusActive, nil
+		return AssetsDisposeAssetsResponseStatusActive, nil
 	case "fully_depreciated":
-		return PostV1AssetsAssetsGetResponseStatusFullyDepreciated, nil
+		return AssetsDisposeAssetsResponseStatusFullyDepreciated, nil
 	case "disposed":
-		return PostV1AssetsAssetsGetResponseStatusDisposed, nil
+		return AssetsDisposeAssetsResponseStatusDisposed, nil
 	}
-	var t PostV1AssetsAssetsGetResponseStatus
+	var t AssetsDisposeAssetsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsGetResponseStatus) Ptr() *PostV1AssetsAssetsGetResponseStatus {
-	return &p
+func (a AssetsDisposeAssetsResponseStatus) Ptr() *AssetsDisposeAssetsResponseStatus {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+	assetsGetAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsGetAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsGetAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsGetAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsGetAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsGetAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsGetAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsGetAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsGetAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsGetAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsGetAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsGetAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsGetAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsGetAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsGetAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsGetAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsGetAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsGetAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsGetAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsGetAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsGetAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsGetAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsGetAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsGetAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsGetAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsGetAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsGetAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
 )
 
-type PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem struct {
-	Year    int64                                                         `json:"year" url:"year"`
-	Percent string                                                        `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason `json:"reason" url:"reason"`
+type AssetsGetAssetsResponse struct {
+	ID                           string                                           `json:"id" url:"id"`
+	GroupID                      string                                           `json:"groupId" url:"groupId"`
+	Code                         string                                           `json:"code" url:"code"`
+	Name                         string                                           `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                        `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                        `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                           `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                           `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                            `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                           `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                           `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                           `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                            `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                            `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsGetAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsGetAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                          `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                       `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                          `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                             `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsGetAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                       `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsGetAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                          `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                          `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2380,571 +2777,495 @@ type PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AssetsGetAssetsResponse) GetGroupID() string {
+	if a == nil {
+		return ""
+	}
+	return a.GroupID
+}
+
+func (a *AssetsGetAssetsResponse) GetCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Code
+}
+
+func (a *AssetsGetAssetsResponse) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsGetAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsGetAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsGetAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.AcquisitionCost
+}
+
+func (a *AssetsGetAssetsResponse) GetSalvageValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.SalvageValue
+}
+
+func (a *AssetsGetAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Year
+	return a.UsefulLifeMonths
 }
 
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetTotalCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.Percent
+	return a.TotalCost
 }
 
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetReason() PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
 		return ""
 	}
-	return p.Reason
+	return a.AccumulatedDepreciation
 }
 
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldYear)
-}
-
-// SetPercent sets the Percent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldPercent)
-}
-
-// SetReason sets the Reason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldReason)
-}
-
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason string
-
-const (
-	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonSale       PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "withdrawal"
-)
-
-func NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason, error) {
-	switch s {
-	case "use_change":
-		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange, nil
-	case "sale":
-		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonSale, nil
-	case "withdrawal":
-		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonWithdrawal, nil
-	}
-	var t PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason {
-	return &p
-}
-
-var (
-	postV1AssetsAssetsInputVatResponseFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsInputVatResponseFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsInputVatResponseFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsInputVatResponseFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsInputVatResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsInputVatResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsInputVatResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsInputVatResponseFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsInputVatResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsInputVatResponseFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsInputVatResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsInputVatResponseFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsInputVatResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsInputVatResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsInputVatResponseFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsInputVatResponseFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsInputVatResponseFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsInputVatResponseFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsInputVatResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsInputVatResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsInputVatResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsInputVatResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsInputVatResponseFieldCreatedAt                 = big.NewInt(1 << 22)
-)
-
-type PostV1AssetsAssetsInputVatResponse struct {
-	ID                        string                                                      `json:"id" url:"id"`
-	GroupID                   string                                                      `json:"groupId" url:"groupId"`
-	Code                      string                                                      `json:"code" url:"code"`
-	Name                      string                                                      `json:"name" url:"name"`
-	AcquisitionDate           string                                                      `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                      `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                      `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                      `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                       `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                      `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                      `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                      `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                       `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                       `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsInputVatResponseStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsInputVatResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                     `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                     `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                     `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                        `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                      `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetID() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetNetBookValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.NetBookValue
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetGroupID() string {
-	if p == nil {
-		return ""
-	}
-	return p.GroupID
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetCode() string {
-	if p == nil {
-		return ""
-	}
-	return p.Code
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetAcquisitionDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionDate
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetDepreciationStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.DepreciationStartDate
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetUsefulLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.UsefulLifeMonths
+	return a.DepreciatedMonths
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetTotalCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.TotalCost
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetAccumulatedDepreciation() string {
-	if p == nil {
-		return ""
-	}
-	return p.AccumulatedDepreciation
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetNetBookValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.NetBookValue
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetDepreciatedMonths() int64 {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.DepreciatedMonths
+	return a.TotalLifeMonths
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetTotalLifeMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.TotalLifeMonths
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetStatus() PostV1AssetsAssetsInputVatResponseStatus {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetStatus() AssetsGetAssetsResponseStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetNotes() *string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetDocuments() []*PostV1AssetsAssetsInputVatResponseDocumentsItem {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetDocuments() []*AssetsGetAssetsResponseDocumentsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Documents
+	return a.Documents
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatAmount() *string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatAmount
+	return a.InputVatAmount
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatFirstUseDate() *string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatFirstUseDate
+	return a.InputVatFirstUseDate
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatDeductiblePercent() *string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatDeductiblePercent
+	return a.InputVatDeductiblePercent
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatRealEstate() bool {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
 		return false
 	}
-	return p.InputVatRealEstate
+	return a.InputVatRealEstate
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetInputVatUseChanges() []*AssetsGetAssetsResponseInputVatUseChangesItem {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatUseChanges
+	return a.InputVatUseChanges
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsInputVatResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.DisposalDate
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsGetAssetsResponse) GetDisposalReason() *AssetsGetAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return a.DisposalReason
+}
+
+func (a *AssetsGetAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsGetAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsGetAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsGetAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsGetAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsInputVatResponseFieldID)
+func (a *AssetsGetAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsGetAssetsResponseFieldID)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsInputVatResponseFieldGroupID)
+func (a *AssetsGetAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsGetAssetsResponseFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsInputVatResponseFieldCode)
+func (a *AssetsGetAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsGetAssetsResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsInputVatResponseFieldName)
+func (a *AssetsGetAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsGetAssetsResponseFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsInputVatResponseFieldAcquisitionDate)
+func (a *AssetsGetAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsGetAssetsResponseFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsInputVatResponseFieldDepreciationStartDate)
+func (a *AssetsGetAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsGetAssetsResponseFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsInputVatResponseFieldAcquisitionCost)
+func (a *AssetsGetAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsGetAssetsResponseFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsInputVatResponseFieldSalvageValue)
+func (a *AssetsGetAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsGetAssetsResponseFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsInputVatResponseFieldUsefulLifeMonths)
+func (a *AssetsGetAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsGetAssetsResponseFieldUsefulLifeMonths)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsInputVatResponseFieldTotalCost)
+func (a *AssetsGetAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsGetAssetsResponseFieldTotalCost)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsInputVatResponseFieldAccumulatedDepreciation)
+func (a *AssetsGetAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsGetAssetsResponseFieldAccumulatedDepreciation)
 }
 
 // SetNetBookValue sets the NetBookValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsInputVatResponseFieldNetBookValue)
+func (a *AssetsGetAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsGetAssetsResponseFieldNetBookValue)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsInputVatResponseFieldDepreciatedMonths)
+func (a *AssetsGetAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsGetAssetsResponseFieldDepreciatedMonths)
 }
 
 // SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsInputVatResponseFieldTotalLifeMonths)
+func (a *AssetsGetAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsGetAssetsResponseFieldTotalLifeMonths)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetStatus(status PostV1AssetsAssetsInputVatResponseStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsInputVatResponseFieldStatus)
+func (a *AssetsGetAssetsResponse) SetStatus(status AssetsGetAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsGetAssetsResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsInputVatResponseFieldNotes)
+func (a *AssetsGetAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsGetAssetsResponseFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetDocuments(documents []*PostV1AssetsAssetsInputVatResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsInputVatResponseFieldDocuments)
+func (a *AssetsGetAssetsResponse) SetDocuments(documents []*AssetsGetAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsGetAssetsResponseFieldDocuments)
 }
 
 // SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatAmount)
+func (a *AssetsGetAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsGetAssetsResponseFieldInputVatAmount)
 }
 
 // SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatFirstUseDate)
+func (a *AssetsGetAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsGetAssetsResponseFieldInputVatFirstUseDate)
 }
 
 // SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatDeductiblePercent)
+func (a *AssetsGetAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsGetAssetsResponseFieldInputVatDeductiblePercent)
 }
 
 // SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatRealEstate)
+func (a *AssetsGetAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsGetAssetsResponseFieldInputVatRealEstate)
 }
 
 // SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatUseChanges)
+func (a *AssetsGetAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsGetAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsGetAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsGetAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetDisposalReason(disposalReason *AssetsGetAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsGetAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsGetAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsGetAssetsResponseFieldDisposalJournalTransactionID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsInputVatResponseFieldCreatedAt)
+func (a *AssetsGetAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsGetAssetsResponseFieldCreatedAt)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsInputVatResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssetsGetAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsGetAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsInputVatResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsGetAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsInputVatResponse
+func (a *AssetsGetAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsGetAssetsResponse
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponse) String() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsGetAssetsResponseDisposalReason string
+
+const (
+	AssetsGetAssetsResponseDisposalReasonSold       AssetsGetAssetsResponseDisposalReason = "sold"
+	AssetsGetAssetsResponseDisposalReasonScrapped   AssetsGetAssetsResponseDisposalReason = "scrapped"
+	AssetsGetAssetsResponseDisposalReasonWrittenOff AssetsGetAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsGetAssetsResponseDisposalReasonFromString(s string) (AssetsGetAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsGetAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsGetAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsGetAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsGetAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsGetAssetsResponseDisposalReason) Ptr() *AssetsGetAssetsResponseDisposalReason {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsInputVatResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsInputVatResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	assetsGetAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsGetAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsInputVatResponseDocumentsItem struct {
+type AssetsGetAssetsResponseDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -2955,100 +3276,100 @@ type PostV1AssetsAssetsInputVatResponseDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetName() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetRef() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
 		return ""
 	}
-	return p.Ref
+	return a.Ref
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsGetAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsGetAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsInputVatResponseDocumentsItemFieldName)
+func (a *AssetsGetAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsGetAssetsResponseDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsInputVatResponseDocumentsItemFieldRef)
+func (a *AssetsGetAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsGetAssetsResponseDocumentsItemFieldRef)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsInputVatResponseDocumentsItem
+func (a *AssetsGetAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsGetAssetsResponseDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsInputVatResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsGetAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsInputVatResponseDocumentsItem
+func (a *AssetsGetAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsGetAssetsResponseDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) String() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponseDocumentsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+	assetsGetAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsGetAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsGetAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem struct {
-	Year    int64                                                          `json:"year" url:"year"`
-	Percent string                                                         `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+type AssetsGetAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                               `json:"year" url:"year"`
+	Percent string                                              `json:"percent" url:"percent"`
+	Reason  AssetsGetAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3057,164 +3378,164 @@ type PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Year
+	return a.Year
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
 		return ""
 	}
-	return p.Percent
+	return a.Percent
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason {
-	if p == nil {
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) GetReason() AssetsGetAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
 		return ""
 	}
-	return p.Reason
+	return a.Reason
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldYear)
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsGetAssetsResponseInputVatUseChangesItemFieldYear)
 }
 
 // SetPercent sets the Percent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldPercent)
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsGetAssetsResponseInputVatUseChangesItemFieldPercent)
 }
 
 // SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldReason)
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsGetAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsGetAssetsResponseInputVatUseChangesItemFieldReason)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsGetAssetsResponseInputVatUseChangesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsGetAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsGetAssetsResponseInputVatUseChangesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) String() string {
-	if p == nil {
+func (a *AssetsGetAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason string
+type AssetsGetAssetsResponseInputVatUseChangesItemReason string
 
 const (
-	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "withdrawal"
+	AssetsGetAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsGetAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsGetAssetsResponseInputVatUseChangesItemReasonSale       AssetsGetAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsGetAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsGetAssetsResponseInputVatUseChangesItemReason = "withdrawal"
 )
 
-func NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason, error) {
+func NewAssetsGetAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsGetAssetsResponseInputVatUseChangesItemReason, error) {
 	switch s {
 	case "use_change":
-		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonUseChange, nil
+		return AssetsGetAssetsResponseInputVatUseChangesItemReasonUseChange, nil
 	case "sale":
-		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonSale, nil
+		return AssetsGetAssetsResponseInputVatUseChangesItemReasonSale, nil
 	case "withdrawal":
-		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonWithdrawal, nil
+		return AssetsGetAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
 	}
-	var t PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason
+	var t AssetsGetAssetsResponseInputVatUseChangesItemReason
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason {
-	return &p
+func (a AssetsGetAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsGetAssetsResponseInputVatUseChangesItemReason {
+	return &a
 }
 
-type PostV1AssetsAssetsInputVatResponseStatus string
+type AssetsGetAssetsResponseStatus string
 
 const (
-	PostV1AssetsAssetsInputVatResponseStatusActive           PostV1AssetsAssetsInputVatResponseStatus = "active"
-	PostV1AssetsAssetsInputVatResponseStatusFullyDepreciated PostV1AssetsAssetsInputVatResponseStatus = "fully_depreciated"
-	PostV1AssetsAssetsInputVatResponseStatusDisposed         PostV1AssetsAssetsInputVatResponseStatus = "disposed"
+	AssetsGetAssetsResponseStatusActive           AssetsGetAssetsResponseStatus = "active"
+	AssetsGetAssetsResponseStatusFullyDepreciated AssetsGetAssetsResponseStatus = "fully_depreciated"
+	AssetsGetAssetsResponseStatusDisposed         AssetsGetAssetsResponseStatus = "disposed"
 )
 
-func NewPostV1AssetsAssetsInputVatResponseStatusFromString(s string) (PostV1AssetsAssetsInputVatResponseStatus, error) {
+func NewAssetsGetAssetsResponseStatusFromString(s string) (AssetsGetAssetsResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1AssetsAssetsInputVatResponseStatusActive, nil
+		return AssetsGetAssetsResponseStatusActive, nil
 	case "fully_depreciated":
-		return PostV1AssetsAssetsInputVatResponseStatusFullyDepreciated, nil
+		return AssetsGetAssetsResponseStatusFullyDepreciated, nil
 	case "disposed":
-		return PostV1AssetsAssetsInputVatResponseStatusDisposed, nil
+		return AssetsGetAssetsResponseStatusDisposed, nil
 	}
-	var t PostV1AssetsAssetsInputVatResponseStatus
+	var t AssetsGetAssetsResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsInputVatResponseStatus) Ptr() *PostV1AssetsAssetsInputVatResponseStatus {
-	return &p
+func (a AssetsGetAssetsResponseStatus) Ptr() *AssetsGetAssetsResponseStatus {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AssetsAssetsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AssetsAssetsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	assetsInputVatAssetsRequestInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsInputVatAssetsRequestInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsInputVatAssetsRequestInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsAssetsListRequestFilterItem struct {
-	Field string                                        `json:"field" url:"field"`
-	Op    PostV1AssetsAssetsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AssetsAssetsListRequestFilterItemValue `json:"value" url:"value"`
+type AssetsInputVatAssetsRequestInputVatUseChangesItem struct {
+	Year    int64                                                   `json:"year" url:"year"`
+	Percent string                                                  `json:"percent" url:"percent"`
+	Reason  AssetsInputVatAssetsRequestInputVatUseChangesItemReason `json:"reason" url:"reason"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3223,312 +3544,1268 @@ type PostV1AssetsAssetsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.Year
+}
+
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Percent
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) GetOp() PostV1AssetsAssetsListRequestFilterItemOp {
-	if p == nil {
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) GetReason() AssetsInputVatAssetsRequestInputVatUseChangesItemReason {
+	if a == nil {
 		return ""
 	}
-	return p.Op
+	return a.Reason
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) GetValue() *PostV1AssetsAssetsListRequestFilterItemValue {
-	if p == nil {
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.Value
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsInputVatAssetsRequestInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsInputVatAssetsRequestInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) SetReason(reason AssetsInputVatAssetsRequestInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsInputVatAssetsRequestInputVatUseChangesItemFieldReason)
+}
+
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsInputVatAssetsRequestInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsInputVatAssetsRequestInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsInputVatAssetsRequestInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsInputVatAssetsRequestInputVatUseChangesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsInputVatAssetsRequestInputVatUseChangesItemReason string
+
+const (
+	AssetsInputVatAssetsRequestInputVatUseChangesItemReasonUseChange  AssetsInputVatAssetsRequestInputVatUseChangesItemReason = "use_change"
+	AssetsInputVatAssetsRequestInputVatUseChangesItemReasonSale       AssetsInputVatAssetsRequestInputVatUseChangesItemReason = "sale"
+	AssetsInputVatAssetsRequestInputVatUseChangesItemReasonWithdrawal AssetsInputVatAssetsRequestInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewAssetsInputVatAssetsRequestInputVatUseChangesItemReasonFromString(s string) (AssetsInputVatAssetsRequestInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return AssetsInputVatAssetsRequestInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return AssetsInputVatAssetsRequestInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return AssetsInputVatAssetsRequestInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t AssetsInputVatAssetsRequestInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsInputVatAssetsRequestInputVatUseChangesItemReason) Ptr() *AssetsInputVatAssetsRequestInputVatUseChangesItemReason {
+	return &a
+}
+
+var (
+	assetsInputVatAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsInputVatAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsInputVatAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsInputVatAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsInputVatAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsInputVatAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsInputVatAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsInputVatAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsInputVatAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsInputVatAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsInputVatAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsInputVatAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsInputVatAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsInputVatAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsInputVatAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsInputVatAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsInputVatAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsInputVatAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsInputVatAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsInputVatAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsInputVatAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsInputVatAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsInputVatAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsInputVatAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsInputVatAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsInputVatAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsInputVatAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+)
+
+type AssetsInputVatAssetsResponse struct {
+	ID                           string                                                `json:"id" url:"id"`
+	GroupID                      string                                                `json:"groupId" url:"groupId"`
+	Code                         string                                                `json:"code" url:"code"`
+	Name                         string                                                `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                             `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                             `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                                `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                                `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                                 `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                                `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                                `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                                `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                                 `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                                 `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsInputVatAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsInputVatAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                               `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                            `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                               `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                  `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsInputVatAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                            `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsInputVatAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                               `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                               `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                             `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsInputVatAssetsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AssetsInputVatAssetsResponse) GetGroupID() string {
+	if a == nil {
+		return ""
+	}
+	return a.GroupID
+}
+
+func (a *AssetsInputVatAssetsResponse) GetCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Code
+}
+
+func (a *AssetsInputVatAssetsResponse) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsInputVatAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsInputVatAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.AcquisitionCost
+}
+
+func (a *AssetsInputVatAssetsResponse) GetSalvageValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.SalvageValue
+}
+
+func (a *AssetsInputVatAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.UsefulLifeMonths
+}
+
+func (a *AssetsInputVatAssetsResponse) GetTotalCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.TotalCost
+}
+
+func (a *AssetsInputVatAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
+		return ""
+	}
+	return a.AccumulatedDepreciation
+}
+
+func (a *AssetsInputVatAssetsResponse) GetNetBookValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.NetBookValue
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.DepreciatedMonths
+}
+
+func (a *AssetsInputVatAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.TotalLifeMonths
+}
+
+func (a *AssetsInputVatAssetsResponse) GetStatus() AssetsInputVatAssetsResponseStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AssetsInputVatAssetsResponse) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.Notes
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsInputVatAssetsResponse) GetDocuments() []*AssetsInputVatAssetsResponseDocumentsItem {
+	if a == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return a.Documents
+}
+
+func (a *AssetsInputVatAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatAmount
+}
+
+func (a *AssetsInputVatAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatFirstUseDate
+}
+
+func (a *AssetsInputVatAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatDeductiblePercent
+}
+
+func (a *AssetsInputVatAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
+		return false
+	}
+	return a.InputVatRealEstate
+}
+
+func (a *AssetsInputVatAssetsResponse) GetInputVatUseChanges() []*AssetsInputVatAssetsResponseInputVatUseChangesItem {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatUseChanges
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalDate
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDisposalReason() *AssetsInputVatAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalReason
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsInputVatAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsInputVatAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsInputVatAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsInputVatAssetsResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsInputVatAssetsResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsInputVatAssetsResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsInputVatAssetsResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsInputVatAssetsResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsInputVatAssetsResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsInputVatAssetsResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsInputVatAssetsResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsInputVatAssetsResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsInputVatAssetsResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsInputVatAssetsResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsInputVatAssetsResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsInputVatAssetsResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsInputVatAssetsResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetStatus(status AssetsInputVatAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsInputVatAssetsResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsInputVatAssetsResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDocuments(documents []*AssetsInputVatAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsInputVatAssetsResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsInputVatAssetsResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsInputVatAssetsResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsInputVatAssetsResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsInputVatAssetsResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsInputVatAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsInputVatAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsInputVatAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDisposalReason(disposalReason *AssetsInputVatAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsInputVatAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsInputVatAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsInputVatAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsInputVatAssetsResponseFieldCreatedAt)
+}
+
+func (a *AssetsInputVatAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsInputVatAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AssetsInputVatAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsInputVatAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsInputVatAssetsResponse
+	var marshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsInputVatAssetsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsInputVatAssetsResponseDisposalReason string
+
+const (
+	AssetsInputVatAssetsResponseDisposalReasonSold       AssetsInputVatAssetsResponseDisposalReason = "sold"
+	AssetsInputVatAssetsResponseDisposalReasonScrapped   AssetsInputVatAssetsResponseDisposalReason = "scrapped"
+	AssetsInputVatAssetsResponseDisposalReasonWrittenOff AssetsInputVatAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsInputVatAssetsResponseDisposalReasonFromString(s string) (AssetsInputVatAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsInputVatAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsInputVatAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsInputVatAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsInputVatAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsInputVatAssetsResponseDisposalReason) Ptr() *AssetsInputVatAssetsResponseDisposalReason {
+	return &a
+}
+
+var (
+	assetsInputVatAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsInputVatAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsInputVatAssetsResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsInputVatAssetsResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsInputVatAssetsResponseDocumentsItemFieldRef)
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsInputVatAssetsResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsInputVatAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsInputVatAssetsResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsInputVatAssetsResponseDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsInputVatAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsInputVatAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsInputVatAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type AssetsInputVatAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                    `json:"year" url:"year"`
+	Percent string                                                   `json:"percent" url:"percent"`
+	Reason  AssetsInputVatAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.Year
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
+		return ""
+	}
+	return a.Percent
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) GetReason() AssetsInputVatAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
+		return ""
+	}
+	return a.Reason
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsInputVatAssetsResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsInputVatAssetsResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsInputVatAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsInputVatAssetsResponseInputVatUseChangesItemFieldReason)
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsInputVatAssetsResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsInputVatAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsInputVatAssetsResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsInputVatAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsInputVatAssetsResponseInputVatUseChangesItemReason string
+
+const (
+	AssetsInputVatAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsInputVatAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsInputVatAssetsResponseInputVatUseChangesItemReasonSale       AssetsInputVatAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsInputVatAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsInputVatAssetsResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewAssetsInputVatAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsInputVatAssetsResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return AssetsInputVatAssetsResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return AssetsInputVatAssetsResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return AssetsInputVatAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t AssetsInputVatAssetsResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsInputVatAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsInputVatAssetsResponseInputVatUseChangesItemReason {
+	return &a
+}
+
+type AssetsInputVatAssetsResponseStatus string
+
+const (
+	AssetsInputVatAssetsResponseStatusActive           AssetsInputVatAssetsResponseStatus = "active"
+	AssetsInputVatAssetsResponseStatusFullyDepreciated AssetsInputVatAssetsResponseStatus = "fully_depreciated"
+	AssetsInputVatAssetsResponseStatusDisposed         AssetsInputVatAssetsResponseStatus = "disposed"
+)
+
+func NewAssetsInputVatAssetsResponseStatusFromString(s string) (AssetsInputVatAssetsResponseStatus, error) {
+	switch s {
+	case "active":
+		return AssetsInputVatAssetsResponseStatusActive, nil
+	case "fully_depreciated":
+		return AssetsInputVatAssetsResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return AssetsInputVatAssetsResponseStatusDisposed, nil
+	}
+	var t AssetsInputVatAssetsResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsInputVatAssetsResponseStatus) Ptr() *AssetsInputVatAssetsResponseStatus {
+	return &a
+}
+
+var (
+	assetsListAssetsRequestFilterItemFieldField = big.NewInt(1 << 0)
+	assetsListAssetsRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	assetsListAssetsRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type AssetsListAssetsRequestFilterItem struct {
+	Field string                                  `json:"field" url:"field"`
+	Op    AssetsListAssetsRequestFilterItemOp     `json:"op" url:"op"`
+	Value *AssetsListAssetsRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsListAssetsRequestFilterItem) GetField() string {
+	if a == nil {
+		return ""
+	}
+	return a.Field
+}
+
+func (a *AssetsListAssetsRequestFilterItem) GetOp() AssetsListAssetsRequestFilterItemOp {
+	if a == nil {
+		return ""
+	}
+	return a.Op
+}
+
+func (a *AssetsListAssetsRequestFilterItem) GetValue() *AssetsListAssetsRequestFilterItemValue {
+	if a == nil {
+		return nil
+	}
+	return a.Value
+}
+
+func (a *AssetsListAssetsRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsListAssetsRequestFilterItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AssetsAssetsListRequestFilterItemFieldField)
+func (a *AssetsListAssetsRequestFilterItem) SetField(field string) {
+	a.Field = field
+	a.require(assetsListAssetsRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequestFilterItem) SetOp(op PostV1AssetsAssetsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AssetsAssetsListRequestFilterItemFieldOp)
+func (a *AssetsListAssetsRequestFilterItem) SetOp(op AssetsListAssetsRequestFilterItemOp) {
+	a.Op = op
+	a.require(assetsListAssetsRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequestFilterItem) SetValue(value *PostV1AssetsAssetsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AssetsAssetsListRequestFilterItemFieldValue)
+func (a *AssetsListAssetsRequestFilterItem) SetValue(value *AssetsListAssetsRequestFilterItemValue) {
+	a.Value = value
+	a.require(assetsListAssetsRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListRequestFilterItem
+func (a *AssetsListAssetsRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListRequestFilterItem
+func (a *AssetsListAssetsRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItem) String() string {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsListRequestFilterItemOp string
+type AssetsListAssetsRequestFilterItemOp string
 
 const (
-	PostV1AssetsAssetsListRequestFilterItemOpEq       PostV1AssetsAssetsListRequestFilterItemOp = "eq"
-	PostV1AssetsAssetsListRequestFilterItemOpNe       PostV1AssetsAssetsListRequestFilterItemOp = "ne"
-	PostV1AssetsAssetsListRequestFilterItemOpContains PostV1AssetsAssetsListRequestFilterItemOp = "contains"
-	PostV1AssetsAssetsListRequestFilterItemOpGte      PostV1AssetsAssetsListRequestFilterItemOp = "gte"
-	PostV1AssetsAssetsListRequestFilterItemOpLte      PostV1AssetsAssetsListRequestFilterItemOp = "lte"
-	PostV1AssetsAssetsListRequestFilterItemOpIn       PostV1AssetsAssetsListRequestFilterItemOp = "in"
+	AssetsListAssetsRequestFilterItemOpEq       AssetsListAssetsRequestFilterItemOp = "eq"
+	AssetsListAssetsRequestFilterItemOpNe       AssetsListAssetsRequestFilterItemOp = "ne"
+	AssetsListAssetsRequestFilterItemOpContains AssetsListAssetsRequestFilterItemOp = "contains"
+	AssetsListAssetsRequestFilterItemOpGte      AssetsListAssetsRequestFilterItemOp = "gte"
+	AssetsListAssetsRequestFilterItemOpLte      AssetsListAssetsRequestFilterItemOp = "lte"
+	AssetsListAssetsRequestFilterItemOpIn       AssetsListAssetsRequestFilterItemOp = "in"
 )
 
-func NewPostV1AssetsAssetsListRequestFilterItemOpFromString(s string) (PostV1AssetsAssetsListRequestFilterItemOp, error) {
+func NewAssetsListAssetsRequestFilterItemOpFromString(s string) (AssetsListAssetsRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AssetsAssetsListRequestFilterItemOpEq, nil
+		return AssetsListAssetsRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AssetsAssetsListRequestFilterItemOpNe, nil
+		return AssetsListAssetsRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AssetsAssetsListRequestFilterItemOpContains, nil
+		return AssetsListAssetsRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AssetsAssetsListRequestFilterItemOpGte, nil
+		return AssetsListAssetsRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AssetsAssetsListRequestFilterItemOpLte, nil
+		return AssetsListAssetsRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AssetsAssetsListRequestFilterItemOpIn, nil
+		return AssetsListAssetsRequestFilterItemOpIn, nil
 	}
-	var t PostV1AssetsAssetsListRequestFilterItemOp
+	var t AssetsListAssetsRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsListRequestFilterItemOp) Ptr() *PostV1AssetsAssetsListRequestFilterItemOp {
-	return &p
+func (a AssetsListAssetsRequestFilterItemOp) Ptr() *AssetsListAssetsRequestFilterItemOp {
+	return &a
 }
 
-type PostV1AssetsAssetsListRequestFilterItemValue struct {
-	String                                                    string
-	Double                                                    float64
-	Boolean                                                   bool
-	PostV1AssetsAssetsListRequestFilterItemValueThreeItemList []*PostV1AssetsAssetsListRequestFilterItemValueThreeItem
+type AssetsListAssetsRequestFilterItemValue struct {
+	String                                              string
+	Double                                              float64
+	Boolean                                             bool
+	AssetsListAssetsRequestFilterItemValueThreeItemList []*AssetsListAssetsRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValue) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValue) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValue) GetBoolean() bool {
+	if a == nil {
 		return false
 	}
-	return p.Boolean
+	return a.Boolean
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) GetPostV1AssetsAssetsListRequestFilterItemValueThreeItemList() []*PostV1AssetsAssetsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValue) GetAssetsListAssetsRequestFilterItemValueThreeItemList() []*AssetsListAssetsRequestFilterItemValueThreeItem {
+	if a == nil {
 		return nil
 	}
-	return p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList
+	return a.AssetsListAssetsRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (a *AssetsListAssetsRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		a.typ = "Boolean"
+		a.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AssetsAssetsListRequestFilterItemValueThreeItemList []*PostV1AssetsAssetsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AssetsAssetsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AssetsAssetsListRequestFilterItemValueThreeItemList"
-		p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList = valuePostV1AssetsAssetsListRequestFilterItemValueThreeItemList
+	var valueAssetsListAssetsRequestFilterItemValueThreeItemList []*AssetsListAssetsRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueAssetsListAssetsRequestFilterItemValueThreeItemList); err == nil {
+		a.typ = "AssetsListAssetsRequestFilterItemValueThreeItemList"
+		a.AssetsListAssetsRequestFilterItemValueThreeItemList = valueAssetsListAssetsRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1AssetsAssetsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AssetsListAssetsRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return json.Marshal(a.Boolean)
 	}
-	if p.typ == "PostV1AssetsAssetsListRequestFilterItemValueThreeItemList" || p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AssetsListAssetsRequestFilterItemValueThreeItemList" || a.AssetsListAssetsRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(a.AssetsListAssetsRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AssetsAssetsListRequestFilterItemValueVisitor interface {
+type AssetsListAssetsRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AssetsAssetsListRequestFilterItemValueThreeItemList([]*PostV1AssetsAssetsListRequestFilterItemValueThreeItem) error
+	VisitAssetsListAssetsRequestFilterItemValueThreeItemList([]*AssetsListAssetsRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValue) Accept(visitor PostV1AssetsAssetsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AssetsListAssetsRequestFilterItemValue) Accept(visitor AssetsListAssetsRequestFilterItemValueVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if a.typ == "Boolean" || a.Boolean != false {
+		return visitor.VisitBoolean(a.Boolean)
 	}
-	if p.typ == "PostV1AssetsAssetsListRequestFilterItemValueThreeItemList" || p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AssetsAssetsListRequestFilterItemValueThreeItemList(p.PostV1AssetsAssetsListRequestFilterItemValueThreeItemList)
+	if a.typ == "AssetsListAssetsRequestFilterItemValueThreeItemList" || a.AssetsListAssetsRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitAssetsListAssetsRequestFilterItemValueThreeItemList(a.AssetsListAssetsRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AssetsAssetsListRequestFilterItemValueThreeItem struct {
+type AssetsListAssetsRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValueThreeItem) GetString() string {
+	if a == nil {
 		return ""
 	}
-	return p.String
+	return a.String
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (a *AssetsListAssetsRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if a == nil {
 		return 0
 	}
-	return p.Double
+	return a.Double
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (a *AssetsListAssetsRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		a.typ = "String"
+		a.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		a.typ = "Double"
+		a.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, a)
 }
 
-func (p PostV1AssetsAssetsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (a AssetsListAssetsRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if a.typ == "String" || a.String != "" {
+		return json.Marshal(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return json.Marshal(a.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
-type PostV1AssetsAssetsListRequestFilterItemValueThreeItemVisitor interface {
+type AssetsListAssetsRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AssetsAssetsListRequestFilterItemValueThreeItem) Accept(visitor PostV1AssetsAssetsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (a *AssetsListAssetsRequestFilterItemValueThreeItem) Accept(visitor AssetsListAssetsRequestFilterItemValueThreeItemVisitor) error {
+	if a.typ == "String" || a.String != "" {
+		return visitor.VisitString(a.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if a.typ == "Double" || a.Double != 0 {
+		return visitor.VisitDouble(a.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", a)
 }
 
 var (
-	postV1AssetsAssetsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AssetsAssetsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	assetsListAssetsRequestSortItemFieldField = big.NewInt(1 << 0)
+	assetsListAssetsRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsListRequestSortItem struct {
-	Field string                                    `json:"field" url:"field"`
-	Dir   *PostV1AssetsAssetsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type AssetsListAssetsRequestSortItem struct {
+	Field string                              `json:"field" url:"field"`
+	Dir   *AssetsListAssetsRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3537,126 +4814,126 @@ type PostV1AssetsAssetsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) GetField() string {
-	if p == nil {
+func (a *AssetsListAssetsRequestSortItem) GetField() string {
+	if a == nil {
 		return ""
 	}
-	return p.Field
+	return a.Field
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) GetDir() *PostV1AssetsAssetsListRequestSortItemDir {
-	if p == nil {
+func (a *AssetsListAssetsRequestSortItem) GetDir() *AssetsListAssetsRequestSortItemDir {
+	if a == nil {
 		return nil
 	}
-	return p.Dir
+	return a.Dir
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsListAssetsRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsRequestSortItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AssetsAssetsListRequestSortItemFieldField)
+func (a *AssetsListAssetsRequestSortItem) SetField(field string) {
+	a.Field = field
+	a.require(assetsListAssetsRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListRequestSortItem) SetDir(dir *PostV1AssetsAssetsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AssetsAssetsListRequestSortItemFieldDir)
+func (a *AssetsListAssetsRequestSortItem) SetDir(dir *AssetsListAssetsRequestSortItemDir) {
+	a.Dir = dir
+	a.require(assetsListAssetsRequestSortItemFieldDir)
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListRequestSortItem
+func (a *AssetsListAssetsRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListRequestSortItem
+func (a *AssetsListAssetsRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsListRequestSortItem) String() string {
-	if p == nil {
+func (a *AssetsListAssetsRequestSortItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsListRequestSortItemDir string
+type AssetsListAssetsRequestSortItemDir string
 
 const (
-	PostV1AssetsAssetsListRequestSortItemDirAsc  PostV1AssetsAssetsListRequestSortItemDir = "asc"
-	PostV1AssetsAssetsListRequestSortItemDirDesc PostV1AssetsAssetsListRequestSortItemDir = "desc"
+	AssetsListAssetsRequestSortItemDirAsc  AssetsListAssetsRequestSortItemDir = "asc"
+	AssetsListAssetsRequestSortItemDirDesc AssetsListAssetsRequestSortItemDir = "desc"
 )
 
-func NewPostV1AssetsAssetsListRequestSortItemDirFromString(s string) (PostV1AssetsAssetsListRequestSortItemDir, error) {
+func NewAssetsListAssetsRequestSortItemDirFromString(s string) (AssetsListAssetsRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AssetsAssetsListRequestSortItemDirAsc, nil
+		return AssetsListAssetsRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AssetsAssetsListRequestSortItemDirDesc, nil
+		return AssetsListAssetsRequestSortItemDirDesc, nil
 	}
-	var t PostV1AssetsAssetsListRequestSortItemDir
+	var t AssetsListAssetsRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsListRequestSortItemDir) Ptr() *PostV1AssetsAssetsListRequestSortItemDir {
-	return &p
+func (a AssetsListAssetsRequestSortItemDir) Ptr() *AssetsListAssetsRequestSortItemDir {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AssetsAssetsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AssetsAssetsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AssetsAssetsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AssetsAssetsListResponseFieldTotals   = big.NewInt(1 << 4)
+	assetsListAssetsResponseFieldRows     = big.NewInt(1 << 0)
+	assetsListAssetsResponseFieldPage     = big.NewInt(1 << 1)
+	assetsListAssetsResponseFieldPageSize = big.NewInt(1 << 2)
+	assetsListAssetsResponseFieldTotal    = big.NewInt(1 << 3)
+	assetsListAssetsResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsAssetsListResponse struct {
-	Rows     []*PostV1AssetsAssetsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                     `json:"page" url:"page"`
-	PageSize int64                                     `json:"pageSize" url:"pageSize"`
-	Total    int64                                     `json:"total" url:"total"`
-	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+type AssetsListAssetsResponse struct {
+	Rows     []*AssetsListAssetsResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                               `json:"page" url:"page"`
+	PageSize int64                               `json:"pageSize" url:"pageSize"`
+	Total    int64                               `json:"total" url:"total"`
+	Totals   map[string]string                   `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3665,182 +4942,190 @@ type PostV1AssetsAssetsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetRows() []*PostV1AssetsAssetsListResponseRowsItem {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetRows() []*AssetsListAssetsResponseRowsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Rows
+	return a.Rows
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetPage() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetPage() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Page
+	return a.Page
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetPageSize() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.PageSize
+	return a.PageSize
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetTotal() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetTotal() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Total
+	return a.Total
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetTotals() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return p.Totals
+	return a.Totals
 }
 
-func (p *PostV1AssetsAssetsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsListAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponse) SetRows(rows []*PostV1AssetsAssetsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AssetsAssetsListResponseFieldRows)
+func (a *AssetsListAssetsResponse) SetRows(rows []*AssetsListAssetsResponseRowsItem) {
+	a.Rows = rows
+	a.require(assetsListAssetsResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AssetsAssetsListResponseFieldPage)
+func (a *AssetsListAssetsResponse) SetPage(page int64) {
+	a.Page = page
+	a.require(assetsListAssetsResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AssetsAssetsListResponseFieldPageSize)
+func (a *AssetsListAssetsResponse) SetPageSize(pageSize int64) {
+	a.PageSize = pageSize
+	a.require(assetsListAssetsResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AssetsAssetsListResponseFieldTotal)
+func (a *AssetsListAssetsResponse) SetTotal(total int64) {
+	a.Total = total
+	a.require(assetsListAssetsResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AssetsAssetsListResponseFieldTotals)
+func (a *AssetsListAssetsResponse) SetTotals(totals map[string]string) {
+	a.Totals = totals
+	a.require(assetsListAssetsResponseFieldTotals)
 }
 
-func (p *PostV1AssetsAssetsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListResponse
+func (a *AssetsListAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListResponse
+func (a *AssetsListAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsListResponse) String() string {
-	if p == nil {
+func (a *AssetsListAssetsResponse) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsListResponseRowsItemFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsListResponseRowsItemFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsListResponseRowsItemFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsListResponseRowsItemFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsListResponseRowsItemFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsListResponseRowsItemFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsListResponseRowsItemFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsListResponseRowsItemFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsListResponseRowsItemFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsListResponseRowsItemFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsListResponseRowsItemFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsListResponseRowsItemFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsListResponseRowsItemFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsListResponseRowsItemFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsListResponseRowsItemFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsListResponseRowsItemFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsListResponseRowsItemFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsListResponseRowsItemFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsListResponseRowsItemFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsListResponseRowsItemFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsListResponseRowsItemFieldCreatedAt                 = big.NewInt(1 << 22)
+	assetsListAssetsResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	assetsListAssetsResponseRowsItemFieldGroupID                      = big.NewInt(1 << 1)
+	assetsListAssetsResponseRowsItemFieldCode                         = big.NewInt(1 << 2)
+	assetsListAssetsResponseRowsItemFieldName                         = big.NewInt(1 << 3)
+	assetsListAssetsResponseRowsItemFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsListAssetsResponseRowsItemFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsListAssetsResponseRowsItemFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsListAssetsResponseRowsItemFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsListAssetsResponseRowsItemFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsListAssetsResponseRowsItemFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsListAssetsResponseRowsItemFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsListAssetsResponseRowsItemFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsListAssetsResponseRowsItemFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsListAssetsResponseRowsItemFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsListAssetsResponseRowsItemFieldStatus                       = big.NewInt(1 << 14)
+	assetsListAssetsResponseRowsItemFieldNotes                        = big.NewInt(1 << 15)
+	assetsListAssetsResponseRowsItemFieldDocuments                    = big.NewInt(1 << 16)
+	assetsListAssetsResponseRowsItemFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsListAssetsResponseRowsItemFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsListAssetsResponseRowsItemFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsListAssetsResponseRowsItemFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsListAssetsResponseRowsItemFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsListAssetsResponseRowsItemFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsListAssetsResponseRowsItemFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsListAssetsResponseRowsItemFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsListAssetsResponseRowsItemFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsListAssetsResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 26)
 )
 
-type PostV1AssetsAssetsListResponseRowsItem struct {
-	ID                        string                                                          `json:"id" url:"id"`
-	GroupID                   string                                                          `json:"groupId" url:"groupId"`
-	Code                      string                                                          `json:"code" url:"code"`
-	Name                      string                                                          `json:"name" url:"name"`
-	AcquisitionDate           string                                                          `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                          `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                          `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                          `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                           `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                          `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                          `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                          `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                           `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                           `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsListResponseRowsItemStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                         `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                         `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                         `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                            `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                          `json:"createdAt" url:"createdAt"`
+type AssetsListAssetsResponseRowsItem struct {
+	ID                           string                                                    `json:"id" url:"id"`
+	GroupID                      string                                                    `json:"groupId" url:"groupId"`
+	Code                         string                                                    `json:"code" url:"code"`
+	Name                         string                                                    `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                                 `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                                 `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                                    `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                                    `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                                    `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                                    `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsListAssetsResponseRowsItemStatus                    `json:"status" url:"status"`
+	Notes                        *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsListAssetsResponseRowsItemDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                                   `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                                `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                                   `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                      `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                                `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsListAssetsResponseRowsItemDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                                   `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                                   `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3849,390 +5134,495 @@ type PostV1AssetsAssetsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return p.ID
+	return a.ID
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetGroupID() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetGroupID() string {
+	if a == nil {
 		return ""
 	}
-	return p.GroupID
+	return a.GroupID
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetCode() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetCode() string {
+	if a == nil {
 		return ""
 	}
-	return p.Code
+	return a.Code
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetName() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetAcquisitionDate() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetAcquisitionCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.AcquisitionDate
+	return a.AcquisitionCost
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetDepreciationStartDate() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetSalvageValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.DepreciationStartDate
+	return a.SalvageValue
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetUsefulLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetUsefulLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.UsefulLifeMonths
+	return a.UsefulLifeMonths
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetTotalCost() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetTotalCost() string {
+	if a == nil {
 		return ""
 	}
-	return p.TotalCost
+	return a.TotalCost
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetAccumulatedDepreciation() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetAccumulatedDepreciation() string {
+	if a == nil {
 		return ""
 	}
-	return p.AccumulatedDepreciation
+	return a.AccumulatedDepreciation
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetNetBookValue() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetNetBookValue() string {
+	if a == nil {
 		return ""
 	}
-	return p.NetBookValue
+	return a.NetBookValue
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetDepreciatedMonths() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetDepreciatedMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.DepreciatedMonths
+	return a.DepreciatedMonths
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetTotalLifeMonths() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetTotalLifeMonths() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.TotalLifeMonths
+	return a.TotalLifeMonths
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetStatus() PostV1AssetsAssetsListResponseRowsItemStatus {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetStatus() AssetsListAssetsResponseRowsItemStatus {
+	if a == nil {
 		return ""
 	}
-	return p.Status
+	return a.Status
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetNotes() *string {
+	if a == nil {
 		return nil
 	}
-	return p.Notes
+	return a.Notes
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetDocuments() []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetDocuments() []*AssetsListAssetsResponseRowsItemDocumentsItem {
+	if a == nil {
 		return nil
 	}
-	return p.Documents
+	return a.Documents
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatAmount() *string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetInputVatAmount() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatAmount
+	return a.InputVatAmount
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatFirstUseDate() *string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatFirstUseDate
+	return a.InputVatFirstUseDate
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatDeductiblePercent() *string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetInputVatDeductiblePercent() *string {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatDeductiblePercent
+	return a.InputVatDeductiblePercent
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatRealEstate() bool {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetInputVatRealEstate() bool {
+	if a == nil {
 		return false
 	}
-	return p.InputVatRealEstate
+	return a.InputVatRealEstate
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatUseChanges() []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetInputVatUseChanges() []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem {
+	if a == nil {
 		return nil
 	}
-	return p.InputVatUseChanges
+	return a.InputVatUseChanges
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) GetDisposalDate() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.DisposalDate
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsResponseRowsItem) GetDisposalReason() *AssetsListAssetsResponseRowsItemDisposalReason {
+	if a == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return a.DisposalReason
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsListAssetsResponseRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldID)
+func (a *AssetsListAssetsResponseRowsItem) SetID(id string) {
+	a.ID = id
+	a.require(assetsListAssetsResponseRowsItemFieldID)
 }
 
 // SetGroupID sets the GroupID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldGroupID)
+func (a *AssetsListAssetsResponseRowsItem) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsListAssetsResponseRowsItemFieldGroupID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldCode)
+func (a *AssetsListAssetsResponseRowsItem) SetCode(code string) {
+	a.Code = code
+	a.require(assetsListAssetsResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldName)
+func (a *AssetsListAssetsResponseRowsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsListAssetsResponseRowsItemFieldName)
 }
 
 // SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldAcquisitionDate)
+func (a *AssetsListAssetsResponseRowsItem) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsListAssetsResponseRowsItemFieldAcquisitionDate)
 }
 
 // SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldDepreciationStartDate)
+func (a *AssetsListAssetsResponseRowsItem) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsListAssetsResponseRowsItemFieldDepreciationStartDate)
 }
 
 // SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldAcquisitionCost)
+func (a *AssetsListAssetsResponseRowsItem) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsListAssetsResponseRowsItemFieldAcquisitionCost)
 }
 
 // SetSalvageValue sets the SalvageValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldSalvageValue)
+func (a *AssetsListAssetsResponseRowsItem) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsListAssetsResponseRowsItemFieldSalvageValue)
 }
 
 // SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldUsefulLifeMonths)
+func (a *AssetsListAssetsResponseRowsItem) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsListAssetsResponseRowsItemFieldUsefulLifeMonths)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldTotalCost)
+func (a *AssetsListAssetsResponseRowsItem) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsListAssetsResponseRowsItemFieldTotalCost)
 }
 
 // SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldAccumulatedDepreciation)
+func (a *AssetsListAssetsResponseRowsItem) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsListAssetsResponseRowsItemFieldAccumulatedDepreciation)
 }
 
 // SetNetBookValue sets the NetBookValue field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldNetBookValue)
+func (a *AssetsListAssetsResponseRowsItem) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsListAssetsResponseRowsItemFieldNetBookValue)
 }
 
 // SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldDepreciatedMonths)
+func (a *AssetsListAssetsResponseRowsItem) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsListAssetsResponseRowsItemFieldDepreciatedMonths)
 }
 
 // SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldTotalLifeMonths)
+func (a *AssetsListAssetsResponseRowsItem) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsListAssetsResponseRowsItemFieldTotalLifeMonths)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetStatus(status PostV1AssetsAssetsListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldStatus)
+func (a *AssetsListAssetsResponseRowsItem) SetStatus(status AssetsListAssetsResponseRowsItemStatus) {
+	a.Status = status
+	a.require(assetsListAssetsResponseRowsItemFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldNotes)
+func (a *AssetsListAssetsResponseRowsItem) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsListAssetsResponseRowsItemFieldNotes)
 }
 
 // SetDocuments sets the Documents field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetDocuments(documents []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldDocuments)
+func (a *AssetsListAssetsResponseRowsItem) SetDocuments(documents []*AssetsListAssetsResponseRowsItemDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsListAssetsResponseRowsItemFieldDocuments)
 }
 
 // SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatAmount)
+func (a *AssetsListAssetsResponseRowsItem) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsListAssetsResponseRowsItemFieldInputVatAmount)
 }
 
 // SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatFirstUseDate)
+func (a *AssetsListAssetsResponseRowsItem) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsListAssetsResponseRowsItemFieldInputVatFirstUseDate)
 }
 
 // SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatDeductiblePercent)
+func (a *AssetsListAssetsResponseRowsItem) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsListAssetsResponseRowsItemFieldInputVatDeductiblePercent)
 }
 
 // SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatRealEstate)
+func (a *AssetsListAssetsResponseRowsItem) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsListAssetsResponseRowsItemFieldInputVatRealEstate)
 }
 
 // SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatUseChanges)
+func (a *AssetsListAssetsResponseRowsItem) SetInputVatUseChanges(inputVatUseChanges []*AssetsListAssetsResponseRowsItemInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsListAssetsResponseRowsItemFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsListAssetsResponseRowsItemFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetDisposalReason(disposalReason *AssetsListAssetsResponseRowsItemDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsListAssetsResponseRowsItemFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsListAssetsResponseRowsItemFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsListAssetsResponseRowsItemFieldDisposalJournalTransactionID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsListResponseRowsItemFieldCreatedAt)
+func (a *AssetsListAssetsResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsListAssetsResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (a *AssetsListAssetsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AssetsListAssetsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsResponseRowsItem(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListResponseRowsItem
+func (a *AssetsListAssetsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsResponseRowsItem
 	var marshaler = struct {
 		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItem) String() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsListAssetsResponseRowsItemDisposalReason string
+
+const (
+	AssetsListAssetsResponseRowsItemDisposalReasonSold       AssetsListAssetsResponseRowsItemDisposalReason = "sold"
+	AssetsListAssetsResponseRowsItemDisposalReasonScrapped   AssetsListAssetsResponseRowsItemDisposalReason = "scrapped"
+	AssetsListAssetsResponseRowsItemDisposalReasonWrittenOff AssetsListAssetsResponseRowsItemDisposalReason = "written_off"
+)
+
+func NewAssetsListAssetsResponseRowsItemDisposalReasonFromString(s string) (AssetsListAssetsResponseRowsItemDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsListAssetsResponseRowsItemDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsListAssetsResponseRowsItemDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsListAssetsResponseRowsItemDisposalReasonWrittenOff, nil
+	}
+	var t AssetsListAssetsResponseRowsItemDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsListAssetsResponseRowsItemDisposalReason) Ptr() *AssetsListAssetsResponseRowsItemDisposalReason {
+	return &a
 }
 
 var (
-	postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
+	assetsListAssetsResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsListAssetsResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsAssetsListResponseRowsItemDocumentsItem struct {
+type AssetsListAssetsResponseRowsItemDocumentsItem struct {
 	Name string `json:"name" url:"name"`
 	Ref  string `json:"ref" url:"ref"`
 
@@ -4243,1604 +5633,100 @@ type PostV1AssetsAssetsListResponseRowsItemDocumentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetName() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return p.Name
+	return a.Name
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetRef() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) GetRef() string {
+	if a == nil {
 		return ""
 	}
-	return p.Ref
+	return a.Ref
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldName)
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsListAssetsResponseRowsItemDocumentsItemFieldName)
 }
 
 // SetRef sets the Ref field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldRef)
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsListAssetsResponseRowsItemDocumentsItemFieldRef)
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsResponseRowsItemDocumentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsListResponseRowsItemDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsResponseRowsItemDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsResponseRowsItemDocumentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) String() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemDocumentsItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
-	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+	assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem struct {
-	Year    int64                                                              `json:"year" url:"year"`
-	Percent string                                                             `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason `json:"reason" url:"reason"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Year
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
-		return ""
-	}
-	return p.Percent
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetReason() PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason {
-	if p == nil {
-		return ""
-	}
-	return p.Reason
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldYear)
-}
-
-// SetPercent sets the Percent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldPercent)
-}
-
-// SetReason sets the Reason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldReason)
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason string
-
-const (
-	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonSale       PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "withdrawal"
-)
-
-func NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason, error) {
-	switch s {
-	case "use_change":
-		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonUseChange, nil
-	case "sale":
-		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonSale, nil
-	case "withdrawal":
-		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonWithdrawal, nil
-	}
-	var t PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason {
-	return &p
-}
-
-type PostV1AssetsAssetsListResponseRowsItemStatus string
-
-const (
-	PostV1AssetsAssetsListResponseRowsItemStatusActive           PostV1AssetsAssetsListResponseRowsItemStatus = "active"
-	PostV1AssetsAssetsListResponseRowsItemStatusFullyDepreciated PostV1AssetsAssetsListResponseRowsItemStatus = "fully_depreciated"
-	PostV1AssetsAssetsListResponseRowsItemStatusDisposed         PostV1AssetsAssetsListResponseRowsItemStatus = "disposed"
-)
-
-func NewPostV1AssetsAssetsListResponseRowsItemStatusFromString(s string) (PostV1AssetsAssetsListResponseRowsItemStatus, error) {
-	switch s {
-	case "active":
-		return PostV1AssetsAssetsListResponseRowsItemStatusActive, nil
-	case "fully_depreciated":
-		return PostV1AssetsAssetsListResponseRowsItemStatusFullyDepreciated, nil
-	case "disposed":
-		return PostV1AssetsAssetsListResponseRowsItemStatusDisposed, nil
-	}
-	var t PostV1AssetsAssetsListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AssetsAssetsListResponseRowsItemStatus) Ptr() *PostV1AssetsAssetsListResponseRowsItemStatus {
-	return &p
-}
-
-var (
-	postV1AssetsAssetsModernizeResponseFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsModernizeResponseFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsModernizeResponseFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsModernizeResponseFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsModernizeResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsModernizeResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsModernizeResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsModernizeResponseFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsModernizeResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsModernizeResponseFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsModernizeResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsModernizeResponseFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsModernizeResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsModernizeResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsModernizeResponseFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsModernizeResponseFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsModernizeResponseFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsModernizeResponseFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsModernizeResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsModernizeResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsModernizeResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsModernizeResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsModernizeResponseFieldCreatedAt                 = big.NewInt(1 << 22)
-)
-
-type PostV1AssetsAssetsModernizeResponse struct {
-	ID                        string                                                       `json:"id" url:"id"`
-	GroupID                   string                                                       `json:"groupId" url:"groupId"`
-	Code                      string                                                       `json:"code" url:"code"`
-	Name                      string                                                       `json:"name" url:"name"`
-	AcquisitionDate           string                                                       `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                       `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                       `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                       `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                        `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                       `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                       `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                       `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                        `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                        `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsModernizeResponseStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsModernizeResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                      `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                      `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                      `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                         `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                       `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetGroupID() string {
-	if p == nil {
-		return ""
-	}
-	return p.GroupID
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetCode() string {
-	if p == nil {
-		return ""
-	}
-	return p.Code
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetAcquisitionDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionDate
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetDepreciationStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.DepreciationStartDate
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetUsefulLifeMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.UsefulLifeMonths
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetTotalCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.TotalCost
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetAccumulatedDepreciation() string {
-	if p == nil {
-		return ""
-	}
-	return p.AccumulatedDepreciation
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetNetBookValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.NetBookValue
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetDepreciatedMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.DepreciatedMonths
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetTotalLifeMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.TotalLifeMonths
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetStatus() PostV1AssetsAssetsModernizeResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetDocuments() []*PostV1AssetsAssetsModernizeResponseDocumentsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Documents
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatAmount() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatAmount
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatFirstUseDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatFirstUseDate
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatDeductiblePercent() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatDeductiblePercent
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatRealEstate() bool {
-	if p == nil {
-		return false
-	}
-	return p.InputVatRealEstate
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatUseChanges
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsModernizeResponseFieldID)
-}
-
-// SetGroupID sets the GroupID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsModernizeResponseFieldGroupID)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsModernizeResponseFieldCode)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsModernizeResponseFieldName)
-}
-
-// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsModernizeResponseFieldAcquisitionDate)
-}
-
-// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsModernizeResponseFieldDepreciationStartDate)
-}
-
-// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsModernizeResponseFieldAcquisitionCost)
-}
-
-// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsModernizeResponseFieldSalvageValue)
-}
-
-// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsModernizeResponseFieldUsefulLifeMonths)
-}
-
-// SetTotalCost sets the TotalCost field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsModernizeResponseFieldTotalCost)
-}
-
-// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsModernizeResponseFieldAccumulatedDepreciation)
-}
-
-// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsModernizeResponseFieldNetBookValue)
-}
-
-// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsModernizeResponseFieldDepreciatedMonths)
-}
-
-// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsModernizeResponseFieldTotalLifeMonths)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetStatus(status PostV1AssetsAssetsModernizeResponseStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsModernizeResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsModernizeResponseFieldNotes)
-}
-
-// SetDocuments sets the Documents field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetDocuments(documents []*PostV1AssetsAssetsModernizeResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsModernizeResponseFieldDocuments)
-}
-
-// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatAmount)
-}
-
-// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatFirstUseDate)
-}
-
-// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatDeductiblePercent)
-}
-
-// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatRealEstate)
-}
-
-// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatUseChanges)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsModernizeResponseFieldCreatedAt)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsModernizeResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsModernizeResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsModernizeResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1AssetsAssetsModernizeResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsModernizeResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
-)
-
-type PostV1AssetsAssetsModernizeResponseDocumentsItem struct {
-	Name string `json:"name" url:"name"`
-	Ref  string `json:"ref" url:"ref"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetRef() string {
-	if p == nil {
-		return ""
-	}
-	return p.Ref
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsModernizeResponseDocumentsItemFieldName)
-}
-
-// SetRef sets the Ref field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsModernizeResponseDocumentsItemFieldRef)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsModernizeResponseDocumentsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsModernizeResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsModernizeResponseDocumentsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
-)
-
-type PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem struct {
-	Year    int64                                                           `json:"year" url:"year"`
-	Percent string                                                          `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Year
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
-		return ""
-	}
-	return p.Percent
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason {
-	if p == nil {
-		return ""
-	}
-	return p.Reason
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldYear)
-}
-
-// SetPercent sets the Percent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldPercent)
-}
-
-// SetReason sets the Reason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldReason)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason string
-
-const (
-	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "withdrawal"
-)
-
-func NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason, error) {
-	switch s {
-	case "use_change":
-		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonUseChange, nil
-	case "sale":
-		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonSale, nil
-	case "withdrawal":
-		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonWithdrawal, nil
-	}
-	var t PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason {
-	return &p
-}
-
-type PostV1AssetsAssetsModernizeResponseStatus string
-
-const (
-	PostV1AssetsAssetsModernizeResponseStatusActive           PostV1AssetsAssetsModernizeResponseStatus = "active"
-	PostV1AssetsAssetsModernizeResponseStatusFullyDepreciated PostV1AssetsAssetsModernizeResponseStatus = "fully_depreciated"
-	PostV1AssetsAssetsModernizeResponseStatusDisposed         PostV1AssetsAssetsModernizeResponseStatus = "disposed"
-)
-
-func NewPostV1AssetsAssetsModernizeResponseStatusFromString(s string) (PostV1AssetsAssetsModernizeResponseStatus, error) {
-	switch s {
-	case "active":
-		return PostV1AssetsAssetsModernizeResponseStatusActive, nil
-	case "fully_depreciated":
-		return PostV1AssetsAssetsModernizeResponseStatusFullyDepreciated, nil
-	case "disposed":
-		return PostV1AssetsAssetsModernizeResponseStatusDisposed, nil
-	}
-	var t PostV1AssetsAssetsModernizeResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1AssetsAssetsModernizeResponseStatus) Ptr() *PostV1AssetsAssetsModernizeResponseStatus {
-	return &p
-}
-
-var (
-	postV1AssetsAssetsUpdateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsUpdateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
-)
-
-type PostV1AssetsAssetsUpdateRequestDocumentsItem struct {
-	Name string `json:"name" url:"name"`
-	Ref  string `json:"ref" url:"ref"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetRef() string {
-	if p == nil {
-		return ""
-	}
-	return p.Ref
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsUpdateRequestDocumentsItemFieldName)
-}
-
-// SetRef sets the Ref field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsUpdateRequestDocumentsItemFieldRef)
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsUpdateRequestDocumentsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsUpdateRequestDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsUpdateRequestDocumentsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1AssetsAssetsUpdateResponseFieldID                        = big.NewInt(1 << 0)
-	postV1AssetsAssetsUpdateResponseFieldGroupID                   = big.NewInt(1 << 1)
-	postV1AssetsAssetsUpdateResponseFieldCode                      = big.NewInt(1 << 2)
-	postV1AssetsAssetsUpdateResponseFieldName                      = big.NewInt(1 << 3)
-	postV1AssetsAssetsUpdateResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
-	postV1AssetsAssetsUpdateResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
-	postV1AssetsAssetsUpdateResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
-	postV1AssetsAssetsUpdateResponseFieldSalvageValue              = big.NewInt(1 << 7)
-	postV1AssetsAssetsUpdateResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
-	postV1AssetsAssetsUpdateResponseFieldTotalCost                 = big.NewInt(1 << 9)
-	postV1AssetsAssetsUpdateResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
-	postV1AssetsAssetsUpdateResponseFieldNetBookValue              = big.NewInt(1 << 11)
-	postV1AssetsAssetsUpdateResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
-	postV1AssetsAssetsUpdateResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
-	postV1AssetsAssetsUpdateResponseFieldStatus                    = big.NewInt(1 << 14)
-	postV1AssetsAssetsUpdateResponseFieldNotes                     = big.NewInt(1 << 15)
-	postV1AssetsAssetsUpdateResponseFieldDocuments                 = big.NewInt(1 << 16)
-	postV1AssetsAssetsUpdateResponseFieldInputVatAmount            = big.NewInt(1 << 17)
-	postV1AssetsAssetsUpdateResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
-	postV1AssetsAssetsUpdateResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
-	postV1AssetsAssetsUpdateResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
-	postV1AssetsAssetsUpdateResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
-	postV1AssetsAssetsUpdateResponseFieldCreatedAt                 = big.NewInt(1 << 22)
-)
-
-type PostV1AssetsAssetsUpdateResponse struct {
-	ID                        string                                                    `json:"id" url:"id"`
-	GroupID                   string                                                    `json:"groupId" url:"groupId"`
-	Code                      string                                                    `json:"code" url:"code"`
-	Name                      string                                                    `json:"name" url:"name"`
-	AcquisitionDate           string                                                    `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate     string                                                    `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost           string                                                    `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue              string                                                    `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths          int64                                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost                 string                                                    `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation   string                                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue              string                                                    `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths         int64                                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths           int64                                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                    PostV1AssetsAssetsUpdateResponseStatus                    `json:"status" url:"status"`
-	Notes                     *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents                 []*PostV1AssetsAssetsUpdateResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
-	InputVatAmount            *string                                                   `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
-	InputVatFirstUseDate      *string                                                   `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
-	InputVatDeductiblePercent *string                                                   `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
-	InputVatRealEstate        bool                                                      `json:"inputVatRealEstate" url:"inputVatRealEstate"`
-	InputVatUseChanges        []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
-	CreatedAt                 string                                                    `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetGroupID() string {
-	if p == nil {
-		return ""
-	}
-	return p.GroupID
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetCode() string {
-	if p == nil {
-		return ""
-	}
-	return p.Code
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetAcquisitionDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionDate
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetDepreciationStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.DepreciationStartDate
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetAcquisitionCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.AcquisitionCost
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetSalvageValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.SalvageValue
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetUsefulLifeMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.UsefulLifeMonths
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetTotalCost() string {
-	if p == nil {
-		return ""
-	}
-	return p.TotalCost
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetAccumulatedDepreciation() string {
-	if p == nil {
-		return ""
-	}
-	return p.AccumulatedDepreciation
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetNetBookValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.NetBookValue
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetDepreciatedMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.DepreciatedMonths
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetTotalLifeMonths() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.TotalLifeMonths
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetStatus() PostV1AssetsAssetsUpdateResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetDocuments() []*PostV1AssetsAssetsUpdateResponseDocumentsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Documents
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatAmount() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatAmount
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatFirstUseDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatFirstUseDate
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatDeductiblePercent() *string {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatDeductiblePercent
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatRealEstate() bool {
-	if p == nil {
-		return false
-	}
-	return p.InputVatRealEstate
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem {
-	if p == nil {
-		return nil
-	}
-	return p.InputVatUseChanges
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsAssetsUpdateResponseFieldID)
-}
-
-// SetGroupID sets the GroupID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetGroupID(groupID string) {
-	p.GroupID = groupID
-	p.require(postV1AssetsAssetsUpdateResponseFieldGroupID)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsAssetsUpdateResponseFieldCode)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsUpdateResponseFieldName)
-}
-
-// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetAcquisitionDate(acquisitionDate string) {
-	p.AcquisitionDate = acquisitionDate
-	p.require(postV1AssetsAssetsUpdateResponseFieldAcquisitionDate)
-}
-
-// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetDepreciationStartDate(depreciationStartDate string) {
-	p.DepreciationStartDate = depreciationStartDate
-	p.require(postV1AssetsAssetsUpdateResponseFieldDepreciationStartDate)
-}
-
-// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetAcquisitionCost(acquisitionCost string) {
-	p.AcquisitionCost = acquisitionCost
-	p.require(postV1AssetsAssetsUpdateResponseFieldAcquisitionCost)
-}
-
-// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetSalvageValue(salvageValue string) {
-	p.SalvageValue = salvageValue
-	p.require(postV1AssetsAssetsUpdateResponseFieldSalvageValue)
-}
-
-// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
-	p.UsefulLifeMonths = usefulLifeMonths
-	p.require(postV1AssetsAssetsUpdateResponseFieldUsefulLifeMonths)
-}
-
-// SetTotalCost sets the TotalCost field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetTotalCost(totalCost string) {
-	p.TotalCost = totalCost
-	p.require(postV1AssetsAssetsUpdateResponseFieldTotalCost)
-}
-
-// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
-	p.AccumulatedDepreciation = accumulatedDepreciation
-	p.require(postV1AssetsAssetsUpdateResponseFieldAccumulatedDepreciation)
-}
-
-// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetNetBookValue(netBookValue string) {
-	p.NetBookValue = netBookValue
-	p.require(postV1AssetsAssetsUpdateResponseFieldNetBookValue)
-}
-
-// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetDepreciatedMonths(depreciatedMonths int64) {
-	p.DepreciatedMonths = depreciatedMonths
-	p.require(postV1AssetsAssetsUpdateResponseFieldDepreciatedMonths)
-}
-
-// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetTotalLifeMonths(totalLifeMonths int64) {
-	p.TotalLifeMonths = totalLifeMonths
-	p.require(postV1AssetsAssetsUpdateResponseFieldTotalLifeMonths)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetStatus(status PostV1AssetsAssetsUpdateResponseStatus) {
-	p.Status = status
-	p.require(postV1AssetsAssetsUpdateResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1AssetsAssetsUpdateResponseFieldNotes)
-}
-
-// SetDocuments sets the Documents field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetDocuments(documents []*PostV1AssetsAssetsUpdateResponseDocumentsItem) {
-	p.Documents = documents
-	p.require(postV1AssetsAssetsUpdateResponseFieldDocuments)
-}
-
-// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatAmount(inputVatAmount *string) {
-	p.InputVatAmount = inputVatAmount
-	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatAmount)
-}
-
-// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
-	p.InputVatFirstUseDate = inputVatFirstUseDate
-	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatFirstUseDate)
-}
-
-// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
-	p.InputVatDeductiblePercent = inputVatDeductiblePercent
-	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatDeductiblePercent)
-}
-
-// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
-	p.InputVatRealEstate = inputVatRealEstate
-	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatRealEstate)
-}
-
-// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) {
-	p.InputVatUseChanges = inputVatUseChanges
-	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatUseChanges)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsAssetsUpdateResponseFieldCreatedAt)
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsUpdateResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsUpdateResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1AssetsAssetsUpdateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
-	postV1AssetsAssetsUpdateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
-)
-
-type PostV1AssetsAssetsUpdateResponseDocumentsItem struct {
-	Name string `json:"name" url:"name"`
-	Ref  string `json:"ref" url:"ref"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetRef() string {
-	if p == nil {
-		return ""
-	}
-	return p.Ref
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsAssetsUpdateResponseDocumentsItemFieldName)
-}
-
-// SetRef sets the Ref field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) SetRef(ref string) {
-	p.Ref = ref
-	p.require(postV1AssetsAssetsUpdateResponseDocumentsItemFieldRef)
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsUpdateResponseDocumentsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1AssetsAssetsUpdateResponseDocumentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsUpdateResponseDocumentsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
-	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
-	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
-)
-
-type PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem struct {
+type AssetsListAssetsResponseRowsItemInputVatUseChangesItem struct {
 	Year    int64                                                        `json:"year" url:"year"`
 	Percent string                                                       `json:"percent" url:"percent"`
-	Reason  PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+	Reason  AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason `json:"reason" url:"reason"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5849,162 +5735,1892 @@ type PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetYear() int64 {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
 		return 0
 	}
-	return p.Year
+	return a.Year
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetPercent() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
 		return ""
 	}
-	return p.Percent
+	return a.Percent
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) GetReason() AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason {
+	if a == nil {
 		return ""
 	}
-	return p.Reason
+	return a.Reason
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
 		return nil
 	}
-	return p.extraProperties
+	return a.extraProperties
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	a.explicitFields.Or(a.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldYear)
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldYear)
 }
 
 // SetPercent sets the Percent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetPercent(percent string) {
-	p.Percent = percent
-	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldPercent)
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldPercent)
 }
 
 // SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason) {
-	p.Reason = reason
-	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldReason)
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) SetReason(reason AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsListAssetsResponseRowsItemInputVatUseChangesItemFieldReason)
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*a = AssetsListAssetsResponseRowsItemInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsListAssetsResponseRowsItemInputVatUseChangesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*a),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) String() string {
-	if p == nil {
+func (a *AssetsListAssetsResponseRowsItemInputVatUseChangesItem) String() string {
+	if a == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(a); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", a)
 }
 
-type PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason string
+type AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason string
 
 const (
-	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "use_change"
-	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "sale"
-	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "withdrawal"
+	AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonUseChange  AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason = "use_change"
+	AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonSale       AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason = "sale"
+	AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonWithdrawal AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason = "withdrawal"
 )
 
-func NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason, error) {
+func NewAssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonFromString(s string) (AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason, error) {
 	switch s {
 	case "use_change":
-		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonUseChange, nil
+		return AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonUseChange, nil
 	case "sale":
-		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonSale, nil
+		return AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonSale, nil
 	case "withdrawal":
-		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonWithdrawal, nil
+		return AssetsListAssetsResponseRowsItemInputVatUseChangesItemReasonWithdrawal, nil
 	}
-	var t PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason
+	var t AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason {
-	return &p
+func (a AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason) Ptr() *AssetsListAssetsResponseRowsItemInputVatUseChangesItemReason {
+	return &a
 }
 
-type PostV1AssetsAssetsUpdateResponseStatus string
+type AssetsListAssetsResponseRowsItemStatus string
 
 const (
-	PostV1AssetsAssetsUpdateResponseStatusActive           PostV1AssetsAssetsUpdateResponseStatus = "active"
-	PostV1AssetsAssetsUpdateResponseStatusFullyDepreciated PostV1AssetsAssetsUpdateResponseStatus = "fully_depreciated"
-	PostV1AssetsAssetsUpdateResponseStatusDisposed         PostV1AssetsAssetsUpdateResponseStatus = "disposed"
+	AssetsListAssetsResponseRowsItemStatusActive           AssetsListAssetsResponseRowsItemStatus = "active"
+	AssetsListAssetsResponseRowsItemStatusFullyDepreciated AssetsListAssetsResponseRowsItemStatus = "fully_depreciated"
+	AssetsListAssetsResponseRowsItemStatusDisposed         AssetsListAssetsResponseRowsItemStatus = "disposed"
 )
 
-func NewPostV1AssetsAssetsUpdateResponseStatusFromString(s string) (PostV1AssetsAssetsUpdateResponseStatus, error) {
+func NewAssetsListAssetsResponseRowsItemStatusFromString(s string) (AssetsListAssetsResponseRowsItemStatus, error) {
 	switch s {
 	case "active":
-		return PostV1AssetsAssetsUpdateResponseStatusActive, nil
+		return AssetsListAssetsResponseRowsItemStatusActive, nil
 	case "fully_depreciated":
-		return PostV1AssetsAssetsUpdateResponseStatusFullyDepreciated, nil
+		return AssetsListAssetsResponseRowsItemStatusFullyDepreciated, nil
 	case "disposed":
-		return PostV1AssetsAssetsUpdateResponseStatusDisposed, nil
+		return AssetsListAssetsResponseRowsItemStatusDisposed, nil
 	}
-	var t PostV1AssetsAssetsUpdateResponseStatus
+	var t AssetsListAssetsResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsAssetsUpdateResponseStatus) Ptr() *PostV1AssetsAssetsUpdateResponseStatus {
-	return &p
+func (a AssetsListAssetsResponseRowsItemStatus) Ptr() *AssetsListAssetsResponseRowsItemStatus {
+	return &a
 }
 
 var (
-	postV1AssetsDepreciationPostResponseFieldPosted               = big.NewInt(1 << 0)
-	postV1AssetsDepreciationPostResponseFieldSkipped              = big.NewInt(1 << 1)
-	postV1AssetsDepreciationPostResponseFieldTotal                = big.NewInt(1 << 2)
-	postV1AssetsDepreciationPostResponseFieldJournalTransactionID = big.NewInt(1 << 3)
+	assetsModernizeAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsModernizeAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsModernizeAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsModernizeAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsModernizeAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsModernizeAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsModernizeAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsModernizeAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsModernizeAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsModernizeAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsModernizeAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsModernizeAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsModernizeAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsModernizeAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsModernizeAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsModernizeAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsModernizeAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsModernizeAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsModernizeAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsModernizeAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsModernizeAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsModernizeAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsModernizeAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsModernizeAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsModernizeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsModernizeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsModernizeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
 )
 
-type PostV1AssetsDepreciationPostResponse struct {
+type AssetsModernizeAssetsResponse struct {
+	ID                           string                                                 `json:"id" url:"id"`
+	GroupID                      string                                                 `json:"groupId" url:"groupId"`
+	Code                         string                                                 `json:"code" url:"code"`
+	Name                         string                                                 `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                              `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                              `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                                 `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                                 `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                                 `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                                 `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsModernizeAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsModernizeAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                                `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                             `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                                `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                   `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsModernizeAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                             `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsModernizeAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                                `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                                `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                              `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsModernizeAssetsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AssetsModernizeAssetsResponse) GetGroupID() string {
+	if a == nil {
+		return ""
+	}
+	return a.GroupID
+}
+
+func (a *AssetsModernizeAssetsResponse) GetCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Code
+}
+
+func (a *AssetsModernizeAssetsResponse) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsModernizeAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsModernizeAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.AcquisitionCost
+}
+
+func (a *AssetsModernizeAssetsResponse) GetSalvageValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.SalvageValue
+}
+
+func (a *AssetsModernizeAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.UsefulLifeMonths
+}
+
+func (a *AssetsModernizeAssetsResponse) GetTotalCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.TotalCost
+}
+
+func (a *AssetsModernizeAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
+		return ""
+	}
+	return a.AccumulatedDepreciation
+}
+
+func (a *AssetsModernizeAssetsResponse) GetNetBookValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.NetBookValue
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.DepreciatedMonths
+}
+
+func (a *AssetsModernizeAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.TotalLifeMonths
+}
+
+func (a *AssetsModernizeAssetsResponse) GetStatus() AssetsModernizeAssetsResponseStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AssetsModernizeAssetsResponse) GetNotes() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Notes
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDocuments() []*AssetsModernizeAssetsResponseDocumentsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Documents
+}
+
+func (a *AssetsModernizeAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatAmount
+}
+
+func (a *AssetsModernizeAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatFirstUseDate
+}
+
+func (a *AssetsModernizeAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatDeductiblePercent
+}
+
+func (a *AssetsModernizeAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
+		return false
+	}
+	return a.InputVatRealEstate
+}
+
+func (a *AssetsModernizeAssetsResponse) GetInputVatUseChanges() []*AssetsModernizeAssetsResponseInputVatUseChangesItem {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatUseChanges
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalDate
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDisposalReason() *AssetsModernizeAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalReason
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsModernizeAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsModernizeAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsModernizeAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsModernizeAssetsResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsModernizeAssetsResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsModernizeAssetsResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsModernizeAssetsResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsModernizeAssetsResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsModernizeAssetsResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsModernizeAssetsResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsModernizeAssetsResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsModernizeAssetsResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsModernizeAssetsResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsModernizeAssetsResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsModernizeAssetsResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsModernizeAssetsResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsModernizeAssetsResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetStatus(status AssetsModernizeAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsModernizeAssetsResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsModernizeAssetsResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDocuments(documents []*AssetsModernizeAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsModernizeAssetsResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsModernizeAssetsResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsModernizeAssetsResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsModernizeAssetsResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsModernizeAssetsResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsModernizeAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsModernizeAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsModernizeAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDisposalReason(disposalReason *AssetsModernizeAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsModernizeAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsModernizeAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsModernizeAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsModernizeAssetsResponseFieldCreatedAt)
+}
+
+func (a *AssetsModernizeAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsModernizeAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AssetsModernizeAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsModernizeAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsModernizeAssetsResponse
+	var marshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsModernizeAssetsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsModernizeAssetsResponseDisposalReason string
+
+const (
+	AssetsModernizeAssetsResponseDisposalReasonSold       AssetsModernizeAssetsResponseDisposalReason = "sold"
+	AssetsModernizeAssetsResponseDisposalReasonScrapped   AssetsModernizeAssetsResponseDisposalReason = "scrapped"
+	AssetsModernizeAssetsResponseDisposalReasonWrittenOff AssetsModernizeAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsModernizeAssetsResponseDisposalReasonFromString(s string) (AssetsModernizeAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsModernizeAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsModernizeAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsModernizeAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsModernizeAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsModernizeAssetsResponseDisposalReason) Ptr() *AssetsModernizeAssetsResponseDisposalReason {
+	return &a
+}
+
+var (
+	assetsModernizeAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsModernizeAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsModernizeAssetsResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsModernizeAssetsResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsModernizeAssetsResponseDocumentsItemFieldRef)
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsModernizeAssetsResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsModernizeAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsModernizeAssetsResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsModernizeAssetsResponseDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsModernizeAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsModernizeAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsModernizeAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type AssetsModernizeAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                     `json:"year" url:"year"`
+	Percent string                                                    `json:"percent" url:"percent"`
+	Reason  AssetsModernizeAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.Year
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
+		return ""
+	}
+	return a.Percent
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) GetReason() AssetsModernizeAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
+		return ""
+	}
+	return a.Reason
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsModernizeAssetsResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsModernizeAssetsResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsModernizeAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsModernizeAssetsResponseInputVatUseChangesItemFieldReason)
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsModernizeAssetsResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsModernizeAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsModernizeAssetsResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsModernizeAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsModernizeAssetsResponseInputVatUseChangesItemReason string
+
+const (
+	AssetsModernizeAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsModernizeAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsModernizeAssetsResponseInputVatUseChangesItemReasonSale       AssetsModernizeAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsModernizeAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsModernizeAssetsResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewAssetsModernizeAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsModernizeAssetsResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return AssetsModernizeAssetsResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return AssetsModernizeAssetsResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return AssetsModernizeAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t AssetsModernizeAssetsResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsModernizeAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsModernizeAssetsResponseInputVatUseChangesItemReason {
+	return &a
+}
+
+type AssetsModernizeAssetsResponseStatus string
+
+const (
+	AssetsModernizeAssetsResponseStatusActive           AssetsModernizeAssetsResponseStatus = "active"
+	AssetsModernizeAssetsResponseStatusFullyDepreciated AssetsModernizeAssetsResponseStatus = "fully_depreciated"
+	AssetsModernizeAssetsResponseStatusDisposed         AssetsModernizeAssetsResponseStatus = "disposed"
+)
+
+func NewAssetsModernizeAssetsResponseStatusFromString(s string) (AssetsModernizeAssetsResponseStatus, error) {
+	switch s {
+	case "active":
+		return AssetsModernizeAssetsResponseStatusActive, nil
+	case "fully_depreciated":
+		return AssetsModernizeAssetsResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return AssetsModernizeAssetsResponseStatusDisposed, nil
+	}
+	var t AssetsModernizeAssetsResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsModernizeAssetsResponseStatus) Ptr() *AssetsModernizeAssetsResponseStatus {
+	return &a
+}
+
+var (
+	assetsUpdateAssetsRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsUpdateAssetsRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsUpdateAssetsRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsRequestDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsUpdateAssetsRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsRequestDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsUpdateAssetsRequestDocumentsItemFieldRef)
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsUpdateAssetsRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsUpdateAssetsRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsUpdateAssetsRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsUpdateAssetsRequestDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsUpdateAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsUpdateAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsUpdateAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsUpdateAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsUpdateAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsUpdateAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsUpdateAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsUpdateAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsUpdateAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsUpdateAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsUpdateAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsUpdateAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsUpdateAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsUpdateAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsUpdateAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsUpdateAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsUpdateAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsUpdateAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsUpdateAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsUpdateAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsUpdateAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsUpdateAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsUpdateAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsUpdateAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsUpdateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsUpdateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsUpdateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+)
+
+type AssetsUpdateAssetsResponse struct {
+	ID                           string                                              `json:"id" url:"id"`
+	GroupID                      string                                              `json:"groupId" url:"groupId"`
+	Code                         string                                              `json:"code" url:"code"`
+	Name                         string                                              `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                           `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                           `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                              `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                              `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                               `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                              `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                              `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                              `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                               `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                               `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsUpdateAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsUpdateAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                             `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                          `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                             `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsUpdateAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                          `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsUpdateAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsUpdateAssetsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AssetsUpdateAssetsResponse) GetGroupID() string {
+	if a == nil {
+		return ""
+	}
+	return a.GroupID
+}
+
+func (a *AssetsUpdateAssetsResponse) GetCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Code
+}
+
+func (a *AssetsUpdateAssetsResponse) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsUpdateAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsUpdateAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.AcquisitionCost
+}
+
+func (a *AssetsUpdateAssetsResponse) GetSalvageValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.SalvageValue
+}
+
+func (a *AssetsUpdateAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.UsefulLifeMonths
+}
+
+func (a *AssetsUpdateAssetsResponse) GetTotalCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.TotalCost
+}
+
+func (a *AssetsUpdateAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
+		return ""
+	}
+	return a.AccumulatedDepreciation
+}
+
+func (a *AssetsUpdateAssetsResponse) GetNetBookValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.NetBookValue
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.DepreciatedMonths
+}
+
+func (a *AssetsUpdateAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.TotalLifeMonths
+}
+
+func (a *AssetsUpdateAssetsResponse) GetStatus() AssetsUpdateAssetsResponseStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AssetsUpdateAssetsResponse) GetNotes() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Notes
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDocuments() []*AssetsUpdateAssetsResponseDocumentsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Documents
+}
+
+func (a *AssetsUpdateAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatAmount
+}
+
+func (a *AssetsUpdateAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatFirstUseDate
+}
+
+func (a *AssetsUpdateAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatDeductiblePercent
+}
+
+func (a *AssetsUpdateAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
+		return false
+	}
+	return a.InputVatRealEstate
+}
+
+func (a *AssetsUpdateAssetsResponse) GetInputVatUseChanges() []*AssetsUpdateAssetsResponseInputVatUseChangesItem {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatUseChanges
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalDate
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDisposalReason() *AssetsUpdateAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalReason
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsUpdateAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsUpdateAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsUpdateAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsUpdateAssetsResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsUpdateAssetsResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsUpdateAssetsResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsUpdateAssetsResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsUpdateAssetsResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsUpdateAssetsResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsUpdateAssetsResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsUpdateAssetsResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsUpdateAssetsResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsUpdateAssetsResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsUpdateAssetsResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsUpdateAssetsResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsUpdateAssetsResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsUpdateAssetsResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetStatus(status AssetsUpdateAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsUpdateAssetsResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsUpdateAssetsResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDocuments(documents []*AssetsUpdateAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsUpdateAssetsResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsUpdateAssetsResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsUpdateAssetsResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsUpdateAssetsResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsUpdateAssetsResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsUpdateAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsUpdateAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsUpdateAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDisposalReason(disposalReason *AssetsUpdateAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsUpdateAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsUpdateAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsUpdateAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsUpdateAssetsResponseFieldCreatedAt)
+}
+
+func (a *AssetsUpdateAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsUpdateAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AssetsUpdateAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsUpdateAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsUpdateAssetsResponse
+	var marshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsUpdateAssetsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsUpdateAssetsResponseDisposalReason string
+
+const (
+	AssetsUpdateAssetsResponseDisposalReasonSold       AssetsUpdateAssetsResponseDisposalReason = "sold"
+	AssetsUpdateAssetsResponseDisposalReasonScrapped   AssetsUpdateAssetsResponseDisposalReason = "scrapped"
+	AssetsUpdateAssetsResponseDisposalReasonWrittenOff AssetsUpdateAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsUpdateAssetsResponseDisposalReasonFromString(s string) (AssetsUpdateAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsUpdateAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsUpdateAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsUpdateAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsUpdateAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsUpdateAssetsResponseDisposalReason) Ptr() *AssetsUpdateAssetsResponseDisposalReason {
+	return &a
+}
+
+var (
+	assetsUpdateAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsUpdateAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsUpdateAssetsResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsUpdateAssetsResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsUpdateAssetsResponseDocumentsItemFieldRef)
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsUpdateAssetsResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsUpdateAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsUpdateAssetsResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsUpdateAssetsResponseDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsUpdateAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsUpdateAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsUpdateAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type AssetsUpdateAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                  `json:"year" url:"year"`
+	Percent string                                                 `json:"percent" url:"percent"`
+	Reason  AssetsUpdateAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.Year
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
+		return ""
+	}
+	return a.Percent
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) GetReason() AssetsUpdateAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
+		return ""
+	}
+	return a.Reason
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsUpdateAssetsResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsUpdateAssetsResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsUpdateAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsUpdateAssetsResponseInputVatUseChangesItemFieldReason)
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsUpdateAssetsResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsUpdateAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsUpdateAssetsResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsUpdateAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsUpdateAssetsResponseInputVatUseChangesItemReason string
+
+const (
+	AssetsUpdateAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsUpdateAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsUpdateAssetsResponseInputVatUseChangesItemReasonSale       AssetsUpdateAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsUpdateAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsUpdateAssetsResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewAssetsUpdateAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsUpdateAssetsResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return AssetsUpdateAssetsResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return AssetsUpdateAssetsResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return AssetsUpdateAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t AssetsUpdateAssetsResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsUpdateAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsUpdateAssetsResponseInputVatUseChangesItemReason {
+	return &a
+}
+
+type AssetsUpdateAssetsResponseStatus string
+
+const (
+	AssetsUpdateAssetsResponseStatusActive           AssetsUpdateAssetsResponseStatus = "active"
+	AssetsUpdateAssetsResponseStatusFullyDepreciated AssetsUpdateAssetsResponseStatus = "fully_depreciated"
+	AssetsUpdateAssetsResponseStatusDisposed         AssetsUpdateAssetsResponseStatus = "disposed"
+)
+
+func NewAssetsUpdateAssetsResponseStatusFromString(s string) (AssetsUpdateAssetsResponseStatus, error) {
+	switch s {
+	case "active":
+		return AssetsUpdateAssetsResponseStatusActive, nil
+	case "fully_depreciated":
+		return AssetsUpdateAssetsResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return AssetsUpdateAssetsResponseStatusDisposed, nil
+	}
+	var t AssetsUpdateAssetsResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsUpdateAssetsResponseStatus) Ptr() *AssetsUpdateAssetsResponseStatus {
+	return &a
+}
+
+var (
+	depreciationPostAssetsResponseFieldPosted               = big.NewInt(1 << 0)
+	depreciationPostAssetsResponseFieldSkipped              = big.NewInt(1 << 1)
+	depreciationPostAssetsResponseFieldTotal                = big.NewInt(1 << 2)
+	depreciationPostAssetsResponseFieldJournalTransactionID = big.NewInt(1 << 3)
+)
+
+type DepreciationPostAssetsResponse struct {
 	Posted               int64   `json:"posted" url:"posted"`
 	Skipped              int64   `json:"skipped" url:"skipped"`
 	Total                string  `json:"total" url:"total"`
@@ -6017,126 +7633,126 @@ type PostV1AssetsDepreciationPostResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) GetPosted() int64 {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) GetPosted() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Posted
+	return d.Posted
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) GetSkipped() int64 {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) GetSkipped() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Skipped
+	return d.Skipped
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) GetTotal() string {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) GetTotal() string {
+	if d == nil {
 		return ""
 	}
-	return p.Total
+	return d.Total
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) GetJournalTransactionID() *string {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) GetJournalTransactionID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return d.JournalTransactionID
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DepreciationPostAssetsResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetPosted sets the Posted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostResponse) SetPosted(posted int64) {
-	p.Posted = posted
-	p.require(postV1AssetsDepreciationPostResponseFieldPosted)
+func (d *DepreciationPostAssetsResponse) SetPosted(posted int64) {
+	d.Posted = posted
+	d.require(depreciationPostAssetsResponseFieldPosted)
 }
 
 // SetSkipped sets the Skipped field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostResponse) SetSkipped(skipped int64) {
-	p.Skipped = skipped
-	p.require(postV1AssetsDepreciationPostResponseFieldSkipped)
+func (d *DepreciationPostAssetsResponse) SetSkipped(skipped int64) {
+	d.Skipped = skipped
+	d.require(depreciationPostAssetsResponseFieldSkipped)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostResponse) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1AssetsDepreciationPostResponseFieldTotal)
+func (d *DepreciationPostAssetsResponse) SetTotal(total string) {
+	d.Total = total
+	d.require(depreciationPostAssetsResponseFieldTotal)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPostResponse) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1AssetsDepreciationPostResponseFieldJournalTransactionID)
+func (d *DepreciationPostAssetsResponse) SetJournalTransactionID(journalTransactionID *string) {
+	d.JournalTransactionID = journalTransactionID
+	d.require(depreciationPostAssetsResponseFieldJournalTransactionID)
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsDepreciationPostResponse
+func (d *DepreciationPostAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DepreciationPostAssetsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsDepreciationPostResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DepreciationPostAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsDepreciationPostResponse
+func (d *DepreciationPostAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed DepreciationPostAssetsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsDepreciationPostResponse) String() string {
-	if p == nil {
+func (d *DepreciationPostAssetsResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1AssetsDepreciationPreviewResponseFieldRows  = big.NewInt(1 << 0)
-	postV1AssetsDepreciationPreviewResponseFieldTotal = big.NewInt(1 << 1)
+	depreciationPreviewAssetsResponseFieldRows  = big.NewInt(1 << 0)
+	depreciationPreviewAssetsResponseFieldTotal = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsDepreciationPreviewResponse struct {
-	Rows  []*PostV1AssetsDepreciationPreviewResponseRowsItem `json:"rows" url:"rows"`
-	Total string                                             `json:"total" url:"total"`
+type DepreciationPreviewAssetsResponse struct {
+	Rows  []*DepreciationPreviewAssetsResponseRowsItem `json:"rows" url:"rows"`
+	Total string                                       `json:"total" url:"total"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6145,104 +7761,107 @@ type PostV1AssetsDepreciationPreviewResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) GetRows() []*PostV1AssetsDepreciationPreviewResponseRowsItem {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponse) GetRows() []*DepreciationPreviewAssetsResponseRowsItem {
+	if d == nil {
 		return nil
 	}
-	return p.Rows
+	return d.Rows
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) GetTotal() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponse) GetTotal() string {
+	if d == nil {
 		return ""
 	}
-	return p.Total
+	return d.Total
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DepreciationPreviewAssetsResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponse) SetRows(rows []*PostV1AssetsDepreciationPreviewResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AssetsDepreciationPreviewResponseFieldRows)
+func (d *DepreciationPreviewAssetsResponse) SetRows(rows []*DepreciationPreviewAssetsResponseRowsItem) {
+	d.Rows = rows
+	d.require(depreciationPreviewAssetsResponseFieldRows)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponse) SetTotal(total string) {
-	p.Total = total
-	p.require(postV1AssetsDepreciationPreviewResponseFieldTotal)
+func (d *DepreciationPreviewAssetsResponse) SetTotal(total string) {
+	d.Total = total
+	d.require(depreciationPreviewAssetsResponseFieldTotal)
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsDepreciationPreviewResponse
+func (d *DepreciationPreviewAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DepreciationPreviewAssetsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsDepreciationPreviewResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DepreciationPreviewAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsDepreciationPreviewResponse
+func (d *DepreciationPreviewAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed DepreciationPreviewAssetsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponse) String() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1AssetsDepreciationPreviewResponseRowsItemFieldAssetID       = big.NewInt(1 << 0)
-	postV1AssetsDepreciationPreviewResponseRowsItemFieldCode          = big.NewInt(1 << 1)
-	postV1AssetsDepreciationPreviewResponseRowsItemFieldName          = big.NewInt(1 << 2)
-	postV1AssetsDepreciationPreviewResponseRowsItemFieldAmount        = big.NewInt(1 << 3)
-	postV1AssetsDepreciationPreviewResponseRowsItemFieldAlreadyPosted = big.NewInt(1 << 4)
+	depreciationPreviewAssetsResponseRowsItemFieldAssetID       = big.NewInt(1 << 0)
+	depreciationPreviewAssetsResponseRowsItemFieldCode          = big.NewInt(1 << 1)
+	depreciationPreviewAssetsResponseRowsItemFieldName          = big.NewInt(1 << 2)
+	depreciationPreviewAssetsResponseRowsItemFieldAmount        = big.NewInt(1 << 3)
+	depreciationPreviewAssetsResponseRowsItemFieldAlreadyPosted = big.NewInt(1 << 4)
+	depreciationPreviewAssetsResponseRowsItemFieldMonths        = big.NewInt(1 << 5)
 )
 
-type PostV1AssetsDepreciationPreviewResponseRowsItem struct {
+type DepreciationPreviewAssetsResponseRowsItem struct {
 	AssetID       string `json:"assetId" url:"assetId"`
 	Code          string `json:"code" url:"code"`
 	Name          string `json:"name" url:"name"`
 	Amount        string `json:"amount" url:"amount"`
 	AlreadyPosted bool   `json:"alreadyPosted" url:"alreadyPosted"`
+	// Every month this run posts for the asset, earlier unposted months included
+	Months []string `json:"months" url:"months"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6251,152 +7870,166 @@ type PostV1AssetsDepreciationPreviewResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetAssetID() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetAssetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.AssetID
+	return d.AssetID
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetCode() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetCode() string {
+	if d == nil {
 		return ""
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetName() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetAmount() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetAmount() string {
+	if d == nil {
 		return ""
 	}
-	return p.Amount
+	return d.Amount
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetAlreadyPosted() bool {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetAlreadyPosted() bool {
+	if d == nil {
 		return false
 	}
-	return p.AlreadyPosted
+	return d.AlreadyPosted
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetMonths() []string {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.Months
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DepreciationPreviewAssetsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return d.extraProperties
+}
+
+func (d *DepreciationPreviewAssetsResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetAssetID sets the AssetID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) SetAssetID(assetID string) {
-	p.AssetID = assetID
-	p.require(postV1AssetsDepreciationPreviewResponseRowsItemFieldAssetID)
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetAssetID(assetID string) {
+	d.AssetID = assetID
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldAssetID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsDepreciationPreviewResponseRowsItemFieldCode)
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetCode(code string) {
+	d.Code = code
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsDepreciationPreviewResponseRowsItemFieldName)
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetName(name string) {
+	d.Name = name
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldName)
 }
 
 // SetAmount sets the Amount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) SetAmount(amount string) {
-	p.Amount = amount
-	p.require(postV1AssetsDepreciationPreviewResponseRowsItemFieldAmount)
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetAmount(amount string) {
+	d.Amount = amount
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldAmount)
 }
 
 // SetAlreadyPosted sets the AlreadyPosted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) SetAlreadyPosted(alreadyPosted bool) {
-	p.AlreadyPosted = alreadyPosted
-	p.require(postV1AssetsDepreciationPreviewResponseRowsItemFieldAlreadyPosted)
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetAlreadyPosted(alreadyPosted bool) {
+	d.AlreadyPosted = alreadyPosted
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldAlreadyPosted)
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsDepreciationPreviewResponseRowsItem
+// SetMonths sets the Months field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DepreciationPreviewAssetsResponseRowsItem) SetMonths(months []string) {
+	d.Months = months
+	d.require(depreciationPreviewAssetsResponseRowsItemFieldMonths)
+}
+
+func (d *DepreciationPreviewAssetsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DepreciationPreviewAssetsResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsDepreciationPreviewResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DepreciationPreviewAssetsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsDepreciationPreviewResponseRowsItem
+func (d *DepreciationPreviewAssetsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DepreciationPreviewAssetsResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsDepreciationPreviewResponseRowsItem) String() string {
-	if p == nil {
+func (d *DepreciationPreviewAssetsResponseRowsItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1AssetsGroupsCreateResponseFieldCode                    = big.NewInt(1 << 0)
-	postV1AssetsGroupsCreateResponseFieldName                    = big.NewInt(1 << 1)
-	postV1AssetsGroupsCreateResponseFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
-	postV1AssetsGroupsCreateResponseFieldAssetAccountCode        = big.NewInt(1 << 3)
-	postV1AssetsGroupsCreateResponseFieldDepreciationAccountCode = big.NewInt(1 << 4)
-	postV1AssetsGroupsCreateResponseFieldExpenseAccountCode      = big.NewInt(1 << 5)
-	postV1AssetsGroupsCreateResponseFieldID                      = big.NewInt(1 << 6)
-	postV1AssetsGroupsCreateResponseFieldCreatedAt               = big.NewInt(1 << 7)
+	groupsCreateAssetsResponseFieldCode                    = big.NewInt(1 << 0)
+	groupsCreateAssetsResponseFieldName                    = big.NewInt(1 << 1)
+	groupsCreateAssetsResponseFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
+	groupsCreateAssetsResponseFieldAssetAccountCode        = big.NewInt(1 << 3)
+	groupsCreateAssetsResponseFieldDepreciationAccountCode = big.NewInt(1 << 4)
+	groupsCreateAssetsResponseFieldExpenseAccountCode      = big.NewInt(1 << 5)
+	groupsCreateAssetsResponseFieldID                      = big.NewInt(1 << 6)
+	groupsCreateAssetsResponseFieldCreatedAt               = big.NewInt(1 << 7)
 )
 
-type PostV1AssetsGroupsCreateResponse struct {
-	Code                    string `json:"code" url:"code"`
-	Name                    string `json:"name" url:"name"`
-	DefaultUsefulLifeMonths *int64 `json:"defaultUsefulLifeMonths,omitempty" url:"defaultUsefulLifeMonths,omitempty"`
-	AssetAccountCode        string `json:"assetAccountCode" url:"assetAccountCode"`
-	DepreciationAccountCode string `json:"depreciationAccountCode" url:"depreciationAccountCode"`
-	ExpenseAccountCode      string `json:"expenseAccountCode" url:"expenseAccountCode"`
-	ID                      string `json:"id" url:"id"`
-	CreatedAt               string `json:"createdAt" url:"createdAt"`
+type GroupsCreateAssetsResponse struct {
+	Code                    string    `json:"code" url:"code"`
+	Name                    string    `json:"name" url:"name"`
+	DefaultUsefulLifeMonths *int64    `json:"defaultUsefulLifeMonths,omitempty" url:"defaultUsefulLifeMonths,omitempty"`
+	AssetAccountCode        string    `json:"assetAccountCode" url:"assetAccountCode"`
+	DepreciationAccountCode string    `json:"depreciationAccountCode" url:"depreciationAccountCode"`
+	ExpenseAccountCode      string    `json:"expenseAccountCode" url:"expenseAccountCode"`
+	ID                      string    `json:"id" url:"id"`
+	CreatedAt               time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6405,184 +8038,192 @@ type PostV1AssetsGroupsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetCode() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.Code
+	return g.Code
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetName() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetDefaultUsefulLifeMonths() *int64 {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetDefaultUsefulLifeMonths() *int64 {
+	if g == nil {
 		return nil
 	}
-	return p.DefaultUsefulLifeMonths
+	return g.DefaultUsefulLifeMonths
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetAssetAccountCode() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetAssetAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.AssetAccountCode
+	return g.AssetAccountCode
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetDepreciationAccountCode() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetDepreciationAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.DepreciationAccountCode
+	return g.DepreciationAccountCode
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetExpenseAccountCode() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetExpenseAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.ExpenseAccountCode
+	return g.ExpenseAccountCode
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetID() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsCreateAssetsResponse) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsCreateAssetsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsGroupsCreateResponseFieldCode)
+func (g *GroupsCreateAssetsResponse) SetCode(code string) {
+	g.Code = code
+	g.require(groupsCreateAssetsResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsGroupsCreateResponseFieldName)
+func (g *GroupsCreateAssetsResponse) SetName(name string) {
+	g.Name = name
+	g.require(groupsCreateAssetsResponseFieldName)
 }
 
 // SetDefaultUsefulLifeMonths sets the DefaultUsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
-	p.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
-	p.require(postV1AssetsGroupsCreateResponseFieldDefaultUsefulLifeMonths)
+func (g *GroupsCreateAssetsResponse) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
+	g.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
+	g.require(groupsCreateAssetsResponseFieldDefaultUsefulLifeMonths)
 }
 
 // SetAssetAccountCode sets the AssetAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetAssetAccountCode(assetAccountCode string) {
-	p.AssetAccountCode = assetAccountCode
-	p.require(postV1AssetsGroupsCreateResponseFieldAssetAccountCode)
+func (g *GroupsCreateAssetsResponse) SetAssetAccountCode(assetAccountCode string) {
+	g.AssetAccountCode = assetAccountCode
+	g.require(groupsCreateAssetsResponseFieldAssetAccountCode)
 }
 
 // SetDepreciationAccountCode sets the DepreciationAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetDepreciationAccountCode(depreciationAccountCode string) {
-	p.DepreciationAccountCode = depreciationAccountCode
-	p.require(postV1AssetsGroupsCreateResponseFieldDepreciationAccountCode)
+func (g *GroupsCreateAssetsResponse) SetDepreciationAccountCode(depreciationAccountCode string) {
+	g.DepreciationAccountCode = depreciationAccountCode
+	g.require(groupsCreateAssetsResponseFieldDepreciationAccountCode)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetExpenseAccountCode(expenseAccountCode string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1AssetsGroupsCreateResponseFieldExpenseAccountCode)
+func (g *GroupsCreateAssetsResponse) SetExpenseAccountCode(expenseAccountCode string) {
+	g.ExpenseAccountCode = expenseAccountCode
+	g.require(groupsCreateAssetsResponseFieldExpenseAccountCode)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsGroupsCreateResponseFieldID)
+func (g *GroupsCreateAssetsResponse) SetID(id string) {
+	g.ID = id
+	g.require(groupsCreateAssetsResponseFieldID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsGroupsCreateResponseFieldCreatedAt)
+func (g *GroupsCreateAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsCreateAssetsResponseFieldCreatedAt)
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsCreateAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed GroupsCreateAssetsResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsCreateAssetsResponse(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsCreateResponse
+func (g *GroupsCreateAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsCreateAssetsResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsGroupsCreateResponse) String() string {
-	if p == nil {
+func (g *GroupsCreateAssetsResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1AssetsGroupsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1AssetsGroupsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1AssetsGroupsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	groupsListAssetsRequestFilterItemFieldField = big.NewInt(1 << 0)
+	groupsListAssetsRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	groupsListAssetsRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1AssetsGroupsListRequestFilterItem struct {
-	Field string                                        `json:"field" url:"field"`
-	Op    PostV1AssetsGroupsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1AssetsGroupsListRequestFilterItemValue `json:"value" url:"value"`
+type GroupsListAssetsRequestFilterItem struct {
+	Field string                                  `json:"field" url:"field"`
+	Op    GroupsListAssetsRequestFilterItemOp     `json:"op" url:"op"`
+	Value *GroupsListAssetsRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6591,312 +8232,312 @@ type PostV1AssetsGroupsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItem) GetField() string {
+	if g == nil {
 		return ""
 	}
-	return p.Field
+	return g.Field
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) GetOp() PostV1AssetsGroupsListRequestFilterItemOp {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItem) GetOp() GroupsListAssetsRequestFilterItemOp {
+	if g == nil {
 		return ""
 	}
-	return p.Op
+	return g.Op
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) GetValue() *PostV1AssetsGroupsListRequestFilterItemValue {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItem) GetValue() *GroupsListAssetsRequestFilterItemValue {
+	if g == nil {
 		return nil
 	}
-	return p.Value
+	return g.Value
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListAssetsRequestFilterItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AssetsGroupsListRequestFilterItemFieldField)
+func (g *GroupsListAssetsRequestFilterItem) SetField(field string) {
+	g.Field = field
+	g.require(groupsListAssetsRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequestFilterItem) SetOp(op PostV1AssetsGroupsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1AssetsGroupsListRequestFilterItemFieldOp)
+func (g *GroupsListAssetsRequestFilterItem) SetOp(op GroupsListAssetsRequestFilterItemOp) {
+	g.Op = op
+	g.require(groupsListAssetsRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequestFilterItem) SetValue(value *PostV1AssetsGroupsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1AssetsGroupsListRequestFilterItemFieldValue)
+func (g *GroupsListAssetsRequestFilterItem) SetValue(value *GroupsListAssetsRequestFilterItemValue) {
+	g.Value = value
+	g.require(groupsListAssetsRequestFilterItemFieldValue)
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsListRequestFilterItem
+func (g *GroupsListAssetsRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsListAssetsRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListAssetsRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsListRequestFilterItem
+func (g *GroupsListAssetsRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed GroupsListAssetsRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItem) String() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItem) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
-type PostV1AssetsGroupsListRequestFilterItemOp string
+type GroupsListAssetsRequestFilterItemOp string
 
 const (
-	PostV1AssetsGroupsListRequestFilterItemOpEq       PostV1AssetsGroupsListRequestFilterItemOp = "eq"
-	PostV1AssetsGroupsListRequestFilterItemOpNe       PostV1AssetsGroupsListRequestFilterItemOp = "ne"
-	PostV1AssetsGroupsListRequestFilterItemOpContains PostV1AssetsGroupsListRequestFilterItemOp = "contains"
-	PostV1AssetsGroupsListRequestFilterItemOpGte      PostV1AssetsGroupsListRequestFilterItemOp = "gte"
-	PostV1AssetsGroupsListRequestFilterItemOpLte      PostV1AssetsGroupsListRequestFilterItemOp = "lte"
-	PostV1AssetsGroupsListRequestFilterItemOpIn       PostV1AssetsGroupsListRequestFilterItemOp = "in"
+	GroupsListAssetsRequestFilterItemOpEq       GroupsListAssetsRequestFilterItemOp = "eq"
+	GroupsListAssetsRequestFilterItemOpNe       GroupsListAssetsRequestFilterItemOp = "ne"
+	GroupsListAssetsRequestFilterItemOpContains GroupsListAssetsRequestFilterItemOp = "contains"
+	GroupsListAssetsRequestFilterItemOpGte      GroupsListAssetsRequestFilterItemOp = "gte"
+	GroupsListAssetsRequestFilterItemOpLte      GroupsListAssetsRequestFilterItemOp = "lte"
+	GroupsListAssetsRequestFilterItemOpIn       GroupsListAssetsRequestFilterItemOp = "in"
 )
 
-func NewPostV1AssetsGroupsListRequestFilterItemOpFromString(s string) (PostV1AssetsGroupsListRequestFilterItemOp, error) {
+func NewGroupsListAssetsRequestFilterItemOpFromString(s string) (GroupsListAssetsRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1AssetsGroupsListRequestFilterItemOpEq, nil
+		return GroupsListAssetsRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1AssetsGroupsListRequestFilterItemOpNe, nil
+		return GroupsListAssetsRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1AssetsGroupsListRequestFilterItemOpContains, nil
+		return GroupsListAssetsRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1AssetsGroupsListRequestFilterItemOpGte, nil
+		return GroupsListAssetsRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1AssetsGroupsListRequestFilterItemOpLte, nil
+		return GroupsListAssetsRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1AssetsGroupsListRequestFilterItemOpIn, nil
+		return GroupsListAssetsRequestFilterItemOpIn, nil
 	}
-	var t PostV1AssetsGroupsListRequestFilterItemOp
+	var t GroupsListAssetsRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsGroupsListRequestFilterItemOp) Ptr() *PostV1AssetsGroupsListRequestFilterItemOp {
-	return &p
+func (g GroupsListAssetsRequestFilterItemOp) Ptr() *GroupsListAssetsRequestFilterItemOp {
+	return &g
 }
 
-type PostV1AssetsGroupsListRequestFilterItemValue struct {
-	String                                                    string
-	Double                                                    float64
-	Boolean                                                   bool
-	PostV1AssetsGroupsListRequestFilterItemValueThreeItemList []*PostV1AssetsGroupsListRequestFilterItemValueThreeItem
+type GroupsListAssetsRequestFilterItemValue struct {
+	String                                              string
+	Double                                              float64
+	Boolean                                             bool
+	GroupsListAssetsRequestFilterItemValueThreeItemList []*GroupsListAssetsRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValue) GetString() string {
+	if g == nil {
 		return ""
 	}
-	return p.String
+	return g.String
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValue) GetDouble() float64 {
+	if g == nil {
 		return 0
 	}
-	return p.Double
+	return g.Double
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValue) GetBoolean() bool {
+	if g == nil {
 		return false
 	}
-	return p.Boolean
+	return g.Boolean
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) GetPostV1AssetsGroupsListRequestFilterItemValueThreeItemList() []*PostV1AssetsGroupsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValue) GetGroupsListAssetsRequestFilterItemValueThreeItemList() []*GroupsListAssetsRequestFilterItemValueThreeItem {
+	if g == nil {
 		return nil
 	}
-	return p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList
+	return g.GroupsListAssetsRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (g *GroupsListAssetsRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		g.typ = "String"
+		g.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		g.typ = "Double"
+		g.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		g.typ = "Boolean"
+		g.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1AssetsGroupsListRequestFilterItemValueThreeItemList []*PostV1AssetsGroupsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1AssetsGroupsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1AssetsGroupsListRequestFilterItemValueThreeItemList"
-		p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList = valuePostV1AssetsGroupsListRequestFilterItemValueThreeItemList
+	var valueGroupsListAssetsRequestFilterItemValueThreeItemList []*GroupsListAssetsRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueGroupsListAssetsRequestFilterItemValueThreeItemList); err == nil {
+		g.typ = "GroupsListAssetsRequestFilterItemValueThreeItemList"
+		g.GroupsListAssetsRequestFilterItemValueThreeItemList = valueGroupsListAssetsRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, g)
 }
 
-func (p PostV1AssetsGroupsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (g GroupsListAssetsRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if g.typ == "String" || g.String != "" {
+		return json.Marshal(g.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if g.typ == "Double" || g.Double != 0 {
+		return json.Marshal(g.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if g.typ == "Boolean" || g.Boolean != false {
+		return json.Marshal(g.Boolean)
 	}
-	if p.typ == "PostV1AssetsGroupsListRequestFilterItemValueThreeItemList" || p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList)
+	if g.typ == "GroupsListAssetsRequestFilterItemValueThreeItemList" || g.GroupsListAssetsRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(g.GroupsListAssetsRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", g)
 }
 
-type PostV1AssetsGroupsListRequestFilterItemValueVisitor interface {
+type GroupsListAssetsRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1AssetsGroupsListRequestFilterItemValueThreeItemList([]*PostV1AssetsGroupsListRequestFilterItemValueThreeItem) error
+	VisitGroupsListAssetsRequestFilterItemValueThreeItemList([]*GroupsListAssetsRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValue) Accept(visitor PostV1AssetsGroupsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (g *GroupsListAssetsRequestFilterItemValue) Accept(visitor GroupsListAssetsRequestFilterItemValueVisitor) error {
+	if g.typ == "String" || g.String != "" {
+		return visitor.VisitString(g.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if g.typ == "Double" || g.Double != 0 {
+		return visitor.VisitDouble(g.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if g.typ == "Boolean" || g.Boolean != false {
+		return visitor.VisitBoolean(g.Boolean)
 	}
-	if p.typ == "PostV1AssetsGroupsListRequestFilterItemValueThreeItemList" || p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1AssetsGroupsListRequestFilterItemValueThreeItemList(p.PostV1AssetsGroupsListRequestFilterItemValueThreeItemList)
+	if g.typ == "GroupsListAssetsRequestFilterItemValueThreeItemList" || g.GroupsListAssetsRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitGroupsListAssetsRequestFilterItemValueThreeItemList(g.GroupsListAssetsRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", g)
 }
 
-type PostV1AssetsGroupsListRequestFilterItemValueThreeItem struct {
+type GroupsListAssetsRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValueThreeItem) GetString() string {
+	if g == nil {
 		return ""
 	}
-	return p.String
+	return g.String
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (g *GroupsListAssetsRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if g == nil {
 		return 0
 	}
-	return p.Double
+	return g.Double
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (g *GroupsListAssetsRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		g.typ = "String"
+		g.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		g.typ = "Double"
+		g.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, g)
 }
 
-func (p PostV1AssetsGroupsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (g GroupsListAssetsRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if g.typ == "String" || g.String != "" {
+		return json.Marshal(g.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if g.typ == "Double" || g.Double != 0 {
+		return json.Marshal(g.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", g)
 }
 
-type PostV1AssetsGroupsListRequestFilterItemValueThreeItemVisitor interface {
+type GroupsListAssetsRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1AssetsGroupsListRequestFilterItemValueThreeItem) Accept(visitor PostV1AssetsGroupsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (g *GroupsListAssetsRequestFilterItemValueThreeItem) Accept(visitor GroupsListAssetsRequestFilterItemValueThreeItemVisitor) error {
+	if g.typ == "String" || g.String != "" {
+		return visitor.VisitString(g.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if g.typ == "Double" || g.Double != 0 {
+		return visitor.VisitDouble(g.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", g)
 }
 
 var (
-	postV1AssetsGroupsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1AssetsGroupsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	groupsListAssetsRequestSortItemFieldField = big.NewInt(1 << 0)
+	groupsListAssetsRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1AssetsGroupsListRequestSortItem struct {
-	Field string                                    `json:"field" url:"field"`
-	Dir   *PostV1AssetsGroupsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type GroupsListAssetsRequestSortItem struct {
+	Field string                              `json:"field" url:"field"`
+	Dir   *GroupsListAssetsRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6905,126 +8546,126 @@ type PostV1AssetsGroupsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) GetField() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestSortItem) GetField() string {
+	if g == nil {
 		return ""
 	}
-	return p.Field
+	return g.Field
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) GetDir() *PostV1AssetsGroupsListRequestSortItemDir {
-	if p == nil {
+func (g *GroupsListAssetsRequestSortItem) GetDir() *GroupsListAssetsRequestSortItemDir {
+	if g == nil {
 		return nil
 	}
-	return p.Dir
+	return g.Dir
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListAssetsRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListAssetsRequestSortItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1AssetsGroupsListRequestSortItemFieldField)
+func (g *GroupsListAssetsRequestSortItem) SetField(field string) {
+	g.Field = field
+	g.require(groupsListAssetsRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListRequestSortItem) SetDir(dir *PostV1AssetsGroupsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1AssetsGroupsListRequestSortItemFieldDir)
+func (g *GroupsListAssetsRequestSortItem) SetDir(dir *GroupsListAssetsRequestSortItemDir) {
+	g.Dir = dir
+	g.require(groupsListAssetsRequestSortItemFieldDir)
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsListRequestSortItem
+func (g *GroupsListAssetsRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsListAssetsRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListAssetsRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsListRequestSortItem
+func (g *GroupsListAssetsRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed GroupsListAssetsRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsGroupsListRequestSortItem) String() string {
-	if p == nil {
+func (g *GroupsListAssetsRequestSortItem) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
-type PostV1AssetsGroupsListRequestSortItemDir string
+type GroupsListAssetsRequestSortItemDir string
 
 const (
-	PostV1AssetsGroupsListRequestSortItemDirAsc  PostV1AssetsGroupsListRequestSortItemDir = "asc"
-	PostV1AssetsGroupsListRequestSortItemDirDesc PostV1AssetsGroupsListRequestSortItemDir = "desc"
+	GroupsListAssetsRequestSortItemDirAsc  GroupsListAssetsRequestSortItemDir = "asc"
+	GroupsListAssetsRequestSortItemDirDesc GroupsListAssetsRequestSortItemDir = "desc"
 )
 
-func NewPostV1AssetsGroupsListRequestSortItemDirFromString(s string) (PostV1AssetsGroupsListRequestSortItemDir, error) {
+func NewGroupsListAssetsRequestSortItemDirFromString(s string) (GroupsListAssetsRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1AssetsGroupsListRequestSortItemDirAsc, nil
+		return GroupsListAssetsRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1AssetsGroupsListRequestSortItemDirDesc, nil
+		return GroupsListAssetsRequestSortItemDirDesc, nil
 	}
-	var t PostV1AssetsGroupsListRequestSortItemDir
+	var t GroupsListAssetsRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1AssetsGroupsListRequestSortItemDir) Ptr() *PostV1AssetsGroupsListRequestSortItemDir {
-	return &p
+func (g GroupsListAssetsRequestSortItemDir) Ptr() *GroupsListAssetsRequestSortItemDir {
+	return &g
 }
 
 var (
-	postV1AssetsGroupsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1AssetsGroupsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1AssetsGroupsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1AssetsGroupsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1AssetsGroupsListResponseFieldTotals   = big.NewInt(1 << 4)
+	groupsListAssetsResponseFieldRows     = big.NewInt(1 << 0)
+	groupsListAssetsResponseFieldPage     = big.NewInt(1 << 1)
+	groupsListAssetsResponseFieldPageSize = big.NewInt(1 << 2)
+	groupsListAssetsResponseFieldTotal    = big.NewInt(1 << 3)
+	groupsListAssetsResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1AssetsGroupsListResponse struct {
-	Rows     []*PostV1AssetsGroupsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                     `json:"page" url:"page"`
-	PageSize int64                                     `json:"pageSize" url:"pageSize"`
-	Total    int64                                     `json:"total" url:"total"`
-	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+type GroupsListAssetsResponse struct {
+	Rows     []*GroupsListAssetsResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                               `json:"page" url:"page"`
+	PageSize int64                               `json:"pageSize" url:"pageSize"`
+	Total    int64                               `json:"total" url:"total"`
+	Totals   map[string]string                   `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7033,152 +8674,152 @@ type PostV1AssetsGroupsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetRows() []*PostV1AssetsGroupsListResponseRowsItem {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetRows() []*GroupsListAssetsResponseRowsItem {
+	if g == nil {
 		return nil
 	}
-	return p.Rows
+	return g.Rows
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetPage() int64 {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetPage() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.Page
+	return g.Page
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetPageSize() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.PageSize
+	return g.PageSize
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetTotal() int64 {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetTotal() int64 {
+	if g == nil {
 		return 0
 	}
-	return p.Total
+	return g.Total
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetTotals() map[string]string {
+	if g == nil {
 		return nil
 	}
-	return p.Totals
+	return g.Totals
 }
 
-func (p *PostV1AssetsGroupsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1AssetsGroupsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListAssetsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponse) SetRows(rows []*PostV1AssetsGroupsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1AssetsGroupsListResponseFieldRows)
+func (g *GroupsListAssetsResponse) SetRows(rows []*GroupsListAssetsResponseRowsItem) {
+	g.Rows = rows
+	g.require(groupsListAssetsResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1AssetsGroupsListResponseFieldPage)
+func (g *GroupsListAssetsResponse) SetPage(page int64) {
+	g.Page = page
+	g.require(groupsListAssetsResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1AssetsGroupsListResponseFieldPageSize)
+func (g *GroupsListAssetsResponse) SetPageSize(pageSize int64) {
+	g.PageSize = pageSize
+	g.require(groupsListAssetsResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1AssetsGroupsListResponseFieldTotal)
+func (g *GroupsListAssetsResponse) SetTotal(total int64) {
+	g.Total = total
+	g.require(groupsListAssetsResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1AssetsGroupsListResponseFieldTotals)
+func (g *GroupsListAssetsResponse) SetTotals(totals map[string]string) {
+	g.Totals = totals
+	g.require(groupsListAssetsResponseFieldTotals)
 }
 
-func (p *PostV1AssetsGroupsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsListResponse
+func (g *GroupsListAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GroupsListAssetsResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsListResponse
+func (g *GroupsListAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed GroupsListAssetsResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*g),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsGroupsListResponse) String() string {
-	if p == nil {
+func (g *GroupsListAssetsResponse) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }
 
 var (
-	postV1AssetsGroupsListResponseRowsItemFieldCode                    = big.NewInt(1 << 0)
-	postV1AssetsGroupsListResponseRowsItemFieldName                    = big.NewInt(1 << 1)
-	postV1AssetsGroupsListResponseRowsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
-	postV1AssetsGroupsListResponseRowsItemFieldAssetAccountCode        = big.NewInt(1 << 3)
-	postV1AssetsGroupsListResponseRowsItemFieldDepreciationAccountCode = big.NewInt(1 << 4)
-	postV1AssetsGroupsListResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 5)
-	postV1AssetsGroupsListResponseRowsItemFieldID                      = big.NewInt(1 << 6)
-	postV1AssetsGroupsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 7)
+	groupsListAssetsResponseRowsItemFieldCode                    = big.NewInt(1 << 0)
+	groupsListAssetsResponseRowsItemFieldName                    = big.NewInt(1 << 1)
+	groupsListAssetsResponseRowsItemFieldDefaultUsefulLifeMonths = big.NewInt(1 << 2)
+	groupsListAssetsResponseRowsItemFieldAssetAccountCode        = big.NewInt(1 << 3)
+	groupsListAssetsResponseRowsItemFieldDepreciationAccountCode = big.NewInt(1 << 4)
+	groupsListAssetsResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 5)
+	groupsListAssetsResponseRowsItemFieldID                      = big.NewInt(1 << 6)
+	groupsListAssetsResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 7)
 )
 
-type PostV1AssetsGroupsListResponseRowsItem struct {
-	Code                    string `json:"code" url:"code"`
-	Name                    string `json:"name" url:"name"`
-	DefaultUsefulLifeMonths *int64 `json:"defaultUsefulLifeMonths,omitempty" url:"defaultUsefulLifeMonths,omitempty"`
-	AssetAccountCode        string `json:"assetAccountCode" url:"assetAccountCode"`
-	DepreciationAccountCode string `json:"depreciationAccountCode" url:"depreciationAccountCode"`
-	ExpenseAccountCode      string `json:"expenseAccountCode" url:"expenseAccountCode"`
-	ID                      string `json:"id" url:"id"`
-	CreatedAt               string `json:"createdAt" url:"createdAt"`
+type GroupsListAssetsResponseRowsItem struct {
+	Code                    string    `json:"code" url:"code"`
+	Name                    string    `json:"name" url:"name"`
+	DefaultUsefulLifeMonths *int64    `json:"defaultUsefulLifeMonths,omitempty" url:"defaultUsefulLifeMonths,omitempty"`
+	AssetAccountCode        string    `json:"assetAccountCode" url:"assetAccountCode"`
+	DepreciationAccountCode string    `json:"depreciationAccountCode" url:"depreciationAccountCode"`
+	ExpenseAccountCode      string    `json:"expenseAccountCode" url:"expenseAccountCode"`
+	ID                      string    `json:"id" url:"id"`
+	CreatedAt               time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7187,170 +8828,178 @@ type PostV1AssetsGroupsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetCode() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.Code
+	return g.Code
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetName() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return p.Name
+	return g.Name
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetDefaultUsefulLifeMonths() *int64 {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetDefaultUsefulLifeMonths() *int64 {
+	if g == nil {
 		return nil
 	}
-	return p.DefaultUsefulLifeMonths
+	return g.DefaultUsefulLifeMonths
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetAssetAccountCode() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetAssetAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.AssetAccountCode
+	return g.AssetAccountCode
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetDepreciationAccountCode() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetDepreciationAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.DepreciationAccountCode
+	return g.DepreciationAccountCode
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetExpenseAccountCode() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetExpenseAccountCode() string {
+	if g == nil {
 		return ""
 	}
-	return p.ExpenseAccountCode
+	return g.ExpenseAccountCode
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return p.ID
+	return g.ID
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (g *GroupsListAssetsResponseRowsItem) GetCreatedAt() time.Time {
+	if g == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return g.CreatedAt
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
 		return nil
 	}
-	return p.extraProperties
+	return g.extraProperties
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (g *GroupsListAssetsResponseRowsItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	g.explicitFields.Or(g.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetCode(code string) {
-	p.Code = code
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldCode)
+func (g *GroupsListAssetsResponseRowsItem) SetCode(code string) {
+	g.Code = code
+	g.require(groupsListAssetsResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldName)
+func (g *GroupsListAssetsResponseRowsItem) SetName(name string) {
+	g.Name = name
+	g.require(groupsListAssetsResponseRowsItemFieldName)
 }
 
 // SetDefaultUsefulLifeMonths sets the DefaultUsefulLifeMonths field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
-	p.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldDefaultUsefulLifeMonths)
+func (g *GroupsListAssetsResponseRowsItem) SetDefaultUsefulLifeMonths(defaultUsefulLifeMonths *int64) {
+	g.DefaultUsefulLifeMonths = defaultUsefulLifeMonths
+	g.require(groupsListAssetsResponseRowsItemFieldDefaultUsefulLifeMonths)
 }
 
 // SetAssetAccountCode sets the AssetAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetAssetAccountCode(assetAccountCode string) {
-	p.AssetAccountCode = assetAccountCode
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldAssetAccountCode)
+func (g *GroupsListAssetsResponseRowsItem) SetAssetAccountCode(assetAccountCode string) {
+	g.AssetAccountCode = assetAccountCode
+	g.require(groupsListAssetsResponseRowsItemFieldAssetAccountCode)
 }
 
 // SetDepreciationAccountCode sets the DepreciationAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
-	p.DepreciationAccountCode = depreciationAccountCode
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldDepreciationAccountCode)
+func (g *GroupsListAssetsResponseRowsItem) SetDepreciationAccountCode(depreciationAccountCode string) {
+	g.DepreciationAccountCode = depreciationAccountCode
+	g.require(groupsListAssetsResponseRowsItemFieldDepreciationAccountCode)
 }
 
 // SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetExpenseAccountCode(expenseAccountCode string) {
-	p.ExpenseAccountCode = expenseAccountCode
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldExpenseAccountCode)
+func (g *GroupsListAssetsResponseRowsItem) SetExpenseAccountCode(expenseAccountCode string) {
+	g.ExpenseAccountCode = expenseAccountCode
+	g.require(groupsListAssetsResponseRowsItemFieldExpenseAccountCode)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldID)
+func (g *GroupsListAssetsResponseRowsItem) SetID(id string) {
+	g.ID = id
+	g.require(groupsListAssetsResponseRowsItemFieldID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AssetsGroupsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1AssetsGroupsListResponseRowsItemFieldCreatedAt)
+func (g *GroupsListAssetsResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	g.CreatedAt = createdAt
+	g.require(groupsListAssetsResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1AssetsGroupsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (g *GroupsListAssetsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed GroupsListAssetsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1AssetsGroupsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*g = GroupsListAssetsResponseRowsItem(unmarshaler.embed)
+	g.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1AssetsGroupsListResponseRowsItem
+func (g *GroupsListAssetsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed GroupsListAssetsResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*g),
+		CreatedAt: internal.NewDateTime(g.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1AssetsGroupsListResponseRowsItem) String() string {
-	if p == nil {
+func (g *GroupsListAssetsResponseRowsItem) String() string {
+	if g == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(g); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", g)
 }

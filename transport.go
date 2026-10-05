@@ -11,655 +11,639 @@ import (
 )
 
 var (
-	postV1TransportWaybillsCancelRequestFieldID = big.NewInt(1 << 0)
+	waybillsCancelTransportResponseFieldID                   = big.NewInt(1 << 0)
+	waybillsCancelTransportResponseFieldStatus               = big.NewInt(1 << 1)
+	waybillsCancelTransportResponseFieldSeries               = big.NewInt(1 << 2)
+	waybillsCancelTransportResponseFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsCancelTransportResponseFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsCancelTransportResponseFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsCancelTransportResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsCancelTransportResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsCancelTransportResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsCancelTransportResponseFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsCancelTransportResponseFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsCancelTransportResponseFieldDriverName           = big.NewInt(1 << 11)
+	waybillsCancelTransportResponseFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsCancelTransportResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsCancelTransportResponseFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsCancelTransportResponseFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsCancelTransportResponseFieldValueEur             = big.NewInt(1 << 16)
+	waybillsCancelTransportResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsCancelTransportResponseFieldNotes                = big.NewInt(1 << 18)
+	waybillsCancelTransportResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsCancelTransportResponseFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
-type PostV1TransportWaybillsCancelRequest struct {
-	ID string `json:"id" url:"-"`
+type WaybillsCancelTransportResponse struct {
+	ID                   string                                `json:"id" url:"id"`
+	Status               WaybillsCancelTransportResponseStatus `json:"status" url:"status"`
+	Series               string                                `json:"series" url:"series"`
+	FullNumber           *string                               `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	DocumentDate         time.Time                             `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                             `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                            `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	ConsigneePartnerID   string                                `json:"consigneePartnerId" url:"consigneePartnerId"`
+	TransporterPartnerID *string                               `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
+	VehiclePlate         *string                               `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate         *string                               `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName           *string                               `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname        *string                               `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	LoadWarehouseID      *string                               `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
+	LoadAddress          string                                `json:"loadAddress" url:"loadAddress"`
+	UnloadAddress        string                                `json:"unloadAddress" url:"unloadAddress"`
+	ValueEur             *string                               `json:"valueEur,omitempty" url:"valueEur,omitempty"`
+	SaleInvoiceID        *string                               `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	Notes                *string                               `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                             `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsCancelRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsCancelTransportResponse) GetID() string {
+	if w == nil {
+		return ""
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	return w.ID
+}
+
+func (w *WaybillsCancelTransportResponse) GetStatus() WaybillsCancelTransportResponseStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WaybillsCancelTransportResponse) GetSeries() string {
+	if w == nil {
+		return ""
+	}
+	return w.Series
+}
+
+func (w *WaybillsCancelTransportResponse) GetFullNumber() *string {
+	if w == nil {
+		return nil
+	}
+	return w.FullNumber
+}
+
+func (w *WaybillsCancelTransportResponse) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsCancelTransportResponse) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsCancelTransportResponse) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsCancelTransportResponse) GetConsigneePartnerID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ConsigneePartnerID
+}
+
+func (w *WaybillsCancelTransportResponse) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsCancelTransportResponse) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsCancelTransportResponse) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsCancelTransportResponse) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsCancelTransportResponse) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsCancelTransportResponse) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsCancelTransportResponse) GetLoadAddress() string {
+	if w == nil {
+		return ""
+	}
+	return w.LoadAddress
+}
+
+func (w *WaybillsCancelTransportResponse) GetUnloadAddress() string {
+	if w == nil {
+		return ""
+	}
+	return w.UnloadAddress
+}
+
+func (w *WaybillsCancelTransportResponse) GetValueEur() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ValueEur
+}
+
+func (w *WaybillsCancelTransportResponse) GetSaleInvoiceID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.SaleInvoiceID
+}
+
+func (w *WaybillsCancelTransportResponse) GetNotes() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Notes
+}
+
+func (w *WaybillsCancelTransportResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsCancelTransportResponse) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsCancelTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WaybillsCancelTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsCancelRequestFieldID)
+func (w *WaybillsCancelTransportResponse) SetID(id string) {
+	w.ID = id
+	w.require(waybillsCancelTransportResponseFieldID)
 }
 
-func (p *PostV1TransportWaybillsCancelRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCancelRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsCancelRequest(body)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsCancelRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCancelRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1TransportWaybillsCreateRequestFieldConsigneePartnerID   = big.NewInt(1 << 0)
-	postV1TransportWaybillsCreateRequestFieldTransporterPartnerID = big.NewInt(1 << 1)
-	postV1TransportWaybillsCreateRequestFieldDocumentDate         = big.NewInt(1 << 2)
-	postV1TransportWaybillsCreateRequestFieldDispatchAt           = big.NewInt(1 << 3)
-	postV1TransportWaybillsCreateRequestFieldEstimatedArrivalAt   = big.NewInt(1 << 4)
-	postV1TransportWaybillsCreateRequestFieldVehiclePlate         = big.NewInt(1 << 5)
-	postV1TransportWaybillsCreateRequestFieldTrailerPlate         = big.NewInt(1 << 6)
-	postV1TransportWaybillsCreateRequestFieldDriverName           = big.NewInt(1 << 7)
-	postV1TransportWaybillsCreateRequestFieldDriverSurname        = big.NewInt(1 << 8)
-	postV1TransportWaybillsCreateRequestFieldLoadWarehouseID      = big.NewInt(1 << 9)
-	postV1TransportWaybillsCreateRequestFieldLoadAddress          = big.NewInt(1 << 10)
-	postV1TransportWaybillsCreateRequestFieldUnloadAddress        = big.NewInt(1 << 11)
-	postV1TransportWaybillsCreateRequestFieldValueEur             = big.NewInt(1 << 12)
-	postV1TransportWaybillsCreateRequestFieldSaleInvoiceID        = big.NewInt(1 << 13)
-	postV1TransportWaybillsCreateRequestFieldNotes                = big.NewInt(1 << 14)
-	postV1TransportWaybillsCreateRequestFieldSeries               = big.NewInt(1 << 15)
-	postV1TransportWaybillsCreateRequestFieldLines                = big.NewInt(1 << 16)
-)
-
-type PostV1TransportWaybillsCreateRequest struct {
-	ConsigneePartnerID   string                                           `json:"consigneePartnerId" url:"-"`
-	TransporterPartnerID *string                                          `json:"transporterPartnerId,omitempty" url:"-"`
-	DocumentDate         *string                                          `json:"documentDate,omitempty" url:"-"`
-	DispatchAt           time.Time                                        `json:"dispatchAt" url:"-"`
-	EstimatedArrivalAt   *time.Time                                       `json:"estimatedArrivalAt,omitempty" url:"-"`
-	VehiclePlate         *string                                          `json:"vehiclePlate,omitempty" url:"-"`
-	TrailerPlate         *string                                          `json:"trailerPlate,omitempty" url:"-"`
-	DriverName           *string                                          `json:"driverName,omitempty" url:"-"`
-	DriverSurname        *string                                          `json:"driverSurname,omitempty" url:"-"`
-	LoadWarehouseID      *string                                          `json:"loadWarehouseId,omitempty" url:"-"`
-	LoadAddress          string                                           `json:"loadAddress" url:"-"`
-	UnloadAddress        string                                           `json:"unloadAddress" url:"-"`
-	ValueEur             *string                                          `json:"valueEur,omitempty" url:"-"`
-	SaleInvoiceID        *string                                          `json:"saleInvoiceId,omitempty" url:"-"`
-	Notes                *string                                          `json:"notes,omitempty" url:"-"`
-	Series               *string                                          `json:"series,omitempty" url:"-"`
-	Lines                []*PostV1TransportWaybillsCreateRequestLinesItem `json:"lines,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1TransportWaybillsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
+// SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsCreateRequestFieldConsigneePartnerID)
-}
-
-// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsCreateRequestFieldTransporterPartnerID)
-}
-
-// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsCreateRequestFieldDocumentDate)
-}
-
-// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetDispatchAt(dispatchAt time.Time) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsCreateRequestFieldDispatchAt)
-}
-
-// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsCreateRequestFieldEstimatedArrivalAt)
-}
-
-// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsCreateRequestFieldVehiclePlate)
-}
-
-// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsCreateRequestFieldTrailerPlate)
-}
-
-// SetDriverName sets the DriverName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsCreateRequestFieldDriverName)
-}
-
-// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsCreateRequestFieldDriverSurname)
-}
-
-// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsCreateRequestFieldLoadWarehouseID)
-}
-
-// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsCreateRequestFieldLoadAddress)
-}
-
-// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsCreateRequestFieldUnloadAddress)
-}
-
-// SetValueEur sets the ValueEur field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsCreateRequestFieldValueEur)
-}
-
-// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsCreateRequestFieldSaleInvoiceID)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsCreateRequestFieldNotes)
+func (w *WaybillsCancelTransportResponse) SetStatus(status WaybillsCancelTransportResponseStatus) {
+	w.Status = status
+	w.require(waybillsCancelTransportResponseFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetSeries(series *string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsCreateRequestFieldSeries)
+func (w *WaybillsCancelTransportResponse) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsCancelTransportResponseFieldSeries)
 }
 
-// SetLines sets the Lines field and marks it as non-optional;
+// SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequest) SetLines(lines []*PostV1TransportWaybillsCreateRequestLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsCreateRequestFieldLines)
+func (w *WaybillsCancelTransportResponse) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsCancelTransportResponseFieldFullNumber)
 }
 
-func (p *PostV1TransportWaybillsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCreateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsCreateRequest(body)
-	return nil
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsCancelTransportResponseFieldDocumentDate)
 }
 
-func (p *PostV1TransportWaybillsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCreateRequest
-	var marshaler = struct {
+// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsCancelTransportResponseFieldDispatchAt)
+}
+
+// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsCancelTransportResponseFieldEstimatedArrivalAt)
+}
+
+// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsCancelTransportResponseFieldConsigneePartnerID)
+}
+
+// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsCancelTransportResponseFieldTransporterPartnerID)
+}
+
+// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsCancelTransportResponseFieldVehiclePlate)
+}
+
+// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsCancelTransportResponseFieldTrailerPlate)
+}
+
+// SetDriverName sets the DriverName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsCancelTransportResponseFieldDriverName)
+}
+
+// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsCancelTransportResponseFieldDriverSurname)
+}
+
+// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsCancelTransportResponseFieldLoadWarehouseID)
+}
+
+// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsCancelTransportResponseFieldLoadAddress)
+}
+
+// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsCancelTransportResponseFieldUnloadAddress)
+}
+
+// SetValueEur sets the ValueEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsCancelTransportResponseFieldValueEur)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsCancelTransportResponseFieldSaleInvoiceID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsCancelTransportResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsCancelTransportResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportResponse) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsCancelTransportResponseFieldUpdatedAt)
+}
+
+func (w *WaybillsCancelTransportResponse) UnmarshalJSON(data []byte) error {
+	type embed WaybillsCancelTransportResponse
+	var unmarshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
 		DispatchAt         *internal.DateTime `json:"dispatchAt"`
 		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed:              embed(*p),
-		DispatchAt:         internal.NewDateTime(p.DispatchAt),
-		EstimatedArrivalAt: internal.NewOptionalDateTime(p.EstimatedArrivalAt),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1TransportWaybillsGetRequestFieldID = big.NewInt(1 << 0)
-)
-
-type PostV1TransportWaybillsGetRequest struct {
-	ID string `json:"id" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1TransportWaybillsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsGetRequestFieldID)
-}
-
-func (p *PostV1TransportWaybillsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsGetRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsGetRequest(body)
+	*w = WaybillsCancelTransportResponse(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsGetRequest
+func (w *WaybillsCancelTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCancelTransportResponse
 	var marshaler = struct {
 		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1TransportWaybillsIssueRequestFieldID = big.NewInt(1 << 0)
-)
-
-type PostV1TransportWaybillsIssueRequest struct {
-	ID string `json:"id" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1TransportWaybillsIssueRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsIssueRequestFieldID)
-}
-
-func (p *PostV1TransportWaybillsIssueRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsIssueRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsIssueRequest(body)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsIssueRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsIssueRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1TransportWaybillsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1TransportWaybillsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1TransportWaybillsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1TransportWaybillsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1TransportWaybillsListRequestFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1TransportWaybillsListRequest struct {
-	Page     *int64                                          `json:"page,omitempty" url:"-"`
-	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1TransportWaybillsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1TransportWaybillsListRequestFilterItem `json:"filter,omitempty" url:"-"`
-	// Numeric fields to sum over every row matching the filter (not only the current page)
-	Totals []string `json:"totals,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1TransportWaybillsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1TransportWaybillsListRequestFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1TransportWaybillsListRequestFieldPageSize)
-}
-
-// SetSort sets the Sort field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequest) SetSort(sort []*PostV1TransportWaybillsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1TransportWaybillsListRequestFieldSort)
-}
-
-// SetFilter sets the Filter field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequest) SetFilter(filter []*PostV1TransportWaybillsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1TransportWaybillsListRequestFieldFilter)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1TransportWaybillsListRequestFieldTotals)
-}
-
-func (p *PostV1TransportWaybillsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsListRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsListRequest(body)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsListRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1TransportWaybillsUpdateRequestFieldConsigneePartnerID   = big.NewInt(1 << 0)
-	postV1TransportWaybillsUpdateRequestFieldTransporterPartnerID = big.NewInt(1 << 1)
-	postV1TransportWaybillsUpdateRequestFieldDocumentDate         = big.NewInt(1 << 2)
-	postV1TransportWaybillsUpdateRequestFieldDispatchAt           = big.NewInt(1 << 3)
-	postV1TransportWaybillsUpdateRequestFieldEstimatedArrivalAt   = big.NewInt(1 << 4)
-	postV1TransportWaybillsUpdateRequestFieldVehiclePlate         = big.NewInt(1 << 5)
-	postV1TransportWaybillsUpdateRequestFieldTrailerPlate         = big.NewInt(1 << 6)
-	postV1TransportWaybillsUpdateRequestFieldDriverName           = big.NewInt(1 << 7)
-	postV1TransportWaybillsUpdateRequestFieldDriverSurname        = big.NewInt(1 << 8)
-	postV1TransportWaybillsUpdateRequestFieldLoadWarehouseID      = big.NewInt(1 << 9)
-	postV1TransportWaybillsUpdateRequestFieldLoadAddress          = big.NewInt(1 << 10)
-	postV1TransportWaybillsUpdateRequestFieldUnloadAddress        = big.NewInt(1 << 11)
-	postV1TransportWaybillsUpdateRequestFieldValueEur             = big.NewInt(1 << 12)
-	postV1TransportWaybillsUpdateRequestFieldSaleInvoiceID        = big.NewInt(1 << 13)
-	postV1TransportWaybillsUpdateRequestFieldNotes                = big.NewInt(1 << 14)
-	postV1TransportWaybillsUpdateRequestFieldSeries               = big.NewInt(1 << 15)
-	postV1TransportWaybillsUpdateRequestFieldLines                = big.NewInt(1 << 16)
-	postV1TransportWaybillsUpdateRequestFieldID                   = big.NewInt(1 << 17)
-)
-
-type PostV1TransportWaybillsUpdateRequest struct {
-	ConsigneePartnerID   *string                                          `json:"consigneePartnerId,omitempty" url:"-"`
-	TransporterPartnerID *string                                          `json:"transporterPartnerId,omitempty" url:"-"`
-	DocumentDate         *string                                          `json:"documentDate,omitempty" url:"-"`
-	DispatchAt           *time.Time                                       `json:"dispatchAt,omitempty" url:"-"`
-	EstimatedArrivalAt   *time.Time                                       `json:"estimatedArrivalAt,omitempty" url:"-"`
-	VehiclePlate         *string                                          `json:"vehiclePlate,omitempty" url:"-"`
-	TrailerPlate         *string                                          `json:"trailerPlate,omitempty" url:"-"`
-	DriverName           *string                                          `json:"driverName,omitempty" url:"-"`
-	DriverSurname        *string                                          `json:"driverSurname,omitempty" url:"-"`
-	LoadWarehouseID      *string                                          `json:"loadWarehouseId,omitempty" url:"-"`
-	LoadAddress          *string                                          `json:"loadAddress,omitempty" url:"-"`
-	UnloadAddress        *string                                          `json:"unloadAddress,omitempty" url:"-"`
-	ValueEur             *string                                          `json:"valueEur,omitempty" url:"-"`
-	SaleInvoiceID        *string                                          `json:"saleInvoiceId,omitempty" url:"-"`
-	Notes                *string                                          `json:"notes,omitempty" url:"-"`
-	Series               *string                                          `json:"series,omitempty" url:"-"`
-	Lines                []*PostV1TransportWaybillsUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
-	ID                   string                                           `json:"id" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1TransportWaybillsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetConsigneePartnerID(consigneePartnerID *string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsUpdateRequestFieldConsigneePartnerID)
-}
-
-// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsUpdateRequestFieldTransporterPartnerID)
-}
-
-// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsUpdateRequestFieldDocumentDate)
-}
-
-// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetDispatchAt(dispatchAt *time.Time) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsUpdateRequestFieldDispatchAt)
-}
-
-// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsUpdateRequestFieldEstimatedArrivalAt)
-}
-
-// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsUpdateRequestFieldVehiclePlate)
-}
-
-// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsUpdateRequestFieldTrailerPlate)
-}
-
-// SetDriverName sets the DriverName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsUpdateRequestFieldDriverName)
-}
-
-// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsUpdateRequestFieldDriverSurname)
-}
-
-// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsUpdateRequestFieldLoadWarehouseID)
-}
-
-// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetLoadAddress(loadAddress *string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsUpdateRequestFieldLoadAddress)
-}
-
-// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetUnloadAddress(unloadAddress *string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsUpdateRequestFieldUnloadAddress)
-}
-
-// SetValueEur sets the ValueEur field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsUpdateRequestFieldValueEur)
-}
-
-// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsUpdateRequestFieldSaleInvoiceID)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsUpdateRequestFieldNotes)
-}
-
-// SetSeries sets the Series field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetSeries(series *string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsUpdateRequestFieldSeries)
-}
-
-// SetLines sets the Lines field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetLines(lines []*PostV1TransportWaybillsUpdateRequestLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsUpdateRequestFieldLines)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsUpdateRequestFieldID)
-}
-
-func (p *PostV1TransportWaybillsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsUpdateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsUpdateRequest(body)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsUpdateRequest
-	var marshaler = struct {
-		embed
-		DispatchAt         *internal.DateTime `json:"dispatchAt,omitempty"`
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
 		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed:              embed(*p),
-		DispatchAt:         internal.NewOptionalDateTime(p.DispatchAt),
-		EstimatedArrivalAt: internal.NewOptionalDateTime(p.EstimatedArrivalAt),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-var (
-	postV1TransportWaybillsCancelResponseFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsCancelResponseFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsCancelResponseFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsCancelResponseFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsCancelResponseFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsCancelResponseFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsCancelResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsCancelResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsCancelResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsCancelResponseFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsCancelResponseFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsCancelResponseFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsCancelResponseFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsCancelResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsCancelResponseFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsCancelResponseFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsCancelResponseFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsCancelResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsCancelResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsCancelResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsCancelResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+func (w *WaybillsCancelTransportResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+type WaybillsCancelTransportResponseStatus string
+
+const (
+	WaybillsCancelTransportResponseStatusDraft     WaybillsCancelTransportResponseStatus = "draft"
+	WaybillsCancelTransportResponseStatusIssued    WaybillsCancelTransportResponseStatus = "issued"
+	WaybillsCancelTransportResponseStatusCancelled WaybillsCancelTransportResponseStatus = "cancelled"
 )
 
-type PostV1TransportWaybillsCancelResponse struct {
+func NewWaybillsCancelTransportResponseStatusFromString(s string) (WaybillsCancelTransportResponseStatus, error) {
+	switch s {
+	case "draft":
+		return WaybillsCancelTransportResponseStatusDraft, nil
+	case "issued":
+		return WaybillsCancelTransportResponseStatusIssued, nil
+	case "cancelled":
+		return WaybillsCancelTransportResponseStatusCancelled, nil
+	}
+	var t WaybillsCancelTransportResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WaybillsCancelTransportResponseStatus) Ptr() *WaybillsCancelTransportResponseStatus {
+	return &w
+}
+
+var (
+	waybillsCreateTransportRequestLinesItemFieldItemID      = big.NewInt(1 << 0)
+	waybillsCreateTransportRequestLinesItemFieldDescription = big.NewInt(1 << 1)
+	waybillsCreateTransportRequestLinesItemFieldUnit        = big.NewInt(1 << 2)
+	waybillsCreateTransportRequestLinesItemFieldQuantity    = big.NewInt(1 << 3)
+	waybillsCreateTransportRequestLinesItemFieldProductCode = big.NewInt(1 << 4)
+)
+
+type WaybillsCreateTransportRequestLinesItem struct {
+	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description *string `json:"description,omitempty" url:"description,omitempty"`
+	Unit        *string `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity    string  `json:"quantity" url:"quantity"`
+	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetItemID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ItemID
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetDescription() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Description
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetUnit() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Unit
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetQuantity() string {
+	if w == nil {
+		return ""
+	}
+	return w.Quantity
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetProductCode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ProductCode
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequestLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsCreateTransportRequestLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequestLinesItem) SetDescription(description *string) {
+	w.Description = description
+	w.require(waybillsCreateTransportRequestLinesItemFieldDescription)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequestLinesItem) SetUnit(unit *string) {
+	w.Unit = unit
+	w.require(waybillsCreateTransportRequestLinesItemFieldUnit)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequestLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsCreateTransportRequestLinesItemFieldQuantity)
+}
+
+// SetProductCode sets the ProductCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequestLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsCreateTransportRequestLinesItemFieldProductCode)
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsCreateTransportRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WaybillsCreateTransportRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCreateTransportRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WaybillsCreateTransportRequestLinesItem) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	waybillsCreateTransportResponseFieldID                   = big.NewInt(1 << 0)
+	waybillsCreateTransportResponseFieldStatus               = big.NewInt(1 << 1)
+	waybillsCreateTransportResponseFieldSeries               = big.NewInt(1 << 2)
+	waybillsCreateTransportResponseFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsCreateTransportResponseFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsCreateTransportResponseFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsCreateTransportResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsCreateTransportResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsCreateTransportResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsCreateTransportResponseFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsCreateTransportResponseFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsCreateTransportResponseFieldDriverName           = big.NewInt(1 << 11)
+	waybillsCreateTransportResponseFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsCreateTransportResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsCreateTransportResponseFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsCreateTransportResponseFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsCreateTransportResponseFieldValueEur             = big.NewInt(1 << 16)
+	waybillsCreateTransportResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsCreateTransportResponseFieldNotes                = big.NewInt(1 << 18)
+	waybillsCreateTransportResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsCreateTransportResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsCreateTransportResponseFieldLines                = big.NewInt(1 << 21)
+)
+
+type WaybillsCreateTransportResponse struct {
 	ID                   string                                      `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsCancelResponseStatus `json:"status" url:"status"`
+	Status               WaybillsCreateTransportResponseStatus       `json:"status" url:"status"`
 	Series               string                                      `json:"series" url:"series"`
 	FullNumber           *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                      `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                      `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                     `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	DocumentDate         time.Time                                   `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                                   `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                                  `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
 	ConsigneePartnerID   string                                      `json:"consigneePartnerId" url:"consigneePartnerId"`
 	TransporterPartnerID *string                                     `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
 	VehiclePlate         *string                                     `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
@@ -672,8 +656,9 @@ type PostV1TransportWaybillsCancelResponse struct {
 	ValueEur             *string                                     `json:"valueEur,omitempty" url:"valueEur,omitempty"`
 	SaleInvoiceID        *string                                     `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
 	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                      `json:"updatedAt" url:"updatedAt"`
+	CreatedAt            time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                   `json:"updatedAt" url:"updatedAt"`
+	Lines                []*WaybillsCreateTransportResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -682,960 +667,405 @@ type PostV1TransportWaybillsCancelResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetID() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetStatus() PostV1TransportWaybillsCancelResponseStatus {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetStatus() WaybillsCreateTransportResponseStatus {
+	if w == nil {
 		return ""
 	}
-	return p.Status
+	return w.Status
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetSeries() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetSeries() string {
+	if w == nil {
 		return ""
 	}
-	return p.Series
+	return w.Series
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetFullNumber() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetFullNumber() *string {
+	if w == nil {
 		return nil
 	}
-	return p.FullNumber
+	return w.FullNumber
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetDocumentDate() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsCreateTransportResponse) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsCreateTransportResponse) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsCreateTransportResponse) GetConsigneePartnerID() string {
+	if w == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return w.ConsigneePartnerID
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetDispatchAt() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsCreateTransportResponse) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsCreateTransportResponse) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsCreateTransportResponse) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsCreateTransportResponse) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsCreateTransportResponse) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsCreateTransportResponse) GetLoadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.DispatchAt
+	return w.LoadAddress
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetConsigneePartnerID() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetUnloadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.ConsigneePartnerID
+	return w.UnloadAddress
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetTransporterPartnerID() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetValueEur() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TransporterPartnerID
+	return w.ValueEur
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetVehiclePlate() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetSaleInvoiceID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.VehiclePlate
+	return w.SaleInvoiceID
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetTrailerPlate() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetNotes() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TrailerPlate
+	return w.Notes
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetDriverName() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsCreateTransportResponse) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsCreateTransportResponse) GetLines() []*WaybillsCreateTransportResponseLinesItem {
+	if w == nil {
 		return nil
 	}
-	return p.DriverName
+	return w.Lines
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetDriverSurname() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.DriverSurname
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsCancelResponse) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
+func (w *WaybillsCreateTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsCancelResponseFieldID)
+func (w *WaybillsCreateTransportResponse) SetID(id string) {
+	w.ID = id
+	w.require(waybillsCreateTransportResponseFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetStatus(status PostV1TransportWaybillsCancelResponseStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsCancelResponseFieldStatus)
+func (w *WaybillsCreateTransportResponse) SetStatus(status WaybillsCreateTransportResponseStatus) {
+	w.Status = status
+	w.require(waybillsCreateTransportResponseFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsCancelResponseFieldSeries)
+func (w *WaybillsCreateTransportResponse) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsCreateTransportResponseFieldSeries)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsCancelResponseFieldFullNumber)
+func (w *WaybillsCreateTransportResponse) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsCreateTransportResponseFieldFullNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsCancelResponseFieldDocumentDate)
+func (w *WaybillsCreateTransportResponse) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsCreateTransportResponseFieldDocumentDate)
 }
 
 // SetDispatchAt sets the DispatchAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsCancelResponseFieldDispatchAt)
+func (w *WaybillsCreateTransportResponse) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsCreateTransportResponseFieldDispatchAt)
 }
 
 // SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsCancelResponseFieldEstimatedArrivalAt)
+func (w *WaybillsCreateTransportResponse) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsCreateTransportResponseFieldEstimatedArrivalAt)
 }
 
 // SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsCancelResponseFieldConsigneePartnerID)
+func (w *WaybillsCreateTransportResponse) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsCreateTransportResponseFieldConsigneePartnerID)
 }
 
 // SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsCancelResponseFieldTransporterPartnerID)
+func (w *WaybillsCreateTransportResponse) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsCreateTransportResponseFieldTransporterPartnerID)
 }
 
 // SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsCancelResponseFieldVehiclePlate)
+func (w *WaybillsCreateTransportResponse) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsCreateTransportResponseFieldVehiclePlate)
 }
 
 // SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsCancelResponseFieldTrailerPlate)
+func (w *WaybillsCreateTransportResponse) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsCreateTransportResponseFieldTrailerPlate)
 }
 
 // SetDriverName sets the DriverName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsCancelResponseFieldDriverName)
+func (w *WaybillsCreateTransportResponse) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsCreateTransportResponseFieldDriverName)
 }
 
 // SetDriverSurname sets the DriverSurname field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsCancelResponseFieldDriverSurname)
+func (w *WaybillsCreateTransportResponse) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsCreateTransportResponseFieldDriverSurname)
 }
 
 // SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsCancelResponseFieldLoadWarehouseID)
+func (w *WaybillsCreateTransportResponse) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsCreateTransportResponseFieldLoadWarehouseID)
 }
 
 // SetLoadAddress sets the LoadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsCancelResponseFieldLoadAddress)
+func (w *WaybillsCreateTransportResponse) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsCreateTransportResponseFieldLoadAddress)
 }
 
 // SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsCancelResponseFieldUnloadAddress)
+func (w *WaybillsCreateTransportResponse) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsCreateTransportResponseFieldUnloadAddress)
 }
 
 // SetValueEur sets the ValueEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsCancelResponseFieldValueEur)
+func (w *WaybillsCreateTransportResponse) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsCreateTransportResponseFieldValueEur)
 }
 
 // SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsCancelResponseFieldSaleInvoiceID)
+func (w *WaybillsCreateTransportResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsCreateTransportResponseFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsCancelResponseFieldNotes)
+func (w *WaybillsCreateTransportResponse) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsCreateTransportResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsCancelResponseFieldCreatedAt)
+func (w *WaybillsCreateTransportResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsCreateTransportResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCancelResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsCancelResponseFieldUpdatedAt)
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCancelResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsCancelResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCancelResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1TransportWaybillsCancelResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1TransportWaybillsCancelResponseStatus string
-
-const (
-	PostV1TransportWaybillsCancelResponseStatusDraft     PostV1TransportWaybillsCancelResponseStatus = "draft"
-	PostV1TransportWaybillsCancelResponseStatusIssued    PostV1TransportWaybillsCancelResponseStatus = "issued"
-	PostV1TransportWaybillsCancelResponseStatusCancelled PostV1TransportWaybillsCancelResponseStatus = "cancelled"
-)
-
-func NewPostV1TransportWaybillsCancelResponseStatusFromString(s string) (PostV1TransportWaybillsCancelResponseStatus, error) {
-	switch s {
-	case "draft":
-		return PostV1TransportWaybillsCancelResponseStatusDraft, nil
-	case "issued":
-		return PostV1TransportWaybillsCancelResponseStatusIssued, nil
-	case "cancelled":
-		return PostV1TransportWaybillsCancelResponseStatusCancelled, nil
-	}
-	var t PostV1TransportWaybillsCancelResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1TransportWaybillsCancelResponseStatus) Ptr() *PostV1TransportWaybillsCancelResponseStatus {
-	return &p
-}
-
-var (
-	postV1TransportWaybillsCreateRequestLinesItemFieldItemID      = big.NewInt(1 << 0)
-	postV1TransportWaybillsCreateRequestLinesItemFieldDescription = big.NewInt(1 << 1)
-	postV1TransportWaybillsCreateRequestLinesItemFieldUnit        = big.NewInt(1 << 2)
-	postV1TransportWaybillsCreateRequestLinesItemFieldQuantity    = big.NewInt(1 << 3)
-	postV1TransportWaybillsCreateRequestLinesItemFieldProductCode = big.NewInt(1 << 4)
-)
-
-type PostV1TransportWaybillsCreateRequestLinesItem struct {
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description *string `json:"description,omitempty" url:"description,omitempty"`
-	Unit        *string `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity    string  `json:"quantity" url:"quantity"`
-	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetItemID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ItemID
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetDescription() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Description
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetUnit() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Unit
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetQuantity() string {
-	if p == nil {
-		return ""
-	}
-	return p.Quantity
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetProductCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ProductCode
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetItemID sets the ItemID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsCreateRequestLinesItemFieldItemID)
-}
-
-// SetDescription sets the Description field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsCreateRequestLinesItemFieldDescription)
-}
-
-// SetUnit sets the Unit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsCreateRequestLinesItemFieldUnit)
-}
-
-// SetQuantity sets the Quantity field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsCreateRequestLinesItemFieldQuantity)
-}
-
-// SetProductCode sets the ProductCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsCreateRequestLinesItemFieldProductCode)
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCreateRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1TransportWaybillsCreateRequestLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCreateRequestLinesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1TransportWaybillsCreateRequestLinesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1TransportWaybillsCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsCreateResponseFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsCreateResponseFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsCreateResponseFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsCreateResponseFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsCreateResponseFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsCreateResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsCreateResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsCreateResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsCreateResponseFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsCreateResponseFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsCreateResponseFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsCreateResponseFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsCreateResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsCreateResponseFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsCreateResponseFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsCreateResponseFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsCreateResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsCreateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsCreateResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsCreateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1TransportWaybillsCreateResponseFieldLines                = big.NewInt(1 << 21)
-)
-
-type PostV1TransportWaybillsCreateResponse struct {
-	ID                   string                                            `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsCreateResponseStatus       `json:"status" url:"status"`
-	Series               string                                            `json:"series" url:"series"`
-	FullNumber           *string                                           `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                            `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                            `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                           `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
-	ConsigneePartnerID   string                                            `json:"consigneePartnerId" url:"consigneePartnerId"`
-	TransporterPartnerID *string                                           `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
-	VehiclePlate         *string                                           `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
-	TrailerPlate         *string                                           `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
-	DriverName           *string                                           `json:"driverName,omitempty" url:"driverName,omitempty"`
-	DriverSurname        *string                                           `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
-	LoadWarehouseID      *string                                           `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
-	LoadAddress          string                                            `json:"loadAddress" url:"loadAddress"`
-	UnloadAddress        string                                            `json:"unloadAddress" url:"unloadAddress"`
-	ValueEur             *string                                           `json:"valueEur,omitempty" url:"valueEur,omitempty"`
-	SaleInvoiceID        *string                                           `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
-	Notes                *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                            `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1TransportWaybillsCreateResponseLinesItem `json:"lines" url:"lines"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetStatus() PostV1TransportWaybillsCreateResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetSeries() string {
-	if p == nil {
-		return ""
-	}
-	return p.Series
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetFullNumber() *string {
-	if p == nil {
-		return nil
-	}
-	return p.FullNumber
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetDocumentDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.DocumentDate
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetDispatchAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.DispatchAt
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetConsigneePartnerID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ConsigneePartnerID
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetTransporterPartnerID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TransporterPartnerID
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetVehiclePlate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.VehiclePlate
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetTrailerPlate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TrailerPlate
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetDriverName() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DriverName
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetDriverSurname() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DriverSurname
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetLines() []*PostV1TransportWaybillsCreateResponseLinesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Lines
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsCreateResponseFieldID)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetStatus(status PostV1TransportWaybillsCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsCreateResponseFieldStatus)
-}
-
-// SetSeries sets the Series field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsCreateResponseFieldSeries)
-}
-
-// SetFullNumber sets the FullNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsCreateResponseFieldFullNumber)
-}
-
-// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsCreateResponseFieldDocumentDate)
-}
-
-// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsCreateResponseFieldDispatchAt)
-}
-
-// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsCreateResponseFieldEstimatedArrivalAt)
-}
-
-// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsCreateResponseFieldConsigneePartnerID)
-}
-
-// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsCreateResponseFieldTransporterPartnerID)
-}
-
-// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsCreateResponseFieldVehiclePlate)
-}
-
-// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsCreateResponseFieldTrailerPlate)
-}
-
-// SetDriverName sets the DriverName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsCreateResponseFieldDriverName)
-}
-
-// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsCreateResponseFieldDriverSurname)
-}
-
-// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsCreateResponseFieldLoadWarehouseID)
-}
-
-// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsCreateResponseFieldLoadAddress)
-}
-
-// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsCreateResponseFieldUnloadAddress)
-}
-
-// SetValueEur sets the ValueEur field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsCreateResponseFieldValueEur)
-}
-
-// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsCreateResponseFieldSaleInvoiceID)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsCreateResponseFieldNotes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsCreateResponseFieldCreatedAt)
-}
-
-// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsCreateResponseFieldUpdatedAt)
+func (w *WaybillsCreateTransportResponse) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsCreateTransportResponseFieldUpdatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponse) SetLines(lines []*PostV1TransportWaybillsCreateResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsCreateResponseFieldLines)
+func (w *WaybillsCreateTransportResponse) SetLines(lines []*WaybillsCreateTransportResponseLinesItem) {
+	w.Lines = lines
+	w.require(waybillsCreateTransportResponseFieldLines)
 }
 
-func (p *PostV1TransportWaybillsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WaybillsCreateTransportResponse) UnmarshalJSON(data []byte) error {
+	type embed WaybillsCreateTransportResponse
+	var unmarshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsCreateTransportResponse(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCreateResponse
+func (w *WaybillsCreateTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCreateTransportResponse
 	var marshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsCreateResponse) String() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsCreateResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	postV1TransportWaybillsCreateResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	postV1TransportWaybillsCreateResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	postV1TransportWaybillsCreateResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	postV1TransportWaybillsCreateResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	postV1TransportWaybillsCreateResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	postV1TransportWaybillsCreateResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsCreateTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
+	waybillsCreateTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
+	waybillsCreateTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
+	waybillsCreateTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
+	waybillsCreateTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
+	waybillsCreateTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
+	waybillsCreateTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
 )
 
-type PostV1TransportWaybillsCreateResponseLinesItem struct {
+type WaybillsCreateTransportResponseLinesItem struct {
 	ID          string  `json:"id" url:"id"`
 	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description string  `json:"description" url:"description"`
@@ -1651,233 +1081,233 @@ type PostV1TransportWaybillsCreateResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetID() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetItemID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ItemID
+	return w.ItemID
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetDescription() string {
+	if w == nil {
 		return ""
 	}
-	return p.Description
+	return w.Description
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetUnit() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetUnit() string {
+	if w == nil {
 		return ""
 	}
-	return p.Unit
+	return w.Unit
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetQuantity() string {
+	if w == nil {
 		return ""
 	}
-	return p.Quantity
+	return w.Quantity
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetProductCode() *string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetProductCode() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ProductCode
+	return w.ProductCode
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetSortOrder() int64 {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetSortOrder() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.SortOrder
+	return w.SortOrder
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsCreateTransportResponseLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldID)
+func (w *WaybillsCreateTransportResponseLinesItem) SetID(id string) {
+	w.ID = id
+	w.require(waybillsCreateTransportResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldItemID)
+func (w *WaybillsCreateTransportResponseLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsCreateTransportResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldDescription)
+func (w *WaybillsCreateTransportResponseLinesItem) SetDescription(description string) {
+	w.Description = description
+	w.require(waybillsCreateTransportResponseLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetUnit(unit string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldUnit)
+func (w *WaybillsCreateTransportResponseLinesItem) SetUnit(unit string) {
+	w.Unit = unit
+	w.require(waybillsCreateTransportResponseLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldQuantity)
+func (w *WaybillsCreateTransportResponseLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsCreateTransportResponseLinesItemFieldQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldProductCode)
+func (w *WaybillsCreateTransportResponseLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsCreateTransportResponseLinesItemFieldProductCode)
 }
 
 // SetSortOrder sets the SortOrder field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) SetSortOrder(sortOrder int64) {
-	p.SortOrder = sortOrder
-	p.require(postV1TransportWaybillsCreateResponseLinesItemFieldSortOrder)
+func (w *WaybillsCreateTransportResponseLinesItem) SetSortOrder(sortOrder int64) {
+	w.SortOrder = sortOrder
+	w.require(waybillsCreateTransportResponseLinesItemFieldSortOrder)
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsCreateResponseLinesItem
+func (w *WaybillsCreateTransportResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsCreateTransportResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsCreateResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsCreateTransportResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsCreateResponseLinesItem
+func (w *WaybillsCreateTransportResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCreateTransportResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsCreateResponseLinesItem) String() string {
-	if p == nil {
+func (w *WaybillsCreateTransportResponseLinesItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsCreateResponseStatus string
+type WaybillsCreateTransportResponseStatus string
 
 const (
-	PostV1TransportWaybillsCreateResponseStatusDraft     PostV1TransportWaybillsCreateResponseStatus = "draft"
-	PostV1TransportWaybillsCreateResponseStatusIssued    PostV1TransportWaybillsCreateResponseStatus = "issued"
-	PostV1TransportWaybillsCreateResponseStatusCancelled PostV1TransportWaybillsCreateResponseStatus = "cancelled"
+	WaybillsCreateTransportResponseStatusDraft     WaybillsCreateTransportResponseStatus = "draft"
+	WaybillsCreateTransportResponseStatusIssued    WaybillsCreateTransportResponseStatus = "issued"
+	WaybillsCreateTransportResponseStatusCancelled WaybillsCreateTransportResponseStatus = "cancelled"
 )
 
-func NewPostV1TransportWaybillsCreateResponseStatusFromString(s string) (PostV1TransportWaybillsCreateResponseStatus, error) {
+func NewWaybillsCreateTransportResponseStatusFromString(s string) (WaybillsCreateTransportResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1TransportWaybillsCreateResponseStatusDraft, nil
+		return WaybillsCreateTransportResponseStatusDraft, nil
 	case "issued":
-		return PostV1TransportWaybillsCreateResponseStatusIssued, nil
+		return WaybillsCreateTransportResponseStatusIssued, nil
 	case "cancelled":
-		return PostV1TransportWaybillsCreateResponseStatusCancelled, nil
+		return WaybillsCreateTransportResponseStatusCancelled, nil
 	}
-	var t PostV1TransportWaybillsCreateResponseStatus
+	var t WaybillsCreateTransportResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsCreateResponseStatus) Ptr() *PostV1TransportWaybillsCreateResponseStatus {
-	return &p
+func (w WaybillsCreateTransportResponseStatus) Ptr() *WaybillsCreateTransportResponseStatus {
+	return &w
 }
 
 var (
-	postV1TransportWaybillsGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsGetResponseFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsGetResponseFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsGetResponseFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsGetResponseFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsGetResponseFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsGetResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsGetResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsGetResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsGetResponseFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsGetResponseFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsGetResponseFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsGetResponseFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsGetResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsGetResponseFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsGetResponseFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsGetResponseFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsGetResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsGetResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsGetResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsGetResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1TransportWaybillsGetResponseFieldLines                = big.NewInt(1 << 21)
+	waybillsGetTransportResponseFieldID                   = big.NewInt(1 << 0)
+	waybillsGetTransportResponseFieldStatus               = big.NewInt(1 << 1)
+	waybillsGetTransportResponseFieldSeries               = big.NewInt(1 << 2)
+	waybillsGetTransportResponseFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsGetTransportResponseFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsGetTransportResponseFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsGetTransportResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsGetTransportResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsGetTransportResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsGetTransportResponseFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsGetTransportResponseFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsGetTransportResponseFieldDriverName           = big.NewInt(1 << 11)
+	waybillsGetTransportResponseFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsGetTransportResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsGetTransportResponseFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsGetTransportResponseFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsGetTransportResponseFieldValueEur             = big.NewInt(1 << 16)
+	waybillsGetTransportResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsGetTransportResponseFieldNotes                = big.NewInt(1 << 18)
+	waybillsGetTransportResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsGetTransportResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsGetTransportResponseFieldLines                = big.NewInt(1 << 21)
 )
 
-type PostV1TransportWaybillsGetResponse struct {
-	ID                   string                                         `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsGetResponseStatus       `json:"status" url:"status"`
-	Series               string                                         `json:"series" url:"series"`
-	FullNumber           *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                         `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                         `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                        `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
-	ConsigneePartnerID   string                                         `json:"consigneePartnerId" url:"consigneePartnerId"`
-	TransporterPartnerID *string                                        `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
-	VehiclePlate         *string                                        `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
-	TrailerPlate         *string                                        `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
-	DriverName           *string                                        `json:"driverName,omitempty" url:"driverName,omitempty"`
-	DriverSurname        *string                                        `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
-	LoadWarehouseID      *string                                        `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
-	LoadAddress          string                                         `json:"loadAddress" url:"loadAddress"`
-	UnloadAddress        string                                         `json:"unloadAddress" url:"unloadAddress"`
-	ValueEur             *string                                        `json:"valueEur,omitempty" url:"valueEur,omitempty"`
-	SaleInvoiceID        *string                                        `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
-	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1TransportWaybillsGetResponseLinesItem `json:"lines" url:"lines"`
+type WaybillsGetTransportResponse struct {
+	ID                   string                                   `json:"id" url:"id"`
+	Status               WaybillsGetTransportResponseStatus       `json:"status" url:"status"`
+	Series               string                                   `json:"series" url:"series"`
+	FullNumber           *string                                  `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	DocumentDate         time.Time                                `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                                `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                               `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	ConsigneePartnerID   string                                   `json:"consigneePartnerId" url:"consigneePartnerId"`
+	TransporterPartnerID *string                                  `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
+	VehiclePlate         *string                                  `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate         *string                                  `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName           *string                                  `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname        *string                                  `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	LoadWarehouseID      *string                                  `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
+	LoadAddress          string                                   `json:"loadAddress" url:"loadAddress"`
+	UnloadAddress        string                                   `json:"unloadAddress" url:"unloadAddress"`
+	ValueEur             *string                                  `json:"valueEur,omitempty" url:"valueEur,omitempty"`
+	SaleInvoiceID        *string                                  `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	Notes                *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                `json:"updatedAt" url:"updatedAt"`
+	Lines                []*WaybillsGetTransportResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1886,381 +1316,405 @@ type PostV1TransportWaybillsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetID() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetStatus() PostV1TransportWaybillsGetResponseStatus {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetStatus() WaybillsGetTransportResponseStatus {
+	if w == nil {
 		return ""
 	}
-	return p.Status
+	return w.Status
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetSeries() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetSeries() string {
+	if w == nil {
 		return ""
 	}
-	return p.Series
+	return w.Series
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetFullNumber() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetFullNumber() *string {
+	if w == nil {
 		return nil
 	}
-	return p.FullNumber
+	return w.FullNumber
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetDocumentDate() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsGetTransportResponse) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsGetTransportResponse) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsGetTransportResponse) GetConsigneePartnerID() string {
+	if w == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return w.ConsigneePartnerID
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetDispatchAt() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsGetTransportResponse) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsGetTransportResponse) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsGetTransportResponse) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsGetTransportResponse) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsGetTransportResponse) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsGetTransportResponse) GetLoadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.DispatchAt
+	return w.LoadAddress
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetConsigneePartnerID() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetUnloadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.ConsigneePartnerID
+	return w.UnloadAddress
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetTransporterPartnerID() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetValueEur() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TransporterPartnerID
+	return w.ValueEur
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetVehiclePlate() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetSaleInvoiceID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.VehiclePlate
+	return w.SaleInvoiceID
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetTrailerPlate() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetNotes() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TrailerPlate
+	return w.Notes
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetDriverName() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsGetTransportResponse) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsGetTransportResponse) GetLines() []*WaybillsGetTransportResponseLinesItem {
+	if w == nil {
 		return nil
 	}
-	return p.DriverName
+	return w.Lines
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetDriverSurname() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.DriverSurname
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsGetResponse) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
+func (w *WaybillsGetTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetLines() []*PostV1TransportWaybillsGetResponseLinesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Lines
-}
-
-func (p *PostV1TransportWaybillsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsGetResponseFieldID)
+func (w *WaybillsGetTransportResponse) SetID(id string) {
+	w.ID = id
+	w.require(waybillsGetTransportResponseFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetStatus(status PostV1TransportWaybillsGetResponseStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsGetResponseFieldStatus)
+func (w *WaybillsGetTransportResponse) SetStatus(status WaybillsGetTransportResponseStatus) {
+	w.Status = status
+	w.require(waybillsGetTransportResponseFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsGetResponseFieldSeries)
+func (w *WaybillsGetTransportResponse) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsGetTransportResponseFieldSeries)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsGetResponseFieldFullNumber)
+func (w *WaybillsGetTransportResponse) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsGetTransportResponseFieldFullNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsGetResponseFieldDocumentDate)
+func (w *WaybillsGetTransportResponse) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsGetTransportResponseFieldDocumentDate)
 }
 
 // SetDispatchAt sets the DispatchAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsGetResponseFieldDispatchAt)
+func (w *WaybillsGetTransportResponse) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsGetTransportResponseFieldDispatchAt)
 }
 
 // SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsGetResponseFieldEstimatedArrivalAt)
+func (w *WaybillsGetTransportResponse) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsGetTransportResponseFieldEstimatedArrivalAt)
 }
 
 // SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsGetResponseFieldConsigneePartnerID)
+func (w *WaybillsGetTransportResponse) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsGetTransportResponseFieldConsigneePartnerID)
 }
 
 // SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsGetResponseFieldTransporterPartnerID)
+func (w *WaybillsGetTransportResponse) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsGetTransportResponseFieldTransporterPartnerID)
 }
 
 // SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsGetResponseFieldVehiclePlate)
+func (w *WaybillsGetTransportResponse) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsGetTransportResponseFieldVehiclePlate)
 }
 
 // SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsGetResponseFieldTrailerPlate)
+func (w *WaybillsGetTransportResponse) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsGetTransportResponseFieldTrailerPlate)
 }
 
 // SetDriverName sets the DriverName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsGetResponseFieldDriverName)
+func (w *WaybillsGetTransportResponse) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsGetTransportResponseFieldDriverName)
 }
 
 // SetDriverSurname sets the DriverSurname field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsGetResponseFieldDriverSurname)
+func (w *WaybillsGetTransportResponse) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsGetTransportResponseFieldDriverSurname)
 }
 
 // SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsGetResponseFieldLoadWarehouseID)
+func (w *WaybillsGetTransportResponse) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsGetTransportResponseFieldLoadWarehouseID)
 }
 
 // SetLoadAddress sets the LoadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsGetResponseFieldLoadAddress)
+func (w *WaybillsGetTransportResponse) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsGetTransportResponseFieldLoadAddress)
 }
 
 // SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsGetResponseFieldUnloadAddress)
+func (w *WaybillsGetTransportResponse) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsGetTransportResponseFieldUnloadAddress)
 }
 
 // SetValueEur sets the ValueEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsGetResponseFieldValueEur)
+func (w *WaybillsGetTransportResponse) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsGetTransportResponseFieldValueEur)
 }
 
 // SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsGetResponseFieldSaleInvoiceID)
+func (w *WaybillsGetTransportResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsGetTransportResponseFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsGetResponseFieldNotes)
+func (w *WaybillsGetTransportResponse) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsGetTransportResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsGetResponseFieldCreatedAt)
+func (w *WaybillsGetTransportResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsGetTransportResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsGetResponseFieldUpdatedAt)
+func (w *WaybillsGetTransportResponse) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsGetTransportResponseFieldUpdatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponse) SetLines(lines []*PostV1TransportWaybillsGetResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsGetResponseFieldLines)
+func (w *WaybillsGetTransportResponse) SetLines(lines []*WaybillsGetTransportResponseLinesItem) {
+	w.Lines = lines
+	w.require(waybillsGetTransportResponseFieldLines)
 }
 
-func (p *PostV1TransportWaybillsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WaybillsGetTransportResponse) UnmarshalJSON(data []byte) error {
+	type embed WaybillsGetTransportResponse
+	var unmarshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsGetTransportResponse(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsGetResponse
+func (w *WaybillsGetTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsGetTransportResponse
 	var marshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsGetResponse) String() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsGetResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	postV1TransportWaybillsGetResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	postV1TransportWaybillsGetResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	postV1TransportWaybillsGetResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	postV1TransportWaybillsGetResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	postV1TransportWaybillsGetResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	postV1TransportWaybillsGetResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsGetTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
+	waybillsGetTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
+	waybillsGetTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
+	waybillsGetTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
+	waybillsGetTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
+	waybillsGetTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
+	waybillsGetTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
 )
 
-type PostV1TransportWaybillsGetResponseLinesItem struct {
+type WaybillsGetTransportResponseLinesItem struct {
 	ID          string  `json:"id" url:"id"`
 	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description string  `json:"description" url:"description"`
@@ -2276,233 +1730,233 @@ type PostV1TransportWaybillsGetResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetID() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetItemID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ItemID
+	return w.ItemID
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetDescription() string {
+	if w == nil {
 		return ""
 	}
-	return p.Description
+	return w.Description
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetUnit() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetUnit() string {
+	if w == nil {
 		return ""
 	}
-	return p.Unit
+	return w.Unit
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetQuantity() string {
+	if w == nil {
 		return ""
 	}
-	return p.Quantity
+	return w.Quantity
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetProductCode() *string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetProductCode() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ProductCode
+	return w.ProductCode
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetSortOrder() int64 {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetSortOrder() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.SortOrder
+	return w.SortOrder
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsGetTransportResponseLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldID)
+func (w *WaybillsGetTransportResponseLinesItem) SetID(id string) {
+	w.ID = id
+	w.require(waybillsGetTransportResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldItemID)
+func (w *WaybillsGetTransportResponseLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsGetTransportResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldDescription)
+func (w *WaybillsGetTransportResponseLinesItem) SetDescription(description string) {
+	w.Description = description
+	w.require(waybillsGetTransportResponseLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetUnit(unit string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldUnit)
+func (w *WaybillsGetTransportResponseLinesItem) SetUnit(unit string) {
+	w.Unit = unit
+	w.require(waybillsGetTransportResponseLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldQuantity)
+func (w *WaybillsGetTransportResponseLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsGetTransportResponseLinesItemFieldQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldProductCode)
+func (w *WaybillsGetTransportResponseLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsGetTransportResponseLinesItemFieldProductCode)
 }
 
 // SetSortOrder sets the SortOrder field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsGetResponseLinesItem) SetSortOrder(sortOrder int64) {
-	p.SortOrder = sortOrder
-	p.require(postV1TransportWaybillsGetResponseLinesItemFieldSortOrder)
+func (w *WaybillsGetTransportResponseLinesItem) SetSortOrder(sortOrder int64) {
+	w.SortOrder = sortOrder
+	w.require(waybillsGetTransportResponseLinesItemFieldSortOrder)
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsGetResponseLinesItem
+func (w *WaybillsGetTransportResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsGetTransportResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsGetResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsGetTransportResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsGetResponseLinesItem
+func (w *WaybillsGetTransportResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsGetTransportResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsGetResponseLinesItem) String() string {
-	if p == nil {
+func (w *WaybillsGetTransportResponseLinesItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsGetResponseStatus string
+type WaybillsGetTransportResponseStatus string
 
 const (
-	PostV1TransportWaybillsGetResponseStatusDraft     PostV1TransportWaybillsGetResponseStatus = "draft"
-	PostV1TransportWaybillsGetResponseStatusIssued    PostV1TransportWaybillsGetResponseStatus = "issued"
-	PostV1TransportWaybillsGetResponseStatusCancelled PostV1TransportWaybillsGetResponseStatus = "cancelled"
+	WaybillsGetTransportResponseStatusDraft     WaybillsGetTransportResponseStatus = "draft"
+	WaybillsGetTransportResponseStatusIssued    WaybillsGetTransportResponseStatus = "issued"
+	WaybillsGetTransportResponseStatusCancelled WaybillsGetTransportResponseStatus = "cancelled"
 )
 
-func NewPostV1TransportWaybillsGetResponseStatusFromString(s string) (PostV1TransportWaybillsGetResponseStatus, error) {
+func NewWaybillsGetTransportResponseStatusFromString(s string) (WaybillsGetTransportResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1TransportWaybillsGetResponseStatusDraft, nil
+		return WaybillsGetTransportResponseStatusDraft, nil
 	case "issued":
-		return PostV1TransportWaybillsGetResponseStatusIssued, nil
+		return WaybillsGetTransportResponseStatusIssued, nil
 	case "cancelled":
-		return PostV1TransportWaybillsGetResponseStatusCancelled, nil
+		return WaybillsGetTransportResponseStatusCancelled, nil
 	}
-	var t PostV1TransportWaybillsGetResponseStatus
+	var t WaybillsGetTransportResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsGetResponseStatus) Ptr() *PostV1TransportWaybillsGetResponseStatus {
-	return &p
+func (w WaybillsGetTransportResponseStatus) Ptr() *WaybillsGetTransportResponseStatus {
+	return &w
 }
 
 var (
-	postV1TransportWaybillsIssueResponseFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsIssueResponseFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsIssueResponseFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsIssueResponseFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsIssueResponseFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsIssueResponseFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsIssueResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsIssueResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsIssueResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsIssueResponseFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsIssueResponseFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsIssueResponseFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsIssueResponseFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsIssueResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsIssueResponseFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsIssueResponseFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsIssueResponseFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsIssueResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsIssueResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsIssueResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsIssueResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1TransportWaybillsIssueResponseFieldLines                = big.NewInt(1 << 21)
+	waybillsIssueTransportResponseFieldID                   = big.NewInt(1 << 0)
+	waybillsIssueTransportResponseFieldStatus               = big.NewInt(1 << 1)
+	waybillsIssueTransportResponseFieldSeries               = big.NewInt(1 << 2)
+	waybillsIssueTransportResponseFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsIssueTransportResponseFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsIssueTransportResponseFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsIssueTransportResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsIssueTransportResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsIssueTransportResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsIssueTransportResponseFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsIssueTransportResponseFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsIssueTransportResponseFieldDriverName           = big.NewInt(1 << 11)
+	waybillsIssueTransportResponseFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsIssueTransportResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsIssueTransportResponseFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsIssueTransportResponseFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsIssueTransportResponseFieldValueEur             = big.NewInt(1 << 16)
+	waybillsIssueTransportResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsIssueTransportResponseFieldNotes                = big.NewInt(1 << 18)
+	waybillsIssueTransportResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsIssueTransportResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsIssueTransportResponseFieldLines                = big.NewInt(1 << 21)
 )
 
-type PostV1TransportWaybillsIssueResponse struct {
-	ID                   string                                           `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsIssueResponseStatus       `json:"status" url:"status"`
-	Series               string                                           `json:"series" url:"series"`
-	FullNumber           *string                                          `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                           `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                           `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                          `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
-	ConsigneePartnerID   string                                           `json:"consigneePartnerId" url:"consigneePartnerId"`
-	TransporterPartnerID *string                                          `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
-	VehiclePlate         *string                                          `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
-	TrailerPlate         *string                                          `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
-	DriverName           *string                                          `json:"driverName,omitempty" url:"driverName,omitempty"`
-	DriverSurname        *string                                          `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
-	LoadWarehouseID      *string                                          `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
-	LoadAddress          string                                           `json:"loadAddress" url:"loadAddress"`
-	UnloadAddress        string                                           `json:"unloadAddress" url:"unloadAddress"`
-	ValueEur             *string                                          `json:"valueEur,omitempty" url:"valueEur,omitempty"`
-	SaleInvoiceID        *string                                          `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
-	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                           `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                           `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1TransportWaybillsIssueResponseLinesItem `json:"lines" url:"lines"`
+type WaybillsIssueTransportResponse struct {
+	ID                   string                                     `json:"id" url:"id"`
+	Status               WaybillsIssueTransportResponseStatus       `json:"status" url:"status"`
+	Series               string                                     `json:"series" url:"series"`
+	FullNumber           *string                                    `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	DocumentDate         time.Time                                  `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                                  `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                                 `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	ConsigneePartnerID   string                                     `json:"consigneePartnerId" url:"consigneePartnerId"`
+	TransporterPartnerID *string                                    `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
+	VehiclePlate         *string                                    `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate         *string                                    `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName           *string                                    `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname        *string                                    `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	LoadWarehouseID      *string                                    `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
+	LoadAddress          string                                     `json:"loadAddress" url:"loadAddress"`
+	UnloadAddress        string                                     `json:"unloadAddress" url:"unloadAddress"`
+	ValueEur             *string                                    `json:"valueEur,omitempty" url:"valueEur,omitempty"`
+	SaleInvoiceID        *string                                    `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                  `json:"updatedAt" url:"updatedAt"`
+	Lines                []*WaybillsIssueTransportResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2511,381 +1965,405 @@ type PostV1TransportWaybillsIssueResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetID() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetStatus() PostV1TransportWaybillsIssueResponseStatus {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetStatus() WaybillsIssueTransportResponseStatus {
+	if w == nil {
 		return ""
 	}
-	return p.Status
+	return w.Status
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetSeries() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetSeries() string {
+	if w == nil {
 		return ""
 	}
-	return p.Series
+	return w.Series
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetFullNumber() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetFullNumber() *string {
+	if w == nil {
 		return nil
 	}
-	return p.FullNumber
+	return w.FullNumber
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetDocumentDate() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsIssueTransportResponse) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsIssueTransportResponse) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsIssueTransportResponse) GetConsigneePartnerID() string {
+	if w == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return w.ConsigneePartnerID
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetDispatchAt() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsIssueTransportResponse) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsIssueTransportResponse) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsIssueTransportResponse) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsIssueTransportResponse) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsIssueTransportResponse) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsIssueTransportResponse) GetLoadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.DispatchAt
+	return w.LoadAddress
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetConsigneePartnerID() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetUnloadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.ConsigneePartnerID
+	return w.UnloadAddress
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetTransporterPartnerID() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetValueEur() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TransporterPartnerID
+	return w.ValueEur
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetVehiclePlate() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetSaleInvoiceID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.VehiclePlate
+	return w.SaleInvoiceID
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetTrailerPlate() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetNotes() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TrailerPlate
+	return w.Notes
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetDriverName() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsIssueTransportResponse) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsIssueTransportResponse) GetLines() []*WaybillsIssueTransportResponseLinesItem {
+	if w == nil {
 		return nil
 	}
-	return p.DriverName
+	return w.Lines
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetDriverSurname() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.DriverSurname
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
+func (w *WaybillsIssueTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetLines() []*PostV1TransportWaybillsIssueResponseLinesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Lines
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsIssueResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsIssueResponseFieldID)
+func (w *WaybillsIssueTransportResponse) SetID(id string) {
+	w.ID = id
+	w.require(waybillsIssueTransportResponseFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetStatus(status PostV1TransportWaybillsIssueResponseStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsIssueResponseFieldStatus)
+func (w *WaybillsIssueTransportResponse) SetStatus(status WaybillsIssueTransportResponseStatus) {
+	w.Status = status
+	w.require(waybillsIssueTransportResponseFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsIssueResponseFieldSeries)
+func (w *WaybillsIssueTransportResponse) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsIssueTransportResponseFieldSeries)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsIssueResponseFieldFullNumber)
+func (w *WaybillsIssueTransportResponse) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsIssueTransportResponseFieldFullNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsIssueResponseFieldDocumentDate)
+func (w *WaybillsIssueTransportResponse) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsIssueTransportResponseFieldDocumentDate)
 }
 
 // SetDispatchAt sets the DispatchAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsIssueResponseFieldDispatchAt)
+func (w *WaybillsIssueTransportResponse) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsIssueTransportResponseFieldDispatchAt)
 }
 
 // SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsIssueResponseFieldEstimatedArrivalAt)
+func (w *WaybillsIssueTransportResponse) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsIssueTransportResponseFieldEstimatedArrivalAt)
 }
 
 // SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsIssueResponseFieldConsigneePartnerID)
+func (w *WaybillsIssueTransportResponse) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsIssueTransportResponseFieldConsigneePartnerID)
 }
 
 // SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsIssueResponseFieldTransporterPartnerID)
+func (w *WaybillsIssueTransportResponse) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsIssueTransportResponseFieldTransporterPartnerID)
 }
 
 // SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsIssueResponseFieldVehiclePlate)
+func (w *WaybillsIssueTransportResponse) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsIssueTransportResponseFieldVehiclePlate)
 }
 
 // SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsIssueResponseFieldTrailerPlate)
+func (w *WaybillsIssueTransportResponse) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsIssueTransportResponseFieldTrailerPlate)
 }
 
 // SetDriverName sets the DriverName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsIssueResponseFieldDriverName)
+func (w *WaybillsIssueTransportResponse) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsIssueTransportResponseFieldDriverName)
 }
 
 // SetDriverSurname sets the DriverSurname field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsIssueResponseFieldDriverSurname)
+func (w *WaybillsIssueTransportResponse) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsIssueTransportResponseFieldDriverSurname)
 }
 
 // SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsIssueResponseFieldLoadWarehouseID)
+func (w *WaybillsIssueTransportResponse) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsIssueTransportResponseFieldLoadWarehouseID)
 }
 
 // SetLoadAddress sets the LoadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsIssueResponseFieldLoadAddress)
+func (w *WaybillsIssueTransportResponse) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsIssueTransportResponseFieldLoadAddress)
 }
 
 // SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsIssueResponseFieldUnloadAddress)
+func (w *WaybillsIssueTransportResponse) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsIssueTransportResponseFieldUnloadAddress)
 }
 
 // SetValueEur sets the ValueEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsIssueResponseFieldValueEur)
+func (w *WaybillsIssueTransportResponse) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsIssueTransportResponseFieldValueEur)
 }
 
 // SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsIssueResponseFieldSaleInvoiceID)
+func (w *WaybillsIssueTransportResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsIssueTransportResponseFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsIssueResponseFieldNotes)
+func (w *WaybillsIssueTransportResponse) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsIssueTransportResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsIssueResponseFieldCreatedAt)
+func (w *WaybillsIssueTransportResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsIssueTransportResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsIssueResponseFieldUpdatedAt)
+func (w *WaybillsIssueTransportResponse) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsIssueTransportResponseFieldUpdatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponse) SetLines(lines []*PostV1TransportWaybillsIssueResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsIssueResponseFieldLines)
+func (w *WaybillsIssueTransportResponse) SetLines(lines []*WaybillsIssueTransportResponseLinesItem) {
+	w.Lines = lines
+	w.require(waybillsIssueTransportResponseFieldLines)
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsIssueResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WaybillsIssueTransportResponse) UnmarshalJSON(data []byte) error {
+	type embed WaybillsIssueTransportResponse
+	var unmarshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsIssueResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsIssueTransportResponse(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsIssueResponse
+func (w *WaybillsIssueTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsIssueTransportResponse
 	var marshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsIssueResponse) String() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsIssueResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	postV1TransportWaybillsIssueResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	postV1TransportWaybillsIssueResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	postV1TransportWaybillsIssueResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	postV1TransportWaybillsIssueResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	postV1TransportWaybillsIssueResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	postV1TransportWaybillsIssueResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsIssueTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
+	waybillsIssueTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
+	waybillsIssueTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
+	waybillsIssueTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
+	waybillsIssueTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
+	waybillsIssueTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
+	waybillsIssueTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
 )
 
-type PostV1TransportWaybillsIssueResponseLinesItem struct {
+type WaybillsIssueTransportResponseLinesItem struct {
 	ID          string  `json:"id" url:"id"`
 	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description string  `json:"description" url:"description"`
@@ -2901,195 +2379,195 @@ type PostV1TransportWaybillsIssueResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetID() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetItemID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ItemID
+	return w.ItemID
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetDescription() string {
+	if w == nil {
 		return ""
 	}
-	return p.Description
+	return w.Description
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetUnit() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetUnit() string {
+	if w == nil {
 		return ""
 	}
-	return p.Unit
+	return w.Unit
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetQuantity() string {
+	if w == nil {
 		return ""
 	}
-	return p.Quantity
+	return w.Quantity
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetProductCode() *string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetProductCode() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ProductCode
+	return w.ProductCode
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetSortOrder() int64 {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetSortOrder() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.SortOrder
+	return w.SortOrder
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsIssueTransportResponseLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldID)
+func (w *WaybillsIssueTransportResponseLinesItem) SetID(id string) {
+	w.ID = id
+	w.require(waybillsIssueTransportResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldItemID)
+func (w *WaybillsIssueTransportResponseLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsIssueTransportResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldDescription)
+func (w *WaybillsIssueTransportResponseLinesItem) SetDescription(description string) {
+	w.Description = description
+	w.require(waybillsIssueTransportResponseLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetUnit(unit string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldUnit)
+func (w *WaybillsIssueTransportResponseLinesItem) SetUnit(unit string) {
+	w.Unit = unit
+	w.require(waybillsIssueTransportResponseLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldQuantity)
+func (w *WaybillsIssueTransportResponseLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsIssueTransportResponseLinesItemFieldQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldProductCode)
+func (w *WaybillsIssueTransportResponseLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsIssueTransportResponseLinesItemFieldProductCode)
 }
 
 // SetSortOrder sets the SortOrder field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) SetSortOrder(sortOrder int64) {
-	p.SortOrder = sortOrder
-	p.require(postV1TransportWaybillsIssueResponseLinesItemFieldSortOrder)
+func (w *WaybillsIssueTransportResponseLinesItem) SetSortOrder(sortOrder int64) {
+	w.SortOrder = sortOrder
+	w.require(waybillsIssueTransportResponseLinesItemFieldSortOrder)
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsIssueResponseLinesItem
+func (w *WaybillsIssueTransportResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsIssueTransportResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsIssueResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsIssueTransportResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsIssueResponseLinesItem
+func (w *WaybillsIssueTransportResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsIssueTransportResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsIssueResponseLinesItem) String() string {
-	if p == nil {
+func (w *WaybillsIssueTransportResponseLinesItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsIssueResponseStatus string
+type WaybillsIssueTransportResponseStatus string
 
 const (
-	PostV1TransportWaybillsIssueResponseStatusDraft     PostV1TransportWaybillsIssueResponseStatus = "draft"
-	PostV1TransportWaybillsIssueResponseStatusIssued    PostV1TransportWaybillsIssueResponseStatus = "issued"
-	PostV1TransportWaybillsIssueResponseStatusCancelled PostV1TransportWaybillsIssueResponseStatus = "cancelled"
+	WaybillsIssueTransportResponseStatusDraft     WaybillsIssueTransportResponseStatus = "draft"
+	WaybillsIssueTransportResponseStatusIssued    WaybillsIssueTransportResponseStatus = "issued"
+	WaybillsIssueTransportResponseStatusCancelled WaybillsIssueTransportResponseStatus = "cancelled"
 )
 
-func NewPostV1TransportWaybillsIssueResponseStatusFromString(s string) (PostV1TransportWaybillsIssueResponseStatus, error) {
+func NewWaybillsIssueTransportResponseStatusFromString(s string) (WaybillsIssueTransportResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1TransportWaybillsIssueResponseStatusDraft, nil
+		return WaybillsIssueTransportResponseStatusDraft, nil
 	case "issued":
-		return PostV1TransportWaybillsIssueResponseStatusIssued, nil
+		return WaybillsIssueTransportResponseStatusIssued, nil
 	case "cancelled":
-		return PostV1TransportWaybillsIssueResponseStatusCancelled, nil
+		return WaybillsIssueTransportResponseStatusCancelled, nil
 	}
-	var t PostV1TransportWaybillsIssueResponseStatus
+	var t WaybillsIssueTransportResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsIssueResponseStatus) Ptr() *PostV1TransportWaybillsIssueResponseStatus {
-	return &p
+func (w WaybillsIssueTransportResponseStatus) Ptr() *WaybillsIssueTransportResponseStatus {
+	return &w
 }
 
 var (
-	postV1TransportWaybillsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1TransportWaybillsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1TransportWaybillsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	waybillsListTransportRequestFilterItemFieldField = big.NewInt(1 << 0)
+	waybillsListTransportRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	waybillsListTransportRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1TransportWaybillsListRequestFilterItem struct {
-	Field string                                             `json:"field" url:"field"`
-	Op    PostV1TransportWaybillsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1TransportWaybillsListRequestFilterItemValue `json:"value" url:"value"`
+type WaybillsListTransportRequestFilterItem struct {
+	Field string                                       `json:"field" url:"field"`
+	Op    WaybillsListTransportRequestFilterItemOp     `json:"op" url:"op"`
+	Value *WaybillsListTransportRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3098,312 +2576,312 @@ type PostV1TransportWaybillsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItem) GetField() string {
+	if w == nil {
 		return ""
 	}
-	return p.Field
+	return w.Field
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) GetOp() PostV1TransportWaybillsListRequestFilterItemOp {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItem) GetOp() WaybillsListTransportRequestFilterItemOp {
+	if w == nil {
 		return ""
 	}
-	return p.Op
+	return w.Op
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) GetValue() *PostV1TransportWaybillsListRequestFilterItemValue {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItem) GetValue() *WaybillsListTransportRequestFilterItemValue {
+	if w == nil {
 		return nil
 	}
-	return p.Value
+	return w.Value
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsListTransportRequestFilterItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1TransportWaybillsListRequestFilterItemFieldField)
+func (w *WaybillsListTransportRequestFilterItem) SetField(field string) {
+	w.Field = field
+	w.require(waybillsListTransportRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequestFilterItem) SetOp(op PostV1TransportWaybillsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1TransportWaybillsListRequestFilterItemFieldOp)
+func (w *WaybillsListTransportRequestFilterItem) SetOp(op WaybillsListTransportRequestFilterItemOp) {
+	w.Op = op
+	w.require(waybillsListTransportRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequestFilterItem) SetValue(value *PostV1TransportWaybillsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1TransportWaybillsListRequestFilterItemFieldValue)
+func (w *WaybillsListTransportRequestFilterItem) SetValue(value *WaybillsListTransportRequestFilterItemValue) {
+	w.Value = value
+	w.require(waybillsListTransportRequestFilterItemFieldValue)
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsListRequestFilterItem
+func (w *WaybillsListTransportRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsListTransportRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsListTransportRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsListRequestFilterItem
+func (w *WaybillsListTransportRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsListTransportRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItem) String() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsListRequestFilterItemOp string
+type WaybillsListTransportRequestFilterItemOp string
 
 const (
-	PostV1TransportWaybillsListRequestFilterItemOpEq       PostV1TransportWaybillsListRequestFilterItemOp = "eq"
-	PostV1TransportWaybillsListRequestFilterItemOpNe       PostV1TransportWaybillsListRequestFilterItemOp = "ne"
-	PostV1TransportWaybillsListRequestFilterItemOpContains PostV1TransportWaybillsListRequestFilterItemOp = "contains"
-	PostV1TransportWaybillsListRequestFilterItemOpGte      PostV1TransportWaybillsListRequestFilterItemOp = "gte"
-	PostV1TransportWaybillsListRequestFilterItemOpLte      PostV1TransportWaybillsListRequestFilterItemOp = "lte"
-	PostV1TransportWaybillsListRequestFilterItemOpIn       PostV1TransportWaybillsListRequestFilterItemOp = "in"
+	WaybillsListTransportRequestFilterItemOpEq       WaybillsListTransportRequestFilterItemOp = "eq"
+	WaybillsListTransportRequestFilterItemOpNe       WaybillsListTransportRequestFilterItemOp = "ne"
+	WaybillsListTransportRequestFilterItemOpContains WaybillsListTransportRequestFilterItemOp = "contains"
+	WaybillsListTransportRequestFilterItemOpGte      WaybillsListTransportRequestFilterItemOp = "gte"
+	WaybillsListTransportRequestFilterItemOpLte      WaybillsListTransportRequestFilterItemOp = "lte"
+	WaybillsListTransportRequestFilterItemOpIn       WaybillsListTransportRequestFilterItemOp = "in"
 )
 
-func NewPostV1TransportWaybillsListRequestFilterItemOpFromString(s string) (PostV1TransportWaybillsListRequestFilterItemOp, error) {
+func NewWaybillsListTransportRequestFilterItemOpFromString(s string) (WaybillsListTransportRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1TransportWaybillsListRequestFilterItemOpEq, nil
+		return WaybillsListTransportRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1TransportWaybillsListRequestFilterItemOpNe, nil
+		return WaybillsListTransportRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1TransportWaybillsListRequestFilterItemOpContains, nil
+		return WaybillsListTransportRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1TransportWaybillsListRequestFilterItemOpGte, nil
+		return WaybillsListTransportRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1TransportWaybillsListRequestFilterItemOpLte, nil
+		return WaybillsListTransportRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1TransportWaybillsListRequestFilterItemOpIn, nil
+		return WaybillsListTransportRequestFilterItemOpIn, nil
 	}
-	var t PostV1TransportWaybillsListRequestFilterItemOp
+	var t WaybillsListTransportRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsListRequestFilterItemOp) Ptr() *PostV1TransportWaybillsListRequestFilterItemOp {
-	return &p
+func (w WaybillsListTransportRequestFilterItemOp) Ptr() *WaybillsListTransportRequestFilterItemOp {
+	return &w
 }
 
-type PostV1TransportWaybillsListRequestFilterItemValue struct {
-	String                                                         string
-	Double                                                         float64
-	Boolean                                                        bool
-	PostV1TransportWaybillsListRequestFilterItemValueThreeItemList []*PostV1TransportWaybillsListRequestFilterItemValueThreeItem
+type WaybillsListTransportRequestFilterItemValue struct {
+	String                                                   string
+	Double                                                   float64
+	Boolean                                                  bool
+	WaybillsListTransportRequestFilterItemValueThreeItemList []*WaybillsListTransportRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValue) GetString() string {
+	if w == nil {
 		return ""
 	}
-	return p.String
+	return w.String
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValue) GetDouble() float64 {
+	if w == nil {
 		return 0
 	}
-	return p.Double
+	return w.Double
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValue) GetBoolean() bool {
+	if w == nil {
 		return false
 	}
-	return p.Boolean
+	return w.Boolean
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) GetPostV1TransportWaybillsListRequestFilterItemValueThreeItemList() []*PostV1TransportWaybillsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValue) GetWaybillsListTransportRequestFilterItemValueThreeItemList() []*WaybillsListTransportRequestFilterItemValueThreeItem {
+	if w == nil {
 		return nil
 	}
-	return p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList
+	return w.WaybillsListTransportRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (w *WaybillsListTransportRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		w.typ = "String"
+		w.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		w.typ = "Double"
+		w.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		w.typ = "Boolean"
+		w.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1TransportWaybillsListRequestFilterItemValueThreeItemList []*PostV1TransportWaybillsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1TransportWaybillsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1TransportWaybillsListRequestFilterItemValueThreeItemList"
-		p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList = valuePostV1TransportWaybillsListRequestFilterItemValueThreeItemList
+	var valueWaybillsListTransportRequestFilterItemValueThreeItemList []*WaybillsListTransportRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueWaybillsListTransportRequestFilterItemValueThreeItemList); err == nil {
+		w.typ = "WaybillsListTransportRequestFilterItemValueThreeItemList"
+		w.WaybillsListTransportRequestFilterItemValueThreeItemList = valueWaybillsListTransportRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, w)
 }
 
-func (p PostV1TransportWaybillsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (w WaybillsListTransportRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if w.typ == "String" || w.String != "" {
+		return json.Marshal(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return json.Marshal(w.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if w.typ == "Boolean" || w.Boolean != false {
+		return json.Marshal(w.Boolean)
 	}
-	if p.typ == "PostV1TransportWaybillsListRequestFilterItemValueThreeItemList" || p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList)
+	if w.typ == "WaybillsListTransportRequestFilterItemValueThreeItemList" || w.WaybillsListTransportRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(w.WaybillsListTransportRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1TransportWaybillsListRequestFilterItemValueVisitor interface {
+type WaybillsListTransportRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1TransportWaybillsListRequestFilterItemValueThreeItemList([]*PostV1TransportWaybillsListRequestFilterItemValueThreeItem) error
+	VisitWaybillsListTransportRequestFilterItemValueThreeItemList([]*WaybillsListTransportRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValue) Accept(visitor PostV1TransportWaybillsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (w *WaybillsListTransportRequestFilterItemValue) Accept(visitor WaybillsListTransportRequestFilterItemValueVisitor) error {
+	if w.typ == "String" || w.String != "" {
+		return visitor.VisitString(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return visitor.VisitDouble(w.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if w.typ == "Boolean" || w.Boolean != false {
+		return visitor.VisitBoolean(w.Boolean)
 	}
-	if p.typ == "PostV1TransportWaybillsListRequestFilterItemValueThreeItemList" || p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1TransportWaybillsListRequestFilterItemValueThreeItemList(p.PostV1TransportWaybillsListRequestFilterItemValueThreeItemList)
+	if w.typ == "WaybillsListTransportRequestFilterItemValueThreeItemList" || w.WaybillsListTransportRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitWaybillsListTransportRequestFilterItemValueThreeItemList(w.WaybillsListTransportRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1TransportWaybillsListRequestFilterItemValueThreeItem struct {
+type WaybillsListTransportRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValueThreeItem) GetString() string {
+	if w == nil {
 		return ""
 	}
-	return p.String
+	return w.String
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (w *WaybillsListTransportRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if w == nil {
 		return 0
 	}
-	return p.Double
+	return w.Double
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (w *WaybillsListTransportRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		w.typ = "String"
+		w.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		w.typ = "Double"
+		w.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, w)
 }
 
-func (p PostV1TransportWaybillsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (w WaybillsListTransportRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if w.typ == "String" || w.String != "" {
+		return json.Marshal(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return json.Marshal(w.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
-type PostV1TransportWaybillsListRequestFilterItemValueThreeItemVisitor interface {
+type WaybillsListTransportRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1TransportWaybillsListRequestFilterItemValueThreeItem) Accept(visitor PostV1TransportWaybillsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (w *WaybillsListTransportRequestFilterItemValueThreeItem) Accept(visitor WaybillsListTransportRequestFilterItemValueThreeItemVisitor) error {
+	if w.typ == "String" || w.String != "" {
+		return visitor.VisitString(w.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if w.typ == "Double" || w.Double != 0 {
+		return visitor.VisitDouble(w.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", w)
 }
 
 var (
-	postV1TransportWaybillsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1TransportWaybillsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	waybillsListTransportRequestSortItemFieldField = big.NewInt(1 << 0)
+	waybillsListTransportRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1TransportWaybillsListRequestSortItem struct {
-	Field string                                         `json:"field" url:"field"`
-	Dir   *PostV1TransportWaybillsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type WaybillsListTransportRequestSortItem struct {
+	Field string                                   `json:"field" url:"field"`
+	Dir   *WaybillsListTransportRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3412,126 +2890,126 @@ type PostV1TransportWaybillsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) GetField() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestSortItem) GetField() string {
+	if w == nil {
 		return ""
 	}
-	return p.Field
+	return w.Field
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) GetDir() *PostV1TransportWaybillsListRequestSortItemDir {
-	if p == nil {
+func (w *WaybillsListTransportRequestSortItem) GetDir() *WaybillsListTransportRequestSortItemDir {
+	if w == nil {
 		return nil
 	}
-	return p.Dir
+	return w.Dir
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsListTransportRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsListTransportRequestSortItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1TransportWaybillsListRequestSortItemFieldField)
+func (w *WaybillsListTransportRequestSortItem) SetField(field string) {
+	w.Field = field
+	w.require(waybillsListTransportRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListRequestSortItem) SetDir(dir *PostV1TransportWaybillsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1TransportWaybillsListRequestSortItemFieldDir)
+func (w *WaybillsListTransportRequestSortItem) SetDir(dir *WaybillsListTransportRequestSortItemDir) {
+	w.Dir = dir
+	w.require(waybillsListTransportRequestSortItemFieldDir)
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsListRequestSortItem
+func (w *WaybillsListTransportRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsListTransportRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsListTransportRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsListRequestSortItem
+func (w *WaybillsListTransportRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsListTransportRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsListRequestSortItem) String() string {
-	if p == nil {
+func (w *WaybillsListTransportRequestSortItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsListRequestSortItemDir string
+type WaybillsListTransportRequestSortItemDir string
 
 const (
-	PostV1TransportWaybillsListRequestSortItemDirAsc  PostV1TransportWaybillsListRequestSortItemDir = "asc"
-	PostV1TransportWaybillsListRequestSortItemDirDesc PostV1TransportWaybillsListRequestSortItemDir = "desc"
+	WaybillsListTransportRequestSortItemDirAsc  WaybillsListTransportRequestSortItemDir = "asc"
+	WaybillsListTransportRequestSortItemDirDesc WaybillsListTransportRequestSortItemDir = "desc"
 )
 
-func NewPostV1TransportWaybillsListRequestSortItemDirFromString(s string) (PostV1TransportWaybillsListRequestSortItemDir, error) {
+func NewWaybillsListTransportRequestSortItemDirFromString(s string) (WaybillsListTransportRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1TransportWaybillsListRequestSortItemDirAsc, nil
+		return WaybillsListTransportRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1TransportWaybillsListRequestSortItemDirDesc, nil
+		return WaybillsListTransportRequestSortItemDirDesc, nil
 	}
-	var t PostV1TransportWaybillsListRequestSortItemDir
+	var t WaybillsListTransportRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsListRequestSortItemDir) Ptr() *PostV1TransportWaybillsListRequestSortItemDir {
-	return &p
+func (w WaybillsListTransportRequestSortItemDir) Ptr() *WaybillsListTransportRequestSortItemDir {
+	return &w
 }
 
 var (
-	postV1TransportWaybillsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1TransportWaybillsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1TransportWaybillsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1TransportWaybillsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1TransportWaybillsListResponseFieldTotals   = big.NewInt(1 << 4)
+	waybillsListTransportResponseFieldRows     = big.NewInt(1 << 0)
+	waybillsListTransportResponseFieldPage     = big.NewInt(1 << 1)
+	waybillsListTransportResponseFieldPageSize = big.NewInt(1 << 2)
+	waybillsListTransportResponseFieldTotal    = big.NewInt(1 << 3)
+	waybillsListTransportResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1TransportWaybillsListResponse struct {
-	Rows     []*PostV1TransportWaybillsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                          `json:"page" url:"page"`
-	PageSize int64                                          `json:"pageSize" url:"pageSize"`
-	Total    int64                                          `json:"total" url:"total"`
-	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
+type WaybillsListTransportResponse struct {
+	Rows     []*WaybillsListTransportResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                    `json:"page" url:"page"`
+	PageSize int64                                    `json:"pageSize" url:"pageSize"`
+	Total    int64                                    `json:"total" url:"total"`
+	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3540,178 +3018,180 @@ type PostV1TransportWaybillsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetRows() []*PostV1TransportWaybillsListResponseRowsItem {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetRows() []*WaybillsListTransportResponseRowsItem {
+	if w == nil {
 		return nil
 	}
-	return p.Rows
+	return w.Rows
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetPage() int64 {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetPage() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.Page
+	return w.Page
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetPageSize() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.PageSize
+	return w.PageSize
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetTotal() int64 {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetTotal() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.Total
+	return w.Total
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetTotals() map[string]string {
+	if w == nil {
 		return nil
 	}
-	return p.Totals
+	return w.Totals
 }
 
-func (p *PostV1TransportWaybillsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsListTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsListTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponse) SetRows(rows []*PostV1TransportWaybillsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1TransportWaybillsListResponseFieldRows)
+func (w *WaybillsListTransportResponse) SetRows(rows []*WaybillsListTransportResponseRowsItem) {
+	w.Rows = rows
+	w.require(waybillsListTransportResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1TransportWaybillsListResponseFieldPage)
+func (w *WaybillsListTransportResponse) SetPage(page int64) {
+	w.Page = page
+	w.require(waybillsListTransportResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1TransportWaybillsListResponseFieldPageSize)
+func (w *WaybillsListTransportResponse) SetPageSize(pageSize int64) {
+	w.PageSize = pageSize
+	w.require(waybillsListTransportResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1TransportWaybillsListResponseFieldTotal)
+func (w *WaybillsListTransportResponse) SetTotal(total int64) {
+	w.Total = total
+	w.require(waybillsListTransportResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1TransportWaybillsListResponseFieldTotals)
+func (w *WaybillsListTransportResponse) SetTotals(totals map[string]string) {
+	w.Totals = totals
+	w.require(waybillsListTransportResponseFieldTotals)
 }
 
-func (p *PostV1TransportWaybillsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsListResponse
+func (w *WaybillsListTransportResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsListTransportResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsListTransportResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsListResponse
+func (w *WaybillsListTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsListTransportResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsListResponse) String() string {
-	if p == nil {
+func (w *WaybillsListTransportResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsListResponseRowsItemFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsListResponseRowsItemFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsListResponseRowsItemFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsListResponseRowsItemFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsListResponseRowsItemFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsListResponseRowsItemFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsListResponseRowsItemFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsListResponseRowsItemFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsListResponseRowsItemFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsListResponseRowsItemFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsListResponseRowsItemFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsListResponseRowsItemFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsListResponseRowsItemFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsListResponseRowsItemFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsListResponseRowsItemFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsListResponseRowsItemFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsListResponseRowsItemFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsListResponseRowsItemFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsListTransportResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	waybillsListTransportResponseRowsItemFieldStatus               = big.NewInt(1 << 1)
+	waybillsListTransportResponseRowsItemFieldSeries               = big.NewInt(1 << 2)
+	waybillsListTransportResponseRowsItemFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsListTransportResponseRowsItemFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsListTransportResponseRowsItemFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsListTransportResponseRowsItemFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsListTransportResponseRowsItemFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsListTransportResponseRowsItemFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsListTransportResponseRowsItemFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsListTransportResponseRowsItemFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsListTransportResponseRowsItemFieldDriverName           = big.NewInt(1 << 11)
+	waybillsListTransportResponseRowsItemFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsListTransportResponseRowsItemFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsListTransportResponseRowsItemFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsListTransportResponseRowsItemFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsListTransportResponseRowsItemFieldValueEur             = big.NewInt(1 << 16)
+	waybillsListTransportResponseRowsItemFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsListTransportResponseRowsItemFieldNotes                = big.NewInt(1 << 18)
+	waybillsListTransportResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsListTransportResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsListTransportResponseRowsItemFieldConsigneeName        = big.NewInt(1 << 21)
 )
 
-type PostV1TransportWaybillsListResponseRowsItem struct {
-	ID                   string                                            `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsListResponseRowsItemStatus `json:"status" url:"status"`
-	Series               string                                            `json:"series" url:"series"`
-	FullNumber           *string                                           `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                            `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                            `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                           `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
-	ConsigneePartnerID   string                                            `json:"consigneePartnerId" url:"consigneePartnerId"`
-	TransporterPartnerID *string                                           `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
-	VehiclePlate         *string                                           `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
-	TrailerPlate         *string                                           `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
-	DriverName           *string                                           `json:"driverName,omitempty" url:"driverName,omitempty"`
-	DriverSurname        *string                                           `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
-	LoadWarehouseID      *string                                           `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
-	LoadAddress          string                                            `json:"loadAddress" url:"loadAddress"`
-	UnloadAddress        string                                            `json:"unloadAddress" url:"unloadAddress"`
-	ValueEur             *string                                           `json:"valueEur,omitempty" url:"valueEur,omitempty"`
-	SaleInvoiceID        *string                                           `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
-	Notes                *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                            `json:"updatedAt" url:"updatedAt"`
+type WaybillsListTransportResponseRowsItem struct {
+	ID                   string                                      `json:"id" url:"id"`
+	Status               WaybillsListTransportResponseRowsItemStatus `json:"status" url:"status"`
+	Series               string                                      `json:"series" url:"series"`
+	FullNumber           *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	DocumentDate         time.Time                                   `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                                   `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                                  `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	ConsigneePartnerID   string                                      `json:"consigneePartnerId" url:"consigneePartnerId"`
+	TransporterPartnerID *string                                     `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
+	VehiclePlate         *string                                     `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate         *string                                     `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName           *string                                     `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname        *string                                     `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	LoadWarehouseID      *string                                     `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
+	LoadAddress          string                                      `json:"loadAddress" url:"loadAddress"`
+	UnloadAddress        string                                      `json:"unloadAddress" url:"unloadAddress"`
+	ValueEur             *string                                     `json:"valueEur,omitempty" url:"valueEur,omitempty"`
+	SaleInvoiceID        *string                                     `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                   `json:"updatedAt" url:"updatedAt"`
+	ConsigneeName        *string                                     `json:"consigneeName,omitempty" url:"consigneeName,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3720,390 +3200,428 @@ type PostV1TransportWaybillsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetStatus() PostV1TransportWaybillsListResponseRowsItemStatus {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetStatus() WaybillsListTransportResponseRowsItemStatus {
+	if w == nil {
 		return ""
 	}
-	return p.Status
+	return w.Status
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetSeries() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetSeries() string {
+	if w == nil {
 		return ""
 	}
-	return p.Series
+	return w.Series
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetFullNumber() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetFullNumber() *string {
+	if w == nil {
 		return nil
 	}
-	return p.FullNumber
+	return w.FullNumber
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetDocumentDate() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetConsigneePartnerID() string {
+	if w == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return w.ConsigneePartnerID
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetDispatchAt() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetLoadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.DispatchAt
+	return w.LoadAddress
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetConsigneePartnerID() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetUnloadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.ConsigneePartnerID
+	return w.UnloadAddress
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetTransporterPartnerID() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetValueEur() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TransporterPartnerID
+	return w.ValueEur
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetVehiclePlate() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetSaleInvoiceID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.VehiclePlate
+	return w.SaleInvoiceID
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetTrailerPlate() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetNotes() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TrailerPlate
+	return w.Notes
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetDriverName() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsListTransportResponseRowsItem) GetConsigneeName() *string {
+	if w == nil {
 		return nil
 	}
-	return p.DriverName
+	return w.ConsigneeName
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetDriverSurname() *string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.DriverSurname
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
+func (w *WaybillsListTransportResponseRowsItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldID)
+func (w *WaybillsListTransportResponseRowsItem) SetID(id string) {
+	w.ID = id
+	w.require(waybillsListTransportResponseRowsItemFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetStatus(status PostV1TransportWaybillsListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldStatus)
+func (w *WaybillsListTransportResponseRowsItem) SetStatus(status WaybillsListTransportResponseRowsItemStatus) {
+	w.Status = status
+	w.require(waybillsListTransportResponseRowsItemFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldSeries)
+func (w *WaybillsListTransportResponseRowsItem) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsListTransportResponseRowsItemFieldSeries)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldFullNumber)
+func (w *WaybillsListTransportResponseRowsItem) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsListTransportResponseRowsItemFieldFullNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldDocumentDate)
+func (w *WaybillsListTransportResponseRowsItem) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsListTransportResponseRowsItemFieldDocumentDate)
 }
 
 // SetDispatchAt sets the DispatchAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldDispatchAt)
+func (w *WaybillsListTransportResponseRowsItem) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsListTransportResponseRowsItemFieldDispatchAt)
 }
 
 // SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldEstimatedArrivalAt)
+func (w *WaybillsListTransportResponseRowsItem) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsListTransportResponseRowsItemFieldEstimatedArrivalAt)
 }
 
 // SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldConsigneePartnerID)
+func (w *WaybillsListTransportResponseRowsItem) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsListTransportResponseRowsItemFieldConsigneePartnerID)
 }
 
 // SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldTransporterPartnerID)
+func (w *WaybillsListTransportResponseRowsItem) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsListTransportResponseRowsItemFieldTransporterPartnerID)
 }
 
 // SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldVehiclePlate)
+func (w *WaybillsListTransportResponseRowsItem) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsListTransportResponseRowsItemFieldVehiclePlate)
 }
 
 // SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldTrailerPlate)
+func (w *WaybillsListTransportResponseRowsItem) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsListTransportResponseRowsItemFieldTrailerPlate)
 }
 
 // SetDriverName sets the DriverName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldDriverName)
+func (w *WaybillsListTransportResponseRowsItem) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsListTransportResponseRowsItemFieldDriverName)
 }
 
 // SetDriverSurname sets the DriverSurname field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldDriverSurname)
+func (w *WaybillsListTransportResponseRowsItem) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsListTransportResponseRowsItemFieldDriverSurname)
 }
 
 // SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldLoadWarehouseID)
+func (w *WaybillsListTransportResponseRowsItem) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsListTransportResponseRowsItemFieldLoadWarehouseID)
 }
 
 // SetLoadAddress sets the LoadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldLoadAddress)
+func (w *WaybillsListTransportResponseRowsItem) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsListTransportResponseRowsItemFieldLoadAddress)
 }
 
 // SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldUnloadAddress)
+func (w *WaybillsListTransportResponseRowsItem) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsListTransportResponseRowsItemFieldUnloadAddress)
 }
 
 // SetValueEur sets the ValueEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldValueEur)
+func (w *WaybillsListTransportResponseRowsItem) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsListTransportResponseRowsItemFieldValueEur)
 }
 
 // SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldSaleInvoiceID)
+func (w *WaybillsListTransportResponseRowsItem) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsListTransportResponseRowsItemFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldNotes)
+func (w *WaybillsListTransportResponseRowsItem) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsListTransportResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldCreatedAt)
+func (w *WaybillsListTransportResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsListTransportResponseRowsItemFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsListResponseRowsItemFieldUpdatedAt)
+func (w *WaybillsListTransportResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsListTransportResponseRowsItemFieldUpdatedAt)
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+// SetConsigneeName sets the ConsigneeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportResponseRowsItem) SetConsigneeName(consigneeName *string) {
+	w.ConsigneeName = consigneeName
+	w.require(waybillsListTransportResponseRowsItemFieldConsigneeName)
+}
+
+func (w *WaybillsListTransportResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed WaybillsListTransportResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsListTransportResponseRowsItem(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsListResponseRowsItem
+func (w *WaybillsListTransportResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsListTransportResponseRowsItem
 	var marshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsListResponseRowsItem) String() string {
-	if p == nil {
+func (w *WaybillsListTransportResponseRowsItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsListResponseRowsItemStatus string
+type WaybillsListTransportResponseRowsItemStatus string
 
 const (
-	PostV1TransportWaybillsListResponseRowsItemStatusDraft     PostV1TransportWaybillsListResponseRowsItemStatus = "draft"
-	PostV1TransportWaybillsListResponseRowsItemStatusIssued    PostV1TransportWaybillsListResponseRowsItemStatus = "issued"
-	PostV1TransportWaybillsListResponseRowsItemStatusCancelled PostV1TransportWaybillsListResponseRowsItemStatus = "cancelled"
+	WaybillsListTransportResponseRowsItemStatusDraft     WaybillsListTransportResponseRowsItemStatus = "draft"
+	WaybillsListTransportResponseRowsItemStatusIssued    WaybillsListTransportResponseRowsItemStatus = "issued"
+	WaybillsListTransportResponseRowsItemStatusCancelled WaybillsListTransportResponseRowsItemStatus = "cancelled"
 )
 
-func NewPostV1TransportWaybillsListResponseRowsItemStatusFromString(s string) (PostV1TransportWaybillsListResponseRowsItemStatus, error) {
+func NewWaybillsListTransportResponseRowsItemStatusFromString(s string) (WaybillsListTransportResponseRowsItemStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1TransportWaybillsListResponseRowsItemStatusDraft, nil
+		return WaybillsListTransportResponseRowsItemStatusDraft, nil
 	case "issued":
-		return PostV1TransportWaybillsListResponseRowsItemStatusIssued, nil
+		return WaybillsListTransportResponseRowsItemStatusIssued, nil
 	case "cancelled":
-		return PostV1TransportWaybillsListResponseRowsItemStatusCancelled, nil
+		return WaybillsListTransportResponseRowsItemStatusCancelled, nil
 	}
-	var t PostV1TransportWaybillsListResponseRowsItemStatus
+	var t WaybillsListTransportResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsListResponseRowsItemStatus) Ptr() *PostV1TransportWaybillsListResponseRowsItemStatus {
-	return &p
+func (w WaybillsListTransportResponseRowsItemStatus) Ptr() *WaybillsListTransportResponseRowsItemStatus {
+	return &w
 }
 
 var (
-	postV1TransportWaybillsUpdateRequestLinesItemFieldItemID      = big.NewInt(1 << 0)
-	postV1TransportWaybillsUpdateRequestLinesItemFieldDescription = big.NewInt(1 << 1)
-	postV1TransportWaybillsUpdateRequestLinesItemFieldUnit        = big.NewInt(1 << 2)
-	postV1TransportWaybillsUpdateRequestLinesItemFieldQuantity    = big.NewInt(1 << 3)
-	postV1TransportWaybillsUpdateRequestLinesItemFieldProductCode = big.NewInt(1 << 4)
+	waybillsUpdateTransportRequestLinesItemFieldItemID      = big.NewInt(1 << 0)
+	waybillsUpdateTransportRequestLinesItemFieldDescription = big.NewInt(1 << 1)
+	waybillsUpdateTransportRequestLinesItemFieldUnit        = big.NewInt(1 << 2)
+	waybillsUpdateTransportRequestLinesItemFieldQuantity    = big.NewInt(1 << 3)
+	waybillsUpdateTransportRequestLinesItemFieldProductCode = big.NewInt(1 << 4)
 )
 
-type PostV1TransportWaybillsUpdateRequestLinesItem struct {
+type WaybillsUpdateTransportRequestLinesItem struct {
 	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description *string `json:"description,omitempty" url:"description,omitempty"`
 	Unit        *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -4117,180 +3635,180 @@ type PostV1TransportWaybillsUpdateRequestLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetItemID() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetItemID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ItemID
+	return w.ItemID
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetDescription() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetDescription() *string {
+	if w == nil {
 		return nil
 	}
-	return p.Description
+	return w.Description
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetUnit() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetUnit() *string {
+	if w == nil {
 		return nil
 	}
-	return p.Unit
+	return w.Unit
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetQuantity() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetQuantity() string {
+	if w == nil {
 		return ""
 	}
-	return p.Quantity
+	return w.Quantity
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetProductCode() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetProductCode() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ProductCode
+	return w.ProductCode
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsUpdateTransportRequestLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsUpdateRequestLinesItemFieldItemID)
+func (w *WaybillsUpdateTransportRequestLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsUpdateTransportRequestLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsUpdateRequestLinesItemFieldDescription)
+func (w *WaybillsUpdateTransportRequestLinesItem) SetDescription(description *string) {
+	w.Description = description
+	w.require(waybillsUpdateTransportRequestLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsUpdateRequestLinesItemFieldUnit)
+func (w *WaybillsUpdateTransportRequestLinesItem) SetUnit(unit *string) {
+	w.Unit = unit
+	w.require(waybillsUpdateTransportRequestLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsUpdateRequestLinesItemFieldQuantity)
+func (w *WaybillsUpdateTransportRequestLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsUpdateTransportRequestLinesItemFieldQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsUpdateRequestLinesItemFieldProductCode)
+func (w *WaybillsUpdateTransportRequestLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsUpdateTransportRequestLinesItemFieldProductCode)
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsUpdateRequestLinesItem
+func (w *WaybillsUpdateTransportRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsUpdateTransportRequestLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsUpdateRequestLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsUpdateTransportRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsUpdateRequestLinesItem
+func (w *WaybillsUpdateTransportRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsUpdateTransportRequestLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsUpdateRequestLinesItem) String() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportRequestLinesItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1TransportWaybillsUpdateResponseFieldStatus               = big.NewInt(1 << 1)
-	postV1TransportWaybillsUpdateResponseFieldSeries               = big.NewInt(1 << 2)
-	postV1TransportWaybillsUpdateResponseFieldFullNumber           = big.NewInt(1 << 3)
-	postV1TransportWaybillsUpdateResponseFieldDocumentDate         = big.NewInt(1 << 4)
-	postV1TransportWaybillsUpdateResponseFieldDispatchAt           = big.NewInt(1 << 5)
-	postV1TransportWaybillsUpdateResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
-	postV1TransportWaybillsUpdateResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
-	postV1TransportWaybillsUpdateResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
-	postV1TransportWaybillsUpdateResponseFieldVehiclePlate         = big.NewInt(1 << 9)
-	postV1TransportWaybillsUpdateResponseFieldTrailerPlate         = big.NewInt(1 << 10)
-	postV1TransportWaybillsUpdateResponseFieldDriverName           = big.NewInt(1 << 11)
-	postV1TransportWaybillsUpdateResponseFieldDriverSurname        = big.NewInt(1 << 12)
-	postV1TransportWaybillsUpdateResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
-	postV1TransportWaybillsUpdateResponseFieldLoadAddress          = big.NewInt(1 << 14)
-	postV1TransportWaybillsUpdateResponseFieldUnloadAddress        = big.NewInt(1 << 15)
-	postV1TransportWaybillsUpdateResponseFieldValueEur             = big.NewInt(1 << 16)
-	postV1TransportWaybillsUpdateResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
-	postV1TransportWaybillsUpdateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1TransportWaybillsUpdateResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1TransportWaybillsUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1TransportWaybillsUpdateResponseFieldLines                = big.NewInt(1 << 21)
+	waybillsUpdateTransportResponseFieldID                   = big.NewInt(1 << 0)
+	waybillsUpdateTransportResponseFieldStatus               = big.NewInt(1 << 1)
+	waybillsUpdateTransportResponseFieldSeries               = big.NewInt(1 << 2)
+	waybillsUpdateTransportResponseFieldFullNumber           = big.NewInt(1 << 3)
+	waybillsUpdateTransportResponseFieldDocumentDate         = big.NewInt(1 << 4)
+	waybillsUpdateTransportResponseFieldDispatchAt           = big.NewInt(1 << 5)
+	waybillsUpdateTransportResponseFieldEstimatedArrivalAt   = big.NewInt(1 << 6)
+	waybillsUpdateTransportResponseFieldConsigneePartnerID   = big.NewInt(1 << 7)
+	waybillsUpdateTransportResponseFieldTransporterPartnerID = big.NewInt(1 << 8)
+	waybillsUpdateTransportResponseFieldVehiclePlate         = big.NewInt(1 << 9)
+	waybillsUpdateTransportResponseFieldTrailerPlate         = big.NewInt(1 << 10)
+	waybillsUpdateTransportResponseFieldDriverName           = big.NewInt(1 << 11)
+	waybillsUpdateTransportResponseFieldDriverSurname        = big.NewInt(1 << 12)
+	waybillsUpdateTransportResponseFieldLoadWarehouseID      = big.NewInt(1 << 13)
+	waybillsUpdateTransportResponseFieldLoadAddress          = big.NewInt(1 << 14)
+	waybillsUpdateTransportResponseFieldUnloadAddress        = big.NewInt(1 << 15)
+	waybillsUpdateTransportResponseFieldValueEur             = big.NewInt(1 << 16)
+	waybillsUpdateTransportResponseFieldSaleInvoiceID        = big.NewInt(1 << 17)
+	waybillsUpdateTransportResponseFieldNotes                = big.NewInt(1 << 18)
+	waybillsUpdateTransportResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	waybillsUpdateTransportResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	waybillsUpdateTransportResponseFieldLines                = big.NewInt(1 << 21)
 )
 
-type PostV1TransportWaybillsUpdateResponse struct {
-	ID                   string                                            `json:"id" url:"id"`
-	Status               PostV1TransportWaybillsUpdateResponseStatus       `json:"status" url:"status"`
-	Series               string                                            `json:"series" url:"series"`
-	FullNumber           *string                                           `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	DocumentDate         string                                            `json:"documentDate" url:"documentDate"`
-	DispatchAt           string                                            `json:"dispatchAt" url:"dispatchAt"`
-	EstimatedArrivalAt   *string                                           `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
-	ConsigneePartnerID   string                                            `json:"consigneePartnerId" url:"consigneePartnerId"`
-	TransporterPartnerID *string                                           `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
-	VehiclePlate         *string                                           `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
-	TrailerPlate         *string                                           `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
-	DriverName           *string                                           `json:"driverName,omitempty" url:"driverName,omitempty"`
-	DriverSurname        *string                                           `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
-	LoadWarehouseID      *string                                           `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
-	LoadAddress          string                                            `json:"loadAddress" url:"loadAddress"`
-	UnloadAddress        string                                            `json:"unloadAddress" url:"unloadAddress"`
-	ValueEur             *string                                           `json:"valueEur,omitempty" url:"valueEur,omitempty"`
-	SaleInvoiceID        *string                                           `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
-	Notes                *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                            `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1TransportWaybillsUpdateResponseLinesItem `json:"lines" url:"lines"`
+type WaybillsUpdateTransportResponse struct {
+	ID                   string                                      `json:"id" url:"id"`
+	Status               WaybillsUpdateTransportResponseStatus       `json:"status" url:"status"`
+	Series               string                                      `json:"series" url:"series"`
+	FullNumber           *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	DocumentDate         time.Time                                   `json:"documentDate" url:"documentDate" format:"date"`
+	DispatchAt           time.Time                                   `json:"dispatchAt" url:"dispatchAt"`
+	EstimatedArrivalAt   *time.Time                                  `json:"estimatedArrivalAt,omitempty" url:"estimatedArrivalAt,omitempty"`
+	ConsigneePartnerID   string                                      `json:"consigneePartnerId" url:"consigneePartnerId"`
+	TransporterPartnerID *string                                     `json:"transporterPartnerId,omitempty" url:"transporterPartnerId,omitempty"`
+	VehiclePlate         *string                                     `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate         *string                                     `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName           *string                                     `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname        *string                                     `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	LoadWarehouseID      *string                                     `json:"loadWarehouseId,omitempty" url:"loadWarehouseId,omitempty"`
+	LoadAddress          string                                      `json:"loadAddress" url:"loadAddress"`
+	UnloadAddress        string                                      `json:"unloadAddress" url:"unloadAddress"`
+	ValueEur             *string                                     `json:"valueEur,omitempty" url:"valueEur,omitempty"`
+	SaleInvoiceID        *string                                     `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt            time.Time                                   `json:"updatedAt" url:"updatedAt"`
+	Lines                []*WaybillsUpdateTransportResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4299,381 +3817,405 @@ type PostV1TransportWaybillsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetID() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetStatus() PostV1TransportWaybillsUpdateResponseStatus {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetStatus() WaybillsUpdateTransportResponseStatus {
+	if w == nil {
 		return ""
 	}
-	return p.Status
+	return w.Status
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetSeries() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetSeries() string {
+	if w == nil {
 		return ""
 	}
-	return p.Series
+	return w.Series
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetFullNumber() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetFullNumber() *string {
+	if w == nil {
 		return nil
 	}
-	return p.FullNumber
+	return w.FullNumber
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetDocumentDate() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetDocumentDate() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DocumentDate
+}
+
+func (w *WaybillsUpdateTransportResponse) GetDispatchAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.DispatchAt
+}
+
+func (w *WaybillsUpdateTransportResponse) GetEstimatedArrivalAt() *time.Time {
+	if w == nil {
+		return nil
+	}
+	return w.EstimatedArrivalAt
+}
+
+func (w *WaybillsUpdateTransportResponse) GetConsigneePartnerID() string {
+	if w == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return w.ConsigneePartnerID
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetDispatchAt() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetTransporterPartnerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TransporterPartnerID
+}
+
+func (w *WaybillsUpdateTransportResponse) GetVehiclePlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.VehiclePlate
+}
+
+func (w *WaybillsUpdateTransportResponse) GetTrailerPlate() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TrailerPlate
+}
+
+func (w *WaybillsUpdateTransportResponse) GetDriverName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverName
+}
+
+func (w *WaybillsUpdateTransportResponse) GetDriverSurname() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DriverSurname
+}
+
+func (w *WaybillsUpdateTransportResponse) GetLoadWarehouseID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LoadWarehouseID
+}
+
+func (w *WaybillsUpdateTransportResponse) GetLoadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.DispatchAt
+	return w.LoadAddress
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetEstimatedArrivalAt() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EstimatedArrivalAt
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetConsigneePartnerID() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetUnloadAddress() string {
+	if w == nil {
 		return ""
 	}
-	return p.ConsigneePartnerID
+	return w.UnloadAddress
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetTransporterPartnerID() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetValueEur() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TransporterPartnerID
+	return w.ValueEur
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetVehiclePlate() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetSaleInvoiceID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.VehiclePlate
+	return w.SaleInvoiceID
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetTrailerPlate() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetNotes() *string {
+	if w == nil {
 		return nil
 	}
-	return p.TrailerPlate
+	return w.Notes
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetDriverName() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WaybillsUpdateTransportResponse) GetUpdatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.UpdatedAt
+}
+
+func (w *WaybillsUpdateTransportResponse) GetLines() []*WaybillsUpdateTransportResponseLinesItem {
+	if w == nil {
 		return nil
 	}
-	return p.DriverName
+	return w.Lines
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetDriverSurname() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.DriverSurname
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) GetLoadWarehouseID() *string {
-	if p == nil {
-		return nil
+func (w *WaybillsUpdateTransportResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	return p.LoadWarehouseID
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetLoadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.LoadAddress
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetUnloadAddress() string {
-	if p == nil {
-		return ""
-	}
-	return p.UnloadAddress
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetValueEur() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ValueEur
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetSaleInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SaleInvoiceID
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetLines() []*PostV1TransportWaybillsUpdateResponseLinesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Lines
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1TransportWaybillsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsUpdateResponseFieldID)
+func (w *WaybillsUpdateTransportResponse) SetID(id string) {
+	w.ID = id
+	w.require(waybillsUpdateTransportResponseFieldID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetStatus(status PostV1TransportWaybillsUpdateResponseStatus) {
-	p.Status = status
-	p.require(postV1TransportWaybillsUpdateResponseFieldStatus)
+func (w *WaybillsUpdateTransportResponse) SetStatus(status WaybillsUpdateTransportResponseStatus) {
+	w.Status = status
+	w.require(waybillsUpdateTransportResponseFieldStatus)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetSeries(series string) {
-	p.Series = series
-	p.require(postV1TransportWaybillsUpdateResponseFieldSeries)
+func (w *WaybillsUpdateTransportResponse) SetSeries(series string) {
+	w.Series = series
+	w.require(waybillsUpdateTransportResponseFieldSeries)
 }
 
 // SetFullNumber sets the FullNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetFullNumber(fullNumber *string) {
-	p.FullNumber = fullNumber
-	p.require(postV1TransportWaybillsUpdateResponseFieldFullNumber)
+func (w *WaybillsUpdateTransportResponse) SetFullNumber(fullNumber *string) {
+	w.FullNumber = fullNumber
+	w.require(waybillsUpdateTransportResponseFieldFullNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1TransportWaybillsUpdateResponseFieldDocumentDate)
+func (w *WaybillsUpdateTransportResponse) SetDocumentDate(documentDate time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsUpdateTransportResponseFieldDocumentDate)
 }
 
 // SetDispatchAt sets the DispatchAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetDispatchAt(dispatchAt string) {
-	p.DispatchAt = dispatchAt
-	p.require(postV1TransportWaybillsUpdateResponseFieldDispatchAt)
+func (w *WaybillsUpdateTransportResponse) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsUpdateTransportResponseFieldDispatchAt)
 }
 
 // SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetEstimatedArrivalAt(estimatedArrivalAt *string) {
-	p.EstimatedArrivalAt = estimatedArrivalAt
-	p.require(postV1TransportWaybillsUpdateResponseFieldEstimatedArrivalAt)
+func (w *WaybillsUpdateTransportResponse) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsUpdateTransportResponseFieldEstimatedArrivalAt)
 }
 
 // SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetConsigneePartnerID(consigneePartnerID string) {
-	p.ConsigneePartnerID = consigneePartnerID
-	p.require(postV1TransportWaybillsUpdateResponseFieldConsigneePartnerID)
+func (w *WaybillsUpdateTransportResponse) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsUpdateTransportResponseFieldConsigneePartnerID)
 }
 
 // SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetTransporterPartnerID(transporterPartnerID *string) {
-	p.TransporterPartnerID = transporterPartnerID
-	p.require(postV1TransportWaybillsUpdateResponseFieldTransporterPartnerID)
+func (w *WaybillsUpdateTransportResponse) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsUpdateTransportResponseFieldTransporterPartnerID)
 }
 
 // SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetVehiclePlate(vehiclePlate *string) {
-	p.VehiclePlate = vehiclePlate
-	p.require(postV1TransportWaybillsUpdateResponseFieldVehiclePlate)
+func (w *WaybillsUpdateTransportResponse) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsUpdateTransportResponseFieldVehiclePlate)
 }
 
 // SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetTrailerPlate(trailerPlate *string) {
-	p.TrailerPlate = trailerPlate
-	p.require(postV1TransportWaybillsUpdateResponseFieldTrailerPlate)
+func (w *WaybillsUpdateTransportResponse) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsUpdateTransportResponseFieldTrailerPlate)
 }
 
 // SetDriverName sets the DriverName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetDriverName(driverName *string) {
-	p.DriverName = driverName
-	p.require(postV1TransportWaybillsUpdateResponseFieldDriverName)
+func (w *WaybillsUpdateTransportResponse) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsUpdateTransportResponseFieldDriverName)
 }
 
 // SetDriverSurname sets the DriverSurname field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetDriverSurname(driverSurname *string) {
-	p.DriverSurname = driverSurname
-	p.require(postV1TransportWaybillsUpdateResponseFieldDriverSurname)
+func (w *WaybillsUpdateTransportResponse) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsUpdateTransportResponseFieldDriverSurname)
 }
 
 // SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetLoadWarehouseID(loadWarehouseID *string) {
-	p.LoadWarehouseID = loadWarehouseID
-	p.require(postV1TransportWaybillsUpdateResponseFieldLoadWarehouseID)
+func (w *WaybillsUpdateTransportResponse) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsUpdateTransportResponseFieldLoadWarehouseID)
 }
 
 // SetLoadAddress sets the LoadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetLoadAddress(loadAddress string) {
-	p.LoadAddress = loadAddress
-	p.require(postV1TransportWaybillsUpdateResponseFieldLoadAddress)
+func (w *WaybillsUpdateTransportResponse) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsUpdateTransportResponseFieldLoadAddress)
 }
 
 // SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetUnloadAddress(unloadAddress string) {
-	p.UnloadAddress = unloadAddress
-	p.require(postV1TransportWaybillsUpdateResponseFieldUnloadAddress)
+func (w *WaybillsUpdateTransportResponse) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsUpdateTransportResponseFieldUnloadAddress)
 }
 
 // SetValueEur sets the ValueEur field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetValueEur(valueEur *string) {
-	p.ValueEur = valueEur
-	p.require(postV1TransportWaybillsUpdateResponseFieldValueEur)
+func (w *WaybillsUpdateTransportResponse) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsUpdateTransportResponseFieldValueEur)
 }
 
 // SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetSaleInvoiceID(saleInvoiceID *string) {
-	p.SaleInvoiceID = saleInvoiceID
-	p.require(postV1TransportWaybillsUpdateResponseFieldSaleInvoiceID)
+func (w *WaybillsUpdateTransportResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsUpdateTransportResponseFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1TransportWaybillsUpdateResponseFieldNotes)
+func (w *WaybillsUpdateTransportResponse) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsUpdateTransportResponseFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1TransportWaybillsUpdateResponseFieldCreatedAt)
+func (w *WaybillsUpdateTransportResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(waybillsUpdateTransportResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1TransportWaybillsUpdateResponseFieldUpdatedAt)
+func (w *WaybillsUpdateTransportResponse) SetUpdatedAt(updatedAt time.Time) {
+	w.UpdatedAt = updatedAt
+	w.require(waybillsUpdateTransportResponseFieldUpdatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponse) SetLines(lines []*PostV1TransportWaybillsUpdateResponseLinesItem) {
-	p.Lines = lines
-	p.require(postV1TransportWaybillsUpdateResponseFieldLines)
+func (w *WaybillsUpdateTransportResponse) SetLines(lines []*WaybillsUpdateTransportResponseLinesItem) {
+	w.Lines = lines
+	w.require(waybillsUpdateTransportResponseFieldLines)
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (w *WaybillsUpdateTransportResponse) UnmarshalJSON(data []byte) error {
+	type embed WaybillsUpdateTransportResponse
+	var unmarshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsUpdateTransportResponse(unmarshaler.embed)
+	w.DocumentDate = unmarshaler.DocumentDate.Time()
+	w.DispatchAt = unmarshaler.DispatchAt.Time()
+	w.EstimatedArrivalAt = unmarshaler.EstimatedArrivalAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	w.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsUpdateResponse
+func (w *WaybillsUpdateTransportResponse) MarshalJSON() ([]byte, error) {
+	type embed WaybillsUpdateTransportResponse
 	var marshaler = struct {
 		embed
+		DocumentDate       *internal.Date     `json:"documentDate"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+		CreatedAt          *internal.DateTime `json:"createdAt"`
+		UpdatedAt          *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:              embed(*w),
+		DocumentDate:       internal.NewDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+		CreatedAt:          internal.NewDateTime(w.CreatedAt),
+		UpdatedAt:          internal.NewDateTime(w.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsUpdateResponse) String() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponse) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
 var (
-	postV1TransportWaybillsUpdateResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	postV1TransportWaybillsUpdateResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsUpdateTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
+	waybillsUpdateTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
+	waybillsUpdateTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
+	waybillsUpdateTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
+	waybillsUpdateTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
+	waybillsUpdateTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
+	waybillsUpdateTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
 )
 
-type PostV1TransportWaybillsUpdateResponseLinesItem struct {
+type WaybillsUpdateTransportResponseLinesItem struct {
 	ID          string  `json:"id" url:"id"`
 	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description string  `json:"description" url:"description"`
@@ -4689,181 +4231,803 @@ type PostV1TransportWaybillsUpdateResponseLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetID() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return p.ID
+	return w.ID
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetItemID() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetItemID() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ItemID
+	return w.ItemID
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetDescription() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetDescription() string {
+	if w == nil {
 		return ""
 	}
-	return p.Description
+	return w.Description
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetUnit() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetUnit() string {
+	if w == nil {
 		return ""
 	}
-	return p.Unit
+	return w.Unit
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetQuantity() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetQuantity() string {
+	if w == nil {
 		return ""
 	}
-	return p.Quantity
+	return w.Quantity
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetProductCode() *string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetProductCode() *string {
+	if w == nil {
 		return nil
 	}
-	return p.ProductCode
+	return w.ProductCode
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetSortOrder() int64 {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetSortOrder() int64 {
+	if w == nil {
 		return 0
 	}
-	return p.SortOrder
+	return w.SortOrder
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
 		return nil
 	}
-	return p.extraProperties
+	return w.extraProperties
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (w *WaybillsUpdateTransportResponseLinesItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	w.explicitFields.Or(w.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldID)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetID(id string) {
+	w.ID = id
+	w.require(waybillsUpdateTransportResponseLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldItemID)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetItemID(itemID *string) {
+	w.ItemID = itemID
+	w.require(waybillsUpdateTransportResponseLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldDescription)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetDescription(description string) {
+	w.Description = description
+	w.require(waybillsUpdateTransportResponseLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetUnit(unit string) {
-	p.Unit = unit
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldUnit)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetUnit(unit string) {
+	w.Unit = unit
+	w.require(waybillsUpdateTransportResponseLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldQuantity)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetQuantity(quantity string) {
+	w.Quantity = quantity
+	w.require(waybillsUpdateTransportResponseLinesItemFieldQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetProductCode(productCode *string) {
-	p.ProductCode = productCode
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldProductCode)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetProductCode(productCode *string) {
+	w.ProductCode = productCode
+	w.require(waybillsUpdateTransportResponseLinesItemFieldProductCode)
 }
 
 // SetSortOrder sets the SortOrder field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) SetSortOrder(sortOrder int64) {
-	p.SortOrder = sortOrder
-	p.require(postV1TransportWaybillsUpdateResponseLinesItemFieldSortOrder)
+func (w *WaybillsUpdateTransportResponseLinesItem) SetSortOrder(sortOrder int64) {
+	w.SortOrder = sortOrder
+	w.require(waybillsUpdateTransportResponseLinesItemFieldSortOrder)
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1TransportWaybillsUpdateResponseLinesItem
+func (w *WaybillsUpdateTransportResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsUpdateTransportResponseLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1TransportWaybillsUpdateResponseLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*w = WaybillsUpdateTransportResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1TransportWaybillsUpdateResponseLinesItem
+func (w *WaybillsUpdateTransportResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed WaybillsUpdateTransportResponseLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*w),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1TransportWaybillsUpdateResponseLinesItem) String() string {
-	if p == nil {
+func (w *WaybillsUpdateTransportResponseLinesItem) String() string {
+	if w == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(w); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", w)
 }
 
-type PostV1TransportWaybillsUpdateResponseStatus string
+type WaybillsUpdateTransportResponseStatus string
 
 const (
-	PostV1TransportWaybillsUpdateResponseStatusDraft     PostV1TransportWaybillsUpdateResponseStatus = "draft"
-	PostV1TransportWaybillsUpdateResponseStatusIssued    PostV1TransportWaybillsUpdateResponseStatus = "issued"
-	PostV1TransportWaybillsUpdateResponseStatusCancelled PostV1TransportWaybillsUpdateResponseStatus = "cancelled"
+	WaybillsUpdateTransportResponseStatusDraft     WaybillsUpdateTransportResponseStatus = "draft"
+	WaybillsUpdateTransportResponseStatusIssued    WaybillsUpdateTransportResponseStatus = "issued"
+	WaybillsUpdateTransportResponseStatusCancelled WaybillsUpdateTransportResponseStatus = "cancelled"
 )
 
-func NewPostV1TransportWaybillsUpdateResponseStatusFromString(s string) (PostV1TransportWaybillsUpdateResponseStatus, error) {
+func NewWaybillsUpdateTransportResponseStatusFromString(s string) (WaybillsUpdateTransportResponseStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1TransportWaybillsUpdateResponseStatusDraft, nil
+		return WaybillsUpdateTransportResponseStatusDraft, nil
 	case "issued":
-		return PostV1TransportWaybillsUpdateResponseStatusIssued, nil
+		return WaybillsUpdateTransportResponseStatusIssued, nil
 	case "cancelled":
-		return PostV1TransportWaybillsUpdateResponseStatusCancelled, nil
+		return WaybillsUpdateTransportResponseStatusCancelled, nil
 	}
-	var t PostV1TransportWaybillsUpdateResponseStatus
+	var t WaybillsUpdateTransportResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1TransportWaybillsUpdateResponseStatus) Ptr() *PostV1TransportWaybillsUpdateResponseStatus {
-	return &p
+func (w WaybillsUpdateTransportResponseStatus) Ptr() *WaybillsUpdateTransportResponseStatus {
+	return &w
+}
+
+var (
+	waybillsCancelTransportRequestFieldID = big.NewInt(1 << 0)
+)
+
+type WaybillsCancelTransportRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsCancelTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCancelTransportRequest) SetID(id string) {
+	w.ID = id
+	w.require(waybillsCancelTransportRequestFieldID)
+}
+
+func (w *WaybillsCancelTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsCancelTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsCancelTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsCancelTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCancelTransportRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	waybillsCreateTransportRequestFieldConsigneePartnerID   = big.NewInt(1 << 0)
+	waybillsCreateTransportRequestFieldTransporterPartnerID = big.NewInt(1 << 1)
+	waybillsCreateTransportRequestFieldDocumentDate         = big.NewInt(1 << 2)
+	waybillsCreateTransportRequestFieldDispatchAt           = big.NewInt(1 << 3)
+	waybillsCreateTransportRequestFieldEstimatedArrivalAt   = big.NewInt(1 << 4)
+	waybillsCreateTransportRequestFieldVehiclePlate         = big.NewInt(1 << 5)
+	waybillsCreateTransportRequestFieldTrailerPlate         = big.NewInt(1 << 6)
+	waybillsCreateTransportRequestFieldDriverName           = big.NewInt(1 << 7)
+	waybillsCreateTransportRequestFieldDriverSurname        = big.NewInt(1 << 8)
+	waybillsCreateTransportRequestFieldLoadWarehouseID      = big.NewInt(1 << 9)
+	waybillsCreateTransportRequestFieldLoadAddress          = big.NewInt(1 << 10)
+	waybillsCreateTransportRequestFieldUnloadAddress        = big.NewInt(1 << 11)
+	waybillsCreateTransportRequestFieldValueEur             = big.NewInt(1 << 12)
+	waybillsCreateTransportRequestFieldSaleInvoiceID        = big.NewInt(1 << 13)
+	waybillsCreateTransportRequestFieldNotes                = big.NewInt(1 << 14)
+	waybillsCreateTransportRequestFieldSeries               = big.NewInt(1 << 15)
+	waybillsCreateTransportRequestFieldLines                = big.NewInt(1 << 16)
+)
+
+type WaybillsCreateTransportRequest struct {
+	ConsigneePartnerID   string                                     `json:"consigneePartnerId" url:"-"`
+	TransporterPartnerID *string                                    `json:"transporterPartnerId,omitempty" url:"-"`
+	DocumentDate         *time.Time                                 `json:"documentDate,omitempty" url:"-" format:"date"`
+	DispatchAt           time.Time                                  `json:"dispatchAt" url:"-"`
+	EstimatedArrivalAt   *time.Time                                 `json:"estimatedArrivalAt,omitempty" url:"-"`
+	VehiclePlate         *string                                    `json:"vehiclePlate,omitempty" url:"-"`
+	TrailerPlate         *string                                    `json:"trailerPlate,omitempty" url:"-"`
+	DriverName           *string                                    `json:"driverName,omitempty" url:"-"`
+	DriverSurname        *string                                    `json:"driverSurname,omitempty" url:"-"`
+	LoadWarehouseID      *string                                    `json:"loadWarehouseId,omitempty" url:"-"`
+	LoadAddress          string                                     `json:"loadAddress" url:"-"`
+	UnloadAddress        string                                     `json:"unloadAddress" url:"-"`
+	ValueEur             *string                                    `json:"valueEur,omitempty" url:"-"`
+	SaleInvoiceID        *string                                    `json:"saleInvoiceId,omitempty" url:"-"`
+	Notes                *string                                    `json:"notes,omitempty" url:"-"`
+	Series               *string                                    `json:"series,omitempty" url:"-"`
+	Lines                []*WaybillsCreateTransportRequestLinesItem `json:"lines,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsCreateTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetConsigneePartnerID(consigneePartnerID string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsCreateTransportRequestFieldConsigneePartnerID)
+}
+
+// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsCreateTransportRequestFieldTransporterPartnerID)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetDocumentDate(documentDate *time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsCreateTransportRequestFieldDocumentDate)
+}
+
+// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetDispatchAt(dispatchAt time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsCreateTransportRequestFieldDispatchAt)
+}
+
+// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsCreateTransportRequestFieldEstimatedArrivalAt)
+}
+
+// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsCreateTransportRequestFieldVehiclePlate)
+}
+
+// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsCreateTransportRequestFieldTrailerPlate)
+}
+
+// SetDriverName sets the DriverName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsCreateTransportRequestFieldDriverName)
+}
+
+// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsCreateTransportRequestFieldDriverSurname)
+}
+
+// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsCreateTransportRequestFieldLoadWarehouseID)
+}
+
+// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetLoadAddress(loadAddress string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsCreateTransportRequestFieldLoadAddress)
+}
+
+// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetUnloadAddress(unloadAddress string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsCreateTransportRequestFieldUnloadAddress)
+}
+
+// SetValueEur sets the ValueEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsCreateTransportRequestFieldValueEur)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsCreateTransportRequestFieldSaleInvoiceID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsCreateTransportRequestFieldNotes)
+}
+
+// SetSeries sets the Series field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetSeries(series *string) {
+	w.Series = series
+	w.require(waybillsCreateTransportRequestFieldSeries)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportRequest) SetLines(lines []*WaybillsCreateTransportRequestLinesItem) {
+	w.Lines = lines
+	w.require(waybillsCreateTransportRequestFieldLines)
+}
+
+func (w *WaybillsCreateTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsCreateTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsCreateTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsCreateTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsCreateTransportRequest
+	var marshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate,omitempty"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+	}{
+		embed:              embed(*w),
+		DocumentDate:       internal.NewOptionalDate(w.DocumentDate),
+		DispatchAt:         internal.NewDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	waybillsGetTransportRequestFieldID = big.NewInt(1 << 0)
+)
+
+type WaybillsGetTransportRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsGetTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsGetTransportRequest) SetID(id string) {
+	w.ID = id
+	w.require(waybillsGetTransportRequestFieldID)
+}
+
+func (w *WaybillsGetTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsGetTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsGetTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsGetTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsGetTransportRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	waybillsIssueTransportRequestFieldID = big.NewInt(1 << 0)
+)
+
+type WaybillsIssueTransportRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsIssueTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsIssueTransportRequest) SetID(id string) {
+	w.ID = id
+	w.require(waybillsIssueTransportRequestFieldID)
+}
+
+func (w *WaybillsIssueTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsIssueTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsIssueTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsIssueTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsIssueTransportRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	waybillsListTransportRequestFieldPage     = big.NewInt(1 << 0)
+	waybillsListTransportRequestFieldPageSize = big.NewInt(1 << 1)
+	waybillsListTransportRequestFieldSort     = big.NewInt(1 << 2)
+	waybillsListTransportRequestFieldFilter   = big.NewInt(1 << 3)
+	waybillsListTransportRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type WaybillsListTransportRequest struct {
+	Page     *int64                                    `json:"page,omitempty" url:"-"`
+	PageSize *int64                                    `json:"pageSize,omitempty" url:"-"`
+	Sort     []*WaybillsListTransportRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*WaybillsListTransportRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsListTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportRequest) SetPage(page *int64) {
+	w.Page = page
+	w.require(waybillsListTransportRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportRequest) SetPageSize(pageSize *int64) {
+	w.PageSize = pageSize
+	w.require(waybillsListTransportRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportRequest) SetSort(sort []*WaybillsListTransportRequestSortItem) {
+	w.Sort = sort
+	w.require(waybillsListTransportRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportRequest) SetFilter(filter []*WaybillsListTransportRequestFilterItem) {
+	w.Filter = filter
+	w.require(waybillsListTransportRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportRequest) SetTotals(totals []string) {
+	w.Totals = totals
+	w.require(waybillsListTransportRequestFieldTotals)
+}
+
+func (w *WaybillsListTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsListTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsListTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsListTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsListTransportRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	waybillsUpdateTransportRequestFieldConsigneePartnerID   = big.NewInt(1 << 0)
+	waybillsUpdateTransportRequestFieldTransporterPartnerID = big.NewInt(1 << 1)
+	waybillsUpdateTransportRequestFieldDocumentDate         = big.NewInt(1 << 2)
+	waybillsUpdateTransportRequestFieldDispatchAt           = big.NewInt(1 << 3)
+	waybillsUpdateTransportRequestFieldEstimatedArrivalAt   = big.NewInt(1 << 4)
+	waybillsUpdateTransportRequestFieldVehiclePlate         = big.NewInt(1 << 5)
+	waybillsUpdateTransportRequestFieldTrailerPlate         = big.NewInt(1 << 6)
+	waybillsUpdateTransportRequestFieldDriverName           = big.NewInt(1 << 7)
+	waybillsUpdateTransportRequestFieldDriverSurname        = big.NewInt(1 << 8)
+	waybillsUpdateTransportRequestFieldLoadWarehouseID      = big.NewInt(1 << 9)
+	waybillsUpdateTransportRequestFieldLoadAddress          = big.NewInt(1 << 10)
+	waybillsUpdateTransportRequestFieldUnloadAddress        = big.NewInt(1 << 11)
+	waybillsUpdateTransportRequestFieldValueEur             = big.NewInt(1 << 12)
+	waybillsUpdateTransportRequestFieldSaleInvoiceID        = big.NewInt(1 << 13)
+	waybillsUpdateTransportRequestFieldNotes                = big.NewInt(1 << 14)
+	waybillsUpdateTransportRequestFieldSeries               = big.NewInt(1 << 15)
+	waybillsUpdateTransportRequestFieldLines                = big.NewInt(1 << 16)
+	waybillsUpdateTransportRequestFieldID                   = big.NewInt(1 << 17)
+)
+
+type WaybillsUpdateTransportRequest struct {
+	ConsigneePartnerID   *string                                    `json:"consigneePartnerId,omitempty" url:"-"`
+	TransporterPartnerID *string                                    `json:"transporterPartnerId,omitempty" url:"-"`
+	DocumentDate         *time.Time                                 `json:"documentDate,omitempty" url:"-" format:"date"`
+	DispatchAt           *time.Time                                 `json:"dispatchAt,omitempty" url:"-"`
+	EstimatedArrivalAt   *time.Time                                 `json:"estimatedArrivalAt,omitempty" url:"-"`
+	VehiclePlate         *string                                    `json:"vehiclePlate,omitempty" url:"-"`
+	TrailerPlate         *string                                    `json:"trailerPlate,omitempty" url:"-"`
+	DriverName           *string                                    `json:"driverName,omitempty" url:"-"`
+	DriverSurname        *string                                    `json:"driverSurname,omitempty" url:"-"`
+	LoadWarehouseID      *string                                    `json:"loadWarehouseId,omitempty" url:"-"`
+	LoadAddress          *string                                    `json:"loadAddress,omitempty" url:"-"`
+	UnloadAddress        *string                                    `json:"unloadAddress,omitempty" url:"-"`
+	ValueEur             *string                                    `json:"valueEur,omitempty" url:"-"`
+	SaleInvoiceID        *string                                    `json:"saleInvoiceId,omitempty" url:"-"`
+	Notes                *string                                    `json:"notes,omitempty" url:"-"`
+	Series               *string                                    `json:"series,omitempty" url:"-"`
+	Lines                []*WaybillsUpdateTransportRequestLinesItem `json:"lines,omitempty" url:"-"`
+	ID                   string                                     `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WaybillsUpdateTransportRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetConsigneePartnerID(consigneePartnerID *string) {
+	w.ConsigneePartnerID = consigneePartnerID
+	w.require(waybillsUpdateTransportRequestFieldConsigneePartnerID)
+}
+
+// SetTransporterPartnerID sets the TransporterPartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetTransporterPartnerID(transporterPartnerID *string) {
+	w.TransporterPartnerID = transporterPartnerID
+	w.require(waybillsUpdateTransportRequestFieldTransporterPartnerID)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetDocumentDate(documentDate *time.Time) {
+	w.DocumentDate = documentDate
+	w.require(waybillsUpdateTransportRequestFieldDocumentDate)
+}
+
+// SetDispatchAt sets the DispatchAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetDispatchAt(dispatchAt *time.Time) {
+	w.DispatchAt = dispatchAt
+	w.require(waybillsUpdateTransportRequestFieldDispatchAt)
+}
+
+// SetEstimatedArrivalAt sets the EstimatedArrivalAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetEstimatedArrivalAt(estimatedArrivalAt *time.Time) {
+	w.EstimatedArrivalAt = estimatedArrivalAt
+	w.require(waybillsUpdateTransportRequestFieldEstimatedArrivalAt)
+}
+
+// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetVehiclePlate(vehiclePlate *string) {
+	w.VehiclePlate = vehiclePlate
+	w.require(waybillsUpdateTransportRequestFieldVehiclePlate)
+}
+
+// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetTrailerPlate(trailerPlate *string) {
+	w.TrailerPlate = trailerPlate
+	w.require(waybillsUpdateTransportRequestFieldTrailerPlate)
+}
+
+// SetDriverName sets the DriverName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetDriverName(driverName *string) {
+	w.DriverName = driverName
+	w.require(waybillsUpdateTransportRequestFieldDriverName)
+}
+
+// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetDriverSurname(driverSurname *string) {
+	w.DriverSurname = driverSurname
+	w.require(waybillsUpdateTransportRequestFieldDriverSurname)
+}
+
+// SetLoadWarehouseID sets the LoadWarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetLoadWarehouseID(loadWarehouseID *string) {
+	w.LoadWarehouseID = loadWarehouseID
+	w.require(waybillsUpdateTransportRequestFieldLoadWarehouseID)
+}
+
+// SetLoadAddress sets the LoadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetLoadAddress(loadAddress *string) {
+	w.LoadAddress = loadAddress
+	w.require(waybillsUpdateTransportRequestFieldLoadAddress)
+}
+
+// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetUnloadAddress(unloadAddress *string) {
+	w.UnloadAddress = unloadAddress
+	w.require(waybillsUpdateTransportRequestFieldUnloadAddress)
+}
+
+// SetValueEur sets the ValueEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetValueEur(valueEur *string) {
+	w.ValueEur = valueEur
+	w.require(waybillsUpdateTransportRequestFieldValueEur)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetSaleInvoiceID(saleInvoiceID *string) {
+	w.SaleInvoiceID = saleInvoiceID
+	w.require(waybillsUpdateTransportRequestFieldSaleInvoiceID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetNotes(notes *string) {
+	w.Notes = notes
+	w.require(waybillsUpdateTransportRequestFieldNotes)
+}
+
+// SetSeries sets the Series field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetSeries(series *string) {
+	w.Series = series
+	w.require(waybillsUpdateTransportRequestFieldSeries)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetLines(lines []*WaybillsUpdateTransportRequestLinesItem) {
+	w.Lines = lines
+	w.require(waybillsUpdateTransportRequestFieldLines)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportRequest) SetID(id string) {
+	w.ID = id
+	w.require(waybillsUpdateTransportRequestFieldID)
+}
+
+func (w *WaybillsUpdateTransportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WaybillsUpdateTransportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WaybillsUpdateTransportRequest(body)
+	return nil
+}
+
+func (w *WaybillsUpdateTransportRequest) MarshalJSON() ([]byte, error) {
+	type embed WaybillsUpdateTransportRequest
+	var marshaler = struct {
+		embed
+		DocumentDate       *internal.Date     `json:"documentDate,omitempty"`
+		DispatchAt         *internal.DateTime `json:"dispatchAt,omitempty"`
+		EstimatedArrivalAt *internal.DateTime `json:"estimatedArrivalAt,omitempty"`
+	}{
+		embed:              embed(*w),
+		DocumentDate:       internal.NewOptionalDate(w.DocumentDate),
+		DispatchAt:         internal.NewOptionalDateTime(w.DispatchAt),
+		EstimatedArrivalAt: internal.NewOptionalDateTime(w.EstimatedArrivalAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

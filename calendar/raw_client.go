@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1CalendarList(
+func (r *RawClient) List(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarListRequest,
+	request *nordlet.ListCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarListResponse], error) {
+) (*core.Response[*nordlet.ListCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1CalendarList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarListResponse
+	var response *nordlet.ListCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1CalendarList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarListResponse]{
+	return &core.Response[*nordlet.ListCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CalendarGet(
+func (r *RawClient) Get(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarGetRequest,
+	request *nordlet.GetCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarGetResponse], error) {
+) (*core.Response[*nordlet.GetCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1CalendarGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarGetResponse
+	var response *nordlet.GetCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1CalendarGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarGetResponse]{
+	return &core.Response[*nordlet.GetCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+func (r *RawClient) Submit(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarSubmitRequest,
+	request *nordlet.SubmitCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarSubmitResponse], error) {
+) (*core.Response[*nordlet.SubmitCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarSubmitResponse
+	var response *nordlet.SubmitCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarSubmitResponse]{
+	return &core.Response[*nordlet.SubmitCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+func (r *RawClient) Download(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarDownloadRequest,
+	request *nordlet.DownloadCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarDownloadResponse], error) {
+) (*core.Response[*nordlet.DownloadCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarDownloadResponse
+	var response *nordlet.DownloadCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarDownloadResponse]{
+	return &core.Response[*nordlet.DownloadCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CalendarCreate(
+func (r *RawClient) Create(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarCreateRequest,
+	request *nordlet.CreateCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarCreateResponse], error) {
+) (*core.Response[*nordlet.CreateCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1CalendarCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarCreateResponse
+	var response *nordlet.CreateCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1CalendarCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarCreateResponse]{
+	return &core.Response[*nordlet.CreateCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CalendarUpdate(
+func (r *RawClient) Update(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarUpdateRequest,
+	request *nordlet.UpdateCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarUpdateResponse], error) {
+) (*core.Response[*nordlet.UpdateCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1CalendarUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarUpdateResponse
+	var response *nordlet.UpdateCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1CalendarUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarUpdateResponse]{
+	return &core.Response[*nordlet.UpdateCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CalendarDelete(
+func (r *RawClient) Delete(
 	ctx context.Context,
-	request *nordlet.PostV1CalendarDeleteRequest,
+	request *nordlet.DeleteCalendarRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CalendarDeleteResponse], error) {
+) (*core.Response[*nordlet.DeleteCalendarResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1CalendarDelete(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CalendarDeleteResponse
+	var response *nordlet.DeleteCalendarResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,7 +333,7 @@ func (r *RawClient) PostV1CalendarDelete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CalendarDeleteResponse]{
+	return &core.Response[*nordlet.DeleteCalendarResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

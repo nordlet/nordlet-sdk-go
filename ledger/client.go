@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1LedgerAccountsList(
+func (c *Client) AccountsList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerAccountsListRequest,
+	request *nordlet.AccountsListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerAccountsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerAccountsList(
+) (*nordlet.AccountsListLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccountsList(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1LedgerAccountsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerAccountsCreate(
+func (c *Client) AccountsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerAccountsCreateRequest,
+	request *nordlet.AccountsCreateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerAccountsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerAccountsCreate(
+) (*nordlet.AccountsCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccountsCreate(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1LedgerAccountsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerAccountsUpdate(
+func (c *Client) AccountsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerAccountsUpdateRequest,
+	request *nordlet.AccountsUpdateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerAccountsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerAccountsUpdate(
+) (*nordlet.AccountsUpdateLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccountsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1LedgerAccountsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerAccountsApplyTemplate(
+func (c *Client) AccountsApplyTemplate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerAccountsApplyTemplateRequest,
+	request *nordlet.AccountsApplyTemplateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerAccountsApplyTemplateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerAccountsApplyTemplate(
+) (*nordlet.AccountsApplyTemplateLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccountsApplyTemplate(
 		ctx,
 		request,
 		opts...,
@@ -99,12 +99,12 @@ func (c *Client) PostV1LedgerAccountsApplyTemplate(
 }
 
 // Replaces the seeded chart with the chart template of the company country (the Romanian general chart for a company registered in Romania, the Lithuanian standard chart otherwise) and switches the posting defaults with it. Answers 409 when the company already uses that chart, has journal entries, holds accounts created by hand, or has settings that name an account the new chart does not have.
-func (c *Client) MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+func (c *Client) AccountsSwitchChart(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerAccountsSwitchChartRequest,
+	request *nordlet.AccountsSwitchChartLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerAccountsSwitchChartResponse, error) {
-	response, err := c.WithRawResponse.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+) (*nordlet.AccountsSwitchChartLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccountsSwitchChart(
 		ctx,
 		request,
 		opts...,
@@ -115,12 +115,12 @@ func (c *Client) MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCou
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerPeriodsList(
+func (c *Client) PeriodsList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerPeriodsListRequest,
+	request *nordlet.PeriodsListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerPeriodsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerPeriodsList(
+) (*nordlet.PeriodsListLedgerResponse, error) {
+	response, err := c.WithRawResponse.PeriodsList(
 		ctx,
 		request,
 		opts...,
@@ -131,12 +131,12 @@ func (c *Client) PostV1LedgerPeriodsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerPeriodsLock(
+func (c *Client) PeriodsLock(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerPeriodsLockRequest,
+	request *nordlet.PeriodsLockLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerPeriodsLockResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerPeriodsLock(
+) (*nordlet.PeriodsLockLedgerResponse, error) {
+	response, err := c.WithRawResponse.PeriodsLock(
 		ctx,
 		request,
 		opts...,
@@ -147,12 +147,12 @@ func (c *Client) PostV1LedgerPeriodsLock(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerPeriodsUnlock(
+func (c *Client) PeriodsUnlock(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerPeriodsUnlockRequest,
+	request *nordlet.PeriodsUnlockLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerPeriodsUnlockResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerPeriodsUnlock(
+) (*nordlet.PeriodsUnlockLedgerResponse, error) {
+	response, err := c.WithRawResponse.PeriodsUnlock(
 		ctx,
 		request,
 		opts...,
@@ -163,12 +163,12 @@ func (c *Client) PostV1LedgerPeriodsUnlock(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerJournalTransactionsList(
+func (c *Client) JournalTransactionsList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerJournalTransactionsListRequest,
+	request *nordlet.JournalTransactionsListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerJournalTransactionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerJournalTransactionsList(
+) (*nordlet.JournalTransactionsListLedgerResponse, error) {
+	response, err := c.WithRawResponse.JournalTransactionsList(
 		ctx,
 		request,
 		opts...,
@@ -179,12 +179,12 @@ func (c *Client) PostV1LedgerJournalTransactionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCentersCreate(
+func (c *Client) CostCentersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCentersCreateRequest,
+	request *nordlet.CostCentersCreateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCentersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCentersCreate(
+) (*nordlet.CostCentersCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCentersCreate(
 		ctx,
 		request,
 		opts...,
@@ -195,12 +195,12 @@ func (c *Client) PostV1LedgerCostCentersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCentersUpdate(
+func (c *Client) CostCentersUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCentersUpdateRequest,
+	request *nordlet.CostCentersUpdateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCentersUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCentersUpdate(
+) (*nordlet.CostCentersUpdateLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCentersUpdate(
 		ctx,
 		request,
 		opts...,
@@ -211,12 +211,12 @@ func (c *Client) PostV1LedgerCostCentersUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCentersList(
+func (c *Client) CostCentersList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCentersListRequest,
+	request *nordlet.CostCentersListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCentersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCentersList(
+) (*nordlet.CostCentersListLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCentersList(
 		ctx,
 		request,
 		opts...,
@@ -227,12 +227,12 @@ func (c *Client) PostV1LedgerCostCentersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCenterGroupsCreate(
+func (c *Client) CostCenterGroupsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCenterGroupsCreateRequest,
+	request *nordlet.CostCenterGroupsCreateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCenterGroupsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCenterGroupsCreate(
+) (*nordlet.CostCenterGroupsCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCenterGroupsCreate(
 		ctx,
 		request,
 		opts...,
@@ -243,12 +243,12 @@ func (c *Client) PostV1LedgerCostCenterGroupsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCenterGroupsUpdate(
+func (c *Client) CostCenterGroupsUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCenterGroupsUpdateRequest,
+	request *nordlet.CostCenterGroupsUpdateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCenterGroupsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCenterGroupsUpdate(
+) (*nordlet.CostCenterGroupsUpdateLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCenterGroupsUpdate(
 		ctx,
 		request,
 		opts...,
@@ -259,12 +259,12 @@ func (c *Client) PostV1LedgerCostCenterGroupsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCenterGroupsDelete(
+func (c *Client) CostCenterGroupsDelete(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCenterGroupsDeleteRequest,
+	request *nordlet.CostCenterGroupsDeleteLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCenterGroupsDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCenterGroupsDelete(
+) (*nordlet.CostCenterGroupsDeleteLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCenterGroupsDelete(
 		ctx,
 		request,
 		opts...,
@@ -275,12 +275,12 @@ func (c *Client) PostV1LedgerCostCenterGroupsDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerCostCenterGroupsList(
+func (c *Client) CostCenterGroupsList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerCostCenterGroupsListRequest,
+	request *nordlet.CostCenterGroupsListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerCostCenterGroupsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerCostCenterGroupsList(
+) (*nordlet.CostCenterGroupsListLedgerResponse, error) {
+	response, err := c.WithRawResponse.CostCenterGroupsList(
 		ctx,
 		request,
 		opts...,
@@ -291,12 +291,12 @@ func (c *Client) PostV1LedgerCostCenterGroupsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerPostingRulesList(
+func (c *Client) PostingRulesList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerPostingRulesListRequest,
+	request *nordlet.PostingRulesListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerPostingRulesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerPostingRulesList(
+) (*nordlet.PostingRulesListLedgerResponse, error) {
+	response, err := c.WithRawResponse.PostingRulesList(
 		ctx,
 		request,
 		opts...,
@@ -307,12 +307,12 @@ func (c *Client) PostV1LedgerPostingRulesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerPostingRulesUpdate(
+func (c *Client) PostingRulesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerPostingRulesUpdateRequest,
+	request *nordlet.PostingRulesUpdateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerPostingRulesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerPostingRulesUpdate(
+) (*nordlet.PostingRulesUpdateLedgerResponse, error) {
+	response, err := c.WithRawResponse.PostingRulesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -323,12 +323,12 @@ func (c *Client) PostV1LedgerPostingRulesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerOwnersCreate(
+func (c *Client) OwnersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerOwnersCreateRequest,
+	request *nordlet.OwnersCreateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerOwnersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerOwnersCreate(
+) (*nordlet.OwnersCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.OwnersCreate(
 		ctx,
 		request,
 		opts...,
@@ -339,12 +339,12 @@ func (c *Client) PostV1LedgerOwnersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerOwnersUpdate(
+func (c *Client) OwnersUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerOwnersUpdateRequest,
+	request *nordlet.OwnersUpdateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerOwnersUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerOwnersUpdate(
+) (*nordlet.OwnersUpdateLedgerResponse, error) {
+	response, err := c.WithRawResponse.OwnersUpdate(
 		ctx,
 		request,
 		opts...,
@@ -355,12 +355,12 @@ func (c *Client) PostV1LedgerOwnersUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerOwnersDelete(
+func (c *Client) OwnersDelete(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerOwnersDeleteRequest,
+	request *nordlet.OwnersDeleteLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerOwnersDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerOwnersDelete(
+) (*nordlet.OwnersDeleteLedgerResponse, error) {
+	response, err := c.WithRawResponse.OwnersDelete(
 		ctx,
 		request,
 		opts...,
@@ -371,12 +371,12 @@ func (c *Client) PostV1LedgerOwnersDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerOwnersList(
+func (c *Client) OwnersList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerOwnersListRequest,
+	request *nordlet.OwnersListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerOwnersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerOwnersList(
+) (*nordlet.OwnersListLedgerResponse, error) {
+	response, err := c.WithRawResponse.OwnersList(
 		ctx,
 		request,
 		opts...,
@@ -387,12 +387,12 @@ func (c *Client) PostV1LedgerOwnersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerJournalTransactionsGet(
+func (c *Client) JournalTransactionsGet(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerJournalTransactionsGetRequest,
+	request *nordlet.JournalTransactionsGetLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerJournalTransactionsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerJournalTransactionsGet(
+) (*nordlet.JournalTransactionsGetLedgerResponse, error) {
+	response, err := c.WithRawResponse.JournalTransactionsGet(
 		ctx,
 		request,
 		opts...,
@@ -403,12 +403,12 @@ func (c *Client) PostV1LedgerJournalTransactionsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1LedgerJournalTransactionsCreate(
+func (c *Client) JournalTransactionsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerJournalTransactionsCreateRequest,
+	request *nordlet.JournalTransactionsCreateLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerJournalTransactionsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1LedgerJournalTransactionsCreate(
+) (*nordlet.JournalTransactionsCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.JournalTransactionsCreate(
 		ctx,
 		request,
 		opts...,
@@ -420,12 +420,12 @@ func (c *Client) PostV1LedgerJournalTransactionsCreate(
 }
 
 // The rows or codes of each return or registry deposit of the company country that are filled from account balances. Accounts fall into a row by the layout defaults for the standard chart of accounts unless mapped under Settings → Statement rows.
-func (c *Client) NationalStatementLayoutsAvailableToTheCompany(
+func (c *Client) StatementRowsSchemes(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerStatementRowsSchemesRequest,
+	request *nordlet.StatementRowsSchemesLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerStatementRowsSchemesResponse, error) {
-	response, err := c.WithRawResponse.NationalStatementLayoutsAvailableToTheCompany(
+) (*nordlet.StatementRowsSchemesLedgerResponse, error) {
+	response, err := c.WithRawResponse.StatementRowsSchemes(
 		ctx,
 		request,
 		opts...,
@@ -436,12 +436,12 @@ func (c *Client) NationalStatementLayoutsAvailableToTheCompany(
 	return response.Body, nil
 }
 
-func (c *Client) AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+func (c *Client) StatementRowsList(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerStatementRowsListRequest,
+	request *nordlet.StatementRowsListLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerStatementRowsListResponse, error) {
-	response, err := c.WithRawResponse.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+) (*nordlet.StatementRowsListLedgerResponse, error) {
+	response, err := c.WithRawResponse.StatementRowsList(
 		ctx,
 		request,
 		opts...,
@@ -453,77 +453,12 @@ func (c *Client) AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPer
 }
 
 // A mapping on a code prefix covers every account whose code starts with it; the longest matching prefix wins. An empty rowCode removes the mapping so the layout default applies again.
-func (c *Client) MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+func (c *Client) StatementRowsSet(
 	ctx context.Context,
-	request *nordlet.PostV1LedgerStatementRowsSetRequest,
+	request *nordlet.StatementRowsSetLedgerRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1LedgerStatementRowsSetResponse, error) {
-	response, err := c.WithRawResponse.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Directors, board members, the company secretary, representatives and liquidators, with their personal identifier, appointment and resignation dates and whether they sign the annual accounts. Annual returns and registry deposits are built from this register.
-func (c *Client) OfficersOfTheCompany(
-	ctx context.Context,
-	request *nordlet.PostV1OfficersListRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OfficersListResponse, error) {
-	response, err := c.WithRawResponse.OfficersOfTheCompany(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) RecordAnOfficerOfTheCompany(
-	ctx context.Context,
-	request *nordlet.PostV1OfficersCreateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OfficersCreateResponse, error) {
-	response, err := c.WithRawResponse.RecordAnOfficerOfTheCompany(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) ChangeARecordedOfficer(
-	ctx context.Context,
-	request *nordlet.PostV1OfficersUpdateRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OfficersUpdateResponse, error) {
-	response, err := c.WithRawResponse.ChangeARecordedOfficer(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-func (c *Client) RemoveARecordedOfficer(
-	ctx context.Context,
-	request *nordlet.PostV1OfficersDeleteRequest,
-	opts ...option.RequestOption,
-) (*nordlet.PostV1OfficersDeleteResponse, error) {
-	response, err := c.WithRawResponse.RemoveARecordedOfficer(
+) (*nordlet.StatementRowsSetLedgerResponse, error) {
+	response, err := c.WithRawResponse.StatementRowsSet(
 		ctx,
 		request,
 		opts...,

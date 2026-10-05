@@ -1,6 +1,6 @@
 # Reference
-## Reference
-<details><summary><code>client.Reference.PostV1ReferenceExchangeRatesSync(request) -> *nordlet.PostV1ReferenceExchangeRatesSyncResponse</code></summary>
+## reference
+<details><summary><code>client.Reference.ExchangeRatesSync(request) -> *nordlet.ExchangeRatesSyncReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -13,8 +13,8 @@
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceExchangeRatesSyncRequest{}
-client.Reference.PostV1ReferenceExchangeRatesSync(
+request := &nordlet.ExchangeRatesSyncReferenceRequest{}
+client.Reference.ExchangeRatesSync(
         context.TODO(),
         request,
     )
@@ -33,7 +33,7 @@ client.Reference.PostV1ReferenceExchangeRatesSync(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -45,7 +45,7 @@ client.Reference.PostV1ReferenceExchangeRatesSync(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceExchangeRatesList(request) -> *nordlet.PostV1ReferenceExchangeRatesListResponse</code></summary>
+<details><summary><code>client.Reference.ExchangeRatesList(request) -> *nordlet.ExchangeRatesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -58,8 +58,8 @@ client.Reference.PostV1ReferenceExchangeRatesSync(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceExchangeRatesListRequest{}
-client.Reference.PostV1ReferenceExchangeRatesList(
+request := &nordlet.ExchangeRatesListReferenceRequest{}
+client.Reference.ExchangeRatesList(
         context.TODO(),
         request,
     )
@@ -94,7 +94,7 @@ client.Reference.PostV1ReferenceExchangeRatesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceExchangeRatesListRequestSortItem` 
+**sort:** `[]*nordlet.ExchangeRatesListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -102,7 +102,7 @@ client.Reference.PostV1ReferenceExchangeRatesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceExchangeRatesListRequestFilterItem` 
+**filter:** `[]*nordlet.ExchangeRatesListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -122,7 +122,7 @@ client.Reference.PostV1ReferenceExchangeRatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceExchangeRatesSet(request) -> *nordlet.PostV1ReferenceExchangeRatesSetResponse</code></summary>
+<details><summary><code>client.Reference.ExchangeRatesSet(request) -> *nordlet.ExchangeRatesSetReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -135,12 +135,14 @@ client.Reference.PostV1ReferenceExchangeRatesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceExchangeRatesSetRequest{
+request := &nordlet.ExchangeRatesSetReferenceRequest{
         Currency: "currency",
-        Date: "date",
-        Rate: "rate",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Rate: "121.00000000",
     }
-client.Reference.PostV1ReferenceExchangeRatesSet(
+client.Reference.ExchangeRatesSet(
         context.TODO(),
         request,
     )
@@ -167,7 +169,7 @@ client.Reference.PostV1ReferenceExchangeRatesSet(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -187,7 +189,7 @@ client.Reference.PostV1ReferenceExchangeRatesSet(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceExchangeRatesOverridesList(request) -> *nordlet.PostV1ReferenceExchangeRatesOverridesListResponse</code></summary>
+<details><summary><code>client.Reference.ExchangeRatesOverridesList(request) -> *nordlet.ExchangeRatesOverridesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -200,8 +202,8 @@ client.Reference.PostV1ReferenceExchangeRatesSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceExchangeRatesOverridesListRequest{}
-client.Reference.PostV1ReferenceExchangeRatesOverridesList(
+request := &nordlet.ExchangeRatesOverridesListReferenceRequest{}
+client.Reference.ExchangeRatesOverridesList(
         context.TODO(),
         request,
     )
@@ -236,7 +238,7 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceExchangeRatesOverridesListRequestSortItem` 
+**sort:** `[]*nordlet.ExchangeRatesOverridesListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -244,7 +246,7 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceExchangeRatesOverridesListRequestFilterItem` 
+**filter:** `[]*nordlet.ExchangeRatesOverridesListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -264,7 +266,7 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(request) -> *nordlet.PostV1ReferenceExchangeRatesOverridesDeleteResponse</code></summary>
+<details><summary><code>client.Reference.ExchangeRatesOverridesDelete(request) -> *nordlet.ExchangeRatesOverridesDeleteReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -277,11 +279,13 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceExchangeRatesOverridesDeleteRequest{
+request := &nordlet.ExchangeRatesOverridesDeleteReferenceRequest{
         Currency: "currency",
-        Date: "date",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(
+client.Reference.ExchangeRatesOverridesDelete(
         context.TODO(),
         request,
     )
@@ -308,7 +312,7 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -320,7 +324,7 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceCountriesList(request) -> *nordlet.PostV1ReferenceCountriesListResponse</code></summary>
+<details><summary><code>client.Reference.CountriesList(request) -> *nordlet.CountriesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -333,8 +337,8 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceCountriesListRequest{}
-client.Reference.PostV1ReferenceCountriesList(
+request := &nordlet.CountriesListReferenceRequest{}
+client.Reference.CountriesList(
         context.TODO(),
         request,
     )
@@ -350,7 +354,7 @@ client.Reference.PostV1ReferenceCountriesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceLtCountiesList(request) -> *nordlet.PostV1ReferenceLtCountiesListResponse</code></summary>
+<details><summary><code>client.Reference.LtCountiesList(request) -> *nordlet.LtCountiesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -363,8 +367,8 @@ client.Reference.PostV1ReferenceCountriesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceLtCountiesListRequest{}
-client.Reference.PostV1ReferenceLtCountiesList(
+request := &nordlet.LtCountiesListReferenceRequest{}
+client.Reference.LtCountiesList(
         context.TODO(),
         request,
     )
@@ -380,7 +384,7 @@ client.Reference.PostV1ReferenceLtCountiesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceLtMunicipalitiesList(request) -> *nordlet.PostV1ReferenceLtMunicipalitiesListResponse</code></summary>
+<details><summary><code>client.Reference.LtMunicipalitiesList(request) -> *nordlet.LtMunicipalitiesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -393,8 +397,8 @@ client.Reference.PostV1ReferenceLtCountiesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceLtMunicipalitiesListRequest{}
-client.Reference.PostV1ReferenceLtMunicipalitiesList(
+request := &nordlet.LtMunicipalitiesListReferenceRequest{}
+client.Reference.LtMunicipalitiesList(
         context.TODO(),
         request,
     )
@@ -425,7 +429,7 @@ client.Reference.PostV1ReferenceLtMunicipalitiesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceLtCitiesList(request) -> *nordlet.PostV1ReferenceLtCitiesListResponse</code></summary>
+<details><summary><code>client.Reference.LtCitiesList(request) -> *nordlet.LtCitiesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -438,8 +442,8 @@ client.Reference.PostV1ReferenceLtMunicipalitiesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceLtCitiesListRequest{}
-client.Reference.PostV1ReferenceLtCitiesList(
+request := &nordlet.LtCitiesListReferenceRequest{}
+client.Reference.LtCitiesList(
         context.TODO(),
         request,
     )
@@ -478,7 +482,7 @@ client.Reference.PostV1ReferenceLtCitiesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceBanksList(request) -> *nordlet.PostV1ReferenceBanksListResponse</code></summary>
+<details><summary><code>client.Reference.BanksList(request) -> *nordlet.BanksListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -491,8 +495,8 @@ client.Reference.PostV1ReferenceLtCitiesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceBanksListRequest{}
-client.Reference.PostV1ReferenceBanksList(
+request := &nordlet.BanksListReferenceRequest{}
+client.Reference.BanksList(
         context.TODO(),
         request,
     )
@@ -527,7 +531,7 @@ client.Reference.PostV1ReferenceBanksList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceBanksListRequestSortItem` 
+**sort:** `[]*nordlet.BanksListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -535,7 +539,7 @@ client.Reference.PostV1ReferenceBanksList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceBanksListRequestFilterItem` 
+**filter:** `[]*nordlet.BanksListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -555,7 +559,7 @@ client.Reference.PostV1ReferenceBanksList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceBanksUpsert(request) -> *nordlet.PostV1ReferenceBanksUpsertResponse</code></summary>
+<details><summary><code>client.Reference.BanksUpsert(request) -> *nordlet.BanksUpsertReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -568,12 +572,12 @@ client.Reference.PostV1ReferenceBanksList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceBanksUpsertRequest{
+request := &nordlet.BanksUpsertReferenceRequest{
         CountryCode: "countryCode",
         Name: "name",
         Bic: "bic",
     }
-client.Reference.PostV1ReferenceBanksUpsert(
+client.Reference.BanksUpsert(
         context.TODO(),
         request,
     )
@@ -636,7 +640,7 @@ client.Reference.PostV1ReferenceBanksUpsert(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceLtRegionsList(request) -> *nordlet.PostV1ReferenceLtRegionsListResponse</code></summary>
+<details><summary><code>client.Reference.LtRegionsList(request) -> *nordlet.LtRegionsListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -649,8 +653,8 @@ client.Reference.PostV1ReferenceBanksUpsert(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceLtRegionsListRequest{}
-client.Reference.PostV1ReferenceLtRegionsList(
+request := &nordlet.LtRegionsListReferenceRequest{}
+client.Reference.LtRegionsList(
         context.TODO(),
         request,
     )
@@ -666,7 +670,7 @@ client.Reference.PostV1ReferenceLtRegionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceCurrenciesList(request) -> *nordlet.PostV1ReferenceCurrenciesListResponse</code></summary>
+<details><summary><code>client.Reference.CurrenciesList(request) -> *nordlet.CurrenciesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -679,85 +683,8 @@ client.Reference.PostV1ReferenceLtRegionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceCurrenciesListRequest{}
-client.Reference.PostV1ReferenceCurrenciesList(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**page:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**pageSize:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**sort:** `[]*nordlet.PostV1ReferenceCurrenciesListRequestSortItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**filter:** `[]*nordlet.PostV1ReferenceCurrenciesListRequestFilterItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Reference.PostV1ReferenceVatClassifiersList(request) -> *nordlet.PostV1ReferenceVatClassifiersListResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1ReferenceVatClassifiersListRequest{}
-client.Reference.PostV1ReferenceVatClassifiersList(
+request := &nordlet.CurrenciesListReferenceRequest{}
+client.Reference.CurrenciesList(
         context.TODO(),
         request,
     )
@@ -792,7 +719,7 @@ client.Reference.PostV1ReferenceVatClassifiersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceVatClassifiersListRequestSortItem` 
+**sort:** `[]*nordlet.CurrenciesListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -800,7 +727,7 @@ client.Reference.PostV1ReferenceVatClassifiersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceVatClassifiersListRequestFilterItem` 
+**filter:** `[]*nordlet.CurrenciesListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -820,7 +747,7 @@ client.Reference.PostV1ReferenceVatClassifiersList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceVatClassifiersUpsert(request) -> *nordlet.PostV1ReferenceVatClassifiersUpsertResponse</code></summary>
+<details><summary><code>client.Reference.VatClassifiersList(request) -> *nordlet.VatClassifiersListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -833,15 +760,92 @@ client.Reference.PostV1ReferenceVatClassifiersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceVatClassifiersUpsertRequest{
-        Rows: []*nordlet.PostV1ReferenceVatClassifiersUpsertRequestRowsItem{
-            &nordlet.PostV1ReferenceVatClassifiersUpsertRequestRowsItem{
+request := &nordlet.VatClassifiersListReferenceRequest{}
+client.Reference.VatClassifiersList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.VatClassifiersListReferenceRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.VatClassifiersListReferenceRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Reference.VatClassifiersUpsert(request) -> *nordlet.VatClassifiersUpsertReferenceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.VatClassifiersUpsertReferenceRequest{
+        Rows: []*nordlet.VatClassifiersUpsertReferenceRequestRowsItem{
+            &nordlet.VatClassifiersUpsertReferenceRequestRowsItem{
                 Code: "code",
                 Name: "name",
             },
         },
     }
-client.Reference.PostV1ReferenceVatClassifiersUpsert(
+client.Reference.VatClassifiersUpsert(
         context.TODO(),
         request,
     )
@@ -860,7 +864,7 @@ client.Reference.PostV1ReferenceVatClassifiersUpsert(
 <dl>
 <dd>
 
-**rows:** `[]*nordlet.PostV1ReferenceVatClassifiersUpsertRequestRowsItem` 
+**rows:** `[]*nordlet.VatClassifiersUpsertReferenceRequestRowsItem` 
     
 </dd>
 </dl>
@@ -872,7 +876,7 @@ client.Reference.PostV1ReferenceVatClassifiersUpsert(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesList(request) -> *nordlet.PostV1ReferenceEuVatRatesListResponse</code></summary>
+<details><summary><code>client.Reference.EuVatRatesList(request) -> *nordlet.EuVatRatesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -899,8 +903,8 @@ Effective EU VAT rate mapping for this company: EC TEDB defaults, replaced per c
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceEuVatRatesListRequest{}
-client.Reference.PostV1ReferenceEuVatRatesList(
+request := &nordlet.EuVatRatesListReferenceRequest{}
+client.Reference.EuVatRatesList(
         context.TODO(),
         request,
     )
@@ -927,7 +931,7 @@ client.Reference.PostV1ReferenceEuVatRatesList(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -939,7 +943,7 @@ client.Reference.PostV1ReferenceEuVatRatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSetOverrides(request) -> *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse</code></summary>
+<details><summary><code>client.Reference.EuVatRatesSetOverrides(request) -> *nordlet.EuVatRatesSetOverridesReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -966,16 +970,16 @@ Replace the VAT rate mapping this company uses for one EU country. Pass an empty
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest{
+request := &nordlet.EuVatRatesSetOverridesReferenceRequest{
         CountryCode: "countryCode",
-        Rates: []*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
-            &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
-                Category: nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard,
-                RatePercent: "ratePercent",
+        Rates: []*nordlet.EuVatRatesSetOverridesReferenceRequestRatesItem{
+            &nordlet.EuVatRatesSetOverridesReferenceRequestRatesItem{
+                Category: nordlet.EuVatRatesSetOverridesReferenceRequestRatesItemCategoryStandard,
+                RatePercent: "121.00",
             },
         },
     }
-client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
+client.Reference.EuVatRatesSetOverrides(
         context.TODO(),
         request,
     )
@@ -1002,7 +1006,7 @@ client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
 <dl>
 <dd>
 
-**rates:** `[]*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem` 
+**rates:** `[]*nordlet.EuVatRatesSetOverridesReferenceRequestRatesItem` 
     
 </dd>
 </dl>
@@ -1014,7 +1018,7 @@ client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceVatResolve(request) -> *nordlet.PostV1ReferenceVatResolveResponse</code></summary>
+<details><summary><code>client.Reference.VatResolve(request) -> *nordlet.VatResolveReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1027,8 +1031,8 @@ client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceVatResolveRequest{}
-client.Reference.PostV1ReferenceVatResolve(
+request := &nordlet.VatResolveReferenceRequest{}
+client.Reference.VatResolve(
         context.TODO(),
         request,
     )
@@ -1071,7 +1075,7 @@ client.Reference.PostV1ReferenceVatResolve(
 <dl>
 <dd>
 
-**supplyType:** `*nordlet.PostV1ReferenceVatResolveRequestSupplyType` 
+**supplyType:** `*nordlet.VatResolveReferenceRequestSupplyType` 
     
 </dd>
 </dl>
@@ -1079,7 +1083,7 @@ client.Reference.PostV1ReferenceVatResolve(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -1131,7 +1135,7 @@ client.Reference.PostV1ReferenceVatResolve(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceCnCodesList(request) -> *nordlet.PostV1ReferenceCnCodesListResponse</code></summary>
+<details><summary><code>client.Reference.CnCodesList(request) -> *nordlet.CnCodesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1144,8 +1148,8 @@ client.Reference.PostV1ReferenceVatResolve(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceCnCodesListRequest{}
-client.Reference.PostV1ReferenceCnCodesList(
+request := &nordlet.CnCodesListReferenceRequest{}
+client.Reference.CnCodesList(
         context.TODO(),
         request,
     )
@@ -1180,7 +1184,7 @@ client.Reference.PostV1ReferenceCnCodesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceCnCodesListRequestSortItem` 
+**sort:** `[]*nordlet.CnCodesListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -1188,7 +1192,7 @@ client.Reference.PostV1ReferenceCnCodesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceCnCodesListRequestFilterItem` 
+**filter:** `[]*nordlet.CnCodesListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -1208,7 +1212,7 @@ client.Reference.PostV1ReferenceCnCodesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceCnCodesUpsert(request) -> *nordlet.PostV1ReferenceCnCodesUpsertResponse</code></summary>
+<details><summary><code>client.Reference.CnCodesUpsert(request) -> *nordlet.CnCodesUpsertReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1221,15 +1225,15 @@ client.Reference.PostV1ReferenceCnCodesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceCnCodesUpsertRequest{
-        Rows: []*nordlet.PostV1ReferenceCnCodesUpsertRequestRowsItem{
-            &nordlet.PostV1ReferenceCnCodesUpsertRequestRowsItem{
+request := &nordlet.CnCodesUpsertReferenceRequest{
+        Rows: []*nordlet.CnCodesUpsertReferenceRequestRowsItem{
+            &nordlet.CnCodesUpsertReferenceRequestRowsItem{
                 Code: "code",
                 Name: "name",
             },
         },
     }
-client.Reference.PostV1ReferenceCnCodesUpsert(
+client.Reference.CnCodesUpsert(
         context.TODO(),
         request,
     )
@@ -1248,7 +1252,7 @@ client.Reference.PostV1ReferenceCnCodesUpsert(
 <dl>
 <dd>
 
-**rows:** `[]*nordlet.PostV1ReferenceCnCodesUpsertRequestRowsItem` 
+**rows:** `[]*nordlet.CnCodesUpsertReferenceRequestRowsItem` 
     
 </dd>
 </dl>
@@ -1260,7 +1264,7 @@ client.Reference.PostV1ReferenceCnCodesUpsert(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceComplianceVersionsList(request) -> *nordlet.PostV1ReferenceComplianceVersionsListResponse</code></summary>
+<details><summary><code>client.Reference.ComplianceVersionsList(request) -> *nordlet.ComplianceVersionsListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1273,8 +1277,8 @@ client.Reference.PostV1ReferenceCnCodesUpsert(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceComplianceVersionsListRequest{}
-client.Reference.PostV1ReferenceComplianceVersionsList(
+request := &nordlet.ComplianceVersionsListReferenceRequest{}
+client.Reference.ComplianceVersionsList(
         context.TODO(),
         request,
     )
@@ -1305,7 +1309,7 @@ client.Reference.PostV1ReferenceComplianceVersionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceIntrastatThresholdsList(request) -> *nordlet.PostV1ReferenceIntrastatThresholdsListResponse</code></summary>
+<details><summary><code>client.Reference.IntrastatThresholdsList(request) -> *nordlet.IntrastatThresholdsListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1318,8 +1322,8 @@ client.Reference.PostV1ReferenceComplianceVersionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceIntrastatThresholdsListRequest{}
-client.Reference.PostV1ReferenceIntrastatThresholdsList(
+request := &nordlet.IntrastatThresholdsListReferenceRequest{}
+client.Reference.IntrastatThresholdsList(
         context.TODO(),
         request,
     )
@@ -1335,7 +1339,7 @@ client.Reference.PostV1ReferenceIntrastatThresholdsList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceUnitsList(request) -> *nordlet.PostV1ReferenceUnitsListResponse</code></summary>
+<details><summary><code>client.Reference.UnitsList(request) -> *nordlet.UnitsListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1348,8 +1352,8 @@ client.Reference.PostV1ReferenceIntrastatThresholdsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceUnitsListRequest{}
-client.Reference.PostV1ReferenceUnitsList(
+request := &nordlet.UnitsListReferenceRequest{}
+client.Reference.UnitsList(
         context.TODO(),
         request,
     )
@@ -1384,7 +1388,7 @@ client.Reference.PostV1ReferenceUnitsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceUnitsListRequestSortItem` 
+**sort:** `[]*nordlet.UnitsListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -1392,7 +1396,7 @@ client.Reference.PostV1ReferenceUnitsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceUnitsListRequestFilterItem` 
+**filter:** `[]*nordlet.UnitsListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -1412,7 +1416,7 @@ client.Reference.PostV1ReferenceUnitsList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceSeriesCreate(request) -> *nordlet.PostV1ReferenceSeriesCreateResponse</code></summary>
+<details><summary><code>client.Reference.SeriesCreate(request) -> *nordlet.SeriesCreateReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1425,11 +1429,11 @@ client.Reference.PostV1ReferenceUnitsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceSeriesCreateRequest{
+request := &nordlet.SeriesCreateReferenceRequest{
         DocumentType: "documentType",
         Year: int64(1000000),
     }
-client.Reference.PostV1ReferenceSeriesCreate(
+client.Reference.SeriesCreate(
         context.TODO(),
         request,
     )
@@ -1484,7 +1488,7 @@ client.Reference.PostV1ReferenceSeriesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceSeriesList(request) -> *nordlet.PostV1ReferenceSeriesListResponse</code></summary>
+<details><summary><code>client.Reference.SeriesList(request) -> *nordlet.SeriesListReferenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -1497,8 +1501,8 @@ client.Reference.PostV1ReferenceSeriesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReferenceSeriesListRequest{}
-client.Reference.PostV1ReferenceSeriesList(
+request := &nordlet.SeriesListReferenceRequest{}
+client.Reference.SeriesList(
         context.TODO(),
         request,
     )
@@ -1533,7 +1537,7 @@ client.Reference.PostV1ReferenceSeriesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReferenceSeriesListRequestSortItem` 
+**sort:** `[]*nordlet.SeriesListReferenceRequestSortItem` 
     
 </dd>
 </dl>
@@ -1541,7 +1545,7 @@ client.Reference.PostV1ReferenceSeriesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReferenceSeriesListRequestFilterItem` 
+**filter:** `[]*nordlet.SeriesListReferenceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -1561,8 +1565,8 @@ client.Reference.PostV1ReferenceSeriesList(
 </dl>
 </details>
 
-## Partners
-<details><summary><code>client.Partners.PostV1PartnersAddressesCreate(request) -> *nordlet.PostV1PartnersAddressesCreateResponse</code></summary>
+## partners
+<details><summary><code>client.Partners.AddressesCreate(request) -> *nordlet.AddressesCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1575,10 +1579,10 @@ client.Reference.PostV1ReferenceSeriesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersAddressesCreateRequest{
+request := &nordlet.AddressesCreatePartnersRequest{
         PartnerID: "partnerId",
     }
-client.Partners.PostV1PartnersAddressesCreate(
+client.Partners.AddressesCreate(
         context.TODO(),
         request,
     )
@@ -1597,7 +1601,7 @@ client.Partners.PostV1PartnersAddressesCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PartnersAddressesCreateRequestType` 
+**type_:** `*nordlet.AddressesCreatePartnersRequestType` 
     
 </dd>
 </dl>
@@ -1657,7 +1661,7 @@ client.Partners.PostV1PartnersAddressesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersAddressesUpdate(request) -> *nordlet.PostV1PartnersAddressesUpdateResponse</code></summary>
+<details><summary><code>client.Partners.AddressesUpdate(request) -> *nordlet.AddressesUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1670,10 +1674,10 @@ client.Partners.PostV1PartnersAddressesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersAddressesUpdateRequest{
+request := &nordlet.AddressesUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersAddressesUpdate(
+client.Partners.AddressesUpdate(
         context.TODO(),
         request,
     )
@@ -1692,7 +1696,7 @@ client.Partners.PostV1PartnersAddressesUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PartnersAddressesUpdateRequestType` 
+**type_:** `*nordlet.AddressesUpdatePartnersRequestType` 
     
 </dd>
 </dl>
@@ -1752,7 +1756,7 @@ client.Partners.PostV1PartnersAddressesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersAddressesDelete(request) -> *nordlet.PostV1PartnersAddressesDeleteResponse</code></summary>
+<details><summary><code>client.Partners.AddressesDelete(request) -> *nordlet.AddressesDeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1765,10 +1769,10 @@ client.Partners.PostV1PartnersAddressesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersAddressesDeleteRequest{
+request := &nordlet.AddressesDeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersAddressesDelete(
+client.Partners.AddressesDelete(
         context.TODO(),
         request,
     )
@@ -1799,7 +1803,7 @@ client.Partners.PostV1PartnersAddressesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersAddressesList(request) -> *nordlet.PostV1PartnersAddressesListResponse</code></summary>
+<details><summary><code>client.Partners.AddressesList(request) -> *nordlet.AddressesListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1812,8 +1816,8 @@ client.Partners.PostV1PartnersAddressesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersAddressesListRequest{}
-client.Partners.PostV1PartnersAddressesList(
+request := &nordlet.AddressesListPartnersRequest{}
+client.Partners.AddressesList(
         context.TODO(),
         request,
     )
@@ -1848,7 +1852,7 @@ client.Partners.PostV1PartnersAddressesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersAddressesListRequestSortItem` 
+**sort:** `[]*nordlet.AddressesListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -1856,7 +1860,7 @@ client.Partners.PostV1PartnersAddressesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersAddressesListRequestFilterItem` 
+**filter:** `[]*nordlet.AddressesListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -1876,7 +1880,7 @@ client.Partners.PostV1PartnersAddressesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersContactsCreate(request) -> *nordlet.PostV1PartnersContactsCreateResponse</code></summary>
+<details><summary><code>client.Partners.ContactsCreate(request) -> *nordlet.ContactsCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1889,11 +1893,11 @@ client.Partners.PostV1PartnersAddressesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersContactsCreateRequest{
+request := &nordlet.ContactsCreatePartnersRequest{
         Name: "name",
         PartnerID: "partnerId",
     }
-client.Partners.PostV1PartnersContactsCreate(
+client.Partners.ContactsCreate(
         context.TODO(),
         request,
     )
@@ -1964,7 +1968,7 @@ client.Partners.PostV1PartnersContactsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersContactsUpdate(request) -> *nordlet.PostV1PartnersContactsUpdateResponse</code></summary>
+<details><summary><code>client.Partners.ContactsUpdate(request) -> *nordlet.ContactsUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1977,10 +1981,10 @@ client.Partners.PostV1PartnersContactsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersContactsUpdateRequest{
+request := &nordlet.ContactsUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersContactsUpdate(
+client.Partners.ContactsUpdate(
         context.TODO(),
         request,
     )
@@ -2051,7 +2055,7 @@ client.Partners.PostV1PartnersContactsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersContactsDelete(request) -> *nordlet.PostV1PartnersContactsDeleteResponse</code></summary>
+<details><summary><code>client.Partners.ContactsDelete(request) -> *nordlet.ContactsDeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2064,10 +2068,10 @@ client.Partners.PostV1PartnersContactsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersContactsDeleteRequest{
+request := &nordlet.ContactsDeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersContactsDelete(
+client.Partners.ContactsDelete(
         context.TODO(),
         request,
     )
@@ -2098,7 +2102,7 @@ client.Partners.PostV1PartnersContactsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersContactsList(request) -> *nordlet.PostV1PartnersContactsListResponse</code></summary>
+<details><summary><code>client.Partners.ContactsList(request) -> *nordlet.ContactsListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2111,8 +2115,8 @@ client.Partners.PostV1PartnersContactsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersContactsListRequest{}
-client.Partners.PostV1PartnersContactsList(
+request := &nordlet.ContactsListPartnersRequest{}
+client.Partners.ContactsList(
         context.TODO(),
         request,
     )
@@ -2147,7 +2151,7 @@ client.Partners.PostV1PartnersContactsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersContactsListRequestSortItem` 
+**sort:** `[]*nordlet.ContactsListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -2155,7 +2159,7 @@ client.Partners.PostV1PartnersContactsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersContactsListRequestFilterItem` 
+**filter:** `[]*nordlet.ContactsListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -2175,7 +2179,7 @@ client.Partners.PostV1PartnersContactsList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersBankAccountsCreate(request) -> *nordlet.PostV1PartnersBankAccountsCreateResponse</code></summary>
+<details><summary><code>client.Partners.BankAccountsCreate(request) -> *nordlet.BankAccountsCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2188,11 +2192,11 @@ client.Partners.PostV1PartnersContactsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersBankAccountsCreateRequest{
+request := &nordlet.BankAccountsCreatePartnersRequest{
         Iban: "iban",
         PartnerID: "partnerId",
     }
-client.Partners.PostV1PartnersBankAccountsCreate(
+client.Partners.BankAccountsCreate(
         context.TODO(),
         request,
     )
@@ -2263,7 +2267,7 @@ client.Partners.PostV1PartnersBankAccountsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersBankAccountsUpdate(request) -> *nordlet.PostV1PartnersBankAccountsUpdateResponse</code></summary>
+<details><summary><code>client.Partners.BankAccountsUpdate(request) -> *nordlet.BankAccountsUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2276,10 +2280,10 @@ client.Partners.PostV1PartnersBankAccountsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersBankAccountsUpdateRequest{
+request := &nordlet.BankAccountsUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersBankAccountsUpdate(
+client.Partners.BankAccountsUpdate(
         context.TODO(),
         request,
     )
@@ -2350,7 +2354,7 @@ client.Partners.PostV1PartnersBankAccountsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersBankAccountsDelete(request) -> *nordlet.PostV1PartnersBankAccountsDeleteResponse</code></summary>
+<details><summary><code>client.Partners.BankAccountsDelete(request) -> *nordlet.BankAccountsDeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2363,10 +2367,10 @@ client.Partners.PostV1PartnersBankAccountsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersBankAccountsDeleteRequest{
+request := &nordlet.BankAccountsDeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersBankAccountsDelete(
+client.Partners.BankAccountsDelete(
         context.TODO(),
         request,
     )
@@ -2397,7 +2401,7 @@ client.Partners.PostV1PartnersBankAccountsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersBankAccountsList(request) -> *nordlet.PostV1PartnersBankAccountsListResponse</code></summary>
+<details><summary><code>client.Partners.BankAccountsList(request) -> *nordlet.BankAccountsListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2410,8 +2414,8 @@ client.Partners.PostV1PartnersBankAccountsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersBankAccountsListRequest{}
-client.Partners.PostV1PartnersBankAccountsList(
+request := &nordlet.BankAccountsListPartnersRequest{}
+client.Partners.BankAccountsList(
         context.TODO(),
         request,
     )
@@ -2446,7 +2450,7 @@ client.Partners.PostV1PartnersBankAccountsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersBankAccountsListRequestSortItem` 
+**sort:** `[]*nordlet.BankAccountsListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -2454,7 +2458,7 @@ client.Partners.PostV1PartnersBankAccountsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersBankAccountsListRequestFilterItem` 
+**filter:** `[]*nordlet.BankAccountsListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -2474,7 +2478,7 @@ client.Partners.PostV1PartnersBankAccountsList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersFilesList(request) -> *nordlet.PostV1PartnersFilesListResponse</code></summary>
+<details><summary><code>client.Partners.FilesList(request) -> *nordlet.FilesListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2487,10 +2491,10 @@ client.Partners.PostV1PartnersBankAccountsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersFilesListRequest{
+request := &nordlet.FilesListPartnersRequest{
         PartnerID: "partnerId",
     }
-client.Partners.PostV1PartnersFilesList(
+client.Partners.FilesList(
         context.TODO(),
         request,
     )
@@ -2521,7 +2525,7 @@ client.Partners.PostV1PartnersFilesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(request) -> *nordlet.PostV1PartnersDebtRemindersPreviewResponse</code></summary>
+<details><summary><code>client.Partners.DebtRemindersPreview(request) -> *nordlet.DebtRemindersPreviewPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2534,8 +2538,8 @@ client.Partners.PostV1PartnersFilesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersDebtRemindersPreviewRequest{}
-client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+request := &nordlet.DebtRemindersPreviewPartnersRequest{}
+client.Partners.DebtRemindersPreview(
         context.TODO(),
         request,
     )
@@ -2551,7 +2555,7 @@ client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersDebtRemindersList(request) -> *nordlet.PostV1PartnersDebtRemindersListResponse</code></summary>
+<details><summary><code>client.Partners.DebtRemindersList(request) -> *nordlet.DebtRemindersListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2564,8 +2568,8 @@ client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersDebtRemindersListRequest{}
-client.Partners.PostV1PartnersDebtRemindersList(
+request := &nordlet.DebtRemindersListPartnersRequest{}
+client.Partners.DebtRemindersList(
         context.TODO(),
         request,
     )
@@ -2600,7 +2604,7 @@ client.Partners.PostV1PartnersDebtRemindersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersDebtRemindersListRequestSortItem` 
+**sort:** `[]*nordlet.DebtRemindersListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -2608,7 +2612,7 @@ client.Partners.PostV1PartnersDebtRemindersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersDebtRemindersListRequestFilterItem` 
+**filter:** `[]*nordlet.DebtRemindersListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -2628,7 +2632,7 @@ client.Partners.PostV1PartnersDebtRemindersList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersValidateVat(request) -> *nordlet.PostV1PartnersValidateVatResponse</code></summary>
+<details><summary><code>client.Partners.ValidateVat(request) -> *nordlet.ValidateVatPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2641,8 +2645,8 @@ client.Partners.PostV1PartnersDebtRemindersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersValidateVatRequest{}
-client.Partners.PostV1PartnersValidateVat(
+request := &nordlet.ValidateVatPartnersRequest{}
+client.Partners.ValidateVat(
         context.TODO(),
         request,
     )
@@ -2681,7 +2685,7 @@ client.Partners.PostV1PartnersValidateVat(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersVatReviewsList(request) -> *nordlet.PostV1PartnersVatReviewsListResponse</code></summary>
+<details><summary><code>client.Partners.VatReviewsList(request) -> *nordlet.VatReviewsListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2694,8 +2698,8 @@ client.Partners.PostV1PartnersValidateVat(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersVatReviewsListRequest{}
-client.Partners.PostV1PartnersVatReviewsList(
+request := &nordlet.VatReviewsListPartnersRequest{}
+client.Partners.VatReviewsList(
         context.TODO(),
         request,
     )
@@ -2730,7 +2734,7 @@ client.Partners.PostV1PartnersVatReviewsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersVatReviewsListRequestSortItem` 
+**sort:** `[]*nordlet.VatReviewsListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -2738,7 +2742,7 @@ client.Partners.PostV1PartnersVatReviewsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersVatReviewsListRequestFilterItem` 
+**filter:** `[]*nordlet.VatReviewsListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -2758,7 +2762,7 @@ client.Partners.PostV1PartnersVatReviewsList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersVatReviewsResolve(request) -> *nordlet.PostV1PartnersVatReviewsResolveResponse</code></summary>
+<details><summary><code>client.Partners.VatReviewsResolve(request) -> *nordlet.VatReviewsResolvePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2771,11 +2775,11 @@ client.Partners.PostV1PartnersVatReviewsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersVatReviewsResolveRequest{
+request := &nordlet.VatReviewsResolvePartnersRequest{
         ID: "id",
-        Resolution: nordlet.PostV1PartnersVatReviewsResolveRequestResolutionConfirmedValid,
+        Resolution: nordlet.VatReviewsResolvePartnersRequestResolutionConfirmedValid,
     }
-client.Partners.PostV1PartnersVatReviewsResolve(
+client.Partners.VatReviewsResolve(
         context.TODO(),
         request,
     )
@@ -2802,7 +2806,7 @@ client.Partners.PostV1PartnersVatReviewsResolve(
 <dl>
 <dd>
 
-**resolution:** `*nordlet.PostV1PartnersVatReviewsResolveRequestResolution` 
+**resolution:** `*nordlet.VatReviewsResolvePartnersRequestResolution` 
     
 </dd>
 </dl>
@@ -2822,7 +2826,7 @@ client.Partners.PostV1PartnersVatReviewsResolve(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersCreate(request) -> *nordlet.PostV1PartnersCreateResponse</code></summary>
+<details><summary><code>client.Partners.Create(request) -> *nordlet.CreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2835,10 +2839,10 @@ client.Partners.PostV1PartnersVatReviewsResolve(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersCreateRequest{
+request := &nordlet.CreatePartnersRequest{
         Name: "name",
     }
-client.Partners.PostV1PartnersCreate(
+client.Partners.Create(
         context.TODO(),
         request,
     )
@@ -2857,7 +2861,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PartnersCreateRequestType` 
+**type_:** `*nordlet.CreatePartnersRequestType` 
     
 </dd>
 </dl>
@@ -2921,7 +2925,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -2985,7 +2989,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1PartnersCreateRequestAddress` 
+**address:** `*nordlet.CreatePartnersRequestAddress` 
     
 </dd>
 </dl>
@@ -2993,7 +2997,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**correspondenceAddress:** `*nordlet.PostV1PartnersCreateRequestCorrespondenceAddress` 
+**correspondenceAddress:** `*nordlet.CreatePartnersRequestCorrespondenceAddress` 
     
 </dd>
 </dl>
@@ -3081,7 +3085,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**firstCallDate:** `*string` 
+**firstCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3089,7 +3093,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**lastCallDate:** `*string` 
+**lastCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3097,7 +3101,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**nextCallDate:** `*string` 
+**nextCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3137,7 +3141,7 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
-**legalCountryClass:** `*nordlet.PostV1PartnersCreateRequestLegalCountryClass` 
+**legalCountryClass:** `*nordlet.CreatePartnersRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -3149,7 +3153,7 @@ client.Partners.PostV1PartnersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersFindOrCreate(request) -> *nordlet.PostV1PartnersFindOrCreateResponse</code></summary>
+<details><summary><code>client.Partners.FindOrCreate(request) -> *nordlet.FindOrCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3162,10 +3166,10 @@ client.Partners.PostV1PartnersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersFindOrCreateRequest{
+request := &nordlet.FindOrCreatePartnersRequest{
         Name: "name",
     }
-client.Partners.PostV1PartnersFindOrCreate(
+client.Partners.FindOrCreate(
         context.TODO(),
         request,
     )
@@ -3184,7 +3188,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PartnersFindOrCreateRequestType` 
+**type_:** `*nordlet.FindOrCreatePartnersRequestType` 
     
 </dd>
 </dl>
@@ -3248,7 +3252,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3312,7 +3316,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1PartnersFindOrCreateRequestAddress` 
+**address:** `*nordlet.FindOrCreatePartnersRequestAddress` 
     
 </dd>
 </dl>
@@ -3320,7 +3324,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**correspondenceAddress:** `*nordlet.PostV1PartnersFindOrCreateRequestCorrespondenceAddress` 
+**correspondenceAddress:** `*nordlet.FindOrCreatePartnersRequestCorrespondenceAddress` 
     
 </dd>
 </dl>
@@ -3408,7 +3412,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**firstCallDate:** `*string` 
+**firstCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3416,7 +3420,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**lastCallDate:** `*string` 
+**lastCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3424,7 +3428,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**nextCallDate:** `*string` 
+**nextCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3464,7 +3468,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
-**legalCountryClass:** `*nordlet.PostV1PartnersFindOrCreateRequestLegalCountryClass` 
+**legalCountryClass:** `*nordlet.FindOrCreatePartnersRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -3476,7 +3480,7 @@ client.Partners.PostV1PartnersFindOrCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersGet(request) -> *nordlet.PostV1PartnersGetResponse</code></summary>
+<details><summary><code>client.Partners.Get(request) -> *nordlet.GetPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3489,10 +3493,10 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersGetRequest{
+request := &nordlet.GetPartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersGet(
+client.Partners.Get(
         context.TODO(),
         request,
     )
@@ -3523,7 +3527,7 @@ client.Partners.PostV1PartnersGet(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersUpdate(request) -> *nordlet.PostV1PartnersUpdateResponse</code></summary>
+<details><summary><code>client.Partners.Update(request) -> *nordlet.UpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3536,10 +3540,10 @@ client.Partners.PostV1PartnersGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersUpdateRequest{
+request := &nordlet.UpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersUpdate(
+client.Partners.Update(
         context.TODO(),
         request,
     )
@@ -3566,7 +3570,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PartnersUpdateRequestType` 
+**type_:** `*nordlet.UpdatePartnersRequestType` 
     
 </dd>
 </dl>
@@ -3630,7 +3634,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3694,7 +3698,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1PartnersUpdateRequestAddress` 
+**address:** `*nordlet.UpdatePartnersRequestAddress` 
     
 </dd>
 </dl>
@@ -3702,7 +3706,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**correspondenceAddress:** `*nordlet.PostV1PartnersUpdateRequestCorrespondenceAddress` 
+**correspondenceAddress:** `*nordlet.UpdatePartnersRequestCorrespondenceAddress` 
     
 </dd>
 </dl>
@@ -3790,7 +3794,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**firstCallDate:** `*string` 
+**firstCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3798,7 +3802,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**lastCallDate:** `*string` 
+**lastCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3806,7 +3810,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**nextCallDate:** `*string` 
+**nextCallDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -3846,7 +3850,7 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
-**legalCountryClass:** `*nordlet.PostV1PartnersUpdateRequestLegalCountryClass` 
+**legalCountryClass:** `*nordlet.UpdatePartnersRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -3858,7 +3862,7 @@ client.Partners.PostV1PartnersUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersDelete(request) -> *nordlet.PostV1PartnersDeleteResponse</code></summary>
+<details><summary><code>client.Partners.Delete(request) -> *nordlet.DeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3871,10 +3875,10 @@ client.Partners.PostV1PartnersUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersDeleteRequest{
+request := &nordlet.DeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersDelete(
+client.Partners.Delete(
         context.TODO(),
         request,
     )
@@ -3905,7 +3909,7 @@ client.Partners.PostV1PartnersDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(request) -> *nordlet.PostV1PartnersAnonymizeResponse</code></summary>
+<details><summary><code>client.Partners.Anonymize(request) -> *nordlet.AnonymizePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3932,10 +3936,10 @@ Removes birth date, self-employment certificate number, email, phone, address, n
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersAnonymizeRequest{
+request := &nordlet.AnonymizePartnersRequest{
         ID: "id",
     }
-client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(
+client.Partners.Anonymize(
         context.TODO(),
         request,
     )
@@ -3966,7 +3970,7 @@ client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersList(request) -> *nordlet.PostV1PartnersListResponse</code></summary>
+<details><summary><code>client.Partners.List(request) -> *nordlet.ListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -3979,8 +3983,8 @@ client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersListRequest{}
-client.Partners.PostV1PartnersList(
+request := &nordlet.ListPartnersRequest{}
+client.Partners.List(
         context.TODO(),
         request,
     )
@@ -4015,7 +4019,7 @@ client.Partners.PostV1PartnersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersListRequestSortItem` 
+**sort:** `[]*nordlet.ListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -4023,7 +4027,7 @@ client.Partners.PostV1PartnersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersListRequestFilterItem` 
+**filter:** `[]*nordlet.ListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -4043,7 +4047,7 @@ client.Partners.PostV1PartnersList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersGroupsCreate(request) -> *nordlet.PostV1PartnersGroupsCreateResponse</code></summary>
+<details><summary><code>client.Partners.GroupsCreate(request) -> *nordlet.GroupsCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4056,11 +4060,11 @@ client.Partners.PostV1PartnersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersGroupsCreateRequest{
+request := &nordlet.GroupsCreatePartnersRequest{
         Code: "code",
         Name: "name",
     }
-client.Partners.PostV1PartnersGroupsCreate(
+client.Partners.GroupsCreate(
         context.TODO(),
         request,
     )
@@ -4099,7 +4103,7 @@ client.Partners.PostV1PartnersGroupsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersGroupsUpdate(request) -> *nordlet.PostV1PartnersGroupsUpdateResponse</code></summary>
+<details><summary><code>client.Partners.GroupsUpdate(request) -> *nordlet.GroupsUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4112,10 +4116,10 @@ client.Partners.PostV1PartnersGroupsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersGroupsUpdateRequest{
+request := &nordlet.GroupsUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersGroupsUpdate(
+client.Partners.GroupsUpdate(
         context.TODO(),
         request,
     )
@@ -4162,7 +4166,7 @@ client.Partners.PostV1PartnersGroupsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersGroupsDelete(request) -> *nordlet.PostV1PartnersGroupsDeleteResponse</code></summary>
+<details><summary><code>client.Partners.GroupsDelete(request) -> *nordlet.GroupsDeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4175,10 +4179,10 @@ client.Partners.PostV1PartnersGroupsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersGroupsDeleteRequest{
+request := &nordlet.GroupsDeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersGroupsDelete(
+client.Partners.GroupsDelete(
         context.TODO(),
         request,
     )
@@ -4209,7 +4213,7 @@ client.Partners.PostV1PartnersGroupsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersGroupsList(request) -> *nordlet.PostV1PartnersGroupsListResponse</code></summary>
+<details><summary><code>client.Partners.GroupsList(request) -> *nordlet.GroupsListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4222,8 +4226,8 @@ client.Partners.PostV1PartnersGroupsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersGroupsListRequest{}
-client.Partners.PostV1PartnersGroupsList(
+request := &nordlet.GroupsListPartnersRequest{}
+client.Partners.GroupsList(
         context.TODO(),
         request,
     )
@@ -4239,7 +4243,7 @@ client.Partners.PostV1PartnersGroupsList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersStatusesCreate(request) -> *nordlet.PostV1PartnersStatusesCreateResponse</code></summary>
+<details><summary><code>client.Partners.StatusesCreate(request) -> *nordlet.StatusesCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4252,11 +4256,11 @@ client.Partners.PostV1PartnersGroupsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersStatusesCreateRequest{
+request := &nordlet.StatusesCreatePartnersRequest{
         Code: "code",
         Name: "name",
     }
-client.Partners.PostV1PartnersStatusesCreate(
+client.Partners.StatusesCreate(
         context.TODO(),
         request,
     )
@@ -4303,7 +4307,7 @@ client.Partners.PostV1PartnersStatusesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersStatusesUpdate(request) -> *nordlet.PostV1PartnersStatusesUpdateResponse</code></summary>
+<details><summary><code>client.Partners.StatusesUpdate(request) -> *nordlet.StatusesUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4316,10 +4320,10 @@ client.Partners.PostV1PartnersStatusesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersStatusesUpdateRequest{
+request := &nordlet.StatusesUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersStatusesUpdate(
+client.Partners.StatusesUpdate(
         context.TODO(),
         request,
     )
@@ -4374,7 +4378,7 @@ client.Partners.PostV1PartnersStatusesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersStatusesDelete(request) -> *nordlet.PostV1PartnersStatusesDeleteResponse</code></summary>
+<details><summary><code>client.Partners.StatusesDelete(request) -> *nordlet.StatusesDeletePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4387,10 +4391,10 @@ client.Partners.PostV1PartnersStatusesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersStatusesDeleteRequest{
+request := &nordlet.StatusesDeletePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersStatusesDelete(
+client.Partners.StatusesDelete(
         context.TODO(),
         request,
     )
@@ -4421,7 +4425,7 @@ client.Partners.PostV1PartnersStatusesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersStatusesList(request) -> *nordlet.PostV1PartnersStatusesListResponse</code></summary>
+<details><summary><code>client.Partners.StatusesList(request) -> *nordlet.StatusesListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4434,8 +4438,8 @@ client.Partners.PostV1PartnersStatusesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersStatusesListRequest{}
-client.Partners.PostV1PartnersStatusesList(
+request := &nordlet.StatusesListPartnersRequest{}
+client.Partners.StatusesList(
         context.TODO(),
         request,
     )
@@ -4451,7 +4455,7 @@ client.Partners.PostV1PartnersStatusesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersInquiriesCreate(request) -> *nordlet.PostV1PartnersInquiriesCreateResponse</code></summary>
+<details><summary><code>client.Partners.InquiriesCreate(request) -> *nordlet.InquiriesCreatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4464,10 +4468,10 @@ client.Partners.PostV1PartnersStatusesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersInquiriesCreateRequest{
+request := &nordlet.InquiriesCreatePartnersRequest{
         Subject: "subject",
     }
-client.Partners.PostV1PartnersInquiriesCreate(
+client.Partners.InquiriesCreate(
         context.TODO(),
         request,
     )
@@ -4562,7 +4566,7 @@ client.Partners.PostV1PartnersInquiriesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersInquiriesUpdate(request) -> *nordlet.PostV1PartnersInquiriesUpdateResponse</code></summary>
+<details><summary><code>client.Partners.InquiriesUpdate(request) -> *nordlet.InquiriesUpdatePartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4575,10 +4579,10 @@ client.Partners.PostV1PartnersInquiriesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersInquiriesUpdateRequest{
+request := &nordlet.InquiriesUpdatePartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersInquiriesUpdate(
+client.Partners.InquiriesUpdate(
         context.TODO(),
         request,
     )
@@ -4637,7 +4641,7 @@ client.Partners.PostV1PartnersInquiriesUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1PartnersInquiriesUpdateRequestStatus` 
+**status:** `*nordlet.InquiriesUpdatePartnersRequestStatus` 
     
 </dd>
 </dl>
@@ -4665,7 +4669,7 @@ client.Partners.PostV1PartnersInquiriesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersInquiriesGet(request) -> *nordlet.PostV1PartnersInquiriesGetResponse</code></summary>
+<details><summary><code>client.Partners.InquiriesGet(request) -> *nordlet.InquiriesGetPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4678,10 +4682,10 @@ client.Partners.PostV1PartnersInquiriesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersInquiriesGetRequest{
+request := &nordlet.InquiriesGetPartnersRequest{
         ID: "id",
     }
-client.Partners.PostV1PartnersInquiriesGet(
+client.Partners.InquiriesGet(
         context.TODO(),
         request,
     )
@@ -4712,7 +4716,7 @@ client.Partners.PostV1PartnersInquiriesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersInquiriesList(request) -> *nordlet.PostV1PartnersInquiriesListResponse</code></summary>
+<details><summary><code>client.Partners.InquiriesList(request) -> *nordlet.InquiriesListPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4725,8 +4729,8 @@ client.Partners.PostV1PartnersInquiriesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersInquiriesListRequest{}
-client.Partners.PostV1PartnersInquiriesList(
+request := &nordlet.InquiriesListPartnersRequest{}
+client.Partners.InquiriesList(
         context.TODO(),
         request,
     )
@@ -4761,7 +4765,7 @@ client.Partners.PostV1PartnersInquiriesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PartnersInquiriesListRequestSortItem` 
+**sort:** `[]*nordlet.InquiriesListPartnersRequestSortItem` 
     
 </dd>
 </dl>
@@ -4769,7 +4773,7 @@ client.Partners.PostV1PartnersInquiriesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PartnersInquiriesListRequestFilterItem` 
+**filter:** `[]*nordlet.InquiriesListPartnersRequestFilterItem` 
     
 </dd>
 </dl>
@@ -4789,7 +4793,7 @@ client.Partners.PostV1PartnersInquiriesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1PartnersCreditCheck(request) -> *nordlet.PostV1PartnersCreditCheckResponse</code></summary>
+<details><summary><code>client.Partners.CreditCheck(request) -> *nordlet.CreditCheckPartnersResponse</code></summary>
 <dl>
 <dd>
 
@@ -4802,10 +4806,10 @@ client.Partners.PostV1PartnersInquiriesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PartnersCreditCheckRequest{
+request := &nordlet.CreditCheckPartnersRequest{
         PartnerID: "partnerId",
     }
-client.Partners.PostV1PartnersCreditCheck(
+client.Partners.CreditCheck(
         context.TODO(),
         request,
     )
@@ -4844,7 +4848,8 @@ client.Partners.PostV1PartnersCreditCheck(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsCreate(request) -> *nordlet.PostV1LeadsCreateResponse</code></summary>
+## Leads
+<details><summary><code>client.Leads.Create(request) -> *nordlet.CreateLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -4857,10 +4862,10 @@ client.Partners.PostV1PartnersCreditCheck(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsCreateRequest{
+request := &nordlet.CreateLeadsRequest{
         Name: "name",
     }
-client.Partners.PostV1LeadsCreate(
+client.Leads.Create(
         context.TODO(),
         request,
     )
@@ -4935,7 +4940,7 @@ client.Partners.PostV1LeadsCreate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1LeadsCreateRequestStatus` 
+**status:** `*nordlet.CreateLeadsRequestStatus` 
     
 </dd>
 </dl>
@@ -4975,7 +4980,7 @@ client.Partners.PostV1LeadsCreate(
 <dl>
 <dd>
 
-**documents:** `[]*nordlet.PostV1LeadsCreateRequestDocumentsItem` 
+**documents:** `[]*nordlet.CreateLeadsRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -4995,7 +5000,7 @@ client.Partners.PostV1LeadsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsGet(request) -> *nordlet.PostV1LeadsGetResponse</code></summary>
+<details><summary><code>client.Leads.Get(request) -> *nordlet.GetLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5008,10 +5013,10 @@ client.Partners.PostV1LeadsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsGetRequest{
+request := &nordlet.GetLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsGet(
+client.Leads.Get(
         context.TODO(),
         request,
     )
@@ -5042,7 +5047,7 @@ client.Partners.PostV1LeadsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsUpdate(request) -> *nordlet.PostV1LeadsUpdateResponse</code></summary>
+<details><summary><code>client.Leads.Update(request) -> *nordlet.UpdateLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5055,10 +5060,10 @@ client.Partners.PostV1LeadsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsUpdateRequest{
+request := &nordlet.UpdateLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsUpdate(
+client.Leads.Update(
         context.TODO(),
         request,
     )
@@ -5141,7 +5146,7 @@ client.Partners.PostV1LeadsUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1LeadsUpdateRequestStatus` 
+**status:** `*nordlet.UpdateLeadsRequestStatus` 
     
 </dd>
 </dl>
@@ -5181,7 +5186,7 @@ client.Partners.PostV1LeadsUpdate(
 <dl>
 <dd>
 
-**documents:** `[]*nordlet.PostV1LeadsUpdateRequestDocumentsItem` 
+**documents:** `[]*nordlet.UpdateLeadsRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -5193,7 +5198,7 @@ client.Partners.PostV1LeadsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsDelete(request) -> *nordlet.PostV1LeadsDeleteResponse</code></summary>
+<details><summary><code>client.Leads.Delete(request) -> *nordlet.DeleteLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5206,10 +5211,10 @@ client.Partners.PostV1LeadsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsDeleteRequest{
+request := &nordlet.DeleteLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsDelete(
+client.Leads.Delete(
         context.TODO(),
         request,
     )
@@ -5240,7 +5245,7 @@ client.Partners.PostV1LeadsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsList(request) -> *nordlet.PostV1LeadsListResponse</code></summary>
+<details><summary><code>client.Leads.List(request) -> *nordlet.ListLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5253,8 +5258,8 @@ client.Partners.PostV1LeadsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsListRequest{}
-client.Partners.PostV1LeadsList(
+request := &nordlet.ListLeadsRequest{}
+client.Leads.List(
         context.TODO(),
         request,
     )
@@ -5289,7 +5294,7 @@ client.Partners.PostV1LeadsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LeadsListRequestSortItem` 
+**sort:** `[]*nordlet.ListLeadsRequestSortItem` 
     
 </dd>
 </dl>
@@ -5297,7 +5302,7 @@ client.Partners.PostV1LeadsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LeadsListRequestFilterItem` 
+**filter:** `[]*nordlet.ListLeadsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -5317,7 +5322,7 @@ client.Partners.PostV1LeadsList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsNotesCreate(request) -> *nordlet.PostV1LeadsNotesCreateResponse</code></summary>
+<details><summary><code>client.Leads.NotesCreate(request) -> *nordlet.NotesCreateLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5330,11 +5335,11 @@ client.Partners.PostV1LeadsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsNotesCreateRequest{
+request := &nordlet.NotesCreateLeadsRequest{
         LeadID: "leadId",
         Body: "body",
     }
-client.Partners.PostV1LeadsNotesCreate(
+client.Leads.NotesCreate(
         context.TODO(),
         request,
     )
@@ -5373,7 +5378,7 @@ client.Partners.PostV1LeadsNotesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsNotesDelete(request) -> *nordlet.PostV1LeadsNotesDeleteResponse</code></summary>
+<details><summary><code>client.Leads.NotesDelete(request) -> *nordlet.NotesDeleteLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5386,10 +5391,10 @@ client.Partners.PostV1LeadsNotesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsNotesDeleteRequest{
+request := &nordlet.NotesDeleteLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsNotesDelete(
+client.Leads.NotesDelete(
         context.TODO(),
         request,
     )
@@ -5420,7 +5425,7 @@ client.Partners.PostV1LeadsNotesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsNotesList(request) -> *nordlet.PostV1LeadsNotesListResponse</code></summary>
+<details><summary><code>client.Leads.NotesList(request) -> *nordlet.NotesListLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5433,10 +5438,10 @@ client.Partners.PostV1LeadsNotesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsNotesListRequest{
+request := &nordlet.NotesListLeadsRequest{
         LeadID: "leadId",
     }
-client.Partners.PostV1LeadsNotesList(
+client.Leads.NotesList(
         context.TODO(),
         request,
     )
@@ -5467,7 +5472,7 @@ client.Partners.PostV1LeadsNotesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsFilesList(request) -> *nordlet.PostV1LeadsFilesListResponse</code></summary>
+<details><summary><code>client.Leads.FilesList(request) -> *nordlet.FilesListLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5480,10 +5485,10 @@ client.Partners.PostV1LeadsNotesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsFilesListRequest{
+request := &nordlet.FilesListLeadsRequest{
         LeadID: "leadId",
     }
-client.Partners.PostV1LeadsFilesList(
+client.Leads.FilesList(
         context.TODO(),
         request,
     )
@@ -5514,7 +5519,7 @@ client.Partners.PostV1LeadsFilesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsSourcesCreate(request) -> *nordlet.PostV1LeadsSourcesCreateResponse</code></summary>
+<details><summary><code>client.Leads.SourcesCreate(request) -> *nordlet.SourcesCreateLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5527,10 +5532,10 @@ client.Partners.PostV1LeadsFilesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsSourcesCreateRequest{
+request := &nordlet.SourcesCreateLeadsRequest{
         Name: "name",
     }
-client.Partners.PostV1LeadsSourcesCreate(
+client.Leads.SourcesCreate(
         context.TODO(),
         request,
     )
@@ -5569,7 +5574,7 @@ client.Partners.PostV1LeadsSourcesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsSourcesUpdate(request) -> *nordlet.PostV1LeadsSourcesUpdateResponse</code></summary>
+<details><summary><code>client.Leads.SourcesUpdate(request) -> *nordlet.SourcesUpdateLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5582,10 +5587,10 @@ client.Partners.PostV1LeadsSourcesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsSourcesUpdateRequest{
+request := &nordlet.SourcesUpdateLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsSourcesUpdate(
+client.Leads.SourcesUpdate(
         context.TODO(),
         request,
     )
@@ -5632,7 +5637,7 @@ client.Partners.PostV1LeadsSourcesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsSourcesDelete(request) -> *nordlet.PostV1LeadsSourcesDeleteResponse</code></summary>
+<details><summary><code>client.Leads.SourcesDelete(request) -> *nordlet.SourcesDeleteLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5645,10 +5650,10 @@ client.Partners.PostV1LeadsSourcesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsSourcesDeleteRequest{
+request := &nordlet.SourcesDeleteLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsSourcesDelete(
+client.Leads.SourcesDelete(
         context.TODO(),
         request,
     )
@@ -5679,7 +5684,7 @@ client.Partners.PostV1LeadsSourcesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsSourcesList(request) -> *nordlet.PostV1LeadsSourcesListResponse</code></summary>
+<details><summary><code>client.Leads.SourcesList(request) -> *nordlet.SourcesListLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5692,8 +5697,8 @@ client.Partners.PostV1LeadsSourcesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsSourcesListRequest{}
-client.Partners.PostV1LeadsSourcesList(
+request := &nordlet.SourcesListLeadsRequest{}
+client.Leads.SourcesList(
         context.TODO(),
         request,
     )
@@ -5709,7 +5714,7 @@ client.Partners.PostV1LeadsSourcesList(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsSourcesOptions(request) -> *nordlet.PostV1LeadsSourcesOptionsResponse</code></summary>
+<details><summary><code>client.Leads.SourcesOptions(request) -> *nordlet.SourcesOptionsLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5722,8 +5727,8 @@ client.Partners.PostV1LeadsSourcesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsSourcesOptionsRequest{}
-client.Partners.PostV1LeadsSourcesOptions(
+request := &nordlet.SourcesOptionsLeadsRequest{}
+client.Leads.SourcesOptions(
         context.TODO(),
         request,
     )
@@ -5739,7 +5744,7 @@ client.Partners.PostV1LeadsSourcesOptions(
 </dl>
 </details>
 
-<details><summary><code>client.Partners.PostV1LeadsConvert(request) -> *nordlet.PostV1LeadsConvertResponse</code></summary>
+<details><summary><code>client.Leads.Convert(request) -> *nordlet.ConvertLeadsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5766,10 +5771,10 @@ Create a customer partner from the lead, move the lead files to the partner, cop
 <dd>
 
 ```go
-request := &nordlet.PostV1LeadsConvertRequest{
+request := &nordlet.ConvertLeadsRequest{
         ID: "id",
     }
-client.Partners.PostV1LeadsConvert(
+client.Leads.Convert(
         context.TODO(),
         request,
     )
@@ -5796,7 +5801,7 @@ client.Partners.PostV1LeadsConvert(
 <dl>
 <dd>
 
-**partnerType:** `*nordlet.PostV1LeadsConvertRequestPartnerType` 
+**partnerType:** `*nordlet.ConvertLeadsRequestPartnerType` 
     
 </dd>
 </dl>
@@ -5824,8 +5829,8 @@ client.Partners.PostV1LeadsConvert(
 </dl>
 </details>
 
-## Catalog
-<details><summary><code>client.Catalog.PostV1CatalogItemsCreate(request) -> *nordlet.PostV1CatalogItemsCreateResponse</code></summary>
+## catalog
+<details><summary><code>client.Catalog.ItemsCreate(request) -> *nordlet.ItemsCreateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -5838,10 +5843,10 @@ client.Partners.PostV1LeadsConvert(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsCreateRequest{
+request := &nordlet.ItemsCreateCatalogRequest{
         Name: "name",
     }
-client.Catalog.PostV1CatalogItemsCreate(
+client.Catalog.ItemsCreate(
         context.TODO(),
         request,
     )
@@ -5860,7 +5865,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1CatalogItemsCreateRequestType` 
+**type_:** `*nordlet.ItemsCreateCatalogRequestType` 
     
 </dd>
 </dl>
@@ -5868,7 +5873,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**tracking:** `*nordlet.PostV1CatalogItemsCreateRequestTracking` 
+**tracking:** `*nordlet.ItemsCreateCatalogRequestTracking` 
     
 </dd>
 </dl>
@@ -6012,7 +6017,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1CatalogItemsCreateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.ItemsCreateCatalogRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -6020,7 +6025,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**components:** `[]*nordlet.PostV1CatalogItemsCreateRequestComponentsItem` 
+**components:** `[]*nordlet.ItemsCreateCatalogRequestComponentsItem` 
     
 </dd>
 </dl>
@@ -6124,7 +6129,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**priceFrom:** `*string` 
+**priceFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6132,7 +6137,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**priceTo:** `*string` 
+**priceTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6212,7 +6217,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**certificateDate:** `*string` 
+**certificateDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6220,7 +6225,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**validFrom:** `*string` 
+**validFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6228,7 +6233,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
-**validTo:** `*string` 
+**validTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6248,7 +6253,7 @@ client.Catalog.PostV1CatalogItemsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsGet(request) -> *nordlet.PostV1CatalogItemsGetResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsGet(request) -> *nordlet.ItemsGetCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6261,10 +6266,10 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsGetRequest{
+request := &nordlet.ItemsGetCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsGet(
+client.Catalog.ItemsGet(
         context.TODO(),
         request,
     )
@@ -6295,7 +6300,7 @@ client.Catalog.PostV1CatalogItemsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsUpdate(request) -> *nordlet.PostV1CatalogItemsUpdateResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsUpdate(request) -> *nordlet.ItemsUpdateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6308,10 +6313,10 @@ client.Catalog.PostV1CatalogItemsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsUpdateRequest{
+request := &nordlet.ItemsUpdateCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsUpdate(
+client.Catalog.ItemsUpdate(
         context.TODO(),
         request,
     )
@@ -6338,7 +6343,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1CatalogItemsUpdateRequestType` 
+**type_:** `*nordlet.ItemsUpdateCatalogRequestType` 
     
 </dd>
 </dl>
@@ -6346,7 +6351,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**tracking:** `*nordlet.PostV1CatalogItemsUpdateRequestTracking` 
+**tracking:** `*nordlet.ItemsUpdateCatalogRequestTracking` 
     
 </dd>
 </dl>
@@ -6490,7 +6495,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1CatalogItemsUpdateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.ItemsUpdateCatalogRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -6498,7 +6503,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**components:** `[]*nordlet.PostV1CatalogItemsUpdateRequestComponentsItem` 
+**components:** `[]*nordlet.ItemsUpdateCatalogRequestComponentsItem` 
     
 </dd>
 </dl>
@@ -6602,7 +6607,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**priceFrom:** `*string` 
+**priceFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6610,7 +6615,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**priceTo:** `*string` 
+**priceTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6690,7 +6695,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**certificateDate:** `*string` 
+**certificateDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6698,7 +6703,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**validFrom:** `*string` 
+**validFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6706,7 +6711,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**validTo:** `*string` 
+**validTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -6726,7 +6731,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsDelete(request) -> *nordlet.PostV1CatalogItemsDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsDelete(request) -> *nordlet.ItemsDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6739,10 +6744,10 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsDeleteRequest{
+request := &nordlet.ItemsDeleteCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsDelete(
+client.Catalog.ItemsDelete(
         context.TODO(),
         request,
     )
@@ -6773,7 +6778,7 @@ client.Catalog.PostV1CatalogItemsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsList(request) -> *nordlet.PostV1CatalogItemsListResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsList(request) -> *nordlet.ItemsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6786,8 +6791,8 @@ client.Catalog.PostV1CatalogItemsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsListRequest{}
-client.Catalog.PostV1CatalogItemsList(
+request := &nordlet.ItemsListCatalogRequest{}
+client.Catalog.ItemsList(
         context.TODO(),
         request,
     )
@@ -6822,7 +6827,7 @@ client.Catalog.PostV1CatalogItemsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1CatalogItemsListRequestSortItem` 
+**sort:** `[]*nordlet.ItemsListCatalogRequestSortItem` 
     
 </dd>
 </dl>
@@ -6830,7 +6835,7 @@ client.Catalog.PostV1CatalogItemsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1CatalogItemsListRequestFilterItem` 
+**filter:** `[]*nordlet.ItemsListCatalogRequestFilterItem` 
     
 </dd>
 </dl>
@@ -6850,7 +6855,7 @@ client.Catalog.PostV1CatalogItemsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsFilesList(request) -> *nordlet.PostV1CatalogItemsFilesListResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsFilesList(request) -> *nordlet.ItemsFilesListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6863,10 +6868,10 @@ client.Catalog.PostV1CatalogItemsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsFilesListRequest{
+request := &nordlet.ItemsFilesListCatalogRequest{
         ItemID: "itemId",
     }
-client.Catalog.PostV1CatalogItemsFilesList(
+client.Catalog.ItemsFilesList(
         context.TODO(),
         request,
     )
@@ -6897,7 +6902,7 @@ client.Catalog.PostV1CatalogItemsFilesList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsKindsCreate(request) -> *nordlet.PostV1CatalogItemsKindsCreateResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsKindsCreate(request) -> *nordlet.ItemsKindsCreateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6910,11 +6915,11 @@ client.Catalog.PostV1CatalogItemsFilesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsKindsCreateRequest{
+request := &nordlet.ItemsKindsCreateCatalogRequest{
         Code: "code",
         Name: "name",
     }
-client.Catalog.PostV1CatalogItemsKindsCreate(
+client.Catalog.ItemsKindsCreate(
         context.TODO(),
         request,
     )
@@ -6949,7 +6954,7 @@ client.Catalog.PostV1CatalogItemsKindsCreate(
 <dl>
 <dd>
 
-**saftType:** `*nordlet.PostV1CatalogItemsKindsCreateRequestSaftType` 
+**saftType:** `*nordlet.ItemsKindsCreateCatalogRequestSaftType` 
     
 </dd>
 </dl>
@@ -6977,7 +6982,7 @@ client.Catalog.PostV1CatalogItemsKindsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsKindsUpdate(request) -> *nordlet.PostV1CatalogItemsKindsUpdateResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsKindsUpdate(request) -> *nordlet.ItemsKindsUpdateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -6990,10 +6995,10 @@ client.Catalog.PostV1CatalogItemsKindsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsKindsUpdateRequest{
+request := &nordlet.ItemsKindsUpdateCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsKindsUpdate(
+client.Catalog.ItemsKindsUpdate(
         context.TODO(),
         request,
     )
@@ -7036,7 +7041,7 @@ client.Catalog.PostV1CatalogItemsKindsUpdate(
 <dl>
 <dd>
 
-**saftType:** `*nordlet.PostV1CatalogItemsKindsUpdateRequestSaftType` 
+**saftType:** `*nordlet.ItemsKindsUpdateCatalogRequestSaftType` 
     
 </dd>
 </dl>
@@ -7064,7 +7069,7 @@ client.Catalog.PostV1CatalogItemsKindsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsKindsDelete(request) -> *nordlet.PostV1CatalogItemsKindsDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsKindsDelete(request) -> *nordlet.ItemsKindsDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7077,10 +7082,10 @@ client.Catalog.PostV1CatalogItemsKindsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsKindsDeleteRequest{
+request := &nordlet.ItemsKindsDeleteCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsKindsDelete(
+client.Catalog.ItemsKindsDelete(
         context.TODO(),
         request,
     )
@@ -7111,7 +7116,7 @@ client.Catalog.PostV1CatalogItemsKindsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsKindsList(request) -> *nordlet.PostV1CatalogItemsKindsListResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsKindsList(request) -> *nordlet.ItemsKindsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7124,8 +7129,8 @@ client.Catalog.PostV1CatalogItemsKindsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsKindsListRequest{}
-client.Catalog.PostV1CatalogItemsKindsList(
+request := &nordlet.ItemsKindsListCatalogRequest{}
+client.Catalog.ItemsKindsList(
         context.TODO(),
         request,
     )
@@ -7141,7 +7146,7 @@ client.Catalog.PostV1CatalogItemsKindsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogUnitsCreate(request) -> *nordlet.PostV1CatalogUnitsCreateResponse</code></summary>
+<details><summary><code>client.Catalog.UnitsCreate(request) -> *nordlet.UnitsCreateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7154,11 +7159,11 @@ client.Catalog.PostV1CatalogItemsKindsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogUnitsCreateRequest{
+request := &nordlet.UnitsCreateCatalogRequest{
         Code: "code",
         Name: "name",
     }
-client.Catalog.PostV1CatalogUnitsCreate(
+client.Catalog.UnitsCreate(
         context.TODO(),
         request,
     )
@@ -7205,7 +7210,7 @@ client.Catalog.PostV1CatalogUnitsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogUnitsUpdate(request) -> *nordlet.PostV1CatalogUnitsUpdateResponse</code></summary>
+<details><summary><code>client.Catalog.UnitsUpdate(request) -> *nordlet.UnitsUpdateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7218,10 +7223,10 @@ client.Catalog.PostV1CatalogUnitsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogUnitsUpdateRequest{
+request := &nordlet.UnitsUpdateCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogUnitsUpdate(
+client.Catalog.UnitsUpdate(
         context.TODO(),
         request,
     )
@@ -7276,7 +7281,7 @@ client.Catalog.PostV1CatalogUnitsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogUnitsDelete(request) -> *nordlet.PostV1CatalogUnitsDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.UnitsDelete(request) -> *nordlet.UnitsDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7289,10 +7294,10 @@ client.Catalog.PostV1CatalogUnitsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogUnitsDeleteRequest{
+request := &nordlet.UnitsDeleteCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogUnitsDelete(
+client.Catalog.UnitsDelete(
         context.TODO(),
         request,
     )
@@ -7323,7 +7328,7 @@ client.Catalog.PostV1CatalogUnitsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogUnitsList(request) -> *nordlet.PostV1CatalogUnitsListResponse</code></summary>
+<details><summary><code>client.Catalog.UnitsList(request) -> *nordlet.UnitsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7336,8 +7341,8 @@ client.Catalog.PostV1CatalogUnitsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogUnitsListRequest{}
-client.Catalog.PostV1CatalogUnitsList(
+request := &nordlet.UnitsListCatalogRequest{}
+client.Catalog.UnitsList(
         context.TODO(),
         request,
     )
@@ -7353,7 +7358,7 @@ client.Catalog.PostV1CatalogUnitsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogUnitsOptions(request) -> *nordlet.PostV1CatalogUnitsOptionsResponse</code></summary>
+<details><summary><code>client.Catalog.UnitsOptions(request) -> *nordlet.UnitsOptionsCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7366,8 +7371,8 @@ client.Catalog.PostV1CatalogUnitsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogUnitsOptionsRequest{}
-client.Catalog.PostV1CatalogUnitsOptions(
+request := &nordlet.UnitsOptionsCatalogRequest{}
+client.Catalog.UnitsOptions(
         context.TODO(),
         request,
     )
@@ -7386,7 +7391,7 @@ client.Catalog.PostV1CatalogUnitsOptions(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1CatalogUnitsOptionsRequestLocale` 
+**locale:** `*nordlet.UnitsOptionsCatalogRequestLocale` 
     
 </dd>
 </dl>
@@ -7398,7 +7403,7 @@ client.Catalog.PostV1CatalogUnitsOptions(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemGroupsCreate(request) -> *nordlet.PostV1CatalogItemGroupsCreateResponse</code></summary>
+<details><summary><code>client.Catalog.ItemGroupsCreate(request) -> *nordlet.ItemGroupsCreateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7411,11 +7416,11 @@ client.Catalog.PostV1CatalogUnitsOptions(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemGroupsCreateRequest{
+request := &nordlet.ItemGroupsCreateCatalogRequest{
         Code: "code",
         Name: "name",
     }
-client.Catalog.PostV1CatalogItemGroupsCreate(
+client.Catalog.ItemGroupsCreate(
         context.TODO(),
         request,
     )
@@ -7462,7 +7467,7 @@ client.Catalog.PostV1CatalogItemGroupsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemGroupsUpdate(request) -> *nordlet.PostV1CatalogItemGroupsUpdateResponse</code></summary>
+<details><summary><code>client.Catalog.ItemGroupsUpdate(request) -> *nordlet.ItemGroupsUpdateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7475,10 +7480,10 @@ client.Catalog.PostV1CatalogItemGroupsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemGroupsUpdateRequest{
+request := &nordlet.ItemGroupsUpdateCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemGroupsUpdate(
+client.Catalog.ItemGroupsUpdate(
         context.TODO(),
         request,
     )
@@ -7533,7 +7538,7 @@ client.Catalog.PostV1CatalogItemGroupsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemGroupsDelete(request) -> *nordlet.PostV1CatalogItemGroupsDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.ItemGroupsDelete(request) -> *nordlet.ItemGroupsDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7546,10 +7551,10 @@ client.Catalog.PostV1CatalogItemGroupsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemGroupsDeleteRequest{
+request := &nordlet.ItemGroupsDeleteCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemGroupsDelete(
+client.Catalog.ItemGroupsDelete(
         context.TODO(),
         request,
     )
@@ -7580,7 +7585,7 @@ client.Catalog.PostV1CatalogItemGroupsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemGroupsList(request) -> *nordlet.PostV1CatalogItemGroupsListResponse</code></summary>
+<details><summary><code>client.Catalog.ItemGroupsList(request) -> *nordlet.ItemGroupsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7593,8 +7598,8 @@ client.Catalog.PostV1CatalogItemGroupsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemGroupsListRequest{}
-client.Catalog.PostV1CatalogItemGroupsList(
+request := &nordlet.ItemGroupsListCatalogRequest{}
+client.Catalog.ItemGroupsList(
         context.TODO(),
         request,
     )
@@ -7610,7 +7615,7 @@ client.Catalog.PostV1CatalogItemGroupsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsSuppliersUpsert(request) -> *nordlet.PostV1CatalogItemsSuppliersUpsertResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsSuppliersUpsert(request) -> *nordlet.ItemsSuppliersUpsertCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7623,11 +7628,11 @@ client.Catalog.PostV1CatalogItemGroupsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsSuppliersUpsertRequest{
+request := &nordlet.ItemsSuppliersUpsertCatalogRequest{
         ItemID: "itemId",
         PartnerID: "partnerId",
     }
-client.Catalog.PostV1CatalogItemsSuppliersUpsert(
+client.Catalog.ItemsSuppliersUpsert(
         context.TODO(),
         request,
     )
@@ -7698,7 +7703,7 @@ client.Catalog.PostV1CatalogItemsSuppliersUpsert(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsSuppliersList(request) -> *nordlet.PostV1CatalogItemsSuppliersListResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsSuppliersList(request) -> *nordlet.ItemsSuppliersListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7711,8 +7716,8 @@ client.Catalog.PostV1CatalogItemsSuppliersUpsert(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsSuppliersListRequest{}
-client.Catalog.PostV1CatalogItemsSuppliersList(
+request := &nordlet.ItemsSuppliersListCatalogRequest{}
+client.Catalog.ItemsSuppliersList(
         context.TODO(),
         request,
     )
@@ -7751,7 +7756,7 @@ client.Catalog.PostV1CatalogItemsSuppliersList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogItemsSuppliersDelete(request) -> *nordlet.PostV1CatalogItemsSuppliersDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.ItemsSuppliersDelete(request) -> *nordlet.ItemsSuppliersDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7764,10 +7769,10 @@ client.Catalog.PostV1CatalogItemsSuppliersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogItemsSuppliersDeleteRequest{
+request := &nordlet.ItemsSuppliersDeleteCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogItemsSuppliersDelete(
+client.Catalog.ItemsSuppliersDelete(
         context.TODO(),
         request,
     )
@@ -7798,7 +7803,7 @@ client.Catalog.PostV1CatalogItemsSuppliersDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsCreate(request) -> *nordlet.PostV1CatalogPriceListsCreateResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsCreate(request) -> *nordlet.PriceListsCreateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7811,11 +7816,11 @@ client.Catalog.PostV1CatalogItemsSuppliersDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsCreateRequest{
+request := &nordlet.PriceListsCreateCatalogRequest{
         Code: "code",
         Name: "name",
     }
-client.Catalog.PostV1CatalogPriceListsCreate(
+client.Catalog.PriceListsCreate(
         context.TODO(),
         request,
     )
@@ -7870,7 +7875,7 @@ client.Catalog.PostV1CatalogPriceListsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsUpdate(request) -> *nordlet.PostV1CatalogPriceListsUpdateResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsUpdate(request) -> *nordlet.PriceListsUpdateCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7883,10 +7888,10 @@ client.Catalog.PostV1CatalogPriceListsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsUpdateRequest{
+request := &nordlet.PriceListsUpdateCatalogRequest{
         ID: "id",
     }
-client.Catalog.PostV1CatalogPriceListsUpdate(
+client.Catalog.PriceListsUpdate(
         context.TODO(),
         request,
     )
@@ -7949,7 +7954,7 @@ client.Catalog.PostV1CatalogPriceListsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsList(request) -> *nordlet.PostV1CatalogPriceListsListResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsList(request) -> *nordlet.PriceListsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7962,8 +7967,8 @@ client.Catalog.PostV1CatalogPriceListsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsListRequest{}
-client.Catalog.PostV1CatalogPriceListsList(
+request := &nordlet.PriceListsListCatalogRequest{}
+client.Catalog.PriceListsList(
         context.TODO(),
         request,
     )
@@ -7979,7 +7984,7 @@ client.Catalog.PostV1CatalogPriceListsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsItemsSet(request) -> *nordlet.PostV1CatalogPriceListsItemsSetResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsItemsSet(request) -> *nordlet.PriceListsItemsSetCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -7992,16 +7997,16 @@ client.Catalog.PostV1CatalogPriceListsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsItemsSetRequest{
+request := &nordlet.PriceListsItemsSetCatalogRequest{
         PriceListID: "priceListId",
-        Items: []*nordlet.PostV1CatalogPriceListsItemsSetRequestItemsItem{
-            &nordlet.PostV1CatalogPriceListsItemsSetRequestItemsItem{
+        Items: []*nordlet.PriceListsItemsSetCatalogRequestItemsItem{
+            &nordlet.PriceListsItemsSetCatalogRequestItemsItem{
                 ItemID: "itemId",
-                UnitPriceExclVat: "unitPriceExclVat",
+                UnitPriceExclVat: "121.0000",
             },
         },
     }
-client.Catalog.PostV1CatalogPriceListsItemsSet(
+client.Catalog.PriceListsItemsSet(
         context.TODO(),
         request,
     )
@@ -8028,7 +8033,7 @@ client.Catalog.PostV1CatalogPriceListsItemsSet(
 <dl>
 <dd>
 
-**items:** `[]*nordlet.PostV1CatalogPriceListsItemsSetRequestItemsItem` 
+**items:** `[]*nordlet.PriceListsItemsSetCatalogRequestItemsItem` 
     
 </dd>
 </dl>
@@ -8040,7 +8045,7 @@ client.Catalog.PostV1CatalogPriceListsItemsSet(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsItemsList(request) -> *nordlet.PostV1CatalogPriceListsItemsListResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsItemsList(request) -> *nordlet.PriceListsItemsListCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -8053,10 +8058,10 @@ client.Catalog.PostV1CatalogPriceListsItemsSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsItemsListRequest{
+request := &nordlet.PriceListsItemsListCatalogRequest{
         PriceListID: "priceListId",
     }
-client.Catalog.PostV1CatalogPriceListsItemsList(
+client.Catalog.PriceListsItemsList(
         context.TODO(),
         request,
     )
@@ -8087,7 +8092,7 @@ client.Catalog.PostV1CatalogPriceListsItemsList(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.PostV1CatalogPriceListsItemsDelete(request) -> *nordlet.PostV1CatalogPriceListsItemsDeleteResponse</code></summary>
+<details><summary><code>client.Catalog.PriceListsItemsDelete(request) -> *nordlet.PriceListsItemsDeleteCatalogResponse</code></summary>
 <dl>
 <dd>
 
@@ -8100,11 +8105,11 @@ client.Catalog.PostV1CatalogPriceListsItemsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CatalogPriceListsItemsDeleteRequest{
+request := &nordlet.PriceListsItemsDeleteCatalogRequest{
         PriceListID: "priceListId",
         ItemID: "itemId",
     }
-client.Catalog.PostV1CatalogPriceListsItemsDelete(
+client.Catalog.PriceListsItemsDelete(
         context.TODO(),
         request,
     )
@@ -8143,8 +8148,8 @@ client.Catalog.PostV1CatalogPriceListsItemsDelete(
 </dl>
 </details>
 
-## Sales
-<details><summary><code>client.Sales.PostV1SalesInvoicesCreate(request) -> *nordlet.PostV1SalesInvoicesCreateResponse</code></summary>
+## sales
+<details><summary><code>client.Sales.InvoicesCreate(request) -> *nordlet.InvoicesCreateSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8157,13 +8162,13 @@ client.Catalog.PostV1CatalogPriceListsItemsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesCreateRequest{
+request := &nordlet.InvoicesCreateSalesRequest{
         PartnerID: "partnerId",
-        Lines: []*nordlet.PostV1SalesInvoicesCreateRequestLinesItem{
-            &nordlet.PostV1SalesInvoicesCreateRequestLinesItem{},
+        Lines: []*nordlet.InvoicesCreateSalesRequestLinesItem{
+            &nordlet.InvoicesCreateSalesRequestLinesItem{},
         },
     }
-client.Sales.PostV1SalesInvoicesCreate(
+client.Sales.InvoicesCreate(
         context.TODO(),
         request,
     )
@@ -8190,7 +8195,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1SalesInvoicesCreateRequestType` 
+**type_:** `*nordlet.InvoicesCreateSalesRequestType` 
     
 </dd>
 </dl>
@@ -8206,7 +8211,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
-**issueDate:** `*string` 
+**issueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -8214,7 +8219,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -8230,6 +8235,22 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
+**creditedInvoiceReference:** `*string` — Number of an original invoice issued outside Nordlet; give it with creditedInvoiceDate
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**creditedInvoiceDate:** `*time.Time` — Issue date of the original invoice issued outside Nordlet
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **agreementID:** `*string` 
     
 </dd>
@@ -8238,7 +8259,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
-**vatScheme:** `*nordlet.PostV1SalesInvoicesCreateRequestVatScheme` 
+**vatScheme:** `*nordlet.InvoicesCreateSalesRequestVatScheme` 
     
 </dd>
 </dl>
@@ -8382,7 +8403,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1SalesInvoicesCreateRequestLinesItem` 
+**lines:** `[]*nordlet.InvoicesCreateSalesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -8394,7 +8415,7 @@ client.Sales.PostV1SalesInvoicesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesGet(request) -> *nordlet.PostV1SalesInvoicesGetResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesGet(request) -> *nordlet.InvoicesGetSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8407,10 +8428,10 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesGetRequest{
+request := &nordlet.InvoicesGetSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesGet(
+client.Sales.InvoicesGet(
         context.TODO(),
         request,
     )
@@ -8441,7 +8462,7 @@ client.Sales.PostV1SalesInvoicesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPdf(request) -> *nordlet.PostV1SalesInvoicesPdfResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPdf(request) -> *nordlet.InvoicesPdfSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8454,10 +8475,10 @@ client.Sales.PostV1SalesInvoicesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPdfRequest{
+request := &nordlet.InvoicesPdfSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesPdf(
+client.Sales.InvoicesPdf(
         context.TODO(),
         request,
     )
@@ -8484,7 +8505,7 @@ client.Sales.PostV1SalesInvoicesPdf(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1SalesInvoicesPdfRequestLocale` 
+**locale:** `*nordlet.InvoicesPdfSalesRequestLocale` 
     
 </dd>
 </dl>
@@ -8496,7 +8517,7 @@ client.Sales.PostV1SalesInvoicesPdf(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesSend(request) -> *nordlet.PostV1SalesInvoicesSendResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesSend(request) -> *nordlet.InvoicesSendSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8509,10 +8530,10 @@ client.Sales.PostV1SalesInvoicesPdf(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesSendRequest{
+request := &nordlet.InvoicesSendSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesSend(
+client.Sales.InvoicesSend(
         context.TODO(),
         request,
     )
@@ -8547,7 +8568,7 @@ client.Sales.PostV1SalesInvoicesSend(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1SalesInvoicesSendRequestLocale` 
+**locale:** `*nordlet.InvoicesSendSalesRequestLocale` 
     
 </dd>
 </dl>
@@ -8559,7 +8580,7 @@ client.Sales.PostV1SalesInvoicesSend(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPeppolXML(request) -> *nordlet.PostV1SalesInvoicesPeppolXMLResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPeppolXML(request) -> *nordlet.InvoicesPeppolXMLSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8572,10 +8593,10 @@ client.Sales.PostV1SalesInvoicesSend(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPeppolXMLRequest{
+request := &nordlet.InvoicesPeppolXMLSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesPeppolXML(
+client.Sales.InvoicesPeppolXML(
         context.TODO(),
         request,
     )
@@ -8606,7 +8627,7 @@ client.Sales.PostV1SalesInvoicesPeppolXML(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPeppolSend(request) -> *nordlet.PostV1SalesInvoicesPeppolSendResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPeppolSend(request) -> *nordlet.InvoicesPeppolSendSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8619,10 +8640,10 @@ client.Sales.PostV1SalesInvoicesPeppolXML(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPeppolSendRequest{
+request := &nordlet.InvoicesPeppolSendSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesPeppolSend(
+client.Sales.InvoicesPeppolSend(
         context.TODO(),
         request,
     )
@@ -8653,7 +8674,7 @@ client.Sales.PostV1SalesInvoicesPeppolSend(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesEinvoiceXML(request) -> *nordlet.PostV1SalesInvoicesEinvoiceXMLResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesEinvoiceXML(request) -> *nordlet.InvoicesEinvoiceXMLSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8680,10 +8701,10 @@ Render an issued invoice as the national e-invoicing payload for the company cou
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesEinvoiceXMLRequest{
+request := &nordlet.InvoicesEinvoiceXMLSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesEinvoiceXML(
+client.Sales.InvoicesEinvoiceXML(
         context.TODO(),
         request,
     )
@@ -8714,7 +8735,7 @@ client.Sales.PostV1SalesInvoicesEinvoiceXML(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesEinvoiceSend(request) -> *nordlet.PostV1SalesInvoicesEinvoiceSendResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesEinvoiceSend(request) -> *nordlet.InvoicesEinvoiceSendSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8741,10 +8762,10 @@ Build the national e-invoicing payload and deliver it over the transport configu
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesEinvoiceSendRequest{
+request := &nordlet.InvoicesEinvoiceSendSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesEinvoiceSend(
+client.Sales.InvoicesEinvoiceSend(
         context.TODO(),
         request,
     )
@@ -8775,7 +8796,7 @@ client.Sales.PostV1SalesInvoicesEinvoiceSend(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesEinvoiceStatus(request) -> *nordlet.PostV1SalesInvoicesEinvoiceStatusResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesEinvoiceStatus(request) -> *nordlet.InvoicesEinvoiceStatusSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8802,10 +8823,10 @@ Ask the national e-invoicing channel what happened to an invoice that was alread
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesEinvoiceStatusRequest{
+request := &nordlet.InvoicesEinvoiceStatusSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesEinvoiceStatus(
+client.Sales.InvoicesEinvoiceStatus(
         context.TODO(),
         request,
     )
@@ -8836,7 +8857,7 @@ client.Sales.PostV1SalesInvoicesEinvoiceStatus(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesUpdate(request) -> *nordlet.PostV1SalesInvoicesUpdateResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesUpdate(request) -> *nordlet.InvoicesUpdateSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -8849,10 +8870,10 @@ client.Sales.PostV1SalesInvoicesEinvoiceStatus(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesUpdateRequest{
+request := &nordlet.InvoicesUpdateSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesUpdate(
+client.Sales.InvoicesUpdate(
         context.TODO(),
         request,
     )
@@ -8903,7 +8924,7 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dl>
 <dd>
 
-**issueDate:** `*string` 
+**issueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -8911,7 +8932,7 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -8919,7 +8940,7 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dl>
 <dd>
 
-**vatScheme:** `*nordlet.PostV1SalesInvoicesUpdateRequestVatScheme` 
+**vatScheme:** `*nordlet.InvoicesUpdateSalesRequestVatScheme` 
     
 </dd>
 </dl>
@@ -9055,7 +9076,7 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1SalesInvoicesUpdateRequestLinesItem` 
+**lines:** `[]*nordlet.InvoicesUpdateSalesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -9067,7 +9088,7 @@ client.Sales.PostV1SalesInvoicesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesDelete(request) -> *nordlet.PostV1SalesInvoicesDeleteResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesDelete(request) -> *nordlet.InvoicesDeleteSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9080,10 +9101,10 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesDeleteRequest{
+request := &nordlet.InvoicesDeleteSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesDelete(
+client.Sales.InvoicesDelete(
         context.TODO(),
         request,
     )
@@ -9114,7 +9135,7 @@ client.Sales.PostV1SalesInvoicesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesIssue(request) -> *nordlet.PostV1SalesInvoicesIssueResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesIssue(request) -> *nordlet.InvoicesIssueSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9127,10 +9148,10 @@ client.Sales.PostV1SalesInvoicesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesIssueRequest{
+request := &nordlet.InvoicesIssueSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesIssue(
+client.Sales.InvoicesIssue(
         context.TODO(),
         request,
     )
@@ -9165,7 +9186,7 @@ client.Sales.PostV1SalesInvoicesIssue(
 <dl>
 <dd>
 
-**issueDate:** `*string` 
+**issueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -9185,7 +9206,7 @@ client.Sales.PostV1SalesInvoicesIssue(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesLock(request) -> *nordlet.PostV1SalesInvoicesLockResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesLock(request) -> *nordlet.InvoicesLockSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9198,10 +9219,10 @@ client.Sales.PostV1SalesInvoicesIssue(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesLockRequest{
+request := &nordlet.InvoicesLockSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesLock(
+client.Sales.InvoicesLock(
         context.TODO(),
         request,
     )
@@ -9232,7 +9253,7 @@ client.Sales.PostV1SalesInvoicesLock(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesUnlock(request) -> *nordlet.PostV1SalesInvoicesUnlockResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesUnlock(request) -> *nordlet.InvoicesUnlockSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9245,10 +9266,10 @@ client.Sales.PostV1SalesInvoicesLock(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesUnlockRequest{
+request := &nordlet.InvoicesUnlockSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesUnlock(
+client.Sales.InvoicesUnlock(
         context.TODO(),
         request,
     )
@@ -9279,7 +9300,7 @@ client.Sales.PostV1SalesInvoicesUnlock(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentLink(request) -> *nordlet.PostV1SalesInvoicesPaymentLinkResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPaymentLink(request) -> *nordlet.InvoicesPaymentLinkSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9292,10 +9313,10 @@ client.Sales.PostV1SalesInvoicesUnlock(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPaymentLinkRequest{
+request := &nordlet.InvoicesPaymentLinkSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesInvoicesPaymentLink(
+client.Sales.InvoicesPaymentLink(
         context.TODO(),
         request,
     )
@@ -9326,7 +9347,7 @@ client.Sales.PostV1SalesInvoicesPaymentLink(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentSettingsGet(request) -> *nordlet.PostV1SalesInvoicesPaymentSettingsGetResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPaymentSettingsGet(request) -> *nordlet.InvoicesPaymentSettingsGetSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9339,8 +9360,8 @@ client.Sales.PostV1SalesInvoicesPaymentLink(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPaymentSettingsGetRequest{}
-client.Sales.PostV1SalesInvoicesPaymentSettingsGet(
+request := &nordlet.InvoicesPaymentSettingsGetSalesRequest{}
+client.Sales.InvoicesPaymentSettingsGet(
         context.TODO(),
         request,
     )
@@ -9356,7 +9377,7 @@ client.Sales.PostV1SalesInvoicesPaymentSettingsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(request) -> *nordlet.PostV1SalesInvoicesPaymentSettingsUpdateResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesPaymentSettingsUpdate(request) -> *nordlet.InvoicesPaymentSettingsUpdateSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9369,8 +9390,8 @@ client.Sales.PostV1SalesInvoicesPaymentSettingsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesPaymentSettingsUpdateRequest{}
-client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(
+request := &nordlet.InvoicesPaymentSettingsUpdateSalesRequest{}
+client.Sales.InvoicesPaymentSettingsUpdate(
         context.TODO(),
         request,
     )
@@ -9401,7 +9422,7 @@ client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesRecognitionSchedulesList(request) -> *nordlet.PostV1SalesRecognitionSchedulesListResponse</code></summary>
+<details><summary><code>client.Sales.RecognitionSchedulesList(request) -> *nordlet.RecognitionSchedulesListSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9414,8 +9435,8 @@ client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesRecognitionSchedulesListRequest{}
-client.Sales.PostV1SalesRecognitionSchedulesList(
+request := &nordlet.RecognitionSchedulesListSalesRequest{}
+client.Sales.RecognitionSchedulesList(
         context.TODO(),
         request,
     )
@@ -9450,7 +9471,7 @@ client.Sales.PostV1SalesRecognitionSchedulesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1SalesRecognitionSchedulesListRequestSortItem` 
+**sort:** `[]*nordlet.RecognitionSchedulesListSalesRequestSortItem` 
     
 </dd>
 </dl>
@@ -9458,7 +9479,7 @@ client.Sales.PostV1SalesRecognitionSchedulesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1SalesRecognitionSchedulesListRequestFilterItem` 
+**filter:** `[]*nordlet.RecognitionSchedulesListSalesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -9478,7 +9499,7 @@ client.Sales.PostV1SalesRecognitionSchedulesList(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesApplyAdvance(request) -> *nordlet.PostV1SalesInvoicesApplyAdvanceResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesApplyAdvance(request) -> *nordlet.InvoicesApplyAdvanceSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9491,11 +9512,11 @@ client.Sales.PostV1SalesRecognitionSchedulesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesApplyAdvanceRequest{
+request := &nordlet.InvoicesApplyAdvanceSalesRequest{
         AdvanceID: "advanceId",
         InvoiceID: "invoiceId",
     }
-client.Sales.PostV1SalesInvoicesApplyAdvance(
+client.Sales.InvoicesApplyAdvance(
         context.TODO(),
         request,
     )
@@ -9530,7 +9551,7 @@ client.Sales.PostV1SalesInvoicesApplyAdvance(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -9542,7 +9563,7 @@ client.Sales.PostV1SalesInvoicesApplyAdvance(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesInvoicesList(request) -> *nordlet.PostV1SalesInvoicesListResponse</code></summary>
+<details><summary><code>client.Sales.InvoicesList(request) -> *nordlet.InvoicesListSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9555,8 +9576,8 @@ client.Sales.PostV1SalesInvoicesApplyAdvance(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesInvoicesListRequest{}
-client.Sales.PostV1SalesInvoicesList(
+request := &nordlet.InvoicesListSalesRequest{}
+client.Sales.InvoicesList(
         context.TODO(),
         request,
     )
@@ -9591,7 +9612,7 @@ client.Sales.PostV1SalesInvoicesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1SalesInvoicesListRequestSortItem` 
+**sort:** `[]*nordlet.InvoicesListSalesRequestSortItem` 
     
 </dd>
 </dl>
@@ -9599,7 +9620,7 @@ client.Sales.PostV1SalesInvoicesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1SalesInvoicesListRequestFilterItem` 
+**filter:** `[]*nordlet.InvoicesListSalesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -9619,7 +9640,7 @@ client.Sales.PostV1SalesInvoicesList(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsCreate(request) -> *nordlet.PostV1SalesActsCreateResponse</code></summary>
+<details><summary><code>client.Sales.ActsCreate(request) -> *nordlet.ActsCreateSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9632,10 +9653,10 @@ client.Sales.PostV1SalesInvoicesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsCreateRequest{
+request := &nordlet.ActsCreateSalesRequest{
         PartnerID: "partnerId",
     }
-client.Sales.PostV1SalesActsCreate(
+client.Sales.ActsCreate(
         context.TODO(),
         request,
     )
@@ -9662,7 +9683,7 @@ client.Sales.PostV1SalesActsCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1SalesActsCreateRequestType` 
+**type_:** `*nordlet.ActsCreateSalesRequestType` 
     
 </dd>
 </dl>
@@ -9670,7 +9691,7 @@ client.Sales.PostV1SalesActsCreate(
 <dl>
 <dd>
 
-**documentDate:** `*string` 
+**documentDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -9734,7 +9755,7 @@ client.Sales.PostV1SalesActsCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1SalesActsCreateRequestLinesItem` 
+**lines:** `[]*nordlet.ActsCreateSalesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -9746,7 +9767,7 @@ client.Sales.PostV1SalesActsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsUpdate(request) -> *nordlet.PostV1SalesActsUpdateResponse</code></summary>
+<details><summary><code>client.Sales.ActsUpdate(request) -> *nordlet.ActsUpdateSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9759,10 +9780,10 @@ client.Sales.PostV1SalesActsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsUpdateRequest{
+request := &nordlet.ActsUpdateSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesActsUpdate(
+client.Sales.ActsUpdate(
         context.TODO(),
         request,
     )
@@ -9789,7 +9810,7 @@ client.Sales.PostV1SalesActsUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1SalesActsUpdateRequestType` 
+**type_:** `*nordlet.ActsUpdateSalesRequestType` 
     
 </dd>
 </dl>
@@ -9797,7 +9818,7 @@ client.Sales.PostV1SalesActsUpdate(
 <dl>
 <dd>
 
-**documentDate:** `*string` 
+**documentDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -9861,7 +9882,7 @@ client.Sales.PostV1SalesActsUpdate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1SalesActsUpdateRequestLinesItem` 
+**lines:** `[]*nordlet.ActsUpdateSalesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -9881,7 +9902,7 @@ client.Sales.PostV1SalesActsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsIssue(request) -> *nordlet.PostV1SalesActsIssueResponse</code></summary>
+<details><summary><code>client.Sales.ActsIssue(request) -> *nordlet.ActsIssueSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9894,10 +9915,10 @@ client.Sales.PostV1SalesActsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsIssueRequest{
+request := &nordlet.ActsIssueSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesActsIssue(
+client.Sales.ActsIssue(
         context.TODO(),
         request,
     )
@@ -9928,7 +9949,7 @@ client.Sales.PostV1SalesActsIssue(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsCancel(request) -> *nordlet.PostV1SalesActsCancelResponse</code></summary>
+<details><summary><code>client.Sales.ActsCancel(request) -> *nordlet.ActsCancelSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9941,10 +9962,10 @@ client.Sales.PostV1SalesActsIssue(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsCancelRequest{
+request := &nordlet.ActsCancelSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesActsCancel(
+client.Sales.ActsCancel(
         context.TODO(),
         request,
     )
@@ -9975,7 +9996,7 @@ client.Sales.PostV1SalesActsCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsGet(request) -> *nordlet.PostV1SalesActsGetResponse</code></summary>
+<details><summary><code>client.Sales.ActsGet(request) -> *nordlet.ActsGetSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -9988,10 +10009,10 @@ client.Sales.PostV1SalesActsCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsGetRequest{
+request := &nordlet.ActsGetSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesActsGet(
+client.Sales.ActsGet(
         context.TODO(),
         request,
     )
@@ -10022,7 +10043,7 @@ client.Sales.PostV1SalesActsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsList(request) -> *nordlet.PostV1SalesActsListResponse</code></summary>
+<details><summary><code>client.Sales.ActsList(request) -> *nordlet.ActsListSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10035,8 +10056,8 @@ client.Sales.PostV1SalesActsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsListRequest{}
-client.Sales.PostV1SalesActsList(
+request := &nordlet.ActsListSalesRequest{}
+client.Sales.ActsList(
         context.TODO(),
         request,
     )
@@ -10071,7 +10092,7 @@ client.Sales.PostV1SalesActsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1SalesActsListRequestSortItem` 
+**sort:** `[]*nordlet.ActsListSalesRequestSortItem` 
     
 </dd>
 </dl>
@@ -10079,7 +10100,7 @@ client.Sales.PostV1SalesActsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1SalesActsListRequestFilterItem` 
+**filter:** `[]*nordlet.ActsListSalesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -10099,7 +10120,7 @@ client.Sales.PostV1SalesActsList(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesActsPdf(request) -> *nordlet.PostV1SalesActsPdfResponse</code></summary>
+<details><summary><code>client.Sales.ActsPdf(request) -> *nordlet.ActsPdfSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10112,10 +10133,10 @@ client.Sales.PostV1SalesActsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesActsPdfRequest{
+request := &nordlet.ActsPdfSalesRequest{
         ID: "id",
     }
-client.Sales.PostV1SalesActsPdf(
+client.Sales.ActsPdf(
         context.TODO(),
         request,
     )
@@ -10142,7 +10163,7 @@ client.Sales.PostV1SalesActsPdf(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1SalesActsPdfRequestLocale` 
+**locale:** `*nordlet.ActsPdfSalesRequestLocale` 
     
 </dd>
 </dl>
@@ -10154,7 +10175,7 @@ client.Sales.PostV1SalesActsPdf(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1OperationTypesCreate(request) -> *nordlet.PostV1OperationTypesCreateResponse</code></summary>
+<details><summary><code>client.Sales.RecognitionCompute(request) -> *nordlet.RecognitionComputeSalesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10167,11 +10188,539 @@ client.Sales.PostV1SalesActsPdf(
 <dd>
 
 ```go
-request := &nordlet.PostV1OperationTypesCreateRequest{
+request := &nordlet.RecognitionComputeSalesRequest{}
+client.Sales.RecognitionCompute(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RecognitionRun(request) -> *nordlet.RecognitionRunSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RecognitionRunSalesRequest{}
+client.Sales.RecognitionRun(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postingDate:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduleIDs:** `[]string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RecognitionProgress(request) -> *nordlet.RecognitionProgressSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RecognitionProgressSalesRequest{
+        InvoiceLineID: "invoiceLineId",
+        PercentComplete: "121.00",
+    }
+client.Sales.RecognitionProgress(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceLineID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**percentComplete:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RecognitionModify(request) -> *nordlet.RecognitionModifySalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Apply an IFRS 15 contract modification to a deferred invoice line. Prospective: cancel the pending schedule and respread the unrecognized remainder over the new terms. Cumulative catch-up (ratable only): recompute revenue as if the new terms applied from the start and post the difference immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RecognitionModifySalesRequest{
+        InvoiceLineID: "invoiceLineId",
+        Approach: nordlet.RecognitionModifySalesRequestApproachProspective,
+    }
+client.Sales.RecognitionModify(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceLineID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**approach:** `*nordlet.RecognitionModifySalesRequestApproach` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**newEndDate:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**newMilestones:** `[]*nordlet.RecognitionModifySalesRequestNewMilestonesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RecognitionRunsList(request) -> *nordlet.RecognitionRunsListSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RecognitionRunsListSalesRequest{}
+client.Sales.RecognitionRunsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.RecognitionRunsListSalesRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.RecognitionRunsListSalesRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RecognitionSummary(request) -> *nordlet.RecognitionSummarySalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RecognitionSummarySalesRequest{}
+client.Sales.RecognitionSummary(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RefundLiabilityList(request) -> *nordlet.RefundLiabilityListSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RefundLiabilityListSalesRequest{}
+client.Sales.RefundLiabilityList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.RefundLiabilityListSalesRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.RefundLiabilityListSalesRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.RefundLiabilityTrueUp(request) -> *nordlet.RefundLiabilityTrueUpSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RefundLiabilityTrueUpSalesRequest{
+        InvoiceID: "invoiceId",
+        EstimatedTotal: "121.0000",
+    }
+client.Sales.RefundLiabilityTrueUp(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**estimatedTotal:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## OperationTypes
+<details><summary><code>client.OperationTypes.Create(request) -> *nordlet.CreateOperationTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.CreateOperationTypesRequest{
         Code: "code",
         Name: "name",
     }
-client.Sales.PostV1OperationTypesCreate(
+client.OperationTypes.Create(
         context.TODO(),
         request,
     )
@@ -10206,7 +10755,7 @@ client.Sales.PostV1OperationTypesCreate(
 <dl>
 <dd>
 
-**invoiceType:** `*nordlet.PostV1OperationTypesCreateRequestInvoiceType` 
+**invoiceType:** `*nordlet.CreateOperationTypesRequestInvoiceType` 
     
 </dd>
 </dl>
@@ -10394,7 +10943,7 @@ client.Sales.PostV1OperationTypesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1OperationTypesUpdate(request) -> *nordlet.PostV1OperationTypesUpdateResponse</code></summary>
+<details><summary><code>client.OperationTypes.Update(request) -> *nordlet.UpdateOperationTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10407,10 +10956,10 @@ client.Sales.PostV1OperationTypesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1OperationTypesUpdateRequest{
+request := &nordlet.UpdateOperationTypesRequest{
         ID: "id",
     }
-client.Sales.PostV1OperationTypesUpdate(
+client.OperationTypes.Update(
         context.TODO(),
         request,
     )
@@ -10453,7 +11002,7 @@ client.Sales.PostV1OperationTypesUpdate(
 <dl>
 <dd>
 
-**invoiceType:** `*nordlet.PostV1OperationTypesUpdateRequestInvoiceType` 
+**invoiceType:** `*nordlet.UpdateOperationTypesRequestInvoiceType` 
     
 </dd>
 </dl>
@@ -10641,7 +11190,7 @@ client.Sales.PostV1OperationTypesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1OperationTypesGet(request) -> *nordlet.PostV1OperationTypesGetResponse</code></summary>
+<details><summary><code>client.OperationTypes.Get(request) -> *nordlet.GetOperationTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10654,10 +11203,10 @@ client.Sales.PostV1OperationTypesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1OperationTypesGetRequest{
+request := &nordlet.GetOperationTypesRequest{
         ID: "id",
     }
-client.Sales.PostV1OperationTypesGet(
+client.OperationTypes.Get(
         context.TODO(),
         request,
     )
@@ -10688,7 +11237,7 @@ client.Sales.PostV1OperationTypesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1OperationTypesDelete(request) -> *nordlet.PostV1OperationTypesDeleteResponse</code></summary>
+<details><summary><code>client.OperationTypes.Delete(request) -> *nordlet.DeleteOperationTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10701,10 +11250,10 @@ client.Sales.PostV1OperationTypesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1OperationTypesDeleteRequest{
+request := &nordlet.DeleteOperationTypesRequest{
         ID: "id",
     }
-client.Sales.PostV1OperationTypesDelete(
+client.OperationTypes.Delete(
         context.TODO(),
         request,
     )
@@ -10735,7 +11284,7 @@ client.Sales.PostV1OperationTypesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1OperationTypesList(request) -> *nordlet.PostV1OperationTypesListResponse</code></summary>
+<details><summary><code>client.OperationTypes.List(request) -> *nordlet.ListOperationTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10748,8 +11297,8 @@ client.Sales.PostV1OperationTypesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1OperationTypesListRequest{}
-client.Sales.PostV1OperationTypesList(
+request := &nordlet.ListOperationTypesRequest{}
+client.OperationTypes.List(
         context.TODO(),
         request,
     )
@@ -10784,7 +11333,7 @@ client.Sales.PostV1OperationTypesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1OperationTypesListRequestSortItem` 
+**sort:** `[]*nordlet.ListOperationTypesRequestSortItem` 
     
 </dd>
 </dl>
@@ -10792,7 +11341,7 @@ client.Sales.PostV1OperationTypesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1OperationTypesListRequestFilterItem` 
+**filter:** `[]*nordlet.ListOperationTypesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -10812,7 +11361,8 @@ client.Sales.PostV1OperationTypesList(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1DocumentSeriesCreate(request) -> *nordlet.PostV1DocumentSeriesCreateResponse</code></summary>
+## DocumentSeries
+<details><summary><code>client.DocumentSeries.Create(request) -> *nordlet.CreateDocumentSeriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10825,10 +11375,10 @@ client.Sales.PostV1OperationTypesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1DocumentSeriesCreateRequest{
+request := &nordlet.CreateDocumentSeriesRequest{
         Prefix: "prefix",
     }
-client.Sales.PostV1DocumentSeriesCreate(
+client.DocumentSeries.Create(
         context.TODO(),
         request,
     )
@@ -10847,7 +11397,7 @@ client.Sales.PostV1DocumentSeriesCreate(
 <dl>
 <dd>
 
-**documentType:** `*nordlet.PostV1DocumentSeriesCreateRequestDocumentType` 
+**documentType:** `*nordlet.CreateDocumentSeriesRequestDocumentType` 
     
 </dd>
 </dl>
@@ -10955,7 +11505,7 @@ client.Sales.PostV1DocumentSeriesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1DocumentSeriesUpdate(request) -> *nordlet.PostV1DocumentSeriesUpdateResponse</code></summary>
+<details><summary><code>client.DocumentSeries.Update(request) -> *nordlet.UpdateDocumentSeriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -10968,10 +11518,10 @@ client.Sales.PostV1DocumentSeriesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DocumentSeriesUpdateRequest{
+request := &nordlet.UpdateDocumentSeriesRequest{
         ID: "id",
     }
-client.Sales.PostV1DocumentSeriesUpdate(
+client.DocumentSeries.Update(
         context.TODO(),
         request,
     )
@@ -10998,7 +11548,7 @@ client.Sales.PostV1DocumentSeriesUpdate(
 <dl>
 <dd>
 
-**documentType:** `*nordlet.PostV1DocumentSeriesUpdateRequestDocumentType` 
+**documentType:** `*nordlet.UpdateDocumentSeriesRequestDocumentType` 
     
 </dd>
 </dl>
@@ -11106,7 +11656,7 @@ client.Sales.PostV1DocumentSeriesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1DocumentSeriesGet(request) -> *nordlet.PostV1DocumentSeriesGetResponse</code></summary>
+<details><summary><code>client.DocumentSeries.Get(request) -> *nordlet.GetDocumentSeriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11119,10 +11669,10 @@ client.Sales.PostV1DocumentSeriesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DocumentSeriesGetRequest{
+request := &nordlet.GetDocumentSeriesRequest{
         ID: "id",
     }
-client.Sales.PostV1DocumentSeriesGet(
+client.DocumentSeries.Get(
         context.TODO(),
         request,
     )
@@ -11153,7 +11703,7 @@ client.Sales.PostV1DocumentSeriesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1DocumentSeriesDelete(request) -> *nordlet.PostV1DocumentSeriesDeleteResponse</code></summary>
+<details><summary><code>client.DocumentSeries.Delete(request) -> *nordlet.DeleteDocumentSeriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11166,10 +11716,10 @@ client.Sales.PostV1DocumentSeriesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1DocumentSeriesDeleteRequest{
+request := &nordlet.DeleteDocumentSeriesRequest{
         ID: "id",
     }
-client.Sales.PostV1DocumentSeriesDelete(
+client.DocumentSeries.Delete(
         context.TODO(),
         request,
     )
@@ -11200,7 +11750,7 @@ client.Sales.PostV1DocumentSeriesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1DocumentSeriesList(request) -> *nordlet.PostV1DocumentSeriesListResponse</code></summary>
+<details><summary><code>client.DocumentSeries.List(request) -> *nordlet.ListDocumentSeriesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11213,8 +11763,8 @@ client.Sales.PostV1DocumentSeriesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1DocumentSeriesListRequest{}
-client.Sales.PostV1DocumentSeriesList(
+request := &nordlet.ListDocumentSeriesRequest{}
+client.DocumentSeries.List(
         context.TODO(),
         request,
     )
@@ -11249,7 +11799,7 @@ client.Sales.PostV1DocumentSeriesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1DocumentSeriesListRequestSortItem` 
+**sort:** `[]*nordlet.ListDocumentSeriesRequestSortItem` 
     
 </dd>
 </dl>
@@ -11257,348 +11807,7 @@ client.Sales.PostV1DocumentSeriesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1DocumentSeriesListRequestFilterItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRecognitionCompute(request) -> *nordlet.PostV1SalesRecognitionComputeResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRecognitionComputeRequest{}
-client.Sales.PostV1SalesRecognitionCompute(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**asOfDate:** `*string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRecognitionRun(request) -> *nordlet.PostV1SalesRecognitionRunResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRecognitionRunRequest{}
-client.Sales.PostV1SalesRecognitionRun(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**asOfDate:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**postingDate:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scheduleIDs:** `[]string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRecognitionProgress(request) -> *nordlet.PostV1SalesRecognitionProgressResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRecognitionProgressRequest{
-        InvoiceLineID: "invoiceLineId",
-        PercentComplete: "percentComplete",
-    }
-client.Sales.PostV1SalesRecognitionProgress(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**invoiceLineID:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**percentComplete:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**date:** `*string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRecognitionModify(request) -> *nordlet.PostV1SalesRecognitionModifyResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Apply an IFRS 15 contract modification to a deferred invoice line. Prospective: cancel the pending schedule and respread the unrecognized remainder over the new terms. Cumulative catch-up (ratable only): recompute revenue as if the new terms applied from the start and post the difference immediately.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRecognitionModifyRequest{
-        InvoiceLineID: "invoiceLineId",
-        Approach: nordlet.PostV1SalesRecognitionModifyRequestApproachProspective,
-    }
-client.Sales.PostV1SalesRecognitionModify(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**invoiceLineID:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**approach:** `*nordlet.PostV1SalesRecognitionModifyRequestApproach` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**date:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**newEndDate:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**newMilestones:** `[]*nordlet.PostV1SalesRecognitionModifyRequestNewMilestonesItem` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRecognitionRunsList(request) -> *nordlet.PostV1SalesRecognitionRunsListResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRecognitionRunsListRequest{}
-client.Sales.PostV1SalesRecognitionRunsList(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**page:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**pageSize:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**sort:** `[]*nordlet.PostV1SalesRecognitionRunsListRequestSortItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**filter:** `[]*nordlet.PostV1SalesRecognitionRunsListRequestFilterItem` 
+**filter:** `[]*nordlet.ListDocumentSeriesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -11618,7 +11827,8 @@ client.Sales.PostV1SalesRecognitionRunsList(
 </dl>
 </details>
 
-<details><summary><code>client.Sales.PostV1SalesRecognitionSummary(request) -> *nordlet.PostV1SalesRecognitionSummaryResponse</code></summary>
+## purchases
+<details><summary><code>client.Purchases.InvoicesCreate(request) -> *nordlet.InvoicesCreatePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11631,202 +11841,17 @@ client.Sales.PostV1SalesRecognitionRunsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1SalesRecognitionSummaryRequest{}
-client.Sales.PostV1SalesRecognitionSummary(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**invoiceID:** `*string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRefundLiabilityList(request) -> *nordlet.PostV1SalesRefundLiabilityListResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRefundLiabilityListRequest{}
-client.Sales.PostV1SalesRefundLiabilityList(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**page:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**pageSize:** `*int64` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**sort:** `[]*nordlet.PostV1SalesRefundLiabilityListRequestSortItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**filter:** `[]*nordlet.PostV1SalesRefundLiabilityListRequestFilterItem` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Sales.PostV1SalesRefundLiabilityTrueUp(request) -> *nordlet.PostV1SalesRefundLiabilityTrueUpResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1SalesRefundLiabilityTrueUpRequest{
-        InvoiceID: "invoiceId",
-        EstimatedTotal: "estimatedTotal",
-    }
-client.Sales.PostV1SalesRefundLiabilityTrueUp(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**invoiceID:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**estimatedTotal:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**date:** `*string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Purchases
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesCreate(request) -> *nordlet.PostV1PurchasesInvoicesCreateResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1PurchasesInvoicesCreateRequest{
+request := &nordlet.InvoicesCreatePurchasesRequest{
         PartnerID: "partnerId",
         DocumentNumber: "documentNumber",
-        DocumentDate: "documentDate",
-        Lines: []*nordlet.PostV1PurchasesInvoicesCreateRequestLinesItem{
-            &nordlet.PostV1PurchasesInvoicesCreateRequestLinesItem{},
+        DocumentDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.InvoicesCreatePurchasesRequestLinesItem{
+            &nordlet.InvoicesCreatePurchasesRequestLinesItem{},
         },
     }
-client.Purchases.PostV1PurchasesInvoicesCreate(
+client.Purchases.InvoicesCreate(
         context.TODO(),
         request,
     )
@@ -11853,7 +11878,7 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1PurchasesInvoicesCreateRequestType` 
+**type_:** `*nordlet.InvoicesCreatePurchasesRequestType` 
     
 </dd>
 </dl>
@@ -11869,7 +11894,7 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
-**documentDate:** `string` 
+**documentDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -11877,7 +11902,7 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -11973,7 +11998,7 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PurchasesInvoicesCreateRequestLinesItem` 
+**lines:** `[]*nordlet.InvoicesCreatePurchasesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -11985,7 +12010,7 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesGet(request) -> *nordlet.PostV1PurchasesInvoicesGetResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesGet(request) -> *nordlet.InvoicesGetPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -11998,10 +12023,10 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesGetRequest{
+request := &nordlet.InvoicesGetPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesInvoicesGet(
+client.Purchases.InvoicesGet(
         context.TODO(),
         request,
     )
@@ -12032,7 +12057,7 @@ client.Purchases.PostV1PurchasesInvoicesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesUpdate(request) -> *nordlet.PostV1PurchasesInvoicesUpdateResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesUpdate(request) -> *nordlet.InvoicesUpdatePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12045,10 +12070,10 @@ client.Purchases.PostV1PurchasesInvoicesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesUpdateRequest{
+request := &nordlet.InvoicesUpdatePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesInvoicesUpdate(
+client.Purchases.InvoicesUpdate(
         context.TODO(),
         request,
     )
@@ -12091,7 +12116,7 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dl>
 <dd>
 
-**documentDate:** `*string` 
+**documentDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12099,7 +12124,7 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12179,7 +12204,7 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PurchasesInvoicesUpdateRequestLinesItem` 
+**lines:** `[]*nordlet.InvoicesUpdatePurchasesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -12191,7 +12216,7 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesDelete(request) -> *nordlet.PostV1PurchasesInvoicesDeleteResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesDelete(request) -> *nordlet.InvoicesDeletePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12204,10 +12229,10 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesDeleteRequest{
+request := &nordlet.InvoicesDeletePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesInvoicesDelete(
+client.Purchases.InvoicesDelete(
         context.TODO(),
         request,
     )
@@ -12238,7 +12263,7 @@ client.Purchases.PostV1PurchasesInvoicesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesRegister(request) -> *nordlet.PostV1PurchasesInvoicesRegisterResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesRegister(request) -> *nordlet.InvoicesRegisterPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12251,10 +12276,10 @@ client.Purchases.PostV1PurchasesInvoicesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesRegisterRequest{
+request := &nordlet.InvoicesRegisterPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesInvoicesRegister(
+client.Purchases.InvoicesRegister(
         context.TODO(),
         request,
     )
@@ -12281,7 +12306,7 @@ client.Purchases.PostV1PurchasesInvoicesRegister(
 <dl>
 <dd>
 
-**registrationDate:** `*string` 
+**registrationDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12301,7 +12326,7 @@ client.Purchases.PostV1PurchasesInvoicesRegister(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesList(request) -> *nordlet.PostV1PurchasesInvoicesListResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesList(request) -> *nordlet.InvoicesListPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12314,8 +12339,8 @@ client.Purchases.PostV1PurchasesInvoicesRegister(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesListRequest{}
-client.Purchases.PostV1PurchasesInvoicesList(
+request := &nordlet.InvoicesListPurchasesRequest{}
+client.Purchases.InvoicesList(
         context.TODO(),
         request,
     )
@@ -12350,7 +12375,7 @@ client.Purchases.PostV1PurchasesInvoicesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PurchasesInvoicesListRequestSortItem` 
+**sort:** `[]*nordlet.InvoicesListPurchasesRequestSortItem` 
     
 </dd>
 </dl>
@@ -12358,7 +12383,7 @@ client.Purchases.PostV1PurchasesInvoicesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PurchasesInvoicesListRequestFilterItem` 
+**filter:** `[]*nordlet.InvoicesListPurchasesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -12378,7 +12403,7 @@ client.Purchases.PostV1PurchasesInvoicesList(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersCreate(request) -> *nordlet.PostV1PurchasesOrdersCreateResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersCreate(request) -> *nordlet.OrdersCreatePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12391,14 +12416,16 @@ client.Purchases.PostV1PurchasesInvoicesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersCreateRequest{
+request := &nordlet.OrdersCreatePurchasesRequest{
         PartnerID: "partnerId",
-        OrderDate: "orderDate",
-        Lines: []*nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{
-            &nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{},
+        OrderDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.OrdersCreatePurchasesRequestLinesItem{
+            &nordlet.OrdersCreatePurchasesRequestLinesItem{},
         },
     }
-client.Purchases.PostV1PurchasesOrdersCreate(
+client.Purchases.OrdersCreate(
         context.TODO(),
         request,
     )
@@ -12433,7 +12460,7 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 <dl>
 <dd>
 
-**orderDate:** `string` 
+**orderDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -12441,7 +12468,7 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 <dl>
 <dd>
 
-**expectedDate:** `*string` 
+**expectedDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12481,7 +12508,7 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PurchasesOrdersCreateRequestLinesItem` 
+**lines:** `[]*nordlet.OrdersCreatePurchasesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -12493,7 +12520,7 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersUpdate(request) -> *nordlet.PostV1PurchasesOrdersUpdateResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersUpdate(request) -> *nordlet.OrdersUpdatePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12506,10 +12533,10 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersUpdateRequest{
+request := &nordlet.OrdersUpdatePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersUpdate(
+client.Purchases.OrdersUpdate(
         context.TODO(),
         request,
     )
@@ -12544,7 +12571,7 @@ client.Purchases.PostV1PurchasesOrdersUpdate(
 <dl>
 <dd>
 
-**orderDate:** `*string` 
+**orderDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12552,7 +12579,7 @@ client.Purchases.PostV1PurchasesOrdersUpdate(
 <dl>
 <dd>
 
-**expectedDate:** `*string` 
+**expectedDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -12584,7 +12611,7 @@ client.Purchases.PostV1PurchasesOrdersUpdate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PurchasesOrdersUpdateRequestLinesItem` 
+**lines:** `[]*nordlet.OrdersUpdatePurchasesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -12596,7 +12623,7 @@ client.Purchases.PostV1PurchasesOrdersUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersGet(request) -> *nordlet.PostV1PurchasesOrdersGetResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersGet(request) -> *nordlet.OrdersGetPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12609,10 +12636,10 @@ client.Purchases.PostV1PurchasesOrdersUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersGetRequest{
+request := &nordlet.OrdersGetPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersGet(
+client.Purchases.OrdersGet(
         context.TODO(),
         request,
     )
@@ -12643,7 +12670,7 @@ client.Purchases.PostV1PurchasesOrdersGet(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersList(request) -> *nordlet.PostV1PurchasesOrdersListResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersList(request) -> *nordlet.OrdersListPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12656,8 +12683,8 @@ client.Purchases.PostV1PurchasesOrdersGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersListRequest{}
-client.Purchases.PostV1PurchasesOrdersList(
+request := &nordlet.OrdersListPurchasesRequest{}
+client.Purchases.OrdersList(
         context.TODO(),
         request,
     )
@@ -12692,7 +12719,7 @@ client.Purchases.PostV1PurchasesOrdersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PurchasesOrdersListRequestSortItem` 
+**sort:** `[]*nordlet.OrdersListPurchasesRequestSortItem` 
     
 </dd>
 </dl>
@@ -12700,7 +12727,7 @@ client.Purchases.PostV1PurchasesOrdersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PurchasesOrdersListRequestFilterItem` 
+**filter:** `[]*nordlet.OrdersListPurchasesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -12720,7 +12747,7 @@ client.Purchases.PostV1PurchasesOrdersList(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersSubmit(request) -> *nordlet.PostV1PurchasesOrdersSubmitResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersSubmit(request) -> *nordlet.OrdersSubmitPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12733,10 +12760,10 @@ client.Purchases.PostV1PurchasesOrdersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersSubmitRequest{
+request := &nordlet.OrdersSubmitPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersSubmit(
+client.Purchases.OrdersSubmit(
         context.TODO(),
         request,
     )
@@ -12775,7 +12802,7 @@ client.Purchases.PostV1PurchasesOrdersSubmit(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersApprove(request) -> *nordlet.PostV1PurchasesOrdersApproveResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersApprove(request) -> *nordlet.OrdersApprovePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12788,10 +12815,10 @@ client.Purchases.PostV1PurchasesOrdersSubmit(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersApproveRequest{
+request := &nordlet.OrdersApprovePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersApprove(
+client.Purchases.OrdersApprove(
         context.TODO(),
         request,
     )
@@ -12830,7 +12857,7 @@ client.Purchases.PostV1PurchasesOrdersApprove(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersReject(request) -> *nordlet.PostV1PurchasesOrdersRejectResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersReject(request) -> *nordlet.OrdersRejectPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12843,10 +12870,10 @@ client.Purchases.PostV1PurchasesOrdersApprove(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersRejectRequest{
+request := &nordlet.OrdersRejectPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersReject(
+client.Purchases.OrdersReject(
         context.TODO(),
         request,
     )
@@ -12885,7 +12912,7 @@ client.Purchases.PostV1PurchasesOrdersReject(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersCancel(request) -> *nordlet.PostV1PurchasesOrdersCancelResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersCancel(request) -> *nordlet.OrdersCancelPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12898,10 +12925,10 @@ client.Purchases.PostV1PurchasesOrdersReject(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersCancelRequest{
+request := &nordlet.OrdersCancelPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersCancel(
+client.Purchases.OrdersCancel(
         context.TODO(),
         request,
     )
@@ -12940,7 +12967,7 @@ client.Purchases.PostV1PurchasesOrdersCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersClose(request) -> *nordlet.PostV1PurchasesOrdersCloseResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersClose(request) -> *nordlet.OrdersClosePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12953,10 +12980,10 @@ client.Purchases.PostV1PurchasesOrdersCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersCloseRequest{
+request := &nordlet.OrdersClosePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersClose(
+client.Purchases.OrdersClose(
         context.TODO(),
         request,
     )
@@ -12995,7 +13022,7 @@ client.Purchases.PostV1PurchasesOrdersClose(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesOrdersDelete(request) -> *nordlet.PostV1PurchasesOrdersDeleteResponse</code></summary>
+<details><summary><code>client.Purchases.OrdersDelete(request) -> *nordlet.OrdersDeletePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13008,10 +13035,10 @@ client.Purchases.PostV1PurchasesOrdersClose(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesOrdersDeleteRequest{
+request := &nordlet.OrdersDeletePurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesOrdersDelete(
+client.Purchases.OrdersDelete(
         context.TODO(),
         request,
     )
@@ -13042,7 +13069,7 @@ client.Purchases.PostV1PurchasesOrdersDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesReceiptsCreate(request) -> *nordlet.PostV1PurchasesReceiptsCreateResponse</code></summary>
+<details><summary><code>client.Purchases.ReceiptsCreate(request) -> *nordlet.ReceiptsCreatePurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13055,17 +13082,19 @@ client.Purchases.PostV1PurchasesOrdersDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesReceiptsCreateRequest{
+request := &nordlet.ReceiptsCreatePurchasesRequest{
         OrderID: "orderId",
-        ReceiptDate: "receiptDate",
-        Lines: []*nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
-            &nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
+        ReceiptDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.ReceiptsCreatePurchasesRequestLinesItem{
+            &nordlet.ReceiptsCreatePurchasesRequestLinesItem{
                 OrderLineID: "orderLineId",
-                Quantity: "quantity",
+                Quantity: "121.0000",
             },
         },
     }
-client.Purchases.PostV1PurchasesReceiptsCreate(
+client.Purchases.ReceiptsCreate(
         context.TODO(),
         request,
     )
@@ -13092,7 +13121,7 @@ client.Purchases.PostV1PurchasesReceiptsCreate(
 <dl>
 <dd>
 
-**receiptDate:** `string` 
+**receiptDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -13116,7 +13145,7 @@ client.Purchases.PostV1PurchasesReceiptsCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem` 
+**lines:** `[]*nordlet.ReceiptsCreatePurchasesRequestLinesItem` 
     
 </dd>
 </dl>
@@ -13128,7 +13157,7 @@ client.Purchases.PostV1PurchasesReceiptsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesReceiptsGet(request) -> *nordlet.PostV1PurchasesReceiptsGetResponse</code></summary>
+<details><summary><code>client.Purchases.ReceiptsGet(request) -> *nordlet.ReceiptsGetPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13141,10 +13170,10 @@ client.Purchases.PostV1PurchasesReceiptsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesReceiptsGetRequest{
+request := &nordlet.ReceiptsGetPurchasesRequest{
         ID: "id",
     }
-client.Purchases.PostV1PurchasesReceiptsGet(
+client.Purchases.ReceiptsGet(
         context.TODO(),
         request,
     )
@@ -13175,7 +13204,7 @@ client.Purchases.PostV1PurchasesReceiptsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesReceiptsList(request) -> *nordlet.PostV1PurchasesReceiptsListResponse</code></summary>
+<details><summary><code>client.Purchases.ReceiptsList(request) -> *nordlet.ReceiptsListPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13188,8 +13217,8 @@ client.Purchases.PostV1PurchasesReceiptsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesReceiptsListRequest{}
-client.Purchases.PostV1PurchasesReceiptsList(
+request := &nordlet.ReceiptsListPurchasesRequest{}
+client.Purchases.ReceiptsList(
         context.TODO(),
         request,
     )
@@ -13224,7 +13253,7 @@ client.Purchases.PostV1PurchasesReceiptsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PurchasesReceiptsListRequestSortItem` 
+**sort:** `[]*nordlet.ReceiptsListPurchasesRequestSortItem` 
     
 </dd>
 </dl>
@@ -13232,7 +13261,7 @@ client.Purchases.PostV1PurchasesReceiptsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PurchasesReceiptsListRequestFilterItem` 
+**filter:** `[]*nordlet.ReceiptsListPurchasesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -13252,7 +13281,7 @@ client.Purchases.PostV1PurchasesReceiptsList(
 </dl>
 </details>
 
-<details><summary><code>client.Purchases.PostV1PurchasesInvoicesMatch(request) -> *nordlet.PostV1PurchasesInvoicesMatchResponse</code></summary>
+<details><summary><code>client.Purchases.InvoicesMatch(request) -> *nordlet.InvoicesMatchPurchasesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13265,10 +13294,10 @@ client.Purchases.PostV1PurchasesReceiptsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PurchasesInvoicesMatchRequest{
+request := &nordlet.InvoicesMatchPurchasesRequest{
         InvoiceID: "invoiceId",
     }
-client.Purchases.PostV1PurchasesInvoicesMatch(
+client.Purchases.InvoicesMatch(
         context.TODO(),
         request,
     )
@@ -13307,8 +13336,8 @@ client.Purchases.PostV1PurchasesInvoicesMatch(
 </dl>
 </details>
 
-## Capture
-<details><summary><code>client.Capture.PostV1CaptureSettingsGet(request) -> *nordlet.PostV1CaptureSettingsGetResponse</code></summary>
+## capture
+<details><summary><code>client.Capture.SettingsGet(request) -> *nordlet.SettingsGetCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13321,8 +13350,8 @@ client.Purchases.PostV1PurchasesInvoicesMatch(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureSettingsGetRequest{}
-client.Capture.PostV1CaptureSettingsGet(
+request := &nordlet.SettingsGetCaptureRequest{}
+client.Capture.SettingsGet(
         context.TODO(),
         request,
     )
@@ -13338,7 +13367,7 @@ client.Capture.PostV1CaptureSettingsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.PostV1CaptureSettingsUpdate(request) -> *nordlet.PostV1CaptureSettingsUpdateResponse</code></summary>
+<details><summary><code>client.Capture.SettingsUpdate(request) -> *nordlet.SettingsUpdateCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13351,8 +13380,8 @@ client.Capture.PostV1CaptureSettingsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureSettingsUpdateRequest{}
-client.Capture.PostV1CaptureSettingsUpdate(
+request := &nordlet.SettingsUpdateCaptureRequest{}
+client.Capture.SettingsUpdate(
         context.TODO(),
         request,
     )
@@ -13391,7 +13420,7 @@ client.Capture.PostV1CaptureSettingsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.PostV1CaptureSettingsRegenerateIntake(request) -> *nordlet.PostV1CaptureSettingsRegenerateIntakeResponse</code></summary>
+<details><summary><code>client.Capture.SettingsRegenerateIntake(request) -> *nordlet.SettingsRegenerateIntakeCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13404,8 +13433,8 @@ client.Capture.PostV1CaptureSettingsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureSettingsRegenerateIntakeRequest{}
-client.Capture.PostV1CaptureSettingsRegenerateIntake(
+request := &nordlet.SettingsRegenerateIntakeCaptureRequest{}
+client.Capture.SettingsRegenerateIntake(
         context.TODO(),
         request,
     )
@@ -13421,7 +13450,7 @@ client.Capture.PostV1CaptureSettingsRegenerateIntake(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(request) -> *nordlet.PostV1CaptureInboundEmailResponse</code></summary>
+<details><summary><code>client.Capture.InboundEmail(request) -> *nordlet.InboundEmailCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13434,8 +13463,8 @@ client.Capture.PostV1CaptureSettingsRegenerateIntake(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureInboundEmailRequest{}
-client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+request := &nordlet.InboundEmailCaptureRequest{}
+client.Capture.InboundEmail(
         context.TODO(),
         request,
     )
@@ -13462,7 +13491,7 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 <dl>
 <dd>
 
-**toFull:** `[]*nordlet.PostV1CaptureInboundEmailRequestToFullItem` 
+**toFull:** `[]*nordlet.InboundEmailCaptureRequestToFullItem` 
     
 </dd>
 </dl>
@@ -13486,7 +13515,7 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 <dl>
 <dd>
 
-**postmarkAttachments:** `[]*nordlet.PostV1CaptureInboundEmailRequestAttachmentsItem` 
+**postmarkAttachments:** `[]*nordlet.InboundEmailCaptureRequestAttachmentsItem` 
     
 </dd>
 </dl>
@@ -13494,7 +13523,7 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 <dl>
 <dd>
 
-**to:** `*nordlet.PostV1CaptureInboundEmailRequestTo` 
+**to:** `*nordlet.InboundEmailCaptureRequestTo` 
     
 </dd>
 </dl>
@@ -13518,7 +13547,7 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 <dl>
 <dd>
 
-**attachments:** `[]*nordlet.PostV1CaptureInboundEmailRequestAttachmentsItem` 
+**attachments:** `[]*nordlet.InboundEmailCaptureRequestAttachmentsItem` 
     
 </dd>
 </dl>
@@ -13530,7 +13559,7 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 </dl>
 </details>
 
-<details><summary><code>client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(request) -> *nordlet.PostV1CaptureDocumentsUploadResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsUpload(request) -> *nordlet.DocumentsUploadCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13543,12 +13572,12 @@ client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOr
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsUploadRequest{
+request := &nordlet.DocumentsUploadCaptureRequest{
         FileName: "fileName",
         MimeType: "mimeType",
         Content: "content",
     }
-client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+client.Capture.DocumentsUpload(
         context.TODO(),
         request,
     )
@@ -13595,7 +13624,7 @@ client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(request) -> *nordlet.PostV1CaptureDocumentsExtractResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsExtract(request) -> *nordlet.DocumentsExtractCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13608,10 +13637,10 @@ client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsExtractRequest{
+request := &nordlet.DocumentsExtractCaptureRequest{
         ID: "id",
     }
-client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(
+client.Capture.DocumentsExtract(
         context.TODO(),
         request,
     )
@@ -13642,7 +13671,7 @@ client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.PostV1CaptureDocumentsGet(request) -> *nordlet.PostV1CaptureDocumentsGetResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsGet(request) -> *nordlet.DocumentsGetCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13655,10 +13684,10 @@ client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsGetRequest{
+request := &nordlet.DocumentsGetCaptureRequest{
         ID: "id",
     }
-client.Capture.PostV1CaptureDocumentsGet(
+client.Capture.DocumentsGet(
         context.TODO(),
         request,
     )
@@ -13689,7 +13718,7 @@ client.Capture.PostV1CaptureDocumentsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.PostV1CaptureDocumentsList(request) -> *nordlet.PostV1CaptureDocumentsListResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsList(request) -> *nordlet.DocumentsListCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13702,8 +13731,8 @@ client.Capture.PostV1CaptureDocumentsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsListRequest{}
-client.Capture.PostV1CaptureDocumentsList(
+request := &nordlet.DocumentsListCaptureRequest{}
+client.Capture.DocumentsList(
         context.TODO(),
         request,
     )
@@ -13738,7 +13767,7 @@ client.Capture.PostV1CaptureDocumentsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1CaptureDocumentsListRequestSortItem` 
+**sort:** `[]*nordlet.DocumentsListCaptureRequestSortItem` 
     
 </dd>
 </dl>
@@ -13746,7 +13775,7 @@ client.Capture.PostV1CaptureDocumentsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1CaptureDocumentsListRequestFilterItem` 
+**filter:** `[]*nordlet.DocumentsListCaptureRequestFilterItem` 
     
 </dd>
 </dl>
@@ -13766,7 +13795,7 @@ client.Capture.PostV1CaptureDocumentsList(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.PostV1CaptureDocumentsDelete(request) -> *nordlet.PostV1CaptureDocumentsDeleteResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsDelete(request) -> *nordlet.DocumentsDeleteCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13779,10 +13808,10 @@ client.Capture.PostV1CaptureDocumentsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsDeleteRequest{
+request := &nordlet.DocumentsDeleteCaptureRequest{
         ID: "id",
     }
-client.Capture.PostV1CaptureDocumentsDelete(
+client.Capture.DocumentsDelete(
         context.TODO(),
         request,
     )
@@ -13813,7 +13842,7 @@ client.Capture.PostV1CaptureDocumentsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(request) -> *nordlet.PostV1CaptureDocumentsConfirmResponse</code></summary>
+<details><summary><code>client.Capture.DocumentsConfirm(request) -> *nordlet.DocumentsConfirmCaptureResponse</code></summary>
 <dl>
 <dd>
 
@@ -13826,15 +13855,17 @@ client.Capture.PostV1CaptureDocumentsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1CaptureDocumentsConfirmRequest{
+request := &nordlet.DocumentsConfirmCaptureRequest{
         ID: "id",
         DocumentNumber: "documentNumber",
-        DocumentDate: "documentDate",
-        Lines: []*nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{
-            &nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{},
+        DocumentDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.DocumentsConfirmCaptureRequestLinesItem{
+            &nordlet.DocumentsConfirmCaptureRequestLinesItem{},
         },
     }
-client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+client.Capture.DocumentsConfirm(
         context.TODO(),
         request,
     )
@@ -13869,7 +13900,7 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 <dl>
 <dd>
 
-**newSupplier:** `*nordlet.PostV1CaptureDocumentsConfirmRequestNewSupplier` 
+**newSupplier:** `*nordlet.DocumentsConfirmCaptureRequestNewSupplier` 
     
 </dd>
 </dl>
@@ -13885,7 +13916,7 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 <dl>
 <dd>
 
-**documentDate:** `string` 
+**documentDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -13893,7 +13924,7 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -13917,7 +13948,7 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem` 
+**lines:** `[]*nordlet.DocumentsConfirmCaptureRequestLinesItem` 
     
 </dd>
 </dl>
@@ -13929,8 +13960,8 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 </dl>
 </details>
 
-## Declarations
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIntrastatCompute(request) -> *nordlet.PostV1DeclarationsLtIntrastatComputeResponse</code></summary>
+## declarations
+<details><summary><code>client.Declarations.LtIntrastatCompute(request) -> *nordlet.LtIntrastatComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13943,12 +13974,12 @@ client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocumen
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIntrastatComputeRequest{
+request := &nordlet.LtIntrastatComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
-        Flow: nordlet.PostV1DeclarationsLtIntrastatComputeRequestFlowArrivals,
+        Flow: nordlet.LtIntrastatComputeDeclarationsRequestFlowArrivals,
     }
-client.Declarations.PostV1DeclarationsLtIntrastatCompute(
+client.Declarations.LtIntrastatCompute(
         context.TODO(),
         request,
     )
@@ -13983,7 +14014,7 @@ client.Declarations.PostV1DeclarationsLtIntrastatCompute(
 <dl>
 <dd>
 
-**flow:** `*nordlet.PostV1DeclarationsLtIntrastatComputeRequestFlow` 
+**flow:** `*nordlet.LtIntrastatComputeDeclarationsRequestFlow` 
     
 </dd>
 </dl>
@@ -14007,7 +14038,7 @@ client.Declarations.PostV1DeclarationsLtIntrastatCompute(
 <dl>
 <dd>
 
-**transportMode:** `*nordlet.PostV1DeclarationsLtIntrastatComputeRequestTransportMode` 
+**transportMode:** `*nordlet.LtIntrastatComputeDeclarationsRequestTransportMode` 
     
 </dd>
 </dl>
@@ -14059,7 +14090,7 @@ client.Declarations.PostV1DeclarationsLtIntrastatCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIvazGenerate(request) -> *nordlet.PostV1DeclarationsLtIvazGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LtIvazGenerate(request) -> *nordlet.LtIvazGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14072,12 +14103,12 @@ client.Declarations.PostV1DeclarationsLtIntrastatCompute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIvazGenerateRequest{
+request := &nordlet.LtIvazGenerateDeclarationsRequest{
         WaybillIDs: []string{
             "waybillIds",
         },
     }
-client.Declarations.PostV1DeclarationsLtIvazGenerate(
+client.Declarations.LtIvazGenerate(
         context.TODO(),
         request,
     )
@@ -14116,7 +14147,7 @@ client.Declarations.PostV1DeclarationsLtIvazGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIntrastatObligation(request) -> *nordlet.PostV1DeclarationsLtIntrastatObligationResponse</code></summary>
+<details><summary><code>client.Declarations.LtIntrastatObligation(request) -> *nordlet.LtIntrastatObligationDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14129,10 +14160,10 @@ client.Declarations.PostV1DeclarationsLtIvazGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIntrastatObligationRequest{
+request := &nordlet.LtIntrastatObligationDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtIntrastatObligation(
+client.Declarations.LtIntrastatObligation(
         context.TODO(),
         request,
     )
@@ -14163,7 +14194,7 @@ client.Declarations.PostV1DeclarationsLtIntrastatObligation(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIsafGenerate(request) -> *nordlet.PostV1DeclarationsLtIsafGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LtIsafGenerate(request) -> *nordlet.LtIsafGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14176,11 +14207,11 @@ client.Declarations.PostV1DeclarationsLtIntrastatObligation(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIsafGenerateRequest{
+request := &nordlet.LtIsafGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtIsafGenerate(
+client.Declarations.LtIsafGenerate(
         context.TODO(),
         request,
     )
@@ -14215,7 +14246,7 @@ client.Declarations.PostV1DeclarationsLtIsafGenerate(
 <dl>
 <dd>
 
-**dataType:** `*nordlet.PostV1DeclarationsLtIsafGenerateRequestDataType` 
+**dataType:** `*nordlet.LtIsafGenerateDeclarationsRequestDataType` 
     
 </dd>
 </dl>
@@ -14227,7 +14258,7 @@ client.Declarations.PostV1DeclarationsLtIsafGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtFr0600Compute(request) -> *nordlet.PostV1DeclarationsLtFr0600ComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtFr0600Compute(request) -> *nordlet.LtFr0600ComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14240,11 +14271,11 @@ client.Declarations.PostV1DeclarationsLtIsafGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtFr0600ComputeRequest{
+request := &nordlet.LtFr0600ComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtFr0600Compute(
+client.Declarations.LtFr0600Compute(
         context.TODO(),
         request,
     )
@@ -14299,7 +14330,7 @@ client.Declarations.PostV1DeclarationsLtFr0600Compute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtGpm313Compute(request) -> *nordlet.PostV1DeclarationsLtGpm313ComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtGpm313Compute(request) -> *nordlet.LtGpm313ComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14312,11 +14343,11 @@ client.Declarations.PostV1DeclarationsLtFr0600Compute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtGpm313ComputeRequest{
+request := &nordlet.LtGpm313ComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtGpm313Compute(
+client.Declarations.LtGpm313Compute(
         context.TODO(),
         request,
     )
@@ -14351,7 +14382,7 @@ client.Declarations.PostV1DeclarationsLtGpm313Compute(
 <dl>
 <dd>
 
-**payoutTiming:** `*nordlet.PostV1DeclarationsLtGpm313ComputeRequestPayoutTiming` 
+**payoutTiming:** `*nordlet.LtGpm313ComputeDeclarationsRequestPayoutTiming` 
     
 </dd>
 </dl>
@@ -14371,7 +14402,7 @@ client.Declarations.PostV1DeclarationsLtGpm313Compute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtSamCompute(request) -> *nordlet.PostV1DeclarationsLtSamComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtSamCompute(request) -> *nordlet.LtSamComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14384,11 +14415,11 @@ client.Declarations.PostV1DeclarationsLtGpm313Compute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtSamComputeRequest{
+request := &nordlet.LtSamComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtSamCompute(
+client.Declarations.LtSamCompute(
         context.TODO(),
         request,
     )
@@ -14427,7 +14458,7 @@ client.Declarations.PostV1DeclarationsLtSamCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtSdGenerate(request) -> *nordlet.PostV1DeclarationsLtSdGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LtSdGenerate(request) -> *nordlet.LtSdGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14440,12 +14471,16 @@ client.Declarations.PostV1DeclarationsLtSamCompute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtSdGenerateRequest{
-        Type: nordlet.PostV1DeclarationsLtSdGenerateRequestTypeOneSd,
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.LtSdGenerateDeclarationsRequest{
+        Type: nordlet.LtSdGenerateDeclarationsRequestTypeOneSd,
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsLtSdGenerate(
+client.Declarations.LtSdGenerate(
         context.TODO(),
         request,
     )
@@ -14464,7 +14499,7 @@ client.Declarations.PostV1DeclarationsLtSdGenerate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1DeclarationsLtSdGenerateRequestType` 
+**type_:** `*nordlet.LtSdGenerateDeclarationsRequestType` 
     
 </dd>
 </dl>
@@ -14472,7 +14507,7 @@ client.Declarations.PostV1DeclarationsLtSdGenerate(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -14480,7 +14515,7 @@ client.Declarations.PostV1DeclarationsLtSdGenerate(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -14492,7 +14527,7 @@ client.Declarations.PostV1DeclarationsLtSdGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtSaftGenerate(request) -> *nordlet.PostV1DeclarationsLtSaftGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LtSaftGenerate(request) -> *nordlet.LtSaftGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14505,11 +14540,15 @@ client.Declarations.PostV1DeclarationsLtSdGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtSaftGenerateRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.LtSaftGenerateDeclarationsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsLtSaftGenerate(
+client.Declarations.LtSaftGenerate(
         context.TODO(),
         request,
     )
@@ -14528,7 +14567,7 @@ client.Declarations.PostV1DeclarationsLtSaftGenerate(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -14536,7 +14575,7 @@ client.Declarations.PostV1DeclarationsLtSaftGenerate(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -14544,7 +14583,7 @@ client.Declarations.PostV1DeclarationsLtSaftGenerate(
 <dl>
 <dd>
 
-**dataType:** `*nordlet.PostV1DeclarationsLtSaftGenerateRequestDataType` 
+**dataType:** `*nordlet.LtSaftGenerateDeclarationsRequestDataType` 
     
 </dd>
 </dl>
@@ -14564,7 +14603,7 @@ client.Declarations.PostV1DeclarationsLtSaftGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIvazAmend(request) -> *nordlet.PostV1DeclarationsLtIvazAmendResponse</code></summary>
+<details><summary><code>client.Declarations.LtIvazAmend(request) -> *nordlet.LtIvazAmendDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14577,12 +14616,12 @@ client.Declarations.PostV1DeclarationsLtSaftGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIvazAmendRequest{
+request := &nordlet.LtIvazAmendDeclarationsRequest{
         WaybillIDs: []string{
             "waybillIds",
         },
     }
-client.Declarations.PostV1DeclarationsLtIvazAmend(
+client.Declarations.LtIvazAmend(
         context.TODO(),
         request,
     )
@@ -14621,7 +14660,7 @@ client.Declarations.PostV1DeclarationsLtIvazAmend(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtIvazCancel(request) -> *nordlet.PostV1DeclarationsLtIvazCancelResponse</code></summary>
+<details><summary><code>client.Declarations.LtIvazCancel(request) -> *nordlet.LtIvazCancelDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14634,15 +14673,15 @@ client.Declarations.PostV1DeclarationsLtIvazAmend(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtIvazCancelRequest{
-        Entries: []*nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItem{
-            &nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItem{
+request := &nordlet.LtIvazCancelDeclarationsRequest{
+        Entries: []*nordlet.LtIvazCancelDeclarationsRequestEntriesItem{
+            &nordlet.LtIvazCancelDeclarationsRequestEntriesItem{
                 WaybillID: "waybillId",
-                Reason: nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItemReasonOne,
+                Reason: nordlet.LtIvazCancelDeclarationsRequestEntriesItemReasonOne,
             },
         },
     }
-client.Declarations.PostV1DeclarationsLtIvazCancel(
+client.Declarations.LtIvazCancel(
         context.TODO(),
         request,
     )
@@ -14661,7 +14700,7 @@ client.Declarations.PostV1DeclarationsLtIvazCancel(
 <dl>
 <dd>
 
-**entries:** `[]*nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItem` 
+**entries:** `[]*nordlet.LtIvazCancelDeclarationsRequestEntriesItem` 
     
 </dd>
 </dl>
@@ -14681,7 +14720,7 @@ client.Declarations.PostV1DeclarationsLtIvazCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtFr0564Compute(request) -> *nordlet.PostV1DeclarationsLtFr0564ComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtFr0564Compute(request) -> *nordlet.LtFr0564ComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14694,11 +14733,11 @@ client.Declarations.PostV1DeclarationsLtIvazCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtFr0564ComputeRequest{
+request := &nordlet.LtFr0564ComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtFr0564Compute(
+client.Declarations.LtFr0564Compute(
         context.TODO(),
         request,
     )
@@ -14737,7 +14776,7 @@ client.Declarations.PostV1DeclarationsLtFr0564Compute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtGpm312Compute(request) -> *nordlet.PostV1DeclarationsLtGpm312ComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtGpm312Compute(request) -> *nordlet.LtGpm312ComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14750,10 +14789,10 @@ client.Declarations.PostV1DeclarationsLtFr0564Compute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtGpm312ComputeRequest{
+request := &nordlet.LtGpm312ComputeDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtGpm312Compute(
+client.Declarations.LtGpm312Compute(
         context.TODO(),
         request,
     )
@@ -14780,7 +14819,7 @@ client.Declarations.PostV1DeclarationsLtGpm312Compute(
 <dl>
 <dd>
 
-**payoutTiming:** `*nordlet.PostV1DeclarationsLtGpm312ComputeRequestPayoutTiming` 
+**payoutTiming:** `*nordlet.LtGpm312ComputeDeclarationsRequestPayoutTiming` 
     
 </dd>
 </dl>
@@ -14792,7 +14831,7 @@ client.Declarations.PostV1DeclarationsLtGpm312Compute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtPln204Compute(request) -> *nordlet.PostV1DeclarationsLtPln204ComputeResponse</code></summary>
+<details><summary><code>client.Declarations.LtPln204Compute(request) -> *nordlet.LtPln204ComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14805,10 +14844,10 @@ client.Declarations.PostV1DeclarationsLtGpm312Compute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtPln204ComputeRequest{
+request := &nordlet.LtPln204ComputeDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtPln204Compute(
+client.Declarations.LtPln204Compute(
         context.TODO(),
         request,
     )
@@ -14839,7 +14878,7 @@ client.Declarations.PostV1DeclarationsLtPln204Compute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuOssCompute(request) -> *nordlet.PostV1DeclarationsEuOssComputeResponse</code></summary>
+<details><summary><code>client.Declarations.EuOssCompute(request) -> *nordlet.EuOssComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14852,11 +14891,11 @@ client.Declarations.PostV1DeclarationsLtPln204Compute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuOssComputeRequest{
+request := &nordlet.EuOssComputeDeclarationsRequest{
         Year: int64(1000000),
         Quarter: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsEuOssCompute(
+client.Declarations.EuOssCompute(
         context.TODO(),
         request,
     )
@@ -14895,7 +14934,7 @@ client.Declarations.PostV1DeclarationsEuOssCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuIossCompute(request) -> *nordlet.PostV1DeclarationsEuIossComputeResponse</code></summary>
+<details><summary><code>client.Declarations.EuIossCompute(request) -> *nordlet.EuIossComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14908,11 +14947,11 @@ client.Declarations.PostV1DeclarationsEuOssCompute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuIossComputeRequest{
+request := &nordlet.EuIossComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsEuIossCompute(
+client.Declarations.EuIossCompute(
         context.TODO(),
         request,
     )
@@ -14951,7 +14990,7 @@ client.Declarations.PostV1DeclarationsEuIossCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(request) -> *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse</code></summary>
+<details><summary><code>client.Declarations.EuDistanceSalesThresholdGet(request) -> *nordlet.EuDistanceSalesThresholdGetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -14964,8 +15003,8 @@ client.Declarations.PostV1DeclarationsEuIossCompute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetRequest{}
-client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(
+request := &nordlet.EuDistanceSalesThresholdGetDeclarationsRequest{}
+client.Declarations.EuDistanceSalesThresholdGet(
         context.TODO(),
         request,
     )
@@ -14984,7 +15023,7 @@ client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -14996,7 +15035,7 @@ client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(request) -> *nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse</code></summary>
+<details><summary><code>client.Declarations.EuUnionTurnoverGet(request) -> *nordlet.EuUnionTurnoverGetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15009,8 +15048,8 @@ client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuUnionTurnoverGetRequest{}
-client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(
+request := &nordlet.EuUnionTurnoverGetDeclarationsRequest{}
+client.Declarations.EuUnionTurnoverGet(
         context.TODO(),
         request,
     )
@@ -15029,7 +15068,7 @@ client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -15041,7 +15080,7 @@ client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(request) -> *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse</code></summary>
+<details><summary><code>client.Declarations.EuSmeCrossBorderReportCompute(request) -> *nordlet.EuSmeCrossBorderReportComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15054,11 +15093,11 @@ client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeRequest{
+request := &nordlet.EuSmeCrossBorderReportComputeDeclarationsRequest{
         Year: int64(1000000),
         Quarter: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(
+client.Declarations.EuSmeCrossBorderReportCompute(
         context.TODO(),
         request,
     )
@@ -15097,7 +15136,7 @@ client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeThresholdsList(request) -> *nordlet.PostV1DeclarationsEuSmeThresholdsListResponse</code></summary>
+<details><summary><code>client.Declarations.EuSmeThresholdsList(request) -> *nordlet.EuSmeThresholdsListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15110,8 +15149,8 @@ client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuSmeThresholdsListRequest{}
-client.Declarations.PostV1DeclarationsEuSmeThresholdsList(
+request := &nordlet.EuSmeThresholdsListDeclarationsRequest{}
+client.Declarations.EuSmeThresholdsList(
         context.TODO(),
         request,
     )
@@ -15127,7 +15166,7 @@ client.Declarations.PostV1DeclarationsEuSmeThresholdsList(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeThresholdGet(request) -> *nordlet.PostV1DeclarationsEuSmeThresholdGetResponse</code></summary>
+<details><summary><code>client.Declarations.EuSmeThresholdGet(request) -> *nordlet.EuSmeThresholdGetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15140,8 +15179,8 @@ client.Declarations.PostV1DeclarationsEuSmeThresholdsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuSmeThresholdGetRequest{}
-client.Declarations.PostV1DeclarationsEuSmeThresholdGet(
+request := &nordlet.EuSmeThresholdGetDeclarationsRequest{}
+client.Declarations.EuSmeThresholdGet(
         context.TODO(),
         request,
     )
@@ -15160,7 +15199,7 @@ client.Declarations.PostV1DeclarationsEuSmeThresholdGet(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -15172,7 +15211,7 @@ client.Declarations.PostV1DeclarationsEuSmeThresholdGet(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuVatReturnPacksList(request) -> *nordlet.PostV1DeclarationsEuVatReturnPacksListResponse</code></summary>
+<details><summary><code>client.Declarations.EuVatReturnPacksList(request) -> *nordlet.EuVatReturnPacksListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15185,8 +15224,8 @@ client.Declarations.PostV1DeclarationsEuSmeThresholdGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuVatReturnPacksListRequest{}
-client.Declarations.PostV1DeclarationsEuVatReturnPacksList(
+request := &nordlet.EuVatReturnPacksListDeclarationsRequest{}
+client.Declarations.EuVatReturnPacksList(
         context.TODO(),
         request,
     )
@@ -15202,7 +15241,7 @@ client.Declarations.PostV1DeclarationsEuVatReturnPacksList(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEuVatReturnCompute(request) -> *nordlet.PostV1DeclarationsEuVatReturnComputeResponse</code></summary>
+<details><summary><code>client.Declarations.EuVatReturnCompute(request) -> *nordlet.EuVatReturnComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15215,12 +15254,12 @@ client.Declarations.PostV1DeclarationsEuVatReturnPacksList(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEuVatReturnComputeRequest{
+request := &nordlet.EuVatReturnComputeDeclarationsRequest{
         CountryCode: "countryCode",
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsEuVatReturnCompute(
+client.Declarations.EuVatReturnCompute(
         context.TODO(),
         request,
     )
@@ -15275,7 +15314,7 @@ client.Declarations.PostV1DeclarationsEuVatReturnCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(request) -> *nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlJpkV7MGenerate(request) -> *nordlet.PlJpkV7MGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15302,13 +15341,13 @@ Generate the Polish JPK_V7M(3) file (VAT declaration with evidence) for a month,
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest{
+request := &nordlet.PlJpkV7MGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
         KodUrzedu: "kodUrzedu",
         Email: "email",
     }
-client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(
+client.Declarations.PlJpkV7MGenerate(
         context.TODO(),
         request,
     )
@@ -15371,7 +15410,7 @@ client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlVatUeGenerate(request) -> *nordlet.PostV1DeclarationsPlVatUeGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlVatUeGenerate(request) -> *nordlet.PlVatUeGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15398,11 +15437,11 @@ Build the rows of the Polish recapitulative statement VAT-UE for a month: sectio
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlVatUeGenerateRequest{
+request := &nordlet.PlVatUeGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlVatUeGenerate(
+client.Declarations.PlVatUeGenerate(
         context.TODO(),
         request,
     )
@@ -15441,7 +15480,7 @@ client.Declarations.PostV1DeclarationsPlVatUeGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlIntrastatGenerate(request) -> *nordlet.PostV1DeclarationsPlIntrastatGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlIntrastatGenerate(request) -> *nordlet.PlIntrastatGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15468,12 +15507,12 @@ Build the rows of the Polish INTRASTAT declaration for a month, arrivals or disp
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlIntrastatGenerateRequest{
+request := &nordlet.PlIntrastatGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
-        Flow: nordlet.PostV1DeclarationsPlIntrastatGenerateRequestFlowArrivals,
+        Flow: nordlet.PlIntrastatGenerateDeclarationsRequestFlowArrivals,
     }
-client.Declarations.PostV1DeclarationsPlIntrastatGenerate(
+client.Declarations.PlIntrastatGenerate(
         context.TODO(),
         request,
     )
@@ -15508,7 +15547,7 @@ client.Declarations.PostV1DeclarationsPlIntrastatGenerate(
 <dl>
 <dd>
 
-**flow:** `*nordlet.PostV1DeclarationsPlIntrastatGenerateRequestFlow` 
+**flow:** `*nordlet.PlIntrastatGenerateDeclarationsRequestFlow` 
     
 </dd>
 </dl>
@@ -15528,7 +15567,7 @@ client.Declarations.PostV1DeclarationsPlIntrastatGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlKsefReceivedList(request) -> *nordlet.PostV1DeclarationsPlKsefReceivedListResponse</code></summary>
+<details><summary><code>client.Declarations.PlKsefReceivedList(request) -> *nordlet.PlKsefReceivedListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15555,7 +15594,7 @@ List the invoices KSeF holds for this company as the buyer, for a window of acqu
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlKsefReceivedListRequest{
+request := &nordlet.PlKsefReceivedListDeclarationsRequest{
         From: nordlet.MustParseDateTime(
             "2024-01-15T09:30:00Z",
         ),
@@ -15563,7 +15602,7 @@ request := &nordlet.PostV1DeclarationsPlKsefReceivedListRequest{
             "2024-01-15T09:30:00Z",
         ),
     }
-client.Declarations.PostV1DeclarationsPlKsefReceivedList(
+client.Declarations.PlKsefReceivedList(
         context.TODO(),
         request,
     )
@@ -15618,7 +15657,7 @@ client.Declarations.PostV1DeclarationsPlKsefReceivedList(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlKsefReceivedFetch(request) -> *nordlet.PostV1DeclarationsPlKsefReceivedFetchResponse</code></summary>
+<details><summary><code>client.Declarations.PlKsefReceivedFetch(request) -> *nordlet.PlKsefReceivedFetchDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15645,10 +15684,10 @@ Read one invoice out of KSeF by its national number. With a purchase invoice giv
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlKsefReceivedFetchRequest{
+request := &nordlet.PlKsefReceivedFetchDeclarationsRequest{
         KsefNumber: "ksefNumber",
     }
-client.Declarations.PostV1DeclarationsPlKsefReceivedFetch(
+client.Declarations.PlKsefReceivedFetch(
         context.TODO(),
         request,
     )
@@ -15687,7 +15726,7 @@ client.Declarations.PostV1DeclarationsPlKsefReceivedFetch(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlKsefReceipt(request) -> *nordlet.PostV1DeclarationsPlKsefReceiptResponse</code></summary>
+<details><summary><code>client.Declarations.PlKsefReceipt(request) -> *nordlet.PlKsefReceiptDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15714,8 +15753,8 @@ The UPO for a KSeF session. KSeF issues one receipt per session rather than per 
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlKsefReceiptRequest{}
-client.Declarations.PostV1DeclarationsPlKsefReceipt(
+request := &nordlet.PlKsefReceiptDeclarationsRequest{}
+client.Declarations.PlKsefReceipt(
         context.TODO(),
         request,
     )
@@ -15746,7 +15785,7 @@ client.Declarations.PostV1DeclarationsPlKsefReceipt(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.TaxAdjustmentsRecordedForATaxYear(request) -> *nordlet.PostV1DeclarationsTaxAdjustmentsListResponse</code></summary>
+<details><summary><code>client.Declarations.TaxAdjustmentsList(request) -> *nordlet.TaxAdjustmentsListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15773,10 +15812,10 @@ The differences between the accounting result and the taxable profit: non-deduct
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxAdjustmentsListRequest{
+request := &nordlet.TaxAdjustmentsListDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.TaxAdjustmentsRecordedForATaxYear(
+client.Declarations.TaxAdjustmentsList(
         context.TODO(),
         request,
     )
@@ -15807,7 +15846,7 @@ client.Declarations.TaxAdjustmentsRecordedForATaxYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RecordATaxAdjustmentForATaxYear(request) -> *nordlet.PostV1DeclarationsTaxAdjustmentsCreateResponse</code></summary>
+<details><summary><code>client.Declarations.TaxAdjustmentsCreate(request) -> *nordlet.TaxAdjustmentsCreateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15820,13 +15859,13 @@ client.Declarations.TaxAdjustmentsRecordedForATaxYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequest{
+request := &nordlet.TaxAdjustmentsCreateDeclarationsRequest{
         Year: int64(1000000),
-        Kind: nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequestKindNonDeductible,
-        Amount: "amount",
+        Kind: nordlet.TaxAdjustmentsCreateDeclarationsRequestKindNonDeductible,
+        Amount: "121.00",
         Description: "description",
     }
-client.Declarations.RecordATaxAdjustmentForATaxYear(
+client.Declarations.TaxAdjustmentsCreate(
         context.TODO(),
         request,
     )
@@ -15853,7 +15892,7 @@ client.Declarations.RecordATaxAdjustmentForATaxYear(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequestKind` 
+**kind:** `*nordlet.TaxAdjustmentsCreateDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -15889,7 +15928,7 @@ client.Declarations.RecordATaxAdjustmentForATaxYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.ChangeARecordedTaxAdjustment(request) -> *nordlet.PostV1DeclarationsTaxAdjustmentsUpdateResponse</code></summary>
+<details><summary><code>client.Declarations.TaxAdjustmentsUpdate(request) -> *nordlet.TaxAdjustmentsUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15902,10 +15941,10 @@ client.Declarations.RecordATaxAdjustmentForATaxYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxAdjustmentsUpdateRequest{
+request := &nordlet.TaxAdjustmentsUpdateDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.ChangeARecordedTaxAdjustment(
+client.Declarations.TaxAdjustmentsUpdate(
         context.TODO(),
         request,
     )
@@ -15932,7 +15971,7 @@ client.Declarations.ChangeARecordedTaxAdjustment(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsTaxAdjustmentsUpdateRequestKind` 
+**kind:** `*nordlet.TaxAdjustmentsUpdateDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -15968,7 +16007,7 @@ client.Declarations.ChangeARecordedTaxAdjustment(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RemoveARecordedTaxAdjustment(request) -> *nordlet.PostV1DeclarationsTaxAdjustmentsDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.TaxAdjustmentsDelete(request) -> *nordlet.TaxAdjustmentsDeleteDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15981,10 +16020,10 @@ client.Declarations.ChangeARecordedTaxAdjustment(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxAdjustmentsDeleteRequest{
+request := &nordlet.TaxAdjustmentsDeleteDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.RemoveARecordedTaxAdjustment(
+client.Declarations.TaxAdjustmentsDelete(
         context.TODO(),
         request,
     )
@@ -16015,7 +16054,7 @@ client.Declarations.RemoveARecordedTaxAdjustment(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(request) -> *nordlet.PostV1DeclarationsTaxPaymentsListResponse</code></summary>
+<details><summary><code>client.Declarations.TaxPaymentsList(request) -> *nordlet.TaxPaymentsListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16042,11 +16081,11 @@ What the company has paid the administration towards a tax before the return is 
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxPaymentsListRequest{
-        Tax: nordlet.PostV1DeclarationsTaxPaymentsListRequestTaxCorporateIncomeTax,
+request := &nordlet.TaxPaymentsListDeclarationsRequest{
+        Tax: nordlet.TaxPaymentsListDeclarationsRequestTaxCorporateIncomeTax,
         Year: int64(1000000),
     }
-client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(
+client.Declarations.TaxPaymentsList(
         context.TODO(),
         request,
     )
@@ -16065,7 +16104,7 @@ client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(
 <dl>
 <dd>
 
-**tax:** `*nordlet.PostV1DeclarationsTaxPaymentsListRequestTax` 
+**tax:** `*nordlet.TaxPaymentsListDeclarationsRequestTax` 
     
 </dd>
 </dl>
@@ -16093,7 +16132,7 @@ client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RecordAPaymentMadeTowardsATax(request) -> *nordlet.PostV1DeclarationsTaxPaymentsCreateResponse</code></summary>
+<details><summary><code>client.Declarations.TaxPaymentsCreate(request) -> *nordlet.TaxPaymentsCreateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16106,15 +16145,17 @@ client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxPaymentsCreateRequest{
-        Tax: nordlet.PostV1DeclarationsTaxPaymentsCreateRequestTaxCorporateIncomeTax,
+request := &nordlet.TaxPaymentsCreateDeclarationsRequest{
+        Tax: nordlet.TaxPaymentsCreateDeclarationsRequestTaxCorporateIncomeTax,
         Year: int64(1000000),
-        Kind: nordlet.PostV1DeclarationsTaxPaymentsCreateRequestKindAdvance,
-        Amount: "amount",
-        PaidOn: "paidOn",
+        Kind: nordlet.TaxPaymentsCreateDeclarationsRequestKindAdvance,
+        Amount: "121.00",
+        PaidOn: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
         Description: "description",
     }
-client.Declarations.RecordAPaymentMadeTowardsATax(
+client.Declarations.TaxPaymentsCreate(
         context.TODO(),
         request,
     )
@@ -16133,7 +16174,7 @@ client.Declarations.RecordAPaymentMadeTowardsATax(
 <dl>
 <dd>
 
-**tax:** `*nordlet.PostV1DeclarationsTaxPaymentsCreateRequestTax` 
+**tax:** `*nordlet.TaxPaymentsCreateDeclarationsRequestTax` 
     
 </dd>
 </dl>
@@ -16157,7 +16198,7 @@ client.Declarations.RecordAPaymentMadeTowardsATax(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsTaxPaymentsCreateRequestKind` 
+**kind:** `*nordlet.TaxPaymentsCreateDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -16173,7 +16214,7 @@ client.Declarations.RecordAPaymentMadeTowardsATax(
 <dl>
 <dd>
 
-**paidOn:** `string` 
+**paidOn:** `time.Time` 
     
 </dd>
 </dl>
@@ -16201,7 +16242,7 @@ client.Declarations.RecordAPaymentMadeTowardsATax(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.ChangeARecordedTaxPayment(request) -> *nordlet.PostV1DeclarationsTaxPaymentsUpdateResponse</code></summary>
+<details><summary><code>client.Declarations.TaxPaymentsUpdate(request) -> *nordlet.TaxPaymentsUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16214,10 +16255,10 @@ client.Declarations.RecordAPaymentMadeTowardsATax(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxPaymentsUpdateRequest{
+request := &nordlet.TaxPaymentsUpdateDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.ChangeARecordedTaxPayment(
+client.Declarations.TaxPaymentsUpdate(
         context.TODO(),
         request,
     )
@@ -16244,7 +16285,7 @@ client.Declarations.ChangeARecordedTaxPayment(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsTaxPaymentsUpdateRequestKind` 
+**kind:** `*nordlet.TaxPaymentsUpdateDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -16260,7 +16301,7 @@ client.Declarations.ChangeARecordedTaxPayment(
 <dl>
 <dd>
 
-**paidOn:** `*string` 
+**paidOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16288,7 +16329,7 @@ client.Declarations.ChangeARecordedTaxPayment(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RemoveARecordedTaxPayment(request) -> *nordlet.PostV1DeclarationsTaxPaymentsDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.TaxPaymentsDelete(request) -> *nordlet.TaxPaymentsDeleteDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16301,10 +16342,10 @@ client.Declarations.ChangeARecordedTaxPayment(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsTaxPaymentsDeleteRequest{
+request := &nordlet.TaxPaymentsDeleteDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.RemoveARecordedTaxPayment(
+client.Declarations.TaxPaymentsDelete(
         context.TODO(),
         request,
     )
@@ -16335,7 +16376,7 @@ client.Declarations.RemoveARecordedTaxPayment(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(request) -> *nordlet.PostV1DeclarationsAnnualAccountsGetResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsGet(request) -> *nordlet.AnnualAccountsGetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16362,10 +16403,10 @@ Whether the general meeting adopted the annual accounts and on which date, the d
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsGetRequest{
+request := &nordlet.AnnualAccountsGetDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
+client.Declarations.AnnualAccountsGet(
         context.TODO(),
         request,
     )
@@ -16396,7 +16437,7 @@ client.Declarations.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(request) -> *nordlet.PostV1DeclarationsAnnualAccountsSetResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsSet(request) -> *nordlet.AnnualAccountsSetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16409,12 +16450,14 @@ client.Declarations.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsSetRequest{
+request := &nordlet.AnnualAccountsSetDeclarationsRequest{
         Year: int64(1000000),
         Adopted: true,
-        DateOfPreparation: "dateOfPreparation",
+        DateOfPreparation: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
+client.Declarations.AnnualAccountsSet(
         context.TODO(),
         request,
     )
@@ -16449,7 +16492,7 @@ client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**adoptionDate:** `*string` 
+**adoptionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16457,7 +16500,7 @@ client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**dateOfPreparation:** `string` 
+**dateOfPreparation:** `time.Time` 
     
 </dd>
 </dl>
@@ -16513,7 +16556,7 @@ client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**auditorReportDate:** `*string` 
+**auditorReportDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16549,7 +16592,7 @@ client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(request) -> *nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsSignaturesCreate(request) -> *nordlet.AnnualAccountsSignaturesCreateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16562,13 +16605,13 @@ client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequest{
+request := &nordlet.AnnualAccountsSignaturesCreateDeclarationsRequest{
         Year: int64(1000000),
         DirectorName: "directorName",
-        DirectorType: nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequestDirectorTypeManagingCurrent,
+        DirectorType: nordlet.AnnualAccountsSignaturesCreateDeclarationsRequestDirectorTypeManagingCurrent,
         Signed: true,
     }
-client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
+client.Declarations.AnnualAccountsSignaturesCreate(
         context.TODO(),
         request,
     )
@@ -16603,7 +16646,7 @@ client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**directorType:** `*nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequestDirectorType` 
+**directorType:** `*nordlet.AnnualAccountsSignaturesCreateDeclarationsRequestDirectorType` 
     
 </dd>
 </dl>
@@ -16619,7 +16662,7 @@ client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**signedOn:** `*string` 
+**signedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16627,7 +16670,7 @@ client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**signedAt:** `*string` 
+**signedAt:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16647,7 +16690,7 @@ client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.ChangeARecordedDirectorSignature(request) -> *nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsSignaturesUpdate(request) -> *nordlet.AnnualAccountsSignaturesUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16660,13 +16703,13 @@ client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequest{
+request := &nordlet.AnnualAccountsSignaturesUpdateDeclarationsRequest{
         ID: "id",
         DirectorName: "directorName",
-        DirectorType: nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequestDirectorTypeManagingCurrent,
+        DirectorType: nordlet.AnnualAccountsSignaturesUpdateDeclarationsRequestDirectorTypeManagingCurrent,
         Signed: true,
     }
-client.Declarations.ChangeARecordedDirectorSignature(
+client.Declarations.AnnualAccountsSignaturesUpdate(
         context.TODO(),
         request,
     )
@@ -16701,7 +16744,7 @@ client.Declarations.ChangeARecordedDirectorSignature(
 <dl>
 <dd>
 
-**directorType:** `*nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequestDirectorType` 
+**directorType:** `*nordlet.AnnualAccountsSignaturesUpdateDeclarationsRequestDirectorType` 
     
 </dd>
 </dl>
@@ -16717,7 +16760,7 @@ client.Declarations.ChangeARecordedDirectorSignature(
 <dl>
 <dd>
 
-**signedOn:** `*string` 
+**signedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16725,7 +16768,7 @@ client.Declarations.ChangeARecordedDirectorSignature(
 <dl>
 <dd>
 
-**signedAt:** `*string` 
+**signedAt:** `*time.Time` 
     
 </dd>
 </dl>
@@ -16745,7 +16788,7 @@ client.Declarations.ChangeARecordedDirectorSignature(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RemoveARecordedDirectorSignature(request) -> *nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsSignaturesDelete(request) -> *nordlet.AnnualAccountsSignaturesDeleteDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16758,10 +16801,10 @@ client.Declarations.ChangeARecordedDirectorSignature(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteRequest{
+request := &nordlet.AnnualAccountsSignaturesDeleteDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.RemoveARecordedDirectorSignature(
+client.Declarations.AnnualAccountsSignaturesDelete(
         context.TODO(),
         request,
     )
@@ -16792,7 +16835,7 @@ client.Declarations.RemoveARecordedDirectorSignature(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(request) -> *nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsDistributionsCreate(request) -> *nordlet.AnnualAccountsDistributionsCreateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16805,13 +16848,15 @@ client.Declarations.RemoveARecordedDirectorSignature(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequest{
+request := &nordlet.AnnualAccountsDistributionsCreateDeclarationsRequest{
         Year: int64(1000000),
-        DecidedOn: "decidedOn",
-        Kind: nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequestKindDividend,
-        Amount: "amount",
+        DecidedOn: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Kind: nordlet.AnnualAccountsDistributionsCreateDeclarationsRequestKindDividend,
+        Amount: "121.00",
     }
-client.Declarations.RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(
+client.Declarations.AnnualAccountsDistributionsCreate(
         context.TODO(),
         request,
     )
@@ -16838,7 +16883,7 @@ client.Declarations.RecordADecisionToDistributeProfitADividendAnInterimDividendO
 <dl>
 <dd>
 
-**decidedOn:** `string` 
+**decidedOn:** `time.Time` 
     
 </dd>
 </dl>
@@ -16846,89 +16891,7 @@ client.Declarations.RecordADecisionToDistributeProfitADividendAnInterimDividendO
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequestKind` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**amount:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**description:** `*string` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Declarations.ChangeARecordedProfitDistribution(request) -> *nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequest{
-        ID: "id",
-        DecidedOn: "decidedOn",
-        Kind: nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequestKindDividend,
-        Amount: "amount",
-    }
-client.Declarations.ChangeARecordedProfitDistribution(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**decidedOn:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**kind:** `*nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequestKind` 
+**kind:** `*nordlet.AnnualAccountsDistributionsCreateDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -16956,7 +16919,7 @@ client.Declarations.ChangeARecordedProfitDistribution(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RemoveARecordedProfitDistribution(request) -> *nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsDistributionsUpdate(request) -> *nordlet.AnnualAccountsDistributionsUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16969,10 +16932,94 @@ client.Declarations.ChangeARecordedProfitDistribution(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteRequest{
+request := &nordlet.AnnualAccountsDistributionsUpdateDeclarationsRequest{
+        ID: "id",
+        DecidedOn: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Kind: nordlet.AnnualAccountsDistributionsUpdateDeclarationsRequestKindDividend,
+        Amount: "121.00",
+    }
+client.Declarations.AnnualAccountsDistributionsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**decidedOn:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kind:** `*nordlet.AnnualAccountsDistributionsUpdateDeclarationsRequestKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.AnnualAccountsDistributionsDelete(request) -> *nordlet.AnnualAccountsDistributionsDeleteDeclarationsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.AnnualAccountsDistributionsDeleteDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.RemoveARecordedProfitDistribution(
+client.Declarations.AnnualAccountsDistributionsDelete(
         context.TODO(),
         request,
     )
@@ -17003,7 +17050,7 @@ client.Declarations.RemoveARecordedProfitDistribution(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(request) -> *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsAttachmentsAdd(request) -> *nordlet.AnnualAccountsAttachmentsAddDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17030,12 +17077,12 @@ Links a file uploaded through files/upload (its storageKey) to the annual accoun
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequest{
+request := &nordlet.AnnualAccountsAttachmentsAddDeclarationsRequest{
         Year: int64(1000000),
-        Kind: nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequestKindFullReport,
+        Kind: nordlet.AnnualAccountsAttachmentsAddDeclarationsRequestKindFullReport,
         Ref: "ref",
     }
-client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
+client.Declarations.AnnualAccountsAttachmentsAdd(
         context.TODO(),
         request,
     )
@@ -17062,7 +17109,7 @@ client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequestKind` 
+**kind:** `*nordlet.AnnualAccountsAttachmentsAddDeclarationsRequestKind` 
     
 </dd>
 </dl>
@@ -17090,7 +17137,7 @@ client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(request) -> *nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.AnnualAccountsAttachmentsDelete(request) -> *nordlet.AnnualAccountsAttachmentsDeleteDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17103,10 +17150,10 @@ client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteRequest{
+request := &nordlet.AnnualAccountsAttachmentsDeleteDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
+client.Declarations.AnnualAccountsAttachmentsDelete(
         context.TODO(),
         request,
     )
@@ -17137,7 +17184,7 @@ client.Declarations.RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsCyTd4Generate(request) -> *nordlet.PostV1DeclarationsCyTd4GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.CyTd4Generate(request) -> *nordlet.CyTd4GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17164,10 +17211,10 @@ Compute the company income tax return TD4 of a tax year from the ledger and the 
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsCyTd4GenerateRequest{
+request := &nordlet.CyTd4GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsCyTd4Generate(
+client.Declarations.CyTd4Generate(
         context.TODO(),
         request,
     )
@@ -17198,7 +17245,7 @@ client.Declarations.PostV1DeclarationsCyTd4Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsCyHe32Generate(request) -> *nordlet.PostV1DeclarationsCyHe32GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.CyHe32Generate(request) -> *nordlet.CyHe32GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17225,10 +17272,10 @@ Build the annual return HE32 of a year: the figures the Registrar’s e-filing s
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsCyHe32GenerateRequest{
+request := &nordlet.CyHe32GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsCyHe32Generate(
+client.Declarations.CyHe32Generate(
         context.TODO(),
         request,
     )
@@ -17259,7 +17306,7 @@ client.Declarations.PostV1DeclarationsCyHe32Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDeReturnsGenerate(request) -> *nordlet.PostV1DeclarationsDeReturnsGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.DeReturnsGenerate(request) -> *nordlet.DeReturnsGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17286,11 +17333,11 @@ Build one of the German returns that ELSTER accepts only through a licensed ERiC
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDeReturnsGenerateRequest{
-        RuleKey: nordlet.PostV1DeclarationsDeReturnsGenerateRequestRuleKeyDeEBilanz,
+request := &nordlet.DeReturnsGenerateDeclarationsRequest{
+        RuleKey: nordlet.DeReturnsGenerateDeclarationsRequestRuleKeyDeEBilanz,
         Period: "period",
     }
-client.Declarations.PostV1DeclarationsDeReturnsGenerate(
+client.Declarations.DeReturnsGenerate(
         context.TODO(),
         request,
     )
@@ -17309,7 +17356,7 @@ client.Declarations.PostV1DeclarationsDeReturnsGenerate(
 <dl>
 <dd>
 
-**ruleKey:** `*nordlet.PostV1DeclarationsDeReturnsGenerateRequestRuleKey` 
+**ruleKey:** `*nordlet.DeReturnsGenerateDeclarationsRequestRuleKey` 
     
 </dd>
 </dl>
@@ -17329,7 +17376,7 @@ client.Declarations.PostV1DeclarationsDeReturnsGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDeReturnFactsGet(request) -> *nordlet.PostV1DeclarationsDeReturnFactsGetResponse</code></summary>
+<details><summary><code>client.Declarations.DeReturnFactsGet(request) -> *nordlet.DeReturnFactsGetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17356,10 +17403,10 @@ The facts of one year that the German annual returns (Körperschaftsteuer, Gewer
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDeReturnFactsGetRequest{
+request := &nordlet.DeReturnFactsGetDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsDeReturnFactsGet(
+client.Declarations.DeReturnFactsGet(
         context.TODO(),
         request,
     )
@@ -17390,7 +17437,7 @@ client.Declarations.PostV1DeclarationsDeReturnFactsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDeReturnFactsSet(request) -> *nordlet.PostV1DeclarationsDeReturnFactsSetResponse</code></summary>
+<details><summary><code>client.Declarations.DeReturnFactsSet(request) -> *nordlet.DeReturnFactsSetDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17417,11 +17464,11 @@ Replace the facts of one year for the German annual returns. The returns built a
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDeReturnFactsSetRequest{
+request := &nordlet.DeReturnFactsSetDeclarationsRequest{
         Year: int64(1000000),
-        Facts: &nordlet.PostV1DeclarationsDeReturnFactsSetRequestFacts{},
+        Facts: &nordlet.DeReturnFactsSetDeclarationsRequestFacts{},
     }
-client.Declarations.PostV1DeclarationsDeReturnFactsSet(
+client.Declarations.DeReturnFactsSet(
         context.TODO(),
         request,
     )
@@ -17448,7 +17495,7 @@ client.Declarations.PostV1DeclarationsDeReturnFactsSet(
 <dl>
 <dd>
 
-**facts:** `*nordlet.PostV1DeclarationsDeReturnFactsSetRequestFacts` 
+**facts:** `*nordlet.DeReturnFactsSetDeclarationsRequestFacts` 
     
 </dd>
 </dl>
@@ -17460,7 +17507,7 @@ client.Declarations.PostV1DeclarationsDeReturnFactsSet(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDeDeuevGenerate(request) -> *nordlet.PostV1DeclarationsDeDeuevGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.DeDeuevGenerate(request) -> *nordlet.DeDeuevGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17487,11 +17534,11 @@ Build the DEÜV notifications of a month (Anmeldung for every start, Abmeldung f
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDeDeuevGenerateRequest{
+request := &nordlet.DeDeuevGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsDeDeuevGenerate(
+client.Declarations.DeDeuevGenerate(
         context.TODO(),
         request,
     )
@@ -17530,7 +17577,7 @@ client.Declarations.PostV1DeclarationsDeDeuevGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDeBeitragsnachweisGenerate(request) -> *nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.DeBeitragsnachweisGenerate(request) -> *nordlet.DeBeitragsnachweisGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17557,11 +17604,11 @@ Build the monthly contribution statement to the health insurers (Beitragsnachwei
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateRequest{
+request := &nordlet.DeBeitragsnachweisGenerateDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsDeBeitragsnachweisGenerate(
+client.Declarations.DeBeitragsnachweisGenerate(
         context.TODO(),
         request,
     )
@@ -17600,7 +17647,7 @@ client.Declarations.PostV1DeclarationsDeBeitragsnachweisGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsDkSelskabsskatGenerate(request) -> *nordlet.PostV1DeclarationsDkSelskabsskatGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.DkSelskabsskatGenerate(request) -> *nordlet.DkSelskabsskatGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17627,10 +17674,10 @@ Compute the oplysningsskema for selskaber (selskabsselvangivelsen) of an income 
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsDkSelskabsskatGenerateRequest{
+request := &nordlet.DkSelskabsskatGenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsDkSelskabsskatGenerate(
+client.Declarations.DkSelskabsskatGenerate(
         context.TODO(),
         request,
     )
@@ -17661,7 +17708,7 @@ client.Declarations.PostV1DeclarationsDkSelskabsskatGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEeEmploymentRegisterSend(request) -> *nordlet.PostV1DeclarationsEeEmploymentRegisterSendResponse</code></summary>
+<details><summary><code>client.Declarations.EeEmploymentRegisterSend(request) -> *nordlet.EeEmploymentRegisterSendDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17688,11 +17735,11 @@ Send one employment register (töötamise register) entry for an employment cont
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequest{
+request := &nordlet.EeEmploymentRegisterSendDeclarationsRequest{
         ContractID: "contractId",
-        Event: nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequestEventStart,
+        Event: nordlet.EeEmploymentRegisterSendDeclarationsRequestEventStart,
     }
-client.Declarations.PostV1DeclarationsEeEmploymentRegisterSend(
+client.Declarations.EeEmploymentRegisterSend(
         context.TODO(),
         request,
     )
@@ -17719,7 +17766,7 @@ client.Declarations.PostV1DeclarationsEeEmploymentRegisterSend(
 <dl>
 <dd>
 
-**event:** `*nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequestEvent` 
+**event:** `*nordlet.EeEmploymentRegisterSendDeclarationsRequestEvent` 
     
 </dd>
 </dl>
@@ -17731,7 +17778,7 @@ client.Declarations.PostV1DeclarationsEeEmploymentRegisterSend(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsEsVerifactuDeclaracionResponsable(request) -> *nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableResponse</code></summary>
+<details><summary><code>client.Declarations.EsVerifactuDeclaracionResponsable(request) -> *nordlet.EsVerifactuDeclaracionResponsableDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17758,8 +17805,8 @@ Nordlet's declaración responsable for its VERI*FACTU invoicing system (Orden HA
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableRequest{}
-client.Declarations.PostV1DeclarationsEsVerifactuDeclaracionResponsable(
+request := &nordlet.EsVerifactuDeclaracionResponsableDeclarationsRequest{}
+client.Declarations.EsVerifactuDeclaracionResponsable(
         context.TODO(),
         request,
     )
@@ -17775,7 +17822,7 @@ client.Declarations.PostV1DeclarationsEsVerifactuDeclaracionResponsable(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsIeCt1Generate(request) -> *nordlet.PostV1DeclarationsIeCt1GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.IeCt1Generate(request) -> *nordlet.IeCt1GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17802,10 +17849,10 @@ Build the Form CT1 of an accounting year as the ROS version 26 XML and the accom
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsIeCt1GenerateRequest{
+request := &nordlet.IeCt1GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsIeCt1Generate(
+client.Declarations.IeCt1Generate(
         context.TODO(),
         request,
     )
@@ -17836,7 +17883,7 @@ client.Declarations.PostV1DeclarationsIeCt1Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsIeB1Generate(request) -> *nordlet.PostV1DeclarationsIeB1GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.IeB1Generate(request) -> *nordlet.IeB1GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17863,10 +17910,10 @@ Build the working paper for the Form B1 annual return of a financial year — co
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsIeB1GenerateRequest{
+request := &nordlet.IeB1GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsIeB1Generate(
+client.Declarations.IeB1Generate(
         context.TODO(),
         request,
     )
@@ -17897,7 +17944,7 @@ client.Declarations.PostV1DeclarationsIeB1Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsItSdiPurchaseSend(request) -> *nordlet.PostV1DeclarationsItSdiPurchaseSendResponse</code></summary>
+<details><summary><code>client.Declarations.ItSdiPurchaseSend(request) -> *nordlet.ItSdiPurchaseSendDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17924,10 +17971,10 @@ Build the TD16-TD19 integration document for a registered purchase invoice and s
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsItSdiPurchaseSendRequest{
+request := &nordlet.ItSdiPurchaseSendDeclarationsRequest{
         PurchaseInvoiceID: "purchaseInvoiceId",
     }
-client.Declarations.PostV1DeclarationsItSdiPurchaseSend(
+client.Declarations.ItSdiPurchaseSend(
         context.TODO(),
         request,
     )
@@ -17962,7 +18009,7 @@ client.Declarations.PostV1DeclarationsItSdiPurchaseSend(
 <dl>
 <dd>
 
-**tipoDocumento:** `*nordlet.PostV1DeclarationsItSdiPurchaseSendRequestTipoDocumento` 
+**tipoDocumento:** `*nordlet.ItSdiPurchaseSendDeclarationsRequestTipoDocumento` 
     
 </dd>
 </dl>
@@ -17974,7 +18021,7 @@ client.Declarations.PostV1DeclarationsItSdiPurchaseSend(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsItSdiPurchasePreview(request) -> *nordlet.PostV1DeclarationsItSdiPurchasePreviewResponse</code></summary>
+<details><summary><code>client.Declarations.ItSdiPurchasePreview(request) -> *nordlet.ItSdiPurchasePreviewDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18001,10 +18048,10 @@ Render the TD16-TD19 integration document for a registered purchase invoice with
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsItSdiPurchasePreviewRequest{
+request := &nordlet.ItSdiPurchasePreviewDeclarationsRequest{
         PurchaseInvoiceID: "purchaseInvoiceId",
     }
-client.Declarations.PostV1DeclarationsItSdiPurchasePreview(
+client.Declarations.ItSdiPurchasePreview(
         context.TODO(),
         request,
     )
@@ -18039,7 +18086,7 @@ client.Declarations.PostV1DeclarationsItSdiPurchasePreview(
 <dl>
 <dd>
 
-**tipoDocumento:** `*nordlet.PostV1DeclarationsItSdiPurchasePreviewRequestTipoDocumento` 
+**tipoDocumento:** `*nordlet.ItSdiPurchasePreviewDeclarationsRequestTipoDocumento` 
     
 </dd>
 </dl>
@@ -18051,7 +18098,7 @@ client.Declarations.PostV1DeclarationsItSdiPurchasePreview(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtSaftSend(request) -> *nordlet.PostV1DeclarationsLtSaftSendResponse</code></summary>
+<details><summary><code>client.Declarations.LtSaftSend(request) -> *nordlet.LtSaftSendDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18063,7 +18110,7 @@ client.Declarations.PostV1DeclarationsItSdiPurchasePreview(
 <dl>
 <dd>
 
-Upload the SAF-T file to i.SAF-T over the iSAFTUploaderService web service and start its processing. The submission itself is confirmed separately, because after confirmation the file can no longer be corrected.
+Upload the SAF-T file to i.SAF-T over the iSAFTUploaderService web service and start its processing. The file, the case reference and the status are kept as a declaration submission (submissionId), whose outcome Nordlet then checks with i.SAF-T. The submission itself is confirmed separately, because after confirmation the file can no longer be corrected. A range and data type already sent is sent again only with amend: true.
 </dd>
 </dl>
 </dd>
@@ -18078,11 +18125,15 @@ Upload the SAF-T file to i.SAF-T over the iSAFTUploaderService web service and s
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtSaftSendRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.LtSaftSendDeclarationsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsLtSaftSend(
+client.Declarations.LtSaftSend(
         context.TODO(),
         request,
     )
@@ -18101,7 +18152,7 @@ client.Declarations.PostV1DeclarationsLtSaftSend(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -18109,7 +18160,7 @@ client.Declarations.PostV1DeclarationsLtSaftSend(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -18117,7 +18168,7 @@ client.Declarations.PostV1DeclarationsLtSaftSend(
 <dl>
 <dd>
 
-**dataType:** `*nordlet.PostV1DeclarationsLtSaftSendRequestDataType` 
+**dataType:** `*nordlet.LtSaftSendDeclarationsRequestDataType` 
     
 </dd>
 </dl>
@@ -18129,6 +18180,14 @@ client.Declarations.PostV1DeclarationsLtSaftSend(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**amend:** `*bool` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18137,7 +18196,7 @@ client.Declarations.PostV1DeclarationsLtSaftSend(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtSdFfdata(request) -> *nordlet.PostV1DeclarationsLtSdFfdataResponse</code></summary>
+<details><summary><code>client.Declarations.LtSdFfdata(request) -> *nordlet.LtSdFfdataDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18164,12 +18223,16 @@ Render the Sodra 1-SD or 2-SD notice for the contracts starting or ending in the
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtSdFfdataRequest{
-        Type: nordlet.PostV1DeclarationsLtSdFfdataRequestTypeOneSd,
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.LtSdFfdataDeclarationsRequest{
+        Type: nordlet.LtSdFfdataDeclarationsRequestTypeOneSd,
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsLtSdFfdata(
+client.Declarations.LtSdFfdata(
         context.TODO(),
         request,
     )
@@ -18188,7 +18251,7 @@ client.Declarations.PostV1DeclarationsLtSdFfdata(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1DeclarationsLtSdFfdataRequestType` 
+**type_:** `*nordlet.LtSdFfdataDeclarationsRequestType` 
     
 </dd>
 </dl>
@@ -18196,7 +18259,7 @@ client.Declarations.PostV1DeclarationsLtSdFfdata(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -18204,7 +18267,7 @@ client.Declarations.PostV1DeclarationsLtSdFfdata(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -18232,7 +18295,7 @@ client.Declarations.PostV1DeclarationsLtSdFfdata(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLtPln204Ffdata(request) -> *nordlet.PostV1DeclarationsLtPln204FfdataResponse</code></summary>
+<details><summary><code>client.Declarations.LtPln204Ffdata(request) -> *nordlet.LtPln204FfdataDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18259,10 +18322,10 @@ Render the annual corporate income tax return PLN204 as an .ffdata document, inc
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLtPln204FfdataRequest{
+request := &nordlet.LtPln204FfdataDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLtPln204Ffdata(
+client.Declarations.LtPln204Ffdata(
         context.TODO(),
         request,
     )
@@ -18293,7 +18356,7 @@ client.Declarations.PostV1DeclarationsLtPln204Ffdata(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsMtCompanyTaxGenerate(request) -> *nordlet.PostV1DeclarationsMtCompanyTaxGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.MtCompanyTaxGenerate(request) -> *nordlet.MtCompanyTaxGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18320,10 +18383,10 @@ Compute the company income tax return and self-assessment of a year of assessmen
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsMtCompanyTaxGenerateRequest{
+request := &nordlet.MtCompanyTaxGenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsMtCompanyTaxGenerate(
+client.Declarations.MtCompanyTaxGenerate(
         context.TODO(),
         request,
     )
@@ -18354,7 +18417,7 @@ client.Declarations.PostV1DeclarationsMtCompanyTaxGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsMtAnnualReturnGenerate(request) -> *nordlet.PostV1DeclarationsMtAnnualReturnGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.MtAnnualReturnGenerate(request) -> *nordlet.MtAnnualReturnGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18381,10 +18444,10 @@ Build the annual return of a year: the company number, registered office and mad
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsMtAnnualReturnGenerateRequest{
+request := &nordlet.MtAnnualReturnGenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsMtAnnualReturnGenerate(
+client.Declarations.MtAnnualReturnGenerate(
         context.TODO(),
         request,
     )
@@ -18415,7 +18478,7 @@ client.Declarations.PostV1DeclarationsMtAnnualReturnGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlJpkFaGenerate(request) -> *nordlet.PostV1DeclarationsPlJpkFaGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlJpkFaGenerate(request) -> *nordlet.PlJpkFaGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18442,11 +18505,15 @@ Generate JPK_FA(4), the on-demand structure with every sales invoice issued in a
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlJpkFaGenerateRequest{
-        DateFrom: "dateFrom",
-        DateTo: "dateTo",
+request := &nordlet.PlJpkFaGenerateDeclarationsRequest{
+        DateFrom: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        DateTo: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsPlJpkFaGenerate(
+client.Declarations.PlJpkFaGenerate(
         context.TODO(),
         request,
     )
@@ -18465,7 +18532,7 @@ client.Declarations.PostV1DeclarationsPlJpkFaGenerate(
 <dl>
 <dd>
 
-**dateFrom:** `string` 
+**dateFrom:** `time.Time` 
     
 </dd>
 </dl>
@@ -18473,7 +18540,7 @@ client.Declarations.PostV1DeclarationsPlJpkFaGenerate(
 <dl>
 <dd>
 
-**dateTo:** `string` 
+**dateTo:** `time.Time` 
     
 </dd>
 </dl>
@@ -18485,7 +18552,7 @@ client.Declarations.PostV1DeclarationsPlJpkFaGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlJpkKrGenerate(request) -> *nordlet.PostV1DeclarationsPlJpkKrGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlJpkKrGenerate(request) -> *nordlet.PlJpkKrGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18512,11 +18579,15 @@ Generate JPK_KR(1), the on-demand structure with the chart of accounts and its o
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlJpkKrGenerateRequest{
-        DateFrom: "dateFrom",
-        DateTo: "dateTo",
+request := &nordlet.PlJpkKrGenerateDeclarationsRequest{
+        DateFrom: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        DateTo: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsPlJpkKrGenerate(
+client.Declarations.PlJpkKrGenerate(
         context.TODO(),
         request,
     )
@@ -18535,7 +18606,7 @@ client.Declarations.PostV1DeclarationsPlJpkKrGenerate(
 <dl>
 <dd>
 
-**dateFrom:** `string` 
+**dateFrom:** `time.Time` 
     
 </dd>
 </dl>
@@ -18543,7 +18614,7 @@ client.Declarations.PostV1DeclarationsPlJpkKrGenerate(
 <dl>
 <dd>
 
-**dateTo:** `string` 
+**dateTo:** `time.Time` 
     
 </dd>
 </dl>
@@ -18555,7 +18626,7 @@ client.Declarations.PostV1DeclarationsPlJpkKrGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlJpkMagGenerate(request) -> *nordlet.PostV1DeclarationsPlJpkMagGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlJpkMagGenerate(request) -> *nordlet.PlJpkMagGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18582,11 +18653,15 @@ Generate JPK_MAG(2), the on-demand structure with the warehouse documents of one
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlJpkMagGenerateRequest{
-        DateFrom: "dateFrom",
-        DateTo: "dateTo",
+request := &nordlet.PlJpkMagGenerateDeclarationsRequest{
+        DateFrom: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        DateTo: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Declarations.PostV1DeclarationsPlJpkMagGenerate(
+client.Declarations.PlJpkMagGenerate(
         context.TODO(),
         request,
     )
@@ -18605,7 +18680,7 @@ client.Declarations.PostV1DeclarationsPlJpkMagGenerate(
 <dl>
 <dd>
 
-**dateFrom:** `string` 
+**dateFrom:** `time.Time` 
     
 </dd>
 </dl>
@@ -18613,7 +18688,7 @@ client.Declarations.PostV1DeclarationsPlJpkMagGenerate(
 <dl>
 <dd>
 
-**dateTo:** `string` 
+**dateTo:** `time.Time` 
     
 </dd>
 </dl>
@@ -18633,7 +18708,7 @@ client.Declarations.PostV1DeclarationsPlJpkMagGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlPit11Generate(request) -> *nordlet.PostV1DeclarationsPlPit11GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlPit11Generate(request) -> *nordlet.PlPit11GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18660,10 +18735,10 @@ Generate PIT-11(29) for every person on the payroll of one year: the pay, the de
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlPit11GenerateRequest{
+request := &nordlet.PlPit11GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlPit11Generate(
+client.Declarations.PlPit11Generate(
         context.TODO(),
         request,
     )
@@ -18694,7 +18769,7 @@ client.Declarations.PostV1DeclarationsPlPit11Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlCit8Generate(request) -> *nordlet.PostV1DeclarationsPlCit8GenerateResponse</code></summary>
+<details><summary><code>client.Declarations.PlCit8Generate(request) -> *nordlet.PlCit8GenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18721,10 +18796,10 @@ Generate CIT-8(34), the annual corporate income tax return, from the ledger of t
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlCit8GenerateRequest{
+request := &nordlet.PlCit8GenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlCit8Generate(
+client.Declarations.PlCit8Generate(
         context.TODO(),
         request,
     )
@@ -18755,7 +18830,7 @@ client.Declarations.PostV1DeclarationsPlCit8Generate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlZusDraCompute(request) -> *nordlet.PostV1DeclarationsPlZusDraComputeResponse</code></summary>
+<details><summary><code>client.Declarations.PlZusDraCompute(request) -> *nordlet.PlZusDraComputeDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18782,11 +18857,11 @@ Compute the monthly ZUS DRA settlement from the payroll run of one month: the pe
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlZusDraComputeRequest{
+request := &nordlet.PlZusDraComputeDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlZusDraCompute(
+client.Declarations.PlZusDraCompute(
         context.TODO(),
         request,
     )
@@ -18825,7 +18900,7 @@ client.Declarations.PostV1DeclarationsPlZusDraCompute(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlZusDraKedu(request) -> *nordlet.PostV1DeclarationsPlZusDraKeduResponse</code></summary>
+<details><summary><code>client.Declarations.PlZusDraKedu(request) -> *nordlet.PlZusDraKeduDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18852,11 +18927,11 @@ Build the KEDU file for one month: the ZUS DRA settlement and one ZUS RCA report
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlZusDraKeduRequest{
+request := &nordlet.PlZusDraKeduDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlZusDraKedu(
+client.Declarations.PlZusDraKedu(
         context.TODO(),
         request,
     )
@@ -18895,7 +18970,7 @@ client.Declarations.PostV1DeclarationsPlZusDraKedu(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsPlZusDraPdf(request) -> *nordlet.PostV1DeclarationsPlZusDraPdfResponse</code></summary>
+<details><summary><code>client.Declarations.PlZusDraPdf(request) -> *nordlet.PlZusDraPdfDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18922,11 +18997,11 @@ Fill the published ZUS DRA form for one month and return it as a PDF. The amount
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsPlZusDraPdfRequest{
+request := &nordlet.PlZusDraPdfDeclarationsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsPlZusDraPdf(
+client.Declarations.PlZusDraPdf(
         context.TODO(),
         request,
     )
@@ -18965,7 +19040,7 @@ client.Declarations.PostV1DeclarationsPlZusDraPdf(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsRoEtransportBuild(request) -> *nordlet.PostV1DeclarationsRoEtransportBuildResponse</code></summary>
+<details><summary><code>client.Declarations.RoEtransportBuild(request) -> *nordlet.RoEtransportBuildDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18992,10 +19067,10 @@ Build the RO e-Transport declaration for an issued waybill: goods with their tar
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsRoEtransportBuildRequest{
+request := &nordlet.RoEtransportBuildDeclarationsRequest{
         WaybillID: "waybillId",
     }
-client.Declarations.PostV1DeclarationsRoEtransportBuild(
+client.Declarations.RoEtransportBuild(
         context.TODO(),
         request,
     )
@@ -19026,7 +19101,7 @@ client.Declarations.PostV1DeclarationsRoEtransportBuild(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsRoEtransportSubmit(request) -> *nordlet.PostV1DeclarationsRoEtransportSubmitResponse</code></summary>
+<details><summary><code>client.Declarations.RoEtransportSubmit(request) -> *nordlet.RoEtransportSubmitDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19053,10 +19128,10 @@ Hand the RO e-Transport declaration for an issued waybill to ANAF under the SPV 
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsRoEtransportSubmitRequest{
+request := &nordlet.RoEtransportSubmitDeclarationsRequest{
         WaybillID: "waybillId",
     }
-client.Declarations.PostV1DeclarationsRoEtransportSubmit(
+client.Declarations.RoEtransportSubmit(
         context.TODO(),
         request,
     )
@@ -19087,7 +19162,7 @@ client.Declarations.PostV1DeclarationsRoEtransportSubmit(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsRoEtransportStatus(request) -> *nordlet.PostV1DeclarationsRoEtransportStatusResponse</code></summary>
+<details><summary><code>client.Declarations.RoEtransportStatus(request) -> *nordlet.RoEtransportStatusDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19114,10 +19189,10 @@ Read the outcome of an e-Transport declaration from ANAF by its upload index, un
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsRoEtransportStatusRequest{
+request := &nordlet.RoEtransportStatusDeclarationsRequest{
         Reference: "reference",
     }
-client.Declarations.PostV1DeclarationsRoEtransportStatus(
+client.Declarations.RoEtransportStatus(
         context.TODO(),
         request,
     )
@@ -19148,7 +19223,7 @@ client.Declarations.PostV1DeclarationsRoEtransportStatus(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLiLohndeklarationGenerate(request) -> *nordlet.PostV1DeclarationsLiLohndeklarationGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LiLohndeklarationGenerate(request) -> *nordlet.LiLohndeklarationGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19175,10 +19250,10 @@ Build the annual wage declaration (Lohndeklaration) to the AHV-IV-FAK from the a
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLiLohndeklarationGenerateRequest{
+request := &nordlet.LiLohndeklarationGenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLiLohndeklarationGenerate(
+client.Declarations.LiLohndeklarationGenerate(
         context.TODO(),
         request,
     )
@@ -19209,7 +19284,7 @@ client.Declarations.PostV1DeclarationsLiLohndeklarationGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsLiLohnlistenGenerate(request) -> *nordlet.PostV1DeclarationsLiLohnlistenGenerateResponse</code></summary>
+<details><summary><code>client.Declarations.LiLohnlistenGenerate(request) -> *nordlet.LiLohnlistenGenerateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19236,10 +19311,10 @@ Build the annual wage list (Lohnliste) of a Liechtenstein employer from the appr
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsLiLohnlistenGenerateRequest{
+request := &nordlet.LiLohnlistenGenerateDeclarationsRequest{
         Year: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsLiLohnlistenGenerate(
+client.Declarations.LiLohnlistenGenerate(
         context.TODO(),
         request,
     )
@@ -19270,7 +19345,7 @@ client.Declarations.PostV1DeclarationsLiLohnlistenGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsConfigsList(request) -> *nordlet.PostV1DeclarationsConfigsListResponse</code></summary>
+<details><summary><code>client.Declarations.ConfigsList(request) -> *nordlet.ConfigsListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19283,8 +19358,8 @@ client.Declarations.PostV1DeclarationsLiLohnlistenGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsConfigsListRequest{}
-client.Declarations.PostV1DeclarationsConfigsList(
+request := &nordlet.ConfigsListDeclarationsRequest{}
+client.Declarations.ConfigsList(
         context.TODO(),
         request,
     )
@@ -19300,7 +19375,7 @@ client.Declarations.PostV1DeclarationsConfigsList(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsConfigsUpdate(request) -> *nordlet.PostV1DeclarationsConfigsUpdateResponse</code></summary>
+<details><summary><code>client.Declarations.ConfigsUpdate(request) -> *nordlet.ConfigsUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19313,13 +19388,13 @@ client.Declarations.PostV1DeclarationsConfigsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsConfigsUpdateRequest{
+request := &nordlet.ConfigsUpdateDeclarationsRequest{
         System: "system",
         Config: map[string]string{
             "key": "value",
         },
     }
-client.Declarations.PostV1DeclarationsConfigsUpdate(
+client.Declarations.ConfigsUpdate(
         context.TODO(),
         request,
     )
@@ -19358,7 +19433,7 @@ client.Declarations.PostV1DeclarationsConfigsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(request) -> *nordlet.PostV1DeclarationsCertificatesUploadResponse</code></summary>
+<details><summary><code>client.Declarations.CertificatesUpload(request) -> *nordlet.CertificatesUploadDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19371,12 +19446,12 @@ client.Declarations.PostV1DeclarationsConfigsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsCertificatesUploadRequest{
+request := &nordlet.CertificatesUploadDeclarationsRequest{
         System: "system",
         FileName: "fileName",
         Content: "content",
     }
-client.Declarations.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
+client.Declarations.CertificatesUpload(
         context.TODO(),
         request,
     )
@@ -19431,7 +19506,7 @@ client.Declarations.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWit
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsCertificatesList(request) -> *nordlet.PostV1DeclarationsCertificatesListResponse</code></summary>
+<details><summary><code>client.Declarations.CertificatesList(request) -> *nordlet.CertificatesListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19444,8 +19519,8 @@ client.Declarations.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWit
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsCertificatesListRequest{}
-client.Declarations.PostV1DeclarationsCertificatesList(
+request := &nordlet.CertificatesListDeclarationsRequest{}
+client.Declarations.CertificatesList(
         context.TODO(),
         request,
     )
@@ -19461,7 +19536,7 @@ client.Declarations.PostV1DeclarationsCertificatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsCertificatesDelete(request) -> *nordlet.PostV1DeclarationsCertificatesDeleteResponse</code></summary>
+<details><summary><code>client.Declarations.CertificatesDelete(request) -> *nordlet.CertificatesDeleteDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19474,11 +19549,11 @@ client.Declarations.PostV1DeclarationsCertificatesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsCertificatesDeleteRequest{
+request := &nordlet.CertificatesDeleteDeclarationsRequest{
         System: "system",
-        FieldKey: nordlet.PostV1DeclarationsCertificatesDeleteRequestFieldKeyCertificate,
+        FieldKey: nordlet.CertificatesDeleteDeclarationsRequestFieldKeyCertificate,
     }
-client.Declarations.PostV1DeclarationsCertificatesDelete(
+client.Declarations.CertificatesDelete(
         context.TODO(),
         request,
     )
@@ -19505,7 +19580,7 @@ client.Declarations.PostV1DeclarationsCertificatesDelete(
 <dl>
 <dd>
 
-**fieldKey:** `*nordlet.PostV1DeclarationsCertificatesDeleteRequestFieldKey` 
+**fieldKey:** `*nordlet.CertificatesDeleteDeclarationsRequestFieldKey` 
     
 </dd>
 </dl>
@@ -19517,7 +19592,7 @@ client.Declarations.PostV1DeclarationsCertificatesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(request) -> *nordlet.PostV1DeclarationsAutomationListResponse</code></summary>
+<details><summary><code>client.Declarations.AutomationList(request) -> *nordlet.AutomationListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19530,8 +19605,8 @@ client.Declarations.PostV1DeclarationsCertificatesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAutomationListRequest{}
-client.Declarations.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(
+request := &nordlet.AutomationListDeclarationsRequest{}
+client.Declarations.AutomationList(
         context.TODO(),
         request,
     )
@@ -19547,7 +19622,7 @@ client.Declarations.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAr
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsAutomationUpdate(request) -> *nordlet.PostV1DeclarationsAutomationUpdateResponse</code></summary>
+<details><summary><code>client.Declarations.AutomationUpdate(request) -> *nordlet.AutomationUpdateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19560,11 +19635,11 @@ client.Declarations.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAr
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsAutomationUpdateRequest{
+request := &nordlet.AutomationUpdateDeclarationsRequest{
         RuleKey: "ruleKey",
         Enabled: true,
     }
-client.Declarations.PostV1DeclarationsAutomationUpdate(
+client.Declarations.AutomationUpdate(
         context.TODO(),
         request,
     )
@@ -19603,7 +19678,7 @@ client.Declarations.PostV1DeclarationsAutomationUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(request) -> *nordlet.PostV1DeclarationsSubmissionsRetryResponse</code></summary>
+<details><summary><code>client.Declarations.SubmissionsRetry(request) -> *nordlet.SubmissionsRetryDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19616,10 +19691,10 @@ client.Declarations.PostV1DeclarationsAutomationUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsSubmissionsRetryRequest{
+request := &nordlet.SubmissionsRetryDeclarationsRequest{
         ID: "id",
     }
-client.Declarations.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(
+client.Declarations.SubmissionsRetry(
         context.TODO(),
         request,
     )
@@ -19650,7 +19725,7 @@ client.Declarations.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGe
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsSubmissionsCreate(request) -> *nordlet.PostV1DeclarationsSubmissionsCreateResponse</code></summary>
+<details><summary><code>client.Declarations.SubmissionsCreate(request) -> *nordlet.SubmissionsCreateDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19663,12 +19738,12 @@ client.Declarations.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGe
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsSubmissionsCreateRequest{
-        Obligation: nordlet.PostV1DeclarationsSubmissionsCreateRequestObligationLtIsaf,
+request := &nordlet.SubmissionsCreateDeclarationsRequest{
+        Obligation: nordlet.SubmissionsCreateDeclarationsRequestObligationLtIsaf,
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Declarations.PostV1DeclarationsSubmissionsCreate(
+client.Declarations.SubmissionsCreate(
         context.TODO(),
         request,
     )
@@ -19687,7 +19762,7 @@ client.Declarations.PostV1DeclarationsSubmissionsCreate(
 <dl>
 <dd>
 
-**obligation:** `*nordlet.PostV1DeclarationsSubmissionsCreateRequestObligation` 
+**obligation:** `*nordlet.SubmissionsCreateDeclarationsRequestObligation` 
     
 </dd>
 </dl>
@@ -19711,7 +19786,7 @@ client.Declarations.PostV1DeclarationsSubmissionsCreate(
 <dl>
 <dd>
 
-**dataType:** `*nordlet.PostV1DeclarationsSubmissionsCreateRequestDataType` 
+**dataType:** `*nordlet.SubmissionsCreateDeclarationsRequestDataType` 
     
 </dd>
 </dl>
@@ -19723,7 +19798,7 @@ client.Declarations.PostV1DeclarationsSubmissionsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsSubmissionsMark(request) -> *nordlet.PostV1DeclarationsSubmissionsMarkResponse</code></summary>
+<details><summary><code>client.Declarations.SubmissionsMark(request) -> *nordlet.SubmissionsMarkDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19736,11 +19811,11 @@ client.Declarations.PostV1DeclarationsSubmissionsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsSubmissionsMarkRequest{
+request := &nordlet.SubmissionsMarkDeclarationsRequest{
         ID: "id",
-        Status: nordlet.PostV1DeclarationsSubmissionsMarkRequestStatusSubmitted,
+        Status: nordlet.SubmissionsMarkDeclarationsRequestStatusSubmitted,
     }
-client.Declarations.PostV1DeclarationsSubmissionsMark(
+client.Declarations.SubmissionsMark(
         context.TODO(),
         request,
     )
@@ -19767,7 +19842,7 @@ client.Declarations.PostV1DeclarationsSubmissionsMark(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1DeclarationsSubmissionsMarkRequestStatus` 
+**status:** `*nordlet.SubmissionsMarkDeclarationsRequestStatus` 
     
 </dd>
 </dl>
@@ -19795,7 +19870,7 @@ client.Declarations.PostV1DeclarationsSubmissionsMark(
 </dl>
 </details>
 
-<details><summary><code>client.Declarations.PostV1DeclarationsSubmissionsList(request) -> *nordlet.PostV1DeclarationsSubmissionsListResponse</code></summary>
+<details><summary><code>client.Declarations.SubmissionsList(request) -> *nordlet.SubmissionsListDeclarationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -19808,8 +19883,8 @@ client.Declarations.PostV1DeclarationsSubmissionsMark(
 <dd>
 
 ```go
-request := &nordlet.PostV1DeclarationsSubmissionsListRequest{}
-client.Declarations.PostV1DeclarationsSubmissionsList(
+request := &nordlet.SubmissionsListDeclarationsRequest{}
+client.Declarations.SubmissionsList(
         context.TODO(),
         request,
     )
@@ -19844,7 +19919,7 @@ client.Declarations.PostV1DeclarationsSubmissionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1DeclarationsSubmissionsListRequestSortItem` 
+**sort:** `[]*nordlet.SubmissionsListDeclarationsRequestSortItem` 
     
 </dd>
 </dl>
@@ -19852,7 +19927,7 @@ client.Declarations.PostV1DeclarationsSubmissionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1DeclarationsSubmissionsListRequestFilterItem` 
+**filter:** `[]*nordlet.SubmissionsListDeclarationsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -19872,8 +19947,8 @@ client.Declarations.PostV1DeclarationsSubmissionsList(
 </dl>
 </details>
 
-## Ledger
-<details><summary><code>client.Ledger.PostV1LedgerAccountsList(request) -> *nordlet.PostV1LedgerAccountsListResponse</code></summary>
+## ledger
+<details><summary><code>client.Ledger.AccountsList(request) -> *nordlet.AccountsListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -19886,8 +19961,8 @@ client.Declarations.PostV1DeclarationsSubmissionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerAccountsListRequest{}
-client.Ledger.PostV1LedgerAccountsList(
+request := &nordlet.AccountsListLedgerRequest{}
+client.Ledger.AccountsList(
         context.TODO(),
         request,
     )
@@ -19922,7 +19997,7 @@ client.Ledger.PostV1LedgerAccountsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerAccountsListRequestSortItem` 
+**sort:** `[]*nordlet.AccountsListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -19930,7 +20005,7 @@ client.Ledger.PostV1LedgerAccountsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerAccountsListRequestFilterItem` 
+**filter:** `[]*nordlet.AccountsListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -19950,7 +20025,7 @@ client.Ledger.PostV1LedgerAccountsList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerAccountsCreate(request) -> *nordlet.PostV1LedgerAccountsCreateResponse</code></summary>
+<details><summary><code>client.Ledger.AccountsCreate(request) -> *nordlet.AccountsCreateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -19963,12 +20038,12 @@ client.Ledger.PostV1LedgerAccountsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerAccountsCreateRequest{
+request := &nordlet.AccountsCreateLedgerRequest{
         Code: "code",
         Name: "name",
-        Type: nordlet.PostV1LedgerAccountsCreateRequestTypeAsset,
+        Type: nordlet.AccountsCreateLedgerRequestTypeAsset,
     }
-client.Ledger.PostV1LedgerAccountsCreate(
+client.Ledger.AccountsCreate(
         context.TODO(),
         request,
     )
@@ -20003,7 +20078,7 @@ client.Ledger.PostV1LedgerAccountsCreate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1LedgerAccountsCreateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.AccountsCreateLedgerRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -20011,7 +20086,7 @@ client.Ledger.PostV1LedgerAccountsCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1LedgerAccountsCreateRequestType` 
+**type_:** `*nordlet.AccountsCreateLedgerRequestType` 
     
 </dd>
 </dl>
@@ -20039,7 +20114,7 @@ client.Ledger.PostV1LedgerAccountsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerAccountsUpdate(request) -> *nordlet.PostV1LedgerAccountsUpdateResponse</code></summary>
+<details><summary><code>client.Ledger.AccountsUpdate(request) -> *nordlet.AccountsUpdateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20052,10 +20127,10 @@ client.Ledger.PostV1LedgerAccountsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerAccountsUpdateRequest{
+request := &nordlet.AccountsUpdateLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerAccountsUpdate(
+client.Ledger.AccountsUpdate(
         context.TODO(),
         request,
     )
@@ -20090,7 +20165,7 @@ client.Ledger.PostV1LedgerAccountsUpdate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1LedgerAccountsUpdateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.AccountsUpdateLedgerRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -20118,7 +20193,7 @@ client.Ledger.PostV1LedgerAccountsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerAccountsApplyTemplate(request) -> *nordlet.PostV1LedgerAccountsApplyTemplateResponse</code></summary>
+<details><summary><code>client.Ledger.AccountsApplyTemplate(request) -> *nordlet.AccountsApplyTemplateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20131,8 +20206,8 @@ client.Ledger.PostV1LedgerAccountsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerAccountsApplyTemplateRequest{}
-client.Ledger.PostV1LedgerAccountsApplyTemplate(
+request := &nordlet.AccountsApplyTemplateLedgerRequest{}
+client.Ledger.AccountsApplyTemplate(
         context.TODO(),
         request,
     )
@@ -20148,7 +20223,7 @@ client.Ledger.PostV1LedgerAccountsApplyTemplate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(request) -> *nordlet.PostV1LedgerAccountsSwitchChartResponse</code></summary>
+<details><summary><code>client.Ledger.AccountsSwitchChart(request) -> *nordlet.AccountsSwitchChartLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20175,8 +20250,8 @@ Replaces the seeded chart with the chart template of the company country (the Ro
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerAccountsSwitchChartRequest{}
-client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+request := &nordlet.AccountsSwitchChartLedgerRequest{}
+client.Ledger.AccountsSwitchChart(
         context.TODO(),
         request,
     )
@@ -20192,7 +20267,7 @@ client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountr
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerPeriodsList(request) -> *nordlet.PostV1LedgerPeriodsListResponse</code></summary>
+<details><summary><code>client.Ledger.PeriodsList(request) -> *nordlet.PeriodsListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20205,8 +20280,8 @@ client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountr
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerPeriodsListRequest{}
-client.Ledger.PostV1LedgerPeriodsList(
+request := &nordlet.PeriodsListLedgerRequest{}
+client.Ledger.PeriodsList(
         context.TODO(),
         request,
     )
@@ -20241,7 +20316,7 @@ client.Ledger.PostV1LedgerPeriodsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerPeriodsListRequestSortItem` 
+**sort:** `[]*nordlet.PeriodsListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -20249,7 +20324,7 @@ client.Ledger.PostV1LedgerPeriodsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerPeriodsListRequestFilterItem` 
+**filter:** `[]*nordlet.PeriodsListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -20269,7 +20344,7 @@ client.Ledger.PostV1LedgerPeriodsList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerPeriodsLock(request) -> *nordlet.PostV1LedgerPeriodsLockResponse</code></summary>
+<details><summary><code>client.Ledger.PeriodsLock(request) -> *nordlet.PeriodsLockLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20282,11 +20357,11 @@ client.Ledger.PostV1LedgerPeriodsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerPeriodsLockRequest{
+request := &nordlet.PeriodsLockLedgerRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Ledger.PostV1LedgerPeriodsLock(
+client.Ledger.PeriodsLock(
         context.TODO(),
         request,
     )
@@ -20325,7 +20400,7 @@ client.Ledger.PostV1LedgerPeriodsLock(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerPeriodsUnlock(request) -> *nordlet.PostV1LedgerPeriodsUnlockResponse</code></summary>
+<details><summary><code>client.Ledger.PeriodsUnlock(request) -> *nordlet.PeriodsUnlockLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20338,11 +20413,11 @@ client.Ledger.PostV1LedgerPeriodsLock(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerPeriodsUnlockRequest{
+request := &nordlet.PeriodsUnlockLedgerRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Ledger.PostV1LedgerPeriodsUnlock(
+client.Ledger.PeriodsUnlock(
         context.TODO(),
         request,
     )
@@ -20381,7 +20456,7 @@ client.Ledger.PostV1LedgerPeriodsUnlock(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerJournalTransactionsList(request) -> *nordlet.PostV1LedgerJournalTransactionsListResponse</code></summary>
+<details><summary><code>client.Ledger.JournalTransactionsList(request) -> *nordlet.JournalTransactionsListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20394,8 +20469,8 @@ client.Ledger.PostV1LedgerPeriodsUnlock(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerJournalTransactionsListRequest{}
-client.Ledger.PostV1LedgerJournalTransactionsList(
+request := &nordlet.JournalTransactionsListLedgerRequest{}
+client.Ledger.JournalTransactionsList(
         context.TODO(),
         request,
     )
@@ -20430,7 +20505,7 @@ client.Ledger.PostV1LedgerJournalTransactionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerJournalTransactionsListRequestSortItem` 
+**sort:** `[]*nordlet.JournalTransactionsListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -20438,7 +20513,7 @@ client.Ledger.PostV1LedgerJournalTransactionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerJournalTransactionsListRequestFilterItem` 
+**filter:** `[]*nordlet.JournalTransactionsListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -20458,7 +20533,7 @@ client.Ledger.PostV1LedgerJournalTransactionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCentersCreate(request) -> *nordlet.PostV1LedgerCostCentersCreateResponse</code></summary>
+<details><summary><code>client.Ledger.CostCentersCreate(request) -> *nordlet.CostCentersCreateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20471,11 +20546,11 @@ client.Ledger.PostV1LedgerJournalTransactionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCentersCreateRequest{
+request := &nordlet.CostCentersCreateLedgerRequest{
         Code: "code",
         Name: "name",
     }
-client.Ledger.PostV1LedgerCostCentersCreate(
+client.Ledger.CostCentersCreate(
         context.TODO(),
         request,
     )
@@ -20522,7 +20597,7 @@ client.Ledger.PostV1LedgerCostCentersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCentersUpdate(request) -> *nordlet.PostV1LedgerCostCentersUpdateResponse</code></summary>
+<details><summary><code>client.Ledger.CostCentersUpdate(request) -> *nordlet.CostCentersUpdateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20535,10 +20610,10 @@ client.Ledger.PostV1LedgerCostCentersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCentersUpdateRequest{
+request := &nordlet.CostCentersUpdateLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerCostCentersUpdate(
+client.Ledger.CostCentersUpdate(
         context.TODO(),
         request,
     )
@@ -20593,7 +20668,7 @@ client.Ledger.PostV1LedgerCostCentersUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCentersList(request) -> *nordlet.PostV1LedgerCostCentersListResponse</code></summary>
+<details><summary><code>client.Ledger.CostCentersList(request) -> *nordlet.CostCentersListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20606,8 +20681,8 @@ client.Ledger.PostV1LedgerCostCentersUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCentersListRequest{}
-client.Ledger.PostV1LedgerCostCentersList(
+request := &nordlet.CostCentersListLedgerRequest{}
+client.Ledger.CostCentersList(
         context.TODO(),
         request,
     )
@@ -20642,7 +20717,7 @@ client.Ledger.PostV1LedgerCostCentersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerCostCentersListRequestSortItem` 
+**sort:** `[]*nordlet.CostCentersListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -20650,7 +20725,7 @@ client.Ledger.PostV1LedgerCostCentersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerCostCentersListRequestFilterItem` 
+**filter:** `[]*nordlet.CostCentersListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -20670,7 +20745,7 @@ client.Ledger.PostV1LedgerCostCentersList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCenterGroupsCreate(request) -> *nordlet.PostV1LedgerCostCenterGroupsCreateResponse</code></summary>
+<details><summary><code>client.Ledger.CostCenterGroupsCreate(request) -> *nordlet.CostCenterGroupsCreateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20683,11 +20758,11 @@ client.Ledger.PostV1LedgerCostCentersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCenterGroupsCreateRequest{
+request := &nordlet.CostCenterGroupsCreateLedgerRequest{
         Code: "code",
         Name: "name",
     }
-client.Ledger.PostV1LedgerCostCenterGroupsCreate(
+client.Ledger.CostCenterGroupsCreate(
         context.TODO(),
         request,
     )
@@ -20726,7 +20801,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCenterGroupsUpdate(request) -> *nordlet.PostV1LedgerCostCenterGroupsUpdateResponse</code></summary>
+<details><summary><code>client.Ledger.CostCenterGroupsUpdate(request) -> *nordlet.CostCenterGroupsUpdateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20739,10 +20814,10 @@ client.Ledger.PostV1LedgerCostCenterGroupsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCenterGroupsUpdateRequest{
+request := &nordlet.CostCenterGroupsUpdateLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerCostCenterGroupsUpdate(
+client.Ledger.CostCenterGroupsUpdate(
         context.TODO(),
         request,
     )
@@ -20789,7 +20864,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCenterGroupsDelete(request) -> *nordlet.PostV1LedgerCostCenterGroupsDeleteResponse</code></summary>
+<details><summary><code>client.Ledger.CostCenterGroupsDelete(request) -> *nordlet.CostCenterGroupsDeleteLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20802,10 +20877,10 @@ client.Ledger.PostV1LedgerCostCenterGroupsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCenterGroupsDeleteRequest{
+request := &nordlet.CostCenterGroupsDeleteLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerCostCenterGroupsDelete(
+client.Ledger.CostCenterGroupsDelete(
         context.TODO(),
         request,
     )
@@ -20836,7 +20911,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerCostCenterGroupsList(request) -> *nordlet.PostV1LedgerCostCenterGroupsListResponse</code></summary>
+<details><summary><code>client.Ledger.CostCenterGroupsList(request) -> *nordlet.CostCenterGroupsListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20849,8 +20924,8 @@ client.Ledger.PostV1LedgerCostCenterGroupsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerCostCenterGroupsListRequest{}
-client.Ledger.PostV1LedgerCostCenterGroupsList(
+request := &nordlet.CostCenterGroupsListLedgerRequest{}
+client.Ledger.CostCenterGroupsList(
         context.TODO(),
         request,
     )
@@ -20885,7 +20960,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerCostCenterGroupsListRequestSortItem` 
+**sort:** `[]*nordlet.CostCenterGroupsListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -20893,7 +20968,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerCostCenterGroupsListRequestFilterItem` 
+**filter:** `[]*nordlet.CostCenterGroupsListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -20913,7 +20988,7 @@ client.Ledger.PostV1LedgerCostCenterGroupsList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerPostingRulesList(request) -> *nordlet.PostV1LedgerPostingRulesListResponse</code></summary>
+<details><summary><code>client.Ledger.PostingRulesList(request) -> *nordlet.PostingRulesListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20926,8 +21001,8 @@ client.Ledger.PostV1LedgerCostCenterGroupsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerPostingRulesListRequest{}
-client.Ledger.PostV1LedgerPostingRulesList(
+request := &nordlet.PostingRulesListLedgerRequest{}
+client.Ledger.PostingRulesList(
         context.TODO(),
         request,
     )
@@ -20943,7 +21018,7 @@ client.Ledger.PostV1LedgerPostingRulesList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerPostingRulesUpdate(request) -> *nordlet.PostV1LedgerPostingRulesUpdateResponse</code></summary>
+<details><summary><code>client.Ledger.PostingRulesUpdate(request) -> *nordlet.PostingRulesUpdateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -20956,14 +21031,14 @@ client.Ledger.PostV1LedgerPostingRulesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerPostingRulesUpdateRequest{
-        Rules: []*nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItem{
-            &nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItem{
-                Key: nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItemKeySalesReceivable,
+request := &nordlet.PostingRulesUpdateLedgerRequest{
+        Rules: []*nordlet.PostingRulesUpdateLedgerRequestRulesItem{
+            &nordlet.PostingRulesUpdateLedgerRequestRulesItem{
+                Key: nordlet.PostingRulesUpdateLedgerRequestRulesItemKeySalesReceivable,
             },
         },
     }
-client.Ledger.PostV1LedgerPostingRulesUpdate(
+client.Ledger.PostingRulesUpdate(
         context.TODO(),
         request,
     )
@@ -20982,7 +21057,7 @@ client.Ledger.PostV1LedgerPostingRulesUpdate(
 <dl>
 <dd>
 
-**rules:** `[]*nordlet.PostV1LedgerPostingRulesUpdateRequestRulesItem` 
+**rules:** `[]*nordlet.PostingRulesUpdateLedgerRequestRulesItem` 
     
 </dd>
 </dl>
@@ -20994,7 +21069,7 @@ client.Ledger.PostV1LedgerPostingRulesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerOwnersCreate(request) -> *nordlet.PostV1LedgerOwnersCreateResponse</code></summary>
+<details><summary><code>client.Ledger.OwnersCreate(request) -> *nordlet.OwnersCreateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21007,10 +21082,10 @@ client.Ledger.PostV1LedgerPostingRulesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerOwnersCreateRequest{
+request := &nordlet.OwnersCreateLedgerRequest{
         Name: "name",
     }
-client.Ledger.PostV1LedgerOwnersCreate(
+client.Ledger.OwnersCreate(
         context.TODO(),
         request,
     )
@@ -21069,7 +21144,7 @@ client.Ledger.PostV1LedgerOwnersCreate(
 <dl>
 <dd>
 
-**sharesType:** `*nordlet.PostV1LedgerOwnersCreateRequestSharesType` 
+**sharesType:** `*nordlet.OwnersCreateLedgerRequestSharesType` 
     
 </dd>
 </dl>
@@ -21077,7 +21152,7 @@ client.Ledger.PostV1LedgerOwnersCreate(
 <dl>
 <dd>
 
-**sharesAcquisitionDate:** `*string` 
+**sharesAcquisitionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21093,7 +21168,7 @@ client.Ledger.PostV1LedgerOwnersCreate(
 <dl>
 <dd>
 
-**partnerLiability:** `*nordlet.PostV1LedgerOwnersCreateRequestPartnerLiability` 
+**partnerLiability:** `*nordlet.OwnersCreateLedgerRequestPartnerLiability` 
     
 </dd>
 </dl>
@@ -21117,7 +21192,7 @@ client.Ledger.PostV1LedgerOwnersCreate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1LedgerOwnersCreateRequestAddress` 
+**address:** `*nordlet.OwnersCreateLedgerRequestAddress` 
     
 </dd>
 </dl>
@@ -21129,7 +21204,7 @@ client.Ledger.PostV1LedgerOwnersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerOwnersUpdate(request) -> *nordlet.PostV1LedgerOwnersUpdateResponse</code></summary>
+<details><summary><code>client.Ledger.OwnersUpdate(request) -> *nordlet.OwnersUpdateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21142,10 +21217,10 @@ client.Ledger.PostV1LedgerOwnersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerOwnersUpdateRequest{
+request := &nordlet.OwnersUpdateLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerOwnersUpdate(
+client.Ledger.OwnersUpdate(
         context.TODO(),
         request,
     )
@@ -21212,7 +21287,7 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 <dl>
 <dd>
 
-**sharesType:** `*nordlet.PostV1LedgerOwnersUpdateRequestSharesType` 
+**sharesType:** `*nordlet.OwnersUpdateLedgerRequestSharesType` 
     
 </dd>
 </dl>
@@ -21220,7 +21295,7 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 <dl>
 <dd>
 
-**sharesAcquisitionDate:** `*string` 
+**sharesAcquisitionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21236,7 +21311,7 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 <dl>
 <dd>
 
-**partnerLiability:** `*nordlet.PostV1LedgerOwnersUpdateRequestPartnerLiability` 
+**partnerLiability:** `*nordlet.OwnersUpdateLedgerRequestPartnerLiability` 
     
 </dd>
 </dl>
@@ -21260,7 +21335,7 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1LedgerOwnersUpdateRequestAddress` 
+**address:** `*nordlet.OwnersUpdateLedgerRequestAddress` 
     
 </dd>
 </dl>
@@ -21272,7 +21347,7 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerOwnersDelete(request) -> *nordlet.PostV1LedgerOwnersDeleteResponse</code></summary>
+<details><summary><code>client.Ledger.OwnersDelete(request) -> *nordlet.OwnersDeleteLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21285,10 +21360,10 @@ client.Ledger.PostV1LedgerOwnersUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerOwnersDeleteRequest{
+request := &nordlet.OwnersDeleteLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerOwnersDelete(
+client.Ledger.OwnersDelete(
         context.TODO(),
         request,
     )
@@ -21319,7 +21394,7 @@ client.Ledger.PostV1LedgerOwnersDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerOwnersList(request) -> *nordlet.PostV1LedgerOwnersListResponse</code></summary>
+<details><summary><code>client.Ledger.OwnersList(request) -> *nordlet.OwnersListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21332,8 +21407,8 @@ client.Ledger.PostV1LedgerOwnersDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerOwnersListRequest{}
-client.Ledger.PostV1LedgerOwnersList(
+request := &nordlet.OwnersListLedgerRequest{}
+client.Ledger.OwnersList(
         context.TODO(),
         request,
     )
@@ -21368,7 +21443,7 @@ client.Ledger.PostV1LedgerOwnersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1LedgerOwnersListRequestSortItem` 
+**sort:** `[]*nordlet.OwnersListLedgerRequestSortItem` 
     
 </dd>
 </dl>
@@ -21376,7 +21451,7 @@ client.Ledger.PostV1LedgerOwnersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1LedgerOwnersListRequestFilterItem` 
+**filter:** `[]*nordlet.OwnersListLedgerRequestFilterItem` 
     
 </dd>
 </dl>
@@ -21396,7 +21471,7 @@ client.Ledger.PostV1LedgerOwnersList(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerJournalTransactionsGet(request) -> *nordlet.PostV1LedgerJournalTransactionsGetResponse</code></summary>
+<details><summary><code>client.Ledger.JournalTransactionsGet(request) -> *nordlet.JournalTransactionsGetLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21409,10 +21484,10 @@ client.Ledger.PostV1LedgerOwnersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerJournalTransactionsGetRequest{
+request := &nordlet.JournalTransactionsGetLedgerRequest{
         ID: "id",
     }
-client.Ledger.PostV1LedgerJournalTransactionsGet(
+client.Ledger.JournalTransactionsGet(
         context.TODO(),
         request,
     )
@@ -21443,7 +21518,7 @@ client.Ledger.PostV1LedgerJournalTransactionsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.PostV1LedgerJournalTransactionsCreate(request) -> *nordlet.PostV1LedgerJournalTransactionsCreateResponse</code></summary>
+<details><summary><code>client.Ledger.JournalTransactionsCreate(request) -> *nordlet.JournalTransactionsCreateLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21456,15 +21531,17 @@ client.Ledger.PostV1LedgerJournalTransactionsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerJournalTransactionsCreateRequest{
-        Date: "date",
-        Entries: []*nordlet.PostV1LedgerJournalTransactionsCreateRequestEntriesItem{
-            &nordlet.PostV1LedgerJournalTransactionsCreateRequestEntriesItem{
+request := &nordlet.JournalTransactionsCreateLedgerRequest{
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Entries: []*nordlet.JournalTransactionsCreateLedgerRequestEntriesItem{
+            &nordlet.JournalTransactionsCreateLedgerRequestEntriesItem{
                 AccountCode: "accountCode",
             },
         },
     }
-client.Ledger.PostV1LedgerJournalTransactionsCreate(
+client.Ledger.JournalTransactionsCreate(
         context.TODO(),
         request,
     )
@@ -21483,7 +21560,7 @@ client.Ledger.PostV1LedgerJournalTransactionsCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -21499,7 +21576,7 @@ client.Ledger.PostV1LedgerJournalTransactionsCreate(
 <dl>
 <dd>
 
-**entries:** `[]*nordlet.PostV1LedgerJournalTransactionsCreateRequestEntriesItem` 
+**entries:** `[]*nordlet.JournalTransactionsCreateLedgerRequestEntriesItem` 
     
 </dd>
 </dl>
@@ -21511,7 +21588,7 @@ client.Ledger.PostV1LedgerJournalTransactionsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.NationalStatementLayoutsAvailableToTheCompany(request) -> *nordlet.PostV1LedgerStatementRowsSchemesResponse</code></summary>
+<details><summary><code>client.Ledger.StatementRowsSchemes(request) -> *nordlet.StatementRowsSchemesLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21538,8 +21615,8 @@ The rows or codes of each return or registry deposit of the company country that
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerStatementRowsSchemesRequest{}
-client.Ledger.NationalStatementLayoutsAvailableToTheCompany(
+request := &nordlet.StatementRowsSchemesLedgerRequest{}
+client.Ledger.StatementRowsSchemes(
         context.TODO(),
         request,
     )
@@ -21555,7 +21632,7 @@ client.Ledger.NationalStatementLayoutsAvailableToTheCompany(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(request) -> *nordlet.PostV1LedgerStatementRowsListResponse</code></summary>
+<details><summary><code>client.Ledger.StatementRowsList(request) -> *nordlet.StatementRowsListLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21568,10 +21645,10 @@ client.Ledger.NationalStatementLayoutsAvailableToTheCompany(
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerStatementRowsListRequest{
+request := &nordlet.StatementRowsListLedgerRequest{
         Scheme: "scheme",
     }
-client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+client.Ledger.StatementRowsList(
         context.TODO(),
         request,
     )
@@ -21598,7 +21675,7 @@ client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod
 <dl>
 <dd>
 
-**fromDate:** `*string` 
+**fromDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21606,7 +21683,7 @@ client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod
 <dl>
 <dd>
 
-**toDate:** `*string` 
+**toDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21618,7 +21695,7 @@ client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(request) -> *nordlet.PostV1LedgerStatementRowsSetResponse</code></summary>
+<details><summary><code>client.Ledger.StatementRowsSet(request) -> *nordlet.StatementRowsSetLedgerResponse</code></summary>
 <dl>
 <dd>
 
@@ -21645,11 +21722,11 @@ A mapping on a code prefix covers every account whose code starts with it; the l
 <dd>
 
 ```go
-request := &nordlet.PostV1LedgerStatementRowsSetRequest{
+request := &nordlet.StatementRowsSetLedgerRequest{
         Scheme: "scheme",
         AccountCode: "accountCode",
     }
-client.Ledger.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+client.Ledger.StatementRowsSet(
         context.TODO(),
         request,
     )
@@ -21696,7 +21773,8 @@ client.Ledger.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.OfficersOfTheCompany(request) -> *nordlet.PostV1OfficersListResponse</code></summary>
+## Officers
+<details><summary><code>client.Officers.List(request) -> *nordlet.ListOfficersResponse</code></summary>
 <dl>
 <dd>
 
@@ -21723,8 +21801,8 @@ Directors, board members, the company secretary, representatives and liquidators
 <dd>
 
 ```go
-request := &nordlet.PostV1OfficersListRequest{}
-client.Ledger.OfficersOfTheCompany(
+request := &nordlet.ListOfficersRequest{}
+client.Officers.List(
         context.TODO(),
         request,
     )
@@ -21740,7 +21818,7 @@ client.Ledger.OfficersOfTheCompany(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.RecordAnOfficerOfTheCompany(request) -> *nordlet.PostV1OfficersCreateResponse</code></summary>
+<details><summary><code>client.Officers.Create(request) -> *nordlet.CreateOfficersResponse</code></summary>
 <dl>
 <dd>
 
@@ -21753,11 +21831,11 @@ client.Ledger.OfficersOfTheCompany(
 <dd>
 
 ```go
-request := &nordlet.PostV1OfficersCreateRequest{
+request := &nordlet.CreateOfficersRequest{
         Name: "name",
-        Role: nordlet.PostV1OfficersCreateRequestRoleDirector,
+        Role: nordlet.CreateOfficersRequestRoleDirector,
     }
-client.Ledger.RecordAnOfficerOfTheCompany(
+client.Officers.Create(
         context.TODO(),
         request,
     )
@@ -21784,7 +21862,7 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 <dl>
 <dd>
 
-**role:** `*nordlet.PostV1OfficersCreateRequestRole` 
+**role:** `*nordlet.CreateOfficersRequestRole` 
     
 </dd>
 </dl>
@@ -21800,7 +21878,7 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21808,7 +21886,7 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 <dl>
 <dd>
 
-**appointedOn:** `*string` 
+**appointedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21824,7 +21902,7 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 <dl>
 <dd>
 
-**resignedOn:** `*string` 
+**resignedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21844,7 +21922,7 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.ChangeARecordedOfficer(request) -> *nordlet.PostV1OfficersUpdateResponse</code></summary>
+<details><summary><code>client.Officers.Update(request) -> *nordlet.UpdateOfficersResponse</code></summary>
 <dl>
 <dd>
 
@@ -21857,12 +21935,12 @@ client.Ledger.RecordAnOfficerOfTheCompany(
 <dd>
 
 ```go
-request := &nordlet.PostV1OfficersUpdateRequest{
+request := &nordlet.UpdateOfficersRequest{
         ID: "id",
         Name: "name",
-        Role: nordlet.PostV1OfficersUpdateRequestRoleDirector,
+        Role: nordlet.UpdateOfficersRequestRoleDirector,
     }
-client.Ledger.ChangeARecordedOfficer(
+client.Officers.Update(
         context.TODO(),
         request,
     )
@@ -21897,7 +21975,7 @@ client.Ledger.ChangeARecordedOfficer(
 <dl>
 <dd>
 
-**role:** `*nordlet.PostV1OfficersUpdateRequestRole` 
+**role:** `*nordlet.UpdateOfficersRequestRole` 
     
 </dd>
 </dl>
@@ -21913,7 +21991,7 @@ client.Ledger.ChangeARecordedOfficer(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21921,7 +21999,7 @@ client.Ledger.ChangeARecordedOfficer(
 <dl>
 <dd>
 
-**appointedOn:** `*string` 
+**appointedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21937,7 +22015,7 @@ client.Ledger.ChangeARecordedOfficer(
 <dl>
 <dd>
 
-**resignedOn:** `*string` 
+**resignedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -21957,7 +22035,7 @@ client.Ledger.ChangeARecordedOfficer(
 </dl>
 </details>
 
-<details><summary><code>client.Ledger.RemoveARecordedOfficer(request) -> *nordlet.PostV1OfficersDeleteResponse</code></summary>
+<details><summary><code>client.Officers.Delete(request) -> *nordlet.DeleteOfficersResponse</code></summary>
 <dl>
 <dd>
 
@@ -21970,10 +22048,10 @@ client.Ledger.ChangeARecordedOfficer(
 <dd>
 
 ```go
-request := &nordlet.PostV1OfficersDeleteRequest{
+request := &nordlet.DeleteOfficersRequest{
         ID: "id",
     }
-client.Ledger.RemoveARecordedOfficer(
+client.Officers.Delete(
         context.TODO(),
         request,
     )
@@ -22004,8 +22082,8 @@ client.Ledger.RemoveARecordedOfficer(
 </dl>
 </details>
 
-## Migration
-<details><summary><code>client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(request) -> *nordlet.PostV1MigrationBooksValidateResponse</code></summary>
+## migration
+<details><summary><code>client.Migration.BooksValidate(request) -> *nordlet.BooksValidateMigrationResponse</code></summary>
 <dl>
 <dd>
 
@@ -22032,10 +22110,12 @@ Runs every check the import runs (accounts, partners, balances, open invoices, a
 <dd>
 
 ```go
-request := &nordlet.PostV1MigrationBooksValidateRequest{
-        CutoverDate: "cutoverDate",
+request := &nordlet.BooksValidateMigrationRequest{
+        CutoverDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
+client.Migration.BooksValidate(
         context.TODO(),
         request,
     )
@@ -22054,7 +22134,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**cutoverDate:** `string` 
+**cutoverDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -22070,7 +22150,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**accounts:** `[]*nordlet.PostV1MigrationBooksValidateRequestAccountsItem` 
+**accounts:** `[]*nordlet.BooksValidateMigrationRequestAccountsItem` 
     
 </dd>
 </dl>
@@ -22078,7 +22158,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**partners:** `[]*nordlet.PostV1MigrationBooksValidateRequestPartnersItem` 
+**partners:** `[]*nordlet.BooksValidateMigrationRequestPartnersItem` 
     
 </dd>
 </dl>
@@ -22086,7 +22166,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**items:** `[]*nordlet.PostV1MigrationBooksValidateRequestItemsItem` 
+**items:** `[]*nordlet.BooksValidateMigrationRequestItemsItem` 
     
 </dd>
 </dl>
@@ -22094,7 +22174,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**openingBalances:** `*nordlet.PostV1MigrationBooksValidateRequestOpeningBalances` 
+**openingBalances:** `*nordlet.BooksValidateMigrationRequestOpeningBalances` 
     
 </dd>
 </dl>
@@ -22102,7 +22182,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**journal:** `[]*nordlet.PostV1MigrationBooksValidateRequestJournalItem` 
+**journal:** `[]*nordlet.BooksValidateMigrationRequestJournalItem` 
     
 </dd>
 </dl>
@@ -22110,7 +22190,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**openReceivables:** `[]*nordlet.PostV1MigrationBooksValidateRequestOpenReceivablesItem` 
+**openReceivables:** `[]*nordlet.BooksValidateMigrationRequestOpenReceivablesItem` 
     
 </dd>
 </dl>
@@ -22118,7 +22198,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**openPayables:** `[]*nordlet.PostV1MigrationBooksValidateRequestOpenPayablesItem` 
+**openPayables:** `[]*nordlet.BooksValidateMigrationRequestOpenPayablesItem` 
     
 </dd>
 </dl>
@@ -22126,7 +22206,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**assetGroups:** `[]*nordlet.PostV1MigrationBooksValidateRequestAssetGroupsItem` 
+**assetGroups:** `[]*nordlet.BooksValidateMigrationRequestAssetGroupsItem` 
     
 </dd>
 </dl>
@@ -22134,7 +22214,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**fixedAssets:** `[]*nordlet.PostV1MigrationBooksValidateRequestFixedAssetsItem` 
+**fixedAssets:** `[]*nordlet.BooksValidateMigrationRequestFixedAssetsItem` 
     
 </dd>
 </dl>
@@ -22142,7 +22222,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 <dl>
 <dd>
 
-**stock:** `[]*nordlet.PostV1MigrationBooksValidateRequestStockItem` 
+**stock:** `[]*nordlet.BooksValidateMigrationRequestStockItem` 
     
 </dd>
 </dl>
@@ -22154,7 +22234,7 @@ client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
 </dl>
 </details>
 
-<details><summary><code>client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(request) -> *nordlet.PostV1MigrationBooksImportResponse</code></summary>
+<details><summary><code>client.Migration.BooksImport(request) -> *nordlet.BooksImportMigrationResponse</code></summary>
 <dl>
 <dd>
 
@@ -22181,10 +22261,12 @@ Brings a company over from another system in one call: chart of accounts, partne
 <dd>
 
 ```go
-request := &nordlet.PostV1MigrationBooksImportRequest{
-        CutoverDate: "cutoverDate",
+request := &nordlet.BooksImportMigrationRequest{
+        CutoverDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
+client.Migration.BooksImport(
         context.TODO(),
         request,
     )
@@ -22203,7 +22285,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**cutoverDate:** `string` 
+**cutoverDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -22219,7 +22301,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**accounts:** `[]*nordlet.PostV1MigrationBooksImportRequestAccountsItem` 
+**accounts:** `[]*nordlet.BooksImportMigrationRequestAccountsItem` 
     
 </dd>
 </dl>
@@ -22227,7 +22309,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**partners:** `[]*nordlet.PostV1MigrationBooksImportRequestPartnersItem` 
+**partners:** `[]*nordlet.BooksImportMigrationRequestPartnersItem` 
     
 </dd>
 </dl>
@@ -22235,7 +22317,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**items:** `[]*nordlet.PostV1MigrationBooksImportRequestItemsItem` 
+**items:** `[]*nordlet.BooksImportMigrationRequestItemsItem` 
     
 </dd>
 </dl>
@@ -22243,7 +22325,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**openingBalances:** `*nordlet.PostV1MigrationBooksImportRequestOpeningBalances` 
+**openingBalances:** `*nordlet.BooksImportMigrationRequestOpeningBalances` 
     
 </dd>
 </dl>
@@ -22251,7 +22333,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**journal:** `[]*nordlet.PostV1MigrationBooksImportRequestJournalItem` 
+**journal:** `[]*nordlet.BooksImportMigrationRequestJournalItem` 
     
 </dd>
 </dl>
@@ -22259,7 +22341,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**openReceivables:** `[]*nordlet.PostV1MigrationBooksImportRequestOpenReceivablesItem` 
+**openReceivables:** `[]*nordlet.BooksImportMigrationRequestOpenReceivablesItem` 
     
 </dd>
 </dl>
@@ -22267,7 +22349,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**openPayables:** `[]*nordlet.PostV1MigrationBooksImportRequestOpenPayablesItem` 
+**openPayables:** `[]*nordlet.BooksImportMigrationRequestOpenPayablesItem` 
     
 </dd>
 </dl>
@@ -22275,7 +22357,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**assetGroups:** `[]*nordlet.PostV1MigrationBooksImportRequestAssetGroupsItem` 
+**assetGroups:** `[]*nordlet.BooksImportMigrationRequestAssetGroupsItem` 
     
 </dd>
 </dl>
@@ -22283,7 +22365,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**fixedAssets:** `[]*nordlet.PostV1MigrationBooksImportRequestFixedAssetsItem` 
+**fixedAssets:** `[]*nordlet.BooksImportMigrationRequestFixedAssetsItem` 
     
 </dd>
 </dl>
@@ -22291,7 +22373,7 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dl>
 <dd>
 
-**stock:** `[]*nordlet.PostV1MigrationBooksImportRequestStockItem` 
+**stock:** `[]*nordlet.BooksImportMigrationRequestStockItem` 
     
 </dd>
 </dl>
@@ -22303,8 +22385,8 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 </dl>
 </details>
 
-## Assets
-<details><summary><code>client.Assets.PostV1AssetsGroupsCreate(request) -> *nordlet.PostV1AssetsGroupsCreateResponse</code></summary>
+## assets
+<details><summary><code>client.Assets.GroupsCreate(request) -> *nordlet.GroupsCreateAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22317,13 +22399,13 @@ client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsGroupsCreateRequest{
+request := &nordlet.GroupsCreateAssetsRequest{
         Code: "code",
         Name: "name",
         AssetAccountCode: "assetAccountCode",
         DepreciationAccountCode: "depreciationAccountCode",
     }
-client.Assets.PostV1AssetsGroupsCreate(
+client.Assets.GroupsCreate(
         context.TODO(),
         request,
     )
@@ -22394,7 +22476,7 @@ client.Assets.PostV1AssetsGroupsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsGroupsList(request) -> *nordlet.PostV1AssetsGroupsListResponse</code></summary>
+<details><summary><code>client.Assets.GroupsList(request) -> *nordlet.GroupsListAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22407,8 +22489,8 @@ client.Assets.PostV1AssetsGroupsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsGroupsListRequest{}
-client.Assets.PostV1AssetsGroupsList(
+request := &nordlet.GroupsListAssetsRequest{}
+client.Assets.GroupsList(
         context.TODO(),
         request,
     )
@@ -22443,7 +22525,7 @@ client.Assets.PostV1AssetsGroupsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AssetsGroupsListRequestSortItem` 
+**sort:** `[]*nordlet.GroupsListAssetsRequestSortItem` 
     
 </dd>
 </dl>
@@ -22451,7 +22533,7 @@ client.Assets.PostV1AssetsGroupsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AssetsGroupsListRequestFilterItem` 
+**filter:** `[]*nordlet.GroupsListAssetsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -22471,7 +22553,7 @@ client.Assets.PostV1AssetsGroupsList(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsCreate(request) -> *nordlet.PostV1AssetsAssetsCreateResponse</code></summary>
+<details><summary><code>client.Assets.AssetsCreate(request) -> *nordlet.AssetsCreateAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22484,14 +22566,16 @@ client.Assets.PostV1AssetsGroupsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsCreateRequest{
+request := &nordlet.AssetsCreateAssetsRequest{
         GroupID: "groupId",
         Code: "code",
         Name: "name",
-        AcquisitionDate: "acquisitionDate",
-        AcquisitionCost: "acquisitionCost",
+        AcquisitionDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        AcquisitionCost: "121.0000",
     }
-client.Assets.PostV1AssetsAssetsCreate(
+client.Assets.AssetsCreate(
         context.TODO(),
         request,
     )
@@ -22534,7 +22618,7 @@ client.Assets.PostV1AssetsAssetsCreate(
 <dl>
 <dd>
 
-**acquisitionDate:** `string` 
+**acquisitionDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -22542,7 +22626,7 @@ client.Assets.PostV1AssetsAssetsCreate(
 <dl>
 <dd>
 
-**depreciationStartDate:** `*string` 
+**depreciationStartDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -22582,7 +22666,7 @@ client.Assets.PostV1AssetsAssetsCreate(
 <dl>
 <dd>
 
-**documents:** `[]*nordlet.PostV1AssetsAssetsCreateRequestDocumentsItem` 
+**documents:** `[]*nordlet.AssetsCreateAssetsRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -22594,7 +22678,7 @@ client.Assets.PostV1AssetsAssetsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsUpdate(request) -> *nordlet.PostV1AssetsAssetsUpdateResponse</code></summary>
+<details><summary><code>client.Assets.AssetsUpdate(request) -> *nordlet.AssetsUpdateAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22607,10 +22691,10 @@ client.Assets.PostV1AssetsAssetsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsUpdateRequest{
+request := &nordlet.AssetsUpdateAssetsRequest{
         ID: "id",
     }
-client.Assets.PostV1AssetsAssetsUpdate(
+client.Assets.AssetsUpdate(
         context.TODO(),
         request,
     )
@@ -22653,7 +22737,7 @@ client.Assets.PostV1AssetsAssetsUpdate(
 <dl>
 <dd>
 
-**acquisitionDate:** `*string` 
+**acquisitionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -22661,7 +22745,7 @@ client.Assets.PostV1AssetsAssetsUpdate(
 <dl>
 <dd>
 
-**depreciationStartDate:** `*string` 
+**depreciationStartDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -22701,7 +22785,7 @@ client.Assets.PostV1AssetsAssetsUpdate(
 <dl>
 <dd>
 
-**documents:** `[]*nordlet.PostV1AssetsAssetsUpdateRequestDocumentsItem` 
+**documents:** `[]*nordlet.AssetsUpdateAssetsRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -22721,7 +22805,7 @@ client.Assets.PostV1AssetsAssetsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsInputVat(request) -> *nordlet.PostV1AssetsAssetsInputVatResponse</code></summary>
+<details><summary><code>client.Assets.AssetsInputVat(request) -> *nordlet.AssetsInputVatAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22748,18 +22832,18 @@ Record the input VAT facts of a capital good that the annual VAT return needs fo
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsInputVatRequest{
+request := &nordlet.AssetsInputVatAssetsRequest{
         ID: "id",
         InputVatRealEstate: true,
-        InputVatUseChanges: []*nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
-            &nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
+        InputVatUseChanges: []*nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItem{
+            &nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItem{
                 Year: int64(1000000),
-                Percent: "percent",
-                Reason: nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange,
+                Percent: "121.00",
+                Reason: nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItemReasonUseChange,
             },
         },
     }
-client.Assets.PostV1AssetsAssetsInputVat(
+client.Assets.AssetsInputVat(
         context.TODO(),
         request,
     )
@@ -22794,7 +22878,7 @@ client.Assets.PostV1AssetsAssetsInputVat(
 <dl>
 <dd>
 
-**inputVatFirstUseDate:** `*string` 
+**inputVatFirstUseDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -22818,7 +22902,7 @@ client.Assets.PostV1AssetsAssetsInputVat(
 <dl>
 <dd>
 
-**inputVatUseChanges:** `[]*nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem` 
+**inputVatUseChanges:** `[]*nordlet.AssetsInputVatAssetsRequestInputVatUseChangesItem` 
     
 </dd>
 </dl>
@@ -22830,7 +22914,7 @@ client.Assets.PostV1AssetsAssetsInputVat(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsGet(request) -> *nordlet.PostV1AssetsAssetsGetResponse</code></summary>
+<details><summary><code>client.Assets.AssetsGet(request) -> *nordlet.AssetsGetAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22843,10 +22927,10 @@ client.Assets.PostV1AssetsAssetsInputVat(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsGetRequest{
+request := &nordlet.AssetsGetAssetsRequest{
         ID: "id",
     }
-client.Assets.PostV1AssetsAssetsGet(
+client.Assets.AssetsGet(
         context.TODO(),
         request,
     )
@@ -22877,7 +22961,7 @@ client.Assets.PostV1AssetsAssetsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsList(request) -> *nordlet.PostV1AssetsAssetsListResponse</code></summary>
+<details><summary><code>client.Assets.AssetsList(request) -> *nordlet.AssetsListAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22890,8 +22974,8 @@ client.Assets.PostV1AssetsAssetsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsListRequest{}
-client.Assets.PostV1AssetsAssetsList(
+request := &nordlet.AssetsListAssetsRequest{}
+client.Assets.AssetsList(
         context.TODO(),
         request,
     )
@@ -22926,7 +23010,7 @@ client.Assets.PostV1AssetsAssetsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AssetsAssetsListRequestSortItem` 
+**sort:** `[]*nordlet.AssetsListAssetsRequestSortItem` 
     
 </dd>
 </dl>
@@ -22934,7 +23018,7 @@ client.Assets.PostV1AssetsAssetsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AssetsAssetsListRequestFilterItem` 
+**filter:** `[]*nordlet.AssetsListAssetsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -22954,7 +23038,7 @@ client.Assets.PostV1AssetsAssetsList(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsAssetsModernize(request) -> *nordlet.PostV1AssetsAssetsModernizeResponse</code></summary>
+<details><summary><code>client.Assets.AssetsModernize(request) -> *nordlet.AssetsModernizeAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -22967,12 +23051,14 @@ client.Assets.PostV1AssetsAssetsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsAssetsModernizeRequest{
+request := &nordlet.AssetsModernizeAssetsRequest{
         ID: "id",
-        Date: "date",
-        Amount: "amount",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Amount: "121.0000",
     }
-client.Assets.PostV1AssetsAssetsModernize(
+client.Assets.AssetsModernize(
         context.TODO(),
         request,
     )
@@ -22999,7 +23085,7 @@ client.Assets.PostV1AssetsAssetsModernize(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -23035,7 +23121,104 @@ client.Assets.PostV1AssetsAssetsModernize(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsDepreciationPreview(request) -> *nordlet.PostV1AssetsDepreciationPreviewResponse</code></summary>
+<details><summary><code>client.Assets.AssetsDispose(request) -> *nordlet.AssetsDisposeAssetsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Dispose of a fixed asset (sold, scrapped or written off). Removes its cost and accumulated depreciation, books the net book value as a disposal loss and the proceeds as a disposal gain (posting rules assets.disposalLoss, assets.disposalGain, assets.disposalProceeds), and stops its depreciation. Depreciation must be posted for every month before the disposal month.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.AssetsDisposeAssetsRequest{
+        ID: "id",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Reason: nordlet.AssetsDisposeAssetsRequestReasonSold,
+    }
+client.Assets.AssetsDispose(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*nordlet.AssetsDisposeAssetsRequestReason` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**proceeds:** `*string` — Sale price excluding VAT; 0 when scrapped or written off
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Assets.DepreciationPreview(request) -> *nordlet.DepreciationPreviewAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23048,11 +23231,11 @@ client.Assets.PostV1AssetsAssetsModernize(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsDepreciationPreviewRequest{
+request := &nordlet.DepreciationPreviewAssetsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Assets.PostV1AssetsDepreciationPreview(
+client.Assets.DepreciationPreview(
         context.TODO(),
         request,
     )
@@ -23091,7 +23274,7 @@ client.Assets.PostV1AssetsDepreciationPreview(
 </dl>
 </details>
 
-<details><summary><code>client.Assets.PostV1AssetsDepreciationPost(request) -> *nordlet.PostV1AssetsDepreciationPostResponse</code></summary>
+<details><summary><code>client.Assets.DepreciationPost(request) -> *nordlet.DepreciationPostAssetsResponse</code></summary>
 <dl>
 <dd>
 
@@ -23104,11 +23287,11 @@ client.Assets.PostV1AssetsDepreciationPreview(
 <dd>
 
 ```go
-request := &nordlet.PostV1AssetsDepreciationPostRequest{
+request := &nordlet.DepreciationPostAssetsRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Assets.PostV1AssetsDepreciationPost(
+client.Assets.DepreciationPost(
         context.TODO(),
         request,
     )
@@ -23147,8 +23330,8 @@ client.Assets.PostV1AssetsDepreciationPost(
 </dl>
 </details>
 
-## Hr
-<details><summary><code>client.Hr.PostV1HrPositionsCreate(request) -> *nordlet.PostV1HrPositionsCreateResponse</code></summary>
+## hr
+<details><summary><code>client.Hr.PositionsCreate(request) -> *nordlet.PositionsCreateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23161,10 +23344,10 @@ client.Assets.PostV1AssetsDepreciationPost(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrPositionsCreateRequest{
+request := &nordlet.PositionsCreateHrRequest{
         Name: "name",
     }
-client.Hr.PostV1HrPositionsCreate(
+client.Hr.PositionsCreate(
         context.TODO(),
         request,
     )
@@ -23199,7 +23382,7 @@ client.Hr.PostV1HrPositionsCreate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1HrPositionsCreateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.PositionsCreateHrRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -23211,7 +23394,7 @@ client.Hr.PostV1HrPositionsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrPositionsUpdate(request) -> *nordlet.PostV1HrPositionsUpdateResponse</code></summary>
+<details><summary><code>client.Hr.PositionsUpdate(request) -> *nordlet.PositionsUpdateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23224,10 +23407,10 @@ client.Hr.PostV1HrPositionsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrPositionsUpdateRequest{
+request := &nordlet.PositionsUpdateHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrPositionsUpdate(
+client.Hr.PositionsUpdate(
         context.TODO(),
         request,
     )
@@ -23270,7 +23453,7 @@ client.Hr.PostV1HrPositionsUpdate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.PostV1HrPositionsUpdateRequestTranslationsValue` 
+**translations:** `map[string]*nordlet.PositionsUpdateHrRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -23282,7 +23465,7 @@ client.Hr.PostV1HrPositionsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrPositionsList(request) -> *nordlet.PostV1HrPositionsListResponse</code></summary>
+<details><summary><code>client.Hr.PositionsList(request) -> *nordlet.PositionsListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23295,8 +23478,8 @@ client.Hr.PostV1HrPositionsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrPositionsListRequest{}
-client.Hr.PostV1HrPositionsList(
+request := &nordlet.PositionsListHrRequest{}
+client.Hr.PositionsList(
         context.TODO(),
         request,
     )
@@ -23331,7 +23514,7 @@ client.Hr.PostV1HrPositionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1HrPositionsListRequestSortItem` 
+**sort:** `[]*nordlet.PositionsListHrRequestSortItem` 
     
 </dd>
 </dl>
@@ -23339,7 +23522,7 @@ client.Hr.PostV1HrPositionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1HrPositionsListRequestFilterItem` 
+**filter:** `[]*nordlet.PositionsListHrRequestFilterItem` 
     
 </dd>
 </dl>
@@ -23359,7 +23542,7 @@ client.Hr.PostV1HrPositionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesCreate(request) -> *nordlet.PostV1HrEmployeesCreateResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesCreate(request) -> *nordlet.EmployeesCreateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23372,11 +23555,11 @@ client.Hr.PostV1HrPositionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesCreateRequest{
+request := &nordlet.EmployeesCreateHrRequest{
         FirstName: "firstName",
         LastName: "lastName",
     }
-client.Hr.PostV1HrEmployeesCreate(
+client.Hr.EmployeesCreate(
         context.TODO(),
         request,
     )
@@ -23427,7 +23610,7 @@ client.Hr.PostV1HrEmployeesCreate(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23451,7 +23634,7 @@ client.Hr.PostV1HrEmployeesCreate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1HrEmployeesCreateRequestAddress` 
+**address:** `*nordlet.EmployeesCreateHrRequestAddress` 
     
 </dd>
 </dl>
@@ -23475,7 +23658,7 @@ client.Hr.PostV1HrEmployeesCreate(
 <dl>
 <dd>
 
-**socialInsuranceStart:** `*string` 
+**socialInsuranceStart:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23483,7 +23666,7 @@ client.Hr.PostV1HrEmployeesCreate(
 <dl>
 <dd>
 
-**hireDate:** `*string` 
+**hireDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23531,7 +23714,7 @@ client.Hr.PostV1HrEmployeesCreate(
 <dl>
 <dd>
 
-**attributes:** `[]*nordlet.PostV1HrEmployeesCreateRequestAttributesItem` 
+**attributes:** `[]*nordlet.EmployeesCreateHrRequestAttributesItem` 
     
 </dd>
 </dl>
@@ -23543,7 +23726,7 @@ client.Hr.PostV1HrEmployeesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesUpdate(request) -> *nordlet.PostV1HrEmployeesUpdateResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesUpdate(request) -> *nordlet.EmployeesUpdateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23556,10 +23739,10 @@ client.Hr.PostV1HrEmployeesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesUpdateRequest{
+request := &nordlet.EmployeesUpdateHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrEmployeesUpdate(
+client.Hr.EmployeesUpdate(
         context.TODO(),
         request,
     )
@@ -23610,7 +23793,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**birthDate:** `*string` 
+**birthDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23634,7 +23817,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1HrEmployeesUpdateRequestAddress` 
+**address:** `*nordlet.EmployeesUpdateHrRequestAddress` 
     
 </dd>
 </dl>
@@ -23658,7 +23841,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**socialInsuranceStart:** `*string` 
+**socialInsuranceStart:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23666,7 +23849,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**hireDate:** `*string` 
+**hireDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23714,7 +23897,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**attributes:** `[]*nordlet.PostV1HrEmployeesUpdateRequestAttributesItem` 
+**attributes:** `[]*nordlet.EmployeesUpdateHrRequestAttributesItem` 
     
 </dd>
 </dl>
@@ -23730,7 +23913,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**terminationDate:** `*string` 
+**terminationDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -23738,7 +23921,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1HrEmployeesUpdateRequestStatus` 
+**status:** `*nordlet.EmployeesUpdateHrRequestStatus` 
     
 </dd>
 </dl>
@@ -23750,7 +23933,7 @@ client.Hr.PostV1HrEmployeesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesGet(request) -> *nordlet.PostV1HrEmployeesGetResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesGet(request) -> *nordlet.EmployeesGetHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23763,10 +23946,10 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesGetRequest{
+request := &nordlet.EmployeesGetHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrEmployeesGet(
+client.Hr.EmployeesGet(
         context.TODO(),
         request,
     )
@@ -23797,7 +23980,7 @@ client.Hr.PostV1HrEmployeesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(request) -> *nordlet.PostV1HrEmployeesFieldsResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesFields(request) -> *nordlet.EmployeesFieldsHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23824,8 +24007,8 @@ Attributes a filing of the company country needs about a person that the shared 
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesFieldsRequest{}
-client.Hr.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+request := &nordlet.EmployeesFieldsHrRequest{}
+client.Hr.EmployeesFields(
         context.TODO(),
         request,
     )
@@ -23841,7 +24024,7 @@ client.Hr.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesList(request) -> *nordlet.PostV1HrEmployeesListResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesList(request) -> *nordlet.EmployeesListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23854,8 +24037,8 @@ client.Hr.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesListRequest{}
-client.Hr.PostV1HrEmployeesList(
+request := &nordlet.EmployeesListHrRequest{}
+client.Hr.EmployeesList(
         context.TODO(),
         request,
     )
@@ -23890,7 +24073,7 @@ client.Hr.PostV1HrEmployeesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1HrEmployeesListRequestSortItem` 
+**sort:** `[]*nordlet.EmployeesListHrRequestSortItem` 
     
 </dd>
 </dl>
@@ -23898,7 +24081,7 @@ client.Hr.PostV1HrEmployeesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1HrEmployeesListRequestFilterItem` 
+**filter:** `[]*nordlet.EmployeesListHrRequestFilterItem` 
     
 </dd>
 </dl>
@@ -23918,7 +24101,7 @@ client.Hr.PostV1HrEmployeesList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesDelete(request) -> *nordlet.PostV1HrEmployeesDeleteResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesDelete(request) -> *nordlet.EmployeesDeleteHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23931,10 +24114,10 @@ client.Hr.PostV1HrEmployeesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesDeleteRequest{
+request := &nordlet.EmployeesDeleteHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrEmployeesDelete(
+client.Hr.EmployeesDelete(
         context.TODO(),
         request,
     )
@@ -23965,7 +24148,7 @@ client.Hr.PostV1HrEmployeesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(request) -> *nordlet.PostV1HrEmployeesAnonymizeResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesAnonymize(request) -> *nordlet.EmployeesAnonymizeHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -23992,10 +24175,10 @@ Replaces the name with a placeholder and removes personal code, birth date, cont
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesAnonymizeRequest{
+request := &nordlet.EmployeesAnonymizeHrRequest{
         ID: "id",
     }
-client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
+client.Hr.EmployeesAnonymize(
         context.TODO(),
         request,
     )
@@ -24026,7 +24209,7 @@ client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrContractsCreate(request) -> *nordlet.PostV1HrContractsCreateResponse</code></summary>
+<details><summary><code>client.Hr.ContractsCreate(request) -> *nordlet.ContractsCreateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24039,12 +24222,14 @@ client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrContractsCreateRequest{
+request := &nordlet.ContractsCreateHrRequest{
         EmployeeID: "employeeId",
-        StartDate: "startDate",
-        BaseSalary: "baseSalary",
+        StartDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        BaseSalary: "121.0000",
     }
-client.Hr.PostV1HrContractsCreate(
+client.Hr.ContractsCreate(
         context.TODO(),
         request,
     )
@@ -24111,7 +24296,7 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1HrContractsCreateRequestType` 
+**type_:** `*nordlet.ContractsCreateHrRequestType` 
     
 </dd>
 </dl>
@@ -24119,7 +24304,7 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**startDate:** `string` 
+**startDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -24127,7 +24312,7 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**endDate:** `*string` 
+**endDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -24143,7 +24328,7 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**salaryType:** `*nordlet.PostV1HrContractsCreateRequestSalaryType` 
+**salaryType:** `*nordlet.ContractsCreateHrRequestSalaryType` 
     
 </dd>
 </dl>
@@ -24171,7 +24356,7 @@ client.Hr.PostV1HrContractsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrContractsEnd(request) -> *nordlet.PostV1HrContractsEndResponse</code></summary>
+<details><summary><code>client.Hr.ContractsEnd(request) -> *nordlet.ContractsEndHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24184,11 +24369,13 @@ client.Hr.PostV1HrContractsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrContractsEndRequest{
+request := &nordlet.ContractsEndHrRequest{
         ID: "id",
-        EndDate: "endDate",
+        EndDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Hr.PostV1HrContractsEnd(
+client.Hr.ContractsEnd(
         context.TODO(),
         request,
     )
@@ -24215,7 +24402,7 @@ client.Hr.PostV1HrContractsEnd(
 <dl>
 <dd>
 
-**endDate:** `string` 
+**endDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -24235,7 +24422,7 @@ client.Hr.PostV1HrContractsEnd(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrContractsList(request) -> *nordlet.PostV1HrContractsListResponse</code></summary>
+<details><summary><code>client.Hr.ContractsList(request) -> *nordlet.ContractsListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24248,8 +24435,8 @@ client.Hr.PostV1HrContractsEnd(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrContractsListRequest{}
-client.Hr.PostV1HrContractsList(
+request := &nordlet.ContractsListHrRequest{}
+client.Hr.ContractsList(
         context.TODO(),
         request,
     )
@@ -24284,7 +24471,7 @@ client.Hr.PostV1HrContractsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1HrContractsListRequestSortItem` 
+**sort:** `[]*nordlet.ContractsListHrRequestSortItem` 
     
 </dd>
 </dl>
@@ -24292,7 +24479,7 @@ client.Hr.PostV1HrContractsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1HrContractsListRequestFilterItem` 
+**filter:** `[]*nordlet.ContractsListHrRequestFilterItem` 
     
 </dd>
 </dl>
@@ -24312,7 +24499,7 @@ client.Hr.PostV1HrContractsList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrLeaveBalancesSet(request) -> *nordlet.PostV1HrLeaveBalancesSetResponse</code></summary>
+<details><summary><code>client.Hr.LeaveBalancesSet(request) -> *nordlet.LeaveBalancesSetHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24325,12 +24512,12 @@ client.Hr.PostV1HrContractsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrLeaveBalancesSetRequest{
+request := &nordlet.LeaveBalancesSetHrRequest{
         EmployeeID: "employeeId",
         Year: int64(1000000),
-        EntitledDays: "entitledDays",
+        EntitledDays: "121.00",
     }
-client.Hr.PostV1HrLeaveBalancesSet(
+client.Hr.LeaveBalancesSet(
         context.TODO(),
         request,
     )
@@ -24385,7 +24572,7 @@ client.Hr.PostV1HrLeaveBalancesSet(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrLeaveBalancesList(request) -> *nordlet.PostV1HrLeaveBalancesListResponse</code></summary>
+<details><summary><code>client.Hr.LeaveBalancesList(request) -> *nordlet.LeaveBalancesListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24398,8 +24585,8 @@ client.Hr.PostV1HrLeaveBalancesSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrLeaveBalancesListRequest{}
-client.Hr.PostV1HrLeaveBalancesList(
+request := &nordlet.LeaveBalancesListHrRequest{}
+client.Hr.LeaveBalancesList(
         context.TODO(),
         request,
     )
@@ -24438,7 +24625,7 @@ client.Hr.PostV1HrLeaveBalancesList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrIncapacityCertificatesCreate(request) -> *nordlet.PostV1HrIncapacityCertificatesCreateResponse</code></summary>
+<details><summary><code>client.Hr.IncapacityCertificatesCreate(request) -> *nordlet.IncapacityCertificatesCreateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24451,13 +24638,17 @@ client.Hr.PostV1HrLeaveBalancesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrIncapacityCertificatesCreateRequest{
+request := &nordlet.IncapacityCertificatesCreateHrRequest{
         EmployeeID: "employeeId",
         Number: "number",
-        FromDate: "fromDate",
-        ToDate: "toDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Hr.PostV1HrIncapacityCertificatesCreate(
+client.Hr.IncapacityCertificatesCreate(
         context.TODO(),
         request,
     )
@@ -24500,7 +24691,7 @@ client.Hr.PostV1HrIncapacityCertificatesCreate(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -24508,7 +24699,7 @@ client.Hr.PostV1HrIncapacityCertificatesCreate(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -24536,7 +24727,7 @@ client.Hr.PostV1HrIncapacityCertificatesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrIncapacityCertificatesList(request) -> *nordlet.PostV1HrIncapacityCertificatesListResponse</code></summary>
+<details><summary><code>client.Hr.IncapacityCertificatesList(request) -> *nordlet.IncapacityCertificatesListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24549,8 +24740,8 @@ client.Hr.PostV1HrIncapacityCertificatesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrIncapacityCertificatesListRequest{}
-client.Hr.PostV1HrIncapacityCertificatesList(
+request := &nordlet.IncapacityCertificatesListHrRequest{}
+client.Hr.IncapacityCertificatesList(
         context.TODO(),
         request,
     )
@@ -24585,7 +24776,7 @@ client.Hr.PostV1HrIncapacityCertificatesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1HrIncapacityCertificatesListRequestSortItem` 
+**sort:** `[]*nordlet.IncapacityCertificatesListHrRequestSortItem` 
     
 </dd>
 </dl>
@@ -24593,7 +24784,7 @@ client.Hr.PostV1HrIncapacityCertificatesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1HrIncapacityCertificatesListRequestFilterItem` 
+**filter:** `[]*nordlet.IncapacityCertificatesListHrRequestFilterItem` 
     
 </dd>
 </dl>
@@ -24613,7 +24804,7 @@ client.Hr.PostV1HrIncapacityCertificatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesRecordsCreate(request) -> *nordlet.PostV1HrEmployeesRecordsCreateResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesRecordsCreate(request) -> *nordlet.EmployeesRecordsCreateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24626,12 +24817,12 @@ client.Hr.PostV1HrIncapacityCertificatesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesRecordsCreateRequest{
+request := &nordlet.EmployeesRecordsCreateHrRequest{
         EmployeeID: "employeeId",
-        Type: nordlet.PostV1HrEmployeesRecordsCreateRequestTypeEducation,
+        Type: nordlet.EmployeesRecordsCreateHrRequestTypeEducation,
         Title: "title",
     }
-client.Hr.PostV1HrEmployeesRecordsCreate(
+client.Hr.EmployeesRecordsCreate(
         context.TODO(),
         request,
     )
@@ -24658,7 +24849,7 @@ client.Hr.PostV1HrEmployeesRecordsCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1HrEmployeesRecordsCreateRequestType` 
+**type_:** `*nordlet.EmployeesRecordsCreateHrRequestType` 
     
 </dd>
 </dl>
@@ -24682,7 +24873,7 @@ client.Hr.PostV1HrEmployeesRecordsCreate(
 <dl>
 <dd>
 
-**issuedAt:** `*string` 
+**issuedAt:** `*time.Time` 
     
 </dd>
 </dl>
@@ -24690,7 +24881,7 @@ client.Hr.PostV1HrEmployeesRecordsCreate(
 <dl>
 <dd>
 
-**validUntil:** `*string` 
+**validUntil:** `*time.Time` 
     
 </dd>
 </dl>
@@ -24718,7 +24909,7 @@ client.Hr.PostV1HrEmployeesRecordsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesRecordsUpdate(request) -> *nordlet.PostV1HrEmployeesRecordsUpdateResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesRecordsUpdate(request) -> *nordlet.EmployeesRecordsUpdateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24731,10 +24922,10 @@ client.Hr.PostV1HrEmployeesRecordsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesRecordsUpdateRequest{
+request := &nordlet.EmployeesRecordsUpdateHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrEmployeesRecordsUpdate(
+client.Hr.EmployeesRecordsUpdate(
         context.TODO(),
         request,
     )
@@ -24761,7 +24952,7 @@ client.Hr.PostV1HrEmployeesRecordsUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1HrEmployeesRecordsUpdateRequestType` 
+**type_:** `*nordlet.EmployeesRecordsUpdateHrRequestType` 
     
 </dd>
 </dl>
@@ -24785,7 +24976,7 @@ client.Hr.PostV1HrEmployeesRecordsUpdate(
 <dl>
 <dd>
 
-**issuedAt:** `*string` 
+**issuedAt:** `*time.Time` 
     
 </dd>
 </dl>
@@ -24793,7 +24984,7 @@ client.Hr.PostV1HrEmployeesRecordsUpdate(
 <dl>
 <dd>
 
-**validUntil:** `*string` 
+**validUntil:** `*time.Time` 
     
 </dd>
 </dl>
@@ -24821,7 +25012,7 @@ client.Hr.PostV1HrEmployeesRecordsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesRecordsDelete(request) -> *nordlet.PostV1HrEmployeesRecordsDeleteResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesRecordsDelete(request) -> *nordlet.EmployeesRecordsDeleteHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24834,10 +25025,10 @@ client.Hr.PostV1HrEmployeesRecordsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesRecordsDeleteRequest{
+request := &nordlet.EmployeesRecordsDeleteHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrEmployeesRecordsDelete(
+client.Hr.EmployeesRecordsDelete(
         context.TODO(),
         request,
     )
@@ -24868,7 +25059,7 @@ client.Hr.PostV1HrEmployeesRecordsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesRecordsList(request) -> *nordlet.PostV1HrEmployeesRecordsListResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesRecordsList(request) -> *nordlet.EmployeesRecordsListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24881,8 +25072,8 @@ client.Hr.PostV1HrEmployeesRecordsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesRecordsListRequest{}
-client.Hr.PostV1HrEmployeesRecordsList(
+request := &nordlet.EmployeesRecordsListHrRequest{}
+client.Hr.EmployeesRecordsList(
         context.TODO(),
         request,
     )
@@ -24917,7 +25108,7 @@ client.Hr.PostV1HrEmployeesRecordsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1HrEmployeesRecordsListRequestSortItem` 
+**sort:** `[]*nordlet.EmployeesRecordsListHrRequestSortItem` 
     
 </dd>
 </dl>
@@ -24925,7 +25116,7 @@ client.Hr.PostV1HrEmployeesRecordsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1HrEmployeesRecordsListRequestFilterItem` 
+**filter:** `[]*nordlet.EmployeesRecordsListHrRequestFilterItem` 
     
 </dd>
 </dl>
@@ -24945,7 +25136,7 @@ client.Hr.PostV1HrEmployeesRecordsList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrEmployeesAttachmentsList(request) -> *nordlet.PostV1HrEmployeesAttachmentsListResponse</code></summary>
+<details><summary><code>client.Hr.EmployeesAttachmentsList(request) -> *nordlet.EmployeesAttachmentsListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -24958,10 +25149,10 @@ client.Hr.PostV1HrEmployeesRecordsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrEmployeesAttachmentsListRequest{
+request := &nordlet.EmployeesAttachmentsListHrRequest{
         EmployeeID: "employeeId",
     }
-client.Hr.PostV1HrEmployeesAttachmentsList(
+client.Hr.EmployeesAttachmentsList(
         context.TODO(),
         request,
     )
@@ -24992,7 +25183,7 @@ client.Hr.PostV1HrEmployeesAttachmentsList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrTimesheetsGenerate(request) -> *nordlet.PostV1HrTimesheetsGenerateResponse</code></summary>
+<details><summary><code>client.Hr.TimesheetsGenerate(request) -> *nordlet.TimesheetsGenerateHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -25005,11 +25196,11 @@ client.Hr.PostV1HrEmployeesAttachmentsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrTimesheetsGenerateRequest{
+request := &nordlet.TimesheetsGenerateHrRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Hr.PostV1HrTimesheetsGenerate(
+client.Hr.TimesheetsGenerate(
         context.TODO(),
         request,
     )
@@ -25056,7 +25247,7 @@ client.Hr.PostV1HrTimesheetsGenerate(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrTimesheetsUpsert(request) -> *nordlet.PostV1HrTimesheetsUpsertResponse</code></summary>
+<details><summary><code>client.Hr.TimesheetsUpsert(request) -> *nordlet.TimesheetsUpsertHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -25069,19 +25260,19 @@ client.Hr.PostV1HrTimesheetsGenerate(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrTimesheetsUpsertRequest{
+request := &nordlet.TimesheetsUpsertHrRequest{
         EmployeeID: "employeeId",
         Year: int64(1000000),
         Month: int64(1000000),
-        Days: []*nordlet.PostV1HrTimesheetsUpsertRequestDaysItem{
-            &nordlet.PostV1HrTimesheetsUpsertRequestDaysItem{
+        Days: []*nordlet.TimesheetsUpsertHrRequestDaysItem{
+            &nordlet.TimesheetsUpsertHrRequestDaysItem{
                 Day: int64(1000000),
-                Hours: "hours",
-                Type: nordlet.PostV1HrTimesheetsUpsertRequestDaysItemTypeWork,
+                Hours: "121.00",
+                Type: nordlet.TimesheetsUpsertHrRequestDaysItemTypeWork,
             },
         },
     }
-client.Hr.PostV1HrTimesheetsUpsert(
+client.Hr.TimesheetsUpsert(
         context.TODO(),
         request,
     )
@@ -25124,7 +25315,7 @@ client.Hr.PostV1HrTimesheetsUpsert(
 <dl>
 <dd>
 
-**days:** `[]*nordlet.PostV1HrTimesheetsUpsertRequestDaysItem` 
+**days:** `[]*nordlet.TimesheetsUpsertHrRequestDaysItem` 
     
 </dd>
 </dl>
@@ -25136,7 +25327,7 @@ client.Hr.PostV1HrTimesheetsUpsert(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrTimesheetsGet(request) -> *nordlet.PostV1HrTimesheetsGetResponse</code></summary>
+<details><summary><code>client.Hr.TimesheetsGet(request) -> *nordlet.TimesheetsGetHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -25149,12 +25340,12 @@ client.Hr.PostV1HrTimesheetsUpsert(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrTimesheetsGetRequest{
+request := &nordlet.TimesheetsGetHrRequest{
         EmployeeID: "employeeId",
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Hr.PostV1HrTimesheetsGet(
+client.Hr.TimesheetsGet(
         context.TODO(),
         request,
     )
@@ -25201,7 +25392,7 @@ client.Hr.PostV1HrTimesheetsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrTimesheetsList(request) -> *nordlet.PostV1HrTimesheetsListResponse</code></summary>
+<details><summary><code>client.Hr.TimesheetsList(request) -> *nordlet.TimesheetsListHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -25214,11 +25405,11 @@ client.Hr.PostV1HrTimesheetsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrTimesheetsListRequest{
+request := &nordlet.TimesheetsListHrRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Hr.PostV1HrTimesheetsList(
+client.Hr.TimesheetsList(
         context.TODO(),
         request,
     )
@@ -25257,7 +25448,7 @@ client.Hr.PostV1HrTimesheetsList(
 </dl>
 </details>
 
-<details><summary><code>client.Hr.PostV1HrTimesheetsDelete(request) -> *nordlet.PostV1HrTimesheetsDeleteResponse</code></summary>
+<details><summary><code>client.Hr.TimesheetsDelete(request) -> *nordlet.TimesheetsDeleteHrResponse</code></summary>
 <dl>
 <dd>
 
@@ -25270,10 +25461,10 @@ client.Hr.PostV1HrTimesheetsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1HrTimesheetsDeleteRequest{
+request := &nordlet.TimesheetsDeleteHrRequest{
         ID: "id",
     }
-client.Hr.PostV1HrTimesheetsDelete(
+client.Hr.TimesheetsDelete(
         context.TODO(),
         request,
     )
@@ -25304,8 +25495,8 @@ client.Hr.PostV1HrTimesheetsDelete(
 </dl>
 </details>
 
-## Fleet
-<details><summary><code>client.Fleet.PostV1FleetVehiclesCreate(request) -> *nordlet.PostV1FleetVehiclesCreateResponse</code></summary>
+## fleet
+<details><summary><code>client.Fleet.VehiclesCreate(request) -> *nordlet.VehiclesCreateFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25318,12 +25509,12 @@ client.Hr.PostV1HrTimesheetsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetVehiclesCreateRequest{
+request := &nordlet.VehiclesCreateFleetRequest{
         PlateNumber: "plateNumber",
         Make: "make",
         Model: "model",
     }
-client.Fleet.PostV1FleetVehiclesCreate(
+client.Fleet.VehiclesCreate(
         context.TODO(),
         request,
     )
@@ -25382,7 +25573,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dl>
 <dd>
 
-**fuelType:** `*nordlet.PostV1FleetVehiclesCreateRequestFuelType` 
+**fuelType:** `*nordlet.VehiclesCreateFleetRequestFuelType` 
     
 </dd>
 </dl>
@@ -25390,7 +25581,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dl>
 <dd>
 
-**acquisitionDate:** `*string` 
+**acquisitionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25414,7 +25605,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dl>
 <dd>
 
-**technicalInspectionDue:** `*string` 
+**technicalInspectionDue:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25422,7 +25613,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dl>
 <dd>
 
-**insuranceDue:** `*string` 
+**insuranceDue:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25438,7 +25629,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dl>
 <dd>
 
-**documents:** `[]*nordlet.PostV1FleetVehiclesCreateRequestDocumentsItem` 
+**documents:** `[]*nordlet.VehiclesCreateFleetRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -25450,7 +25641,7 @@ client.Fleet.PostV1FleetVehiclesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetVehiclesUpdate(request) -> *nordlet.PostV1FleetVehiclesUpdateResponse</code></summary>
+<details><summary><code>client.Fleet.VehiclesUpdate(request) -> *nordlet.VehiclesUpdateFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25463,10 +25654,10 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetVehiclesUpdateRequest{
+request := &nordlet.VehiclesUpdateFleetRequest{
         ID: "id",
     }
-client.Fleet.PostV1FleetVehiclesUpdate(
+client.Fleet.VehiclesUpdate(
         context.TODO(),
         request,
     )
@@ -25533,7 +25724,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dl>
 <dd>
 
-**fuelType:** `*nordlet.PostV1FleetVehiclesUpdateRequestFuelType` 
+**fuelType:** `*nordlet.VehiclesUpdateFleetRequestFuelType` 
     
 </dd>
 </dl>
@@ -25541,7 +25732,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dl>
 <dd>
 
-**acquisitionDate:** `*string` 
+**acquisitionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25565,7 +25756,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dl>
 <dd>
 
-**technicalInspectionDue:** `*string` 
+**technicalInspectionDue:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25573,7 +25764,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dl>
 <dd>
 
-**insuranceDue:** `*string` 
+**insuranceDue:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25581,7 +25772,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1FleetVehiclesUpdateRequestStatus` 
+**status:** `*nordlet.VehiclesUpdateFleetRequestStatus` 
     
 </dd>
 </dl>
@@ -25601,7 +25792,7 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetVehiclesGet(request) -> *nordlet.PostV1FleetVehiclesGetResponse</code></summary>
+<details><summary><code>client.Fleet.VehiclesGet(request) -> *nordlet.VehiclesGetFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25614,10 +25805,10 @@ client.Fleet.PostV1FleetVehiclesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetVehiclesGetRequest{
+request := &nordlet.VehiclesGetFleetRequest{
         ID: "id",
     }
-client.Fleet.PostV1FleetVehiclesGet(
+client.Fleet.VehiclesGet(
         context.TODO(),
         request,
     )
@@ -25648,7 +25839,7 @@ client.Fleet.PostV1FleetVehiclesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetVehiclesList(request) -> *nordlet.PostV1FleetVehiclesListResponse</code></summary>
+<details><summary><code>client.Fleet.VehiclesList(request) -> *nordlet.VehiclesListFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25661,8 +25852,8 @@ client.Fleet.PostV1FleetVehiclesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetVehiclesListRequest{}
-client.Fleet.PostV1FleetVehiclesList(
+request := &nordlet.VehiclesListFleetRequest{}
+client.Fleet.VehiclesList(
         context.TODO(),
         request,
     )
@@ -25697,7 +25888,7 @@ client.Fleet.PostV1FleetVehiclesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1FleetVehiclesListRequestSortItem` 
+**sort:** `[]*nordlet.VehiclesListFleetRequestSortItem` 
     
 </dd>
 </dl>
@@ -25705,7 +25896,7 @@ client.Fleet.PostV1FleetVehiclesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1FleetVehiclesListRequestFilterItem` 
+**filter:** `[]*nordlet.VehiclesListFleetRequestFilterItem` 
     
 </dd>
 </dl>
@@ -25725,7 +25916,7 @@ client.Fleet.PostV1FleetVehiclesList(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetAssignmentsCreate(request) -> *nordlet.PostV1FleetAssignmentsCreateResponse</code></summary>
+<details><summary><code>client.Fleet.AssignmentsCreate(request) -> *nordlet.AssignmentsCreateFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25738,12 +25929,14 @@ client.Fleet.PostV1FleetVehiclesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetAssignmentsCreateRequest{
+request := &nordlet.AssignmentsCreateFleetRequest{
         VehicleID: "vehicleId",
         EmployeeID: "employeeId",
-        FromDate: "fromDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Fleet.PostV1FleetAssignmentsCreate(
+client.Fleet.AssignmentsCreate(
         context.TODO(),
         request,
     )
@@ -25778,7 +25971,7 @@ client.Fleet.PostV1FleetAssignmentsCreate(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -25786,7 +25979,7 @@ client.Fleet.PostV1FleetAssignmentsCreate(
 <dl>
 <dd>
 
-**toDate:** `*string` 
+**toDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -25822,7 +26015,7 @@ client.Fleet.PostV1FleetAssignmentsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetAssignmentsEnd(request) -> *nordlet.PostV1FleetAssignmentsEndResponse</code></summary>
+<details><summary><code>client.Fleet.AssignmentsEnd(request) -> *nordlet.AssignmentsEndFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25835,11 +26028,13 @@ client.Fleet.PostV1FleetAssignmentsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetAssignmentsEndRequest{
+request := &nordlet.AssignmentsEndFleetRequest{
         ID: "id",
-        ToDate: "toDate",
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Fleet.PostV1FleetAssignmentsEnd(
+client.Fleet.AssignmentsEnd(
         context.TODO(),
         request,
     )
@@ -25866,7 +26061,7 @@ client.Fleet.PostV1FleetAssignmentsEnd(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -25878,7 +26073,7 @@ client.Fleet.PostV1FleetAssignmentsEnd(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetAssignmentsList(request) -> *nordlet.PostV1FleetAssignmentsListResponse</code></summary>
+<details><summary><code>client.Fleet.AssignmentsList(request) -> *nordlet.AssignmentsListFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25891,8 +26086,8 @@ client.Fleet.PostV1FleetAssignmentsEnd(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetAssignmentsListRequest{}
-client.Fleet.PostV1FleetAssignmentsList(
+request := &nordlet.AssignmentsListFleetRequest{}
+client.Fleet.AssignmentsList(
         context.TODO(),
         request,
     )
@@ -25927,7 +26122,7 @@ client.Fleet.PostV1FleetAssignmentsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1FleetAssignmentsListRequestSortItem` 
+**sort:** `[]*nordlet.AssignmentsListFleetRequestSortItem` 
     
 </dd>
 </dl>
@@ -25935,7 +26130,7 @@ client.Fleet.PostV1FleetAssignmentsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1FleetAssignmentsListRequestFilterItem` 
+**filter:** `[]*nordlet.AssignmentsListFleetRequestFilterItem` 
     
 </dd>
 </dl>
@@ -25955,7 +26150,7 @@ client.Fleet.PostV1FleetAssignmentsList(
 </dl>
 </details>
 
-<details><summary><code>client.Fleet.PostV1FleetNaturaPreview(request) -> *nordlet.PostV1FleetNaturaPreviewResponse</code></summary>
+<details><summary><code>client.Fleet.NaturaPreview(request) -> *nordlet.NaturaPreviewFleetResponse</code></summary>
 <dl>
 <dd>
 
@@ -25968,11 +26163,11 @@ client.Fleet.PostV1FleetAssignmentsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1FleetNaturaPreviewRequest{
+request := &nordlet.NaturaPreviewFleetRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Fleet.PostV1FleetNaturaPreview(
+client.Fleet.NaturaPreview(
         context.TODO(),
         request,
     )
@@ -26011,8 +26206,8 @@ client.Fleet.PostV1FleetNaturaPreview(
 </dl>
 </details>
 
-## Payroll
-<details><summary><code>client.Payroll.PostV1PayrollDepartmentsCreate(request) -> *nordlet.PostV1PayrollDepartmentsCreateResponse</code></summary>
+## payroll
+<details><summary><code>client.Payroll.DepartmentsCreate(request) -> *nordlet.DepartmentsCreatePayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26025,11 +26220,11 @@ client.Fleet.PostV1FleetNaturaPreview(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollDepartmentsCreateRequest{
+request := &nordlet.DepartmentsCreatePayrollRequest{
         Code: "code",
         Name: "name",
     }
-client.Payroll.PostV1PayrollDepartmentsCreate(
+client.Payroll.DepartmentsCreate(
         context.TODO(),
         request,
     )
@@ -26068,7 +26263,7 @@ client.Payroll.PostV1PayrollDepartmentsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollDepartmentsList(request) -> *nordlet.PostV1PayrollDepartmentsListResponse</code></summary>
+<details><summary><code>client.Payroll.DepartmentsList(request) -> *nordlet.DepartmentsListPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26081,8 +26276,8 @@ client.Payroll.PostV1PayrollDepartmentsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollDepartmentsListRequest{}
-client.Payroll.PostV1PayrollDepartmentsList(
+request := &nordlet.DepartmentsListPayrollRequest{}
+client.Payroll.DepartmentsList(
         context.TODO(),
         request,
     )
@@ -26098,7 +26293,7 @@ client.Payroll.PostV1PayrollDepartmentsList(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollSchedulesCreate(request) -> *nordlet.PostV1PayrollSchedulesCreateResponse</code></summary>
+<details><summary><code>client.Payroll.SchedulesCreate(request) -> *nordlet.SchedulesCreatePayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26111,11 +26306,11 @@ client.Payroll.PostV1PayrollDepartmentsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollSchedulesCreateRequest{
+request := &nordlet.SchedulesCreatePayrollRequest{
         Code: "code",
         Name: "name",
     }
-client.Payroll.PostV1PayrollSchedulesCreate(
+client.Payroll.SchedulesCreate(
         context.TODO(),
         request,
     )
@@ -26162,7 +26357,7 @@ client.Payroll.PostV1PayrollSchedulesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollSchedulesList(request) -> *nordlet.PostV1PayrollSchedulesListResponse</code></summary>
+<details><summary><code>client.Payroll.SchedulesList(request) -> *nordlet.SchedulesListPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26175,8 +26370,8 @@ client.Payroll.PostV1PayrollSchedulesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollSchedulesListRequest{}
-client.Payroll.PostV1PayrollSchedulesList(
+request := &nordlet.SchedulesListPayrollRequest{}
+client.Payroll.SchedulesList(
         context.TODO(),
         request,
     )
@@ -26192,7 +26387,7 @@ client.Payroll.PostV1PayrollSchedulesList(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(request) -> *nordlet.PostV1PayrollCalcResponse</code></summary>
+<details><summary><code>client.Payroll.Calc(request) -> *nordlet.CalcPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26205,11 +26400,13 @@ client.Payroll.PostV1PayrollSchedulesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollCalcRequest{
-        TaxableBase: "taxableBase",
-        Date: "date",
+request := &nordlet.CalcPayrollRequest{
+        TaxableBase: "121.00",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
+client.Payroll.Calc(
         context.TODO(),
         request,
     )
@@ -26236,7 +26433,7 @@ client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -26296,7 +26493,7 @@ client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollRunsCreate(request) -> *nordlet.PostV1PayrollRunsCreateResponse</code></summary>
+<details><summary><code>client.Payroll.RunsCreate(request) -> *nordlet.RunsCreatePayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26309,11 +26506,11 @@ client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollRunsCreateRequest{
+request := &nordlet.RunsCreatePayrollRequest{
         Year: int64(1000000),
         Month: int64(1000000),
     }
-client.Payroll.PostV1PayrollRunsCreate(
+client.Payroll.RunsCreate(
         context.TODO(),
         request,
     )
@@ -26356,7 +26553,7 @@ client.Payroll.PostV1PayrollRunsCreate(
 <dl>
 <dd>
 
-**grossOverrides:** `[]*nordlet.PostV1PayrollRunsCreateRequestGrossOverridesItem` 
+**grossOverrides:** `[]*nordlet.RunsCreatePayrollRequestGrossOverridesItem` 
     
 </dd>
 </dl>
@@ -26364,7 +26561,7 @@ client.Payroll.PostV1PayrollRunsCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1PayrollRunsCreateRequestLinesItem` 
+**lines:** `[]*nordlet.RunsCreatePayrollRequestLinesItem` 
     
 </dd>
 </dl>
@@ -26384,7 +26581,7 @@ client.Payroll.PostV1PayrollRunsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollRunsGet(request) -> *nordlet.PostV1PayrollRunsGetResponse</code></summary>
+<details><summary><code>client.Payroll.RunsGet(request) -> *nordlet.RunsGetPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26397,10 +26594,10 @@ client.Payroll.PostV1PayrollRunsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollRunsGetRequest{
+request := &nordlet.RunsGetPayrollRequest{
         ID: "id",
     }
-client.Payroll.PostV1PayrollRunsGet(
+client.Payroll.RunsGet(
         context.TODO(),
         request,
     )
@@ -26431,7 +26628,7 @@ client.Payroll.PostV1PayrollRunsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollRunsList(request) -> *nordlet.PostV1PayrollRunsListResponse</code></summary>
+<details><summary><code>client.Payroll.RunsList(request) -> *nordlet.RunsListPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26444,8 +26641,8 @@ client.Payroll.PostV1PayrollRunsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollRunsListRequest{}
-client.Payroll.PostV1PayrollRunsList(
+request := &nordlet.RunsListPayrollRequest{}
+client.Payroll.RunsList(
         context.TODO(),
         request,
     )
@@ -26480,7 +26677,7 @@ client.Payroll.PostV1PayrollRunsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PayrollRunsListRequestSortItem` 
+**sort:** `[]*nordlet.RunsListPayrollRequestSortItem` 
     
 </dd>
 </dl>
@@ -26488,7 +26685,7 @@ client.Payroll.PostV1PayrollRunsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PayrollRunsListRequestFilterItem` 
+**filter:** `[]*nordlet.RunsListPayrollRequestFilterItem` 
     
 </dd>
 </dl>
@@ -26508,7 +26705,7 @@ client.Payroll.PostV1PayrollRunsList(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.RecordTheTimeAPersonWorkedInAPayrollLine(request) -> *nordlet.PostV1PayrollLinesAttendanceResponse</code></summary>
+<details><summary><code>client.Payroll.LinesAttendance(request) -> *nordlet.LinesAttendancePayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26535,10 +26732,10 @@ The days and hours worked, the days on the register and the average hourly earni
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollLinesAttendanceRequest{
+request := &nordlet.LinesAttendancePayrollRequest{
         ID: "id",
     }
-client.Payroll.RecordTheTimeAPersonWorkedInAPayrollLine(
+client.Payroll.LinesAttendance(
         context.TODO(),
         request,
     )
@@ -26601,7 +26798,7 @@ client.Payroll.RecordTheTimeAPersonWorkedInAPayrollLine(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollRunsApprove(request) -> *nordlet.PostV1PayrollRunsApproveResponse</code></summary>
+<details><summary><code>client.Payroll.RunsApprove(request) -> *nordlet.RunsApprovePayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26614,10 +26811,10 @@ client.Payroll.RecordTheTimeAPersonWorkedInAPayrollLine(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollRunsApproveRequest{
+request := &nordlet.RunsApprovePayrollRequest{
         ID: "id",
     }
-client.Payroll.PostV1PayrollRunsApprove(
+client.Payroll.RunsApprove(
         context.TODO(),
         request,
     )
@@ -26704,7 +26901,7 @@ client.Payroll.PostV1PayrollRunsApprove(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollRunsCancel(request) -> *nordlet.PostV1PayrollRunsCancelResponse</code></summary>
+<details><summary><code>client.Payroll.RunsCancel(request) -> *nordlet.RunsCancelPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26717,10 +26914,10 @@ client.Payroll.PostV1PayrollRunsApprove(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollRunsCancelRequest{
+request := &nordlet.RunsCancelPayrollRequest{
         ID: "id",
     }
-client.Payroll.PostV1PayrollRunsCancel(
+client.Payroll.RunsCancel(
         context.TODO(),
         request,
     )
@@ -26751,7 +26948,7 @@ client.Payroll.PostV1PayrollRunsCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Payroll.PostV1PayrollPaymentsExport(request) -> *nordlet.PostV1PayrollPaymentsExportResponse</code></summary>
+<details><summary><code>client.Payroll.PaymentsExport(request) -> *nordlet.PaymentsExportPayrollResponse</code></summary>
 <dl>
 <dd>
 
@@ -26764,11 +26961,11 @@ client.Payroll.PostV1PayrollRunsCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1PayrollPaymentsExportRequest{
+request := &nordlet.PaymentsExportPayrollRequest{
         RunID: "runId",
         BankAccountID: "bankAccountId",
     }
-client.Payroll.PostV1PayrollPaymentsExport(
+client.Payroll.PaymentsExport(
         context.TODO(),
         request,
     )
@@ -26803,7 +27000,15 @@ client.Payroll.PostV1PayrollPaymentsExport(
 <dl>
 <dd>
 
-**executionDate:** `*string` 
+**executionDate:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.PaymentsExportPayrollRequestLocale` 
     
 </dd>
 </dl>
@@ -26815,8 +27020,8 @@ client.Payroll.PostV1PayrollPaymentsExport(
 </dl>
 </details>
 
-## Agreements
-<details><summary><code>client.Agreements.PostV1AgreementsTypesCreate(request) -> *nordlet.PostV1AgreementsTypesCreateResponse</code></summary>
+## agreements
+<details><summary><code>client.Agreements.TypesCreate(request) -> *nordlet.TypesCreateAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -26829,11 +27034,11 @@ client.Payroll.PostV1PayrollPaymentsExport(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsTypesCreateRequest{
+request := &nordlet.TypesCreateAgreementsRequest{
         Code: "code",
         Name: "name",
     }
-client.Agreements.PostV1AgreementsTypesCreate(
+client.Agreements.TypesCreate(
         context.TODO(),
         request,
     )
@@ -26872,7 +27077,7 @@ client.Agreements.PostV1AgreementsTypesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsTypesList(request) -> *nordlet.PostV1AgreementsTypesListResponse</code></summary>
+<details><summary><code>client.Agreements.TypesList(request) -> *nordlet.TypesListAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -26885,8 +27090,8 @@ client.Agreements.PostV1AgreementsTypesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsTypesListRequest{}
-client.Agreements.PostV1AgreementsTypesList(
+request := &nordlet.TypesListAgreementsRequest{}
+client.Agreements.TypesList(
         context.TODO(),
         request,
     )
@@ -26921,7 +27126,7 @@ client.Agreements.PostV1AgreementsTypesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AgreementsTypesListRequestSortItem` 
+**sort:** `[]*nordlet.TypesListAgreementsRequestSortItem` 
     
 </dd>
 </dl>
@@ -26929,7 +27134,7 @@ client.Agreements.PostV1AgreementsTypesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AgreementsTypesListRequestFilterItem` 
+**filter:** `[]*nordlet.TypesListAgreementsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -26949,7 +27154,7 @@ client.Agreements.PostV1AgreementsTypesList(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsCreate(request) -> *nordlet.PostV1AgreementsAgreementsCreateResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsCreate(request) -> *nordlet.AgreementsCreateAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -26962,11 +27167,13 @@ client.Agreements.PostV1AgreementsTypesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsCreateRequest{
+request := &nordlet.AgreementsCreateAgreementsRequest{
         Number: "number",
-        StartDate: "startDate",
+        StartDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Agreements.PostV1AgreementsAgreementsCreate(
+client.Agreements.AgreementsCreate(
         context.TODO(),
         request,
     )
@@ -26993,7 +27200,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1AgreementsAgreementsCreateRequestKind` 
+**kind:** `*nordlet.AgreementsCreateAgreementsRequestKind` 
     
 </dd>
 </dl>
@@ -27041,7 +27248,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**startDate:** `string` 
+**startDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -27049,7 +27256,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**endDate:** `*string` 
+**endDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -27073,7 +27280,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**billingPeriod:** `*nordlet.PostV1AgreementsAgreementsCreateRequestBillingPeriod` 
+**billingPeriod:** `*nordlet.AgreementsCreateAgreementsRequestBillingPeriod` 
     
 </dd>
 </dl>
@@ -27089,7 +27296,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1AgreementsAgreementsCreateRequestStatus` 
+**status:** `*nordlet.AgreementsCreateAgreementsRequestStatus` 
     
 </dd>
 </dl>
@@ -27113,7 +27320,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**items:** `[]*nordlet.PostV1AgreementsAgreementsCreateRequestItemsItem` 
+**items:** `[]*nordlet.AgreementsCreateAgreementsRequestItemsItem` 
     
 </dd>
 </dl>
@@ -27125,7 +27332,7 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsGet(request) -> *nordlet.PostV1AgreementsAgreementsGetResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsGet(request) -> *nordlet.AgreementsGetAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27138,10 +27345,10 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsGetRequest{
+request := &nordlet.AgreementsGetAgreementsRequest{
         ID: "id",
     }
-client.Agreements.PostV1AgreementsAgreementsGet(
+client.Agreements.AgreementsGet(
         context.TODO(),
         request,
     )
@@ -27172,7 +27379,7 @@ client.Agreements.PostV1AgreementsAgreementsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsUpdate(request) -> *nordlet.PostV1AgreementsAgreementsUpdateResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsUpdate(request) -> *nordlet.AgreementsUpdateAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27185,10 +27392,10 @@ client.Agreements.PostV1AgreementsAgreementsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsUpdateRequest{
+request := &nordlet.AgreementsUpdateAgreementsRequest{
         ID: "id",
     }
-client.Agreements.PostV1AgreementsAgreementsUpdate(
+client.Agreements.AgreementsUpdate(
         context.TODO(),
         request,
     )
@@ -27223,7 +27430,7 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
-**kind:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestKind` 
+**kind:** `*nordlet.AgreementsUpdateAgreementsRequestKind` 
     
 </dd>
 </dl>
@@ -27239,7 +27446,7 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
-**endDate:** `*string` 
+**endDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -27263,7 +27470,7 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
-**billingPeriod:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestBillingPeriod` 
+**billingPeriod:** `*nordlet.AgreementsUpdateAgreementsRequestBillingPeriod` 
     
 </dd>
 </dl>
@@ -27271,7 +27478,7 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestStatus` 
+**status:** `*nordlet.AgreementsUpdateAgreementsRequestStatus` 
     
 </dd>
 </dl>
@@ -27299,7 +27506,7 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsDelete(request) -> *nordlet.PostV1AgreementsAgreementsDeleteResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsDelete(request) -> *nordlet.AgreementsDeleteAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27312,10 +27519,10 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsDeleteRequest{
+request := &nordlet.AgreementsDeleteAgreementsRequest{
         ID: "id",
     }
-client.Agreements.PostV1AgreementsAgreementsDelete(
+client.Agreements.AgreementsDelete(
         context.TODO(),
         request,
     )
@@ -27346,7 +27553,7 @@ client.Agreements.PostV1AgreementsAgreementsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsList(request) -> *nordlet.PostV1AgreementsAgreementsListResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsList(request) -> *nordlet.AgreementsListAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27359,8 +27566,8 @@ client.Agreements.PostV1AgreementsAgreementsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsListRequest{}
-client.Agreements.PostV1AgreementsAgreementsList(
+request := &nordlet.AgreementsListAgreementsRequest{}
+client.Agreements.AgreementsList(
         context.TODO(),
         request,
     )
@@ -27395,7 +27602,7 @@ client.Agreements.PostV1AgreementsAgreementsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AgreementsAgreementsListRequestSortItem` 
+**sort:** `[]*nordlet.AgreementsListAgreementsRequestSortItem` 
     
 </dd>
 </dl>
@@ -27403,7 +27610,7 @@ client.Agreements.PostV1AgreementsAgreementsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AgreementsAgreementsListRequestFilterItem` 
+**filter:** `[]*nordlet.AgreementsListAgreementsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -27423,7 +27630,7 @@ client.Agreements.PostV1AgreementsAgreementsList(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(request) -> *nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsGenerateInvoice(request) -> *nordlet.AgreementsGenerateInvoiceAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27436,10 +27643,10 @@ client.Agreements.PostV1AgreementsAgreementsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest{
+request := &nordlet.AgreementsGenerateInvoiceAgreementsRequest{
         ID: "id",
     }
-client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
+client.Agreements.AgreementsGenerateInvoice(
         context.TODO(),
         request,
     )
@@ -27466,7 +27673,7 @@ client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
 <dl>
 <dd>
 
-**asOfDate:** `*string` 
+**asOfDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -27478,7 +27685,7 @@ client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsAgreementsBillingRun(request) -> *nordlet.PostV1AgreementsAgreementsBillingRunResponse</code></summary>
+<details><summary><code>client.Agreements.AgreementsBillingRun(request) -> *nordlet.AgreementsBillingRunAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27491,8 +27698,8 @@ client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsAgreementsBillingRunRequest{}
-client.Agreements.PostV1AgreementsAgreementsBillingRun(
+request := &nordlet.AgreementsBillingRunAgreementsRequest{}
+client.Agreements.AgreementsBillingRun(
         context.TODO(),
         request,
     )
@@ -27511,7 +27718,7 @@ client.Agreements.PostV1AgreementsAgreementsBillingRun(
 <dl>
 <dd>
 
-**asOfDate:** `*string` 
+**asOfDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -27523,7 +27730,7 @@ client.Agreements.PostV1AgreementsAgreementsBillingRun(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsInsurancePoliciesCreate(request) -> *nordlet.PostV1AgreementsInsurancePoliciesCreateResponse</code></summary>
+<details><summary><code>client.Agreements.InsurancePoliciesCreate(request) -> *nordlet.InsurancePoliciesCreateAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27536,13 +27743,17 @@ client.Agreements.PostV1AgreementsAgreementsBillingRun(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsInsurancePoliciesCreateRequest{
+request := &nordlet.InsurancePoliciesCreateAgreementsRequest{
         PolicyNumber: "policyNumber",
         InsuredObject: "insuredObject",
-        FromDate: "fromDate",
-        ToDate: "toDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
+client.Agreements.InsurancePoliciesCreate(
         context.TODO(),
         request,
     )
@@ -27585,7 +27796,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -27593,7 +27804,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -27629,7 +27840,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsInsurancePoliciesList(request) -> *nordlet.PostV1AgreementsInsurancePoliciesListResponse</code></summary>
+<details><summary><code>client.Agreements.InsurancePoliciesList(request) -> *nordlet.InsurancePoliciesListAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27642,8 +27853,8 @@ client.Agreements.PostV1AgreementsInsurancePoliciesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsInsurancePoliciesListRequest{}
-client.Agreements.PostV1AgreementsInsurancePoliciesList(
+request := &nordlet.InsurancePoliciesListAgreementsRequest{}
+client.Agreements.InsurancePoliciesList(
         context.TODO(),
         request,
     )
@@ -27678,7 +27889,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AgreementsInsurancePoliciesListRequestSortItem` 
+**sort:** `[]*nordlet.InsurancePoliciesListAgreementsRequestSortItem` 
     
 </dd>
 </dl>
@@ -27686,7 +27897,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AgreementsInsurancePoliciesListRequestFilterItem` 
+**filter:** `[]*nordlet.InsurancePoliciesListAgreementsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -27706,7 +27917,7 @@ client.Agreements.PostV1AgreementsInsurancePoliciesList(
 </dl>
 </details>
 
-<details><summary><code>client.Agreements.PostV1AgreementsInsurancePoliciesDelete(request) -> *nordlet.PostV1AgreementsInsurancePoliciesDeleteResponse</code></summary>
+<details><summary><code>client.Agreements.InsurancePoliciesDelete(request) -> *nordlet.InsurancePoliciesDeleteAgreementsResponse</code></summary>
 <dl>
 <dd>
 
@@ -27719,10 +27930,10 @@ client.Agreements.PostV1AgreementsInsurancePoliciesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AgreementsInsurancePoliciesDeleteRequest{
+request := &nordlet.InsurancePoliciesDeleteAgreementsRequest{
         ID: "id",
     }
-client.Agreements.PostV1AgreementsInsurancePoliciesDelete(
+client.Agreements.InsurancePoliciesDelete(
         context.TODO(),
         request,
     )
@@ -27753,8 +27964,8 @@ client.Agreements.PostV1AgreementsInsurancePoliciesDelete(
 </dl>
 </details>
 
-## Inventory
-<details><summary><code>client.Inventory.PostV1InventorySettingsGet(request) -> *nordlet.PostV1InventorySettingsGetResponse</code></summary>
+## inventory
+<details><summary><code>client.Inventory.SettingsGet(request) -> *nordlet.SettingsGetInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27767,8 +27978,8 @@ client.Agreements.PostV1AgreementsInsurancePoliciesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventorySettingsGetRequest{}
-client.Inventory.PostV1InventorySettingsGet(
+request := &nordlet.SettingsGetInventoryRequest{}
+client.Inventory.SettingsGet(
         context.TODO(),
         request,
     )
@@ -27784,7 +27995,7 @@ client.Inventory.PostV1InventorySettingsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventorySettingsUpdate(request) -> *nordlet.PostV1InventorySettingsUpdateResponse</code></summary>
+<details><summary><code>client.Inventory.SettingsUpdate(request) -> *nordlet.SettingsUpdateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27797,10 +28008,10 @@ client.Inventory.PostV1InventorySettingsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventorySettingsUpdateRequest{
-        NegativeStockPolicy: nordlet.PostV1InventorySettingsUpdateRequestNegativeStockPolicyReject,
+request := &nordlet.SettingsUpdateInventoryRequest{
+        NegativeStockPolicy: nordlet.SettingsUpdateInventoryRequestNegativeStockPolicyReject,
     }
-client.Inventory.PostV1InventorySettingsUpdate(
+client.Inventory.SettingsUpdate(
         context.TODO(),
         request,
     )
@@ -27819,7 +28030,7 @@ client.Inventory.PostV1InventorySettingsUpdate(
 <dl>
 <dd>
 
-**negativeStockPolicy:** `*nordlet.PostV1InventorySettingsUpdateRequestNegativeStockPolicy` 
+**negativeStockPolicy:** `*nordlet.SettingsUpdateInventoryRequestNegativeStockPolicy` 
     
 </dd>
 </dl>
@@ -27831,7 +28042,7 @@ client.Inventory.PostV1InventorySettingsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryWarehousesCreate(request) -> *nordlet.PostV1InventoryWarehousesCreateResponse</code></summary>
+<details><summary><code>client.Inventory.WarehousesCreate(request) -> *nordlet.WarehousesCreateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27844,11 +28055,11 @@ client.Inventory.PostV1InventorySettingsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryWarehousesCreateRequest{
+request := &nordlet.WarehousesCreateInventoryRequest{
         Code: "code",
         Name: "name",
     }
-client.Inventory.PostV1InventoryWarehousesCreate(
+client.Inventory.WarehousesCreate(
         context.TODO(),
         request,
     )
@@ -27895,7 +28106,7 @@ client.Inventory.PostV1InventoryWarehousesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryWarehousesList(request) -> *nordlet.PostV1InventoryWarehousesListResponse</code></summary>
+<details><summary><code>client.Inventory.WarehousesList(request) -> *nordlet.WarehousesListInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27908,8 +28119,8 @@ client.Inventory.PostV1InventoryWarehousesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryWarehousesListRequest{}
-client.Inventory.PostV1InventoryWarehousesList(
+request := &nordlet.WarehousesListInventoryRequest{}
+client.Inventory.WarehousesList(
         context.TODO(),
         request,
     )
@@ -27944,7 +28155,7 @@ client.Inventory.PostV1InventoryWarehousesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1InventoryWarehousesListRequestSortItem` 
+**sort:** `[]*nordlet.WarehousesListInventoryRequestSortItem` 
     
 </dd>
 </dl>
@@ -27952,7 +28163,7 @@ client.Inventory.PostV1InventoryWarehousesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1InventoryWarehousesListRequestFilterItem` 
+**filter:** `[]*nordlet.WarehousesListInventoryRequestFilterItem` 
     
 </dd>
 </dl>
@@ -27972,7 +28183,7 @@ client.Inventory.PostV1InventoryWarehousesList(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockReceive(request) -> *nordlet.PostV1InventoryStockReceiveResponse</code></summary>
+<details><summary><code>client.Inventory.StockReceive(request) -> *nordlet.StockReceiveInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27985,14 +28196,16 @@ client.Inventory.PostV1InventoryWarehousesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockReceiveRequest{
+request := &nordlet.StockReceiveInventoryRequest{
         WarehouseID: "warehouseId",
         ItemID: "itemId",
-        Date: "date",
-        Quantity: "quantity",
-        UnitCost: "unitCost",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Quantity: "121.0000",
+        UnitCost: "121.000000",
     }
-client.Inventory.PostV1InventoryStockReceive(
+client.Inventory.StockReceive(
         context.TODO(),
         request,
     )
@@ -28027,7 +28240,7 @@ client.Inventory.PostV1InventoryStockReceive(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -28059,7 +28272,7 @@ client.Inventory.PostV1InventoryStockReceive(
 <dl>
 <dd>
 
-**expiryDate:** `*string` 
+**expiryDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -28079,7 +28292,7 @@ client.Inventory.PostV1InventoryStockReceive(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockWriteOff(request) -> *nordlet.PostV1InventoryStockWriteOffResponse</code></summary>
+<details><summary><code>client.Inventory.StockWriteOff(request) -> *nordlet.StockWriteOffInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28092,13 +28305,15 @@ client.Inventory.PostV1InventoryStockReceive(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockWriteOffRequest{
+request := &nordlet.StockWriteOffInventoryRequest{
         WarehouseID: "warehouseId",
         ItemID: "itemId",
-        Date: "date",
-        Quantity: "quantity",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Quantity: "121.0000",
     }
-client.Inventory.PostV1InventoryStockWriteOff(
+client.Inventory.StockWriteOff(
         context.TODO(),
         request,
     )
@@ -28133,7 +28348,7 @@ client.Inventory.PostV1InventoryStockWriteOff(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -28185,7 +28400,7 @@ client.Inventory.PostV1InventoryStockWriteOff(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockTransfer(request) -> *nordlet.PostV1InventoryStockTransferResponse</code></summary>
+<details><summary><code>client.Inventory.StockTransfer(request) -> *nordlet.StockTransferInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28198,14 +28413,16 @@ client.Inventory.PostV1InventoryStockWriteOff(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockTransferRequest{
+request := &nordlet.StockTransferInventoryRequest{
         FromWarehouseID: "fromWarehouseId",
         ToWarehouseID: "toWarehouseId",
         ItemID: "itemId",
-        Date: "date",
-        Quantity: "quantity",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Quantity: "121.0000",
     }
-client.Inventory.PostV1InventoryStockTransfer(
+client.Inventory.StockTransfer(
         context.TODO(),
         request,
     )
@@ -28248,7 +28465,7 @@ client.Inventory.PostV1InventoryStockTransfer(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -28284,7 +28501,7 @@ client.Inventory.PostV1InventoryStockTransfer(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockTake(request) -> *nordlet.PostV1InventoryStockTakeResponse</code></summary>
+<details><summary><code>client.Inventory.StockTake(request) -> *nordlet.StockTakeInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28297,16 +28514,18 @@ client.Inventory.PostV1InventoryStockTransfer(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockTakeRequest{
+request := &nordlet.StockTakeInventoryRequest{
         WarehouseID: "warehouseId",
-        Date: "date",
-        Lines: []*nordlet.PostV1InventoryStockTakeRequestLinesItem{
-            &nordlet.PostV1InventoryStockTakeRequestLinesItem{
-                CountedQty: "countedQty",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.StockTakeInventoryRequestLinesItem{
+            &nordlet.StockTakeInventoryRequestLinesItem{
+                CountedQty: "121.0000",
             },
         },
     }
-client.Inventory.PostV1InventoryStockTake(
+client.Inventory.StockTake(
         context.TODO(),
         request,
     )
@@ -28333,7 +28552,7 @@ client.Inventory.PostV1InventoryStockTake(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -28357,7 +28576,7 @@ client.Inventory.PostV1InventoryStockTake(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1InventoryStockTakeRequestLinesItem` 
+**lines:** `[]*nordlet.StockTakeInventoryRequestLinesItem` 
     
 </dd>
 </dl>
@@ -28369,7 +28588,7 @@ client.Inventory.PostV1InventoryStockTake(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockLevels(request) -> *nordlet.PostV1InventoryStockLevelsResponse</code></summary>
+<details><summary><code>client.Inventory.StockLevels(request) -> *nordlet.StockLevelsInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28382,8 +28601,8 @@ client.Inventory.PostV1InventoryStockTake(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockLevelsRequest{}
-client.Inventory.PostV1InventoryStockLevels(
+request := &nordlet.StockLevelsInventoryRequest{}
+client.Inventory.StockLevels(
         context.TODO(),
         request,
     )
@@ -28422,7 +28641,7 @@ client.Inventory.PostV1InventoryStockLevels(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryStockMovementsList(request) -> *nordlet.PostV1InventoryStockMovementsListResponse</code></summary>
+<details><summary><code>client.Inventory.StockMovementsList(request) -> *nordlet.StockMovementsListInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28435,8 +28654,8 @@ client.Inventory.PostV1InventoryStockLevels(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryStockMovementsListRequest{}
-client.Inventory.PostV1InventoryStockMovementsList(
+request := &nordlet.StockMovementsListInventoryRequest{}
+client.Inventory.StockMovementsList(
         context.TODO(),
         request,
     )
@@ -28471,7 +28690,7 @@ client.Inventory.PostV1InventoryStockMovementsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1InventoryStockMovementsListRequestSortItem` 
+**sort:** `[]*nordlet.StockMovementsListInventoryRequestSortItem` 
     
 </dd>
 </dl>
@@ -28479,7 +28698,7 @@ client.Inventory.PostV1InventoryStockMovementsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1InventoryStockMovementsListRequestFilterItem` 
+**filter:** `[]*nordlet.StockMovementsListInventoryRequestFilterItem` 
     
 </dd>
 </dl>
@@ -28499,7 +28718,7 @@ client.Inventory.PostV1InventoryStockMovementsList(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLotsList(request) -> *nordlet.PostV1InventoryLotsListResponse</code></summary>
+<details><summary><code>client.Inventory.LotsList(request) -> *nordlet.LotsListInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28512,8 +28731,8 @@ client.Inventory.PostV1InventoryStockMovementsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLotsListRequest{}
-client.Inventory.PostV1InventoryLotsList(
+request := &nordlet.LotsListInventoryRequest{}
+client.Inventory.LotsList(
         context.TODO(),
         request,
     )
@@ -28548,7 +28767,7 @@ client.Inventory.PostV1InventoryLotsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1InventoryLotsListRequestSortItem` 
+**sort:** `[]*nordlet.LotsListInventoryRequestSortItem` 
     
 </dd>
 </dl>
@@ -28556,7 +28775,7 @@ client.Inventory.PostV1InventoryLotsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1InventoryLotsListRequestFilterItem` 
+**filter:** `[]*nordlet.LotsListInventoryRequestFilterItem` 
     
 </dd>
 </dl>
@@ -28576,7 +28795,7 @@ client.Inventory.PostV1InventoryLotsList(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLotsGet(request) -> *nordlet.PostV1InventoryLotsGetResponse</code></summary>
+<details><summary><code>client.Inventory.LotsGet(request) -> *nordlet.LotsGetInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28589,10 +28808,10 @@ client.Inventory.PostV1InventoryLotsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLotsGetRequest{
+request := &nordlet.LotsGetInventoryRequest{
         ID: "id",
     }
-client.Inventory.PostV1InventoryLotsGet(
+client.Inventory.LotsGet(
         context.TODO(),
         request,
     )
@@ -28623,7 +28842,7 @@ client.Inventory.PostV1InventoryLotsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLotsUpdate(request) -> *nordlet.PostV1InventoryLotsUpdateResponse</code></summary>
+<details><summary><code>client.Inventory.LotsUpdate(request) -> *nordlet.LotsUpdateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28636,10 +28855,10 @@ client.Inventory.PostV1InventoryLotsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLotsUpdateRequest{
+request := &nordlet.LotsUpdateInventoryRequest{
         ID: "id",
     }
-client.Inventory.PostV1InventoryLotsUpdate(
+client.Inventory.LotsUpdate(
         context.TODO(),
         request,
     )
@@ -28666,7 +28885,7 @@ client.Inventory.PostV1InventoryLotsUpdate(
 <dl>
 <dd>
 
-**expiryDate:** `*string` 
+**expiryDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -28686,7 +28905,7 @@ client.Inventory.PostV1InventoryLotsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLandedCostsCreate(request) -> *nordlet.PostV1InventoryLandedCostsCreateResponse</code></summary>
+<details><summary><code>client.Inventory.LandedCostsCreate(request) -> *nordlet.LandedCostsCreateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28699,11 +28918,13 @@ client.Inventory.PostV1InventoryLotsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLandedCostsCreateRequest{
-        Date: "date",
-        Amount: "amount",
+request := &nordlet.LandedCostsCreateInventoryRequest{
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Amount: "121.000000",
     }
-client.Inventory.PostV1InventoryLandedCostsCreate(
+client.Inventory.LandedCostsCreate(
         context.TODO(),
         request,
     )
@@ -28722,7 +28943,7 @@ client.Inventory.PostV1InventoryLandedCostsCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -28738,7 +28959,7 @@ client.Inventory.PostV1InventoryLandedCostsCreate(
 <dl>
 <dd>
 
-**method:** `*nordlet.PostV1InventoryLandedCostsCreateRequestMethod` 
+**method:** `*nordlet.LandedCostsCreateInventoryRequestMethod` 
     
 </dd>
 </dl>
@@ -28782,7 +29003,7 @@ client.Inventory.PostV1InventoryLandedCostsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLandedCostsGet(request) -> *nordlet.PostV1InventoryLandedCostsGetResponse</code></summary>
+<details><summary><code>client.Inventory.LandedCostsGet(request) -> *nordlet.LandedCostsGetInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28795,10 +29016,10 @@ client.Inventory.PostV1InventoryLandedCostsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLandedCostsGetRequest{
+request := &nordlet.LandedCostsGetInventoryRequest{
         ID: "id",
     }
-client.Inventory.PostV1InventoryLandedCostsGet(
+client.Inventory.LandedCostsGet(
         context.TODO(),
         request,
     )
@@ -28829,7 +29050,7 @@ client.Inventory.PostV1InventoryLandedCostsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryLandedCostsList(request) -> *nordlet.PostV1InventoryLandedCostsListResponse</code></summary>
+<details><summary><code>client.Inventory.LandedCostsList(request) -> *nordlet.LandedCostsListInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28842,8 +29063,8 @@ client.Inventory.PostV1InventoryLandedCostsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryLandedCostsListRequest{}
-client.Inventory.PostV1InventoryLandedCostsList(
+request := &nordlet.LandedCostsListInventoryRequest{}
+client.Inventory.LandedCostsList(
         context.TODO(),
         request,
     )
@@ -28878,7 +29099,7 @@ client.Inventory.PostV1InventoryLandedCostsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1InventoryLandedCostsListRequestSortItem` 
+**sort:** `[]*nordlet.LandedCostsListInventoryRequestSortItem` 
     
 </dd>
 </dl>
@@ -28886,7 +29107,7 @@ client.Inventory.PostV1InventoryLandedCostsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1InventoryLandedCostsListRequestFilterItem` 
+**filter:** `[]*nordlet.LandedCostsListInventoryRequestFilterItem` 
     
 </dd>
 </dl>
@@ -28906,7 +29127,7 @@ client.Inventory.PostV1InventoryLandedCostsList(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryReorderRulesCreate(request) -> *nordlet.PostV1InventoryReorderRulesCreateResponse</code></summary>
+<details><summary><code>client.Inventory.ReorderRulesCreate(request) -> *nordlet.ReorderRulesCreateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -28919,11 +29140,11 @@ client.Inventory.PostV1InventoryLandedCostsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryReorderRulesCreateRequest{
+request := &nordlet.ReorderRulesCreateInventoryRequest{
         ItemID: "itemId",
-        MinQty: "minQty",
+        MinQty: "121.0000",
     }
-client.Inventory.PostV1InventoryReorderRulesCreate(
+client.Inventory.ReorderRulesCreate(
         context.TODO(),
         request,
     )
@@ -28994,7 +29215,7 @@ client.Inventory.PostV1InventoryReorderRulesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryReorderRulesUpdate(request) -> *nordlet.PostV1InventoryReorderRulesUpdateResponse</code></summary>
+<details><summary><code>client.Inventory.ReorderRulesUpdate(request) -> *nordlet.ReorderRulesUpdateInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -29007,10 +29228,10 @@ client.Inventory.PostV1InventoryReorderRulesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryReorderRulesUpdateRequest{
+request := &nordlet.ReorderRulesUpdateInventoryRequest{
         ID: "id",
     }
-client.Inventory.PostV1InventoryReorderRulesUpdate(
+client.Inventory.ReorderRulesUpdate(
         context.TODO(),
         request,
     )
@@ -29073,7 +29294,7 @@ client.Inventory.PostV1InventoryReorderRulesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryReorderRulesDelete(request) -> *nordlet.PostV1InventoryReorderRulesDeleteResponse</code></summary>
+<details><summary><code>client.Inventory.ReorderRulesDelete(request) -> *nordlet.ReorderRulesDeleteInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -29086,10 +29307,10 @@ client.Inventory.PostV1InventoryReorderRulesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryReorderRulesDeleteRequest{
+request := &nordlet.ReorderRulesDeleteInventoryRequest{
         ID: "id",
     }
-client.Inventory.PostV1InventoryReorderRulesDelete(
+client.Inventory.ReorderRulesDelete(
         context.TODO(),
         request,
     )
@@ -29120,7 +29341,7 @@ client.Inventory.PostV1InventoryReorderRulesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryReorderRulesList(request) -> *nordlet.PostV1InventoryReorderRulesListResponse</code></summary>
+<details><summary><code>client.Inventory.ReorderRulesList(request) -> *nordlet.ReorderRulesListInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -29133,8 +29354,8 @@ client.Inventory.PostV1InventoryReorderRulesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryReorderRulesListRequest{}
-client.Inventory.PostV1InventoryReorderRulesList(
+request := &nordlet.ReorderRulesListInventoryRequest{}
+client.Inventory.ReorderRulesList(
         context.TODO(),
         request,
     )
@@ -29169,7 +29390,7 @@ client.Inventory.PostV1InventoryReorderRulesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1InventoryReorderRulesListRequestSortItem` 
+**sort:** `[]*nordlet.ReorderRulesListInventoryRequestSortItem` 
     
 </dd>
 </dl>
@@ -29177,7 +29398,7 @@ client.Inventory.PostV1InventoryReorderRulesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1InventoryReorderRulesListRequestFilterItem` 
+**filter:** `[]*nordlet.ReorderRulesListInventoryRequestFilterItem` 
     
 </dd>
 </dl>
@@ -29197,7 +29418,7 @@ client.Inventory.PostV1InventoryReorderRulesList(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.PostV1InventoryReorderRulesCheck(request) -> *nordlet.PostV1InventoryReorderRulesCheckResponse</code></summary>
+<details><summary><code>client.Inventory.ReorderRulesCheck(request) -> *nordlet.ReorderRulesCheckInventoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -29210,8 +29431,8 @@ client.Inventory.PostV1InventoryReorderRulesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1InventoryReorderRulesCheckRequest{}
-client.Inventory.PostV1InventoryReorderRulesCheck(
+request := &nordlet.ReorderRulesCheckInventoryRequest{}
+client.Inventory.ReorderRulesCheck(
         context.TODO(),
         request,
     )
@@ -29227,8 +29448,8 @@ client.Inventory.PostV1InventoryReorderRulesCheck(
 </dl>
 </details>
 
-## Production
-<details><summary><code>client.Production.PostV1ProductionWorkCentersCreate(request) -> *nordlet.PostV1ProductionWorkCentersCreateResponse</code></summary>
+## production
+<details><summary><code>client.Production.WorkCentersCreate(request) -> *nordlet.WorkCentersCreateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29241,11 +29462,11 @@ client.Inventory.PostV1InventoryReorderRulesCheck(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionWorkCentersCreateRequest{
+request := &nordlet.WorkCentersCreateProductionRequest{
         Code: "code",
         Name: "name",
     }
-client.Production.PostV1ProductionWorkCentersCreate(
+client.Production.WorkCentersCreate(
         context.TODO(),
         request,
     )
@@ -29316,7 +29537,7 @@ client.Production.PostV1ProductionWorkCentersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionWorkCentersUpdate(request) -> *nordlet.PostV1ProductionWorkCentersUpdateResponse</code></summary>
+<details><summary><code>client.Production.WorkCentersUpdate(request) -> *nordlet.WorkCentersUpdateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29329,10 +29550,10 @@ client.Production.PostV1ProductionWorkCentersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionWorkCentersUpdateRequest{
+request := &nordlet.WorkCentersUpdateProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionWorkCentersUpdate(
+client.Production.WorkCentersUpdate(
         context.TODO(),
         request,
     )
@@ -29419,7 +29640,7 @@ client.Production.PostV1ProductionWorkCentersUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionWorkCentersList(request) -> *nordlet.PostV1ProductionWorkCentersListResponse</code></summary>
+<details><summary><code>client.Production.WorkCentersList(request) -> *nordlet.WorkCentersListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29432,8 +29653,8 @@ client.Production.PostV1ProductionWorkCentersUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionWorkCentersListRequest{}
-client.Production.PostV1ProductionWorkCentersList(
+request := &nordlet.WorkCentersListProductionRequest{}
+client.Production.WorkCentersList(
         context.TODO(),
         request,
     )
@@ -29468,7 +29689,7 @@ client.Production.PostV1ProductionWorkCentersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionWorkCentersListRequestSortItem` 
+**sort:** `[]*nordlet.WorkCentersListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -29476,7 +29697,7 @@ client.Production.PostV1ProductionWorkCentersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionWorkCentersListRequestFilterItem` 
+**filter:** `[]*nordlet.WorkCentersListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -29496,7 +29717,7 @@ client.Production.PostV1ProductionWorkCentersList(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionRoutingsCreate(request) -> *nordlet.PostV1ProductionRoutingsCreateResponse</code></summary>
+<details><summary><code>client.Production.RoutingsCreate(request) -> *nordlet.RoutingsCreateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29509,18 +29730,18 @@ client.Production.PostV1ProductionWorkCentersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionRoutingsCreateRequest{
+request := &nordlet.RoutingsCreateProductionRequest{
         Code: "code",
         Name: "name",
-        Operations: []*nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem{
-            &nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem{
+        Operations: []*nordlet.RoutingsCreateProductionRequestOperationsItem{
+            &nordlet.RoutingsCreateProductionRequestOperationsItem{
                 Sequence: int64(1000000),
                 Name: "name",
                 WorkCenterID: "workCenterId",
             },
         },
     }
-client.Production.PostV1ProductionRoutingsCreate(
+client.Production.RoutingsCreate(
         context.TODO(),
         request,
     )
@@ -29563,7 +29784,7 @@ client.Production.PostV1ProductionRoutingsCreate(
 <dl>
 <dd>
 
-**operations:** `[]*nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem` 
+**operations:** `[]*nordlet.RoutingsCreateProductionRequestOperationsItem` 
     
 </dd>
 </dl>
@@ -29575,7 +29796,7 @@ client.Production.PostV1ProductionRoutingsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionRoutingsGet(request) -> *nordlet.PostV1ProductionRoutingsGetResponse</code></summary>
+<details><summary><code>client.Production.RoutingsGet(request) -> *nordlet.RoutingsGetProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29588,10 +29809,10 @@ client.Production.PostV1ProductionRoutingsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionRoutingsGetRequest{
+request := &nordlet.RoutingsGetProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionRoutingsGet(
+client.Production.RoutingsGet(
         context.TODO(),
         request,
     )
@@ -29622,7 +29843,7 @@ client.Production.PostV1ProductionRoutingsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionRoutingsList(request) -> *nordlet.PostV1ProductionRoutingsListResponse</code></summary>
+<details><summary><code>client.Production.RoutingsList(request) -> *nordlet.RoutingsListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29635,8 +29856,8 @@ client.Production.PostV1ProductionRoutingsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionRoutingsListRequest{}
-client.Production.PostV1ProductionRoutingsList(
+request := &nordlet.RoutingsListProductionRequest{}
+client.Production.RoutingsList(
         context.TODO(),
         request,
     )
@@ -29671,7 +29892,7 @@ client.Production.PostV1ProductionRoutingsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionRoutingsListRequestSortItem` 
+**sort:** `[]*nordlet.RoutingsListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -29679,7 +29900,7 @@ client.Production.PostV1ProductionRoutingsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionRoutingsListRequestFilterItem` 
+**filter:** `[]*nordlet.RoutingsListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -29699,7 +29920,7 @@ client.Production.PostV1ProductionRoutingsList(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionMaintenanceCreate(request) -> *nordlet.PostV1ProductionMaintenanceCreateResponse</code></summary>
+<details><summary><code>client.Production.MaintenanceCreate(request) -> *nordlet.MaintenanceCreateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29712,12 +29933,14 @@ client.Production.PostV1ProductionRoutingsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionMaintenanceCreateRequest{
+request := &nordlet.MaintenanceCreateProductionRequest{
         WorkCenterID: "workCenterId",
-        Type: nordlet.PostV1ProductionMaintenanceCreateRequestTypePreventive,
-        PlannedDate: "plannedDate",
+        Type: nordlet.MaintenanceCreateProductionRequestTypePreventive,
+        PlannedDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Production.PostV1ProductionMaintenanceCreate(
+client.Production.MaintenanceCreate(
         context.TODO(),
         request,
     )
@@ -29744,7 +29967,7 @@ client.Production.PostV1ProductionMaintenanceCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1ProductionMaintenanceCreateRequestType` 
+**type_:** `*nordlet.MaintenanceCreateProductionRequestType` 
     
 </dd>
 </dl>
@@ -29752,7 +29975,7 @@ client.Production.PostV1ProductionMaintenanceCreate(
 <dl>
 <dd>
 
-**plannedDate:** `string` 
+**plannedDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -29780,7 +30003,7 @@ client.Production.PostV1ProductionMaintenanceCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionMaintenanceComplete(request) -> *nordlet.PostV1ProductionMaintenanceCompleteResponse</code></summary>
+<details><summary><code>client.Production.MaintenanceComplete(request) -> *nordlet.MaintenanceCompleteProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29793,11 +30016,13 @@ client.Production.PostV1ProductionMaintenanceCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionMaintenanceCompleteRequest{
+request := &nordlet.MaintenanceCompleteProductionRequest{
         ID: "id",
-        CompletedDate: "completedDate",
+        CompletedDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Production.PostV1ProductionMaintenanceComplete(
+client.Production.MaintenanceComplete(
         context.TODO(),
         request,
     )
@@ -29824,7 +30049,7 @@ client.Production.PostV1ProductionMaintenanceComplete(
 <dl>
 <dd>
 
-**completedDate:** `string` 
+**completedDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -29860,7 +30085,7 @@ client.Production.PostV1ProductionMaintenanceComplete(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionMaintenanceCancel(request) -> *nordlet.PostV1ProductionMaintenanceCancelResponse</code></summary>
+<details><summary><code>client.Production.MaintenanceCancel(request) -> *nordlet.MaintenanceCancelProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29873,10 +30098,10 @@ client.Production.PostV1ProductionMaintenanceComplete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionMaintenanceCancelRequest{
+request := &nordlet.MaintenanceCancelProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionMaintenanceCancel(
+client.Production.MaintenanceCancel(
         context.TODO(),
         request,
     )
@@ -29907,7 +30132,7 @@ client.Production.PostV1ProductionMaintenanceCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionMaintenanceList(request) -> *nordlet.PostV1ProductionMaintenanceListResponse</code></summary>
+<details><summary><code>client.Production.MaintenanceList(request) -> *nordlet.MaintenanceListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29920,8 +30145,8 @@ client.Production.PostV1ProductionMaintenanceCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionMaintenanceListRequest{}
-client.Production.PostV1ProductionMaintenanceList(
+request := &nordlet.MaintenanceListProductionRequest{}
+client.Production.MaintenanceList(
         context.TODO(),
         request,
     )
@@ -29956,7 +30181,7 @@ client.Production.PostV1ProductionMaintenanceList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionMaintenanceListRequestSortItem` 
+**sort:** `[]*nordlet.MaintenanceListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -29964,7 +30189,7 @@ client.Production.PostV1ProductionMaintenanceList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionMaintenanceListRequestFilterItem` 
+**filter:** `[]*nordlet.MaintenanceListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -29984,7 +30209,7 @@ client.Production.PostV1ProductionMaintenanceList(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionBomsCreate(request) -> *nordlet.PostV1ProductionBomsCreateResponse</code></summary>
+<details><summary><code>client.Production.BomsCreate(request) -> *nordlet.BomsCreateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -29997,18 +30222,18 @@ client.Production.PostV1ProductionMaintenanceList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionBomsCreateRequest{
+request := &nordlet.BomsCreateProductionRequest{
         Code: "code",
         Name: "name",
         FinishedItemID: "finishedItemId",
-        Lines: []*nordlet.PostV1ProductionBomsCreateRequestLinesItem{
-            &nordlet.PostV1ProductionBomsCreateRequestLinesItem{
+        Lines: []*nordlet.BomsCreateProductionRequestLinesItem{
+            &nordlet.BomsCreateProductionRequestLinesItem{
                 ComponentItemID: "componentItemId",
-                Quantity: "quantity",
+                Quantity: "121.0000",
             },
         },
     }
-client.Production.PostV1ProductionBomsCreate(
+client.Production.BomsCreate(
         context.TODO(),
         request,
     )
@@ -30067,7 +30292,7 @@ client.Production.PostV1ProductionBomsCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1ProductionBomsCreateRequestLinesItem` 
+**lines:** `[]*nordlet.BomsCreateProductionRequestLinesItem` 
     
 </dd>
 </dl>
@@ -30079,7 +30304,7 @@ client.Production.PostV1ProductionBomsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionBomsGet(request) -> *nordlet.PostV1ProductionBomsGetResponse</code></summary>
+<details><summary><code>client.Production.BomsGet(request) -> *nordlet.BomsGetProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30092,10 +30317,10 @@ client.Production.PostV1ProductionBomsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionBomsGetRequest{
+request := &nordlet.BomsGetProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionBomsGet(
+client.Production.BomsGet(
         context.TODO(),
         request,
     )
@@ -30126,7 +30351,7 @@ client.Production.PostV1ProductionBomsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionBomsList(request) -> *nordlet.PostV1ProductionBomsListResponse</code></summary>
+<details><summary><code>client.Production.BomsList(request) -> *nordlet.BomsListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30139,8 +30364,8 @@ client.Production.PostV1ProductionBomsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionBomsListRequest{}
-client.Production.PostV1ProductionBomsList(
+request := &nordlet.BomsListProductionRequest{}
+client.Production.BomsList(
         context.TODO(),
         request,
     )
@@ -30175,7 +30400,7 @@ client.Production.PostV1ProductionBomsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionBomsListRequestSortItem` 
+**sort:** `[]*nordlet.BomsListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -30183,7 +30408,7 @@ client.Production.PostV1ProductionBomsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionBomsListRequestFilterItem` 
+**filter:** `[]*nordlet.BomsListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -30203,7 +30428,7 @@ client.Production.PostV1ProductionBomsList(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionOrdersCreate(request) -> *nordlet.PostV1ProductionOrdersCreateResponse</code></summary>
+<details><summary><code>client.Production.OrdersCreate(request) -> *nordlet.OrdersCreateProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30216,13 +30441,15 @@ client.Production.PostV1ProductionBomsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionOrdersCreateRequest{
+request := &nordlet.OrdersCreateProductionRequest{
         BomID: "bomId",
         WarehouseID: "warehouseId",
-        Quantity: "quantity",
-        Date: "date",
+        Quantity: "121.0000",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Production.PostV1ProductionOrdersCreate(
+client.Production.OrdersCreate(
         context.TODO(),
         request,
     )
@@ -30241,7 +30468,7 @@ client.Production.PostV1ProductionOrdersCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1ProductionOrdersCreateRequestType` 
+**type_:** `*nordlet.OrdersCreateProductionRequestType` 
     
 </dd>
 </dl>
@@ -30281,7 +30508,7 @@ client.Production.PostV1ProductionOrdersCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -30301,7 +30528,7 @@ client.Production.PostV1ProductionOrdersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionOrdersRecordOperation(request) -> *nordlet.PostV1ProductionOrdersRecordOperationResponse</code></summary>
+<details><summary><code>client.Production.OrdersRecordOperation(request) -> *nordlet.OrdersRecordOperationProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30314,11 +30541,11 @@ client.Production.PostV1ProductionOrdersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionOrdersRecordOperationRequest{
+request := &nordlet.OrdersRecordOperationProductionRequest{
         ID: "id",
-        ActualMinutes: "actualMinutes",
+        ActualMinutes: "121.00",
     }
-client.Production.PostV1ProductionOrdersRecordOperation(
+client.Production.OrdersRecordOperation(
         context.TODO(),
         request,
     )
@@ -30357,7 +30584,7 @@ client.Production.PostV1ProductionOrdersRecordOperation(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionQualityChecksAdd(request) -> *nordlet.PostV1ProductionQualityChecksAddResponse</code></summary>
+<details><summary><code>client.Production.QualityChecksAdd(request) -> *nordlet.QualityChecksAddProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30370,11 +30597,11 @@ client.Production.PostV1ProductionOrdersRecordOperation(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionQualityChecksAddRequest{
+request := &nordlet.QualityChecksAddProductionRequest{
         OrderID: "orderId",
         Name: "name",
     }
-client.Production.PostV1ProductionQualityChecksAdd(
+client.Production.QualityChecksAdd(
         context.TODO(),
         request,
     )
@@ -30421,7 +30648,7 @@ client.Production.PostV1ProductionQualityChecksAdd(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionQualityChecksRecord(request) -> *nordlet.PostV1ProductionQualityChecksRecordResponse</code></summary>
+<details><summary><code>client.Production.QualityChecksRecord(request) -> *nordlet.QualityChecksRecordProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30434,11 +30661,11 @@ client.Production.PostV1ProductionQualityChecksAdd(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionQualityChecksRecordRequest{
+request := &nordlet.QualityChecksRecordProductionRequest{
         ID: "id",
-        Result: nordlet.PostV1ProductionQualityChecksRecordRequestResultPassed,
+        Result: nordlet.QualityChecksRecordProductionRequestResultPassed,
     }
-client.Production.PostV1ProductionQualityChecksRecord(
+client.Production.QualityChecksRecord(
         context.TODO(),
         request,
     )
@@ -30465,7 +30692,7 @@ client.Production.PostV1ProductionQualityChecksRecord(
 <dl>
 <dd>
 
-**result:** `*nordlet.PostV1ProductionQualityChecksRecordRequestResult` 
+**result:** `*nordlet.QualityChecksRecordProductionRequestResult` 
     
 </dd>
 </dl>
@@ -30485,7 +30712,7 @@ client.Production.PostV1ProductionQualityChecksRecord(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionQualityChecksList(request) -> *nordlet.PostV1ProductionQualityChecksListResponse</code></summary>
+<details><summary><code>client.Production.QualityChecksList(request) -> *nordlet.QualityChecksListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30498,8 +30725,8 @@ client.Production.PostV1ProductionQualityChecksRecord(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionQualityChecksListRequest{}
-client.Production.PostV1ProductionQualityChecksList(
+request := &nordlet.QualityChecksListProductionRequest{}
+client.Production.QualityChecksList(
         context.TODO(),
         request,
     )
@@ -30534,7 +30761,7 @@ client.Production.PostV1ProductionQualityChecksList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionQualityChecksListRequestSortItem` 
+**sort:** `[]*nordlet.QualityChecksListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -30542,7 +30769,7 @@ client.Production.PostV1ProductionQualityChecksList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionQualityChecksListRequestFilterItem` 
+**filter:** `[]*nordlet.QualityChecksListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -30562,7 +30789,7 @@ client.Production.PostV1ProductionQualityChecksList(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionOrdersComplete(request) -> *nordlet.PostV1ProductionOrdersCompleteResponse</code></summary>
+<details><summary><code>client.Production.OrdersComplete(request) -> *nordlet.OrdersCompleteProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30575,10 +30802,10 @@ client.Production.PostV1ProductionQualityChecksList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionOrdersCompleteRequest{
+request := &nordlet.OrdersCompleteProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionOrdersComplete(
+client.Production.OrdersComplete(
         context.TODO(),
         request,
     )
@@ -30633,7 +30860,7 @@ client.Production.PostV1ProductionOrdersComplete(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionOrdersGet(request) -> *nordlet.PostV1ProductionOrdersGetResponse</code></summary>
+<details><summary><code>client.Production.OrdersGet(request) -> *nordlet.OrdersGetProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30646,10 +30873,10 @@ client.Production.PostV1ProductionOrdersComplete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionOrdersGetRequest{
+request := &nordlet.OrdersGetProductionRequest{
         ID: "id",
     }
-client.Production.PostV1ProductionOrdersGet(
+client.Production.OrdersGet(
         context.TODO(),
         request,
     )
@@ -30680,7 +30907,7 @@ client.Production.PostV1ProductionOrdersGet(
 </dl>
 </details>
 
-<details><summary><code>client.Production.PostV1ProductionOrdersList(request) -> *nordlet.PostV1ProductionOrdersListResponse</code></summary>
+<details><summary><code>client.Production.OrdersList(request) -> *nordlet.OrdersListProductionResponse</code></summary>
 <dl>
 <dd>
 
@@ -30693,8 +30920,8 @@ client.Production.PostV1ProductionOrdersGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProductionOrdersListRequest{}
-client.Production.PostV1ProductionOrdersList(
+request := &nordlet.OrdersListProductionRequest{}
+client.Production.OrdersList(
         context.TODO(),
         request,
     )
@@ -30729,7 +30956,7 @@ client.Production.PostV1ProductionOrdersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProductionOrdersListRequestSortItem` 
+**sort:** `[]*nordlet.OrdersListProductionRequestSortItem` 
     
 </dd>
 </dl>
@@ -30737,7 +30964,7 @@ client.Production.PostV1ProductionOrdersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProductionOrdersListRequestFilterItem` 
+**filter:** `[]*nordlet.OrdersListProductionRequestFilterItem` 
     
 </dd>
 </dl>
@@ -30757,8 +30984,8 @@ client.Production.PostV1ProductionOrdersList(
 </dl>
 </details>
 
-## Ecommerce
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersCreate(request) -> *nordlet.PostV1EcommerceOrdersCreateResponse</code></summary>
+## ecommerce
+<details><summary><code>client.Ecommerce.OrdersCreate(request) -> *nordlet.OrdersCreateEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -30771,16 +30998,16 @@ client.Production.PostV1ProductionOrdersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersCreateRequest{
-        Lines: []*nordlet.PostV1EcommerceOrdersCreateRequestLinesItem{
-            &nordlet.PostV1EcommerceOrdersCreateRequestLinesItem{
+request := &nordlet.OrdersCreateEcommerceRequest{
+        Lines: []*nordlet.OrdersCreateEcommerceRequestLinesItem{
+            &nordlet.OrdersCreateEcommerceRequestLinesItem{
                 Description: "description",
-                Quantity: "quantity",
-                UnitPriceExclVat: "unitPriceExclVat",
+                Quantity: "121.0000",
+                UnitPriceExclVat: "121.0000",
             },
         },
     }
-client.Ecommerce.PostV1EcommerceOrdersCreate(
+client.Ecommerce.OrdersCreate(
         context.TODO(),
         request,
     )
@@ -30823,7 +31050,7 @@ client.Ecommerce.PostV1EcommerceOrdersCreate(
 <dl>
 <dd>
 
-**partner:** `*nordlet.PostV1EcommerceOrdersCreateRequestPartner` 
+**partner:** `*nordlet.OrdersCreateEcommerceRequestPartner` 
     
 </dd>
 </dl>
@@ -30871,7 +31098,7 @@ client.Ecommerce.PostV1EcommerceOrdersCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1EcommerceOrdersCreateRequestLinesItem` 
+**lines:** `[]*nordlet.OrdersCreateEcommerceRequestLinesItem` 
     
 </dd>
 </dl>
@@ -30883,7 +31110,7 @@ client.Ecommerce.PostV1EcommerceOrdersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersGet(request) -> *nordlet.PostV1EcommerceOrdersGetResponse</code></summary>
+<details><summary><code>client.Ecommerce.OrdersGet(request) -> *nordlet.OrdersGetEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -30896,10 +31123,10 @@ client.Ecommerce.PostV1EcommerceOrdersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersGetRequest{
+request := &nordlet.OrdersGetEcommerceRequest{
         ID: "id",
     }
-client.Ecommerce.PostV1EcommerceOrdersGet(
+client.Ecommerce.OrdersGet(
         context.TODO(),
         request,
     )
@@ -30930,7 +31157,7 @@ client.Ecommerce.PostV1EcommerceOrdersGet(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersList(request) -> *nordlet.PostV1EcommerceOrdersListResponse</code></summary>
+<details><summary><code>client.Ecommerce.OrdersList(request) -> *nordlet.OrdersListEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -30943,8 +31170,8 @@ client.Ecommerce.PostV1EcommerceOrdersGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersListRequest{}
-client.Ecommerce.PostV1EcommerceOrdersList(
+request := &nordlet.OrdersListEcommerceRequest{}
+client.Ecommerce.OrdersList(
         context.TODO(),
         request,
     )
@@ -30979,7 +31206,7 @@ client.Ecommerce.PostV1EcommerceOrdersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1EcommerceOrdersListRequestSortItem` 
+**sort:** `[]*nordlet.OrdersListEcommerceRequestSortItem` 
     
 </dd>
 </dl>
@@ -30987,7 +31214,7 @@ client.Ecommerce.PostV1EcommerceOrdersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1EcommerceOrdersListRequestFilterItem` 
+**filter:** `[]*nordlet.OrdersListEcommerceRequestFilterItem` 
     
 </dd>
 </dl>
@@ -31007,7 +31234,7 @@ client.Ecommerce.PostV1EcommerceOrdersList(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersReserve(request) -> *nordlet.PostV1EcommerceOrdersReserveResponse</code></summary>
+<details><summary><code>client.Ecommerce.OrdersReserve(request) -> *nordlet.OrdersReserveEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -31020,10 +31247,10 @@ client.Ecommerce.PostV1EcommerceOrdersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersReserveRequest{
+request := &nordlet.OrdersReserveEcommerceRequest{
         ID: "id",
     }
-client.Ecommerce.PostV1EcommerceOrdersReserve(
+client.Ecommerce.OrdersReserve(
         context.TODO(),
         request,
     )
@@ -31062,7 +31289,7 @@ client.Ecommerce.PostV1EcommerceOrdersReserve(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersFulfill(request) -> *nordlet.PostV1EcommerceOrdersFulfillResponse</code></summary>
+<details><summary><code>client.Ecommerce.OrdersFulfill(request) -> *nordlet.OrdersFulfillEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -31075,10 +31302,10 @@ client.Ecommerce.PostV1EcommerceOrdersReserve(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersFulfillRequest{
+request := &nordlet.OrdersFulfillEcommerceRequest{
         ID: "id",
     }
-client.Ecommerce.PostV1EcommerceOrdersFulfill(
+client.Ecommerce.OrdersFulfill(
         context.TODO(),
         request,
     )
@@ -31105,7 +31332,7 @@ client.Ecommerce.PostV1EcommerceOrdersFulfill(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -31133,7 +31360,7 @@ client.Ecommerce.PostV1EcommerceOrdersFulfill(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceOrdersCancel(request) -> *nordlet.PostV1EcommerceOrdersCancelResponse</code></summary>
+<details><summary><code>client.Ecommerce.OrdersCancel(request) -> *nordlet.OrdersCancelEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -31146,10 +31373,10 @@ client.Ecommerce.PostV1EcommerceOrdersFulfill(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceOrdersCancelRequest{
+request := &nordlet.OrdersCancelEcommerceRequest{
         ID: "id",
     }
-client.Ecommerce.PostV1EcommerceOrdersCancel(
+client.Ecommerce.OrdersCancel(
         context.TODO(),
         request,
     )
@@ -31180,7 +31407,7 @@ client.Ecommerce.PostV1EcommerceOrdersCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceProductsList(request) -> *nordlet.PostV1EcommerceProductsListResponse</code></summary>
+<details><summary><code>client.Ecommerce.ProductsList(request) -> *nordlet.ProductsListEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -31193,8 +31420,8 @@ client.Ecommerce.PostV1EcommerceOrdersCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceProductsListRequest{}
-client.Ecommerce.PostV1EcommerceProductsList(
+request := &nordlet.ProductsListEcommerceRequest{}
+client.Ecommerce.ProductsList(
         context.TODO(),
         request,
     )
@@ -31257,7 +31484,7 @@ client.Ecommerce.PostV1EcommerceProductsList(
 </dl>
 </details>
 
-<details><summary><code>client.Ecommerce.PostV1EcommerceStockList(request) -> *nordlet.PostV1EcommerceStockListResponse</code></summary>
+<details><summary><code>client.Ecommerce.StockList(request) -> *nordlet.StockListEcommerceResponse</code></summary>
 <dl>
 <dd>
 
@@ -31270,8 +31497,8 @@ client.Ecommerce.PostV1EcommerceProductsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1EcommerceStockListRequest{}
-client.Ecommerce.PostV1EcommerceStockList(
+request := &nordlet.StockListEcommerceRequest{}
+client.Ecommerce.StockList(
         context.TODO(),
         request,
     )
@@ -31302,8 +31529,8 @@ client.Ecommerce.PostV1EcommerceStockList(
 </dl>
 </details>
 
-## Cash
-<details><summary><code>client.Cash.PostV1CashOrdersCreate(request) -> *nordlet.PostV1CashOrdersCreateResponse</code></summary>
+## cash
+<details><summary><code>client.Cash.OrdersCreate(request) -> *nordlet.OrdersCreateCashResponse</code></summary>
 <dl>
 <dd>
 
@@ -31316,14 +31543,16 @@ client.Ecommerce.PostV1EcommerceStockList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CashOrdersCreateRequest{
-        Type: nordlet.PostV1CashOrdersCreateRequestTypeReceipt,
-        Date: "date",
-        Amount: "amount",
+request := &nordlet.OrdersCreateCashRequest{
+        Type: nordlet.OrdersCreateCashRequestTypeReceipt,
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Amount: "121.0000",
         Purpose: "purpose",
         CounterAccountCode: "counterAccountCode",
     }
-client.Cash.PostV1CashOrdersCreate(
+client.Cash.OrdersCreate(
         context.TODO(),
         request,
     )
@@ -31342,7 +31571,7 @@ client.Cash.PostV1CashOrdersCreate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1CashOrdersCreateRequestType` 
+**type_:** `*nordlet.OrdersCreateCashRequestType` 
     
 </dd>
 </dl>
@@ -31350,7 +31579,7 @@ client.Cash.PostV1CashOrdersCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -31426,7 +31655,7 @@ client.Cash.PostV1CashOrdersCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Cash.PostV1CashOrdersGet(request) -> *nordlet.PostV1CashOrdersGetResponse</code></summary>
+<details><summary><code>client.Cash.OrdersGet(request) -> *nordlet.OrdersGetCashResponse</code></summary>
 <dl>
 <dd>
 
@@ -31439,10 +31668,10 @@ client.Cash.PostV1CashOrdersCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CashOrdersGetRequest{
+request := &nordlet.OrdersGetCashRequest{
         ID: "id",
     }
-client.Cash.PostV1CashOrdersGet(
+client.Cash.OrdersGet(
         context.TODO(),
         request,
     )
@@ -31473,7 +31702,7 @@ client.Cash.PostV1CashOrdersGet(
 </dl>
 </details>
 
-<details><summary><code>client.Cash.PostV1CashOrdersList(request) -> *nordlet.PostV1CashOrdersListResponse</code></summary>
+<details><summary><code>client.Cash.OrdersList(request) -> *nordlet.OrdersListCashResponse</code></summary>
 <dl>
 <dd>
 
@@ -31486,8 +31715,8 @@ client.Cash.PostV1CashOrdersGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CashOrdersListRequest{}
-client.Cash.PostV1CashOrdersList(
+request := &nordlet.OrdersListCashRequest{}
+client.Cash.OrdersList(
         context.TODO(),
         request,
     )
@@ -31522,7 +31751,7 @@ client.Cash.PostV1CashOrdersList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1CashOrdersListRequestSortItem` 
+**sort:** `[]*nordlet.OrdersListCashRequestSortItem` 
     
 </dd>
 </dl>
@@ -31530,7 +31759,7 @@ client.Cash.PostV1CashOrdersList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1CashOrdersListRequestFilterItem` 
+**filter:** `[]*nordlet.OrdersListCashRequestFilterItem` 
     
 </dd>
 </dl>
@@ -31550,7 +31779,7 @@ client.Cash.PostV1CashOrdersList(
 </dl>
 </details>
 
-<details><summary><code>client.Cash.PostV1CashBalance(request) -> *nordlet.PostV1CashBalanceResponse</code></summary>
+<details><summary><code>client.Cash.Balance(request) -> *nordlet.BalanceCashResponse</code></summary>
 <dl>
 <dd>
 
@@ -31563,8 +31792,8 @@ client.Cash.PostV1CashOrdersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CashBalanceRequest{}
-client.Cash.PostV1CashBalance(
+request := &nordlet.BalanceCashRequest{}
+client.Cash.Balance(
         context.TODO(),
         request,
     )
@@ -31591,7 +31820,7 @@ client.Cash.PostV1CashBalance(
 <dl>
 <dd>
 
-**asOf:** `*string` 
+**asOf:** `*time.Time` 
     
 </dd>
 </dl>
@@ -31603,7 +31832,7 @@ client.Cash.PostV1CashBalance(
 </dl>
 </details>
 
-<details><summary><code>client.Cash.PostV1CashAdvanceHoldersBalances(request) -> *nordlet.PostV1CashAdvanceHoldersBalancesResponse</code></summary>
+<details><summary><code>client.Cash.AdvanceHoldersBalances(request) -> *nordlet.AdvanceHoldersBalancesCashResponse</code></summary>
 <dl>
 <dd>
 
@@ -31616,8 +31845,8 @@ client.Cash.PostV1CashBalance(
 <dd>
 
 ```go
-request := &nordlet.PostV1CashAdvanceHoldersBalancesRequest{}
-client.Cash.PostV1CashAdvanceHoldersBalances(
+request := &nordlet.AdvanceHoldersBalancesCashRequest{}
+client.Cash.AdvanceHoldersBalances(
         context.TODO(),
         request,
     )
@@ -31633,8 +31862,8 @@ client.Cash.PostV1CashAdvanceHoldersBalances(
 </dl>
 </details>
 
-## Projects
-<details><summary><code>client.Projects.PostV1ProjectsCreate(request) -> *nordlet.PostV1ProjectsCreateResponse</code></summary>
+## projects
+<details><summary><code>client.Projects.Create(request) -> *nordlet.CreateProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -31647,11 +31876,11 @@ client.Cash.PostV1CashAdvanceHoldersBalances(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsCreateRequest{
+request := &nordlet.CreateProjectsRequest{
         Code: "code",
         Name: "name",
     }
-client.Projects.PostV1ProjectsCreate(
+client.Projects.Create(
         context.TODO(),
         request,
     )
@@ -31706,7 +31935,7 @@ client.Projects.PostV1ProjectsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsUpdate(request) -> *nordlet.PostV1ProjectsUpdateResponse</code></summary>
+<details><summary><code>client.Projects.Update(request) -> *nordlet.UpdateProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -31719,10 +31948,10 @@ client.Projects.PostV1ProjectsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsUpdateRequest{
+request := &nordlet.UpdateProjectsRequest{
         ID: "id",
     }
-client.Projects.PostV1ProjectsUpdate(
+client.Projects.Update(
         context.TODO(),
         request,
     )
@@ -31765,7 +31994,7 @@ client.Projects.PostV1ProjectsUpdate(
 <dl>
 <dd>
 
-**status:** `*nordlet.PostV1ProjectsUpdateRequestStatus` 
+**status:** `*nordlet.UpdateProjectsRequestStatus` 
     
 </dd>
 </dl>
@@ -31785,7 +32014,7 @@ client.Projects.PostV1ProjectsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsGet(request) -> *nordlet.PostV1ProjectsGetResponse</code></summary>
+<details><summary><code>client.Projects.Get(request) -> *nordlet.GetProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -31798,10 +32027,10 @@ client.Projects.PostV1ProjectsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsGetRequest{
+request := &nordlet.GetProjectsRequest{
         ID: "id",
     }
-client.Projects.PostV1ProjectsGet(
+client.Projects.Get(
         context.TODO(),
         request,
     )
@@ -31832,7 +32061,7 @@ client.Projects.PostV1ProjectsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsList(request) -> *nordlet.PostV1ProjectsListResponse</code></summary>
+<details><summary><code>client.Projects.List(request) -> *nordlet.ListProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -31845,8 +32074,8 @@ client.Projects.PostV1ProjectsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsListRequest{}
-client.Projects.PostV1ProjectsList(
+request := &nordlet.ListProjectsRequest{}
+client.Projects.List(
         context.TODO(),
         request,
     )
@@ -31881,7 +32110,7 @@ client.Projects.PostV1ProjectsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProjectsListRequestSortItem` 
+**sort:** `[]*nordlet.ListProjectsRequestSortItem` 
     
 </dd>
 </dl>
@@ -31889,7 +32118,7 @@ client.Projects.PostV1ProjectsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProjectsListRequestFilterItem` 
+**filter:** `[]*nordlet.ListProjectsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -31909,7 +32138,7 @@ client.Projects.PostV1ProjectsList(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesCreate(request) -> *nordlet.PostV1ProjectsTimeEntriesCreateResponse</code></summary>
+<details><summary><code>client.Projects.TimeEntriesCreate(request) -> *nordlet.TimeEntriesCreateProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -31922,12 +32151,14 @@ client.Projects.PostV1ProjectsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsTimeEntriesCreateRequest{
+request := &nordlet.TimeEntriesCreateProjectsRequest{
         ProjectID: "projectId",
-        Date: "date",
-        Hours: "hours",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Hours: "121.00",
     }
-client.Projects.PostV1ProjectsTimeEntriesCreate(
+client.Projects.TimeEntriesCreate(
         context.TODO(),
         request,
     )
@@ -31962,7 +32193,7 @@ client.Projects.PostV1ProjectsTimeEntriesCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -32006,7 +32237,7 @@ client.Projects.PostV1ProjectsTimeEntriesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesUpdate(request) -> *nordlet.PostV1ProjectsTimeEntriesUpdateResponse</code></summary>
+<details><summary><code>client.Projects.TimeEntriesUpdate(request) -> *nordlet.TimeEntriesUpdateProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -32019,10 +32250,10 @@ client.Projects.PostV1ProjectsTimeEntriesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsTimeEntriesUpdateRequest{
+request := &nordlet.TimeEntriesUpdateProjectsRequest{
         ID: "id",
     }
-client.Projects.PostV1ProjectsTimeEntriesUpdate(
+client.Projects.TimeEntriesUpdate(
         context.TODO(),
         request,
     )
@@ -32049,7 +32280,7 @@ client.Projects.PostV1ProjectsTimeEntriesUpdate(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32093,7 +32324,7 @@ client.Projects.PostV1ProjectsTimeEntriesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesDelete(request) -> *nordlet.PostV1ProjectsTimeEntriesDeleteResponse</code></summary>
+<details><summary><code>client.Projects.TimeEntriesDelete(request) -> *nordlet.TimeEntriesDeleteProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -32106,10 +32337,10 @@ client.Projects.PostV1ProjectsTimeEntriesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsTimeEntriesDeleteRequest{
+request := &nordlet.TimeEntriesDeleteProjectsRequest{
         ID: "id",
     }
-client.Projects.PostV1ProjectsTimeEntriesDelete(
+client.Projects.TimeEntriesDelete(
         context.TODO(),
         request,
     )
@@ -32140,7 +32371,7 @@ client.Projects.PostV1ProjectsTimeEntriesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesList(request) -> *nordlet.PostV1ProjectsTimeEntriesListResponse</code></summary>
+<details><summary><code>client.Projects.TimeEntriesList(request) -> *nordlet.TimeEntriesListProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -32153,8 +32384,8 @@ client.Projects.PostV1ProjectsTimeEntriesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsTimeEntriesListRequest{}
-client.Projects.PostV1ProjectsTimeEntriesList(
+request := &nordlet.TimeEntriesListProjectsRequest{}
+client.Projects.TimeEntriesList(
         context.TODO(),
         request,
     )
@@ -32189,7 +32420,7 @@ client.Projects.PostV1ProjectsTimeEntriesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ProjectsTimeEntriesListRequestSortItem` 
+**sort:** `[]*nordlet.TimeEntriesListProjectsRequestSortItem` 
     
 </dd>
 </dl>
@@ -32197,7 +32428,7 @@ client.Projects.PostV1ProjectsTimeEntriesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ProjectsTimeEntriesListRequestFilterItem` 
+**filter:** `[]*nordlet.TimeEntriesListProjectsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -32217,7 +32448,7 @@ client.Projects.PostV1ProjectsTimeEntriesList(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesBill(request) -> *nordlet.PostV1ProjectsTimeEntriesBillResponse</code></summary>
+<details><summary><code>client.Projects.TimeEntriesBill(request) -> *nordlet.TimeEntriesBillProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -32230,10 +32461,10 @@ client.Projects.PostV1ProjectsTimeEntriesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsTimeEntriesBillRequest{
+request := &nordlet.TimeEntriesBillProjectsRequest{
         ProjectID: "projectId",
     }
-client.Projects.PostV1ProjectsTimeEntriesBill(
+client.Projects.TimeEntriesBill(
         context.TODO(),
         request,
     )
@@ -32268,7 +32499,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dl>
 <dd>
 
-**dateFrom:** `*string` 
+**dateFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32276,7 +32507,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dl>
 <dd>
 
-**dateTo:** `*string` 
+**dateTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32316,7 +32547,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dl>
 <dd>
 
-**issueDate:** `*string` 
+**issueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32324,7 +32555,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32332,7 +32563,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dl>
 <dd>
 
-**groupBy:** `*nordlet.PostV1ProjectsTimeEntriesBillRequestGroupBy` 
+**groupBy:** `*nordlet.TimeEntriesBillProjectsRequestGroupBy` 
     
 </dd>
 </dl>
@@ -32352,7 +32583,7 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 </dl>
 </details>
 
-<details><summary><code>client.Projects.PostV1ProjectsReport(request) -> *nordlet.PostV1ProjectsReportResponse</code></summary>
+<details><summary><code>client.Projects.Report(request) -> *nordlet.ReportProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -32365,8 +32596,8 @@ client.Projects.PostV1ProjectsTimeEntriesBill(
 <dd>
 
 ```go
-request := &nordlet.PostV1ProjectsReportRequest{}
-client.Projects.PostV1ProjectsReport(
+request := &nordlet.ReportProjectsRequest{}
+client.Projects.Report(
         context.TODO(),
         request,
     )
@@ -32393,7 +32624,7 @@ client.Projects.PostV1ProjectsReport(
 <dl>
 <dd>
 
-**dateFrom:** `*string` 
+**dateFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32401,7 +32632,7 @@ client.Projects.PostV1ProjectsReport(
 <dl>
 <dd>
 
-**dateTo:** `*string` 
+**dateTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32413,8 +32644,8 @@ client.Projects.PostV1ProjectsReport(
 </dl>
 </details>
 
-## Transport
-<details><summary><code>client.Transport.PostV1TransportWaybillsCreate(request) -> *nordlet.PostV1TransportWaybillsCreateResponse</code></summary>
+## transport
+<details><summary><code>client.Transport.WaybillsCreate(request) -> *nordlet.WaybillsCreateTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32427,7 +32658,7 @@ client.Projects.PostV1ProjectsReport(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsCreateRequest{
+request := &nordlet.WaybillsCreateTransportRequest{
         ConsigneePartnerID: "consigneePartnerId",
         DispatchAt: nordlet.MustParseDateTime(
             "2024-01-15T09:30:00Z",
@@ -32435,7 +32666,7 @@ request := &nordlet.PostV1TransportWaybillsCreateRequest{
         LoadAddress: "loadAddress",
         UnloadAddress: "unloadAddress",
     }
-client.Transport.PostV1TransportWaybillsCreate(
+client.Transport.WaybillsCreate(
         context.TODO(),
         request,
     )
@@ -32470,7 +32701,7 @@ client.Transport.PostV1TransportWaybillsCreate(
 <dl>
 <dd>
 
-**documentDate:** `*string` 
+**documentDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32582,7 +32813,7 @@ client.Transport.PostV1TransportWaybillsCreate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1TransportWaybillsCreateRequestLinesItem` 
+**lines:** `[]*nordlet.WaybillsCreateTransportRequestLinesItem` 
     
 </dd>
 </dl>
@@ -32594,7 +32825,7 @@ client.Transport.PostV1TransportWaybillsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Transport.PostV1TransportWaybillsUpdate(request) -> *nordlet.PostV1TransportWaybillsUpdateResponse</code></summary>
+<details><summary><code>client.Transport.WaybillsUpdate(request) -> *nordlet.WaybillsUpdateTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32607,10 +32838,10 @@ client.Transport.PostV1TransportWaybillsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsUpdateRequest{
+request := &nordlet.WaybillsUpdateTransportRequest{
         ID: "id",
     }
-client.Transport.PostV1TransportWaybillsUpdate(
+client.Transport.WaybillsUpdate(
         context.TODO(),
         request,
     )
@@ -32645,7 +32876,7 @@ client.Transport.PostV1TransportWaybillsUpdate(
 <dl>
 <dd>
 
-**documentDate:** `*string` 
+**documentDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -32757,7 +32988,7 @@ client.Transport.PostV1TransportWaybillsUpdate(
 <dl>
 <dd>
 
-**lines:** `[]*nordlet.PostV1TransportWaybillsUpdateRequestLinesItem` 
+**lines:** `[]*nordlet.WaybillsUpdateTransportRequestLinesItem` 
     
 </dd>
 </dl>
@@ -32777,7 +33008,7 @@ client.Transport.PostV1TransportWaybillsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Transport.PostV1TransportWaybillsIssue(request) -> *nordlet.PostV1TransportWaybillsIssueResponse</code></summary>
+<details><summary><code>client.Transport.WaybillsIssue(request) -> *nordlet.WaybillsIssueTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32790,10 +33021,10 @@ client.Transport.PostV1TransportWaybillsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsIssueRequest{
+request := &nordlet.WaybillsIssueTransportRequest{
         ID: "id",
     }
-client.Transport.PostV1TransportWaybillsIssue(
+client.Transport.WaybillsIssue(
         context.TODO(),
         request,
     )
@@ -32824,7 +33055,7 @@ client.Transport.PostV1TransportWaybillsIssue(
 </dl>
 </details>
 
-<details><summary><code>client.Transport.PostV1TransportWaybillsCancel(request) -> *nordlet.PostV1TransportWaybillsCancelResponse</code></summary>
+<details><summary><code>client.Transport.WaybillsCancel(request) -> *nordlet.WaybillsCancelTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32837,10 +33068,10 @@ client.Transport.PostV1TransportWaybillsIssue(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsCancelRequest{
+request := &nordlet.WaybillsCancelTransportRequest{
         ID: "id",
     }
-client.Transport.PostV1TransportWaybillsCancel(
+client.Transport.WaybillsCancel(
         context.TODO(),
         request,
     )
@@ -32871,7 +33102,7 @@ client.Transport.PostV1TransportWaybillsCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Transport.PostV1TransportWaybillsGet(request) -> *nordlet.PostV1TransportWaybillsGetResponse</code></summary>
+<details><summary><code>client.Transport.WaybillsGet(request) -> *nordlet.WaybillsGetTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32884,10 +33115,10 @@ client.Transport.PostV1TransportWaybillsCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsGetRequest{
+request := &nordlet.WaybillsGetTransportRequest{
         ID: "id",
     }
-client.Transport.PostV1TransportWaybillsGet(
+client.Transport.WaybillsGet(
         context.TODO(),
         request,
     )
@@ -32918,7 +33149,7 @@ client.Transport.PostV1TransportWaybillsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Transport.PostV1TransportWaybillsList(request) -> *nordlet.PostV1TransportWaybillsListResponse</code></summary>
+<details><summary><code>client.Transport.WaybillsList(request) -> *nordlet.WaybillsListTransportResponse</code></summary>
 <dl>
 <dd>
 
@@ -32931,8 +33162,8 @@ client.Transport.PostV1TransportWaybillsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1TransportWaybillsListRequest{}
-client.Transport.PostV1TransportWaybillsList(
+request := &nordlet.WaybillsListTransportRequest{}
+client.Transport.WaybillsList(
         context.TODO(),
         request,
     )
@@ -32967,7 +33198,7 @@ client.Transport.PostV1TransportWaybillsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1TransportWaybillsListRequestSortItem` 
+**sort:** `[]*nordlet.WaybillsListTransportRequestSortItem` 
     
 </dd>
 </dl>
@@ -32975,7 +33206,7 @@ client.Transport.PostV1TransportWaybillsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1TransportWaybillsListRequestFilterItem` 
+**filter:** `[]*nordlet.WaybillsListTransportRequestFilterItem` 
     
 </dd>
 </dl>
@@ -32995,8 +33226,8 @@ client.Transport.PostV1TransportWaybillsList(
 </dl>
 </details>
 
-## Pos
-<details><summary><code>client.Pos.PostV1PosDevicesCreate(request) -> *nordlet.PostV1PosDevicesCreateResponse</code></summary>
+## pos
+<details><summary><code>client.Pos.DevicesCreate(request) -> *nordlet.DevicesCreatePosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33009,11 +33240,11 @@ client.Transport.PostV1TransportWaybillsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosDevicesCreateRequest{
+request := &nordlet.DevicesCreatePosRequest{
         Name: "name",
         SerialNumber: "serialNumber",
     }
-client.Pos.PostV1PosDevicesCreate(
+client.Pos.DevicesCreate(
         context.TODO(),
         request,
     )
@@ -33076,7 +33307,7 @@ client.Pos.PostV1PosDevicesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Pos.PostV1PosDevicesUpdate(request) -> *nordlet.PostV1PosDevicesUpdateResponse</code></summary>
+<details><summary><code>client.Pos.DevicesUpdate(request) -> *nordlet.DevicesUpdatePosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33089,10 +33320,10 @@ client.Pos.PostV1PosDevicesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosDevicesUpdateRequest{
+request := &nordlet.DevicesUpdatePosRequest{
         ID: "id",
     }
-client.Pos.PostV1PosDevicesUpdate(
+client.Pos.DevicesUpdate(
         context.TODO(),
         request,
     )
@@ -33171,7 +33402,7 @@ client.Pos.PostV1PosDevicesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Pos.PostV1PosDevicesList(request) -> *nordlet.PostV1PosDevicesListResponse</code></summary>
+<details><summary><code>client.Pos.DevicesList(request) -> *nordlet.DevicesListPosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33184,8 +33415,8 @@ client.Pos.PostV1PosDevicesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosDevicesListRequest{}
-client.Pos.PostV1PosDevicesList(
+request := &nordlet.DevicesListPosRequest{}
+client.Pos.DevicesList(
         context.TODO(),
         request,
     )
@@ -33220,7 +33451,7 @@ client.Pos.PostV1PosDevicesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PosDevicesListRequestSortItem` 
+**sort:** `[]*nordlet.DevicesListPosRequestSortItem` 
     
 </dd>
 </dl>
@@ -33228,7 +33459,7 @@ client.Pos.PostV1PosDevicesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PosDevicesListRequestFilterItem` 
+**filter:** `[]*nordlet.DevicesListPosRequestFilterItem` 
     
 </dd>
 </dl>
@@ -33248,7 +33479,7 @@ client.Pos.PostV1PosDevicesList(
 </dl>
 </details>
 
-<details><summary><code>client.Pos.PostV1PosReportsCreate(request) -> *nordlet.PostV1PosReportsCreateResponse</code></summary>
+<details><summary><code>client.Pos.ReportsCreate(request) -> *nordlet.ReportsCreatePosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33261,18 +33492,20 @@ client.Pos.PostV1PosDevicesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosReportsCreateRequest{
+request := &nordlet.ReportsCreatePosRequest{
         ReportNumber: "reportNumber",
-        Date: "date",
-        VatLines: []*nordlet.PostV1PosReportsCreateRequestVatLinesItem{
-            &nordlet.PostV1PosReportsCreateRequestVatLinesItem{
-                VatRatePercent: "vatRatePercent",
-                NetAmount: "netAmount",
-                VatAmount: "vatAmount",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        VatLines: []*nordlet.ReportsCreatePosRequestVatLinesItem{
+            &nordlet.ReportsCreatePosRequestVatLinesItem{
+                VatRatePercent: "121.00",
+                NetAmount: "121.0000",
+                VatAmount: "121.0000",
             },
         },
     }
-client.Pos.PostV1PosReportsCreate(
+client.Pos.ReportsCreate(
         context.TODO(),
         request,
     )
@@ -33299,7 +33532,7 @@ client.Pos.PostV1PosReportsCreate(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -33323,7 +33556,7 @@ client.Pos.PostV1PosReportsCreate(
 <dl>
 <dd>
 
-**vatLines:** `[]*nordlet.PostV1PosReportsCreateRequestVatLinesItem` 
+**vatLines:** `[]*nordlet.ReportsCreatePosRequestVatLinesItem` 
     
 </dd>
 </dl>
@@ -33347,7 +33580,7 @@ client.Pos.PostV1PosReportsCreate(
 <dl>
 <dd>
 
-**itemLines:** `[]*nordlet.PostV1PosReportsCreateRequestItemLinesItem` 
+**itemLines:** `[]*nordlet.ReportsCreatePosRequestItemLinesItem` 
     
 </dd>
 </dl>
@@ -33415,7 +33648,7 @@ client.Pos.PostV1PosReportsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Pos.PostV1PosReportsGet(request) -> *nordlet.PostV1PosReportsGetResponse</code></summary>
+<details><summary><code>client.Pos.ReportsGet(request) -> *nordlet.ReportsGetPosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33428,10 +33661,10 @@ client.Pos.PostV1PosReportsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosReportsGetRequest{
+request := &nordlet.ReportsGetPosRequest{
         ID: "id",
     }
-client.Pos.PostV1PosReportsGet(
+client.Pos.ReportsGet(
         context.TODO(),
         request,
     )
@@ -33462,7 +33695,7 @@ client.Pos.PostV1PosReportsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Pos.PostV1PosReportsList(request) -> *nordlet.PostV1PosReportsListResponse</code></summary>
+<details><summary><code>client.Pos.ReportsList(request) -> *nordlet.ReportsListPosResponse</code></summary>
 <dl>
 <dd>
 
@@ -33475,8 +33708,8 @@ client.Pos.PostV1PosReportsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1PosReportsListRequest{}
-client.Pos.PostV1PosReportsList(
+request := &nordlet.ReportsListPosRequest{}
+client.Pos.ReportsList(
         context.TODO(),
         request,
     )
@@ -33511,7 +33744,7 @@ client.Pos.PostV1PosReportsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1PosReportsListRequestSortItem` 
+**sort:** `[]*nordlet.ReportsListPosRequestSortItem` 
     
 </dd>
 </dl>
@@ -33519,7 +33752,7 @@ client.Pos.PostV1PosReportsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1PosReportsListRequestFilterItem` 
+**filter:** `[]*nordlet.ReportsListPosRequestFilterItem` 
     
 </dd>
 </dl>
@@ -33539,8 +33772,8 @@ client.Pos.PostV1PosReportsList(
 </dl>
 </details>
 
-## Calendar
-<details><summary><code>client.Calendar.PostV1CalendarList(request) -> *nordlet.PostV1CalendarListResponse</code></summary>
+## calendar
+<details><summary><code>client.Calendar.List(request) -> *nordlet.ListCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33553,8 +33786,8 @@ client.Pos.PostV1PosReportsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarListRequest{}
-client.Calendar.PostV1CalendarList(
+request := &nordlet.ListCalendarRequest{}
+client.Calendar.List(
         context.TODO(),
         request,
     )
@@ -33573,7 +33806,7 @@ client.Calendar.PostV1CalendarList(
 <dl>
 <dd>
 
-**from:** `*string` 
+**from:** `*time.Time` 
     
 </dd>
 </dl>
@@ -33581,7 +33814,7 @@ client.Calendar.PostV1CalendarList(
 <dl>
 <dd>
 
-**to:** `*string` 
+**to:** `*time.Time` 
     
 </dd>
 </dl>
@@ -33601,7 +33834,7 @@ client.Calendar.PostV1CalendarList(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.PostV1CalendarGet(request) -> *nordlet.PostV1CalendarGetResponse</code></summary>
+<details><summary><code>client.Calendar.Get(request) -> *nordlet.GetCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33614,10 +33847,10 @@ client.Calendar.PostV1CalendarList(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarGetRequest{
+request := &nordlet.GetCalendarRequest{
         Key: "key",
     }
-client.Calendar.PostV1CalendarGet(
+client.Calendar.Get(
         context.TODO(),
         request,
     )
@@ -33648,9 +33881,23 @@ client.Calendar.PostV1CalendarGet(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(request) -> *nordlet.PostV1CalendarSubmitResponse</code></summary>
+<details><summary><code>client.Calendar.Submit(request) -> *nordlet.SubmitCalendarResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+With amend: true the return is filed again as a correction of the one already submitted or accepted for the period; only returns whose format has a correction mark accept it.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -33661,10 +33908,10 @@ client.Calendar.PostV1CalendarGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarSubmitRequest{
+request := &nordlet.SubmitCalendarRequest{
         Key: "key",
     }
-client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+client.Calendar.Submit(
         context.TODO(),
         request,
     )
@@ -33687,6 +33934,14 @@ client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**amend:** `*bool` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -33695,7 +33950,7 @@ client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(request) -> *nordlet.PostV1CalendarDownloadResponse</code></summary>
+<details><summary><code>client.Calendar.Download(request) -> *nordlet.DownloadCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33722,10 +33977,10 @@ Builds the file of a deadline whose format Nordlet produces but whose administra
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarDownloadRequest{
+request := &nordlet.DownloadCalendarRequest{
         Key: "key",
     }
-client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+client.Calendar.Download(
         context.TODO(),
         request,
     )
@@ -33756,7 +34011,7 @@ client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.PostV1CalendarCreate(request) -> *nordlet.PostV1CalendarCreateResponse</code></summary>
+<details><summary><code>client.Calendar.Create(request) -> *nordlet.CreateCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33769,11 +34024,13 @@ client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarCreateRequest{
+request := &nordlet.CreateCalendarRequest{
         Title: "title",
-        DueDate: "dueDate",
+        DueDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Calendar.PostV1CalendarCreate(
+client.Calendar.Create(
         context.TODO(),
         request,
     )
@@ -33800,7 +34057,7 @@ client.Calendar.PostV1CalendarCreate(
 <dl>
 <dd>
 
-**dueDate:** `string` 
+**dueDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -33828,7 +34085,7 @@ client.Calendar.PostV1CalendarCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.PostV1CalendarUpdate(request) -> *nordlet.PostV1CalendarUpdateResponse</code></summary>
+<details><summary><code>client.Calendar.Update(request) -> *nordlet.UpdateCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33841,10 +34098,10 @@ client.Calendar.PostV1CalendarCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarUpdateRequest{
+request := &nordlet.UpdateCalendarRequest{
         Key: "key",
     }
-client.Calendar.PostV1CalendarUpdate(
+client.Calendar.Update(
         context.TODO(),
         request,
     )
@@ -33879,7 +34136,7 @@ client.Calendar.PostV1CalendarUpdate(
 <dl>
 <dd>
 
-**dueDate:** `*string` 
+**dueDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -33907,7 +34164,7 @@ client.Calendar.PostV1CalendarUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Calendar.PostV1CalendarDelete(request) -> *nordlet.PostV1CalendarDeleteResponse</code></summary>
+<details><summary><code>client.Calendar.Delete(request) -> *nordlet.DeleteCalendarResponse</code></summary>
 <dl>
 <dd>
 
@@ -33920,10 +34177,10 @@ client.Calendar.PostV1CalendarUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1CalendarDeleteRequest{
+request := &nordlet.DeleteCalendarRequest{
         Key: "key",
     }
-client.Calendar.PostV1CalendarDelete(
+client.Calendar.Delete(
         context.TODO(),
         request,
     )
@@ -33954,8 +34211,8 @@ client.Calendar.PostV1CalendarDelete(
 </dl>
 </details>
 
-## Audit
-<details><summary><code>client.Audit.PostV1AuditList(request) -> *nordlet.PostV1AuditListResponse</code></summary>
+## audit
+<details><summary><code>client.Audit.List(request) -> *nordlet.ListAuditResponse</code></summary>
 <dl>
 <dd>
 
@@ -33968,8 +34225,8 @@ client.Calendar.PostV1CalendarDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1AuditListRequest{}
-client.Audit.PostV1AuditList(
+request := &nordlet.ListAuditRequest{}
+client.Audit.List(
         context.TODO(),
         request,
     )
@@ -34004,7 +34261,7 @@ client.Audit.PostV1AuditList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1AuditListRequestSortItem` 
+**sort:** `[]*nordlet.ListAuditRequestSortItem` 
     
 </dd>
 </dl>
@@ -34012,7 +34269,7 @@ client.Audit.PostV1AuditList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1AuditListRequestFilterItem` 
+**filter:** `[]*nordlet.ListAuditRequestFilterItem` 
     
 </dd>
 </dl>
@@ -34032,8 +34289,8 @@ client.Audit.PostV1AuditList(
 </dl>
 </details>
 
-## Webhooks
-<details><summary><code>client.Webhooks.PostV1WebhooksSubscriptionsCreate(request) -> *nordlet.PostV1WebhooksSubscriptionsCreateResponse</code></summary>
+## webhooks
+<details><summary><code>client.Webhooks.SubscriptionsCreate(request) -> *nordlet.SubscriptionsCreateWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34046,13 +34303,13 @@ client.Audit.PostV1AuditList(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksSubscriptionsCreateRequest{
+request := &nordlet.SubscriptionsCreateWebhooksRequest{
         URL: "url",
-        Events: []string{
-            "events",
+        Events: []nordlet.SubscriptionsCreateWebhooksRequestEventsItem{
+            nordlet.SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated,
         },
     }
-client.Webhooks.PostV1WebhooksSubscriptionsCreate(
+client.Webhooks.SubscriptionsCreate(
         context.TODO(),
         request,
     )
@@ -34079,7 +34336,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsCreate(
 <dl>
 <dd>
 
-**events:** `[]string` 
+**events:** `[]*nordlet.SubscriptionsCreateWebhooksRequestEventsItem` 
     
 </dd>
 </dl>
@@ -34099,7 +34356,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.PostV1WebhooksSubscriptionsList(request) -> *nordlet.PostV1WebhooksSubscriptionsListResponse</code></summary>
+<details><summary><code>client.Webhooks.SubscriptionsList(request) -> *nordlet.SubscriptionsListWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34112,8 +34369,8 @@ client.Webhooks.PostV1WebhooksSubscriptionsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksSubscriptionsListRequest{}
-client.Webhooks.PostV1WebhooksSubscriptionsList(
+request := &nordlet.SubscriptionsListWebhooksRequest{}
+client.Webhooks.SubscriptionsList(
         context.TODO(),
         request,
     )
@@ -34148,7 +34405,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1WebhooksSubscriptionsListRequestSortItem` 
+**sort:** `[]*nordlet.SubscriptionsListWebhooksRequestSortItem` 
     
 </dd>
 </dl>
@@ -34156,7 +34413,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1WebhooksSubscriptionsListRequestFilterItem` 
+**filter:** `[]*nordlet.SubscriptionsListWebhooksRequestFilterItem` 
     
 </dd>
 </dl>
@@ -34176,7 +34433,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.PostV1WebhooksSubscriptionsUpdate(request) -> *nordlet.PostV1WebhooksSubscriptionsUpdateResponse</code></summary>
+<details><summary><code>client.Webhooks.SubscriptionsUpdate(request) -> *nordlet.SubscriptionsUpdateWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34189,10 +34446,10 @@ client.Webhooks.PostV1WebhooksSubscriptionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksSubscriptionsUpdateRequest{
+request := &nordlet.SubscriptionsUpdateWebhooksRequest{
         ID: "id",
     }
-client.Webhooks.PostV1WebhooksSubscriptionsUpdate(
+client.Webhooks.SubscriptionsUpdate(
         context.TODO(),
         request,
     )
@@ -34227,7 +34484,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsUpdate(
 <dl>
 <dd>
 
-**events:** `[]string` 
+**events:** `[]*nordlet.SubscriptionsUpdateWebhooksRequestEventsItem` 
     
 </dd>
 </dl>
@@ -34247,7 +34504,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.PostV1WebhooksSubscriptionsDelete(request) -> *nordlet.PostV1WebhooksSubscriptionsDeleteResponse</code></summary>
+<details><summary><code>client.Webhooks.SubscriptionsDelete(request) -> *nordlet.SubscriptionsDeleteWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34260,10 +34517,10 @@ client.Webhooks.PostV1WebhooksSubscriptionsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksSubscriptionsDeleteRequest{
+request := &nordlet.SubscriptionsDeleteWebhooksRequest{
         ID: "id",
     }
-client.Webhooks.PostV1WebhooksSubscriptionsDelete(
+client.Webhooks.SubscriptionsDelete(
         context.TODO(),
         request,
     )
@@ -34294,7 +34551,7 @@ client.Webhooks.PostV1WebhooksSubscriptionsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.PostV1WebhooksDeliveriesList(request) -> *nordlet.PostV1WebhooksDeliveriesListResponse</code></summary>
+<details><summary><code>client.Webhooks.DeliveriesList(request) -> *nordlet.DeliveriesListWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34307,8 +34564,8 @@ client.Webhooks.PostV1WebhooksSubscriptionsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksDeliveriesListRequest{}
-client.Webhooks.PostV1WebhooksDeliveriesList(
+request := &nordlet.DeliveriesListWebhooksRequest{}
+client.Webhooks.DeliveriesList(
         context.TODO(),
         request,
     )
@@ -34343,7 +34600,7 @@ client.Webhooks.PostV1WebhooksDeliveriesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1WebhooksDeliveriesListRequestSortItem` 
+**sort:** `[]*nordlet.DeliveriesListWebhooksRequestSortItem` 
     
 </dd>
 </dl>
@@ -34351,7 +34608,7 @@ client.Webhooks.PostV1WebhooksDeliveriesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1WebhooksDeliveriesListRequestFilterItem` 
+**filter:** `[]*nordlet.DeliveriesListWebhooksRequestFilterItem` 
     
 </dd>
 </dl>
@@ -34371,7 +34628,7 @@ client.Webhooks.PostV1WebhooksDeliveriesList(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.PostV1WebhooksDeliveriesRedeliver(request) -> *nordlet.PostV1WebhooksDeliveriesRedeliverResponse</code></summary>
+<details><summary><code>client.Webhooks.DeliveriesRedeliver(request) -> *nordlet.DeliveriesRedeliverWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -34384,10 +34641,10 @@ client.Webhooks.PostV1WebhooksDeliveriesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1WebhooksDeliveriesRedeliverRequest{
+request := &nordlet.DeliveriesRedeliverWebhooksRequest{
         ID: "id",
     }
-client.Webhooks.PostV1WebhooksDeliveriesRedeliver(
+client.Webhooks.DeliveriesRedeliver(
         context.TODO(),
         request,
     )
@@ -34418,8 +34675,8 @@ client.Webhooks.PostV1WebhooksDeliveriesRedeliver(
 </dl>
 </details>
 
-## Bank
-<details><summary><code>client.Bank.PostV1BankAccountsCreate(request) -> *nordlet.PostV1BankAccountsCreateResponse</code></summary>
+## bank
+<details><summary><code>client.Bank.AccountsCreate(request) -> *nordlet.AccountsCreateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34432,10 +34689,10 @@ client.Webhooks.PostV1WebhooksDeliveriesRedeliver(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankAccountsCreateRequest{
+request := &nordlet.AccountsCreateBankRequest{
         Name: "name",
     }
-client.Bank.PostV1BankAccountsCreate(
+client.Bank.AccountsCreate(
         context.TODO(),
         request,
     )
@@ -34498,7 +34755,7 @@ client.Bank.PostV1BankAccountsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankAccountsList(request) -> *nordlet.PostV1BankAccountsListResponse</code></summary>
+<details><summary><code>client.Bank.AccountsList(request) -> *nordlet.AccountsListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34511,8 +34768,8 @@ client.Bank.PostV1BankAccountsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankAccountsListRequest{}
-client.Bank.PostV1BankAccountsList(
+request := &nordlet.AccountsListBankRequest{}
+client.Bank.AccountsList(
         context.TODO(),
         request,
     )
@@ -34547,7 +34804,7 @@ client.Bank.PostV1BankAccountsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankAccountsListRequestSortItem` 
+**sort:** `[]*nordlet.AccountsListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -34555,7 +34812,7 @@ client.Bank.PostV1BankAccountsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankAccountsListRequestFilterItem` 
+**filter:** `[]*nordlet.AccountsListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -34575,7 +34832,7 @@ client.Bank.PostV1BankAccountsList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankAccountsUpdate(request) -> *nordlet.PostV1BankAccountsUpdateResponse</code></summary>
+<details><summary><code>client.Bank.AccountsUpdate(request) -> *nordlet.AccountsUpdateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34588,10 +34845,10 @@ client.Bank.PostV1BankAccountsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankAccountsUpdateRequest{
+request := &nordlet.AccountsUpdateBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankAccountsUpdate(
+client.Bank.AccountsUpdate(
         context.TODO(),
         request,
     )
@@ -34654,7 +34911,7 @@ client.Bank.PostV1BankAccountsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankTransactionsImport(request) -> *nordlet.PostV1BankTransactionsImportResponse</code></summary>
+<details><summary><code>client.Bank.TransactionsImport(request) -> *nordlet.TransactionsImportBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34667,16 +34924,18 @@ client.Bank.PostV1BankAccountsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankTransactionsImportRequest{
+request := &nordlet.TransactionsImportBankRequest{
         BankAccountID: "bankAccountId",
-        Transactions: []*nordlet.PostV1BankTransactionsImportRequestTransactionsItem{
-            &nordlet.PostV1BankTransactionsImportRequestTransactionsItem{
-                Date: "date",
-                Amount: "amount",
+        Transactions: []*nordlet.TransactionsImportBankRequestTransactionsItem{
+            &nordlet.TransactionsImportBankRequestTransactionsItem{
+                Date: nordlet.MustParseDate(
+                    "2026-07-01",
+                ),
+                Amount: "-121.0000",
             },
         },
     }
-client.Bank.PostV1BankTransactionsImport(
+client.Bank.TransactionsImport(
         context.TODO(),
         request,
     )
@@ -34703,7 +34962,7 @@ client.Bank.PostV1BankTransactionsImport(
 <dl>
 <dd>
 
-**transactions:** `[]*nordlet.PostV1BankTransactionsImportRequestTransactionsItem` 
+**transactions:** `[]*nordlet.TransactionsImportBankRequestTransactionsItem` 
     
 </dd>
 </dl>
@@ -34715,7 +34974,7 @@ client.Bank.PostV1BankTransactionsImport(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankStatementsImport(request) -> *nordlet.PostV1BankStatementsImportResponse</code></summary>
+<details><summary><code>client.Bank.StatementsImport(request) -> *nordlet.StatementsImportBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34728,11 +34987,11 @@ client.Bank.PostV1BankTransactionsImport(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankStatementsImportRequest{
+request := &nordlet.StatementsImportBankRequest{
         BankAccountID: "bankAccountId",
         Content: "content",
     }
-client.Bank.PostV1BankStatementsImport(
+client.Bank.StatementsImport(
         context.TODO(),
         request,
     )
@@ -34767,7 +35026,7 @@ client.Bank.PostV1BankStatementsImport(
 <dl>
 <dd>
 
-**format:** `*nordlet.PostV1BankStatementsImportRequestFormat` 
+**format:** `*nordlet.StatementsImportBankRequestFormat` 
     
 </dd>
 </dl>
@@ -34795,7 +35054,7 @@ client.Bank.PostV1BankStatementsImport(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankTransactionsList(request) -> *nordlet.PostV1BankTransactionsListResponse</code></summary>
+<details><summary><code>client.Bank.TransactionsList(request) -> *nordlet.TransactionsListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34808,8 +35067,8 @@ client.Bank.PostV1BankStatementsImport(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankTransactionsListRequest{}
-client.Bank.PostV1BankTransactionsList(
+request := &nordlet.TransactionsListBankRequest{}
+client.Bank.TransactionsList(
         context.TODO(),
         request,
     )
@@ -34844,7 +35103,7 @@ client.Bank.PostV1BankTransactionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankTransactionsListRequestSortItem` 
+**sort:** `[]*nordlet.TransactionsListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -34852,7 +35111,7 @@ client.Bank.PostV1BankTransactionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankTransactionsListRequestFilterItem` 
+**filter:** `[]*nordlet.TransactionsListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -34872,7 +35131,7 @@ client.Bank.PostV1BankTransactionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankTransactionsMatch(request) -> *nordlet.PostV1BankTransactionsMatchResponse</code></summary>
+<details><summary><code>client.Bank.TransactionsMatch(request) -> *nordlet.TransactionsMatchBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34885,12 +35144,12 @@ client.Bank.PostV1BankTransactionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankTransactionsMatchRequest{
+request := &nordlet.TransactionsMatchBankRequest{
         TransactionID: "transactionId",
-        DocumentType: nordlet.PostV1BankTransactionsMatchRequestDocumentTypeSaleInvoice,
+        DocumentType: nordlet.TransactionsMatchBankRequestDocumentTypeSaleInvoice,
         DocumentID: "documentId",
     }
-client.Bank.PostV1BankTransactionsMatch(
+client.Bank.TransactionsMatch(
         context.TODO(),
         request,
     )
@@ -34917,7 +35176,7 @@ client.Bank.PostV1BankTransactionsMatch(
 <dl>
 <dd>
 
-**documentType:** `*nordlet.PostV1BankTransactionsMatchRequestDocumentType` 
+**documentType:** `*nordlet.TransactionsMatchBankRequestDocumentType` 
     
 </dd>
 </dl>
@@ -34929,6 +35188,14 @@ client.Bank.PostV1BankTransactionsMatch(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**invoiceAmount:** `*string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -34937,7 +35204,76 @@ client.Bank.PostV1BankTransactionsMatch(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankTransactionsRecord(request) -> *nordlet.PostV1BankTransactionsRecordResponse</code></summary>
+<details><summary><code>client.Bank.TransactionsUnmatch(request) -> *nordlet.TransactionsUnmatchBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Undo a match. A payment matched to an invoice, or a line posted by an import template, gets a reversing journal transaction dated date (default: today) and the invoice paid amount and payment status are restored; a line linked to a payment-provider settlement is only unlinked. The line returns to status new.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TransactionsUnmatchBankRequest{
+        TransactionID: "transactionId",
+    }
+client.Bank.TransactionsUnmatch(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transactionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.TransactionsRecord(request) -> *nordlet.TransactionsRecordBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -34950,14 +35286,16 @@ client.Bank.PostV1BankTransactionsMatch(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankTransactionsRecordRequest{
+request := &nordlet.TransactionsRecordBankRequest{
         BankAccountID: "bankAccountId",
-        Date: "date",
-        Amount: "amount",
-        DocumentType: nordlet.PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice,
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Amount: "121.0000",
+        DocumentType: nordlet.TransactionsRecordBankRequestDocumentTypeSaleInvoice,
         DocumentID: "documentId",
     }
-client.Bank.PostV1BankTransactionsRecord(
+client.Bank.TransactionsRecord(
         context.TODO(),
         request,
     )
@@ -34984,7 +35322,7 @@ client.Bank.PostV1BankTransactionsRecord(
 <dl>
 <dd>
 
-**date:** `string` 
+**date:** `time.Time` 
     
 </dd>
 </dl>
@@ -35008,7 +35346,7 @@ client.Bank.PostV1BankTransactionsRecord(
 <dl>
 <dd>
 
-**documentType:** `*nordlet.PostV1BankTransactionsRecordRequestDocumentType` 
+**documentType:** `*nordlet.TransactionsRecordBankRequestDocumentType` 
     
 </dd>
 </dl>
@@ -35028,7 +35366,7 @@ client.Bank.PostV1BankTransactionsRecord(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankPaymentsExport(request) -> *nordlet.PostV1BankPaymentsExportResponse</code></summary>
+<details><summary><code>client.Bank.PaymentsExport(request) -> *nordlet.PaymentsExportBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35041,13 +35379,13 @@ client.Bank.PostV1BankTransactionsRecord(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankPaymentsExportRequest{
+request := &nordlet.PaymentsExportBankRequest{
         BankAccountID: "bankAccountId",
         PurchaseInvoiceIDs: []string{
             "purchaseInvoiceIds",
         },
     }
-client.Bank.PostV1BankPaymentsExport(
+client.Bank.PaymentsExport(
         context.TODO(),
         request,
     )
@@ -35082,7 +35420,7 @@ client.Bank.PostV1BankPaymentsExport(
 <dl>
 <dd>
 
-**executionDate:** `*string` 
+**executionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -35094,7 +35432,7 @@ client.Bank.PostV1BankPaymentsExport(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(request) -> *nordlet.PostV1BankImportTemplatesCreateResponse</code></summary>
+<details><summary><code>client.Bank.ImportTemplatesCreate(request) -> *nordlet.ImportTemplatesCreateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35107,11 +35445,11 @@ client.Bank.PostV1BankPaymentsExport(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankImportTemplatesCreateRequest{
+request := &nordlet.ImportTemplatesCreateBankRequest{
         Name: "name",
-        Type: nordlet.PostV1BankImportTemplatesCreateRequestTypeStripe,
+        Type: nordlet.ImportTemplatesCreateBankRequestTypeStripe,
     }
-client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+client.Bank.ImportTemplatesCreate(
         context.TODO(),
         request,
     )
@@ -35138,7 +35476,7 @@ client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1BankImportTemplatesCreateRequestType` 
+**type_:** `*nordlet.ImportTemplatesCreateBankRequestType` 
     
 </dd>
 </dl>
@@ -35146,7 +35484,7 @@ client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
 <dl>
 <dd>
 
-**fields:** `[]*nordlet.PostV1BankImportTemplatesCreateRequestFieldsItem` 
+**fields:** `[]*nordlet.ImportTemplatesCreateBankRequestFieldsItem` 
     
 </dd>
 </dl>
@@ -35254,7 +35592,7 @@ client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankImportTemplatesUpdate(request) -> *nordlet.PostV1BankImportTemplatesUpdateResponse</code></summary>
+<details><summary><code>client.Bank.ImportTemplatesUpdate(request) -> *nordlet.ImportTemplatesUpdateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35267,10 +35605,10 @@ client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankImportTemplatesUpdateRequest{
+request := &nordlet.ImportTemplatesUpdateBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankImportTemplatesUpdate(
+client.Bank.ImportTemplatesUpdate(
         context.TODO(),
         request,
     )
@@ -35297,7 +35635,7 @@ client.Bank.PostV1BankImportTemplatesUpdate(
 <dl>
 <dd>
 
-**type_:** `*nordlet.PostV1BankImportTemplatesUpdateRequestType` 
+**type_:** `*nordlet.ImportTemplatesUpdateBankRequestType` 
     
 </dd>
 </dl>
@@ -35305,7 +35643,7 @@ client.Bank.PostV1BankImportTemplatesUpdate(
 <dl>
 <dd>
 
-**fields:** `[]*nordlet.PostV1BankImportTemplatesUpdateRequestFieldsItem` 
+**fields:** `[]*nordlet.ImportTemplatesUpdateBankRequestFieldsItem` 
     
 </dd>
 </dl>
@@ -35421,7 +35759,7 @@ client.Bank.PostV1BankImportTemplatesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankImportTemplatesDelete(request) -> *nordlet.PostV1BankImportTemplatesDeleteResponse</code></summary>
+<details><summary><code>client.Bank.ImportTemplatesDelete(request) -> *nordlet.ImportTemplatesDeleteBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35434,10 +35772,10 @@ client.Bank.PostV1BankImportTemplatesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankImportTemplatesDeleteRequest{
+request := &nordlet.ImportTemplatesDeleteBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankImportTemplatesDelete(
+client.Bank.ImportTemplatesDelete(
         context.TODO(),
         request,
     )
@@ -35468,7 +35806,7 @@ client.Bank.PostV1BankImportTemplatesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankImportTemplatesGet(request) -> *nordlet.PostV1BankImportTemplatesGetResponse</code></summary>
+<details><summary><code>client.Bank.ImportTemplatesGet(request) -> *nordlet.ImportTemplatesGetBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35481,10 +35819,10 @@ client.Bank.PostV1BankImportTemplatesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankImportTemplatesGetRequest{
+request := &nordlet.ImportTemplatesGetBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankImportTemplatesGet(
+client.Bank.ImportTemplatesGet(
         context.TODO(),
         request,
     )
@@ -35515,7 +35853,7 @@ client.Bank.PostV1BankImportTemplatesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankImportTemplatesList(request) -> *nordlet.PostV1BankImportTemplatesListResponse</code></summary>
+<details><summary><code>client.Bank.ImportTemplatesList(request) -> *nordlet.ImportTemplatesListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35528,8 +35866,8 @@ client.Bank.PostV1BankImportTemplatesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankImportTemplatesListRequest{}
-client.Bank.PostV1BankImportTemplatesList(
+request := &nordlet.ImportTemplatesListBankRequest{}
+client.Bank.ImportTemplatesList(
         context.TODO(),
         request,
     )
@@ -35564,7 +35902,7 @@ client.Bank.PostV1BankImportTemplatesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankImportTemplatesListRequestSortItem` 
+**sort:** `[]*nordlet.ImportTemplatesListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -35572,7 +35910,7 @@ client.Bank.PostV1BankImportTemplatesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankImportTemplatesListRequestFilterItem` 
+**filter:** `[]*nordlet.ImportTemplatesListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -35592,7 +35930,7 @@ client.Bank.PostV1BankImportTemplatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMatchRulesCreate(request) -> *nordlet.PostV1BankMatchRulesCreateResponse</code></summary>
+<details><summary><code>client.Bank.MatchRulesCreate(request) -> *nordlet.MatchRulesCreateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35605,11 +35943,11 @@ client.Bank.PostV1BankImportTemplatesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMatchRulesCreateRequest{
+request := &nordlet.MatchRulesCreateBankRequest{
         Name: "name",
         Pattern: "pattern",
     }
-client.Bank.PostV1BankMatchRulesCreate(
+client.Bank.MatchRulesCreate(
         context.TODO(),
         request,
     )
@@ -35688,7 +36026,7 @@ client.Bank.PostV1BankMatchRulesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMatchRulesUpdate(request) -> *nordlet.PostV1BankMatchRulesUpdateResponse</code></summary>
+<details><summary><code>client.Bank.MatchRulesUpdate(request) -> *nordlet.MatchRulesUpdateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35701,10 +36039,10 @@ client.Bank.PostV1BankMatchRulesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMatchRulesUpdateRequest{
+request := &nordlet.MatchRulesUpdateBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankMatchRulesUpdate(
+client.Bank.MatchRulesUpdate(
         context.TODO(),
         request,
     )
@@ -35791,7 +36129,7 @@ client.Bank.PostV1BankMatchRulesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMatchRulesDelete(request) -> *nordlet.PostV1BankMatchRulesDeleteResponse</code></summary>
+<details><summary><code>client.Bank.MatchRulesDelete(request) -> *nordlet.MatchRulesDeleteBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35804,10 +36142,10 @@ client.Bank.PostV1BankMatchRulesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMatchRulesDeleteRequest{
+request := &nordlet.MatchRulesDeleteBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankMatchRulesDelete(
+client.Bank.MatchRulesDelete(
         context.TODO(),
         request,
     )
@@ -35838,7 +36176,7 @@ client.Bank.PostV1BankMatchRulesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMatchRulesList(request) -> *nordlet.PostV1BankMatchRulesListResponse</code></summary>
+<details><summary><code>client.Bank.MatchRulesList(request) -> *nordlet.MatchRulesListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35851,8 +36189,8 @@ client.Bank.PostV1BankMatchRulesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMatchRulesListRequest{}
-client.Bank.PostV1BankMatchRulesList(
+request := &nordlet.MatchRulesListBankRequest{}
+client.Bank.MatchRulesList(
         context.TODO(),
         request,
     )
@@ -35868,7 +36206,7 @@ client.Bank.PostV1BankMatchRulesList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMandatesCreate(request) -> *nordlet.PostV1BankMandatesCreateResponse</code></summary>
+<details><summary><code>client.Bank.MandatesCreate(request) -> *nordlet.MandatesCreateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35881,12 +36219,14 @@ client.Bank.PostV1BankMatchRulesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMandatesCreateRequest{
+request := &nordlet.MandatesCreateBankRequest{
         PartnerID: "partnerId",
         Iban: "iban",
-        SignatureDate: "signatureDate",
+        SignatureDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Bank.PostV1BankMandatesCreate(
+client.Bank.MandatesCreate(
         context.TODO(),
         request,
     )
@@ -35929,7 +36269,7 @@ client.Bank.PostV1BankMandatesCreate(
 <dl>
 <dd>
 
-**scheme:** `*nordlet.PostV1BankMandatesCreateRequestScheme` 
+**scheme:** `*nordlet.MandatesCreateBankRequestScheme` 
     
 </dd>
 </dl>
@@ -35937,7 +36277,7 @@ client.Bank.PostV1BankMandatesCreate(
 <dl>
 <dd>
 
-**sequenceType:** `*nordlet.PostV1BankMandatesCreateRequestSequenceType` 
+**sequenceType:** `*nordlet.MandatesCreateBankRequestSequenceType` 
     
 </dd>
 </dl>
@@ -35945,7 +36285,7 @@ client.Bank.PostV1BankMandatesCreate(
 <dl>
 <dd>
 
-**signatureDate:** `string` 
+**signatureDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -35981,7 +36321,7 @@ client.Bank.PostV1BankMandatesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMandatesUpdate(request) -> *nordlet.PostV1BankMandatesUpdateResponse</code></summary>
+<details><summary><code>client.Bank.MandatesUpdate(request) -> *nordlet.MandatesUpdateBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -35994,10 +36334,10 @@ client.Bank.PostV1BankMandatesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMandatesUpdateRequest{
+request := &nordlet.MandatesUpdateBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankMandatesUpdate(
+client.Bank.MandatesUpdate(
         context.TODO(),
         request,
     )
@@ -36052,7 +36392,7 @@ client.Bank.PostV1BankMandatesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMandatesCancel(request) -> *nordlet.PostV1BankMandatesCancelResponse</code></summary>
+<details><summary><code>client.Bank.MandatesCancel(request) -> *nordlet.MandatesCancelBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36065,10 +36405,10 @@ client.Bank.PostV1BankMandatesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMandatesCancelRequest{
+request := &nordlet.MandatesCancelBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankMandatesCancel(
+client.Bank.MandatesCancel(
         context.TODO(),
         request,
     )
@@ -36099,7 +36439,7 @@ client.Bank.PostV1BankMandatesCancel(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMandatesGet(request) -> *nordlet.PostV1BankMandatesGetResponse</code></summary>
+<details><summary><code>client.Bank.MandatesGet(request) -> *nordlet.MandatesGetBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36112,10 +36452,10 @@ client.Bank.PostV1BankMandatesCancel(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMandatesGetRequest{
+request := &nordlet.MandatesGetBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankMandatesGet(
+client.Bank.MandatesGet(
         context.TODO(),
         request,
     )
@@ -36146,7 +36486,7 @@ client.Bank.PostV1BankMandatesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankMandatesList(request) -> *nordlet.PostV1BankMandatesListResponse</code></summary>
+<details><summary><code>client.Bank.MandatesList(request) -> *nordlet.MandatesListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36159,8 +36499,8 @@ client.Bank.PostV1BankMandatesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankMandatesListRequest{}
-client.Bank.PostV1BankMandatesList(
+request := &nordlet.MandatesListBankRequest{}
+client.Bank.MandatesList(
         context.TODO(),
         request,
     )
@@ -36195,7 +36535,7 @@ client.Bank.PostV1BankMandatesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankMandatesListRequestSortItem` 
+**sort:** `[]*nordlet.MandatesListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -36203,7 +36543,7 @@ client.Bank.PostV1BankMandatesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankMandatesListRequestFilterItem` 
+**filter:** `[]*nordlet.MandatesListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -36223,7 +36563,7 @@ client.Bank.PostV1BankMandatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankDirectDebitsExport(request) -> *nordlet.PostV1BankDirectDebitsExportResponse</code></summary>
+<details><summary><code>client.Bank.DirectDebitsExport(request) -> *nordlet.DirectDebitsExportBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36236,13 +36576,13 @@ client.Bank.PostV1BankMandatesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankDirectDebitsExportRequest{
+request := &nordlet.DirectDebitsExportBankRequest{
         BankAccountID: "bankAccountId",
         SaleInvoiceIDs: []string{
             "saleInvoiceIds",
         },
     }
-client.Bank.PostV1BankDirectDebitsExport(
+client.Bank.DirectDebitsExport(
         context.TODO(),
         request,
     )
@@ -36277,7 +36617,7 @@ client.Bank.PostV1BankDirectDebitsExport(
 <dl>
 <dd>
 
-**collectionDate:** `*string` 
+**collectionDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -36289,7 +36629,7 @@ client.Bank.PostV1BankDirectDebitsExport(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankTransactionsSuggestMatches(request) -> *nordlet.PostV1BankTransactionsSuggestMatchesResponse</code></summary>
+<details><summary><code>client.Bank.TransactionsSuggestMatches(request) -> *nordlet.TransactionsSuggestMatchesBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36302,10 +36642,10 @@ client.Bank.PostV1BankDirectDebitsExport(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankTransactionsSuggestMatchesRequest{
+request := &nordlet.TransactionsSuggestMatchesBankRequest{
         TransactionID: "transactionId",
     }
-client.Bank.PostV1BankTransactionsSuggestMatches(
+client.Bank.TransactionsSuggestMatches(
         context.TODO(),
         request,
     )
@@ -36344,7 +36684,7 @@ client.Bank.PostV1BankTransactionsSuggestMatches(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsImport(request) -> *nordlet.PostV1BankSettlementsImportResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsImport(request) -> *nordlet.SettlementsImportBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36357,11 +36697,11 @@ client.Bank.PostV1BankTransactionsSuggestMatches(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsImportRequest{
+request := &nordlet.SettlementsImportBankRequest{
         BankAccountID: "bankAccountId",
         Content: "content",
     }
-client.Bank.PostV1BankSettlementsImport(
+client.Bank.SettlementsImport(
         context.TODO(),
         request,
     )
@@ -36388,7 +36728,7 @@ client.Bank.PostV1BankSettlementsImport(
 <dl>
 <dd>
 
-**provider:** `*nordlet.PostV1BankSettlementsImportRequestProvider` 
+**provider:** `*nordlet.SettlementsImportBankRequestProvider` 
     
 </dd>
 </dl>
@@ -36408,7 +36748,7 @@ client.Bank.PostV1BankSettlementsImport(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsList(request) -> *nordlet.PostV1BankSettlementsListResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsList(request) -> *nordlet.SettlementsListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36421,8 +36761,8 @@ client.Bank.PostV1BankSettlementsImport(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsListRequest{}
-client.Bank.PostV1BankSettlementsList(
+request := &nordlet.SettlementsListBankRequest{}
+client.Bank.SettlementsList(
         context.TODO(),
         request,
     )
@@ -36457,7 +36797,7 @@ client.Bank.PostV1BankSettlementsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankSettlementsListRequestSortItem` 
+**sort:** `[]*nordlet.SettlementsListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -36465,7 +36805,7 @@ client.Bank.PostV1BankSettlementsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankSettlementsListRequestFilterItem` 
+**filter:** `[]*nordlet.SettlementsListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -36485,7 +36825,7 @@ client.Bank.PostV1BankSettlementsList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsGet(request) -> *nordlet.PostV1BankSettlementsGetResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsGet(request) -> *nordlet.SettlementsGetBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36498,10 +36838,10 @@ client.Bank.PostV1BankSettlementsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsGetRequest{
+request := &nordlet.SettlementsGetBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankSettlementsGet(
+client.Bank.SettlementsGet(
         context.TODO(),
         request,
     )
@@ -36532,7 +36872,7 @@ client.Bank.PostV1BankSettlementsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsMatch(request) -> *nordlet.PostV1BankSettlementsMatchResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsMatch(request) -> *nordlet.SettlementsMatchBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36545,10 +36885,10 @@ client.Bank.PostV1BankSettlementsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsMatchRequest{
+request := &nordlet.SettlementsMatchBankRequest{
         LineID: "lineId",
     }
-client.Bank.PostV1BankSettlementsMatch(
+client.Bank.SettlementsMatch(
         context.TODO(),
         request,
     )
@@ -36587,7 +36927,7 @@ client.Bank.PostV1BankSettlementsMatch(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(request) -> *nordlet.PostV1BankSettlementsCommissionResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsCommission(request) -> *nordlet.SettlementsCommissionBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36614,10 +36954,10 @@ A line with its own rate or amount is split with that value when the batch is po
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsCommissionRequest{
+request := &nordlet.SettlementsCommissionBankRequest{
         LineID: "lineId",
     }
-client.Bank.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+client.Bank.SettlementsCommission(
         context.TODO(),
         request,
     )
@@ -36664,7 +37004,7 @@ client.Bank.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsLink(request) -> *nordlet.PostV1BankSettlementsLinkResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsLink(request) -> *nordlet.SettlementsLinkBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36691,11 +37031,11 @@ Attach the incoming bank-statement line that carries this payout to the settleme
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsLinkRequest{
+request := &nordlet.SettlementsLinkBankRequest{
         ID: "id",
         BankTransactionID: "bankTransactionId",
     }
-client.Bank.PostV1BankSettlementsLink(
+client.Bank.SettlementsLink(
         context.TODO(),
         request,
     )
@@ -36734,7 +37074,7 @@ client.Bank.PostV1BankSettlementsLink(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsUnlink(request) -> *nordlet.PostV1BankSettlementsUnlinkResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsUnlink(request) -> *nordlet.SettlementsUnlinkBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36761,10 +37101,10 @@ Detach the bank-statement line from the settlement batch and return the line to 
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsUnlinkRequest{
+request := &nordlet.SettlementsUnlinkBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankSettlementsUnlink(
+client.Bank.SettlementsUnlink(
         context.TODO(),
         request,
     )
@@ -36795,7 +37135,7 @@ client.Bank.PostV1BankSettlementsUnlink(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankSettlementsPost(request) -> *nordlet.PostV1BankSettlementsPostResponse</code></summary>
+<details><summary><code>client.Bank.SettlementsPost(request) -> *nordlet.SettlementsPostBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36808,10 +37148,10 @@ client.Bank.PostV1BankSettlementsUnlink(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankSettlementsPostRequest{
+request := &nordlet.SettlementsPostBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankSettlementsPost(
+client.Bank.SettlementsPost(
         context.TODO(),
         request,
     )
@@ -36838,7 +37178,7 @@ client.Bank.PostV1BankSettlementsPost(
 <dl>
 <dd>
 
-**date:** `*string` 
+**date:** `*time.Time` 
     
 </dd>
 </dl>
@@ -36858,7 +37198,7 @@ client.Bank.PostV1BankSettlementsPost(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(request) -> *nordlet.PostV1BankFeedsBanksListResponse</code></summary>
+<details><summary><code>client.Bank.FeedsBanksList(request) -> *nordlet.FeedsBanksListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36871,8 +37211,8 @@ client.Bank.PostV1BankSettlementsPost(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsBanksListRequest{}
-client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(
+request := &nordlet.FeedsBanksListBankRequest{}
+client.Bank.FeedsBanksList(
         context.TODO(),
         request,
     )
@@ -36903,7 +37243,7 @@ client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(request) -> *nordlet.PostV1BankFeedsConnectionsStartResponse</code></summary>
+<details><summary><code>client.Bank.FeedsConnectionsStart(request) -> *nordlet.FeedsConnectionsStartBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -36916,11 +37256,11 @@ client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsConnectionsStartRequest{
+request := &nordlet.FeedsConnectionsStartBankRequest{
         AspspName: "aspspName",
         AspspCountry: "aspspCountry",
     }
-client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+client.Bank.FeedsConnectionsStart(
         context.TODO(),
         request,
     )
@@ -36955,7 +37295,7 @@ client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 <dl>
 <dd>
 
-**psuType:** `*nordlet.PostV1BankFeedsConnectionsStartRequestPsuType` 
+**psuType:** `*nordlet.FeedsConnectionsStartBankRequestPsuType` 
     
 </dd>
 </dl>
@@ -36991,7 +37331,7 @@ client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(request) -> *nordlet.PostV1BankFeedsConnectionsCompleteResponse</code></summary>
+<details><summary><code>client.Bank.FeedsConnectionsComplete(request) -> *nordlet.FeedsConnectionsCompleteBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37004,11 +37344,11 @@ client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsConnectionsCompleteRequest{
+request := &nordlet.FeedsConnectionsCompleteBankRequest{
         Reference: "reference",
         Code: "code",
     }
-client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+client.Bank.FeedsConnectionsComplete(
         context.TODO(),
         request,
     )
@@ -37047,7 +37387,7 @@ client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankFeedsConnectionsGet(request) -> *nordlet.PostV1BankFeedsConnectionsGetResponse</code></summary>
+<details><summary><code>client.Bank.FeedsConnectionsGet(request) -> *nordlet.FeedsConnectionsGetBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37060,10 +37400,10 @@ client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsConnectionsGetRequest{
+request := &nordlet.FeedsConnectionsGetBankRequest{
         ID: "id",
     }
-client.Bank.PostV1BankFeedsConnectionsGet(
+client.Bank.FeedsConnectionsGet(
         context.TODO(),
         request,
     )
@@ -37094,7 +37434,7 @@ client.Bank.PostV1BankFeedsConnectionsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PostV1BankFeedsConnectionsList(request) -> *nordlet.PostV1BankFeedsConnectionsListResponse</code></summary>
+<details><summary><code>client.Bank.FeedsConnectionsList(request) -> *nordlet.FeedsConnectionsListBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37107,8 +37447,8 @@ client.Bank.PostV1BankFeedsConnectionsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsConnectionsListRequest{}
-client.Bank.PostV1BankFeedsConnectionsList(
+request := &nordlet.FeedsConnectionsListBankRequest{}
+client.Bank.FeedsConnectionsList(
         context.TODO(),
         request,
     )
@@ -37143,7 +37483,7 @@ client.Bank.PostV1BankFeedsConnectionsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1BankFeedsConnectionsListRequestSortItem` 
+**sort:** `[]*nordlet.FeedsConnectionsListBankRequestSortItem` 
     
 </dd>
 </dl>
@@ -37151,7 +37491,7 @@ client.Bank.PostV1BankFeedsConnectionsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1BankFeedsConnectionsListRequestFilterItem` 
+**filter:** `[]*nordlet.FeedsConnectionsListBankRequestFilterItem` 
     
 </dd>
 </dl>
@@ -37171,7 +37511,7 @@ client.Bank.PostV1BankFeedsConnectionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(request) -> *nordlet.PostV1BankFeedsConnectionsDeleteResponse</code></summary>
+<details><summary><code>client.Bank.FeedsConnectionsDelete(request) -> *nordlet.FeedsConnectionsDeleteBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37184,10 +37524,10 @@ client.Bank.PostV1BankFeedsConnectionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsConnectionsDeleteRequest{
+request := &nordlet.FeedsConnectionsDeleteBankRequest{
         ID: "id",
     }
-client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+client.Bank.FeedsConnectionsDelete(
         context.TODO(),
         request,
     )
@@ -37218,7 +37558,7 @@ client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(request) -> *nordlet.PostV1BankFeedsAccountsLinkResponse</code></summary>
+<details><summary><code>client.Bank.FeedsAccountsLink(request) -> *nordlet.FeedsAccountsLinkBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37231,10 +37571,10 @@ client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsAccountsLinkRequest{
+request := &nordlet.FeedsAccountsLinkBankRequest{
         ID: "id",
     }
-client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+client.Bank.FeedsAccountsLink(
         context.TODO(),
         request,
     )
@@ -37269,7 +37609,7 @@ client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynce
 <dl>
 <dd>
 
-**createBankAccount:** `*nordlet.PostV1BankFeedsAccountsLinkRequestCreateBankAccount` 
+**createBankAccount:** `*nordlet.FeedsAccountsLinkBankRequestCreateBankAccount` 
     
 </dd>
 </dl>
@@ -37277,7 +37617,7 @@ client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynce
 <dl>
 <dd>
 
-**syncFrom:** `*string` 
+**syncFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -37289,7 +37629,7 @@ client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynce
 </dl>
 </details>
 
-<details><summary><code>client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(request) -> *nordlet.PostV1BankFeedsAccountsConfigureResponse</code></summary>
+<details><summary><code>client.Bank.FeedsAccountsConfigure(request) -> *nordlet.FeedsAccountsConfigureBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37302,10 +37642,10 @@ client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynce
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsAccountsConfigureRequest{
+request := &nordlet.FeedsAccountsConfigureBankRequest{
         ID: "id",
     }
-client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+client.Bank.FeedsAccountsConfigure(
         context.TODO(),
         request,
     )
@@ -37340,7 +37680,7 @@ client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAut
 <dl>
 <dd>
 
-**syncSchedule:** `*nordlet.PostV1BankFeedsAccountsConfigureRequestSyncSchedule` 
+**syncSchedule:** `*nordlet.FeedsAccountsConfigureBankRequestSyncSchedule` 
     
 </dd>
 </dl>
@@ -37352,7 +37692,7 @@ client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAut
 </dl>
 </details>
 
-<details><summary><code>client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(request) -> *nordlet.PostV1BankFeedsSyncResponse</code></summary>
+<details><summary><code>client.Bank.FeedsSync(request) -> *nordlet.FeedsSyncBankResponse</code></summary>
 <dl>
 <dd>
 
@@ -37365,10 +37705,10 @@ client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAut
 <dd>
 
 ```go
-request := &nordlet.PostV1BankFeedsSyncRequest{
+request := &nordlet.FeedsSyncBankRequest{
         ConnectionID: "connectionId",
     }
-client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+client.Bank.FeedsSync(
         context.TODO(),
         request,
     )
@@ -37403,7 +37743,7 @@ client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 <dl>
 <dd>
 
-**dateFrom:** `*string` 
+**dateFrom:** `*time.Time` 
     
 </dd>
 </dl>
@@ -37411,7 +37751,7 @@ client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 <dl>
 <dd>
 
-**dateTo:** `*string` 
+**dateTo:** `*time.Time` 
     
 </dd>
 </dl>
@@ -37423,8 +37763,8 @@ client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 </dl>
 </details>
 
-## Files
-<details><summary><code>client.Files.PostV1FilesUpload(request) -> *nordlet.PostV1FilesUploadResponse</code></summary>
+## files
+<details><summary><code>client.Files.Upload(request) -> *nordlet.UploadFilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -37437,13 +37777,13 @@ client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 <dd>
 
 ```go
-request := &nordlet.PostV1FilesUploadRequest{
+request := &nordlet.UploadFilesRequest{
         Entity: "entity",
         FileName: "fileName",
         MimeType: "mimeType",
         Content: "content",
     }
-client.Files.PostV1FilesUpload(
+client.Files.Upload(
         context.TODO(),
         request,
     )
@@ -37486,7 +37826,7 @@ client.Files.PostV1FilesUpload(
 <dl>
 <dd>
 
-**mimeType:** `string` 
+**mimeType:** `string` — Stored as the bare media type; only PNG, JPEG, GIF, WebP and PDF files are shown in the browser, every other type is downloaded
     
 </dd>
 </dl>
@@ -37506,7 +37846,7 @@ client.Files.PostV1FilesUpload(
 </dl>
 </details>
 
-<details><summary><code>client.Files.PostV1FilesGet(request) -> *nordlet.PostV1FilesGetResponse</code></summary>
+<details><summary><code>client.Files.Get(request) -> *nordlet.GetFilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -37519,10 +37859,10 @@ client.Files.PostV1FilesUpload(
 <dd>
 
 ```go
-request := &nordlet.PostV1FilesGetRequest{
+request := &nordlet.GetFilesRequest{
         ID: "id",
     }
-client.Files.PostV1FilesGet(
+client.Files.Get(
         context.TODO(),
         request,
     )
@@ -37553,7 +37893,7 @@ client.Files.PostV1FilesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Files.PostV1FilesList(request) -> *nordlet.PostV1FilesListResponse</code></summary>
+<details><summary><code>client.Files.List(request) -> *nordlet.ListFilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -37566,8 +37906,8 @@ client.Files.PostV1FilesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1FilesListRequest{}
-client.Files.PostV1FilesList(
+request := &nordlet.ListFilesRequest{}
+client.Files.List(
         context.TODO(),
         request,
     )
@@ -37602,7 +37942,7 @@ client.Files.PostV1FilesList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1FilesListRequestSortItem` 
+**sort:** `[]*nordlet.ListFilesRequestSortItem` 
     
 </dd>
 </dl>
@@ -37610,7 +37950,7 @@ client.Files.PostV1FilesList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1FilesListRequestFilterItem` 
+**filter:** `[]*nordlet.ListFilesRequestFilterItem` 
     
 </dd>
 </dl>
@@ -37630,7 +37970,7 @@ client.Files.PostV1FilesList(
 </dl>
 </details>
 
-<details><summary><code>client.Files.PostV1FilesDelete(request) -> *nordlet.PostV1FilesDeleteResponse</code></summary>
+<details><summary><code>client.Files.Delete(request) -> *nordlet.DeleteFilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -37643,10 +37983,10 @@ client.Files.PostV1FilesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1FilesDeleteRequest{
+request := &nordlet.DeleteFilesRequest{
         ID: "id",
     }
-client.Files.PostV1FilesDelete(
+client.Files.Delete(
         context.TODO(),
         request,
     )
@@ -37677,8 +38017,8 @@ client.Files.PostV1FilesDelete(
 </dl>
 </details>
 
-## Reports
-<details><summary><code>client.Reports.PostV1ReportsTrialBalance(request) -> *nordlet.PostV1ReportsTrialBalanceResponse</code></summary>
+## reports
+<details><summary><code>client.Reports.TrialBalance(request) -> *nordlet.TrialBalanceReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37691,11 +38031,15 @@ client.Files.PostV1FilesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsTrialBalanceRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.TrialBalanceReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsTrialBalance(
+client.Reports.TrialBalance(
         context.TODO(),
         request,
     )
@@ -37714,7 +38058,7 @@ client.Reports.PostV1ReportsTrialBalance(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37722,7 +38066,7 @@ client.Reports.PostV1ReportsTrialBalance(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37734,7 +38078,7 @@ client.Reports.PostV1ReportsTrialBalance(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsSizeCategory(request) -> *nordlet.PostV1ReportsSizeCategoryResponse</code></summary>
+<details><summary><code>client.Reports.SizeCategory(request) -> *nordlet.SizeCategoryReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37747,10 +38091,10 @@ client.Reports.PostV1ReportsTrialBalance(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsSizeCategoryRequest{
+request := &nordlet.SizeCategoryReportsRequest{
         Year: int64(1000000),
     }
-client.Reports.PostV1ReportsSizeCategory(
+client.Reports.SizeCategory(
         context.TODO(),
         request,
     )
@@ -37781,7 +38125,7 @@ client.Reports.PostV1ReportsSizeCategory(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsFinancialStatements(request) -> *nordlet.PostV1ReportsFinancialStatementsResponse</code></summary>
+<details><summary><code>client.Reports.FinancialStatements(request) -> *nordlet.FinancialStatementsReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37794,11 +38138,15 @@ client.Reports.PostV1ReportsSizeCategory(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsFinancialStatementsRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.FinancialStatementsReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsFinancialStatements(
+client.Reports.FinancialStatements(
         context.TODO(),
         request,
     )
@@ -37817,7 +38165,7 @@ client.Reports.PostV1ReportsFinancialStatements(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37825,7 +38173,7 @@ client.Reports.PostV1ReportsFinancialStatements(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37833,7 +38181,7 @@ client.Reports.PostV1ReportsFinancialStatements(
 <dl>
 <dd>
 
-**category:** `*nordlet.PostV1ReportsFinancialStatementsRequestCategory` 
+**category:** `*nordlet.FinancialStatementsReportsRequestCategory` 
     
 </dd>
 </dl>
@@ -37845,7 +38193,7 @@ client.Reports.PostV1ReportsFinancialStatements(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsGeneralJournal(request) -> *nordlet.PostV1ReportsGeneralJournalResponse</code></summary>
+<details><summary><code>client.Reports.GeneralJournal(request) -> *nordlet.GeneralJournalReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37858,11 +38206,15 @@ client.Reports.PostV1ReportsFinancialStatements(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsGeneralJournalRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.GeneralJournalReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsGeneralJournal(
+client.Reports.GeneralJournal(
         context.TODO(),
         request,
     )
@@ -37881,7 +38233,7 @@ client.Reports.PostV1ReportsGeneralJournal(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37889,7 +38241,7 @@ client.Reports.PostV1ReportsGeneralJournal(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37917,7 +38269,7 @@ client.Reports.PostV1ReportsGeneralJournal(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsGlDetail(request) -> *nordlet.PostV1ReportsGlDetailResponse</code></summary>
+<details><summary><code>client.Reports.GlDetail(request) -> *nordlet.GlDetailReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37930,12 +38282,16 @@ client.Reports.PostV1ReportsGeneralJournal(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsGlDetailRequest{
+request := &nordlet.GlDetailReportsRequest{
         AccountCode: "accountCode",
-        FromDate: "fromDate",
-        ToDate: "toDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsGlDetail(
+client.Reports.GlDetail(
         context.TODO(),
         request,
     )
@@ -37962,7 +38318,7 @@ client.Reports.PostV1ReportsGlDetail(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37970,7 +38326,7 @@ client.Reports.PostV1ReportsGlDetail(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -37982,7 +38338,7 @@ client.Reports.PostV1ReportsGlDetail(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsPartnerBalances(request) -> *nordlet.PostV1ReportsPartnerBalancesResponse</code></summary>
+<details><summary><code>client.Reports.PartnerBalances(request) -> *nordlet.PartnerBalancesReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37995,8 +38351,8 @@ client.Reports.PostV1ReportsGlDetail(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsPartnerBalancesRequest{}
-client.Reports.PostV1ReportsPartnerBalances(
+request := &nordlet.PartnerBalancesReportsRequest{}
+client.Reports.PartnerBalances(
         context.TODO(),
         request,
     )
@@ -38012,7 +38368,7 @@ client.Reports.PostV1ReportsPartnerBalances(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsDebtAging(request) -> *nordlet.PostV1ReportsDebtAgingResponse</code></summary>
+<details><summary><code>client.Reports.DebtAging(request) -> *nordlet.DebtAgingReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38025,8 +38381,8 @@ client.Reports.PostV1ReportsPartnerBalances(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsDebtAgingRequest{}
-client.Reports.PostV1ReportsDebtAging(
+request := &nordlet.DebtAgingReportsRequest{}
+client.Reports.DebtAging(
         context.TODO(),
         request,
     )
@@ -38045,7 +38401,7 @@ client.Reports.PostV1ReportsDebtAging(
 <dl>
 <dd>
 
-**side:** `*nordlet.PostV1ReportsDebtAgingRequestSide` 
+**side:** `*nordlet.DebtAgingReportsRequestSide` 
     
 </dd>
 </dl>
@@ -38053,7 +38409,7 @@ client.Reports.PostV1ReportsDebtAging(
 <dl>
 <dd>
 
-**asOf:** `*string` 
+**asOf:** `*time.Time` 
     
 </dd>
 </dl>
@@ -38065,7 +38421,7 @@ client.Reports.PostV1ReportsDebtAging(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsMonthlySummary(request) -> *nordlet.PostV1ReportsMonthlySummaryResponse</code></summary>
+<details><summary><code>client.Reports.MonthlySummary(request) -> *nordlet.MonthlySummaryReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38078,8 +38434,8 @@ client.Reports.PostV1ReportsDebtAging(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsMonthlySummaryRequest{}
-client.Reports.PostV1ReportsMonthlySummary(
+request := &nordlet.MonthlySummaryReportsRequest{}
+client.Reports.MonthlySummary(
         context.TODO(),
         request,
     )
@@ -38110,7 +38466,7 @@ client.Reports.PostV1ReportsMonthlySummary(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsStockBalance(request) -> *nordlet.PostV1ReportsStockBalanceResponse</code></summary>
+<details><summary><code>client.Reports.StockBalance(request) -> *nordlet.StockBalanceReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38123,10 +38479,12 @@ client.Reports.PostV1ReportsMonthlySummary(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsStockBalanceRequest{
-        AsOf: "asOf",
+request := &nordlet.StockBalanceReportsRequest{
+        AsOf: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsStockBalance(
+client.Reports.StockBalance(
         context.TODO(),
         request,
     )
@@ -38145,7 +38503,7 @@ client.Reports.PostV1ReportsStockBalance(
 <dl>
 <dd>
 
-**asOf:** `string` 
+**asOf:** `time.Time` 
     
 </dd>
 </dl>
@@ -38165,7 +38523,7 @@ client.Reports.PostV1ReportsStockBalance(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsStockMovement(request) -> *nordlet.PostV1ReportsStockMovementResponse</code></summary>
+<details><summary><code>client.Reports.StockMovement(request) -> *nordlet.StockMovementReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38178,11 +38536,15 @@ client.Reports.PostV1ReportsStockBalance(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsStockMovementRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.StockMovementReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsStockMovement(
+client.Reports.StockMovement(
         context.TODO(),
         request,
     )
@@ -38201,7 +38563,7 @@ client.Reports.PostV1ReportsStockMovement(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38209,7 +38571,7 @@ client.Reports.PostV1ReportsStockMovement(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38237,7 +38599,7 @@ client.Reports.PostV1ReportsStockMovement(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsVatSummary(request) -> *nordlet.PostV1ReportsVatSummaryResponse</code></summary>
+<details><summary><code>client.Reports.VatSummary(request) -> *nordlet.VatSummaryReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38250,11 +38612,15 @@ client.Reports.PostV1ReportsStockMovement(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsVatSummaryRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.VatSummaryReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsVatSummary(
+client.Reports.VatSummary(
         context.TODO(),
         request,
     )
@@ -38273,7 +38639,7 @@ client.Reports.PostV1ReportsVatSummary(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38281,7 +38647,7 @@ client.Reports.PostV1ReportsVatSummary(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38289,7 +38655,7 @@ client.Reports.PostV1ReportsVatSummary(
 <dl>
 <dd>
 
-**side:** `*nordlet.PostV1ReportsVatSummaryRequestSide` 
+**side:** `*nordlet.VatSummaryReportsRequestSide` 
     
 </dd>
 </dl>
@@ -38301,7 +38667,7 @@ client.Reports.PostV1ReportsVatSummary(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsCashFlow(request) -> *nordlet.PostV1ReportsCashFlowResponse</code></summary>
+<details><summary><code>client.Reports.CashFlow(request) -> *nordlet.CashFlowReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38314,11 +38680,15 @@ client.Reports.PostV1ReportsVatSummary(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsCashFlowRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.CashFlowReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsCashFlow(
+client.Reports.CashFlow(
         context.TODO(),
         request,
     )
@@ -38337,7 +38707,7 @@ client.Reports.PostV1ReportsCashFlow(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38345,7 +38715,7 @@ client.Reports.PostV1ReportsCashFlow(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38357,7 +38727,7 @@ client.Reports.PostV1ReportsCashFlow(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsStockAging(request) -> *nordlet.PostV1ReportsStockAgingResponse</code></summary>
+<details><summary><code>client.Reports.StockAging(request) -> *nordlet.StockAgingReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38370,10 +38740,12 @@ client.Reports.PostV1ReportsCashFlow(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsStockAgingRequest{
-        AsOf: "asOf",
+request := &nordlet.StockAgingReportsRequest{
+        AsOf: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsStockAging(
+client.Reports.StockAging(
         context.TODO(),
         request,
     )
@@ -38392,7 +38764,7 @@ client.Reports.PostV1ReportsStockAging(
 <dl>
 <dd>
 
-**asOf:** `string` 
+**asOf:** `time.Time` 
     
 </dd>
 </dl>
@@ -38412,7 +38784,7 @@ client.Reports.PostV1ReportsStockAging(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsStockShortage(request) -> *nordlet.PostV1ReportsStockShortageResponse</code></summary>
+<details><summary><code>client.Reports.StockShortage(request) -> *nordlet.StockShortageReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38425,8 +38797,8 @@ client.Reports.PostV1ReportsStockAging(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsStockShortageRequest{}
-client.Reports.PostV1ReportsStockShortage(
+request := &nordlet.StockShortageReportsRequest{}
+client.Reports.StockShortage(
         context.TODO(),
         request,
     )
@@ -38457,7 +38829,7 @@ client.Reports.PostV1ReportsStockShortage(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsSie(request) -> *nordlet.PostV1ReportsSieResponse</code></summary>
+<details><summary><code>client.Reports.Sie(request) -> *nordlet.SieReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38484,11 +38856,15 @@ Export the ledger of one financial year as an SIE file (the Swedish standard acc
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsSieRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.SieReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsSie(
+client.Reports.Sie(
         context.TODO(),
         request,
     )
@@ -38507,7 +38883,7 @@ client.Reports.PostV1ReportsSie(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38515,7 +38891,7 @@ client.Reports.PostV1ReportsSie(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38535,7 +38911,7 @@ client.Reports.PostV1ReportsSie(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsDatev(request) -> *nordlet.PostV1ReportsDatevResponse</code></summary>
+<details><summary><code>client.Reports.Datev(request) -> *nordlet.DatevReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38562,11 +38938,15 @@ Export the posted ledger of a period as a DATEV Buchungsstapel file (DATEV forma
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsDatevRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.DatevReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsDatev(
+client.Reports.Datev(
         context.TODO(),
         request,
     )
@@ -38585,7 +38965,7 @@ client.Reports.PostV1ReportsDatev(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38593,7 +38973,7 @@ client.Reports.PostV1ReportsDatev(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38621,7 +39001,7 @@ client.Reports.PostV1ReportsDatev(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsFec(request) -> *nordlet.PostV1ReportsFecResponse</code></summary>
+<details><summary><code>client.Reports.Fec(request) -> *nordlet.FecReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38648,11 +39028,15 @@ Export the posted ledger of a period as a French FEC file (fichier des écriture
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsFecRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.FecReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsFec(
+client.Reports.Fec(
         context.TODO(),
         request,
     )
@@ -38671,7 +39055,7 @@ client.Reports.PostV1ReportsFec(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38679,7 +39063,7 @@ client.Reports.PostV1ReportsFec(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38691,7 +39075,7 @@ client.Reports.PostV1ReportsFec(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsEuPurchases(request) -> *nordlet.PostV1ReportsEuPurchasesResponse</code></summary>
+<details><summary><code>client.Reports.EuPurchases(request) -> *nordlet.EuPurchasesReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38704,11 +39088,15 @@ client.Reports.PostV1ReportsFec(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsEuPurchasesRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.EuPurchasesReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsEuPurchases(
+client.Reports.EuPurchases(
         context.TODO(),
         request,
     )
@@ -38727,7 +39115,7 @@ client.Reports.PostV1ReportsEuPurchases(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38735,7 +39123,7 @@ client.Reports.PostV1ReportsEuPurchases(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38747,7 +39135,7 @@ client.Reports.PostV1ReportsEuPurchases(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsVatDetail(request) -> *nordlet.PostV1ReportsVatDetailResponse</code></summary>
+<details><summary><code>client.Reports.VatDetail(request) -> *nordlet.VatDetailReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38760,11 +39148,15 @@ client.Reports.PostV1ReportsEuPurchases(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsVatDetailRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.VatDetailReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsVatDetail(
+client.Reports.VatDetail(
         context.TODO(),
         request,
     )
@@ -38783,7 +39175,7 @@ client.Reports.PostV1ReportsVatDetail(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38791,7 +39183,7 @@ client.Reports.PostV1ReportsVatDetail(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38799,7 +39191,7 @@ client.Reports.PostV1ReportsVatDetail(
 <dl>
 <dd>
 
-**side:** `*nordlet.PostV1ReportsVatDetailRequestSide` 
+**side:** `*nordlet.VatDetailReportsRequestSide` 
     
 </dd>
 </dl>
@@ -38811,7 +39203,7 @@ client.Reports.PostV1ReportsVatDetail(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsPosSales(request) -> *nordlet.PostV1ReportsPosSalesResponse</code></summary>
+<details><summary><code>client.Reports.PosSales(request) -> *nordlet.PosSalesReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38824,11 +39216,15 @@ client.Reports.PostV1ReportsVatDetail(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsPosSalesRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.PosSalesReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsPosSales(
+client.Reports.PosSales(
         context.TODO(),
         request,
     )
@@ -38847,7 +39243,7 @@ client.Reports.PostV1ReportsPosSales(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38855,7 +39251,7 @@ client.Reports.PostV1ReportsPosSales(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38867,7 +39263,7 @@ client.Reports.PostV1ReportsPosSales(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsOnlineSales(request) -> *nordlet.PostV1ReportsOnlineSalesResponse</code></summary>
+<details><summary><code>client.Reports.OnlineSales(request) -> *nordlet.OnlineSalesReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38880,11 +39276,15 @@ client.Reports.PostV1ReportsPosSales(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsOnlineSalesRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.OnlineSalesReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsOnlineSales(
+client.Reports.OnlineSales(
         context.TODO(),
         request,
     )
@@ -38903,7 +39303,7 @@ client.Reports.PostV1ReportsOnlineSales(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38911,7 +39311,7 @@ client.Reports.PostV1ReportsOnlineSales(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38923,7 +39323,7 @@ client.Reports.PostV1ReportsOnlineSales(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsOss(request) -> *nordlet.PostV1ReportsOssResponse</code></summary>
+<details><summary><code>client.Reports.Oss(request) -> *nordlet.OssReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38936,11 +39336,15 @@ client.Reports.PostV1ReportsOnlineSales(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsOssRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.OssReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsOss(
+client.Reports.Oss(
         context.TODO(),
         request,
     )
@@ -38959,7 +39363,7 @@ client.Reports.PostV1ReportsOss(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38967,7 +39371,7 @@ client.Reports.PostV1ReportsOss(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -38979,7 +39383,7 @@ client.Reports.PostV1ReportsOss(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsAdvanceReconciliation(request) -> *nordlet.PostV1ReportsAdvanceReconciliationResponse</code></summary>
+<details><summary><code>client.Reports.AdvanceReconciliation(request) -> *nordlet.AdvanceReconciliationReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38992,11 +39396,15 @@ client.Reports.PostV1ReportsOss(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsAdvanceReconciliationRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.AdvanceReconciliationReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsAdvanceReconciliation(
+client.Reports.AdvanceReconciliation(
         context.TODO(),
         request,
     )
@@ -39015,7 +39423,7 @@ client.Reports.PostV1ReportsAdvanceReconciliation(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39023,7 +39431,7 @@ client.Reports.PostV1ReportsAdvanceReconciliation(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39035,7 +39443,7 @@ client.Reports.PostV1ReportsAdvanceReconciliation(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsWriteOffActs(request) -> *nordlet.PostV1ReportsWriteOffActsResponse</code></summary>
+<details><summary><code>client.Reports.WriteOffActs(request) -> *nordlet.WriteOffActsReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39048,11 +39456,15 @@ client.Reports.PostV1ReportsAdvanceReconciliation(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsWriteOffActsRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.WriteOffActsReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsWriteOffActs(
+client.Reports.WriteOffActs(
         context.TODO(),
         request,
     )
@@ -39071,7 +39483,7 @@ client.Reports.PostV1ReportsWriteOffActs(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39079,7 +39491,7 @@ client.Reports.PostV1ReportsWriteOffActs(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39099,7 +39511,7 @@ client.Reports.PostV1ReportsWriteOffActs(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsCostCenters(request) -> *nordlet.PostV1ReportsCostCentersResponse</code></summary>
+<details><summary><code>client.Reports.CostCenters(request) -> *nordlet.CostCentersReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39112,11 +39524,15 @@ client.Reports.PostV1ReportsWriteOffActs(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsCostCentersRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.CostCentersReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsCostCenters(
+client.Reports.CostCenters(
         context.TODO(),
         request,
     )
@@ -39135,7 +39551,7 @@ client.Reports.PostV1ReportsCostCenters(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39143,7 +39559,7 @@ client.Reports.PostV1ReportsCostCenters(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39155,7 +39571,7 @@ client.Reports.PostV1ReportsCostCenters(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsCostCenterActivity(request) -> *nordlet.PostV1ReportsCostCenterActivityResponse</code></summary>
+<details><summary><code>client.Reports.CostCenterActivity(request) -> *nordlet.CostCenterActivityReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39168,12 +39584,16 @@ client.Reports.PostV1ReportsCostCenters(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsCostCenterActivityRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.CostCenterActivityReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
         CostCenterID: "costCenterId",
     }
-client.Reports.PostV1ReportsCostCenterActivity(
+client.Reports.CostCenterActivity(
         context.TODO(),
         request,
     )
@@ -39192,7 +39612,7 @@ client.Reports.PostV1ReportsCostCenterActivity(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39200,7 +39620,7 @@ client.Reports.PostV1ReportsCostCenterActivity(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39220,7 +39640,7 @@ client.Reports.PostV1ReportsCostCenterActivity(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsCostCenterItems(request) -> *nordlet.PostV1ReportsCostCenterItemsResponse</code></summary>
+<details><summary><code>client.Reports.CostCenterItems(request) -> *nordlet.CostCenterItemsReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39233,11 +39653,15 @@ client.Reports.PostV1ReportsCostCenterActivity(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsCostCenterItemsRequest{
-        FromDate: "fromDate",
-        ToDate: "toDate",
+request := &nordlet.CostCenterItemsReportsRequest{
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Reports.PostV1ReportsCostCenterItems(
+client.Reports.CostCenterItems(
         context.TODO(),
         request,
     )
@@ -39256,7 +39680,7 @@ client.Reports.PostV1ReportsCostCenterItems(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39264,7 +39688,7 @@ client.Reports.PostV1ReportsCostCenterItems(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -39284,7 +39708,7 @@ client.Reports.PostV1ReportsCostCenterItems(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsJobsCreate(request) -> *nordlet.PostV1ReportsJobsCreateResponse</code></summary>
+<details><summary><code>client.Reports.JobsCreate(request) -> *nordlet.JobsCreateReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39297,10 +39721,10 @@ client.Reports.PostV1ReportsCostCenterItems(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsJobsCreateRequest{
+request := &nordlet.JobsCreateReportsRequest{
         ReportType: "reportType",
     }
-client.Reports.PostV1ReportsJobsCreate(
+client.Reports.JobsCreate(
         context.TODO(),
         request,
     )
@@ -39335,7 +39759,7 @@ client.Reports.PostV1ReportsJobsCreate(
 <dl>
 <dd>
 
-**formats:** `[]*nordlet.PostV1ReportsJobsCreateRequestFormatsItem` 
+**formats:** `[]*nordlet.JobsCreateReportsRequestFormatsItem` 
     
 </dd>
 </dl>
@@ -39347,7 +39771,7 @@ client.Reports.PostV1ReportsJobsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsJobsGet(request) -> *nordlet.PostV1ReportsJobsGetResponse</code></summary>
+<details><summary><code>client.Reports.JobsGet(request) -> *nordlet.JobsGetReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39360,10 +39784,10 @@ client.Reports.PostV1ReportsJobsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsJobsGetRequest{
+request := &nordlet.JobsGetReportsRequest{
         ID: "id",
     }
-client.Reports.PostV1ReportsJobsGet(
+client.Reports.JobsGet(
         context.TODO(),
         request,
     )
@@ -39394,7 +39818,7 @@ client.Reports.PostV1ReportsJobsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Reports.PostV1ReportsJobsList(request) -> *nordlet.PostV1ReportsJobsListResponse</code></summary>
+<details><summary><code>client.Reports.JobsList(request) -> *nordlet.JobsListReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39407,8 +39831,8 @@ client.Reports.PostV1ReportsJobsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ReportsJobsListRequest{}
-client.Reports.PostV1ReportsJobsList(
+request := &nordlet.JobsListReportsRequest{}
+client.Reports.JobsList(
         context.TODO(),
         request,
     )
@@ -39443,7 +39867,7 @@ client.Reports.PostV1ReportsJobsList(
 <dl>
 <dd>
 
-**sort:** `[]*nordlet.PostV1ReportsJobsListRequestSortItem` 
+**sort:** `[]*nordlet.JobsListReportsRequestSortItem` 
     
 </dd>
 </dl>
@@ -39451,7 +39875,7 @@ client.Reports.PostV1ReportsJobsList(
 <dl>
 <dd>
 
-**filter:** `[]*nordlet.PostV1ReportsJobsListRequestFilterItem` 
+**filter:** `[]*nordlet.JobsListReportsRequestFilterItem` 
     
 </dd>
 </dl>
@@ -39471,8 +39895,8 @@ client.Reports.PostV1ReportsJobsList(
 </dl>
 </details>
 
-## Consolidation
-<details><summary><code>client.Consolidation.PostV1ConsolidationGroupsCreate(request) -> *nordlet.PostV1ConsolidationGroupsCreateResponse</code></summary>
+## consolidation
+<details><summary><code>client.Consolidation.GroupsCreate(request) -> *nordlet.GroupsCreateConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39485,10 +39909,10 @@ client.Reports.PostV1ReportsJobsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationGroupsCreateRequest{
+request := &nordlet.GroupsCreateConsolidationRequest{
         Name: "name",
     }
-client.Consolidation.PostV1ConsolidationGroupsCreate(
+client.Consolidation.GroupsCreate(
         context.TODO(),
         request,
     )
@@ -39527,7 +39951,7 @@ client.Consolidation.PostV1ConsolidationGroupsCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationGroupsList(request) -> *nordlet.PostV1ConsolidationGroupsListResponse</code></summary>
+<details><summary><code>client.Consolidation.GroupsList(request) -> *nordlet.GroupsListConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39540,8 +39964,8 @@ client.Consolidation.PostV1ConsolidationGroupsCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationGroupsListRequest{}
-client.Consolidation.PostV1ConsolidationGroupsList(
+request := &nordlet.GroupsListConsolidationRequest{}
+client.Consolidation.GroupsList(
         context.TODO(),
         request,
     )
@@ -39557,7 +39981,7 @@ client.Consolidation.PostV1ConsolidationGroupsList(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationGroupsGet(request) -> *nordlet.PostV1ConsolidationGroupsGetResponse</code></summary>
+<details><summary><code>client.Consolidation.GroupsGet(request) -> *nordlet.GroupsGetConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39570,10 +39994,10 @@ client.Consolidation.PostV1ConsolidationGroupsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationGroupsGetRequest{
+request := &nordlet.GroupsGetConsolidationRequest{
         GroupID: "groupId",
     }
-client.Consolidation.PostV1ConsolidationGroupsGet(
+client.Consolidation.GroupsGet(
         context.TODO(),
         request,
     )
@@ -39604,7 +40028,7 @@ client.Consolidation.PostV1ConsolidationGroupsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationGroupsUpdate(request) -> *nordlet.PostV1ConsolidationGroupsUpdateResponse</code></summary>
+<details><summary><code>client.Consolidation.GroupsUpdate(request) -> *nordlet.GroupsUpdateConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39617,10 +40041,10 @@ client.Consolidation.PostV1ConsolidationGroupsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationGroupsUpdateRequest{
+request := &nordlet.GroupsUpdateConsolidationRequest{
         GroupID: "groupId",
     }
-client.Consolidation.PostV1ConsolidationGroupsUpdate(
+client.Consolidation.GroupsUpdate(
         context.TODO(),
         request,
     )
@@ -39667,7 +40091,7 @@ client.Consolidation.PostV1ConsolidationGroupsUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationGroupsDelete(request) -> *nordlet.PostV1ConsolidationGroupsDeleteResponse</code></summary>
+<details><summary><code>client.Consolidation.GroupsDelete(request) -> *nordlet.GroupsDeleteConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39680,10 +40104,10 @@ client.Consolidation.PostV1ConsolidationGroupsUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationGroupsDeleteRequest{
+request := &nordlet.GroupsDeleteConsolidationRequest{
         GroupID: "groupId",
     }
-client.Consolidation.PostV1ConsolidationGroupsDelete(
+client.Consolidation.GroupsDelete(
         context.TODO(),
         request,
     )
@@ -39714,7 +40138,7 @@ client.Consolidation.PostV1ConsolidationGroupsDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationMembersAdd(request) -> *nordlet.PostV1ConsolidationMembersAddResponse</code></summary>
+<details><summary><code>client.Consolidation.MembersAdd(request) -> *nordlet.MembersAddConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39727,11 +40151,11 @@ client.Consolidation.PostV1ConsolidationGroupsDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationMembersAddRequest{
+request := &nordlet.MembersAddConsolidationRequest{
         GroupID: "groupId",
         MemberCompanyID: "memberCompanyId",
     }
-client.Consolidation.PostV1ConsolidationMembersAdd(
+client.Consolidation.MembersAdd(
         context.TODO(),
         request,
     )
@@ -39774,7 +40198,7 @@ client.Consolidation.PostV1ConsolidationMembersAdd(
 <dl>
 <dd>
 
-**method:** `*nordlet.PostV1ConsolidationMembersAddRequestMethod` 
+**method:** `*nordlet.MembersAddConsolidationRequestMethod` 
     
 </dd>
 </dl>
@@ -39786,7 +40210,7 @@ client.Consolidation.PostV1ConsolidationMembersAdd(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationMembersRemove(request) -> *nordlet.PostV1ConsolidationMembersRemoveResponse</code></summary>
+<details><summary><code>client.Consolidation.MembersRemove(request) -> *nordlet.MembersRemoveConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39799,11 +40223,11 @@ client.Consolidation.PostV1ConsolidationMembersAdd(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationMembersRemoveRequest{
+request := &nordlet.MembersRemoveConsolidationRequest{
         GroupID: "groupId",
         MemberCompanyID: "memberCompanyId",
     }
-client.Consolidation.PostV1ConsolidationMembersRemove(
+client.Consolidation.MembersRemove(
         context.TODO(),
         request,
     )
@@ -39842,7 +40266,7 @@ client.Consolidation.PostV1ConsolidationMembersRemove(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyCandidates(request) -> *nordlet.PostV1ConsolidationIntercompanyCandidatesResponse</code></summary>
+<details><summary><code>client.Consolidation.IntercompanyCandidates(request) -> *nordlet.IntercompanyCandidatesConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39869,10 +40293,10 @@ Partners in member companies that look like other members of the same group (mat
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationIntercompanyCandidatesRequest{
+request := &nordlet.IntercompanyCandidatesConsolidationRequest{
         GroupID: "groupId",
     }
-client.Consolidation.PostV1ConsolidationIntercompanyCandidates(
+client.Consolidation.IntercompanyCandidates(
         context.TODO(),
         request,
     )
@@ -39903,7 +40327,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyCandidates(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksSetResponse</code></summary>
+<details><summary><code>client.Consolidation.IntercompanyLinksSet(request) -> *nordlet.IntercompanyLinksSetConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39930,12 +40354,12 @@ Confirm that a partner record in one member company represents another member co
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationIntercompanyLinksSetRequest{
+request := &nordlet.IntercompanyLinksSetConsolidationRequest{
         GroupID: "groupId",
         PartnerID: "partnerId",
         CounterpartyCompanyID: "counterpartyCompanyId",
     }
-client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(
+client.Consolidation.IntercompanyLinksSet(
         context.TODO(),
         request,
     )
@@ -39982,7 +40406,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksList(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksListResponse</code></summary>
+<details><summary><code>client.Consolidation.IntercompanyLinksList(request) -> *nordlet.IntercompanyLinksListConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -39995,10 +40419,10 @@ client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationIntercompanyLinksListRequest{
+request := &nordlet.IntercompanyLinksListConsolidationRequest{
         GroupID: "groupId",
     }
-client.Consolidation.PostV1ConsolidationIntercompanyLinksList(
+client.Consolidation.IntercompanyLinksList(
         context.TODO(),
         request,
     )
@@ -40029,7 +40453,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyLinksList(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse</code></summary>
+<details><summary><code>client.Consolidation.IntercompanyLinksRemove(request) -> *nordlet.IntercompanyLinksRemoveConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -40042,11 +40466,11 @@ client.Consolidation.PostV1ConsolidationIntercompanyLinksList(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest{
+request := &nordlet.IntercompanyLinksRemoveConsolidationRequest{
         GroupID: "groupId",
         ID: "id",
     }
-client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(
+client.Consolidation.IntercompanyLinksRemove(
         context.TODO(),
         request,
     )
@@ -40085,7 +40509,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyReport(request) -> *nordlet.PostV1ConsolidationIntercompanyReportResponse</code></summary>
+<details><summary><code>client.Consolidation.IntercompanyReport(request) -> *nordlet.IntercompanyReportConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -40112,12 +40536,16 @@ Intercompany reconciliation for a period: every issued intercompany sale invoice
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationIntercompanyReportRequest{
+request := &nordlet.IntercompanyReportConsolidationRequest{
         GroupID: "groupId",
-        FromDate: "fromDate",
-        ToDate: "toDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Consolidation.PostV1ConsolidationIntercompanyReport(
+client.Consolidation.IntercompanyReport(
         context.TODO(),
         request,
     )
@@ -40144,7 +40572,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyReport(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -40152,7 +40580,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyReport(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -40164,7 +40592,7 @@ client.Consolidation.PostV1ConsolidationIntercompanyReport(
 </dl>
 </details>
 
-<details><summary><code>client.Consolidation.PostV1ConsolidationReport(request) -> *nordlet.PostV1ConsolidationReportResponse</code></summary>
+<details><summary><code>client.Consolidation.Report(request) -> *nordlet.ReportConsolidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -40177,12 +40605,16 @@ client.Consolidation.PostV1ConsolidationIntercompanyReport(
 <dd>
 
 ```go
-request := &nordlet.PostV1ConsolidationReportRequest{
+request := &nordlet.ReportConsolidationRequest{
         GroupID: "groupId",
-        FromDate: "fromDate",
-        ToDate: "toDate",
+        FromDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        ToDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Consolidation.PostV1ConsolidationReport(
+client.Consolidation.Report(
         context.TODO(),
         request,
     )
@@ -40209,7 +40641,7 @@ client.Consolidation.PostV1ConsolidationReport(
 <dl>
 <dd>
 
-**fromDate:** `string` 
+**fromDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -40217,7 +40649,7 @@ client.Consolidation.PostV1ConsolidationReport(
 <dl>
 <dd>
 
-**toDate:** `string` 
+**toDate:** `time.Time` 
     
 </dd>
 </dl>
@@ -40225,7 +40657,7 @@ client.Consolidation.PostV1ConsolidationReport(
 <dl>
 <dd>
 
-**category:** `*nordlet.PostV1ConsolidationReportRequestCategory` 
+**category:** `*nordlet.ReportConsolidationRequestCategory` 
     
 </dd>
 </dl>
@@ -40233,7 +40665,7 @@ client.Consolidation.PostV1ConsolidationReport(
 <dl>
 <dd>
 
-**eliminations:** `[]*nordlet.PostV1ConsolidationReportRequestEliminationsItem` 
+**eliminations:** `[]*nordlet.ReportConsolidationRequestEliminationsItem` 
     
 </dd>
 </dl>
@@ -40245,8 +40677,8 @@ client.Consolidation.PostV1ConsolidationReport(
 </dl>
 </details>
 
-## Public
-<details><summary><code>client.Public.PostV1PublicIntegrationRequests(request) -> *nordlet.PostV1PublicIntegrationRequestsResponse</code></summary>
+## public
+<details><summary><code>client.Public.IntegrationRequests(request) -> *nordlet.IntegrationRequestsPublicResponse</code></summary>
 <dl>
 <dd>
 
@@ -40259,12 +40691,12 @@ client.Consolidation.PostV1ConsolidationReport(
 <dd>
 
 ```go
-request := &nordlet.PostV1PublicIntegrationRequestsRequest{
+request := &nordlet.IntegrationRequestsPublicRequest{
         Integration: "integration",
         Name: "name",
         Email: "email",
     }
-client.Public.PostV1PublicIntegrationRequests(
+client.Public.IntegrationRequests(
         context.TODO(),
         request,
     )
@@ -40335,7 +40767,7 @@ client.Public.PostV1PublicIntegrationRequests(
 </dl>
 </details>
 
-<details><summary><code>client.Public.GetV1PublicPayToken(Token) -> error</code></summary>
+<details><summary><code>client.Public.Pay(Token) -> error</code></summary>
 <dl>
 <dd>
 
@@ -40348,10 +40780,10 @@ client.Public.PostV1PublicIntegrationRequests(
 <dd>
 
 ```go
-request := &nordlet.GetV1PublicPayTokenRequest{
+request := &nordlet.PayPublicRequest{
         Token: "token",
     }
-client.Public.GetV1PublicPayToken(
+client.Public.Pay(
         context.TODO(),
         request,
     )
@@ -40382,8 +40814,8 @@ client.Public.GetV1PublicPayToken(
 </dl>
 </details>
 
-## Billing
-<details><summary><code>client.Billing.PostV1BillingAccountGet(request) -> *nordlet.PostV1BillingAccountGetResponse</code></summary>
+## billing
+<details><summary><code>client.Billing.AccountGet(request) -> *nordlet.AccountGetBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40396,8 +40828,8 @@ client.Public.GetV1PublicPayToken(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingAccountGetRequest{}
-client.Billing.PostV1BillingAccountGet(
+request := &nordlet.AccountGetBillingRequest{}
+client.Billing.AccountGet(
         context.TODO(),
         request,
     )
@@ -40413,7 +40845,7 @@ client.Billing.PostV1BillingAccountGet(
 </dl>
 </details>
 
-<details><summary><code>client.Billing.PostV1BillingAccountSetPlan(request) -> *nordlet.PostV1BillingAccountSetPlanResponse</code></summary>
+<details><summary><code>client.Billing.AccountSetPlan(request) -> *nordlet.AccountSetPlanBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40426,10 +40858,10 @@ client.Billing.PostV1BillingAccountGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingAccountSetPlanRequest{
-        Plan: nordlet.PostV1BillingAccountSetPlanRequestPlanStarter,
+request := &nordlet.AccountSetPlanBillingRequest{
+        Plan: nordlet.AccountSetPlanBillingRequestPlanStarter,
     }
-client.Billing.PostV1BillingAccountSetPlan(
+client.Billing.AccountSetPlan(
         context.TODO(),
         request,
     )
@@ -40448,7 +40880,7 @@ client.Billing.PostV1BillingAccountSetPlan(
 <dl>
 <dd>
 
-**plan:** `*nordlet.PostV1BillingAccountSetPlanRequestPlan` 
+**plan:** `*nordlet.AccountSetPlanBillingRequestPlan` 
     
 </dd>
 </dl>
@@ -40460,7 +40892,7 @@ client.Billing.PostV1BillingAccountSetPlan(
 </dl>
 </details>
 
-<details><summary><code>client.Billing.PostV1BillingTopupCreate(request) -> *nordlet.PostV1BillingTopupCreateResponse</code></summary>
+<details><summary><code>client.Billing.TopupCreate(request) -> *nordlet.TopupCreateBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40473,10 +40905,10 @@ client.Billing.PostV1BillingAccountSetPlan(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingTopupCreateRequest{
+request := &nordlet.TopupCreateBillingRequest{
         AmountCents: int64(1000000),
     }
-client.Billing.PostV1BillingTopupCreate(
+client.Billing.TopupCreate(
         context.TODO(),
         request,
     )
@@ -40503,7 +40935,7 @@ client.Billing.PostV1BillingTopupCreate(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1BillingTopupCreateRequestLocale` 
+**locale:** `*nordlet.TopupCreateBillingRequestLocale` 
     
 </dd>
 </dl>
@@ -40515,7 +40947,7 @@ client.Billing.PostV1BillingTopupCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Billing.PostV1BillingPortalCreate(request) -> *nordlet.PostV1BillingPortalCreateResponse</code></summary>
+<details><summary><code>client.Billing.PortalCreate(request) -> *nordlet.PortalCreateBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40528,8 +40960,8 @@ client.Billing.PostV1BillingTopupCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingPortalCreateRequest{}
-client.Billing.PostV1BillingPortalCreate(
+request := &nordlet.PortalCreateBillingRequest{}
+client.Billing.PortalCreate(
         context.TODO(),
         request,
     )
@@ -40548,7 +40980,7 @@ client.Billing.PostV1BillingPortalCreate(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1BillingPortalCreateRequestLocale` 
+**locale:** `*nordlet.PortalCreateBillingRequestLocale` 
     
 </dd>
 </dl>
@@ -40560,7 +40992,7 @@ client.Billing.PostV1BillingPortalCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Billing.PostV1BillingTransactionsList(request) -> *nordlet.PostV1BillingTransactionsListResponse</code></summary>
+<details><summary><code>client.Billing.TransactionsList(request) -> *nordlet.TransactionsListBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40573,8 +41005,8 @@ client.Billing.PostV1BillingPortalCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingTransactionsListRequest{}
-client.Billing.PostV1BillingTransactionsList(
+request := &nordlet.TransactionsListBillingRequest{}
+client.Billing.TransactionsList(
         context.TODO(),
         request,
     )
@@ -40605,7 +41037,7 @@ client.Billing.PostV1BillingTransactionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Billing.PostV1BillingUsageList(request) -> *nordlet.PostV1BillingUsageListResponse</code></summary>
+<details><summary><code>client.Billing.UsageList(request) -> *nordlet.UsageListBillingResponse</code></summary>
 <dl>
 <dd>
 
@@ -40618,11 +41050,15 @@ client.Billing.PostV1BillingTransactionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1BillingUsageListRequest{
-        From: "from",
-        To: "to",
+request := &nordlet.UsageListBillingRequest{
+        From: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        To: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
     }
-client.Billing.PostV1BillingUsageList(
+client.Billing.UsageList(
         context.TODO(),
         request,
     )
@@ -40641,7 +41077,7 @@ client.Billing.PostV1BillingUsageList(
 <dl>
 <dd>
 
-**from:** `string` 
+**from:** `time.Time` 
     
 </dd>
 </dl>
@@ -40649,7 +41085,7 @@ client.Billing.PostV1BillingUsageList(
 <dl>
 <dd>
 
-**to:** `string` 
+**to:** `time.Time` 
     
 </dd>
 </dl>
@@ -40661,8 +41097,8 @@ client.Billing.PostV1BillingUsageList(
 </dl>
 </details>
 
-## Account
-<details><summary><code>client.Account.PostV1AccountLoginLinkRequest(request) -> *nordlet.PostV1AccountLoginLinkRequestResponse</code></summary>
+## account
+<details><summary><code>client.Account.LoginLinkRequest(request) -> *nordlet.LoginLinkRequestAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40675,10 +41111,10 @@ client.Billing.PostV1BillingUsageList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountLoginLinkRequestRequest{
+request := &nordlet.LoginLinkRequestAccountRequest{
         Email: "email",
     }
-client.Account.PostV1AccountLoginLinkRequest(
+client.Account.LoginLinkRequest(
         context.TODO(),
         request,
     )
@@ -40705,7 +41141,7 @@ client.Account.PostV1AccountLoginLinkRequest(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1AccountLoginLinkRequestRequestLocale` 
+**locale:** `*nordlet.LoginLinkRequestAccountRequestLocale` 
     
 </dd>
 </dl>
@@ -40741,7 +41177,7 @@ client.Account.PostV1AccountLoginLinkRequest(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountLoginLinkConsume(request) -> *nordlet.PostV1AccountLoginLinkConsumeResponse</code></summary>
+<details><summary><code>client.Account.LoginLinkConsume(request) -> *nordlet.LoginLinkConsumeAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40754,10 +41190,10 @@ client.Account.PostV1AccountLoginLinkRequest(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountLoginLinkConsumeRequest{
+request := &nordlet.LoginLinkConsumeAccountRequest{
         Token: "token",
     }
-client.Account.PostV1AccountLoginLinkConsume(
+client.Account.LoginLinkConsume(
         context.TODO(),
         request,
     )
@@ -40788,7 +41224,7 @@ client.Account.PostV1AccountLoginLinkConsume(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountLogout(request) -> *nordlet.PostV1AccountLogoutResponse</code></summary>
+<details><summary><code>client.Account.Logout(request) -> *nordlet.LogoutAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40801,8 +41237,8 @@ client.Account.PostV1AccountLoginLinkConsume(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountLogoutRequest{}
-client.Account.PostV1AccountLogout(
+request := &nordlet.LogoutAccountRequest{}
+client.Account.Logout(
         context.TODO(),
         request,
     )
@@ -40818,7 +41254,7 @@ client.Account.PostV1AccountLogout(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountMe(request) -> *nordlet.PostV1AccountMeResponse</code></summary>
+<details><summary><code>client.Account.Me(request) -> *nordlet.MeAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40831,8 +41267,8 @@ client.Account.PostV1AccountLogout(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountMeRequest{}
-client.Account.PostV1AccountMe(
+request := &nordlet.MeAccountRequest{}
+client.Account.Me(
         context.TODO(),
         request,
     )
@@ -40848,7 +41284,7 @@ client.Account.PostV1AccountMe(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountMembersList(request) -> *nordlet.PostV1AccountMembersListResponse</code></summary>
+<details><summary><code>client.Account.MembersList(request) -> *nordlet.MembersListAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40861,8 +41297,8 @@ client.Account.PostV1AccountMe(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountMembersListRequest{}
-client.Account.PostV1AccountMembersList(
+request := &nordlet.MembersListAccountRequest{}
+client.Account.MembersList(
         context.TODO(),
         request,
     )
@@ -40878,7 +41314,7 @@ client.Account.PostV1AccountMembersList(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountMembersSetRole(request) -> *nordlet.PostV1AccountMembersSetRoleResponse</code></summary>
+<details><summary><code>client.Account.MembersSetRole(request) -> *nordlet.MembersSetRoleAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40891,11 +41327,11 @@ client.Account.PostV1AccountMembersList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountMembersSetRoleRequest{
+request := &nordlet.MembersSetRoleAccountRequest{
         UserID: "userId",
-        Role: nordlet.PostV1AccountMembersSetRoleRequestRoleAdmin,
+        Role: nordlet.MembersSetRoleAccountRequestRoleAdmin,
     }
-client.Account.PostV1AccountMembersSetRole(
+client.Account.MembersSetRole(
         context.TODO(),
         request,
     )
@@ -40922,7 +41358,7 @@ client.Account.PostV1AccountMembersSetRole(
 <dl>
 <dd>
 
-**role:** `*nordlet.PostV1AccountMembersSetRoleRequestRole` 
+**role:** `*nordlet.MembersSetRoleAccountRequestRole` 
     
 </dd>
 </dl>
@@ -40934,7 +41370,7 @@ client.Account.PostV1AccountMembersSetRole(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountMembersTransferOwnership(request) -> *nordlet.PostV1AccountMembersTransferOwnershipResponse</code></summary>
+<details><summary><code>client.Account.MembersTransferOwnership(request) -> *nordlet.MembersTransferOwnershipAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -40947,10 +41383,10 @@ client.Account.PostV1AccountMembersSetRole(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountMembersTransferOwnershipRequest{
+request := &nordlet.MembersTransferOwnershipAccountRequest{
         UserID: "userId",
     }
-client.Account.PostV1AccountMembersTransferOwnership(
+client.Account.MembersTransferOwnership(
         context.TODO(),
         request,
     )
@@ -40989,7 +41425,7 @@ client.Account.PostV1AccountMembersTransferOwnership(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountMembersRemove(request) -> *nordlet.PostV1AccountMembersRemoveResponse</code></summary>
+<details><summary><code>client.Account.MembersRemove(request) -> *nordlet.MembersRemoveAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41002,10 +41438,10 @@ client.Account.PostV1AccountMembersTransferOwnership(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountMembersRemoveRequest{
+request := &nordlet.MembersRemoveAccountRequest{
         UserID: "userId",
     }
-client.Account.PostV1AccountMembersRemove(
+client.Account.MembersRemove(
         context.TODO(),
         request,
     )
@@ -41036,7 +41472,7 @@ client.Account.PostV1AccountMembersRemove(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountInvitesCreate(request) -> *nordlet.PostV1AccountInvitesCreateResponse</code></summary>
+<details><summary><code>client.Account.InvitesCreate(request) -> *nordlet.InvitesCreateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41049,11 +41485,11 @@ client.Account.PostV1AccountMembersRemove(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountInvitesCreateRequest{
+request := &nordlet.InvitesCreateAccountRequest{
         Email: "email",
-        Role: nordlet.PostV1AccountInvitesCreateRequestRoleAdmin,
+        Role: nordlet.InvitesCreateAccountRequestRoleAdmin,
     }
-client.Account.PostV1AccountInvitesCreate(
+client.Account.InvitesCreate(
         context.TODO(),
         request,
     )
@@ -41080,7 +41516,7 @@ client.Account.PostV1AccountInvitesCreate(
 <dl>
 <dd>
 
-**role:** `*nordlet.PostV1AccountInvitesCreateRequestRole` 
+**role:** `*nordlet.InvitesCreateAccountRequestRole` 
     
 </dd>
 </dl>
@@ -41088,7 +41524,7 @@ client.Account.PostV1AccountInvitesCreate(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1AccountInvitesCreateRequestLocale` 
+**locale:** `*nordlet.InvitesCreateAccountRequestLocale` 
     
 </dd>
 </dl>
@@ -41100,7 +41536,7 @@ client.Account.PostV1AccountInvitesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountInvitesList(request) -> *nordlet.PostV1AccountInvitesListResponse</code></summary>
+<details><summary><code>client.Account.InvitesList(request) -> *nordlet.InvitesListAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41113,8 +41549,8 @@ client.Account.PostV1AccountInvitesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountInvitesListRequest{}
-client.Account.PostV1AccountInvitesList(
+request := &nordlet.InvitesListAccountRequest{}
+client.Account.InvitesList(
         context.TODO(),
         request,
     )
@@ -41130,7 +41566,7 @@ client.Account.PostV1AccountInvitesList(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountInvitesRevoke(request) -> *nordlet.PostV1AccountInvitesRevokeResponse</code></summary>
+<details><summary><code>client.Account.InvitesRevoke(request) -> *nordlet.InvitesRevokeAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41143,10 +41579,10 @@ client.Account.PostV1AccountInvitesList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountInvitesRevokeRequest{
+request := &nordlet.InvitesRevokeAccountRequest{
         ID: "id",
     }
-client.Account.PostV1AccountInvitesRevoke(
+client.Account.InvitesRevoke(
         context.TODO(),
         request,
     )
@@ -41177,7 +41613,7 @@ client.Account.PostV1AccountInvitesRevoke(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountInvitesGet(request) -> *nordlet.PostV1AccountInvitesGetResponse</code></summary>
+<details><summary><code>client.Account.InvitesGet(request) -> *nordlet.InvitesGetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41190,10 +41626,10 @@ client.Account.PostV1AccountInvitesRevoke(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountInvitesGetRequest{
+request := &nordlet.InvitesGetAccountRequest{
         Token: "token",
     }
-client.Account.PostV1AccountInvitesGet(
+client.Account.InvitesGet(
         context.TODO(),
         request,
     )
@@ -41224,7 +41660,7 @@ client.Account.PostV1AccountInvitesGet(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountInvitesAccept(request) -> *nordlet.PostV1AccountInvitesAcceptResponse</code></summary>
+<details><summary><code>client.Account.InvitesAccept(request) -> *nordlet.InvitesAcceptAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41237,10 +41673,10 @@ client.Account.PostV1AccountInvitesGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountInvitesAcceptRequest{
+request := &nordlet.InvitesAcceptAccountRequest{
         Token: "token",
     }
-client.Account.PostV1AccountInvitesAccept(
+client.Account.InvitesAccept(
         context.TODO(),
         request,
     )
@@ -41275,7 +41711,7 @@ client.Account.PostV1AccountInvitesAccept(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1AccountInvitesAcceptRequestLocale` 
+**locale:** `*nordlet.InvitesAcceptAccountRequestLocale` 
     
 </dd>
 </dl>
@@ -41303,7 +41739,7 @@ client.Account.PostV1AccountInvitesAccept(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountLocaleSet(request) -> *nordlet.PostV1AccountLocaleSetResponse</code></summary>
+<details><summary><code>client.Account.LocaleSet(request) -> *nordlet.LocaleSetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41316,10 +41752,10 @@ client.Account.PostV1AccountInvitesAccept(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountLocaleSetRequest{
-        Locale: nordlet.PostV1AccountLocaleSetRequestLocaleEn,
+request := &nordlet.LocaleSetAccountRequest{
+        Locale: nordlet.LocaleSetAccountRequestLocaleEn,
     }
-client.Account.PostV1AccountLocaleSet(
+client.Account.LocaleSet(
         context.TODO(),
         request,
     )
@@ -41338,7 +41774,7 @@ client.Account.PostV1AccountLocaleSet(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1AccountLocaleSetRequestLocale` 
+**locale:** `*nordlet.LocaleSetAccountRequestLocale` 
     
 </dd>
 </dl>
@@ -41350,7 +41786,7 @@ client.Account.PostV1AccountLocaleSet(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesCreate(request) -> *nordlet.PostV1AccountCompaniesCreateResponse</code></summary>
+<details><summary><code>client.Account.CompaniesCreate(request) -> *nordlet.CompaniesCreateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41363,10 +41799,10 @@ client.Account.PostV1AccountLocaleSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesCreateRequest{
+request := &nordlet.CompaniesCreateAccountRequest{
         Name: "name",
     }
-client.Account.PostV1AccountCompaniesCreate(
+client.Account.CompaniesCreate(
         context.TODO(),
         request,
     )
@@ -41425,7 +41861,7 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
-**vatPeriod:** `*nordlet.PostV1AccountCompaniesCreateRequestVatPeriod` 
+**vatPeriod:** `*nordlet.CompaniesCreateAccountRequestVatPeriod` 
     
 </dd>
 </dl>
@@ -41457,7 +41893,7 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1AccountCompaniesCreateRequestAddress` 
+**address:** `*nordlet.CompaniesCreateAccountRequestAddress` 
     
 </dd>
 </dl>
@@ -41537,7 +41973,7 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
-**incorporatedOn:** `*string` 
+**incorporatedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -41553,7 +41989,7 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
-**accountsKeptBy:** `*nordlet.PostV1AccountCompaniesCreateRequestAccountsKeptBy` 
+**accountsKeptBy:** `*nordlet.CompaniesCreateAccountRequestAccountsKeptBy` 
     
 </dd>
 </dl>
@@ -41593,7 +42029,15 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
-**countryCode:** `*nordlet.PostV1AccountCompaniesCreateRequestCountryCode` — Jurisdiction the company is registered in (immutable after creation)
+**countryCode:** `*nordlet.CompaniesCreateAccountRequestCountryCode` — Jurisdiction the company is registered in (immutable after creation)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**baseCurrency:** `*string` — Currency the ledger is kept in; defaults to the national currency of countryCode (immutable after creation)
     
 </dd>
 </dl>
@@ -41613,7 +42057,7 @@ client.Account.PostV1AccountCompaniesCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesSelect(request) -> *nordlet.PostV1AccountCompaniesSelectResponse</code></summary>
+<details><summary><code>client.Account.CompaniesSelect(request) -> *nordlet.CompaniesSelectAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41626,10 +42070,10 @@ client.Account.PostV1AccountCompaniesCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesSelectRequest{
+request := &nordlet.CompaniesSelectAccountRequest{
         CompanyID: "companyId",
     }
-client.Account.PostV1AccountCompaniesSelect(
+client.Account.CompaniesSelect(
         context.TODO(),
         request,
     )
@@ -41660,7 +42104,7 @@ client.Account.PostV1AccountCompaniesSelect(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesProfile(request) -> *nordlet.PostV1AccountCompaniesProfileResponse</code></summary>
+<details><summary><code>client.Account.CompaniesProfile(request) -> *nordlet.CompaniesProfileAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41673,8 +42117,8 @@ client.Account.PostV1AccountCompaniesSelect(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesProfileRequest{}
-client.Account.PostV1AccountCompaniesProfile(
+request := &nordlet.CompaniesProfileAccountRequest{}
+client.Account.CompaniesProfile(
         context.TODO(),
         request,
     )
@@ -41690,7 +42134,7 @@ client.Account.PostV1AccountCompaniesProfile(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesUpdate(request) -> *nordlet.PostV1AccountCompaniesUpdateResponse</code></summary>
+<details><summary><code>client.Account.CompaniesUpdate(request) -> *nordlet.CompaniesUpdateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41703,8 +42147,8 @@ client.Account.PostV1AccountCompaniesProfile(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesUpdateRequest{}
-client.Account.PostV1AccountCompaniesUpdate(
+request := &nordlet.CompaniesUpdateAccountRequest{}
+client.Account.CompaniesUpdate(
         context.TODO(),
         request,
     )
@@ -41763,7 +42207,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dl>
 <dd>
 
-**vatPeriod:** `*nordlet.PostV1AccountCompaniesUpdateRequestVatPeriod` 
+**vatPeriod:** `*nordlet.CompaniesUpdateAccountRequestVatPeriod` 
     
 </dd>
 </dl>
@@ -41795,7 +42239,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dl>
 <dd>
 
-**address:** `*nordlet.PostV1AccountCompaniesUpdateRequestAddress` 
+**address:** `*nordlet.CompaniesUpdateAccountRequestAddress` 
     
 </dd>
 </dl>
@@ -41875,7 +42319,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dl>
 <dd>
 
-**incorporatedOn:** `*string` 
+**incorporatedOn:** `*time.Time` 
     
 </dd>
 </dl>
@@ -41891,7 +42335,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dl>
 <dd>
 
-**accountsKeptBy:** `*nordlet.PostV1AccountCompaniesUpdateRequestAccountsKeptBy` 
+**accountsKeptBy:** `*nordlet.CompaniesUpdateAccountRequestAccountsKeptBy` 
     
 </dd>
 </dl>
@@ -41931,7 +42375,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dl>
 <dd>
 
-**logo:** `*nordlet.PostV1AccountCompaniesUpdateRequestLogo` 
+**logo:** `*nordlet.CompaniesUpdateAccountRequestLogo` 
     
 </dd>
 </dl>
@@ -41943,7 +42387,7 @@ client.Account.PostV1AccountCompaniesUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesArchive(request) -> *nordlet.PostV1AccountCompaniesArchiveResponse</code></summary>
+<details><summary><code>client.Account.CompaniesArchive(request) -> *nordlet.CompaniesArchiveAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -41956,10 +42400,10 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesArchiveRequest{
+request := &nordlet.CompaniesArchiveAccountRequest{
         CompanyID: "companyId",
     }
-client.Account.PostV1AccountCompaniesArchive(
+client.Account.CompaniesArchive(
         context.TODO(),
         request,
     )
@@ -41990,7 +42434,7 @@ client.Account.PostV1AccountCompaniesArchive(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesDelete(request) -> *nordlet.PostV1AccountCompaniesDeleteResponse</code></summary>
+<details><summary><code>client.Account.CompaniesDelete(request) -> *nordlet.CompaniesDeleteAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42003,10 +42447,10 @@ client.Account.PostV1AccountCompaniesArchive(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesDeleteRequest{
+request := &nordlet.CompaniesDeleteAccountRequest{
         CompanyID: "companyId",
     }
-client.Account.PostV1AccountCompaniesDelete(
+client.Account.CompaniesDelete(
         context.TODO(),
         request,
     )
@@ -42037,7 +42481,7 @@ client.Account.PostV1AccountCompaniesDelete(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountCompaniesActivate(request) -> *nordlet.PostV1AccountCompaniesActivateResponse</code></summary>
+<details><summary><code>client.Account.CompaniesActivate(request) -> *nordlet.CompaniesActivateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42050,10 +42494,10 @@ client.Account.PostV1AccountCompaniesDelete(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountCompaniesActivateRequest{
+request := &nordlet.CompaniesActivateAccountRequest{
         CompanyID: "companyId",
     }
-client.Account.PostV1AccountCompaniesActivate(
+client.Account.CompaniesActivate(
         context.TODO(),
         request,
     )
@@ -42084,7 +42528,7 @@ client.Account.PostV1AccountCompaniesActivate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountAPIKeysCreate(request) -> *nordlet.PostV1AccountAPIKeysCreateResponse</code></summary>
+<details><summary><code>client.Account.APIKeysCreate(request) -> *nordlet.APIKeysCreateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42097,10 +42541,10 @@ client.Account.PostV1AccountCompaniesActivate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountAPIKeysCreateRequest{
+request := &nordlet.APIKeysCreateAccountRequest{
         Name: "name",
     }
-client.Account.PostV1AccountAPIKeysCreate(
+client.Account.APIKeysCreate(
         context.TODO(),
         request,
     )
@@ -42147,7 +42591,7 @@ client.Account.PostV1AccountAPIKeysCreate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountAPIKeysList(request) -> *nordlet.PostV1AccountAPIKeysListResponse</code></summary>
+<details><summary><code>client.Account.APIKeysList(request) -> *nordlet.APIKeysListAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42160,8 +42604,8 @@ client.Account.PostV1AccountAPIKeysCreate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountAPIKeysListRequest{}
-client.Account.PostV1AccountAPIKeysList(
+request := &nordlet.APIKeysListAccountRequest{}
+client.Account.APIKeysList(
         context.TODO(),
         request,
     )
@@ -42177,7 +42621,7 @@ client.Account.PostV1AccountAPIKeysList(
 </dl>
 </details>
 
-<details><summary><code>client.Account.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(request) -> *nordlet.PostV1AccountAPIKeysRotateResponse</code></summary>
+<details><summary><code>client.Account.APIKeysRotate(request) -> *nordlet.APIKeysRotateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42190,10 +42634,10 @@ client.Account.PostV1AccountAPIKeysList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountAPIKeysRotateRequest{
+request := &nordlet.APIKeysRotateAccountRequest{
         ID: "id",
     }
-client.Account.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+client.Account.APIKeysRotate(
         context.TODO(),
         request,
     )
@@ -42240,7 +42684,7 @@ client.Account.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterASho
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountAPIKeysRevoke(request) -> *nordlet.PostV1AccountAPIKeysRevokeResponse</code></summary>
+<details><summary><code>client.Account.APIKeysRevoke(request) -> *nordlet.APIKeysRevokeAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42253,10 +42697,10 @@ client.Account.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterASho
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountAPIKeysRevokeRequest{
+request := &nordlet.APIKeysRevokeAccountRequest{
         ID: "id",
     }
-client.Account.PostV1AccountAPIKeysRevoke(
+client.Account.APIKeysRevoke(
         context.TODO(),
         request,
     )
@@ -42287,7 +42731,7 @@ client.Account.PostV1AccountAPIKeysRevoke(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountConsentAccept(request) -> *nordlet.PostV1AccountConsentAcceptResponse</code></summary>
+<details><summary><code>client.Account.ConsentAccept(request) -> *nordlet.ConsentAcceptAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42300,11 +42744,11 @@ client.Account.PostV1AccountAPIKeysRevoke(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountConsentAcceptRequest{
+request := &nordlet.ConsentAcceptAccountRequest{
         AcceptTerms: true,
         AcceptDpa: true,
     }
-client.Account.PostV1AccountConsentAccept(
+client.Account.ConsentAccept(
         context.TODO(),
         request,
     )
@@ -42343,7 +42787,7 @@ client.Account.PostV1AccountConsentAccept(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountProfileUpdate(request) -> *nordlet.PostV1AccountProfileUpdateResponse</code></summary>
+<details><summary><code>client.Account.ProfileUpdate(request) -> *nordlet.ProfileUpdateAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42356,8 +42800,8 @@ client.Account.PostV1AccountConsentAccept(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountProfileUpdateRequest{}
-client.Account.PostV1AccountProfileUpdate(
+request := &nordlet.ProfileUpdateAccountRequest{}
+client.Account.ProfileUpdate(
         context.TODO(),
         request,
     )
@@ -42388,7 +42832,7 @@ client.Account.PostV1AccountProfileUpdate(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountEmailChangeRequest(request) -> *nordlet.PostV1AccountEmailChangeRequestResponse</code></summary>
+<details><summary><code>client.Account.EmailChangeRequest(request) -> *nordlet.EmailChangeRequestAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42401,10 +42845,10 @@ client.Account.PostV1AccountProfileUpdate(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountEmailChangeRequestRequest{
+request := &nordlet.EmailChangeRequestAccountRequest{
         NewEmail: "newEmail",
     }
-client.Account.PostV1AccountEmailChangeRequest(
+client.Account.EmailChangeRequest(
         context.TODO(),
         request,
     )
@@ -42431,7 +42875,7 @@ client.Account.PostV1AccountEmailChangeRequest(
 <dl>
 <dd>
 
-**locale:** `*nordlet.PostV1AccountEmailChangeRequestRequestLocale` 
+**locale:** `*nordlet.EmailChangeRequestAccountRequestLocale` 
     
 </dd>
 </dl>
@@ -42443,7 +42887,7 @@ client.Account.PostV1AccountEmailChangeRequest(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountSessionsList(request) -> *nordlet.PostV1AccountSessionsListResponse</code></summary>
+<details><summary><code>client.Account.SessionsList(request) -> *nordlet.SessionsListAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42456,8 +42900,8 @@ client.Account.PostV1AccountEmailChangeRequest(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountSessionsListRequest{}
-client.Account.PostV1AccountSessionsList(
+request := &nordlet.SessionsListAccountRequest{}
+client.Account.SessionsList(
         context.TODO(),
         request,
     )
@@ -42473,7 +42917,7 @@ client.Account.PostV1AccountSessionsList(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountSessionsRevoke(request) -> *nordlet.PostV1AccountSessionsRevokeResponse</code></summary>
+<details><summary><code>client.Account.SessionsRevoke(request) -> *nordlet.SessionsRevokeAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42486,10 +42930,10 @@ client.Account.PostV1AccountSessionsList(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountSessionsRevokeRequest{
+request := &nordlet.SessionsRevokeAccountRequest{
         ID: "id",
     }
-client.Account.PostV1AccountSessionsRevoke(
+client.Account.SessionsRevoke(
         context.TODO(),
         request,
     )
@@ -42520,7 +42964,7 @@ client.Account.PostV1AccountSessionsRevoke(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountSessionsRevokeOthers(request) -> *nordlet.PostV1AccountSessionsRevokeOthersResponse</code></summary>
+<details><summary><code>client.Account.SessionsRevokeOthers(request) -> *nordlet.SessionsRevokeOthersAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42533,8 +42977,8 @@ client.Account.PostV1AccountSessionsRevoke(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountSessionsRevokeOthersRequest{}
-client.Account.PostV1AccountSessionsRevokeOthers(
+request := &nordlet.SessionsRevokeOthersAccountRequest{}
+client.Account.SessionsRevokeOthers(
         context.TODO(),
         request,
     )
@@ -42550,7 +42994,7 @@ client.Account.PostV1AccountSessionsRevokeOthers(
 </dl>
 </details>
 
-<details><summary><code>client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(request) -> *nordlet.PostV1AccountExportResponse</code></summary>
+<details><summary><code>client.Account.Export(request) -> *nordlet.ExportAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42563,8 +43007,8 @@ client.Account.PostV1AccountSessionsRevokeOthers(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountExportRequest{}
-client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(
+request := &nordlet.ExportAccountRequest{}
+client.Account.Export(
         context.TODO(),
         request,
     )
@@ -42580,7 +43024,7 @@ client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(
 </dl>
 </details>
 
-<details><summary><code>client.Account.DeleteTheSignedInUserAccount(request) -> *nordlet.PostV1AccountDeleteResponse</code></summary>
+<details><summary><code>client.Account.Delete(request) -> *nordlet.DeleteAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42607,10 +43051,10 @@ Removes the user: sessions, sign-in links, memberships and pending invitations a
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountDeleteRequest{
+request := &nordlet.DeleteAccountRequest{
         ConfirmEmail: "confirmEmail",
     }
-client.Account.DeleteTheSignedInUserAccount(
+client.Account.Delete(
         context.TODO(),
         request,
     )
@@ -42641,7 +43085,7 @@ client.Account.DeleteTheSignedInUserAccount(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountReferralGet(request) -> *nordlet.PostV1AccountReferralGetResponse</code></summary>
+<details><summary><code>client.Account.ReferralGet(request) -> *nordlet.ReferralGetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42654,8 +43098,8 @@ client.Account.DeleteTheSignedInUserAccount(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountReferralGetRequest{}
-client.Account.PostV1AccountReferralGet(
+request := &nordlet.ReferralGetAccountRequest{}
+client.Account.ReferralGet(
         context.TODO(),
         request,
     )
@@ -42671,7 +43115,7 @@ client.Account.PostV1AccountReferralGet(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountReferralConvert(request) -> *nordlet.PostV1AccountReferralConvertResponse</code></summary>
+<details><summary><code>client.Account.ReferralConvert(request) -> *nordlet.ReferralConvertAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42684,10 +43128,10 @@ client.Account.PostV1AccountReferralGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountReferralConvertRequest{
+request := &nordlet.ReferralConvertAccountRequest{
         Points: int64(1000000),
     }
-client.Account.PostV1AccountReferralConvert(
+client.Account.ReferralConvert(
         context.TODO(),
         request,
     )
@@ -42718,7 +43162,7 @@ client.Account.PostV1AccountReferralConvert(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountTableSettingsGet(request) -> *nordlet.PostV1AccountTableSettingsGetResponse</code></summary>
+<details><summary><code>client.Account.TableSettingsGet(request) -> *nordlet.TableSettingsGetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42731,10 +43175,10 @@ client.Account.PostV1AccountReferralConvert(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountTableSettingsGetRequest{
+request := &nordlet.TableSettingsGetAccountRequest{
         TableKey: "tableKey",
     }
-client.Account.PostV1AccountTableSettingsGet(
+client.Account.TableSettingsGet(
         context.TODO(),
         request,
     )
@@ -42765,7 +43209,7 @@ client.Account.PostV1AccountTableSettingsGet(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountTableSettingsSet(request) -> *nordlet.PostV1AccountTableSettingsSetResponse</code></summary>
+<details><summary><code>client.Account.TableSettingsSet(request) -> *nordlet.TableSettingsSetAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42778,10 +43222,10 @@ client.Account.PostV1AccountTableSettingsGet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountTableSettingsSetRequest{
+request := &nordlet.TableSettingsSetAccountRequest{
         TableKey: "tableKey",
     }
-client.Account.PostV1AccountTableSettingsSet(
+client.Account.TableSettingsSet(
         context.TODO(),
         request,
     )
@@ -42828,7 +43272,7 @@ client.Account.PostV1AccountTableSettingsSet(
 </dl>
 </details>
 
-<details><summary><code>client.Account.PostV1AccountTableSettingsList(request) -> *nordlet.PostV1AccountTableSettingsListResponse</code></summary>
+<details><summary><code>client.Account.TableSettingsList(request) -> *nordlet.TableSettingsListAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -42841,8 +43285,8 @@ client.Account.PostV1AccountTableSettingsSet(
 <dd>
 
 ```go
-request := &nordlet.PostV1AccountTableSettingsListRequest{}
-client.Account.PostV1AccountTableSettingsList(
+request := &nordlet.TableSettingsListAccountRequest{}
+client.Account.TableSettingsList(
         context.TODO(),
         request,
     )

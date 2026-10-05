@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestMigrationCheckAHistoricalBooksPackageWithoutWritingAnythingWithWireMock(
+func TestMigrationBooksValidateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,22 +88,24 @@ func TestMigrationCheckAHistoricalBooksPackageWithoutWritingAnythingWithWireMock
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1MigrationBooksValidateRequest{
-		CutoverDate: "cutoverDate",
+	request := &nordlet.BooksValidateMigrationRequest{
+		CutoverDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
+	_, invocationErr := client.Migration.BooksValidate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestMigrationCheckAHistoricalBooksPackageWithoutWritingAnythingWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestMigrationBooksValidateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestMigrationCheckAHistoricalBooksPackageWithoutWritingAnythingWithWireMock", "POST", "/v1/migration/books/validate", nil, 1)
+	VerifyRequestCount(t, "TestMigrationBooksValidateWithWireMock", "POST", "/v1/migration/books/validate", nil, 1)
 }
 
-func TestMigrationImportHistoricalBooksFromAPreviousAccountingSystemWithWireMock(
+func TestMigrationBooksImportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -114,17 +116,19 @@ func TestMigrationImportHistoricalBooksFromAPreviousAccountingSystemWithWireMock
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1MigrationBooksImportRequest{
-		CutoverDate: "cutoverDate",
+	request := &nordlet.BooksImportMigrationRequest{
+		CutoverDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
+	_, invocationErr := client.Migration.BooksImport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestMigrationImportHistoricalBooksFromAPreviousAccountingSystemWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestMigrationBooksImportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestMigrationImportHistoricalBooksFromAPreviousAccountingSystemWithWireMock", "POST", "/v1/migration/books/import", nil, 1)
+	VerifyRequestCount(t, "TestMigrationBooksImportWithWireMock", "POST", "/v1/migration/books/import", nil, 1)
 }

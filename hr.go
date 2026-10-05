@@ -7,298 +7,246 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1HrEmployeesAnonymizeRequestFieldID = big.NewInt(1 << 0)
+	contractsCreateHrRequestFieldEmployeeID   = big.NewInt(1 << 0)
+	contractsCreateHrRequestFieldPositionID   = big.NewInt(1 << 1)
+	contractsCreateHrRequestFieldDepartmentID = big.NewInt(1 << 2)
+	contractsCreateHrRequestFieldScheduleID   = big.NewInt(1 << 3)
+	contractsCreateHrRequestFieldAgreementID  = big.NewInt(1 << 4)
+	contractsCreateHrRequestFieldContractNo   = big.NewInt(1 << 5)
+	contractsCreateHrRequestFieldType         = big.NewInt(1 << 6)
+	contractsCreateHrRequestFieldStartDate    = big.NewInt(1 << 7)
+	contractsCreateHrRequestFieldEndDate      = big.NewInt(1 << 8)
+	contractsCreateHrRequestFieldBaseSalary   = big.NewInt(1 << 9)
+	contractsCreateHrRequestFieldSalaryType   = big.NewInt(1 << 10)
+	contractsCreateHrRequestFieldWorkHours    = big.NewInt(1 << 11)
+	contractsCreateHrRequestFieldNotes        = big.NewInt(1 << 12)
 )
 
-type PostV1HrEmployeesAnonymizeRequest struct {
-	ID string `json:"id" url:"-"`
+type ContractsCreateHrRequest struct {
+	EmployeeID   string                              `json:"employeeId" url:"-"`
+	PositionID   *string                             `json:"positionId,omitempty" url:"-"`
+	DepartmentID *string                             `json:"departmentId,omitempty" url:"-"`
+	ScheduleID   *string                             `json:"scheduleId,omitempty" url:"-"`
+	AgreementID  *string                             `json:"agreementId,omitempty" url:"-"`
+	ContractNo   *string                             `json:"contractNo,omitempty" url:"-"`
+	Type         *ContractsCreateHrRequestType       `json:"type,omitempty" url:"-"`
+	StartDate    time.Time                           `json:"startDate" url:"-" format:"date"`
+	EndDate      *time.Time                          `json:"endDate,omitempty" url:"-" format:"date"`
+	BaseSalary   string                              `json:"baseSalary" url:"-"`
+	SalaryType   *ContractsCreateHrRequestSalaryType `json:"salaryType,omitempty" url:"-"`
+	WorkHours    *string                             `json:"workHours,omitempty" url:"-"`
+	Notes        *string                             `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesAnonymizeRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (c *ContractsCreateHrRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesAnonymizeRequestFieldID)
-}
-
-func (p *PostV1HrEmployeesAnonymizeRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAnonymizeRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAnonymizeRequest(body)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAnonymizeRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAnonymizeRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-type PostV1HrEmployeesFieldsRequest struct {
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1HrEmployeesFieldsRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-var (
-	postV1HrContractsCreateRequestFieldEmployeeID   = big.NewInt(1 << 0)
-	postV1HrContractsCreateRequestFieldPositionID   = big.NewInt(1 << 1)
-	postV1HrContractsCreateRequestFieldDepartmentID = big.NewInt(1 << 2)
-	postV1HrContractsCreateRequestFieldScheduleID   = big.NewInt(1 << 3)
-	postV1HrContractsCreateRequestFieldAgreementID  = big.NewInt(1 << 4)
-	postV1HrContractsCreateRequestFieldContractNo   = big.NewInt(1 << 5)
-	postV1HrContractsCreateRequestFieldType         = big.NewInt(1 << 6)
-	postV1HrContractsCreateRequestFieldStartDate    = big.NewInt(1 << 7)
-	postV1HrContractsCreateRequestFieldEndDate      = big.NewInt(1 << 8)
-	postV1HrContractsCreateRequestFieldBaseSalary   = big.NewInt(1 << 9)
-	postV1HrContractsCreateRequestFieldSalaryType   = big.NewInt(1 << 10)
-	postV1HrContractsCreateRequestFieldWorkHours    = big.NewInt(1 << 11)
-	postV1HrContractsCreateRequestFieldNotes        = big.NewInt(1 << 12)
-)
-
-type PostV1HrContractsCreateRequest struct {
-	EmployeeID   string                                    `json:"employeeId" url:"-"`
-	PositionID   *string                                   `json:"positionId,omitempty" url:"-"`
-	DepartmentID *string                                   `json:"departmentId,omitempty" url:"-"`
-	ScheduleID   *string                                   `json:"scheduleId,omitempty" url:"-"`
-	AgreementID  *string                                   `json:"agreementId,omitempty" url:"-"`
-	ContractNo   *string                                   `json:"contractNo,omitempty" url:"-"`
-	Type         *PostV1HrContractsCreateRequestType       `json:"type,omitempty" url:"-"`
-	StartDate    string                                    `json:"startDate" url:"-"`
-	EndDate      *string                                   `json:"endDate,omitempty" url:"-"`
-	BaseSalary   string                                    `json:"baseSalary" url:"-"`
-	SalaryType   *PostV1HrContractsCreateRequestSalaryType `json:"salaryType,omitempty" url:"-"`
-	WorkHours    *string                                   `json:"workHours,omitempty" url:"-"`
-	Notes        *string                                   `json:"notes,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1HrContractsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	c.explicitFields.Or(c.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrContractsCreateRequestFieldEmployeeID)
+func (c *ContractsCreateHrRequest) SetEmployeeID(employeeID string) {
+	c.EmployeeID = employeeID
+	c.require(contractsCreateHrRequestFieldEmployeeID)
 }
 
 // SetPositionID sets the PositionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetPositionID(positionID *string) {
-	p.PositionID = positionID
-	p.require(postV1HrContractsCreateRequestFieldPositionID)
+func (c *ContractsCreateHrRequest) SetPositionID(positionID *string) {
+	c.PositionID = positionID
+	c.require(contractsCreateHrRequestFieldPositionID)
 }
 
 // SetDepartmentID sets the DepartmentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetDepartmentID(departmentID *string) {
-	p.DepartmentID = departmentID
-	p.require(postV1HrContractsCreateRequestFieldDepartmentID)
+func (c *ContractsCreateHrRequest) SetDepartmentID(departmentID *string) {
+	c.DepartmentID = departmentID
+	c.require(contractsCreateHrRequestFieldDepartmentID)
 }
 
 // SetScheduleID sets the ScheduleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetScheduleID(scheduleID *string) {
-	p.ScheduleID = scheduleID
-	p.require(postV1HrContractsCreateRequestFieldScheduleID)
+func (c *ContractsCreateHrRequest) SetScheduleID(scheduleID *string) {
+	c.ScheduleID = scheduleID
+	c.require(contractsCreateHrRequestFieldScheduleID)
 }
 
 // SetAgreementID sets the AgreementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetAgreementID(agreementID *string) {
-	p.AgreementID = agreementID
-	p.require(postV1HrContractsCreateRequestFieldAgreementID)
+func (c *ContractsCreateHrRequest) SetAgreementID(agreementID *string) {
+	c.AgreementID = agreementID
+	c.require(contractsCreateHrRequestFieldAgreementID)
 }
 
 // SetContractNo sets the ContractNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetContractNo(contractNo *string) {
-	p.ContractNo = contractNo
-	p.require(postV1HrContractsCreateRequestFieldContractNo)
+func (c *ContractsCreateHrRequest) SetContractNo(contractNo *string) {
+	c.ContractNo = contractNo
+	c.require(contractsCreateHrRequestFieldContractNo)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetType(type_ *PostV1HrContractsCreateRequestType) {
-	p.Type = type_
-	p.require(postV1HrContractsCreateRequestFieldType)
+func (c *ContractsCreateHrRequest) SetType(type_ *ContractsCreateHrRequestType) {
+	c.Type = type_
+	c.require(contractsCreateHrRequestFieldType)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1HrContractsCreateRequestFieldStartDate)
+func (c *ContractsCreateHrRequest) SetStartDate(startDate time.Time) {
+	c.StartDate = startDate
+	c.require(contractsCreateHrRequestFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1HrContractsCreateRequestFieldEndDate)
+func (c *ContractsCreateHrRequest) SetEndDate(endDate *time.Time) {
+	c.EndDate = endDate
+	c.require(contractsCreateHrRequestFieldEndDate)
 }
 
 // SetBaseSalary sets the BaseSalary field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetBaseSalary(baseSalary string) {
-	p.BaseSalary = baseSalary
-	p.require(postV1HrContractsCreateRequestFieldBaseSalary)
+func (c *ContractsCreateHrRequest) SetBaseSalary(baseSalary string) {
+	c.BaseSalary = baseSalary
+	c.require(contractsCreateHrRequestFieldBaseSalary)
 }
 
 // SetSalaryType sets the SalaryType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetSalaryType(salaryType *PostV1HrContractsCreateRequestSalaryType) {
-	p.SalaryType = salaryType
-	p.require(postV1HrContractsCreateRequestFieldSalaryType)
+func (c *ContractsCreateHrRequest) SetSalaryType(salaryType *ContractsCreateHrRequestSalaryType) {
+	c.SalaryType = salaryType
+	c.require(contractsCreateHrRequestFieldSalaryType)
 }
 
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetWorkHours(workHours *string) {
-	p.WorkHours = workHours
-	p.require(postV1HrContractsCreateRequestFieldWorkHours)
+func (c *ContractsCreateHrRequest) SetWorkHours(workHours *string) {
+	c.WorkHours = workHours
+	c.require(contractsCreateHrRequestFieldWorkHours)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrContractsCreateRequestFieldNotes)
+func (c *ContractsCreateHrRequest) SetNotes(notes *string) {
+	c.Notes = notes
+	c.require(contractsCreateHrRequestFieldNotes)
 }
 
-func (p *PostV1HrContractsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsCreateRequest
+func (c *ContractsCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsCreateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrContractsCreateRequest(body)
+	*c = ContractsCreateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrContractsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsCreateRequest
+func (c *ContractsCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed ContractsCreateHrRequest
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date `json:"startDate"`
+		EndDate   *internal.Date `json:"endDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*c),
+		StartDate: internal.NewDate(c.StartDate),
+		EndDate:   internal.NewOptionalDate(c.EndDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrContractsEndRequestFieldID        = big.NewInt(1 << 0)
-	postV1HrContractsEndRequestFieldEndDate   = big.NewInt(1 << 1)
-	postV1HrContractsEndRequestFieldEndReason = big.NewInt(1 << 2)
+	contractsEndHrRequestFieldID        = big.NewInt(1 << 0)
+	contractsEndHrRequestFieldEndDate   = big.NewInt(1 << 1)
+	contractsEndHrRequestFieldEndReason = big.NewInt(1 << 2)
 )
 
-type PostV1HrContractsEndRequest struct {
-	ID        string  `json:"id" url:"-"`
-	EndDate   string  `json:"endDate" url:"-"`
-	EndReason *string `json:"endReason,omitempty" url:"-"`
+type ContractsEndHrRequest struct {
+	ID        string    `json:"id" url:"-"`
+	EndDate   time.Time `json:"endDate" url:"-" format:"date"`
+	EndReason *string   `json:"endReason,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrContractsEndRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (c *ContractsEndHrRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	c.explicitFields.Or(c.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrContractsEndRequestFieldID)
+func (c *ContractsEndHrRequest) SetID(id string) {
+	c.ID = id
+	c.require(contractsEndHrRequestFieldID)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndRequest) SetEndDate(endDate string) {
-	p.EndDate = endDate
-	p.require(postV1HrContractsEndRequestFieldEndDate)
+func (c *ContractsEndHrRequest) SetEndDate(endDate time.Time) {
+	c.EndDate = endDate
+	c.require(contractsEndHrRequestFieldEndDate)
 }
 
 // SetEndReason sets the EndReason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndRequest) SetEndReason(endReason *string) {
-	p.EndReason = endReason
-	p.require(postV1HrContractsEndRequestFieldEndReason)
+func (c *ContractsEndHrRequest) SetEndReason(endReason *string) {
+	c.EndReason = endReason
+	c.require(contractsEndHrRequestFieldEndReason)
 }
 
-func (p *PostV1HrContractsEndRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsEndRequest
+func (c *ContractsEndHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsEndHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrContractsEndRequest(body)
+	*c = ContractsEndHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrContractsEndRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsEndRequest
+func (c *ContractsEndHrRequest) MarshalJSON() ([]byte, error) {
+	type embed ContractsEndHrRequest
 	var marshaler = struct {
 		embed
+		EndDate *internal.Date `json:"endDate"`
 	}{
-		embed: embed(*p),
+		embed:   embed(*c),
+		EndDate: internal.NewDate(c.EndDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrContractsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1HrContractsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1HrContractsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1HrContractsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1HrContractsListRequestFieldTotals   = big.NewInt(1 << 4)
+	contractsListHrRequestFieldPage     = big.NewInt(1 << 0)
+	contractsListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	contractsListHrRequestFieldSort     = big.NewInt(1 << 2)
+	contractsListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	contractsListHrRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrContractsListRequest struct {
-	Page     *int64                                    `json:"page,omitempty" url:"-"`
-	PageSize *int64                                    `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1HrContractsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1HrContractsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type ContractsListHrRequest struct {
+	Page     *int64                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ContractsListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ContractsListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -306,419 +254,484 @@ type PostV1HrContractsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrContractsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (c *ContractsListHrRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	c.explicitFields.Or(c.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1HrContractsListRequestFieldPage)
+func (c *ContractsListHrRequest) SetPage(page *int64) {
+	c.Page = page
+	c.require(contractsListHrRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrContractsListRequestFieldPageSize)
+func (c *ContractsListHrRequest) SetPageSize(pageSize *int64) {
+	c.PageSize = pageSize
+	c.require(contractsListHrRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequest) SetSort(sort []*PostV1HrContractsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1HrContractsListRequestFieldSort)
+func (c *ContractsListHrRequest) SetSort(sort []*ContractsListHrRequestSortItem) {
+	c.Sort = sort
+	c.require(contractsListHrRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequest) SetFilter(filter []*PostV1HrContractsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1HrContractsListRequestFieldFilter)
+func (c *ContractsListHrRequest) SetFilter(filter []*ContractsListHrRequestFilterItem) {
+	c.Filter = filter
+	c.require(contractsListHrRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1HrContractsListRequestFieldTotals)
+func (c *ContractsListHrRequest) SetTotals(totals []string) {
+	c.Totals = totals
+	c.require(contractsListHrRequestFieldTotals)
 }
 
-func (p *PostV1HrContractsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsListRequest
+func (c *ContractsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrContractsListRequest(body)
+	*c = ContractsListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrContractsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsListRequest
+func (c *ContractsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed ContractsListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*c),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesAttachmentsListRequestFieldEmployeeID = big.NewInt(1 << 0)
+	employeesAnonymizeHrRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesAttachmentsListRequest struct {
+type EmployeesAnonymizeHrRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EmployeesAnonymizeHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesAnonymizeHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesAnonymizeHrRequestFieldID)
+}
+
+func (e *EmployeesAnonymizeHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesAnonymizeHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EmployeesAnonymizeHrRequest(body)
+	return nil
+}
+
+func (e *EmployeesAnonymizeHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAnonymizeHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	employeesAttachmentsListHrRequestFieldEmployeeID = big.NewInt(1 << 0)
+)
+
+type EmployeesAttachmentsListHrRequest struct {
 	EmployeeID string `json:"employeeId" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesAttachmentsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesAttachmentsListHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrEmployeesAttachmentsListRequestFieldEmployeeID)
+func (e *EmployeesAttachmentsListHrRequest) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(employeesAttachmentsListHrRequestFieldEmployeeID)
 }
 
-func (p *PostV1HrEmployeesAttachmentsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAttachmentsListRequest
+func (e *EmployeesAttachmentsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesAttachmentsListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesAttachmentsListRequest(body)
+	*e = EmployeesAttachmentsListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesAttachmentsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAttachmentsListRequest
+func (e *EmployeesAttachmentsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAttachmentsListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesCreateRequestFieldCode                 = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateRequestFieldFirstName            = big.NewInt(1 << 1)
-	postV1HrEmployeesCreateRequestFieldLastName             = big.NewInt(1 << 2)
-	postV1HrEmployeesCreateRequestFieldPersonalCode         = big.NewInt(1 << 3)
-	postV1HrEmployeesCreateRequestFieldBirthDate            = big.NewInt(1 << 4)
-	postV1HrEmployeesCreateRequestFieldEmail                = big.NewInt(1 << 5)
-	postV1HrEmployeesCreateRequestFieldPhone                = big.NewInt(1 << 6)
-	postV1HrEmployeesCreateRequestFieldAddress              = big.NewInt(1 << 7)
-	postV1HrEmployeesCreateRequestFieldIban                 = big.NewInt(1 << 8)
-	postV1HrEmployeesCreateRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
-	postV1HrEmployeesCreateRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
-	postV1HrEmployeesCreateRequestFieldHireDate             = big.NewInt(1 << 11)
-	postV1HrEmployeesCreateRequestFieldApplyAllowance       = big.NewInt(1 << 12)
-	postV1HrEmployeesCreateRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
-	postV1HrEmployeesCreateRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	postV1HrEmployeesCreateRequestFieldPayrollOptions       = big.NewInt(1 << 15)
-	postV1HrEmployeesCreateRequestFieldNotes                = big.NewInt(1 << 16)
-	postV1HrEmployeesCreateRequestFieldAttributes           = big.NewInt(1 << 17)
+	employeesCreateHrRequestFieldCode                 = big.NewInt(1 << 0)
+	employeesCreateHrRequestFieldFirstName            = big.NewInt(1 << 1)
+	employeesCreateHrRequestFieldLastName             = big.NewInt(1 << 2)
+	employeesCreateHrRequestFieldPersonalCode         = big.NewInt(1 << 3)
+	employeesCreateHrRequestFieldBirthDate            = big.NewInt(1 << 4)
+	employeesCreateHrRequestFieldEmail                = big.NewInt(1 << 5)
+	employeesCreateHrRequestFieldPhone                = big.NewInt(1 << 6)
+	employeesCreateHrRequestFieldAddress              = big.NewInt(1 << 7)
+	employeesCreateHrRequestFieldIban                 = big.NewInt(1 << 8)
+	employeesCreateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
+	employeesCreateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
+	employeesCreateHrRequestFieldHireDate             = big.NewInt(1 << 11)
+	employeesCreateHrRequestFieldApplyAllowance       = big.NewInt(1 << 12)
+	employeesCreateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
+	employeesCreateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
+	employeesCreateHrRequestFieldPayrollOptions       = big.NewInt(1 << 15)
+	employeesCreateHrRequestFieldNotes                = big.NewInt(1 << 16)
+	employeesCreateHrRequestFieldAttributes           = big.NewInt(1 << 17)
 )
 
-type PostV1HrEmployeesCreateRequest struct {
-	Code                 *string                                         `json:"code,omitempty" url:"-"`
-	FirstName            string                                          `json:"firstName" url:"-"`
-	LastName             string                                          `json:"lastName" url:"-"`
-	PersonalCode         *string                                         `json:"personalCode,omitempty" url:"-"`
-	BirthDate            *string                                         `json:"birthDate,omitempty" url:"-"`
-	Email                *string                                         `json:"email,omitempty" url:"-"`
-	Phone                *string                                         `json:"phone,omitempty" url:"-"`
-	Address              *PostV1HrEmployeesCreateRequestAddress          `json:"address,omitempty" url:"-"`
-	Iban                 *string                                         `json:"iban,omitempty" url:"-"`
-	SocialInsuranceNo    *string                                         `json:"socialInsuranceNo,omitempty" url:"-"`
-	SocialInsuranceStart *string                                         `json:"socialInsuranceStart,omitempty" url:"-"`
-	HireDate             *string                                         `json:"hireDate,omitempty" url:"-"`
-	ApplyAllowance       *bool                                           `json:"applyAllowance,omitempty" url:"-"`
-	AllowanceOverride    *string                                         `json:"allowanceOverride,omitempty" url:"-"`
-	PensionAccumulation  *bool                                           `json:"pensionAccumulation,omitempty" url:"-"`
-	PayrollOptions       map[string]string                               `json:"payrollOptions,omitempty" url:"-"`
-	Notes                *string                                         `json:"notes,omitempty" url:"-"`
-	Attributes           []*PostV1HrEmployeesCreateRequestAttributesItem `json:"attributes,omitempty" url:"-"`
+type EmployeesCreateHrRequest struct {
+	Code                 *string                                   `json:"code,omitempty" url:"-"`
+	FirstName            string                                    `json:"firstName" url:"-"`
+	LastName             string                                    `json:"lastName" url:"-"`
+	PersonalCode         *string                                   `json:"personalCode,omitempty" url:"-"`
+	BirthDate            *time.Time                                `json:"birthDate,omitempty" url:"-" format:"date"`
+	Email                *string                                   `json:"email,omitempty" url:"-"`
+	Phone                *string                                   `json:"phone,omitempty" url:"-"`
+	Address              *EmployeesCreateHrRequestAddress          `json:"address,omitempty" url:"-"`
+	Iban                 *string                                   `json:"iban,omitempty" url:"-"`
+	SocialInsuranceNo    *string                                   `json:"socialInsuranceNo,omitempty" url:"-"`
+	SocialInsuranceStart *time.Time                                `json:"socialInsuranceStart,omitempty" url:"-" format:"date"`
+	HireDate             *time.Time                                `json:"hireDate,omitempty" url:"-" format:"date"`
+	ApplyAllowance       *bool                                     `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride    *string                                   `json:"allowanceOverride,omitempty" url:"-"`
+	PensionAccumulation  *bool                                     `json:"pensionAccumulation,omitempty" url:"-"`
+	PayrollOptions       map[string]string                         `json:"payrollOptions,omitempty" url:"-"`
+	Notes                *string                                   `json:"notes,omitempty" url:"-"`
+	Attributes           []*EmployeesCreateHrRequestAttributesItem `json:"attributes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesCreateHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesCreateRequestFieldCode)
+func (e *EmployeesCreateHrRequest) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesCreateHrRequestFieldCode)
 }
 
 // SetFirstName sets the FirstName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesCreateRequestFieldFirstName)
+func (e *EmployeesCreateHrRequest) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesCreateHrRequestFieldFirstName)
 }
 
 // SetLastName sets the LastName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesCreateRequestFieldLastName)
+func (e *EmployeesCreateHrRequest) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesCreateHrRequestFieldLastName)
 }
 
 // SetPersonalCode sets the PersonalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesCreateRequestFieldPersonalCode)
+func (e *EmployeesCreateHrRequest) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesCreateHrRequestFieldPersonalCode)
 }
 
 // SetBirthDate sets the BirthDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesCreateRequestFieldBirthDate)
+func (e *EmployeesCreateHrRequest) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesCreateHrRequestFieldBirthDate)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesCreateRequestFieldEmail)
+func (e *EmployeesCreateHrRequest) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesCreateHrRequestFieldEmail)
 }
 
 // SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesCreateRequestFieldPhone)
+func (e *EmployeesCreateHrRequest) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesCreateHrRequestFieldPhone)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetAddress(address *PostV1HrEmployeesCreateRequestAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesCreateRequestFieldAddress)
+func (e *EmployeesCreateHrRequest) SetAddress(address *EmployeesCreateHrRequestAddress) {
+	e.Address = address
+	e.require(employeesCreateHrRequestFieldAddress)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesCreateRequestFieldIban)
+func (e *EmployeesCreateHrRequest) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesCreateHrRequestFieldIban)
 }
 
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesCreateRequestFieldSocialInsuranceNo)
+func (e *EmployeesCreateHrRequest) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesCreateHrRequestFieldSocialInsuranceNo)
 }
 
 // SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesCreateRequestFieldSocialInsuranceStart)
+func (e *EmployeesCreateHrRequest) SetSocialInsuranceStart(socialInsuranceStart *time.Time) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesCreateHrRequestFieldSocialInsuranceStart)
 }
 
 // SetHireDate sets the HireDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesCreateRequestFieldHireDate)
+func (e *EmployeesCreateHrRequest) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesCreateHrRequestFieldHireDate)
 }
 
 // SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetApplyAllowance(applyAllowance *bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesCreateRequestFieldApplyAllowance)
+func (e *EmployeesCreateHrRequest) SetApplyAllowance(applyAllowance *bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesCreateHrRequestFieldApplyAllowance)
 }
 
 // SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesCreateRequestFieldAllowanceOverride)
+func (e *EmployeesCreateHrRequest) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesCreateHrRequestFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetPensionAccumulation(pensionAccumulation *bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesCreateRequestFieldPensionAccumulation)
+func (e *EmployeesCreateHrRequest) SetPensionAccumulation(pensionAccumulation *bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesCreateHrRequestFieldPensionAccumulation)
 }
 
 // SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesCreateRequestFieldPayrollOptions)
+func (e *EmployeesCreateHrRequest) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesCreateHrRequestFieldPayrollOptions)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesCreateRequestFieldNotes)
+func (e *EmployeesCreateHrRequest) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesCreateHrRequestFieldNotes)
 }
 
 // SetAttributes sets the Attributes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetAttributes(attributes []*PostV1HrEmployeesCreateRequestAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesCreateRequestFieldAttributes)
+func (e *EmployeesCreateHrRequest) SetAttributes(attributes []*EmployeesCreateHrRequestAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesCreateHrRequestFieldAttributes)
 }
 
-func (p *PostV1HrEmployeesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateRequest
+func (e *EmployeesCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesCreateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesCreateRequest(body)
+	*e = EmployeesCreateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateRequest
+func (e *EmployeesCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrRequest
 	var marshaler = struct {
 		embed
+		BirthDate            *internal.Date `json:"birthDate,omitempty"`
+		SocialInsuranceStart *internal.Date `json:"socialInsuranceStart,omitempty"`
+		HireDate             *internal.Date `json:"hireDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                embed(*e),
+		BirthDate:            internal.NewOptionalDate(e.BirthDate),
+		SocialInsuranceStart: internal.NewOptionalDate(e.SocialInsuranceStart),
+		HireDate:             internal.NewOptionalDate(e.HireDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesDeleteRequestFieldID = big.NewInt(1 << 0)
+	employeesDeleteHrRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesDeleteRequest struct {
+type EmployeesDeleteHrRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesDeleteHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesDeleteRequestFieldID)
+func (e *EmployeesDeleteHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesDeleteHrRequestFieldID)
 }
 
-func (p *PostV1HrEmployeesDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesDeleteRequest
+func (e *EmployeesDeleteHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesDeleteHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesDeleteRequest(body)
+	*e = EmployeesDeleteHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesDeleteRequest
+func (e *EmployeesDeleteHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesDeleteHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
+type EmployeesFieldsHrRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EmployeesFieldsHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
 var (
-	postV1HrEmployeesGetRequestFieldID = big.NewInt(1 << 0)
+	employeesGetHrRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesGetRequest struct {
+type EmployeesGetHrRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesGetHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesGetRequestFieldID)
+func (e *EmployeesGetHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesGetHrRequestFieldID)
 }
 
-func (p *PostV1HrEmployeesGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesGetRequest
+func (e *EmployeesGetHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesGetHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesGetRequest(body)
+	*e = EmployeesGetHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesGetRequest
+func (e *EmployeesGetHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesGetHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1HrEmployeesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1HrEmployeesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1HrEmployeesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1HrEmployeesListRequestFieldTotals   = big.NewInt(1 << 4)
+	employeesListHrRequestFieldPage     = big.NewInt(1 << 0)
+	employeesListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	employeesListHrRequestFieldSort     = big.NewInt(1 << 2)
+	employeesListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	employeesListHrRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrEmployeesListRequest struct {
-	Page     *int64                                    `json:"page,omitempty" url:"-"`
-	PageSize *int64                                    `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1HrEmployeesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1HrEmployeesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type EmployeesListHrRequest struct {
+	Page     *int64                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*EmployeesListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*EmployeesListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -726,237 +739,241 @@ type PostV1HrEmployeesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesListHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1HrEmployeesListRequestFieldPage)
+func (e *EmployeesListHrRequest) SetPage(page *int64) {
+	e.Page = page
+	e.require(employeesListHrRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrEmployeesListRequestFieldPageSize)
+func (e *EmployeesListHrRequest) SetPageSize(pageSize *int64) {
+	e.PageSize = pageSize
+	e.require(employeesListHrRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequest) SetSort(sort []*PostV1HrEmployeesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1HrEmployeesListRequestFieldSort)
+func (e *EmployeesListHrRequest) SetSort(sort []*EmployeesListHrRequestSortItem) {
+	e.Sort = sort
+	e.require(employeesListHrRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequest) SetFilter(filter []*PostV1HrEmployeesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1HrEmployeesListRequestFieldFilter)
+func (e *EmployeesListHrRequest) SetFilter(filter []*EmployeesListHrRequestFilterItem) {
+	e.Filter = filter
+	e.require(employeesListHrRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1HrEmployeesListRequestFieldTotals)
+func (e *EmployeesListHrRequest) SetTotals(totals []string) {
+	e.Totals = totals
+	e.require(employeesListHrRequestFieldTotals)
 }
 
-func (p *PostV1HrEmployeesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListRequest
+func (e *EmployeesListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesListRequest(body)
+	*e = EmployeesListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListRequest
+func (e *EmployeesListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesRecordsCreateRequestFieldEmployeeID  = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsCreateRequestFieldType        = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsCreateRequestFieldTitle       = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsCreateRequestFieldInstitution = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsCreateRequestFieldIssuedAt    = big.NewInt(1 << 4)
-	postV1HrEmployeesRecordsCreateRequestFieldValidUntil  = big.NewInt(1 << 5)
-	postV1HrEmployeesRecordsCreateRequestFieldFileID      = big.NewInt(1 << 6)
-	postV1HrEmployeesRecordsCreateRequestFieldNotes       = big.NewInt(1 << 7)
+	employeesRecordsCreateHrRequestFieldEmployeeID  = big.NewInt(1 << 0)
+	employeesRecordsCreateHrRequestFieldType        = big.NewInt(1 << 1)
+	employeesRecordsCreateHrRequestFieldTitle       = big.NewInt(1 << 2)
+	employeesRecordsCreateHrRequestFieldInstitution = big.NewInt(1 << 3)
+	employeesRecordsCreateHrRequestFieldIssuedAt    = big.NewInt(1 << 4)
+	employeesRecordsCreateHrRequestFieldValidUntil  = big.NewInt(1 << 5)
+	employeesRecordsCreateHrRequestFieldFileID      = big.NewInt(1 << 6)
+	employeesRecordsCreateHrRequestFieldNotes       = big.NewInt(1 << 7)
 )
 
-type PostV1HrEmployeesRecordsCreateRequest struct {
-	EmployeeID  string                                    `json:"employeeId" url:"-"`
-	Type        PostV1HrEmployeesRecordsCreateRequestType `json:"type" url:"-"`
-	Title       string                                    `json:"title" url:"-"`
-	Institution *string                                   `json:"institution,omitempty" url:"-"`
-	IssuedAt    *string                                   `json:"issuedAt,omitempty" url:"-"`
-	ValidUntil  *string                                   `json:"validUntil,omitempty" url:"-"`
-	FileID      *string                                   `json:"fileId,omitempty" url:"-"`
-	Notes       *string                                   `json:"notes,omitempty" url:"-"`
+type EmployeesRecordsCreateHrRequest struct {
+	EmployeeID  string                              `json:"employeeId" url:"-"`
+	Type        EmployeesRecordsCreateHrRequestType `json:"type" url:"-"`
+	Title       string                              `json:"title" url:"-"`
+	Institution *string                             `json:"institution,omitempty" url:"-"`
+	IssuedAt    *time.Time                          `json:"issuedAt,omitempty" url:"-" format:"date"`
+	ValidUntil  *time.Time                          `json:"validUntil,omitempty" url:"-" format:"date"`
+	FileID      *string                             `json:"fileId,omitempty" url:"-"`
+	Notes       *string                             `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesRecordsCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesRecordsCreateHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldEmployeeID)
+func (e *EmployeesRecordsCreateHrRequest) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(employeesRecordsCreateHrRequestFieldEmployeeID)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetType(type_ PostV1HrEmployeesRecordsCreateRequestType) {
-	p.Type = type_
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldType)
+func (e *EmployeesRecordsCreateHrRequest) SetType(type_ EmployeesRecordsCreateHrRequestType) {
+	e.Type = type_
+	e.require(employeesRecordsCreateHrRequestFieldType)
 }
 
 // SetTitle sets the Title field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetTitle(title string) {
-	p.Title = title
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldTitle)
+func (e *EmployeesRecordsCreateHrRequest) SetTitle(title string) {
+	e.Title = title
+	e.require(employeesRecordsCreateHrRequestFieldTitle)
 }
 
 // SetInstitution sets the Institution field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetInstitution(institution *string) {
-	p.Institution = institution
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldInstitution)
+func (e *EmployeesRecordsCreateHrRequest) SetInstitution(institution *string) {
+	e.Institution = institution
+	e.require(employeesRecordsCreateHrRequestFieldInstitution)
 }
 
 // SetIssuedAt sets the IssuedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetIssuedAt(issuedAt *string) {
-	p.IssuedAt = issuedAt
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldIssuedAt)
+func (e *EmployeesRecordsCreateHrRequest) SetIssuedAt(issuedAt *time.Time) {
+	e.IssuedAt = issuedAt
+	e.require(employeesRecordsCreateHrRequestFieldIssuedAt)
 }
 
 // SetValidUntil sets the ValidUntil field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetValidUntil(validUntil *string) {
-	p.ValidUntil = validUntil
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldValidUntil)
+func (e *EmployeesRecordsCreateHrRequest) SetValidUntil(validUntil *time.Time) {
+	e.ValidUntil = validUntil
+	e.require(employeesRecordsCreateHrRequestFieldValidUntil)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetFileID(fileID *string) {
-	p.FileID = fileID
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldFileID)
+func (e *EmployeesRecordsCreateHrRequest) SetFileID(fileID *string) {
+	e.FileID = fileID
+	e.require(employeesRecordsCreateHrRequestFieldFileID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesRecordsCreateRequestFieldNotes)
+func (e *EmployeesRecordsCreateHrRequest) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesRecordsCreateHrRequestFieldNotes)
 }
 
-func (p *PostV1HrEmployeesRecordsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsCreateRequest
+func (e *EmployeesRecordsCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsCreateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsCreateRequest(body)
+	*e = EmployeesRecordsCreateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsCreateRequest
+func (e *EmployeesRecordsCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsCreateHrRequest
 	var marshaler = struct {
 		embed
+		IssuedAt   *internal.Date `json:"issuedAt,omitempty"`
+		ValidUntil *internal.Date `json:"validUntil,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*e),
+		IssuedAt:   internal.NewOptionalDate(e.IssuedAt),
+		ValidUntil: internal.NewOptionalDate(e.ValidUntil),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesRecordsDeleteRequestFieldID = big.NewInt(1 << 0)
+	employeesRecordsDeleteHrRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesRecordsDeleteRequest struct {
+type EmployeesRecordsDeleteHrRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesRecordsDeleteHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsDeleteRequestFieldID)
+func (e *EmployeesRecordsDeleteHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsDeleteHrRequestFieldID)
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsDeleteRequest
+func (e *EmployeesRecordsDeleteHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsDeleteHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsDeleteRequest(body)
+	*e = EmployeesRecordsDeleteHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsDeleteRequest
+func (e *EmployeesRecordsDeleteHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsDeleteHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesRecordsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsListRequestFieldTotals   = big.NewInt(1 << 4)
+	employeesRecordsListHrRequestFieldPage     = big.NewInt(1 << 0)
+	employeesRecordsListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	employeesRecordsListHrRequestFieldSort     = big.NewInt(1 << 2)
+	employeesRecordsListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	employeesRecordsListHrRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrEmployeesRecordsListRequest struct {
-	Page     *int64                                           `json:"page,omitempty" url:"-"`
-	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1HrEmployeesRecordsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1HrEmployeesRecordsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type EmployeesRecordsListHrRequest struct {
+	Page     *int64                                     `json:"page,omitempty" url:"-"`
+	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
+	Sort     []*EmployeesRecordsListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*EmployeesRecordsListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -964,517 +981,533 @@ type PostV1HrEmployeesRecordsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesRecordsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesRecordsListHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1HrEmployeesRecordsListRequestFieldPage)
+func (e *EmployeesRecordsListHrRequest) SetPage(page *int64) {
+	e.Page = page
+	e.require(employeesRecordsListHrRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrEmployeesRecordsListRequestFieldPageSize)
+func (e *EmployeesRecordsListHrRequest) SetPageSize(pageSize *int64) {
+	e.PageSize = pageSize
+	e.require(employeesRecordsListHrRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequest) SetSort(sort []*PostV1HrEmployeesRecordsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1HrEmployeesRecordsListRequestFieldSort)
+func (e *EmployeesRecordsListHrRequest) SetSort(sort []*EmployeesRecordsListHrRequestSortItem) {
+	e.Sort = sort
+	e.require(employeesRecordsListHrRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequest) SetFilter(filter []*PostV1HrEmployeesRecordsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1HrEmployeesRecordsListRequestFieldFilter)
+func (e *EmployeesRecordsListHrRequest) SetFilter(filter []*EmployeesRecordsListHrRequestFilterItem) {
+	e.Filter = filter
+	e.require(employeesRecordsListHrRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1HrEmployeesRecordsListRequestFieldTotals)
+func (e *EmployeesRecordsListHrRequest) SetTotals(totals []string) {
+	e.Totals = totals
+	e.require(employeesRecordsListHrRequestFieldTotals)
 }
 
-func (p *PostV1HrEmployeesRecordsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsListRequest
+func (e *EmployeesRecordsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsListRequest(body)
+	*e = EmployeesRecordsListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsListRequest
+func (e *EmployeesRecordsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesRecordsUpdateRequestFieldID          = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsUpdateRequestFieldType        = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsUpdateRequestFieldTitle       = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsUpdateRequestFieldInstitution = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsUpdateRequestFieldIssuedAt    = big.NewInt(1 << 4)
-	postV1HrEmployeesRecordsUpdateRequestFieldValidUntil  = big.NewInt(1 << 5)
-	postV1HrEmployeesRecordsUpdateRequestFieldFileID      = big.NewInt(1 << 6)
-	postV1HrEmployeesRecordsUpdateRequestFieldNotes       = big.NewInt(1 << 7)
+	employeesRecordsUpdateHrRequestFieldID          = big.NewInt(1 << 0)
+	employeesRecordsUpdateHrRequestFieldType        = big.NewInt(1 << 1)
+	employeesRecordsUpdateHrRequestFieldTitle       = big.NewInt(1 << 2)
+	employeesRecordsUpdateHrRequestFieldInstitution = big.NewInt(1 << 3)
+	employeesRecordsUpdateHrRequestFieldIssuedAt    = big.NewInt(1 << 4)
+	employeesRecordsUpdateHrRequestFieldValidUntil  = big.NewInt(1 << 5)
+	employeesRecordsUpdateHrRequestFieldFileID      = big.NewInt(1 << 6)
+	employeesRecordsUpdateHrRequestFieldNotes       = big.NewInt(1 << 7)
 )
 
-type PostV1HrEmployeesRecordsUpdateRequest struct {
-	ID          string                                     `json:"id" url:"-"`
-	Type        *PostV1HrEmployeesRecordsUpdateRequestType `json:"type,omitempty" url:"-"`
-	Title       *string                                    `json:"title,omitempty" url:"-"`
-	Institution *string                                    `json:"institution,omitempty" url:"-"`
-	IssuedAt    *string                                    `json:"issuedAt,omitempty" url:"-"`
-	ValidUntil  *string                                    `json:"validUntil,omitempty" url:"-"`
-	FileID      *string                                    `json:"fileId,omitempty" url:"-"`
-	Notes       *string                                    `json:"notes,omitempty" url:"-"`
+type EmployeesRecordsUpdateHrRequest struct {
+	ID          string                               `json:"id" url:"-"`
+	Type        *EmployeesRecordsUpdateHrRequestType `json:"type,omitempty" url:"-"`
+	Title       *string                              `json:"title,omitempty" url:"-"`
+	Institution *string                              `json:"institution,omitempty" url:"-"`
+	IssuedAt    *time.Time                           `json:"issuedAt,omitempty" url:"-" format:"date"`
+	ValidUntil  *time.Time                           `json:"validUntil,omitempty" url:"-" format:"date"`
+	FileID      *string                              `json:"fileId,omitempty" url:"-"`
+	Notes       *string                              `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesRecordsUpdateHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldID)
+func (e *EmployeesRecordsUpdateHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsUpdateHrRequestFieldID)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetType(type_ *PostV1HrEmployeesRecordsUpdateRequestType) {
-	p.Type = type_
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldType)
+func (e *EmployeesRecordsUpdateHrRequest) SetType(type_ *EmployeesRecordsUpdateHrRequestType) {
+	e.Type = type_
+	e.require(employeesRecordsUpdateHrRequestFieldType)
 }
 
 // SetTitle sets the Title field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetTitle(title *string) {
-	p.Title = title
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldTitle)
+func (e *EmployeesRecordsUpdateHrRequest) SetTitle(title *string) {
+	e.Title = title
+	e.require(employeesRecordsUpdateHrRequestFieldTitle)
 }
 
 // SetInstitution sets the Institution field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetInstitution(institution *string) {
-	p.Institution = institution
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldInstitution)
+func (e *EmployeesRecordsUpdateHrRequest) SetInstitution(institution *string) {
+	e.Institution = institution
+	e.require(employeesRecordsUpdateHrRequestFieldInstitution)
 }
 
 // SetIssuedAt sets the IssuedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetIssuedAt(issuedAt *string) {
-	p.IssuedAt = issuedAt
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldIssuedAt)
+func (e *EmployeesRecordsUpdateHrRequest) SetIssuedAt(issuedAt *time.Time) {
+	e.IssuedAt = issuedAt
+	e.require(employeesRecordsUpdateHrRequestFieldIssuedAt)
 }
 
 // SetValidUntil sets the ValidUntil field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetValidUntil(validUntil *string) {
-	p.ValidUntil = validUntil
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldValidUntil)
+func (e *EmployeesRecordsUpdateHrRequest) SetValidUntil(validUntil *time.Time) {
+	e.ValidUntil = validUntil
+	e.require(employeesRecordsUpdateHrRequestFieldValidUntil)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetFileID(fileID *string) {
-	p.FileID = fileID
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldFileID)
+func (e *EmployeesRecordsUpdateHrRequest) SetFileID(fileID *string) {
+	e.FileID = fileID
+	e.require(employeesRecordsUpdateHrRequestFieldFileID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesRecordsUpdateRequestFieldNotes)
+func (e *EmployeesRecordsUpdateHrRequest) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesRecordsUpdateHrRequestFieldNotes)
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsUpdateRequest
+func (e *EmployeesRecordsUpdateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsUpdateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsUpdateRequest(body)
+	*e = EmployeesRecordsUpdateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsUpdateRequest
+func (e *EmployeesRecordsUpdateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsUpdateHrRequest
 	var marshaler = struct {
 		embed
+		IssuedAt   *internal.Date `json:"issuedAt,omitempty"`
+		ValidUntil *internal.Date `json:"validUntil,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:      embed(*e),
+		IssuedAt:   internal.NewOptionalDate(e.IssuedAt),
+		ValidUntil: internal.NewOptionalDate(e.ValidUntil),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrEmployeesUpdateRequestFieldCode                 = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateRequestFieldFirstName            = big.NewInt(1 << 1)
-	postV1HrEmployeesUpdateRequestFieldLastName             = big.NewInt(1 << 2)
-	postV1HrEmployeesUpdateRequestFieldPersonalCode         = big.NewInt(1 << 3)
-	postV1HrEmployeesUpdateRequestFieldBirthDate            = big.NewInt(1 << 4)
-	postV1HrEmployeesUpdateRequestFieldEmail                = big.NewInt(1 << 5)
-	postV1HrEmployeesUpdateRequestFieldPhone                = big.NewInt(1 << 6)
-	postV1HrEmployeesUpdateRequestFieldAddress              = big.NewInt(1 << 7)
-	postV1HrEmployeesUpdateRequestFieldIban                 = big.NewInt(1 << 8)
-	postV1HrEmployeesUpdateRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
-	postV1HrEmployeesUpdateRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
-	postV1HrEmployeesUpdateRequestFieldHireDate             = big.NewInt(1 << 11)
-	postV1HrEmployeesUpdateRequestFieldApplyAllowance       = big.NewInt(1 << 12)
-	postV1HrEmployeesUpdateRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
-	postV1HrEmployeesUpdateRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	postV1HrEmployeesUpdateRequestFieldPayrollOptions       = big.NewInt(1 << 15)
-	postV1HrEmployeesUpdateRequestFieldNotes                = big.NewInt(1 << 16)
-	postV1HrEmployeesUpdateRequestFieldAttributes           = big.NewInt(1 << 17)
-	postV1HrEmployeesUpdateRequestFieldID                   = big.NewInt(1 << 18)
-	postV1HrEmployeesUpdateRequestFieldTerminationDate      = big.NewInt(1 << 19)
-	postV1HrEmployeesUpdateRequestFieldStatus               = big.NewInt(1 << 20)
+	employeesUpdateHrRequestFieldCode                 = big.NewInt(1 << 0)
+	employeesUpdateHrRequestFieldFirstName            = big.NewInt(1 << 1)
+	employeesUpdateHrRequestFieldLastName             = big.NewInt(1 << 2)
+	employeesUpdateHrRequestFieldPersonalCode         = big.NewInt(1 << 3)
+	employeesUpdateHrRequestFieldBirthDate            = big.NewInt(1 << 4)
+	employeesUpdateHrRequestFieldEmail                = big.NewInt(1 << 5)
+	employeesUpdateHrRequestFieldPhone                = big.NewInt(1 << 6)
+	employeesUpdateHrRequestFieldAddress              = big.NewInt(1 << 7)
+	employeesUpdateHrRequestFieldIban                 = big.NewInt(1 << 8)
+	employeesUpdateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
+	employeesUpdateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
+	employeesUpdateHrRequestFieldHireDate             = big.NewInt(1 << 11)
+	employeesUpdateHrRequestFieldApplyAllowance       = big.NewInt(1 << 12)
+	employeesUpdateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
+	employeesUpdateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
+	employeesUpdateHrRequestFieldPayrollOptions       = big.NewInt(1 << 15)
+	employeesUpdateHrRequestFieldNotes                = big.NewInt(1 << 16)
+	employeesUpdateHrRequestFieldAttributes           = big.NewInt(1 << 17)
+	employeesUpdateHrRequestFieldID                   = big.NewInt(1 << 18)
+	employeesUpdateHrRequestFieldTerminationDate      = big.NewInt(1 << 19)
+	employeesUpdateHrRequestFieldStatus               = big.NewInt(1 << 20)
 )
 
-type PostV1HrEmployeesUpdateRequest struct {
-	Code                 *string                                         `json:"code,omitempty" url:"-"`
-	FirstName            *string                                         `json:"firstName,omitempty" url:"-"`
-	LastName             *string                                         `json:"lastName,omitempty" url:"-"`
-	PersonalCode         *string                                         `json:"personalCode,omitempty" url:"-"`
-	BirthDate            *string                                         `json:"birthDate,omitempty" url:"-"`
-	Email                *string                                         `json:"email,omitempty" url:"-"`
-	Phone                *string                                         `json:"phone,omitempty" url:"-"`
-	Address              *PostV1HrEmployeesUpdateRequestAddress          `json:"address,omitempty" url:"-"`
-	Iban                 *string                                         `json:"iban,omitempty" url:"-"`
-	SocialInsuranceNo    *string                                         `json:"socialInsuranceNo,omitempty" url:"-"`
-	SocialInsuranceStart *string                                         `json:"socialInsuranceStart,omitempty" url:"-"`
-	HireDate             *string                                         `json:"hireDate,omitempty" url:"-"`
-	ApplyAllowance       *bool                                           `json:"applyAllowance,omitempty" url:"-"`
-	AllowanceOverride    *string                                         `json:"allowanceOverride,omitempty" url:"-"`
-	PensionAccumulation  *bool                                           `json:"pensionAccumulation,omitempty" url:"-"`
-	PayrollOptions       map[string]string                               `json:"payrollOptions,omitempty" url:"-"`
-	Notes                *string                                         `json:"notes,omitempty" url:"-"`
-	Attributes           []*PostV1HrEmployeesUpdateRequestAttributesItem `json:"attributes,omitempty" url:"-"`
-	ID                   string                                          `json:"id" url:"-"`
-	TerminationDate      *string                                         `json:"terminationDate,omitempty" url:"-"`
-	Status               *PostV1HrEmployeesUpdateRequestStatus           `json:"status,omitempty" url:"-"`
+type EmployeesUpdateHrRequest struct {
+	Code                 *string                                   `json:"code,omitempty" url:"-"`
+	FirstName            *string                                   `json:"firstName,omitempty" url:"-"`
+	LastName             *string                                   `json:"lastName,omitempty" url:"-"`
+	PersonalCode         *string                                   `json:"personalCode,omitempty" url:"-"`
+	BirthDate            *time.Time                                `json:"birthDate,omitempty" url:"-" format:"date"`
+	Email                *string                                   `json:"email,omitempty" url:"-"`
+	Phone                *string                                   `json:"phone,omitempty" url:"-"`
+	Address              *EmployeesUpdateHrRequestAddress          `json:"address,omitempty" url:"-"`
+	Iban                 *string                                   `json:"iban,omitempty" url:"-"`
+	SocialInsuranceNo    *string                                   `json:"socialInsuranceNo,omitempty" url:"-"`
+	SocialInsuranceStart *time.Time                                `json:"socialInsuranceStart,omitempty" url:"-" format:"date"`
+	HireDate             *time.Time                                `json:"hireDate,omitempty" url:"-" format:"date"`
+	ApplyAllowance       *bool                                     `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride    *string                                   `json:"allowanceOverride,omitempty" url:"-"`
+	PensionAccumulation  *bool                                     `json:"pensionAccumulation,omitempty" url:"-"`
+	PayrollOptions       map[string]string                         `json:"payrollOptions,omitempty" url:"-"`
+	Notes                *string                                   `json:"notes,omitempty" url:"-"`
+	Attributes           []*EmployeesUpdateHrRequestAttributesItem `json:"attributes,omitempty" url:"-"`
+	ID                   string                                    `json:"id" url:"-"`
+	TerminationDate      *time.Time                                `json:"terminationDate,omitempty" url:"-" format:"date"`
+	Status               *EmployeesUpdateHrRequestStatus           `json:"status,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrEmployeesUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesUpdateHrRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesUpdateRequestFieldCode)
+func (e *EmployeesUpdateHrRequest) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesUpdateHrRequestFieldCode)
 }
 
 // SetFirstName sets the FirstName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetFirstName(firstName *string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesUpdateRequestFieldFirstName)
+func (e *EmployeesUpdateHrRequest) SetFirstName(firstName *string) {
+	e.FirstName = firstName
+	e.require(employeesUpdateHrRequestFieldFirstName)
 }
 
 // SetLastName sets the LastName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetLastName(lastName *string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesUpdateRequestFieldLastName)
+func (e *EmployeesUpdateHrRequest) SetLastName(lastName *string) {
+	e.LastName = lastName
+	e.require(employeesUpdateHrRequestFieldLastName)
 }
 
 // SetPersonalCode sets the PersonalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesUpdateRequestFieldPersonalCode)
+func (e *EmployeesUpdateHrRequest) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesUpdateHrRequestFieldPersonalCode)
 }
 
 // SetBirthDate sets the BirthDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesUpdateRequestFieldBirthDate)
+func (e *EmployeesUpdateHrRequest) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesUpdateHrRequestFieldBirthDate)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesUpdateRequestFieldEmail)
+func (e *EmployeesUpdateHrRequest) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesUpdateHrRequestFieldEmail)
 }
 
 // SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesUpdateRequestFieldPhone)
+func (e *EmployeesUpdateHrRequest) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesUpdateHrRequestFieldPhone)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetAddress(address *PostV1HrEmployeesUpdateRequestAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesUpdateRequestFieldAddress)
+func (e *EmployeesUpdateHrRequest) SetAddress(address *EmployeesUpdateHrRequestAddress) {
+	e.Address = address
+	e.require(employeesUpdateHrRequestFieldAddress)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesUpdateRequestFieldIban)
+func (e *EmployeesUpdateHrRequest) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesUpdateHrRequestFieldIban)
 }
 
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesUpdateRequestFieldSocialInsuranceNo)
+func (e *EmployeesUpdateHrRequest) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesUpdateHrRequestFieldSocialInsuranceNo)
 }
 
 // SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesUpdateRequestFieldSocialInsuranceStart)
+func (e *EmployeesUpdateHrRequest) SetSocialInsuranceStart(socialInsuranceStart *time.Time) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesUpdateHrRequestFieldSocialInsuranceStart)
 }
 
 // SetHireDate sets the HireDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesUpdateRequestFieldHireDate)
+func (e *EmployeesUpdateHrRequest) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesUpdateHrRequestFieldHireDate)
 }
 
 // SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetApplyAllowance(applyAllowance *bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesUpdateRequestFieldApplyAllowance)
+func (e *EmployeesUpdateHrRequest) SetApplyAllowance(applyAllowance *bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesUpdateHrRequestFieldApplyAllowance)
 }
 
 // SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesUpdateRequestFieldAllowanceOverride)
+func (e *EmployeesUpdateHrRequest) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesUpdateHrRequestFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetPensionAccumulation(pensionAccumulation *bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesUpdateRequestFieldPensionAccumulation)
+func (e *EmployeesUpdateHrRequest) SetPensionAccumulation(pensionAccumulation *bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesUpdateHrRequestFieldPensionAccumulation)
 }
 
 // SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesUpdateRequestFieldPayrollOptions)
+func (e *EmployeesUpdateHrRequest) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesUpdateHrRequestFieldPayrollOptions)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesUpdateRequestFieldNotes)
+func (e *EmployeesUpdateHrRequest) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesUpdateHrRequestFieldNotes)
 }
 
 // SetAttributes sets the Attributes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetAttributes(attributes []*PostV1HrEmployeesUpdateRequestAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesUpdateRequestFieldAttributes)
+func (e *EmployeesUpdateHrRequest) SetAttributes(attributes []*EmployeesUpdateHrRequestAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesUpdateHrRequestFieldAttributes)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesUpdateRequestFieldID)
+func (e *EmployeesUpdateHrRequest) SetID(id string) {
+	e.ID = id
+	e.require(employeesUpdateHrRequestFieldID)
 }
 
 // SetTerminationDate sets the TerminationDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesUpdateRequestFieldTerminationDate)
+func (e *EmployeesUpdateHrRequest) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesUpdateHrRequestFieldTerminationDate)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetStatus(status *PostV1HrEmployeesUpdateRequestStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesUpdateRequestFieldStatus)
+func (e *EmployeesUpdateHrRequest) SetStatus(status *EmployeesUpdateHrRequestStatus) {
+	e.Status = status
+	e.require(employeesUpdateHrRequestFieldStatus)
 }
 
-func (p *PostV1HrEmployeesUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateRequest
+func (e *EmployeesUpdateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesUpdateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesUpdateRequest(body)
+	*e = EmployeesUpdateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrEmployeesUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateRequest
+func (e *EmployeesUpdateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrRequest
 	var marshaler = struct {
 		embed
+		BirthDate            *internal.Date `json:"birthDate,omitempty"`
+		SocialInsuranceStart *internal.Date `json:"socialInsuranceStart,omitempty"`
+		HireDate             *internal.Date `json:"hireDate,omitempty"`
+		TerminationDate      *internal.Date `json:"terminationDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:                embed(*e),
+		BirthDate:            internal.NewOptionalDate(e.BirthDate),
+		SocialInsuranceStart: internal.NewOptionalDate(e.SocialInsuranceStart),
+		HireDate:             internal.NewOptionalDate(e.HireDate),
+		TerminationDate:      internal.NewOptionalDate(e.TerminationDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrIncapacityCertificatesCreateRequestFieldEmployeeID = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesCreateRequestFieldSeries     = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesCreateRequestFieldNumber     = big.NewInt(1 << 2)
-	postV1HrIncapacityCertificatesCreateRequestFieldFromDate   = big.NewInt(1 << 3)
-	postV1HrIncapacityCertificatesCreateRequestFieldToDate     = big.NewInt(1 << 4)
-	postV1HrIncapacityCertificatesCreateRequestFieldReason     = big.NewInt(1 << 5)
-	postV1HrIncapacityCertificatesCreateRequestFieldNotes      = big.NewInt(1 << 6)
+	incapacityCertificatesCreateHrRequestFieldEmployeeID = big.NewInt(1 << 0)
+	incapacityCertificatesCreateHrRequestFieldSeries     = big.NewInt(1 << 1)
+	incapacityCertificatesCreateHrRequestFieldNumber     = big.NewInt(1 << 2)
+	incapacityCertificatesCreateHrRequestFieldFromDate   = big.NewInt(1 << 3)
+	incapacityCertificatesCreateHrRequestFieldToDate     = big.NewInt(1 << 4)
+	incapacityCertificatesCreateHrRequestFieldReason     = big.NewInt(1 << 5)
+	incapacityCertificatesCreateHrRequestFieldNotes      = big.NewInt(1 << 6)
 )
 
-type PostV1HrIncapacityCertificatesCreateRequest struct {
-	EmployeeID string  `json:"employeeId" url:"-"`
-	Series     *string `json:"series,omitempty" url:"-"`
-	Number     string  `json:"number" url:"-"`
-	FromDate   string  `json:"fromDate" url:"-"`
-	ToDate     string  `json:"toDate" url:"-"`
-	Reason     *string `json:"reason,omitempty" url:"-"`
-	Notes      *string `json:"notes,omitempty" url:"-"`
+type IncapacityCertificatesCreateHrRequest struct {
+	EmployeeID string    `json:"employeeId" url:"-"`
+	Series     *string   `json:"series,omitempty" url:"-"`
+	Number     string    `json:"number" url:"-"`
+	FromDate   time.Time `json:"fromDate" url:"-" format:"date"`
+	ToDate     time.Time `json:"toDate" url:"-" format:"date"`
+	Reason     *string   `json:"reason,omitempty" url:"-"`
+	Notes      *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrIncapacityCertificatesCreateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IncapacityCertificatesCreateHrRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldEmployeeID)
+func (i *IncapacityCertificatesCreateHrRequest) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(incapacityCertificatesCreateHrRequestFieldEmployeeID)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetSeries(series *string) {
-	p.Series = series
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldSeries)
+func (i *IncapacityCertificatesCreateHrRequest) SetSeries(series *string) {
+	i.Series = series
+	i.require(incapacityCertificatesCreateHrRequestFieldSeries)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldNumber)
+func (i *IncapacityCertificatesCreateHrRequest) SetNumber(number string) {
+	i.Number = number
+	i.require(incapacityCertificatesCreateHrRequestFieldNumber)
 }
 
 // SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldFromDate)
+func (i *IncapacityCertificatesCreateHrRequest) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(incapacityCertificatesCreateHrRequestFieldFromDate)
 }
 
 // SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldToDate)
+func (i *IncapacityCertificatesCreateHrRequest) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(incapacityCertificatesCreateHrRequestFieldToDate)
 }
 
 // SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetReason(reason *string) {
-	p.Reason = reason
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldReason)
+func (i *IncapacityCertificatesCreateHrRequest) SetReason(reason *string) {
+	i.Reason = reason
+	i.require(incapacityCertificatesCreateHrRequestFieldReason)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrIncapacityCertificatesCreateRequestFieldNotes)
+func (i *IncapacityCertificatesCreateHrRequest) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(incapacityCertificatesCreateHrRequestFieldNotes)
 }
 
-func (p *PostV1HrIncapacityCertificatesCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesCreateRequest
+func (i *IncapacityCertificatesCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IncapacityCertificatesCreateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrIncapacityCertificatesCreateRequest(body)
+	*i = IncapacityCertificatesCreateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrIncapacityCertificatesCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesCreateRequest
+func (i *IncapacityCertificatesCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesCreateHrRequest
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrIncapacityCertificatesListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1HrIncapacityCertificatesListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1HrIncapacityCertificatesListRequestFieldTotals   = big.NewInt(1 << 4)
+	incapacityCertificatesListHrRequestFieldPage     = big.NewInt(1 << 0)
+	incapacityCertificatesListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	incapacityCertificatesListHrRequestFieldSort     = big.NewInt(1 << 2)
+	incapacityCertificatesListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	incapacityCertificatesListHrRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrIncapacityCertificatesListRequest struct {
-	Page     *int64                                                 `json:"page,omitempty" url:"-"`
-	PageSize *int64                                                 `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1HrIncapacityCertificatesListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1HrIncapacityCertificatesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type IncapacityCertificatesListHrRequest struct {
+	Page     *int64                                           `json:"page,omitempty" url:"-"`
+	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
+	Sort     []*IncapacityCertificatesListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*IncapacityCertificatesListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -1482,75 +1515,75 @@ type PostV1HrIncapacityCertificatesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IncapacityCertificatesListHrRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1HrIncapacityCertificatesListRequestFieldPage)
+func (i *IncapacityCertificatesListHrRequest) SetPage(page *int64) {
+	i.Page = page
+	i.require(incapacityCertificatesListHrRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrIncapacityCertificatesListRequestFieldPageSize)
+func (i *IncapacityCertificatesListHrRequest) SetPageSize(pageSize *int64) {
+	i.PageSize = pageSize
+	i.require(incapacityCertificatesListHrRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequest) SetSort(sort []*PostV1HrIncapacityCertificatesListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1HrIncapacityCertificatesListRequestFieldSort)
+func (i *IncapacityCertificatesListHrRequest) SetSort(sort []*IncapacityCertificatesListHrRequestSortItem) {
+	i.Sort = sort
+	i.require(incapacityCertificatesListHrRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequest) SetFilter(filter []*PostV1HrIncapacityCertificatesListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1HrIncapacityCertificatesListRequestFieldFilter)
+func (i *IncapacityCertificatesListHrRequest) SetFilter(filter []*IncapacityCertificatesListHrRequestFilterItem) {
+	i.Filter = filter
+	i.require(incapacityCertificatesListHrRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1HrIncapacityCertificatesListRequestFieldTotals)
+func (i *IncapacityCertificatesListHrRequest) SetTotals(totals []string) {
+	i.Totals = totals
+	i.require(incapacityCertificatesListHrRequestFieldTotals)
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesListRequest
+func (i *IncapacityCertificatesListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IncapacityCertificatesListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrIncapacityCertificatesListRequest(body)
+	*i = IncapacityCertificatesListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesListRequest
+func (i *IncapacityCertificatesListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrLeaveBalancesListRequestFieldEmployeeID = big.NewInt(1 << 0)
-	postV1HrLeaveBalancesListRequestFieldYear       = big.NewInt(1 << 1)
+	leaveBalancesListHrRequestFieldEmployeeID = big.NewInt(1 << 0)
+	leaveBalancesListHrRequestFieldYear       = big.NewInt(1 << 1)
 )
 
-type PostV1HrLeaveBalancesListRequest struct {
+type LeaveBalancesListHrRequest struct {
 	EmployeeID *string `json:"employeeId,omitempty" url:"-"`
 	Year       *int64  `json:"year,omitempty" url:"-"`
 
@@ -1558,56 +1591,56 @@ type PostV1HrLeaveBalancesListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrLeaveBalancesListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LeaveBalancesListHrRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListRequest) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrLeaveBalancesListRequestFieldEmployeeID)
+func (l *LeaveBalancesListHrRequest) SetEmployeeID(employeeID *string) {
+	l.EmployeeID = employeeID
+	l.require(leaveBalancesListHrRequestFieldEmployeeID)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListRequest) SetYear(year *int64) {
-	p.Year = year
-	p.require(postV1HrLeaveBalancesListRequestFieldYear)
+func (l *LeaveBalancesListHrRequest) SetYear(year *int64) {
+	l.Year = year
+	l.require(leaveBalancesListHrRequestFieldYear)
 }
 
-func (p *PostV1HrLeaveBalancesListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrLeaveBalancesListRequest
+func (l *LeaveBalancesListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LeaveBalancesListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrLeaveBalancesListRequest(body)
+	*l = LeaveBalancesListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrLeaveBalancesListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrLeaveBalancesListRequest
+func (l *LeaveBalancesListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed LeaveBalancesListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrLeaveBalancesSetRequestFieldEmployeeID   = big.NewInt(1 << 0)
-	postV1HrLeaveBalancesSetRequestFieldYear         = big.NewInt(1 << 1)
-	postV1HrLeaveBalancesSetRequestFieldEntitledDays = big.NewInt(1 << 2)
-	postV1HrLeaveBalancesSetRequestFieldUsedDays     = big.NewInt(1 << 3)
+	leaveBalancesSetHrRequestFieldEmployeeID   = big.NewInt(1 << 0)
+	leaveBalancesSetHrRequestFieldYear         = big.NewInt(1 << 1)
+	leaveBalancesSetHrRequestFieldEntitledDays = big.NewInt(1 << 2)
+	leaveBalancesSetHrRequestFieldUsedDays     = big.NewInt(1 << 3)
 )
 
-type PostV1HrLeaveBalancesSetRequest struct {
+type LeaveBalancesSetHrRequest struct {
 	EmployeeID   string  `json:"employeeId" url:"-"`
 	Year         int64   `json:"year" url:"-"`
 	EntitledDays string  `json:"entitledDays" url:"-"`
@@ -1617,78 +1650,78 @@ type PostV1HrLeaveBalancesSetRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrLeaveBalancesSetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (l *LeaveBalancesSetHrRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrLeaveBalancesSetRequestFieldEmployeeID)
+func (l *LeaveBalancesSetHrRequest) SetEmployeeID(employeeID string) {
+	l.EmployeeID = employeeID
+	l.require(leaveBalancesSetHrRequestFieldEmployeeID)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrLeaveBalancesSetRequestFieldYear)
+func (l *LeaveBalancesSetHrRequest) SetYear(year int64) {
+	l.Year = year
+	l.require(leaveBalancesSetHrRequestFieldYear)
 }
 
 // SetEntitledDays sets the EntitledDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetRequest) SetEntitledDays(entitledDays string) {
-	p.EntitledDays = entitledDays
-	p.require(postV1HrLeaveBalancesSetRequestFieldEntitledDays)
+func (l *LeaveBalancesSetHrRequest) SetEntitledDays(entitledDays string) {
+	l.EntitledDays = entitledDays
+	l.require(leaveBalancesSetHrRequestFieldEntitledDays)
 }
 
 // SetUsedDays sets the UsedDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetRequest) SetUsedDays(usedDays *string) {
-	p.UsedDays = usedDays
-	p.require(postV1HrLeaveBalancesSetRequestFieldUsedDays)
+func (l *LeaveBalancesSetHrRequest) SetUsedDays(usedDays *string) {
+	l.UsedDays = usedDays
+	l.require(leaveBalancesSetHrRequestFieldUsedDays)
 }
 
-func (p *PostV1HrLeaveBalancesSetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrLeaveBalancesSetRequest
+func (l *LeaveBalancesSetHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LeaveBalancesSetHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrLeaveBalancesSetRequest(body)
+	*l = LeaveBalancesSetHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrLeaveBalancesSetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrLeaveBalancesSetRequest
+func (l *LeaveBalancesSetHrRequest) MarshalJSON() ([]byte, error) {
+	type embed LeaveBalancesSetHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrPositionsCreateRequestFieldCode         = big.NewInt(1 << 0)
-	postV1HrPositionsCreateRequestFieldName         = big.NewInt(1 << 1)
-	postV1HrPositionsCreateRequestFieldTranslations = big.NewInt(1 << 2)
+	positionsCreateHrRequestFieldCode         = big.NewInt(1 << 0)
+	positionsCreateHrRequestFieldName         = big.NewInt(1 << 1)
+	positionsCreateHrRequestFieldTranslations = big.NewInt(1 << 2)
 )
 
-type PostV1HrPositionsCreateRequest struct {
-	Code         *string                                                     `json:"code,omitempty" url:"-"`
-	Name         string                                                      `json:"name" url:"-"`
-	Translations map[string]*PostV1HrPositionsCreateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
+type PositionsCreateHrRequest struct {
+	Code         *string                                               `json:"code,omitempty" url:"-"`
+	Name         string                                                `json:"name" url:"-"`
+	Translations map[string]*PositionsCreateHrRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrPositionsCreateRequest) require(field *big.Int) {
+func (p *PositionsCreateHrRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -1697,37 +1730,37 @@ func (p *PostV1HrPositionsCreateRequest) require(field *big.Int) {
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateRequest) SetCode(code *string) {
+func (p *PositionsCreateHrRequest) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1HrPositionsCreateRequestFieldCode)
+	p.require(positionsCreateHrRequestFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateRequest) SetName(name string) {
+func (p *PositionsCreateHrRequest) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrPositionsCreateRequestFieldName)
+	p.require(positionsCreateHrRequestFieldName)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateRequest) SetTranslations(translations map[string]*PostV1HrPositionsCreateRequestTranslationsValue) {
+func (p *PositionsCreateHrRequest) SetTranslations(translations map[string]*PositionsCreateHrRequestTranslationsValue) {
 	p.Translations = translations
-	p.require(postV1HrPositionsCreateRequestFieldTranslations)
+	p.require(positionsCreateHrRequestFieldTranslations)
 }
 
-func (p *PostV1HrPositionsCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsCreateRequest
+func (p *PositionsCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsCreateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsCreateRequest(body)
+	*p = PositionsCreateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrPositionsCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsCreateRequest
+func (p *PositionsCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PositionsCreateHrRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1738,18 +1771,18 @@ func (p *PostV1HrPositionsCreateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1HrPositionsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1HrPositionsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1HrPositionsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1HrPositionsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1HrPositionsListRequestFieldTotals   = big.NewInt(1 << 4)
+	positionsListHrRequestFieldPage     = big.NewInt(1 << 0)
+	positionsListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	positionsListHrRequestFieldSort     = big.NewInt(1 << 2)
+	positionsListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	positionsListHrRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrPositionsListRequest struct {
-	Page     *int64                                    `json:"page,omitempty" url:"-"`
-	PageSize *int64                                    `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1HrPositionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1HrPositionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type PositionsListHrRequest struct {
+	Page     *int64                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PositionsListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PositionsListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -1757,7 +1790,7 @@ type PostV1HrPositionsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrPositionsListRequest) require(field *big.Int) {
+func (p *PositionsListHrRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -1766,51 +1799,51 @@ func (p *PostV1HrPositionsListRequest) require(field *big.Int) {
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequest) SetPage(page *int64) {
+func (p *PositionsListHrRequest) SetPage(page *int64) {
 	p.Page = page
-	p.require(postV1HrPositionsListRequestFieldPage)
+	p.require(positionsListHrRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequest) SetPageSize(pageSize *int64) {
+func (p *PositionsListHrRequest) SetPageSize(pageSize *int64) {
 	p.PageSize = pageSize
-	p.require(postV1HrPositionsListRequestFieldPageSize)
+	p.require(positionsListHrRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequest) SetSort(sort []*PostV1HrPositionsListRequestSortItem) {
+func (p *PositionsListHrRequest) SetSort(sort []*PositionsListHrRequestSortItem) {
 	p.Sort = sort
-	p.require(postV1HrPositionsListRequestFieldSort)
+	p.require(positionsListHrRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequest) SetFilter(filter []*PostV1HrPositionsListRequestFilterItem) {
+func (p *PositionsListHrRequest) SetFilter(filter []*PositionsListHrRequestFilterItem) {
 	p.Filter = filter
-	p.require(postV1HrPositionsListRequestFieldFilter)
+	p.require(positionsListHrRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequest) SetTotals(totals []string) {
+func (p *PositionsListHrRequest) SetTotals(totals []string) {
 	p.Totals = totals
-	p.require(postV1HrPositionsListRequestFieldTotals)
+	p.require(positionsListHrRequestFieldTotals)
 }
 
-func (p *PostV1HrPositionsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListRequest
+func (p *PositionsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsListRequest(body)
+	*p = PositionsListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrPositionsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListRequest
+func (p *PositionsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1821,23 +1854,23 @@ func (p *PostV1HrPositionsListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1HrPositionsUpdateRequestFieldID           = big.NewInt(1 << 0)
-	postV1HrPositionsUpdateRequestFieldCode         = big.NewInt(1 << 1)
-	postV1HrPositionsUpdateRequestFieldName         = big.NewInt(1 << 2)
-	postV1HrPositionsUpdateRequestFieldTranslations = big.NewInt(1 << 3)
+	positionsUpdateHrRequestFieldID           = big.NewInt(1 << 0)
+	positionsUpdateHrRequestFieldCode         = big.NewInt(1 << 1)
+	positionsUpdateHrRequestFieldName         = big.NewInt(1 << 2)
+	positionsUpdateHrRequestFieldTranslations = big.NewInt(1 << 3)
 )
 
-type PostV1HrPositionsUpdateRequest struct {
-	ID           string                                                      `json:"id" url:"-"`
-	Code         *string                                                     `json:"code,omitempty" url:"-"`
-	Name         *string                                                     `json:"name,omitempty" url:"-"`
-	Translations map[string]*PostV1HrPositionsUpdateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
+type PositionsUpdateHrRequest struct {
+	ID           string                                                `json:"id" url:"-"`
+	Code         *string                                               `json:"code,omitempty" url:"-"`
+	Name         *string                                               `json:"name,omitempty" url:"-"`
+	Translations map[string]*PositionsUpdateHrRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrPositionsUpdateRequest) require(field *big.Int) {
+func (p *PositionsUpdateHrRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -1846,44 +1879,44 @@ func (p *PostV1HrPositionsUpdateRequest) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateRequest) SetID(id string) {
+func (p *PositionsUpdateHrRequest) SetID(id string) {
 	p.ID = id
-	p.require(postV1HrPositionsUpdateRequestFieldID)
+	p.require(positionsUpdateHrRequestFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateRequest) SetCode(code *string) {
+func (p *PositionsUpdateHrRequest) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1HrPositionsUpdateRequestFieldCode)
+	p.require(positionsUpdateHrRequestFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateRequest) SetName(name *string) {
+func (p *PositionsUpdateHrRequest) SetName(name *string) {
 	p.Name = name
-	p.require(postV1HrPositionsUpdateRequestFieldName)
+	p.require(positionsUpdateHrRequestFieldName)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateRequest) SetTranslations(translations map[string]*PostV1HrPositionsUpdateRequestTranslationsValue) {
+func (p *PositionsUpdateHrRequest) SetTranslations(translations map[string]*PositionsUpdateHrRequestTranslationsValue) {
 	p.Translations = translations
-	p.require(postV1HrPositionsUpdateRequestFieldTranslations)
+	p.require(positionsUpdateHrRequestFieldTranslations)
 }
 
-func (p *PostV1HrPositionsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsUpdateRequest
+func (p *PositionsUpdateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsUpdateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsUpdateRequest(body)
+	*p = PositionsUpdateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrPositionsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsUpdateRequest
+func (p *PositionsUpdateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PositionsUpdateHrRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1894,58 +1927,58 @@ func (p *PostV1HrPositionsUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1HrTimesheetsDeleteRequestFieldID = big.NewInt(1 << 0)
+	timesheetsDeleteHrRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrTimesheetsDeleteRequest struct {
+type TimesheetsDeleteHrRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrTimesheetsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsDeleteHrRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrTimesheetsDeleteRequestFieldID)
+func (t *TimesheetsDeleteHrRequest) SetID(id string) {
+	t.ID = id
+	t.require(timesheetsDeleteHrRequestFieldID)
 }
 
-func (p *PostV1HrTimesheetsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsDeleteRequest
+func (t *TimesheetsDeleteHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsDeleteHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsDeleteRequest(body)
+	*t = TimesheetsDeleteHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsDeleteRequest
+func (t *TimesheetsDeleteHrRequest) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsDeleteHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrTimesheetsGenerateRequestFieldYear       = big.NewInt(1 << 0)
-	postV1HrTimesheetsGenerateRequestFieldMonth      = big.NewInt(1 << 1)
-	postV1HrTimesheetsGenerateRequestFieldEmployeeID = big.NewInt(1 << 2)
+	timesheetsGenerateHrRequestFieldYear       = big.NewInt(1 << 0)
+	timesheetsGenerateHrRequestFieldMonth      = big.NewInt(1 << 1)
+	timesheetsGenerateHrRequestFieldEmployeeID = big.NewInt(1 << 2)
 )
 
-type PostV1HrTimesheetsGenerateRequest struct {
+type TimesheetsGenerateHrRequest struct {
 	Year       int64   `json:"year" url:"-"`
 	Month      int64   `json:"month" url:"-"`
 	EmployeeID *string `json:"employeeId,omitempty" url:"-"`
@@ -1954,62 +1987,62 @@ type PostV1HrTimesheetsGenerateRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrTimesheetsGenerateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsGenerateHrRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGenerateRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsGenerateRequestFieldYear)
+func (t *TimesheetsGenerateHrRequest) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsGenerateHrRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGenerateRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsGenerateRequestFieldMonth)
+func (t *TimesheetsGenerateHrRequest) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsGenerateHrRequestFieldMonth)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGenerateRequest) SetEmployeeID(employeeID *string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsGenerateRequestFieldEmployeeID)
+func (t *TimesheetsGenerateHrRequest) SetEmployeeID(employeeID *string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsGenerateHrRequestFieldEmployeeID)
 }
 
-func (p *PostV1HrTimesheetsGenerateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsGenerateRequest
+func (t *TimesheetsGenerateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsGenerateHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsGenerateRequest(body)
+	*t = TimesheetsGenerateHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsGenerateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsGenerateRequest
+func (t *TimesheetsGenerateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsGenerateHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrTimesheetsGetRequestFieldEmployeeID = big.NewInt(1 << 0)
-	postV1HrTimesheetsGetRequestFieldYear       = big.NewInt(1 << 1)
-	postV1HrTimesheetsGetRequestFieldMonth      = big.NewInt(1 << 2)
+	timesheetsGetHrRequestFieldEmployeeID = big.NewInt(1 << 0)
+	timesheetsGetHrRequestFieldYear       = big.NewInt(1 << 1)
+	timesheetsGetHrRequestFieldMonth      = big.NewInt(1 << 2)
 )
 
-type PostV1HrTimesheetsGetRequest struct {
+type TimesheetsGetHrRequest struct {
 	EmployeeID string `json:"employeeId" url:"-"`
 	Year       int64  `json:"year" url:"-"`
 	Month      int64  `json:"month" url:"-"`
@@ -2018,61 +2051,61 @@ type PostV1HrTimesheetsGetRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrTimesheetsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsGetHrRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsGetRequestFieldEmployeeID)
+func (t *TimesheetsGetHrRequest) SetEmployeeID(employeeID string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsGetHrRequestFieldEmployeeID)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsGetRequestFieldYear)
+func (t *TimesheetsGetHrRequest) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsGetHrRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsGetRequestFieldMonth)
+func (t *TimesheetsGetHrRequest) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsGetHrRequestFieldMonth)
 }
 
-func (p *PostV1HrTimesheetsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsGetRequest
+func (t *TimesheetsGetHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsGetHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsGetRequest(body)
+	*t = TimesheetsGetHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsGetRequest
+func (t *TimesheetsGetHrRequest) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsGetHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrTimesheetsListRequestFieldYear  = big.NewInt(1 << 0)
-	postV1HrTimesheetsListRequestFieldMonth = big.NewInt(1 << 1)
+	timesheetsListHrRequestFieldYear  = big.NewInt(1 << 0)
+	timesheetsListHrRequestFieldMonth = big.NewInt(1 << 1)
 )
 
-type PostV1HrTimesheetsListRequest struct {
+type TimesheetsListHrRequest struct {
 	Year  int64 `json:"year" url:"-"`
 	Month int64 `json:"month" url:"-"`
 
@@ -2080,196 +2113,1720 @@ type PostV1HrTimesheetsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrTimesheetsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsListHrRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsListRequestFieldYear)
+func (t *TimesheetsListHrRequest) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsListHrRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsListRequestFieldMonth)
+func (t *TimesheetsListHrRequest) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsListHrRequestFieldMonth)
 }
 
-func (p *PostV1HrTimesheetsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsListRequest
+func (t *TimesheetsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsListHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsListRequest(body)
+	*t = TimesheetsListHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsListRequest
+func (t *TimesheetsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsListHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1HrTimesheetsUpsertRequestFieldEmployeeID = big.NewInt(1 << 0)
-	postV1HrTimesheetsUpsertRequestFieldYear       = big.NewInt(1 << 1)
-	postV1HrTimesheetsUpsertRequestFieldMonth      = big.NewInt(1 << 2)
-	postV1HrTimesheetsUpsertRequestFieldDays       = big.NewInt(1 << 3)
+	timesheetsUpsertHrRequestFieldEmployeeID = big.NewInt(1 << 0)
+	timesheetsUpsertHrRequestFieldYear       = big.NewInt(1 << 1)
+	timesheetsUpsertHrRequestFieldMonth      = big.NewInt(1 << 2)
+	timesheetsUpsertHrRequestFieldDays       = big.NewInt(1 << 3)
 )
 
-type PostV1HrTimesheetsUpsertRequest struct {
-	EmployeeID string                                     `json:"employeeId" url:"-"`
-	Year       int64                                      `json:"year" url:"-"`
-	Month      int64                                      `json:"month" url:"-"`
-	Days       []*PostV1HrTimesheetsUpsertRequestDaysItem `json:"days" url:"-"`
+type TimesheetsUpsertHrRequest struct {
+	EmployeeID string                               `json:"employeeId" url:"-"`
+	Year       int64                                `json:"year" url:"-"`
+	Month      int64                                `json:"month" url:"-"`
+	Days       []*TimesheetsUpsertHrRequestDaysItem `json:"days" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1HrTimesheetsUpsertRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsUpsertHrRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequest) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsUpsertRequestFieldEmployeeID)
+func (t *TimesheetsUpsertHrRequest) SetEmployeeID(employeeID string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsUpsertHrRequestFieldEmployeeID)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequest) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsUpsertRequestFieldYear)
+func (t *TimesheetsUpsertHrRequest) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsUpsertHrRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequest) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsUpsertRequestFieldMonth)
+func (t *TimesheetsUpsertHrRequest) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsUpsertHrRequestFieldMonth)
 }
 
 // SetDays sets the Days field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequest) SetDays(days []*PostV1HrTimesheetsUpsertRequestDaysItem) {
-	p.Days = days
-	p.require(postV1HrTimesheetsUpsertRequestFieldDays)
+func (t *TimesheetsUpsertHrRequest) SetDays(days []*TimesheetsUpsertHrRequestDaysItem) {
+	t.Days = days
+	t.require(timesheetsUpsertHrRequestFieldDays)
 }
 
-func (p *PostV1HrTimesheetsUpsertRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsUpsertRequest
+func (t *TimesheetsUpsertHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsUpsertHrRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsUpsertRequest(body)
+	*t = TimesheetsUpsertHrRequest(body)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsUpsertRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsUpsertRequest
+func (t *TimesheetsUpsertHrRequest) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsUpsertHrRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-type PostV1HrContractsCreateRequestSalaryType string
+type ContractsCreateHrRequestSalaryType string
 
 const (
-	PostV1HrContractsCreateRequestSalaryTypeMonthly PostV1HrContractsCreateRequestSalaryType = "monthly"
-	PostV1HrContractsCreateRequestSalaryTypeHourly  PostV1HrContractsCreateRequestSalaryType = "hourly"
-	PostV1HrContractsCreateRequestSalaryTypeWeekly  PostV1HrContractsCreateRequestSalaryType = "weekly"
-	PostV1HrContractsCreateRequestSalaryTypeDaily   PostV1HrContractsCreateRequestSalaryType = "daily"
-	PostV1HrContractsCreateRequestSalaryTypeYearly  PostV1HrContractsCreateRequestSalaryType = "yearly"
+	ContractsCreateHrRequestSalaryTypeMonthly ContractsCreateHrRequestSalaryType = "monthly"
+	ContractsCreateHrRequestSalaryTypeHourly  ContractsCreateHrRequestSalaryType = "hourly"
+	ContractsCreateHrRequestSalaryTypeWeekly  ContractsCreateHrRequestSalaryType = "weekly"
+	ContractsCreateHrRequestSalaryTypeDaily   ContractsCreateHrRequestSalaryType = "daily"
+	ContractsCreateHrRequestSalaryTypeYearly  ContractsCreateHrRequestSalaryType = "yearly"
 )
 
-func NewPostV1HrContractsCreateRequestSalaryTypeFromString(s string) (PostV1HrContractsCreateRequestSalaryType, error) {
+func NewContractsCreateHrRequestSalaryTypeFromString(s string) (ContractsCreateHrRequestSalaryType, error) {
 	switch s {
 	case "monthly":
-		return PostV1HrContractsCreateRequestSalaryTypeMonthly, nil
+		return ContractsCreateHrRequestSalaryTypeMonthly, nil
 	case "hourly":
-		return PostV1HrContractsCreateRequestSalaryTypeHourly, nil
+		return ContractsCreateHrRequestSalaryTypeHourly, nil
 	case "weekly":
-		return PostV1HrContractsCreateRequestSalaryTypeWeekly, nil
+		return ContractsCreateHrRequestSalaryTypeWeekly, nil
 	case "daily":
-		return PostV1HrContractsCreateRequestSalaryTypeDaily, nil
+		return ContractsCreateHrRequestSalaryTypeDaily, nil
 	case "yearly":
-		return PostV1HrContractsCreateRequestSalaryTypeYearly, nil
+		return ContractsCreateHrRequestSalaryTypeYearly, nil
 	}
-	var t PostV1HrContractsCreateRequestSalaryType
+	var t ContractsCreateHrRequestSalaryType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateRequestSalaryType) Ptr() *PostV1HrContractsCreateRequestSalaryType {
-	return &p
+func (c ContractsCreateHrRequestSalaryType) Ptr() *ContractsCreateHrRequestSalaryType {
+	return &c
 }
 
-type PostV1HrContractsCreateRequestType string
+type ContractsCreateHrRequestType string
 
 const (
-	PostV1HrContractsCreateRequestTypePermanent PostV1HrContractsCreateRequestType = "permanent"
-	PostV1HrContractsCreateRequestTypeFixedTerm PostV1HrContractsCreateRequestType = "fixed_term"
+	ContractsCreateHrRequestTypePermanent ContractsCreateHrRequestType = "permanent"
+	ContractsCreateHrRequestTypeFixedTerm ContractsCreateHrRequestType = "fixed_term"
 )
 
-func NewPostV1HrContractsCreateRequestTypeFromString(s string) (PostV1HrContractsCreateRequestType, error) {
+func NewContractsCreateHrRequestTypeFromString(s string) (ContractsCreateHrRequestType, error) {
 	switch s {
 	case "permanent":
-		return PostV1HrContractsCreateRequestTypePermanent, nil
+		return ContractsCreateHrRequestTypePermanent, nil
 	case "fixed_term":
-		return PostV1HrContractsCreateRequestTypeFixedTerm, nil
+		return ContractsCreateHrRequestTypeFixedTerm, nil
 	}
-	var t PostV1HrContractsCreateRequestType
+	var t ContractsCreateHrRequestType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateRequestType) Ptr() *PostV1HrContractsCreateRequestType {
-	return &p
+func (c ContractsCreateHrRequestType) Ptr() *ContractsCreateHrRequestType {
+	return &c
 }
 
 var (
-	postV1HrContractsCreateResponseFieldID            = big.NewInt(1 << 0)
-	postV1HrContractsCreateResponseFieldEmployeeID    = big.NewInt(1 << 1)
-	postV1HrContractsCreateResponseFieldPositionID    = big.NewInt(1 << 2)
-	postV1HrContractsCreateResponseFieldDepartmentID  = big.NewInt(1 << 3)
-	postV1HrContractsCreateResponseFieldScheduleID    = big.NewInt(1 << 4)
-	postV1HrContractsCreateResponseFieldAgreementID   = big.NewInt(1 << 5)
-	postV1HrContractsCreateResponseFieldContractNo    = big.NewInt(1 << 6)
-	postV1HrContractsCreateResponseFieldType          = big.NewInt(1 << 7)
-	postV1HrContractsCreateResponseFieldStartDate     = big.NewInt(1 << 8)
-	postV1HrContractsCreateResponseFieldEndDate       = big.NewInt(1 << 9)
-	postV1HrContractsCreateResponseFieldEndReason     = big.NewInt(1 << 10)
-	postV1HrContractsCreateResponseFieldBaseSalary    = big.NewInt(1 << 11)
-	postV1HrContractsCreateResponseFieldSalaryType    = big.NewInt(1 << 12)
-	postV1HrContractsCreateResponseFieldWorkHours     = big.NewInt(1 << 13)
-	postV1HrContractsCreateResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
-	postV1HrContractsCreateResponseFieldStatus        = big.NewInt(1 << 15)
-	postV1HrContractsCreateResponseFieldNotes         = big.NewInt(1 << 16)
-	postV1HrContractsCreateResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	contractsCreateHrResponseFieldID            = big.NewInt(1 << 0)
+	contractsCreateHrResponseFieldEmployeeID    = big.NewInt(1 << 1)
+	contractsCreateHrResponseFieldPositionID    = big.NewInt(1 << 2)
+	contractsCreateHrResponseFieldDepartmentID  = big.NewInt(1 << 3)
+	contractsCreateHrResponseFieldScheduleID    = big.NewInt(1 << 4)
+	contractsCreateHrResponseFieldAgreementID   = big.NewInt(1 << 5)
+	contractsCreateHrResponseFieldContractNo    = big.NewInt(1 << 6)
+	contractsCreateHrResponseFieldType          = big.NewInt(1 << 7)
+	contractsCreateHrResponseFieldStartDate     = big.NewInt(1 << 8)
+	contractsCreateHrResponseFieldEndDate       = big.NewInt(1 << 9)
+	contractsCreateHrResponseFieldEndReason     = big.NewInt(1 << 10)
+	contractsCreateHrResponseFieldBaseSalary    = big.NewInt(1 << 11)
+	contractsCreateHrResponseFieldSalaryType    = big.NewInt(1 << 12)
+	contractsCreateHrResponseFieldWorkHours     = big.NewInt(1 << 13)
+	contractsCreateHrResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
+	contractsCreateHrResponseFieldStatus        = big.NewInt(1 << 15)
+	contractsCreateHrResponseFieldNotes         = big.NewInt(1 << 16)
+	contractsCreateHrResponseFieldCreatedAt     = big.NewInt(1 << 17)
 )
 
-type PostV1HrContractsCreateResponse struct {
+type ContractsCreateHrResponse struct {
+	ID            string                                 `json:"id" url:"id"`
+	EmployeeID    string                                 `json:"employeeId" url:"employeeId"`
+	PositionID    *string                                `json:"positionId,omitempty" url:"positionId,omitempty"`
+	DepartmentID  *string                                `json:"departmentId,omitempty" url:"departmentId,omitempty"`
+	ScheduleID    *string                                `json:"scheduleId,omitempty" url:"scheduleId,omitempty"`
+	AgreementID   *string                                `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	ContractNo    string                                 `json:"contractNo" url:"contractNo"`
+	Type          ContractsCreateHrResponseType          `json:"type" url:"type"`
+	StartDate     time.Time                              `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                             `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	EndReason     *string                                `json:"endReason,omitempty" url:"endReason,omitempty"`
+	BaseSalary    string                                 `json:"baseSalary" url:"baseSalary"`
+	SalaryType    ContractsCreateHrResponseSalaryType    `json:"salaryType" url:"salaryType"`
+	WorkHours     string                                 `json:"workHours" url:"workHours"`
+	WorkHoursUnit ContractsCreateHrResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
+	Status        ContractsCreateHrResponseStatus        `json:"status" url:"status"`
+	Notes         *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     time.Time                              `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ContractsCreateHrResponse) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *ContractsCreateHrResponse) GetEmployeeID() string {
+	if c == nil {
+		return ""
+	}
+	return c.EmployeeID
+}
+
+func (c *ContractsCreateHrResponse) GetPositionID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PositionID
+}
+
+func (c *ContractsCreateHrResponse) GetDepartmentID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DepartmentID
+}
+
+func (c *ContractsCreateHrResponse) GetScheduleID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ScheduleID
+}
+
+func (c *ContractsCreateHrResponse) GetAgreementID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AgreementID
+}
+
+func (c *ContractsCreateHrResponse) GetContractNo() string {
+	if c == nil {
+		return ""
+	}
+	return c.ContractNo
+}
+
+func (c *ContractsCreateHrResponse) GetType() ContractsCreateHrResponseType {
+	if c == nil {
+		return ""
+	}
+	return c.Type
+}
+
+func (c *ContractsCreateHrResponse) GetStartDate() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.StartDate
+}
+
+func (c *ContractsCreateHrResponse) GetEndDate() *time.Time {
+	if c == nil {
+		return nil
+	}
+	return c.EndDate
+}
+
+func (c *ContractsCreateHrResponse) GetEndReason() *string {
+	if c == nil {
+		return nil
+	}
+	return c.EndReason
+}
+
+func (c *ContractsCreateHrResponse) GetBaseSalary() string {
+	if c == nil {
+		return ""
+	}
+	return c.BaseSalary
+}
+
+func (c *ContractsCreateHrResponse) GetSalaryType() ContractsCreateHrResponseSalaryType {
+	if c == nil {
+		return ""
+	}
+	return c.SalaryType
+}
+
+func (c *ContractsCreateHrResponse) GetWorkHours() string {
+	if c == nil {
+		return ""
+	}
+	return c.WorkHours
+}
+
+func (c *ContractsCreateHrResponse) GetWorkHoursUnit() ContractsCreateHrResponseWorkHoursUnit {
+	if c == nil {
+		return ""
+	}
+	return c.WorkHoursUnit
+}
+
+func (c *ContractsCreateHrResponse) GetStatus() ContractsCreateHrResponseStatus {
+	if c == nil {
+		return ""
+	}
+	return c.Status
+}
+
+func (c *ContractsCreateHrResponse) GetNotes() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Notes
+}
+
+func (c *ContractsCreateHrResponse) GetCreatedAt() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.CreatedAt
+}
+
+func (c *ContractsCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ContractsCreateHrResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetID(id string) {
+	c.ID = id
+	c.require(contractsCreateHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetEmployeeID(employeeID string) {
+	c.EmployeeID = employeeID
+	c.require(contractsCreateHrResponseFieldEmployeeID)
+}
+
+// SetPositionID sets the PositionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetPositionID(positionID *string) {
+	c.PositionID = positionID
+	c.require(contractsCreateHrResponseFieldPositionID)
+}
+
+// SetDepartmentID sets the DepartmentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetDepartmentID(departmentID *string) {
+	c.DepartmentID = departmentID
+	c.require(contractsCreateHrResponseFieldDepartmentID)
+}
+
+// SetScheduleID sets the ScheduleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetScheduleID(scheduleID *string) {
+	c.ScheduleID = scheduleID
+	c.require(contractsCreateHrResponseFieldScheduleID)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetAgreementID(agreementID *string) {
+	c.AgreementID = agreementID
+	c.require(contractsCreateHrResponseFieldAgreementID)
+}
+
+// SetContractNo sets the ContractNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetContractNo(contractNo string) {
+	c.ContractNo = contractNo
+	c.require(contractsCreateHrResponseFieldContractNo)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetType(type_ ContractsCreateHrResponseType) {
+	c.Type = type_
+	c.require(contractsCreateHrResponseFieldType)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetStartDate(startDate time.Time) {
+	c.StartDate = startDate
+	c.require(contractsCreateHrResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetEndDate(endDate *time.Time) {
+	c.EndDate = endDate
+	c.require(contractsCreateHrResponseFieldEndDate)
+}
+
+// SetEndReason sets the EndReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetEndReason(endReason *string) {
+	c.EndReason = endReason
+	c.require(contractsCreateHrResponseFieldEndReason)
+}
+
+// SetBaseSalary sets the BaseSalary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetBaseSalary(baseSalary string) {
+	c.BaseSalary = baseSalary
+	c.require(contractsCreateHrResponseFieldBaseSalary)
+}
+
+// SetSalaryType sets the SalaryType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetSalaryType(salaryType ContractsCreateHrResponseSalaryType) {
+	c.SalaryType = salaryType
+	c.require(contractsCreateHrResponseFieldSalaryType)
+}
+
+// SetWorkHours sets the WorkHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetWorkHours(workHours string) {
+	c.WorkHours = workHours
+	c.require(contractsCreateHrResponseFieldWorkHours)
+}
+
+// SetWorkHoursUnit sets the WorkHoursUnit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetWorkHoursUnit(workHoursUnit ContractsCreateHrResponseWorkHoursUnit) {
+	c.WorkHoursUnit = workHoursUnit
+	c.require(contractsCreateHrResponseFieldWorkHoursUnit)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetStatus(status ContractsCreateHrResponseStatus) {
+	c.Status = status
+	c.require(contractsCreateHrResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetNotes(notes *string) {
+	c.Notes = notes
+	c.require(contractsCreateHrResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetCreatedAt(createdAt time.Time) {
+	c.CreatedAt = createdAt
+	c.require(contractsCreateHrResponseFieldCreatedAt)
+}
+
+func (c *ContractsCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed ContractsCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*c),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*c = ContractsCreateHrResponse(unmarshaler.embed)
+	c.StartDate = unmarshaler.StartDate.Time()
+	c.EndDate = unmarshaler.EndDate.TimePtr()
+	c.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ContractsCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed ContractsCreateHrResponse
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*c),
+		StartDate: internal.NewDate(c.StartDate),
+		EndDate:   internal.NewOptionalDate(c.EndDate),
+		CreatedAt: internal.NewDateTime(c.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ContractsCreateHrResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsCreateHrResponseSalaryType string
+
+const (
+	ContractsCreateHrResponseSalaryTypeMonthly ContractsCreateHrResponseSalaryType = "monthly"
+	ContractsCreateHrResponseSalaryTypeHourly  ContractsCreateHrResponseSalaryType = "hourly"
+	ContractsCreateHrResponseSalaryTypeWeekly  ContractsCreateHrResponseSalaryType = "weekly"
+	ContractsCreateHrResponseSalaryTypeDaily   ContractsCreateHrResponseSalaryType = "daily"
+	ContractsCreateHrResponseSalaryTypeYearly  ContractsCreateHrResponseSalaryType = "yearly"
+)
+
+func NewContractsCreateHrResponseSalaryTypeFromString(s string) (ContractsCreateHrResponseSalaryType, error) {
+	switch s {
+	case "monthly":
+		return ContractsCreateHrResponseSalaryTypeMonthly, nil
+	case "hourly":
+		return ContractsCreateHrResponseSalaryTypeHourly, nil
+	case "weekly":
+		return ContractsCreateHrResponseSalaryTypeWeekly, nil
+	case "daily":
+		return ContractsCreateHrResponseSalaryTypeDaily, nil
+	case "yearly":
+		return ContractsCreateHrResponseSalaryTypeYearly, nil
+	}
+	var t ContractsCreateHrResponseSalaryType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrResponseSalaryType) Ptr() *ContractsCreateHrResponseSalaryType {
+	return &c
+}
+
+type ContractsCreateHrResponseStatus string
+
+const (
+	ContractsCreateHrResponseStatusActive ContractsCreateHrResponseStatus = "active"
+	ContractsCreateHrResponseStatusEnded  ContractsCreateHrResponseStatus = "ended"
+)
+
+func NewContractsCreateHrResponseStatusFromString(s string) (ContractsCreateHrResponseStatus, error) {
+	switch s {
+	case "active":
+		return ContractsCreateHrResponseStatusActive, nil
+	case "ended":
+		return ContractsCreateHrResponseStatusEnded, nil
+	}
+	var t ContractsCreateHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrResponseStatus) Ptr() *ContractsCreateHrResponseStatus {
+	return &c
+}
+
+type ContractsCreateHrResponseType string
+
+const (
+	ContractsCreateHrResponseTypePermanent ContractsCreateHrResponseType = "permanent"
+	ContractsCreateHrResponseTypeFixedTerm ContractsCreateHrResponseType = "fixed_term"
+)
+
+func NewContractsCreateHrResponseTypeFromString(s string) (ContractsCreateHrResponseType, error) {
+	switch s {
+	case "permanent":
+		return ContractsCreateHrResponseTypePermanent, nil
+	case "fixed_term":
+		return ContractsCreateHrResponseTypeFixedTerm, nil
+	}
+	var t ContractsCreateHrResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrResponseType) Ptr() *ContractsCreateHrResponseType {
+	return &c
+}
+
+type ContractsCreateHrResponseWorkHoursUnit string
+
+const (
+	ContractsCreateHrResponseWorkHoursUnitDay  ContractsCreateHrResponseWorkHoursUnit = "day"
+	ContractsCreateHrResponseWorkHoursUnitWeek ContractsCreateHrResponseWorkHoursUnit = "week"
+)
+
+func NewContractsCreateHrResponseWorkHoursUnitFromString(s string) (ContractsCreateHrResponseWorkHoursUnit, error) {
+	switch s {
+	case "day":
+		return ContractsCreateHrResponseWorkHoursUnitDay, nil
+	case "week":
+		return ContractsCreateHrResponseWorkHoursUnitWeek, nil
+	}
+	var t ContractsCreateHrResponseWorkHoursUnit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrResponseWorkHoursUnit) Ptr() *ContractsCreateHrResponseWorkHoursUnit {
+	return &c
+}
+
+var (
+	contractsEndHrResponseFieldID            = big.NewInt(1 << 0)
+	contractsEndHrResponseFieldEmployeeID    = big.NewInt(1 << 1)
+	contractsEndHrResponseFieldPositionID    = big.NewInt(1 << 2)
+	contractsEndHrResponseFieldDepartmentID  = big.NewInt(1 << 3)
+	contractsEndHrResponseFieldScheduleID    = big.NewInt(1 << 4)
+	contractsEndHrResponseFieldAgreementID   = big.NewInt(1 << 5)
+	contractsEndHrResponseFieldContractNo    = big.NewInt(1 << 6)
+	contractsEndHrResponseFieldType          = big.NewInt(1 << 7)
+	contractsEndHrResponseFieldStartDate     = big.NewInt(1 << 8)
+	contractsEndHrResponseFieldEndDate       = big.NewInt(1 << 9)
+	contractsEndHrResponseFieldEndReason     = big.NewInt(1 << 10)
+	contractsEndHrResponseFieldBaseSalary    = big.NewInt(1 << 11)
+	contractsEndHrResponseFieldSalaryType    = big.NewInt(1 << 12)
+	contractsEndHrResponseFieldWorkHours     = big.NewInt(1 << 13)
+	contractsEndHrResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
+	contractsEndHrResponseFieldStatus        = big.NewInt(1 << 15)
+	contractsEndHrResponseFieldNotes         = big.NewInt(1 << 16)
+	contractsEndHrResponseFieldCreatedAt     = big.NewInt(1 << 17)
+)
+
+type ContractsEndHrResponse struct {
+	ID            string                              `json:"id" url:"id"`
+	EmployeeID    string                              `json:"employeeId" url:"employeeId"`
+	PositionID    *string                             `json:"positionId,omitempty" url:"positionId,omitempty"`
+	DepartmentID  *string                             `json:"departmentId,omitempty" url:"departmentId,omitempty"`
+	ScheduleID    *string                             `json:"scheduleId,omitempty" url:"scheduleId,omitempty"`
+	AgreementID   *string                             `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	ContractNo    string                              `json:"contractNo" url:"contractNo"`
+	Type          ContractsEndHrResponseType          `json:"type" url:"type"`
+	StartDate     time.Time                           `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                          `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	EndReason     *string                             `json:"endReason,omitempty" url:"endReason,omitempty"`
+	BaseSalary    string                              `json:"baseSalary" url:"baseSalary"`
+	SalaryType    ContractsEndHrResponseSalaryType    `json:"salaryType" url:"salaryType"`
+	WorkHours     string                              `json:"workHours" url:"workHours"`
+	WorkHoursUnit ContractsEndHrResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
+	Status        ContractsEndHrResponseStatus        `json:"status" url:"status"`
+	Notes         *string                             `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     time.Time                           `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ContractsEndHrResponse) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *ContractsEndHrResponse) GetEmployeeID() string {
+	if c == nil {
+		return ""
+	}
+	return c.EmployeeID
+}
+
+func (c *ContractsEndHrResponse) GetPositionID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PositionID
+}
+
+func (c *ContractsEndHrResponse) GetDepartmentID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DepartmentID
+}
+
+func (c *ContractsEndHrResponse) GetScheduleID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ScheduleID
+}
+
+func (c *ContractsEndHrResponse) GetAgreementID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AgreementID
+}
+
+func (c *ContractsEndHrResponse) GetContractNo() string {
+	if c == nil {
+		return ""
+	}
+	return c.ContractNo
+}
+
+func (c *ContractsEndHrResponse) GetType() ContractsEndHrResponseType {
+	if c == nil {
+		return ""
+	}
+	return c.Type
+}
+
+func (c *ContractsEndHrResponse) GetStartDate() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.StartDate
+}
+
+func (c *ContractsEndHrResponse) GetEndDate() *time.Time {
+	if c == nil {
+		return nil
+	}
+	return c.EndDate
+}
+
+func (c *ContractsEndHrResponse) GetEndReason() *string {
+	if c == nil {
+		return nil
+	}
+	return c.EndReason
+}
+
+func (c *ContractsEndHrResponse) GetBaseSalary() string {
+	if c == nil {
+		return ""
+	}
+	return c.BaseSalary
+}
+
+func (c *ContractsEndHrResponse) GetSalaryType() ContractsEndHrResponseSalaryType {
+	if c == nil {
+		return ""
+	}
+	return c.SalaryType
+}
+
+func (c *ContractsEndHrResponse) GetWorkHours() string {
+	if c == nil {
+		return ""
+	}
+	return c.WorkHours
+}
+
+func (c *ContractsEndHrResponse) GetWorkHoursUnit() ContractsEndHrResponseWorkHoursUnit {
+	if c == nil {
+		return ""
+	}
+	return c.WorkHoursUnit
+}
+
+func (c *ContractsEndHrResponse) GetStatus() ContractsEndHrResponseStatus {
+	if c == nil {
+		return ""
+	}
+	return c.Status
+}
+
+func (c *ContractsEndHrResponse) GetNotes() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Notes
+}
+
+func (c *ContractsEndHrResponse) GetCreatedAt() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.CreatedAt
+}
+
+func (c *ContractsEndHrResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ContractsEndHrResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetID(id string) {
+	c.ID = id
+	c.require(contractsEndHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetEmployeeID(employeeID string) {
+	c.EmployeeID = employeeID
+	c.require(contractsEndHrResponseFieldEmployeeID)
+}
+
+// SetPositionID sets the PositionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetPositionID(positionID *string) {
+	c.PositionID = positionID
+	c.require(contractsEndHrResponseFieldPositionID)
+}
+
+// SetDepartmentID sets the DepartmentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetDepartmentID(departmentID *string) {
+	c.DepartmentID = departmentID
+	c.require(contractsEndHrResponseFieldDepartmentID)
+}
+
+// SetScheduleID sets the ScheduleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetScheduleID(scheduleID *string) {
+	c.ScheduleID = scheduleID
+	c.require(contractsEndHrResponseFieldScheduleID)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetAgreementID(agreementID *string) {
+	c.AgreementID = agreementID
+	c.require(contractsEndHrResponseFieldAgreementID)
+}
+
+// SetContractNo sets the ContractNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetContractNo(contractNo string) {
+	c.ContractNo = contractNo
+	c.require(contractsEndHrResponseFieldContractNo)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetType(type_ ContractsEndHrResponseType) {
+	c.Type = type_
+	c.require(contractsEndHrResponseFieldType)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetStartDate(startDate time.Time) {
+	c.StartDate = startDate
+	c.require(contractsEndHrResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetEndDate(endDate *time.Time) {
+	c.EndDate = endDate
+	c.require(contractsEndHrResponseFieldEndDate)
+}
+
+// SetEndReason sets the EndReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetEndReason(endReason *string) {
+	c.EndReason = endReason
+	c.require(contractsEndHrResponseFieldEndReason)
+}
+
+// SetBaseSalary sets the BaseSalary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetBaseSalary(baseSalary string) {
+	c.BaseSalary = baseSalary
+	c.require(contractsEndHrResponseFieldBaseSalary)
+}
+
+// SetSalaryType sets the SalaryType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetSalaryType(salaryType ContractsEndHrResponseSalaryType) {
+	c.SalaryType = salaryType
+	c.require(contractsEndHrResponseFieldSalaryType)
+}
+
+// SetWorkHours sets the WorkHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetWorkHours(workHours string) {
+	c.WorkHours = workHours
+	c.require(contractsEndHrResponseFieldWorkHours)
+}
+
+// SetWorkHoursUnit sets the WorkHoursUnit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetWorkHoursUnit(workHoursUnit ContractsEndHrResponseWorkHoursUnit) {
+	c.WorkHoursUnit = workHoursUnit
+	c.require(contractsEndHrResponseFieldWorkHoursUnit)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetStatus(status ContractsEndHrResponseStatus) {
+	c.Status = status
+	c.require(contractsEndHrResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetNotes(notes *string) {
+	c.Notes = notes
+	c.require(contractsEndHrResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetCreatedAt(createdAt time.Time) {
+	c.CreatedAt = createdAt
+	c.require(contractsEndHrResponseFieldCreatedAt)
+}
+
+func (c *ContractsEndHrResponse) UnmarshalJSON(data []byte) error {
+	type embed ContractsEndHrResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*c),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*c = ContractsEndHrResponse(unmarshaler.embed)
+	c.StartDate = unmarshaler.StartDate.Time()
+	c.EndDate = unmarshaler.EndDate.TimePtr()
+	c.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ContractsEndHrResponse) MarshalJSON() ([]byte, error) {
+	type embed ContractsEndHrResponse
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*c),
+		StartDate: internal.NewDate(c.StartDate),
+		EndDate:   internal.NewOptionalDate(c.EndDate),
+		CreatedAt: internal.NewDateTime(c.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ContractsEndHrResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsEndHrResponseSalaryType string
+
+const (
+	ContractsEndHrResponseSalaryTypeMonthly ContractsEndHrResponseSalaryType = "monthly"
+	ContractsEndHrResponseSalaryTypeHourly  ContractsEndHrResponseSalaryType = "hourly"
+	ContractsEndHrResponseSalaryTypeWeekly  ContractsEndHrResponseSalaryType = "weekly"
+	ContractsEndHrResponseSalaryTypeDaily   ContractsEndHrResponseSalaryType = "daily"
+	ContractsEndHrResponseSalaryTypeYearly  ContractsEndHrResponseSalaryType = "yearly"
+)
+
+func NewContractsEndHrResponseSalaryTypeFromString(s string) (ContractsEndHrResponseSalaryType, error) {
+	switch s {
+	case "monthly":
+		return ContractsEndHrResponseSalaryTypeMonthly, nil
+	case "hourly":
+		return ContractsEndHrResponseSalaryTypeHourly, nil
+	case "weekly":
+		return ContractsEndHrResponseSalaryTypeWeekly, nil
+	case "daily":
+		return ContractsEndHrResponseSalaryTypeDaily, nil
+	case "yearly":
+		return ContractsEndHrResponseSalaryTypeYearly, nil
+	}
+	var t ContractsEndHrResponseSalaryType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsEndHrResponseSalaryType) Ptr() *ContractsEndHrResponseSalaryType {
+	return &c
+}
+
+type ContractsEndHrResponseStatus string
+
+const (
+	ContractsEndHrResponseStatusActive ContractsEndHrResponseStatus = "active"
+	ContractsEndHrResponseStatusEnded  ContractsEndHrResponseStatus = "ended"
+)
+
+func NewContractsEndHrResponseStatusFromString(s string) (ContractsEndHrResponseStatus, error) {
+	switch s {
+	case "active":
+		return ContractsEndHrResponseStatusActive, nil
+	case "ended":
+		return ContractsEndHrResponseStatusEnded, nil
+	}
+	var t ContractsEndHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsEndHrResponseStatus) Ptr() *ContractsEndHrResponseStatus {
+	return &c
+}
+
+type ContractsEndHrResponseType string
+
+const (
+	ContractsEndHrResponseTypePermanent ContractsEndHrResponseType = "permanent"
+	ContractsEndHrResponseTypeFixedTerm ContractsEndHrResponseType = "fixed_term"
+)
+
+func NewContractsEndHrResponseTypeFromString(s string) (ContractsEndHrResponseType, error) {
+	switch s {
+	case "permanent":
+		return ContractsEndHrResponseTypePermanent, nil
+	case "fixed_term":
+		return ContractsEndHrResponseTypeFixedTerm, nil
+	}
+	var t ContractsEndHrResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsEndHrResponseType) Ptr() *ContractsEndHrResponseType {
+	return &c
+}
+
+type ContractsEndHrResponseWorkHoursUnit string
+
+const (
+	ContractsEndHrResponseWorkHoursUnitDay  ContractsEndHrResponseWorkHoursUnit = "day"
+	ContractsEndHrResponseWorkHoursUnitWeek ContractsEndHrResponseWorkHoursUnit = "week"
+)
+
+func NewContractsEndHrResponseWorkHoursUnitFromString(s string) (ContractsEndHrResponseWorkHoursUnit, error) {
+	switch s {
+	case "day":
+		return ContractsEndHrResponseWorkHoursUnitDay, nil
+	case "week":
+		return ContractsEndHrResponseWorkHoursUnitWeek, nil
+	}
+	var t ContractsEndHrResponseWorkHoursUnit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsEndHrResponseWorkHoursUnit) Ptr() *ContractsEndHrResponseWorkHoursUnit {
+	return &c
+}
+
+var (
+	contractsListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	contractsListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	contractsListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type ContractsListHrRequestFilterItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Op    ContractsListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ContractsListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ContractsListHrRequestFilterItem) GetField() string {
+	if c == nil {
+		return ""
+	}
+	return c.Field
+}
+
+func (c *ContractsListHrRequestFilterItem) GetOp() ContractsListHrRequestFilterItemOp {
+	if c == nil {
+		return ""
+	}
+	return c.Op
+}
+
+func (c *ContractsListHrRequestFilterItem) GetValue() *ContractsListHrRequestFilterItemValue {
+	if c == nil {
+		return nil
+	}
+	return c.Value
+}
+
+func (c *ContractsListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ContractsListHrRequestFilterItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrRequestFilterItem) SetField(field string) {
+	c.Field = field
+	c.require(contractsListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrRequestFilterItem) SetOp(op ContractsListHrRequestFilterItemOp) {
+	c.Op = op
+	c.require(contractsListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrRequestFilterItem) SetValue(value *ContractsListHrRequestFilterItemValue) {
+	c.Value = value
+	c.require(contractsListHrRequestFilterItemFieldValue)
+}
+
+func (c *ContractsListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ContractsListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ContractsListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ContractsListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ContractsListHrRequestFilterItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsListHrRequestFilterItemOp string
+
+const (
+	ContractsListHrRequestFilterItemOpEq       ContractsListHrRequestFilterItemOp = "eq"
+	ContractsListHrRequestFilterItemOpNe       ContractsListHrRequestFilterItemOp = "ne"
+	ContractsListHrRequestFilterItemOpContains ContractsListHrRequestFilterItemOp = "contains"
+	ContractsListHrRequestFilterItemOpGte      ContractsListHrRequestFilterItemOp = "gte"
+	ContractsListHrRequestFilterItemOpLte      ContractsListHrRequestFilterItemOp = "lte"
+	ContractsListHrRequestFilterItemOpIn       ContractsListHrRequestFilterItemOp = "in"
+)
+
+func NewContractsListHrRequestFilterItemOpFromString(s string) (ContractsListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return ContractsListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return ContractsListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return ContractsListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return ContractsListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return ContractsListHrRequestFilterItemOpLte, nil
+	case "in":
+		return ContractsListHrRequestFilterItemOpIn, nil
+	}
+	var t ContractsListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsListHrRequestFilterItemOp) Ptr() *ContractsListHrRequestFilterItemOp {
+	return &c
+}
+
+type ContractsListHrRequestFilterItemValue struct {
+	String                                             string
+	Double                                             float64
+	Boolean                                            bool
+	ContractsListHrRequestFilterItemValueThreeItemList []*ContractsListHrRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (c *ContractsListHrRequestFilterItemValue) GetString() string {
+	if c == nil {
+		return ""
+	}
+	return c.String
+}
+
+func (c *ContractsListHrRequestFilterItemValue) GetDouble() float64 {
+	if c == nil {
+		return 0
+	}
+	return c.Double
+}
+
+func (c *ContractsListHrRequestFilterItemValue) GetBoolean() bool {
+	if c == nil {
+		return false
+	}
+	return c.Boolean
+}
+
+func (c *ContractsListHrRequestFilterItemValue) GetContractsListHrRequestFilterItemValueThreeItemList() []*ContractsListHrRequestFilterItemValueThreeItem {
+	if c == nil {
+		return nil
+	}
+	return c.ContractsListHrRequestFilterItemValueThreeItemList
+}
+
+func (c *ContractsListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		c.typ = "String"
+		c.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		c.typ = "Double"
+		c.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		c.typ = "Boolean"
+		c.Boolean = valueBoolean
+		return nil
+	}
+	var valueContractsListHrRequestFilterItemValueThreeItemList []*ContractsListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueContractsListHrRequestFilterItemValueThreeItemList); err == nil {
+		c.typ = "ContractsListHrRequestFilterItemValueThreeItemList"
+		c.ContractsListHrRequestFilterItemValueThreeItemList = valueContractsListHrRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, c)
+}
+
+func (c ContractsListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if c.typ == "String" || c.String != "" {
+		return json.Marshal(c.String)
+	}
+	if c.typ == "Double" || c.Double != 0 {
+		return json.Marshal(c.Double)
+	}
+	if c.typ == "Boolean" || c.Boolean != false {
+		return json.Marshal(c.Boolean)
+	}
+	if c.typ == "ContractsListHrRequestFilterItemValueThreeItemList" || c.ContractsListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(c.ContractsListHrRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", c)
+}
+
+type ContractsListHrRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitContractsListHrRequestFilterItemValueThreeItemList([]*ContractsListHrRequestFilterItemValueThreeItem) error
+}
+
+func (c *ContractsListHrRequestFilterItemValue) Accept(visitor ContractsListHrRequestFilterItemValueVisitor) error {
+	if c.typ == "String" || c.String != "" {
+		return visitor.VisitString(c.String)
+	}
+	if c.typ == "Double" || c.Double != 0 {
+		return visitor.VisitDouble(c.Double)
+	}
+	if c.typ == "Boolean" || c.Boolean != false {
+		return visitor.VisitBoolean(c.Boolean)
+	}
+	if c.typ == "ContractsListHrRequestFilterItemValueThreeItemList" || c.ContractsListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitContractsListHrRequestFilterItemValueThreeItemList(c.ContractsListHrRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", c)
+}
+
+type ContractsListHrRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (c *ContractsListHrRequestFilterItemValueThreeItem) GetString() string {
+	if c == nil {
+		return ""
+	}
+	return c.String
+}
+
+func (c *ContractsListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if c == nil {
+		return 0
+	}
+	return c.Double
+}
+
+func (c *ContractsListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		c.typ = "String"
+		c.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		c.typ = "Double"
+		c.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, c)
+}
+
+func (c ContractsListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if c.typ == "String" || c.String != "" {
+		return json.Marshal(c.String)
+	}
+	if c.typ == "Double" || c.Double != 0 {
+		return json.Marshal(c.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", c)
+}
+
+type ContractsListHrRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (c *ContractsListHrRequestFilterItemValueThreeItem) Accept(visitor ContractsListHrRequestFilterItemValueThreeItemVisitor) error {
+	if c.typ == "String" || c.String != "" {
+		return visitor.VisitString(c.String)
+	}
+	if c.typ == "Double" || c.Double != 0 {
+		return visitor.VisitDouble(c.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", c)
+}
+
+var (
+	contractsListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	contractsListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type ContractsListHrRequestSortItem struct {
+	Field string                             `json:"field" url:"field"`
+	Dir   *ContractsListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ContractsListHrRequestSortItem) GetField() string {
+	if c == nil {
+		return ""
+	}
+	return c.Field
+}
+
+func (c *ContractsListHrRequestSortItem) GetDir() *ContractsListHrRequestSortItemDir {
+	if c == nil {
+		return nil
+	}
+	return c.Dir
+}
+
+func (c *ContractsListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ContractsListHrRequestSortItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrRequestSortItem) SetField(field string) {
+	c.Field = field
+	c.require(contractsListHrRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrRequestSortItem) SetDir(dir *ContractsListHrRequestSortItemDir) {
+	c.Dir = dir
+	c.require(contractsListHrRequestSortItemFieldDir)
+}
+
+func (c *ContractsListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsListHrRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ContractsListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ContractsListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ContractsListHrRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ContractsListHrRequestSortItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsListHrRequestSortItemDir string
+
+const (
+	ContractsListHrRequestSortItemDirAsc  ContractsListHrRequestSortItemDir = "asc"
+	ContractsListHrRequestSortItemDirDesc ContractsListHrRequestSortItemDir = "desc"
+)
+
+func NewContractsListHrRequestSortItemDirFromString(s string) (ContractsListHrRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return ContractsListHrRequestSortItemDirAsc, nil
+	case "desc":
+		return ContractsListHrRequestSortItemDirDesc, nil
+	}
+	var t ContractsListHrRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsListHrRequestSortItemDir) Ptr() *ContractsListHrRequestSortItemDir {
+	return &c
+}
+
+var (
+	contractsListHrResponseFieldRows     = big.NewInt(1 << 0)
+	contractsListHrResponseFieldPage     = big.NewInt(1 << 1)
+	contractsListHrResponseFieldPageSize = big.NewInt(1 << 2)
+	contractsListHrResponseFieldTotal    = big.NewInt(1 << 3)
+	contractsListHrResponseFieldTotals   = big.NewInt(1 << 4)
+)
+
+type ContractsListHrResponse struct {
+	Rows     []*ContractsListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                              `json:"page" url:"page"`
+	PageSize int64                              `json:"pageSize" url:"pageSize"`
+	Total    int64                              `json:"total" url:"total"`
+	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ContractsListHrResponse) GetRows() []*ContractsListHrResponseRowsItem {
+	if c == nil {
+		return nil
+	}
+	return c.Rows
+}
+
+func (c *ContractsListHrResponse) GetPage() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Page
+}
+
+func (c *ContractsListHrResponse) GetPageSize() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.PageSize
+}
+
+func (c *ContractsListHrResponse) GetTotal() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Total
+}
+
+func (c *ContractsListHrResponse) GetTotals() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Totals
+}
+
+func (c *ContractsListHrResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ContractsListHrResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponse) SetRows(rows []*ContractsListHrResponseRowsItem) {
+	c.Rows = rows
+	c.require(contractsListHrResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponse) SetPage(page int64) {
+	c.Page = page
+	c.require(contractsListHrResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponse) SetPageSize(pageSize int64) {
+	c.PageSize = pageSize
+	c.require(contractsListHrResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponse) SetTotal(total int64) {
+	c.Total = total
+	c.require(contractsListHrResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponse) SetTotals(totals map[string]string) {
+	c.Totals = totals
+	c.require(contractsListHrResponseFieldTotals)
+}
+
+func (c *ContractsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ContractsListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ContractsListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ContractsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed ContractsListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ContractsListHrResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	contractsListHrResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	contractsListHrResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 1)
+	contractsListHrResponseRowsItemFieldPositionID    = big.NewInt(1 << 2)
+	contractsListHrResponseRowsItemFieldDepartmentID  = big.NewInt(1 << 3)
+	contractsListHrResponseRowsItemFieldScheduleID    = big.NewInt(1 << 4)
+	contractsListHrResponseRowsItemFieldAgreementID   = big.NewInt(1 << 5)
+	contractsListHrResponseRowsItemFieldContractNo    = big.NewInt(1 << 6)
+	contractsListHrResponseRowsItemFieldType          = big.NewInt(1 << 7)
+	contractsListHrResponseRowsItemFieldStartDate     = big.NewInt(1 << 8)
+	contractsListHrResponseRowsItemFieldEndDate       = big.NewInt(1 << 9)
+	contractsListHrResponseRowsItemFieldEndReason     = big.NewInt(1 << 10)
+	contractsListHrResponseRowsItemFieldBaseSalary    = big.NewInt(1 << 11)
+	contractsListHrResponseRowsItemFieldSalaryType    = big.NewInt(1 << 12)
+	contractsListHrResponseRowsItemFieldWorkHours     = big.NewInt(1 << 13)
+	contractsListHrResponseRowsItemFieldWorkHoursUnit = big.NewInt(1 << 14)
+	contractsListHrResponseRowsItemFieldStatus        = big.NewInt(1 << 15)
+	contractsListHrResponseRowsItemFieldNotes         = big.NewInt(1 << 16)
+	contractsListHrResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
+)
+
+type ContractsListHrResponseRowsItem struct {
 	ID            string                                       `json:"id" url:"id"`
 	EmployeeID    string                                       `json:"employeeId" url:"employeeId"`
 	PositionID    *string                                      `json:"positionId,omitempty" url:"positionId,omitempty"`
@@ -2277,17 +3834,17 @@ type PostV1HrContractsCreateResponse struct {
 	ScheduleID    *string                                      `json:"scheduleId,omitempty" url:"scheduleId,omitempty"`
 	AgreementID   *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	ContractNo    string                                       `json:"contractNo" url:"contractNo"`
-	Type          PostV1HrContractsCreateResponseType          `json:"type" url:"type"`
-	StartDate     string                                       `json:"startDate" url:"startDate"`
-	EndDate       *string                                      `json:"endDate,omitempty" url:"endDate,omitempty"`
+	Type          ContractsListHrResponseRowsItemType          `json:"type" url:"type"`
+	StartDate     time.Time                                    `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                   `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
 	EndReason     *string                                      `json:"endReason,omitempty" url:"endReason,omitempty"`
 	BaseSalary    string                                       `json:"baseSalary" url:"baseSalary"`
-	SalaryType    PostV1HrContractsCreateResponseSalaryType    `json:"salaryType" url:"salaryType"`
+	SalaryType    ContractsListHrResponseRowsItemSalaryType    `json:"salaryType" url:"salaryType"`
 	WorkHours     string                                       `json:"workHours" url:"workHours"`
-	WorkHoursUnit PostV1HrContractsCreateResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
-	Status        PostV1HrContractsCreateResponseStatus        `json:"status" url:"status"`
+	WorkHoursUnit ContractsListHrResponseRowsItemWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
+	Status        ContractsListHrResponseRowsItemStatus        `json:"status" url:"status"`
 	Notes         *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     string                                       `json:"createdAt" url:"createdAt"`
+	CreatedAt     time.Time                                    `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2296,4104 +3853,475 @@ type PostV1HrContractsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrContractsCreateResponse) GetID() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return p.ID
+	return c.ID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetEmployeeID() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetEmployeeID() string {
+	if c == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return c.EmployeeID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetPositionID() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetPositionID() *string {
+	if c == nil {
 		return nil
 	}
-	return p.PositionID
+	return c.PositionID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetDepartmentID() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetDepartmentID() *string {
+	if c == nil {
 		return nil
 	}
-	return p.DepartmentID
+	return c.DepartmentID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetScheduleID() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetScheduleID() *string {
+	if c == nil {
 		return nil
 	}
-	return p.ScheduleID
+	return c.ScheduleID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetAgreementID() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetAgreementID() *string {
+	if c == nil {
 		return nil
 	}
-	return p.AgreementID
+	return c.AgreementID
 }
 
-func (p *PostV1HrContractsCreateResponse) GetContractNo() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetContractNo() string {
+	if c == nil {
 		return ""
 	}
-	return p.ContractNo
+	return c.ContractNo
 }
 
-func (p *PostV1HrContractsCreateResponse) GetType() PostV1HrContractsCreateResponseType {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetType() ContractsListHrResponseRowsItemType {
+	if c == nil {
 		return ""
 	}
-	return p.Type
+	return c.Type
 }
 
-func (p *PostV1HrContractsCreateResponse) GetStartDate() string {
-	if p == nil {
-		return ""
+func (c *ContractsListHrResponseRowsItem) GetStartDate() time.Time {
+	if c == nil {
+		return time.Time{}
 	}
-	return p.StartDate
+	return c.StartDate
 }
 
-func (p *PostV1HrContractsCreateResponse) GetEndDate() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetEndDate() *time.Time {
+	if c == nil {
 		return nil
 	}
-	return p.EndDate
+	return c.EndDate
 }
 
-func (p *PostV1HrContractsCreateResponse) GetEndReason() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetEndReason() *string {
+	if c == nil {
 		return nil
 	}
-	return p.EndReason
+	return c.EndReason
 }
 
-func (p *PostV1HrContractsCreateResponse) GetBaseSalary() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetBaseSalary() string {
+	if c == nil {
 		return ""
 	}
-	return p.BaseSalary
+	return c.BaseSalary
 }
 
-func (p *PostV1HrContractsCreateResponse) GetSalaryType() PostV1HrContractsCreateResponseSalaryType {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetSalaryType() ContractsListHrResponseRowsItemSalaryType {
+	if c == nil {
 		return ""
 	}
-	return p.SalaryType
+	return c.SalaryType
 }
 
-func (p *PostV1HrContractsCreateResponse) GetWorkHours() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetWorkHours() string {
+	if c == nil {
 		return ""
 	}
-	return p.WorkHours
+	return c.WorkHours
 }
 
-func (p *PostV1HrContractsCreateResponse) GetWorkHoursUnit() PostV1HrContractsCreateResponseWorkHoursUnit {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetWorkHoursUnit() ContractsListHrResponseRowsItemWorkHoursUnit {
+	if c == nil {
 		return ""
 	}
-	return p.WorkHoursUnit
+	return c.WorkHoursUnit
 }
 
-func (p *PostV1HrContractsCreateResponse) GetStatus() PostV1HrContractsCreateResponseStatus {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetStatus() ContractsListHrResponseRowsItemStatus {
+	if c == nil {
 		return ""
 	}
-	return p.Status
+	return c.Status
 }
 
-func (p *PostV1HrContractsCreateResponse) GetNotes() *string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetNotes() *string {
+	if c == nil {
 		return nil
 	}
-	return p.Notes
+	return c.Notes
 }
 
-func (p *PostV1HrContractsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (c *ContractsListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if c == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return c.CreatedAt
 }
 
-func (p *PostV1HrContractsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
 		return nil
 	}
-	return p.extraProperties
+	return c.extraProperties
 }
 
-func (p *PostV1HrContractsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (c *ContractsListHrResponseRowsItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	c.explicitFields.Or(c.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrContractsCreateResponseFieldID)
+func (c *ContractsListHrResponseRowsItem) SetID(id string) {
+	c.ID = id
+	c.require(contractsListHrResponseRowsItemFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrContractsCreateResponseFieldEmployeeID)
+func (c *ContractsListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	c.EmployeeID = employeeID
+	c.require(contractsListHrResponseRowsItemFieldEmployeeID)
 }
 
 // SetPositionID sets the PositionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetPositionID(positionID *string) {
-	p.PositionID = positionID
-	p.require(postV1HrContractsCreateResponseFieldPositionID)
+func (c *ContractsListHrResponseRowsItem) SetPositionID(positionID *string) {
+	c.PositionID = positionID
+	c.require(contractsListHrResponseRowsItemFieldPositionID)
 }
 
 // SetDepartmentID sets the DepartmentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetDepartmentID(departmentID *string) {
-	p.DepartmentID = departmentID
-	p.require(postV1HrContractsCreateResponseFieldDepartmentID)
+func (c *ContractsListHrResponseRowsItem) SetDepartmentID(departmentID *string) {
+	c.DepartmentID = departmentID
+	c.require(contractsListHrResponseRowsItemFieldDepartmentID)
 }
 
 // SetScheduleID sets the ScheduleID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetScheduleID(scheduleID *string) {
-	p.ScheduleID = scheduleID
-	p.require(postV1HrContractsCreateResponseFieldScheduleID)
+func (c *ContractsListHrResponseRowsItem) SetScheduleID(scheduleID *string) {
+	c.ScheduleID = scheduleID
+	c.require(contractsListHrResponseRowsItemFieldScheduleID)
 }
 
 // SetAgreementID sets the AgreementID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetAgreementID(agreementID *string) {
-	p.AgreementID = agreementID
-	p.require(postV1HrContractsCreateResponseFieldAgreementID)
+func (c *ContractsListHrResponseRowsItem) SetAgreementID(agreementID *string) {
+	c.AgreementID = agreementID
+	c.require(contractsListHrResponseRowsItemFieldAgreementID)
 }
 
 // SetContractNo sets the ContractNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetContractNo(contractNo string) {
-	p.ContractNo = contractNo
-	p.require(postV1HrContractsCreateResponseFieldContractNo)
+func (c *ContractsListHrResponseRowsItem) SetContractNo(contractNo string) {
+	c.ContractNo = contractNo
+	c.require(contractsListHrResponseRowsItemFieldContractNo)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetType(type_ PostV1HrContractsCreateResponseType) {
-	p.Type = type_
-	p.require(postV1HrContractsCreateResponseFieldType)
+func (c *ContractsListHrResponseRowsItem) SetType(type_ ContractsListHrResponseRowsItemType) {
+	c.Type = type_
+	c.require(contractsListHrResponseRowsItemFieldType)
 }
 
 // SetStartDate sets the StartDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1HrContractsCreateResponseFieldStartDate)
+func (c *ContractsListHrResponseRowsItem) SetStartDate(startDate time.Time) {
+	c.StartDate = startDate
+	c.require(contractsListHrResponseRowsItemFieldStartDate)
 }
 
 // SetEndDate sets the EndDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1HrContractsCreateResponseFieldEndDate)
+func (c *ContractsListHrResponseRowsItem) SetEndDate(endDate *time.Time) {
+	c.EndDate = endDate
+	c.require(contractsListHrResponseRowsItemFieldEndDate)
 }
 
 // SetEndReason sets the EndReason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetEndReason(endReason *string) {
-	p.EndReason = endReason
-	p.require(postV1HrContractsCreateResponseFieldEndReason)
+func (c *ContractsListHrResponseRowsItem) SetEndReason(endReason *string) {
+	c.EndReason = endReason
+	c.require(contractsListHrResponseRowsItemFieldEndReason)
 }
 
 // SetBaseSalary sets the BaseSalary field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetBaseSalary(baseSalary string) {
-	p.BaseSalary = baseSalary
-	p.require(postV1HrContractsCreateResponseFieldBaseSalary)
+func (c *ContractsListHrResponseRowsItem) SetBaseSalary(baseSalary string) {
+	c.BaseSalary = baseSalary
+	c.require(contractsListHrResponseRowsItemFieldBaseSalary)
 }
 
 // SetSalaryType sets the SalaryType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetSalaryType(salaryType PostV1HrContractsCreateResponseSalaryType) {
-	p.SalaryType = salaryType
-	p.require(postV1HrContractsCreateResponseFieldSalaryType)
+func (c *ContractsListHrResponseRowsItem) SetSalaryType(salaryType ContractsListHrResponseRowsItemSalaryType) {
+	c.SalaryType = salaryType
+	c.require(contractsListHrResponseRowsItemFieldSalaryType)
 }
 
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetWorkHours(workHours string) {
-	p.WorkHours = workHours
-	p.require(postV1HrContractsCreateResponseFieldWorkHours)
+func (c *ContractsListHrResponseRowsItem) SetWorkHours(workHours string) {
+	c.WorkHours = workHours
+	c.require(contractsListHrResponseRowsItemFieldWorkHours)
 }
 
 // SetWorkHoursUnit sets the WorkHoursUnit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetWorkHoursUnit(workHoursUnit PostV1HrContractsCreateResponseWorkHoursUnit) {
-	p.WorkHoursUnit = workHoursUnit
-	p.require(postV1HrContractsCreateResponseFieldWorkHoursUnit)
+func (c *ContractsListHrResponseRowsItem) SetWorkHoursUnit(workHoursUnit ContractsListHrResponseRowsItemWorkHoursUnit) {
+	c.WorkHoursUnit = workHoursUnit
+	c.require(contractsListHrResponseRowsItemFieldWorkHoursUnit)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetStatus(status PostV1HrContractsCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1HrContractsCreateResponseFieldStatus)
+func (c *ContractsListHrResponseRowsItem) SetStatus(status ContractsListHrResponseRowsItemStatus) {
+	c.Status = status
+	c.require(contractsListHrResponseRowsItemFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrContractsCreateResponseFieldNotes)
+func (c *ContractsListHrResponseRowsItem) SetNotes(notes *string) {
+	c.Notes = notes
+	c.require(contractsListHrResponseRowsItemFieldNotes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrContractsCreateResponseFieldCreatedAt)
+func (c *ContractsListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	c.CreatedAt = createdAt
+	c.require(contractsListHrResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1HrContractsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (c *ContractsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ContractsListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*c),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrContractsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*c = ContractsListHrResponseRowsItem(unmarshaler.embed)
+	c.StartDate = unmarshaler.StartDate.Time()
+	c.EndDate = unmarshaler.EndDate.TimePtr()
+	c.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrContractsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsCreateResponse
+func (c *ContractsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ContractsListHrResponseRowsItem
 	var marshaler = struct {
 		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*c),
+		StartDate: internal.NewDate(c.StartDate),
+		EndDate:   internal.NewOptionalDate(c.EndDate),
+		CreatedAt: internal.NewDateTime(c.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrContractsCreateResponse) String() string {
-	if p == nil {
+func (c *ContractsListHrResponseRowsItem) String() string {
+	if c == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(c); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", c)
 }
 
-type PostV1HrContractsCreateResponseSalaryType string
+type ContractsListHrResponseRowsItemSalaryType string
 
 const (
-	PostV1HrContractsCreateResponseSalaryTypeMonthly PostV1HrContractsCreateResponseSalaryType = "monthly"
-	PostV1HrContractsCreateResponseSalaryTypeHourly  PostV1HrContractsCreateResponseSalaryType = "hourly"
-	PostV1HrContractsCreateResponseSalaryTypeWeekly  PostV1HrContractsCreateResponseSalaryType = "weekly"
-	PostV1HrContractsCreateResponseSalaryTypeDaily   PostV1HrContractsCreateResponseSalaryType = "daily"
-	PostV1HrContractsCreateResponseSalaryTypeYearly  PostV1HrContractsCreateResponseSalaryType = "yearly"
+	ContractsListHrResponseRowsItemSalaryTypeMonthly ContractsListHrResponseRowsItemSalaryType = "monthly"
+	ContractsListHrResponseRowsItemSalaryTypeHourly  ContractsListHrResponseRowsItemSalaryType = "hourly"
+	ContractsListHrResponseRowsItemSalaryTypeWeekly  ContractsListHrResponseRowsItemSalaryType = "weekly"
+	ContractsListHrResponseRowsItemSalaryTypeDaily   ContractsListHrResponseRowsItemSalaryType = "daily"
+	ContractsListHrResponseRowsItemSalaryTypeYearly  ContractsListHrResponseRowsItemSalaryType = "yearly"
 )
 
-func NewPostV1HrContractsCreateResponseSalaryTypeFromString(s string) (PostV1HrContractsCreateResponseSalaryType, error) {
+func NewContractsListHrResponseRowsItemSalaryTypeFromString(s string) (ContractsListHrResponseRowsItemSalaryType, error) {
 	switch s {
 	case "monthly":
-		return PostV1HrContractsCreateResponseSalaryTypeMonthly, nil
+		return ContractsListHrResponseRowsItemSalaryTypeMonthly, nil
 	case "hourly":
-		return PostV1HrContractsCreateResponseSalaryTypeHourly, nil
+		return ContractsListHrResponseRowsItemSalaryTypeHourly, nil
 	case "weekly":
-		return PostV1HrContractsCreateResponseSalaryTypeWeekly, nil
+		return ContractsListHrResponseRowsItemSalaryTypeWeekly, nil
 	case "daily":
-		return PostV1HrContractsCreateResponseSalaryTypeDaily, nil
+		return ContractsListHrResponseRowsItemSalaryTypeDaily, nil
 	case "yearly":
-		return PostV1HrContractsCreateResponseSalaryTypeYearly, nil
+		return ContractsListHrResponseRowsItemSalaryTypeYearly, nil
 	}
-	var t PostV1HrContractsCreateResponseSalaryType
+	var t ContractsListHrResponseRowsItemSalaryType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateResponseSalaryType) Ptr() *PostV1HrContractsCreateResponseSalaryType {
-	return &p
+func (c ContractsListHrResponseRowsItemSalaryType) Ptr() *ContractsListHrResponseRowsItemSalaryType {
+	return &c
 }
 
-type PostV1HrContractsCreateResponseStatus string
+type ContractsListHrResponseRowsItemStatus string
 
 const (
-	PostV1HrContractsCreateResponseStatusActive PostV1HrContractsCreateResponseStatus = "active"
-	PostV1HrContractsCreateResponseStatusEnded  PostV1HrContractsCreateResponseStatus = "ended"
+	ContractsListHrResponseRowsItemStatusActive ContractsListHrResponseRowsItemStatus = "active"
+	ContractsListHrResponseRowsItemStatusEnded  ContractsListHrResponseRowsItemStatus = "ended"
 )
 
-func NewPostV1HrContractsCreateResponseStatusFromString(s string) (PostV1HrContractsCreateResponseStatus, error) {
+func NewContractsListHrResponseRowsItemStatusFromString(s string) (ContractsListHrResponseRowsItemStatus, error) {
 	switch s {
 	case "active":
-		return PostV1HrContractsCreateResponseStatusActive, nil
+		return ContractsListHrResponseRowsItemStatusActive, nil
 	case "ended":
-		return PostV1HrContractsCreateResponseStatusEnded, nil
+		return ContractsListHrResponseRowsItemStatusEnded, nil
 	}
-	var t PostV1HrContractsCreateResponseStatus
+	var t ContractsListHrResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateResponseStatus) Ptr() *PostV1HrContractsCreateResponseStatus {
-	return &p
+func (c ContractsListHrResponseRowsItemStatus) Ptr() *ContractsListHrResponseRowsItemStatus {
+	return &c
 }
 
-type PostV1HrContractsCreateResponseType string
+type ContractsListHrResponseRowsItemType string
 
 const (
-	PostV1HrContractsCreateResponseTypePermanent PostV1HrContractsCreateResponseType = "permanent"
-	PostV1HrContractsCreateResponseTypeFixedTerm PostV1HrContractsCreateResponseType = "fixed_term"
+	ContractsListHrResponseRowsItemTypePermanent ContractsListHrResponseRowsItemType = "permanent"
+	ContractsListHrResponseRowsItemTypeFixedTerm ContractsListHrResponseRowsItemType = "fixed_term"
 )
 
-func NewPostV1HrContractsCreateResponseTypeFromString(s string) (PostV1HrContractsCreateResponseType, error) {
+func NewContractsListHrResponseRowsItemTypeFromString(s string) (ContractsListHrResponseRowsItemType, error) {
 	switch s {
 	case "permanent":
-		return PostV1HrContractsCreateResponseTypePermanent, nil
+		return ContractsListHrResponseRowsItemTypePermanent, nil
 	case "fixed_term":
-		return PostV1HrContractsCreateResponseTypeFixedTerm, nil
+		return ContractsListHrResponseRowsItemTypeFixedTerm, nil
 	}
-	var t PostV1HrContractsCreateResponseType
+	var t ContractsListHrResponseRowsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateResponseType) Ptr() *PostV1HrContractsCreateResponseType {
-	return &p
+func (c ContractsListHrResponseRowsItemType) Ptr() *ContractsListHrResponseRowsItemType {
+	return &c
 }
 
-type PostV1HrContractsCreateResponseWorkHoursUnit string
+type ContractsListHrResponseRowsItemWorkHoursUnit string
 
 const (
-	PostV1HrContractsCreateResponseWorkHoursUnitDay  PostV1HrContractsCreateResponseWorkHoursUnit = "day"
-	PostV1HrContractsCreateResponseWorkHoursUnitWeek PostV1HrContractsCreateResponseWorkHoursUnit = "week"
+	ContractsListHrResponseRowsItemWorkHoursUnitDay  ContractsListHrResponseRowsItemWorkHoursUnit = "day"
+	ContractsListHrResponseRowsItemWorkHoursUnitWeek ContractsListHrResponseRowsItemWorkHoursUnit = "week"
 )
 
-func NewPostV1HrContractsCreateResponseWorkHoursUnitFromString(s string) (PostV1HrContractsCreateResponseWorkHoursUnit, error) {
+func NewContractsListHrResponseRowsItemWorkHoursUnitFromString(s string) (ContractsListHrResponseRowsItemWorkHoursUnit, error) {
 	switch s {
 	case "day":
-		return PostV1HrContractsCreateResponseWorkHoursUnitDay, nil
+		return ContractsListHrResponseRowsItemWorkHoursUnitDay, nil
 	case "week":
-		return PostV1HrContractsCreateResponseWorkHoursUnitWeek, nil
+		return ContractsListHrResponseRowsItemWorkHoursUnitWeek, nil
 	}
-	var t PostV1HrContractsCreateResponseWorkHoursUnit
+	var t ContractsListHrResponseRowsItemWorkHoursUnit
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrContractsCreateResponseWorkHoursUnit) Ptr() *PostV1HrContractsCreateResponseWorkHoursUnit {
-	return &p
+func (c ContractsListHrResponseRowsItemWorkHoursUnit) Ptr() *ContractsListHrResponseRowsItemWorkHoursUnit {
+	return &c
 }
 
 var (
-	postV1HrContractsEndResponseFieldID            = big.NewInt(1 << 0)
-	postV1HrContractsEndResponseFieldEmployeeID    = big.NewInt(1 << 1)
-	postV1HrContractsEndResponseFieldPositionID    = big.NewInt(1 << 2)
-	postV1HrContractsEndResponseFieldDepartmentID  = big.NewInt(1 << 3)
-	postV1HrContractsEndResponseFieldScheduleID    = big.NewInt(1 << 4)
-	postV1HrContractsEndResponseFieldAgreementID   = big.NewInt(1 << 5)
-	postV1HrContractsEndResponseFieldContractNo    = big.NewInt(1 << 6)
-	postV1HrContractsEndResponseFieldType          = big.NewInt(1 << 7)
-	postV1HrContractsEndResponseFieldStartDate     = big.NewInt(1 << 8)
-	postV1HrContractsEndResponseFieldEndDate       = big.NewInt(1 << 9)
-	postV1HrContractsEndResponseFieldEndReason     = big.NewInt(1 << 10)
-	postV1HrContractsEndResponseFieldBaseSalary    = big.NewInt(1 << 11)
-	postV1HrContractsEndResponseFieldSalaryType    = big.NewInt(1 << 12)
-	postV1HrContractsEndResponseFieldWorkHours     = big.NewInt(1 << 13)
-	postV1HrContractsEndResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
-	postV1HrContractsEndResponseFieldStatus        = big.NewInt(1 << 15)
-	postV1HrContractsEndResponseFieldNotes         = big.NewInt(1 << 16)
-	postV1HrContractsEndResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	employeesAnonymizeHrResponseFieldID                   = big.NewInt(1 << 0)
+	employeesAnonymizeHrResponseFieldCode                 = big.NewInt(1 << 1)
+	employeesAnonymizeHrResponseFieldFirstName            = big.NewInt(1 << 2)
+	employeesAnonymizeHrResponseFieldLastName             = big.NewInt(1 << 3)
+	employeesAnonymizeHrResponseFieldPersonalCode         = big.NewInt(1 << 4)
+	employeesAnonymizeHrResponseFieldBirthDate            = big.NewInt(1 << 5)
+	employeesAnonymizeHrResponseFieldEmail                = big.NewInt(1 << 6)
+	employeesAnonymizeHrResponseFieldPhone                = big.NewInt(1 << 7)
+	employeesAnonymizeHrResponseFieldAddress              = big.NewInt(1 << 8)
+	employeesAnonymizeHrResponseFieldIban                 = big.NewInt(1 << 9)
+	employeesAnonymizeHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	employeesAnonymizeHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	employeesAnonymizeHrResponseFieldHireDate             = big.NewInt(1 << 12)
+	employeesAnonymizeHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
+	employeesAnonymizeHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	employeesAnonymizeHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
+	employeesAnonymizeHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
+	employeesAnonymizeHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	employeesAnonymizeHrResponseFieldStatus               = big.NewInt(1 << 18)
+	employeesAnonymizeHrResponseFieldNotes                = big.NewInt(1 << 19)
+	employeesAnonymizeHrResponseFieldAttributes           = big.NewInt(1 << 20)
+	employeesAnonymizeHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
-type PostV1HrContractsEndResponse struct {
-	ID            string                                    `json:"id" url:"id"`
-	EmployeeID    string                                    `json:"employeeId" url:"employeeId"`
-	PositionID    *string                                   `json:"positionId,omitempty" url:"positionId,omitempty"`
-	DepartmentID  *string                                   `json:"departmentId,omitempty" url:"departmentId,omitempty"`
-	ScheduleID    *string                                   `json:"scheduleId,omitempty" url:"scheduleId,omitempty"`
-	AgreementID   *string                                   `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	ContractNo    string                                    `json:"contractNo" url:"contractNo"`
-	Type          PostV1HrContractsEndResponseType          `json:"type" url:"type"`
-	StartDate     string                                    `json:"startDate" url:"startDate"`
-	EndDate       *string                                   `json:"endDate,omitempty" url:"endDate,omitempty"`
-	EndReason     *string                                   `json:"endReason,omitempty" url:"endReason,omitempty"`
-	BaseSalary    string                                    `json:"baseSalary" url:"baseSalary"`
-	SalaryType    PostV1HrContractsEndResponseSalaryType    `json:"salaryType" url:"salaryType"`
-	WorkHours     string                                    `json:"workHours" url:"workHours"`
-	WorkHoursUnit PostV1HrContractsEndResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
-	Status        PostV1HrContractsEndResponseStatus        `json:"status" url:"status"`
-	Notes         *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     string                                    `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrContractsEndResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrContractsEndResponse) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrContractsEndResponse) GetPositionID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PositionID
-}
-
-func (p *PostV1HrContractsEndResponse) GetDepartmentID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DepartmentID
-}
-
-func (p *PostV1HrContractsEndResponse) GetScheduleID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ScheduleID
-}
-
-func (p *PostV1HrContractsEndResponse) GetAgreementID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AgreementID
-}
-
-func (p *PostV1HrContractsEndResponse) GetContractNo() string {
-	if p == nil {
-		return ""
-	}
-	return p.ContractNo
-}
-
-func (p *PostV1HrContractsEndResponse) GetType() PostV1HrContractsEndResponseType {
-	if p == nil {
-		return ""
-	}
-	return p.Type
-}
-
-func (p *PostV1HrContractsEndResponse) GetStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.StartDate
-}
-
-func (p *PostV1HrContractsEndResponse) GetEndDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EndDate
-}
-
-func (p *PostV1HrContractsEndResponse) GetEndReason() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EndReason
-}
-
-func (p *PostV1HrContractsEndResponse) GetBaseSalary() string {
-	if p == nil {
-		return ""
-	}
-	return p.BaseSalary
-}
-
-func (p *PostV1HrContractsEndResponse) GetSalaryType() PostV1HrContractsEndResponseSalaryType {
-	if p == nil {
-		return ""
-	}
-	return p.SalaryType
-}
-
-func (p *PostV1HrContractsEndResponse) GetWorkHours() string {
-	if p == nil {
-		return ""
-	}
-	return p.WorkHours
-}
-
-func (p *PostV1HrContractsEndResponse) GetWorkHoursUnit() PostV1HrContractsEndResponseWorkHoursUnit {
-	if p == nil {
-		return ""
-	}
-	return p.WorkHoursUnit
-}
-
-func (p *PostV1HrContractsEndResponse) GetStatus() PostV1HrContractsEndResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrContractsEndResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrContractsEndResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrContractsEndResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrContractsEndResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrContractsEndResponseFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrContractsEndResponseFieldEmployeeID)
-}
-
-// SetPositionID sets the PositionID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetPositionID(positionID *string) {
-	p.PositionID = positionID
-	p.require(postV1HrContractsEndResponseFieldPositionID)
-}
-
-// SetDepartmentID sets the DepartmentID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetDepartmentID(departmentID *string) {
-	p.DepartmentID = departmentID
-	p.require(postV1HrContractsEndResponseFieldDepartmentID)
-}
-
-// SetScheduleID sets the ScheduleID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetScheduleID(scheduleID *string) {
-	p.ScheduleID = scheduleID
-	p.require(postV1HrContractsEndResponseFieldScheduleID)
-}
-
-// SetAgreementID sets the AgreementID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetAgreementID(agreementID *string) {
-	p.AgreementID = agreementID
-	p.require(postV1HrContractsEndResponseFieldAgreementID)
-}
-
-// SetContractNo sets the ContractNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetContractNo(contractNo string) {
-	p.ContractNo = contractNo
-	p.require(postV1HrContractsEndResponseFieldContractNo)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetType(type_ PostV1HrContractsEndResponseType) {
-	p.Type = type_
-	p.require(postV1HrContractsEndResponseFieldType)
-}
-
-// SetStartDate sets the StartDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1HrContractsEndResponseFieldStartDate)
-}
-
-// SetEndDate sets the EndDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1HrContractsEndResponseFieldEndDate)
-}
-
-// SetEndReason sets the EndReason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetEndReason(endReason *string) {
-	p.EndReason = endReason
-	p.require(postV1HrContractsEndResponseFieldEndReason)
-}
-
-// SetBaseSalary sets the BaseSalary field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetBaseSalary(baseSalary string) {
-	p.BaseSalary = baseSalary
-	p.require(postV1HrContractsEndResponseFieldBaseSalary)
-}
-
-// SetSalaryType sets the SalaryType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetSalaryType(salaryType PostV1HrContractsEndResponseSalaryType) {
-	p.SalaryType = salaryType
-	p.require(postV1HrContractsEndResponseFieldSalaryType)
-}
-
-// SetWorkHours sets the WorkHours field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetWorkHours(workHours string) {
-	p.WorkHours = workHours
-	p.require(postV1HrContractsEndResponseFieldWorkHours)
-}
-
-// SetWorkHoursUnit sets the WorkHoursUnit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetWorkHoursUnit(workHoursUnit PostV1HrContractsEndResponseWorkHoursUnit) {
-	p.WorkHoursUnit = workHoursUnit
-	p.require(postV1HrContractsEndResponseFieldWorkHoursUnit)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetStatus(status PostV1HrContractsEndResponseStatus) {
-	p.Status = status
-	p.require(postV1HrContractsEndResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrContractsEndResponseFieldNotes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsEndResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrContractsEndResponseFieldCreatedAt)
-}
-
-func (p *PostV1HrContractsEndResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsEndResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrContractsEndResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrContractsEndResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsEndResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrContractsEndResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrContractsEndResponseSalaryType string
-
-const (
-	PostV1HrContractsEndResponseSalaryTypeMonthly PostV1HrContractsEndResponseSalaryType = "monthly"
-	PostV1HrContractsEndResponseSalaryTypeHourly  PostV1HrContractsEndResponseSalaryType = "hourly"
-	PostV1HrContractsEndResponseSalaryTypeWeekly  PostV1HrContractsEndResponseSalaryType = "weekly"
-	PostV1HrContractsEndResponseSalaryTypeDaily   PostV1HrContractsEndResponseSalaryType = "daily"
-	PostV1HrContractsEndResponseSalaryTypeYearly  PostV1HrContractsEndResponseSalaryType = "yearly"
-)
-
-func NewPostV1HrContractsEndResponseSalaryTypeFromString(s string) (PostV1HrContractsEndResponseSalaryType, error) {
-	switch s {
-	case "monthly":
-		return PostV1HrContractsEndResponseSalaryTypeMonthly, nil
-	case "hourly":
-		return PostV1HrContractsEndResponseSalaryTypeHourly, nil
-	case "weekly":
-		return PostV1HrContractsEndResponseSalaryTypeWeekly, nil
-	case "daily":
-		return PostV1HrContractsEndResponseSalaryTypeDaily, nil
-	case "yearly":
-		return PostV1HrContractsEndResponseSalaryTypeYearly, nil
-	}
-	var t PostV1HrContractsEndResponseSalaryType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsEndResponseSalaryType) Ptr() *PostV1HrContractsEndResponseSalaryType {
-	return &p
-}
-
-type PostV1HrContractsEndResponseStatus string
-
-const (
-	PostV1HrContractsEndResponseStatusActive PostV1HrContractsEndResponseStatus = "active"
-	PostV1HrContractsEndResponseStatusEnded  PostV1HrContractsEndResponseStatus = "ended"
-)
-
-func NewPostV1HrContractsEndResponseStatusFromString(s string) (PostV1HrContractsEndResponseStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrContractsEndResponseStatusActive, nil
-	case "ended":
-		return PostV1HrContractsEndResponseStatusEnded, nil
-	}
-	var t PostV1HrContractsEndResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsEndResponseStatus) Ptr() *PostV1HrContractsEndResponseStatus {
-	return &p
-}
-
-type PostV1HrContractsEndResponseType string
-
-const (
-	PostV1HrContractsEndResponseTypePermanent PostV1HrContractsEndResponseType = "permanent"
-	PostV1HrContractsEndResponseTypeFixedTerm PostV1HrContractsEndResponseType = "fixed_term"
-)
-
-func NewPostV1HrContractsEndResponseTypeFromString(s string) (PostV1HrContractsEndResponseType, error) {
-	switch s {
-	case "permanent":
-		return PostV1HrContractsEndResponseTypePermanent, nil
-	case "fixed_term":
-		return PostV1HrContractsEndResponseTypeFixedTerm, nil
-	}
-	var t PostV1HrContractsEndResponseType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsEndResponseType) Ptr() *PostV1HrContractsEndResponseType {
-	return &p
-}
-
-type PostV1HrContractsEndResponseWorkHoursUnit string
-
-const (
-	PostV1HrContractsEndResponseWorkHoursUnitDay  PostV1HrContractsEndResponseWorkHoursUnit = "day"
-	PostV1HrContractsEndResponseWorkHoursUnitWeek PostV1HrContractsEndResponseWorkHoursUnit = "week"
-)
-
-func NewPostV1HrContractsEndResponseWorkHoursUnitFromString(s string) (PostV1HrContractsEndResponseWorkHoursUnit, error) {
-	switch s {
-	case "day":
-		return PostV1HrContractsEndResponseWorkHoursUnitDay, nil
-	case "week":
-		return PostV1HrContractsEndResponseWorkHoursUnitWeek, nil
-	}
-	var t PostV1HrContractsEndResponseWorkHoursUnit
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsEndResponseWorkHoursUnit) Ptr() *PostV1HrContractsEndResponseWorkHoursUnit {
-	return &p
-}
-
-var (
-	postV1HrContractsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1HrContractsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1HrContractsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
-)
-
-type PostV1HrContractsListRequestFilterItem struct {
-	Field string                                       `json:"field" url:"field"`
-	Op    PostV1HrContractsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1HrContractsListRequestFilterItemValue `json:"value" url:"value"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) GetOp() PostV1HrContractsListRequestFilterItemOp {
-	if p == nil {
-		return ""
-	}
-	return p.Op
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) GetValue() *PostV1HrContractsListRequestFilterItemValue {
-	if p == nil {
-		return nil
-	}
-	return p.Value
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrContractsListRequestFilterItemFieldField)
-}
-
-// SetOp sets the Op field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequestFilterItem) SetOp(op PostV1HrContractsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1HrContractsListRequestFilterItemFieldOp)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequestFilterItem) SetValue(value *PostV1HrContractsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1HrContractsListRequestFilterItemFieldValue)
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsListRequestFilterItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrContractsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsListRequestFilterItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrContractsListRequestFilterItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrContractsListRequestFilterItemOp string
-
-const (
-	PostV1HrContractsListRequestFilterItemOpEq       PostV1HrContractsListRequestFilterItemOp = "eq"
-	PostV1HrContractsListRequestFilterItemOpNe       PostV1HrContractsListRequestFilterItemOp = "ne"
-	PostV1HrContractsListRequestFilterItemOpContains PostV1HrContractsListRequestFilterItemOp = "contains"
-	PostV1HrContractsListRequestFilterItemOpGte      PostV1HrContractsListRequestFilterItemOp = "gte"
-	PostV1HrContractsListRequestFilterItemOpLte      PostV1HrContractsListRequestFilterItemOp = "lte"
-	PostV1HrContractsListRequestFilterItemOpIn       PostV1HrContractsListRequestFilterItemOp = "in"
-)
-
-func NewPostV1HrContractsListRequestFilterItemOpFromString(s string) (PostV1HrContractsListRequestFilterItemOp, error) {
-	switch s {
-	case "eq":
-		return PostV1HrContractsListRequestFilterItemOpEq, nil
-	case "ne":
-		return PostV1HrContractsListRequestFilterItemOpNe, nil
-	case "contains":
-		return PostV1HrContractsListRequestFilterItemOpContains, nil
-	case "gte":
-		return PostV1HrContractsListRequestFilterItemOpGte, nil
-	case "lte":
-		return PostV1HrContractsListRequestFilterItemOpLte, nil
-	case "in":
-		return PostV1HrContractsListRequestFilterItemOpIn, nil
-	}
-	var t PostV1HrContractsListRequestFilterItemOp
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListRequestFilterItemOp) Ptr() *PostV1HrContractsListRequestFilterItemOp {
-	return &p
-}
-
-type PostV1HrContractsListRequestFilterItemValue struct {
-	String                                                   string
-	Double                                                   float64
-	Boolean                                                  bool
-	PostV1HrContractsListRequestFilterItemValueThreeItemList []*PostV1HrContractsListRequestFilterItemValueThreeItem
-
-	typ string
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
-		return false
-	}
-	return p.Boolean
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) GetPostV1HrContractsListRequestFilterItemValueThreeItemList() []*PostV1HrContractsListRequestFilterItemValueThreeItem {
-	if p == nil {
-		return nil
-	}
-	return p.PostV1HrContractsListRequestFilterItemValueThreeItemList
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	var valueBoolean bool
-	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
-		return nil
-	}
-	var valuePostV1HrContractsListRequestFilterItemValueThreeItemList []*PostV1HrContractsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1HrContractsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1HrContractsListRequestFilterItemValueThreeItemList"
-		p.PostV1HrContractsListRequestFilterItemValueThreeItemList = valuePostV1HrContractsListRequestFilterItemValueThreeItemList
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrContractsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
-	}
-	if p.typ == "PostV1HrContractsListRequestFilterItemValueThreeItemList" || p.PostV1HrContractsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1HrContractsListRequestFilterItemValueThreeItemList)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrContractsListRequestFilterItemValueVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-	VisitBoolean(bool) error
-	VisitPostV1HrContractsListRequestFilterItemValueThreeItemList([]*PostV1HrContractsListRequestFilterItemValueThreeItem) error
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValue) Accept(visitor PostV1HrContractsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
-	}
-	if p.typ == "PostV1HrContractsListRequestFilterItemValueThreeItemList" || p.PostV1HrContractsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1HrContractsListRequestFilterItemValueThreeItemList(p.PostV1HrContractsListRequestFilterItemValueThreeItemList)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrContractsListRequestFilterItemValueThreeItem struct {
-	String string
-	Double float64
-
-	typ string
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrContractsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrContractsListRequestFilterItemValueThreeItemVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-}
-
-func (p *PostV1HrContractsListRequestFilterItemValueThreeItem) Accept(visitor PostV1HrContractsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-var (
-	postV1HrContractsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1HrContractsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
-)
-
-type PostV1HrContractsListRequestSortItem struct {
-	Field string                                   `json:"field" url:"field"`
-	Dir   *PostV1HrContractsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrContractsListRequestSortItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrContractsListRequestSortItem) GetDir() *PostV1HrContractsListRequestSortItemDir {
-	if p == nil {
-		return nil
-	}
-	return p.Dir
-}
-
-func (p *PostV1HrContractsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrContractsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrContractsListRequestSortItemFieldField)
-}
-
-// SetDir sets the Dir field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListRequestSortItem) SetDir(dir *PostV1HrContractsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1HrContractsListRequestSortItemFieldDir)
-}
-
-func (p *PostV1HrContractsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsListRequestSortItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrContractsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrContractsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsListRequestSortItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrContractsListRequestSortItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrContractsListRequestSortItemDir string
-
-const (
-	PostV1HrContractsListRequestSortItemDirAsc  PostV1HrContractsListRequestSortItemDir = "asc"
-	PostV1HrContractsListRequestSortItemDirDesc PostV1HrContractsListRequestSortItemDir = "desc"
-)
-
-func NewPostV1HrContractsListRequestSortItemDirFromString(s string) (PostV1HrContractsListRequestSortItemDir, error) {
-	switch s {
-	case "asc":
-		return PostV1HrContractsListRequestSortItemDirAsc, nil
-	case "desc":
-		return PostV1HrContractsListRequestSortItemDirDesc, nil
-	}
-	var t PostV1HrContractsListRequestSortItemDir
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListRequestSortItemDir) Ptr() *PostV1HrContractsListRequestSortItemDir {
-	return &p
-}
-
-var (
-	postV1HrContractsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1HrContractsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1HrContractsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1HrContractsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1HrContractsListResponseFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1HrContractsListResponse struct {
-	Rows     []*PostV1HrContractsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                    `json:"page" url:"page"`
-	PageSize int64                                    `json:"pageSize" url:"pageSize"`
-	Total    int64                                    `json:"total" url:"total"`
-	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrContractsListResponse) GetRows() []*PostV1HrContractsListResponseRowsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Rows
-}
-
-func (p *PostV1HrContractsListResponse) GetPage() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Page
-}
-
-func (p *PostV1HrContractsListResponse) GetPageSize() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.PageSize
-}
-
-func (p *PostV1HrContractsListResponse) GetTotal() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Total
-}
-
-func (p *PostV1HrContractsListResponse) GetTotals() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.Totals
-}
-
-func (p *PostV1HrContractsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrContractsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetRows sets the Rows field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponse) SetRows(rows []*PostV1HrContractsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrContractsListResponseFieldRows)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1HrContractsListResponseFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrContractsListResponseFieldPageSize)
-}
-
-// SetTotal sets the Total field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1HrContractsListResponseFieldTotal)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1HrContractsListResponseFieldTotals)
-}
-
-func (p *PostV1HrContractsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsListResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrContractsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrContractsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsListResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrContractsListResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrContractsListResponseRowsItemFieldID            = big.NewInt(1 << 0)
-	postV1HrContractsListResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 1)
-	postV1HrContractsListResponseRowsItemFieldPositionID    = big.NewInt(1 << 2)
-	postV1HrContractsListResponseRowsItemFieldDepartmentID  = big.NewInt(1 << 3)
-	postV1HrContractsListResponseRowsItemFieldScheduleID    = big.NewInt(1 << 4)
-	postV1HrContractsListResponseRowsItemFieldAgreementID   = big.NewInt(1 << 5)
-	postV1HrContractsListResponseRowsItemFieldContractNo    = big.NewInt(1 << 6)
-	postV1HrContractsListResponseRowsItemFieldType          = big.NewInt(1 << 7)
-	postV1HrContractsListResponseRowsItemFieldStartDate     = big.NewInt(1 << 8)
-	postV1HrContractsListResponseRowsItemFieldEndDate       = big.NewInt(1 << 9)
-	postV1HrContractsListResponseRowsItemFieldEndReason     = big.NewInt(1 << 10)
-	postV1HrContractsListResponseRowsItemFieldBaseSalary    = big.NewInt(1 << 11)
-	postV1HrContractsListResponseRowsItemFieldSalaryType    = big.NewInt(1 << 12)
-	postV1HrContractsListResponseRowsItemFieldWorkHours     = big.NewInt(1 << 13)
-	postV1HrContractsListResponseRowsItemFieldWorkHoursUnit = big.NewInt(1 << 14)
-	postV1HrContractsListResponseRowsItemFieldStatus        = big.NewInt(1 << 15)
-	postV1HrContractsListResponseRowsItemFieldNotes         = big.NewInt(1 << 16)
-	postV1HrContractsListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
-)
-
-type PostV1HrContractsListResponseRowsItem struct {
-	ID            string                                             `json:"id" url:"id"`
-	EmployeeID    string                                             `json:"employeeId" url:"employeeId"`
-	PositionID    *string                                            `json:"positionId,omitempty" url:"positionId,omitempty"`
-	DepartmentID  *string                                            `json:"departmentId,omitempty" url:"departmentId,omitempty"`
-	ScheduleID    *string                                            `json:"scheduleId,omitempty" url:"scheduleId,omitempty"`
-	AgreementID   *string                                            `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	ContractNo    string                                             `json:"contractNo" url:"contractNo"`
-	Type          PostV1HrContractsListResponseRowsItemType          `json:"type" url:"type"`
-	StartDate     string                                             `json:"startDate" url:"startDate"`
-	EndDate       *string                                            `json:"endDate,omitempty" url:"endDate,omitempty"`
-	EndReason     *string                                            `json:"endReason,omitempty" url:"endReason,omitempty"`
-	BaseSalary    string                                             `json:"baseSalary" url:"baseSalary"`
-	SalaryType    PostV1HrContractsListResponseRowsItemSalaryType    `json:"salaryType" url:"salaryType"`
-	WorkHours     string                                             `json:"workHours" url:"workHours"`
-	WorkHoursUnit PostV1HrContractsListResponseRowsItemWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
-	Status        PostV1HrContractsListResponseRowsItemStatus        `json:"status" url:"status"`
-	Notes         *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     string                                             `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetPositionID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PositionID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetDepartmentID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DepartmentID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetScheduleID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.ScheduleID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetAgreementID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AgreementID
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetContractNo() string {
-	if p == nil {
-		return ""
-	}
-	return p.ContractNo
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetType() PostV1HrContractsListResponseRowsItemType {
-	if p == nil {
-		return ""
-	}
-	return p.Type
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetStartDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.StartDate
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetEndDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EndDate
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetEndReason() *string {
-	if p == nil {
-		return nil
-	}
-	return p.EndReason
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetBaseSalary() string {
-	if p == nil {
-		return ""
-	}
-	return p.BaseSalary
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetSalaryType() PostV1HrContractsListResponseRowsItemSalaryType {
-	if p == nil {
-		return ""
-	}
-	return p.SalaryType
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetWorkHours() string {
-	if p == nil {
-		return ""
-	}
-	return p.WorkHours
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetWorkHoursUnit() PostV1HrContractsListResponseRowsItemWorkHoursUnit {
-	if p == nil {
-		return ""
-	}
-	return p.WorkHoursUnit
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetStatus() PostV1HrContractsListResponseRowsItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrContractsListResponseRowsItemFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrContractsListResponseRowsItemFieldEmployeeID)
-}
-
-// SetPositionID sets the PositionID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetPositionID(positionID *string) {
-	p.PositionID = positionID
-	p.require(postV1HrContractsListResponseRowsItemFieldPositionID)
-}
-
-// SetDepartmentID sets the DepartmentID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetDepartmentID(departmentID *string) {
-	p.DepartmentID = departmentID
-	p.require(postV1HrContractsListResponseRowsItemFieldDepartmentID)
-}
-
-// SetScheduleID sets the ScheduleID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetScheduleID(scheduleID *string) {
-	p.ScheduleID = scheduleID
-	p.require(postV1HrContractsListResponseRowsItemFieldScheduleID)
-}
-
-// SetAgreementID sets the AgreementID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetAgreementID(agreementID *string) {
-	p.AgreementID = agreementID
-	p.require(postV1HrContractsListResponseRowsItemFieldAgreementID)
-}
-
-// SetContractNo sets the ContractNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetContractNo(contractNo string) {
-	p.ContractNo = contractNo
-	p.require(postV1HrContractsListResponseRowsItemFieldContractNo)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetType(type_ PostV1HrContractsListResponseRowsItemType) {
-	p.Type = type_
-	p.require(postV1HrContractsListResponseRowsItemFieldType)
-}
-
-// SetStartDate sets the StartDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetStartDate(startDate string) {
-	p.StartDate = startDate
-	p.require(postV1HrContractsListResponseRowsItemFieldStartDate)
-}
-
-// SetEndDate sets the EndDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetEndDate(endDate *string) {
-	p.EndDate = endDate
-	p.require(postV1HrContractsListResponseRowsItemFieldEndDate)
-}
-
-// SetEndReason sets the EndReason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetEndReason(endReason *string) {
-	p.EndReason = endReason
-	p.require(postV1HrContractsListResponseRowsItemFieldEndReason)
-}
-
-// SetBaseSalary sets the BaseSalary field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetBaseSalary(baseSalary string) {
-	p.BaseSalary = baseSalary
-	p.require(postV1HrContractsListResponseRowsItemFieldBaseSalary)
-}
-
-// SetSalaryType sets the SalaryType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetSalaryType(salaryType PostV1HrContractsListResponseRowsItemSalaryType) {
-	p.SalaryType = salaryType
-	p.require(postV1HrContractsListResponseRowsItemFieldSalaryType)
-}
-
-// SetWorkHours sets the WorkHours field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetWorkHours(workHours string) {
-	p.WorkHours = workHours
-	p.require(postV1HrContractsListResponseRowsItemFieldWorkHours)
-}
-
-// SetWorkHoursUnit sets the WorkHoursUnit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetWorkHoursUnit(workHoursUnit PostV1HrContractsListResponseRowsItemWorkHoursUnit) {
-	p.WorkHoursUnit = workHoursUnit
-	p.require(postV1HrContractsListResponseRowsItemFieldWorkHoursUnit)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetStatus(status PostV1HrContractsListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1HrContractsListResponseRowsItemFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrContractsListResponseRowsItemFieldNotes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrContractsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrContractsListResponseRowsItemFieldCreatedAt)
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrContractsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrContractsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrContractsListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrContractsListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrContractsListResponseRowsItemSalaryType string
-
-const (
-	PostV1HrContractsListResponseRowsItemSalaryTypeMonthly PostV1HrContractsListResponseRowsItemSalaryType = "monthly"
-	PostV1HrContractsListResponseRowsItemSalaryTypeHourly  PostV1HrContractsListResponseRowsItemSalaryType = "hourly"
-	PostV1HrContractsListResponseRowsItemSalaryTypeWeekly  PostV1HrContractsListResponseRowsItemSalaryType = "weekly"
-	PostV1HrContractsListResponseRowsItemSalaryTypeDaily   PostV1HrContractsListResponseRowsItemSalaryType = "daily"
-	PostV1HrContractsListResponseRowsItemSalaryTypeYearly  PostV1HrContractsListResponseRowsItemSalaryType = "yearly"
-)
-
-func NewPostV1HrContractsListResponseRowsItemSalaryTypeFromString(s string) (PostV1HrContractsListResponseRowsItemSalaryType, error) {
-	switch s {
-	case "monthly":
-		return PostV1HrContractsListResponseRowsItemSalaryTypeMonthly, nil
-	case "hourly":
-		return PostV1HrContractsListResponseRowsItemSalaryTypeHourly, nil
-	case "weekly":
-		return PostV1HrContractsListResponseRowsItemSalaryTypeWeekly, nil
-	case "daily":
-		return PostV1HrContractsListResponseRowsItemSalaryTypeDaily, nil
-	case "yearly":
-		return PostV1HrContractsListResponseRowsItemSalaryTypeYearly, nil
-	}
-	var t PostV1HrContractsListResponseRowsItemSalaryType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListResponseRowsItemSalaryType) Ptr() *PostV1HrContractsListResponseRowsItemSalaryType {
-	return &p
-}
-
-type PostV1HrContractsListResponseRowsItemStatus string
-
-const (
-	PostV1HrContractsListResponseRowsItemStatusActive PostV1HrContractsListResponseRowsItemStatus = "active"
-	PostV1HrContractsListResponseRowsItemStatusEnded  PostV1HrContractsListResponseRowsItemStatus = "ended"
-)
-
-func NewPostV1HrContractsListResponseRowsItemStatusFromString(s string) (PostV1HrContractsListResponseRowsItemStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrContractsListResponseRowsItemStatusActive, nil
-	case "ended":
-		return PostV1HrContractsListResponseRowsItemStatusEnded, nil
-	}
-	var t PostV1HrContractsListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListResponseRowsItemStatus) Ptr() *PostV1HrContractsListResponseRowsItemStatus {
-	return &p
-}
-
-type PostV1HrContractsListResponseRowsItemType string
-
-const (
-	PostV1HrContractsListResponseRowsItemTypePermanent PostV1HrContractsListResponseRowsItemType = "permanent"
-	PostV1HrContractsListResponseRowsItemTypeFixedTerm PostV1HrContractsListResponseRowsItemType = "fixed_term"
-)
-
-func NewPostV1HrContractsListResponseRowsItemTypeFromString(s string) (PostV1HrContractsListResponseRowsItemType, error) {
-	switch s {
-	case "permanent":
-		return PostV1HrContractsListResponseRowsItemTypePermanent, nil
-	case "fixed_term":
-		return PostV1HrContractsListResponseRowsItemTypeFixedTerm, nil
-	}
-	var t PostV1HrContractsListResponseRowsItemType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListResponseRowsItemType) Ptr() *PostV1HrContractsListResponseRowsItemType {
-	return &p
-}
-
-type PostV1HrContractsListResponseRowsItemWorkHoursUnit string
-
-const (
-	PostV1HrContractsListResponseRowsItemWorkHoursUnitDay  PostV1HrContractsListResponseRowsItemWorkHoursUnit = "day"
-	PostV1HrContractsListResponseRowsItemWorkHoursUnitWeek PostV1HrContractsListResponseRowsItemWorkHoursUnit = "week"
-)
-
-func NewPostV1HrContractsListResponseRowsItemWorkHoursUnitFromString(s string) (PostV1HrContractsListResponseRowsItemWorkHoursUnit, error) {
-	switch s {
-	case "day":
-		return PostV1HrContractsListResponseRowsItemWorkHoursUnitDay, nil
-	case "week":
-		return PostV1HrContractsListResponseRowsItemWorkHoursUnitWeek, nil
-	}
-	var t PostV1HrContractsListResponseRowsItemWorkHoursUnit
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrContractsListResponseRowsItemWorkHoursUnit) Ptr() *PostV1HrContractsListResponseRowsItemWorkHoursUnit {
-	return &p
-}
-
-var (
-	postV1HrEmployeesAnonymizeResponseFieldID                   = big.NewInt(1 << 0)
-	postV1HrEmployeesAnonymizeResponseFieldCode                 = big.NewInt(1 << 1)
-	postV1HrEmployeesAnonymizeResponseFieldFirstName            = big.NewInt(1 << 2)
-	postV1HrEmployeesAnonymizeResponseFieldLastName             = big.NewInt(1 << 3)
-	postV1HrEmployeesAnonymizeResponseFieldPersonalCode         = big.NewInt(1 << 4)
-	postV1HrEmployeesAnonymizeResponseFieldBirthDate            = big.NewInt(1 << 5)
-	postV1HrEmployeesAnonymizeResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1HrEmployeesAnonymizeResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1HrEmployeesAnonymizeResponseFieldAddress              = big.NewInt(1 << 8)
-	postV1HrEmployeesAnonymizeResponseFieldIban                 = big.NewInt(1 << 9)
-	postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	postV1HrEmployeesAnonymizeResponseFieldHireDate             = big.NewInt(1 << 12)
-	postV1HrEmployeesAnonymizeResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesAnonymizeResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	postV1HrEmployeesAnonymizeResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesAnonymizeResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	postV1HrEmployeesAnonymizeResponseFieldStatus               = big.NewInt(1 << 18)
-	postV1HrEmployeesAnonymizeResponseFieldNotes                = big.NewInt(1 << 19)
-	postV1HrEmployeesAnonymizeResponseFieldAttributes           = big.NewInt(1 << 20)
-	postV1HrEmployeesAnonymizeResponseFieldCreatedAt            = big.NewInt(1 << 21)
-)
-
-type PostV1HrEmployeesAnonymizeResponse struct {
-	ID                   string                                              `json:"id" url:"id"`
-	Code                 *string                                             `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                              `json:"firstName" url:"firstName"`
-	LastName             string                                              `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                             `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *string                                             `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	Email                *string                                             `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                             `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *PostV1HrEmployeesAnonymizeResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                             `json:"iban,omitempty" url:"iban,omitempty"`
-	SocialInsuranceNo    *string                                             `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
-	SocialInsuranceStart *string                                             `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
-	HireDate             *string                                             `json:"hireDate,omitempty" url:"hireDate,omitempty"`
-	TerminationDate      *string                                             `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyAllowance       bool                                                `json:"applyAllowance" url:"applyAllowance"`
-	AllowanceOverride    *string                                             `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
-	PensionAccumulation  bool                                                `json:"pensionAccumulation" url:"pensionAccumulation"`
-	PayrollOptions       map[string]string                                   `json:"payrollOptions" url:"payrollOptions"`
-	Status               PostV1HrEmployeesAnonymizeResponseStatus            `json:"status" url:"status"`
-	Notes                *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
-	Attributes           []*PostV1HrEmployeesAnonymizeResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
-	CreatedAt            string                                              `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetFirstName() string {
-	if p == nil {
-		return ""
-	}
-	return p.FirstName
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetLastName() string {
-	if p == nil {
-		return ""
-	}
-	return p.LastName
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetPersonalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PersonalCode
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetBirthDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.BirthDate
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetEmail() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Email
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetPhone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Phone
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetAddress() *PostV1HrEmployeesAnonymizeResponseAddress {
-	if p == nil {
-		return nil
-	}
-	return p.Address
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetIban() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Iban
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetSocialInsuranceNo() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceNo
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetSocialInsuranceStart() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceStart
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetHireDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.HireDate
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetTerminationDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TerminationDate
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetApplyAllowance() bool {
-	if p == nil {
-		return false
-	}
-	return p.ApplyAllowance
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetAllowanceOverride() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AllowanceOverride
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetPensionAccumulation() bool {
-	if p == nil {
-		return false
-	}
-	return p.PensionAccumulation
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetPayrollOptions() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.PayrollOptions
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetStatus() PostV1HrEmployeesAnonymizeResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetAttributes() []*PostV1HrEmployeesAnonymizeResponseAttributesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Attributes
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesAnonymizeResponseFieldID)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesAnonymizeResponseFieldCode)
-}
-
-// SetFirstName sets the FirstName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesAnonymizeResponseFieldFirstName)
-}
-
-// SetLastName sets the LastName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesAnonymizeResponseFieldLastName)
-}
-
-// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesAnonymizeResponseFieldPersonalCode)
-}
-
-// SetBirthDate sets the BirthDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesAnonymizeResponseFieldBirthDate)
-}
-
-// SetEmail sets the Email field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesAnonymizeResponseFieldEmail)
-}
-
-// SetPhone sets the Phone field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesAnonymizeResponseFieldPhone)
-}
-
-// SetAddress sets the Address field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetAddress(address *PostV1HrEmployeesAnonymizeResponseAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesAnonymizeResponseFieldAddress)
-}
-
-// SetIban sets the Iban field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesAnonymizeResponseFieldIban)
-}
-
-// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceNo)
-}
-
-// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceStart)
-}
-
-// SetHireDate sets the HireDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesAnonymizeResponseFieldHireDate)
-}
-
-// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesAnonymizeResponseFieldTerminationDate)
-}
-
-// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetApplyAllowance(applyAllowance bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesAnonymizeResponseFieldApplyAllowance)
-}
-
-// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesAnonymizeResponseFieldAllowanceOverride)
-}
-
-// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetPensionAccumulation(pensionAccumulation bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation)
-}
-
-// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesAnonymizeResponseFieldPayrollOptions)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetStatus(status PostV1HrEmployeesAnonymizeResponseStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesAnonymizeResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesAnonymizeResponseFieldNotes)
-}
-
-// SetAttributes sets the Attributes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetAttributes(attributes []*PostV1HrEmployeesAnonymizeResponseAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesAnonymizeResponseFieldAttributes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesAnonymizeResponseFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAnonymizeResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAnonymizeResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAnonymizeResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesAnonymizeResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesAnonymizeResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesAnonymizeResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesAnonymizeResponseAddressFieldCountryCode = big.NewInt(1 << 3)
-)
-
-type PostV1HrEmployeesAnonymizeResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetStreet() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Street
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetCity() *string {
-	if p == nil {
-		return nil
-	}
-	return p.City
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetPostalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PostalCode
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetStreet sets the Street field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldStreet)
-}
-
-// SetCity sets the City field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldCity)
-}
-
-// SetPostalCode sets the PostalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldPostalCode)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldCountryCode)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAnonymizeResponseAddress
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAnonymizeResponseAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAnonymizeResponseAddress
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAddress) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesAnonymizeResponseAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesAnonymizeResponseAttributesItemFieldValue = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesAnonymizeResponseAttributesItem struct {
-	Name  string `json:"name" url:"name"`
-	Value string `json:"value" url:"value"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) GetValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.Value
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrEmployeesAnonymizeResponseAttributesItemFieldName)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesAnonymizeResponseAttributesItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAnonymizeResponseAttributesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAnonymizeResponseAttributesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAnonymizeResponseAttributesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesAnonymizeResponseAttributesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesAnonymizeResponseStatus string
-
-const (
-	PostV1HrEmployeesAnonymizeResponseStatusActive     PostV1HrEmployeesAnonymizeResponseStatus = "active"
-	PostV1HrEmployeesAnonymizeResponseStatusTerminated PostV1HrEmployeesAnonymizeResponseStatus = "terminated"
-)
-
-func NewPostV1HrEmployeesAnonymizeResponseStatusFromString(s string) (PostV1HrEmployeesAnonymizeResponseStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrEmployeesAnonymizeResponseStatusActive, nil
-	case "terminated":
-		return PostV1HrEmployeesAnonymizeResponseStatusTerminated, nil
-	}
-	var t PostV1HrEmployeesAnonymizeResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesAnonymizeResponseStatus) Ptr() *PostV1HrEmployeesAnonymizeResponseStatus {
-	return &p
-}
-
-var (
-	postV1HrEmployeesAttachmentsListResponseFieldRows = big.NewInt(1 << 0)
-)
-
-type PostV1HrEmployeesAttachmentsListResponse struct {
-	Rows []*PostV1HrEmployeesAttachmentsListResponseRowsItem `json:"rows" url:"rows"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) GetRows() []*PostV1HrEmployeesAttachmentsListResponseRowsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Rows
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetRows sets the Rows field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponse) SetRows(rows []*PostV1HrEmployeesAttachmentsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrEmployeesAttachmentsListResponseFieldRows)
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAttachmentsListResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAttachmentsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAttachmentsListResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesAttachmentsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1HrEmployeesAttachmentsListResponseRowsItemFieldFileName  = big.NewInt(1 << 1)
-	postV1HrEmployeesAttachmentsListResponseRowsItemFieldMimeType  = big.NewInt(1 << 2)
-	postV1HrEmployeesAttachmentsListResponseRowsItemFieldSizeBytes = big.NewInt(1 << 3)
-	postV1HrEmployeesAttachmentsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
-)
-
-type PostV1HrEmployeesAttachmentsListResponseRowsItem struct {
-	ID        string `json:"id" url:"id"`
-	FileName  string `json:"fileName" url:"fileName"`
-	MimeType  string `json:"mimeType" url:"mimeType"`
-	SizeBytes int64  `json:"sizeBytes" url:"sizeBytes"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetFileName() string {
-	if p == nil {
-		return ""
-	}
-	return p.FileName
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetMimeType() string {
-	if p == nil {
-		return ""
-	}
-	return p.MimeType
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetSizeBytes() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.SizeBytes
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesAttachmentsListResponseRowsItemFieldID)
-}
-
-// SetFileName sets the FileName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1HrEmployeesAttachmentsListResponseRowsItemFieldFileName)
-}
-
-// SetMimeType sets the MimeType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1HrEmployeesAttachmentsListResponseRowsItemFieldMimeType)
-}
-
-// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1HrEmployeesAttachmentsListResponseRowsItemFieldSizeBytes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesAttachmentsListResponseRowsItemFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesAttachmentsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesAttachmentsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesAttachmentsListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesAttachmentsListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesCreateRequestAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateRequestAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesCreateRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesCreateRequestAddressFieldCountryCode = big.NewInt(1 << 3)
-)
-
-type PostV1HrEmployeesCreateRequestAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) GetStreet() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Street
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) GetCity() *string {
-	if p == nil {
-		return nil
-	}
-	return p.City
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) GetPostalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PostalCode
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetStreet sets the Street field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesCreateRequestAddressFieldStreet)
-}
-
-// SetCity sets the City field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesCreateRequestAddressFieldCity)
-}
-
-// SetPostalCode sets the PostalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesCreateRequestAddressFieldPostalCode)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesCreateRequestAddressFieldCountryCode)
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateRequestAddress
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesCreateRequestAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateRequestAddress
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesCreateRequestAddress) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesCreateRequestAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateRequestAttributesItemFieldValue = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesCreateRequestAttributesItem struct {
-	Name  string `json:"name" url:"name"`
-	Value string `json:"value" url:"value"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) GetValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.Value
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrEmployeesCreateRequestAttributesItemFieldName)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesCreateRequestAttributesItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateRequestAttributesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesCreateRequestAttributesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateRequestAttributesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesCreateRequestAttributesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateResponseFieldCode                 = big.NewInt(1 << 1)
-	postV1HrEmployeesCreateResponseFieldFirstName            = big.NewInt(1 << 2)
-	postV1HrEmployeesCreateResponseFieldLastName             = big.NewInt(1 << 3)
-	postV1HrEmployeesCreateResponseFieldPersonalCode         = big.NewInt(1 << 4)
-	postV1HrEmployeesCreateResponseFieldBirthDate            = big.NewInt(1 << 5)
-	postV1HrEmployeesCreateResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1HrEmployeesCreateResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1HrEmployeesCreateResponseFieldAddress              = big.NewInt(1 << 8)
-	postV1HrEmployeesCreateResponseFieldIban                 = big.NewInt(1 << 9)
-	postV1HrEmployeesCreateResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	postV1HrEmployeesCreateResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	postV1HrEmployeesCreateResponseFieldHireDate             = big.NewInt(1 << 12)
-	postV1HrEmployeesCreateResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesCreateResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	postV1HrEmployeesCreateResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	postV1HrEmployeesCreateResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesCreateResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	postV1HrEmployeesCreateResponseFieldStatus               = big.NewInt(1 << 18)
-	postV1HrEmployeesCreateResponseFieldNotes                = big.NewInt(1 << 19)
-	postV1HrEmployeesCreateResponseFieldAttributes           = big.NewInt(1 << 20)
-	postV1HrEmployeesCreateResponseFieldCreatedAt            = big.NewInt(1 << 21)
-)
-
-type PostV1HrEmployeesCreateResponse struct {
-	ID                   string                                           `json:"id" url:"id"`
-	Code                 *string                                          `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                           `json:"firstName" url:"firstName"`
-	LastName             string                                           `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *string                                          `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	Email                *string                                          `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                          `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *PostV1HrEmployeesCreateResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                          `json:"iban,omitempty" url:"iban,omitempty"`
-	SocialInsuranceNo    *string                                          `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
-	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
-	HireDate             *string                                          `json:"hireDate,omitempty" url:"hireDate,omitempty"`
-	TerminationDate      *string                                          `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyAllowance       bool                                             `json:"applyAllowance" url:"applyAllowance"`
-	AllowanceOverride    *string                                          `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
-	PensionAccumulation  bool                                             `json:"pensionAccumulation" url:"pensionAccumulation"`
-	PayrollOptions       map[string]string                                `json:"payrollOptions" url:"payrollOptions"`
-	Status               PostV1HrEmployeesCreateResponseStatus            `json:"status" url:"status"`
-	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Attributes           []*PostV1HrEmployeesCreateResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
-	CreatedAt            string                                           `json:"createdAt" url:"createdAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetFirstName() string {
-	if p == nil {
-		return ""
-	}
-	return p.FirstName
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetLastName() string {
-	if p == nil {
-		return ""
-	}
-	return p.LastName
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetPersonalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PersonalCode
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetBirthDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.BirthDate
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetEmail() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Email
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetPhone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Phone
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetAddress() *PostV1HrEmployeesCreateResponseAddress {
-	if p == nil {
-		return nil
-	}
-	return p.Address
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetIban() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Iban
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetSocialInsuranceNo() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceNo
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetSocialInsuranceStart() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceStart
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetHireDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.HireDate
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetTerminationDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TerminationDate
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetApplyAllowance() bool {
-	if p == nil {
-		return false
-	}
-	return p.ApplyAllowance
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetAllowanceOverride() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AllowanceOverride
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetPensionAccumulation() bool {
-	if p == nil {
-		return false
-	}
-	return p.PensionAccumulation
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetPayrollOptions() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.PayrollOptions
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetStatus() PostV1HrEmployeesCreateResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetAttributes() []*PostV1HrEmployeesCreateResponseAttributesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Attributes
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesCreateResponseFieldID)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesCreateResponseFieldCode)
-}
-
-// SetFirstName sets the FirstName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesCreateResponseFieldFirstName)
-}
-
-// SetLastName sets the LastName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesCreateResponseFieldLastName)
-}
-
-// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesCreateResponseFieldPersonalCode)
-}
-
-// SetBirthDate sets the BirthDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesCreateResponseFieldBirthDate)
-}
-
-// SetEmail sets the Email field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesCreateResponseFieldEmail)
-}
-
-// SetPhone sets the Phone field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesCreateResponseFieldPhone)
-}
-
-// SetAddress sets the Address field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetAddress(address *PostV1HrEmployeesCreateResponseAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesCreateResponseFieldAddress)
-}
-
-// SetIban sets the Iban field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesCreateResponseFieldIban)
-}
-
-// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesCreateResponseFieldSocialInsuranceNo)
-}
-
-// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesCreateResponseFieldSocialInsuranceStart)
-}
-
-// SetHireDate sets the HireDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesCreateResponseFieldHireDate)
-}
-
-// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesCreateResponseFieldTerminationDate)
-}
-
-// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetApplyAllowance(applyAllowance bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesCreateResponseFieldApplyAllowance)
-}
-
-// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesCreateResponseFieldAllowanceOverride)
-}
-
-// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetPensionAccumulation(pensionAccumulation bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesCreateResponseFieldPensionAccumulation)
-}
-
-// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesCreateResponseFieldPayrollOptions)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetStatus(status PostV1HrEmployeesCreateResponseStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesCreateResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesCreateResponseFieldNotes)
-}
-
-// SetAttributes sets the Attributes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetAttributes(attributes []*PostV1HrEmployeesCreateResponseAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesCreateResponseFieldAttributes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesCreateResponseFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesCreateResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesCreateResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesCreateResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesCreateResponseAddressFieldCountryCode = big.NewInt(1 << 3)
-)
-
-type PostV1HrEmployeesCreateResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) GetStreet() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Street
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) GetCity() *string {
-	if p == nil {
-		return nil
-	}
-	return p.City
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) GetPostalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PostalCode
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetStreet sets the Street field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesCreateResponseAddressFieldStreet)
-}
-
-// SetCity sets the City field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesCreateResponseAddressFieldCity)
-}
-
-// SetPostalCode sets the PostalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesCreateResponseAddressFieldPostalCode)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesCreateResponseAddressFieldCountryCode)
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateResponseAddress
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesCreateResponseAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateResponseAddress
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesCreateResponseAddress) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesCreateResponseAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesCreateResponseAttributesItemFieldValue = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesCreateResponseAttributesItem struct {
-	Name  string `json:"name" url:"name"`
-	Value string `json:"value" url:"value"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) GetValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.Value
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrEmployeesCreateResponseAttributesItemFieldName)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesCreateResponseAttributesItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesCreateResponseAttributesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesCreateResponseAttributesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesCreateResponseAttributesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesCreateResponseAttributesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesCreateResponseStatus string
-
-const (
-	PostV1HrEmployeesCreateResponseStatusActive     PostV1HrEmployeesCreateResponseStatus = "active"
-	PostV1HrEmployeesCreateResponseStatusTerminated PostV1HrEmployeesCreateResponseStatus = "terminated"
-)
-
-func NewPostV1HrEmployeesCreateResponseStatusFromString(s string) (PostV1HrEmployeesCreateResponseStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrEmployeesCreateResponseStatusActive, nil
-	case "terminated":
-		return PostV1HrEmployeesCreateResponseStatusTerminated, nil
-	}
-	var t PostV1HrEmployeesCreateResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesCreateResponseStatus) Ptr() *PostV1HrEmployeesCreateResponseStatus {
-	return &p
-}
-
-var (
-	postV1HrEmployeesDeleteResponseFieldID = big.NewInt(1 << 0)
-)
-
-type PostV1HrEmployeesDeleteResponse struct {
-	ID string `json:"id" url:"id"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesDeleteResponseFieldID)
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesDeleteResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesDeleteResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesDeleteResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesFieldsResponseFieldCountry = big.NewInt(1 << 0)
-	postV1HrEmployeesFieldsResponseFieldFields  = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesFieldsResponse struct {
-	Country string                                       `json:"country" url:"country"`
-	Fields  []*PostV1HrEmployeesFieldsResponseFieldsItem `json:"fields" url:"fields"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) GetCountry() string {
-	if p == nil {
-		return ""
-	}
-	return p.Country
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) GetFields() []*PostV1HrEmployeesFieldsResponseFieldsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Fields
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetCountry sets the Country field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponse) SetCountry(country string) {
-	p.Country = country
-	p.require(postV1HrEmployeesFieldsResponseFieldCountry)
-}
-
-// SetFields sets the Fields field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponse) SetFields(fields []*PostV1HrEmployeesFieldsResponseFieldsItem) {
-	p.Fields = fields
-	p.require(postV1HrEmployeesFieldsResponseFieldFields)
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesFieldsResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesFieldsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesFieldsResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesFieldsResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesFieldsResponseFieldsItemFieldKey       = big.NewInt(1 << 0)
-	postV1HrEmployeesFieldsResponseFieldsItemFieldKind      = big.NewInt(1 << 1)
-	postV1HrEmployeesFieldsResponseFieldsItemFieldOptions   = big.NewInt(1 << 2)
-	postV1HrEmployeesFieldsResponseFieldsItemFieldMaxLength = big.NewInt(1 << 3)
-)
-
-type PostV1HrEmployeesFieldsResponseFieldsItem struct {
-	Key       string                                        `json:"key" url:"key"`
-	Kind      PostV1HrEmployeesFieldsResponseFieldsItemKind `json:"kind" url:"kind"`
-	Options   []string                                      `json:"options,omitempty" url:"options,omitempty"`
-	MaxLength *int64                                        `json:"maxLength,omitempty" url:"maxLength,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetKey() string {
-	if p == nil {
-		return ""
-	}
-	return p.Key
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetKind() PostV1HrEmployeesFieldsResponseFieldsItemKind {
-	if p == nil {
-		return ""
-	}
-	return p.Kind
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetOptions() []string {
-	if p == nil {
-		return nil
-	}
-	return p.Options
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetMaxLength() *int64 {
-	if p == nil {
-		return nil
-	}
-	return p.MaxLength
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetKey sets the Key field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetKey(key string) {
-	p.Key = key
-	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldKey)
-}
-
-// SetKind sets the Kind field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetKind(kind PostV1HrEmployeesFieldsResponseFieldsItemKind) {
-	p.Kind = kind
-	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldKind)
-}
-
-// SetOptions sets the Options field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetOptions(options []string) {
-	p.Options = options
-	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldOptions)
-}
-
-// SetMaxLength sets the MaxLength field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetMaxLength(maxLength *int64) {
-	p.MaxLength = maxLength
-	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldMaxLength)
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesFieldsResponseFieldsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesFieldsResponseFieldsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesFieldsResponseFieldsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesFieldsResponseFieldsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesFieldsResponseFieldsItemKind string
-
-const (
-	PostV1HrEmployeesFieldsResponseFieldsItemKindText   PostV1HrEmployeesFieldsResponseFieldsItemKind = "text"
-	PostV1HrEmployeesFieldsResponseFieldsItemKindSelect PostV1HrEmployeesFieldsResponseFieldsItemKind = "select"
-	PostV1HrEmployeesFieldsResponseFieldsItemKindDate   PostV1HrEmployeesFieldsResponseFieldsItemKind = "date"
-)
-
-func NewPostV1HrEmployeesFieldsResponseFieldsItemKindFromString(s string) (PostV1HrEmployeesFieldsResponseFieldsItemKind, error) {
-	switch s {
-	case "text":
-		return PostV1HrEmployeesFieldsResponseFieldsItemKindText, nil
-	case "select":
-		return PostV1HrEmployeesFieldsResponseFieldsItemKindSelect, nil
-	case "date":
-		return PostV1HrEmployeesFieldsResponseFieldsItemKindDate, nil
-	}
-	var t PostV1HrEmployeesFieldsResponseFieldsItemKind
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesFieldsResponseFieldsItemKind) Ptr() *PostV1HrEmployeesFieldsResponseFieldsItemKind {
-	return &p
-}
-
-var (
-	postV1HrEmployeesGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1HrEmployeesGetResponseFieldCode                 = big.NewInt(1 << 1)
-	postV1HrEmployeesGetResponseFieldFirstName            = big.NewInt(1 << 2)
-	postV1HrEmployeesGetResponseFieldLastName             = big.NewInt(1 << 3)
-	postV1HrEmployeesGetResponseFieldPersonalCode         = big.NewInt(1 << 4)
-	postV1HrEmployeesGetResponseFieldBirthDate            = big.NewInt(1 << 5)
-	postV1HrEmployeesGetResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1HrEmployeesGetResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1HrEmployeesGetResponseFieldAddress              = big.NewInt(1 << 8)
-	postV1HrEmployeesGetResponseFieldIban                 = big.NewInt(1 << 9)
-	postV1HrEmployeesGetResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	postV1HrEmployeesGetResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	postV1HrEmployeesGetResponseFieldHireDate             = big.NewInt(1 << 12)
-	postV1HrEmployeesGetResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesGetResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	postV1HrEmployeesGetResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	postV1HrEmployeesGetResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesGetResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	postV1HrEmployeesGetResponseFieldStatus               = big.NewInt(1 << 18)
-	postV1HrEmployeesGetResponseFieldNotes                = big.NewInt(1 << 19)
-	postV1HrEmployeesGetResponseFieldAttributes           = big.NewInt(1 << 20)
-	postV1HrEmployeesGetResponseFieldCreatedAt            = big.NewInt(1 << 21)
-)
-
-type PostV1HrEmployeesGetResponse struct {
+type EmployeesAnonymizeHrResponse struct {
 	ID                   string                                        `json:"id" url:"id"`
 	Code                 *string                                       `json:"code,omitempty" url:"code,omitempty"`
 	FirstName            string                                        `json:"firstName" url:"firstName"`
 	LastName             string                                        `json:"lastName" url:"lastName"`
 	PersonalCode         *string                                       `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *string                                       `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	BirthDate            *time.Time                                    `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
 	Email                *string                                       `json:"email,omitempty" url:"email,omitempty"`
 	Phone                *string                                       `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *PostV1HrEmployeesGetResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	Address              *EmployeesAnonymizeHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
 	Iban                 *string                                       `json:"iban,omitempty" url:"iban,omitempty"`
 	SocialInsuranceNo    *string                                       `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                       `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
-	HireDate             *string                                       `json:"hireDate,omitempty" url:"hireDate,omitempty"`
-	TerminationDate      *string                                       `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
+	HireDate             *time.Time                                    `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
+	TerminationDate      *time.Time                                    `json:"terminationDate,omitempty" url:"terminationDate,omitempty" format:"date"`
 	ApplyAllowance       bool                                          `json:"applyAllowance" url:"applyAllowance"`
 	AllowanceOverride    *string                                       `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                          `json:"pensionAccumulation" url:"pensionAccumulation"`
 	PayrollOptions       map[string]string                             `json:"payrollOptions" url:"payrollOptions"`
-	Status               PostV1HrEmployeesGetResponseStatus            `json:"status" url:"status"`
+	Status               EmployeesAnonymizeHrResponseStatus            `json:"status" url:"status"`
 	Notes                *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
-	Attributes           []*PostV1HrEmployeesGetResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
-	CreatedAt            string                                        `json:"createdAt" url:"createdAt"`
+	Attributes           []*EmployeesAnonymizeHrResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
+	CreatedAt            time.Time                                     `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6402,378 +4330,398 @@ type PostV1HrEmployeesGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetID() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return p.ID
+	return e.ID
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetCode() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Code
+	return e.Code
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetFirstName() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetFirstName() string {
+	if e == nil {
 		return ""
 	}
-	return p.FirstName
+	return e.FirstName
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetLastName() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetLastName() string {
+	if e == nil {
 		return ""
 	}
-	return p.LastName
+	return e.LastName
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetPersonalCode() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetPersonalCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.PersonalCode
+	return e.PersonalCode
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetBirthDate() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetBirthDate() *time.Time {
+	if e == nil {
 		return nil
 	}
-	return p.BirthDate
+	return e.BirthDate
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetEmail() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetEmail() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Email
+	return e.Email
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetPhone() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetPhone() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Phone
+	return e.Phone
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetAddress() *PostV1HrEmployeesGetResponseAddress {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetAddress() *EmployeesAnonymizeHrResponseAddress {
+	if e == nil {
 		return nil
 	}
-	return p.Address
+	return e.Address
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetIban() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetIban() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Iban
+	return e.Iban
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetSocialInsuranceNo() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetSocialInsuranceNo() *string {
+	if e == nil {
 		return nil
 	}
-	return p.SocialInsuranceNo
+	return e.SocialInsuranceNo
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetSocialInsuranceStart() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetSocialInsuranceStart() *string {
+	if e == nil {
 		return nil
 	}
-	return p.SocialInsuranceStart
+	return e.SocialInsuranceStart
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetHireDate() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetHireDate() *time.Time {
+	if e == nil {
 		return nil
 	}
-	return p.HireDate
+	return e.HireDate
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetTerminationDate() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetTerminationDate() *time.Time {
+	if e == nil {
 		return nil
 	}
-	return p.TerminationDate
+	return e.TerminationDate
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetApplyAllowance() bool {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetApplyAllowance() bool {
+	if e == nil {
 		return false
 	}
-	return p.ApplyAllowance
+	return e.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetAllowanceOverride() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetAllowanceOverride() *string {
+	if e == nil {
 		return nil
 	}
-	return p.AllowanceOverride
+	return e.AllowanceOverride
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetPensionAccumulation() bool {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetPensionAccumulation() bool {
+	if e == nil {
 		return false
 	}
-	return p.PensionAccumulation
+	return e.PensionAccumulation
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetPayrollOptions() map[string]string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetPayrollOptions() map[string]string {
+	if e == nil {
 		return nil
 	}
-	return p.PayrollOptions
+	return e.PayrollOptions
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetStatus() PostV1HrEmployeesGetResponseStatus {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetStatus() EmployeesAnonymizeHrResponseStatus {
+	if e == nil {
 		return ""
 	}
-	return p.Status
+	return e.Status
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetNotes() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetNotes() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Notes
+	return e.Notes
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetAttributes() []*PostV1HrEmployeesGetResponseAttributesItem {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetAttributes() []*EmployeesAnonymizeHrResponseAttributesItem {
+	if e == nil {
 		return nil
 	}
-	return p.Attributes
+	return e.Attributes
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (e *EmployeesAnonymizeHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return e.CreatedAt
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesAnonymizeHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesGetResponseFieldID)
+func (e *EmployeesAnonymizeHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesAnonymizeHrResponseFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesGetResponseFieldCode)
+func (e *EmployeesAnonymizeHrResponse) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesAnonymizeHrResponseFieldCode)
 }
 
 // SetFirstName sets the FirstName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesGetResponseFieldFirstName)
+func (e *EmployeesAnonymizeHrResponse) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesAnonymizeHrResponseFieldFirstName)
 }
 
 // SetLastName sets the LastName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesGetResponseFieldLastName)
+func (e *EmployeesAnonymizeHrResponse) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesAnonymizeHrResponseFieldLastName)
 }
 
 // SetPersonalCode sets the PersonalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesGetResponseFieldPersonalCode)
+func (e *EmployeesAnonymizeHrResponse) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesAnonymizeHrResponseFieldPersonalCode)
 }
 
 // SetBirthDate sets the BirthDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesGetResponseFieldBirthDate)
+func (e *EmployeesAnonymizeHrResponse) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesAnonymizeHrResponseFieldBirthDate)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesGetResponseFieldEmail)
+func (e *EmployeesAnonymizeHrResponse) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesAnonymizeHrResponseFieldEmail)
 }
 
 // SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesGetResponseFieldPhone)
+func (e *EmployeesAnonymizeHrResponse) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesAnonymizeHrResponseFieldPhone)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetAddress(address *PostV1HrEmployeesGetResponseAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesGetResponseFieldAddress)
+func (e *EmployeesAnonymizeHrResponse) SetAddress(address *EmployeesAnonymizeHrResponseAddress) {
+	e.Address = address
+	e.require(employeesAnonymizeHrResponseFieldAddress)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesGetResponseFieldIban)
+func (e *EmployeesAnonymizeHrResponse) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesAnonymizeHrResponseFieldIban)
 }
 
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesGetResponseFieldSocialInsuranceNo)
+func (e *EmployeesAnonymizeHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesAnonymizeHrResponseFieldSocialInsuranceNo)
 }
 
 // SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesGetResponseFieldSocialInsuranceStart)
+func (e *EmployeesAnonymizeHrResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesAnonymizeHrResponseFieldSocialInsuranceStart)
 }
 
 // SetHireDate sets the HireDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesGetResponseFieldHireDate)
+func (e *EmployeesAnonymizeHrResponse) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesAnonymizeHrResponseFieldHireDate)
 }
 
 // SetTerminationDate sets the TerminationDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesGetResponseFieldTerminationDate)
+func (e *EmployeesAnonymizeHrResponse) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesAnonymizeHrResponseFieldTerminationDate)
 }
 
 // SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetApplyAllowance(applyAllowance bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesGetResponseFieldApplyAllowance)
+func (e *EmployeesAnonymizeHrResponse) SetApplyAllowance(applyAllowance bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesAnonymizeHrResponseFieldApplyAllowance)
 }
 
 // SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesGetResponseFieldAllowanceOverride)
+func (e *EmployeesAnonymizeHrResponse) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesAnonymizeHrResponseFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetPensionAccumulation(pensionAccumulation bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesGetResponseFieldPensionAccumulation)
+func (e *EmployeesAnonymizeHrResponse) SetPensionAccumulation(pensionAccumulation bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesAnonymizeHrResponseFieldPensionAccumulation)
 }
 
 // SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesGetResponseFieldPayrollOptions)
+func (e *EmployeesAnonymizeHrResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesAnonymizeHrResponseFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetStatus(status PostV1HrEmployeesGetResponseStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesGetResponseFieldStatus)
+func (e *EmployeesAnonymizeHrResponse) SetStatus(status EmployeesAnonymizeHrResponseStatus) {
+	e.Status = status
+	e.require(employeesAnonymizeHrResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesGetResponseFieldNotes)
+func (e *EmployeesAnonymizeHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesAnonymizeHrResponseFieldNotes)
 }
 
 // SetAttributes sets the Attributes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetAttributes(attributes []*PostV1HrEmployeesGetResponseAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesGetResponseFieldAttributes)
+func (e *EmployeesAnonymizeHrResponse) SetAttributes(attributes []*EmployeesAnonymizeHrResponseAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesAnonymizeHrResponseFieldAttributes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesGetResponseFieldCreatedAt)
+func (e *EmployeesAnonymizeHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesAnonymizeHrResponseFieldCreatedAt)
 }
 
-func (p *PostV1HrEmployeesGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (e *EmployeesAnonymizeHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesAnonymizeHrResponse
+	var unmarshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesAnonymizeHrResponse(unmarshaler.embed)
+	e.BirthDate = unmarshaler.BirthDate.TimePtr()
+	e.HireDate = unmarshaler.HireDate.TimePtr()
+	e.TerminationDate = unmarshaler.TerminationDate.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesGetResponse
+func (e *EmployeesAnonymizeHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAnonymizeHrResponse
 	var marshaler = struct {
 		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:           embed(*e),
+		BirthDate:       internal.NewOptionalDate(e.BirthDate),
+		HireDate:        internal.NewOptionalDate(e.HireDate),
+		TerminationDate: internal.NewOptionalDate(e.TerminationDate),
+		CreatedAt:       internal.NewDateTime(e.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesGetResponse) String() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponse) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesGetResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesGetResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesGetResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesGetResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesAnonymizeHrResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesAnonymizeHrResponseAddressFieldCity        = big.NewInt(1 << 1)
+	employeesAnonymizeHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesAnonymizeHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
 )
 
-type PostV1HrEmployeesGetResponseAddress struct {
+type EmployeesAnonymizeHrResponseAddress struct {
 	Street      *string `json:"street,omitempty" url:"street,omitempty"`
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
@@ -6786,124 +4734,124 @@ type PostV1HrEmployeesGetResponseAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) GetStreet() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) GetStreet() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Street
+	return e.Street
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) GetCity() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) GetCity() *string {
+	if e == nil {
 		return nil
 	}
-	return p.City
+	return e.City
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) GetPostalCode() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) GetPostalCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.PostalCode
+	return e.PostalCode
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) GetCountryCode() *string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) GetCountryCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.CountryCode
+	return e.CountryCode
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesAnonymizeHrResponseAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetStreet sets the Street field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesGetResponseAddressFieldStreet)
+func (e *EmployeesAnonymizeHrResponseAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesAnonymizeHrResponseAddressFieldStreet)
 }
 
 // SetCity sets the City field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesGetResponseAddressFieldCity)
+func (e *EmployeesAnonymizeHrResponseAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesAnonymizeHrResponseAddressFieldCity)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesGetResponseAddressFieldPostalCode)
+func (e *EmployeesAnonymizeHrResponseAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesAnonymizeHrResponseAddressFieldPostalCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesGetResponseAddressFieldCountryCode)
+func (e *EmployeesAnonymizeHrResponseAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesAnonymizeHrResponseAddressFieldCountryCode)
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesGetResponseAddress
+func (e *EmployeesAnonymizeHrResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesAnonymizeHrResponseAddress
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesGetResponseAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesAnonymizeHrResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesGetResponseAddress
+func (e *EmployeesAnonymizeHrResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAnonymizeHrResponseAddress
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesGetResponseAddress) String() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAddress) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesGetResponseAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesGetResponseAttributesItemFieldValue = big.NewInt(1 << 1)
+	employeesAnonymizeHrResponseAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesAnonymizeHrResponseAttributesItemFieldValue = big.NewInt(1 << 1)
 )
 
-type PostV1HrEmployeesGetResponseAttributesItem struct {
+type EmployeesAnonymizeHrResponseAttributesItem struct {
 	Name  string `json:"name" url:"name"`
 	Value string `json:"value" url:"value"`
 
@@ -6914,122 +4862,118 @@ type PostV1HrEmployeesGetResponseAttributesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) GetName() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAttributesItem) GetName() string {
+	if e == nil {
 		return ""
 	}
-	return p.Name
+	return e.Name
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) GetValue() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAttributesItem) GetValue() string {
+	if e == nil {
 		return ""
 	}
-	return p.Value
+	return e.Value
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesAnonymizeHrResponseAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAttributesItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrEmployeesGetResponseAttributesItemFieldName)
+func (e *EmployeesAnonymizeHrResponseAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesAnonymizeHrResponseAttributesItemFieldName)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponseAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesGetResponseAttributesItemFieldValue)
+func (e *EmployeesAnonymizeHrResponseAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesAnonymizeHrResponseAttributesItemFieldValue)
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesGetResponseAttributesItem
+func (e *EmployeesAnonymizeHrResponseAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesAnonymizeHrResponseAttributesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesGetResponseAttributesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesAnonymizeHrResponseAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesGetResponseAttributesItem
+func (e *EmployeesAnonymizeHrResponseAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAnonymizeHrResponseAttributesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesGetResponseAttributesItem) String() string {
-	if p == nil {
+func (e *EmployeesAnonymizeHrResponseAttributesItem) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
-type PostV1HrEmployeesGetResponseStatus string
+type EmployeesAnonymizeHrResponseStatus string
 
 const (
-	PostV1HrEmployeesGetResponseStatusActive     PostV1HrEmployeesGetResponseStatus = "active"
-	PostV1HrEmployeesGetResponseStatusTerminated PostV1HrEmployeesGetResponseStatus = "terminated"
+	EmployeesAnonymizeHrResponseStatusActive     EmployeesAnonymizeHrResponseStatus = "active"
+	EmployeesAnonymizeHrResponseStatusTerminated EmployeesAnonymizeHrResponseStatus = "terminated"
 )
 
-func NewPostV1HrEmployeesGetResponseStatusFromString(s string) (PostV1HrEmployeesGetResponseStatus, error) {
+func NewEmployeesAnonymizeHrResponseStatusFromString(s string) (EmployeesAnonymizeHrResponseStatus, error) {
 	switch s {
 	case "active":
-		return PostV1HrEmployeesGetResponseStatusActive, nil
+		return EmployeesAnonymizeHrResponseStatusActive, nil
 	case "terminated":
-		return PostV1HrEmployeesGetResponseStatusTerminated, nil
+		return EmployeesAnonymizeHrResponseStatusTerminated, nil
 	}
-	var t PostV1HrEmployeesGetResponseStatus
+	var t EmployeesAnonymizeHrResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrEmployeesGetResponseStatus) Ptr() *PostV1HrEmployeesGetResponseStatus {
-	return &p
+func (e EmployeesAnonymizeHrResponseStatus) Ptr() *EmployeesAnonymizeHrResponseStatus {
+	return &e
 }
 
 var (
-	postV1HrEmployeesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1HrEmployeesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1HrEmployeesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	employeesAttachmentsListHrResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesListRequestFilterItem struct {
-	Field string                                       `json:"field" url:"field"`
-	Op    PostV1HrEmployeesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1HrEmployeesListRequestFilterItemValue `json:"value" url:"value"`
+type EmployeesAttachmentsListHrResponse struct {
+	Rows []*EmployeesAttachmentsListHrResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7038,622 +4982,90 @@ type PostV1HrEmployeesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesListRequestFilterItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItem) GetOp() PostV1HrEmployeesListRequestFilterItemOp {
-	if p == nil {
-		return ""
-	}
-	return p.Op
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItem) GetValue() *PostV1HrEmployeesListRequestFilterItemValue {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponse) GetRows() []*EmployeesAttachmentsListHrResponseRowsItem {
+	if e == nil {
 		return nil
 	}
-	return p.Value
+	return e.Rows
 }
 
-func (p *PostV1HrEmployeesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesAttachmentsListHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrEmployeesListRequestFilterItemFieldField)
-}
-
-// SetOp sets the Op field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequestFilterItem) SetOp(op PostV1HrEmployeesListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1HrEmployeesListRequestFilterItemFieldOp)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequestFilterItem) SetValue(value *PostV1HrEmployeesListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1HrEmployeesListRequestFilterItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListRequestFilterItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListRequestFilterItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesListRequestFilterItemOp string
-
-const (
-	PostV1HrEmployeesListRequestFilterItemOpEq       PostV1HrEmployeesListRequestFilterItemOp = "eq"
-	PostV1HrEmployeesListRequestFilterItemOpNe       PostV1HrEmployeesListRequestFilterItemOp = "ne"
-	PostV1HrEmployeesListRequestFilterItemOpContains PostV1HrEmployeesListRequestFilterItemOp = "contains"
-	PostV1HrEmployeesListRequestFilterItemOpGte      PostV1HrEmployeesListRequestFilterItemOp = "gte"
-	PostV1HrEmployeesListRequestFilterItemOpLte      PostV1HrEmployeesListRequestFilterItemOp = "lte"
-	PostV1HrEmployeesListRequestFilterItemOpIn       PostV1HrEmployeesListRequestFilterItemOp = "in"
-)
-
-func NewPostV1HrEmployeesListRequestFilterItemOpFromString(s string) (PostV1HrEmployeesListRequestFilterItemOp, error) {
-	switch s {
-	case "eq":
-		return PostV1HrEmployeesListRequestFilterItemOpEq, nil
-	case "ne":
-		return PostV1HrEmployeesListRequestFilterItemOpNe, nil
-	case "contains":
-		return PostV1HrEmployeesListRequestFilterItemOpContains, nil
-	case "gte":
-		return PostV1HrEmployeesListRequestFilterItemOpGte, nil
-	case "lte":
-		return PostV1HrEmployeesListRequestFilterItemOpLte, nil
-	case "in":
-		return PostV1HrEmployeesListRequestFilterItemOpIn, nil
-	}
-	var t PostV1HrEmployeesListRequestFilterItemOp
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesListRequestFilterItemOp) Ptr() *PostV1HrEmployeesListRequestFilterItemOp {
-	return &p
-}
-
-type PostV1HrEmployeesListRequestFilterItemValue struct {
-	String                                                   string
-	Double                                                   float64
-	Boolean                                                  bool
-	PostV1HrEmployeesListRequestFilterItemValueThreeItemList []*PostV1HrEmployeesListRequestFilterItemValueThreeItem
-
-	typ string
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
-		return false
-	}
-	return p.Boolean
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) GetPostV1HrEmployeesListRequestFilterItemValueThreeItemList() []*PostV1HrEmployeesListRequestFilterItemValueThreeItem {
-	if p == nil {
-		return nil
-	}
-	return p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	var valueBoolean bool
-	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
-		return nil
-	}
-	var valuePostV1HrEmployeesListRequestFilterItemValueThreeItemList []*PostV1HrEmployeesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1HrEmployeesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1HrEmployeesListRequestFilterItemValueThreeItemList"
-		p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList = valuePostV1HrEmployeesListRequestFilterItemValueThreeItemList
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrEmployeesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
-	}
-	if p.typ == "PostV1HrEmployeesListRequestFilterItemValueThreeItemList" || p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrEmployeesListRequestFilterItemValueVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-	VisitBoolean(bool) error
-	VisitPostV1HrEmployeesListRequestFilterItemValueThreeItemList([]*PostV1HrEmployeesListRequestFilterItemValueThreeItem) error
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValue) Accept(visitor PostV1HrEmployeesListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
-	}
-	if p.typ == "PostV1HrEmployeesListRequestFilterItemValueThreeItemList" || p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1HrEmployeesListRequestFilterItemValueThreeItemList(p.PostV1HrEmployeesListRequestFilterItemValueThreeItemList)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrEmployeesListRequestFilterItemValueThreeItem struct {
-	String string
-	Double float64
-
-	typ string
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrEmployeesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrEmployeesListRequestFilterItemValueThreeItemVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-}
-
-func (p *PostV1HrEmployeesListRequestFilterItemValueThreeItem) Accept(visitor PostV1HrEmployeesListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-var (
-	postV1HrEmployeesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1HrEmployeesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesListRequestSortItem struct {
-	Field string                                   `json:"field" url:"field"`
-	Dir   *PostV1HrEmployeesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) GetDir() *PostV1HrEmployeesListRequestSortItemDir {
-	if p == nil {
-		return nil
-	}
-	return p.Dir
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrEmployeesListRequestSortItemFieldField)
-}
-
-// SetDir sets the Dir field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListRequestSortItem) SetDir(dir *PostV1HrEmployeesListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1HrEmployeesListRequestSortItemFieldDir)
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListRequestSortItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListRequestSortItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesListRequestSortItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesListRequestSortItemDir string
-
-const (
-	PostV1HrEmployeesListRequestSortItemDirAsc  PostV1HrEmployeesListRequestSortItemDir = "asc"
-	PostV1HrEmployeesListRequestSortItemDirDesc PostV1HrEmployeesListRequestSortItemDir = "desc"
-)
-
-func NewPostV1HrEmployeesListRequestSortItemDirFromString(s string) (PostV1HrEmployeesListRequestSortItemDir, error) {
-	switch s {
-	case "asc":
-		return PostV1HrEmployeesListRequestSortItemDirAsc, nil
-	case "desc":
-		return PostV1HrEmployeesListRequestSortItemDirDesc, nil
-	}
-	var t PostV1HrEmployeesListRequestSortItemDir
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesListRequestSortItemDir) Ptr() *PostV1HrEmployeesListRequestSortItemDir {
-	return &p
-}
-
-var (
-	postV1HrEmployeesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1HrEmployeesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1HrEmployeesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1HrEmployeesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1HrEmployeesListResponseFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1HrEmployeesListResponse struct {
-	Rows     []*PostV1HrEmployeesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                    `json:"page" url:"page"`
-	PageSize int64                                    `json:"pageSize" url:"pageSize"`
-	Total    int64                                    `json:"total" url:"total"`
-	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesListResponse) GetRows() []*PostV1HrEmployeesListResponseRowsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Rows
-}
-
-func (p *PostV1HrEmployeesListResponse) GetPage() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Page
-}
-
-func (p *PostV1HrEmployeesListResponse) GetPageSize() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.PageSize
-}
-
-func (p *PostV1HrEmployeesListResponse) GetTotal() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Total
-}
-
-func (p *PostV1HrEmployeesListResponse) GetTotals() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.Totals
-}
-
-func (p *PostV1HrEmployeesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponse) SetRows(rows []*PostV1HrEmployeesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrEmployeesListResponseFieldRows)
+func (e *EmployeesAttachmentsListHrResponse) SetRows(rows []*EmployeesAttachmentsListHrResponseRowsItem) {
+	e.Rows = rows
+	e.require(employeesAttachmentsListHrResponseFieldRows)
 }
 
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1HrEmployeesListResponseFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrEmployeesListResponseFieldPageSize)
-}
-
-// SetTotal sets the Total field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1HrEmployeesListResponseFieldTotal)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1HrEmployeesListResponseFieldTotals)
-}
-
-func (p *PostV1HrEmployeesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListResponse
+func (e *EmployeesAttachmentsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesAttachmentsListHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesAttachmentsListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListResponse
+func (e *EmployeesAttachmentsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAttachmentsListHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesListResponse) String() string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponse) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1HrEmployeesListResponseRowsItemFieldCode                 = big.NewInt(1 << 1)
-	postV1HrEmployeesListResponseRowsItemFieldFirstName            = big.NewInt(1 << 2)
-	postV1HrEmployeesListResponseRowsItemFieldLastName             = big.NewInt(1 << 3)
-	postV1HrEmployeesListResponseRowsItemFieldPersonalCode         = big.NewInt(1 << 4)
-	postV1HrEmployeesListResponseRowsItemFieldBirthDate            = big.NewInt(1 << 5)
-	postV1HrEmployeesListResponseRowsItemFieldEmail                = big.NewInt(1 << 6)
-	postV1HrEmployeesListResponseRowsItemFieldPhone                = big.NewInt(1 << 7)
-	postV1HrEmployeesListResponseRowsItemFieldAddress              = big.NewInt(1 << 8)
-	postV1HrEmployeesListResponseRowsItemFieldIban                 = big.NewInt(1 << 9)
-	postV1HrEmployeesListResponseRowsItemFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	postV1HrEmployeesListResponseRowsItemFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	postV1HrEmployeesListResponseRowsItemFieldHireDate             = big.NewInt(1 << 12)
-	postV1HrEmployeesListResponseRowsItemFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesListResponseRowsItemFieldApplyAllowance       = big.NewInt(1 << 14)
-	postV1HrEmployeesListResponseRowsItemFieldAllowanceOverride    = big.NewInt(1 << 15)
-	postV1HrEmployeesListResponseRowsItemFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesListResponseRowsItemFieldPayrollOptions       = big.NewInt(1 << 17)
-	postV1HrEmployeesListResponseRowsItemFieldStatus               = big.NewInt(1 << 18)
-	postV1HrEmployeesListResponseRowsItemFieldNotes                = big.NewInt(1 << 19)
-	postV1HrEmployeesListResponseRowsItemFieldAttributes           = big.NewInt(1 << 20)
-	postV1HrEmployeesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesAttachmentsListHrResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	employeesAttachmentsListHrResponseRowsItemFieldFileName  = big.NewInt(1 << 1)
+	employeesAttachmentsListHrResponseRowsItemFieldMimeType  = big.NewInt(1 << 2)
+	employeesAttachmentsListHrResponseRowsItemFieldSizeBytes = big.NewInt(1 << 3)
+	employeesAttachmentsListHrResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
 )
 
-type PostV1HrEmployeesListResponseRowsItem struct {
-	ID                   string                                                 `json:"id" url:"id"`
-	Code                 *string                                                `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                                 `json:"firstName" url:"firstName"`
-	LastName             string                                                 `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                                `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *string                                                `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	Email                *string                                                `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                                `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *PostV1HrEmployeesListResponseRowsItemAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                                `json:"iban,omitempty" url:"iban,omitempty"`
-	SocialInsuranceNo    *string                                                `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
-	SocialInsuranceStart *string                                                `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
-	HireDate             *string                                                `json:"hireDate,omitempty" url:"hireDate,omitempty"`
-	TerminationDate      *string                                                `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyAllowance       bool                                                   `json:"applyAllowance" url:"applyAllowance"`
-	AllowanceOverride    *string                                                `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
-	PensionAccumulation  bool                                                   `json:"pensionAccumulation" url:"pensionAccumulation"`
-	PayrollOptions       map[string]string                                      `json:"payrollOptions" url:"payrollOptions"`
-	Status               PostV1HrEmployeesListResponseRowsItemStatus            `json:"status" url:"status"`
-	Notes                *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
-	Attributes           []*PostV1HrEmployeesListResponseRowsItemAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
-	CreatedAt            string                                                 `json:"createdAt" url:"createdAt"`
+type EmployeesAttachmentsListHrResponseRowsItem struct {
+	ID        string    `json:"id" url:"id"`
+	FileName  string    `json:"fileName" url:"fileName"`
+	MimeType  string    `json:"mimeType" url:"mimeType"`
+	SizeBytes int64     `json:"sizeBytes" url:"sizeBytes"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7662,378 +5074,148 @@ type PostV1HrEmployeesListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetID() string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return p.ID
+	return e.ID
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetFirstName() string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetFileName() string {
+	if e == nil {
 		return ""
 	}
-	return p.FirstName
+	return e.FileName
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetLastName() string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetMimeType() string {
+	if e == nil {
 		return ""
 	}
-	return p.LastName
+	return e.MimeType
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetPersonalCode() *string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetSizeBytes() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.SizeBytes
+}
+
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesAttachmentsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.PersonalCode
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetBirthDate() *string {
-	if p == nil {
-		return nil
+func (e *EmployeesAttachmentsListHrResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	return p.BirthDate
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetEmail() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Email
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetPhone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Phone
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetAddress() *PostV1HrEmployeesListResponseRowsItemAddress {
-	if p == nil {
-		return nil
-	}
-	return p.Address
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetIban() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Iban
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetSocialInsuranceNo() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceNo
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetSocialInsuranceStart() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceStart
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetHireDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.HireDate
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetTerminationDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TerminationDate
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetApplyAllowance() bool {
-	if p == nil {
-		return false
-	}
-	return p.ApplyAllowance
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetAllowanceOverride() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AllowanceOverride
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetPensionAccumulation() bool {
-	if p == nil {
-		return false
-	}
-	return p.PensionAccumulation
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetPayrollOptions() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.PayrollOptions
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetStatus() PostV1HrEmployeesListResponseRowsItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetAttributes() []*PostV1HrEmployeesListResponseRowsItemAttributesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Attributes
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesListResponseRowsItemFieldID)
+func (e *EmployeesAttachmentsListHrResponseRowsItem) SetID(id string) {
+	e.ID = id
+	e.require(employeesAttachmentsListHrResponseRowsItemFieldID)
 }
 
-// SetCode sets the Code field and marks it as non-optional;
+// SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrEmployeesListResponseRowsItemFieldCode)
+func (e *EmployeesAttachmentsListHrResponseRowsItem) SetFileName(fileName string) {
+	e.FileName = fileName
+	e.require(employeesAttachmentsListHrResponseRowsItemFieldFileName)
 }
 
-// SetFirstName sets the FirstName field and marks it as non-optional;
+// SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesListResponseRowsItemFieldFirstName)
+func (e *EmployeesAttachmentsListHrResponseRowsItem) SetMimeType(mimeType string) {
+	e.MimeType = mimeType
+	e.require(employeesAttachmentsListHrResponseRowsItemFieldMimeType)
 }
 
-// SetLastName sets the LastName field and marks it as non-optional;
+// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesListResponseRowsItemFieldLastName)
-}
-
-// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesListResponseRowsItemFieldPersonalCode)
-}
-
-// SetBirthDate sets the BirthDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesListResponseRowsItemFieldBirthDate)
-}
-
-// SetEmail sets the Email field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesListResponseRowsItemFieldEmail)
-}
-
-// SetPhone sets the Phone field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesListResponseRowsItemFieldPhone)
-}
-
-// SetAddress sets the Address field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetAddress(address *PostV1HrEmployeesListResponseRowsItemAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesListResponseRowsItemFieldAddress)
-}
-
-// SetIban sets the Iban field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesListResponseRowsItemFieldIban)
-}
-
-// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesListResponseRowsItemFieldSocialInsuranceNo)
-}
-
-// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesListResponseRowsItemFieldSocialInsuranceStart)
-}
-
-// SetHireDate sets the HireDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesListResponseRowsItemFieldHireDate)
-}
-
-// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesListResponseRowsItemFieldTerminationDate)
-}
-
-// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetApplyAllowance(applyAllowance bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesListResponseRowsItemFieldApplyAllowance)
-}
-
-// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesListResponseRowsItemFieldAllowanceOverride)
-}
-
-// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetPensionAccumulation(pensionAccumulation bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesListResponseRowsItemFieldPensionAccumulation)
-}
-
-// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesListResponseRowsItemFieldPayrollOptions)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetStatus(status PostV1HrEmployeesListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesListResponseRowsItemFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesListResponseRowsItemFieldNotes)
-}
-
-// SetAttributes sets the Attributes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetAttributes(attributes []*PostV1HrEmployeesListResponseRowsItemAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesListResponseRowsItemFieldAttributes)
+func (e *EmployeesAttachmentsListHrResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	e.SizeBytes = sizeBytes
+	e.require(employeesAttachmentsListHrResponseRowsItemFieldSizeBytes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesListResponseRowsItemFieldCreatedAt)
+func (e *EmployeesAttachmentsListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesAttachmentsListHrResponseRowsItemFieldCreatedAt)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed EmployeesAttachmentsListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesAttachmentsListHrResponseRowsItem(unmarshaler.embed)
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListResponseRowsItem
+func (e *EmployeesAttachmentsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesAttachmentsListHrResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*e),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) String() string {
-	if p == nil {
+func (e *EmployeesAttachmentsListHrResponseRowsItem) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesListResponseRowsItemAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesListResponseRowsItemAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesListResponseRowsItemAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesListResponseRowsItemAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesCreateHrRequestAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesCreateHrRequestAddressFieldCity        = big.NewInt(1 << 1)
+	employeesCreateHrRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesCreateHrRequestAddressFieldCountryCode = big.NewInt(1 << 3)
 )
 
-type PostV1HrEmployeesListResponseRowsItemAddress struct {
+type EmployeesCreateHrRequestAddress struct {
 	Street      *string `json:"street,omitempty" url:"street,omitempty"`
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
@@ -8046,124 +5228,124 @@ type PostV1HrEmployeesListResponseRowsItemAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) GetStreet() *string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) GetStreet() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Street
+	return e.Street
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) GetCity() *string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) GetCity() *string {
+	if e == nil {
 		return nil
 	}
-	return p.City
+	return e.City
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) GetPostalCode() *string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) GetPostalCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.PostalCode
+	return e.PostalCode
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) GetCountryCode() *string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) GetCountryCode() *string {
+	if e == nil {
 		return nil
 	}
-	return p.CountryCode
+	return e.CountryCode
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesCreateHrRequestAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetStreet sets the Street field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesListResponseRowsItemAddressFieldStreet)
+func (e *EmployeesCreateHrRequestAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesCreateHrRequestAddressFieldStreet)
 }
 
 // SetCity sets the City field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesListResponseRowsItemAddressFieldCity)
+func (e *EmployeesCreateHrRequestAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesCreateHrRequestAddressFieldCity)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesListResponseRowsItemAddressFieldPostalCode)
+func (e *EmployeesCreateHrRequestAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesCreateHrRequestAddressFieldPostalCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesListResponseRowsItemAddressFieldCountryCode)
+func (e *EmployeesCreateHrRequestAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesCreateHrRequestAddressFieldCountryCode)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListResponseRowsItemAddress
+func (e *EmployeesCreateHrRequestAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesCreateHrRequestAddress
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesListResponseRowsItemAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesCreateHrRequestAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListResponseRowsItemAddress
+func (e *EmployeesCreateHrRequestAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrRequestAddress
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAddress) String() string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAddress) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesListResponseRowsItemAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesListResponseRowsItemAttributesItemFieldValue = big.NewInt(1 << 1)
+	employeesCreateHrRequestAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesCreateHrRequestAttributesItemFieldValue = big.NewInt(1 << 1)
 )
 
-type PostV1HrEmployeesListResponseRowsItemAttributesItem struct {
+type EmployeesCreateHrRequestAttributesItem struct {
 	Name  string `json:"name" url:"name"`
 	Value string `json:"value" url:"value"`
 
@@ -8174,164 +5356,138 @@ type PostV1HrEmployeesListResponseRowsItemAttributesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) GetName() string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAttributesItem) GetName() string {
+	if e == nil {
 		return ""
 	}
-	return p.Name
+	return e.Name
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) GetValue() string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAttributesItem) GetValue() string {
+	if e == nil {
 		return ""
 	}
-	return p.Value
+	return e.Value
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesCreateHrRequestAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrEmployeesListResponseRowsItemAttributesItemFieldName)
+func (e *EmployeesCreateHrRequestAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesCreateHrRequestAttributesItemFieldName)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesListResponseRowsItemAttributesItemFieldValue)
+func (e *EmployeesCreateHrRequestAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesCreateHrRequestAttributesItemFieldValue)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesListResponseRowsItemAttributesItem
+func (e *EmployeesCreateHrRequestAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesCreateHrRequestAttributesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesListResponseRowsItemAttributesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesCreateHrRequestAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesListResponseRowsItemAttributesItem
+func (e *EmployeesCreateHrRequestAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrRequestAttributesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItemAttributesItem) String() string {
-	if p == nil {
+func (e *EmployeesCreateHrRequestAttributesItem) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesListResponseRowsItemStatus string
-
-const (
-	PostV1HrEmployeesListResponseRowsItemStatusActive     PostV1HrEmployeesListResponseRowsItemStatus = "active"
-	PostV1HrEmployeesListResponseRowsItemStatusTerminated PostV1HrEmployeesListResponseRowsItemStatus = "terminated"
-)
-
-func NewPostV1HrEmployeesListResponseRowsItemStatusFromString(s string) (PostV1HrEmployeesListResponseRowsItemStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrEmployeesListResponseRowsItemStatusActive, nil
-	case "terminated":
-		return PostV1HrEmployeesListResponseRowsItemStatusTerminated, nil
-	}
-	var t PostV1HrEmployeesListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesListResponseRowsItemStatus) Ptr() *PostV1HrEmployeesListResponseRowsItemStatus {
-	return &p
-}
-
-type PostV1HrEmployeesRecordsCreateRequestType string
-
-const (
-	PostV1HrEmployeesRecordsCreateRequestTypeEducation     PostV1HrEmployeesRecordsCreateRequestType = "education"
-	PostV1HrEmployeesRecordsCreateRequestTypeQualification PostV1HrEmployeesRecordsCreateRequestType = "qualification"
-	PostV1HrEmployeesRecordsCreateRequestTypeCertificate   PostV1HrEmployeesRecordsCreateRequestType = "certificate"
-	PostV1HrEmployeesRecordsCreateRequestTypeTraining      PostV1HrEmployeesRecordsCreateRequestType = "training"
-)
-
-func NewPostV1HrEmployeesRecordsCreateRequestTypeFromString(s string) (PostV1HrEmployeesRecordsCreateRequestType, error) {
-	switch s {
-	case "education":
-		return PostV1HrEmployeesRecordsCreateRequestTypeEducation, nil
-	case "qualification":
-		return PostV1HrEmployeesRecordsCreateRequestTypeQualification, nil
-	case "certificate":
-		return PostV1HrEmployeesRecordsCreateRequestTypeCertificate, nil
-	case "training":
-		return PostV1HrEmployeesRecordsCreateRequestTypeTraining, nil
-	}
-	var t PostV1HrEmployeesRecordsCreateRequestType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesRecordsCreateRequestType) Ptr() *PostV1HrEmployeesRecordsCreateRequestType {
-	return &p
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesRecordsCreateResponseFieldID          = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsCreateResponseFieldEmployeeID  = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsCreateResponseFieldType        = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsCreateResponseFieldTitle       = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsCreateResponseFieldInstitution = big.NewInt(1 << 4)
-	postV1HrEmployeesRecordsCreateResponseFieldIssuedAt    = big.NewInt(1 << 5)
-	postV1HrEmployeesRecordsCreateResponseFieldValidUntil  = big.NewInt(1 << 6)
-	postV1HrEmployeesRecordsCreateResponseFieldFileID      = big.NewInt(1 << 7)
-	postV1HrEmployeesRecordsCreateResponseFieldNotes       = big.NewInt(1 << 8)
-	postV1HrEmployeesRecordsCreateResponseFieldCreatedAt   = big.NewInt(1 << 9)
+	employeesCreateHrResponseFieldID                   = big.NewInt(1 << 0)
+	employeesCreateHrResponseFieldCode                 = big.NewInt(1 << 1)
+	employeesCreateHrResponseFieldFirstName            = big.NewInt(1 << 2)
+	employeesCreateHrResponseFieldLastName             = big.NewInt(1 << 3)
+	employeesCreateHrResponseFieldPersonalCode         = big.NewInt(1 << 4)
+	employeesCreateHrResponseFieldBirthDate            = big.NewInt(1 << 5)
+	employeesCreateHrResponseFieldEmail                = big.NewInt(1 << 6)
+	employeesCreateHrResponseFieldPhone                = big.NewInt(1 << 7)
+	employeesCreateHrResponseFieldAddress              = big.NewInt(1 << 8)
+	employeesCreateHrResponseFieldIban                 = big.NewInt(1 << 9)
+	employeesCreateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	employeesCreateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	employeesCreateHrResponseFieldHireDate             = big.NewInt(1 << 12)
+	employeesCreateHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
+	employeesCreateHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	employeesCreateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
+	employeesCreateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
+	employeesCreateHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	employeesCreateHrResponseFieldStatus               = big.NewInt(1 << 18)
+	employeesCreateHrResponseFieldNotes                = big.NewInt(1 << 19)
+	employeesCreateHrResponseFieldAttributes           = big.NewInt(1 << 20)
+	employeesCreateHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
-type PostV1HrEmployeesRecordsCreateResponse struct {
-	ID          string                                     `json:"id" url:"id"`
-	EmployeeID  string                                     `json:"employeeId" url:"employeeId"`
-	Type        PostV1HrEmployeesRecordsCreateResponseType `json:"type" url:"type"`
-	Title       string                                     `json:"title" url:"title"`
-	Institution *string                                    `json:"institution,omitempty" url:"institution,omitempty"`
-	IssuedAt    *string                                    `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
-	ValidUntil  *string                                    `json:"validUntil,omitempty" url:"validUntil,omitempty"`
-	FileID      *string                                    `json:"fileId,omitempty" url:"fileId,omitempty"`
-	Notes       *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string                                     `json:"createdAt" url:"createdAt"`
+type EmployeesCreateHrResponse struct {
+	ID                   string                                     `json:"id" url:"id"`
+	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
+	FirstName            string                                     `json:"firstName" url:"firstName"`
+	LastName             string                                     `json:"lastName" url:"lastName"`
+	PersonalCode         *string                                    `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate            *time.Time                                 `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
+	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
+	Address              *EmployeesCreateHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	Iban                 *string                                    `json:"iban,omitempty" url:"iban,omitempty"`
+	SocialInsuranceNo    *string                                    `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
+	SocialInsuranceStart *string                                    `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
+	HireDate             *time.Time                                 `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
+	TerminationDate      *time.Time                                 `json:"terminationDate,omitempty" url:"terminationDate,omitempty" format:"date"`
+	ApplyAllowance       bool                                       `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                    `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
+	PensionAccumulation  bool                                       `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                          `json:"payrollOptions" url:"payrollOptions"`
+	Status               EmployeesCreateHrResponseStatus            `json:"status" url:"status"`
+	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	Attributes           []*EmployeesCreateHrResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
+	CreatedAt            time.Time                                  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8340,235 +5496,649 @@ type PostV1HrEmployeesRecordsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetID() string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return p.ID
+	return e.ID
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetEmployeeID() string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Code
+}
+
+func (e *EmployeesCreateHrResponse) GetFirstName() string {
+	if e == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return e.FirstName
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetType() PostV1HrEmployeesRecordsCreateResponseType {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetLastName() string {
+	if e == nil {
 		return ""
 	}
-	return p.Type
+	return e.LastName
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetTitle() string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetPersonalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PersonalCode
+}
+
+func (e *EmployeesCreateHrResponse) GetBirthDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BirthDate
+}
+
+func (e *EmployeesCreateHrResponse) GetEmail() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Email
+}
+
+func (e *EmployeesCreateHrResponse) GetPhone() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Phone
+}
+
+func (e *EmployeesCreateHrResponse) GetAddress() *EmployeesCreateHrResponseAddress {
+	if e == nil {
+		return nil
+	}
+	return e.Address
+}
+
+func (e *EmployeesCreateHrResponse) GetIban() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Iban
+}
+
+func (e *EmployeesCreateHrResponse) GetSocialInsuranceNo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceNo
+}
+
+func (e *EmployeesCreateHrResponse) GetSocialInsuranceStart() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceStart
+}
+
+func (e *EmployeesCreateHrResponse) GetHireDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.HireDate
+}
+
+func (e *EmployeesCreateHrResponse) GetTerminationDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.TerminationDate
+}
+
+func (e *EmployeesCreateHrResponse) GetApplyAllowance() bool {
+	if e == nil {
+		return false
+	}
+	return e.ApplyAllowance
+}
+
+func (e *EmployeesCreateHrResponse) GetAllowanceOverride() *string {
+	if e == nil {
+		return nil
+	}
+	return e.AllowanceOverride
+}
+
+func (e *EmployeesCreateHrResponse) GetPensionAccumulation() bool {
+	if e == nil {
+		return false
+	}
+	return e.PensionAccumulation
+}
+
+func (e *EmployeesCreateHrResponse) GetPayrollOptions() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.PayrollOptions
+}
+
+func (e *EmployeesCreateHrResponse) GetStatus() EmployeesCreateHrResponseStatus {
+	if e == nil {
 		return ""
 	}
-	return p.Title
+	return e.Status
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetInstitution() *string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetNotes() *string {
+	if e == nil {
 		return nil
 	}
-	return p.Institution
+	return e.Notes
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetIssuedAt() *string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetAttributes() []*EmployeesCreateHrResponseAttributesItem {
+	if e == nil {
 		return nil
 	}
-	return p.IssuedAt
+	return e.Attributes
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetValidUntil() *string {
-	if p == nil {
+func (e *EmployeesCreateHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.ValidUntil
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetFileID() *string {
-	if p == nil {
-		return nil
+func (e *EmployeesCreateHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	return p.FileID
-}
-
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesRecordsCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesRecordsCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldID)
+func (e *EmployeesCreateHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesCreateHrResponseFieldID)
 }
 
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldEmployeeID)
+func (e *EmployeesCreateHrResponse) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesCreateHrResponseFieldCode)
 }
 
-// SetType sets the Type field and marks it as non-optional;
+// SetFirstName sets the FirstName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetType(type_ PostV1HrEmployeesRecordsCreateResponseType) {
-	p.Type = type_
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldType)
+func (e *EmployeesCreateHrResponse) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesCreateHrResponseFieldFirstName)
 }
 
-// SetTitle sets the Title field and marks it as non-optional;
+// SetLastName sets the LastName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetTitle(title string) {
-	p.Title = title
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldTitle)
+func (e *EmployeesCreateHrResponse) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesCreateHrResponseFieldLastName)
 }
 
-// SetInstitution sets the Institution field and marks it as non-optional;
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetInstitution(institution *string) {
-	p.Institution = institution
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldInstitution)
+func (e *EmployeesCreateHrResponse) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesCreateHrResponseFieldPersonalCode)
 }
 
-// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetIssuedAt(issuedAt *string) {
-	p.IssuedAt = issuedAt
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldIssuedAt)
+func (e *EmployeesCreateHrResponse) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesCreateHrResponseFieldBirthDate)
 }
 
-// SetValidUntil sets the ValidUntil field and marks it as non-optional;
+// SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetValidUntil(validUntil *string) {
-	p.ValidUntil = validUntil
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldValidUntil)
+func (e *EmployeesCreateHrResponse) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesCreateHrResponseFieldEmail)
 }
 
-// SetFileID sets the FileID field and marks it as non-optional;
+// SetPhone sets the Phone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetFileID(fileID *string) {
-	p.FileID = fileID
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldFileID)
+func (e *EmployeesCreateHrResponse) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesCreateHrResponseFieldPhone)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetAddress(address *EmployeesCreateHrResponseAddress) {
+	e.Address = address
+	e.require(employeesCreateHrResponseFieldAddress)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesCreateHrResponseFieldIban)
+}
+
+// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesCreateHrResponseFieldSocialInsuranceNo)
+}
+
+// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesCreateHrResponseFieldSocialInsuranceStart)
+}
+
+// SetHireDate sets the HireDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesCreateHrResponseFieldHireDate)
+}
+
+// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesCreateHrResponseFieldTerminationDate)
+}
+
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetApplyAllowance(applyAllowance bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesCreateHrResponseFieldApplyAllowance)
+}
+
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesCreateHrResponseFieldAllowanceOverride)
+}
+
+// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetPensionAccumulation(pensionAccumulation bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesCreateHrResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesCreateHrResponseFieldPayrollOptions)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetStatus(status EmployeesCreateHrResponseStatus) {
+	e.Status = status
+	e.require(employeesCreateHrResponseFieldStatus)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldNotes)
+func (e *EmployeesCreateHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesCreateHrResponseFieldNotes)
+}
+
+// SetAttributes sets the Attributes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetAttributes(attributes []*EmployeesCreateHrResponseAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesCreateHrResponseFieldAttributes)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsCreateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesRecordsCreateResponseFieldCreatedAt)
+func (e *EmployeesCreateHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesCreateHrResponseFieldCreatedAt)
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsCreateResponse
+func (e *EmployeesCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesCreateHrResponse(unmarshaler.embed)
+	e.BirthDate = unmarshaler.BirthDate.TimePtr()
+	e.HireDate = unmarshaler.HireDate.TimePtr()
+	e.TerminationDate = unmarshaler.TerminationDate.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrResponse
+	var marshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed:           embed(*e),
+		BirthDate:       internal.NewOptionalDate(e.BirthDate),
+		HireDate:        internal.NewOptionalDate(e.HireDate),
+		TerminationDate: internal.NewOptionalDate(e.TerminationDate),
+		CreatedAt:       internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesCreateHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesCreateHrResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesCreateHrResponseAddressFieldCity        = big.NewInt(1 << 1)
+	employeesCreateHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesCreateHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type EmployeesCreateHrResponseAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetStreet() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Street
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetCity() *string {
+	if e == nil {
+		return nil
+	}
+	return e.City
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetPostalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PostalCode
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetCountryCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CountryCode
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesCreateHrResponseAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesCreateHrResponseAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesCreateHrResponseAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesCreateHrResponseAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesCreateHrResponseAddressFieldCountryCode)
+}
+
+func (e *EmployeesCreateHrResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesCreateHrResponseAddress
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesCreateHrResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsCreateResponse
+func (e *EmployeesCreateHrResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrResponseAddress
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsCreateResponse) String() string {
-	if p == nil {
+func (e *EmployeesCreateHrResponseAddress) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesRecordsCreateResponseType string
-
-const (
-	PostV1HrEmployeesRecordsCreateResponseTypeEducation     PostV1HrEmployeesRecordsCreateResponseType = "education"
-	PostV1HrEmployeesRecordsCreateResponseTypeQualification PostV1HrEmployeesRecordsCreateResponseType = "qualification"
-	PostV1HrEmployeesRecordsCreateResponseTypeCertificate   PostV1HrEmployeesRecordsCreateResponseType = "certificate"
-	PostV1HrEmployeesRecordsCreateResponseTypeTraining      PostV1HrEmployeesRecordsCreateResponseType = "training"
-)
-
-func NewPostV1HrEmployeesRecordsCreateResponseTypeFromString(s string) (PostV1HrEmployeesRecordsCreateResponseType, error) {
-	switch s {
-	case "education":
-		return PostV1HrEmployeesRecordsCreateResponseTypeEducation, nil
-	case "qualification":
-		return PostV1HrEmployeesRecordsCreateResponseTypeQualification, nil
-	case "certificate":
-		return PostV1HrEmployeesRecordsCreateResponseTypeCertificate, nil
-	case "training":
-		return PostV1HrEmployeesRecordsCreateResponseTypeTraining, nil
-	}
-	var t PostV1HrEmployeesRecordsCreateResponseType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesRecordsCreateResponseType) Ptr() *PostV1HrEmployeesRecordsCreateResponseType {
-	return &p
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesRecordsDeleteResponseFieldID = big.NewInt(1 << 0)
+	employeesCreateHrResponseAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesCreateHrResponseAttributesItemFieldValue = big.NewInt(1 << 1)
 )
 
-type PostV1HrEmployeesRecordsDeleteResponse struct {
+type EmployeesCreateHrResponseAttributesItem struct {
+	Name  string `json:"name" url:"name"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) GetValue() string {
+	if e == nil {
+		return ""
+	}
+	return e.Value
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesCreateHrResponseAttributesItemFieldName)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesCreateHrResponseAttributesItemFieldValue)
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesCreateHrResponseAttributesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesCreateHrResponseAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesCreateHrResponseAttributesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesCreateHrResponseAttributesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesCreateHrResponseStatus string
+
+const (
+	EmployeesCreateHrResponseStatusActive     EmployeesCreateHrResponseStatus = "active"
+	EmployeesCreateHrResponseStatusTerminated EmployeesCreateHrResponseStatus = "terminated"
+)
+
+func NewEmployeesCreateHrResponseStatusFromString(s string) (EmployeesCreateHrResponseStatus, error) {
+	switch s {
+	case "active":
+		return EmployeesCreateHrResponseStatusActive, nil
+	case "terminated":
+		return EmployeesCreateHrResponseStatusTerminated, nil
+	}
+	var t EmployeesCreateHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesCreateHrResponseStatus) Ptr() *EmployeesCreateHrResponseStatus {
+	return &e
+}
+
+var (
+	employeesDeleteHrResponseFieldID = big.NewInt(1 << 0)
+)
+
+type EmployeesDeleteHrResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -8578,86 +6148,84 @@ type PostV1HrEmployeesRecordsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) GetID() string {
-	if p == nil {
+func (e *EmployeesDeleteHrResponse) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return p.ID
+	return e.ID
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesDeleteHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesDeleteHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsDeleteResponseFieldID)
+func (e *EmployeesDeleteHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesDeleteHrResponseFieldID)
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsDeleteResponse
+func (e *EmployeesDeleteHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesDeleteHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesDeleteHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsDeleteResponse
+func (e *EmployeesDeleteHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesDeleteHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsDeleteResponse) String() string {
-	if p == nil {
+func (e *EmployeesDeleteHrResponse) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
 var (
-	postV1HrEmployeesRecordsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	employeesFieldsHrResponseFieldCountry = big.NewInt(1 << 0)
+	employeesFieldsHrResponseFieldFields  = big.NewInt(1 << 1)
 )
 
-type PostV1HrEmployeesRecordsListRequestFilterItem struct {
-	Field string                                              `json:"field" url:"field"`
-	Op    PostV1HrEmployeesRecordsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1HrEmployeesRecordsListRequestFilterItemValue `json:"value" url:"value"`
+type EmployeesFieldsHrResponse struct {
+	Country string                                 `json:"country" url:"country"`
+	Fields  []*EmployeesFieldsHrResponseFieldsItem `json:"fields" url:"fields"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8666,312 +6234,1265 @@ type PostV1HrEmployeesRecordsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (e *EmployeesFieldsHrResponse) GetCountry() string {
+	if e == nil {
 		return ""
 	}
-	return p.Field
+	return e.Country
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) GetOp() PostV1HrEmployeesRecordsListRequestFilterItemOp {
-	if p == nil {
-		return ""
-	}
-	return p.Op
-}
-
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) GetValue() *PostV1HrEmployeesRecordsListRequestFilterItemValue {
-	if p == nil {
+func (e *EmployeesFieldsHrResponse) GetFields() []*EmployeesFieldsHrResponseFieldsItem {
+	if e == nil {
 		return nil
 	}
-	return p.Value
+	return e.Fields
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesFieldsHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesFieldsHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
-// SetField sets the Field field and marks it as non-optional;
+// SetCountry sets the Country field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrEmployeesRecordsListRequestFilterItemFieldField)
+func (e *EmployeesFieldsHrResponse) SetCountry(country string) {
+	e.Country = country
+	e.require(employeesFieldsHrResponseFieldCountry)
 }
 
-// SetOp sets the Op field and marks it as non-optional;
+// SetFields sets the Fields field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) SetOp(op PostV1HrEmployeesRecordsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1HrEmployeesRecordsListRequestFilterItemFieldOp)
+func (e *EmployeesFieldsHrResponse) SetFields(fields []*EmployeesFieldsHrResponseFieldsItem) {
+	e.Fields = fields
+	e.require(employeesFieldsHrResponseFieldFields)
 }
 
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) SetValue(value *PostV1HrEmployeesRecordsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1HrEmployeesRecordsListRequestFilterItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsListRequestFilterItem
+func (e *EmployeesFieldsHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesFieldsHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesFieldsHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsListRequestFilterItem
+func (e *EmployeesFieldsHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesFieldsHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItem) String() string {
-	if p == nil {
+func (e *EmployeesFieldsHrResponse) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
-type PostV1HrEmployeesRecordsListRequestFilterItemOp string
-
-const (
-	PostV1HrEmployeesRecordsListRequestFilterItemOpEq       PostV1HrEmployeesRecordsListRequestFilterItemOp = "eq"
-	PostV1HrEmployeesRecordsListRequestFilterItemOpNe       PostV1HrEmployeesRecordsListRequestFilterItemOp = "ne"
-	PostV1HrEmployeesRecordsListRequestFilterItemOpContains PostV1HrEmployeesRecordsListRequestFilterItemOp = "contains"
-	PostV1HrEmployeesRecordsListRequestFilterItemOpGte      PostV1HrEmployeesRecordsListRequestFilterItemOp = "gte"
-	PostV1HrEmployeesRecordsListRequestFilterItemOpLte      PostV1HrEmployeesRecordsListRequestFilterItemOp = "lte"
-	PostV1HrEmployeesRecordsListRequestFilterItemOpIn       PostV1HrEmployeesRecordsListRequestFilterItemOp = "in"
+var (
+	employeesFieldsHrResponseFieldsItemFieldKey       = big.NewInt(1 << 0)
+	employeesFieldsHrResponseFieldsItemFieldKind      = big.NewInt(1 << 1)
+	employeesFieldsHrResponseFieldsItemFieldOptions   = big.NewInt(1 << 2)
+	employeesFieldsHrResponseFieldsItemFieldMaxLength = big.NewInt(1 << 3)
 )
 
-func NewPostV1HrEmployeesRecordsListRequestFilterItemOpFromString(s string) (PostV1HrEmployeesRecordsListRequestFilterItemOp, error) {
-	switch s {
-	case "eq":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpEq, nil
-	case "ne":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpNe, nil
-	case "contains":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpContains, nil
-	case "gte":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpGte, nil
-	case "lte":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpLte, nil
-	case "in":
-		return PostV1HrEmployeesRecordsListRequestFilterItemOpIn, nil
+type EmployeesFieldsHrResponseFieldsItem struct {
+	Key       string                                  `json:"key" url:"key"`
+	Kind      EmployeesFieldsHrResponseFieldsItemKind `json:"kind" url:"kind"`
+	Options   []string                                `json:"options,omitempty" url:"options,omitempty"`
+	MaxLength *int64                                  `json:"maxLength,omitempty" url:"maxLength,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) GetKey() string {
+	if e == nil {
+		return ""
 	}
-	var t PostV1HrEmployeesRecordsListRequestFilterItemOp
+	return e.Key
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) GetKind() EmployeesFieldsHrResponseFieldsItemKind {
+	if e == nil {
+		return ""
+	}
+	return e.Kind
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) GetOptions() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Options
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) GetMaxLength() *int64 {
+	if e == nil {
+		return nil
+	}
+	return e.MaxLength
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesFieldsHrResponseFieldsItem) SetKey(key string) {
+	e.Key = key
+	e.require(employeesFieldsHrResponseFieldsItemFieldKey)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesFieldsHrResponseFieldsItem) SetKind(kind EmployeesFieldsHrResponseFieldsItemKind) {
+	e.Kind = kind
+	e.require(employeesFieldsHrResponseFieldsItemFieldKind)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesFieldsHrResponseFieldsItem) SetOptions(options []string) {
+	e.Options = options
+	e.require(employeesFieldsHrResponseFieldsItemFieldOptions)
+}
+
+// SetMaxLength sets the MaxLength field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesFieldsHrResponseFieldsItem) SetMaxLength(maxLength *int64) {
+	e.MaxLength = maxLength
+	e.require(employeesFieldsHrResponseFieldsItemFieldMaxLength)
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesFieldsHrResponseFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesFieldsHrResponseFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesFieldsHrResponseFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesFieldsHrResponseFieldsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesFieldsHrResponseFieldsItemKind string
+
+const (
+	EmployeesFieldsHrResponseFieldsItemKindText   EmployeesFieldsHrResponseFieldsItemKind = "text"
+	EmployeesFieldsHrResponseFieldsItemKindSelect EmployeesFieldsHrResponseFieldsItemKind = "select"
+	EmployeesFieldsHrResponseFieldsItemKindDate   EmployeesFieldsHrResponseFieldsItemKind = "date"
+)
+
+func NewEmployeesFieldsHrResponseFieldsItemKindFromString(s string) (EmployeesFieldsHrResponseFieldsItemKind, error) {
+	switch s {
+	case "text":
+		return EmployeesFieldsHrResponseFieldsItemKindText, nil
+	case "select":
+		return EmployeesFieldsHrResponseFieldsItemKindSelect, nil
+	case "date":
+		return EmployeesFieldsHrResponseFieldsItemKindDate, nil
+	}
+	var t EmployeesFieldsHrResponseFieldsItemKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrEmployeesRecordsListRequestFilterItemOp) Ptr() *PostV1HrEmployeesRecordsListRequestFilterItemOp {
-	return &p
+func (e EmployeesFieldsHrResponseFieldsItemKind) Ptr() *EmployeesFieldsHrResponseFieldsItemKind {
+	return &e
 }
 
-type PostV1HrEmployeesRecordsListRequestFilterItemValue struct {
-	String                                                          string
-	Double                                                          float64
-	Boolean                                                         bool
-	PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList []*PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem
+var (
+	employeesGetHrResponseFieldID                   = big.NewInt(1 << 0)
+	employeesGetHrResponseFieldCode                 = big.NewInt(1 << 1)
+	employeesGetHrResponseFieldFirstName            = big.NewInt(1 << 2)
+	employeesGetHrResponseFieldLastName             = big.NewInt(1 << 3)
+	employeesGetHrResponseFieldPersonalCode         = big.NewInt(1 << 4)
+	employeesGetHrResponseFieldBirthDate            = big.NewInt(1 << 5)
+	employeesGetHrResponseFieldEmail                = big.NewInt(1 << 6)
+	employeesGetHrResponseFieldPhone                = big.NewInt(1 << 7)
+	employeesGetHrResponseFieldAddress              = big.NewInt(1 << 8)
+	employeesGetHrResponseFieldIban                 = big.NewInt(1 << 9)
+	employeesGetHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	employeesGetHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	employeesGetHrResponseFieldHireDate             = big.NewInt(1 << 12)
+	employeesGetHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
+	employeesGetHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	employeesGetHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
+	employeesGetHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
+	employeesGetHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	employeesGetHrResponseFieldStatus               = big.NewInt(1 << 18)
+	employeesGetHrResponseFieldNotes                = big.NewInt(1 << 19)
+	employeesGetHrResponseFieldAttributes           = big.NewInt(1 << 20)
+	employeesGetHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+)
+
+type EmployeesGetHrResponse struct {
+	ID                   string                                  `json:"id" url:"id"`
+	Code                 *string                                 `json:"code,omitempty" url:"code,omitempty"`
+	FirstName            string                                  `json:"firstName" url:"firstName"`
+	LastName             string                                  `json:"lastName" url:"lastName"`
+	PersonalCode         *string                                 `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate            *time.Time                              `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email                *string                                 `json:"email,omitempty" url:"email,omitempty"`
+	Phone                *string                                 `json:"phone,omitempty" url:"phone,omitempty"`
+	Address              *EmployeesGetHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	Iban                 *string                                 `json:"iban,omitempty" url:"iban,omitempty"`
+	SocialInsuranceNo    *string                                 `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
+	SocialInsuranceStart *string                                 `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
+	HireDate             *time.Time                              `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
+	TerminationDate      *time.Time                              `json:"terminationDate,omitempty" url:"terminationDate,omitempty" format:"date"`
+	ApplyAllowance       bool                                    `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                 `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
+	PensionAccumulation  bool                                    `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                       `json:"payrollOptions" url:"payrollOptions"`
+	Status               EmployeesGetHrResponseStatus            `json:"status" url:"status"`
+	Notes                *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	Attributes           []*EmployeesGetHrResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
+	CreatedAt            time.Time                               `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesGetHrResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesGetHrResponse) GetCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Code
+}
+
+func (e *EmployeesGetHrResponse) GetFirstName() string {
+	if e == nil {
+		return ""
+	}
+	return e.FirstName
+}
+
+func (e *EmployeesGetHrResponse) GetLastName() string {
+	if e == nil {
+		return ""
+	}
+	return e.LastName
+}
+
+func (e *EmployeesGetHrResponse) GetPersonalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PersonalCode
+}
+
+func (e *EmployeesGetHrResponse) GetBirthDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BirthDate
+}
+
+func (e *EmployeesGetHrResponse) GetEmail() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Email
+}
+
+func (e *EmployeesGetHrResponse) GetPhone() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Phone
+}
+
+func (e *EmployeesGetHrResponse) GetAddress() *EmployeesGetHrResponseAddress {
+	if e == nil {
+		return nil
+	}
+	return e.Address
+}
+
+func (e *EmployeesGetHrResponse) GetIban() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Iban
+}
+
+func (e *EmployeesGetHrResponse) GetSocialInsuranceNo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceNo
+}
+
+func (e *EmployeesGetHrResponse) GetSocialInsuranceStart() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceStart
+}
+
+func (e *EmployeesGetHrResponse) GetHireDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.HireDate
+}
+
+func (e *EmployeesGetHrResponse) GetTerminationDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.TerminationDate
+}
+
+func (e *EmployeesGetHrResponse) GetApplyAllowance() bool {
+	if e == nil {
+		return false
+	}
+	return e.ApplyAllowance
+}
+
+func (e *EmployeesGetHrResponse) GetAllowanceOverride() *string {
+	if e == nil {
+		return nil
+	}
+	return e.AllowanceOverride
+}
+
+func (e *EmployeesGetHrResponse) GetPensionAccumulation() bool {
+	if e == nil {
+		return false
+	}
+	return e.PensionAccumulation
+}
+
+func (e *EmployeesGetHrResponse) GetPayrollOptions() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.PayrollOptions
+}
+
+func (e *EmployeesGetHrResponse) GetStatus() EmployeesGetHrResponseStatus {
+	if e == nil {
+		return ""
+	}
+	return e.Status
+}
+
+func (e *EmployeesGetHrResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesGetHrResponse) GetAttributes() []*EmployeesGetHrResponseAttributesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Attributes
+}
+
+func (e *EmployeesGetHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesGetHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesGetHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesGetHrResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesGetHrResponseFieldCode)
+}
+
+// SetFirstName sets the FirstName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesGetHrResponseFieldFirstName)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesGetHrResponseFieldLastName)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesGetHrResponseFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesGetHrResponseFieldBirthDate)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesGetHrResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesGetHrResponseFieldPhone)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetAddress(address *EmployeesGetHrResponseAddress) {
+	e.Address = address
+	e.require(employeesGetHrResponseFieldAddress)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesGetHrResponseFieldIban)
+}
+
+// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesGetHrResponseFieldSocialInsuranceNo)
+}
+
+// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesGetHrResponseFieldSocialInsuranceStart)
+}
+
+// SetHireDate sets the HireDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesGetHrResponseFieldHireDate)
+}
+
+// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesGetHrResponseFieldTerminationDate)
+}
+
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetApplyAllowance(applyAllowance bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesGetHrResponseFieldApplyAllowance)
+}
+
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesGetHrResponseFieldAllowanceOverride)
+}
+
+// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetPensionAccumulation(pensionAccumulation bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesGetHrResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesGetHrResponseFieldPayrollOptions)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetStatus(status EmployeesGetHrResponseStatus) {
+	e.Status = status
+	e.require(employeesGetHrResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesGetHrResponseFieldNotes)
+}
+
+// SetAttributes sets the Attributes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetAttributes(attributes []*EmployeesGetHrResponseAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesGetHrResponseFieldAttributes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesGetHrResponseFieldCreatedAt)
+}
+
+func (e *EmployeesGetHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesGetHrResponse
+	var unmarshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesGetHrResponse(unmarshaler.embed)
+	e.BirthDate = unmarshaler.BirthDate.TimePtr()
+	e.HireDate = unmarshaler.HireDate.TimePtr()
+	e.TerminationDate = unmarshaler.TerminationDate.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesGetHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesGetHrResponse
+	var marshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed:           embed(*e),
+		BirthDate:       internal.NewOptionalDate(e.BirthDate),
+		HireDate:        internal.NewOptionalDate(e.HireDate),
+		TerminationDate: internal.NewOptionalDate(e.TerminationDate),
+		CreatedAt:       internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesGetHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesGetHrResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesGetHrResponseAddressFieldCity        = big.NewInt(1 << 1)
+	employeesGetHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesGetHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type EmployeesGetHrResponseAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesGetHrResponseAddress) GetStreet() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Street
+}
+
+func (e *EmployeesGetHrResponseAddress) GetCity() *string {
+	if e == nil {
+		return nil
+	}
+	return e.City
+}
+
+func (e *EmployeesGetHrResponseAddress) GetPostalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PostalCode
+}
+
+func (e *EmployeesGetHrResponseAddress) GetCountryCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CountryCode
+}
+
+func (e *EmployeesGetHrResponseAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesGetHrResponseAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesGetHrResponseAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesGetHrResponseAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesGetHrResponseAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesGetHrResponseAddressFieldCountryCode)
+}
+
+func (e *EmployeesGetHrResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesGetHrResponseAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesGetHrResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesGetHrResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesGetHrResponseAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesGetHrResponseAddress) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesGetHrResponseAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesGetHrResponseAttributesItemFieldValue = big.NewInt(1 << 1)
+)
+
+type EmployeesGetHrResponseAttributesItem struct {
+	Name  string `json:"name" url:"name"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) GetValue() string {
+	if e == nil {
+		return ""
+	}
+	return e.Value
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesGetHrResponseAttributesItemFieldName)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesGetHrResponseAttributesItemFieldValue)
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesGetHrResponseAttributesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesGetHrResponseAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesGetHrResponseAttributesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesGetHrResponseAttributesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesGetHrResponseStatus string
+
+const (
+	EmployeesGetHrResponseStatusActive     EmployeesGetHrResponseStatus = "active"
+	EmployeesGetHrResponseStatusTerminated EmployeesGetHrResponseStatus = "terminated"
+)
+
+func NewEmployeesGetHrResponseStatusFromString(s string) (EmployeesGetHrResponseStatus, error) {
+	switch s {
+	case "active":
+		return EmployeesGetHrResponseStatusActive, nil
+	case "terminated":
+		return EmployeesGetHrResponseStatusTerminated, nil
+	}
+	var t EmployeesGetHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesGetHrResponseStatus) Ptr() *EmployeesGetHrResponseStatus {
+	return &e
+}
+
+var (
+	employeesListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	employeesListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	employeesListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type EmployeesListHrRequestFilterItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Op    EmployeesListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *EmployeesListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesListHrRequestFilterItem) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *EmployeesListHrRequestFilterItem) GetOp() EmployeesListHrRequestFilterItemOp {
+	if e == nil {
+		return ""
+	}
+	return e.Op
+}
+
+func (e *EmployeesListHrRequestFilterItem) GetValue() *EmployeesListHrRequestFilterItemValue {
+	if e == nil {
+		return nil
+	}
+	return e.Value
+}
+
+func (e *EmployeesListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesListHrRequestFilterItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrRequestFilterItem) SetField(field string) {
+	e.Field = field
+	e.require(employeesListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrRequestFilterItem) SetOp(op EmployeesListHrRequestFilterItemOp) {
+	e.Op = op
+	e.require(employeesListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrRequestFilterItem) SetValue(value *EmployeesListHrRequestFilterItemValue) {
+	e.Value = value
+	e.require(employeesListHrRequestFilterItemFieldValue)
+}
+
+func (e *EmployeesListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesListHrRequestFilterItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesListHrRequestFilterItemOp string
+
+const (
+	EmployeesListHrRequestFilterItemOpEq       EmployeesListHrRequestFilterItemOp = "eq"
+	EmployeesListHrRequestFilterItemOpNe       EmployeesListHrRequestFilterItemOp = "ne"
+	EmployeesListHrRequestFilterItemOpContains EmployeesListHrRequestFilterItemOp = "contains"
+	EmployeesListHrRequestFilterItemOpGte      EmployeesListHrRequestFilterItemOp = "gte"
+	EmployeesListHrRequestFilterItemOpLte      EmployeesListHrRequestFilterItemOp = "lte"
+	EmployeesListHrRequestFilterItemOpIn       EmployeesListHrRequestFilterItemOp = "in"
+)
+
+func NewEmployeesListHrRequestFilterItemOpFromString(s string) (EmployeesListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return EmployeesListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return EmployeesListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return EmployeesListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return EmployeesListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return EmployeesListHrRequestFilterItemOpLte, nil
+	case "in":
+		return EmployeesListHrRequestFilterItemOpIn, nil
+	}
+	var t EmployeesListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesListHrRequestFilterItemOp) Ptr() *EmployeesListHrRequestFilterItemOp {
+	return &e
+}
+
+type EmployeesListHrRequestFilterItemValue struct {
+	String                                             string
+	Double                                             float64
+	Boolean                                            bool
+	EmployeesListHrRequestFilterItemValueThreeItemList []*EmployeesListHrRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValue) GetString() string {
+	if e == nil {
 		return ""
 	}
-	return p.String
+	return e.String
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValue) GetDouble() float64 {
+	if e == nil {
 		return 0
 	}
-	return p.Double
+	return e.Double
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValue) GetBoolean() bool {
+	if e == nil {
 		return false
 	}
-	return p.Boolean
+	return e.Boolean
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) GetPostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList() []*PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValue) GetEmployeesListHrRequestFilterItemValueThreeItemList() []*EmployeesListHrRequestFilterItemValueThreeItem {
+	if e == nil {
 		return nil
 	}
-	return p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList
+	return e.EmployeesListHrRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (e *EmployeesListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		e.typ = "String"
+		e.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		e.typ = "Double"
+		e.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		e.typ = "Boolean"
+		e.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList []*PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList"
-		p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList = valuePostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList
+	var valueEmployeesListHrRequestFilterItemValueThreeItemList []*EmployeesListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueEmployeesListHrRequestFilterItemValueThreeItemList); err == nil {
+		e.typ = "EmployeesListHrRequestFilterItemValueThreeItemList"
+		e.EmployeesListHrRequestFilterItemValueThreeItemList = valueEmployeesListHrRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
 }
 
-func (p PostV1HrEmployeesRecordsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (e EmployeesListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if e.typ == "Boolean" || e.Boolean != false {
+		return json.Marshal(e.Boolean)
 	}
-	if p.typ == "PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList" || p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList)
+	if e.typ == "EmployeesListHrRequestFilterItemValueThreeItemList" || e.EmployeesListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(e.EmployeesListHrRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
 }
 
-type PostV1HrEmployeesRecordsListRequestFilterItemValueVisitor interface {
+type EmployeesListHrRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList([]*PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) error
+	VisitEmployeesListHrRequestFilterItemValueThreeItemList([]*EmployeesListHrRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValue) Accept(visitor PostV1HrEmployeesRecordsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (e *EmployeesListHrRequestFilterItemValue) Accept(visitor EmployeesListHrRequestFilterItemValueVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if e.typ == "Boolean" || e.Boolean != false {
+		return visitor.VisitBoolean(e.Boolean)
 	}
-	if p.typ == "PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList" || p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList(p.PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemList)
+	if e.typ == "EmployeesListHrRequestFilterItemValueThreeItemList" || e.EmployeesListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitEmployeesListHrRequestFilterItemValueThreeItemList(e.EmployeesListHrRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
 }
 
-type PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem struct {
+type EmployeesListHrRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValueThreeItem) GetString() string {
+	if e == nil {
 		return ""
 	}
-	return p.String
+	return e.String
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (e *EmployeesListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if e == nil {
 		return 0
 	}
-	return p.Double
+	return e.Double
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (e *EmployeesListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		e.typ = "String"
+		e.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		e.typ = "Double"
+		e.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
 }
 
-func (p PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (e EmployeesListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
 }
 
-type PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemVisitor interface {
+type EmployeesListHrRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItem) Accept(visitor PostV1HrEmployeesRecordsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (e *EmployeesListHrRequestFilterItemValueThreeItem) Accept(visitor EmployeesListHrRequestFilterItemValueThreeItemVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
 }
 
 var (
-	postV1HrEmployeesRecordsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	employeesListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	employeesListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1HrEmployeesRecordsListRequestSortItem struct {
-	Field string                                          `json:"field" url:"field"`
-	Dir   *PostV1HrEmployeesRecordsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type EmployeesListHrRequestSortItem struct {
+	Field string                             `json:"field" url:"field"`
+	Dir   *EmployeesListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8980,122 +7501,4088 @@ type PostV1HrEmployeesRecordsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) GetField() string {
-	if p == nil {
+func (e *EmployeesListHrRequestSortItem) GetField() string {
+	if e == nil {
 		return ""
 	}
-	return p.Field
+	return e.Field
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) GetDir() *PostV1HrEmployeesRecordsListRequestSortItemDir {
-	if p == nil {
+func (e *EmployeesListHrRequestSortItem) GetDir() *EmployeesListHrRequestSortItemDir {
+	if e == nil {
 		return nil
 	}
-	return p.Dir
+	return e.Dir
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (e *EmployeesListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
 		return nil
 	}
-	return p.extraProperties
+	return e.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (e *EmployeesListHrRequestSortItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	e.explicitFields.Or(e.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrEmployeesRecordsListRequestSortItemFieldField)
+func (e *EmployeesListHrRequestSortItem) SetField(field string) {
+	e.Field = field
+	e.require(employeesListHrRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) SetDir(dir *PostV1HrEmployeesRecordsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1HrEmployeesRecordsListRequestSortItemFieldDir)
+func (e *EmployeesListHrRequestSortItem) SetDir(dir *EmployeesListHrRequestSortItemDir) {
+	e.Dir = dir
+	e.require(employeesListHrRequestSortItemFieldDir)
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsListRequestSortItem
+func (e *EmployeesListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*e = EmployeesListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsListRequestSortItem
+func (e *EmployeesListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*e),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsListRequestSortItem) String() string {
-	if p == nil {
+func (e *EmployeesListHrRequestSortItem) String() string {
+	if e == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(e); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", e)
 }
 
-type PostV1HrEmployeesRecordsListRequestSortItemDir string
+type EmployeesListHrRequestSortItemDir string
 
 const (
-	PostV1HrEmployeesRecordsListRequestSortItemDirAsc  PostV1HrEmployeesRecordsListRequestSortItemDir = "asc"
-	PostV1HrEmployeesRecordsListRequestSortItemDirDesc PostV1HrEmployeesRecordsListRequestSortItemDir = "desc"
+	EmployeesListHrRequestSortItemDirAsc  EmployeesListHrRequestSortItemDir = "asc"
+	EmployeesListHrRequestSortItemDirDesc EmployeesListHrRequestSortItemDir = "desc"
 )
 
-func NewPostV1HrEmployeesRecordsListRequestSortItemDirFromString(s string) (PostV1HrEmployeesRecordsListRequestSortItemDir, error) {
+func NewEmployeesListHrRequestSortItemDirFromString(s string) (EmployeesListHrRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1HrEmployeesRecordsListRequestSortItemDirAsc, nil
+		return EmployeesListHrRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1HrEmployeesRecordsListRequestSortItemDirDesc, nil
+		return EmployeesListHrRequestSortItemDirDesc, nil
 	}
-	var t PostV1HrEmployeesRecordsListRequestSortItemDir
+	var t EmployeesListHrRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrEmployeesRecordsListRequestSortItemDir) Ptr() *PostV1HrEmployeesRecordsListRequestSortItemDir {
-	return &p
+func (e EmployeesListHrRequestSortItemDir) Ptr() *EmployeesListHrRequestSortItemDir {
+	return &e
 }
 
 var (
-	postV1HrEmployeesRecordsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsListResponseFieldTotals   = big.NewInt(1 << 4)
+	employeesListHrResponseFieldRows     = big.NewInt(1 << 0)
+	employeesListHrResponseFieldPage     = big.NewInt(1 << 1)
+	employeesListHrResponseFieldPageSize = big.NewInt(1 << 2)
+	employeesListHrResponseFieldTotal    = big.NewInt(1 << 3)
+	employeesListHrResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrEmployeesRecordsListResponse struct {
-	Rows     []*PostV1HrEmployeesRecordsListResponseRowsItem `json:"rows" url:"rows"`
+type EmployeesListHrResponse struct {
+	Rows     []*EmployeesListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                              `json:"page" url:"page"`
+	PageSize int64                              `json:"pageSize" url:"pageSize"`
+	Total    int64                              `json:"total" url:"total"`
+	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesListHrResponse) GetRows() []*EmployeesListHrResponseRowsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Rows
+}
+
+func (e *EmployeesListHrResponse) GetPage() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Page
+}
+
+func (e *EmployeesListHrResponse) GetPageSize() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PageSize
+}
+
+func (e *EmployeesListHrResponse) GetTotal() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Total
+}
+
+func (e *EmployeesListHrResponse) GetTotals() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.Totals
+}
+
+func (e *EmployeesListHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesListHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponse) SetRows(rows []*EmployeesListHrResponseRowsItem) {
+	e.Rows = rows
+	e.require(employeesListHrResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponse) SetPage(page int64) {
+	e.Page = page
+	e.require(employeesListHrResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponse) SetPageSize(pageSize int64) {
+	e.PageSize = pageSize
+	e.require(employeesListHrResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponse) SetTotal(total int64) {
+	e.Total = total
+	e.require(employeesListHrResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponse) SetTotals(totals map[string]string) {
+	e.Totals = totals
+	e.require(employeesListHrResponseFieldTotals)
+}
+
+func (e *EmployeesListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesListHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesListHrResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	employeesListHrResponseRowsItemFieldCode                 = big.NewInt(1 << 1)
+	employeesListHrResponseRowsItemFieldFirstName            = big.NewInt(1 << 2)
+	employeesListHrResponseRowsItemFieldLastName             = big.NewInt(1 << 3)
+	employeesListHrResponseRowsItemFieldPersonalCode         = big.NewInt(1 << 4)
+	employeesListHrResponseRowsItemFieldBirthDate            = big.NewInt(1 << 5)
+	employeesListHrResponseRowsItemFieldEmail                = big.NewInt(1 << 6)
+	employeesListHrResponseRowsItemFieldPhone                = big.NewInt(1 << 7)
+	employeesListHrResponseRowsItemFieldAddress              = big.NewInt(1 << 8)
+	employeesListHrResponseRowsItemFieldIban                 = big.NewInt(1 << 9)
+	employeesListHrResponseRowsItemFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	employeesListHrResponseRowsItemFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	employeesListHrResponseRowsItemFieldHireDate             = big.NewInt(1 << 12)
+	employeesListHrResponseRowsItemFieldTerminationDate      = big.NewInt(1 << 13)
+	employeesListHrResponseRowsItemFieldApplyAllowance       = big.NewInt(1 << 14)
+	employeesListHrResponseRowsItemFieldAllowanceOverride    = big.NewInt(1 << 15)
+	employeesListHrResponseRowsItemFieldPensionAccumulation  = big.NewInt(1 << 16)
+	employeesListHrResponseRowsItemFieldPayrollOptions       = big.NewInt(1 << 17)
+	employeesListHrResponseRowsItemFieldStatus               = big.NewInt(1 << 18)
+	employeesListHrResponseRowsItemFieldNotes                = big.NewInt(1 << 19)
+	employeesListHrResponseRowsItemFieldAttributes           = big.NewInt(1 << 20)
+	employeesListHrResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 21)
+)
+
+type EmployeesListHrResponseRowsItem struct {
+	ID                   string                                           `json:"id" url:"id"`
+	Code                 *string                                          `json:"code,omitempty" url:"code,omitempty"`
+	FirstName            string                                           `json:"firstName" url:"firstName"`
+	LastName             string                                           `json:"lastName" url:"lastName"`
+	PersonalCode         *string                                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate            *time.Time                                       `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email                *string                                          `json:"email,omitempty" url:"email,omitempty"`
+	Phone                *string                                          `json:"phone,omitempty" url:"phone,omitempty"`
+	Address              *EmployeesListHrResponseRowsItemAddress          `json:"address,omitempty" url:"address,omitempty"`
+	Iban                 *string                                          `json:"iban,omitempty" url:"iban,omitempty"`
+	SocialInsuranceNo    *string                                          `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
+	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
+	HireDate             *time.Time                                       `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
+	TerminationDate      *time.Time                                       `json:"terminationDate,omitempty" url:"terminationDate,omitempty" format:"date"`
+	ApplyAllowance       bool                                             `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                          `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
+	PensionAccumulation  bool                                             `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                                `json:"payrollOptions" url:"payrollOptions"`
+	Status               EmployeesListHrResponseRowsItemStatus            `json:"status" url:"status"`
+	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Attributes           []*EmployeesListHrResponseRowsItemAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
+	CreatedAt            time.Time                                        `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Code
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetFirstName() string {
+	if e == nil {
+		return ""
+	}
+	return e.FirstName
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetLastName() string {
+	if e == nil {
+		return ""
+	}
+	return e.LastName
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetPersonalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PersonalCode
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetBirthDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BirthDate
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetEmail() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Email
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetPhone() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Phone
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetAddress() *EmployeesListHrResponseRowsItemAddress {
+	if e == nil {
+		return nil
+	}
+	return e.Address
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetIban() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Iban
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetSocialInsuranceNo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceNo
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetSocialInsuranceStart() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceStart
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetHireDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.HireDate
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetTerminationDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.TerminationDate
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetApplyAllowance() bool {
+	if e == nil {
+		return false
+	}
+	return e.ApplyAllowance
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetAllowanceOverride() *string {
+	if e == nil {
+		return nil
+	}
+	return e.AllowanceOverride
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetPensionAccumulation() bool {
+	if e == nil {
+		return false
+	}
+	return e.PensionAccumulation
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetPayrollOptions() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.PayrollOptions
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetStatus() EmployeesListHrResponseRowsItemStatus {
+	if e == nil {
+		return ""
+	}
+	return e.Status
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetAttributes() []*EmployeesListHrResponseRowsItemAttributesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Attributes
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesListHrResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetID(id string) {
+	e.ID = id
+	e.require(employeesListHrResponseRowsItemFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesListHrResponseRowsItemFieldCode)
+}
+
+// SetFirstName sets the FirstName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesListHrResponseRowsItemFieldFirstName)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesListHrResponseRowsItemFieldLastName)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesListHrResponseRowsItemFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesListHrResponseRowsItemFieldBirthDate)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesListHrResponseRowsItemFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesListHrResponseRowsItemFieldPhone)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetAddress(address *EmployeesListHrResponseRowsItemAddress) {
+	e.Address = address
+	e.require(employeesListHrResponseRowsItemFieldAddress)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesListHrResponseRowsItemFieldIban)
+}
+
+// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesListHrResponseRowsItemFieldSocialInsuranceNo)
+}
+
+// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesListHrResponseRowsItemFieldSocialInsuranceStart)
+}
+
+// SetHireDate sets the HireDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesListHrResponseRowsItemFieldHireDate)
+}
+
+// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesListHrResponseRowsItemFieldTerminationDate)
+}
+
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetApplyAllowance(applyAllowance bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesListHrResponseRowsItemFieldApplyAllowance)
+}
+
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesListHrResponseRowsItemFieldAllowanceOverride)
+}
+
+// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetPensionAccumulation(pensionAccumulation bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesListHrResponseRowsItemFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesListHrResponseRowsItemFieldPayrollOptions)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetStatus(status EmployeesListHrResponseRowsItemStatus) {
+	e.Status = status
+	e.require(employeesListHrResponseRowsItemFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesListHrResponseRowsItemFieldNotes)
+}
+
+// SetAttributes sets the Attributes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetAttributes(attributes []*EmployeesListHrResponseRowsItemAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesListHrResponseRowsItemFieldAttributes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesListHrResponseRowsItemFieldCreatedAt)
+}
+
+func (e *EmployeesListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed EmployeesListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesListHrResponseRowsItem(unmarshaler.embed)
+	e.BirthDate = unmarshaler.BirthDate.TimePtr()
+	e.HireDate = unmarshaler.HireDate.TimePtr()
+	e.TerminationDate = unmarshaler.TerminationDate.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrResponseRowsItem
+	var marshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed:           embed(*e),
+		BirthDate:       internal.NewOptionalDate(e.BirthDate),
+		HireDate:        internal.NewOptionalDate(e.HireDate),
+		TerminationDate: internal.NewOptionalDate(e.TerminationDate),
+		CreatedAt:       internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesListHrResponseRowsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesListHrResponseRowsItemAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesListHrResponseRowsItemAddressFieldCity        = big.NewInt(1 << 1)
+	employeesListHrResponseRowsItemAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesListHrResponseRowsItemAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type EmployeesListHrResponseRowsItemAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetStreet() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Street
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetCity() *string {
+	if e == nil {
+		return nil
+	}
+	return e.City
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetPostalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PostalCode
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetCountryCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CountryCode
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesListHrResponseRowsItemAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesListHrResponseRowsItemAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesListHrResponseRowsItemAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesListHrResponseRowsItemAddressFieldCountryCode)
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrResponseRowsItemAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesListHrResponseRowsItemAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrResponseRowsItemAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesListHrResponseRowsItemAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesListHrResponseRowsItemAttributesItemFieldValue = big.NewInt(1 << 1)
+)
+
+type EmployeesListHrResponseRowsItemAttributesItem struct {
+	Name  string `json:"name" url:"name"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) GetValue() string {
+	if e == nil {
+		return ""
+	}
+	return e.Value
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesListHrResponseRowsItemAttributesItemFieldName)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesListHrResponseRowsItemAttributesItemFieldValue)
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesListHrResponseRowsItemAttributesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesListHrResponseRowsItemAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesListHrResponseRowsItemAttributesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesListHrResponseRowsItemAttributesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesListHrResponseRowsItemStatus string
+
+const (
+	EmployeesListHrResponseRowsItemStatusActive     EmployeesListHrResponseRowsItemStatus = "active"
+	EmployeesListHrResponseRowsItemStatusTerminated EmployeesListHrResponseRowsItemStatus = "terminated"
+)
+
+func NewEmployeesListHrResponseRowsItemStatusFromString(s string) (EmployeesListHrResponseRowsItemStatus, error) {
+	switch s {
+	case "active":
+		return EmployeesListHrResponseRowsItemStatusActive, nil
+	case "terminated":
+		return EmployeesListHrResponseRowsItemStatusTerminated, nil
+	}
+	var t EmployeesListHrResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesListHrResponseRowsItemStatus) Ptr() *EmployeesListHrResponseRowsItemStatus {
+	return &e
+}
+
+type EmployeesRecordsCreateHrRequestType string
+
+const (
+	EmployeesRecordsCreateHrRequestTypeEducation     EmployeesRecordsCreateHrRequestType = "education"
+	EmployeesRecordsCreateHrRequestTypeQualification EmployeesRecordsCreateHrRequestType = "qualification"
+	EmployeesRecordsCreateHrRequestTypeCertificate   EmployeesRecordsCreateHrRequestType = "certificate"
+	EmployeesRecordsCreateHrRequestTypeTraining      EmployeesRecordsCreateHrRequestType = "training"
+)
+
+func NewEmployeesRecordsCreateHrRequestTypeFromString(s string) (EmployeesRecordsCreateHrRequestType, error) {
+	switch s {
+	case "education":
+		return EmployeesRecordsCreateHrRequestTypeEducation, nil
+	case "qualification":
+		return EmployeesRecordsCreateHrRequestTypeQualification, nil
+	case "certificate":
+		return EmployeesRecordsCreateHrRequestTypeCertificate, nil
+	case "training":
+		return EmployeesRecordsCreateHrRequestTypeTraining, nil
+	}
+	var t EmployeesRecordsCreateHrRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsCreateHrRequestType) Ptr() *EmployeesRecordsCreateHrRequestType {
+	return &e
+}
+
+var (
+	employeesRecordsCreateHrResponseFieldID          = big.NewInt(1 << 0)
+	employeesRecordsCreateHrResponseFieldEmployeeID  = big.NewInt(1 << 1)
+	employeesRecordsCreateHrResponseFieldType        = big.NewInt(1 << 2)
+	employeesRecordsCreateHrResponseFieldTitle       = big.NewInt(1 << 3)
+	employeesRecordsCreateHrResponseFieldInstitution = big.NewInt(1 << 4)
+	employeesRecordsCreateHrResponseFieldIssuedAt    = big.NewInt(1 << 5)
+	employeesRecordsCreateHrResponseFieldValidUntil  = big.NewInt(1 << 6)
+	employeesRecordsCreateHrResponseFieldFileID      = big.NewInt(1 << 7)
+	employeesRecordsCreateHrResponseFieldNotes       = big.NewInt(1 << 8)
+	employeesRecordsCreateHrResponseFieldCreatedAt   = big.NewInt(1 << 9)
+)
+
+type EmployeesRecordsCreateHrResponse struct {
+	ID          string                               `json:"id" url:"id"`
+	EmployeeID  string                               `json:"employeeId" url:"employeeId"`
+	Type        EmployeesRecordsCreateHrResponseType `json:"type" url:"type"`
+	Title       string                               `json:"title" url:"title"`
+	Institution *string                              `json:"institution,omitempty" url:"institution,omitempty"`
+	IssuedAt    *time.Time                           `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
+	ValidUntil  *string                              `json:"validUntil,omitempty" url:"validUntil,omitempty"`
+	FileID      *string                              `json:"fileId,omitempty" url:"fileId,omitempty"`
+	Notes       *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetType() EmployeesRecordsCreateHrResponseType {
+	if e == nil {
+		return ""
+	}
+	return e.Type
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetTitle() string {
+	if e == nil {
+		return ""
+	}
+	return e.Title
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetInstitution() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Institution
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetIssuedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.IssuedAt
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetValidUntil() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ValidUntil
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetFileID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.FileID
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesRecordsCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsCreateHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsCreateHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(employeesRecordsCreateHrResponseFieldEmployeeID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetType(type_ EmployeesRecordsCreateHrResponseType) {
+	e.Type = type_
+	e.require(employeesRecordsCreateHrResponseFieldType)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetTitle(title string) {
+	e.Title = title
+	e.require(employeesRecordsCreateHrResponseFieldTitle)
+}
+
+// SetInstitution sets the Institution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetInstitution(institution *string) {
+	e.Institution = institution
+	e.require(employeesRecordsCreateHrResponseFieldInstitution)
+}
+
+// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetIssuedAt(issuedAt *time.Time) {
+	e.IssuedAt = issuedAt
+	e.require(employeesRecordsCreateHrResponseFieldIssuedAt)
+}
+
+// SetValidUntil sets the ValidUntil field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetValidUntil(validUntil *string) {
+	e.ValidUntil = validUntil
+	e.require(employeesRecordsCreateHrResponseFieldValidUntil)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetFileID(fileID *string) {
+	e.FileID = fileID
+	e.require(employeesRecordsCreateHrResponseFieldFileID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesRecordsCreateHrResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsCreateHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesRecordsCreateHrResponseFieldCreatedAt)
+}
+
+func (e *EmployeesRecordsCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesRecordsCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsCreateHrResponse(unmarshaler.embed)
+	e.IssuedAt = unmarshaler.IssuedAt.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsCreateHrResponse
+	var marshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		IssuedAt:  internal.NewOptionalDateTime(e.IssuedAt),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsCreateHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesRecordsCreateHrResponseType string
+
+const (
+	EmployeesRecordsCreateHrResponseTypeEducation     EmployeesRecordsCreateHrResponseType = "education"
+	EmployeesRecordsCreateHrResponseTypeQualification EmployeesRecordsCreateHrResponseType = "qualification"
+	EmployeesRecordsCreateHrResponseTypeCertificate   EmployeesRecordsCreateHrResponseType = "certificate"
+	EmployeesRecordsCreateHrResponseTypeTraining      EmployeesRecordsCreateHrResponseType = "training"
+)
+
+func NewEmployeesRecordsCreateHrResponseTypeFromString(s string) (EmployeesRecordsCreateHrResponseType, error) {
+	switch s {
+	case "education":
+		return EmployeesRecordsCreateHrResponseTypeEducation, nil
+	case "qualification":
+		return EmployeesRecordsCreateHrResponseTypeQualification, nil
+	case "certificate":
+		return EmployeesRecordsCreateHrResponseTypeCertificate, nil
+	case "training":
+		return EmployeesRecordsCreateHrResponseTypeTraining, nil
+	}
+	var t EmployeesRecordsCreateHrResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsCreateHrResponseType) Ptr() *EmployeesRecordsCreateHrResponseType {
+	return &e
+}
+
+var (
+	employeesRecordsDeleteHrResponseFieldID = big.NewInt(1 << 0)
+)
+
+type EmployeesRecordsDeleteHrResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsDeleteHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsDeleteHrResponseFieldID)
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsDeleteHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsDeleteHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsDeleteHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsDeleteHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesRecordsListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	employeesRecordsListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	employeesRecordsListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type EmployeesRecordsListHrRequestFilterItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Op    EmployeesRecordsListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *EmployeesRecordsListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) GetOp() EmployeesRecordsListHrRequestFilterItemOp {
+	if e == nil {
+		return ""
+	}
+	return e.Op
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) GetValue() *EmployeesRecordsListHrRequestFilterItemValue {
+	if e == nil {
+		return nil
+	}
+	return e.Value
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrRequestFilterItem) SetField(field string) {
+	e.Field = field
+	e.require(employeesRecordsListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrRequestFilterItem) SetOp(op EmployeesRecordsListHrRequestFilterItemOp) {
+	e.Op = op
+	e.require(employeesRecordsListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrRequestFilterItem) SetValue(value *EmployeesRecordsListHrRequestFilterItemValue) {
+	e.Value = value
+	e.require(employeesRecordsListHrRequestFilterItemFieldValue)
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesRecordsListHrRequestFilterItemOp string
+
+const (
+	EmployeesRecordsListHrRequestFilterItemOpEq       EmployeesRecordsListHrRequestFilterItemOp = "eq"
+	EmployeesRecordsListHrRequestFilterItemOpNe       EmployeesRecordsListHrRequestFilterItemOp = "ne"
+	EmployeesRecordsListHrRequestFilterItemOpContains EmployeesRecordsListHrRequestFilterItemOp = "contains"
+	EmployeesRecordsListHrRequestFilterItemOpGte      EmployeesRecordsListHrRequestFilterItemOp = "gte"
+	EmployeesRecordsListHrRequestFilterItemOpLte      EmployeesRecordsListHrRequestFilterItemOp = "lte"
+	EmployeesRecordsListHrRequestFilterItemOpIn       EmployeesRecordsListHrRequestFilterItemOp = "in"
+)
+
+func NewEmployeesRecordsListHrRequestFilterItemOpFromString(s string) (EmployeesRecordsListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return EmployeesRecordsListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return EmployeesRecordsListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return EmployeesRecordsListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return EmployeesRecordsListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return EmployeesRecordsListHrRequestFilterItemOpLte, nil
+	case "in":
+		return EmployeesRecordsListHrRequestFilterItemOpIn, nil
+	}
+	var t EmployeesRecordsListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsListHrRequestFilterItemOp) Ptr() *EmployeesRecordsListHrRequestFilterItemOp {
+	return &e
+}
+
+type EmployeesRecordsListHrRequestFilterItemValue struct {
+	String                                                    string
+	Double                                                    float64
+	Boolean                                                   bool
+	EmployeesRecordsListHrRequestFilterItemValueThreeItemList []*EmployeesRecordsListHrRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) GetBoolean() bool {
+	if e == nil {
+		return false
+	}
+	return e.Boolean
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) GetEmployeesRecordsListHrRequestFilterItemValueThreeItemList() []*EmployeesRecordsListHrRequestFilterItemValueThreeItem {
+	if e == nil {
+		return nil
+	}
+	return e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		e.typ = "Boolean"
+		e.Boolean = valueBoolean
+		return nil
+	}
+	var valueEmployeesRecordsListHrRequestFilterItemValueThreeItemList []*EmployeesRecordsListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueEmployeesRecordsListHrRequestFilterItemValueThreeItemList); err == nil {
+		e.typ = "EmployeesRecordsListHrRequestFilterItemValueThreeItemList"
+		e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList = valueEmployeesRecordsListHrRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EmployeesRecordsListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return json.Marshal(e.Boolean)
+	}
+	if e.typ == "EmployeesRecordsListHrRequestFilterItemValueThreeItemList" || e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EmployeesRecordsListHrRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitEmployeesRecordsListHrRequestFilterItemValueThreeItemList([]*EmployeesRecordsListHrRequestFilterItemValueThreeItem) error
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValue) Accept(visitor EmployeesRecordsListHrRequestFilterItemValueVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return visitor.VisitBoolean(e.Boolean)
+	}
+	if e.typ == "EmployeesRecordsListHrRequestFilterItemValueThreeItemList" || e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitEmployeesRecordsListHrRequestFilterItemValueThreeItemList(e.EmployeesRecordsListHrRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EmployeesRecordsListHrRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValueThreeItem) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EmployeesRecordsListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EmployeesRecordsListHrRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (e *EmployeesRecordsListHrRequestFilterItemValueThreeItem) Accept(visitor EmployeesRecordsListHrRequestFilterItemValueThreeItemVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+var (
+	employeesRecordsListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	employeesRecordsListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type EmployeesRecordsListHrRequestSortItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Dir   *EmployeesRecordsListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) GetDir() *EmployeesRecordsListHrRequestSortItemDir {
+	if e == nil {
+		return nil
+	}
+	return e.Dir
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrRequestSortItem) SetField(field string) {
+	e.Field = field
+	e.require(employeesRecordsListHrRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrRequestSortItem) SetDir(dir *EmployeesRecordsListHrRequestSortItemDir) {
+	e.Dir = dir
+	e.require(employeesRecordsListHrRequestSortItemFieldDir)
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsListHrRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsListHrRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsListHrRequestSortItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesRecordsListHrRequestSortItemDir string
+
+const (
+	EmployeesRecordsListHrRequestSortItemDirAsc  EmployeesRecordsListHrRequestSortItemDir = "asc"
+	EmployeesRecordsListHrRequestSortItemDirDesc EmployeesRecordsListHrRequestSortItemDir = "desc"
+)
+
+func NewEmployeesRecordsListHrRequestSortItemDirFromString(s string) (EmployeesRecordsListHrRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return EmployeesRecordsListHrRequestSortItemDirAsc, nil
+	case "desc":
+		return EmployeesRecordsListHrRequestSortItemDirDesc, nil
+	}
+	var t EmployeesRecordsListHrRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsListHrRequestSortItemDir) Ptr() *EmployeesRecordsListHrRequestSortItemDir {
+	return &e
+}
+
+var (
+	employeesRecordsListHrResponseFieldRows     = big.NewInt(1 << 0)
+	employeesRecordsListHrResponseFieldPage     = big.NewInt(1 << 1)
+	employeesRecordsListHrResponseFieldPageSize = big.NewInt(1 << 2)
+	employeesRecordsListHrResponseFieldTotal    = big.NewInt(1 << 3)
+	employeesRecordsListHrResponseFieldTotals   = big.NewInt(1 << 4)
+)
+
+type EmployeesRecordsListHrResponse struct {
+	Rows     []*EmployeesRecordsListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                     `json:"page" url:"page"`
+	PageSize int64                                     `json:"pageSize" url:"pageSize"`
+	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsListHrResponse) GetRows() []*EmployeesRecordsListHrResponseRowsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Rows
+}
+
+func (e *EmployeesRecordsListHrResponse) GetPage() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Page
+}
+
+func (e *EmployeesRecordsListHrResponse) GetPageSize() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PageSize
+}
+
+func (e *EmployeesRecordsListHrResponse) GetTotal() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Total
+}
+
+func (e *EmployeesRecordsListHrResponse) GetTotals() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.Totals
+}
+
+func (e *EmployeesRecordsListHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsListHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponse) SetRows(rows []*EmployeesRecordsListHrResponseRowsItem) {
+	e.Rows = rows
+	e.require(employeesRecordsListHrResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponse) SetPage(page int64) {
+	e.Page = page
+	e.require(employeesRecordsListHrResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponse) SetPageSize(pageSize int64) {
+	e.PageSize = pageSize
+	e.require(employeesRecordsListHrResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponse) SetTotal(total int64) {
+	e.Total = total
+	e.require(employeesRecordsListHrResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponse) SetTotals(totals map[string]string) {
+	e.Totals = totals
+	e.require(employeesRecordsListHrResponseFieldTotals)
+}
+
+func (e *EmployeesRecordsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesRecordsListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsListHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesRecordsListHrResponseRowsItemFieldID          = big.NewInt(1 << 0)
+	employeesRecordsListHrResponseRowsItemFieldEmployeeID  = big.NewInt(1 << 1)
+	employeesRecordsListHrResponseRowsItemFieldType        = big.NewInt(1 << 2)
+	employeesRecordsListHrResponseRowsItemFieldTitle       = big.NewInt(1 << 3)
+	employeesRecordsListHrResponseRowsItemFieldInstitution = big.NewInt(1 << 4)
+	employeesRecordsListHrResponseRowsItemFieldIssuedAt    = big.NewInt(1 << 5)
+	employeesRecordsListHrResponseRowsItemFieldValidUntil  = big.NewInt(1 << 6)
+	employeesRecordsListHrResponseRowsItemFieldFileID      = big.NewInt(1 << 7)
+	employeesRecordsListHrResponseRowsItemFieldNotes       = big.NewInt(1 << 8)
+	employeesRecordsListHrResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 9)
+)
+
+type EmployeesRecordsListHrResponseRowsItem struct {
+	ID          string                                     `json:"id" url:"id"`
+	EmployeeID  string                                     `json:"employeeId" url:"employeeId"`
+	Type        EmployeesRecordsListHrResponseRowsItemType `json:"type" url:"type"`
+	Title       string                                     `json:"title" url:"title"`
+	Institution *string                                    `json:"institution,omitempty" url:"institution,omitempty"`
+	IssuedAt    *time.Time                                 `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
+	ValidUntil  *string                                    `json:"validUntil,omitempty" url:"validUntil,omitempty"`
+	FileID      *string                                    `json:"fileId,omitempty" url:"fileId,omitempty"`
+	Notes       *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time                                  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetType() EmployeesRecordsListHrResponseRowsItemType {
+	if e == nil {
+		return ""
+	}
+	return e.Type
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetTitle() string {
+	if e == nil {
+		return ""
+	}
+	return e.Title
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetInstitution() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Institution
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetIssuedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.IssuedAt
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetValidUntil() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ValidUntil
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetFileID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.FileID
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsListHrResponseRowsItemFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(employeesRecordsListHrResponseRowsItemFieldEmployeeID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetType(type_ EmployeesRecordsListHrResponseRowsItemType) {
+	e.Type = type_
+	e.require(employeesRecordsListHrResponseRowsItemFieldType)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetTitle(title string) {
+	e.Title = title
+	e.require(employeesRecordsListHrResponseRowsItemFieldTitle)
+}
+
+// SetInstitution sets the Institution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetInstitution(institution *string) {
+	e.Institution = institution
+	e.require(employeesRecordsListHrResponseRowsItemFieldInstitution)
+}
+
+// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetIssuedAt(issuedAt *time.Time) {
+	e.IssuedAt = issuedAt
+	e.require(employeesRecordsListHrResponseRowsItemFieldIssuedAt)
+}
+
+// SetValidUntil sets the ValidUntil field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetValidUntil(validUntil *string) {
+	e.ValidUntil = validUntil
+	e.require(employeesRecordsListHrResponseRowsItemFieldValidUntil)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetFileID(fileID *string) {
+	e.FileID = fileID
+	e.require(employeesRecordsListHrResponseRowsItemFieldFileID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesRecordsListHrResponseRowsItemFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesRecordsListHrResponseRowsItemFieldCreatedAt)
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed EmployeesRecordsListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsListHrResponseRowsItem(unmarshaler.embed)
+	e.IssuedAt = unmarshaler.IssuedAt.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsListHrResponseRowsItem
+	var marshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		IssuedAt:  internal.NewOptionalDateTime(e.IssuedAt),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsListHrResponseRowsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesRecordsListHrResponseRowsItemType string
+
+const (
+	EmployeesRecordsListHrResponseRowsItemTypeEducation     EmployeesRecordsListHrResponseRowsItemType = "education"
+	EmployeesRecordsListHrResponseRowsItemTypeQualification EmployeesRecordsListHrResponseRowsItemType = "qualification"
+	EmployeesRecordsListHrResponseRowsItemTypeCertificate   EmployeesRecordsListHrResponseRowsItemType = "certificate"
+	EmployeesRecordsListHrResponseRowsItemTypeTraining      EmployeesRecordsListHrResponseRowsItemType = "training"
+)
+
+func NewEmployeesRecordsListHrResponseRowsItemTypeFromString(s string) (EmployeesRecordsListHrResponseRowsItemType, error) {
+	switch s {
+	case "education":
+		return EmployeesRecordsListHrResponseRowsItemTypeEducation, nil
+	case "qualification":
+		return EmployeesRecordsListHrResponseRowsItemTypeQualification, nil
+	case "certificate":
+		return EmployeesRecordsListHrResponseRowsItemTypeCertificate, nil
+	case "training":
+		return EmployeesRecordsListHrResponseRowsItemTypeTraining, nil
+	}
+	var t EmployeesRecordsListHrResponseRowsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsListHrResponseRowsItemType) Ptr() *EmployeesRecordsListHrResponseRowsItemType {
+	return &e
+}
+
+type EmployeesRecordsUpdateHrRequestType string
+
+const (
+	EmployeesRecordsUpdateHrRequestTypeEducation     EmployeesRecordsUpdateHrRequestType = "education"
+	EmployeesRecordsUpdateHrRequestTypeQualification EmployeesRecordsUpdateHrRequestType = "qualification"
+	EmployeesRecordsUpdateHrRequestTypeCertificate   EmployeesRecordsUpdateHrRequestType = "certificate"
+	EmployeesRecordsUpdateHrRequestTypeTraining      EmployeesRecordsUpdateHrRequestType = "training"
+)
+
+func NewEmployeesRecordsUpdateHrRequestTypeFromString(s string) (EmployeesRecordsUpdateHrRequestType, error) {
+	switch s {
+	case "education":
+		return EmployeesRecordsUpdateHrRequestTypeEducation, nil
+	case "qualification":
+		return EmployeesRecordsUpdateHrRequestTypeQualification, nil
+	case "certificate":
+		return EmployeesRecordsUpdateHrRequestTypeCertificate, nil
+	case "training":
+		return EmployeesRecordsUpdateHrRequestTypeTraining, nil
+	}
+	var t EmployeesRecordsUpdateHrRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsUpdateHrRequestType) Ptr() *EmployeesRecordsUpdateHrRequestType {
+	return &e
+}
+
+var (
+	employeesRecordsUpdateHrResponseFieldID          = big.NewInt(1 << 0)
+	employeesRecordsUpdateHrResponseFieldEmployeeID  = big.NewInt(1 << 1)
+	employeesRecordsUpdateHrResponseFieldType        = big.NewInt(1 << 2)
+	employeesRecordsUpdateHrResponseFieldTitle       = big.NewInt(1 << 3)
+	employeesRecordsUpdateHrResponseFieldInstitution = big.NewInt(1 << 4)
+	employeesRecordsUpdateHrResponseFieldIssuedAt    = big.NewInt(1 << 5)
+	employeesRecordsUpdateHrResponseFieldValidUntil  = big.NewInt(1 << 6)
+	employeesRecordsUpdateHrResponseFieldFileID      = big.NewInt(1 << 7)
+	employeesRecordsUpdateHrResponseFieldNotes       = big.NewInt(1 << 8)
+	employeesRecordsUpdateHrResponseFieldCreatedAt   = big.NewInt(1 << 9)
+)
+
+type EmployeesRecordsUpdateHrResponse struct {
+	ID          string                               `json:"id" url:"id"`
+	EmployeeID  string                               `json:"employeeId" url:"employeeId"`
+	Type        EmployeesRecordsUpdateHrResponseType `json:"type" url:"type"`
+	Title       string                               `json:"title" url:"title"`
+	Institution *string                              `json:"institution,omitempty" url:"institution,omitempty"`
+	IssuedAt    *time.Time                           `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
+	ValidUntil  *string                              `json:"validUntil,omitempty" url:"validUntil,omitempty"`
+	FileID      *string                              `json:"fileId,omitempty" url:"fileId,omitempty"`
+	Notes       *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt   time.Time                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetType() EmployeesRecordsUpdateHrResponseType {
+	if e == nil {
+		return ""
+	}
+	return e.Type
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetTitle() string {
+	if e == nil {
+		return ""
+	}
+	return e.Title
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetInstitution() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Institution
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetIssuedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.IssuedAt
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetValidUntil() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ValidUntil
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetFileID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.FileID
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesRecordsUpdateHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(employeesRecordsUpdateHrResponseFieldEmployeeID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetType(type_ EmployeesRecordsUpdateHrResponseType) {
+	e.Type = type_
+	e.require(employeesRecordsUpdateHrResponseFieldType)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetTitle(title string) {
+	e.Title = title
+	e.require(employeesRecordsUpdateHrResponseFieldTitle)
+}
+
+// SetInstitution sets the Institution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetInstitution(institution *string) {
+	e.Institution = institution
+	e.require(employeesRecordsUpdateHrResponseFieldInstitution)
+}
+
+// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetIssuedAt(issuedAt *time.Time) {
+	e.IssuedAt = issuedAt
+	e.require(employeesRecordsUpdateHrResponseFieldIssuedAt)
+}
+
+// SetValidUntil sets the ValidUntil field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetValidUntil(validUntil *string) {
+	e.ValidUntil = validUntil
+	e.require(employeesRecordsUpdateHrResponseFieldValidUntil)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetFileID(fileID *string) {
+	e.FileID = fileID
+	e.require(employeesRecordsUpdateHrResponseFieldFileID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesRecordsUpdateHrResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesRecordsUpdateHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesRecordsUpdateHrResponseFieldCreatedAt)
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesRecordsUpdateHrResponse
+	var unmarshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesRecordsUpdateHrResponse(unmarshaler.embed)
+	e.IssuedAt = unmarshaler.IssuedAt.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesRecordsUpdateHrResponse
+	var marshaler = struct {
+		embed
+		IssuedAt  *internal.DateTime `json:"issuedAt,omitempty"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		IssuedAt:  internal.NewOptionalDateTime(e.IssuedAt),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesRecordsUpdateHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesRecordsUpdateHrResponseType string
+
+const (
+	EmployeesRecordsUpdateHrResponseTypeEducation     EmployeesRecordsUpdateHrResponseType = "education"
+	EmployeesRecordsUpdateHrResponseTypeQualification EmployeesRecordsUpdateHrResponseType = "qualification"
+	EmployeesRecordsUpdateHrResponseTypeCertificate   EmployeesRecordsUpdateHrResponseType = "certificate"
+	EmployeesRecordsUpdateHrResponseTypeTraining      EmployeesRecordsUpdateHrResponseType = "training"
+)
+
+func NewEmployeesRecordsUpdateHrResponseTypeFromString(s string) (EmployeesRecordsUpdateHrResponseType, error) {
+	switch s {
+	case "education":
+		return EmployeesRecordsUpdateHrResponseTypeEducation, nil
+	case "qualification":
+		return EmployeesRecordsUpdateHrResponseTypeQualification, nil
+	case "certificate":
+		return EmployeesRecordsUpdateHrResponseTypeCertificate, nil
+	case "training":
+		return EmployeesRecordsUpdateHrResponseTypeTraining, nil
+	}
+	var t EmployeesRecordsUpdateHrResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesRecordsUpdateHrResponseType) Ptr() *EmployeesRecordsUpdateHrResponseType {
+	return &e
+}
+
+var (
+	employeesUpdateHrRequestAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesUpdateHrRequestAddressFieldCity        = big.NewInt(1 << 1)
+	employeesUpdateHrRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesUpdateHrRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type EmployeesUpdateHrRequestAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetStreet() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Street
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetCity() *string {
+	if e == nil {
+		return nil
+	}
+	return e.City
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetPostalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PostalCode
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetCountryCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CountryCode
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesUpdateHrRequestAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesUpdateHrRequestAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesUpdateHrRequestAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesUpdateHrRequestAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesUpdateHrRequestAddressFieldCountryCode)
+}
+
+func (e *EmployeesUpdateHrRequestAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesUpdateHrRequestAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesUpdateHrRequestAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesUpdateHrRequestAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrRequestAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesUpdateHrRequestAddress) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesUpdateHrRequestAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesUpdateHrRequestAttributesItemFieldValue = big.NewInt(1 << 1)
+)
+
+type EmployeesUpdateHrRequestAttributesItem struct {
+	Name  string `json:"name" url:"name"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) GetValue() string {
+	if e == nil {
+		return ""
+	}
+	return e.Value
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesUpdateHrRequestAttributesItemFieldName)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesUpdateHrRequestAttributesItemFieldValue)
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesUpdateHrRequestAttributesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesUpdateHrRequestAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrRequestAttributesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesUpdateHrRequestAttributesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesUpdateHrRequestStatus string
+
+const (
+	EmployeesUpdateHrRequestStatusActive     EmployeesUpdateHrRequestStatus = "active"
+	EmployeesUpdateHrRequestStatusTerminated EmployeesUpdateHrRequestStatus = "terminated"
+)
+
+func NewEmployeesUpdateHrRequestStatusFromString(s string) (EmployeesUpdateHrRequestStatus, error) {
+	switch s {
+	case "active":
+		return EmployeesUpdateHrRequestStatusActive, nil
+	case "terminated":
+		return EmployeesUpdateHrRequestStatusTerminated, nil
+	}
+	var t EmployeesUpdateHrRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesUpdateHrRequestStatus) Ptr() *EmployeesUpdateHrRequestStatus {
+	return &e
+}
+
+var (
+	employeesUpdateHrResponseFieldID                   = big.NewInt(1 << 0)
+	employeesUpdateHrResponseFieldCode                 = big.NewInt(1 << 1)
+	employeesUpdateHrResponseFieldFirstName            = big.NewInt(1 << 2)
+	employeesUpdateHrResponseFieldLastName             = big.NewInt(1 << 3)
+	employeesUpdateHrResponseFieldPersonalCode         = big.NewInt(1 << 4)
+	employeesUpdateHrResponseFieldBirthDate            = big.NewInt(1 << 5)
+	employeesUpdateHrResponseFieldEmail                = big.NewInt(1 << 6)
+	employeesUpdateHrResponseFieldPhone                = big.NewInt(1 << 7)
+	employeesUpdateHrResponseFieldAddress              = big.NewInt(1 << 8)
+	employeesUpdateHrResponseFieldIban                 = big.NewInt(1 << 9)
+	employeesUpdateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	employeesUpdateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	employeesUpdateHrResponseFieldHireDate             = big.NewInt(1 << 12)
+	employeesUpdateHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
+	employeesUpdateHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	employeesUpdateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
+	employeesUpdateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
+	employeesUpdateHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	employeesUpdateHrResponseFieldStatus               = big.NewInt(1 << 18)
+	employeesUpdateHrResponseFieldNotes                = big.NewInt(1 << 19)
+	employeesUpdateHrResponseFieldAttributes           = big.NewInt(1 << 20)
+	employeesUpdateHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+)
+
+type EmployeesUpdateHrResponse struct {
+	ID                   string                                     `json:"id" url:"id"`
+	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
+	FirstName            string                                     `json:"firstName" url:"firstName"`
+	LastName             string                                     `json:"lastName" url:"lastName"`
+	PersonalCode         *string                                    `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate            *time.Time                                 `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
+	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
+	Address              *EmployeesUpdateHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	Iban                 *string                                    `json:"iban,omitempty" url:"iban,omitempty"`
+	SocialInsuranceNo    *string                                    `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
+	SocialInsuranceStart *string                                    `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
+	HireDate             *time.Time                                 `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
+	TerminationDate      *time.Time                                 `json:"terminationDate,omitempty" url:"terminationDate,omitempty" format:"date"`
+	ApplyAllowance       bool                                       `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                    `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
+	PensionAccumulation  bool                                       `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                          `json:"payrollOptions" url:"payrollOptions"`
+	Status               EmployeesUpdateHrResponseStatus            `json:"status" url:"status"`
+	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	Attributes           []*EmployeesUpdateHrResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
+	CreatedAt            time.Time                                  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesUpdateHrResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *EmployeesUpdateHrResponse) GetCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Code
+}
+
+func (e *EmployeesUpdateHrResponse) GetFirstName() string {
+	if e == nil {
+		return ""
+	}
+	return e.FirstName
+}
+
+func (e *EmployeesUpdateHrResponse) GetLastName() string {
+	if e == nil {
+		return ""
+	}
+	return e.LastName
+}
+
+func (e *EmployeesUpdateHrResponse) GetPersonalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PersonalCode
+}
+
+func (e *EmployeesUpdateHrResponse) GetBirthDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BirthDate
+}
+
+func (e *EmployeesUpdateHrResponse) GetEmail() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Email
+}
+
+func (e *EmployeesUpdateHrResponse) GetPhone() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Phone
+}
+
+func (e *EmployeesUpdateHrResponse) GetAddress() *EmployeesUpdateHrResponseAddress {
+	if e == nil {
+		return nil
+	}
+	return e.Address
+}
+
+func (e *EmployeesUpdateHrResponse) GetIban() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Iban
+}
+
+func (e *EmployeesUpdateHrResponse) GetSocialInsuranceNo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceNo
+}
+
+func (e *EmployeesUpdateHrResponse) GetSocialInsuranceStart() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SocialInsuranceStart
+}
+
+func (e *EmployeesUpdateHrResponse) GetHireDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.HireDate
+}
+
+func (e *EmployeesUpdateHrResponse) GetTerminationDate() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.TerminationDate
+}
+
+func (e *EmployeesUpdateHrResponse) GetApplyAllowance() bool {
+	if e == nil {
+		return false
+	}
+	return e.ApplyAllowance
+}
+
+func (e *EmployeesUpdateHrResponse) GetAllowanceOverride() *string {
+	if e == nil {
+		return nil
+	}
+	return e.AllowanceOverride
+}
+
+func (e *EmployeesUpdateHrResponse) GetPensionAccumulation() bool {
+	if e == nil {
+		return false
+	}
+	return e.PensionAccumulation
+}
+
+func (e *EmployeesUpdateHrResponse) GetPayrollOptions() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.PayrollOptions
+}
+
+func (e *EmployeesUpdateHrResponse) GetStatus() EmployeesUpdateHrResponseStatus {
+	if e == nil {
+		return ""
+	}
+	return e.Status
+}
+
+func (e *EmployeesUpdateHrResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *EmployeesUpdateHrResponse) GetAttributes() []*EmployeesUpdateHrResponseAttributesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Attributes
+}
+
+func (e *EmployeesUpdateHrResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *EmployeesUpdateHrResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesUpdateHrResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetID(id string) {
+	e.ID = id
+	e.require(employeesUpdateHrResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetCode(code *string) {
+	e.Code = code
+	e.require(employeesUpdateHrResponseFieldCode)
+}
+
+// SetFirstName sets the FirstName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetFirstName(firstName string) {
+	e.FirstName = firstName
+	e.require(employeesUpdateHrResponseFieldFirstName)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetLastName(lastName string) {
+	e.LastName = lastName
+	e.require(employeesUpdateHrResponseFieldLastName)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetPersonalCode(personalCode *string) {
+	e.PersonalCode = personalCode
+	e.require(employeesUpdateHrResponseFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetBirthDate(birthDate *time.Time) {
+	e.BirthDate = birthDate
+	e.require(employeesUpdateHrResponseFieldBirthDate)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetEmail(email *string) {
+	e.Email = email
+	e.require(employeesUpdateHrResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetPhone(phone *string) {
+	e.Phone = phone
+	e.require(employeesUpdateHrResponseFieldPhone)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetAddress(address *EmployeesUpdateHrResponseAddress) {
+	e.Address = address
+	e.require(employeesUpdateHrResponseFieldAddress)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetIban(iban *string) {
+	e.Iban = iban
+	e.require(employeesUpdateHrResponseFieldIban)
+}
+
+// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	e.SocialInsuranceNo = socialInsuranceNo
+	e.require(employeesUpdateHrResponseFieldSocialInsuranceNo)
+}
+
+// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	e.SocialInsuranceStart = socialInsuranceStart
+	e.require(employeesUpdateHrResponseFieldSocialInsuranceStart)
+}
+
+// SetHireDate sets the HireDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetHireDate(hireDate *time.Time) {
+	e.HireDate = hireDate
+	e.require(employeesUpdateHrResponseFieldHireDate)
+}
+
+// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetTerminationDate(terminationDate *time.Time) {
+	e.TerminationDate = terminationDate
+	e.require(employeesUpdateHrResponseFieldTerminationDate)
+}
+
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetApplyAllowance(applyAllowance bool) {
+	e.ApplyAllowance = applyAllowance
+	e.require(employeesUpdateHrResponseFieldApplyAllowance)
+}
+
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetAllowanceOverride(allowanceOverride *string) {
+	e.AllowanceOverride = allowanceOverride
+	e.require(employeesUpdateHrResponseFieldAllowanceOverride)
+}
+
+// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetPensionAccumulation(pensionAccumulation bool) {
+	e.PensionAccumulation = pensionAccumulation
+	e.require(employeesUpdateHrResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	e.PayrollOptions = payrollOptions
+	e.require(employeesUpdateHrResponseFieldPayrollOptions)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetStatus(status EmployeesUpdateHrResponseStatus) {
+	e.Status = status
+	e.require(employeesUpdateHrResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(employeesUpdateHrResponseFieldNotes)
+}
+
+// SetAttributes sets the Attributes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetAttributes(attributes []*EmployeesUpdateHrResponseAttributesItem) {
+	e.Attributes = attributes
+	e.require(employeesUpdateHrResponseFieldAttributes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(employeesUpdateHrResponseFieldCreatedAt)
+}
+
+func (e *EmployeesUpdateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed EmployeesUpdateHrResponse
+	var unmarshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EmployeesUpdateHrResponse(unmarshaler.embed)
+	e.BirthDate = unmarshaler.BirthDate.TimePtr()
+	e.HireDate = unmarshaler.HireDate.TimePtr()
+	e.TerminationDate = unmarshaler.TerminationDate.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesUpdateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrResponse
+	var marshaler = struct {
+		embed
+		BirthDate       *internal.Date     `json:"birthDate,omitempty"`
+		HireDate        *internal.Date     `json:"hireDate,omitempty"`
+		TerminationDate *internal.Date     `json:"terminationDate,omitempty"`
+		CreatedAt       *internal.DateTime `json:"createdAt"`
+	}{
+		embed:           embed(*e),
+		BirthDate:       internal.NewOptionalDate(e.BirthDate),
+		HireDate:        internal.NewOptionalDate(e.HireDate),
+		TerminationDate: internal.NewOptionalDate(e.TerminationDate),
+		CreatedAt:       internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesUpdateHrResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesUpdateHrResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	employeesUpdateHrResponseAddressFieldCity        = big.NewInt(1 << 1)
+	employeesUpdateHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
+	employeesUpdateHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type EmployeesUpdateHrResponseAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetStreet() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Street
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetCity() *string {
+	if e == nil {
+		return nil
+	}
+	return e.City
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetPostalCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PostalCode
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetCountryCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CountryCode
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesUpdateHrResponseAddress) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAddress) SetStreet(street *string) {
+	e.Street = street
+	e.require(employeesUpdateHrResponseAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAddress) SetCity(city *string) {
+	e.City = city
+	e.require(employeesUpdateHrResponseAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAddress) SetPostalCode(postalCode *string) {
+	e.PostalCode = postalCode
+	e.require(employeesUpdateHrResponseAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAddress) SetCountryCode(countryCode *string) {
+	e.CountryCode = countryCode
+	e.require(employeesUpdateHrResponseAddressFieldCountryCode)
+}
+
+func (e *EmployeesUpdateHrResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesUpdateHrResponseAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesUpdateHrResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesUpdateHrResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrResponseAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesUpdateHrResponseAddress) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	employeesUpdateHrResponseAttributesItemFieldName  = big.NewInt(1 << 0)
+	employeesUpdateHrResponseAttributesItemFieldValue = big.NewInt(1 << 1)
+)
+
+type EmployeesUpdateHrResponseAttributesItem struct {
+	Name  string `json:"name" url:"name"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) GetValue() string {
+	if e == nil {
+		return ""
+	}
+	return e.Value
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAttributesItem) SetName(name string) {
+	e.Name = name
+	e.require(employeesUpdateHrResponseAttributesItemFieldName)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAttributesItem) SetValue(value string) {
+	e.Value = value
+	e.require(employeesUpdateHrResponseAttributesItemFieldValue)
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EmployeesUpdateHrResponseAttributesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EmployeesUpdateHrResponseAttributesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) MarshalJSON() ([]byte, error) {
+	type embed EmployeesUpdateHrResponseAttributesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EmployeesUpdateHrResponseAttributesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EmployeesUpdateHrResponseStatus string
+
+const (
+	EmployeesUpdateHrResponseStatusActive     EmployeesUpdateHrResponseStatus = "active"
+	EmployeesUpdateHrResponseStatusTerminated EmployeesUpdateHrResponseStatus = "terminated"
+)
+
+func NewEmployeesUpdateHrResponseStatusFromString(s string) (EmployeesUpdateHrResponseStatus, error) {
+	switch s {
+	case "active":
+		return EmployeesUpdateHrResponseStatusActive, nil
+	case "terminated":
+		return EmployeesUpdateHrResponseStatusTerminated, nil
+	}
+	var t EmployeesUpdateHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesUpdateHrResponseStatus) Ptr() *EmployeesUpdateHrResponseStatus {
+	return &e
+}
+
+var (
+	incapacityCertificatesCreateHrResponseFieldID         = big.NewInt(1 << 0)
+	incapacityCertificatesCreateHrResponseFieldEmployeeID = big.NewInt(1 << 1)
+	incapacityCertificatesCreateHrResponseFieldSeries     = big.NewInt(1 << 2)
+	incapacityCertificatesCreateHrResponseFieldNumber     = big.NewInt(1 << 3)
+	incapacityCertificatesCreateHrResponseFieldFromDate   = big.NewInt(1 << 4)
+	incapacityCertificatesCreateHrResponseFieldToDate     = big.NewInt(1 << 5)
+	incapacityCertificatesCreateHrResponseFieldReason     = big.NewInt(1 << 6)
+	incapacityCertificatesCreateHrResponseFieldNotes      = big.NewInt(1 << 7)
+)
+
+type IncapacityCertificatesCreateHrResponse struct {
+	ID         string    `json:"id" url:"id"`
+	EmployeeID string    `json:"employeeId" url:"employeeId"`
+	Series     *string   `json:"series,omitempty" url:"series,omitempty"`
+	Number     string    `json:"number" url:"number"`
+	FromDate   time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate     time.Time `json:"toDate" url:"toDate" format:"date"`
+	Reason     *string   `json:"reason,omitempty" url:"reason,omitempty"`
+	Notes      *string   `json:"notes,omitempty" url:"notes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetSeries() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Series
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetNumber() string {
+	if i == nil {
+		return ""
+	}
+	return i.Number
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetFromDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.FromDate
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetToDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.ToDate
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Reason
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetID(id string) {
+	i.ID = id
+	i.require(incapacityCertificatesCreateHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(incapacityCertificatesCreateHrResponseFieldEmployeeID)
+}
+
+// SetSeries sets the Series field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetSeries(series *string) {
+	i.Series = series
+	i.require(incapacityCertificatesCreateHrResponseFieldSeries)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetNumber(number string) {
+	i.Number = number
+	i.require(incapacityCertificatesCreateHrResponseFieldNumber)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(incapacityCertificatesCreateHrResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(incapacityCertificatesCreateHrResponseFieldToDate)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetReason(reason *string) {
+	i.Reason = reason
+	i.require(incapacityCertificatesCreateHrResponseFieldReason)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesCreateHrResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(incapacityCertificatesCreateHrResponseFieldNotes)
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed IncapacityCertificatesCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = IncapacityCertificatesCreateHrResponse(unmarshaler.embed)
+	i.FromDate = unmarshaler.FromDate.Time()
+	i.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesCreateHrResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IncapacityCertificatesCreateHrResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	incapacityCertificatesListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	incapacityCertificatesListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	incapacityCertificatesListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type IncapacityCertificatesListHrRequestFilterItem struct {
+	Field string                                              `json:"field" url:"field"`
+	Op    IncapacityCertificatesListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *IncapacityCertificatesListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) GetField() string {
+	if i == nil {
+		return ""
+	}
+	return i.Field
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) GetOp() IncapacityCertificatesListHrRequestFilterItemOp {
+	if i == nil {
+		return ""
+	}
+	return i.Op
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) GetValue() *IncapacityCertificatesListHrRequestFilterItemValue {
+	if i == nil {
+		return nil
+	}
+	return i.Value
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesListHrRequestFilterItem) SetField(field string) {
+	i.Field = field
+	i.require(incapacityCertificatesListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesListHrRequestFilterItem) SetOp(op IncapacityCertificatesListHrRequestFilterItemOp) {
+	i.Op = op
+	i.require(incapacityCertificatesListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesListHrRequestFilterItem) SetValue(value *IncapacityCertificatesListHrRequestFilterItemValue) {
+	i.Value = value
+	i.require(incapacityCertificatesListHrRequestFilterItemFieldValue)
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IncapacityCertificatesListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IncapacityCertificatesListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type IncapacityCertificatesListHrRequestFilterItemOp string
+
+const (
+	IncapacityCertificatesListHrRequestFilterItemOpEq       IncapacityCertificatesListHrRequestFilterItemOp = "eq"
+	IncapacityCertificatesListHrRequestFilterItemOpNe       IncapacityCertificatesListHrRequestFilterItemOp = "ne"
+	IncapacityCertificatesListHrRequestFilterItemOpContains IncapacityCertificatesListHrRequestFilterItemOp = "contains"
+	IncapacityCertificatesListHrRequestFilterItemOpGte      IncapacityCertificatesListHrRequestFilterItemOp = "gte"
+	IncapacityCertificatesListHrRequestFilterItemOpLte      IncapacityCertificatesListHrRequestFilterItemOp = "lte"
+	IncapacityCertificatesListHrRequestFilterItemOpIn       IncapacityCertificatesListHrRequestFilterItemOp = "in"
+)
+
+func NewIncapacityCertificatesListHrRequestFilterItemOpFromString(s string) (IncapacityCertificatesListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return IncapacityCertificatesListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return IncapacityCertificatesListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return IncapacityCertificatesListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return IncapacityCertificatesListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return IncapacityCertificatesListHrRequestFilterItemOpLte, nil
+	case "in":
+		return IncapacityCertificatesListHrRequestFilterItemOpIn, nil
+	}
+	var t IncapacityCertificatesListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i IncapacityCertificatesListHrRequestFilterItemOp) Ptr() *IncapacityCertificatesListHrRequestFilterItemOp {
+	return &i
+}
+
+type IncapacityCertificatesListHrRequestFilterItemValue struct {
+	String                                                          string
+	Double                                                          float64
+	Boolean                                                         bool
+	IncapacityCertificatesListHrRequestFilterItemValueThreeItemList []*IncapacityCertificatesListHrRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) GetString() string {
+	if i == nil {
+		return ""
+	}
+	return i.String
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) GetDouble() float64 {
+	if i == nil {
+		return 0
+	}
+	return i.Double
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) GetBoolean() bool {
+	if i == nil {
+		return false
+	}
+	return i.Boolean
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) GetIncapacityCertificatesListHrRequestFilterItemValueThreeItemList() []*IncapacityCertificatesListHrRequestFilterItemValueThreeItem {
+	if i == nil {
+		return nil
+	}
+	return i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		i.typ = "String"
+		i.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		i.typ = "Double"
+		i.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		i.typ = "Boolean"
+		i.Boolean = valueBoolean
+		return nil
+	}
+	var valueIncapacityCertificatesListHrRequestFilterItemValueThreeItemList []*IncapacityCertificatesListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueIncapacityCertificatesListHrRequestFilterItemValueThreeItemList); err == nil {
+		i.typ = "IncapacityCertificatesListHrRequestFilterItemValueThreeItemList"
+		i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList = valueIncapacityCertificatesListHrRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
+}
+
+func (i IncapacityCertificatesListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
+	}
+	if i.typ == "Boolean" || i.Boolean != false {
+		return json.Marshal(i.Boolean)
+	}
+	if i.typ == "IncapacityCertificatesListHrRequestFilterItemValueThreeItemList" || i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type IncapacityCertificatesListHrRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitIncapacityCertificatesListHrRequestFilterItemValueThreeItemList([]*IncapacityCertificatesListHrRequestFilterItemValueThreeItem) error
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValue) Accept(visitor IncapacityCertificatesListHrRequestFilterItemValueVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
+	}
+	if i.typ == "Boolean" || i.Boolean != false {
+		return visitor.VisitBoolean(i.Boolean)
+	}
+	if i.typ == "IncapacityCertificatesListHrRequestFilterItemValueThreeItemList" || i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitIncapacityCertificatesListHrRequestFilterItemValueThreeItemList(i.IncapacityCertificatesListHrRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type IncapacityCertificatesListHrRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValueThreeItem) GetString() string {
+	if i == nil {
+		return ""
+	}
+	return i.String
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if i == nil {
+		return 0
+	}
+	return i.Double
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		i.typ = "String"
+		i.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		i.typ = "Double"
+		i.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
+}
+
+func (i IncapacityCertificatesListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type IncapacityCertificatesListHrRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (i *IncapacityCertificatesListHrRequestFilterItemValueThreeItem) Accept(visitor IncapacityCertificatesListHrRequestFilterItemValueThreeItemVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+var (
+	incapacityCertificatesListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	incapacityCertificatesListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type IncapacityCertificatesListHrRequestSortItem struct {
+	Field string                                          `json:"field" url:"field"`
+	Dir   *IncapacityCertificatesListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) GetField() string {
+	if i == nil {
+		return ""
+	}
+	return i.Field
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) GetDir() *IncapacityCertificatesListHrRequestSortItemDir {
+	if i == nil {
+		return nil
+	}
+	return i.Dir
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesListHrRequestSortItem) SetField(field string) {
+	i.Field = field
+	i.require(incapacityCertificatesListHrRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IncapacityCertificatesListHrRequestSortItem) SetDir(dir *IncapacityCertificatesListHrRequestSortItemDir) {
+	i.Dir = dir
+	i.require(incapacityCertificatesListHrRequestSortItemFieldDir)
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IncapacityCertificatesListHrRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IncapacityCertificatesListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesListHrRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IncapacityCertificatesListHrRequestSortItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type IncapacityCertificatesListHrRequestSortItemDir string
+
+const (
+	IncapacityCertificatesListHrRequestSortItemDirAsc  IncapacityCertificatesListHrRequestSortItemDir = "asc"
+	IncapacityCertificatesListHrRequestSortItemDirDesc IncapacityCertificatesListHrRequestSortItemDir = "desc"
+)
+
+func NewIncapacityCertificatesListHrRequestSortItemDirFromString(s string) (IncapacityCertificatesListHrRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return IncapacityCertificatesListHrRequestSortItemDirAsc, nil
+	case "desc":
+		return IncapacityCertificatesListHrRequestSortItemDirDesc, nil
+	}
+	var t IncapacityCertificatesListHrRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i IncapacityCertificatesListHrRequestSortItemDir) Ptr() *IncapacityCertificatesListHrRequestSortItemDir {
+	return &i
+}
+
+var (
+	incapacityCertificatesListHrResponseFieldRows     = big.NewInt(1 << 0)
+	incapacityCertificatesListHrResponseFieldPage     = big.NewInt(1 << 1)
+	incapacityCertificatesListHrResponseFieldPageSize = big.NewInt(1 << 2)
+	incapacityCertificatesListHrResponseFieldTotal    = big.NewInt(1 << 3)
+	incapacityCertificatesListHrResponseFieldTotals   = big.NewInt(1 << 4)
+)
+
+type IncapacityCertificatesListHrResponse struct {
+	Rows     []*IncapacityCertificatesListHrResponseRowsItem `json:"rows" url:"rows"`
 	Page     int64                                           `json:"page" url:"page"`
 	PageSize int64                                           `json:"pageSize" url:"pageSize"`
 	Total    int64                                           `json:"total" url:"total"`
@@ -9108,156 +11595,152 @@ type PostV1HrEmployeesRecordsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetRows() []*PostV1HrEmployeesRecordsListResponseRowsItem {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetRows() []*IncapacityCertificatesListHrResponseRowsItem {
+	if i == nil {
 		return nil
 	}
-	return p.Rows
+	return i.Rows
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetPage() int64 {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetPage() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Page
+	return i.Page
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetPageSize() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.PageSize
+	return i.PageSize
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetTotal() int64 {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetTotal() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Total
+	return i.Total
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetTotals() map[string]string {
+	if i == nil {
 		return nil
 	}
-	return p.Totals
+	return i.Totals
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IncapacityCertificatesListHrResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponse) SetRows(rows []*PostV1HrEmployeesRecordsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrEmployeesRecordsListResponseFieldRows)
+func (i *IncapacityCertificatesListHrResponse) SetRows(rows []*IncapacityCertificatesListHrResponseRowsItem) {
+	i.Rows = rows
+	i.require(incapacityCertificatesListHrResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1HrEmployeesRecordsListResponseFieldPage)
+func (i *IncapacityCertificatesListHrResponse) SetPage(page int64) {
+	i.Page = page
+	i.require(incapacityCertificatesListHrResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrEmployeesRecordsListResponseFieldPageSize)
+func (i *IncapacityCertificatesListHrResponse) SetPageSize(pageSize int64) {
+	i.PageSize = pageSize
+	i.require(incapacityCertificatesListHrResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1HrEmployeesRecordsListResponseFieldTotal)
+func (i *IncapacityCertificatesListHrResponse) SetTotal(total int64) {
+	i.Total = total
+	i.require(incapacityCertificatesListHrResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1HrEmployeesRecordsListResponseFieldTotals)
+func (i *IncapacityCertificatesListHrResponse) SetTotals(totals map[string]string) {
+	i.Totals = totals
+	i.require(incapacityCertificatesListHrResponseFieldTotals)
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsListResponse
+func (i *IncapacityCertificatesListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IncapacityCertificatesListHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IncapacityCertificatesListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsListResponse
+func (i *IncapacityCertificatesListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesListHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsListResponse) String() string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1HrEmployeesRecordsListResponseRowsItemFieldID          = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldEmployeeID  = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldType        = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldTitle       = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldInstitution = big.NewInt(1 << 4)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldIssuedAt    = big.NewInt(1 << 5)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldValidUntil  = big.NewInt(1 << 6)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldFileID      = big.NewInt(1 << 7)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldNotes       = big.NewInt(1 << 8)
-	postV1HrEmployeesRecordsListResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 9)
+	incapacityCertificatesListHrResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	incapacityCertificatesListHrResponseRowsItemFieldEmployeeID = big.NewInt(1 << 1)
+	incapacityCertificatesListHrResponseRowsItemFieldSeries     = big.NewInt(1 << 2)
+	incapacityCertificatesListHrResponseRowsItemFieldNumber     = big.NewInt(1 << 3)
+	incapacityCertificatesListHrResponseRowsItemFieldFromDate   = big.NewInt(1 << 4)
+	incapacityCertificatesListHrResponseRowsItemFieldToDate     = big.NewInt(1 << 5)
+	incapacityCertificatesListHrResponseRowsItemFieldReason     = big.NewInt(1 << 6)
+	incapacityCertificatesListHrResponseRowsItemFieldNotes      = big.NewInt(1 << 7)
 )
 
-type PostV1HrEmployeesRecordsListResponseRowsItem struct {
-	ID          string                                           `json:"id" url:"id"`
-	EmployeeID  string                                           `json:"employeeId" url:"employeeId"`
-	Type        PostV1HrEmployeesRecordsListResponseRowsItemType `json:"type" url:"type"`
-	Title       string                                           `json:"title" url:"title"`
-	Institution *string                                          `json:"institution,omitempty" url:"institution,omitempty"`
-	IssuedAt    *string                                          `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
-	ValidUntil  *string                                          `json:"validUntil,omitempty" url:"validUntil,omitempty"`
-	FileID      *string                                          `json:"fileId,omitempty" url:"fileId,omitempty"`
-	Notes       *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string                                           `json:"createdAt" url:"createdAt"`
+type IncapacityCertificatesListHrResponseRowsItem struct {
+	ID         string    `json:"id" url:"id"`
+	EmployeeID string    `json:"employeeId" url:"employeeId"`
+	Series     *string   `json:"series,omitempty" url:"series,omitempty"`
+	Number     string    `json:"number" url:"number"`
+	FromDate   time.Time `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate     time.Time `json:"toDate" url:"toDate" format:"date"`
+	Reason     *string   `json:"reason,omitempty" url:"reason,omitempty"`
+	Notes      *string   `json:"notes,omitempty" url:"notes,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9266,282 +11749,192 @@ type PostV1HrEmployeesRecordsListResponseRowsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetID() string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return p.ID
+	return i.ID
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetEmployeeID() string {
+	if i == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return i.EmployeeID
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetType() PostV1HrEmployeesRecordsListResponseRowsItemType {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetSeries() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Series
+}
+
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetNumber() string {
+	if i == nil {
 		return ""
 	}
-	return p.Type
+	return i.Number
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetTitle() string {
-	if p == nil {
-		return ""
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetFromDate() time.Time {
+	if i == nil {
+		return time.Time{}
 	}
-	return p.Title
+	return i.FromDate
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetInstitution() *string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetToDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.ToDate
+}
+
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetReason() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Institution
+	return i.Reason
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetIssuedAt() *string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetNotes() *string {
+	if i == nil {
 		return nil
 	}
-	return p.IssuedAt
+	return i.Notes
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetValidUntil() *string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.ValidUntil
+	return i.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetFileID() *string {
-	if p == nil {
-		return nil
+func (i *IncapacityCertificatesListHrResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	return p.FileID
-}
-
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldID)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldEmployeeID)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldEmployeeID)
 }
 
-// SetType sets the Type field and marks it as non-optional;
+// SetSeries sets the Series field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetType(type_ PostV1HrEmployeesRecordsListResponseRowsItemType) {
-	p.Type = type_
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldType)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetSeries(series *string) {
+	i.Series = series
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldSeries)
 }
 
-// SetTitle sets the Title field and marks it as non-optional;
+// SetNumber sets the Number field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetTitle(title string) {
-	p.Title = title
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldTitle)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetNumber(number string) {
+	i.Number = number
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldNumber)
 }
 
-// SetInstitution sets the Institution field and marks it as non-optional;
+// SetFromDate sets the FromDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetInstitution(institution *string) {
-	p.Institution = institution
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldInstitution)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetFromDate(fromDate time.Time) {
+	i.FromDate = fromDate
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldFromDate)
 }
 
-// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// SetToDate sets the ToDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetIssuedAt(issuedAt *string) {
-	p.IssuedAt = issuedAt
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldIssuedAt)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetToDate(toDate time.Time) {
+	i.ToDate = toDate
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldToDate)
 }
 
-// SetValidUntil sets the ValidUntil field and marks it as non-optional;
+// SetReason sets the Reason field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetValidUntil(validUntil *string) {
-	p.ValidUntil = validUntil
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldValidUntil)
-}
-
-// SetFileID sets the FileID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetFileID(fileID *string) {
-	p.FileID = fileID
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldFileID)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetReason(reason *string) {
+	i.Reason = reason
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldReason)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldNotes)
+func (i *IncapacityCertificatesListHrResponseRowsItem) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(incapacityCertificatesListHrResponseRowsItemFieldNotes)
 }
 
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesRecordsListResponseRowsItemFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed IncapacityCertificatesListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IncapacityCertificatesListHrResponseRowsItem(unmarshaler.embed)
+	i.FromDate = unmarshaler.FromDate.Time()
+	i.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsListResponseRowsItem
+func (i *IncapacityCertificatesListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed IncapacityCertificatesListHrResponseRowsItem
 	var marshaler = struct {
 		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
 	}{
-		embed: embed(*p),
+		embed:    embed(*i),
+		FromDate: internal.NewDate(i.FromDate),
+		ToDate:   internal.NewDate(i.ToDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsListResponseRowsItem) String() string {
-	if p == nil {
+func (i *IncapacityCertificatesListHrResponseRowsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesRecordsListResponseRowsItemType string
-
-const (
-	PostV1HrEmployeesRecordsListResponseRowsItemTypeEducation     PostV1HrEmployeesRecordsListResponseRowsItemType = "education"
-	PostV1HrEmployeesRecordsListResponseRowsItemTypeQualification PostV1HrEmployeesRecordsListResponseRowsItemType = "qualification"
-	PostV1HrEmployeesRecordsListResponseRowsItemTypeCertificate   PostV1HrEmployeesRecordsListResponseRowsItemType = "certificate"
-	PostV1HrEmployeesRecordsListResponseRowsItemTypeTraining      PostV1HrEmployeesRecordsListResponseRowsItemType = "training"
-)
-
-func NewPostV1HrEmployeesRecordsListResponseRowsItemTypeFromString(s string) (PostV1HrEmployeesRecordsListResponseRowsItemType, error) {
-	switch s {
-	case "education":
-		return PostV1HrEmployeesRecordsListResponseRowsItemTypeEducation, nil
-	case "qualification":
-		return PostV1HrEmployeesRecordsListResponseRowsItemTypeQualification, nil
-	case "certificate":
-		return PostV1HrEmployeesRecordsListResponseRowsItemTypeCertificate, nil
-	case "training":
-		return PostV1HrEmployeesRecordsListResponseRowsItemTypeTraining, nil
-	}
-	var t PostV1HrEmployeesRecordsListResponseRowsItemType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesRecordsListResponseRowsItemType) Ptr() *PostV1HrEmployeesRecordsListResponseRowsItemType {
-	return &p
-}
-
-type PostV1HrEmployeesRecordsUpdateRequestType string
-
-const (
-	PostV1HrEmployeesRecordsUpdateRequestTypeEducation     PostV1HrEmployeesRecordsUpdateRequestType = "education"
-	PostV1HrEmployeesRecordsUpdateRequestTypeQualification PostV1HrEmployeesRecordsUpdateRequestType = "qualification"
-	PostV1HrEmployeesRecordsUpdateRequestTypeCertificate   PostV1HrEmployeesRecordsUpdateRequestType = "certificate"
-	PostV1HrEmployeesRecordsUpdateRequestTypeTraining      PostV1HrEmployeesRecordsUpdateRequestType = "training"
-)
-
-func NewPostV1HrEmployeesRecordsUpdateRequestTypeFromString(s string) (PostV1HrEmployeesRecordsUpdateRequestType, error) {
-	switch s {
-	case "education":
-		return PostV1HrEmployeesRecordsUpdateRequestTypeEducation, nil
-	case "qualification":
-		return PostV1HrEmployeesRecordsUpdateRequestTypeQualification, nil
-	case "certificate":
-		return PostV1HrEmployeesRecordsUpdateRequestTypeCertificate, nil
-	case "training":
-		return PostV1HrEmployeesRecordsUpdateRequestTypeTraining, nil
-	}
-	var t PostV1HrEmployeesRecordsUpdateRequestType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesRecordsUpdateRequestType) Ptr() *PostV1HrEmployeesRecordsUpdateRequestType {
-	return &p
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1HrEmployeesRecordsUpdateResponseFieldID          = big.NewInt(1 << 0)
-	postV1HrEmployeesRecordsUpdateResponseFieldEmployeeID  = big.NewInt(1 << 1)
-	postV1HrEmployeesRecordsUpdateResponseFieldType        = big.NewInt(1 << 2)
-	postV1HrEmployeesRecordsUpdateResponseFieldTitle       = big.NewInt(1 << 3)
-	postV1HrEmployeesRecordsUpdateResponseFieldInstitution = big.NewInt(1 << 4)
-	postV1HrEmployeesRecordsUpdateResponseFieldIssuedAt    = big.NewInt(1 << 5)
-	postV1HrEmployeesRecordsUpdateResponseFieldValidUntil  = big.NewInt(1 << 6)
-	postV1HrEmployeesRecordsUpdateResponseFieldFileID      = big.NewInt(1 << 7)
-	postV1HrEmployeesRecordsUpdateResponseFieldNotes       = big.NewInt(1 << 8)
-	postV1HrEmployeesRecordsUpdateResponseFieldCreatedAt   = big.NewInt(1 << 9)
+	leaveBalancesListHrResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesRecordsUpdateResponse struct {
-	ID          string                                     `json:"id" url:"id"`
-	EmployeeID  string                                     `json:"employeeId" url:"employeeId"`
-	Type        PostV1HrEmployeesRecordsUpdateResponseType `json:"type" url:"type"`
-	Title       string                                     `json:"title" url:"title"`
-	Institution *string                                    `json:"institution,omitempty" url:"institution,omitempty"`
-	IssuedAt    *string                                    `json:"issuedAt,omitempty" url:"issuedAt,omitempty"`
-	ValidUntil  *string                                    `json:"validUntil,omitempty" url:"validUntil,omitempty"`
-	FileID      *string                                    `json:"fileId,omitempty" url:"fileId,omitempty"`
-	Notes       *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt   string                                     `json:"createdAt" url:"createdAt"`
+type LeaveBalancesListHrResponse struct {
+	Rows []*LeaveBalancesListHrResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9550,242 +11943,238 @@ type PostV1HrEmployeesRecordsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetType() PostV1HrEmployeesRecordsUpdateResponseType {
-	if p == nil {
-		return ""
-	}
-	return p.Type
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetTitle() string {
-	if p == nil {
-		return ""
-	}
-	return p.Title
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetInstitution() *string {
-	if p == nil {
+func (l *LeaveBalancesListHrResponse) GetRows() []*LeaveBalancesListHrResponseRowsItem {
+	if l == nil {
 		return nil
 	}
-	return p.Institution
+	return l.Rows
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetIssuedAt() *string {
-	if p == nil {
+func (l *LeaveBalancesListHrResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.IssuedAt
+	return l.extraProperties
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetValidUntil() *string {
-	if p == nil {
-		return nil
+func (l *LeaveBalancesListHrResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	return p.ValidUntil
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetFileID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.FileID
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
+// SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldID)
+func (l *LeaveBalancesListHrResponse) SetRows(rows []*LeaveBalancesListHrResponseRowsItem) {
+	l.Rows = rows
+	l.require(leaveBalancesListHrResponseFieldRows)
+}
+
+func (l *LeaveBalancesListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler LeaveBalancesListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = LeaveBalancesListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *LeaveBalancesListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed LeaveBalancesListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *LeaveBalancesListHrResponse) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
+var (
+	leaveBalancesListHrResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 0)
+	leaveBalancesListHrResponseRowsItemFieldYear          = big.NewInt(1 << 1)
+	leaveBalancesListHrResponseRowsItemFieldEntitledDays  = big.NewInt(1 << 2)
+	leaveBalancesListHrResponseRowsItemFieldUsedDays      = big.NewInt(1 << 3)
+	leaveBalancesListHrResponseRowsItemFieldRemainingDays = big.NewInt(1 << 4)
+)
+
+type LeaveBalancesListHrResponseRowsItem struct {
+	EmployeeID    string `json:"employeeId" url:"employeeId"`
+	Year          int64  `json:"year" url:"year"`
+	EntitledDays  string `json:"entitledDays" url:"entitledDays"`
+	UsedDays      string `json:"usedDays" url:"usedDays"`
+	RemainingDays string `json:"remainingDays" url:"remainingDays"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetEmployeeID() string {
+	if l == nil {
+		return ""
+	}
+	return l.EmployeeID
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetYear() int64 {
+	if l == nil {
+		return 0
+	}
+	return l.Year
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetEntitledDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.EntitledDays
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetUsedDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.UsedDays
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetRemainingDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.RemainingDays
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *LeaveBalancesListHrResponseRowsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldEmployeeID)
+func (l *LeaveBalancesListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	l.EmployeeID = employeeID
+	l.require(leaveBalancesListHrResponseRowsItemFieldEmployeeID)
 }
 
-// SetType sets the Type field and marks it as non-optional;
+// SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetType(type_ PostV1HrEmployeesRecordsUpdateResponseType) {
-	p.Type = type_
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldType)
+func (l *LeaveBalancesListHrResponseRowsItem) SetYear(year int64) {
+	l.Year = year
+	l.require(leaveBalancesListHrResponseRowsItemFieldYear)
 }
 
-// SetTitle sets the Title field and marks it as non-optional;
+// SetEntitledDays sets the EntitledDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetTitle(title string) {
-	p.Title = title
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldTitle)
+func (l *LeaveBalancesListHrResponseRowsItem) SetEntitledDays(entitledDays string) {
+	l.EntitledDays = entitledDays
+	l.require(leaveBalancesListHrResponseRowsItemFieldEntitledDays)
 }
 
-// SetInstitution sets the Institution field and marks it as non-optional;
+// SetUsedDays sets the UsedDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetInstitution(institution *string) {
-	p.Institution = institution
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldInstitution)
+func (l *LeaveBalancesListHrResponseRowsItem) SetUsedDays(usedDays string) {
+	l.UsedDays = usedDays
+	l.require(leaveBalancesListHrResponseRowsItemFieldUsedDays)
 }
 
-// SetIssuedAt sets the IssuedAt field and marks it as non-optional;
+// SetRemainingDays sets the RemainingDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetIssuedAt(issuedAt *string) {
-	p.IssuedAt = issuedAt
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldIssuedAt)
+func (l *LeaveBalancesListHrResponseRowsItem) SetRemainingDays(remainingDays string) {
+	l.RemainingDays = remainingDays
+	l.require(leaveBalancesListHrResponseRowsItemFieldRemainingDays)
 }
 
-// SetValidUntil sets the ValidUntil field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetValidUntil(validUntil *string) {
-	p.ValidUntil = validUntil
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldValidUntil)
-}
-
-// SetFileID sets the FileID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetFileID(fileID *string) {
-	p.FileID = fileID
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldFileID)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldNotes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesRecordsUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesRecordsUpdateResponseFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesRecordsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesRecordsUpdateResponse
+func (l *LeaveBalancesListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LeaveBalancesListHrResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesRecordsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LeaveBalancesListHrResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesRecordsUpdateResponse
+func (l *LeaveBalancesListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed LeaveBalancesListHrResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesRecordsUpdateResponse) String() string {
-	if p == nil {
+func (l *LeaveBalancesListHrResponseRowsItem) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesRecordsUpdateResponseType string
-
-const (
-	PostV1HrEmployeesRecordsUpdateResponseTypeEducation     PostV1HrEmployeesRecordsUpdateResponseType = "education"
-	PostV1HrEmployeesRecordsUpdateResponseTypeQualification PostV1HrEmployeesRecordsUpdateResponseType = "qualification"
-	PostV1HrEmployeesRecordsUpdateResponseTypeCertificate   PostV1HrEmployeesRecordsUpdateResponseType = "certificate"
-	PostV1HrEmployeesRecordsUpdateResponseTypeTraining      PostV1HrEmployeesRecordsUpdateResponseType = "training"
-)
-
-func NewPostV1HrEmployeesRecordsUpdateResponseTypeFromString(s string) (PostV1HrEmployeesRecordsUpdateResponseType, error) {
-	switch s {
-	case "education":
-		return PostV1HrEmployeesRecordsUpdateResponseTypeEducation, nil
-	case "qualification":
-		return PostV1HrEmployeesRecordsUpdateResponseTypeQualification, nil
-	case "certificate":
-		return PostV1HrEmployeesRecordsUpdateResponseTypeCertificate, nil
-	case "training":
-		return PostV1HrEmployeesRecordsUpdateResponseTypeTraining, nil
-	}
-	var t PostV1HrEmployeesRecordsUpdateResponseType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesRecordsUpdateResponseType) Ptr() *PostV1HrEmployeesRecordsUpdateResponseType {
-	return &p
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1HrEmployeesUpdateRequestAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateRequestAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesUpdateRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesUpdateRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	leaveBalancesSetHrResponseFieldEmployeeID    = big.NewInt(1 << 0)
+	leaveBalancesSetHrResponseFieldYear          = big.NewInt(1 << 1)
+	leaveBalancesSetHrResponseFieldEntitledDays  = big.NewInt(1 << 2)
+	leaveBalancesSetHrResponseFieldUsedDays      = big.NewInt(1 << 3)
+	leaveBalancesSetHrResponseFieldRemainingDays = big.NewInt(1 << 4)
 )
 
-type PostV1HrEmployeesUpdateRequestAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+type LeaveBalancesSetHrResponse struct {
+	EmployeeID    string `json:"employeeId" url:"employeeId"`
+	Year          int64  `json:"year" url:"year"`
+	EntitledDays  string `json:"entitledDays" url:"entitledDays"`
+	UsedDays      string `json:"usedDays" url:"usedDays"`
+	RemainingDays string `json:"remainingDays" url:"remainingDays"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9794,126 +12183,138 @@ type PostV1HrEmployeesUpdateRequestAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) GetStreet() *string {
-	if p == nil {
+func (l *LeaveBalancesSetHrResponse) GetEmployeeID() string {
+	if l == nil {
+		return ""
+	}
+	return l.EmployeeID
+}
+
+func (l *LeaveBalancesSetHrResponse) GetYear() int64 {
+	if l == nil {
+		return 0
+	}
+	return l.Year
+}
+
+func (l *LeaveBalancesSetHrResponse) GetEntitledDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.EntitledDays
+}
+
+func (l *LeaveBalancesSetHrResponse) GetUsedDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.UsedDays
+}
+
+func (l *LeaveBalancesSetHrResponse) GetRemainingDays() string {
+	if l == nil {
+		return ""
+	}
+	return l.RemainingDays
+}
+
+func (l *LeaveBalancesSetHrResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
 		return nil
 	}
-	return p.Street
+	return l.extraProperties
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) GetCity() *string {
-	if p == nil {
-		return nil
+func (l *LeaveBalancesSetHrResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
 	}
-	return p.City
+	l.explicitFields.Or(l.explicitFields, field)
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) GetPostalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PostalCode
-}
-
-func (p *PostV1HrEmployeesUpdateRequestAddress) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1HrEmployeesUpdateRequestAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesUpdateRequestAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetStreet sets the Street field and marks it as non-optional;
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesUpdateRequestAddressFieldStreet)
+func (l *LeaveBalancesSetHrResponse) SetEmployeeID(employeeID string) {
+	l.EmployeeID = employeeID
+	l.require(leaveBalancesSetHrResponseFieldEmployeeID)
 }
 
-// SetCity sets the City field and marks it as non-optional;
+// SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesUpdateRequestAddressFieldCity)
+func (l *LeaveBalancesSetHrResponse) SetYear(year int64) {
+	l.Year = year
+	l.require(leaveBalancesSetHrResponseFieldYear)
 }
 
-// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// SetEntitledDays sets the EntitledDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesUpdateRequestAddressFieldPostalCode)
+func (l *LeaveBalancesSetHrResponse) SetEntitledDays(entitledDays string) {
+	l.EntitledDays = entitledDays
+	l.require(leaveBalancesSetHrResponseFieldEntitledDays)
 }
 
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// SetUsedDays sets the UsedDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesUpdateRequestAddressFieldCountryCode)
+func (l *LeaveBalancesSetHrResponse) SetUsedDays(usedDays string) {
+	l.UsedDays = usedDays
+	l.require(leaveBalancesSetHrResponseFieldUsedDays)
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateRequestAddress
+// SetRemainingDays sets the RemainingDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LeaveBalancesSetHrResponse) SetRemainingDays(remainingDays string) {
+	l.RemainingDays = remainingDays
+	l.require(leaveBalancesSetHrResponseFieldRemainingDays)
+}
+
+func (l *LeaveBalancesSetHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler LeaveBalancesSetHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesUpdateRequestAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*l = LeaveBalancesSetHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateRequestAddress
+func (l *LeaveBalancesSetHrResponse) MarshalJSON() ([]byte, error) {
+	type embed LeaveBalancesSetHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*l),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAddress) String() string {
-	if p == nil {
+func (l *LeaveBalancesSetHrResponse) String() string {
+	if l == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(l); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", l)
 }
 
 var (
-	postV1HrEmployeesUpdateRequestAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateRequestAttributesItemFieldValue = big.NewInt(1 << 1)
+	positionsCreateHrRequestTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesUpdateRequestAttributesItem struct {
-	Name  string `json:"name" url:"name"`
-	Value string `json:"value" url:"value"`
+type PositionsCreateHrRequestTranslationsValue struct {
+	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9922,28 +12323,21 @@ type PostV1HrEmployeesUpdateRequestAttributesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) GetName() string {
+func (p *PositionsCreateHrRequestTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) GetValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.Value
-}
-
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) GetExtraProperties() map[string]interface{} {
+func (p *PositionsCreateHrRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) require(field *big.Int) {
+func (p *PositionsCreateHrRequestTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -9952,25 +12346,18 @@ func (p *PostV1HrEmployeesUpdateRequestAttributesItem) require(field *big.Int) {
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) SetName(name string) {
+func (p *PositionsCreateHrRequestTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrEmployeesUpdateRequestAttributesItemFieldName)
+	p.require(positionsCreateHrRequestTranslationsValueFieldName)
 }
 
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesUpdateRequestAttributesItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateRequestAttributesItem
+func (p *PositionsCreateHrRequestTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsCreateHrRequestTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesUpdateRequestAttributesItem(value)
+	*p = PositionsCreateHrRequestTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -9980,8 +12367,8 @@ func (p *PostV1HrEmployeesUpdateRequestAttributesItem) UnmarshalJSON(data []byte
 	return nil
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateRequestAttributesItem
+func (p *PositionsCreateHrRequestTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PositionsCreateHrRequestTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -9991,7 +12378,7 @@ func (p *PostV1HrEmployeesUpdateRequestAttributesItem) MarshalJSON() ([]byte, er
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesUpdateRequestAttributesItem) String() string {
+func (p *PositionsCreateHrRequestTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -10006,76 +12393,18 @@ func (p *PostV1HrEmployeesUpdateRequestAttributesItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
-type PostV1HrEmployeesUpdateRequestStatus string
-
-const (
-	PostV1HrEmployeesUpdateRequestStatusActive     PostV1HrEmployeesUpdateRequestStatus = "active"
-	PostV1HrEmployeesUpdateRequestStatusTerminated PostV1HrEmployeesUpdateRequestStatus = "terminated"
-)
-
-func NewPostV1HrEmployeesUpdateRequestStatusFromString(s string) (PostV1HrEmployeesUpdateRequestStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrEmployeesUpdateRequestStatusActive, nil
-	case "terminated":
-		return PostV1HrEmployeesUpdateRequestStatusTerminated, nil
-	}
-	var t PostV1HrEmployeesUpdateRequestStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesUpdateRequestStatus) Ptr() *PostV1HrEmployeesUpdateRequestStatus {
-	return &p
-}
-
 var (
-	postV1HrEmployeesUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateResponseFieldCode                 = big.NewInt(1 << 1)
-	postV1HrEmployeesUpdateResponseFieldFirstName            = big.NewInt(1 << 2)
-	postV1HrEmployeesUpdateResponseFieldLastName             = big.NewInt(1 << 3)
-	postV1HrEmployeesUpdateResponseFieldPersonalCode         = big.NewInt(1 << 4)
-	postV1HrEmployeesUpdateResponseFieldBirthDate            = big.NewInt(1 << 5)
-	postV1HrEmployeesUpdateResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1HrEmployeesUpdateResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1HrEmployeesUpdateResponseFieldAddress              = big.NewInt(1 << 8)
-	postV1HrEmployeesUpdateResponseFieldIban                 = big.NewInt(1 << 9)
-	postV1HrEmployeesUpdateResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	postV1HrEmployeesUpdateResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	postV1HrEmployeesUpdateResponseFieldHireDate             = big.NewInt(1 << 12)
-	postV1HrEmployeesUpdateResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesUpdateResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	postV1HrEmployeesUpdateResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	postV1HrEmployeesUpdateResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesUpdateResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	postV1HrEmployeesUpdateResponseFieldStatus               = big.NewInt(1 << 18)
-	postV1HrEmployeesUpdateResponseFieldNotes                = big.NewInt(1 << 19)
-	postV1HrEmployeesUpdateResponseFieldAttributes           = big.NewInt(1 << 20)
-	postV1HrEmployeesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 21)
+	positionsCreateHrResponseFieldID           = big.NewInt(1 << 0)
+	positionsCreateHrResponseFieldCode         = big.NewInt(1 << 1)
+	positionsCreateHrResponseFieldName         = big.NewInt(1 << 2)
+	positionsCreateHrResponseFieldTranslations = big.NewInt(1 << 3)
 )
 
-type PostV1HrEmployeesUpdateResponse struct {
-	ID                   string                                           `json:"id" url:"id"`
-	Code                 *string                                          `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                           `json:"firstName" url:"firstName"`
-	LastName             string                                           `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *string                                          `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	Email                *string                                          `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                          `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *PostV1HrEmployeesUpdateResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                          `json:"iban,omitempty" url:"iban,omitempty"`
-	SocialInsuranceNo    *string                                          `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
-	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
-	HireDate             *string                                          `json:"hireDate,omitempty" url:"hireDate,omitempty"`
-	TerminationDate      *string                                          `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyAllowance       bool                                             `json:"applyAllowance" url:"applyAllowance"`
-	AllowanceOverride    *string                                          `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
-	PensionAccumulation  bool                                             `json:"pensionAccumulation" url:"pensionAccumulation"`
-	PayrollOptions       map[string]string                                `json:"payrollOptions" url:"payrollOptions"`
-	Status               PostV1HrEmployeesUpdateResponseStatus            `json:"status" url:"status"`
-	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Attributes           []*PostV1HrEmployeesUpdateResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
-	CreatedAt            string                                           `json:"createdAt" url:"createdAt"`
+type PositionsCreateHrResponse struct {
+	ID           string                                                 `json:"id" url:"id"`
+	Code         *string                                                `json:"code,omitempty" url:"code,omitempty"`
+	Name         string                                                 `json:"name" url:"name"`
+	Translations map[string]*PositionsCreateHrResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10084,168 +12413,42 @@ type PostV1HrEmployeesUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetID() string {
+func (p *PositionsCreateHrResponse) GetID() string {
 	if p == nil {
 		return ""
 	}
 	return p.ID
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetCode() *string {
+func (p *PositionsCreateHrResponse) GetCode() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Code
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetFirstName() string {
+func (p *PositionsCreateHrResponse) GetName() string {
 	if p == nil {
 		return ""
 	}
-	return p.FirstName
+	return p.Name
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetLastName() string {
-	if p == nil {
-		return ""
-	}
-	return p.LastName
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetPersonalCode() *string {
+func (p *PositionsCreateHrResponse) GetTranslations() map[string]*PositionsCreateHrResponseTranslationsValue {
 	if p == nil {
 		return nil
 	}
-	return p.PersonalCode
+	return p.Translations
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetBirthDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.BirthDate
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetEmail() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Email
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetPhone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Phone
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetAddress() *PostV1HrEmployeesUpdateResponseAddress {
-	if p == nil {
-		return nil
-	}
-	return p.Address
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetIban() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Iban
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetSocialInsuranceNo() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceNo
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetSocialInsuranceStart() *string {
-	if p == nil {
-		return nil
-	}
-	return p.SocialInsuranceStart
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetHireDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.HireDate
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetTerminationDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.TerminationDate
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetApplyAllowance() bool {
-	if p == nil {
-		return false
-	}
-	return p.ApplyAllowance
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetAllowanceOverride() *string {
-	if p == nil {
-		return nil
-	}
-	return p.AllowanceOverride
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetPensionAccumulation() bool {
-	if p == nil {
-		return false
-	}
-	return p.PensionAccumulation
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetPayrollOptions() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.PayrollOptions
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetStatus() PostV1HrEmployeesUpdateResponseStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetAttributes() []*PostV1HrEmployeesUpdateResponseAttributesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Attributes
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) GetExtraProperties() map[string]interface{} {
+func (p *PositionsCreateHrResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) require(field *big.Int) {
+func (p *PositionsCreateHrResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -10254,165 +12457,39 @@ func (p *PostV1HrEmployeesUpdateResponse) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetID(id string) {
+func (p *PositionsCreateHrResponse) SetID(id string) {
 	p.ID = id
-	p.require(postV1HrEmployeesUpdateResponseFieldID)
+	p.require(positionsCreateHrResponseFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetCode(code *string) {
+func (p *PositionsCreateHrResponse) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1HrEmployeesUpdateResponseFieldCode)
+	p.require(positionsCreateHrResponseFieldCode)
 }
 
-// SetFirstName sets the FirstName field and marks it as non-optional;
+// SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetFirstName(firstName string) {
-	p.FirstName = firstName
-	p.require(postV1HrEmployeesUpdateResponseFieldFirstName)
+func (p *PositionsCreateHrResponse) SetName(name string) {
+	p.Name = name
+	p.require(positionsCreateHrResponseFieldName)
 }
 
-// SetLastName sets the LastName field and marks it as non-optional;
+// SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetLastName(lastName string) {
-	p.LastName = lastName
-	p.require(postV1HrEmployeesUpdateResponseFieldLastName)
+func (p *PositionsCreateHrResponse) SetTranslations(translations map[string]*PositionsCreateHrResponseTranslationsValue) {
+	p.Translations = translations
+	p.require(positionsCreateHrResponseFieldTranslations)
 }
 
-// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetPersonalCode(personalCode *string) {
-	p.PersonalCode = personalCode
-	p.require(postV1HrEmployeesUpdateResponseFieldPersonalCode)
-}
-
-// SetBirthDate sets the BirthDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetBirthDate(birthDate *string) {
-	p.BirthDate = birthDate
-	p.require(postV1HrEmployeesUpdateResponseFieldBirthDate)
-}
-
-// SetEmail sets the Email field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1HrEmployeesUpdateResponseFieldEmail)
-}
-
-// SetPhone sets the Phone field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetPhone(phone *string) {
-	p.Phone = phone
-	p.require(postV1HrEmployeesUpdateResponseFieldPhone)
-}
-
-// SetAddress sets the Address field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetAddress(address *PostV1HrEmployeesUpdateResponseAddress) {
-	p.Address = address
-	p.require(postV1HrEmployeesUpdateResponseFieldAddress)
-}
-
-// SetIban sets the Iban field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1HrEmployeesUpdateResponseFieldIban)
-}
-
-// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
-	p.SocialInsuranceNo = socialInsuranceNo
-	p.require(postV1HrEmployeesUpdateResponseFieldSocialInsuranceNo)
-}
-
-// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
-	p.SocialInsuranceStart = socialInsuranceStart
-	p.require(postV1HrEmployeesUpdateResponseFieldSocialInsuranceStart)
-}
-
-// SetHireDate sets the HireDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetHireDate(hireDate *string) {
-	p.HireDate = hireDate
-	p.require(postV1HrEmployeesUpdateResponseFieldHireDate)
-}
-
-// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetTerminationDate(terminationDate *string) {
-	p.TerminationDate = terminationDate
-	p.require(postV1HrEmployeesUpdateResponseFieldTerminationDate)
-}
-
-// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetApplyAllowance(applyAllowance bool) {
-	p.ApplyAllowance = applyAllowance
-	p.require(postV1HrEmployeesUpdateResponseFieldApplyAllowance)
-}
-
-// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetAllowanceOverride(allowanceOverride *string) {
-	p.AllowanceOverride = allowanceOverride
-	p.require(postV1HrEmployeesUpdateResponseFieldAllowanceOverride)
-}
-
-// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetPensionAccumulation(pensionAccumulation bool) {
-	p.PensionAccumulation = pensionAccumulation
-	p.require(postV1HrEmployeesUpdateResponseFieldPensionAccumulation)
-}
-
-// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetPayrollOptions(payrollOptions map[string]string) {
-	p.PayrollOptions = payrollOptions
-	p.require(postV1HrEmployeesUpdateResponseFieldPayrollOptions)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetStatus(status PostV1HrEmployeesUpdateResponseStatus) {
-	p.Status = status
-	p.require(postV1HrEmployeesUpdateResponseFieldStatus)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrEmployeesUpdateResponseFieldNotes)
-}
-
-// SetAttributes sets the Attributes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetAttributes(attributes []*PostV1HrEmployeesUpdateResponseAttributesItem) {
-	p.Attributes = attributes
-	p.require(postV1HrEmployeesUpdateResponseFieldAttributes)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1HrEmployeesUpdateResponseFieldCreatedAt)
-}
-
-func (p *PostV1HrEmployeesUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateResponse
+func (p *PositionsCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsCreateHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesUpdateResponse(value)
+	*p = PositionsCreateHrResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -10422,8 +12499,8 @@ func (p *PostV1HrEmployeesUpdateResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateResponse
+func (p *PositionsCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PositionsCreateHrResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -10433,7 +12510,7 @@ func (p *PostV1HrEmployeesUpdateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) String() string {
+func (p *PositionsCreateHrResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -10449,17 +12526,11 @@ func (p *PostV1HrEmployeesUpdateResponse) String() string {
 }
 
 var (
-	postV1HrEmployeesUpdateResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1HrEmployeesUpdateResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1HrEmployeesUpdateResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	positionsCreateHrResponseTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1HrEmployeesUpdateResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+type PositionsCreateHrResponseTranslationsValue struct {
+	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10468,156 +12539,21 @@ type PostV1HrEmployeesUpdateResponseAddress struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrEmployeesUpdateResponseAddress) GetStreet() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Street
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) GetCity() *string {
-	if p == nil {
-		return nil
-	}
-	return p.City
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) GetPostalCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PostalCode
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetStreet sets the Street field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAddress) SetStreet(street *string) {
-	p.Street = street
-	p.require(postV1HrEmployeesUpdateResponseAddressFieldStreet)
-}
-
-// SetCity sets the City field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAddress) SetCity(city *string) {
-	p.City = city
-	p.require(postV1HrEmployeesUpdateResponseAddressFieldCity)
-}
-
-// SetPostalCode sets the PostalCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAddress) SetPostalCode(postalCode *string) {
-	p.PostalCode = postalCode
-	p.require(postV1HrEmployeesUpdateResponseAddressFieldPostalCode)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAddress) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1HrEmployeesUpdateResponseAddressFieldCountryCode)
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateResponseAddress
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrEmployeesUpdateResponseAddress(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateResponseAddress
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAddress) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrEmployeesUpdateResponseAttributesItemFieldName  = big.NewInt(1 << 0)
-	postV1HrEmployeesUpdateResponseAttributesItemFieldValue = big.NewInt(1 << 1)
-)
-
-type PostV1HrEmployeesUpdateResponseAttributesItem struct {
-	Name  string `json:"name" url:"name"`
-	Value string `json:"value" url:"value"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) GetName() string {
+func (p *PositionsCreateHrResponseTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) GetValue() string {
-	if p == nil {
-		return ""
-	}
-	return p.Value
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) GetExtraProperties() map[string]interface{} {
+func (p *PositionsCreateHrResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) require(field *big.Int) {
+func (p *PositionsCreateHrResponseTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -10626,25 +12562,18 @@ func (p *PostV1HrEmployeesUpdateResponseAttributesItem) require(field *big.Int) 
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) SetName(name string) {
+func (p *PositionsCreateHrResponseTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrEmployeesUpdateResponseAttributesItemFieldName)
+	p.require(positionsCreateHrResponseTranslationsValueFieldName)
 }
 
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) SetValue(value string) {
-	p.Value = value
-	p.require(postV1HrEmployeesUpdateResponseAttributesItemFieldValue)
-}
-
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrEmployeesUpdateResponseAttributesItem
+func (p *PositionsCreateHrResponseTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsCreateHrResponseTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrEmployeesUpdateResponseAttributesItem(value)
+	*p = PositionsCreateHrResponseTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -10654,8 +12583,8 @@ func (p *PostV1HrEmployeesUpdateResponseAttributesItem) UnmarshalJSON(data []byt
 	return nil
 }
 
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrEmployeesUpdateResponseAttributesItem
+func (p *PositionsCreateHrResponseTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PositionsCreateHrResponseTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -10665,225 +12594,7 @@ func (p *PostV1HrEmployeesUpdateResponseAttributesItem) MarshalJSON() ([]byte, e
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrEmployeesUpdateResponseAttributesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrEmployeesUpdateResponseStatus string
-
-const (
-	PostV1HrEmployeesUpdateResponseStatusActive     PostV1HrEmployeesUpdateResponseStatus = "active"
-	PostV1HrEmployeesUpdateResponseStatusTerminated PostV1HrEmployeesUpdateResponseStatus = "terminated"
-)
-
-func NewPostV1HrEmployeesUpdateResponseStatusFromString(s string) (PostV1HrEmployeesUpdateResponseStatus, error) {
-	switch s {
-	case "active":
-		return PostV1HrEmployeesUpdateResponseStatusActive, nil
-	case "terminated":
-		return PostV1HrEmployeesUpdateResponseStatusTerminated, nil
-	}
-	var t PostV1HrEmployeesUpdateResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrEmployeesUpdateResponseStatus) Ptr() *PostV1HrEmployeesUpdateResponseStatus {
-	return &p
-}
-
-var (
-	postV1HrIncapacityCertificatesCreateResponseFieldID         = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesCreateResponseFieldEmployeeID = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesCreateResponseFieldSeries     = big.NewInt(1 << 2)
-	postV1HrIncapacityCertificatesCreateResponseFieldNumber     = big.NewInt(1 << 3)
-	postV1HrIncapacityCertificatesCreateResponseFieldFromDate   = big.NewInt(1 << 4)
-	postV1HrIncapacityCertificatesCreateResponseFieldToDate     = big.NewInt(1 << 5)
-	postV1HrIncapacityCertificatesCreateResponseFieldReason     = big.NewInt(1 << 6)
-	postV1HrIncapacityCertificatesCreateResponseFieldNotes      = big.NewInt(1 << 7)
-)
-
-type PostV1HrIncapacityCertificatesCreateResponse struct {
-	ID         string  `json:"id" url:"id"`
-	EmployeeID string  `json:"employeeId" url:"employeeId"`
-	Series     *string `json:"series,omitempty" url:"series,omitempty"`
-	Number     string  `json:"number" url:"number"`
-	FromDate   string  `json:"fromDate" url:"fromDate"`
-	ToDate     string  `json:"toDate" url:"toDate"`
-	Reason     *string `json:"reason,omitempty" url:"reason,omitempty"`
-	Notes      *string `json:"notes,omitempty" url:"notes,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetSeries() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Series
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetNumber() string {
-	if p == nil {
-		return ""
-	}
-	return p.Number
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetFromDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.FromDate
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetToDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.ToDate
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetReason() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Reason
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldEmployeeID)
-}
-
-// SetSeries sets the Series field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetSeries(series *string) {
-	p.Series = series
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldSeries)
-}
-
-// SetNumber sets the Number field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldNumber)
-}
-
-// SetFromDate sets the FromDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldFromDate)
-}
-
-// SetToDate sets the ToDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldToDate)
-}
-
-// SetReason sets the Reason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetReason(reason *string) {
-	p.Reason = reason
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldReason)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesCreateResponse) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrIncapacityCertificatesCreateResponseFieldNotes)
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesCreateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrIncapacityCertificatesCreateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesCreateResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrIncapacityCertificatesCreateResponse) String() string {
+func (p *PositionsCreateHrResponseTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -10899,15 +12610,15 @@ func (p *PostV1HrIncapacityCertificatesCreateResponse) String() string {
 }
 
 var (
-	postV1HrIncapacityCertificatesListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	positionsListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	positionsListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	positionsListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1HrIncapacityCertificatesListRequestFilterItem struct {
-	Field string                                                    `json:"field" url:"field"`
-	Op    PostV1HrIncapacityCertificatesListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1HrIncapacityCertificatesListRequestFilterItemValue `json:"value" url:"value"`
+type PositionsListHrRequestFilterItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Op    PositionsListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PositionsListHrRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10916,35 +12627,35 @@ type PostV1HrIncapacityCertificatesListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) GetField() string {
+func (p *PositionsListHrRequestFilterItem) GetField() string {
 	if p == nil {
 		return ""
 	}
 	return p.Field
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) GetOp() PostV1HrIncapacityCertificatesListRequestFilterItemOp {
+func (p *PositionsListHrRequestFilterItem) GetOp() PositionsListHrRequestFilterItemOp {
 	if p == nil {
 		return ""
 	}
 	return p.Op
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) GetValue() *PostV1HrIncapacityCertificatesListRequestFilterItemValue {
+func (p *PositionsListHrRequestFilterItem) GetValue() *PositionsListHrRequestFilterItemValue {
 	if p == nil {
 		return nil
 	}
 	return p.Value
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+func (p *PositionsListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) require(field *big.Int) {
+func (p *PositionsListHrRequestFilterItem) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -10953,32 +12664,32 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) require(field *big
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) SetField(field string) {
+func (p *PositionsListHrRequestFilterItem) SetField(field string) {
 	p.Field = field
-	p.require(postV1HrIncapacityCertificatesListRequestFilterItemFieldField)
+	p.require(positionsListHrRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) SetOp(op PostV1HrIncapacityCertificatesListRequestFilterItemOp) {
+func (p *PositionsListHrRequestFilterItem) SetOp(op PositionsListHrRequestFilterItemOp) {
 	p.Op = op
-	p.require(postV1HrIncapacityCertificatesListRequestFilterItemFieldOp)
+	p.require(positionsListHrRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) SetValue(value *PostV1HrIncapacityCertificatesListRequestFilterItemValue) {
+func (p *PositionsListHrRequestFilterItem) SetValue(value *PositionsListHrRequestFilterItemValue) {
 	p.Value = value
-	p.require(postV1HrIncapacityCertificatesListRequestFilterItemFieldValue)
+	p.require(positionsListHrRequestFilterItemFieldValue)
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesListRequestFilterItem
+func (p *PositionsListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrIncapacityCertificatesListRequestFilterItem(value)
+	*p = PositionsListHrRequestFilterItem(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -10988,8 +12699,8 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) UnmarshalJSON(data
 	return nil
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesListRequestFilterItem
+func (p *PositionsListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
@@ -10999,7 +12710,7 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) MarshalJSON() ([]b
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) String() string {
+func (p *PositionsListHrRequestFilterItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -11014,78 +12725,78 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
-type PostV1HrIncapacityCertificatesListRequestFilterItemOp string
+type PositionsListHrRequestFilterItemOp string
 
 const (
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpEq       PostV1HrIncapacityCertificatesListRequestFilterItemOp = "eq"
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpNe       PostV1HrIncapacityCertificatesListRequestFilterItemOp = "ne"
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpContains PostV1HrIncapacityCertificatesListRequestFilterItemOp = "contains"
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpGte      PostV1HrIncapacityCertificatesListRequestFilterItemOp = "gte"
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpLte      PostV1HrIncapacityCertificatesListRequestFilterItemOp = "lte"
-	PostV1HrIncapacityCertificatesListRequestFilterItemOpIn       PostV1HrIncapacityCertificatesListRequestFilterItemOp = "in"
+	PositionsListHrRequestFilterItemOpEq       PositionsListHrRequestFilterItemOp = "eq"
+	PositionsListHrRequestFilterItemOpNe       PositionsListHrRequestFilterItemOp = "ne"
+	PositionsListHrRequestFilterItemOpContains PositionsListHrRequestFilterItemOp = "contains"
+	PositionsListHrRequestFilterItemOpGte      PositionsListHrRequestFilterItemOp = "gte"
+	PositionsListHrRequestFilterItemOpLte      PositionsListHrRequestFilterItemOp = "lte"
+	PositionsListHrRequestFilterItemOpIn       PositionsListHrRequestFilterItemOp = "in"
 )
 
-func NewPostV1HrIncapacityCertificatesListRequestFilterItemOpFromString(s string) (PostV1HrIncapacityCertificatesListRequestFilterItemOp, error) {
+func NewPositionsListHrRequestFilterItemOpFromString(s string) (PositionsListHrRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpEq, nil
+		return PositionsListHrRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpNe, nil
+		return PositionsListHrRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpContains, nil
+		return PositionsListHrRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpGte, nil
+		return PositionsListHrRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpLte, nil
+		return PositionsListHrRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1HrIncapacityCertificatesListRequestFilterItemOpIn, nil
+		return PositionsListHrRequestFilterItemOpIn, nil
 	}
-	var t PostV1HrIncapacityCertificatesListRequestFilterItemOp
+	var t PositionsListHrRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrIncapacityCertificatesListRequestFilterItemOp) Ptr() *PostV1HrIncapacityCertificatesListRequestFilterItemOp {
+func (p PositionsListHrRequestFilterItemOp) Ptr() *PositionsListHrRequestFilterItemOp {
 	return &p
 }
 
-type PostV1HrIncapacityCertificatesListRequestFilterItemValue struct {
-	String                                                                string
-	Double                                                                float64
-	Boolean                                                               bool
-	PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList []*PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem
+type PositionsListHrRequestFilterItemValue struct {
+	String                                             string
+	Double                                             float64
+	Boolean                                            bool
+	PositionsListHrRequestFilterItemValueThreeItemList []*PositionsListHrRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) GetString() string {
+func (p *PositionsListHrRequestFilterItemValue) GetString() string {
 	if p == nil {
 		return ""
 	}
 	return p.String
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) GetDouble() float64 {
+func (p *PositionsListHrRequestFilterItemValue) GetDouble() float64 {
 	if p == nil {
 		return 0
 	}
 	return p.Double
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) GetBoolean() bool {
+func (p *PositionsListHrRequestFilterItemValue) GetBoolean() bool {
 	if p == nil {
 		return false
 	}
 	return p.Boolean
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) GetPostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList() []*PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem {
+func (p *PositionsListHrRequestFilterItemValue) GetPositionsListHrRequestFilterItemValueThreeItemList() []*PositionsListHrRequestFilterItemValueThreeItem {
 	if p == nil {
 		return nil
 	}
-	return p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList
+	return p.PositionsListHrRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (p *PositionsListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
 		p.typ = "String"
@@ -11104,16 +12815,16 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) UnmarshalJSON
 		p.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList []*PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList"
-		p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList = valuePostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList
+	var valuePositionsListHrRequestFilterItemValueThreeItemList []*PositionsListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePositionsListHrRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PositionsListHrRequestFilterItemValueThreeItemList"
+		p.PositionsListHrRequestFilterItemValueThreeItemList = valuePositionsListHrRequestFilterItemValueThreeItemList
 		return nil
 	}
 	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
 }
 
-func (p PostV1HrIncapacityCertificatesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+func (p PositionsListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
 	if p.typ == "String" || p.String != "" {
 		return json.Marshal(p.String)
 	}
@@ -11123,20 +12834,20 @@ func (p PostV1HrIncapacityCertificatesListRequestFilterItemValue) MarshalJSON() 
 	if p.typ == "Boolean" || p.Boolean != false {
 		return json.Marshal(p.Boolean)
 	}
-	if p.typ == "PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList" || p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList)
+	if p.typ == "PositionsListHrRequestFilterItemValueThreeItemList" || p.PositionsListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PositionsListHrRequestFilterItemValueThreeItemList)
 	}
 	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
 }
 
-type PostV1HrIncapacityCertificatesListRequestFilterItemValueVisitor interface {
+type PositionsListHrRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList([]*PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) error
+	VisitPositionsListHrRequestFilterItemValueThreeItemList([]*PositionsListHrRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) Accept(visitor PostV1HrIncapacityCertificatesListRequestFilterItemValueVisitor) error {
+func (p *PositionsListHrRequestFilterItemValue) Accept(visitor PositionsListHrRequestFilterItemValueVisitor) error {
 	if p.typ == "String" || p.String != "" {
 		return visitor.VisitString(p.String)
 	}
@@ -11146,34 +12857,34 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValue) Accept(visito
 	if p.typ == "Boolean" || p.Boolean != false {
 		return visitor.VisitBoolean(p.Boolean)
 	}
-	if p.typ == "PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList" || p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList(p.PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemList)
+	if p.typ == "PositionsListHrRequestFilterItemValueThreeItemList" || p.PositionsListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPositionsListHrRequestFilterItemValueThreeItemList(p.PositionsListHrRequestFilterItemValueThreeItemList)
 	}
 	return fmt.Errorf("type %T does not include a non-empty union type", p)
 }
 
-type PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem struct {
+type PositionsListHrRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) GetString() string {
+func (p *PositionsListHrRequestFilterItemValueThreeItem) GetString() string {
 	if p == nil {
 		return ""
 	}
 	return p.String
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) GetDouble() float64 {
+func (p *PositionsListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
 	if p == nil {
 		return 0
 	}
 	return p.Double
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (p *PositionsListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
 		p.typ = "String"
@@ -11189,7 +12900,7 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) Unma
 	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
 }
 
-func (p PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+func (p PositionsListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
 	if p.typ == "String" || p.String != "" {
 		return json.Marshal(p.String)
 	}
@@ -11199,12 +12910,12 @@ func (p PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) Marsh
 	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
 }
 
-type PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemVisitor interface {
+type PositionsListHrRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) Accept(visitor PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItemVisitor) error {
+func (p *PositionsListHrRequestFilterItemValueThreeItem) Accept(visitor PositionsListHrRequestFilterItemValueThreeItemVisitor) error {
 	if p.typ == "String" || p.String != "" {
 		return visitor.VisitString(p.String)
 	}
@@ -11215,13 +12926,13 @@ func (p *PostV1HrIncapacityCertificatesListRequestFilterItemValueThreeItem) Acce
 }
 
 var (
-	postV1HrIncapacityCertificatesListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	positionsListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	positionsListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1HrIncapacityCertificatesListRequestSortItem struct {
-	Field string                                                `json:"field" url:"field"`
-	Dir   *PostV1HrIncapacityCertificatesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type PositionsListHrRequestSortItem struct {
+	Field string                             `json:"field" url:"field"`
+	Dir   *PositionsListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11230,28 +12941,28 @@ type PostV1HrIncapacityCertificatesListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) GetField() string {
+func (p *PositionsListHrRequestSortItem) GetField() string {
 	if p == nil {
 		return ""
 	}
 	return p.Field
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) GetDir() *PostV1HrIncapacityCertificatesListRequestSortItemDir {
+func (p *PositionsListHrRequestSortItem) GetDir() *PositionsListHrRequestSortItemDir {
 	if p == nil {
 		return nil
 	}
 	return p.Dir
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) GetExtraProperties() map[string]interface{} {
+func (p *PositionsListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) require(field *big.Int) {
+func (p *PositionsListHrRequestSortItem) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -11260,25 +12971,25 @@ func (p *PostV1HrIncapacityCertificatesListRequestSortItem) require(field *big.I
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) SetField(field string) {
+func (p *PositionsListHrRequestSortItem) SetField(field string) {
 	p.Field = field
-	p.require(postV1HrIncapacityCertificatesListRequestSortItemFieldField)
+	p.require(positionsListHrRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) SetDir(dir *PostV1HrIncapacityCertificatesListRequestSortItemDir) {
+func (p *PositionsListHrRequestSortItem) SetDir(dir *PositionsListHrRequestSortItemDir) {
 	p.Dir = dir
-	p.require(postV1HrIncapacityCertificatesListRequestSortItemFieldDir)
+	p.require(positionsListHrRequestSortItemFieldDir)
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesListRequestSortItem
+func (p *PositionsListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrIncapacityCertificatesListRequestSortItem(value)
+	*p = PositionsListHrRequestSortItem(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -11288,8 +12999,8 @@ func (p *PostV1HrIncapacityCertificatesListRequestSortItem) UnmarshalJSON(data [
 	return nil
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesListRequestSortItem
+func (p *PositionsListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
@@ -11299,7 +13010,7 @@ func (p *PostV1HrIncapacityCertificatesListRequestSortItem) MarshalJSON() ([]byt
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrIncapacityCertificatesListRequestSortItem) String() string {
+func (p *PositionsListHrRequestSortItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -11314,42 +13025,42 @@ func (p *PostV1HrIncapacityCertificatesListRequestSortItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
-type PostV1HrIncapacityCertificatesListRequestSortItemDir string
+type PositionsListHrRequestSortItemDir string
 
 const (
-	PostV1HrIncapacityCertificatesListRequestSortItemDirAsc  PostV1HrIncapacityCertificatesListRequestSortItemDir = "asc"
-	PostV1HrIncapacityCertificatesListRequestSortItemDirDesc PostV1HrIncapacityCertificatesListRequestSortItemDir = "desc"
+	PositionsListHrRequestSortItemDirAsc  PositionsListHrRequestSortItemDir = "asc"
+	PositionsListHrRequestSortItemDirDesc PositionsListHrRequestSortItemDir = "desc"
 )
 
-func NewPostV1HrIncapacityCertificatesListRequestSortItemDirFromString(s string) (PostV1HrIncapacityCertificatesListRequestSortItemDir, error) {
+func NewPositionsListHrRequestSortItemDirFromString(s string) (PositionsListHrRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1HrIncapacityCertificatesListRequestSortItemDirAsc, nil
+		return PositionsListHrRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1HrIncapacityCertificatesListRequestSortItemDirDesc, nil
+		return PositionsListHrRequestSortItemDirDesc, nil
 	}
-	var t PostV1HrIncapacityCertificatesListRequestSortItemDir
+	var t PositionsListHrRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrIncapacityCertificatesListRequestSortItemDir) Ptr() *PostV1HrIncapacityCertificatesListRequestSortItemDir {
+func (p PositionsListHrRequestSortItemDir) Ptr() *PositionsListHrRequestSortItemDir {
 	return &p
 }
 
 var (
-	postV1HrIncapacityCertificatesListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1HrIncapacityCertificatesListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1HrIncapacityCertificatesListResponseFieldTotals   = big.NewInt(1 << 4)
+	positionsListHrResponseFieldRows     = big.NewInt(1 << 0)
+	positionsListHrResponseFieldPage     = big.NewInt(1 << 1)
+	positionsListHrResponseFieldPageSize = big.NewInt(1 << 2)
+	positionsListHrResponseFieldTotal    = big.NewInt(1 << 3)
+	positionsListHrResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1HrIncapacityCertificatesListResponse struct {
-	Rows     []*PostV1HrIncapacityCertificatesListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                                 `json:"page" url:"page"`
-	PageSize int64                                                 `json:"pageSize" url:"pageSize"`
-	Total    int64                                                 `json:"total" url:"total"`
-	Totals   map[string]string                                     `json:"totals,omitempty" url:"totals,omitempty"`
+type PositionsListHrResponse struct {
+	Rows     []*PositionsListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                              `json:"page" url:"page"`
+	PageSize int64                              `json:"pageSize" url:"pageSize"`
+	Total    int64                              `json:"total" url:"total"`
+	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11358,49 +13069,49 @@ type PostV1HrIncapacityCertificatesListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetRows() []*PostV1HrIncapacityCertificatesListResponseRowsItem {
+func (p *PositionsListHrResponse) GetRows() []*PositionsListHrResponseRowsItem {
 	if p == nil {
 		return nil
 	}
 	return p.Rows
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetPage() int64 {
+func (p *PositionsListHrResponse) GetPage() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.Page
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetPageSize() int64 {
+func (p *PositionsListHrResponse) GetPageSize() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.PageSize
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetTotal() int64 {
+func (p *PositionsListHrResponse) GetTotal() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.Total
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetTotals() map[string]string {
+func (p *PositionsListHrResponse) GetTotals() map[string]string {
 	if p == nil {
 		return nil
 	}
 	return p.Totals
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) GetExtraProperties() map[string]interface{} {
+func (p *PositionsListHrResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) require(field *big.Int) {
+func (p *PositionsListHrResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -11409,46 +13120,46 @@ func (p *PostV1HrIncapacityCertificatesListResponse) require(field *big.Int) {
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponse) SetRows(rows []*PostV1HrIncapacityCertificatesListResponseRowsItem) {
+func (p *PositionsListHrResponse) SetRows(rows []*PositionsListHrResponseRowsItem) {
 	p.Rows = rows
-	p.require(postV1HrIncapacityCertificatesListResponseFieldRows)
+	p.require(positionsListHrResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponse) SetPage(page int64) {
+func (p *PositionsListHrResponse) SetPage(page int64) {
 	p.Page = page
-	p.require(postV1HrIncapacityCertificatesListResponseFieldPage)
+	p.require(positionsListHrResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponse) SetPageSize(pageSize int64) {
+func (p *PositionsListHrResponse) SetPageSize(pageSize int64) {
 	p.PageSize = pageSize
-	p.require(postV1HrIncapacityCertificatesListResponseFieldPageSize)
+	p.require(positionsListHrResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponse) SetTotal(total int64) {
+func (p *PositionsListHrResponse) SetTotal(total int64) {
 	p.Total = total
-	p.require(postV1HrIncapacityCertificatesListResponseFieldTotal)
+	p.require(positionsListHrResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponse) SetTotals(totals map[string]string) {
+func (p *PositionsListHrResponse) SetTotals(totals map[string]string) {
 	p.Totals = totals
-	p.require(postV1HrIncapacityCertificatesListResponseFieldTotals)
+	p.require(positionsListHrResponseFieldTotals)
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesListResponse
+func (p *PositionsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrIncapacityCertificatesListResponse(value)
+	*p = PositionsListHrResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -11458,8 +13169,8 @@ func (p *PostV1HrIncapacityCertificatesListResponse) UnmarshalJSON(data []byte) 
 	return nil
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesListResponse
+func (p *PositionsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -11469,7 +13180,7 @@ func (p *PostV1HrIncapacityCertificatesListResponse) MarshalJSON() ([]byte, erro
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrIncapacityCertificatesListResponse) String() string {
+func (p *PositionsListHrResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -11485,677 +13196,17 @@ func (p *PostV1HrIncapacityCertificatesListResponse) String() string {
 }
 
 var (
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldID         = big.NewInt(1 << 0)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldEmployeeID = big.NewInt(1 << 1)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldSeries     = big.NewInt(1 << 2)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldNumber     = big.NewInt(1 << 3)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldFromDate   = big.NewInt(1 << 4)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldToDate     = big.NewInt(1 << 5)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldReason     = big.NewInt(1 << 6)
-	postV1HrIncapacityCertificatesListResponseRowsItemFieldNotes      = big.NewInt(1 << 7)
+	positionsListHrResponseRowsItemFieldID           = big.NewInt(1 << 0)
+	positionsListHrResponseRowsItemFieldCode         = big.NewInt(1 << 1)
+	positionsListHrResponseRowsItemFieldName         = big.NewInt(1 << 2)
+	positionsListHrResponseRowsItemFieldTranslations = big.NewInt(1 << 3)
 )
 
-type PostV1HrIncapacityCertificatesListResponseRowsItem struct {
-	ID         string  `json:"id" url:"id"`
-	EmployeeID string  `json:"employeeId" url:"employeeId"`
-	Series     *string `json:"series,omitempty" url:"series,omitempty"`
-	Number     string  `json:"number" url:"number"`
-	FromDate   string  `json:"fromDate" url:"fromDate"`
-	ToDate     string  `json:"toDate" url:"toDate"`
-	Reason     *string `json:"reason,omitempty" url:"reason,omitempty"`
-	Notes      *string `json:"notes,omitempty" url:"notes,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetSeries() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Series
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetNumber() string {
-	if p == nil {
-		return ""
-	}
-	return p.Number
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetFromDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.FromDate
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetToDate() string {
-	if p == nil {
-		return ""
-	}
-	return p.ToDate
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetReason() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Reason
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldEmployeeID)
-}
-
-// SetSeries sets the Series field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetSeries(series *string) {
-	p.Series = series
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldSeries)
-}
-
-// SetNumber sets the Number field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetNumber(number string) {
-	p.Number = number
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldNumber)
-}
-
-// SetFromDate sets the FromDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetFromDate(fromDate string) {
-	p.FromDate = fromDate
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldFromDate)
-}
-
-// SetToDate sets the ToDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetToDate(toDate string) {
-	p.ToDate = toDate
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldToDate)
-}
-
-// SetReason sets the Reason field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetReason(reason *string) {
-	p.Reason = reason
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldReason)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1HrIncapacityCertificatesListResponseRowsItemFieldNotes)
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrIncapacityCertificatesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrIncapacityCertificatesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrIncapacityCertificatesListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrIncapacityCertificatesListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrLeaveBalancesListResponseFieldRows = big.NewInt(1 << 0)
-)
-
-type PostV1HrLeaveBalancesListResponse struct {
-	Rows []*PostV1HrLeaveBalancesListResponseRowsItem `json:"rows" url:"rows"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) GetRows() []*PostV1HrLeaveBalancesListResponseRowsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Rows
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetRows sets the Rows field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponse) SetRows(rows []*PostV1HrLeaveBalancesListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrLeaveBalancesListResponseFieldRows)
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrLeaveBalancesListResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrLeaveBalancesListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrLeaveBalancesListResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrLeaveBalancesListResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrLeaveBalancesListResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 0)
-	postV1HrLeaveBalancesListResponseRowsItemFieldYear          = big.NewInt(1 << 1)
-	postV1HrLeaveBalancesListResponseRowsItemFieldEntitledDays  = big.NewInt(1 << 2)
-	postV1HrLeaveBalancesListResponseRowsItemFieldUsedDays      = big.NewInt(1 << 3)
-	postV1HrLeaveBalancesListResponseRowsItemFieldRemainingDays = big.NewInt(1 << 4)
-)
-
-type PostV1HrLeaveBalancesListResponseRowsItem struct {
-	EmployeeID    string `json:"employeeId" url:"employeeId"`
-	Year          int64  `json:"year" url:"year"`
-	EntitledDays  string `json:"entitledDays" url:"entitledDays"`
-	UsedDays      string `json:"usedDays" url:"usedDays"`
-	RemainingDays string `json:"remainingDays" url:"remainingDays"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetYear() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Year
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetEntitledDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.EntitledDays
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetUsedDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.UsedDays
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetRemainingDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.RemainingDays
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrLeaveBalancesListResponseRowsItemFieldEmployeeID)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrLeaveBalancesListResponseRowsItemFieldYear)
-}
-
-// SetEntitledDays sets the EntitledDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) SetEntitledDays(entitledDays string) {
-	p.EntitledDays = entitledDays
-	p.require(postV1HrLeaveBalancesListResponseRowsItemFieldEntitledDays)
-}
-
-// SetUsedDays sets the UsedDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) SetUsedDays(usedDays string) {
-	p.UsedDays = usedDays
-	p.require(postV1HrLeaveBalancesListResponseRowsItemFieldUsedDays)
-}
-
-// SetRemainingDays sets the RemainingDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) SetRemainingDays(remainingDays string) {
-	p.RemainingDays = remainingDays
-	p.require(postV1HrLeaveBalancesListResponseRowsItemFieldRemainingDays)
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrLeaveBalancesListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrLeaveBalancesListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrLeaveBalancesListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrLeaveBalancesListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrLeaveBalancesSetResponseFieldEmployeeID    = big.NewInt(1 << 0)
-	postV1HrLeaveBalancesSetResponseFieldYear          = big.NewInt(1 << 1)
-	postV1HrLeaveBalancesSetResponseFieldEntitledDays  = big.NewInt(1 << 2)
-	postV1HrLeaveBalancesSetResponseFieldUsedDays      = big.NewInt(1 << 3)
-	postV1HrLeaveBalancesSetResponseFieldRemainingDays = big.NewInt(1 << 4)
-)
-
-type PostV1HrLeaveBalancesSetResponse struct {
-	EmployeeID    string `json:"employeeId" url:"employeeId"`
-	Year          int64  `json:"year" url:"year"`
-	EntitledDays  string `json:"entitledDays" url:"entitledDays"`
-	UsedDays      string `json:"usedDays" url:"usedDays"`
-	RemainingDays string `json:"remainingDays" url:"remainingDays"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetYear() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Year
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetEntitledDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.EntitledDays
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetUsedDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.UsedDays
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetRemainingDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.RemainingDays
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrLeaveBalancesSetResponseFieldEmployeeID)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetResponse) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrLeaveBalancesSetResponseFieldYear)
-}
-
-// SetEntitledDays sets the EntitledDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetResponse) SetEntitledDays(entitledDays string) {
-	p.EntitledDays = entitledDays
-	p.require(postV1HrLeaveBalancesSetResponseFieldEntitledDays)
-}
-
-// SetUsedDays sets the UsedDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetResponse) SetUsedDays(usedDays string) {
-	p.UsedDays = usedDays
-	p.require(postV1HrLeaveBalancesSetResponseFieldUsedDays)
-}
-
-// SetRemainingDays sets the RemainingDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrLeaveBalancesSetResponse) SetRemainingDays(remainingDays string) {
-	p.RemainingDays = remainingDays
-	p.require(postV1HrLeaveBalancesSetResponseFieldRemainingDays)
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrLeaveBalancesSetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrLeaveBalancesSetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrLeaveBalancesSetResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrLeaveBalancesSetResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrPositionsCreateRequestTranslationsValueFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1HrPositionsCreateRequestTranslationsValue struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrPositionsCreateRequestTranslationsValueFieldName)
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsCreateRequestTranslationsValue
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsCreateRequestTranslationsValue(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsCreateRequestTranslationsValue
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsCreateRequestTranslationsValue) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrPositionsCreateResponseFieldID           = big.NewInt(1 << 0)
-	postV1HrPositionsCreateResponseFieldCode         = big.NewInt(1 << 1)
-	postV1HrPositionsCreateResponseFieldName         = big.NewInt(1 << 2)
-	postV1HrPositionsCreateResponseFieldTranslations = big.NewInt(1 << 3)
-)
-
-type PostV1HrPositionsCreateResponse struct {
+type PositionsListHrResponseRowsItem struct {
 	ID           string                                                       `json:"id" url:"id"`
 	Code         *string                                                      `json:"code,omitempty" url:"code,omitempty"`
 	Name         string                                                       `json:"name" url:"name"`
-	Translations map[string]*PostV1HrPositionsCreateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+	Translations map[string]*PositionsListHrResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12164,42 +13215,42 @@ type PostV1HrPositionsCreateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrPositionsCreateResponse) GetID() string {
+func (p *PositionsListHrResponseRowsItem) GetID() string {
 	if p == nil {
 		return ""
 	}
 	return p.ID
 }
 
-func (p *PostV1HrPositionsCreateResponse) GetCode() *string {
+func (p *PositionsListHrResponseRowsItem) GetCode() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Code
 }
 
-func (p *PostV1HrPositionsCreateResponse) GetName() string {
+func (p *PositionsListHrResponseRowsItem) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrPositionsCreateResponse) GetTranslations() map[string]*PostV1HrPositionsCreateResponseTranslationsValue {
+func (p *PositionsListHrResponseRowsItem) GetTranslations() map[string]*PositionsListHrResponseRowsItemTranslationsValue {
 	if p == nil {
 		return nil
 	}
 	return p.Translations
 }
 
-func (p *PostV1HrPositionsCreateResponse) GetExtraProperties() map[string]interface{} {
+func (p *PositionsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrPositionsCreateResponse) require(field *big.Int) {
+func (p *PositionsListHrResponseRowsItem) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -12208,39 +13259,39 @@ func (p *PostV1HrPositionsCreateResponse) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateResponse) SetID(id string) {
+func (p *PositionsListHrResponseRowsItem) SetID(id string) {
 	p.ID = id
-	p.require(postV1HrPositionsCreateResponseFieldID)
+	p.require(positionsListHrResponseRowsItemFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateResponse) SetCode(code *string) {
+func (p *PositionsListHrResponseRowsItem) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1HrPositionsCreateResponseFieldCode)
+	p.require(positionsListHrResponseRowsItemFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateResponse) SetName(name string) {
+func (p *PositionsListHrResponseRowsItem) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrPositionsCreateResponseFieldName)
+	p.require(positionsListHrResponseRowsItemFieldName)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateResponse) SetTranslations(translations map[string]*PostV1HrPositionsCreateResponseTranslationsValue) {
+func (p *PositionsListHrResponseRowsItem) SetTranslations(translations map[string]*PositionsListHrResponseRowsItemTranslationsValue) {
 	p.Translations = translations
-	p.require(postV1HrPositionsCreateResponseFieldTranslations)
+	p.require(positionsListHrResponseRowsItemFieldTranslations)
 }
 
-func (p *PostV1HrPositionsCreateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsCreateResponse
+func (p *PositionsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrResponseRowsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsCreateResponse(value)
+	*p = PositionsListHrResponseRowsItem(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -12250,8 +13301,8 @@ func (p *PostV1HrPositionsCreateResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PostV1HrPositionsCreateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsCreateResponse
+func (p *PositionsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrResponseRowsItem
 	var marshaler = struct {
 		embed
 	}{
@@ -12261,7 +13312,7 @@ func (p *PostV1HrPositionsCreateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrPositionsCreateResponse) String() string {
+func (p *PositionsListHrResponseRowsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -12277,10 +13328,10 @@ func (p *PostV1HrPositionsCreateResponse) String() string {
 }
 
 var (
-	postV1HrPositionsCreateResponseTranslationsValueFieldName = big.NewInt(1 << 0)
+	positionsListHrResponseRowsItemTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1HrPositionsCreateResponseTranslationsValue struct {
+type PositionsListHrResponseRowsItemTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -12290,21 +13341,21 @@ type PostV1HrPositionsCreateResponseTranslationsValue struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) GetName() string {
+func (p *PositionsListHrResponseRowsItemTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
+func (p *PositionsListHrResponseRowsItemTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) require(field *big.Int) {
+func (p *PositionsListHrResponseRowsItemTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -12313,18 +13364,18 @@ func (p *PostV1HrPositionsCreateResponseTranslationsValue) require(field *big.In
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) SetName(name string) {
+func (p *PositionsListHrResponseRowsItemTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrPositionsCreateResponseTranslationsValueFieldName)
+	p.require(positionsListHrResponseRowsItemTranslationsValueFieldName)
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsCreateResponseTranslationsValue
+func (p *PositionsListHrResponseRowsItemTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsListHrResponseRowsItemTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsCreateResponseTranslationsValue(value)
+	*p = PositionsListHrResponseRowsItemTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -12334,8 +13385,8 @@ func (p *PostV1HrPositionsCreateResponseTranslationsValue) UnmarshalJSON(data []
 	return nil
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsCreateResponseTranslationsValue
+func (p *PositionsListHrResponseRowsItemTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PositionsListHrResponseRowsItemTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -12345,7 +13396,7 @@ func (p *PostV1HrPositionsCreateResponseTranslationsValue) MarshalJSON() ([]byte
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrPositionsCreateResponseTranslationsValue) String() string {
+func (p *PositionsListHrResponseRowsItemTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -12361,15 +13412,11 @@ func (p *PostV1HrPositionsCreateResponseTranslationsValue) String() string {
 }
 
 var (
-	postV1HrPositionsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1HrPositionsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1HrPositionsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	positionsUpdateHrRequestTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1HrPositionsListRequestFilterItem struct {
-	Field string                                       `json:"field" url:"field"`
-	Op    PostV1HrPositionsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1HrPositionsListRequestFilterItemValue `json:"value" url:"value"`
+type PositionsUpdateHrRequestTranslationsValue struct {
+	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12378,630 +13425,132 @@ type PostV1HrPositionsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrPositionsListRequestFilterItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) GetOp() PostV1HrPositionsListRequestFilterItemOp {
-	if p == nil {
-		return ""
-	}
-	return p.Op
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) GetValue() *PostV1HrPositionsListRequestFilterItemValue {
-	if p == nil {
-		return nil
-	}
-	return p.Value
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrPositionsListRequestFilterItemFieldField)
-}
-
-// SetOp sets the Op field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequestFilterItem) SetOp(op PostV1HrPositionsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1HrPositionsListRequestFilterItemFieldOp)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequestFilterItem) SetValue(value *PostV1HrPositionsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1HrPositionsListRequestFilterItemFieldValue)
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListRequestFilterItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListRequestFilterItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsListRequestFilterItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrPositionsListRequestFilterItemOp string
-
-const (
-	PostV1HrPositionsListRequestFilterItemOpEq       PostV1HrPositionsListRequestFilterItemOp = "eq"
-	PostV1HrPositionsListRequestFilterItemOpNe       PostV1HrPositionsListRequestFilterItemOp = "ne"
-	PostV1HrPositionsListRequestFilterItemOpContains PostV1HrPositionsListRequestFilterItemOp = "contains"
-	PostV1HrPositionsListRequestFilterItemOpGte      PostV1HrPositionsListRequestFilterItemOp = "gte"
-	PostV1HrPositionsListRequestFilterItemOpLte      PostV1HrPositionsListRequestFilterItemOp = "lte"
-	PostV1HrPositionsListRequestFilterItemOpIn       PostV1HrPositionsListRequestFilterItemOp = "in"
-)
-
-func NewPostV1HrPositionsListRequestFilterItemOpFromString(s string) (PostV1HrPositionsListRequestFilterItemOp, error) {
-	switch s {
-	case "eq":
-		return PostV1HrPositionsListRequestFilterItemOpEq, nil
-	case "ne":
-		return PostV1HrPositionsListRequestFilterItemOpNe, nil
-	case "contains":
-		return PostV1HrPositionsListRequestFilterItemOpContains, nil
-	case "gte":
-		return PostV1HrPositionsListRequestFilterItemOpGte, nil
-	case "lte":
-		return PostV1HrPositionsListRequestFilterItemOpLte, nil
-	case "in":
-		return PostV1HrPositionsListRequestFilterItemOpIn, nil
-	}
-	var t PostV1HrPositionsListRequestFilterItemOp
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrPositionsListRequestFilterItemOp) Ptr() *PostV1HrPositionsListRequestFilterItemOp {
-	return &p
-}
-
-type PostV1HrPositionsListRequestFilterItemValue struct {
-	String                                                   string
-	Double                                                   float64
-	Boolean                                                  bool
-	PostV1HrPositionsListRequestFilterItemValueThreeItemList []*PostV1HrPositionsListRequestFilterItemValueThreeItem
-
-	typ string
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
-		return false
-	}
-	return p.Boolean
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) GetPostV1HrPositionsListRequestFilterItemValueThreeItemList() []*PostV1HrPositionsListRequestFilterItemValueThreeItem {
-	if p == nil {
-		return nil
-	}
-	return p.PostV1HrPositionsListRequestFilterItemValueThreeItemList
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	var valueBoolean bool
-	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
-		return nil
-	}
-	var valuePostV1HrPositionsListRequestFilterItemValueThreeItemList []*PostV1HrPositionsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1HrPositionsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1HrPositionsListRequestFilterItemValueThreeItemList"
-		p.PostV1HrPositionsListRequestFilterItemValueThreeItemList = valuePostV1HrPositionsListRequestFilterItemValueThreeItemList
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrPositionsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
-	}
-	if p.typ == "PostV1HrPositionsListRequestFilterItemValueThreeItemList" || p.PostV1HrPositionsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1HrPositionsListRequestFilterItemValueThreeItemList)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrPositionsListRequestFilterItemValueVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-	VisitBoolean(bool) error
-	VisitPostV1HrPositionsListRequestFilterItemValueThreeItemList([]*PostV1HrPositionsListRequestFilterItemValueThreeItem) error
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValue) Accept(visitor PostV1HrPositionsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
-	}
-	if p.typ == "PostV1HrPositionsListRequestFilterItemValueThreeItemList" || p.PostV1HrPositionsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1HrPositionsListRequestFilterItemValueThreeItemList(p.PostV1HrPositionsListRequestFilterItemValueThreeItemList)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrPositionsListRequestFilterItemValueThreeItem struct {
-	String string
-	Double float64
-
-	typ string
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
-		return ""
-	}
-	return p.String
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
-		return 0
-	}
-	return p.Double
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
-	var valueString string
-	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
-		return nil
-	}
-	var valueDouble float64
-	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
-}
-
-func (p PostV1HrPositionsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-type PostV1HrPositionsListRequestFilterItemValueThreeItemVisitor interface {
-	VisitString(string) error
-	VisitDouble(float64) error
-}
-
-func (p *PostV1HrPositionsListRequestFilterItemValueThreeItem) Accept(visitor PostV1HrPositionsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
-	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
-}
-
-var (
-	postV1HrPositionsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1HrPositionsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
-)
-
-type PostV1HrPositionsListRequestSortItem struct {
-	Field string                                   `json:"field" url:"field"`
-	Dir   *PostV1HrPositionsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) GetField() string {
-	if p == nil {
-		return ""
-	}
-	return p.Field
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) GetDir() *PostV1HrPositionsListRequestSortItemDir {
-	if p == nil {
-		return nil
-	}
-	return p.Dir
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetField sets the Field field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1HrPositionsListRequestSortItemFieldField)
-}
-
-// SetDir sets the Dir field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListRequestSortItem) SetDir(dir *PostV1HrPositionsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1HrPositionsListRequestSortItemFieldDir)
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListRequestSortItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListRequestSortItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsListRequestSortItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrPositionsListRequestSortItemDir string
-
-const (
-	PostV1HrPositionsListRequestSortItemDirAsc  PostV1HrPositionsListRequestSortItemDir = "asc"
-	PostV1HrPositionsListRequestSortItemDirDesc PostV1HrPositionsListRequestSortItemDir = "desc"
-)
-
-func NewPostV1HrPositionsListRequestSortItemDirFromString(s string) (PostV1HrPositionsListRequestSortItemDir, error) {
-	switch s {
-	case "asc":
-		return PostV1HrPositionsListRequestSortItemDirAsc, nil
-	case "desc":
-		return PostV1HrPositionsListRequestSortItemDirDesc, nil
-	}
-	var t PostV1HrPositionsListRequestSortItemDir
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrPositionsListRequestSortItemDir) Ptr() *PostV1HrPositionsListRequestSortItemDir {
-	return &p
-}
-
-var (
-	postV1HrPositionsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1HrPositionsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1HrPositionsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1HrPositionsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1HrPositionsListResponseFieldTotals   = big.NewInt(1 << 4)
-)
-
-type PostV1HrPositionsListResponse struct {
-	Rows     []*PostV1HrPositionsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                    `json:"page" url:"page"`
-	PageSize int64                                    `json:"pageSize" url:"pageSize"`
-	Total    int64                                    `json:"total" url:"total"`
-	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsListResponse) GetRows() []*PostV1HrPositionsListResponseRowsItem {
-	if p == nil {
-		return nil
-	}
-	return p.Rows
-}
-
-func (p *PostV1HrPositionsListResponse) GetPage() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Page
-}
-
-func (p *PostV1HrPositionsListResponse) GetPageSize() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.PageSize
-}
-
-func (p *PostV1HrPositionsListResponse) GetTotal() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Total
-}
-
-func (p *PostV1HrPositionsListResponse) GetTotals() map[string]string {
-	if p == nil {
-		return nil
-	}
-	return p.Totals
-}
-
-func (p *PostV1HrPositionsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetRows sets the Rows field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponse) SetRows(rows []*PostV1HrPositionsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrPositionsListResponseFieldRows)
-}
-
-// SetPage sets the Page field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1HrPositionsListResponseFieldPage)
-}
-
-// SetPageSize sets the PageSize field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1HrPositionsListResponseFieldPageSize)
-}
-
-// SetTotal sets the Total field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1HrPositionsListResponseFieldTotal)
-}
-
-// SetTotals sets the Totals field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1HrPositionsListResponseFieldTotals)
-}
-
-func (p *PostV1HrPositionsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsListResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrPositionsListResponseRowsItemFieldID           = big.NewInt(1 << 0)
-	postV1HrPositionsListResponseRowsItemFieldCode         = big.NewInt(1 << 1)
-	postV1HrPositionsListResponseRowsItemFieldName         = big.NewInt(1 << 2)
-	postV1HrPositionsListResponseRowsItemFieldTranslations = big.NewInt(1 << 3)
-)
-
-type PostV1HrPositionsListResponseRowsItem struct {
-	ID           string                                                             `json:"id" url:"id"`
-	Code         *string                                                            `json:"code,omitempty" url:"code,omitempty"`
-	Name         string                                                             `json:"name" url:"name"`
-	Translations map[string]*PostV1HrPositionsListResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrPositionsListResponseRowsItem) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1HrPositionsListResponseRowsItem) GetName() string {
+func (p *PositionsUpdateHrRequestTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrPositionsListResponseRowsItem) GetTranslations() map[string]*PostV1HrPositionsListResponseRowsItemTranslationsValue {
-	if p == nil {
-		return nil
-	}
-	return p.Translations
-}
-
-func (p *PostV1HrPositionsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+func (p *PositionsUpdateHrRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrPositionsListResponseRowsItem) require(field *big.Int) {
+func (p *PositionsUpdateHrRequestTranslationsValue) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PositionsUpdateHrRequestTranslationsValue) SetName(name string) {
+	p.Name = name
+	p.require(positionsUpdateHrRequestTranslationsValueFieldName)
+}
+
+func (p *PositionsUpdateHrRequestTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsUpdateHrRequestTranslationsValue
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PositionsUpdateHrRequestTranslationsValue(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PositionsUpdateHrRequestTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PositionsUpdateHrRequestTranslationsValue
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PositionsUpdateHrRequestTranslationsValue) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	positionsUpdateHrResponseFieldID           = big.NewInt(1 << 0)
+	positionsUpdateHrResponseFieldCode         = big.NewInt(1 << 1)
+	positionsUpdateHrResponseFieldName         = big.NewInt(1 << 2)
+	positionsUpdateHrResponseFieldTranslations = big.NewInt(1 << 3)
+)
+
+type PositionsUpdateHrResponse struct {
+	ID           string                                                 `json:"id" url:"id"`
+	Code         *string                                                `json:"code,omitempty" url:"code,omitempty"`
+	Name         string                                                 `json:"name" url:"name"`
+	Translations map[string]*PositionsUpdateHrResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PositionsUpdateHrResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PositionsUpdateHrResponse) GetCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Code
+}
+
+func (p *PositionsUpdateHrResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PositionsUpdateHrResponse) GetTranslations() map[string]*PositionsUpdateHrResponseTranslationsValue {
+	if p == nil {
+		return nil
+	}
+	return p.Translations
+}
+
+func (p *PositionsUpdateHrResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PositionsUpdateHrResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -13010,39 +13559,39 @@ func (p *PostV1HrPositionsListResponseRowsItem) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponseRowsItem) SetID(id string) {
+func (p *PositionsUpdateHrResponse) SetID(id string) {
 	p.ID = id
-	p.require(postV1HrPositionsListResponseRowsItemFieldID)
+	p.require(positionsUpdateHrResponseFieldID)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponseRowsItem) SetCode(code *string) {
+func (p *PositionsUpdateHrResponse) SetCode(code *string) {
 	p.Code = code
-	p.require(postV1HrPositionsListResponseRowsItemFieldCode)
+	p.require(positionsUpdateHrResponseFieldCode)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponseRowsItem) SetName(name string) {
+func (p *PositionsUpdateHrResponse) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrPositionsListResponseRowsItemFieldName)
+	p.require(positionsUpdateHrResponseFieldName)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponseRowsItem) SetTranslations(translations map[string]*PostV1HrPositionsListResponseRowsItemTranslationsValue) {
+func (p *PositionsUpdateHrResponse) SetTranslations(translations map[string]*PositionsUpdateHrResponseTranslationsValue) {
 	p.Translations = translations
-	p.require(postV1HrPositionsListResponseRowsItemFieldTranslations)
+	p.require(positionsUpdateHrResponseFieldTranslations)
 }
 
-func (p *PostV1HrPositionsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListResponseRowsItem
+func (p *PositionsUpdateHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsUpdateHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsListResponseRowsItem(value)
+	*p = PositionsUpdateHrResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -13052,8 +13601,8 @@ func (p *PostV1HrPositionsListResponseRowsItem) UnmarshalJSON(data []byte) error
 	return nil
 }
 
-func (p *PostV1HrPositionsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListResponseRowsItem
+func (p *PositionsUpdateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PositionsUpdateHrResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -13063,7 +13612,7 @@ func (p *PostV1HrPositionsListResponseRowsItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrPositionsListResponseRowsItem) String() string {
+func (p *PositionsUpdateHrResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -13079,10 +13628,10 @@ func (p *PostV1HrPositionsListResponseRowsItem) String() string {
 }
 
 var (
-	postV1HrPositionsListResponseRowsItemTranslationsValueFieldName = big.NewInt(1 << 0)
+	positionsUpdateHrResponseTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1HrPositionsListResponseRowsItemTranslationsValue struct {
+type PositionsUpdateHrResponseTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -13092,21 +13641,21 @@ type PostV1HrPositionsListResponseRowsItemTranslationsValue struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) GetName() string {
+func (p *PositionsUpdateHrResponseTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) GetExtraProperties() map[string]interface{} {
+func (p *PositionsUpdateHrResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) require(field *big.Int) {
+func (p *PositionsUpdateHrResponseTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -13115,18 +13664,18 @@ func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) require(field *
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) SetName(name string) {
+func (p *PositionsUpdateHrResponseTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1HrPositionsListResponseRowsItemTranslationsValueFieldName)
+	p.require(positionsUpdateHrResponseTranslationsValueFieldName)
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsListResponseRowsItemTranslationsValue
+func (p *PositionsUpdateHrResponseTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PositionsUpdateHrResponseTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrPositionsListResponseRowsItemTranslationsValue(value)
+	*p = PositionsUpdateHrResponseTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -13136,8 +13685,8 @@ func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) UnmarshalJSON(d
 	return nil
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsListResponseRowsItemTranslationsValue
+func (p *PositionsUpdateHrResponseTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PositionsUpdateHrResponseTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -13147,7 +13696,7 @@ func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) MarshalJSON() (
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) String() string {
+func (p *PositionsUpdateHrResponseTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -13163,310 +13712,10 @@ func (p *PostV1HrPositionsListResponseRowsItemTranslationsValue) String() string
 }
 
 var (
-	postV1HrPositionsUpdateRequestTranslationsValueFieldName = big.NewInt(1 << 0)
+	timesheetsDeleteHrResponseFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1HrPositionsUpdateRequestTranslationsValue struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrPositionsUpdateRequestTranslationsValueFieldName)
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsUpdateRequestTranslationsValue
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsUpdateRequestTranslationsValue(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsUpdateRequestTranslationsValue
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsUpdateRequestTranslationsValue) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrPositionsUpdateResponseFieldID           = big.NewInt(1 << 0)
-	postV1HrPositionsUpdateResponseFieldCode         = big.NewInt(1 << 1)
-	postV1HrPositionsUpdateResponseFieldName         = big.NewInt(1 << 2)
-	postV1HrPositionsUpdateResponseFieldTranslations = big.NewInt(1 << 3)
-)
-
-type PostV1HrPositionsUpdateResponse struct {
-	ID           string                                                       `json:"id" url:"id"`
-	Code         *string                                                      `json:"code,omitempty" url:"code,omitempty"`
-	Name         string                                                       `json:"name" url:"name"`
-	Translations map[string]*PostV1HrPositionsUpdateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsUpdateResponse) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrPositionsUpdateResponse) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1HrPositionsUpdateResponse) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrPositionsUpdateResponse) GetTranslations() map[string]*PostV1HrPositionsUpdateResponseTranslationsValue {
-	if p == nil {
-		return nil
-	}
-	return p.Translations
-}
-
-func (p *PostV1HrPositionsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrPositionsUpdateResponseFieldID)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateResponse) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1HrPositionsUpdateResponseFieldCode)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateResponse) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrPositionsUpdateResponseFieldName)
-}
-
-// SetTranslations sets the Translations field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateResponse) SetTranslations(translations map[string]*PostV1HrPositionsUpdateResponseTranslationsValue) {
-	p.Translations = translations
-	p.require(postV1HrPositionsUpdateResponseFieldTranslations)
-}
-
-func (p *PostV1HrPositionsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsUpdateResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsUpdateResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsUpdateResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrPositionsUpdateResponseTranslationsValueFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1HrPositionsUpdateResponseTranslationsValue struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) SetName(name string) {
-	p.Name = name
-	p.require(postV1HrPositionsUpdateResponseTranslationsValueFieldName)
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrPositionsUpdateResponseTranslationsValue
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrPositionsUpdateResponseTranslationsValue(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrPositionsUpdateResponseTranslationsValue
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrPositionsUpdateResponseTranslationsValue) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrTimesheetsDeleteResponseFieldID = big.NewInt(1 << 0)
-)
-
-type PostV1HrTimesheetsDeleteResponse struct {
+type TimesheetsDeleteHrResponse struct {
 	ID string `json:"id" url:"id"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -13476,81 +13725,81 @@ type PostV1HrTimesheetsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) GetID() string {
-	if p == nil {
+func (t *TimesheetsDeleteHrResponse) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsDeleteHrResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsDeleteHrResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsDeleteResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrTimesheetsDeleteResponseFieldID)
+func (t *TimesheetsDeleteHrResponse) SetID(id string) {
+	t.ID = id
+	t.require(timesheetsDeleteHrResponseFieldID)
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsDeleteResponse
+func (t *TimesheetsDeleteHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsDeleteHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsDeleteHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsDeleteResponse
+func (t *TimesheetsDeleteHrResponse) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsDeleteHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsDeleteResponse) String() string {
-	if p == nil {
+func (t *TimesheetsDeleteHrResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1HrTimesheetsGenerateResponseFieldGenerated = big.NewInt(1 << 0)
+	timesheetsGenerateHrResponseFieldGenerated = big.NewInt(1 << 0)
 )
 
-type PostV1HrTimesheetsGenerateResponse struct {
+type TimesheetsGenerateHrResponse struct {
 	Generated int64 `json:"generated" url:"generated"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -13560,98 +13809,98 @@ type PostV1HrTimesheetsGenerateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) GetGenerated() int64 {
-	if p == nil {
+func (t *TimesheetsGenerateHrResponse) GetGenerated() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Generated
+	return t.Generated
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsGenerateHrResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsGenerateHrResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetGenerated sets the Generated field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGenerateResponse) SetGenerated(generated int64) {
-	p.Generated = generated
-	p.require(postV1HrTimesheetsGenerateResponseFieldGenerated)
+func (t *TimesheetsGenerateHrResponse) SetGenerated(generated int64) {
+	t.Generated = generated
+	t.require(timesheetsGenerateHrResponseFieldGenerated)
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsGenerateResponse
+func (t *TimesheetsGenerateHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsGenerateHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsGenerateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsGenerateHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsGenerateResponse
+func (t *TimesheetsGenerateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsGenerateHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsGenerateResponse) String() string {
-	if p == nil {
+func (t *TimesheetsGenerateHrResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1HrTimesheetsGetResponseFieldID           = big.NewInt(1 << 0)
-	postV1HrTimesheetsGetResponseFieldEmployeeID   = big.NewInt(1 << 1)
-	postV1HrTimesheetsGetResponseFieldEmployeeName = big.NewInt(1 << 2)
-	postV1HrTimesheetsGetResponseFieldYear         = big.NewInt(1 << 3)
-	postV1HrTimesheetsGetResponseFieldMonth        = big.NewInt(1 << 4)
-	postV1HrTimesheetsGetResponseFieldDays         = big.NewInt(1 << 5)
-	postV1HrTimesheetsGetResponseFieldWorkedDays   = big.NewInt(1 << 6)
-	postV1HrTimesheetsGetResponseFieldWorkedHours  = big.NewInt(1 << 7)
-	postV1HrTimesheetsGetResponseFieldUpdatedAt    = big.NewInt(1 << 8)
+	timesheetsGetHrResponseFieldID           = big.NewInt(1 << 0)
+	timesheetsGetHrResponseFieldEmployeeID   = big.NewInt(1 << 1)
+	timesheetsGetHrResponseFieldEmployeeName = big.NewInt(1 << 2)
+	timesheetsGetHrResponseFieldYear         = big.NewInt(1 << 3)
+	timesheetsGetHrResponseFieldMonth        = big.NewInt(1 << 4)
+	timesheetsGetHrResponseFieldDays         = big.NewInt(1 << 5)
+	timesheetsGetHrResponseFieldWorkedDays   = big.NewInt(1 << 6)
+	timesheetsGetHrResponseFieldWorkedHours  = big.NewInt(1 << 7)
+	timesheetsGetHrResponseFieldUpdatedAt    = big.NewInt(1 << 8)
 )
 
-type PostV1HrTimesheetsGetResponse struct {
-	ID           string                                   `json:"id" url:"id"`
-	EmployeeID   string                                   `json:"employeeId" url:"employeeId"`
-	EmployeeName string                                   `json:"employeeName" url:"employeeName"`
-	Year         int64                                    `json:"year" url:"year"`
-	Month        int64                                    `json:"month" url:"month"`
-	Days         []*PostV1HrTimesheetsGetResponseDaysItem `json:"days" url:"days"`
-	WorkedDays   string                                   `json:"workedDays" url:"workedDays"`
-	WorkedHours  string                                   `json:"workedHours" url:"workedHours"`
-	UpdatedAt    string                                   `json:"updatedAt" url:"updatedAt"`
+type TimesheetsGetHrResponse struct {
+	ID           string                             `json:"id" url:"id"`
+	EmployeeID   string                             `json:"employeeId" url:"employeeId"`
+	EmployeeName string                             `json:"employeeName" url:"employeeName"`
+	Year         int64                              `json:"year" url:"year"`
+	Month        int64                              `json:"month" url:"month"`
+	Days         []*TimesheetsGetHrResponseDaysItem `json:"days" url:"days"`
+	WorkedDays   string                             `json:"workedDays" url:"workedDays"`
+	WorkedHours  string                             `json:"workedHours" url:"workedHours"`
+	UpdatedAt    time.Time                          `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13660,198 +13909,206 @@ type PostV1HrTimesheetsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetID() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetEmployeeID() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetEmployeeID() string {
+	if t == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return t.EmployeeID
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetEmployeeName() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetEmployeeName() string {
+	if t == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return t.EmployeeName
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetYear() int64 {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetYear() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Year
+	return t.Year
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetMonth() int64 {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetMonth() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Month
+	return t.Month
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetDays() []*PostV1HrTimesheetsGetResponseDaysItem {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetDays() []*TimesheetsGetHrResponseDaysItem {
+	if t == nil {
 		return nil
 	}
-	return p.Days
+	return t.Days
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetWorkedDays() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetWorkedDays() string {
+	if t == nil {
 		return ""
 	}
-	return p.WorkedDays
+	return t.WorkedDays
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetWorkedHours() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetWorkedHours() string {
+	if t == nil {
 		return ""
 	}
-	return p.WorkedHours
+	return t.WorkedHours
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (t *TimesheetsGetHrResponse) GetUpdatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return t.UpdatedAt
 }
 
-func (p *PostV1HrTimesheetsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsGetHrResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrTimesheetsGetResponseFieldID)
+func (t *TimesheetsGetHrResponse) SetID(id string) {
+	t.ID = id
+	t.require(timesheetsGetHrResponseFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsGetResponseFieldEmployeeID)
+func (t *TimesheetsGetHrResponse) SetEmployeeID(employeeID string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsGetHrResponseFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1HrTimesheetsGetResponseFieldEmployeeName)
+func (t *TimesheetsGetHrResponse) SetEmployeeName(employeeName string) {
+	t.EmployeeName = employeeName
+	t.require(timesheetsGetHrResponseFieldEmployeeName)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsGetResponseFieldYear)
+func (t *TimesheetsGetHrResponse) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsGetHrResponseFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsGetResponseFieldMonth)
+func (t *TimesheetsGetHrResponse) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsGetHrResponseFieldMonth)
 }
 
 // SetDays sets the Days field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetDays(days []*PostV1HrTimesheetsGetResponseDaysItem) {
-	p.Days = days
-	p.require(postV1HrTimesheetsGetResponseFieldDays)
+func (t *TimesheetsGetHrResponse) SetDays(days []*TimesheetsGetHrResponseDaysItem) {
+	t.Days = days
+	t.require(timesheetsGetHrResponseFieldDays)
 }
 
 // SetWorkedDays sets the WorkedDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetWorkedDays(workedDays string) {
-	p.WorkedDays = workedDays
-	p.require(postV1HrTimesheetsGetResponseFieldWorkedDays)
+func (t *TimesheetsGetHrResponse) SetWorkedDays(workedDays string) {
+	t.WorkedDays = workedDays
+	t.require(timesheetsGetHrResponseFieldWorkedDays)
 }
 
 // SetWorkedHours sets the WorkedHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetWorkedHours(workedHours string) {
-	p.WorkedHours = workedHours
-	p.require(postV1HrTimesheetsGetResponseFieldWorkedHours)
+func (t *TimesheetsGetHrResponse) SetWorkedHours(workedHours string) {
+	t.WorkedHours = workedHours
+	t.require(timesheetsGetHrResponseFieldWorkedHours)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1HrTimesheetsGetResponseFieldUpdatedAt)
+func (t *TimesheetsGetHrResponse) SetUpdatedAt(updatedAt time.Time) {
+	t.UpdatedAt = updatedAt
+	t.require(timesheetsGetHrResponseFieldUpdatedAt)
 }
 
-func (p *PostV1HrTimesheetsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (t *TimesheetsGetHrResponse) UnmarshalJSON(data []byte) error {
+	type embed TimesheetsGetHrResponse
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsGetHrResponse(unmarshaler.embed)
+	t.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsGetResponse
+func (t *TimesheetsGetHrResponse) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsGetHrResponse
 	var marshaler = struct {
 		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*t),
+		UpdatedAt: internal.NewDateTime(t.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsGetResponse) String() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1HrTimesheetsGetResponseDaysItemFieldDay   = big.NewInt(1 << 0)
-	postV1HrTimesheetsGetResponseDaysItemFieldHours = big.NewInt(1 << 1)
-	postV1HrTimesheetsGetResponseDaysItemFieldType  = big.NewInt(1 << 2)
+	timesheetsGetHrResponseDaysItemFieldDay   = big.NewInt(1 << 0)
+	timesheetsGetHrResponseDaysItemFieldHours = big.NewInt(1 << 1)
+	timesheetsGetHrResponseDaysItemFieldType  = big.NewInt(1 << 2)
 )
 
-type PostV1HrTimesheetsGetResponseDaysItem struct {
-	Day   int64                                     `json:"day" url:"day"`
-	Hours string                                    `json:"hours" url:"hours"`
-	Type  PostV1HrTimesheetsGetResponseDaysItemType `json:"type" url:"type"`
+type TimesheetsGetHrResponseDaysItem struct {
+	Day   int64                               `json:"day" url:"day"`
+	Hours string                              `json:"hours" url:"hours"`
+	Type  TimesheetsGetHrResponseDaysItemType `json:"type" url:"type"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13860,144 +14117,144 @@ type PostV1HrTimesheetsGetResponseDaysItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) GetDay() int64 {
-	if p == nil {
+func (t *TimesheetsGetHrResponseDaysItem) GetDay() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Day
+	return t.Day
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) GetHours() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponseDaysItem) GetHours() string {
+	if t == nil {
 		return ""
 	}
-	return p.Hours
+	return t.Hours
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) GetType() PostV1HrTimesheetsGetResponseDaysItemType {
-	if p == nil {
+func (t *TimesheetsGetHrResponseDaysItem) GetType() TimesheetsGetHrResponseDaysItemType {
+	if t == nil {
 		return ""
 	}
-	return p.Type
+	return t.Type
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsGetHrResponseDaysItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsGetHrResponseDaysItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetDay sets the Day field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponseDaysItem) SetDay(day int64) {
-	p.Day = day
-	p.require(postV1HrTimesheetsGetResponseDaysItemFieldDay)
+func (t *TimesheetsGetHrResponseDaysItem) SetDay(day int64) {
+	t.Day = day
+	t.require(timesheetsGetHrResponseDaysItemFieldDay)
 }
 
 // SetHours sets the Hours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponseDaysItem) SetHours(hours string) {
-	p.Hours = hours
-	p.require(postV1HrTimesheetsGetResponseDaysItemFieldHours)
+func (t *TimesheetsGetHrResponseDaysItem) SetHours(hours string) {
+	t.Hours = hours
+	t.require(timesheetsGetHrResponseDaysItemFieldHours)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsGetResponseDaysItem) SetType(type_ PostV1HrTimesheetsGetResponseDaysItemType) {
-	p.Type = type_
-	p.require(postV1HrTimesheetsGetResponseDaysItemFieldType)
+func (t *TimesheetsGetHrResponseDaysItem) SetType(type_ TimesheetsGetHrResponseDaysItemType) {
+	t.Type = type_
+	t.require(timesheetsGetHrResponseDaysItemFieldType)
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsGetResponseDaysItem
+func (t *TimesheetsGetHrResponseDaysItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsGetHrResponseDaysItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsGetResponseDaysItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsGetHrResponseDaysItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsGetResponseDaysItem
+func (t *TimesheetsGetHrResponseDaysItem) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsGetHrResponseDaysItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsGetResponseDaysItem) String() string {
-	if p == nil {
+func (t *TimesheetsGetHrResponseDaysItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
-type PostV1HrTimesheetsGetResponseDaysItemType string
+type TimesheetsGetHrResponseDaysItemType string
 
 const (
-	PostV1HrTimesheetsGetResponseDaysItemTypeWork         PostV1HrTimesheetsGetResponseDaysItemType = "work"
-	PostV1HrTimesheetsGetResponseDaysItemTypeBusinessTrip PostV1HrTimesheetsGetResponseDaysItemType = "business_trip"
-	PostV1HrTimesheetsGetResponseDaysItemTypeVacation     PostV1HrTimesheetsGetResponseDaysItemType = "vacation"
-	PostV1HrTimesheetsGetResponseDaysItemTypeSick         PostV1HrTimesheetsGetResponseDaysItemType = "sick"
-	PostV1HrTimesheetsGetResponseDaysItemTypeHoliday      PostV1HrTimesheetsGetResponseDaysItemType = "holiday"
-	PostV1HrTimesheetsGetResponseDaysItemTypeUnpaid       PostV1HrTimesheetsGetResponseDaysItemType = "unpaid"
+	TimesheetsGetHrResponseDaysItemTypeWork         TimesheetsGetHrResponseDaysItemType = "work"
+	TimesheetsGetHrResponseDaysItemTypeBusinessTrip TimesheetsGetHrResponseDaysItemType = "business_trip"
+	TimesheetsGetHrResponseDaysItemTypeVacation     TimesheetsGetHrResponseDaysItemType = "vacation"
+	TimesheetsGetHrResponseDaysItemTypeSick         TimesheetsGetHrResponseDaysItemType = "sick"
+	TimesheetsGetHrResponseDaysItemTypeHoliday      TimesheetsGetHrResponseDaysItemType = "holiday"
+	TimesheetsGetHrResponseDaysItemTypeUnpaid       TimesheetsGetHrResponseDaysItemType = "unpaid"
 )
 
-func NewPostV1HrTimesheetsGetResponseDaysItemTypeFromString(s string) (PostV1HrTimesheetsGetResponseDaysItemType, error) {
+func NewTimesheetsGetHrResponseDaysItemTypeFromString(s string) (TimesheetsGetHrResponseDaysItemType, error) {
 	switch s {
 	case "work":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeWork, nil
+		return TimesheetsGetHrResponseDaysItemTypeWork, nil
 	case "business_trip":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeBusinessTrip, nil
+		return TimesheetsGetHrResponseDaysItemTypeBusinessTrip, nil
 	case "vacation":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeVacation, nil
+		return TimesheetsGetHrResponseDaysItemTypeVacation, nil
 	case "sick":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeSick, nil
+		return TimesheetsGetHrResponseDaysItemTypeSick, nil
 	case "holiday":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeHoliday, nil
+		return TimesheetsGetHrResponseDaysItemTypeHoliday, nil
 	case "unpaid":
-		return PostV1HrTimesheetsGetResponseDaysItemTypeUnpaid, nil
+		return TimesheetsGetHrResponseDaysItemTypeUnpaid, nil
 	}
-	var t PostV1HrTimesheetsGetResponseDaysItemType
+	var t TimesheetsGetHrResponseDaysItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrTimesheetsGetResponseDaysItemType) Ptr() *PostV1HrTimesheetsGetResponseDaysItemType {
-	return &p
+func (t TimesheetsGetHrResponseDaysItemType) Ptr() *TimesheetsGetHrResponseDaysItemType {
+	return &t
 }
 
 var (
-	postV1HrTimesheetsListResponseFieldRows = big.NewInt(1 << 0)
+	timesheetsListHrResponseFieldRows = big.NewInt(1 << 0)
 )
 
-type PostV1HrTimesheetsListResponse struct {
-	Rows []*PostV1HrTimesheetsListResponseRowsItem `json:"rows" url:"rows"`
+type TimesheetsListHrResponse struct {
+	Rows []*TimesheetsListHrResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14006,610 +14263,98 @@ type PostV1HrTimesheetsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsListResponse) GetRows() []*PostV1HrTimesheetsListResponseRowsItem {
-	if p == nil {
+func (t *TimesheetsListHrResponse) GetRows() []*TimesheetsListHrResponseRowsItem {
+	if t == nil {
 		return nil
 	}
-	return p.Rows
+	return t.Rows
 }
 
-func (p *PostV1HrTimesheetsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsListHrResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsListHrResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponse) SetRows(rows []*PostV1HrTimesheetsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1HrTimesheetsListResponseFieldRows)
+func (t *TimesheetsListHrResponse) SetRows(rows []*TimesheetsListHrResponseRowsItem) {
+	t.Rows = rows
+	t.require(timesheetsListHrResponseFieldRows)
 }
 
-func (p *PostV1HrTimesheetsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsListResponse
+func (t *TimesheetsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsListHrResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsListResponse
+func (t *TimesheetsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsListHrResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsListResponse) String() string {
-	if p == nil {
+func (t *TimesheetsListHrResponse) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1HrTimesheetsListResponseRowsItemFieldID           = big.NewInt(1 << 0)
-	postV1HrTimesheetsListResponseRowsItemFieldEmployeeID   = big.NewInt(1 << 1)
-	postV1HrTimesheetsListResponseRowsItemFieldEmployeeName = big.NewInt(1 << 2)
-	postV1HrTimesheetsListResponseRowsItemFieldYear         = big.NewInt(1 << 3)
-	postV1HrTimesheetsListResponseRowsItemFieldMonth        = big.NewInt(1 << 4)
-	postV1HrTimesheetsListResponseRowsItemFieldDays         = big.NewInt(1 << 5)
-	postV1HrTimesheetsListResponseRowsItemFieldWorkedDays   = big.NewInt(1 << 6)
-	postV1HrTimesheetsListResponseRowsItemFieldWorkedHours  = big.NewInt(1 << 7)
-	postV1HrTimesheetsListResponseRowsItemFieldUpdatedAt    = big.NewInt(1 << 8)
+	timesheetsListHrResponseRowsItemFieldID           = big.NewInt(1 << 0)
+	timesheetsListHrResponseRowsItemFieldEmployeeID   = big.NewInt(1 << 1)
+	timesheetsListHrResponseRowsItemFieldEmployeeName = big.NewInt(1 << 2)
+	timesheetsListHrResponseRowsItemFieldYear         = big.NewInt(1 << 3)
+	timesheetsListHrResponseRowsItemFieldMonth        = big.NewInt(1 << 4)
+	timesheetsListHrResponseRowsItemFieldDays         = big.NewInt(1 << 5)
+	timesheetsListHrResponseRowsItemFieldWorkedDays   = big.NewInt(1 << 6)
+	timesheetsListHrResponseRowsItemFieldWorkedHours  = big.NewInt(1 << 7)
+	timesheetsListHrResponseRowsItemFieldUpdatedAt    = big.NewInt(1 << 8)
 )
 
-type PostV1HrTimesheetsListResponseRowsItem struct {
-	ID           string                                            `json:"id" url:"id"`
-	EmployeeID   string                                            `json:"employeeId" url:"employeeId"`
-	EmployeeName string                                            `json:"employeeName" url:"employeeName"`
-	Year         int64                                             `json:"year" url:"year"`
-	Month        int64                                             `json:"month" url:"month"`
-	Days         []*PostV1HrTimesheetsListResponseRowsItemDaysItem `json:"days" url:"days"`
-	WorkedDays   string                                            `json:"workedDays" url:"workedDays"`
-	WorkedHours  string                                            `json:"workedHours" url:"workedHours"`
-	UpdatedAt    string                                            `json:"updatedAt" url:"updatedAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetEmployeeID() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeID
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetEmployeeName() string {
-	if p == nil {
-		return ""
-	}
-	return p.EmployeeName
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetYear() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Year
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetMonth() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Month
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetDays() []*PostV1HrTimesheetsListResponseRowsItemDaysItem {
-	if p == nil {
-		return nil
-	}
-	return p.Days
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetWorkedDays() string {
-	if p == nil {
-		return ""
-	}
-	return p.WorkedDays
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetWorkedHours() string {
-	if p == nil {
-		return ""
-	}
-	return p.WorkedHours
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldID)
-}
-
-// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldEmployeeID)
-}
-
-// SetEmployeeName sets the EmployeeName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldEmployeeName)
-}
-
-// SetYear sets the Year field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldYear)
-}
-
-// SetMonth sets the Month field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldMonth)
-}
-
-// SetDays sets the Days field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetDays(days []*PostV1HrTimesheetsListResponseRowsItemDaysItem) {
-	p.Days = days
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldDays)
-}
-
-// SetWorkedDays sets the WorkedDays field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetWorkedDays(workedDays string) {
-	p.WorkedDays = workedDays
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldWorkedDays)
-}
-
-// SetWorkedHours sets the WorkedHours field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetWorkedHours(workedHours string) {
-	p.WorkedHours = workedHours
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldWorkedHours)
-}
-
-// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1HrTimesheetsListResponseRowsItemFieldUpdatedAt)
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrTimesheetsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1HrTimesheetsListResponseRowsItemDaysItemFieldDay   = big.NewInt(1 << 0)
-	postV1HrTimesheetsListResponseRowsItemDaysItemFieldHours = big.NewInt(1 << 1)
-	postV1HrTimesheetsListResponseRowsItemDaysItemFieldType  = big.NewInt(1 << 2)
-)
-
-type PostV1HrTimesheetsListResponseRowsItemDaysItem struct {
-	Day   int64                                              `json:"day" url:"day"`
-	Hours string                                             `json:"hours" url:"hours"`
-	Type  PostV1HrTimesheetsListResponseRowsItemDaysItemType `json:"type" url:"type"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) GetDay() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Day
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) GetHours() string {
-	if p == nil {
-		return ""
-	}
-	return p.Hours
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) GetType() PostV1HrTimesheetsListResponseRowsItemDaysItemType {
-	if p == nil {
-		return ""
-	}
-	return p.Type
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetDay sets the Day field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) SetDay(day int64) {
-	p.Day = day
-	p.require(postV1HrTimesheetsListResponseRowsItemDaysItemFieldDay)
-}
-
-// SetHours sets the Hours field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) SetHours(hours string) {
-	p.Hours = hours
-	p.require(postV1HrTimesheetsListResponseRowsItemDaysItemFieldHours)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) SetType(type_ PostV1HrTimesheetsListResponseRowsItemDaysItemType) {
-	p.Type = type_
-	p.require(postV1HrTimesheetsListResponseRowsItemDaysItemFieldType)
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsListResponseRowsItemDaysItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrTimesheetsListResponseRowsItemDaysItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsListResponseRowsItemDaysItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrTimesheetsListResponseRowsItemDaysItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrTimesheetsListResponseRowsItemDaysItemType string
-
-const (
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeWork         PostV1HrTimesheetsListResponseRowsItemDaysItemType = "work"
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeBusinessTrip PostV1HrTimesheetsListResponseRowsItemDaysItemType = "business_trip"
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeVacation     PostV1HrTimesheetsListResponseRowsItemDaysItemType = "vacation"
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeSick         PostV1HrTimesheetsListResponseRowsItemDaysItemType = "sick"
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeHoliday      PostV1HrTimesheetsListResponseRowsItemDaysItemType = "holiday"
-	PostV1HrTimesheetsListResponseRowsItemDaysItemTypeUnpaid       PostV1HrTimesheetsListResponseRowsItemDaysItemType = "unpaid"
-)
-
-func NewPostV1HrTimesheetsListResponseRowsItemDaysItemTypeFromString(s string) (PostV1HrTimesheetsListResponseRowsItemDaysItemType, error) {
-	switch s {
-	case "work":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeWork, nil
-	case "business_trip":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeBusinessTrip, nil
-	case "vacation":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeVacation, nil
-	case "sick":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeSick, nil
-	case "holiday":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeHoliday, nil
-	case "unpaid":
-		return PostV1HrTimesheetsListResponseRowsItemDaysItemTypeUnpaid, nil
-	}
-	var t PostV1HrTimesheetsListResponseRowsItemDaysItemType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrTimesheetsListResponseRowsItemDaysItemType) Ptr() *PostV1HrTimesheetsListResponseRowsItemDaysItemType {
-	return &p
-}
-
-var (
-	postV1HrTimesheetsUpsertRequestDaysItemFieldDay   = big.NewInt(1 << 0)
-	postV1HrTimesheetsUpsertRequestDaysItemFieldHours = big.NewInt(1 << 1)
-	postV1HrTimesheetsUpsertRequestDaysItemFieldType  = big.NewInt(1 << 2)
-)
-
-type PostV1HrTimesheetsUpsertRequestDaysItem struct {
-	Day   int64                                       `json:"day" url:"day"`
-	Hours string                                      `json:"hours" url:"hours"`
-	Type  PostV1HrTimesheetsUpsertRequestDaysItemType `json:"type" url:"type"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) GetDay() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.Day
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) GetHours() string {
-	if p == nil {
-		return ""
-	}
-	return p.Hours
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) GetType() PostV1HrTimesheetsUpsertRequestDaysItemType {
-	if p == nil {
-		return ""
-	}
-	return p.Type
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetDay sets the Day field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) SetDay(day int64) {
-	p.Day = day
-	p.require(postV1HrTimesheetsUpsertRequestDaysItemFieldDay)
-}
-
-// SetHours sets the Hours field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) SetHours(hours string) {
-	p.Hours = hours
-	p.require(postV1HrTimesheetsUpsertRequestDaysItemFieldHours)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) SetType(type_ PostV1HrTimesheetsUpsertRequestDaysItemType) {
-	p.Type = type_
-	p.require(postV1HrTimesheetsUpsertRequestDaysItemFieldType)
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsUpsertRequestDaysItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1HrTimesheetsUpsertRequestDaysItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsUpsertRequestDaysItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1HrTimesheetsUpsertRequestDaysItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1HrTimesheetsUpsertRequestDaysItemType string
-
-const (
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeWork         PostV1HrTimesheetsUpsertRequestDaysItemType = "work"
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeBusinessTrip PostV1HrTimesheetsUpsertRequestDaysItemType = "business_trip"
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeVacation     PostV1HrTimesheetsUpsertRequestDaysItemType = "vacation"
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeSick         PostV1HrTimesheetsUpsertRequestDaysItemType = "sick"
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeHoliday      PostV1HrTimesheetsUpsertRequestDaysItemType = "holiday"
-	PostV1HrTimesheetsUpsertRequestDaysItemTypeUnpaid       PostV1HrTimesheetsUpsertRequestDaysItemType = "unpaid"
-)
-
-func NewPostV1HrTimesheetsUpsertRequestDaysItemTypeFromString(s string) (PostV1HrTimesheetsUpsertRequestDaysItemType, error) {
-	switch s {
-	case "work":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeWork, nil
-	case "business_trip":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeBusinessTrip, nil
-	case "vacation":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeVacation, nil
-	case "sick":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeSick, nil
-	case "holiday":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeHoliday, nil
-	case "unpaid":
-		return PostV1HrTimesheetsUpsertRequestDaysItemTypeUnpaid, nil
-	}
-	var t PostV1HrTimesheetsUpsertRequestDaysItemType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1HrTimesheetsUpsertRequestDaysItemType) Ptr() *PostV1HrTimesheetsUpsertRequestDaysItemType {
-	return &p
-}
-
-var (
-	postV1HrTimesheetsUpsertResponseFieldID           = big.NewInt(1 << 0)
-	postV1HrTimesheetsUpsertResponseFieldEmployeeID   = big.NewInt(1 << 1)
-	postV1HrTimesheetsUpsertResponseFieldEmployeeName = big.NewInt(1 << 2)
-	postV1HrTimesheetsUpsertResponseFieldYear         = big.NewInt(1 << 3)
-	postV1HrTimesheetsUpsertResponseFieldMonth        = big.NewInt(1 << 4)
-	postV1HrTimesheetsUpsertResponseFieldDays         = big.NewInt(1 << 5)
-	postV1HrTimesheetsUpsertResponseFieldWorkedDays   = big.NewInt(1 << 6)
-	postV1HrTimesheetsUpsertResponseFieldWorkedHours  = big.NewInt(1 << 7)
-	postV1HrTimesheetsUpsertResponseFieldUpdatedAt    = big.NewInt(1 << 8)
-)
-
-type PostV1HrTimesheetsUpsertResponse struct {
+type TimesheetsListHrResponseRowsItem struct {
 	ID           string                                      `json:"id" url:"id"`
 	EmployeeID   string                                      `json:"employeeId" url:"employeeId"`
 	EmployeeName string                                      `json:"employeeName" url:"employeeName"`
 	Year         int64                                       `json:"year" url:"year"`
 	Month        int64                                       `json:"month" url:"month"`
-	Days         []*PostV1HrTimesheetsUpsertResponseDaysItem `json:"days" url:"days"`
+	Days         []*TimesheetsListHrResponseRowsItemDaysItem `json:"days" url:"days"`
 	WorkedDays   string                                      `json:"workedDays" url:"workedDays"`
 	WorkedHours  string                                      `json:"workedHours" url:"workedHours"`
-	UpdatedAt    string                                      `json:"updatedAt" url:"updatedAt"`
+	UpdatedAt    time.Time                                   `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14618,198 +14363,206 @@ type PostV1HrTimesheetsUpsertResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetID() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return p.ID
+	return t.ID
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetEmployeeID() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetEmployeeID() string {
+	if t == nil {
 		return ""
 	}
-	return p.EmployeeID
+	return t.EmployeeID
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetEmployeeName() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetEmployeeName() string {
+	if t == nil {
 		return ""
 	}
-	return p.EmployeeName
+	return t.EmployeeName
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetYear() int64 {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetYear() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Year
+	return t.Year
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetMonth() int64 {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetMonth() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Month
+	return t.Month
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetDays() []*PostV1HrTimesheetsUpsertResponseDaysItem {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetDays() []*TimesheetsListHrResponseRowsItemDaysItem {
+	if t == nil {
 		return nil
 	}
-	return p.Days
+	return t.Days
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetWorkedDays() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetWorkedDays() string {
+	if t == nil {
 		return ""
 	}
-	return p.WorkedDays
+	return t.WorkedDays
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetWorkedHours() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetWorkedHours() string {
+	if t == nil {
 		return ""
 	}
-	return p.WorkedHours
+	return t.WorkedHours
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (t *TimesheetsListHrResponseRowsItem) GetUpdatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return t.UpdatedAt
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsListHrResponseRowsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1HrTimesheetsUpsertResponseFieldID)
+func (t *TimesheetsListHrResponseRowsItem) SetID(id string) {
+	t.ID = id
+	t.require(timesheetsListHrResponseRowsItemFieldID)
 }
 
 // SetEmployeeID sets the EmployeeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetEmployeeID(employeeID string) {
-	p.EmployeeID = employeeID
-	p.require(postV1HrTimesheetsUpsertResponseFieldEmployeeID)
+func (t *TimesheetsListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsListHrResponseRowsItemFieldEmployeeID)
 }
 
 // SetEmployeeName sets the EmployeeName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetEmployeeName(employeeName string) {
-	p.EmployeeName = employeeName
-	p.require(postV1HrTimesheetsUpsertResponseFieldEmployeeName)
+func (t *TimesheetsListHrResponseRowsItem) SetEmployeeName(employeeName string) {
+	t.EmployeeName = employeeName
+	t.require(timesheetsListHrResponseRowsItemFieldEmployeeName)
 }
 
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetYear(year int64) {
-	p.Year = year
-	p.require(postV1HrTimesheetsUpsertResponseFieldYear)
+func (t *TimesheetsListHrResponseRowsItem) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsListHrResponseRowsItemFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetMonth(month int64) {
-	p.Month = month
-	p.require(postV1HrTimesheetsUpsertResponseFieldMonth)
+func (t *TimesheetsListHrResponseRowsItem) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsListHrResponseRowsItemFieldMonth)
 }
 
 // SetDays sets the Days field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetDays(days []*PostV1HrTimesheetsUpsertResponseDaysItem) {
-	p.Days = days
-	p.require(postV1HrTimesheetsUpsertResponseFieldDays)
+func (t *TimesheetsListHrResponseRowsItem) SetDays(days []*TimesheetsListHrResponseRowsItemDaysItem) {
+	t.Days = days
+	t.require(timesheetsListHrResponseRowsItemFieldDays)
 }
 
 // SetWorkedDays sets the WorkedDays field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetWorkedDays(workedDays string) {
-	p.WorkedDays = workedDays
-	p.require(postV1HrTimesheetsUpsertResponseFieldWorkedDays)
+func (t *TimesheetsListHrResponseRowsItem) SetWorkedDays(workedDays string) {
+	t.WorkedDays = workedDays
+	t.require(timesheetsListHrResponseRowsItemFieldWorkedDays)
 }
 
 // SetWorkedHours sets the WorkedHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetWorkedHours(workedHours string) {
-	p.WorkedHours = workedHours
-	p.require(postV1HrTimesheetsUpsertResponseFieldWorkedHours)
+func (t *TimesheetsListHrResponseRowsItem) SetWorkedHours(workedHours string) {
+	t.WorkedHours = workedHours
+	t.require(timesheetsListHrResponseRowsItemFieldWorkedHours)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1HrTimesheetsUpsertResponseFieldUpdatedAt)
+func (t *TimesheetsListHrResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	t.UpdatedAt = updatedAt
+	t.require(timesheetsListHrResponseRowsItemFieldUpdatedAt)
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsUpsertResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (t *TimesheetsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed TimesheetsListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsUpsertResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsListHrResponseRowsItem(unmarshaler.embed)
+	t.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsUpsertResponse
+func (t *TimesheetsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsListHrResponseRowsItem
 	var marshaler = struct {
 		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*t),
+		UpdatedAt: internal.NewDateTime(t.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsUpsertResponse) String() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
 var (
-	postV1HrTimesheetsUpsertResponseDaysItemFieldDay   = big.NewInt(1 << 0)
-	postV1HrTimesheetsUpsertResponseDaysItemFieldHours = big.NewInt(1 << 1)
-	postV1HrTimesheetsUpsertResponseDaysItemFieldType  = big.NewInt(1 << 2)
+	timesheetsListHrResponseRowsItemDaysItemFieldDay   = big.NewInt(1 << 0)
+	timesheetsListHrResponseRowsItemDaysItemFieldHours = big.NewInt(1 << 1)
+	timesheetsListHrResponseRowsItemDaysItemFieldType  = big.NewInt(1 << 2)
 )
 
-type PostV1HrTimesheetsUpsertResponseDaysItem struct {
+type TimesheetsListHrResponseRowsItemDaysItem struct {
 	Day   int64                                        `json:"day" url:"day"`
 	Hours string                                       `json:"hours" url:"hours"`
-	Type  PostV1HrTimesheetsUpsertResponseDaysItemType `json:"type" url:"type"`
+	Type  TimesheetsListHrResponseRowsItemDaysItemType `json:"type" url:"type"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14818,134 +14571,654 @@ type PostV1HrTimesheetsUpsertResponseDaysItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) GetDay() int64 {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItemDaysItem) GetDay() int64 {
+	if t == nil {
 		return 0
 	}
-	return p.Day
+	return t.Day
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) GetHours() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItemDaysItem) GetHours() string {
+	if t == nil {
 		return ""
 	}
-	return p.Hours
+	return t.Hours
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) GetType() PostV1HrTimesheetsUpsertResponseDaysItemType {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItemDaysItem) GetType() TimesheetsListHrResponseRowsItemDaysItemType {
+	if t == nil {
 		return ""
 	}
-	return p.Type
+	return t.Type
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItemDaysItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
 		return nil
 	}
-	return p.extraProperties
+	return t.extraProperties
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (t *TimesheetsListHrResponseRowsItemDaysItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	t.explicitFields.Or(t.explicitFields, field)
 }
 
 // SetDay sets the Day field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) SetDay(day int64) {
-	p.Day = day
-	p.require(postV1HrTimesheetsUpsertResponseDaysItemFieldDay)
+func (t *TimesheetsListHrResponseRowsItemDaysItem) SetDay(day int64) {
+	t.Day = day
+	t.require(timesheetsListHrResponseRowsItemDaysItemFieldDay)
 }
 
 // SetHours sets the Hours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) SetHours(hours string) {
-	p.Hours = hours
-	p.require(postV1HrTimesheetsUpsertResponseDaysItemFieldHours)
+func (t *TimesheetsListHrResponseRowsItemDaysItem) SetHours(hours string) {
+	t.Hours = hours
+	t.require(timesheetsListHrResponseRowsItemDaysItemFieldHours)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) SetType(type_ PostV1HrTimesheetsUpsertResponseDaysItemType) {
-	p.Type = type_
-	p.require(postV1HrTimesheetsUpsertResponseDaysItemFieldType)
+func (t *TimesheetsListHrResponseRowsItemDaysItem) SetType(type_ TimesheetsListHrResponseRowsItemDaysItemType) {
+	t.Type = type_
+	t.require(timesheetsListHrResponseRowsItemDaysItemFieldType)
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1HrTimesheetsUpsertResponseDaysItem
+func (t *TimesheetsListHrResponseRowsItemDaysItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsListHrResponseRowsItemDaysItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1HrTimesheetsUpsertResponseDaysItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*t = TimesheetsListHrResponseRowsItemDaysItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1HrTimesheetsUpsertResponseDaysItem
+func (t *TimesheetsListHrResponseRowsItemDaysItem) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsListHrResponseRowsItemDaysItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*t),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1HrTimesheetsUpsertResponseDaysItem) String() string {
-	if p == nil {
+func (t *TimesheetsListHrResponseRowsItemDaysItem) String() string {
+	if t == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(t); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", t)
 }
 
-type PostV1HrTimesheetsUpsertResponseDaysItemType string
+type TimesheetsListHrResponseRowsItemDaysItemType string
 
 const (
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeWork         PostV1HrTimesheetsUpsertResponseDaysItemType = "work"
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeBusinessTrip PostV1HrTimesheetsUpsertResponseDaysItemType = "business_trip"
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeVacation     PostV1HrTimesheetsUpsertResponseDaysItemType = "vacation"
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeSick         PostV1HrTimesheetsUpsertResponseDaysItemType = "sick"
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeHoliday      PostV1HrTimesheetsUpsertResponseDaysItemType = "holiday"
-	PostV1HrTimesheetsUpsertResponseDaysItemTypeUnpaid       PostV1HrTimesheetsUpsertResponseDaysItemType = "unpaid"
+	TimesheetsListHrResponseRowsItemDaysItemTypeWork         TimesheetsListHrResponseRowsItemDaysItemType = "work"
+	TimesheetsListHrResponseRowsItemDaysItemTypeBusinessTrip TimesheetsListHrResponseRowsItemDaysItemType = "business_trip"
+	TimesheetsListHrResponseRowsItemDaysItemTypeVacation     TimesheetsListHrResponseRowsItemDaysItemType = "vacation"
+	TimesheetsListHrResponseRowsItemDaysItemTypeSick         TimesheetsListHrResponseRowsItemDaysItemType = "sick"
+	TimesheetsListHrResponseRowsItemDaysItemTypeHoliday      TimesheetsListHrResponseRowsItemDaysItemType = "holiday"
+	TimesheetsListHrResponseRowsItemDaysItemTypeUnpaid       TimesheetsListHrResponseRowsItemDaysItemType = "unpaid"
 )
 
-func NewPostV1HrTimesheetsUpsertResponseDaysItemTypeFromString(s string) (PostV1HrTimesheetsUpsertResponseDaysItemType, error) {
+func NewTimesheetsListHrResponseRowsItemDaysItemTypeFromString(s string) (TimesheetsListHrResponseRowsItemDaysItemType, error) {
 	switch s {
 	case "work":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeWork, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeWork, nil
 	case "business_trip":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeBusinessTrip, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeBusinessTrip, nil
 	case "vacation":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeVacation, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeVacation, nil
 	case "sick":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeSick, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeSick, nil
 	case "holiday":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeHoliday, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeHoliday, nil
 	case "unpaid":
-		return PostV1HrTimesheetsUpsertResponseDaysItemTypeUnpaid, nil
+		return TimesheetsListHrResponseRowsItemDaysItemTypeUnpaid, nil
 	}
-	var t PostV1HrTimesheetsUpsertResponseDaysItemType
+	var t TimesheetsListHrResponseRowsItemDaysItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1HrTimesheetsUpsertResponseDaysItemType) Ptr() *PostV1HrTimesheetsUpsertResponseDaysItemType {
-	return &p
+func (t TimesheetsListHrResponseRowsItemDaysItemType) Ptr() *TimesheetsListHrResponseRowsItemDaysItemType {
+	return &t
+}
+
+var (
+	timesheetsUpsertHrRequestDaysItemFieldDay   = big.NewInt(1 << 0)
+	timesheetsUpsertHrRequestDaysItemFieldHours = big.NewInt(1 << 1)
+	timesheetsUpsertHrRequestDaysItemFieldType  = big.NewInt(1 << 2)
+)
+
+type TimesheetsUpsertHrRequestDaysItem struct {
+	Day   int64                                 `json:"day" url:"day"`
+	Hours string                                `json:"hours" url:"hours"`
+	Type  TimesheetsUpsertHrRequestDaysItemType `json:"type" url:"type"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) GetDay() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.Day
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) GetHours() string {
+	if t == nil {
+		return ""
+	}
+	return t.Hours
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) GetType() TimesheetsUpsertHrRequestDaysItemType {
+	if t == nil {
+		return ""
+	}
+	return t.Type
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetDay sets the Day field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrRequestDaysItem) SetDay(day int64) {
+	t.Day = day
+	t.require(timesheetsUpsertHrRequestDaysItemFieldDay)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrRequestDaysItem) SetHours(hours string) {
+	t.Hours = hours
+	t.require(timesheetsUpsertHrRequestDaysItemFieldHours)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrRequestDaysItem) SetType(type_ TimesheetsUpsertHrRequestDaysItemType) {
+	t.Type = type_
+	t.require(timesheetsUpsertHrRequestDaysItemFieldType)
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsUpsertHrRequestDaysItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TimesheetsUpsertHrRequestDaysItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsUpsertHrRequestDaysItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TimesheetsUpsertHrRequestDaysItem) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TimesheetsUpsertHrRequestDaysItemType string
+
+const (
+	TimesheetsUpsertHrRequestDaysItemTypeWork         TimesheetsUpsertHrRequestDaysItemType = "work"
+	TimesheetsUpsertHrRequestDaysItemTypeBusinessTrip TimesheetsUpsertHrRequestDaysItemType = "business_trip"
+	TimesheetsUpsertHrRequestDaysItemTypeVacation     TimesheetsUpsertHrRequestDaysItemType = "vacation"
+	TimesheetsUpsertHrRequestDaysItemTypeSick         TimesheetsUpsertHrRequestDaysItemType = "sick"
+	TimesheetsUpsertHrRequestDaysItemTypeHoliday      TimesheetsUpsertHrRequestDaysItemType = "holiday"
+	TimesheetsUpsertHrRequestDaysItemTypeUnpaid       TimesheetsUpsertHrRequestDaysItemType = "unpaid"
+)
+
+func NewTimesheetsUpsertHrRequestDaysItemTypeFromString(s string) (TimesheetsUpsertHrRequestDaysItemType, error) {
+	switch s {
+	case "work":
+		return TimesheetsUpsertHrRequestDaysItemTypeWork, nil
+	case "business_trip":
+		return TimesheetsUpsertHrRequestDaysItemTypeBusinessTrip, nil
+	case "vacation":
+		return TimesheetsUpsertHrRequestDaysItemTypeVacation, nil
+	case "sick":
+		return TimesheetsUpsertHrRequestDaysItemTypeSick, nil
+	case "holiday":
+		return TimesheetsUpsertHrRequestDaysItemTypeHoliday, nil
+	case "unpaid":
+		return TimesheetsUpsertHrRequestDaysItemTypeUnpaid, nil
+	}
+	var t TimesheetsUpsertHrRequestDaysItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TimesheetsUpsertHrRequestDaysItemType) Ptr() *TimesheetsUpsertHrRequestDaysItemType {
+	return &t
+}
+
+var (
+	timesheetsUpsertHrResponseFieldID           = big.NewInt(1 << 0)
+	timesheetsUpsertHrResponseFieldEmployeeID   = big.NewInt(1 << 1)
+	timesheetsUpsertHrResponseFieldEmployeeName = big.NewInt(1 << 2)
+	timesheetsUpsertHrResponseFieldYear         = big.NewInt(1 << 3)
+	timesheetsUpsertHrResponseFieldMonth        = big.NewInt(1 << 4)
+	timesheetsUpsertHrResponseFieldDays         = big.NewInt(1 << 5)
+	timesheetsUpsertHrResponseFieldWorkedDays   = big.NewInt(1 << 6)
+	timesheetsUpsertHrResponseFieldWorkedHours  = big.NewInt(1 << 7)
+	timesheetsUpsertHrResponseFieldUpdatedAt    = big.NewInt(1 << 8)
+)
+
+type TimesheetsUpsertHrResponse struct {
+	ID           string                                `json:"id" url:"id"`
+	EmployeeID   string                                `json:"employeeId" url:"employeeId"`
+	EmployeeName string                                `json:"employeeName" url:"employeeName"`
+	Year         int64                                 `json:"year" url:"year"`
+	Month        int64                                 `json:"month" url:"month"`
+	Days         []*TimesheetsUpsertHrResponseDaysItem `json:"days" url:"days"`
+	WorkedDays   string                                `json:"workedDays" url:"workedDays"`
+	WorkedHours  string                                `json:"workedHours" url:"workedHours"`
+	UpdatedAt    time.Time                             `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TimesheetsUpsertHrResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TimesheetsUpsertHrResponse) GetEmployeeID() string {
+	if t == nil {
+		return ""
+	}
+	return t.EmployeeID
+}
+
+func (t *TimesheetsUpsertHrResponse) GetEmployeeName() string {
+	if t == nil {
+		return ""
+	}
+	return t.EmployeeName
+}
+
+func (t *TimesheetsUpsertHrResponse) GetYear() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.Year
+}
+
+func (t *TimesheetsUpsertHrResponse) GetMonth() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.Month
+}
+
+func (t *TimesheetsUpsertHrResponse) GetDays() []*TimesheetsUpsertHrResponseDaysItem {
+	if t == nil {
+		return nil
+	}
+	return t.Days
+}
+
+func (t *TimesheetsUpsertHrResponse) GetWorkedDays() string {
+	if t == nil {
+		return ""
+	}
+	return t.WorkedDays
+}
+
+func (t *TimesheetsUpsertHrResponse) GetWorkedHours() string {
+	if t == nil {
+		return ""
+	}
+	return t.WorkedHours
+}
+
+func (t *TimesheetsUpsertHrResponse) GetUpdatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.UpdatedAt
+}
+
+func (t *TimesheetsUpsertHrResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TimesheetsUpsertHrResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetID(id string) {
+	t.ID = id
+	t.require(timesheetsUpsertHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetEmployeeID(employeeID string) {
+	t.EmployeeID = employeeID
+	t.require(timesheetsUpsertHrResponseFieldEmployeeID)
+}
+
+// SetEmployeeName sets the EmployeeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetEmployeeName(employeeName string) {
+	t.EmployeeName = employeeName
+	t.require(timesheetsUpsertHrResponseFieldEmployeeName)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetYear(year int64) {
+	t.Year = year
+	t.require(timesheetsUpsertHrResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetMonth(month int64) {
+	t.Month = month
+	t.require(timesheetsUpsertHrResponseFieldMonth)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetDays(days []*TimesheetsUpsertHrResponseDaysItem) {
+	t.Days = days
+	t.require(timesheetsUpsertHrResponseFieldDays)
+}
+
+// SetWorkedDays sets the WorkedDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetWorkedDays(workedDays string) {
+	t.WorkedDays = workedDays
+	t.require(timesheetsUpsertHrResponseFieldWorkedDays)
+}
+
+// SetWorkedHours sets the WorkedHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetWorkedHours(workedHours string) {
+	t.WorkedHours = workedHours
+	t.require(timesheetsUpsertHrResponseFieldWorkedHours)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponse) SetUpdatedAt(updatedAt time.Time) {
+	t.UpdatedAt = updatedAt
+	t.require(timesheetsUpsertHrResponseFieldUpdatedAt)
+}
+
+func (t *TimesheetsUpsertHrResponse) UnmarshalJSON(data []byte) error {
+	type embed TimesheetsUpsertHrResponse
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TimesheetsUpsertHrResponse(unmarshaler.embed)
+	t.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TimesheetsUpsertHrResponse) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsUpsertHrResponse
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*t),
+		UpdatedAt: internal.NewDateTime(t.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TimesheetsUpsertHrResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	timesheetsUpsertHrResponseDaysItemFieldDay   = big.NewInt(1 << 0)
+	timesheetsUpsertHrResponseDaysItemFieldHours = big.NewInt(1 << 1)
+	timesheetsUpsertHrResponseDaysItemFieldType  = big.NewInt(1 << 2)
+)
+
+type TimesheetsUpsertHrResponseDaysItem struct {
+	Day   int64                                  `json:"day" url:"day"`
+	Hours string                                 `json:"hours" url:"hours"`
+	Type  TimesheetsUpsertHrResponseDaysItemType `json:"type" url:"type"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) GetDay() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.Day
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) GetHours() string {
+	if t == nil {
+		return ""
+	}
+	return t.Hours
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) GetType() TimesheetsUpsertHrResponseDaysItemType {
+	if t == nil {
+		return ""
+	}
+	return t.Type
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetDay sets the Day field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponseDaysItem) SetDay(day int64) {
+	t.Day = day
+	t.require(timesheetsUpsertHrResponseDaysItemFieldDay)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponseDaysItem) SetHours(hours string) {
+	t.Hours = hours
+	t.require(timesheetsUpsertHrResponseDaysItemFieldHours)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TimesheetsUpsertHrResponseDaysItem) SetType(type_ TimesheetsUpsertHrResponseDaysItemType) {
+	t.Type = type_
+	t.require(timesheetsUpsertHrResponseDaysItemFieldType)
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TimesheetsUpsertHrResponseDaysItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TimesheetsUpsertHrResponseDaysItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) MarshalJSON() ([]byte, error) {
+	type embed TimesheetsUpsertHrResponseDaysItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TimesheetsUpsertHrResponseDaysItem) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TimesheetsUpsertHrResponseDaysItemType string
+
+const (
+	TimesheetsUpsertHrResponseDaysItemTypeWork         TimesheetsUpsertHrResponseDaysItemType = "work"
+	TimesheetsUpsertHrResponseDaysItemTypeBusinessTrip TimesheetsUpsertHrResponseDaysItemType = "business_trip"
+	TimesheetsUpsertHrResponseDaysItemTypeVacation     TimesheetsUpsertHrResponseDaysItemType = "vacation"
+	TimesheetsUpsertHrResponseDaysItemTypeSick         TimesheetsUpsertHrResponseDaysItemType = "sick"
+	TimesheetsUpsertHrResponseDaysItemTypeHoliday      TimesheetsUpsertHrResponseDaysItemType = "holiday"
+	TimesheetsUpsertHrResponseDaysItemTypeUnpaid       TimesheetsUpsertHrResponseDaysItemType = "unpaid"
+)
+
+func NewTimesheetsUpsertHrResponseDaysItemTypeFromString(s string) (TimesheetsUpsertHrResponseDaysItemType, error) {
+	switch s {
+	case "work":
+		return TimesheetsUpsertHrResponseDaysItemTypeWork, nil
+	case "business_trip":
+		return TimesheetsUpsertHrResponseDaysItemTypeBusinessTrip, nil
+	case "vacation":
+		return TimesheetsUpsertHrResponseDaysItemTypeVacation, nil
+	case "sick":
+		return TimesheetsUpsertHrResponseDaysItemTypeSick, nil
+	case "holiday":
+		return TimesheetsUpsertHrResponseDaysItemTypeHoliday, nil
+	case "unpaid":
+		return TimesheetsUpsertHrResponseDaysItemTypeUnpaid, nil
+	}
+	var t TimesheetsUpsertHrResponseDaysItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TimesheetsUpsertHrResponseDaysItemType) Ptr() *TimesheetsUpsertHrResponseDaysItemType {
+	return &t
 }

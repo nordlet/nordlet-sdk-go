@@ -10,40 +10,15 @@ import (
 )
 
 var (
-	getV1PublicPayTokenRequestFieldToken = big.NewInt(1 << 0)
+	integrationRequestsPublicRequestFieldIntegration = big.NewInt(1 << 0)
+	integrationRequestsPublicRequestFieldName        = big.NewInt(1 << 1)
+	integrationRequestsPublicRequestFieldCompany     = big.NewInt(1 << 2)
+	integrationRequestsPublicRequestFieldEmail       = big.NewInt(1 << 3)
+	integrationRequestsPublicRequestFieldDetails     = big.NewInt(1 << 4)
+	integrationRequestsPublicRequestFieldWebsite     = big.NewInt(1 << 5)
 )
 
-type GetV1PublicPayTokenRequest struct {
-	Token string `json:"-" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (g *GetV1PublicPayTokenRequest) require(field *big.Int) {
-	if g.explicitFields == nil {
-		g.explicitFields = big.NewInt(0)
-	}
-	g.explicitFields.Or(g.explicitFields, field)
-}
-
-// SetToken sets the Token field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetV1PublicPayTokenRequest) SetToken(token string) {
-	g.Token = token
-	g.require(getV1PublicPayTokenRequestFieldToken)
-}
-
-var (
-	postV1PublicIntegrationRequestsRequestFieldIntegration = big.NewInt(1 << 0)
-	postV1PublicIntegrationRequestsRequestFieldName        = big.NewInt(1 << 1)
-	postV1PublicIntegrationRequestsRequestFieldCompany     = big.NewInt(1 << 2)
-	postV1PublicIntegrationRequestsRequestFieldEmail       = big.NewInt(1 << 3)
-	postV1PublicIntegrationRequestsRequestFieldDetails     = big.NewInt(1 << 4)
-	postV1PublicIntegrationRequestsRequestFieldWebsite     = big.NewInt(1 << 5)
-)
-
-type PostV1PublicIntegrationRequestsRequest struct {
+type IntegrationRequestsPublicRequest struct {
 	Integration string  `json:"integration" url:"-"`
 	Name        string  `json:"name" url:"-"`
 	Company     *string `json:"company,omitempty" url:"-"`
@@ -55,81 +30,106 @@ type PostV1PublicIntegrationRequestsRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1PublicIntegrationRequestsRequest) require(field *big.Int) {
+func (i *IntegrationRequestsPublicRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetIntegration sets the Integration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetIntegration(integration string) {
+	i.Integration = integration
+	i.require(integrationRequestsPublicRequestFieldIntegration)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetName(name string) {
+	i.Name = name
+	i.require(integrationRequestsPublicRequestFieldName)
+}
+
+// SetCompany sets the Company field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetCompany(company *string) {
+	i.Company = company
+	i.require(integrationRequestsPublicRequestFieldCompany)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetEmail(email string) {
+	i.Email = email
+	i.require(integrationRequestsPublicRequestFieldEmail)
+}
+
+// SetDetails sets the Details field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetDetails(details *string) {
+	i.Details = details
+	i.require(integrationRequestsPublicRequestFieldDetails)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IntegrationRequestsPublicRequest) SetWebsite(website *string) {
+	i.Website = website
+	i.require(integrationRequestsPublicRequestFieldWebsite)
+}
+
+func (i *IntegrationRequestsPublicRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntegrationRequestsPublicRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = IntegrationRequestsPublicRequest(body)
+	return nil
+}
+
+func (i *IntegrationRequestsPublicRequest) MarshalJSON() ([]byte, error) {
+	type embed IntegrationRequestsPublicRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	payPublicRequestFieldToken = big.NewInt(1 << 0)
+)
+
+type PayPublicRequest struct {
+	Token string `json:"-" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PayPublicRequest) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
-// SetIntegration sets the Integration field and marks it as non-optional;
+// SetToken sets the Token field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetIntegration(integration string) {
-	p.Integration = integration
-	p.require(postV1PublicIntegrationRequestsRequestFieldIntegration)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetName(name string) {
-	p.Name = name
-	p.require(postV1PublicIntegrationRequestsRequestFieldName)
-}
-
-// SetCompany sets the Company field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetCompany(company *string) {
-	p.Company = company
-	p.require(postV1PublicIntegrationRequestsRequestFieldCompany)
-}
-
-// SetEmail sets the Email field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetEmail(email string) {
-	p.Email = email
-	p.require(postV1PublicIntegrationRequestsRequestFieldEmail)
-}
-
-// SetDetails sets the Details field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetDetails(details *string) {
-	p.Details = details
-	p.require(postV1PublicIntegrationRequestsRequestFieldDetails)
-}
-
-// SetWebsite sets the Website field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsRequest) SetWebsite(website *string) {
-	p.Website = website
-	p.require(postV1PublicIntegrationRequestsRequestFieldWebsite)
-}
-
-func (p *PostV1PublicIntegrationRequestsRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PublicIntegrationRequestsRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1PublicIntegrationRequestsRequest(body)
-	return nil
-}
-
-func (p *PostV1PublicIntegrationRequestsRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1PublicIntegrationRequestsRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
+func (p *PayPublicRequest) SetToken(token string) {
+	p.Token = token
+	p.require(payPublicRequestFieldToken)
 }
 
 var (
-	postV1PublicIntegrationRequestsResponseFieldReceived = big.NewInt(1 << 0)
+	integrationRequestsPublicResponseFieldReceived = big.NewInt(1 << 0)
 )
 
-type PostV1PublicIntegrationRequestsResponse struct {
+type IntegrationRequestsPublicResponse struct {
 	Received bool `json:"received" url:"received"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -139,72 +139,72 @@ type PostV1PublicIntegrationRequestsResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) GetReceived() bool {
-	if p == nil {
+func (i *IntegrationRequestsPublicResponse) GetReceived() bool {
+	if i == nil {
 		return false
 	}
-	return p.Received
+	return i.Received
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *IntegrationRequestsPublicResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *IntegrationRequestsPublicResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetReceived sets the Received field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PublicIntegrationRequestsResponse) SetReceived(received bool) {
-	p.Received = received
-	p.require(postV1PublicIntegrationRequestsResponseFieldReceived)
+func (i *IntegrationRequestsPublicResponse) SetReceived(received bool) {
+	i.Received = received
+	i.require(integrationRequestsPublicResponseFieldReceived)
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1PublicIntegrationRequestsResponse
+func (i *IntegrationRequestsPublicResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IntegrationRequestsPublicResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1PublicIntegrationRequestsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = IntegrationRequestsPublicResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1PublicIntegrationRequestsResponse
+func (i *IntegrationRequestsPublicResponse) MarshalJSON() ([]byte, error) {
+	type embed IntegrationRequestsPublicResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1PublicIntegrationRequestsResponse) String() string {
-	if p == nil {
+func (i *IntegrationRequestsPublicResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }

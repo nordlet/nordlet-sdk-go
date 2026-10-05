@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1PurchasesInvoicesCreate(
+func (c *Client) InvoicesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesCreateRequest,
+	request *nordlet.InvoicesCreatePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesCreate(
+) (*nordlet.InvoicesCreatePurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesCreate(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1PurchasesInvoicesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesGet(
+func (c *Client) InvoicesGet(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesGetRequest,
+	request *nordlet.InvoicesGetPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesGet(
+) (*nordlet.InvoicesGetPurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesGet(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1PurchasesInvoicesGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesUpdate(
+func (c *Client) InvoicesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesUpdateRequest,
+	request *nordlet.InvoicesUpdatePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesUpdate(
+) (*nordlet.InvoicesUpdatePurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1PurchasesInvoicesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesDelete(
+func (c *Client) InvoicesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesDeleteRequest,
+	request *nordlet.InvoicesDeletePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesDelete(
+) (*nordlet.InvoicesDeletePurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesDelete(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1PurchasesInvoicesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesRegister(
+func (c *Client) InvoicesRegister(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesRegisterRequest,
+	request *nordlet.InvoicesRegisterPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesRegisterResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesRegister(
+) (*nordlet.InvoicesRegisterPurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesRegister(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1PurchasesInvoicesRegister(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesList(
+func (c *Client) InvoicesList(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesListRequest,
+	request *nordlet.InvoicesListPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesList(
+) (*nordlet.InvoicesListPurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesList(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1PurchasesInvoicesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersCreate(
+func (c *Client) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersCreateRequest,
+	request *nordlet.OrdersCreatePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersCreate(
+) (*nordlet.OrdersCreatePurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersCreate(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1PurchasesOrdersCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersUpdate(
+func (c *Client) OrdersUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersUpdateRequest,
+	request *nordlet.OrdersUpdatePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersUpdate(
+) (*nordlet.OrdersUpdatePurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersUpdate(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1PurchasesOrdersUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersGet(
+func (c *Client) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersGetRequest,
+	request *nordlet.OrdersGetPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersGet(
+) (*nordlet.OrdersGetPurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersGet(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1PurchasesOrdersGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersList(
+func (c *Client) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersListRequest,
+	request *nordlet.OrdersListPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersList(
+) (*nordlet.OrdersListPurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersList(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1PurchasesOrdersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersSubmit(
+func (c *Client) OrdersSubmit(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersSubmitRequest,
+	request *nordlet.OrdersSubmitPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersSubmitResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersSubmit(
+) (*nordlet.OrdersSubmitPurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersSubmit(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1PurchasesOrdersSubmit(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersApprove(
+func (c *Client) OrdersApprove(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersApproveRequest,
+	request *nordlet.OrdersApprovePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersApproveResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersApprove(
+) (*nordlet.OrdersApprovePurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersApprove(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1PurchasesOrdersApprove(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersReject(
+func (c *Client) OrdersReject(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersRejectRequest,
+	request *nordlet.OrdersRejectPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersRejectResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersReject(
+) (*nordlet.OrdersRejectPurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersReject(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1PurchasesOrdersReject(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersCancel(
+func (c *Client) OrdersCancel(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersCancelRequest,
+	request *nordlet.OrdersCancelPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersCancelResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersCancel(
+) (*nordlet.OrdersCancelPurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersCancel(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1PurchasesOrdersCancel(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersClose(
+func (c *Client) OrdersClose(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersCloseRequest,
+	request *nordlet.OrdersClosePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersCloseResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersClose(
+) (*nordlet.OrdersClosePurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersClose(
 		ctx,
 		request,
 		opts...,
@@ -274,12 +274,12 @@ func (c *Client) PostV1PurchasesOrdersClose(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesOrdersDelete(
+func (c *Client) OrdersDelete(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesOrdersDeleteRequest,
+	request *nordlet.OrdersDeletePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesOrdersDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesOrdersDelete(
+) (*nordlet.OrdersDeletePurchasesResponse, error) {
+	response, err := c.WithRawResponse.OrdersDelete(
 		ctx,
 		request,
 		opts...,
@@ -290,12 +290,12 @@ func (c *Client) PostV1PurchasesOrdersDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesReceiptsCreate(
+func (c *Client) ReceiptsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesReceiptsCreateRequest,
+	request *nordlet.ReceiptsCreatePurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesReceiptsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesReceiptsCreate(
+) (*nordlet.ReceiptsCreatePurchasesResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsCreate(
 		ctx,
 		request,
 		opts...,
@@ -306,12 +306,12 @@ func (c *Client) PostV1PurchasesReceiptsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesReceiptsGet(
+func (c *Client) ReceiptsGet(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesReceiptsGetRequest,
+	request *nordlet.ReceiptsGetPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesReceiptsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesReceiptsGet(
+) (*nordlet.ReceiptsGetPurchasesResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsGet(
 		ctx,
 		request,
 		opts...,
@@ -322,12 +322,12 @@ func (c *Client) PostV1PurchasesReceiptsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesReceiptsList(
+func (c *Client) ReceiptsList(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesReceiptsListRequest,
+	request *nordlet.ReceiptsListPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesReceiptsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesReceiptsList(
+) (*nordlet.ReceiptsListPurchasesResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsList(
 		ctx,
 		request,
 		opts...,
@@ -338,12 +338,12 @@ func (c *Client) PostV1PurchasesReceiptsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PurchasesInvoicesMatch(
+func (c *Client) InvoicesMatch(
 	ctx context.Context,
-	request *nordlet.PostV1PurchasesInvoicesMatchRequest,
+	request *nordlet.InvoicesMatchPurchasesRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1PurchasesInvoicesMatchResponse, error) {
-	response, err := c.WithRawResponse.PostV1PurchasesInvoicesMatch(
+) (*nordlet.InvoicesMatchPurchasesResponse, error) {
+	response, err := c.WithRawResponse.InvoicesMatch(
 		ctx,
 		request,
 		opts...,

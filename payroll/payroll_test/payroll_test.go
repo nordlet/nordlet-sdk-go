@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestPayrollPostV1PayrollDepartmentsCreateWithWireMock(
+func TestPayrollDepartmentsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,23 +88,23 @@ func TestPayrollPostV1PayrollDepartmentsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollDepartmentsCreateRequest{
+	request := &nordlet.DepartmentsCreatePayrollRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollDepartmentsCreate(
+	_, invocationErr := client.Payroll.DepartmentsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollDepartmentsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollDepartmentsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollDepartmentsCreateWithWireMock", "POST", "/v1/payroll/departments/create", nil, 1)
+	VerifyRequestCount(t, "TestPayrollDepartmentsCreateWithWireMock", "POST", "/v1/payroll/departments/create", nil, 1)
 }
 
-func TestPayrollPostV1PayrollDepartmentsListWithWireMock(
+func TestPayrollDepartmentsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -115,20 +115,20 @@ func TestPayrollPostV1PayrollDepartmentsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollDepartmentsListRequest{}
-	_, invocationErr := client.Payroll.PostV1PayrollDepartmentsList(
+	request := &nordlet.DepartmentsListPayrollRequest{}
+	_, invocationErr := client.Payroll.DepartmentsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollDepartmentsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollDepartmentsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollDepartmentsListWithWireMock", "POST", "/v1/payroll/departments/list", nil, 1)
+	VerifyRequestCount(t, "TestPayrollDepartmentsListWithWireMock", "POST", "/v1/payroll/departments/list", nil, 1)
 }
 
-func TestPayrollPostV1PayrollSchedulesCreateWithWireMock(
+func TestPayrollSchedulesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -139,23 +139,23 @@ func TestPayrollPostV1PayrollSchedulesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollSchedulesCreateRequest{
+	request := &nordlet.SchedulesCreatePayrollRequest{
 		Code: "code",
 		Name: "name",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollSchedulesCreate(
+	_, invocationErr := client.Payroll.SchedulesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollSchedulesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollSchedulesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollSchedulesCreateWithWireMock", "POST", "/v1/payroll/schedules/create", nil, 1)
+	VerifyRequestCount(t, "TestPayrollSchedulesCreateWithWireMock", "POST", "/v1/payroll/schedules/create", nil, 1)
 }
 
-func TestPayrollPostV1PayrollSchedulesListWithWireMock(
+func TestPayrollSchedulesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -166,20 +166,20 @@ func TestPayrollPostV1PayrollSchedulesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollSchedulesListRequest{}
-	_, invocationErr := client.Payroll.PostV1PayrollSchedulesList(
+	request := &nordlet.SchedulesListPayrollRequest{}
+	_, invocationErr := client.Payroll.SchedulesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollSchedulesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollSchedulesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollSchedulesListWithWireMock", "POST", "/v1/payroll/schedules/list", nil, 1)
+	VerifyRequestCount(t, "TestPayrollSchedulesListWithWireMock", "POST", "/v1/payroll/schedules/list", nil, 1)
 }
 
-func TestPayrollCalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountryWithWireMock(
+func TestPayrollCalcWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -190,23 +190,25 @@ func TestPayrollCalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountryWithW
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollCalcRequest{
-		TaxableBase: "taxableBase",
-		Date:        "date",
+	request := &nordlet.CalcPayrollRequest{
+		TaxableBase: "121.00",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Payroll.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
+	_, invocationErr := client.Payroll.Calc(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollCalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountryWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollCalcWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollCalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountryWithWireMock", "POST", "/v1/payroll/calc", nil, 1)
+	VerifyRequestCount(t, "TestPayrollCalcWithWireMock", "POST", "/v1/payroll/calc", nil, 1)
 }
 
-func TestPayrollPostV1PayrollRunsCreateWithWireMock(
+func TestPayrollRunsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -217,23 +219,23 @@ func TestPayrollPostV1PayrollRunsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollRunsCreateRequest{
+	request := &nordlet.RunsCreatePayrollRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollRunsCreate(
+	_, invocationErr := client.Payroll.RunsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollRunsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollRunsCreateWithWireMock", "POST", "/v1/payroll/runs/create", nil, 1)
+	VerifyRequestCount(t, "TestPayrollRunsCreateWithWireMock", "POST", "/v1/payroll/runs/create", nil, 1)
 }
 
-func TestPayrollPostV1PayrollRunsGetWithWireMock(
+func TestPayrollRunsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -244,22 +246,22 @@ func TestPayrollPostV1PayrollRunsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollRunsGetRequest{
+	request := &nordlet.RunsGetPayrollRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollRunsGet(
+	_, invocationErr := client.Payroll.RunsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollRunsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollRunsGetWithWireMock", "POST", "/v1/payroll/runs/get", nil, 1)
+	VerifyRequestCount(t, "TestPayrollRunsGetWithWireMock", "POST", "/v1/payroll/runs/get", nil, 1)
 }
 
-func TestPayrollPostV1PayrollRunsListWithWireMock(
+func TestPayrollRunsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -270,20 +272,20 @@ func TestPayrollPostV1PayrollRunsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollRunsListRequest{}
-	_, invocationErr := client.Payroll.PostV1PayrollRunsList(
+	request := &nordlet.RunsListPayrollRequest{}
+	_, invocationErr := client.Payroll.RunsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollRunsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollRunsListWithWireMock", "POST", "/v1/payroll/runs/list", nil, 1)
+	VerifyRequestCount(t, "TestPayrollRunsListWithWireMock", "POST", "/v1/payroll/runs/list", nil, 1)
 }
 
-func TestPayrollRecordTheTimeAPersonWorkedInAPayrollLineWithWireMock(
+func TestPayrollLinesAttendanceWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -294,22 +296,22 @@ func TestPayrollRecordTheTimeAPersonWorkedInAPayrollLineWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollLinesAttendanceRequest{
+	request := &nordlet.LinesAttendancePayrollRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Payroll.RecordTheTimeAPersonWorkedInAPayrollLine(
+	_, invocationErr := client.Payroll.LinesAttendance(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollRecordTheTimeAPersonWorkedInAPayrollLineWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollLinesAttendanceWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollRecordTheTimeAPersonWorkedInAPayrollLineWithWireMock", "POST", "/v1/payroll/lines/attendance", nil, 1)
+	VerifyRequestCount(t, "TestPayrollLinesAttendanceWithWireMock", "POST", "/v1/payroll/lines/attendance", nil, 1)
 }
 
-func TestPayrollPostV1PayrollRunsApproveWithWireMock(
+func TestPayrollRunsApproveWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -320,22 +322,22 @@ func TestPayrollPostV1PayrollRunsApproveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollRunsApproveRequest{
+	request := &nordlet.RunsApprovePayrollRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollRunsApprove(
+	_, invocationErr := client.Payroll.RunsApprove(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollRunsApproveWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsApproveWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollRunsApproveWithWireMock", "POST", "/v1/payroll/runs/approve", nil, 1)
+	VerifyRequestCount(t, "TestPayrollRunsApproveWithWireMock", "POST", "/v1/payroll/runs/approve", nil, 1)
 }
 
-func TestPayrollPostV1PayrollRunsCancelWithWireMock(
+func TestPayrollRunsCancelWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -346,22 +348,22 @@ func TestPayrollPostV1PayrollRunsCancelWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollRunsCancelRequest{
+	request := &nordlet.RunsCancelPayrollRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollRunsCancel(
+	_, invocationErr := client.Payroll.RunsCancel(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollRunsCancelWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsCancelWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollRunsCancelWithWireMock", "POST", "/v1/payroll/runs/cancel", nil, 1)
+	VerifyRequestCount(t, "TestPayrollRunsCancelWithWireMock", "POST", "/v1/payroll/runs/cancel", nil, 1)
 }
 
-func TestPayrollPostV1PayrollPaymentsExportWithWireMock(
+func TestPayrollPaymentsExportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -372,18 +374,18 @@ func TestPayrollPostV1PayrollPaymentsExportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1PayrollPaymentsExportRequest{
+	request := &nordlet.PaymentsExportPayrollRequest{
 		RunID:         "runId",
 		BankAccountID: "bankAccountId",
 	}
-	_, invocationErr := client.Payroll.PostV1PayrollPaymentsExport(
+	_, invocationErr := client.Payroll.PaymentsExport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestPayrollPostV1PayrollPaymentsExportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestPayrollPaymentsExportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestPayrollPostV1PayrollPaymentsExportWithWireMock", "POST", "/v1/payroll/payments/export", nil, 1)
+	VerifyRequestCount(t, "TestPayrollPaymentsExportWithWireMock", "POST", "/v1/payroll/payments/export", nil, 1)
 }

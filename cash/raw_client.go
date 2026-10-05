@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1CashOrdersCreate(
+func (r *RawClient) OrdersCreate(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersCreateRequest,
+	request *nordlet.OrdersCreateCashRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CashOrdersCreateResponse], error) {
+) (*core.Response[*nordlet.OrdersCreateCashResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1CashOrdersCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CashOrdersCreateResponse
+	var response *nordlet.OrdersCreateCashResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1CashOrdersCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CashOrdersCreateResponse]{
+	return &core.Response[*nordlet.OrdersCreateCashResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CashOrdersGet(
+func (r *RawClient) OrdersGet(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersGetRequest,
+	request *nordlet.OrdersGetCashRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CashOrdersGetResponse], error) {
+) (*core.Response[*nordlet.OrdersGetCashResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1CashOrdersGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CashOrdersGetResponse
+	var response *nordlet.OrdersGetCashResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1CashOrdersGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CashOrdersGetResponse]{
+	return &core.Response[*nordlet.OrdersGetCashResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CashOrdersList(
+func (r *RawClient) OrdersList(
 	ctx context.Context,
-	request *nordlet.PostV1CashOrdersListRequest,
+	request *nordlet.OrdersListCashRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CashOrdersListResponse], error) {
+) (*core.Response[*nordlet.OrdersListCashResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1CashOrdersList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CashOrdersListResponse
+	var response *nordlet.OrdersListCashResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1CashOrdersList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CashOrdersListResponse]{
+	return &core.Response[*nordlet.OrdersListCashResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CashBalance(
+func (r *RawClient) Balance(
 	ctx context.Context,
-	request *nordlet.PostV1CashBalanceRequest,
+	request *nordlet.BalanceCashRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CashBalanceResponse], error) {
+) (*core.Response[*nordlet.BalanceCashResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1CashBalance(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CashBalanceResponse
+	var response *nordlet.BalanceCashResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1CashBalance(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CashBalanceResponse]{
+	return &core.Response[*nordlet.BalanceCashResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1CashAdvanceHoldersBalances(
+func (r *RawClient) AdvanceHoldersBalances(
 	ctx context.Context,
-	request *nordlet.PostV1CashAdvanceHoldersBalancesRequest,
+	request *nordlet.AdvanceHoldersBalancesCashRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1CashAdvanceHoldersBalancesResponse], error) {
+) (*core.Response[*nordlet.AdvanceHoldersBalancesCashResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1CashAdvanceHoldersBalances(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1CashAdvanceHoldersBalancesResponse
+	var response *nordlet.AdvanceHoldersBalancesCashResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,7 +245,7 @@ func (r *RawClient) PostV1CashAdvanceHoldersBalances(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1CashAdvanceHoldersBalancesResponse]{
+	return &core.Response[*nordlet.AdvanceHoldersBalancesCashResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

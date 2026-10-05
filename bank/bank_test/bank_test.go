@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestBankPostV1BankAccountsCreateWithWireMock(
+func TestBankAccountsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,22 +88,22 @@ func TestBankPostV1BankAccountsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankAccountsCreateRequest{
+	request := &nordlet.AccountsCreateBankRequest{
 		Name: "name",
 	}
-	_, invocationErr := client.Bank.PostV1BankAccountsCreate(
+	_, invocationErr := client.Bank.AccountsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankAccountsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankAccountsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankAccountsCreateWithWireMock", "POST", "/v1/bank/accounts/create", nil, 1)
+	VerifyRequestCount(t, "TestBankAccountsCreateWithWireMock", "POST", "/v1/bank/accounts/create", nil, 1)
 }
 
-func TestBankPostV1BankAccountsListWithWireMock(
+func TestBankAccountsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -114,20 +114,20 @@ func TestBankPostV1BankAccountsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankAccountsListRequest{}
-	_, invocationErr := client.Bank.PostV1BankAccountsList(
+	request := &nordlet.AccountsListBankRequest{}
+	_, invocationErr := client.Bank.AccountsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankAccountsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankAccountsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankAccountsListWithWireMock", "POST", "/v1/bank/accounts/list", nil, 1)
+	VerifyRequestCount(t, "TestBankAccountsListWithWireMock", "POST", "/v1/bank/accounts/list", nil, 1)
 }
 
-func TestBankPostV1BankAccountsUpdateWithWireMock(
+func TestBankAccountsUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -138,22 +138,22 @@ func TestBankPostV1BankAccountsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankAccountsUpdateRequest{
+	request := &nordlet.AccountsUpdateBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankAccountsUpdate(
+	_, invocationErr := client.Bank.AccountsUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankAccountsUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankAccountsUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankAccountsUpdateWithWireMock", "POST", "/v1/bank/accounts/update", nil, 1)
+	VerifyRequestCount(t, "TestBankAccountsUpdateWithWireMock", "POST", "/v1/bank/accounts/update", nil, 1)
 }
 
-func TestBankPostV1BankTransactionsImportWithWireMock(
+func TestBankTransactionsImportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -164,28 +164,30 @@ func TestBankPostV1BankTransactionsImportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankTransactionsImportRequest{
+	request := &nordlet.TransactionsImportBankRequest{
 		BankAccountID: "bankAccountId",
-		Transactions: []*nordlet.PostV1BankTransactionsImportRequestTransactionsItem{
-			&nordlet.PostV1BankTransactionsImportRequestTransactionsItem{
-				Date:   "date",
-				Amount: "amount",
+		Transactions: []*nordlet.TransactionsImportBankRequestTransactionsItem{
+			&nordlet.TransactionsImportBankRequestTransactionsItem{
+				Date: nordlet.MustParseDate(
+					"2026-07-01",
+				),
+				Amount: "-121.0000",
 			},
 		},
 	}
-	_, invocationErr := client.Bank.PostV1BankTransactionsImport(
+	_, invocationErr := client.Bank.TransactionsImport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsImportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsImportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankTransactionsImportWithWireMock", "POST", "/v1/bank/transactions/import", nil, 1)
+	VerifyRequestCount(t, "TestBankTransactionsImportWithWireMock", "POST", "/v1/bank/transactions/import", nil, 1)
 }
 
-func TestBankPostV1BankStatementsImportWithWireMock(
+func TestBankStatementsImportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -196,23 +198,23 @@ func TestBankPostV1BankStatementsImportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankStatementsImportRequest{
+	request := &nordlet.StatementsImportBankRequest{
 		BankAccountID: "bankAccountId",
 		Content:       "content",
 	}
-	_, invocationErr := client.Bank.PostV1BankStatementsImport(
+	_, invocationErr := client.Bank.StatementsImport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankStatementsImportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankStatementsImportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankStatementsImportWithWireMock", "POST", "/v1/bank/statements/import", nil, 1)
+	VerifyRequestCount(t, "TestBankStatementsImportWithWireMock", "POST", "/v1/bank/statements/import", nil, 1)
 }
 
-func TestBankPostV1BankTransactionsListWithWireMock(
+func TestBankTransactionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -223,20 +225,20 @@ func TestBankPostV1BankTransactionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankTransactionsListRequest{}
-	_, invocationErr := client.Bank.PostV1BankTransactionsList(
+	request := &nordlet.TransactionsListBankRequest{}
+	_, invocationErr := client.Bank.TransactionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankTransactionsListWithWireMock", "POST", "/v1/bank/transactions/list", nil, 1)
+	VerifyRequestCount(t, "TestBankTransactionsListWithWireMock", "POST", "/v1/bank/transactions/list", nil, 1)
 }
 
-func TestBankPostV1BankTransactionsMatchWithWireMock(
+func TestBankTransactionsMatchWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -247,24 +249,24 @@ func TestBankPostV1BankTransactionsMatchWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankTransactionsMatchRequest{
+	request := &nordlet.TransactionsMatchBankRequest{
 		TransactionID: "transactionId",
-		DocumentType:  nordlet.PostV1BankTransactionsMatchRequestDocumentTypeSaleInvoice,
+		DocumentType:  nordlet.TransactionsMatchBankRequestDocumentTypeSaleInvoice,
 		DocumentID:    "documentId",
 	}
-	_, invocationErr := client.Bank.PostV1BankTransactionsMatch(
+	_, invocationErr := client.Bank.TransactionsMatch(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsMatchWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsMatchWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankTransactionsMatchWithWireMock", "POST", "/v1/bank/transactions/match", nil, 1)
+	VerifyRequestCount(t, "TestBankTransactionsMatchWithWireMock", "POST", "/v1/bank/transactions/match", nil, 1)
 }
 
-func TestBankPostV1BankTransactionsRecordWithWireMock(
+func TestBankTransactionsUnmatchWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -275,26 +277,54 @@ func TestBankPostV1BankTransactionsRecordWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankTransactionsRecordRequest{
+	request := &nordlet.TransactionsUnmatchBankRequest{
+		TransactionID: "transactionId",
+	}
+	_, invocationErr := client.Bank.TransactionsUnmatch(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsUnmatchWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankTransactionsUnmatchWithWireMock", "POST", "/v1/bank/transactions/unmatch", nil, 1)
+}
+
+func TestBankTransactionsRecordWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TransactionsRecordBankRequest{
 		BankAccountID: "bankAccountId",
-		Date:          "date",
-		Amount:        "amount",
-		DocumentType:  nordlet.PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice,
-		DocumentID:    "documentId",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Amount:       "121.0000",
+		DocumentType: nordlet.TransactionsRecordBankRequestDocumentTypeSaleInvoice,
+		DocumentID:   "documentId",
 	}
-	_, invocationErr := client.Bank.PostV1BankTransactionsRecord(
+	_, invocationErr := client.Bank.TransactionsRecord(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsRecordWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsRecordWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankTransactionsRecordWithWireMock", "POST", "/v1/bank/transactions/record", nil, 1)
+	VerifyRequestCount(t, "TestBankTransactionsRecordWithWireMock", "POST", "/v1/bank/transactions/record", nil, 1)
 }
 
-func TestBankPostV1BankPaymentsExportWithWireMock(
+func TestBankPaymentsExportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -305,25 +335,25 @@ func TestBankPostV1BankPaymentsExportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankPaymentsExportRequest{
+	request := &nordlet.PaymentsExportBankRequest{
 		BankAccountID: "bankAccountId",
 		PurchaseInvoiceIDs: []string{
 			"purchaseInvoiceIds",
 		},
 	}
-	_, invocationErr := client.Bank.PostV1BankPaymentsExport(
+	_, invocationErr := client.Bank.PaymentsExport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankPaymentsExportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankPaymentsExportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankPaymentsExportWithWireMock", "POST", "/v1/bank/payments/export", nil, 1)
+	VerifyRequestCount(t, "TestBankPaymentsExportWithWireMock", "POST", "/v1/bank/payments/export", nil, 1)
 }
 
-func TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock(
+func TestBankImportTemplatesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -334,23 +364,23 @@ func TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWi
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankImportTemplatesCreateRequest{
+	request := &nordlet.ImportTemplatesCreateBankRequest{
 		Name: "name",
-		Type: nordlet.PostV1BankImportTemplatesCreateRequestTypeStripe,
+		Type: nordlet.ImportTemplatesCreateBankRequestTypeStripe,
 	}
-	_, invocationErr := client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+	_, invocationErr := client.Bank.ImportTemplatesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankImportTemplatesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock", "POST", "/v1/bank/import-templates/create", nil, 1)
+	VerifyRequestCount(t, "TestBankImportTemplatesCreateWithWireMock", "POST", "/v1/bank/import-templates/create", nil, 1)
 }
 
-func TestBankPostV1BankImportTemplatesUpdateWithWireMock(
+func TestBankImportTemplatesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -361,22 +391,22 @@ func TestBankPostV1BankImportTemplatesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankImportTemplatesUpdateRequest{
+	request := &nordlet.ImportTemplatesUpdateBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankImportTemplatesUpdate(
+	_, invocationErr := client.Bank.ImportTemplatesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankImportTemplatesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesUpdateWithWireMock", "POST", "/v1/bank/import-templates/update", nil, 1)
+	VerifyRequestCount(t, "TestBankImportTemplatesUpdateWithWireMock", "POST", "/v1/bank/import-templates/update", nil, 1)
 }
 
-func TestBankPostV1BankImportTemplatesDeleteWithWireMock(
+func TestBankImportTemplatesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -387,22 +417,22 @@ func TestBankPostV1BankImportTemplatesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankImportTemplatesDeleteRequest{
+	request := &nordlet.ImportTemplatesDeleteBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankImportTemplatesDelete(
+	_, invocationErr := client.Bank.ImportTemplatesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankImportTemplatesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesDeleteWithWireMock", "POST", "/v1/bank/import-templates/delete", nil, 1)
+	VerifyRequestCount(t, "TestBankImportTemplatesDeleteWithWireMock", "POST", "/v1/bank/import-templates/delete", nil, 1)
 }
 
-func TestBankPostV1BankImportTemplatesGetWithWireMock(
+func TestBankImportTemplatesGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -413,22 +443,22 @@ func TestBankPostV1BankImportTemplatesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankImportTemplatesGetRequest{
+	request := &nordlet.ImportTemplatesGetBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankImportTemplatesGet(
+	_, invocationErr := client.Bank.ImportTemplatesGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankImportTemplatesGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesGetWithWireMock", "POST", "/v1/bank/import-templates/get", nil, 1)
+	VerifyRequestCount(t, "TestBankImportTemplatesGetWithWireMock", "POST", "/v1/bank/import-templates/get", nil, 1)
 }
 
-func TestBankPostV1BankImportTemplatesListWithWireMock(
+func TestBankImportTemplatesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -439,20 +469,20 @@ func TestBankPostV1BankImportTemplatesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankImportTemplatesListRequest{}
-	_, invocationErr := client.Bank.PostV1BankImportTemplatesList(
+	request := &nordlet.ImportTemplatesListBankRequest{}
+	_, invocationErr := client.Bank.ImportTemplatesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankImportTemplatesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesListWithWireMock", "POST", "/v1/bank/import-templates/list", nil, 1)
+	VerifyRequestCount(t, "TestBankImportTemplatesListWithWireMock", "POST", "/v1/bank/import-templates/list", nil, 1)
 }
 
-func TestBankPostV1BankMatchRulesCreateWithWireMock(
+func TestBankMatchRulesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -463,23 +493,23 @@ func TestBankPostV1BankMatchRulesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMatchRulesCreateRequest{
+	request := &nordlet.MatchRulesCreateBankRequest{
 		Name:    "name",
 		Pattern: "pattern",
 	}
-	_, invocationErr := client.Bank.PostV1BankMatchRulesCreate(
+	_, invocationErr := client.Bank.MatchRulesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMatchRulesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMatchRulesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMatchRulesCreateWithWireMock", "POST", "/v1/bank/match-rules/create", nil, 1)
+	VerifyRequestCount(t, "TestBankMatchRulesCreateWithWireMock", "POST", "/v1/bank/match-rules/create", nil, 1)
 }
 
-func TestBankPostV1BankMatchRulesUpdateWithWireMock(
+func TestBankMatchRulesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -490,22 +520,22 @@ func TestBankPostV1BankMatchRulesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMatchRulesUpdateRequest{
+	request := &nordlet.MatchRulesUpdateBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankMatchRulesUpdate(
+	_, invocationErr := client.Bank.MatchRulesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMatchRulesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMatchRulesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMatchRulesUpdateWithWireMock", "POST", "/v1/bank/match-rules/update", nil, 1)
+	VerifyRequestCount(t, "TestBankMatchRulesUpdateWithWireMock", "POST", "/v1/bank/match-rules/update", nil, 1)
 }
 
-func TestBankPostV1BankMatchRulesDeleteWithWireMock(
+func TestBankMatchRulesDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -516,22 +546,22 @@ func TestBankPostV1BankMatchRulesDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMatchRulesDeleteRequest{
+	request := &nordlet.MatchRulesDeleteBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankMatchRulesDelete(
+	_, invocationErr := client.Bank.MatchRulesDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMatchRulesDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMatchRulesDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMatchRulesDeleteWithWireMock", "POST", "/v1/bank/match-rules/delete", nil, 1)
+	VerifyRequestCount(t, "TestBankMatchRulesDeleteWithWireMock", "POST", "/v1/bank/match-rules/delete", nil, 1)
 }
 
-func TestBankPostV1BankMatchRulesListWithWireMock(
+func TestBankMatchRulesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -542,20 +572,20 @@ func TestBankPostV1BankMatchRulesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMatchRulesListRequest{}
-	_, invocationErr := client.Bank.PostV1BankMatchRulesList(
+	request := &nordlet.MatchRulesListBankRequest{}
+	_, invocationErr := client.Bank.MatchRulesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMatchRulesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMatchRulesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMatchRulesListWithWireMock", "POST", "/v1/bank/match-rules/list", nil, 1)
+	VerifyRequestCount(t, "TestBankMatchRulesListWithWireMock", "POST", "/v1/bank/match-rules/list", nil, 1)
 }
 
-func TestBankPostV1BankMandatesCreateWithWireMock(
+func TestBankMandatesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -566,24 +596,26 @@ func TestBankPostV1BankMandatesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMandatesCreateRequest{
-		PartnerID:     "partnerId",
-		Iban:          "iban",
-		SignatureDate: "signatureDate",
+	request := &nordlet.MandatesCreateBankRequest{
+		PartnerID: "partnerId",
+		Iban:      "iban",
+		SignatureDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Bank.PostV1BankMandatesCreate(
+	_, invocationErr := client.Bank.MandatesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMandatesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMandatesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMandatesCreateWithWireMock", "POST", "/v1/bank/mandates/create", nil, 1)
+	VerifyRequestCount(t, "TestBankMandatesCreateWithWireMock", "POST", "/v1/bank/mandates/create", nil, 1)
 }
 
-func TestBankPostV1BankMandatesUpdateWithWireMock(
+func TestBankMandatesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -594,22 +626,22 @@ func TestBankPostV1BankMandatesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMandatesUpdateRequest{
+	request := &nordlet.MandatesUpdateBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankMandatesUpdate(
+	_, invocationErr := client.Bank.MandatesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMandatesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMandatesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMandatesUpdateWithWireMock", "POST", "/v1/bank/mandates/update", nil, 1)
+	VerifyRequestCount(t, "TestBankMandatesUpdateWithWireMock", "POST", "/v1/bank/mandates/update", nil, 1)
 }
 
-func TestBankPostV1BankMandatesCancelWithWireMock(
+func TestBankMandatesCancelWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -620,22 +652,22 @@ func TestBankPostV1BankMandatesCancelWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMandatesCancelRequest{
+	request := &nordlet.MandatesCancelBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankMandatesCancel(
+	_, invocationErr := client.Bank.MandatesCancel(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMandatesCancelWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMandatesCancelWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMandatesCancelWithWireMock", "POST", "/v1/bank/mandates/cancel", nil, 1)
+	VerifyRequestCount(t, "TestBankMandatesCancelWithWireMock", "POST", "/v1/bank/mandates/cancel", nil, 1)
 }
 
-func TestBankPostV1BankMandatesGetWithWireMock(
+func TestBankMandatesGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -646,22 +678,22 @@ func TestBankPostV1BankMandatesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMandatesGetRequest{
+	request := &nordlet.MandatesGetBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankMandatesGet(
+	_, invocationErr := client.Bank.MandatesGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMandatesGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMandatesGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMandatesGetWithWireMock", "POST", "/v1/bank/mandates/get", nil, 1)
+	VerifyRequestCount(t, "TestBankMandatesGetWithWireMock", "POST", "/v1/bank/mandates/get", nil, 1)
 }
 
-func TestBankPostV1BankMandatesListWithWireMock(
+func TestBankMandatesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -672,20 +704,20 @@ func TestBankPostV1BankMandatesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankMandatesListRequest{}
-	_, invocationErr := client.Bank.PostV1BankMandatesList(
+	request := &nordlet.MandatesListBankRequest{}
+	_, invocationErr := client.Bank.MandatesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankMandatesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankMandatesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankMandatesListWithWireMock", "POST", "/v1/bank/mandates/list", nil, 1)
+	VerifyRequestCount(t, "TestBankMandatesListWithWireMock", "POST", "/v1/bank/mandates/list", nil, 1)
 }
 
-func TestBankPostV1BankDirectDebitsExportWithWireMock(
+func TestBankDirectDebitsExportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -696,25 +728,25 @@ func TestBankPostV1BankDirectDebitsExportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankDirectDebitsExportRequest{
+	request := &nordlet.DirectDebitsExportBankRequest{
 		BankAccountID: "bankAccountId",
 		SaleInvoiceIDs: []string{
 			"saleInvoiceIds",
 		},
 	}
-	_, invocationErr := client.Bank.PostV1BankDirectDebitsExport(
+	_, invocationErr := client.Bank.DirectDebitsExport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankDirectDebitsExportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankDirectDebitsExportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankDirectDebitsExportWithWireMock", "POST", "/v1/bank/direct-debits/export", nil, 1)
+	VerifyRequestCount(t, "TestBankDirectDebitsExportWithWireMock", "POST", "/v1/bank/direct-debits/export", nil, 1)
 }
 
-func TestBankPostV1BankTransactionsSuggestMatchesWithWireMock(
+func TestBankTransactionsSuggestMatchesWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -725,22 +757,22 @@ func TestBankPostV1BankTransactionsSuggestMatchesWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankTransactionsSuggestMatchesRequest{
+	request := &nordlet.TransactionsSuggestMatchesBankRequest{
 		TransactionID: "transactionId",
 	}
-	_, invocationErr := client.Bank.PostV1BankTransactionsSuggestMatches(
+	_, invocationErr := client.Bank.TransactionsSuggestMatches(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsSuggestMatchesWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsSuggestMatchesWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankTransactionsSuggestMatchesWithWireMock", "POST", "/v1/bank/transactions/suggest-matches", nil, 1)
+	VerifyRequestCount(t, "TestBankTransactionsSuggestMatchesWithWireMock", "POST", "/v1/bank/transactions/suggest-matches", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsImportWithWireMock(
+func TestBankSettlementsImportWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -751,23 +783,23 @@ func TestBankPostV1BankSettlementsImportWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsImportRequest{
+	request := &nordlet.SettlementsImportBankRequest{
 		BankAccountID: "bankAccountId",
 		Content:       "content",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsImport(
+	_, invocationErr := client.Bank.SettlementsImport(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsImportWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsImportWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsImportWithWireMock", "POST", "/v1/bank/settlements/import", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsImportWithWireMock", "POST", "/v1/bank/settlements/import", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsListWithWireMock(
+func TestBankSettlementsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -778,20 +810,20 @@ func TestBankPostV1BankSettlementsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsListRequest{}
-	_, invocationErr := client.Bank.PostV1BankSettlementsList(
+	request := &nordlet.SettlementsListBankRequest{}
+	_, invocationErr := client.Bank.SettlementsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsListWithWireMock", "POST", "/v1/bank/settlements/list", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsListWithWireMock", "POST", "/v1/bank/settlements/list", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsGetWithWireMock(
+func TestBankSettlementsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -802,22 +834,22 @@ func TestBankPostV1BankSettlementsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsGetRequest{
+	request := &nordlet.SettlementsGetBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsGet(
+	_, invocationErr := client.Bank.SettlementsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsGetWithWireMock", "POST", "/v1/bank/settlements/get", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsGetWithWireMock", "POST", "/v1/bank/settlements/get", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsMatchWithWireMock(
+func TestBankSettlementsMatchWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -828,22 +860,22 @@ func TestBankPostV1BankSettlementsMatchWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsMatchRequest{
+	request := &nordlet.SettlementsMatchBankRequest{
 		LineID: "lineId",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsMatch(
+	_, invocationErr := client.Bank.SettlementsMatch(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsMatchWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsMatchWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsMatchWithWireMock", "POST", "/v1/bank/settlements/match", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsMatchWithWireMock", "POST", "/v1/bank/settlements/match", nil, 1)
 }
 
-func TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock(
+func TestBankSettlementsCommissionWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -854,22 +886,22 @@ func TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountW
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsCommissionRequest{
+	request := &nordlet.SettlementsCommissionBankRequest{
 		LineID: "lineId",
 	}
-	_, invocationErr := client.Bank.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+	_, invocationErr := client.Bank.SettlementsCommission(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsCommissionWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock", "POST", "/v1/bank/settlements/commission", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsCommissionWithWireMock", "POST", "/v1/bank/settlements/commission", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsLinkWithWireMock(
+func TestBankSettlementsLinkWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -880,23 +912,23 @@ func TestBankPostV1BankSettlementsLinkWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsLinkRequest{
+	request := &nordlet.SettlementsLinkBankRequest{
 		ID:                "id",
 		BankTransactionID: "bankTransactionId",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsLink(
+	_, invocationErr := client.Bank.SettlementsLink(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsLinkWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsLinkWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsLinkWithWireMock", "POST", "/v1/bank/settlements/link", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsLinkWithWireMock", "POST", "/v1/bank/settlements/link", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsUnlinkWithWireMock(
+func TestBankSettlementsUnlinkWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -907,22 +939,22 @@ func TestBankPostV1BankSettlementsUnlinkWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsUnlinkRequest{
+	request := &nordlet.SettlementsUnlinkBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsUnlink(
+	_, invocationErr := client.Bank.SettlementsUnlink(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsUnlinkWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsUnlinkWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsUnlinkWithWireMock", "POST", "/v1/bank/settlements/unlink", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsUnlinkWithWireMock", "POST", "/v1/bank/settlements/unlink", nil, 1)
 }
 
-func TestBankPostV1BankSettlementsPostWithWireMock(
+func TestBankSettlementsPostWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -933,22 +965,22 @@ func TestBankPostV1BankSettlementsPostWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankSettlementsPostRequest{
+	request := &nordlet.SettlementsPostBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankSettlementsPost(
+	_, invocationErr := client.Bank.SettlementsPost(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankSettlementsPostWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankSettlementsPostWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankSettlementsPostWithWireMock", "POST", "/v1/bank/settlements/post", nil, 1)
+	VerifyRequestCount(t, "TestBankSettlementsPostWithWireMock", "POST", "/v1/bank/settlements/post", nil, 1)
 }
 
-func TestBankListThePsd2BanksAspsPsAvailableToConnectWithWireMock(
+func TestBankFeedsBanksListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -959,20 +991,20 @@ func TestBankListThePsd2BanksAspsPsAvailableToConnectWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsBanksListRequest{}
-	_, invocationErr := client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(
+	request := &nordlet.FeedsBanksListBankRequest{}
+	_, invocationErr := client.Bank.FeedsBanksList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankListThePsd2BanksAspsPsAvailableToConnectWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsBanksListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankListThePsd2BanksAspsPsAvailableToConnectWithWireMock", "POST", "/v1/bank/feeds/banks/list", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsBanksListWithWireMock", "POST", "/v1/bank/feeds/banks/list", nil, 1)
 }
 
-func TestBankBeginBankAuthorizationRedirectTheUserToTheReturnedURLWithWireMock(
+func TestBankFeedsConnectionsStartWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -983,23 +1015,23 @@ func TestBankBeginBankAuthorizationRedirectTheUserToTheReturnedURLWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsConnectionsStartRequest{
+	request := &nordlet.FeedsConnectionsStartBankRequest{
 		AspspName:    "aspspName",
 		AspspCountry: "aspspCountry",
 	}
-	_, invocationErr := client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+	_, invocationErr := client.Bank.FeedsConnectionsStart(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankBeginBankAuthorizationRedirectTheUserToTheReturnedURLWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsConnectionsStartWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankBeginBankAuthorizationRedirectTheUserToTheReturnedURLWithWireMock", "POST", "/v1/bank/feeds/connections/start", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsConnectionsStartWithWireMock", "POST", "/v1/bank/feeds/connections/start", nil, 1)
 }
 
-func TestBankExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposesWithWireMock(
+func TestBankFeedsConnectionsCompleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1010,23 +1042,23 @@ func TestBankExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposesW
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsConnectionsCompleteRequest{
+	request := &nordlet.FeedsConnectionsCompleteBankRequest{
 		Reference: "reference",
 		Code:      "code",
 	}
-	_, invocationErr := client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+	_, invocationErr := client.Bank.FeedsConnectionsComplete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposesWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsConnectionsCompleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposesWithWireMock", "POST", "/v1/bank/feeds/connections/complete", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsConnectionsCompleteWithWireMock", "POST", "/v1/bank/feeds/connections/complete", nil, 1)
 }
 
-func TestBankPostV1BankFeedsConnectionsGetWithWireMock(
+func TestBankFeedsConnectionsGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1037,22 +1069,22 @@ func TestBankPostV1BankFeedsConnectionsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsConnectionsGetRequest{
+	request := &nordlet.FeedsConnectionsGetBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PostV1BankFeedsConnectionsGet(
+	_, invocationErr := client.Bank.FeedsConnectionsGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankFeedsConnectionsGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsConnectionsGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankFeedsConnectionsGetWithWireMock", "POST", "/v1/bank/feeds/connections/get", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsConnectionsGetWithWireMock", "POST", "/v1/bank/feeds/connections/get", nil, 1)
 }
 
-func TestBankPostV1BankFeedsConnectionsListWithWireMock(
+func TestBankFeedsConnectionsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1063,20 +1095,20 @@ func TestBankPostV1BankFeedsConnectionsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsConnectionsListRequest{}
-	_, invocationErr := client.Bank.PostV1BankFeedsConnectionsList(
+	request := &nordlet.FeedsConnectionsListBankRequest{}
+	_, invocationErr := client.Bank.FeedsConnectionsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPostV1BankFeedsConnectionsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsConnectionsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPostV1BankFeedsConnectionsListWithWireMock", "POST", "/v1/bank/feeds/connections/list", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsConnectionsListWithWireMock", "POST", "/v1/bank/feeds/connections/list", nil, 1)
 }
 
-func TestBankRevokeTheConsentAtTheBankAndDropTheStoredConnectionWithWireMock(
+func TestBankFeedsConnectionsDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1087,22 +1119,22 @@ func TestBankRevokeTheConsentAtTheBankAndDropTheStoredConnectionWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsConnectionsDeleteRequest{
+	request := &nordlet.FeedsConnectionsDeleteBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+	_, invocationErr := client.Bank.FeedsConnectionsDelete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankRevokeTheConsentAtTheBankAndDropTheStoredConnectionWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsConnectionsDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankRevokeTheConsentAtTheBankAndDropTheStoredConnectionWithWireMock", "POST", "/v1/bank/feeds/connections/delete", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsConnectionsDeleteWithWireMock", "POST", "/v1/bank/feeds/connections/delete", nil, 1)
 }
 
-func TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSyncedWithWireMock(
+func TestBankFeedsAccountsLinkWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1113,22 +1145,22 @@ func TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSync
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsAccountsLinkRequest{
+	request := &nordlet.FeedsAccountsLinkBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+	_, invocationErr := client.Bank.FeedsAccountsLink(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSyncedWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsAccountsLinkWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSyncedWithWireMock", "POST", "/v1/bank/feeds/accounts/link", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsAccountsLinkWithWireMock", "POST", "/v1/bank/feeds/accounts/link", nil, 1)
 }
 
-func TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock(
+func TestBankFeedsAccountsConfigureWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1139,22 +1171,22 @@ func TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAu
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsAccountsConfigureRequest{
+	request := &nordlet.FeedsAccountsConfigureBankRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+	_, invocationErr := client.Bank.FeedsAccountsConfigure(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsAccountsConfigureWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock", "POST", "/v1/bank/feeds/accounts/configure", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsAccountsConfigureWithWireMock", "POST", "/v1/bank/feeds/accounts/configure", nil, 1)
 }
 
-func TestBankPullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSyncedWithWireMock(
+func TestBankFeedsSyncWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -1165,17 +1197,17 @@ func TestBankPullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSyncedWithW
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1BankFeedsSyncRequest{
+	request := &nordlet.FeedsSyncBankRequest{
 		ConnectionID: "connectionId",
 	}
-	_, invocationErr := client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+	_, invocationErr := client.Bank.FeedsSync(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestBankPullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSyncedWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestBankFeedsSyncWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestBankPullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSyncedWithWireMock", "POST", "/v1/bank/feeds/sync", nil, 1)
+	VerifyRequestCount(t, "TestBankFeedsSyncWithWireMock", "POST", "/v1/bank/feeds/sync", nil, 1)
 }

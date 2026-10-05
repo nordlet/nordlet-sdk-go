@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1ReferenceExchangeRatesSync(
+func (c *Client) ExchangeRatesSync(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesSyncRequest,
+	request *nordlet.ExchangeRatesSyncReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceExchangeRatesSyncResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceExchangeRatesSync(
+) (*nordlet.ExchangeRatesSyncReferenceResponse, error) {
+	response, err := c.WithRawResponse.ExchangeRatesSync(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1ReferenceExchangeRatesSync(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceExchangeRatesList(
+func (c *Client) ExchangeRatesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesListRequest,
+	request *nordlet.ExchangeRatesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceExchangeRatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceExchangeRatesList(
+) (*nordlet.ExchangeRatesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.ExchangeRatesList(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1ReferenceExchangeRatesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceExchangeRatesSet(
+func (c *Client) ExchangeRatesSet(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesSetRequest,
+	request *nordlet.ExchangeRatesSetReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceExchangeRatesSetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceExchangeRatesSet(
+) (*nordlet.ExchangeRatesSetReferenceResponse, error) {
+	response, err := c.WithRawResponse.ExchangeRatesSet(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1ReferenceExchangeRatesSet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceExchangeRatesOverridesList(
+func (c *Client) ExchangeRatesOverridesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesOverridesListRequest,
+	request *nordlet.ExchangeRatesOverridesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceExchangeRatesOverridesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceExchangeRatesOverridesList(
+) (*nordlet.ExchangeRatesOverridesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.ExchangeRatesOverridesList(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1ReferenceExchangeRatesOverridesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceExchangeRatesOverridesDelete(
+func (c *Client) ExchangeRatesOverridesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceExchangeRatesOverridesDeleteRequest,
+	request *nordlet.ExchangeRatesOverridesDeleteReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceExchangeRatesOverridesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceExchangeRatesOverridesDelete(
+) (*nordlet.ExchangeRatesOverridesDeleteReferenceResponse, error) {
+	response, err := c.WithRawResponse.ExchangeRatesOverridesDelete(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1ReferenceExchangeRatesOverridesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceCountriesList(
+func (c *Client) CountriesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCountriesListRequest,
+	request *nordlet.CountriesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceCountriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceCountriesList(
+) (*nordlet.CountriesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.CountriesList(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1ReferenceCountriesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceLtCountiesList(
+func (c *Client) LtCountiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtCountiesListRequest,
+	request *nordlet.LtCountiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceLtCountiesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceLtCountiesList(
+) (*nordlet.LtCountiesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.LtCountiesList(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1ReferenceLtCountiesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceLtMunicipalitiesList(
+func (c *Client) LtMunicipalitiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtMunicipalitiesListRequest,
+	request *nordlet.LtMunicipalitiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceLtMunicipalitiesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceLtMunicipalitiesList(
+) (*nordlet.LtMunicipalitiesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.LtMunicipalitiesList(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1ReferenceLtMunicipalitiesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceLtCitiesList(
+func (c *Client) LtCitiesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtCitiesListRequest,
+	request *nordlet.LtCitiesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceLtCitiesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceLtCitiesList(
+) (*nordlet.LtCitiesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.LtCitiesList(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1ReferenceLtCitiesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceBanksList(
+func (c *Client) BanksList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceBanksListRequest,
+	request *nordlet.BanksListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceBanksListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceBanksList(
+) (*nordlet.BanksListReferenceResponse, error) {
+	response, err := c.WithRawResponse.BanksList(
 		ctx,
 		request,
 		opts...,
@@ -194,12 +194,12 @@ func (c *Client) PostV1ReferenceBanksList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceBanksUpsert(
+func (c *Client) BanksUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceBanksUpsertRequest,
+	request *nordlet.BanksUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceBanksUpsertResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceBanksUpsert(
+) (*nordlet.BanksUpsertReferenceResponse, error) {
+	response, err := c.WithRawResponse.BanksUpsert(
 		ctx,
 		request,
 		opts...,
@@ -210,12 +210,12 @@ func (c *Client) PostV1ReferenceBanksUpsert(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceLtRegionsList(
+func (c *Client) LtRegionsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceLtRegionsListRequest,
+	request *nordlet.LtRegionsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceLtRegionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceLtRegionsList(
+) (*nordlet.LtRegionsListReferenceResponse, error) {
+	response, err := c.WithRawResponse.LtRegionsList(
 		ctx,
 		request,
 		opts...,
@@ -226,12 +226,12 @@ func (c *Client) PostV1ReferenceLtRegionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceCurrenciesList(
+func (c *Client) CurrenciesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCurrenciesListRequest,
+	request *nordlet.CurrenciesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceCurrenciesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceCurrenciesList(
+) (*nordlet.CurrenciesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.CurrenciesList(
 		ctx,
 		request,
 		opts...,
@@ -242,12 +242,12 @@ func (c *Client) PostV1ReferenceCurrenciesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceVatClassifiersList(
+func (c *Client) VatClassifiersList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatClassifiersListRequest,
+	request *nordlet.VatClassifiersListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceVatClassifiersListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceVatClassifiersList(
+) (*nordlet.VatClassifiersListReferenceResponse, error) {
+	response, err := c.WithRawResponse.VatClassifiersList(
 		ctx,
 		request,
 		opts...,
@@ -258,12 +258,12 @@ func (c *Client) PostV1ReferenceVatClassifiersList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceVatClassifiersUpsert(
+func (c *Client) VatClassifiersUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatClassifiersUpsertRequest,
+	request *nordlet.VatClassifiersUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceVatClassifiersUpsertResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceVatClassifiersUpsert(
+) (*nordlet.VatClassifiersUpsertReferenceResponse, error) {
+	response, err := c.WithRawResponse.VatClassifiersUpsert(
 		ctx,
 		request,
 		opts...,
@@ -275,12 +275,12 @@ func (c *Client) PostV1ReferenceVatClassifiersUpsert(
 }
 
 // Effective EU VAT rate mapping for this company: EC TEDB defaults, replaced per country by any company overrides. Verify the mapping fits the goods and services you sell before relying on it.
-func (c *Client) PostV1ReferenceEuVatRatesList(
+func (c *Client) EuVatRatesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceEuVatRatesListRequest,
+	request *nordlet.EuVatRatesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceEuVatRatesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesList(
+) (*nordlet.EuVatRatesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.EuVatRatesList(
 		ctx,
 		request,
 		opts...,
@@ -292,12 +292,12 @@ func (c *Client) PostV1ReferenceEuVatRatesList(
 }
 
 // Replace the VAT rate mapping this company uses for one EU country. Pass an empty rates array to drop the overrides and return to the TEDB defaults. Overrides feed rate suggestions (vat/resolve) and OSS/IOSS return rate classification.
-func (c *Client) PostV1ReferenceEuVatRatesSetOverrides(
+func (c *Client) EuVatRatesSetOverrides(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest,
+	request *nordlet.EuVatRatesSetOverridesReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesSetOverrides(
+) (*nordlet.EuVatRatesSetOverridesReferenceResponse, error) {
+	response, err := c.WithRawResponse.EuVatRatesSetOverrides(
 		ctx,
 		request,
 		opts...,
@@ -308,12 +308,12 @@ func (c *Client) PostV1ReferenceEuVatRatesSetOverrides(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceVatResolve(
+func (c *Client) VatResolve(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceVatResolveRequest,
+	request *nordlet.VatResolveReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceVatResolveResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceVatResolve(
+) (*nordlet.VatResolveReferenceResponse, error) {
+	response, err := c.WithRawResponse.VatResolve(
 		ctx,
 		request,
 		opts...,
@@ -324,12 +324,12 @@ func (c *Client) PostV1ReferenceVatResolve(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceCnCodesList(
+func (c *Client) CnCodesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCnCodesListRequest,
+	request *nordlet.CnCodesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceCnCodesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceCnCodesList(
+) (*nordlet.CnCodesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.CnCodesList(
 		ctx,
 		request,
 		opts...,
@@ -340,12 +340,12 @@ func (c *Client) PostV1ReferenceCnCodesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceCnCodesUpsert(
+func (c *Client) CnCodesUpsert(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceCnCodesUpsertRequest,
+	request *nordlet.CnCodesUpsertReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceCnCodesUpsertResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceCnCodesUpsert(
+) (*nordlet.CnCodesUpsertReferenceResponse, error) {
+	response, err := c.WithRawResponse.CnCodesUpsert(
 		ctx,
 		request,
 		opts...,
@@ -356,12 +356,12 @@ func (c *Client) PostV1ReferenceCnCodesUpsert(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceComplianceVersionsList(
+func (c *Client) ComplianceVersionsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceComplianceVersionsListRequest,
+	request *nordlet.ComplianceVersionsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceComplianceVersionsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceComplianceVersionsList(
+) (*nordlet.ComplianceVersionsListReferenceResponse, error) {
+	response, err := c.WithRawResponse.ComplianceVersionsList(
 		ctx,
 		request,
 		opts...,
@@ -372,12 +372,12 @@ func (c *Client) PostV1ReferenceComplianceVersionsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceIntrastatThresholdsList(
+func (c *Client) IntrastatThresholdsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceIntrastatThresholdsListRequest,
+	request *nordlet.IntrastatThresholdsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceIntrastatThresholdsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceIntrastatThresholdsList(
+) (*nordlet.IntrastatThresholdsListReferenceResponse, error) {
+	response, err := c.WithRawResponse.IntrastatThresholdsList(
 		ctx,
 		request,
 		opts...,
@@ -388,12 +388,12 @@ func (c *Client) PostV1ReferenceIntrastatThresholdsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceUnitsList(
+func (c *Client) UnitsList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceUnitsListRequest,
+	request *nordlet.UnitsListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceUnitsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceUnitsList(
+) (*nordlet.UnitsListReferenceResponse, error) {
+	response, err := c.WithRawResponse.UnitsList(
 		ctx,
 		request,
 		opts...,
@@ -404,12 +404,12 @@ func (c *Client) PostV1ReferenceUnitsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceSeriesCreate(
+func (c *Client) SeriesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceSeriesCreateRequest,
+	request *nordlet.SeriesCreateReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceSeriesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceSeriesCreate(
+) (*nordlet.SeriesCreateReferenceResponse, error) {
+	response, err := c.WithRawResponse.SeriesCreate(
 		ctx,
 		request,
 		opts...,
@@ -420,12 +420,12 @@ func (c *Client) PostV1ReferenceSeriesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ReferenceSeriesList(
+func (c *Client) SeriesList(
 	ctx context.Context,
-	request *nordlet.PostV1ReferenceSeriesListRequest,
+	request *nordlet.SeriesListReferenceRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ReferenceSeriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ReferenceSeriesList(
+) (*nordlet.SeriesListReferenceResponse, error) {
+	response, err := c.WithRawResponse.SeriesList(
 		ctx,
 		request,
 		opts...,

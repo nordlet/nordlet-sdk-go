@@ -7,12 +7,13 @@ import (
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
+	time "time"
 )
 
-func TestSettersPostV1BillingAccountSetPlanRequest(t *testing.T) {
+func TestSettersAccountSetPlanBillingRequest(t *testing.T) {
 	t.Run("SetPlan", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanRequest{}
-		var fernTestValuePlan PostV1BillingAccountSetPlanRequestPlan
+		obj := &AccountSetPlanBillingRequest{}
+		var fernTestValuePlan AccountSetPlanBillingRequestPlan
 		obj.SetPlan(fernTestValuePlan)
 		assert.Equal(t, fernTestValuePlan, obj.Plan)
 		assert.NotNil(t, obj.explicitFields)
@@ -20,12 +21,12 @@ func TestSettersPostV1BillingAccountSetPlanRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountSetPlanRequest(t *testing.T) {
+func TestSettersMarkExplicitAccountSetPlanBillingRequest(t *testing.T) {
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanRequest{}
-		var fernTestValuePlan PostV1BillingAccountSetPlanRequestPlan
+		obj := &AccountSetPlanBillingRequest{}
+		var fernTestValuePlan AccountSetPlanBillingRequestPlan
 
 		// Act
 		obj.SetPlan(fernTestValuePlan)
@@ -54,10 +55,10 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingPortalCreateRequest(t *testing.T) {
+func TestSettersPortalCreateBillingRequest(t *testing.T) {
 	t.Run("SetLocale", func(t *testing.T) {
-		obj := &PostV1BillingPortalCreateRequest{}
-		var fernTestValueLocale *PostV1BillingPortalCreateRequestLocale
+		obj := &PortalCreateBillingRequest{}
+		var fernTestValueLocale *PortalCreateBillingRequestLocale
 		obj.SetLocale(fernTestValueLocale)
 		assert.Equal(t, fernTestValueLocale, obj.Locale)
 		assert.NotNil(t, obj.explicitFields)
@@ -65,12 +66,12 @@ func TestSettersPostV1BillingPortalCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingPortalCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitPortalCreateBillingRequest(t *testing.T) {
 	t.Run("SetLocale_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingPortalCreateRequest{}
-		var fernTestValueLocale *PostV1BillingPortalCreateRequestLocale
+		obj := &PortalCreateBillingRequest{}
+		var fernTestValueLocale *PortalCreateBillingRequestLocale
 
 		// Act
 		obj.SetLocale(fernTestValueLocale)
@@ -99,9 +100,9 @@ func TestSettersMarkExplicitPostV1BillingPortalCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingTopupCreateRequest(t *testing.T) {
+func TestSettersTopupCreateBillingRequest(t *testing.T) {
 	t.Run("SetAmountCents", func(t *testing.T) {
-		obj := &PostV1BillingTopupCreateRequest{}
+		obj := &TopupCreateBillingRequest{}
 		var fernTestValueAmountCents int64
 		obj.SetAmountCents(fernTestValueAmountCents)
 		assert.Equal(t, fernTestValueAmountCents, obj.AmountCents)
@@ -109,8 +110,8 @@ func TestSettersPostV1BillingTopupCreateRequest(t *testing.T) {
 	})
 
 	t.Run("SetLocale", func(t *testing.T) {
-		obj := &PostV1BillingTopupCreateRequest{}
-		var fernTestValueLocale *PostV1BillingTopupCreateRequestLocale
+		obj := &TopupCreateBillingRequest{}
+		var fernTestValueLocale *TopupCreateBillingRequestLocale
 		obj.SetLocale(fernTestValueLocale)
 		assert.Equal(t, fernTestValueLocale, obj.Locale)
 		assert.NotNil(t, obj.explicitFields)
@@ -118,11 +119,11 @@ func TestSettersPostV1BillingTopupCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingTopupCreateRequest(t *testing.T) {
+func TestSettersMarkExplicitTopupCreateBillingRequest(t *testing.T) {
 	t.Run("SetAmountCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateRequest{}
+		obj := &TopupCreateBillingRequest{}
 		var fernTestValueAmountCents int64
 
 		// Act
@@ -153,8 +154,8 @@ func TestSettersMarkExplicitPostV1BillingTopupCreateRequest(t *testing.T) {
 	t.Run("SetLocale_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateRequest{}
-		var fernTestValueLocale *PostV1BillingTopupCreateRequestLocale
+		obj := &TopupCreateBillingRequest{}
+		var fernTestValueLocale *TopupCreateBillingRequestLocale
 
 		// Act
 		obj.SetLocale(fernTestValueLocale)
@@ -183,9 +184,9 @@ func TestSettersMarkExplicitPostV1BillingTopupCreateRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingTransactionsListRequest(t *testing.T) {
+func TestSettersTransactionsListBillingRequest(t *testing.T) {
 	t.Run("SetLimit", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListRequest{}
+		obj := &TransactionsListBillingRequest{}
 		var fernTestValueLimit *int64
 		obj.SetLimit(fernTestValueLimit)
 		assert.Equal(t, fernTestValueLimit, obj.Limit)
@@ -194,11 +195,11 @@ func TestSettersPostV1BillingTransactionsListRequest(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingTransactionsListRequest(t *testing.T) {
+func TestSettersMarkExplicitTransactionsListBillingRequest(t *testing.T) {
 	t.Run("SetLimit_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListRequest{}
+		obj := &TransactionsListBillingRequest{}
 		var fernTestValueLimit *int64
 
 		// Act
@@ -228,109 +229,25 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListRequest(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingUsageListRequest(t *testing.T) {
-	t.Run("SetFrom", func(t *testing.T) {
-		obj := &PostV1BillingUsageListRequest{}
-		var fernTestValueFrom string
-		obj.SetFrom(fernTestValueFrom)
-		assert.Equal(t, fernTestValueFrom, obj.From)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTo", func(t *testing.T) {
-		obj := &PostV1BillingUsageListRequest{}
-		var fernTestValueTo string
-		obj.SetTo(fernTestValueTo)
-		assert.Equal(t, fernTestValueTo, obj.To)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestSettersMarkExplicitPostV1BillingUsageListRequest(t *testing.T) {
-	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1BillingUsageListRequest{}
-		var fernTestValueFrom string
-
-		// Act
-		obj.SetFrom(fernTestValueFrom)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &PostV1BillingUsageListRequest{}
-		var fernTestValueTo string
-
-		// Act
-		obj.SetTo(fernTestValueTo)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
+func TestSettersAccountGetBillingResponse(t *testing.T) {
 	t.Run("SetPlan", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePlan PostV1BillingAccountGetResponsePlan
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePlan AccountGetBillingResponsePlan
 		obj.SetPlan(fernTestValuePlan)
 		assert.Equal(t, fernTestValuePlan, obj.Plan)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueStatus PostV1BillingAccountGetResponseStatus
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueStatus AccountGetBillingResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalanceCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueBalanceCents int64
 		obj.SetBalanceCents(fernTestValueBalanceCents)
 		assert.Equal(t, fernTestValueBalanceCents, obj.BalanceCents)
@@ -338,31 +255,31 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrialEndsAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueTrialEndsAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueTrialEndsAt *time.Time
 		obj.SetTrialEndsAt(fernTestValueTrialEndsAt)
 		assert.Equal(t, fernTestValueTrialEndsAt, obj.TrialEndsAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFirstTopUpAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueFirstTopUpAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueFirstTopUpAt *time.Time
 		obj.SetFirstTopUpAt(fernTestValueFirstTopUpAt)
 		assert.Equal(t, fernTestValueFirstTopUpAt, obj.FirstTopUpAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLastChargedDate", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueLastChargedDate *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueLastChargedDate *time.Time
 		obj.SetLastChargedDate(fernTestValueLastChargedDate)
 		assert.Equal(t, fernTestValueLastChargedDate, obj.LastChargedDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentsConfigured", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValuePaymentsConfigured bool
 		obj.SetPaymentsConfigured(fernTestValuePaymentsConfigured)
 		assert.Equal(t, fernTestValuePaymentsConfigured, obj.PaymentsConfigured)
@@ -370,7 +287,7 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetHasPaymentAccount", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueHasPaymentAccount bool
 		obj.SetHasPaymentAccount(fernTestValueHasPaymentAccount)
 		assert.Equal(t, fernTestValueHasPaymentAccount, obj.HasPaymentAccount)
@@ -378,7 +295,7 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetHasSubscription", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueHasSubscription bool
 		obj.SetHasSubscription(fernTestValueHasSubscription)
 		assert.Equal(t, fernTestValueHasSubscription, obj.HasSubscription)
@@ -386,15 +303,15 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetPaymentFailedAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePaymentFailedAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePaymentFailedAt *time.Time
 		obj.SetPaymentFailedAt(fernTestValuePaymentFailedAt)
 		assert.Equal(t, fernTestValuePaymentFailedAt, obj.PaymentFailedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentFailedInvoiceURL", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValuePaymentFailedInvoiceURL *string
 		obj.SetPaymentFailedInvoiceURL(fernTestValuePaymentFailedInvoiceURL)
 		assert.Equal(t, fernTestValuePaymentFailedInvoiceURL, obj.PaymentFailedInvoiceURL)
@@ -402,31 +319,31 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 	})
 
 	t.Run("SetMonthToDate", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueMonthToDate *PostV1BillingAccountGetResponseMonthToDate
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueMonthToDate *AccountGetBillingResponseMonthToDate
 		obj.SetMonthToDate(fernTestValueMonthToDate)
 		assert.Equal(t, fernTestValueMonthToDate, obj.MonthToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPlans", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePlans map[string]*PostV1BillingAccountGetResponsePlansValue
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePlans map[string]*AccountGetBillingResponsePlansValue
 		obj.SetPlans(fernTestValuePlans)
 		assert.Equal(t, fernTestValuePlans, obj.Plans)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTopUp", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueTopUp *PostV1BillingAccountGetResponseTopUp
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueTopUp *AccountGetBillingResponseTopUp
 		obj.SetTopUp(fernTestValueTopUp)
 		assert.Equal(t, fernTestValueTopUp, obj.TopUp)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTrialDays", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueTrialDays int64
 		obj.SetTrialDays(fernTestValueTrialDays)
 		assert.Equal(t, fernTestValueTrialDays, obj.TrialDays)
@@ -435,12 +352,12 @@ func TestSettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
+func TestGettersAccountGetBillingResponse(t *testing.T) {
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected PostV1BillingAccountGetResponsePlan
+		obj := &AccountGetBillingResponse{}
+		var expected AccountGetBillingResponsePlan
 		obj.Plan = expected
 
 		// Act & Assert
@@ -449,7 +366,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetPlan_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -462,8 +379,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected PostV1BillingAccountGetResponseStatus
+		obj := &AccountGetBillingResponse{}
+		var expected AccountGetBillingResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -472,7 +389,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -485,7 +402,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetBalanceCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected int64
 		obj.BalanceCents = expected
 
@@ -495,7 +412,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetBalanceCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -508,8 +425,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetTrialEndsAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *string
+		obj := &AccountGetBillingResponse{}
+		var expected *time.Time
 		obj.TrialEndsAt = expected
 
 		// Act & Assert
@@ -519,7 +436,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetTrialEndsAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.TrialEndsAt = nil
 
 		// Act & Assert
@@ -528,7 +445,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetTrialEndsAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -541,8 +458,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetFirstTopUpAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *string
+		obj := &AccountGetBillingResponse{}
+		var expected *time.Time
 		obj.FirstTopUpAt = expected
 
 		// Act & Assert
@@ -552,7 +469,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetFirstTopUpAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.FirstTopUpAt = nil
 
 		// Act & Assert
@@ -561,7 +478,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetFirstTopUpAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -574,8 +491,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetLastChargedDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *string
+		obj := &AccountGetBillingResponse{}
+		var expected *time.Time
 		obj.LastChargedDate = expected
 
 		// Act & Assert
@@ -585,7 +502,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetLastChargedDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.LastChargedDate = nil
 
 		// Act & Assert
@@ -594,7 +511,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetLastChargedDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -607,7 +524,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPaymentsConfigured", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected bool
 		obj.PaymentsConfigured = expected
 
@@ -617,7 +534,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetPaymentsConfigured_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -630,7 +547,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetHasPaymentAccount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected bool
 		obj.HasPaymentAccount = expected
 
@@ -640,7 +557,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetHasPaymentAccount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -653,7 +570,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetHasSubscription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected bool
 		obj.HasSubscription = expected
 
@@ -663,7 +580,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetHasSubscription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -676,8 +593,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPaymentFailedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *string
+		obj := &AccountGetBillingResponse{}
+		var expected *time.Time
 		obj.PaymentFailedAt = expected
 
 		// Act & Assert
@@ -687,7 +604,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPaymentFailedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.PaymentFailedAt = nil
 
 		// Act & Assert
@@ -696,7 +613,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetPaymentFailedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -709,7 +626,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPaymentFailedInvoiceURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected *string
 		obj.PaymentFailedInvoiceURL = expected
 
@@ -720,7 +637,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPaymentFailedInvoiceURL_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.PaymentFailedInvoiceURL = nil
 
 		// Act & Assert
@@ -729,7 +646,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetPaymentFailedInvoiceURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -742,8 +659,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetMonthToDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *PostV1BillingAccountGetResponseMonthToDate
+		obj := &AccountGetBillingResponse{}
+		var expected *AccountGetBillingResponseMonthToDate
 		obj.MonthToDate = expected
 
 		// Act & Assert
@@ -753,7 +670,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetMonthToDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.MonthToDate = nil
 
 		// Act & Assert
@@ -762,7 +679,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetMonthToDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -775,8 +692,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPlans", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected map[string]*PostV1BillingAccountGetResponsePlansValue
+		obj := &AccountGetBillingResponse{}
+		var expected map[string]*AccountGetBillingResponsePlansValue
 		obj.Plans = expected
 
 		// Act & Assert
@@ -786,7 +703,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetPlans_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.Plans = nil
 
 		// Act & Assert
@@ -795,7 +712,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetPlans_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -808,8 +725,8 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetTopUp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var expected *PostV1BillingAccountGetResponseTopUp
+		obj := &AccountGetBillingResponse{}
+		var expected *AccountGetBillingResponseTopUp
 		obj.TopUp = expected
 
 		// Act & Assert
@@ -819,7 +736,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetTopUp_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		obj.TopUp = nil
 
 		// Act & Assert
@@ -828,7 +745,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetTopUp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -841,7 +758,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("GetTrialDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var expected int64
 		obj.TrialDays = expected
 
@@ -851,7 +768,7 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetTrialDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -863,12 +780,12 @@ func TestGettersPostV1BillingAccountGetResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
+func TestSettersMarkExplicitAccountGetBillingResponse(t *testing.T) {
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePlan PostV1BillingAccountGetResponsePlan
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePlan AccountGetBillingResponsePlan
 
 		// Act
 		obj.SetPlan(fernTestValuePlan)
@@ -898,8 +815,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueStatus PostV1BillingAccountGetResponseStatus
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueStatus AccountGetBillingResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -929,7 +846,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetBalanceCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueBalanceCents int64
 
 		// Act
@@ -960,8 +877,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetTrialEndsAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueTrialEndsAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueTrialEndsAt *time.Time
 
 		// Act
 		obj.SetTrialEndsAt(fernTestValueTrialEndsAt)
@@ -991,8 +908,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetFirstTopUpAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueFirstTopUpAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueFirstTopUpAt *time.Time
 
 		// Act
 		obj.SetFirstTopUpAt(fernTestValueFirstTopUpAt)
@@ -1022,8 +939,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetLastChargedDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueLastChargedDate *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueLastChargedDate *time.Time
 
 		// Act
 		obj.SetLastChargedDate(fernTestValueLastChargedDate)
@@ -1053,7 +970,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetPaymentsConfigured_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValuePaymentsConfigured bool
 
 		// Act
@@ -1084,7 +1001,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetHasPaymentAccount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueHasPaymentAccount bool
 
 		// Act
@@ -1115,7 +1032,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetHasSubscription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueHasSubscription bool
 
 		// Act
@@ -1146,8 +1063,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetPaymentFailedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePaymentFailedAt *string
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePaymentFailedAt *time.Time
 
 		// Act
 		obj.SetPaymentFailedAt(fernTestValuePaymentFailedAt)
@@ -1177,7 +1094,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetPaymentFailedInvoiceURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValuePaymentFailedInvoiceURL *string
 
 		// Act
@@ -1208,8 +1125,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetMonthToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueMonthToDate *PostV1BillingAccountGetResponseMonthToDate
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueMonthToDate *AccountGetBillingResponseMonthToDate
 
 		// Act
 		obj.SetMonthToDate(fernTestValueMonthToDate)
@@ -1239,8 +1156,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetPlans_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValuePlans map[string]*PostV1BillingAccountGetResponsePlansValue
+		obj := &AccountGetBillingResponse{}
+		var fernTestValuePlans map[string]*AccountGetBillingResponsePlansValue
 
 		// Act
 		obj.SetPlans(fernTestValuePlans)
@@ -1270,8 +1187,8 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetTopUp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
-		var fernTestValueTopUp *PostV1BillingAccountGetResponseTopUp
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueTopUp *AccountGetBillingResponseTopUp
 
 		// Act
 		obj.SetTopUp(fernTestValueTopUp)
@@ -1301,7 +1218,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 	t.Run("SetTrialDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		var fernTestValueTrialDays int64
 
 		// Act
@@ -1331,9 +1248,9 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestSettersAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("SetFrom", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueFrom string
 		obj.SetFrom(fernTestValueFrom)
 		assert.Equal(t, fernTestValueFrom, obj.From)
@@ -1341,7 +1258,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetTo", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueTo string
 		obj.SetTo(fernTestValueTo)
 		assert.Equal(t, fernTestValueTo, obj.To)
@@ -1349,7 +1266,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetAPIRequests", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueAPIRequests int64
 		obj.SetAPIRequests(fernTestValueAPIRequests)
 		assert.Equal(t, fernTestValueAPIRequests, obj.APIRequests)
@@ -1357,7 +1274,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueOcrPages int64
 		obj.SetOcrPages(fernTestValueOcrPages)
 		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
@@ -1365,7 +1282,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetFileBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
 		obj.SetFileBytes(fernTestValueFileBytes)
 		assert.Equal(t, fernTestValueFileBytes, obj.FileBytes)
@@ -1373,7 +1290,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetDatabaseBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueDatabaseBytes float64
 		obj.SetDatabaseBytes(fernTestValueDatabaseBytes)
 		assert.Equal(t, fernTestValueDatabaseBytes, obj.DatabaseBytes)
@@ -1381,7 +1298,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetArchivedCompanies", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueArchivedCompanies int64
 		obj.SetArchivedCompanies(fernTestValueArchivedCompanies)
 		assert.Equal(t, fernTestValueArchivedCompanies, obj.ArchivedCompanies)
@@ -1389,7 +1306,7 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetEstimatedTodayCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueEstimatedTodayCents int64
 		obj.SetEstimatedTodayCents(fernTestValueEstimatedTodayCents)
 		assert.Equal(t, fernTestValueEstimatedTodayCents, obj.EstimatedTodayCents)
@@ -1398,11 +1315,11 @@ func TestSettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestGettersAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("GetFrom", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected string
 		obj.From = expected
 
@@ -1412,7 +1329,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1425,7 +1342,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetTo", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected string
 		obj.To = expected
 
@@ -1435,7 +1352,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetTo_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1448,7 +1365,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetAPIRequests", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected int64
 		obj.APIRequests = expected
 
@@ -1458,7 +1375,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetAPIRequests_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1471,7 +1388,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetOcrPages", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected int64
 		obj.OcrPages = expected
 
@@ -1481,7 +1398,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1494,7 +1411,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetFileBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected float64
 		obj.FileBytes = expected
 
@@ -1504,7 +1421,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetFileBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1517,7 +1434,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetDatabaseBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected float64
 		obj.DatabaseBytes = expected
 
@@ -1527,7 +1444,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetDatabaseBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1540,7 +1457,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetArchivedCompanies", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected int64
 		obj.ArchivedCompanies = expected
 
@@ -1550,7 +1467,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetArchivedCompanies_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1563,7 +1480,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 	t.Run("GetEstimatedTodayCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var expected int64
 		obj.EstimatedTodayCents = expected
 
@@ -1573,7 +1490,7 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetEstimatedTodayCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1585,11 +1502,11 @@ func TestGettersPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestSettersMarkExplicitAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueFrom string
 
 		// Act
@@ -1620,7 +1537,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueTo string
 
 		// Act
@@ -1651,7 +1568,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetAPIRequests_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueAPIRequests int64
 
 		// Act
@@ -1682,7 +1599,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueOcrPages int64
 
 		// Act
@@ -1713,7 +1630,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetFileBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
 
 		// Act
@@ -1744,7 +1661,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetDatabaseBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueDatabaseBytes float64
 
 		// Act
@@ -1775,7 +1692,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetArchivedCompanies_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueArchivedCompanies int64
 
 		// Act
@@ -1806,7 +1723,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 	t.Run("SetEstimatedTodayCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueEstimatedTodayCents int64
 
 		// Act
@@ -1836,9 +1753,9 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseMonthToDate(t *testin
 
 }
 
-func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestSettersAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("SetMonthlyFeeEur", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueMonthlyFeeEur string
 		obj.SetMonthlyFeeEur(fernTestValueMonthlyFeeEur)
 		assert.Equal(t, fernTestValueMonthlyFeeEur, obj.MonthlyFeeEur)
@@ -1846,7 +1763,7 @@ func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedRequests", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedRequests int64
 		obj.SetIncludedRequests(fernTestValueIncludedRequests)
 		assert.Equal(t, fernTestValueIncludedRequests, obj.IncludedRequests)
@@ -1854,7 +1771,7 @@ func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetRequestOverageEur", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueRequestOverageEur string
 		obj.SetRequestOverageEur(fernTestValueRequestOverageEur)
 		assert.Equal(t, fernTestValueRequestOverageEur, obj.RequestOverageEur)
@@ -1862,7 +1779,7 @@ func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedDatabaseBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedDatabaseBytes float64
 		obj.SetIncludedDatabaseBytes(fernTestValueIncludedDatabaseBytes)
 		assert.Equal(t, fernTestValueIncludedDatabaseBytes, obj.IncludedDatabaseBytes)
@@ -1870,7 +1787,7 @@ func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedFileBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedFileBytes float64
 		obj.SetIncludedFileBytes(fernTestValueIncludedFileBytes)
 		assert.Equal(t, fernTestValueIncludedFileBytes, obj.IncludedFileBytes)
@@ -1879,11 +1796,11 @@ func TestSettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestGettersAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("GetMonthlyFeeEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var expected string
 		obj.MonthlyFeeEur = expected
 
@@ -1893,7 +1810,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 	t.Run("GetMonthlyFeeEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1906,7 +1823,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedRequests", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var expected int64
 		obj.IncludedRequests = expected
 
@@ -1916,7 +1833,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedRequests_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1929,7 +1846,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	t.Run("GetRequestOverageEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var expected string
 		obj.RequestOverageEur = expected
 
@@ -1939,7 +1856,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 	t.Run("GetRequestOverageEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1952,7 +1869,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedDatabaseBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var expected float64
 		obj.IncludedDatabaseBytes = expected
 
@@ -1962,7 +1879,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedDatabaseBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1975,7 +1892,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedFileBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var expected float64
 		obj.IncludedFileBytes = expected
 
@@ -1985,7 +1902,7 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedFileBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1997,11 +1914,11 @@ func TestGettersPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestSettersMarkExplicitAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("SetMonthlyFeeEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueMonthlyFeeEur string
 
 		// Act
@@ -2032,7 +1949,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing
 	t.Run("SetIncludedRequests_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedRequests int64
 
 		// Act
@@ -2063,7 +1980,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing
 	t.Run("SetRequestOverageEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueRequestOverageEur string
 
 		// Act
@@ -2094,7 +2011,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing
 	t.Run("SetIncludedDatabaseBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedDatabaseBytes float64
 
 		// Act
@@ -2125,7 +2042,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing
 	t.Run("SetIncludedFileBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		var fernTestValueIncludedFileBytes float64
 
 		// Act
@@ -2155,9 +2072,9 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponsePlansValue(t *testing
 
 }
 
-func TestSettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestSettersAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("SetMinCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var fernTestValueMinCents int64
 		obj.SetMinCents(fernTestValueMinCents)
 		assert.Equal(t, fernTestValueMinCents, obj.MinCents)
@@ -2165,7 +2082,7 @@ func TestSettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 	})
 
 	t.Run("SetMaxCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var fernTestValueMaxCents int64
 		obj.SetMaxCents(fernTestValueMaxCents)
 		assert.Equal(t, fernTestValueMaxCents, obj.MaxCents)
@@ -2174,11 +2091,11 @@ func TestSettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestGettersAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("GetMinCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var expected int64
 		obj.MinCents = expected
 
@@ -2188,7 +2105,7 @@ func TestGettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 	t.Run("GetMinCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseTopUp
+		var obj *AccountGetBillingResponseTopUp
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2201,7 +2118,7 @@ func TestGettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 	t.Run("GetMaxCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var expected int64
 		obj.MaxCents = expected
 
@@ -2211,7 +2128,7 @@ func TestGettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 	t.Run("GetMaxCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseTopUp
+		var obj *AccountGetBillingResponseTopUp
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2223,11 +2140,11 @@ func TestGettersPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestSettersMarkExplicitAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("SetMinCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var fernTestValueMinCents int64
 
 		// Act
@@ -2258,7 +2175,7 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 	t.Run("SetMaxCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		var fernTestValueMaxCents int64
 
 		// Act
@@ -2288,25 +2205,25 @@ func TestSettersMarkExplicitPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestSettersAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("SetPlan", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePlan PostV1BillingAccountSetPlanResponsePlan
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePlan AccountSetPlanBillingResponsePlan
 		obj.SetPlan(fernTestValuePlan)
 		assert.Equal(t, fernTestValuePlan, obj.Plan)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueStatus PostV1BillingAccountSetPlanResponseStatus
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueStatus AccountSetPlanBillingResponseStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBalanceCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueBalanceCents int64
 		obj.SetBalanceCents(fernTestValueBalanceCents)
 		assert.Equal(t, fernTestValueBalanceCents, obj.BalanceCents)
@@ -2314,31 +2231,31 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	})
 
 	t.Run("SetTrialEndsAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueTrialEndsAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueTrialEndsAt *time.Time
 		obj.SetTrialEndsAt(fernTestValueTrialEndsAt)
 		assert.Equal(t, fernTestValueTrialEndsAt, obj.TrialEndsAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetFirstTopUpAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueFirstTopUpAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueFirstTopUpAt *time.Time
 		obj.SetFirstTopUpAt(fernTestValueFirstTopUpAt)
 		assert.Equal(t, fernTestValueFirstTopUpAt, obj.FirstTopUpAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetLastChargedDate", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueLastChargedDate *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueLastChargedDate *time.Time
 		obj.SetLastChargedDate(fernTestValueLastChargedDate)
 		assert.Equal(t, fernTestValueLastChargedDate, obj.LastChargedDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentsConfigured", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValuePaymentsConfigured bool
 		obj.SetPaymentsConfigured(fernTestValuePaymentsConfigured)
 		assert.Equal(t, fernTestValuePaymentsConfigured, obj.PaymentsConfigured)
@@ -2346,7 +2263,7 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	})
 
 	t.Run("SetHasPaymentAccount", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueHasPaymentAccount bool
 		obj.SetHasPaymentAccount(fernTestValueHasPaymentAccount)
 		assert.Equal(t, fernTestValueHasPaymentAccount, obj.HasPaymentAccount)
@@ -2354,7 +2271,7 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	})
 
 	t.Run("SetHasSubscription", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueHasSubscription bool
 		obj.SetHasSubscription(fernTestValueHasSubscription)
 		assert.Equal(t, fernTestValueHasSubscription, obj.HasSubscription)
@@ -2362,15 +2279,15 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	})
 
 	t.Run("SetPaymentFailedAt", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePaymentFailedAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePaymentFailedAt *time.Time
 		obj.SetPaymentFailedAt(fernTestValuePaymentFailedAt)
 		assert.Equal(t, fernTestValuePaymentFailedAt, obj.PaymentFailedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPaymentFailedInvoiceURL", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValuePaymentFailedInvoiceURL *string
 		obj.SetPaymentFailedInvoiceURL(fernTestValuePaymentFailedInvoiceURL)
 		assert.Equal(t, fernTestValuePaymentFailedInvoiceURL, obj.PaymentFailedInvoiceURL)
@@ -2378,31 +2295,31 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	})
 
 	t.Run("SetMonthToDate", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueMonthToDate *PostV1BillingAccountSetPlanResponseMonthToDate
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueMonthToDate *AccountSetPlanBillingResponseMonthToDate
 		obj.SetMonthToDate(fernTestValueMonthToDate)
 		assert.Equal(t, fernTestValueMonthToDate, obj.MonthToDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetPlans", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePlans map[string]*PostV1BillingAccountSetPlanResponsePlansValue
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePlans map[string]*AccountSetPlanBillingResponsePlansValue
 		obj.SetPlans(fernTestValuePlans)
 		assert.Equal(t, fernTestValuePlans, obj.Plans)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTopUp", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueTopUp *PostV1BillingAccountSetPlanResponseTopUp
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueTopUp *AccountSetPlanBillingResponseTopUp
 		obj.SetTopUp(fernTestValueTopUp)
 		assert.Equal(t, fernTestValueTopUp, obj.TopUp)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTrialDays", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueTrialDays int64
 		obj.SetTrialDays(fernTestValueTrialDays)
 		assert.Equal(t, fernTestValueTrialDays, obj.TrialDays)
@@ -2411,12 +2328,12 @@ func TestSettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestGettersAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected PostV1BillingAccountSetPlanResponsePlan
+		obj := &AccountSetPlanBillingResponse{}
+		var expected AccountSetPlanBillingResponsePlan
 		obj.Plan = expected
 
 		// Act & Assert
@@ -2425,7 +2342,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetPlan_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2438,8 +2355,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected PostV1BillingAccountSetPlanResponseStatus
+		obj := &AccountSetPlanBillingResponse{}
+		var expected AccountSetPlanBillingResponseStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -2448,7 +2365,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2461,7 +2378,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetBalanceCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected int64
 		obj.BalanceCents = expected
 
@@ -2471,7 +2388,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetBalanceCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2484,8 +2401,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetTrialEndsAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *string
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *time.Time
 		obj.TrialEndsAt = expected
 
 		// Act & Assert
@@ -2495,7 +2412,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetTrialEndsAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.TrialEndsAt = nil
 
 		// Act & Assert
@@ -2504,7 +2421,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetTrialEndsAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2517,8 +2434,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetFirstTopUpAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *string
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *time.Time
 		obj.FirstTopUpAt = expected
 
 		// Act & Assert
@@ -2528,7 +2445,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetFirstTopUpAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.FirstTopUpAt = nil
 
 		// Act & Assert
@@ -2537,7 +2454,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetFirstTopUpAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2550,8 +2467,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetLastChargedDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *string
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *time.Time
 		obj.LastChargedDate = expected
 
 		// Act & Assert
@@ -2561,7 +2478,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetLastChargedDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.LastChargedDate = nil
 
 		// Act & Assert
@@ -2570,7 +2487,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetLastChargedDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2583,7 +2500,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPaymentsConfigured", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected bool
 		obj.PaymentsConfigured = expected
 
@@ -2593,7 +2510,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetPaymentsConfigured_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2606,7 +2523,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetHasPaymentAccount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected bool
 		obj.HasPaymentAccount = expected
 
@@ -2616,7 +2533,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetHasPaymentAccount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2629,7 +2546,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetHasSubscription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected bool
 		obj.HasSubscription = expected
 
@@ -2639,7 +2556,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetHasSubscription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2652,8 +2569,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPaymentFailedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *string
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *time.Time
 		obj.PaymentFailedAt = expected
 
 		// Act & Assert
@@ -2663,7 +2580,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPaymentFailedAt_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.PaymentFailedAt = nil
 
 		// Act & Assert
@@ -2672,7 +2589,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetPaymentFailedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2685,7 +2602,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPaymentFailedInvoiceURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected *string
 		obj.PaymentFailedInvoiceURL = expected
 
@@ -2696,7 +2613,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPaymentFailedInvoiceURL_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.PaymentFailedInvoiceURL = nil
 
 		// Act & Assert
@@ -2705,7 +2622,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetPaymentFailedInvoiceURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2718,8 +2635,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetMonthToDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *PostV1BillingAccountSetPlanResponseMonthToDate
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *AccountSetPlanBillingResponseMonthToDate
 		obj.MonthToDate = expected
 
 		// Act & Assert
@@ -2729,7 +2646,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetMonthToDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.MonthToDate = nil
 
 		// Act & Assert
@@ -2738,7 +2655,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetMonthToDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2751,8 +2668,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPlans", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected map[string]*PostV1BillingAccountSetPlanResponsePlansValue
+		obj := &AccountSetPlanBillingResponse{}
+		var expected map[string]*AccountSetPlanBillingResponsePlansValue
 		obj.Plans = expected
 
 		// Act & Assert
@@ -2762,7 +2679,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetPlans_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.Plans = nil
 
 		// Act & Assert
@@ -2771,7 +2688,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetPlans_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2784,8 +2701,8 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetTopUp", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var expected *PostV1BillingAccountSetPlanResponseTopUp
+		obj := &AccountSetPlanBillingResponse{}
+		var expected *AccountSetPlanBillingResponseTopUp
 		obj.TopUp = expected
 
 		// Act & Assert
@@ -2795,7 +2712,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetTopUp_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		obj.TopUp = nil
 
 		// Act & Assert
@@ -2804,7 +2721,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetTopUp_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2817,7 +2734,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("GetTrialDays", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var expected int64
 		obj.TrialDays = expected
 
@@ -2827,7 +2744,7 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetTrialDays_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -2839,12 +2756,12 @@ func TestGettersPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestSettersMarkExplicitAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePlan PostV1BillingAccountSetPlanResponsePlan
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePlan AccountSetPlanBillingResponsePlan
 
 		// Act
 		obj.SetPlan(fernTestValuePlan)
@@ -2874,8 +2791,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueStatus PostV1BillingAccountSetPlanResponseStatus
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueStatus AccountSetPlanBillingResponseStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -2905,7 +2822,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetBalanceCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueBalanceCents int64
 
 		// Act
@@ -2936,8 +2853,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetTrialEndsAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueTrialEndsAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueTrialEndsAt *time.Time
 
 		// Act
 		obj.SetTrialEndsAt(fernTestValueTrialEndsAt)
@@ -2967,8 +2884,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetFirstTopUpAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueFirstTopUpAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueFirstTopUpAt *time.Time
 
 		// Act
 		obj.SetFirstTopUpAt(fernTestValueFirstTopUpAt)
@@ -2998,8 +2915,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetLastChargedDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueLastChargedDate *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueLastChargedDate *time.Time
 
 		// Act
 		obj.SetLastChargedDate(fernTestValueLastChargedDate)
@@ -3029,7 +2946,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetPaymentsConfigured_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValuePaymentsConfigured bool
 
 		// Act
@@ -3060,7 +2977,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetHasPaymentAccount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueHasPaymentAccount bool
 
 		// Act
@@ -3091,7 +3008,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetHasSubscription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueHasSubscription bool
 
 		// Act
@@ -3122,8 +3039,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetPaymentFailedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePaymentFailedAt *string
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePaymentFailedAt *time.Time
 
 		// Act
 		obj.SetPaymentFailedAt(fernTestValuePaymentFailedAt)
@@ -3153,7 +3070,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetPaymentFailedInvoiceURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValuePaymentFailedInvoiceURL *string
 
 		// Act
@@ -3184,8 +3101,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetMonthToDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueMonthToDate *PostV1BillingAccountSetPlanResponseMonthToDate
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueMonthToDate *AccountSetPlanBillingResponseMonthToDate
 
 		// Act
 		obj.SetMonthToDate(fernTestValueMonthToDate)
@@ -3215,8 +3132,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetPlans_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValuePlans map[string]*PostV1BillingAccountSetPlanResponsePlansValue
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValuePlans map[string]*AccountSetPlanBillingResponsePlansValue
 
 		// Act
 		obj.SetPlans(fernTestValuePlans)
@@ -3246,8 +3163,8 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetTopUp_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
-		var fernTestValueTopUp *PostV1BillingAccountSetPlanResponseTopUp
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueTopUp *AccountSetPlanBillingResponseTopUp
 
 		// Act
 		obj.SetTopUp(fernTestValueTopUp)
@@ -3277,7 +3194,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 	t.Run("SetTrialDays_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValueTrialDays int64
 
 		// Act
@@ -3307,9 +3224,9 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestSettersAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("SetFrom", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueFrom string
 		obj.SetFrom(fernTestValueFrom)
 		assert.Equal(t, fernTestValueFrom, obj.From)
@@ -3317,7 +3234,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetTo", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueTo string
 		obj.SetTo(fernTestValueTo)
 		assert.Equal(t, fernTestValueTo, obj.To)
@@ -3325,7 +3242,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetAPIRequests", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueAPIRequests int64
 		obj.SetAPIRequests(fernTestValueAPIRequests)
 		assert.Equal(t, fernTestValueAPIRequests, obj.APIRequests)
@@ -3333,7 +3250,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueOcrPages int64
 		obj.SetOcrPages(fernTestValueOcrPages)
 		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
@@ -3341,7 +3258,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetFileBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
 		obj.SetFileBytes(fernTestValueFileBytes)
 		assert.Equal(t, fernTestValueFileBytes, obj.FileBytes)
@@ -3349,7 +3266,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetDatabaseBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueDatabaseBytes float64
 		obj.SetDatabaseBytes(fernTestValueDatabaseBytes)
 		assert.Equal(t, fernTestValueDatabaseBytes, obj.DatabaseBytes)
@@ -3357,7 +3274,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetArchivedCompanies", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueArchivedCompanies int64
 		obj.SetArchivedCompanies(fernTestValueArchivedCompanies)
 		assert.Equal(t, fernTestValueArchivedCompanies, obj.ArchivedCompanies)
@@ -3365,7 +3282,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	})
 
 	t.Run("SetEstimatedTodayCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueEstimatedTodayCents int64
 		obj.SetEstimatedTodayCents(fernTestValueEstimatedTodayCents)
 		assert.Equal(t, fernTestValueEstimatedTodayCents, obj.EstimatedTodayCents)
@@ -3374,11 +3291,11 @@ func TestSettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestGettersAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("GetFrom", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected string
 		obj.From = expected
 
@@ -3388,7 +3305,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3401,7 +3318,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetTo", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected string
 		obj.To = expected
 
@@ -3411,7 +3328,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetTo_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3424,7 +3341,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetAPIRequests", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected int64
 		obj.APIRequests = expected
 
@@ -3434,7 +3351,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetAPIRequests_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3447,7 +3364,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetOcrPages", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected int64
 		obj.OcrPages = expected
 
@@ -3457,7 +3374,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3470,7 +3387,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetFileBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected float64
 		obj.FileBytes = expected
 
@@ -3480,7 +3397,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetFileBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3493,7 +3410,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetDatabaseBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected float64
 		obj.DatabaseBytes = expected
 
@@ -3503,7 +3420,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetDatabaseBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3516,7 +3433,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetArchivedCompanies", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected int64
 		obj.ArchivedCompanies = expected
 
@@ -3526,7 +3443,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetArchivedCompanies_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3539,7 +3456,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 	t.Run("GetEstimatedTodayCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var expected int64
 		obj.EstimatedTodayCents = expected
 
@@ -3549,7 +3466,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 	t.Run("GetEstimatedTodayCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3561,11 +3478,11 @@ func TestGettersPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestSettersMarkExplicitAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueFrom string
 
 		// Act
@@ -3596,7 +3513,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueTo string
 
 		// Act
@@ -3627,7 +3544,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetAPIRequests_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueAPIRequests int64
 
 		// Act
@@ -3658,7 +3575,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueOcrPages int64
 
 		// Act
@@ -3689,7 +3606,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetFileBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
 
 		// Act
@@ -3720,7 +3637,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetDatabaseBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueDatabaseBytes float64
 
 		// Act
@@ -3751,7 +3668,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetArchivedCompanies_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueArchivedCompanies int64
 
 		// Act
@@ -3782,7 +3699,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 	t.Run("SetEstimatedTodayCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueEstimatedTodayCents int64
 
 		// Act
@@ -3812,9 +3729,9 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseMonthToDate(t *te
 
 }
 
-func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestSettersAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("SetMonthlyFeeEur", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueMonthlyFeeEur string
 		obj.SetMonthlyFeeEur(fernTestValueMonthlyFeeEur)
 		assert.Equal(t, fernTestValueMonthlyFeeEur, obj.MonthlyFeeEur)
@@ -3822,7 +3739,7 @@ func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedRequests", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedRequests int64
 		obj.SetIncludedRequests(fernTestValueIncludedRequests)
 		assert.Equal(t, fernTestValueIncludedRequests, obj.IncludedRequests)
@@ -3830,7 +3747,7 @@ func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetRequestOverageEur", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueRequestOverageEur string
 		obj.SetRequestOverageEur(fernTestValueRequestOverageEur)
 		assert.Equal(t, fernTestValueRequestOverageEur, obj.RequestOverageEur)
@@ -3838,7 +3755,7 @@ func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedDatabaseBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedDatabaseBytes float64
 		obj.SetIncludedDatabaseBytes(fernTestValueIncludedDatabaseBytes)
 		assert.Equal(t, fernTestValueIncludedDatabaseBytes, obj.IncludedDatabaseBytes)
@@ -3846,7 +3763,7 @@ func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	})
 
 	t.Run("SetIncludedFileBytes", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedFileBytes float64
 		obj.SetIncludedFileBytes(fernTestValueIncludedFileBytes)
 		assert.Equal(t, fernTestValueIncludedFileBytes, obj.IncludedFileBytes)
@@ -3855,11 +3772,11 @@ func TestSettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestGettersAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("GetMonthlyFeeEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var expected string
 		obj.MonthlyFeeEur = expected
 
@@ -3869,7 +3786,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 	t.Run("GetMonthlyFeeEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3882,7 +3799,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedRequests", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var expected int64
 		obj.IncludedRequests = expected
 
@@ -3892,7 +3809,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedRequests_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3905,7 +3822,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	t.Run("GetRequestOverageEur", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var expected string
 		obj.RequestOverageEur = expected
 
@@ -3915,7 +3832,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 	t.Run("GetRequestOverageEur_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3928,7 +3845,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedDatabaseBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var expected float64
 		obj.IncludedDatabaseBytes = expected
 
@@ -3938,7 +3855,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedDatabaseBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3951,7 +3868,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 	t.Run("GetIncludedFileBytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var expected float64
 		obj.IncludedFileBytes = expected
 
@@ -3961,7 +3878,7 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 	t.Run("GetIncludedFileBytes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -3973,11 +3890,11 @@ func TestGettersPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestSettersMarkExplicitAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("SetMonthlyFeeEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueMonthlyFeeEur string
 
 		// Act
@@ -4008,7 +3925,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *tes
 	t.Run("SetIncludedRequests_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedRequests int64
 
 		// Act
@@ -4039,7 +3956,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *tes
 	t.Run("SetRequestOverageEur_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueRequestOverageEur string
 
 		// Act
@@ -4070,7 +3987,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *tes
 	t.Run("SetIncludedDatabaseBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedDatabaseBytes float64
 
 		// Act
@@ -4101,7 +4018,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *tes
 	t.Run("SetIncludedFileBytes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		var fernTestValueIncludedFileBytes float64
 
 		// Act
@@ -4131,9 +4048,9 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponsePlansValue(t *tes
 
 }
 
-func TestSettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestSettersAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("SetMinCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var fernTestValueMinCents int64
 		obj.SetMinCents(fernTestValueMinCents)
 		assert.Equal(t, fernTestValueMinCents, obj.MinCents)
@@ -4141,7 +4058,7 @@ func TestSettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 	})
 
 	t.Run("SetMaxCents", func(t *testing.T) {
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var fernTestValueMaxCents int64
 		obj.SetMaxCents(fernTestValueMaxCents)
 		assert.Equal(t, fernTestValueMaxCents, obj.MaxCents)
@@ -4150,11 +4067,11 @@ func TestSettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestGettersAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("GetMinCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var expected int64
 		obj.MinCents = expected
 
@@ -4164,7 +4081,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 
 	t.Run("GetMinCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseTopUp
+		var obj *AccountSetPlanBillingResponseTopUp
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4177,7 +4094,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 	t.Run("GetMaxCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var expected int64
 		obj.MaxCents = expected
 
@@ -4187,7 +4104,7 @@ func TestGettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 
 	t.Run("GetMaxCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseTopUp
+		var obj *AccountSetPlanBillingResponseTopUp
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4199,11 +4116,11 @@ func TestGettersPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestSettersMarkExplicitAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("SetMinCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var fernTestValueMinCents int64
 
 		// Act
@@ -4234,7 +4151,7 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseTopUp(t *testing.
 	t.Run("SetMaxCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		var fernTestValueMaxCents int64
 
 		// Act
@@ -4264,9 +4181,9 @@ func TestSettersMarkExplicitPostV1BillingAccountSetPlanResponseTopUp(t *testing.
 
 }
 
-func TestSettersPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestSettersPortalCreateBillingResponse(t *testing.T) {
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -4275,11 +4192,11 @@ func TestSettersPostV1BillingPortalCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestGettersPortalCreateBillingResponse(t *testing.T) {
 	t.Run("GetURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 		var expected string
 		obj.URL = expected
 
@@ -4289,7 +4206,7 @@ func TestGettersPostV1BillingPortalCreateResponse(t *testing.T) {
 
 	t.Run("GetURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingPortalCreateResponse
+		var obj *PortalCreateBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4301,11 +4218,11 @@ func TestGettersPostV1BillingPortalCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitPortalCreateBillingResponse(t *testing.T) {
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 		var fernTestValueURL string
 
 		// Act
@@ -4335,9 +4252,9 @@ func TestSettersMarkExplicitPostV1BillingPortalCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestSettersTopupCreateBillingResponse(t *testing.T) {
 	t.Run("SetURL", func(t *testing.T) {
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var fernTestValueURL string
 		obj.SetURL(fernTestValueURL)
 		assert.Equal(t, fernTestValueURL, obj.URL)
@@ -4345,7 +4262,7 @@ func TestSettersPostV1BillingTopupCreateResponse(t *testing.T) {
 	})
 
 	t.Run("SetSessionID", func(t *testing.T) {
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var fernTestValueSessionID string
 		obj.SetSessionID(fernTestValueSessionID)
 		assert.Equal(t, fernTestValueSessionID, obj.SessionID)
@@ -4354,11 +4271,11 @@ func TestSettersPostV1BillingTopupCreateResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestGettersTopupCreateBillingResponse(t *testing.T) {
 	t.Run("GetURL", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var expected string
 		obj.URL = expected
 
@@ -4368,7 +4285,7 @@ func TestGettersPostV1BillingTopupCreateResponse(t *testing.T) {
 
 	t.Run("GetURL_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTopupCreateResponse
+		var obj *TopupCreateBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4381,7 +4298,7 @@ func TestGettersPostV1BillingTopupCreateResponse(t *testing.T) {
 	t.Run("GetSessionID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var expected string
 		obj.SessionID = expected
 
@@ -4391,7 +4308,7 @@ func TestGettersPostV1BillingTopupCreateResponse(t *testing.T) {
 
 	t.Run("GetSessionID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTopupCreateResponse
+		var obj *TopupCreateBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4403,11 +4320,11 @@ func TestGettersPostV1BillingTopupCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestSettersMarkExplicitTopupCreateBillingResponse(t *testing.T) {
 	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var fernTestValueURL string
 
 		// Act
@@ -4438,7 +4355,7 @@ func TestSettersMarkExplicitPostV1BillingTopupCreateResponse(t *testing.T) {
 	t.Run("SetSessionID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		var fernTestValueSessionID string
 
 		// Act
@@ -4468,10 +4385,10 @@ func TestSettersMarkExplicitPostV1BillingTopupCreateResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestSettersTransactionsListBillingResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponse{}
-		var fernTestValueRows []*PostV1BillingTransactionsListResponseRowsItem
+		obj := &TransactionsListBillingResponse{}
+		var fernTestValueRows []*TransactionsListBillingResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -4479,12 +4396,12 @@ func TestSettersPostV1BillingTransactionsListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestGettersTransactionsListBillingResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponse{}
-		var expected []*PostV1BillingTransactionsListResponseRowsItem
+		obj := &TransactionsListBillingResponse{}
+		var expected []*TransactionsListBillingResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -4494,7 +4411,7 @@ func TestGettersPostV1BillingTransactionsListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponse{}
+		obj := &TransactionsListBillingResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -4503,7 +4420,7 @@ func TestGettersPostV1BillingTransactionsListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponse
+		var obj *TransactionsListBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4515,12 +4432,12 @@ func TestGettersPostV1BillingTransactionsListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestSettersMarkExplicitTransactionsListBillingResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponse{}
-		var fernTestValueRows []*PostV1BillingTransactionsListResponseRowsItem
+		obj := &TransactionsListBillingResponse{}
+		var fernTestValueRows []*TransactionsListBillingResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -4549,9 +4466,9 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponse(t *testing.T) 
 
 }
 
-func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestSettersTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueID string
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -4559,15 +4476,15 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetType", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueType PostV1BillingTransactionsListResponseRowsItemType
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueType TransactionsListBillingResponseRowsItemType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetAmountCents", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueAmountCents int64
 		obj.SetAmountCents(fernTestValueAmountCents)
 		assert.Equal(t, fernTestValueAmountCents, obj.AmountCents)
@@ -4575,7 +4492,7 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetBalanceAfterCents", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueBalanceAfterCents int64
 		obj.SetBalanceAfterCents(fernTestValueBalanceAfterCents)
 		assert.Equal(t, fernTestValueBalanceAfterCents, obj.BalanceAfterCents)
@@ -4583,7 +4500,7 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDescription", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueDescription string
 		obj.SetDescription(fernTestValueDescription)
 		assert.Equal(t, fernTestValueDescription, obj.Description)
@@ -4591,7 +4508,7 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetReference", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueReference *string
 		obj.SetReference(fernTestValueReference)
 		assert.Equal(t, fernTestValueReference, obj.Reference)
@@ -4599,16 +4516,16 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetUsageDate", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueUsageDate *string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueUsageDate *time.Time
 		obj.SetUsageDate(fernTestValueUsageDate)
 		assert.Equal(t, fernTestValueUsageDate, obj.UsageDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetCreatedAt", func(t *testing.T) {
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
 		assert.NotNil(t, obj.explicitFields)
@@ -4616,11 +4533,11 @@ func TestSettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestGettersTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var expected string
 		obj.ID = expected
 
@@ -4630,7 +4547,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4643,8 +4560,8 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var expected PostV1BillingTransactionsListResponseRowsItemType
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var expected TransactionsListBillingResponseRowsItemType
 		obj.Type = expected
 
 		// Act & Assert
@@ -4653,7 +4570,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4666,7 +4583,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetAmountCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var expected int64
 		obj.AmountCents = expected
 
@@ -4676,7 +4593,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetAmountCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4689,7 +4606,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetBalanceAfterCents", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var expected int64
 		obj.BalanceAfterCents = expected
 
@@ -4699,7 +4616,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetBalanceAfterCents_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4712,7 +4629,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetDescription", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var expected string
 		obj.Description = expected
 
@@ -4722,7 +4639,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4735,7 +4652,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetReference", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var expected *string
 		obj.Reference = expected
 
@@ -4746,7 +4663,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetReference_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		obj.Reference = nil
 
 		// Act & Assert
@@ -4755,7 +4672,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetReference_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4768,8 +4685,8 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUsageDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var expected *string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var expected *time.Time
 		obj.UsageDate = expected
 
 		// Act & Assert
@@ -4779,7 +4696,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetUsageDate_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		obj.UsageDate = nil
 
 		// Act & Assert
@@ -4788,7 +4705,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetUsageDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4801,8 +4718,8 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var expected string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var expected time.Time
 		obj.CreatedAt = expected
 
 		// Act & Assert
@@ -4811,7 +4728,7 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -4823,11 +4740,11 @@ func TestGettersPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueID string
 
 		// Act
@@ -4858,8 +4775,8 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueType PostV1BillingTransactionsListResponseRowsItemType
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueType TransactionsListBillingResponseRowsItemType
 
 		// Act
 		obj.SetType(fernTestValueType)
@@ -4889,7 +4806,7 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetAmountCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueAmountCents int64
 
 		// Act
@@ -4920,7 +4837,7 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetBalanceAfterCents_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueBalanceAfterCents int64
 
 		// Act
@@ -4951,7 +4868,7 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueDescription string
 
 		// Act
@@ -4982,7 +4899,7 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetReference_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		var fernTestValueReference *string
 
 		// Act
@@ -5013,8 +4930,8 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetUsageDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueUsageDate *string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueUsageDate *time.Time
 
 		// Act
 		obj.SetUsageDate(fernTestValueUsageDate)
@@ -5044,8 +4961,8 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
-		var fernTestValueCreatedAt string
+		obj := &TransactionsListBillingResponseRowsItem{}
+		var fernTestValueCreatedAt time.Time
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
@@ -5074,10 +4991,10 @@ func TestSettersMarkExplicitPostV1BillingTransactionsListResponseRowsItem(t *tes
 
 }
 
-func TestSettersPostV1BillingUsageListResponse(t *testing.T) {
+func TestSettersUsageListBillingResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
-		obj := &PostV1BillingUsageListResponse{}
-		var fernTestValueRows []*PostV1BillingUsageListResponseRowsItem
+		obj := &UsageListBillingResponse{}
+		var fernTestValueRows []*UsageListBillingResponseRowsItem
 		obj.SetRows(fernTestValueRows)
 		assert.Equal(t, fernTestValueRows, obj.Rows)
 		assert.NotNil(t, obj.explicitFields)
@@ -5085,12 +5002,12 @@ func TestSettersPostV1BillingUsageListResponse(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingUsageListResponse(t *testing.T) {
+func TestGettersUsageListBillingResponse(t *testing.T) {
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponse{}
-		var expected []*PostV1BillingUsageListResponseRowsItem
+		obj := &UsageListBillingResponse{}
+		var expected []*UsageListBillingResponseRowsItem
 		obj.Rows = expected
 
 		// Act & Assert
@@ -5100,7 +5017,7 @@ func TestGettersPostV1BillingUsageListResponse(t *testing.T) {
 	t.Run("GetRows_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponse{}
+		obj := &UsageListBillingResponse{}
 		obj.Rows = nil
 
 		// Act & Assert
@@ -5109,7 +5026,7 @@ func TestGettersPostV1BillingUsageListResponse(t *testing.T) {
 
 	t.Run("GetRows_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponse
+		var obj *UsageListBillingResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5121,12 +5038,12 @@ func TestGettersPostV1BillingUsageListResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingUsageListResponse(t *testing.T) {
+func TestSettersMarkExplicitUsageListBillingResponse(t *testing.T) {
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponse{}
-		var fernTestValueRows []*PostV1BillingUsageListResponseRowsItem
+		obj := &UsageListBillingResponse{}
+		var fernTestValueRows []*UsageListBillingResponseRowsItem
 
 		// Act
 		obj.SetRows(fernTestValueRows)
@@ -5155,9 +5072,9 @@ func TestSettersMarkExplicitPostV1BillingUsageListResponse(t *testing.T) {
 
 }
 
-func TestSettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestSettersUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("SetCompanyID", func(t *testing.T) {
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var fernTestValueCompanyID string
 		obj.SetCompanyID(fernTestValueCompanyID)
 		assert.Equal(t, fernTestValueCompanyID, obj.CompanyID)
@@ -5165,23 +5082,23 @@ func TestSettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 	})
 
 	t.Run("SetDate", func(t *testing.T) {
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueDate time.Time
 		obj.SetDate(fernTestValueDate)
 		assert.Equal(t, fernTestValueDate, obj.Date)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetMetric", func(t *testing.T) {
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var fernTestValueMetric PostV1BillingUsageListResponseRowsItemMetric
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueMetric UsageListBillingResponseRowsItemMetric
 		obj.SetMetric(fernTestValueMetric)
 		assert.Equal(t, fernTestValueMetric, obj.Metric)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetQuantity", func(t *testing.T) {
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var fernTestValueQuantity float64
 		obj.SetQuantity(fernTestValueQuantity)
 		assert.Equal(t, fernTestValueQuantity, obj.Quantity)
@@ -5190,11 +5107,11 @@ func TestSettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestGettersUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("GetCompanyID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var expected string
 		obj.CompanyID = expected
 
@@ -5204,7 +5121,7 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetCompanyID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5217,8 +5134,8 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 	t.Run("GetDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var expected string
+		obj := &UsageListBillingResponseRowsItem{}
+		var expected time.Time
 		obj.Date = expected
 
 		// Act & Assert
@@ -5227,7 +5144,7 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5240,8 +5157,8 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 	t.Run("GetMetric", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var expected PostV1BillingUsageListResponseRowsItemMetric
+		obj := &UsageListBillingResponseRowsItem{}
+		var expected UsageListBillingResponseRowsItemMetric
 		obj.Metric = expected
 
 		// Act & Assert
@@ -5250,7 +5167,7 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetMetric_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5263,7 +5180,7 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 	t.Run("GetQuantity", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var expected float64
 		obj.Quantity = expected
 
@@ -5273,7 +5190,7 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetQuantity_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -5285,11 +5202,11 @@ func TestGettersPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestSettersMarkExplicitUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("SetCompanyID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var fernTestValueCompanyID string
 
 		// Act
@@ -5320,8 +5237,8 @@ func TestSettersMarkExplicitPostV1BillingUsageListResponseRowsItem(t *testing.T)
 	t.Run("SetDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var fernTestValueDate string
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueDate time.Time
 
 		// Act
 		obj.SetDate(fernTestValueDate)
@@ -5351,8 +5268,8 @@ func TestSettersMarkExplicitPostV1BillingUsageListResponseRowsItem(t *testing.T)
 	t.Run("SetMetric_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
-		var fernTestValueMetric PostV1BillingUsageListResponseRowsItemMetric
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueMetric UsageListBillingResponseRowsItemMetric
 
 		// Act
 		obj.SetMetric(fernTestValueMetric)
@@ -5382,7 +5299,7 @@ func TestSettersMarkExplicitPostV1BillingUsageListResponseRowsItem(t *testing.T)
 	t.Run("SetQuantity_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		var fernTestValueQuantity float64
 
 		// Act
@@ -5412,11 +5329,95 @@ func TestSettersMarkExplicitPostV1BillingUsageListResponseRowsItem(t *testing.T)
 
 }
 
-func TestJSONMarshalingPostV1BillingAccountGetResponse(t *testing.T) {
+func TestSettersUsageListBillingRequest(t *testing.T) {
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &UsageListBillingRequest{}
+		var fernTestValueFrom time.Time
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &UsageListBillingRequest{}
+		var fernTestValueTo time.Time
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitUsageListBillingRequest(t *testing.T) {
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UsageListBillingRequest{}
+		var fernTestValueFrom time.Time
+
+		// Act
+		obj.SetFrom(fernTestValueFrom)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UsageListBillingRequest{}
+		var fernTestValueTo time.Time
+
+		// Act
+		obj.SetTo(fernTestValueTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingAccountGetBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5425,31 +5426,31 @@ func TestJSONMarshalingPostV1BillingAccountGetResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountGetResponse
+		var unmarshaled AccountGetBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponse
+		var obj AccountGetBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponse
+		var obj AccountGetBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestJSONMarshalingAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5458,31 +5459,31 @@ func TestJSONMarshalingPostV1BillingAccountGetResponseMonthToDate(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountGetResponseMonthToDate
+		var unmarshaled AccountGetBillingResponseMonthToDate
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponseMonthToDate
+		var obj AccountGetBillingResponseMonthToDate
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponseMonthToDate
+		var obj AccountGetBillingResponseMonthToDate
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestJSONMarshalingAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5491,31 +5492,31 @@ func TestJSONMarshalingPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountGetResponsePlansValue
+		var unmarshaled AccountGetBillingResponsePlansValue
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponsePlansValue
+		var obj AccountGetBillingResponsePlansValue
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponsePlansValue
+		var obj AccountGetBillingResponsePlansValue
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestJSONMarshalingAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5524,31 +5525,31 @@ func TestJSONMarshalingPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountGetResponseTopUp
+		var unmarshaled AccountGetBillingResponseTopUp
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponseTopUp
+		var obj AccountGetBillingResponseTopUp
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountGetResponseTopUp
+		var obj AccountGetBillingResponseTopUp
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestJSONMarshalingAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5557,31 +5558,31 @@ func TestJSONMarshalingPostV1BillingAccountSetPlanResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountSetPlanResponse
+		var unmarshaled AccountSetPlanBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponse
+		var obj AccountSetPlanBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponse
+		var obj AccountSetPlanBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestJSONMarshalingAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5590,31 +5591,31 @@ func TestJSONMarshalingPostV1BillingAccountSetPlanResponseMonthToDate(t *testing
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountSetPlanResponseMonthToDate
+		var unmarshaled AccountSetPlanBillingResponseMonthToDate
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj AccountSetPlanBillingResponseMonthToDate
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj AccountSetPlanBillingResponseMonthToDate
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestJSONMarshalingAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5623,31 +5624,31 @@ func TestJSONMarshalingPostV1BillingAccountSetPlanResponsePlansValue(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountSetPlanResponsePlansValue
+		var unmarshaled AccountSetPlanBillingResponsePlansValue
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponsePlansValue
+		var obj AccountSetPlanBillingResponsePlansValue
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponsePlansValue
+		var obj AccountSetPlanBillingResponsePlansValue
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestJSONMarshalingAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5656,31 +5657,31 @@ func TestJSONMarshalingPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingAccountSetPlanResponseTopUp
+		var unmarshaled AccountSetPlanBillingResponseTopUp
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponseTopUp
+		var obj AccountSetPlanBillingResponseTopUp
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingAccountSetPlanResponseTopUp
+		var obj AccountSetPlanBillingResponseTopUp
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestJSONMarshalingPortalCreateBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5689,31 +5690,31 @@ func TestJSONMarshalingPostV1BillingPortalCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingPortalCreateResponse
+		var unmarshaled PortalCreateBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingPortalCreateResponse
+		var obj PortalCreateBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingPortalCreateResponse
+		var obj PortalCreateBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestJSONMarshalingTopupCreateBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5722,31 +5723,31 @@ func TestJSONMarshalingPostV1BillingTopupCreateResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingTopupCreateResponse
+		var unmarshaled TopupCreateBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTopupCreateResponse
+		var obj TopupCreateBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTopupCreateResponse
+		var obj TopupCreateBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestJSONMarshalingTransactionsListBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponse{}
+		obj := &TransactionsListBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5755,31 +5756,31 @@ func TestJSONMarshalingPostV1BillingTransactionsListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingTransactionsListResponse
+		var unmarshaled TransactionsListBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTransactionsListResponse
+		var obj TransactionsListBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTransactionsListResponse
+		var obj TransactionsListBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5788,31 +5789,31 @@ func TestJSONMarshalingPostV1BillingTransactionsListResponseRowsItem(t *testing.
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingTransactionsListResponseRowsItem
+		var unmarshaled TransactionsListBillingResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTransactionsListResponseRowsItem
+		var obj TransactionsListBillingResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingTransactionsListResponseRowsItem
+		var obj TransactionsListBillingResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingUsageListResponse(t *testing.T) {
+func TestJSONMarshalingUsageListBillingResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponse{}
+		obj := &UsageListBillingResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5821,31 +5822,31 @@ func TestJSONMarshalingPostV1BillingUsageListResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingUsageListResponse
+		var unmarshaled UsageListBillingResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingUsageListResponse
+		var obj UsageListBillingResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingUsageListResponse
+		var obj UsageListBillingResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestJSONMarshalingUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -5854,279 +5855,279 @@ func TestJSONMarshalingPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled PostV1BillingUsageListResponseRowsItem
+		var unmarshaled UsageListBillingResponseRowsItem
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingUsageListResponseRowsItem
+		var obj UsageListBillingResponseRowsItem
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj PostV1BillingUsageListResponseRowsItem
+		var obj UsageListBillingResponseRowsItem
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringPostV1BillingAccountGetResponse(t *testing.T) {
+func TestStringAccountGetBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestStringAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestStringAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestStringAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseTopUp
+		var obj *AccountGetBillingResponseTopUp
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestStringAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestStringAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestStringAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestStringAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseTopUp
+		var obj *AccountSetPlanBillingResponseTopUp
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestStringPortalCreateBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingPortalCreateResponse
+		var obj *PortalCreateBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestStringTopupCreateBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTopupCreateResponse
+		var obj *TopupCreateBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestStringTransactionsListBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTransactionsListResponse{}
+		obj := &TransactionsListBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponse
+		var obj *TransactionsListBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestStringTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingUsageListResponse(t *testing.T) {
+func TestStringUsageListBillingResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingUsageListResponse{}
+		obj := &UsageListBillingResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponse
+		var obj *UsageListBillingResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestStringUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumPostV1BillingAccountGetResponsePlan(t *testing.T) {
+func TestEnumAccountGetBillingResponsePlan(t *testing.T) {
 	t.Run("NewFromString_starter", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponsePlanFromString("starter")
+		val, err := NewAccountGetBillingResponsePlanFromString("starter")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponsePlan("starter"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponsePlan("starter"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_business", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponsePlanFromString("business")
+		val, err := NewAccountGetBillingResponsePlanFromString("business")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponsePlan("business"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponsePlan("business"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_scale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponsePlanFromString("scale")
+		val, err := NewAccountGetBillingResponsePlanFromString("scale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponsePlan("scale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponsePlan("scale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingAccountGetResponsePlanFromString("invalid_value_that_does_not_exist")
+		_, err := NewAccountGetBillingResponsePlanFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingAccountGetResponsePlanFromString("starter")
+		val, err := NewAccountGetBillingResponsePlanFromString("starter")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6134,35 +6135,35 @@ func TestEnumPostV1BillingAccountGetResponsePlan(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingAccountGetResponseStatus(t *testing.T) {
+func TestEnumAccountGetBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponseStatusFromString("trial")
+		val, err := NewAccountGetBillingResponseStatusFromString("trial")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponseStatus("trial"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponseStatus("trial"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponseStatusFromString("active")
+		val, err := NewAccountGetBillingResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_suspended", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountGetResponseStatusFromString("suspended")
+		val, err := NewAccountGetBillingResponseStatusFromString("suspended")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountGetResponseStatus("suspended"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountGetBillingResponseStatus("suspended"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingAccountGetResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAccountGetBillingResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingAccountGetResponseStatusFromString("trial")
+		val, err := NewAccountGetBillingResponseStatusFromString("trial")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6170,35 +6171,35 @@ func TestEnumPostV1BillingAccountGetResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingAccountSetPlanRequestPlan(t *testing.T) {
+func TestEnumAccountSetPlanBillingRequestPlan(t *testing.T) {
 	t.Run("NewFromString_starter", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanRequestPlanFromString("starter")
+		val, err := NewAccountSetPlanBillingRequestPlanFromString("starter")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanRequestPlan("starter"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingRequestPlan("starter"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_business", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanRequestPlanFromString("business")
+		val, err := NewAccountSetPlanBillingRequestPlanFromString("business")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanRequestPlan("business"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingRequestPlan("business"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_scale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanRequestPlanFromString("scale")
+		val, err := NewAccountSetPlanBillingRequestPlanFromString("scale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanRequestPlan("scale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingRequestPlan("scale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingAccountSetPlanRequestPlanFromString("invalid_value_that_does_not_exist")
+		_, err := NewAccountSetPlanBillingRequestPlanFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingAccountSetPlanRequestPlanFromString("starter")
+		val, err := NewAccountSetPlanBillingRequestPlanFromString("starter")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6206,35 +6207,35 @@ func TestEnumPostV1BillingAccountSetPlanRequestPlan(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingAccountSetPlanResponsePlan(t *testing.T) {
+func TestEnumAccountSetPlanBillingResponsePlan(t *testing.T) {
 	t.Run("NewFromString_starter", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponsePlanFromString("starter")
+		val, err := NewAccountSetPlanBillingResponsePlanFromString("starter")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponsePlan("starter"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponsePlan("starter"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_business", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponsePlanFromString("business")
+		val, err := NewAccountSetPlanBillingResponsePlanFromString("business")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponsePlan("business"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponsePlan("business"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_scale", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponsePlanFromString("scale")
+		val, err := NewAccountSetPlanBillingResponsePlanFromString("scale")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponsePlan("scale"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponsePlan("scale"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingAccountSetPlanResponsePlanFromString("invalid_value_that_does_not_exist")
+		_, err := NewAccountSetPlanBillingResponsePlanFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingAccountSetPlanResponsePlanFromString("starter")
+		val, err := NewAccountSetPlanBillingResponsePlanFromString("starter")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6242,35 +6243,35 @@ func TestEnumPostV1BillingAccountSetPlanResponsePlan(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingAccountSetPlanResponseStatus(t *testing.T) {
+func TestEnumAccountSetPlanBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponseStatusFromString("trial")
+		val, err := NewAccountSetPlanBillingResponseStatusFromString("trial")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponseStatus("trial"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponseStatus("trial"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponseStatusFromString("active")
+		val, err := NewAccountSetPlanBillingResponseStatusFromString("active")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponseStatus("active"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponseStatus("active"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_suspended", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingAccountSetPlanResponseStatusFromString("suspended")
+		val, err := NewAccountSetPlanBillingResponseStatusFromString("suspended")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingAccountSetPlanResponseStatus("suspended"), val, "enum value should match expected wire value")
+		assert.Equal(t, AccountSetPlanBillingResponseStatus("suspended"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingAccountSetPlanResponseStatusFromString("invalid_value_that_does_not_exist")
+		_, err := NewAccountSetPlanBillingResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingAccountSetPlanResponseStatusFromString("trial")
+		val, err := NewAccountSetPlanBillingResponseStatusFromString("trial")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6278,35 +6279,35 @@ func TestEnumPostV1BillingAccountSetPlanResponseStatus(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingPortalCreateRequestLocale(t *testing.T) {
+func TestEnumPortalCreateBillingRequestLocale(t *testing.T) {
 	t.Run("NewFromString_en", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingPortalCreateRequestLocaleFromString("en")
+		val, err := NewPortalCreateBillingRequestLocaleFromString("en")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingPortalCreateRequestLocale("en"), val, "enum value should match expected wire value")
+		assert.Equal(t, PortalCreateBillingRequestLocale("en"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingPortalCreateRequestLocaleFromString("lt")
+		val, err := NewPortalCreateBillingRequestLocaleFromString("lt")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingPortalCreateRequestLocale("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, PortalCreateBillingRequestLocale("lt"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_de", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingPortalCreateRequestLocaleFromString("de")
+		val, err := NewPortalCreateBillingRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingPortalCreateRequestLocale("de"), val, "enum value should match expected wire value")
+		assert.Equal(t, PortalCreateBillingRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingPortalCreateRequestLocaleFromString("invalid_value_that_does_not_exist")
+		_, err := NewPortalCreateBillingRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingPortalCreateRequestLocaleFromString("en")
+		val, err := NewPortalCreateBillingRequestLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6314,35 +6315,35 @@ func TestEnumPostV1BillingPortalCreateRequestLocale(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingTopupCreateRequestLocale(t *testing.T) {
+func TestEnumTopupCreateBillingRequestLocale(t *testing.T) {
 	t.Run("NewFromString_en", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTopupCreateRequestLocaleFromString("en")
+		val, err := NewTopupCreateBillingRequestLocaleFromString("en")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTopupCreateRequestLocale("en"), val, "enum value should match expected wire value")
+		assert.Equal(t, TopupCreateBillingRequestLocale("en"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTopupCreateRequestLocaleFromString("lt")
+		val, err := NewTopupCreateBillingRequestLocaleFromString("lt")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTopupCreateRequestLocale("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, TopupCreateBillingRequestLocale("lt"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_de", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTopupCreateRequestLocaleFromString("de")
+		val, err := NewTopupCreateBillingRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTopupCreateRequestLocale("de"), val, "enum value should match expected wire value")
+		assert.Equal(t, TopupCreateBillingRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingTopupCreateRequestLocaleFromString("invalid_value_that_does_not_exist")
+		_, err := NewTopupCreateBillingRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingTopupCreateRequestLocaleFromString("en")
+		val, err := NewTopupCreateBillingRequestLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6350,49 +6351,49 @@ func TestEnumPostV1BillingTopupCreateRequestLocale(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingTransactionsListResponseRowsItemType(t *testing.T) {
+func TestEnumTransactionsListBillingResponseRowsItemType(t *testing.T) {
 	t.Run("NewFromString_trial_grant", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("trial_grant")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("trial_grant")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTransactionsListResponseRowsItemType("trial_grant"), val, "enum value should match expected wire value")
+		assert.Equal(t, TransactionsListBillingResponseRowsItemType("trial_grant"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_topup", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("topup")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("topup")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTransactionsListResponseRowsItemType("topup"), val, "enum value should match expected wire value")
+		assert.Equal(t, TransactionsListBillingResponseRowsItemType("topup"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_usage", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("usage")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("usage")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTransactionsListResponseRowsItemType("usage"), val, "enum value should match expected wire value")
+		assert.Equal(t, TransactionsListBillingResponseRowsItemType("usage"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_activation", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("activation")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("activation")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTransactionsListResponseRowsItemType("activation"), val, "enum value should match expected wire value")
+		assert.Equal(t, TransactionsListBillingResponseRowsItemType("activation"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_adjustment", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("adjustment")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("adjustment")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingTransactionsListResponseRowsItemType("adjustment"), val, "enum value should match expected wire value")
+		assert.Equal(t, TransactionsListBillingResponseRowsItemType("adjustment"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("invalid_value_that_does_not_exist")
+		_, err := NewTransactionsListBillingResponseRowsItemTypeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingTransactionsListResponseRowsItemTypeFromString("trial_grant")
+		val, err := NewTransactionsListBillingResponseRowsItemTypeFromString("trial_grant")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6400,42 +6401,42 @@ func TestEnumPostV1BillingTransactionsListResponseRowsItemType(t *testing.T) {
 	})
 }
 
-func TestEnumPostV1BillingUsageListResponseRowsItemMetric(t *testing.T) {
+func TestEnumUsageListBillingResponseRowsItemMetric(t *testing.T) {
 	t.Run("NewFromString_api_request", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("api_request")
+		val, err := NewUsageListBillingResponseRowsItemMetricFromString("api_request")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingUsageListResponseRowsItemMetric("api_request"), val, "enum value should match expected wire value")
+		assert.Equal(t, UsageListBillingResponseRowsItemMetric("api_request"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ocr_page", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("ocr_page")
+		val, err := NewUsageListBillingResponseRowsItemMetricFromString("ocr_page")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingUsageListResponseRowsItemMetric("ocr_page"), val, "enum value should match expected wire value")
+		assert.Equal(t, UsageListBillingResponseRowsItemMetric("ocr_page"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_file_storage_bytes", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("file_storage_bytes")
+		val, err := NewUsageListBillingResponseRowsItemMetricFromString("file_storage_bytes")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingUsageListResponseRowsItemMetric("file_storage_bytes"), val, "enum value should match expected wire value")
+		assert.Equal(t, UsageListBillingResponseRowsItemMetric("file_storage_bytes"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_database_bytes", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("database_bytes")
+		val, err := NewUsageListBillingResponseRowsItemMetricFromString("database_bytes")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1BillingUsageListResponseRowsItemMetric("database_bytes"), val, "enum value should match expected wire value")
+		assert.Equal(t, UsageListBillingResponseRowsItemMetric("database_bytes"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("invalid_value_that_does_not_exist")
+		_, err := NewUsageListBillingResponseRowsItemMetricFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1BillingUsageListResponseRowsItemMetricFromString("api_request")
+		val, err := NewUsageListBillingResponseRowsItemMetricFromString("api_request")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -6443,10 +6444,10 @@ func TestEnumPostV1BillingUsageListResponseRowsItemMetric(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountGetResponse(t *testing.T) {
+func TestExtraPropertiesAccountGetBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponse{}
+		obj := &AccountGetBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6460,16 +6461,16 @@ func TestExtraPropertiesPostV1BillingAccountGetResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponse
+		var obj *AccountGetBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountGetResponseMonthToDate(t *testing.T) {
+func TestExtraPropertiesAccountGetBillingResponseMonthToDate(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponseMonthToDate{}
+		obj := &AccountGetBillingResponseMonthToDate{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6483,16 +6484,16 @@ func TestExtraPropertiesPostV1BillingAccountGetResponseMonthToDate(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseMonthToDate
+		var obj *AccountGetBillingResponseMonthToDate
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountGetResponsePlansValue(t *testing.T) {
+func TestExtraPropertiesAccountGetBillingResponsePlansValue(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponsePlansValue{}
+		obj := &AccountGetBillingResponsePlansValue{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6506,16 +6507,16 @@ func TestExtraPropertiesPostV1BillingAccountGetResponsePlansValue(t *testing.T) 
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponsePlansValue
+		var obj *AccountGetBillingResponsePlansValue
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountGetResponseTopUp(t *testing.T) {
+func TestExtraPropertiesAccountGetBillingResponseTopUp(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountGetResponseTopUp{}
+		obj := &AccountGetBillingResponseTopUp{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6529,16 +6530,16 @@ func TestExtraPropertiesPostV1BillingAccountGetResponseTopUp(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountGetResponseTopUp
+		var obj *AccountGetBillingResponseTopUp
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountSetPlanResponse(t *testing.T) {
+func TestExtraPropertiesAccountSetPlanBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponse{}
+		obj := &AccountSetPlanBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6552,16 +6553,16 @@ func TestExtraPropertiesPostV1BillingAccountSetPlanResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponse
+		var obj *AccountSetPlanBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountSetPlanResponseMonthToDate(t *testing.T) {
+func TestExtraPropertiesAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponseMonthToDate{}
+		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6575,16 +6576,16 @@ func TestExtraPropertiesPostV1BillingAccountSetPlanResponseMonthToDate(t *testin
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseMonthToDate
+		var obj *AccountSetPlanBillingResponseMonthToDate
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountSetPlanResponsePlansValue(t *testing.T) {
+func TestExtraPropertiesAccountSetPlanBillingResponsePlansValue(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponsePlansValue{}
+		obj := &AccountSetPlanBillingResponsePlansValue{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6598,16 +6599,16 @@ func TestExtraPropertiesPostV1BillingAccountSetPlanResponsePlansValue(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponsePlansValue
+		var obj *AccountSetPlanBillingResponsePlansValue
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
+func TestExtraPropertiesAccountSetPlanBillingResponseTopUp(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingAccountSetPlanResponseTopUp{}
+		obj := &AccountSetPlanBillingResponseTopUp{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6621,16 +6622,16 @@ func TestExtraPropertiesPostV1BillingAccountSetPlanResponseTopUp(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingAccountSetPlanResponseTopUp
+		var obj *AccountSetPlanBillingResponseTopUp
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingPortalCreateResponse(t *testing.T) {
+func TestExtraPropertiesPortalCreateBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingPortalCreateResponse{}
+		obj := &PortalCreateBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6644,16 +6645,16 @@ func TestExtraPropertiesPostV1BillingPortalCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingPortalCreateResponse
+		var obj *PortalCreateBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingTopupCreateResponse(t *testing.T) {
+func TestExtraPropertiesTopupCreateBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTopupCreateResponse{}
+		obj := &TopupCreateBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6667,16 +6668,16 @@ func TestExtraPropertiesPostV1BillingTopupCreateResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTopupCreateResponse
+		var obj *TopupCreateBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingTransactionsListResponse(t *testing.T) {
+func TestExtraPropertiesTransactionsListBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTransactionsListResponse{}
+		obj := &TransactionsListBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6690,16 +6691,16 @@ func TestExtraPropertiesPostV1BillingTransactionsListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponse
+		var obj *TransactionsListBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingTransactionsListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesTransactionsListBillingResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingTransactionsListResponseRowsItem{}
+		obj := &TransactionsListBillingResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6713,16 +6714,16 @@ func TestExtraPropertiesPostV1BillingTransactionsListResponseRowsItem(t *testing
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingTransactionsListResponseRowsItem
+		var obj *TransactionsListBillingResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingUsageListResponse(t *testing.T) {
+func TestExtraPropertiesUsageListBillingResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingUsageListResponse{}
+		obj := &UsageListBillingResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6736,16 +6737,16 @@ func TestExtraPropertiesPostV1BillingUsageListResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponse
+		var obj *UsageListBillingResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesPostV1BillingUsageListResponseRowsItem(t *testing.T) {
+func TestExtraPropertiesUsageListBillingResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &PostV1BillingUsageListResponseRowsItem{}
+		obj := &UsageListBillingResponseRowsItem{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -6759,7 +6760,7 @@ func TestExtraPropertiesPostV1BillingUsageListResponseRowsItem(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *PostV1BillingUsageListResponseRowsItem
+		var obj *UsageListBillingResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

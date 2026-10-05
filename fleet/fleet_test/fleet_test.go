@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestFleetPostV1FleetVehiclesCreateWithWireMock(
+func TestFleetVehiclesCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,24 +88,24 @@ func TestFleetPostV1FleetVehiclesCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetVehiclesCreateRequest{
+	request := &nordlet.VehiclesCreateFleetRequest{
 		PlateNumber: "plateNumber",
 		Make:        "make",
 		Model:       "model",
 	}
-	_, invocationErr := client.Fleet.PostV1FleetVehiclesCreate(
+	_, invocationErr := client.Fleet.VehiclesCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetVehiclesCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetVehiclesCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetVehiclesCreateWithWireMock", "POST", "/v1/fleet/vehicles/create", nil, 1)
+	VerifyRequestCount(t, "TestFleetVehiclesCreateWithWireMock", "POST", "/v1/fleet/vehicles/create", nil, 1)
 }
 
-func TestFleetPostV1FleetVehiclesUpdateWithWireMock(
+func TestFleetVehiclesUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -116,22 +116,22 @@ func TestFleetPostV1FleetVehiclesUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetVehiclesUpdateRequest{
+	request := &nordlet.VehiclesUpdateFleetRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Fleet.PostV1FleetVehiclesUpdate(
+	_, invocationErr := client.Fleet.VehiclesUpdate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetVehiclesUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetVehiclesUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetVehiclesUpdateWithWireMock", "POST", "/v1/fleet/vehicles/update", nil, 1)
+	VerifyRequestCount(t, "TestFleetVehiclesUpdateWithWireMock", "POST", "/v1/fleet/vehicles/update", nil, 1)
 }
 
-func TestFleetPostV1FleetVehiclesGetWithWireMock(
+func TestFleetVehiclesGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -142,22 +142,22 @@ func TestFleetPostV1FleetVehiclesGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetVehiclesGetRequest{
+	request := &nordlet.VehiclesGetFleetRequest{
 		ID: "id",
 	}
-	_, invocationErr := client.Fleet.PostV1FleetVehiclesGet(
+	_, invocationErr := client.Fleet.VehiclesGet(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetVehiclesGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetVehiclesGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetVehiclesGetWithWireMock", "POST", "/v1/fleet/vehicles/get", nil, 1)
+	VerifyRequestCount(t, "TestFleetVehiclesGetWithWireMock", "POST", "/v1/fleet/vehicles/get", nil, 1)
 }
 
-func TestFleetPostV1FleetVehiclesListWithWireMock(
+func TestFleetVehiclesListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -168,20 +168,20 @@ func TestFleetPostV1FleetVehiclesListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetVehiclesListRequest{}
-	_, invocationErr := client.Fleet.PostV1FleetVehiclesList(
+	request := &nordlet.VehiclesListFleetRequest{}
+	_, invocationErr := client.Fleet.VehiclesList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetVehiclesListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetVehiclesListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetVehiclesListWithWireMock", "POST", "/v1/fleet/vehicles/list", nil, 1)
+	VerifyRequestCount(t, "TestFleetVehiclesListWithWireMock", "POST", "/v1/fleet/vehicles/list", nil, 1)
 }
 
-func TestFleetPostV1FleetAssignmentsCreateWithWireMock(
+func TestFleetAssignmentsCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -192,24 +192,26 @@ func TestFleetPostV1FleetAssignmentsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetAssignmentsCreateRequest{
+	request := &nordlet.AssignmentsCreateFleetRequest{
 		VehicleID:  "vehicleId",
 		EmployeeID: "employeeId",
-		FromDate:   "fromDate",
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Fleet.PostV1FleetAssignmentsCreate(
+	_, invocationErr := client.Fleet.AssignmentsCreate(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetAssignmentsCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetAssignmentsCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetAssignmentsCreateWithWireMock", "POST", "/v1/fleet/assignments/create", nil, 1)
+	VerifyRequestCount(t, "TestFleetAssignmentsCreateWithWireMock", "POST", "/v1/fleet/assignments/create", nil, 1)
 }
 
-func TestFleetPostV1FleetAssignmentsEndWithWireMock(
+func TestFleetAssignmentsEndWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -220,23 +222,25 @@ func TestFleetPostV1FleetAssignmentsEndWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetAssignmentsEndRequest{
-		ID:     "id",
-		ToDate: "toDate",
+	request := &nordlet.AssignmentsEndFleetRequest{
+		ID: "id",
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Fleet.PostV1FleetAssignmentsEnd(
+	_, invocationErr := client.Fleet.AssignmentsEnd(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetAssignmentsEndWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetAssignmentsEndWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetAssignmentsEndWithWireMock", "POST", "/v1/fleet/assignments/end", nil, 1)
+	VerifyRequestCount(t, "TestFleetAssignmentsEndWithWireMock", "POST", "/v1/fleet/assignments/end", nil, 1)
 }
 
-func TestFleetPostV1FleetAssignmentsListWithWireMock(
+func TestFleetAssignmentsListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -247,20 +251,20 @@ func TestFleetPostV1FleetAssignmentsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetAssignmentsListRequest{}
-	_, invocationErr := client.Fleet.PostV1FleetAssignmentsList(
+	request := &nordlet.AssignmentsListFleetRequest{}
+	_, invocationErr := client.Fleet.AssignmentsList(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetAssignmentsListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetAssignmentsListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetAssignmentsListWithWireMock", "POST", "/v1/fleet/assignments/list", nil, 1)
+	VerifyRequestCount(t, "TestFleetAssignmentsListWithWireMock", "POST", "/v1/fleet/assignments/list", nil, 1)
 }
 
-func TestFleetPostV1FleetNaturaPreviewWithWireMock(
+func TestFleetNaturaPreviewWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -271,18 +275,18 @@ func TestFleetPostV1FleetNaturaPreviewWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1FleetNaturaPreviewRequest{
+	request := &nordlet.NaturaPreviewFleetRequest{
 		Year:  int64(1000000),
 		Month: int64(1000000),
 	}
-	_, invocationErr := client.Fleet.PostV1FleetNaturaPreview(
+	_, invocationErr := client.Fleet.NaturaPreview(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestFleetPostV1FleetNaturaPreviewWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestFleetNaturaPreviewWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestFleetPostV1FleetNaturaPreviewWithWireMock", "POST", "/v1/fleet/natura/preview", nil, 1)
+	VerifyRequestCount(t, "TestFleetNaturaPreviewWithWireMock", "POST", "/v1/fleet/natura/preview", nil, 1)
 }

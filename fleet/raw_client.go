@@ -32,11 +32,11 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 	}
 }
 
-func (r *RawClient) PostV1FleetVehiclesCreate(
+func (r *RawClient) VehiclesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesCreateRequest,
+	request *nordlet.VehiclesCreateFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetVehiclesCreateResponse], error) {
+) (*core.Response[*nordlet.VehiclesCreateFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) PostV1FleetVehiclesCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetVehiclesCreateResponse
+	var response *nordlet.VehiclesCreateFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -69,18 +69,18 @@ func (r *RawClient) PostV1FleetVehiclesCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetVehiclesCreateResponse]{
+	return &core.Response[*nordlet.VehiclesCreateFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetVehiclesUpdate(
+func (r *RawClient) VehiclesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesUpdateRequest,
+	request *nordlet.VehiclesUpdateFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetVehiclesUpdateResponse], error) {
+) (*core.Response[*nordlet.VehiclesUpdateFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -93,7 +93,7 @@ func (r *RawClient) PostV1FleetVehiclesUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetVehiclesUpdateResponse
+	var response *nordlet.VehiclesUpdateFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -113,18 +113,18 @@ func (r *RawClient) PostV1FleetVehiclesUpdate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetVehiclesUpdateResponse]{
+	return &core.Response[*nordlet.VehiclesUpdateFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetVehiclesGet(
+func (r *RawClient) VehiclesGet(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesGetRequest,
+	request *nordlet.VehiclesGetFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetVehiclesGetResponse], error) {
+) (*core.Response[*nordlet.VehiclesGetFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) PostV1FleetVehiclesGet(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetVehiclesGetResponse
+	var response *nordlet.VehiclesGetFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -157,18 +157,18 @@ func (r *RawClient) PostV1FleetVehiclesGet(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetVehiclesGetResponse]{
+	return &core.Response[*nordlet.VehiclesGetFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetVehiclesList(
+func (r *RawClient) VehiclesList(
 	ctx context.Context,
-	request *nordlet.PostV1FleetVehiclesListRequest,
+	request *nordlet.VehiclesListFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetVehiclesListResponse], error) {
+) (*core.Response[*nordlet.VehiclesListFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -181,7 +181,7 @@ func (r *RawClient) PostV1FleetVehiclesList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetVehiclesListResponse
+	var response *nordlet.VehiclesListFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,18 +201,18 @@ func (r *RawClient) PostV1FleetVehiclesList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetVehiclesListResponse]{
+	return &core.Response[*nordlet.VehiclesListFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetAssignmentsCreate(
+func (r *RawClient) AssignmentsCreate(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsCreateRequest,
+	request *nordlet.AssignmentsCreateFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetAssignmentsCreateResponse], error) {
+) (*core.Response[*nordlet.AssignmentsCreateFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -225,7 +225,7 @@ func (r *RawClient) PostV1FleetAssignmentsCreate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetAssignmentsCreateResponse
+	var response *nordlet.AssignmentsCreateFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -245,18 +245,18 @@ func (r *RawClient) PostV1FleetAssignmentsCreate(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetAssignmentsCreateResponse]{
+	return &core.Response[*nordlet.AssignmentsCreateFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetAssignmentsEnd(
+func (r *RawClient) AssignmentsEnd(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsEndRequest,
+	request *nordlet.AssignmentsEndFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetAssignmentsEndResponse], error) {
+) (*core.Response[*nordlet.AssignmentsEndFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -269,7 +269,7 @@ func (r *RawClient) PostV1FleetAssignmentsEnd(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetAssignmentsEndResponse
+	var response *nordlet.AssignmentsEndFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -289,18 +289,18 @@ func (r *RawClient) PostV1FleetAssignmentsEnd(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetAssignmentsEndResponse]{
+	return &core.Response[*nordlet.AssignmentsEndFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetAssignmentsList(
+func (r *RawClient) AssignmentsList(
 	ctx context.Context,
-	request *nordlet.PostV1FleetAssignmentsListRequest,
+	request *nordlet.AssignmentsListFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetAssignmentsListResponse], error) {
+) (*core.Response[*nordlet.AssignmentsListFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -313,7 +313,7 @@ func (r *RawClient) PostV1FleetAssignmentsList(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetAssignmentsListResponse
+	var response *nordlet.AssignmentsListFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -333,18 +333,18 @@ func (r *RawClient) PostV1FleetAssignmentsList(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetAssignmentsListResponse]{
+	return &core.Response[*nordlet.AssignmentsListFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
 	}, nil
 }
 
-func (r *RawClient) PostV1FleetNaturaPreview(
+func (r *RawClient) NaturaPreview(
 	ctx context.Context,
-	request *nordlet.PostV1FleetNaturaPreviewRequest,
+	request *nordlet.NaturaPreviewFleetRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*nordlet.PostV1FleetNaturaPreviewResponse], error) {
+) (*core.Response[*nordlet.NaturaPreviewFleetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -357,7 +357,7 @@ func (r *RawClient) PostV1FleetNaturaPreview(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *nordlet.PostV1FleetNaturaPreviewResponse
+	var response *nordlet.NaturaPreviewFleetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -377,7 +377,7 @@ func (r *RawClient) PostV1FleetNaturaPreview(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*nordlet.PostV1FleetNaturaPreviewResponse]{
+	return &core.Response[*nordlet.NaturaPreviewFleetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

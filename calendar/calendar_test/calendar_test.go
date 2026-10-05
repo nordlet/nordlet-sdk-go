@@ -77,7 +77,7 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
-func TestCalendarPostV1CalendarListWithWireMock(
+func TestCalendarListWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -88,20 +88,20 @@ func TestCalendarPostV1CalendarListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarListRequest{}
-	_, invocationErr := client.Calendar.PostV1CalendarList(
+	request := &nordlet.ListCalendarRequest{}
+	_, invocationErr := client.Calendar.List(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarPostV1CalendarListWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarListWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarPostV1CalendarListWithWireMock", "POST", "/v1/calendar/list", nil, 1)
+	VerifyRequestCount(t, "TestCalendarListWithWireMock", "POST", "/v1/calendar/list", nil, 1)
 }
 
-func TestCalendarPostV1CalendarGetWithWireMock(
+func TestCalendarGetWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -112,22 +112,22 @@ func TestCalendarPostV1CalendarGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarGetRequest{
+	request := &nordlet.GetCalendarRequest{
 		Key: "key",
 	}
-	_, invocationErr := client.Calendar.PostV1CalendarGet(
+	_, invocationErr := client.Calendar.Get(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarPostV1CalendarGetWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarGetWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarPostV1CalendarGetWithWireMock", "POST", "/v1/calendar/get", nil, 1)
+	VerifyRequestCount(t, "TestCalendarGetWithWireMock", "POST", "/v1/calendar/get", nil, 1)
 }
 
-func TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock(
+func TestCalendarSubmitWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -138,22 +138,22 @@ func TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWi
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarSubmitRequest{
+	request := &nordlet.SubmitCalendarRequest{
 		Key: "key",
 	}
-	_, invocationErr := client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+	_, invocationErr := client.Calendar.Submit(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarSubmitWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock", "POST", "/v1/calendar/submit", nil, 1)
+	VerifyRequestCount(t, "TestCalendarSubmitWithWireMock", "POST", "/v1/calendar/submit", nil, 1)
 }
 
-func TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock(
+func TestCalendarDownloadWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -164,22 +164,22 @@ func TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarDownloadRequest{
+	request := &nordlet.DownloadCalendarRequest{
 		Key: "key",
 	}
-	_, invocationErr := client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+	_, invocationErr := client.Calendar.Download(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarDownloadWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock", "POST", "/v1/calendar/download", nil, 1)
+	VerifyRequestCount(t, "TestCalendarDownloadWithWireMock", "POST", "/v1/calendar/download", nil, 1)
 }
 
-func TestCalendarPostV1CalendarCreateWithWireMock(
+func TestCalendarCreateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -190,23 +190,25 @@ func TestCalendarPostV1CalendarCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarCreateRequest{
-		Title:   "title",
-		DueDate: "dueDate",
+	request := &nordlet.CreateCalendarRequest{
+		Title: "title",
+		DueDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
 	}
-	_, invocationErr := client.Calendar.PostV1CalendarCreate(
+	_, invocationErr := client.Calendar.Create(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarPostV1CalendarCreateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarCreateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarPostV1CalendarCreateWithWireMock", "POST", "/v1/calendar/create", nil, 1)
+	VerifyRequestCount(t, "TestCalendarCreateWithWireMock", "POST", "/v1/calendar/create", nil, 1)
 }
 
-func TestCalendarPostV1CalendarUpdateWithWireMock(
+func TestCalendarUpdateWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -217,22 +219,22 @@ func TestCalendarPostV1CalendarUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarUpdateRequest{
+	request := &nordlet.UpdateCalendarRequest{
 		Key: "key",
 	}
-	_, invocationErr := client.Calendar.PostV1CalendarUpdate(
+	_, invocationErr := client.Calendar.Update(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarPostV1CalendarUpdateWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarUpdateWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarPostV1CalendarUpdateWithWireMock", "POST", "/v1/calendar/update", nil, 1)
+	VerifyRequestCount(t, "TestCalendarUpdateWithWireMock", "POST", "/v1/calendar/update", nil, 1)
 }
 
-func TestCalendarPostV1CalendarDeleteWithWireMock(
+func TestCalendarDeleteWithWireMock(
 	t *testing.T,
 ) {
 	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
@@ -243,17 +245,17 @@ func TestCalendarPostV1CalendarDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.PostV1CalendarDeleteRequest{
+	request := &nordlet.DeleteCalendarRequest{
 		Key: "key",
 	}
-	_, invocationErr := client.Calendar.PostV1CalendarDelete(
+	_, invocationErr := client.Calendar.Delete(
 		context.TODO(),
 		request,
 		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestCalendarPostV1CalendarDeleteWithWireMock"}},
+			http.Header{"X-Test-Id": []string{"TestCalendarDeleteWithWireMock"}},
 		),
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCalendarPostV1CalendarDeleteWithWireMock", "POST", "/v1/calendar/delete", nil, 1)
+	VerifyRequestCount(t, "TestCalendarDeleteWithWireMock", "POST", "/v1/calendar/delete", nil, 1)
 }

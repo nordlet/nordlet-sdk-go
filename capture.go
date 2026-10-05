@@ -7,113 +7,282 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
-	postV1CaptureDocumentsDeleteRequestFieldID = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestFieldID             = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestFieldPartnerID      = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestFieldNewSupplier    = big.NewInt(1 << 2)
+	documentsConfirmCaptureRequestFieldDocumentNumber = big.NewInt(1 << 3)
+	documentsConfirmCaptureRequestFieldDocumentDate   = big.NewInt(1 << 4)
+	documentsConfirmCaptureRequestFieldDueDate        = big.NewInt(1 << 5)
+	documentsConfirmCaptureRequestFieldCurrency       = big.NewInt(1 << 6)
+	documentsConfirmCaptureRequestFieldNotes          = big.NewInt(1 << 7)
+	documentsConfirmCaptureRequestFieldLines          = big.NewInt(1 << 8)
 )
 
-type PostV1CaptureDocumentsDeleteRequest struct {
+type DocumentsConfirmCaptureRequest struct {
+	ID             string                                     `json:"id" url:"-"`
+	PartnerID      *string                                    `json:"partnerId,omitempty" url:"-"`
+	NewSupplier    *DocumentsConfirmCaptureRequestNewSupplier `json:"newSupplier,omitempty" url:"-"`
+	DocumentNumber string                                     `json:"documentNumber" url:"-"`
+	DocumentDate   time.Time                                  `json:"documentDate" url:"-" format:"date"`
+	DueDate        *time.Time                                 `json:"dueDate,omitempty" url:"-" format:"date"`
+	Currency       *string                                    `json:"currency,omitempty" url:"-"`
+	Notes          *string                                    `json:"notes,omitempty" url:"-"`
+	Lines          []*DocumentsConfirmCaptureRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DocumentsConfirmCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureRequestFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetPartnerID(partnerID *string) {
+	d.PartnerID = partnerID
+	d.require(documentsConfirmCaptureRequestFieldPartnerID)
+}
+
+// SetNewSupplier sets the NewSupplier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetNewSupplier(newSupplier *DocumentsConfirmCaptureRequestNewSupplier) {
+	d.NewSupplier = newSupplier
+	d.require(documentsConfirmCaptureRequestFieldNewSupplier)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetDocumentNumber(documentNumber string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsConfirmCaptureRequestFieldDocumentNumber)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetDocumentDate(documentDate time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsConfirmCaptureRequestFieldDocumentDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsConfirmCaptureRequestFieldDueDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsConfirmCaptureRequestFieldCurrency)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsConfirmCaptureRequestFieldNotes)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetLines(lines []*DocumentsConfirmCaptureRequestLinesItem) {
+	d.Lines = lines
+	d.require(documentsConfirmCaptureRequestFieldLines)
+}
+
+func (d *DocumentsConfirmCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DocumentsConfirmCaptureRequest(body)
+	return nil
+}
+
+func (d *DocumentsConfirmCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureRequest
+	var marshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed:        embed(*d),
+		DocumentDate: internal.NewDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	documentsDeleteCaptureRequestFieldID = big.NewInt(1 << 0)
+)
+
+type DocumentsDeleteCaptureRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureDocumentsDeleteRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsDeleteCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsDeleteRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsDeleteRequestFieldID)
+func (d *DocumentsDeleteCaptureRequest) SetID(id string) {
+	d.ID = id
+	d.require(documentsDeleteCaptureRequestFieldID)
 }
 
-func (p *PostV1CaptureDocumentsDeleteRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsDeleteRequest
+func (d *DocumentsDeleteCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsDeleteCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsDeleteRequest(body)
+	*d = DocumentsDeleteCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsDeleteRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsDeleteRequest
+func (d *DocumentsDeleteCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsDeleteCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1CaptureDocumentsGetRequestFieldID = big.NewInt(1 << 0)
+	documentsExtractCaptureRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1CaptureDocumentsGetRequest struct {
+type DocumentsExtractCaptureRequest struct {
 	ID string `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureDocumentsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsExtractCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsGetRequestFieldID)
+func (d *DocumentsExtractCaptureRequest) SetID(id string) {
+	d.ID = id
+	d.require(documentsExtractCaptureRequestFieldID)
 }
 
-func (p *PostV1CaptureDocumentsGetRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsGetRequest
+func (d *DocumentsExtractCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsExtractCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsGetRequest(body)
+	*d = DocumentsExtractCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsGetRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsGetRequest
+func (d *DocumentsExtractCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1CaptureDocumentsListRequestFieldPage     = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListRequestFieldPageSize = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListRequestFieldSort     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListRequestFieldFilter   = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListRequestFieldTotals   = big.NewInt(1 << 4)
+	documentsGetCaptureRequestFieldID = big.NewInt(1 << 0)
 )
 
-type PostV1CaptureDocumentsListRequest struct {
-	Page     *int64                                         `json:"page,omitempty" url:"-"`
-	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
-	Sort     []*PostV1CaptureDocumentsListRequestSortItem   `json:"sort,omitempty" url:"-"`
-	Filter   []*PostV1CaptureDocumentsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+type DocumentsGetCaptureRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DocumentsGetCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureRequest) SetID(id string) {
+	d.ID = id
+	d.require(documentsGetCaptureRequestFieldID)
+}
+
+func (d *DocumentsGetCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsGetCaptureRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DocumentsGetCaptureRequest(body)
+	return nil
+}
+
+func (d *DocumentsGetCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	documentsListCaptureRequestFieldPage     = big.NewInt(1 << 0)
+	documentsListCaptureRequestFieldPageSize = big.NewInt(1 << 1)
+	documentsListCaptureRequestFieldSort     = big.NewInt(1 << 2)
+	documentsListCaptureRequestFieldFilter   = big.NewInt(1 << 3)
+	documentsListCaptureRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type DocumentsListCaptureRequest struct {
+	Page     *int64                                   `json:"page,omitempty" url:"-"`
+	PageSize *int64                                   `json:"pageSize,omitempty" url:"-"`
+	Sort     []*DocumentsListCaptureRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*DocumentsListCaptureRequestFilterItem `json:"filter,omitempty" url:"-"`
 	// Numeric fields to sum over every row matching the filter (not only the current page)
 	Totals []string `json:"totals,omitempty" url:"-"`
 
@@ -121,203 +290,76 @@ type PostV1CaptureDocumentsListRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureDocumentsListRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequest) SetPage(page *int64) {
-	p.Page = page
-	p.require(postV1CaptureDocumentsListRequestFieldPage)
+func (d *DocumentsListCaptureRequest) SetPage(page *int64) {
+	d.Page = page
+	d.require(documentsListCaptureRequestFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequest) SetPageSize(pageSize *int64) {
-	p.PageSize = pageSize
-	p.require(postV1CaptureDocumentsListRequestFieldPageSize)
+func (d *DocumentsListCaptureRequest) SetPageSize(pageSize *int64) {
+	d.PageSize = pageSize
+	d.require(documentsListCaptureRequestFieldPageSize)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequest) SetSort(sort []*PostV1CaptureDocumentsListRequestSortItem) {
-	p.Sort = sort
-	p.require(postV1CaptureDocumentsListRequestFieldSort)
+func (d *DocumentsListCaptureRequest) SetSort(sort []*DocumentsListCaptureRequestSortItem) {
+	d.Sort = sort
+	d.require(documentsListCaptureRequestFieldSort)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequest) SetFilter(filter []*PostV1CaptureDocumentsListRequestFilterItem) {
-	p.Filter = filter
-	p.require(postV1CaptureDocumentsListRequestFieldFilter)
+func (d *DocumentsListCaptureRequest) SetFilter(filter []*DocumentsListCaptureRequestFilterItem) {
+	d.Filter = filter
+	d.require(documentsListCaptureRequestFieldFilter)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequest) SetTotals(totals []string) {
-	p.Totals = totals
-	p.require(postV1CaptureDocumentsListRequestFieldTotals)
+func (d *DocumentsListCaptureRequest) SetTotals(totals []string) {
+	d.Totals = totals
+	d.require(documentsListCaptureRequestFieldTotals)
 }
 
-func (p *PostV1CaptureDocumentsListRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListRequest
+func (d *DocumentsListCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsListRequest(body)
+	*d = DocumentsListCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsListRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListRequest
+func (d *DocumentsListCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-type PostV1CaptureSettingsGetRequest struct {
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1CaptureSettingsGetRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-type PostV1CaptureSettingsRegenerateIntakeRequest struct {
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1CaptureSettingsRegenerateIntakeRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-var (
-	postV1CaptureSettingsUpdateRequestFieldIntakeEnabled      = big.NewInt(1 << 0)
-	postV1CaptureSettingsUpdateRequestFieldCaptureAutoExtract = big.NewInt(1 << 1)
-)
-
-type PostV1CaptureSettingsUpdateRequest struct {
-	IntakeEnabled      *bool `json:"intakeEnabled,omitempty" url:"-"`
-	CaptureAutoExtract *bool `json:"captureAutoExtract,omitempty" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1CaptureSettingsUpdateRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateRequest) SetIntakeEnabled(intakeEnabled *bool) {
-	p.IntakeEnabled = intakeEnabled
-	p.require(postV1CaptureSettingsUpdateRequestFieldIntakeEnabled)
-}
-
-// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateRequest) SetCaptureAutoExtract(captureAutoExtract *bool) {
-	p.CaptureAutoExtract = captureAutoExtract
-	p.require(postV1CaptureSettingsUpdateRequestFieldCaptureAutoExtract)
-}
-
-func (p *PostV1CaptureSettingsUpdateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureSettingsUpdateRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1CaptureSettingsUpdateRequest(body)
-	return nil
-}
-
-func (p *PostV1CaptureSettingsUpdateRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureSettingsUpdateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1CaptureDocumentsExtractRequestFieldID = big.NewInt(1 << 0)
+	documentsUploadCaptureRequestFieldFileName = big.NewInt(1 << 0)
+	documentsUploadCaptureRequestFieldMimeType = big.NewInt(1 << 1)
+	documentsUploadCaptureRequestFieldContent  = big.NewInt(1 << 2)
 )
 
-type PostV1CaptureDocumentsExtractRequest struct {
-	ID string `json:"id" url:"-"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-}
-
-func (p *PostV1CaptureDocumentsExtractRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsExtractRequestFieldID)
-}
-
-func (p *PostV1CaptureDocumentsExtractRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsExtractRequest
-	var body unmarshaler
-	if err := json.Unmarshal(data, &body); err != nil {
-		return err
-	}
-	*p = PostV1CaptureDocumentsExtractRequest(body)
-	return nil
-}
-
-func (p *PostV1CaptureDocumentsExtractRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsExtractRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-var (
-	postV1CaptureDocumentsUploadRequestFieldFileName = big.NewInt(1 << 0)
-	postV1CaptureDocumentsUploadRequestFieldMimeType = big.NewInt(1 << 1)
-	postV1CaptureDocumentsUploadRequestFieldContent  = big.NewInt(1 << 2)
-)
-
-type PostV1CaptureDocumentsUploadRequest struct {
+type DocumentsUploadCaptureRequest struct {
 	FileName string `json:"fileName" url:"-"`
 	MimeType string `json:"mimeType" url:"-"`
 	// Base64-encoded scan, photo or PDF of the supplier document
@@ -327,317 +369,280 @@ type PostV1CaptureDocumentsUploadRequest struct {
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureDocumentsUploadRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsUploadCaptureRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadRequest) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsUploadRequestFieldFileName)
+func (d *DocumentsUploadCaptureRequest) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsUploadCaptureRequestFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadRequest) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsUploadRequestFieldMimeType)
+func (d *DocumentsUploadCaptureRequest) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsUploadCaptureRequestFieldMimeType)
 }
 
 // SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadRequest) SetContent(content string) {
-	p.Content = content
-	p.require(postV1CaptureDocumentsUploadRequestFieldContent)
+func (d *DocumentsUploadCaptureRequest) SetContent(content string) {
+	d.Content = content
+	d.require(documentsUploadCaptureRequestFieldContent)
 }
 
-func (p *PostV1CaptureDocumentsUploadRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsUploadRequest
+func (d *DocumentsUploadCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsUploadCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsUploadRequest(body)
+	*d = DocumentsUploadCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsUploadRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsUploadRequest
+func (d *DocumentsUploadCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1CaptureInboundEmailRequestFieldPostmarkTo          = big.NewInt(1 << 0)
-	postV1CaptureInboundEmailRequestFieldToFull              = big.NewInt(1 << 1)
-	postV1CaptureInboundEmailRequestFieldPostmarkFrom        = big.NewInt(1 << 2)
-	postV1CaptureInboundEmailRequestFieldPostmarkSubject     = big.NewInt(1 << 3)
-	postV1CaptureInboundEmailRequestFieldPostmarkAttachments = big.NewInt(1 << 4)
-	postV1CaptureInboundEmailRequestFieldTo                  = big.NewInt(1 << 5)
-	postV1CaptureInboundEmailRequestFieldFrom                = big.NewInt(1 << 6)
-	postV1CaptureInboundEmailRequestFieldSubject             = big.NewInt(1 << 7)
-	postV1CaptureInboundEmailRequestFieldAttachments         = big.NewInt(1 << 8)
+	inboundEmailCaptureRequestFieldPostmarkTo          = big.NewInt(1 << 0)
+	inboundEmailCaptureRequestFieldToFull              = big.NewInt(1 << 1)
+	inboundEmailCaptureRequestFieldPostmarkFrom        = big.NewInt(1 << 2)
+	inboundEmailCaptureRequestFieldPostmarkSubject     = big.NewInt(1 << 3)
+	inboundEmailCaptureRequestFieldPostmarkAttachments = big.NewInt(1 << 4)
+	inboundEmailCaptureRequestFieldTo                  = big.NewInt(1 << 5)
+	inboundEmailCaptureRequestFieldFrom                = big.NewInt(1 << 6)
+	inboundEmailCaptureRequestFieldSubject             = big.NewInt(1 << 7)
+	inboundEmailCaptureRequestFieldAttachments         = big.NewInt(1 << 8)
 )
 
-type PostV1CaptureInboundEmailRequest struct {
-	PostmarkTo          *string                                            `json:"To,omitempty" url:"-"`
-	ToFull              []*PostV1CaptureInboundEmailRequestToFullItem      `json:"ToFull,omitempty" url:"-"`
-	PostmarkFrom        *string                                            `json:"From,omitempty" url:"-"`
-	PostmarkSubject     *string                                            `json:"Subject,omitempty" url:"-"`
-	PostmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem `json:"Attachments,omitempty" url:"-"`
-	To                  *PostV1CaptureInboundEmailRequestTo                `json:"to,omitempty" url:"-"`
-	From                *string                                            `json:"from,omitempty" url:"-"`
-	Subject             *string                                            `json:"subject,omitempty" url:"-"`
-	Attachments         []*PostV1CaptureInboundEmailRequestAttachmentsItem `json:"attachments,omitempty" url:"-"`
+type InboundEmailCaptureRequest struct {
+	PostmarkTo          *string                                      `json:"To,omitempty" url:"-"`
+	ToFull              []*InboundEmailCaptureRequestToFullItem      `json:"ToFull,omitempty" url:"-"`
+	PostmarkFrom        *string                                      `json:"From,omitempty" url:"-"`
+	PostmarkSubject     *string                                      `json:"Subject,omitempty" url:"-"`
+	PostmarkAttachments []*InboundEmailCaptureRequestAttachmentsItem `json:"Attachments,omitempty" url:"-"`
+	To                  *InboundEmailCaptureRequestTo                `json:"to,omitempty" url:"-"`
+	From                *string                                      `json:"from,omitempty" url:"-"`
+	Subject             *string                                      `json:"subject,omitempty" url:"-"`
+	Attachments         []*InboundEmailCaptureRequestAttachmentsItem `json:"attachments,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureInboundEmailRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InboundEmailCaptureRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetPostmarkTo sets the PostmarkTo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetPostmarkTo(postmarkTo *string) {
-	p.PostmarkTo = postmarkTo
-	p.require(postV1CaptureInboundEmailRequestFieldPostmarkTo)
+func (i *InboundEmailCaptureRequest) SetPostmarkTo(postmarkTo *string) {
+	i.PostmarkTo = postmarkTo
+	i.require(inboundEmailCaptureRequestFieldPostmarkTo)
 }
 
 // SetToFull sets the ToFull field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetToFull(toFull []*PostV1CaptureInboundEmailRequestToFullItem) {
-	p.ToFull = toFull
-	p.require(postV1CaptureInboundEmailRequestFieldToFull)
+func (i *InboundEmailCaptureRequest) SetToFull(toFull []*InboundEmailCaptureRequestToFullItem) {
+	i.ToFull = toFull
+	i.require(inboundEmailCaptureRequestFieldToFull)
 }
 
 // SetPostmarkFrom sets the PostmarkFrom field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetPostmarkFrom(postmarkFrom *string) {
-	p.PostmarkFrom = postmarkFrom
-	p.require(postV1CaptureInboundEmailRequestFieldPostmarkFrom)
+func (i *InboundEmailCaptureRequest) SetPostmarkFrom(postmarkFrom *string) {
+	i.PostmarkFrom = postmarkFrom
+	i.require(inboundEmailCaptureRequestFieldPostmarkFrom)
 }
 
 // SetPostmarkSubject sets the PostmarkSubject field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetPostmarkSubject(postmarkSubject *string) {
-	p.PostmarkSubject = postmarkSubject
-	p.require(postV1CaptureInboundEmailRequestFieldPostmarkSubject)
+func (i *InboundEmailCaptureRequest) SetPostmarkSubject(postmarkSubject *string) {
+	i.PostmarkSubject = postmarkSubject
+	i.require(inboundEmailCaptureRequestFieldPostmarkSubject)
 }
 
 // SetPostmarkAttachments sets the PostmarkAttachments field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetPostmarkAttachments(postmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem) {
-	p.PostmarkAttachments = postmarkAttachments
-	p.require(postV1CaptureInboundEmailRequestFieldPostmarkAttachments)
+func (i *InboundEmailCaptureRequest) SetPostmarkAttachments(postmarkAttachments []*InboundEmailCaptureRequestAttachmentsItem) {
+	i.PostmarkAttachments = postmarkAttachments
+	i.require(inboundEmailCaptureRequestFieldPostmarkAttachments)
 }
 
 // SetTo sets the To field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetTo(to *PostV1CaptureInboundEmailRequestTo) {
-	p.To = to
-	p.require(postV1CaptureInboundEmailRequestFieldTo)
+func (i *InboundEmailCaptureRequest) SetTo(to *InboundEmailCaptureRequestTo) {
+	i.To = to
+	i.require(inboundEmailCaptureRequestFieldTo)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetFrom(from *string) {
-	p.From = from
-	p.require(postV1CaptureInboundEmailRequestFieldFrom)
+func (i *InboundEmailCaptureRequest) SetFrom(from *string) {
+	i.From = from
+	i.require(inboundEmailCaptureRequestFieldFrom)
 }
 
 // SetSubject sets the Subject field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetSubject(subject *string) {
-	p.Subject = subject
-	p.require(postV1CaptureInboundEmailRequestFieldSubject)
+func (i *InboundEmailCaptureRequest) SetSubject(subject *string) {
+	i.Subject = subject
+	i.require(inboundEmailCaptureRequestFieldSubject)
 }
 
 // SetAttachments sets the Attachments field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequest) SetAttachments(attachments []*PostV1CaptureInboundEmailRequestAttachmentsItem) {
-	p.Attachments = attachments
-	p.require(postV1CaptureInboundEmailRequestFieldAttachments)
+func (i *InboundEmailCaptureRequest) SetAttachments(attachments []*InboundEmailCaptureRequestAttachmentsItem) {
+	i.Attachments = attachments
+	i.require(inboundEmailCaptureRequestFieldAttachments)
 }
 
-func (p *PostV1CaptureInboundEmailRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureInboundEmailRequest
+func (i *InboundEmailCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InboundEmailCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureInboundEmailRequest(body)
+	*i = InboundEmailCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureInboundEmailRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureInboundEmailRequest
+func (i *InboundEmailCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed InboundEmailCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-var (
-	postV1CaptureDocumentsConfirmRequestFieldID             = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmRequestFieldPartnerID      = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmRequestFieldNewSupplier    = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmRequestFieldDocumentNumber = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmRequestFieldDocumentDate   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmRequestFieldDueDate        = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmRequestFieldCurrency       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmRequestFieldNotes          = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmRequestFieldLines          = big.NewInt(1 << 8)
-)
-
-type PostV1CaptureDocumentsConfirmRequest struct {
-	ID             string                                           `json:"id" url:"-"`
-	PartnerID      *string                                          `json:"partnerId,omitempty" url:"-"`
-	NewSupplier    *PostV1CaptureDocumentsConfirmRequestNewSupplier `json:"newSupplier,omitempty" url:"-"`
-	DocumentNumber string                                           `json:"documentNumber" url:"-"`
-	DocumentDate   string                                           `json:"documentDate" url:"-"`
-	DueDate        *string                                          `json:"dueDate,omitempty" url:"-"`
-	Currency       *string                                          `json:"currency,omitempty" url:"-"`
-	Notes          *string                                          `json:"notes,omitempty" url:"-"`
-	Lines          []*PostV1CaptureDocumentsConfirmRequestLinesItem `json:"lines" url:"-"`
+type SettingsGetCaptureRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequest) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsGetCaptureRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetID sets the ID field and marks it as non-optional;
+type SettingsRegenerateIntakeCaptureRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsRegenerateIntakeCaptureRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+var (
+	settingsUpdateCaptureRequestFieldIntakeEnabled      = big.NewInt(1 << 0)
+	settingsUpdateCaptureRequestFieldCaptureAutoExtract = big.NewInt(1 << 1)
+)
+
+type SettingsUpdateCaptureRequest struct {
+	IntakeEnabled      *bool `json:"intakeEnabled,omitempty" url:"-"`
+	CaptureAutoExtract *bool `json:"captureAutoExtract,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsUpdateCaptureRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsConfirmRequestFieldID)
+func (s *SettingsUpdateCaptureRequest) SetIntakeEnabled(intakeEnabled *bool) {
+	s.IntakeEnabled = intakeEnabled
+	s.require(settingsUpdateCaptureRequestFieldIntakeEnabled)
 }
 
-// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetPartnerID(partnerID *string) {
-	p.PartnerID = partnerID
-	p.require(postV1CaptureDocumentsConfirmRequestFieldPartnerID)
+func (s *SettingsUpdateCaptureRequest) SetCaptureAutoExtract(captureAutoExtract *bool) {
+	s.CaptureAutoExtract = captureAutoExtract
+	s.require(settingsUpdateCaptureRequestFieldCaptureAutoExtract)
 }
 
-// SetNewSupplier sets the NewSupplier field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetNewSupplier(newSupplier *PostV1CaptureDocumentsConfirmRequestNewSupplier) {
-	p.NewSupplier = newSupplier
-	p.require(postV1CaptureDocumentsConfirmRequestFieldNewSupplier)
-}
-
-// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetDocumentNumber(documentNumber string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsConfirmRequestFieldDocumentNumber)
-}
-
-// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsConfirmRequestFieldDocumentDate)
-}
-
-// SetDueDate sets the DueDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsConfirmRequestFieldDueDate)
-}
-
-// SetCurrency sets the Currency field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsConfirmRequestFieldCurrency)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsConfirmRequestFieldNotes)
-}
-
-// SetLines sets the Lines field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequest) SetLines(lines []*PostV1CaptureDocumentsConfirmRequestLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsConfirmRequestFieldLines)
-}
-
-func (p *PostV1CaptureDocumentsConfirmRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmRequest
+func (s *SettingsUpdateCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateCaptureRequest
 	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmRequest(body)
+	*s = SettingsUpdateCaptureRequest(body)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequest) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmRequest
+func (s *SettingsUpdateCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateCaptureRequest
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
 var (
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldUnit              = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldQuantity          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
-	postV1CaptureDocumentsConfirmRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	documentsConfirmCaptureRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestLinesItemFieldUnit              = big.NewInt(1 << 2)
+	documentsConfirmCaptureRequestLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	documentsConfirmCaptureRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	documentsConfirmCaptureRequestLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 5)
+	documentsConfirmCaptureRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 6)
+	documentsConfirmCaptureRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 7)
+	documentsConfirmCaptureRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
+	documentsConfirmCaptureRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
+	documentsConfirmCaptureRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 )
 
-type PostV1CaptureDocumentsConfirmRequestLinesItem struct {
-	ItemID            *string                                                `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       *string                                                `json:"description,omitempty" url:"description,omitempty"`
-	Unit              *string                                                `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity          *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPriceExclVat  *string                                                `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    *string                                                `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	VatClassifierCode *string                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string                                                `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string                                                `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+type DocumentsConfirmCaptureRequestLinesItem struct {
+	ItemID            *string                                          `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string                                          `json:"description,omitempty" url:"description,omitempty"`
+	Unit              *string                                          `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity          *DocumentsConfirmCaptureRequestLinesItemQuantity `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string                                          `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string                                          `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    *string                                          `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string                                          `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -646,286 +651,286 @@ type PostV1CaptureDocumentsConfirmRequestLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetItemID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetItemID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.ItemID
+	return d.ItemID
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetDescription() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetDescription() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetUnit() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetUnit() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetQuantity() *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetQuantity() *DocumentsConfirmCaptureRequestLinesItemQuantity {
+	if d == nil {
 		return nil
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetUnitPriceInclVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetUnitPriceInclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceInclVat
+	return d.UnitPriceInclVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetVatRatePercent() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetVatClassifierCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetVatClassifierCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatClassifierCode
+	return d.VatClassifierCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetCostCenterID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetCostCenterID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CostCenterID
+	return d.CostCenterID
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetProjectID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetProjectID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.ProjectID
+	return d.ProjectID
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetAccountCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetAccountCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.AccountCode
+	return d.AccountCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureRequestLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldItemID)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetItemID(itemID *string) {
+	d.ItemID = itemID
+	d.require(documentsConfirmCaptureRequestLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetDescription(description *string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldDescription)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetDescription(description *string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureRequestLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldUnit)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureRequestLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetQuantity(quantity *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldQuantity)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetQuantity(quantity *DocumentsConfirmCaptureRequestLinesItemQuantity) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureRequestLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureRequestLinesItemFieldUnitPriceExclVat)
 }
 
 // SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
-	p.UnitPriceInclVat = unitPriceInclVat
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldUnitPriceInclVat)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
+	d.UnitPriceInclVat = unitPriceInclVat
+	d.require(documentsConfirmCaptureRequestLinesItemFieldUnitPriceInclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldVatRatePercent)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureRequestLinesItemFieldVatRatePercent)
 }
 
 // SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
-	p.VatClassifierCode = vatClassifierCode
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldVatClassifierCode)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	d.VatClassifierCode = vatClassifierCode
+	d.require(documentsConfirmCaptureRequestLinesItemFieldVatClassifierCode)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetCostCenterID(costCenterID *string) {
-	p.CostCenterID = costCenterID
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldCostCenterID)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetCostCenterID(costCenterID *string) {
+	d.CostCenterID = costCenterID
+	d.require(documentsConfirmCaptureRequestLinesItemFieldCostCenterID)
 }
 
 // SetProjectID sets the ProjectID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetProjectID(projectID *string) {
-	p.ProjectID = projectID
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldProjectID)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetProjectID(projectID *string) {
+	d.ProjectID = projectID
+	d.require(documentsConfirmCaptureRequestLinesItemFieldProjectID)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) SetAccountCode(accountCode *string) {
-	p.AccountCode = accountCode
-	p.require(postV1CaptureDocumentsConfirmRequestLinesItemFieldAccountCode)
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetAccountCode(accountCode *string) {
+	d.AccountCode = accountCode
+	d.require(documentsConfirmCaptureRequestLinesItemFieldAccountCode)
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmRequestLinesItem
+func (d *DocumentsConfirmCaptureRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureRequestLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmRequestLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmRequestLinesItem
+func (d *DocumentsConfirmCaptureRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureRequestLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsConfirmRequestLinesItemQuantity struct {
+type DocumentsConfirmCaptureRequestLinesItemQuantity struct {
 	Double float64
 	String string
 
 	typ string
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) GetDouble() float64 {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItemQuantity) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) GetString() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestLinesItemQuantity) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) UnmarshalJSON(data []byte) error {
+func (d *DocumentsConfirmCaptureRequestLinesItemQuantity) UnmarshalJSON(data []byte) error {
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) MarshalJSON() ([]byte, error) {
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+func (d DocumentsConfirmCaptureRequestLinesItemQuantity) MarshalJSON() ([]byte, error) {
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1CaptureDocumentsConfirmRequestLinesItemQuantityVisitor interface {
+type DocumentsConfirmCaptureRequestLinesItemQuantityVisitor interface {
 	VisitDouble(float64) error
 	VisitString(string) error
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestLinesItemQuantity) Accept(visitor PostV1CaptureDocumentsConfirmRequestLinesItemQuantityVisitor) error {
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+func (d *DocumentsConfirmCaptureRequestLinesItemQuantity) Accept(visitor DocumentsConfirmCaptureRequestLinesItemQuantityVisitor) error {
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmRequestNewSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmRequestNewSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmRequestNewSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmRequestNewSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsConfirmCaptureRequestNewSupplierFieldName        = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestNewSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestNewSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsConfirmCaptureRequestNewSupplierFieldCountryCode = big.NewInt(1 << 3)
 )
 
-type PostV1CaptureDocumentsConfirmRequestNewSupplier struct {
+type DocumentsConfirmCaptureRequestNewSupplier struct {
 	Name        string  `json:"name" url:"name"`
 	Code        *string `json:"code,omitempty" url:"code,omitempty"`
 	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
@@ -938,126 +943,126 @@ type PostV1CaptureDocumentsConfirmRequestNewSupplier struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) GetName() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) GetCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) GetCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) GetVatCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) GetVatCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatCode
+	return d.VatCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) GetCountryCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) GetCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CountryCode
+	return d.CountryCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureRequestNewSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) SetName(name string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsConfirmRequestNewSupplierFieldName)
+func (d *DocumentsConfirmCaptureRequestNewSupplier) SetName(name string) {
+	d.Name = name
+	d.require(documentsConfirmCaptureRequestNewSupplierFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsConfirmRequestNewSupplierFieldCode)
+func (d *DocumentsConfirmCaptureRequestNewSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsConfirmCaptureRequestNewSupplierFieldCode)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsConfirmRequestNewSupplierFieldVatCode)
+func (d *DocumentsConfirmCaptureRequestNewSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsConfirmCaptureRequestNewSupplierFieldVatCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsConfirmRequestNewSupplierFieldCountryCode)
+func (d *DocumentsConfirmCaptureRequestNewSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsConfirmCaptureRequestNewSupplierFieldCountryCode)
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmRequestNewSupplier
+func (d *DocumentsConfirmCaptureRequestNewSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureRequestNewSupplier
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmRequestNewSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureRequestNewSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmRequestNewSupplier
+func (d *DocumentsConfirmCaptureRequestNewSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureRequestNewSupplier
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmRequestNewSupplier) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureRequestNewSupplier) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseFieldCapture = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseFieldInvoice = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseFieldCapture = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseFieldInvoice = big.NewInt(1 << 1)
 )
 
-type PostV1CaptureDocumentsConfirmResponse struct {
-	Capture *PostV1CaptureDocumentsConfirmResponseCapture `json:"capture" url:"capture"`
-	Invoice *PostV1CaptureDocumentsConfirmResponseInvoice `json:"invoice" url:"invoice"`
+type DocumentsConfirmCaptureResponse struct {
+	Capture *DocumentsConfirmCaptureResponseCapture `json:"capture" url:"capture"`
+	Invoice *DocumentsConfirmCaptureResponseInvoice `json:"invoice" url:"invoice"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1066,124 +1071,124 @@ type PostV1CaptureDocumentsConfirmResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) GetCapture() *PostV1CaptureDocumentsConfirmResponseCapture {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponse) GetCapture() *DocumentsConfirmCaptureResponseCapture {
+	if d == nil {
 		return nil
 	}
-	return p.Capture
+	return d.Capture
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) GetInvoice() *PostV1CaptureDocumentsConfirmResponseInvoice {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponse) GetInvoice() *DocumentsConfirmCaptureResponseInvoice {
+	if d == nil {
 		return nil
 	}
-	return p.Invoice
+	return d.Invoice
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetCapture sets the Capture field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponse) SetCapture(capture *PostV1CaptureDocumentsConfirmResponseCapture) {
-	p.Capture = capture
-	p.require(postV1CaptureDocumentsConfirmResponseFieldCapture)
+func (d *DocumentsConfirmCaptureResponse) SetCapture(capture *DocumentsConfirmCaptureResponseCapture) {
+	d.Capture = capture
+	d.require(documentsConfirmCaptureResponseFieldCapture)
 }
 
 // SetInvoice sets the Invoice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponse) SetInvoice(invoice *PostV1CaptureDocumentsConfirmResponseInvoice) {
-	p.Invoice = invoice
-	p.require(postV1CaptureDocumentsConfirmResponseFieldInvoice)
+func (d *DocumentsConfirmCaptureResponse) SetInvoice(invoice *DocumentsConfirmCaptureResponseInvoice) {
+	d.Invoice = invoice
+	d.require(documentsConfirmCaptureResponseFieldInvoice)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponse
+func (d *DocumentsConfirmCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponse
+func (d *DocumentsConfirmCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponse) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseCaptureFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldFileID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldFileName          = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldMimeType          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldSizeBytes         = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldStatus            = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldProvider          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldModel             = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldPagesProcessed    = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldExtraction        = big.NewInt(1 << 9)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldMatchedPartnerID  = big.NewInt(1 << 10)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldPurchaseInvoiceID = big.NewInt(1 << 11)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldError             = big.NewInt(1 << 12)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldCreatedAt         = big.NewInt(1 << 13)
-	postV1CaptureDocumentsConfirmResponseCaptureFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseCaptureFieldID                = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureFieldFileID            = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureFieldFileName          = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureFieldMimeType          = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureFieldSizeBytes         = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureFieldStatus            = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseCaptureFieldProvider          = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseCaptureFieldModel             = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseCaptureFieldPagesProcessed    = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseCaptureFieldExtraction        = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseCaptureFieldMatchedPartnerID  = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseCaptureFieldPurchaseInvoiceID = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseCaptureFieldError             = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseCaptureFieldCreatedAt         = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseCaptureFieldUpdatedAt         = big.NewInt(1 << 14)
 )
 
-type PostV1CaptureDocumentsConfirmResponseCapture struct {
-	ID                string                                                  `json:"id" url:"id"`
-	FileID            string                                                  `json:"fileId" url:"fileId"`
-	FileName          string                                                  `json:"fileName" url:"fileName"`
-	MimeType          string                                                  `json:"mimeType" url:"mimeType"`
-	SizeBytes         int64                                                   `json:"sizeBytes" url:"sizeBytes"`
-	Status            PostV1CaptureDocumentsConfirmResponseCaptureStatus      `json:"status" url:"status"`
-	Provider          *string                                                 `json:"provider,omitempty" url:"provider,omitempty"`
-	Model             *string                                                 `json:"model,omitempty" url:"model,omitempty"`
-	PagesProcessed    *int64                                                  `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
-	Extraction        *PostV1CaptureDocumentsConfirmResponseCaptureExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
-	MatchedPartnerID  *string                                                 `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
-	PurchaseInvoiceID *string                                                 `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
-	Error             *string                                                 `json:"error,omitempty" url:"error,omitempty"`
-	CreatedAt         string                                                  `json:"createdAt" url:"createdAt"`
-	UpdatedAt         string                                                  `json:"updatedAt" url:"updatedAt"`
+type DocumentsConfirmCaptureResponseCapture struct {
+	ID                string                                            `json:"id" url:"id"`
+	FileID            string                                            `json:"fileId" url:"fileId"`
+	FileName          string                                            `json:"fileName" url:"fileName"`
+	MimeType          string                                            `json:"mimeType" url:"mimeType"`
+	SizeBytes         int64                                             `json:"sizeBytes" url:"sizeBytes"`
+	Status            DocumentsConfirmCaptureResponseCaptureStatus      `json:"status" url:"status"`
+	Provider          *string                                           `json:"provider,omitempty" url:"provider,omitempty"`
+	Model             *string                                           `json:"model,omitempty" url:"model,omitempty"`
+	PagesProcessed    *int64                                            `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
+	Extraction        *DocumentsConfirmCaptureResponseCaptureExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
+	MatchedPartnerID  *string                                           `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
+	PurchaseInvoiceID *string                                           `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Error             *string                                           `json:"error,omitempty" url:"error,omitempty"`
+	CreatedAt         time.Time                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time                                         `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1192,296 +1197,308 @@ type PostV1CaptureDocumentsConfirmResponseCapture struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetID() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetFileID() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetFileID() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileID
+	return d.FileID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetFileName() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetFileName() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileName
+	return d.FileName
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetMimeType() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetMimeType() string {
+	if d == nil {
 		return ""
 	}
-	return p.MimeType
+	return d.MimeType
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetSizeBytes() int64 {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetSizeBytes() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return d.SizeBytes
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetStatus() PostV1CaptureDocumentsConfirmResponseCaptureStatus {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetStatus() DocumentsConfirmCaptureResponseCaptureStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetProvider() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetProvider() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Provider
+	return d.Provider
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetModel() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetPagesProcessed() *int64 {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetPagesProcessed() *int64 {
+	if d == nil {
 		return nil
 	}
-	return p.PagesProcessed
+	return d.PagesProcessed
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetExtraction() *PostV1CaptureDocumentsConfirmResponseCaptureExtraction {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetExtraction() *DocumentsConfirmCaptureResponseCaptureExtraction {
+	if d == nil {
 		return nil
 	}
-	return p.Extraction
+	return d.Extraction
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetMatchedPartnerID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetMatchedPartnerID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.MatchedPartnerID
+	return d.MatchedPartnerID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetPurchaseInvoiceID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetPurchaseInvoiceID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.PurchaseInvoiceID
+	return d.PurchaseInvoiceID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetError() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetError() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Error
+	return d.Error
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsConfirmCaptureResponseCapture) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsConfirmCaptureResponseCapture) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return d.UpdatedAt
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseCapture) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldID)
+func (d *DocumentsConfirmCaptureResponseCapture) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureResponseCaptureFieldID)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetFileID(fileID string) {
-	p.FileID = fileID
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldFileID)
+func (d *DocumentsConfirmCaptureResponseCapture) SetFileID(fileID string) {
+	d.FileID = fileID
+	d.require(documentsConfirmCaptureResponseCaptureFieldFileID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldFileName)
+func (d *DocumentsConfirmCaptureResponseCapture) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsConfirmCaptureResponseCaptureFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldMimeType)
+func (d *DocumentsConfirmCaptureResponseCapture) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsConfirmCaptureResponseCaptureFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldSizeBytes)
+func (d *DocumentsConfirmCaptureResponseCapture) SetSizeBytes(sizeBytes int64) {
+	d.SizeBytes = sizeBytes
+	d.require(documentsConfirmCaptureResponseCaptureFieldSizeBytes)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetStatus(status PostV1CaptureDocumentsConfirmResponseCaptureStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldStatus)
+func (d *DocumentsConfirmCaptureResponseCapture) SetStatus(status DocumentsConfirmCaptureResponseCaptureStatus) {
+	d.Status = status
+	d.require(documentsConfirmCaptureResponseCaptureFieldStatus)
 }
 
 // SetProvider sets the Provider field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetProvider(provider *string) {
-	p.Provider = provider
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldProvider)
+func (d *DocumentsConfirmCaptureResponseCapture) SetProvider(provider *string) {
+	d.Provider = provider
+	d.require(documentsConfirmCaptureResponseCaptureFieldProvider)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldModel)
+func (d *DocumentsConfirmCaptureResponseCapture) SetModel(model *string) {
+	d.Model = model
+	d.require(documentsConfirmCaptureResponseCaptureFieldModel)
 }
 
 // SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetPagesProcessed(pagesProcessed *int64) {
-	p.PagesProcessed = pagesProcessed
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldPagesProcessed)
+func (d *DocumentsConfirmCaptureResponseCapture) SetPagesProcessed(pagesProcessed *int64) {
+	d.PagesProcessed = pagesProcessed
+	d.require(documentsConfirmCaptureResponseCaptureFieldPagesProcessed)
 }
 
 // SetExtraction sets the Extraction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetExtraction(extraction *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) {
-	p.Extraction = extraction
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldExtraction)
+func (d *DocumentsConfirmCaptureResponseCapture) SetExtraction(extraction *DocumentsConfirmCaptureResponseCaptureExtraction) {
+	d.Extraction = extraction
+	d.require(documentsConfirmCaptureResponseCaptureFieldExtraction)
 }
 
 // SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetMatchedPartnerID(matchedPartnerID *string) {
-	p.MatchedPartnerID = matchedPartnerID
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldMatchedPartnerID)
+func (d *DocumentsConfirmCaptureResponseCapture) SetMatchedPartnerID(matchedPartnerID *string) {
+	d.MatchedPartnerID = matchedPartnerID
+	d.require(documentsConfirmCaptureResponseCaptureFieldMatchedPartnerID)
 }
 
 // SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
-	p.PurchaseInvoiceID = purchaseInvoiceID
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldPurchaseInvoiceID)
+func (d *DocumentsConfirmCaptureResponseCapture) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	d.PurchaseInvoiceID = purchaseInvoiceID
+	d.require(documentsConfirmCaptureResponseCaptureFieldPurchaseInvoiceID)
 }
 
 // SetError sets the Error field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetError(error_ *string) {
-	p.Error = error_
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldError)
+func (d *DocumentsConfirmCaptureResponseCapture) SetError(error_ *string) {
+	d.Error = error_
+	d.require(documentsConfirmCaptureResponseCaptureFieldError)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldCreatedAt)
+func (d *DocumentsConfirmCaptureResponseCapture) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsConfirmCaptureResponseCaptureFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureFieldUpdatedAt)
+func (d *DocumentsConfirmCaptureResponseCapture) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsConfirmCaptureResponseCaptureFieldUpdatedAt)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseCapture
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsConfirmCaptureResponseCapture) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureResponseCapture
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseCapture(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseCapture(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseCapture
+func (d *DocumentsConfirmCaptureResponseCapture) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseCapture
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
+		UpdatedAt: internal.NewDateTime(d.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCapture) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCapture) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldSupplier       = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDueDate        = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldCurrency       = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldNotes          = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseCaptureExtractionFieldSupplier       = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentNumber = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentDate   = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDueDate        = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureExtractionFieldCurrency       = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureExtractionFieldNetTotal       = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseCaptureExtractionFieldVatTotal       = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseCaptureExtractionFieldGrossTotal     = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseCaptureExtractionFieldNotes          = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseCaptureExtractionFieldLines          = big.NewInt(1 << 9)
 )
 
-type PostV1CaptureDocumentsConfirmResponseCaptureExtraction struct {
-	Supplier       *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                            `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *string                                                            `json:"documentDate,omitempty" url:"documentDate,omitempty"`
-	DueDate        *string                                                            `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string                                                            `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                            `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                            `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                            `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                            `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem `json:"lines" url:"lines"`
+type DocumentsConfirmCaptureResponseCaptureExtraction struct {
+	Supplier       *DocumentsConfirmCaptureResponseCaptureExtractionSupplier    `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                      `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                   `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                      `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                      `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                      `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                      `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1490,214 +1507,226 @@ type PostV1CaptureDocumentsConfirmResponseCaptureExtraction struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetSupplier() *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetSupplier() *DocumentsConfirmCaptureResponseCaptureExtractionSupplier {
+	if d == nil {
 		return nil
 	}
-	return p.Supplier
+	return d.Supplier
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetDocumentNumber() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetDocumentNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentNumber
+	return d.DocumentNumber
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetDocumentDate() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetDocumentDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentDate
+	return d.DocumentDate
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetDueDate() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetDueDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DueDate
+	return d.DueDate
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetCurrency() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetCurrency() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Currency
+	return d.Currency
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetNetTotal() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetNetTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.NetTotal
+	return d.NetTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetVatTotal() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetVatTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatTotal
+	return d.VatTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetGrossTotal() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetGrossTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.GrossTotal
+	return d.GrossTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetNotes() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetNotes() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Notes
+	return d.Notes
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetLines() []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetLines() []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem {
+	if d == nil {
 		return nil
 	}
-	return p.Lines
+	return d.Lines
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetSupplier(supplier *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) {
-	p.Supplier = supplier
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldSupplier)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetSupplier(supplier *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) {
+	d.Supplier = supplier
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldSupplier)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetDocumentNumber(documentNumber *string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDocumentNumber)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetDocumentNumber(documentNumber *string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDocumentDate)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetDocumentDate(documentDate *time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldDocumentDate)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldDueDate)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldCurrency)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldCurrency)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetNetTotal(netTotal *string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldNetTotal)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetNetTotal(netTotal *string) {
+	d.NetTotal = netTotal
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldVatTotal)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetVatTotal(vatTotal *string) {
+	d.VatTotal = vatTotal
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetGrossTotal(grossTotal *string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldGrossTotal)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetGrossTotal(grossTotal *string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldGrossTotal)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldNotes)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldNotes)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) SetLines(lines []*PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionFieldLines)
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetLines(lines []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) {
+	d.Lines = lines
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldLines)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseCaptureExtraction
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureResponseCaptureExtraction
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseCaptureExtraction(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseCaptureExtraction(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseCaptureExtraction
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseCaptureExtraction
 	var marshaler = struct {
 		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*d),
+		DocumentDate: internal.NewOptionalDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtraction) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
 )
 
-type PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem struct {
+type DocumentsConfirmCaptureResponseCaptureExtractionLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Quantity         string  `json:"quantity" url:"quantity"`
 	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -1714,183 +1743,183 @@ type PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetDescription() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetDescription() string {
+	if d == nil {
 		return ""
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetQuantity() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetQuantity() string {
+	if d == nil {
 		return ""
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetUnit() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetUnit() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetVatRatePercent() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetLineNet() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetLineNet() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineNet
+	return d.LineNet
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetLineVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetLineVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineVat
+	return d.LineVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetLineGross() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetLineGross() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineGross
+	return d.LineGross
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldDescription)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldQuantity)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldQuantity)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldUnit)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldUnit)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldVatRatePercent)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldVatRatePercent)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetLineNet(lineNet *string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineNet)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineNet)
 }
 
 // SetLineVat sets the LineVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetLineVat(lineVat *string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineVat)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineVat)
 }
 
 // SetLineGross sets the LineGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) SetLineGross(lineGross *string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItemFieldLineGross)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsConfirmCaptureResponseCaptureExtractionLinesItemFieldLineGross)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseCaptureExtractionLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseCaptureExtractionLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldIban        = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureExtractionSupplierFieldName        = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureExtractionSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureExtractionSupplierFieldIban        = big.NewInt(1 << 4)
 )
 
-type PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier struct {
+type DocumentsConfirmCaptureResponseCaptureExtractionSupplier struct {
 	Name        *string `json:"name,omitempty" url:"name,omitempty"`
 	Code        *string `json:"code,omitempty" url:"code,omitempty"`
 	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
@@ -1904,220 +1933,220 @@ type PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetName() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetName() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetVatCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetVatCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatCode
+	return d.VatCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetCountryCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CountryCode
+	return d.CountryCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetIban() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetIban() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Iban
+	return d.Iban
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) SetName(name *string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldName)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) SetName(name *string) {
+	d.Name = name
+	d.require(documentsConfirmCaptureResponseCaptureExtractionSupplierFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldCode)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsConfirmCaptureResponseCaptureExtractionSupplierFieldCode)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldVatCode)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsConfirmCaptureResponseCaptureExtractionSupplierFieldVatCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldCountryCode)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsConfirmCaptureResponseCaptureExtractionSupplierFieldCountryCode)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1CaptureDocumentsConfirmResponseCaptureExtractionSupplierFieldIban)
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) SetIban(iban *string) {
+	d.Iban = iban
+	d.require(documentsConfirmCaptureResponseCaptureExtractionSupplierFieldIban)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseCaptureExtractionSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseCaptureExtractionSupplier
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseCaptureExtractionSupplier) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionSupplier) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsConfirmResponseCaptureStatus string
+type DocumentsConfirmCaptureResponseCaptureStatus string
 
 const (
-	PostV1CaptureDocumentsConfirmResponseCaptureStatusPending   PostV1CaptureDocumentsConfirmResponseCaptureStatus = "pending"
-	PostV1CaptureDocumentsConfirmResponseCaptureStatusExtracted PostV1CaptureDocumentsConfirmResponseCaptureStatus = "extracted"
-	PostV1CaptureDocumentsConfirmResponseCaptureStatusFailed    PostV1CaptureDocumentsConfirmResponseCaptureStatus = "failed"
-	PostV1CaptureDocumentsConfirmResponseCaptureStatusLinked    PostV1CaptureDocumentsConfirmResponseCaptureStatus = "linked"
+	DocumentsConfirmCaptureResponseCaptureStatusPending   DocumentsConfirmCaptureResponseCaptureStatus = "pending"
+	DocumentsConfirmCaptureResponseCaptureStatusExtracted DocumentsConfirmCaptureResponseCaptureStatus = "extracted"
+	DocumentsConfirmCaptureResponseCaptureStatusFailed    DocumentsConfirmCaptureResponseCaptureStatus = "failed"
+	DocumentsConfirmCaptureResponseCaptureStatusLinked    DocumentsConfirmCaptureResponseCaptureStatus = "linked"
 )
 
-func NewPostV1CaptureDocumentsConfirmResponseCaptureStatusFromString(s string) (PostV1CaptureDocumentsConfirmResponseCaptureStatus, error) {
+func NewDocumentsConfirmCaptureResponseCaptureStatusFromString(s string) (DocumentsConfirmCaptureResponseCaptureStatus, error) {
 	switch s {
 	case "pending":
-		return PostV1CaptureDocumentsConfirmResponseCaptureStatusPending, nil
+		return DocumentsConfirmCaptureResponseCaptureStatusPending, nil
 	case "extracted":
-		return PostV1CaptureDocumentsConfirmResponseCaptureStatusExtracted, nil
+		return DocumentsConfirmCaptureResponseCaptureStatusExtracted, nil
 	case "failed":
-		return PostV1CaptureDocumentsConfirmResponseCaptureStatusFailed, nil
+		return DocumentsConfirmCaptureResponseCaptureStatusFailed, nil
 	case "linked":
-		return PostV1CaptureDocumentsConfirmResponseCaptureStatusLinked, nil
+		return DocumentsConfirmCaptureResponseCaptureStatusLinked, nil
 	}
-	var t PostV1CaptureDocumentsConfirmResponseCaptureStatus
+	var t DocumentsConfirmCaptureResponseCaptureStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsConfirmResponseCaptureStatus) Ptr() *PostV1CaptureDocumentsConfirmResponseCaptureStatus {
-	return &p
+func (d DocumentsConfirmCaptureResponseCaptureStatus) Ptr() *DocumentsConfirmCaptureResponseCaptureStatus {
+	return &d
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldID                           = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPartnerID                    = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldType                         = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldStatus                       = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaymentStatus                = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentNumber               = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentDate                 = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDueDate                      = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldRegistrationDate             = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCurrency                     = big.NewInt(1 << 9)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldNetTotal                     = big.NewInt(1 << 10)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldVatTotal                     = big.NewInt(1 << 11)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldGrossTotal                   = big.NewInt(1 << 12)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaidAmount                   = big.NewInt(1 << 13)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldJournalTransactionID         = big.NewInt(1 << 14)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID            = big.NewInt(1 << 15)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID              = big.NewInt(1 << 16)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID              = big.NewInt(1 << 17)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                        = big.NewInt(1 << 18)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatTransportMode       = big.NewInt(1 << 19)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatRegion              = big.NewInt(1 << 21)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 23)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef                  = big.NewInt(1 << 24)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt                    = big.NewInt(1 << 25)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt                    = big.NewInt(1 << 26)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                        = big.NewInt(1 << 27)
+	documentsConfirmCaptureResponseInvoiceFieldID                           = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseInvoiceFieldPartnerID                    = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseInvoiceFieldType                         = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseInvoiceFieldStatus                       = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseInvoiceFieldPaymentStatus                = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseInvoiceFieldDocumentNumber               = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseInvoiceFieldDocumentDate                 = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseInvoiceFieldDueDate                      = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseInvoiceFieldRegistrationDate             = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseInvoiceFieldCurrency                     = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseInvoiceFieldNetTotal                     = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseInvoiceFieldVatTotal                     = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseInvoiceFieldGrossTotal                   = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseInvoiceFieldPaidAmount                   = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseInvoiceFieldJournalTransactionID         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseInvoiceFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseInvoiceFieldOperationTypeID              = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseInvoiceFieldNotes                        = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseInvoiceFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseInvoiceFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseInvoiceFieldIntrastatRegion              = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	documentsConfirmCaptureResponseInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	documentsConfirmCaptureResponseInvoiceFieldDocumentRef                  = big.NewInt(1 << 24)
+	documentsConfirmCaptureResponseInvoiceFieldCreatedAt                    = big.NewInt(1 << 25)
+	documentsConfirmCaptureResponseInvoiceFieldUpdatedAt                    = big.NewInt(1 << 26)
+	documentsConfirmCaptureResponseInvoiceFieldLines                        = big.NewInt(1 << 27)
 )
 
-type PostV1CaptureDocumentsConfirmResponseInvoice struct {
-	ID                           string                                                    `json:"id" url:"id"`
-	PartnerID                    string                                                    `json:"partnerId" url:"partnerId"`
-	Type                         PostV1CaptureDocumentsConfirmResponseInvoiceType          `json:"type" url:"type"`
-	Status                       PostV1CaptureDocumentsConfirmResponseInvoiceStatus        `json:"status" url:"status"`
-	PaymentStatus                PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber               string                                                    `json:"documentNumber" url:"documentNumber"`
-	DocumentDate                 string                                                    `json:"documentDate" url:"documentDate"`
-	DueDate                      *string                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate             *string                                                   `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency                     string                                                    `json:"currency" url:"currency"`
-	NetTotal                     string                                                    `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                                    `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                                    `json:"grossTotal" url:"grossTotal"`
-	PaidAmount                   string                                                    `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID            *string                                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID              *string                                                   `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID              *string                                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                        *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	IntrastatTransportMode       *string                                                   `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                                   `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	EinvoiceNumber               *string                                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	DocumentRef                  *string                                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt                    string                                                    `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    string                                                    `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem  `json:"lines" url:"lines"`
+type DocumentsConfirmCaptureResponseInvoice struct {
+	ID                           string                                              `json:"id" url:"id"`
+	PartnerID                    string                                              `json:"partnerId" url:"partnerId"`
+	Type                         DocumentsConfirmCaptureResponseInvoiceType          `json:"type" url:"type"`
+	Status                       DocumentsConfirmCaptureResponseInvoiceStatus        `json:"status" url:"status"`
+	PaymentStatus                DocumentsConfirmCaptureResponseInvoicePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                              `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 time.Time                                           `json:"documentDate" url:"documentDate" format:"date"`
+	DueDate                      *time.Time                                          `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	RegistrationDate             *time.Time                                          `json:"registrationDate,omitempty" url:"registrationDate,omitempty" format:"date"`
+	Currency                     string                                              `json:"currency" url:"currency"`
+	NetTotal                     string                                              `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                              `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                              `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                              `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                             `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                             `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                             `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                             `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                             `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                             `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                             `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                             `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                             `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                           `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*DocumentsConfirmCaptureResponseInvoiceLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2126,474 +2155,498 @@ type PostV1CaptureDocumentsConfirmResponseInvoice struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetID() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetPartnerID() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetPartnerID() string {
+	if d == nil {
 		return ""
 	}
-	return p.PartnerID
+	return d.PartnerID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetType() PostV1CaptureDocumentsConfirmResponseInvoiceType {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetType() DocumentsConfirmCaptureResponseInvoiceType {
+	if d == nil {
 		return ""
 	}
-	return p.Type
+	return d.Type
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetStatus() PostV1CaptureDocumentsConfirmResponseInvoiceStatus {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetStatus() DocumentsConfirmCaptureResponseInvoiceStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetPaymentStatus() PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetPaymentStatus() DocumentsConfirmCaptureResponseInvoicePaymentStatus {
+	if d == nil {
 		return ""
 	}
-	return p.PaymentStatus
+	return d.PaymentStatus
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDocumentNumber() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetDocumentNumber() string {
+	if d == nil {
 		return ""
 	}
-	return p.DocumentNumber
+	return d.DocumentNumber
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDocumentDate() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetDocumentDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.DocumentDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoice) GetDueDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DueDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoice) GetRegistrationDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.RegistrationDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoice) GetCurrency() string {
+	if d == nil {
 		return ""
 	}
-	return p.DocumentDate
+	return d.Currency
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDueDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DueDate
-}
-
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetRegistrationDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.RegistrationDate
-}
-
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetCurrency() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetNetTotal() string {
+	if d == nil {
 		return ""
 	}
-	return p.Currency
+	return d.NetTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetNetTotal() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetVatTotal() string {
+	if d == nil {
 		return ""
 	}
-	return p.NetTotal
+	return d.VatTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetVatTotal() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetGrossTotal() string {
+	if d == nil {
 		return ""
 	}
-	return p.VatTotal
+	return d.GrossTotal
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetGrossTotal() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetPaidAmount() string {
+	if d == nil {
 		return ""
 	}
-	return p.GrossTotal
+	return d.PaidAmount
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetPaidAmount() string {
-	if p == nil {
-		return ""
-	}
-	return p.PaidAmount
-}
-
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetJournalTransactionID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetJournalTransactionID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.JournalTransactionID
+	return d.JournalTransactionID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetCreditedInvoiceID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetCreditedInvoiceID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CreditedInvoiceID
+	return d.CreditedInvoiceID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetPurchaseOrderID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetPurchaseOrderID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.PurchaseOrderID
+	return d.PurchaseOrderID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetOperationTypeID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetOperationTypeID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.OperationTypeID
+	return d.OperationTypeID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetNotes() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetNotes() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Notes
+	return d.Notes
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatTransportMode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetIntrastatTransportMode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.IntrastatTransportMode
+	return d.IntrastatTransportMode
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatDeliveryTerms() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetIntrastatDeliveryTerms() *string {
+	if d == nil {
 		return nil
 	}
-	return p.IntrastatDeliveryTerms
+	return d.IntrastatDeliveryTerms
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatRegion() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetIntrastatRegion() *string {
+	if d == nil {
 		return nil
 	}
-	return p.IntrastatRegion
+	return d.IntrastatRegion
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatNatureOfTransaction() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetIntrastatNatureOfTransaction() *string {
+	if d == nil {
 		return nil
 	}
-	return p.IntrastatNatureOfTransaction
+	return d.IntrastatNatureOfTransaction
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetEinvoiceNumber() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetEinvoiceNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.EinvoiceNumber
+	return d.EinvoiceNumber
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDocumentRef() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetDocumentRef() *string {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentRef
+	return d.DocumentRef
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsConfirmCaptureResponseInvoice) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsConfirmCaptureResponseInvoice) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return d.UpdatedAt
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetLines() []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetLines() []*DocumentsConfirmCaptureResponseInvoiceLinesItem {
+	if d == nil {
 		return nil
 	}
-	return p.Lines
+	return d.Lines
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseInvoice) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureResponseInvoiceFieldID)
 }
 
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPartnerID(partnerID string) {
-	p.PartnerID = partnerID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldPartnerID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetPartnerID(partnerID string) {
+	d.PartnerID = partnerID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldPartnerID)
 }
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetType(type_ PostV1CaptureDocumentsConfirmResponseInvoiceType) {
-	p.Type = type_
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldType)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetType(type_ DocumentsConfirmCaptureResponseInvoiceType) {
+	d.Type = type_
+	d.require(documentsConfirmCaptureResponseInvoiceFieldType)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetStatus(status PostV1CaptureDocumentsConfirmResponseInvoiceStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldStatus)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetStatus(status DocumentsConfirmCaptureResponseInvoiceStatus) {
+	d.Status = status
+	d.require(documentsConfirmCaptureResponseInvoiceFieldStatus)
 }
 
 // SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPaymentStatus(paymentStatus PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus) {
-	p.PaymentStatus = paymentStatus
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldPaymentStatus)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetPaymentStatus(paymentStatus DocumentsConfirmCaptureResponseInvoicePaymentStatus) {
+	d.PaymentStatus = paymentStatus
+	d.require(documentsConfirmCaptureResponseInvoiceFieldPaymentStatus)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetDocumentNumber(documentNumber string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentNumber)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetDocumentNumber(documentNumber string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsConfirmCaptureResponseInvoiceFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetDocumentDate(documentDate string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentDate)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetDocumentDate(documentDate time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsConfirmCaptureResponseInvoiceFieldDocumentDate)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldDueDate)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsConfirmCaptureResponseInvoiceFieldDueDate)
 }
 
 // SetRegistrationDate sets the RegistrationDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetRegistrationDate(registrationDate *string) {
-	p.RegistrationDate = registrationDate
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldRegistrationDate)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetRegistrationDate(registrationDate *time.Time) {
+	d.RegistrationDate = registrationDate
+	d.require(documentsConfirmCaptureResponseInvoiceFieldRegistrationDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetCurrency(currency string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldCurrency)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetCurrency(currency string) {
+	d.Currency = currency
+	d.require(documentsConfirmCaptureResponseInvoiceFieldCurrency)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetNetTotal(netTotal string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldNetTotal)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetNetTotal(netTotal string) {
+	d.NetTotal = netTotal
+	d.require(documentsConfirmCaptureResponseInvoiceFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetVatTotal(vatTotal string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldVatTotal)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetVatTotal(vatTotal string) {
+	d.VatTotal = vatTotal
+	d.require(documentsConfirmCaptureResponseInvoiceFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetGrossTotal(grossTotal string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldGrossTotal)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetGrossTotal(grossTotal string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsConfirmCaptureResponseInvoiceFieldGrossTotal)
 }
 
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPaidAmount(paidAmount string) {
-	p.PaidAmount = paidAmount
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldPaidAmount)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetPaidAmount(paidAmount string) {
+	d.PaidAmount = paidAmount
+	d.require(documentsConfirmCaptureResponseInvoiceFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetJournalTransactionID(journalTransactionID *string) {
-	p.JournalTransactionID = journalTransactionID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldJournalTransactionID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetJournalTransactionID(journalTransactionID *string) {
+	d.JournalTransactionID = journalTransactionID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldJournalTransactionID)
 }
 
 // SetCreditedInvoiceID sets the CreditedInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetCreditedInvoiceID(creditedInvoiceID *string) {
-	p.CreditedInvoiceID = creditedInvoiceID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetCreditedInvoiceID(creditedInvoiceID *string) {
+	d.CreditedInvoiceID = creditedInvoiceID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldCreditedInvoiceID)
 }
 
 // SetPurchaseOrderID sets the PurchaseOrderID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPurchaseOrderID(purchaseOrderID *string) {
-	p.PurchaseOrderID = purchaseOrderID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetPurchaseOrderID(purchaseOrderID *string) {
+	d.PurchaseOrderID = purchaseOrderID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldPurchaseOrderID)
 }
 
 // SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetOperationTypeID(operationTypeID *string) {
-	p.OperationTypeID = operationTypeID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetOperationTypeID(operationTypeID *string) {
+	d.OperationTypeID = operationTypeID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsConfirmCaptureResponseInvoiceFieldNotes)
 }
 
 // SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatTransportMode(intrastatTransportMode *string) {
-	p.IntrastatTransportMode = intrastatTransportMode
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatTransportMode)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	d.IntrastatTransportMode = intrastatTransportMode
+	d.require(documentsConfirmCaptureResponseInvoiceFieldIntrastatTransportMode)
 }
 
 // SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
-	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatDeliveryTerms)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	d.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	d.require(documentsConfirmCaptureResponseInvoiceFieldIntrastatDeliveryTerms)
 }
 
 // SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatRegion(intrastatRegion *string) {
-	p.IntrastatRegion = intrastatRegion
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatRegion)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetIntrastatRegion(intrastatRegion *string) {
+	d.IntrastatRegion = intrastatRegion
+	d.require(documentsConfirmCaptureResponseInvoiceFieldIntrastatRegion)
 }
 
 // SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
-	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatNatureOfTransaction)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	d.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	d.require(documentsConfirmCaptureResponseInvoiceFieldIntrastatNatureOfTransaction)
 }
 
 // SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetEinvoiceNumber(einvoiceNumber *string) {
-	p.EinvoiceNumber = einvoiceNumber
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldEinvoiceNumber)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetEinvoiceNumber(einvoiceNumber *string) {
+	d.EinvoiceNumber = einvoiceNumber
+	d.require(documentsConfirmCaptureResponseInvoiceFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetDocumentRef(documentRef *string) {
-	p.DocumentRef = documentRef
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetDocumentRef(documentRef *string) {
+	d.DocumentRef = documentRef
+	d.require(documentsConfirmCaptureResponseInvoiceFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsConfirmCaptureResponseInvoiceFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsConfirmCaptureResponseInvoiceFieldUpdatedAt)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetLines(lines []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldLines)
+func (d *DocumentsConfirmCaptureResponseInvoice) SetLines(lines []*DocumentsConfirmCaptureResponseInvoiceLinesItem) {
+	d.Lines = lines
+	d.require(documentsConfirmCaptureResponseInvoiceFieldLines)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseInvoice
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureResponseInvoice
+	var unmarshaler = struct {
+		embed
+		DocumentDate     *internal.Date     `json:"documentDate"`
+		DueDate          *internal.Date     `json:"dueDate,omitempty"`
+		RegistrationDate *internal.Date     `json:"registrationDate,omitempty"`
+		CreatedAt        *internal.DateTime `json:"createdAt"`
+		UpdatedAt        *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseInvoice(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseInvoice(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.Time()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	d.RegistrationDate = unmarshaler.RegistrationDate.TimePtr()
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseInvoice
+func (d *DocumentsConfirmCaptureResponseInvoice) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseInvoice
 	var marshaler = struct {
 		embed
+		DocumentDate     *internal.Date     `json:"documentDate"`
+		DueDate          *internal.Date     `json:"dueDate,omitempty"`
+		RegistrationDate *internal.Date     `json:"registrationDate,omitempty"`
+		CreatedAt        *internal.DateTime `json:"createdAt"`
+		UpdatedAt        *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:            embed(*d),
+		DocumentDate:     internal.NewDate(d.DocumentDate),
+		DueDate:          internal.NewOptionalDate(d.DueDate),
+		RegistrationDate: internal.NewOptionalDate(d.RegistrationDate),
+		CreatedAt:        internal.NewDateTime(d.CreatedAt),
+		UpdatedAt:        internal.NewDateTime(d.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoice) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoice) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldID                = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldItemID            = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDescription       = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnit              = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldQuantity          = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 15)
 )
 
-type PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem struct {
+type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
 	ID                string  `json:"id" url:"id"`
 	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
 	Description       string  `json:"description" url:"description"`
@@ -2618,360 +2671,360 @@ type PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetID() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetItemID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetItemID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.ItemID
+	return d.ItemID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetDescription() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetDescription() string {
+	if d == nil {
 		return ""
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetUnit() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetUnit() string {
+	if d == nil {
 		return ""
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetQuantity() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetQuantity() string {
+	if d == nil {
 		return ""
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetUnitPriceInclVat() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetUnitPriceInclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceInclVat
+	return d.UnitPriceInclVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetVatRatePercent() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetVatRatePercent() string {
+	if d == nil {
 		return ""
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetVatClassifierCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetVatClassifierCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatClassifierCode
+	return d.VatClassifierCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetCostCenterID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetCostCenterID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CostCenterID
+	return d.CostCenterID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetProjectID() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetProjectID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.ProjectID
+	return d.ProjectID
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetAccountCode() *string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetAccountCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.AccountCode
+	return d.AccountCode
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetLineNet() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineNet() string {
+	if d == nil {
 		return ""
 	}
-	return p.LineNet
+	return d.LineNet
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetLineVat() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineVat() string {
+	if d == nil {
 		return ""
 	}
-	return p.LineVat
+	return d.LineVat
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetLineGross() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineGross() string {
+	if d == nil {
 		return ""
 	}
-	return p.LineGross
+	return d.LineGross
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetSortOrder() int64 {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetSortOrder() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.SortOrder
+	return d.SortOrder
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldID)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldID)
 }
 
 // SetItemID sets the ItemID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetItemID(itemID *string) {
-	p.ItemID = itemID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldItemID)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetItemID(itemID *string) {
+	d.ItemID = itemID
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldItemID)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldDescription)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldDescription)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetUnit(unit string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnit)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetUnit(unit string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldUnit)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldQuantity)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceExclVat)
 }
 
 // SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
-	p.UnitPriceInclVat = unitPriceInclVat
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldUnitPriceInclVat)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
+	d.UnitPriceInclVat = unitPriceInclVat
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceInclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetVatRatePercent(vatRatePercent string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldVatRatePercent)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetVatRatePercent(vatRatePercent string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldVatRatePercent)
 }
 
 // SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
-	p.VatClassifierCode = vatClassifierCode
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldVatClassifierCode)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	d.VatClassifierCode = vatClassifierCode
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetCostCenterID(costCenterID *string) {
-	p.CostCenterID = costCenterID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldCostCenterID)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetCostCenterID(costCenterID *string) {
+	d.CostCenterID = costCenterID
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID)
 }
 
 // SetProjectID sets the ProjectID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetProjectID(projectID *string) {
-	p.ProjectID = projectID
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldProjectID)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetProjectID(projectID *string) {
+	d.ProjectID = projectID
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetAccountCode(accountCode *string) {
-	p.AccountCode = accountCode
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldAccountCode)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetAccountCode(accountCode *string) {
+	d.AccountCode = accountCode
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetLineNet(lineNet string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineNet)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLineNet(lineNet string) {
+	d.LineNet = lineNet
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet)
 }
 
 // SetLineVat sets the LineVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetLineVat(lineVat string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineVat)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLineVat(lineVat string) {
+	d.LineVat = lineVat
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat)
 }
 
 // SetLineGross sets the LineGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetLineGross(lineGross string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldLineGross)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLineGross(lineGross string) {
+	d.LineGross = lineGross
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross)
 }
 
 // SetSortOrder sets the SortOrder field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) SetSortOrder(sortOrder int64) {
-	p.SortOrder = sortOrder
-	p.require(postV1CaptureDocumentsConfirmResponseInvoiceLinesItemFieldSortOrder)
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetSortOrder(sortOrder int64) {
+	d.SortOrder = sortOrder
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureResponseInvoiceLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsConfirmCaptureResponseInvoiceLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseInvoiceLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus string
+type DocumentsConfirmCaptureResponseInvoicePaymentStatus string
 
 const (
-	PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusUnpaid  PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus = "unpaid"
-	PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusPartial PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus = "partial"
-	PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusPaid    PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus = "paid"
+	DocumentsConfirmCaptureResponseInvoicePaymentStatusUnpaid  DocumentsConfirmCaptureResponseInvoicePaymentStatus = "unpaid"
+	DocumentsConfirmCaptureResponseInvoicePaymentStatusPartial DocumentsConfirmCaptureResponseInvoicePaymentStatus = "partial"
+	DocumentsConfirmCaptureResponseInvoicePaymentStatusPaid    DocumentsConfirmCaptureResponseInvoicePaymentStatus = "paid"
 )
 
-func NewPostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusFromString(s string) (PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus, error) {
+func NewDocumentsConfirmCaptureResponseInvoicePaymentStatusFromString(s string) (DocumentsConfirmCaptureResponseInvoicePaymentStatus, error) {
 	switch s {
 	case "unpaid":
-		return PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusUnpaid, nil
+		return DocumentsConfirmCaptureResponseInvoicePaymentStatusUnpaid, nil
 	case "partial":
-		return PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusPartial, nil
+		return DocumentsConfirmCaptureResponseInvoicePaymentStatusPartial, nil
 	case "paid":
-		return PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatusPaid, nil
+		return DocumentsConfirmCaptureResponseInvoicePaymentStatusPaid, nil
 	}
-	var t PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus
+	var t DocumentsConfirmCaptureResponseInvoicePaymentStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus) Ptr() *PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus {
-	return &p
+func (d DocumentsConfirmCaptureResponseInvoicePaymentStatus) Ptr() *DocumentsConfirmCaptureResponseInvoicePaymentStatus {
+	return &d
 }
 
-type PostV1CaptureDocumentsConfirmResponseInvoiceStatus string
+type DocumentsConfirmCaptureResponseInvoiceStatus string
 
 const (
-	PostV1CaptureDocumentsConfirmResponseInvoiceStatusDraft      PostV1CaptureDocumentsConfirmResponseInvoiceStatus = "draft"
-	PostV1CaptureDocumentsConfirmResponseInvoiceStatusRegistered PostV1CaptureDocumentsConfirmResponseInvoiceStatus = "registered"
+	DocumentsConfirmCaptureResponseInvoiceStatusDraft      DocumentsConfirmCaptureResponseInvoiceStatus = "draft"
+	DocumentsConfirmCaptureResponseInvoiceStatusRegistered DocumentsConfirmCaptureResponseInvoiceStatus = "registered"
 )
 
-func NewPostV1CaptureDocumentsConfirmResponseInvoiceStatusFromString(s string) (PostV1CaptureDocumentsConfirmResponseInvoiceStatus, error) {
+func NewDocumentsConfirmCaptureResponseInvoiceStatusFromString(s string) (DocumentsConfirmCaptureResponseInvoiceStatus, error) {
 	switch s {
 	case "draft":
-		return PostV1CaptureDocumentsConfirmResponseInvoiceStatusDraft, nil
+		return DocumentsConfirmCaptureResponseInvoiceStatusDraft, nil
 	case "registered":
-		return PostV1CaptureDocumentsConfirmResponseInvoiceStatusRegistered, nil
+		return DocumentsConfirmCaptureResponseInvoiceStatusRegistered, nil
 	}
-	var t PostV1CaptureDocumentsConfirmResponseInvoiceStatus
+	var t DocumentsConfirmCaptureResponseInvoiceStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsConfirmResponseInvoiceStatus) Ptr() *PostV1CaptureDocumentsConfirmResponseInvoiceStatus {
-	return &p
+func (d DocumentsConfirmCaptureResponseInvoiceStatus) Ptr() *DocumentsConfirmCaptureResponseInvoiceStatus {
+	return &d
 }
 
-type PostV1CaptureDocumentsConfirmResponseInvoiceType string
+type DocumentsConfirmCaptureResponseInvoiceType string
 
 const (
-	PostV1CaptureDocumentsConfirmResponseInvoiceTypeInvoice    PostV1CaptureDocumentsConfirmResponseInvoiceType = "invoice"
-	PostV1CaptureDocumentsConfirmResponseInvoiceTypeCreditNote PostV1CaptureDocumentsConfirmResponseInvoiceType = "credit_note"
+	DocumentsConfirmCaptureResponseInvoiceTypeInvoice    DocumentsConfirmCaptureResponseInvoiceType = "invoice"
+	DocumentsConfirmCaptureResponseInvoiceTypeCreditNote DocumentsConfirmCaptureResponseInvoiceType = "credit_note"
 )
 
-func NewPostV1CaptureDocumentsConfirmResponseInvoiceTypeFromString(s string) (PostV1CaptureDocumentsConfirmResponseInvoiceType, error) {
+func NewDocumentsConfirmCaptureResponseInvoiceTypeFromString(s string) (DocumentsConfirmCaptureResponseInvoiceType, error) {
 	switch s {
 	case "invoice":
-		return PostV1CaptureDocumentsConfirmResponseInvoiceTypeInvoice, nil
+		return DocumentsConfirmCaptureResponseInvoiceTypeInvoice, nil
 	case "credit_note":
-		return PostV1CaptureDocumentsConfirmResponseInvoiceTypeCreditNote, nil
+		return DocumentsConfirmCaptureResponseInvoiceTypeCreditNote, nil
 	}
-	var t PostV1CaptureDocumentsConfirmResponseInvoiceType
+	var t DocumentsConfirmCaptureResponseInvoiceType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsConfirmResponseInvoiceType) Ptr() *PostV1CaptureDocumentsConfirmResponseInvoiceType {
-	return &p
+func (d DocumentsConfirmCaptureResponseInvoiceType) Ptr() *DocumentsConfirmCaptureResponseInvoiceType {
+	return &d
 }
 
 var (
-	postV1CaptureDocumentsDeleteResponseFieldDeleted = big.NewInt(1 << 0)
+	documentsDeleteCaptureResponseFieldDeleted = big.NewInt(1 << 0)
 )
 
-type PostV1CaptureDocumentsDeleteResponse struct {
+type DocumentsDeleteCaptureResponse struct {
 	Deleted bool `json:"deleted" url:"deleted"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2981,112 +3034,112 @@ type PostV1CaptureDocumentsDeleteResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) GetDeleted() bool {
-	if p == nil {
+func (d *DocumentsDeleteCaptureResponse) GetDeleted() bool {
+	if d == nil {
 		return false
 	}
-	return p.Deleted
+	return d.Deleted
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsDeleteCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsDeleteCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDeleted sets the Deleted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsDeleteResponse) SetDeleted(deleted bool) {
-	p.Deleted = deleted
-	p.require(postV1CaptureDocumentsDeleteResponseFieldDeleted)
+func (d *DocumentsDeleteCaptureResponse) SetDeleted(deleted bool) {
+	d.Deleted = deleted
+	d.require(documentsDeleteCaptureResponseFieldDeleted)
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsDeleteResponse
+func (d *DocumentsDeleteCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsDeleteCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsDeleteResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsDeleteCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsDeleteResponse
+func (d *DocumentsDeleteCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsDeleteCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsDeleteResponse) String() string {
-	if p == nil {
+func (d *DocumentsDeleteCaptureResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsExtractResponseFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsExtractResponseFieldFileID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsExtractResponseFieldFileName          = big.NewInt(1 << 2)
-	postV1CaptureDocumentsExtractResponseFieldMimeType          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsExtractResponseFieldSizeBytes         = big.NewInt(1 << 4)
-	postV1CaptureDocumentsExtractResponseFieldStatus            = big.NewInt(1 << 5)
-	postV1CaptureDocumentsExtractResponseFieldProvider          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsExtractResponseFieldModel             = big.NewInt(1 << 7)
-	postV1CaptureDocumentsExtractResponseFieldPagesProcessed    = big.NewInt(1 << 8)
-	postV1CaptureDocumentsExtractResponseFieldExtraction        = big.NewInt(1 << 9)
-	postV1CaptureDocumentsExtractResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
-	postV1CaptureDocumentsExtractResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
-	postV1CaptureDocumentsExtractResponseFieldError             = big.NewInt(1 << 12)
-	postV1CaptureDocumentsExtractResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	postV1CaptureDocumentsExtractResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	postV1CaptureDocumentsExtractResponseFieldRawText           = big.NewInt(1 << 15)
+	documentsExtractCaptureResponseFieldID                = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseFieldFileID            = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseFieldFileName          = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseFieldMimeType          = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseFieldSizeBytes         = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseFieldStatus            = big.NewInt(1 << 5)
+	documentsExtractCaptureResponseFieldProvider          = big.NewInt(1 << 6)
+	documentsExtractCaptureResponseFieldModel             = big.NewInt(1 << 7)
+	documentsExtractCaptureResponseFieldPagesProcessed    = big.NewInt(1 << 8)
+	documentsExtractCaptureResponseFieldExtraction        = big.NewInt(1 << 9)
+	documentsExtractCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
+	documentsExtractCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
+	documentsExtractCaptureResponseFieldError             = big.NewInt(1 << 12)
+	documentsExtractCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
+	documentsExtractCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsExtractCaptureResponseFieldRawText           = big.NewInt(1 << 15)
 )
 
-type PostV1CaptureDocumentsExtractResponse struct {
-	ID                string                                           `json:"id" url:"id"`
-	FileID            string                                           `json:"fileId" url:"fileId"`
-	FileName          string                                           `json:"fileName" url:"fileName"`
-	MimeType          string                                           `json:"mimeType" url:"mimeType"`
-	SizeBytes         int64                                            `json:"sizeBytes" url:"sizeBytes"`
-	Status            PostV1CaptureDocumentsExtractResponseStatus      `json:"status" url:"status"`
-	Provider          *string                                          `json:"provider,omitempty" url:"provider,omitempty"`
-	Model             *string                                          `json:"model,omitempty" url:"model,omitempty"`
-	PagesProcessed    *int64                                           `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
-	Extraction        *PostV1CaptureDocumentsExtractResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
-	MatchedPartnerID  *string                                          `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
-	PurchaseInvoiceID *string                                          `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
-	Error             *string                                          `json:"error,omitempty" url:"error,omitempty"`
-	CreatedAt         string                                           `json:"createdAt" url:"createdAt"`
-	UpdatedAt         string                                           `json:"updatedAt" url:"updatedAt"`
-	RawText           *string                                          `json:"rawText,omitempty" url:"rawText,omitempty"`
+type DocumentsExtractCaptureResponse struct {
+	ID                string                                     `json:"id" url:"id"`
+	FileID            string                                     `json:"fileId" url:"fileId"`
+	FileName          string                                     `json:"fileName" url:"fileName"`
+	MimeType          string                                     `json:"mimeType" url:"mimeType"`
+	SizeBytes         int64                                      `json:"sizeBytes" url:"sizeBytes"`
+	Status            DocumentsExtractCaptureResponseStatus      `json:"status" url:"status"`
+	Provider          *string                                    `json:"provider,omitempty" url:"provider,omitempty"`
+	Model             *string                                    `json:"model,omitempty" url:"model,omitempty"`
+	PagesProcessed    *int64                                     `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
+	Extraction        *DocumentsExtractCaptureResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
+	MatchedPartnerID  *string                                    `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
+	PurchaseInvoiceID *string                                    `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Error             *string                                    `json:"error,omitempty" url:"error,omitempty"`
+	CreatedAt         time.Time                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time                                  `json:"updatedAt" url:"updatedAt"`
+	RawText           *string                                    `json:"rawText,omitempty" url:"rawText,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3095,310 +3148,322 @@ type PostV1CaptureDocumentsExtractResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetID() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetFileID() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetFileID() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileID
+	return d.FileID
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetFileName() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetFileName() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileName
+	return d.FileName
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetMimeType() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetMimeType() string {
+	if d == nil {
 		return ""
 	}
-	return p.MimeType
+	return d.MimeType
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetSizeBytes() int64 {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetSizeBytes() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return d.SizeBytes
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetStatus() PostV1CaptureDocumentsExtractResponseStatus {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetStatus() DocumentsExtractCaptureResponseStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetProvider() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetProvider() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Provider
+	return d.Provider
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetModel() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetPagesProcessed() *int64 {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetPagesProcessed() *int64 {
+	if d == nil {
 		return nil
 	}
-	return p.PagesProcessed
+	return d.PagesProcessed
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetExtraction() *PostV1CaptureDocumentsExtractResponseExtraction {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetExtraction() *DocumentsExtractCaptureResponseExtraction {
+	if d == nil {
 		return nil
 	}
-	return p.Extraction
+	return d.Extraction
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetMatchedPartnerID() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetMatchedPartnerID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.MatchedPartnerID
+	return d.MatchedPartnerID
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetPurchaseInvoiceID() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetPurchaseInvoiceID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.PurchaseInvoiceID
+	return d.PurchaseInvoiceID
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetError() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetError() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Error
+	return d.Error
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsExtractCaptureResponse) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsExtractCaptureResponse) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return d.UpdatedAt
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetRawText() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetRawText() *string {
+	if d == nil {
 		return nil
 	}
-	return p.RawText
+	return d.RawText
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsExtractCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsExtractResponseFieldID)
+func (d *DocumentsExtractCaptureResponse) SetID(id string) {
+	d.ID = id
+	d.require(documentsExtractCaptureResponseFieldID)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetFileID(fileID string) {
-	p.FileID = fileID
-	p.require(postV1CaptureDocumentsExtractResponseFieldFileID)
+func (d *DocumentsExtractCaptureResponse) SetFileID(fileID string) {
+	d.FileID = fileID
+	d.require(documentsExtractCaptureResponseFieldFileID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsExtractResponseFieldFileName)
+func (d *DocumentsExtractCaptureResponse) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsExtractCaptureResponseFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsExtractResponseFieldMimeType)
+func (d *DocumentsExtractCaptureResponse) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsExtractCaptureResponseFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1CaptureDocumentsExtractResponseFieldSizeBytes)
+func (d *DocumentsExtractCaptureResponse) SetSizeBytes(sizeBytes int64) {
+	d.SizeBytes = sizeBytes
+	d.require(documentsExtractCaptureResponseFieldSizeBytes)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetStatus(status PostV1CaptureDocumentsExtractResponseStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsExtractResponseFieldStatus)
+func (d *DocumentsExtractCaptureResponse) SetStatus(status DocumentsExtractCaptureResponseStatus) {
+	d.Status = status
+	d.require(documentsExtractCaptureResponseFieldStatus)
 }
 
 // SetProvider sets the Provider field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetProvider(provider *string) {
-	p.Provider = provider
-	p.require(postV1CaptureDocumentsExtractResponseFieldProvider)
+func (d *DocumentsExtractCaptureResponse) SetProvider(provider *string) {
+	d.Provider = provider
+	d.require(documentsExtractCaptureResponseFieldProvider)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1CaptureDocumentsExtractResponseFieldModel)
+func (d *DocumentsExtractCaptureResponse) SetModel(model *string) {
+	d.Model = model
+	d.require(documentsExtractCaptureResponseFieldModel)
 }
 
 // SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetPagesProcessed(pagesProcessed *int64) {
-	p.PagesProcessed = pagesProcessed
-	p.require(postV1CaptureDocumentsExtractResponseFieldPagesProcessed)
+func (d *DocumentsExtractCaptureResponse) SetPagesProcessed(pagesProcessed *int64) {
+	d.PagesProcessed = pagesProcessed
+	d.require(documentsExtractCaptureResponseFieldPagesProcessed)
 }
 
 // SetExtraction sets the Extraction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetExtraction(extraction *PostV1CaptureDocumentsExtractResponseExtraction) {
-	p.Extraction = extraction
-	p.require(postV1CaptureDocumentsExtractResponseFieldExtraction)
+func (d *DocumentsExtractCaptureResponse) SetExtraction(extraction *DocumentsExtractCaptureResponseExtraction) {
+	d.Extraction = extraction
+	d.require(documentsExtractCaptureResponseFieldExtraction)
 }
 
 // SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetMatchedPartnerID(matchedPartnerID *string) {
-	p.MatchedPartnerID = matchedPartnerID
-	p.require(postV1CaptureDocumentsExtractResponseFieldMatchedPartnerID)
+func (d *DocumentsExtractCaptureResponse) SetMatchedPartnerID(matchedPartnerID *string) {
+	d.MatchedPartnerID = matchedPartnerID
+	d.require(documentsExtractCaptureResponseFieldMatchedPartnerID)
 }
 
 // SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
-	p.PurchaseInvoiceID = purchaseInvoiceID
-	p.require(postV1CaptureDocumentsExtractResponseFieldPurchaseInvoiceID)
+func (d *DocumentsExtractCaptureResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	d.PurchaseInvoiceID = purchaseInvoiceID
+	d.require(documentsExtractCaptureResponseFieldPurchaseInvoiceID)
 }
 
 // SetError sets the Error field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetError(error_ *string) {
-	p.Error = error_
-	p.require(postV1CaptureDocumentsExtractResponseFieldError)
+func (d *DocumentsExtractCaptureResponse) SetError(error_ *string) {
+	d.Error = error_
+	d.require(documentsExtractCaptureResponseFieldError)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsExtractResponseFieldCreatedAt)
+func (d *DocumentsExtractCaptureResponse) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsExtractCaptureResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsExtractResponseFieldUpdatedAt)
+func (d *DocumentsExtractCaptureResponse) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsExtractCaptureResponseFieldUpdatedAt)
 }
 
 // SetRawText sets the RawText field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponse) SetRawText(rawText *string) {
-	p.RawText = rawText
-	p.require(postV1CaptureDocumentsExtractResponseFieldRawText)
+func (d *DocumentsExtractCaptureResponse) SetRawText(rawText *string) {
+	d.RawText = rawText
+	d.require(documentsExtractCaptureResponseFieldRawText)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsExtractResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsExtractCaptureResponse) UnmarshalJSON(data []byte) error {
+	type embed DocumentsExtractCaptureResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsExtractResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsExtractCaptureResponse(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsExtractResponse
+func (d *DocumentsExtractCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
+		UpdatedAt: internal.NewDateTime(d.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponse) String() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsExtractResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	postV1CaptureDocumentsExtractResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1CaptureDocumentsExtractResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1CaptureDocumentsExtractResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	postV1CaptureDocumentsExtractResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	postV1CaptureDocumentsExtractResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsExtractResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsExtractResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	postV1CaptureDocumentsExtractResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	postV1CaptureDocumentsExtractResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsExtractCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
+	documentsExtractCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
+	documentsExtractCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
+	documentsExtractCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
+	documentsExtractCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
 )
 
-type PostV1CaptureDocumentsExtractResponseExtraction struct {
-	Supplier       *PostV1CaptureDocumentsExtractResponseExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                     `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *string                                                     `json:"documentDate,omitempty" url:"documentDate,omitempty"`
-	DueDate        *string                                                     `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string                                                     `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                     `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                     `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                     `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem `json:"lines" url:"lines"`
+type DocumentsExtractCaptureResponseExtraction struct {
+	Supplier       *DocumentsExtractCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                               `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                            `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                            `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                               `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                               `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                               `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                               `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsExtractCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3407,214 +3472,226 @@ type PostV1CaptureDocumentsExtractResponseExtraction struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetSupplier() *PostV1CaptureDocumentsExtractResponseExtractionSupplier {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetSupplier() *DocumentsExtractCaptureResponseExtractionSupplier {
+	if d == nil {
 		return nil
 	}
-	return p.Supplier
+	return d.Supplier
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetDocumentNumber() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetDocumentNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentNumber
+	return d.DocumentNumber
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetDocumentDate() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetDocumentDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentDate
+	return d.DocumentDate
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetDueDate() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetDueDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DueDate
+	return d.DueDate
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetCurrency() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetCurrency() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Currency
+	return d.Currency
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetNetTotal() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetNetTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.NetTotal
+	return d.NetTotal
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetVatTotal() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetVatTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatTotal
+	return d.VatTotal
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetGrossTotal() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetGrossTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.GrossTotal
+	return d.GrossTotal
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetNotes() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetNotes() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Notes
+	return d.Notes
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetLines() []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetLines() []*DocumentsExtractCaptureResponseExtractionLinesItem {
+	if d == nil {
 		return nil
 	}
-	return p.Lines
+	return d.Lines
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsExtractCaptureResponseExtraction) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetSupplier(supplier *PostV1CaptureDocumentsExtractResponseExtractionSupplier) {
-	p.Supplier = supplier
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldSupplier)
+func (d *DocumentsExtractCaptureResponseExtraction) SetSupplier(supplier *DocumentsExtractCaptureResponseExtractionSupplier) {
+	d.Supplier = supplier
+	d.require(documentsExtractCaptureResponseExtractionFieldSupplier)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetDocumentNumber(documentNumber *string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldDocumentNumber)
+func (d *DocumentsExtractCaptureResponseExtraction) SetDocumentNumber(documentNumber *string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsExtractCaptureResponseExtractionFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldDocumentDate)
+func (d *DocumentsExtractCaptureResponseExtraction) SetDocumentDate(documentDate *time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsExtractCaptureResponseExtractionFieldDocumentDate)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldDueDate)
+func (d *DocumentsExtractCaptureResponseExtraction) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsExtractCaptureResponseExtractionFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldCurrency)
+func (d *DocumentsExtractCaptureResponseExtraction) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsExtractCaptureResponseExtractionFieldCurrency)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetNetTotal(netTotal *string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldNetTotal)
+func (d *DocumentsExtractCaptureResponseExtraction) SetNetTotal(netTotal *string) {
+	d.NetTotal = netTotal
+	d.require(documentsExtractCaptureResponseExtractionFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldVatTotal)
+func (d *DocumentsExtractCaptureResponseExtraction) SetVatTotal(vatTotal *string) {
+	d.VatTotal = vatTotal
+	d.require(documentsExtractCaptureResponseExtractionFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetGrossTotal(grossTotal *string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldGrossTotal)
+func (d *DocumentsExtractCaptureResponseExtraction) SetGrossTotal(grossTotal *string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsExtractCaptureResponseExtractionFieldGrossTotal)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldNotes)
+func (d *DocumentsExtractCaptureResponseExtraction) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsExtractCaptureResponseExtractionFieldNotes)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) SetLines(lines []*PostV1CaptureDocumentsExtractResponseExtractionLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsExtractResponseExtractionFieldLines)
+func (d *DocumentsExtractCaptureResponseExtraction) SetLines(lines []*DocumentsExtractCaptureResponseExtractionLinesItem) {
+	d.Lines = lines
+	d.require(documentsExtractCaptureResponseExtractionFieldLines)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsExtractResponseExtraction
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsExtractCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
+	type embed DocumentsExtractCaptureResponseExtraction
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsExtractResponseExtraction(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsExtractCaptureResponseExtraction(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsExtractResponseExtraction
+func (d *DocumentsExtractCaptureResponseExtraction) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureResponseExtraction
 	var marshaler = struct {
 		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*d),
+		DocumentDate: internal.NewOptionalDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtraction) String() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtraction) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
+	documentsExtractCaptureResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsExtractCaptureResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsExtractCaptureResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
 )
 
-type PostV1CaptureDocumentsExtractResponseExtractionLinesItem struct {
+type DocumentsExtractCaptureResponseExtractionLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Quantity         string  `json:"quantity" url:"quantity"`
 	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -3631,183 +3708,183 @@ type PostV1CaptureDocumentsExtractResponseExtractionLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetDescription() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetDescription() string {
+	if d == nil {
 		return ""
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetQuantity() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetQuantity() string {
+	if d == nil {
 		return ""
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetUnit() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetUnit() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetVatRatePercent() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetLineNet() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetLineNet() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineNet
+	return d.LineNet
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetLineVat() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetLineVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineVat
+	return d.LineVat
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetLineGross() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetLineGross() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineGross
+	return d.LineGross
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldDescription)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldQuantity)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldQuantity)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldUnit)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldUnit)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldVatRatePercent)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldVatRatePercent)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetLineNet(lineNet *string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineNet)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldLineNet)
 }
 
 // SetLineVat sets the LineVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetLineVat(lineVat *string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineVat)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldLineVat)
 }
 
 // SetLineGross sets the LineGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) SetLineGross(lineGross *string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsExtractResponseExtractionLinesItemFieldLineGross)
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsExtractCaptureResponseExtractionLinesItemFieldLineGross)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsExtractCaptureResponseExtractionLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsExtractResponseExtractionLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsExtractCaptureResponseExtractionLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsExtractResponseExtractionLinesItem
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureResponseExtractionLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsExtractResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsExtractResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsExtractResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsExtractResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
-	postV1CaptureDocumentsExtractResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
 )
 
-type PostV1CaptureDocumentsExtractResponseExtractionSupplier struct {
+type DocumentsExtractCaptureResponseExtractionSupplier struct {
 	Name        *string `json:"name,omitempty" url:"name,omitempty"`
 	Code        *string `json:"code,omitempty" url:"code,omitempty"`
 	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
@@ -3821,196 +3898,196 @@ type PostV1CaptureDocumentsExtractResponseExtractionSupplier struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetName() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetName() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetCode() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetVatCode() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetVatCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatCode
+	return d.VatCode
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetCountryCode() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CountryCode
+	return d.CountryCode
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetIban() *string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetIban() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Iban
+	return d.Iban
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) SetName(name *string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsExtractResponseExtractionSupplierFieldName)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) SetName(name *string) {
+	d.Name = name
+	d.require(documentsExtractCaptureResponseExtractionSupplierFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsExtractResponseExtractionSupplierFieldCode)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsExtractCaptureResponseExtractionSupplierFieldCode)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsExtractResponseExtractionSupplierFieldVatCode)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsExtractCaptureResponseExtractionSupplierFieldVatCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsExtractResponseExtractionSupplierFieldCountryCode)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsExtractCaptureResponseExtractionSupplierFieldCountryCode)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1CaptureDocumentsExtractResponseExtractionSupplierFieldIban)
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) SetIban(iban *string) {
+	d.Iban = iban
+	d.require(documentsExtractCaptureResponseExtractionSupplierFieldIban)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsExtractResponseExtractionSupplier
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsExtractCaptureResponseExtractionSupplier
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsExtractResponseExtractionSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsExtractCaptureResponseExtractionSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsExtractResponseExtractionSupplier
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureResponseExtractionSupplier
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsExtractResponseExtractionSupplier) String() string {
-	if p == nil {
+func (d *DocumentsExtractCaptureResponseExtractionSupplier) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsExtractResponseStatus string
+type DocumentsExtractCaptureResponseStatus string
 
 const (
-	PostV1CaptureDocumentsExtractResponseStatusPending   PostV1CaptureDocumentsExtractResponseStatus = "pending"
-	PostV1CaptureDocumentsExtractResponseStatusExtracted PostV1CaptureDocumentsExtractResponseStatus = "extracted"
-	PostV1CaptureDocumentsExtractResponseStatusFailed    PostV1CaptureDocumentsExtractResponseStatus = "failed"
-	PostV1CaptureDocumentsExtractResponseStatusLinked    PostV1CaptureDocumentsExtractResponseStatus = "linked"
+	DocumentsExtractCaptureResponseStatusPending   DocumentsExtractCaptureResponseStatus = "pending"
+	DocumentsExtractCaptureResponseStatusExtracted DocumentsExtractCaptureResponseStatus = "extracted"
+	DocumentsExtractCaptureResponseStatusFailed    DocumentsExtractCaptureResponseStatus = "failed"
+	DocumentsExtractCaptureResponseStatusLinked    DocumentsExtractCaptureResponseStatus = "linked"
 )
 
-func NewPostV1CaptureDocumentsExtractResponseStatusFromString(s string) (PostV1CaptureDocumentsExtractResponseStatus, error) {
+func NewDocumentsExtractCaptureResponseStatusFromString(s string) (DocumentsExtractCaptureResponseStatus, error) {
 	switch s {
 	case "pending":
-		return PostV1CaptureDocumentsExtractResponseStatusPending, nil
+		return DocumentsExtractCaptureResponseStatusPending, nil
 	case "extracted":
-		return PostV1CaptureDocumentsExtractResponseStatusExtracted, nil
+		return DocumentsExtractCaptureResponseStatusExtracted, nil
 	case "failed":
-		return PostV1CaptureDocumentsExtractResponseStatusFailed, nil
+		return DocumentsExtractCaptureResponseStatusFailed, nil
 	case "linked":
-		return PostV1CaptureDocumentsExtractResponseStatusLinked, nil
+		return DocumentsExtractCaptureResponseStatusLinked, nil
 	}
-	var t PostV1CaptureDocumentsExtractResponseStatus
+	var t DocumentsExtractCaptureResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsExtractResponseStatus) Ptr() *PostV1CaptureDocumentsExtractResponseStatus {
-	return &p
+func (d DocumentsExtractCaptureResponseStatus) Ptr() *DocumentsExtractCaptureResponseStatus {
+	return &d
 }
 
 var (
-	postV1CaptureDocumentsGetResponseFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsGetResponseFieldFileID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsGetResponseFieldFileName          = big.NewInt(1 << 2)
-	postV1CaptureDocumentsGetResponseFieldMimeType          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsGetResponseFieldSizeBytes         = big.NewInt(1 << 4)
-	postV1CaptureDocumentsGetResponseFieldStatus            = big.NewInt(1 << 5)
-	postV1CaptureDocumentsGetResponseFieldProvider          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsGetResponseFieldModel             = big.NewInt(1 << 7)
-	postV1CaptureDocumentsGetResponseFieldPagesProcessed    = big.NewInt(1 << 8)
-	postV1CaptureDocumentsGetResponseFieldExtraction        = big.NewInt(1 << 9)
-	postV1CaptureDocumentsGetResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
-	postV1CaptureDocumentsGetResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
-	postV1CaptureDocumentsGetResponseFieldError             = big.NewInt(1 << 12)
-	postV1CaptureDocumentsGetResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	postV1CaptureDocumentsGetResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	postV1CaptureDocumentsGetResponseFieldRawText           = big.NewInt(1 << 15)
+	documentsGetCaptureResponseFieldID                = big.NewInt(1 << 0)
+	documentsGetCaptureResponseFieldFileID            = big.NewInt(1 << 1)
+	documentsGetCaptureResponseFieldFileName          = big.NewInt(1 << 2)
+	documentsGetCaptureResponseFieldMimeType          = big.NewInt(1 << 3)
+	documentsGetCaptureResponseFieldSizeBytes         = big.NewInt(1 << 4)
+	documentsGetCaptureResponseFieldStatus            = big.NewInt(1 << 5)
+	documentsGetCaptureResponseFieldProvider          = big.NewInt(1 << 6)
+	documentsGetCaptureResponseFieldModel             = big.NewInt(1 << 7)
+	documentsGetCaptureResponseFieldPagesProcessed    = big.NewInt(1 << 8)
+	documentsGetCaptureResponseFieldExtraction        = big.NewInt(1 << 9)
+	documentsGetCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
+	documentsGetCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
+	documentsGetCaptureResponseFieldError             = big.NewInt(1 << 12)
+	documentsGetCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
+	documentsGetCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsGetCaptureResponseFieldRawText           = big.NewInt(1 << 15)
 )
 
-type PostV1CaptureDocumentsGetResponse struct {
-	ID                string                                       `json:"id" url:"id"`
-	FileID            string                                       `json:"fileId" url:"fileId"`
-	FileName          string                                       `json:"fileName" url:"fileName"`
-	MimeType          string                                       `json:"mimeType" url:"mimeType"`
-	SizeBytes         int64                                        `json:"sizeBytes" url:"sizeBytes"`
-	Status            PostV1CaptureDocumentsGetResponseStatus      `json:"status" url:"status"`
-	Provider          *string                                      `json:"provider,omitempty" url:"provider,omitempty"`
-	Model             *string                                      `json:"model,omitempty" url:"model,omitempty"`
-	PagesProcessed    *int64                                       `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
-	Extraction        *PostV1CaptureDocumentsGetResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
-	MatchedPartnerID  *string                                      `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
-	PurchaseInvoiceID *string                                      `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
-	Error             *string                                      `json:"error,omitempty" url:"error,omitempty"`
-	CreatedAt         string                                       `json:"createdAt" url:"createdAt"`
-	UpdatedAt         string                                       `json:"updatedAt" url:"updatedAt"`
-	RawText           *string                                      `json:"rawText,omitempty" url:"rawText,omitempty"`
+type DocumentsGetCaptureResponse struct {
+	ID                string                                 `json:"id" url:"id"`
+	FileID            string                                 `json:"fileId" url:"fileId"`
+	FileName          string                                 `json:"fileName" url:"fileName"`
+	MimeType          string                                 `json:"mimeType" url:"mimeType"`
+	SizeBytes         int64                                  `json:"sizeBytes" url:"sizeBytes"`
+	Status            DocumentsGetCaptureResponseStatus      `json:"status" url:"status"`
+	Provider          *string                                `json:"provider,omitempty" url:"provider,omitempty"`
+	Model             *string                                `json:"model,omitempty" url:"model,omitempty"`
+	PagesProcessed    *int64                                 `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
+	Extraction        *DocumentsGetCaptureResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
+	MatchedPartnerID  *string                                `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
+	PurchaseInvoiceID *string                                `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Error             *string                                `json:"error,omitempty" url:"error,omitempty"`
+	CreatedAt         time.Time                              `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time                              `json:"updatedAt" url:"updatedAt"`
+	RawText           *string                                `json:"rawText,omitempty" url:"rawText,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4019,310 +4096,322 @@ type PostV1CaptureDocumentsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetID() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetFileID() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetFileID() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileID
+	return d.FileID
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetFileName() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetFileName() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileName
+	return d.FileName
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetMimeType() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetMimeType() string {
+	if d == nil {
 		return ""
 	}
-	return p.MimeType
+	return d.MimeType
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetSizeBytes() int64 {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetSizeBytes() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return d.SizeBytes
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetStatus() PostV1CaptureDocumentsGetResponseStatus {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetStatus() DocumentsGetCaptureResponseStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetProvider() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetProvider() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Provider
+	return d.Provider
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetModel() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetPagesProcessed() *int64 {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetPagesProcessed() *int64 {
+	if d == nil {
 		return nil
 	}
-	return p.PagesProcessed
+	return d.PagesProcessed
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetExtraction() *PostV1CaptureDocumentsGetResponseExtraction {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetExtraction() *DocumentsGetCaptureResponseExtraction {
+	if d == nil {
 		return nil
 	}
-	return p.Extraction
+	return d.Extraction
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetMatchedPartnerID() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetMatchedPartnerID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.MatchedPartnerID
+	return d.MatchedPartnerID
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetPurchaseInvoiceID() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetPurchaseInvoiceID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.PurchaseInvoiceID
+	return d.PurchaseInvoiceID
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetError() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetError() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Error
+	return d.Error
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsGetCaptureResponse) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsGetCaptureResponse) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return d.UpdatedAt
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetRawText() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetRawText() *string {
+	if d == nil {
 		return nil
 	}
-	return p.RawText
+	return d.RawText
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsGetCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsGetResponseFieldID)
+func (d *DocumentsGetCaptureResponse) SetID(id string) {
+	d.ID = id
+	d.require(documentsGetCaptureResponseFieldID)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetFileID(fileID string) {
-	p.FileID = fileID
-	p.require(postV1CaptureDocumentsGetResponseFieldFileID)
+func (d *DocumentsGetCaptureResponse) SetFileID(fileID string) {
+	d.FileID = fileID
+	d.require(documentsGetCaptureResponseFieldFileID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsGetResponseFieldFileName)
+func (d *DocumentsGetCaptureResponse) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsGetCaptureResponseFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsGetResponseFieldMimeType)
+func (d *DocumentsGetCaptureResponse) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsGetCaptureResponseFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1CaptureDocumentsGetResponseFieldSizeBytes)
+func (d *DocumentsGetCaptureResponse) SetSizeBytes(sizeBytes int64) {
+	d.SizeBytes = sizeBytes
+	d.require(documentsGetCaptureResponseFieldSizeBytes)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetStatus(status PostV1CaptureDocumentsGetResponseStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsGetResponseFieldStatus)
+func (d *DocumentsGetCaptureResponse) SetStatus(status DocumentsGetCaptureResponseStatus) {
+	d.Status = status
+	d.require(documentsGetCaptureResponseFieldStatus)
 }
 
 // SetProvider sets the Provider field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetProvider(provider *string) {
-	p.Provider = provider
-	p.require(postV1CaptureDocumentsGetResponseFieldProvider)
+func (d *DocumentsGetCaptureResponse) SetProvider(provider *string) {
+	d.Provider = provider
+	d.require(documentsGetCaptureResponseFieldProvider)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1CaptureDocumentsGetResponseFieldModel)
+func (d *DocumentsGetCaptureResponse) SetModel(model *string) {
+	d.Model = model
+	d.require(documentsGetCaptureResponseFieldModel)
 }
 
 // SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetPagesProcessed(pagesProcessed *int64) {
-	p.PagesProcessed = pagesProcessed
-	p.require(postV1CaptureDocumentsGetResponseFieldPagesProcessed)
+func (d *DocumentsGetCaptureResponse) SetPagesProcessed(pagesProcessed *int64) {
+	d.PagesProcessed = pagesProcessed
+	d.require(documentsGetCaptureResponseFieldPagesProcessed)
 }
 
 // SetExtraction sets the Extraction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetExtraction(extraction *PostV1CaptureDocumentsGetResponseExtraction) {
-	p.Extraction = extraction
-	p.require(postV1CaptureDocumentsGetResponseFieldExtraction)
+func (d *DocumentsGetCaptureResponse) SetExtraction(extraction *DocumentsGetCaptureResponseExtraction) {
+	d.Extraction = extraction
+	d.require(documentsGetCaptureResponseFieldExtraction)
 }
 
 // SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetMatchedPartnerID(matchedPartnerID *string) {
-	p.MatchedPartnerID = matchedPartnerID
-	p.require(postV1CaptureDocumentsGetResponseFieldMatchedPartnerID)
+func (d *DocumentsGetCaptureResponse) SetMatchedPartnerID(matchedPartnerID *string) {
+	d.MatchedPartnerID = matchedPartnerID
+	d.require(documentsGetCaptureResponseFieldMatchedPartnerID)
 }
 
 // SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
-	p.PurchaseInvoiceID = purchaseInvoiceID
-	p.require(postV1CaptureDocumentsGetResponseFieldPurchaseInvoiceID)
+func (d *DocumentsGetCaptureResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	d.PurchaseInvoiceID = purchaseInvoiceID
+	d.require(documentsGetCaptureResponseFieldPurchaseInvoiceID)
 }
 
 // SetError sets the Error field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetError(error_ *string) {
-	p.Error = error_
-	p.require(postV1CaptureDocumentsGetResponseFieldError)
+func (d *DocumentsGetCaptureResponse) SetError(error_ *string) {
+	d.Error = error_
+	d.require(documentsGetCaptureResponseFieldError)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsGetResponseFieldCreatedAt)
+func (d *DocumentsGetCaptureResponse) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsGetCaptureResponseFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsGetResponseFieldUpdatedAt)
+func (d *DocumentsGetCaptureResponse) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsGetCaptureResponseFieldUpdatedAt)
 }
 
 // SetRawText sets the RawText field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponse) SetRawText(rawText *string) {
-	p.RawText = rawText
-	p.require(postV1CaptureDocumentsGetResponseFieldRawText)
+func (d *DocumentsGetCaptureResponse) SetRawText(rawText *string) {
+	d.RawText = rawText
+	d.require(documentsGetCaptureResponseFieldRawText)
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsGetResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsGetCaptureResponse) UnmarshalJSON(data []byte) error {
+	type embed DocumentsGetCaptureResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsGetCaptureResponse(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsGetResponse
+func (d *DocumentsGetCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureResponse
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
+		UpdatedAt: internal.NewDateTime(d.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsGetResponse) String() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsGetResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	postV1CaptureDocumentsGetResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1CaptureDocumentsGetResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1CaptureDocumentsGetResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	postV1CaptureDocumentsGetResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	postV1CaptureDocumentsGetResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsGetResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsGetResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	postV1CaptureDocumentsGetResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	postV1CaptureDocumentsGetResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsGetCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
+	documentsGetCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
+	documentsGetCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
+	documentsGetCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
+	documentsGetCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
+	documentsGetCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
+	documentsGetCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
+	documentsGetCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
+	documentsGetCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
+	documentsGetCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
 )
 
-type PostV1CaptureDocumentsGetResponseExtraction struct {
-	Supplier       *PostV1CaptureDocumentsGetResponseExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                 `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *string                                                 `json:"documentDate,omitempty" url:"documentDate,omitempty"`
-	DueDate        *string                                                 `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string                                                 `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                 `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                 `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                 `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                 `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*PostV1CaptureDocumentsGetResponseExtractionLinesItem `json:"lines" url:"lines"`
+type DocumentsGetCaptureResponseExtraction struct {
+	Supplier       *DocumentsGetCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                           `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                        `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                        `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                           `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                           `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                           `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                           `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsGetCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4331,214 +4420,226 @@ type PostV1CaptureDocumentsGetResponseExtraction struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetSupplier() *PostV1CaptureDocumentsGetResponseExtractionSupplier {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetSupplier() *DocumentsGetCaptureResponseExtractionSupplier {
+	if d == nil {
 		return nil
 	}
-	return p.Supplier
+	return d.Supplier
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetDocumentNumber() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetDocumentNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentNumber
+	return d.DocumentNumber
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetDocumentDate() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetDocumentDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentDate
+	return d.DocumentDate
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetDueDate() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetDueDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DueDate
+	return d.DueDate
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetCurrency() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetCurrency() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Currency
+	return d.Currency
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetNetTotal() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetNetTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.NetTotal
+	return d.NetTotal
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetVatTotal() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetVatTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatTotal
+	return d.VatTotal
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetGrossTotal() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetGrossTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.GrossTotal
+	return d.GrossTotal
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetNotes() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetNotes() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Notes
+	return d.Notes
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetLines() []*PostV1CaptureDocumentsGetResponseExtractionLinesItem {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetLines() []*DocumentsGetCaptureResponseExtractionLinesItem {
+	if d == nil {
 		return nil
 	}
-	return p.Lines
+	return d.Lines
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsGetCaptureResponseExtraction) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetSupplier(supplier *PostV1CaptureDocumentsGetResponseExtractionSupplier) {
-	p.Supplier = supplier
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldSupplier)
+func (d *DocumentsGetCaptureResponseExtraction) SetSupplier(supplier *DocumentsGetCaptureResponseExtractionSupplier) {
+	d.Supplier = supplier
+	d.require(documentsGetCaptureResponseExtractionFieldSupplier)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetDocumentNumber(documentNumber *string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldDocumentNumber)
+func (d *DocumentsGetCaptureResponseExtraction) SetDocumentNumber(documentNumber *string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsGetCaptureResponseExtractionFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldDocumentDate)
+func (d *DocumentsGetCaptureResponseExtraction) SetDocumentDate(documentDate *time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsGetCaptureResponseExtractionFieldDocumentDate)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldDueDate)
+func (d *DocumentsGetCaptureResponseExtraction) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsGetCaptureResponseExtractionFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldCurrency)
+func (d *DocumentsGetCaptureResponseExtraction) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsGetCaptureResponseExtractionFieldCurrency)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetNetTotal(netTotal *string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldNetTotal)
+func (d *DocumentsGetCaptureResponseExtraction) SetNetTotal(netTotal *string) {
+	d.NetTotal = netTotal
+	d.require(documentsGetCaptureResponseExtractionFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldVatTotal)
+func (d *DocumentsGetCaptureResponseExtraction) SetVatTotal(vatTotal *string) {
+	d.VatTotal = vatTotal
+	d.require(documentsGetCaptureResponseExtractionFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetGrossTotal(grossTotal *string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldGrossTotal)
+func (d *DocumentsGetCaptureResponseExtraction) SetGrossTotal(grossTotal *string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsGetCaptureResponseExtractionFieldGrossTotal)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldNotes)
+func (d *DocumentsGetCaptureResponseExtraction) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsGetCaptureResponseExtractionFieldNotes)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtraction) SetLines(lines []*PostV1CaptureDocumentsGetResponseExtractionLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsGetResponseExtractionFieldLines)
+func (d *DocumentsGetCaptureResponseExtraction) SetLines(lines []*DocumentsGetCaptureResponseExtractionLinesItem) {
+	d.Lines = lines
+	d.require(documentsGetCaptureResponseExtractionFieldLines)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsGetResponseExtraction
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsGetCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
+	type embed DocumentsGetCaptureResponseExtraction
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsGetResponseExtraction(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsGetCaptureResponseExtraction(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsGetResponseExtraction
+func (d *DocumentsGetCaptureResponseExtraction) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureResponseExtraction
 	var marshaler = struct {
 		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*d),
+		DocumentDate: internal.NewOptionalDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtraction) String() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtraction) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
+	documentsGetCaptureResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsGetCaptureResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsGetCaptureResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsGetCaptureResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsGetCaptureResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsGetCaptureResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsGetCaptureResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsGetCaptureResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
 )
 
-type PostV1CaptureDocumentsGetResponseExtractionLinesItem struct {
+type DocumentsGetCaptureResponseExtractionLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Quantity         string  `json:"quantity" url:"quantity"`
 	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -4555,183 +4656,183 @@ type PostV1CaptureDocumentsGetResponseExtractionLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetDescription() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetDescription() string {
+	if d == nil {
 		return ""
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetQuantity() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetQuantity() string {
+	if d == nil {
 		return ""
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetUnit() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetUnit() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetVatRatePercent() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetLineNet() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetLineNet() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineNet
+	return d.LineNet
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetLineVat() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetLineVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineVat
+	return d.LineVat
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetLineGross() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetLineGross() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineGross
+	return d.LineGross
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldDescription)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldQuantity)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldQuantity)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldUnit)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldUnit)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldVatRatePercent)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldVatRatePercent)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetLineNet(lineNet *string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineNet)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldLineNet)
 }
 
 // SetLineVat sets the LineVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetLineVat(lineVat *string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineVat)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldLineVat)
 }
 
 // SetLineGross sets the LineGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) SetLineGross(lineGross *string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsGetResponseExtractionLinesItemFieldLineGross)
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsGetCaptureResponseExtractionLinesItemFieldLineGross)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsGetResponseExtractionLinesItem
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsGetCaptureResponseExtractionLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsGetResponseExtractionLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsGetCaptureResponseExtractionLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsGetResponseExtractionLinesItem
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureResponseExtractionLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsGetResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsGetResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsGetResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsGetResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
-	postV1CaptureDocumentsGetResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
+	documentsGetCaptureResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
+	documentsGetCaptureResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsGetCaptureResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsGetCaptureResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsGetCaptureResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
 )
 
-type PostV1CaptureDocumentsGetResponseExtractionSupplier struct {
+type DocumentsGetCaptureResponseExtractionSupplier struct {
 	Name        *string `json:"name,omitempty" url:"name,omitempty"`
 	Code        *string `json:"code,omitempty" url:"code,omitempty"`
 	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
@@ -4745,170 +4846,170 @@ type PostV1CaptureDocumentsGetResponseExtractionSupplier struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetName() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetName() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetCode() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetVatCode() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetVatCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatCode
+	return d.VatCode
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetCountryCode() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CountryCode
+	return d.CountryCode
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetIban() *string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetIban() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Iban
+	return d.Iban
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) SetName(name *string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsGetResponseExtractionSupplierFieldName)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) SetName(name *string) {
+	d.Name = name
+	d.require(documentsGetCaptureResponseExtractionSupplierFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsGetResponseExtractionSupplierFieldCode)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsGetCaptureResponseExtractionSupplierFieldCode)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsGetResponseExtractionSupplierFieldVatCode)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsGetCaptureResponseExtractionSupplierFieldVatCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsGetResponseExtractionSupplierFieldCountryCode)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsGetCaptureResponseExtractionSupplierFieldCountryCode)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1CaptureDocumentsGetResponseExtractionSupplierFieldIban)
+func (d *DocumentsGetCaptureResponseExtractionSupplier) SetIban(iban *string) {
+	d.Iban = iban
+	d.require(documentsGetCaptureResponseExtractionSupplierFieldIban)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsGetResponseExtractionSupplier
+func (d *DocumentsGetCaptureResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsGetCaptureResponseExtractionSupplier
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsGetResponseExtractionSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsGetCaptureResponseExtractionSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsGetResponseExtractionSupplier
+func (d *DocumentsGetCaptureResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureResponseExtractionSupplier
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsGetResponseExtractionSupplier) String() string {
-	if p == nil {
+func (d *DocumentsGetCaptureResponseExtractionSupplier) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsGetResponseStatus string
+type DocumentsGetCaptureResponseStatus string
 
 const (
-	PostV1CaptureDocumentsGetResponseStatusPending   PostV1CaptureDocumentsGetResponseStatus = "pending"
-	PostV1CaptureDocumentsGetResponseStatusExtracted PostV1CaptureDocumentsGetResponseStatus = "extracted"
-	PostV1CaptureDocumentsGetResponseStatusFailed    PostV1CaptureDocumentsGetResponseStatus = "failed"
-	PostV1CaptureDocumentsGetResponseStatusLinked    PostV1CaptureDocumentsGetResponseStatus = "linked"
+	DocumentsGetCaptureResponseStatusPending   DocumentsGetCaptureResponseStatus = "pending"
+	DocumentsGetCaptureResponseStatusExtracted DocumentsGetCaptureResponseStatus = "extracted"
+	DocumentsGetCaptureResponseStatusFailed    DocumentsGetCaptureResponseStatus = "failed"
+	DocumentsGetCaptureResponseStatusLinked    DocumentsGetCaptureResponseStatus = "linked"
 )
 
-func NewPostV1CaptureDocumentsGetResponseStatusFromString(s string) (PostV1CaptureDocumentsGetResponseStatus, error) {
+func NewDocumentsGetCaptureResponseStatusFromString(s string) (DocumentsGetCaptureResponseStatus, error) {
 	switch s {
 	case "pending":
-		return PostV1CaptureDocumentsGetResponseStatusPending, nil
+		return DocumentsGetCaptureResponseStatusPending, nil
 	case "extracted":
-		return PostV1CaptureDocumentsGetResponseStatusExtracted, nil
+		return DocumentsGetCaptureResponseStatusExtracted, nil
 	case "failed":
-		return PostV1CaptureDocumentsGetResponseStatusFailed, nil
+		return DocumentsGetCaptureResponseStatusFailed, nil
 	case "linked":
-		return PostV1CaptureDocumentsGetResponseStatusLinked, nil
+		return DocumentsGetCaptureResponseStatusLinked, nil
 	}
-	var t PostV1CaptureDocumentsGetResponseStatus
+	var t DocumentsGetCaptureResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsGetResponseStatus) Ptr() *PostV1CaptureDocumentsGetResponseStatus {
-	return &p
+func (d DocumentsGetCaptureResponseStatus) Ptr() *DocumentsGetCaptureResponseStatus {
+	return &d
 }
 
 var (
-	postV1CaptureDocumentsListRequestFilterItemFieldField = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+	documentsListCaptureRequestFilterItemFieldField = big.NewInt(1 << 0)
+	documentsListCaptureRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	documentsListCaptureRequestFilterItemFieldValue = big.NewInt(1 << 2)
 )
 
-type PostV1CaptureDocumentsListRequestFilterItem struct {
-	Field string                                            `json:"field" url:"field"`
-	Op    PostV1CaptureDocumentsListRequestFilterItemOp     `json:"op" url:"op"`
-	Value *PostV1CaptureDocumentsListRequestFilterItemValue `json:"value" url:"value"`
+type DocumentsListCaptureRequestFilterItem struct {
+	Field string                                      `json:"field" url:"field"`
+	Op    DocumentsListCaptureRequestFilterItemOp     `json:"op" url:"op"`
+	Value *DocumentsListCaptureRequestFilterItemValue `json:"value" url:"value"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4917,312 +5018,312 @@ type PostV1CaptureDocumentsListRequestFilterItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) GetField() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) GetOp() PostV1CaptureDocumentsListRequestFilterItemOp {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItem) GetOp() DocumentsListCaptureRequestFilterItemOp {
+	if d == nil {
 		return ""
 	}
-	return p.Op
+	return d.Op
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) GetValue() *PostV1CaptureDocumentsListRequestFilterItemValue {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItem) GetValue() *DocumentsListCaptureRequestFilterItemValue {
+	if d == nil {
 		return nil
 	}
-	return p.Value
+	return d.Value
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureRequestFilterItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequestFilterItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1CaptureDocumentsListRequestFilterItemFieldField)
+func (d *DocumentsListCaptureRequestFilterItem) SetField(field string) {
+	d.Field = field
+	d.require(documentsListCaptureRequestFilterItemFieldField)
 }
 
 // SetOp sets the Op field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequestFilterItem) SetOp(op PostV1CaptureDocumentsListRequestFilterItemOp) {
-	p.Op = op
-	p.require(postV1CaptureDocumentsListRequestFilterItemFieldOp)
+func (d *DocumentsListCaptureRequestFilterItem) SetOp(op DocumentsListCaptureRequestFilterItemOp) {
+	d.Op = op
+	d.require(documentsListCaptureRequestFilterItemFieldOp)
 }
 
 // SetValue sets the Value field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequestFilterItem) SetValue(value *PostV1CaptureDocumentsListRequestFilterItemValue) {
-	p.Value = value
-	p.require(postV1CaptureDocumentsListRequestFilterItemFieldValue)
+func (d *DocumentsListCaptureRequestFilterItem) SetValue(value *DocumentsListCaptureRequestFilterItemValue) {
+	d.Value = value
+	d.require(documentsListCaptureRequestFilterItemFieldValue)
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListRequestFilterItem
+func (d *DocumentsListCaptureRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureRequestFilterItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsListRequestFilterItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListRequestFilterItem
+func (d *DocumentsListCaptureRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureRequestFilterItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItem) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsListRequestFilterItemOp string
+type DocumentsListCaptureRequestFilterItemOp string
 
 const (
-	PostV1CaptureDocumentsListRequestFilterItemOpEq       PostV1CaptureDocumentsListRequestFilterItemOp = "eq"
-	PostV1CaptureDocumentsListRequestFilterItemOpNe       PostV1CaptureDocumentsListRequestFilterItemOp = "ne"
-	PostV1CaptureDocumentsListRequestFilterItemOpContains PostV1CaptureDocumentsListRequestFilterItemOp = "contains"
-	PostV1CaptureDocumentsListRequestFilterItemOpGte      PostV1CaptureDocumentsListRequestFilterItemOp = "gte"
-	PostV1CaptureDocumentsListRequestFilterItemOpLte      PostV1CaptureDocumentsListRequestFilterItemOp = "lte"
-	PostV1CaptureDocumentsListRequestFilterItemOpIn       PostV1CaptureDocumentsListRequestFilterItemOp = "in"
+	DocumentsListCaptureRequestFilterItemOpEq       DocumentsListCaptureRequestFilterItemOp = "eq"
+	DocumentsListCaptureRequestFilterItemOpNe       DocumentsListCaptureRequestFilterItemOp = "ne"
+	DocumentsListCaptureRequestFilterItemOpContains DocumentsListCaptureRequestFilterItemOp = "contains"
+	DocumentsListCaptureRequestFilterItemOpGte      DocumentsListCaptureRequestFilterItemOp = "gte"
+	DocumentsListCaptureRequestFilterItemOpLte      DocumentsListCaptureRequestFilterItemOp = "lte"
+	DocumentsListCaptureRequestFilterItemOpIn       DocumentsListCaptureRequestFilterItemOp = "in"
 )
 
-func NewPostV1CaptureDocumentsListRequestFilterItemOpFromString(s string) (PostV1CaptureDocumentsListRequestFilterItemOp, error) {
+func NewDocumentsListCaptureRequestFilterItemOpFromString(s string) (DocumentsListCaptureRequestFilterItemOp, error) {
 	switch s {
 	case "eq":
-		return PostV1CaptureDocumentsListRequestFilterItemOpEq, nil
+		return DocumentsListCaptureRequestFilterItemOpEq, nil
 	case "ne":
-		return PostV1CaptureDocumentsListRequestFilterItemOpNe, nil
+		return DocumentsListCaptureRequestFilterItemOpNe, nil
 	case "contains":
-		return PostV1CaptureDocumentsListRequestFilterItemOpContains, nil
+		return DocumentsListCaptureRequestFilterItemOpContains, nil
 	case "gte":
-		return PostV1CaptureDocumentsListRequestFilterItemOpGte, nil
+		return DocumentsListCaptureRequestFilterItemOpGte, nil
 	case "lte":
-		return PostV1CaptureDocumentsListRequestFilterItemOpLte, nil
+		return DocumentsListCaptureRequestFilterItemOpLte, nil
 	case "in":
-		return PostV1CaptureDocumentsListRequestFilterItemOpIn, nil
+		return DocumentsListCaptureRequestFilterItemOpIn, nil
 	}
-	var t PostV1CaptureDocumentsListRequestFilterItemOp
+	var t DocumentsListCaptureRequestFilterItemOp
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsListRequestFilterItemOp) Ptr() *PostV1CaptureDocumentsListRequestFilterItemOp {
-	return &p
+func (d DocumentsListCaptureRequestFilterItemOp) Ptr() *DocumentsListCaptureRequestFilterItemOp {
+	return &d
 }
 
-type PostV1CaptureDocumentsListRequestFilterItemValue struct {
-	String                                                        string
-	Double                                                        float64
-	Boolean                                                       bool
-	PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList []*PostV1CaptureDocumentsListRequestFilterItemValueThreeItem
+type DocumentsListCaptureRequestFilterItemValue struct {
+	String                                                  string
+	Double                                                  float64
+	Boolean                                                 bool
+	DocumentsListCaptureRequestFilterItemValueThreeItemList []*DocumentsListCaptureRequestFilterItemValueThreeItem
 
 	typ string
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) GetString() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValue) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) GetDouble() float64 {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValue) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) GetBoolean() bool {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValue) GetBoolean() bool {
+	if d == nil {
 		return false
 	}
-	return p.Boolean
+	return d.Boolean
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) GetPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList() []*PostV1CaptureDocumentsListRequestFilterItemValueThreeItem {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValue) GetDocumentsListCaptureRequestFilterItemValueThreeItemList() []*DocumentsListCaptureRequestFilterItemValueThreeItem {
+	if d == nil {
 		return nil
 	}
-	return p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList
+	return d.DocumentsListCaptureRequestFilterItemValueThreeItemList
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+func (d *DocumentsListCaptureRequestFilterItemValue) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
 	var valueBoolean bool
 	if err := json.Unmarshal(data, &valueBoolean); err == nil {
-		p.typ = "Boolean"
-		p.Boolean = valueBoolean
+		d.typ = "Boolean"
+		d.Boolean = valueBoolean
 		return nil
 	}
-	var valuePostV1CaptureDocumentsListRequestFilterItemValueThreeItemList []*PostV1CaptureDocumentsListRequestFilterItemValueThreeItem
-	if err := json.Unmarshal(data, &valuePostV1CaptureDocumentsListRequestFilterItemValueThreeItemList); err == nil {
-		p.typ = "PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList"
-		p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList = valuePostV1CaptureDocumentsListRequestFilterItemValueThreeItemList
+	var valueDocumentsListCaptureRequestFilterItemValueThreeItemList []*DocumentsListCaptureRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueDocumentsListCaptureRequestFilterItemValueThreeItemList); err == nil {
+		d.typ = "DocumentsListCaptureRequestFilterItemValueThreeItemList"
+		d.DocumentsListCaptureRequestFilterItemValueThreeItemList = valueDocumentsListCaptureRequestFilterItemValueThreeItemList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1CaptureDocumentsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DocumentsListCaptureRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return json.Marshal(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return json.Marshal(d.Boolean)
 	}
-	if p.typ == "PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList" || p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList != nil {
-		return json.Marshal(p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList)
+	if d.typ == "DocumentsListCaptureRequestFilterItemValueThreeItemList" || d.DocumentsListCaptureRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(d.DocumentsListCaptureRequestFilterItemValueThreeItemList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1CaptureDocumentsListRequestFilterItemValueVisitor interface {
+type DocumentsListCaptureRequestFilterItemValueVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 	VisitBoolean(bool) error
-	VisitPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList([]*PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) error
+	VisitDocumentsListCaptureRequestFilterItemValueThreeItemList([]*DocumentsListCaptureRequestFilterItemValueThreeItem) error
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValue) Accept(visitor PostV1CaptureDocumentsListRequestFilterItemValueVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DocumentsListCaptureRequestFilterItemValue) Accept(visitor DocumentsListCaptureRequestFilterItemValueVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	if p.typ == "Boolean" || p.Boolean != false {
-		return visitor.VisitBoolean(p.Boolean)
+	if d.typ == "Boolean" || d.Boolean != false {
+		return visitor.VisitBoolean(d.Boolean)
 	}
-	if p.typ == "PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList" || p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList != nil {
-		return visitor.VisitPostV1CaptureDocumentsListRequestFilterItemValueThreeItemList(p.PostV1CaptureDocumentsListRequestFilterItemValueThreeItemList)
+	if d.typ == "DocumentsListCaptureRequestFilterItemValueThreeItemList" || d.DocumentsListCaptureRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitDocumentsListCaptureRequestFilterItemValueThreeItemList(d.DocumentsListCaptureRequestFilterItemValueThreeItemList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1CaptureDocumentsListRequestFilterItemValueThreeItem struct {
+type DocumentsListCaptureRequestFilterItemValueThreeItem struct {
 	String string
 	Double float64
 
 	typ string
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) GetString() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValueThreeItem) GetString() string {
+	if d == nil {
 		return ""
 	}
-	return p.String
+	return d.String
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) GetDouble() float64 {
-	if p == nil {
+func (d *DocumentsListCaptureRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if d == nil {
 		return 0
 	}
-	return p.Double
+	return d.Double
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+func (d *DocumentsListCaptureRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		d.typ = "String"
+		d.String = valueString
 		return nil
 	}
 	var valueDouble float64
 	if err := json.Unmarshal(data, &valueDouble); err == nil {
-		p.typ = "Double"
-		p.Double = valueDouble
+		d.typ = "Double"
+		d.Double = valueDouble
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
 }
 
-func (p PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (d DocumentsListCaptureRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return json.Marshal(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
-type PostV1CaptureDocumentsListRequestFilterItemValueThreeItemVisitor interface {
+type DocumentsListCaptureRequestFilterItemValueThreeItemVisitor interface {
 	VisitString(string) error
 	VisitDouble(float64) error
 }
 
-func (p *PostV1CaptureDocumentsListRequestFilterItemValueThreeItem) Accept(visitor PostV1CaptureDocumentsListRequestFilterItemValueThreeItemVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (d *DocumentsListCaptureRequestFilterItemValueThreeItem) Accept(visitor DocumentsListCaptureRequestFilterItemValueThreeItemVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
 	}
-	if p.typ == "Double" || p.Double != 0 {
-		return visitor.VisitDouble(p.Double)
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
 }
 
 var (
-	postV1CaptureDocumentsListRequestSortItemFieldField = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+	documentsListCaptureRequestSortItemFieldField = big.NewInt(1 << 0)
+	documentsListCaptureRequestSortItemFieldDir   = big.NewInt(1 << 1)
 )
 
-type PostV1CaptureDocumentsListRequestSortItem struct {
-	Field string                                        `json:"field" url:"field"`
-	Dir   *PostV1CaptureDocumentsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+type DocumentsListCaptureRequestSortItem struct {
+	Field string                                  `json:"field" url:"field"`
+	Dir   *DocumentsListCaptureRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5231,126 +5332,126 @@ type PostV1CaptureDocumentsListRequestSortItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) GetField() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestSortItem) GetField() string {
+	if d == nil {
 		return ""
 	}
-	return p.Field
+	return d.Field
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) GetDir() *PostV1CaptureDocumentsListRequestSortItemDir {
-	if p == nil {
+func (d *DocumentsListCaptureRequestSortItem) GetDir() *DocumentsListCaptureRequestSortItemDir {
+	if d == nil {
 		return nil
 	}
-	return p.Dir
+	return d.Dir
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureRequestSortItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetField sets the Field field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequestSortItem) SetField(field string) {
-	p.Field = field
-	p.require(postV1CaptureDocumentsListRequestSortItemFieldField)
+func (d *DocumentsListCaptureRequestSortItem) SetField(field string) {
+	d.Field = field
+	d.require(documentsListCaptureRequestSortItemFieldField)
 }
 
 // SetDir sets the Dir field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListRequestSortItem) SetDir(dir *PostV1CaptureDocumentsListRequestSortItemDir) {
-	p.Dir = dir
-	p.require(postV1CaptureDocumentsListRequestSortItemFieldDir)
+func (d *DocumentsListCaptureRequestSortItem) SetDir(dir *DocumentsListCaptureRequestSortItemDir) {
+	d.Dir = dir
+	d.require(documentsListCaptureRequestSortItemFieldDir)
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListRequestSortItem
+func (d *DocumentsListCaptureRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureRequestSortItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsListRequestSortItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListRequestSortItem
+func (d *DocumentsListCaptureRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureRequestSortItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsListRequestSortItem) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureRequestSortItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsListRequestSortItemDir string
+type DocumentsListCaptureRequestSortItemDir string
 
 const (
-	PostV1CaptureDocumentsListRequestSortItemDirAsc  PostV1CaptureDocumentsListRequestSortItemDir = "asc"
-	PostV1CaptureDocumentsListRequestSortItemDirDesc PostV1CaptureDocumentsListRequestSortItemDir = "desc"
+	DocumentsListCaptureRequestSortItemDirAsc  DocumentsListCaptureRequestSortItemDir = "asc"
+	DocumentsListCaptureRequestSortItemDirDesc DocumentsListCaptureRequestSortItemDir = "desc"
 )
 
-func NewPostV1CaptureDocumentsListRequestSortItemDirFromString(s string) (PostV1CaptureDocumentsListRequestSortItemDir, error) {
+func NewDocumentsListCaptureRequestSortItemDirFromString(s string) (DocumentsListCaptureRequestSortItemDir, error) {
 	switch s {
 	case "asc":
-		return PostV1CaptureDocumentsListRequestSortItemDirAsc, nil
+		return DocumentsListCaptureRequestSortItemDirAsc, nil
 	case "desc":
-		return PostV1CaptureDocumentsListRequestSortItemDirDesc, nil
+		return DocumentsListCaptureRequestSortItemDirDesc, nil
 	}
-	var t PostV1CaptureDocumentsListRequestSortItemDir
+	var t DocumentsListCaptureRequestSortItemDir
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsListRequestSortItemDir) Ptr() *PostV1CaptureDocumentsListRequestSortItemDir {
-	return &p
+func (d DocumentsListCaptureRequestSortItemDir) Ptr() *DocumentsListCaptureRequestSortItemDir {
+	return &d
 }
 
 var (
-	postV1CaptureDocumentsListResponseFieldRows     = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListResponseFieldPage     = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListResponseFieldPageSize = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListResponseFieldTotal    = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListResponseFieldTotals   = big.NewInt(1 << 4)
+	documentsListCaptureResponseFieldRows     = big.NewInt(1 << 0)
+	documentsListCaptureResponseFieldPage     = big.NewInt(1 << 1)
+	documentsListCaptureResponseFieldPageSize = big.NewInt(1 << 2)
+	documentsListCaptureResponseFieldTotal    = big.NewInt(1 << 3)
+	documentsListCaptureResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
-type PostV1CaptureDocumentsListResponse struct {
-	Rows     []*PostV1CaptureDocumentsListResponseRowsItem `json:"rows" url:"rows"`
-	Page     int64                                         `json:"page" url:"page"`
-	PageSize int64                                         `json:"pageSize" url:"pageSize"`
-	Total    int64                                         `json:"total" url:"total"`
-	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+type DocumentsListCaptureResponse struct {
+	Rows     []*DocumentsListCaptureResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                   `json:"page" url:"page"`
+	PageSize int64                                   `json:"pageSize" url:"pageSize"`
+	Total    int64                                   `json:"total" url:"total"`
+	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5359,1076 +5460,166 @@ type PostV1CaptureDocumentsListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetRows() []*PostV1CaptureDocumentsListResponseRowsItem {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetRows() []*DocumentsListCaptureResponseRowsItem {
+	if d == nil {
 		return nil
 	}
-	return p.Rows
+	return d.Rows
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetPage() int64 {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetPage() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Page
+	return d.Page
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetPageSize() int64 {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetPageSize() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.PageSize
+	return d.PageSize
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetTotal() int64 {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetTotal() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.Total
+	return d.Total
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetTotals() map[string]string {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetTotals() map[string]string {
+	if d == nil {
 		return nil
 	}
-	return p.Totals
+	return d.Totals
 }
 
-func (p *PostV1CaptureDocumentsListResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsListResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponse) SetRows(rows []*PostV1CaptureDocumentsListResponseRowsItem) {
-	p.Rows = rows
-	p.require(postV1CaptureDocumentsListResponseFieldRows)
+func (d *DocumentsListCaptureResponse) SetRows(rows []*DocumentsListCaptureResponseRowsItem) {
+	d.Rows = rows
+	d.require(documentsListCaptureResponseFieldRows)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponse) SetPage(page int64) {
-	p.Page = page
-	p.require(postV1CaptureDocumentsListResponseFieldPage)
+func (d *DocumentsListCaptureResponse) SetPage(page int64) {
+	d.Page = page
+	d.require(documentsListCaptureResponseFieldPage)
 }
 
 // SetPageSize sets the PageSize field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponse) SetPageSize(pageSize int64) {
-	p.PageSize = pageSize
-	p.require(postV1CaptureDocumentsListResponseFieldPageSize)
+func (d *DocumentsListCaptureResponse) SetPageSize(pageSize int64) {
+	d.PageSize = pageSize
+	d.require(documentsListCaptureResponseFieldPageSize)
 }
 
 // SetTotal sets the Total field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponse) SetTotal(total int64) {
-	p.Total = total
-	p.require(postV1CaptureDocumentsListResponseFieldTotal)
+func (d *DocumentsListCaptureResponse) SetTotal(total int64) {
+	d.Total = total
+	d.require(documentsListCaptureResponseFieldTotal)
 }
 
 // SetTotals sets the Totals field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponse) SetTotals(totals map[string]string) {
-	p.Totals = totals
-	p.require(postV1CaptureDocumentsListResponseFieldTotals)
+func (d *DocumentsListCaptureResponse) SetTotals(totals map[string]string) {
+	d.Totals = totals
+	d.require(documentsListCaptureResponseFieldTotals)
 }
 
-func (p *PostV1CaptureDocumentsListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListResponse
+func (d *DocumentsListCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsListResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsListResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListResponse
+func (d *DocumentsListCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsListResponse) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponse) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsListResponseRowsItemFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListResponseRowsItemFieldFileID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListResponseRowsItemFieldFileName          = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListResponseRowsItemFieldMimeType          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListResponseRowsItemFieldSizeBytes         = big.NewInt(1 << 4)
-	postV1CaptureDocumentsListResponseRowsItemFieldStatus            = big.NewInt(1 << 5)
-	postV1CaptureDocumentsListResponseRowsItemFieldProvider          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsListResponseRowsItemFieldModel             = big.NewInt(1 << 7)
-	postV1CaptureDocumentsListResponseRowsItemFieldPagesProcessed    = big.NewInt(1 << 8)
-	postV1CaptureDocumentsListResponseRowsItemFieldExtraction        = big.NewInt(1 << 9)
-	postV1CaptureDocumentsListResponseRowsItemFieldMatchedPartnerID  = big.NewInt(1 << 10)
-	postV1CaptureDocumentsListResponseRowsItemFieldPurchaseInvoiceID = big.NewInt(1 << 11)
-	postV1CaptureDocumentsListResponseRowsItemFieldError             = big.NewInt(1 << 12)
-	postV1CaptureDocumentsListResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 13)
-	postV1CaptureDocumentsListResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsListCaptureResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemFieldFileID            = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemFieldFileName          = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemFieldMimeType          = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemFieldSizeBytes         = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemFieldStatus            = big.NewInt(1 << 5)
+	documentsListCaptureResponseRowsItemFieldProvider          = big.NewInt(1 << 6)
+	documentsListCaptureResponseRowsItemFieldModel             = big.NewInt(1 << 7)
+	documentsListCaptureResponseRowsItemFieldPagesProcessed    = big.NewInt(1 << 8)
+	documentsListCaptureResponseRowsItemFieldExtraction        = big.NewInt(1 << 9)
+	documentsListCaptureResponseRowsItemFieldMatchedPartnerID  = big.NewInt(1 << 10)
+	documentsListCaptureResponseRowsItemFieldPurchaseInvoiceID = big.NewInt(1 << 11)
+	documentsListCaptureResponseRowsItemFieldError             = big.NewInt(1 << 12)
+	documentsListCaptureResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 13)
+	documentsListCaptureResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 14)
 )
 
-type PostV1CaptureDocumentsListResponseRowsItem struct {
-	ID                string                                                `json:"id" url:"id"`
-	FileID            string                                                `json:"fileId" url:"fileId"`
-	FileName          string                                                `json:"fileName" url:"fileName"`
-	MimeType          string                                                `json:"mimeType" url:"mimeType"`
-	SizeBytes         int64                                                 `json:"sizeBytes" url:"sizeBytes"`
-	Status            PostV1CaptureDocumentsListResponseRowsItemStatus      `json:"status" url:"status"`
-	Provider          *string                                               `json:"provider,omitempty" url:"provider,omitempty"`
-	Model             *string                                               `json:"model,omitempty" url:"model,omitempty"`
-	PagesProcessed    *int64                                                `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
-	Extraction        *PostV1CaptureDocumentsListResponseRowsItemExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
-	MatchedPartnerID  *string                                               `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
-	PurchaseInvoiceID *string                                               `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
-	Error             *string                                               `json:"error,omitempty" url:"error,omitempty"`
-	CreatedAt         string                                                `json:"createdAt" url:"createdAt"`
-	UpdatedAt         string                                                `json:"updatedAt" url:"updatedAt"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetID() string {
-	if p == nil {
-		return ""
-	}
-	return p.ID
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetFileID() string {
-	if p == nil {
-		return ""
-	}
-	return p.FileID
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetFileName() string {
-	if p == nil {
-		return ""
-	}
-	return p.FileName
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetMimeType() string {
-	if p == nil {
-		return ""
-	}
-	return p.MimeType
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetSizeBytes() int64 {
-	if p == nil {
-		return 0
-	}
-	return p.SizeBytes
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetStatus() PostV1CaptureDocumentsListResponseRowsItemStatus {
-	if p == nil {
-		return ""
-	}
-	return p.Status
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetProvider() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Provider
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetModel() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Model
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetPagesProcessed() *int64 {
-	if p == nil {
-		return nil
-	}
-	return p.PagesProcessed
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetExtraction() *PostV1CaptureDocumentsListResponseRowsItemExtraction {
-	if p == nil {
-		return nil
-	}
-	return p.Extraction
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetMatchedPartnerID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.MatchedPartnerID
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetPurchaseInvoiceID() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PurchaseInvoiceID
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetError() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Error
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetCreatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.CreatedAt
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetUpdatedAt() string {
-	if p == nil {
-		return ""
-	}
-	return p.UpdatedAt
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetID sets the ID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldID)
-}
-
-// SetFileID sets the FileID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetFileID(fileID string) {
-	p.FileID = fileID
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldFileID)
-}
-
-// SetFileName sets the FileName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldFileName)
-}
-
-// SetMimeType sets the MimeType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldMimeType)
-}
-
-// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldSizeBytes)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetStatus(status PostV1CaptureDocumentsListResponseRowsItemStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldStatus)
-}
-
-// SetProvider sets the Provider field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetProvider(provider *string) {
-	p.Provider = provider
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldProvider)
-}
-
-// SetModel sets the Model field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldModel)
-}
-
-// SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetPagesProcessed(pagesProcessed *int64) {
-	p.PagesProcessed = pagesProcessed
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldPagesProcessed)
-}
-
-// SetExtraction sets the Extraction field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetExtraction(extraction *PostV1CaptureDocumentsListResponseRowsItemExtraction) {
-	p.Extraction = extraction
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldExtraction)
-}
-
-// SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetMatchedPartnerID(matchedPartnerID *string) {
-	p.MatchedPartnerID = matchedPartnerID
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldMatchedPartnerID)
-}
-
-// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
-	p.PurchaseInvoiceID = purchaseInvoiceID
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldPurchaseInvoiceID)
-}
-
-// SetError sets the Error field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetError(error_ *string) {
-	p.Error = error_
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldError)
-}
-
-// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldCreatedAt)
-}
-
-// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsListResponseRowsItemFieldUpdatedAt)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListResponseRowsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1CaptureDocumentsListResponseRowsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListResponseRowsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldSupplier       = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldDueDate        = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldCurrency       = big.NewInt(1 << 4)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldNotes          = big.NewInt(1 << 8)
-	postV1CaptureDocumentsListResponseRowsItemExtractionFieldLines          = big.NewInt(1 << 9)
-)
-
-type PostV1CaptureDocumentsListResponseRowsItemExtraction struct {
-	Supplier       *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                          `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *string                                                          `json:"documentDate,omitempty" url:"documentDate,omitempty"`
-	DueDate        *string                                                          `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency       *string                                                          `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                          `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                          `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                          `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem `json:"lines" url:"lines"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetSupplier() *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier {
-	if p == nil {
-		return nil
-	}
-	return p.Supplier
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetDocumentNumber() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DocumentNumber
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetDocumentDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DocumentDate
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetDueDate() *string {
-	if p == nil {
-		return nil
-	}
-	return p.DueDate
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetCurrency() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Currency
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetNetTotal() *string {
-	if p == nil {
-		return nil
-	}
-	return p.NetTotal
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetVatTotal() *string {
-	if p == nil {
-		return nil
-	}
-	return p.VatTotal
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetGrossTotal() *string {
-	if p == nil {
-		return nil
-	}
-	return p.GrossTotal
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetNotes() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Notes
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetLines() []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem {
-	if p == nil {
-		return nil
-	}
-	return p.Lines
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetSupplier sets the Supplier field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetSupplier(supplier *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) {
-	p.Supplier = supplier
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldSupplier)
-}
-
-// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetDocumentNumber(documentNumber *string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldDocumentNumber)
-}
-
-// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldDocumentDate)
-}
-
-// SetDueDate sets the DueDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldDueDate)
-}
-
-// SetCurrency sets the Currency field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldCurrency)
-}
-
-// SetNetTotal sets the NetTotal field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetNetTotal(netTotal *string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldNetTotal)
-}
-
-// SetVatTotal sets the VatTotal field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldVatTotal)
-}
-
-// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetGrossTotal(grossTotal *string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldGrossTotal)
-}
-
-// SetNotes sets the Notes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldNotes)
-}
-
-// SetLines sets the Lines field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) SetLines(lines []*PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionFieldLines)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListResponseRowsItemExtraction
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1CaptureDocumentsListResponseRowsItemExtraction(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListResponseRowsItemExtraction
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtraction) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
-)
-
-type PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem struct {
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
-	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
-	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
-	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetDescription() string {
-	if p == nil {
-		return ""
-	}
-	return p.Description
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetQuantity() string {
-	if p == nil {
-		return ""
-	}
-	return p.Quantity
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetUnit() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Unit
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
-		return nil
-	}
-	return p.UnitPriceExclVat
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetVatRatePercent() *string {
-	if p == nil {
-		return nil
-	}
-	return p.VatRatePercent
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetLineNet() *string {
-	if p == nil {
-		return nil
-	}
-	return p.LineNet
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetLineVat() *string {
-	if p == nil {
-		return nil
-	}
-	return p.LineVat
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetLineGross() *string {
-	if p == nil {
-		return nil
-	}
-	return p.LineGross
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetDescription sets the Description field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldDescription)
-}
-
-// SetQuantity sets the Quantity field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldQuantity)
-}
-
-// SetUnit sets the Unit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldUnit)
-}
-
-// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldUnitPriceExclVat)
-}
-
-// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldVatRatePercent)
-}
-
-// SetLineNet sets the LineNet field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetLineNet(lineNet *string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineNet)
-}
-
-// SetLineVat sets the LineVat field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetLineVat(lineVat *string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineVat)
-}
-
-// SetLineGross sets the LineGross field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) SetLineGross(lineGross *string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionLinesItemFieldLineGross)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionLinesItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
-	postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldIban        = big.NewInt(1 << 4)
-)
-
-type PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier struct {
-	Name        *string `json:"name,omitempty" url:"name,omitempty"`
-	Code        *string `json:"code,omitempty" url:"code,omitempty"`
-	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
-	Iban        *string `json:"iban,omitempty" url:"iban,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetName() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Name
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Code
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetVatCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.VatCode
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetIban() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Iban
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) SetName(name *string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldName)
-}
-
-// SetCode sets the Code field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldCode)
-}
-
-// SetVatCode sets the VatCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldVatCode)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldCountryCode)
-}
-
-// SetIban sets the Iban field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1CaptureDocumentsListResponseRowsItemExtractionSupplierFieldIban)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1CaptureDocumentsListResponseRowsItemExtractionSupplier) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-type PostV1CaptureDocumentsListResponseRowsItemStatus string
-
-const (
-	PostV1CaptureDocumentsListResponseRowsItemStatusPending   PostV1CaptureDocumentsListResponseRowsItemStatus = "pending"
-	PostV1CaptureDocumentsListResponseRowsItemStatusExtracted PostV1CaptureDocumentsListResponseRowsItemStatus = "extracted"
-	PostV1CaptureDocumentsListResponseRowsItemStatusFailed    PostV1CaptureDocumentsListResponseRowsItemStatus = "failed"
-	PostV1CaptureDocumentsListResponseRowsItemStatusLinked    PostV1CaptureDocumentsListResponseRowsItemStatus = "linked"
-)
-
-func NewPostV1CaptureDocumentsListResponseRowsItemStatusFromString(s string) (PostV1CaptureDocumentsListResponseRowsItemStatus, error) {
-	switch s {
-	case "pending":
-		return PostV1CaptureDocumentsListResponseRowsItemStatusPending, nil
-	case "extracted":
-		return PostV1CaptureDocumentsListResponseRowsItemStatusExtracted, nil
-	case "failed":
-		return PostV1CaptureDocumentsListResponseRowsItemStatusFailed, nil
-	case "linked":
-		return PostV1CaptureDocumentsListResponseRowsItemStatusLinked, nil
-	}
-	var t PostV1CaptureDocumentsListResponseRowsItemStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (p PostV1CaptureDocumentsListResponseRowsItemStatus) Ptr() *PostV1CaptureDocumentsListResponseRowsItemStatus {
-	return &p
-}
-
-var (
-	postV1CaptureDocumentsUploadResponseFieldID                = big.NewInt(1 << 0)
-	postV1CaptureDocumentsUploadResponseFieldFileID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsUploadResponseFieldFileName          = big.NewInt(1 << 2)
-	postV1CaptureDocumentsUploadResponseFieldMimeType          = big.NewInt(1 << 3)
-	postV1CaptureDocumentsUploadResponseFieldSizeBytes         = big.NewInt(1 << 4)
-	postV1CaptureDocumentsUploadResponseFieldStatus            = big.NewInt(1 << 5)
-	postV1CaptureDocumentsUploadResponseFieldProvider          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsUploadResponseFieldModel             = big.NewInt(1 << 7)
-	postV1CaptureDocumentsUploadResponseFieldPagesProcessed    = big.NewInt(1 << 8)
-	postV1CaptureDocumentsUploadResponseFieldExtraction        = big.NewInt(1 << 9)
-	postV1CaptureDocumentsUploadResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
-	postV1CaptureDocumentsUploadResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
-	postV1CaptureDocumentsUploadResponseFieldError             = big.NewInt(1 << 12)
-	postV1CaptureDocumentsUploadResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	postV1CaptureDocumentsUploadResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	postV1CaptureDocumentsUploadResponseFieldRawText           = big.NewInt(1 << 15)
-)
-
-type PostV1CaptureDocumentsUploadResponse struct {
+type DocumentsListCaptureResponseRowsItem struct {
 	ID                string                                          `json:"id" url:"id"`
 	FileID            string                                          `json:"fileId" url:"fileId"`
 	FileName          string                                          `json:"fileName" url:"fileName"`
 	MimeType          string                                          `json:"mimeType" url:"mimeType"`
 	SizeBytes         int64                                           `json:"sizeBytes" url:"sizeBytes"`
-	Status            PostV1CaptureDocumentsUploadResponseStatus      `json:"status" url:"status"`
+	Status            DocumentsListCaptureResponseRowsItemStatus      `json:"status" url:"status"`
 	Provider          *string                                         `json:"provider,omitempty" url:"provider,omitempty"`
 	Model             *string                                         `json:"model,omitempty" url:"model,omitempty"`
 	PagesProcessed    *int64                                          `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
-	Extraction        *PostV1CaptureDocumentsUploadResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
+	Extraction        *DocumentsListCaptureResponseRowsItemExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
 	MatchedPartnerID  *string                                         `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                         `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                         `json:"error,omitempty" url:"error,omitempty"`
-	CreatedAt         string                                          `json:"createdAt" url:"createdAt"`
-	UpdatedAt         string                                          `json:"updatedAt" url:"updatedAt"`
-	RawText           *string                                         `json:"rawText,omitempty" url:"rawText,omitempty"`
+	CreatedAt         time.Time                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time                                       `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6437,310 +5628,308 @@ type PostV1CaptureDocumentsUploadResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetID() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return p.ID
+	return d.ID
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetFileID() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetFileID() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileID
+	return d.FileID
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetFileName() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetFileName() string {
+	if d == nil {
 		return ""
 	}
-	return p.FileName
+	return d.FileName
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetMimeType() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetMimeType() string {
+	if d == nil {
 		return ""
 	}
-	return p.MimeType
+	return d.MimeType
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetSizeBytes() int64 {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetSizeBytes() int64 {
+	if d == nil {
 		return 0
 	}
-	return p.SizeBytes
+	return d.SizeBytes
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetStatus() PostV1CaptureDocumentsUploadResponseStatus {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetStatus() DocumentsListCaptureResponseRowsItemStatus {
+	if d == nil {
 		return ""
 	}
-	return p.Status
+	return d.Status
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetProvider() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetProvider() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Provider
+	return d.Provider
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetModel() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetModel() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Model
+	return d.Model
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetPagesProcessed() *int64 {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetPagesProcessed() *int64 {
+	if d == nil {
 		return nil
 	}
-	return p.PagesProcessed
+	return d.PagesProcessed
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetExtraction() *PostV1CaptureDocumentsUploadResponseExtraction {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetExtraction() *DocumentsListCaptureResponseRowsItemExtraction {
+	if d == nil {
 		return nil
 	}
-	return p.Extraction
+	return d.Extraction
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetMatchedPartnerID() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetMatchedPartnerID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.MatchedPartnerID
+	return d.MatchedPartnerID
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetPurchaseInvoiceID() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetPurchaseInvoiceID() *string {
+	if d == nil {
 		return nil
 	}
-	return p.PurchaseInvoiceID
+	return d.PurchaseInvoiceID
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetError() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetError() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Error
+	return d.Error
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetCreatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsListCaptureResponseRowsItem) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.CreatedAt
+	return d.CreatedAt
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetUpdatedAt() string {
-	if p == nil {
-		return ""
+func (d *DocumentsListCaptureResponseRowsItem) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
 	}
-	return p.UpdatedAt
+	return d.UpdatedAt
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetRawText() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.RawText
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
+func (d *DocumentsListCaptureResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	return p.extraProperties
-}
-
-func (p *PostV1CaptureDocumentsUploadResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetID(id string) {
-	p.ID = id
-	p.require(postV1CaptureDocumentsUploadResponseFieldID)
+func (d *DocumentsListCaptureResponseRowsItem) SetID(id string) {
+	d.ID = id
+	d.require(documentsListCaptureResponseRowsItemFieldID)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetFileID(fileID string) {
-	p.FileID = fileID
-	p.require(postV1CaptureDocumentsUploadResponseFieldFileID)
+func (d *DocumentsListCaptureResponseRowsItem) SetFileID(fileID string) {
+	d.FileID = fileID
+	d.require(documentsListCaptureResponseRowsItemFieldFileID)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetFileName(fileName string) {
-	p.FileName = fileName
-	p.require(postV1CaptureDocumentsUploadResponseFieldFileName)
+func (d *DocumentsListCaptureResponseRowsItem) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsListCaptureResponseRowsItemFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetMimeType(mimeType string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureDocumentsUploadResponseFieldMimeType)
+func (d *DocumentsListCaptureResponseRowsItem) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsListCaptureResponseRowsItemFieldMimeType)
 }
 
 // SetSizeBytes sets the SizeBytes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetSizeBytes(sizeBytes int64) {
-	p.SizeBytes = sizeBytes
-	p.require(postV1CaptureDocumentsUploadResponseFieldSizeBytes)
+func (d *DocumentsListCaptureResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	d.SizeBytes = sizeBytes
+	d.require(documentsListCaptureResponseRowsItemFieldSizeBytes)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetStatus(status PostV1CaptureDocumentsUploadResponseStatus) {
-	p.Status = status
-	p.require(postV1CaptureDocumentsUploadResponseFieldStatus)
+func (d *DocumentsListCaptureResponseRowsItem) SetStatus(status DocumentsListCaptureResponseRowsItemStatus) {
+	d.Status = status
+	d.require(documentsListCaptureResponseRowsItemFieldStatus)
 }
 
 // SetProvider sets the Provider field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetProvider(provider *string) {
-	p.Provider = provider
-	p.require(postV1CaptureDocumentsUploadResponseFieldProvider)
+func (d *DocumentsListCaptureResponseRowsItem) SetProvider(provider *string) {
+	d.Provider = provider
+	d.require(documentsListCaptureResponseRowsItemFieldProvider)
 }
 
 // SetModel sets the Model field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetModel(model *string) {
-	p.Model = model
-	p.require(postV1CaptureDocumentsUploadResponseFieldModel)
+func (d *DocumentsListCaptureResponseRowsItem) SetModel(model *string) {
+	d.Model = model
+	d.require(documentsListCaptureResponseRowsItemFieldModel)
 }
 
 // SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetPagesProcessed(pagesProcessed *int64) {
-	p.PagesProcessed = pagesProcessed
-	p.require(postV1CaptureDocumentsUploadResponseFieldPagesProcessed)
+func (d *DocumentsListCaptureResponseRowsItem) SetPagesProcessed(pagesProcessed *int64) {
+	d.PagesProcessed = pagesProcessed
+	d.require(documentsListCaptureResponseRowsItemFieldPagesProcessed)
 }
 
 // SetExtraction sets the Extraction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetExtraction(extraction *PostV1CaptureDocumentsUploadResponseExtraction) {
-	p.Extraction = extraction
-	p.require(postV1CaptureDocumentsUploadResponseFieldExtraction)
+func (d *DocumentsListCaptureResponseRowsItem) SetExtraction(extraction *DocumentsListCaptureResponseRowsItemExtraction) {
+	d.Extraction = extraction
+	d.require(documentsListCaptureResponseRowsItemFieldExtraction)
 }
 
 // SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetMatchedPartnerID(matchedPartnerID *string) {
-	p.MatchedPartnerID = matchedPartnerID
-	p.require(postV1CaptureDocumentsUploadResponseFieldMatchedPartnerID)
+func (d *DocumentsListCaptureResponseRowsItem) SetMatchedPartnerID(matchedPartnerID *string) {
+	d.MatchedPartnerID = matchedPartnerID
+	d.require(documentsListCaptureResponseRowsItemFieldMatchedPartnerID)
 }
 
 // SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
-	p.PurchaseInvoiceID = purchaseInvoiceID
-	p.require(postV1CaptureDocumentsUploadResponseFieldPurchaseInvoiceID)
+func (d *DocumentsListCaptureResponseRowsItem) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	d.PurchaseInvoiceID = purchaseInvoiceID
+	d.require(documentsListCaptureResponseRowsItemFieldPurchaseInvoiceID)
 }
 
 // SetError sets the Error field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetError(error_ *string) {
-	p.Error = error_
-	p.require(postV1CaptureDocumentsUploadResponseFieldError)
+func (d *DocumentsListCaptureResponseRowsItem) SetError(error_ *string) {
+	d.Error = error_
+	d.require(documentsListCaptureResponseRowsItemFieldError)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetCreatedAt(createdAt string) {
-	p.CreatedAt = createdAt
-	p.require(postV1CaptureDocumentsUploadResponseFieldCreatedAt)
+func (d *DocumentsListCaptureResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsListCaptureResponseRowsItemFieldCreatedAt)
 }
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetUpdatedAt(updatedAt string) {
-	p.UpdatedAt = updatedAt
-	p.require(postV1CaptureDocumentsUploadResponseFieldUpdatedAt)
+func (d *DocumentsListCaptureResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsListCaptureResponseRowsItemFieldUpdatedAt)
 }
 
-// SetRawText sets the RawText field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponse) SetRawText(rawText *string) {
-	p.RawText = rawText
-	p.require(postV1CaptureDocumentsUploadResponseFieldRawText)
-}
-
-func (p *PostV1CaptureDocumentsUploadResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsUploadResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsListCaptureResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DocumentsListCaptureResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsUploadResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureResponseRowsItem(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsUploadResponse
+func (d *DocumentsListCaptureResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponseRowsItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
 	}{
-		embed: embed(*p),
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
+		UpdatedAt: internal.NewDateTime(d.UpdatedAt),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponse) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsUploadResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	postV1CaptureDocumentsUploadResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	postV1CaptureDocumentsUploadResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	postV1CaptureDocumentsUploadResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	postV1CaptureDocumentsUploadResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	postV1CaptureDocumentsUploadResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsUploadResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	postV1CaptureDocumentsUploadResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	postV1CaptureDocumentsUploadResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	postV1CaptureDocumentsUploadResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsListCaptureResponseRowsItemExtractionFieldSupplier       = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemExtractionFieldDocumentNumber = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemExtractionFieldDocumentDate   = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemExtractionFieldDueDate        = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemExtractionFieldCurrency       = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemExtractionFieldNetTotal       = big.NewInt(1 << 5)
+	documentsListCaptureResponseRowsItemExtractionFieldVatTotal       = big.NewInt(1 << 6)
+	documentsListCaptureResponseRowsItemExtractionFieldGrossTotal     = big.NewInt(1 << 7)
+	documentsListCaptureResponseRowsItemExtractionFieldNotes          = big.NewInt(1 << 8)
+	documentsListCaptureResponseRowsItemExtractionFieldLines          = big.NewInt(1 << 9)
 )
 
-type PostV1CaptureDocumentsUploadResponseExtraction struct {
-	Supplier       *PostV1CaptureDocumentsUploadResponseExtractionSupplier    `json:"supplier" url:"supplier"`
+type DocumentsListCaptureResponseRowsItemExtraction struct {
+	Supplier       *DocumentsListCaptureResponseRowsItemExtractionSupplier    `json:"supplier" url:"supplier"`
 	DocumentNumber *string                                                    `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *string                                                    `json:"documentDate,omitempty" url:"documentDate,omitempty"`
-	DueDate        *string                                                    `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	DocumentDate   *time.Time                                                 `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                 `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
 	Currency       *string                                                    `json:"currency,omitempty" url:"currency,omitempty"`
 	NetTotal       *string                                                    `json:"netTotal,omitempty" url:"netTotal,omitempty"`
 	VatTotal       *string                                                    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
 	GrossTotal     *string                                                    `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
 	Notes          *string                                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem `json:"lines" url:"lines"`
+	Lines          []*DocumentsListCaptureResponseRowsItemExtractionLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6749,214 +5938,226 @@ type PostV1CaptureDocumentsUploadResponseExtraction struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetSupplier() *PostV1CaptureDocumentsUploadResponseExtractionSupplier {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetSupplier() *DocumentsListCaptureResponseRowsItemExtractionSupplier {
+	if d == nil {
 		return nil
 	}
-	return p.Supplier
+	return d.Supplier
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetDocumentNumber() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetDocumentNumber() *string {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentNumber
+	return d.DocumentNumber
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetDocumentDate() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetDocumentDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DocumentDate
+	return d.DocumentDate
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetDueDate() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetDueDate() *time.Time {
+	if d == nil {
 		return nil
 	}
-	return p.DueDate
+	return d.DueDate
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetCurrency() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetCurrency() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Currency
+	return d.Currency
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetNetTotal() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetNetTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.NetTotal
+	return d.NetTotal
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetVatTotal() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetVatTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatTotal
+	return d.VatTotal
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetGrossTotal() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetGrossTotal() *string {
+	if d == nil {
 		return nil
 	}
-	return p.GrossTotal
+	return d.GrossTotal
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetNotes() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetNotes() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Notes
+	return d.Notes
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetLines() []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetLines() []*DocumentsListCaptureResponseRowsItemExtractionLinesItem {
+	if d == nil {
 		return nil
 	}
-	return p.Lines
+	return d.Lines
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetSupplier(supplier *PostV1CaptureDocumentsUploadResponseExtractionSupplier) {
-	p.Supplier = supplier
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldSupplier)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetSupplier(supplier *DocumentsListCaptureResponseRowsItemExtractionSupplier) {
+	d.Supplier = supplier
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldSupplier)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetDocumentNumber(documentNumber *string) {
-	p.DocumentNumber = documentNumber
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldDocumentNumber)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetDocumentNumber(documentNumber *string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldDocumentNumber)
 }
 
 // SetDocumentDate sets the DocumentDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetDocumentDate(documentDate *string) {
-	p.DocumentDate = documentDate
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldDocumentDate)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetDocumentDate(documentDate *time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldDocumentDate)
 }
 
 // SetDueDate sets the DueDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetDueDate(dueDate *string) {
-	p.DueDate = dueDate
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldDueDate)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldDueDate)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetCurrency(currency *string) {
-	p.Currency = currency
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldCurrency)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldCurrency)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetNetTotal(netTotal *string) {
-	p.NetTotal = netTotal
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldNetTotal)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetNetTotal(netTotal *string) {
+	d.NetTotal = netTotal
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldNetTotal)
 }
 
 // SetVatTotal sets the VatTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetVatTotal(vatTotal *string) {
-	p.VatTotal = vatTotal
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldVatTotal)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetVatTotal(vatTotal *string) {
+	d.VatTotal = vatTotal
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldVatTotal)
 }
 
 // SetGrossTotal sets the GrossTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetGrossTotal(grossTotal *string) {
-	p.GrossTotal = grossTotal
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldGrossTotal)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetGrossTotal(grossTotal *string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldGrossTotal)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetNotes(notes *string) {
-	p.Notes = notes
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldNotes)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldNotes)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) SetLines(lines []*PostV1CaptureDocumentsUploadResponseExtractionLinesItem) {
-	p.Lines = lines
-	p.require(postV1CaptureDocumentsUploadResponseExtractionFieldLines)
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetLines(lines []*DocumentsListCaptureResponseRowsItemExtractionLinesItem) {
+	d.Lines = lines
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldLines)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsUploadResponseExtraction
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) UnmarshalJSON(data []byte) error {
+	type embed DocumentsListCaptureResponseRowsItemExtraction
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsUploadResponseExtraction(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureResponseRowsItemExtraction(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsUploadResponseExtraction
+func (d *DocumentsListCaptureResponseRowsItemExtraction) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponseRowsItemExtraction
 	var marshaler = struct {
 		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
 	}{
-		embed: embed(*p),
+		embed:        embed(*d),
+		DocumentDate: internal.NewOptionalDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtraction) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtraction) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
-	postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
 )
 
-type PostV1CaptureDocumentsUploadResponseExtractionLinesItem struct {
+type DocumentsListCaptureResponseRowsItemExtractionLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Quantity         string  `json:"quantity" url:"quantity"`
 	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -6973,183 +6174,183 @@ type PostV1CaptureDocumentsUploadResponseExtractionLinesItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetDescription() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetDescription() string {
+	if d == nil {
 		return ""
 	}
-	return p.Description
+	return d.Description
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetQuantity() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetQuantity() string {
+	if d == nil {
 		return ""
 	}
-	return p.Quantity
+	return d.Quantity
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetUnit() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetUnit() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Unit
+	return d.Unit
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.UnitPriceExclVat
+	return d.UnitPriceExclVat
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetVatRatePercent() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetVatRatePercent() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatRatePercent
+	return d.VatRatePercent
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetLineNet() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetLineNet() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineNet
+	return d.LineNet
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetLineVat() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetLineVat() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineVat
+	return d.LineVat
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetLineGross() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetLineGross() *string {
+	if d == nil {
 		return nil
 	}
-	return p.LineGross
+	return d.LineGross
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetDescription(description string) {
-	p.Description = description
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldDescription)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldDescription)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetQuantity(quantity string) {
-	p.Quantity = quantity
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldQuantity)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldQuantity)
 }
 
 // SetUnit sets the Unit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetUnit(unit *string) {
-	p.Unit = unit
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldUnit)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldUnit)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
-	p.UnitPriceExclVat = unitPriceExclVat
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldUnitPriceExclVat)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldUnitPriceExclVat)
 }
 
 // SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
-	p.VatRatePercent = vatRatePercent
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldVatRatePercent)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldVatRatePercent)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetLineNet(lineNet *string) {
-	p.LineNet = lineNet
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineNet)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineNet)
 }
 
 // SetLineVat sets the LineVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetLineVat(lineVat *string) {
-	p.LineVat = lineVat
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineVat)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineVat)
 }
 
 // SetLineGross sets the LineGross field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) SetLineGross(lineGross *string) {
-	p.LineGross = lineGross
-	p.require(postV1CaptureDocumentsUploadResponseExtractionLinesItemFieldLineGross)
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsListCaptureResponseRowsItemExtractionLinesItemFieldLineGross)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureResponseRowsItemExtractionLinesItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsUploadResponseExtractionLinesItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureResponseRowsItemExtractionLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsUploadResponseExtractionLinesItem
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponseRowsItemExtractionLinesItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionLinesItem) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
-	postV1CaptureDocumentsUploadResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
-	postV1CaptureDocumentsUploadResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
-	postV1CaptureDocumentsUploadResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
-	postV1CaptureDocumentsUploadResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
-	postV1CaptureDocumentsUploadResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemExtractionSupplierFieldName        = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemExtractionSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemExtractionSupplierFieldIban        = big.NewInt(1 << 4)
 )
 
-type PostV1CaptureDocumentsUploadResponseExtractionSupplier struct {
+type DocumentsListCaptureResponseRowsItemExtractionSupplier struct {
 	Name        *string `json:"name,omitempty" url:"name,omitempty"`
 	Code        *string `json:"code,omitempty" url:"code,omitempty"`
 	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
@@ -7163,170 +6364,1118 @@ type PostV1CaptureDocumentsUploadResponseExtractionSupplier struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetName() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetName() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Name
+	return d.Name
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetCode() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Code
+	return d.Code
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetVatCode() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetVatCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.VatCode
+	return d.VatCode
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetCountryCode() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return p.CountryCode
+	return d.CountryCode
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetIban() *string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetIban() *string {
+	if d == nil {
 		return nil
 	}
-	return p.Iban
+	return d.Iban
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
 		return nil
 	}
-	return p.extraProperties
+	return d.extraProperties
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	d.explicitFields.Or(d.explicitFields, field)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) SetName(name *string) {
-	p.Name = name
-	p.require(postV1CaptureDocumentsUploadResponseExtractionSupplierFieldName)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) SetName(name *string) {
+	d.Name = name
+	d.require(documentsListCaptureResponseRowsItemExtractionSupplierFieldName)
 }
 
 // SetCode sets the Code field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) SetCode(code *string) {
-	p.Code = code
-	p.require(postV1CaptureDocumentsUploadResponseExtractionSupplierFieldCode)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsListCaptureResponseRowsItemExtractionSupplierFieldCode)
 }
 
 // SetVatCode sets the VatCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) SetVatCode(vatCode *string) {
-	p.VatCode = vatCode
-	p.require(postV1CaptureDocumentsUploadResponseExtractionSupplierFieldVatCode)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsListCaptureResponseRowsItemExtractionSupplierFieldVatCode)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(postV1CaptureDocumentsUploadResponseExtractionSupplierFieldCountryCode)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsListCaptureResponseRowsItemExtractionSupplierFieldCountryCode)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) SetIban(iban *string) {
-	p.Iban = iban
-	p.require(postV1CaptureDocumentsUploadResponseExtractionSupplierFieldIban)
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) SetIban(iban *string) {
+	d.Iban = iban
+	d.require(documentsListCaptureResponseRowsItemExtractionSupplierFieldIban)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureDocumentsUploadResponseExtractionSupplier
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureResponseRowsItemExtractionSupplier
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureDocumentsUploadResponseExtractionSupplier(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*d = DocumentsListCaptureResponseRowsItemExtractionSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureDocumentsUploadResponseExtractionSupplier
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponseRowsItemExtractionSupplier
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*d),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureDocumentsUploadResponseExtractionSupplier) String() string {
-	if p == nil {
+func (d *DocumentsListCaptureResponseRowsItemExtractionSupplier) String() string {
+	if d == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(d); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", d)
 }
 
-type PostV1CaptureDocumentsUploadResponseStatus string
+type DocumentsListCaptureResponseRowsItemStatus string
 
 const (
-	PostV1CaptureDocumentsUploadResponseStatusPending   PostV1CaptureDocumentsUploadResponseStatus = "pending"
-	PostV1CaptureDocumentsUploadResponseStatusExtracted PostV1CaptureDocumentsUploadResponseStatus = "extracted"
-	PostV1CaptureDocumentsUploadResponseStatusFailed    PostV1CaptureDocumentsUploadResponseStatus = "failed"
-	PostV1CaptureDocumentsUploadResponseStatusLinked    PostV1CaptureDocumentsUploadResponseStatus = "linked"
+	DocumentsListCaptureResponseRowsItemStatusPending   DocumentsListCaptureResponseRowsItemStatus = "pending"
+	DocumentsListCaptureResponseRowsItemStatusExtracted DocumentsListCaptureResponseRowsItemStatus = "extracted"
+	DocumentsListCaptureResponseRowsItemStatusFailed    DocumentsListCaptureResponseRowsItemStatus = "failed"
+	DocumentsListCaptureResponseRowsItemStatusLinked    DocumentsListCaptureResponseRowsItemStatus = "linked"
 )
 
-func NewPostV1CaptureDocumentsUploadResponseStatusFromString(s string) (PostV1CaptureDocumentsUploadResponseStatus, error) {
+func NewDocumentsListCaptureResponseRowsItemStatusFromString(s string) (DocumentsListCaptureResponseRowsItemStatus, error) {
 	switch s {
 	case "pending":
-		return PostV1CaptureDocumentsUploadResponseStatusPending, nil
+		return DocumentsListCaptureResponseRowsItemStatusPending, nil
 	case "extracted":
-		return PostV1CaptureDocumentsUploadResponseStatusExtracted, nil
+		return DocumentsListCaptureResponseRowsItemStatusExtracted, nil
 	case "failed":
-		return PostV1CaptureDocumentsUploadResponseStatusFailed, nil
+		return DocumentsListCaptureResponseRowsItemStatusFailed, nil
 	case "linked":
-		return PostV1CaptureDocumentsUploadResponseStatusLinked, nil
+		return DocumentsListCaptureResponseRowsItemStatusLinked, nil
 	}
-	var t PostV1CaptureDocumentsUploadResponseStatus
+	var t DocumentsListCaptureResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (p PostV1CaptureDocumentsUploadResponseStatus) Ptr() *PostV1CaptureDocumentsUploadResponseStatus {
-	return &p
+func (d DocumentsListCaptureResponseRowsItemStatus) Ptr() *DocumentsListCaptureResponseRowsItemStatus {
+	return &d
 }
 
 var (
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkName        = big.NewInt(1 << 0)
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContent     = big.NewInt(1 << 1)
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContentType = big.NewInt(1 << 2)
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldFileName            = big.NewInt(1 << 3)
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldMimeType            = big.NewInt(1 << 4)
-	postV1CaptureInboundEmailRequestAttachmentsItemFieldContent             = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseFieldID                = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseFieldFileID            = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseFieldFileName          = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseFieldMimeType          = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseFieldSizeBytes         = big.NewInt(1 << 4)
+	documentsUploadCaptureResponseFieldStatus            = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseFieldProvider          = big.NewInt(1 << 6)
+	documentsUploadCaptureResponseFieldModel             = big.NewInt(1 << 7)
+	documentsUploadCaptureResponseFieldPagesProcessed    = big.NewInt(1 << 8)
+	documentsUploadCaptureResponseFieldExtraction        = big.NewInt(1 << 9)
+	documentsUploadCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
+	documentsUploadCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
+	documentsUploadCaptureResponseFieldError             = big.NewInt(1 << 12)
+	documentsUploadCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
+	documentsUploadCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsUploadCaptureResponseFieldRawText           = big.NewInt(1 << 15)
 )
 
-type PostV1CaptureInboundEmailRequestAttachmentsItem struct {
+type DocumentsUploadCaptureResponse struct {
+	ID                string                                    `json:"id" url:"id"`
+	FileID            string                                    `json:"fileId" url:"fileId"`
+	FileName          string                                    `json:"fileName" url:"fileName"`
+	MimeType          string                                    `json:"mimeType" url:"mimeType"`
+	SizeBytes         int64                                     `json:"sizeBytes" url:"sizeBytes"`
+	Status            DocumentsUploadCaptureResponseStatus      `json:"status" url:"status"`
+	Provider          *string                                   `json:"provider,omitempty" url:"provider,omitempty"`
+	Model             *string                                   `json:"model,omitempty" url:"model,omitempty"`
+	PagesProcessed    *int64                                    `json:"pagesProcessed,omitempty" url:"pagesProcessed,omitempty"`
+	Extraction        *DocumentsUploadCaptureResponseExtraction `json:"extraction,omitempty" url:"extraction,omitempty"`
+	MatchedPartnerID  *string                                   `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
+	PurchaseInvoiceID *string                                   `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Error             *string                                   `json:"error,omitempty" url:"error,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time                                 `json:"updatedAt" url:"updatedAt"`
+	RawText           *string                                   `json:"rawText,omitempty" url:"rawText,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponse) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DocumentsUploadCaptureResponse) GetFileID() string {
+	if d == nil {
+		return ""
+	}
+	return d.FileID
+}
+
+func (d *DocumentsUploadCaptureResponse) GetFileName() string {
+	if d == nil {
+		return ""
+	}
+	return d.FileName
+}
+
+func (d *DocumentsUploadCaptureResponse) GetMimeType() string {
+	if d == nil {
+		return ""
+	}
+	return d.MimeType
+}
+
+func (d *DocumentsUploadCaptureResponse) GetSizeBytes() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.SizeBytes
+}
+
+func (d *DocumentsUploadCaptureResponse) GetStatus() DocumentsUploadCaptureResponseStatus {
+	if d == nil {
+		return ""
+	}
+	return d.Status
+}
+
+func (d *DocumentsUploadCaptureResponse) GetProvider() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Provider
+}
+
+func (d *DocumentsUploadCaptureResponse) GetModel() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Model
+}
+
+func (d *DocumentsUploadCaptureResponse) GetPagesProcessed() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.PagesProcessed
+}
+
+func (d *DocumentsUploadCaptureResponse) GetExtraction() *DocumentsUploadCaptureResponseExtraction {
+	if d == nil {
+		return nil
+	}
+	return d.Extraction
+}
+
+func (d *DocumentsUploadCaptureResponse) GetMatchedPartnerID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MatchedPartnerID
+}
+
+func (d *DocumentsUploadCaptureResponse) GetPurchaseInvoiceID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.PurchaseInvoiceID
+}
+
+func (d *DocumentsUploadCaptureResponse) GetError() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Error
+}
+
+func (d *DocumentsUploadCaptureResponse) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.CreatedAt
+}
+
+func (d *DocumentsUploadCaptureResponse) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.UpdatedAt
+}
+
+func (d *DocumentsUploadCaptureResponse) GetRawText() *string {
+	if d == nil {
+		return nil
+	}
+	return d.RawText
+}
+
+func (d *DocumentsUploadCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsUploadCaptureResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetID(id string) {
+	d.ID = id
+	d.require(documentsUploadCaptureResponseFieldID)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetFileID(fileID string) {
+	d.FileID = fileID
+	d.require(documentsUploadCaptureResponseFieldFileID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetFileName(fileName string) {
+	d.FileName = fileName
+	d.require(documentsUploadCaptureResponseFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetMimeType(mimeType string) {
+	d.MimeType = mimeType
+	d.require(documentsUploadCaptureResponseFieldMimeType)
+}
+
+// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetSizeBytes(sizeBytes int64) {
+	d.SizeBytes = sizeBytes
+	d.require(documentsUploadCaptureResponseFieldSizeBytes)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetStatus(status DocumentsUploadCaptureResponseStatus) {
+	d.Status = status
+	d.require(documentsUploadCaptureResponseFieldStatus)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetProvider(provider *string) {
+	d.Provider = provider
+	d.require(documentsUploadCaptureResponseFieldProvider)
+}
+
+// SetModel sets the Model field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetModel(model *string) {
+	d.Model = model
+	d.require(documentsUploadCaptureResponseFieldModel)
+}
+
+// SetPagesProcessed sets the PagesProcessed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetPagesProcessed(pagesProcessed *int64) {
+	d.PagesProcessed = pagesProcessed
+	d.require(documentsUploadCaptureResponseFieldPagesProcessed)
+}
+
+// SetExtraction sets the Extraction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetExtraction(extraction *DocumentsUploadCaptureResponseExtraction) {
+	d.Extraction = extraction
+	d.require(documentsUploadCaptureResponseFieldExtraction)
+}
+
+// SetMatchedPartnerID sets the MatchedPartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetMatchedPartnerID(matchedPartnerID *string) {
+	d.MatchedPartnerID = matchedPartnerID
+	d.require(documentsUploadCaptureResponseFieldMatchedPartnerID)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	d.PurchaseInvoiceID = purchaseInvoiceID
+	d.require(documentsUploadCaptureResponseFieldPurchaseInvoiceID)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetError(error_ *string) {
+	d.Error = error_
+	d.require(documentsUploadCaptureResponseFieldError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsUploadCaptureResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsUploadCaptureResponseFieldUpdatedAt)
+}
+
+// SetRawText sets the RawText field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetRawText(rawText *string) {
+	d.RawText = rawText
+	d.require(documentsUploadCaptureResponseFieldRawText)
+}
+
+func (d *DocumentsUploadCaptureResponse) UnmarshalJSON(data []byte) error {
+	type embed DocumentsUploadCaptureResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DocumentsUploadCaptureResponse(unmarshaler.embed)
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsUploadCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*d),
+		CreatedAt: internal.NewDateTime(d.CreatedAt),
+		UpdatedAt: internal.NewDateTime(d.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsUploadCaptureResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsUploadCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
+	documentsUploadCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
+	documentsUploadCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
+	documentsUploadCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
+	documentsUploadCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
+)
+
+type DocumentsUploadCaptureResponseExtraction struct {
+	Supplier       *DocumentsUploadCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                              `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                           `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                           `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                              `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                              `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                              `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                              `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsUploadCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetSupplier() *DocumentsUploadCaptureResponseExtractionSupplier {
+	if d == nil {
+		return nil
+	}
+	return d.Supplier
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetDocumentNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentNumber
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetDocumentDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentDate
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetDueDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DueDate
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetCurrency() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Currency
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetNetTotal() *string {
+	if d == nil {
+		return nil
+	}
+	return d.NetTotal
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetVatTotal() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatTotal
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetGrossTotal() *string {
+	if d == nil {
+		return nil
+	}
+	return d.GrossTotal
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetNotes() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Notes
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetLines() []*DocumentsUploadCaptureResponseExtractionLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.Lines
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetSupplier sets the Supplier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetSupplier(supplier *DocumentsUploadCaptureResponseExtractionSupplier) {
+	d.Supplier = supplier
+	d.require(documentsUploadCaptureResponseExtractionFieldSupplier)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetDocumentNumber(documentNumber *string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsUploadCaptureResponseExtractionFieldDocumentNumber)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetDocumentDate(documentDate *time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsUploadCaptureResponseExtractionFieldDocumentDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsUploadCaptureResponseExtractionFieldDueDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetCurrency(currency *string) {
+	d.Currency = currency
+	d.require(documentsUploadCaptureResponseExtractionFieldCurrency)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetNetTotal(netTotal *string) {
+	d.NetTotal = netTotal
+	d.require(documentsUploadCaptureResponseExtractionFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetVatTotal(vatTotal *string) {
+	d.VatTotal = vatTotal
+	d.require(documentsUploadCaptureResponseExtractionFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetGrossTotal(grossTotal *string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsUploadCaptureResponseExtractionFieldGrossTotal)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsUploadCaptureResponseExtractionFieldNotes)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetLines(lines []*DocumentsUploadCaptureResponseExtractionLinesItem) {
+	d.Lines = lines
+	d.require(documentsUploadCaptureResponseExtractionFieldLines)
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
+	type embed DocumentsUploadCaptureResponseExtraction
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DocumentsUploadCaptureResponseExtraction(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureResponseExtraction
+	var marshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+		DueDate      *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed:        embed(*d),
+		DocumentDate: internal.NewOptionalDate(d.DocumentDate),
+		DueDate:      internal.NewOptionalDate(d.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsUploadCaptureResponseExtractionLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseExtractionLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseExtractionLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseExtractionLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseExtractionLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsUploadCaptureResponseExtractionLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseExtractionLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsUploadCaptureResponseExtractionLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsUploadCaptureResponseExtractionLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsUploadCaptureResponseExtractionLinesItemFieldLineGross)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsUploadCaptureResponseExtractionLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsUploadCaptureResponseExtractionLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureResponseExtractionLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsUploadCaptureResponseExtractionSupplierFieldName        = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseExtractionSupplierFieldCode        = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseExtractionSupplierFieldVatCode     = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseExtractionSupplierFieldCountryCode = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseExtractionSupplierFieldIban        = big.NewInt(1 << 4)
+)
+
+type DocumentsUploadCaptureResponseExtractionSupplier struct {
+	Name        *string `json:"name,omitempty" url:"name,omitempty"`
+	Code        *string `json:"code,omitempty" url:"code,omitempty"`
+	VatCode     *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Iban        *string `json:"iban,omitempty" url:"iban,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetName() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Name
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Code
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetVatCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatCode
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetCountryCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.CountryCode
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetIban() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Iban
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) SetName(name *string) {
+	d.Name = name
+	d.require(documentsUploadCaptureResponseExtractionSupplierFieldName)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) SetCode(code *string) {
+	d.Code = code
+	d.require(documentsUploadCaptureResponseExtractionSupplierFieldCode)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) SetVatCode(vatCode *string) {
+	d.VatCode = vatCode
+	d.require(documentsUploadCaptureResponseExtractionSupplierFieldVatCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) SetCountryCode(countryCode *string) {
+	d.CountryCode = countryCode
+	d.require(documentsUploadCaptureResponseExtractionSupplierFieldCountryCode)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) SetIban(iban *string) {
+	d.Iban = iban
+	d.require(documentsUploadCaptureResponseExtractionSupplierFieldIban)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsUploadCaptureResponseExtractionSupplier
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsUploadCaptureResponseExtractionSupplier(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureResponseExtractionSupplier
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionSupplier) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsUploadCaptureResponseStatus string
+
+const (
+	DocumentsUploadCaptureResponseStatusPending   DocumentsUploadCaptureResponseStatus = "pending"
+	DocumentsUploadCaptureResponseStatusExtracted DocumentsUploadCaptureResponseStatus = "extracted"
+	DocumentsUploadCaptureResponseStatusFailed    DocumentsUploadCaptureResponseStatus = "failed"
+	DocumentsUploadCaptureResponseStatusLinked    DocumentsUploadCaptureResponseStatus = "linked"
+)
+
+func NewDocumentsUploadCaptureResponseStatusFromString(s string) (DocumentsUploadCaptureResponseStatus, error) {
+	switch s {
+	case "pending":
+		return DocumentsUploadCaptureResponseStatusPending, nil
+	case "extracted":
+		return DocumentsUploadCaptureResponseStatusExtracted, nil
+	case "failed":
+		return DocumentsUploadCaptureResponseStatusFailed, nil
+	case "linked":
+		return DocumentsUploadCaptureResponseStatusLinked, nil
+	}
+	var t DocumentsUploadCaptureResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsUploadCaptureResponseStatus) Ptr() *DocumentsUploadCaptureResponseStatus {
+	return &d
+}
+
+var (
+	inboundEmailCaptureRequestAttachmentsItemFieldPostmarkName        = big.NewInt(1 << 0)
+	inboundEmailCaptureRequestAttachmentsItemFieldPostmarkContent     = big.NewInt(1 << 1)
+	inboundEmailCaptureRequestAttachmentsItemFieldPostmarkContentType = big.NewInt(1 << 2)
+	inboundEmailCaptureRequestAttachmentsItemFieldFileName            = big.NewInt(1 << 3)
+	inboundEmailCaptureRequestAttachmentsItemFieldMimeType            = big.NewInt(1 << 4)
+	inboundEmailCaptureRequestAttachmentsItemFieldContent             = big.NewInt(1 << 5)
+)
+
+type InboundEmailCaptureRequestAttachmentsItem struct {
 	PostmarkName        *string `json:"Name,omitempty" url:"Name,omitempty"`
 	PostmarkContent     *string `json:"Content,omitempty" url:"Content,omitempty"`
 	PostmarkContentType *string `json:"ContentType,omitempty" url:"ContentType,omitempty"`
@@ -7341,213 +7490,213 @@ type PostV1CaptureInboundEmailRequestAttachmentsItem struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkName() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetPostmarkName() *string {
+	if i == nil {
 		return nil
 	}
-	return p.PostmarkName
+	return i.PostmarkName
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkContent() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetPostmarkContent() *string {
+	if i == nil {
 		return nil
 	}
-	return p.PostmarkContent
+	return i.PostmarkContent
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkContentType() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetPostmarkContentType() *string {
+	if i == nil {
 		return nil
 	}
-	return p.PostmarkContentType
+	return i.PostmarkContentType
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetFileName() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetFileName() *string {
+	if i == nil {
 		return nil
 	}
-	return p.FileName
+	return i.FileName
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetMimeType() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetMimeType() *string {
+	if i == nil {
 		return nil
 	}
-	return p.MimeType
+	return i.MimeType
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetContent() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetContent() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Content
+	return i.Content
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InboundEmailCaptureRequestAttachmentsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetPostmarkName sets the PostmarkName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkName(postmarkName *string) {
-	p.PostmarkName = postmarkName
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkName)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetPostmarkName(postmarkName *string) {
+	i.PostmarkName = postmarkName
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldPostmarkName)
 }
 
 // SetPostmarkContent sets the PostmarkContent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkContent(postmarkContent *string) {
-	p.PostmarkContent = postmarkContent
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContent)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetPostmarkContent(postmarkContent *string) {
+	i.PostmarkContent = postmarkContent
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldPostmarkContent)
 }
 
 // SetPostmarkContentType sets the PostmarkContentType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkContentType(postmarkContentType *string) {
-	p.PostmarkContentType = postmarkContentType
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContentType)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetPostmarkContentType(postmarkContentType *string) {
+	i.PostmarkContentType = postmarkContentType
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldPostmarkContentType)
 }
 
 // SetFileName sets the FileName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetFileName(fileName *string) {
-	p.FileName = fileName
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldFileName)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetFileName(fileName *string) {
+	i.FileName = fileName
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldFileName)
 }
 
 // SetMimeType sets the MimeType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetMimeType(mimeType *string) {
-	p.MimeType = mimeType
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldMimeType)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetMimeType(mimeType *string) {
+	i.MimeType = mimeType
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldMimeType)
 }
 
 // SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetContent(content *string) {
-	p.Content = content
-	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldContent)
+func (i *InboundEmailCaptureRequestAttachmentsItem) SetContent(content *string) {
+	i.Content = content
+	i.require(inboundEmailCaptureRequestAttachmentsItemFieldContent)
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureInboundEmailRequestAttachmentsItem
+func (i *InboundEmailCaptureRequestAttachmentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InboundEmailCaptureRequestAttachmentsItem
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureInboundEmailRequestAttachmentsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InboundEmailCaptureRequestAttachmentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureInboundEmailRequestAttachmentsItem
+func (i *InboundEmailCaptureRequestAttachmentsItem) MarshalJSON() ([]byte, error) {
+	type embed InboundEmailCaptureRequestAttachmentsItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) String() string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestAttachmentsItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
-type PostV1CaptureInboundEmailRequestTo struct {
+type InboundEmailCaptureRequestTo struct {
 	String     string
 	StringList []string
 
 	typ string
 }
 
-func (p *PostV1CaptureInboundEmailRequestTo) GetString() string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestTo) GetString() string {
+	if i == nil {
 		return ""
 	}
-	return p.String
+	return i.String
 }
 
-func (p *PostV1CaptureInboundEmailRequestTo) GetStringList() []string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestTo) GetStringList() []string {
+	if i == nil {
 		return nil
 	}
-	return p.StringList
+	return i.StringList
 }
 
-func (p *PostV1CaptureInboundEmailRequestTo) UnmarshalJSON(data []byte) error {
+func (i *InboundEmailCaptureRequestTo) UnmarshalJSON(data []byte) error {
 	var valueString string
 	if err := json.Unmarshal(data, &valueString); err == nil {
-		p.typ = "String"
-		p.String = valueString
+		i.typ = "String"
+		i.String = valueString
 		return nil
 	}
 	var valueStringList []string
 	if err := json.Unmarshal(data, &valueStringList); err == nil {
-		p.typ = "StringList"
-		p.StringList = valueStringList
+		i.typ = "StringList"
+		i.StringList = valueStringList
 		return nil
 	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
 }
 
-func (p PostV1CaptureInboundEmailRequestTo) MarshalJSON() ([]byte, error) {
-	if p.typ == "String" || p.String != "" {
-		return json.Marshal(p.String)
+func (i InboundEmailCaptureRequestTo) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
 	}
-	if p.typ == "StringList" || p.StringList != nil {
-		return json.Marshal(p.StringList)
+	if i.typ == "StringList" || i.StringList != nil {
+		return json.Marshal(i.StringList)
 	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
-type PostV1CaptureInboundEmailRequestToVisitor interface {
+type InboundEmailCaptureRequestToVisitor interface {
 	VisitString(string) error
 	VisitStringList([]string) error
 }
 
-func (p *PostV1CaptureInboundEmailRequestTo) Accept(visitor PostV1CaptureInboundEmailRequestToVisitor) error {
-	if p.typ == "String" || p.String != "" {
-		return visitor.VisitString(p.String)
+func (i *InboundEmailCaptureRequestTo) Accept(visitor InboundEmailCaptureRequestToVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
 	}
-	if p.typ == "StringList" || p.StringList != nil {
-		return visitor.VisitStringList(p.StringList)
+	if i.typ == "StringList" || i.StringList != nil {
+		return visitor.VisitStringList(i.StringList)
 	}
-	return fmt.Errorf("type %T does not include a non-empty union type", p)
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
 }
 
 var (
-	postV1CaptureInboundEmailRequestToFullItemFieldEmail = big.NewInt(1 << 0)
+	inboundEmailCaptureRequestToFullItemFieldEmail = big.NewInt(1 << 0)
 )
 
-type PostV1CaptureInboundEmailRequestToFullItem struct {
+type InboundEmailCaptureRequestToFullItem struct {
 	Email *string `json:"Email,omitempty" url:"Email,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -7558,87 +7707,87 @@ type PostV1CaptureInboundEmailRequestToFullItem struct {
 	rawJSON json.RawMessage
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) GetEmail() *string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestToFullItem) GetEmail() *string {
+	if i == nil {
 		return nil
 	}
-	return p.Email
+	return i.Email
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InboundEmailCaptureRequestToFullItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.ExtraProperties
+	return i.ExtraProperties
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InboundEmailCaptureRequestToFullItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetEmail sets the Email field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailRequestToFullItem) SetEmail(email *string) {
-	p.Email = email
-	p.require(postV1CaptureInboundEmailRequestToFullItemFieldEmail)
+func (i *InboundEmailCaptureRequestToFullItem) SetEmail(email *string) {
+	i.Email = email
+	i.require(inboundEmailCaptureRequestToFullItemFieldEmail)
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) UnmarshalJSON(data []byte) error {
-	type embed PostV1CaptureInboundEmailRequestToFullItem
+func (i *InboundEmailCaptureRequestToFullItem) UnmarshalJSON(data []byte) error {
+	type embed InboundEmailCaptureRequestToFullItem
 	var unmarshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
 	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*p = PostV1CaptureInboundEmailRequestToFullItem(unmarshaler.embed)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InboundEmailCaptureRequestToFullItem(unmarshaler.embed)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.ExtraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.ExtraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureInboundEmailRequestToFullItem
+func (i *InboundEmailCaptureRequestToFullItem) MarshalJSON() ([]byte, error) {
+	type embed InboundEmailCaptureRequestToFullItem
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, p.ExtraProperties)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, i.ExtraProperties)
 }
 
-func (p *PostV1CaptureInboundEmailRequestToFullItem) String() string {
-	if p == nil {
+func (i *InboundEmailCaptureRequestToFullItem) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1CaptureInboundEmailResponseFieldAccepted   = big.NewInt(1 << 0)
-	postV1CaptureInboundEmailResponseFieldSkipped    = big.NewInt(1 << 1)
-	postV1CaptureInboundEmailResponseFieldCaptureIDs = big.NewInt(1 << 2)
+	inboundEmailCaptureResponseFieldAccepted   = big.NewInt(1 << 0)
+	inboundEmailCaptureResponseFieldSkipped    = big.NewInt(1 << 1)
+	inboundEmailCaptureResponseFieldCaptureIDs = big.NewInt(1 << 2)
 )
 
-type PostV1CaptureInboundEmailResponse struct {
+type InboundEmailCaptureResponse struct {
 	Accepted   int64    `json:"accepted" url:"accepted"`
 	Skipped    int64    `json:"skipped" url:"skipped"`
 	CaptureIDs []string `json:"captureIds" url:"captureIds"`
@@ -7650,112 +7799,112 @@ type PostV1CaptureInboundEmailResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureInboundEmailResponse) GetAccepted() int64 {
-	if p == nil {
+func (i *InboundEmailCaptureResponse) GetAccepted() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Accepted
+	return i.Accepted
 }
 
-func (p *PostV1CaptureInboundEmailResponse) GetSkipped() int64 {
-	if p == nil {
+func (i *InboundEmailCaptureResponse) GetSkipped() int64 {
+	if i == nil {
 		return 0
 	}
-	return p.Skipped
+	return i.Skipped
 }
 
-func (p *PostV1CaptureInboundEmailResponse) GetCaptureIDs() []string {
-	if p == nil {
+func (i *InboundEmailCaptureResponse) GetCaptureIDs() []string {
+	if i == nil {
 		return nil
 	}
-	return p.CaptureIDs
+	return i.CaptureIDs
 }
 
-func (p *PostV1CaptureInboundEmailResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (i *InboundEmailCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
 		return nil
 	}
-	return p.extraProperties
+	return i.extraProperties
 }
 
-func (p *PostV1CaptureInboundEmailResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (i *InboundEmailCaptureResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	i.explicitFields.Or(i.explicitFields, field)
 }
 
 // SetAccepted sets the Accepted field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailResponse) SetAccepted(accepted int64) {
-	p.Accepted = accepted
-	p.require(postV1CaptureInboundEmailResponseFieldAccepted)
+func (i *InboundEmailCaptureResponse) SetAccepted(accepted int64) {
+	i.Accepted = accepted
+	i.require(inboundEmailCaptureResponseFieldAccepted)
 }
 
 // SetSkipped sets the Skipped field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailResponse) SetSkipped(skipped int64) {
-	p.Skipped = skipped
-	p.require(postV1CaptureInboundEmailResponseFieldSkipped)
+func (i *InboundEmailCaptureResponse) SetSkipped(skipped int64) {
+	i.Skipped = skipped
+	i.require(inboundEmailCaptureResponseFieldSkipped)
 }
 
 // SetCaptureIDs sets the CaptureIDs field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureInboundEmailResponse) SetCaptureIDs(captureIDs []string) {
-	p.CaptureIDs = captureIDs
-	p.require(postV1CaptureInboundEmailResponseFieldCaptureIDs)
+func (i *InboundEmailCaptureResponse) SetCaptureIDs(captureIDs []string) {
+	i.CaptureIDs = captureIDs
+	i.require(inboundEmailCaptureResponseFieldCaptureIDs)
 }
 
-func (p *PostV1CaptureInboundEmailResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureInboundEmailResponse
+func (i *InboundEmailCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InboundEmailCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureInboundEmailResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*i = InboundEmailCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureInboundEmailResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureInboundEmailResponse
+func (i *InboundEmailCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed InboundEmailCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*i),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureInboundEmailResponse) String() string {
-	if p == nil {
+func (i *InboundEmailCaptureResponse) String() string {
+	if i == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(i); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
-	postV1CaptureSettingsGetResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
-	postV1CaptureSettingsGetResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
-	postV1CaptureSettingsGetResponseFieldIntakeAddress      = big.NewInt(1 << 2)
-	postV1CaptureSettingsGetResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+	settingsGetCaptureResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	settingsGetCaptureResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	settingsGetCaptureResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	settingsGetCaptureResponseFieldOcrConfigured      = big.NewInt(1 << 3)
 )
 
-type PostV1CaptureSettingsGetResponse struct {
+type SettingsGetCaptureResponse struct {
 	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
 	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
 	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
@@ -7768,126 +7917,126 @@ type PostV1CaptureSettingsGetResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureSettingsGetResponse) GetIntakeEnabled() bool {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) GetIntakeEnabled() bool {
+	if s == nil {
 		return false
 	}
-	return p.IntakeEnabled
+	return s.IntakeEnabled
 }
 
-func (p *PostV1CaptureSettingsGetResponse) GetCaptureAutoExtract() bool {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) GetCaptureAutoExtract() bool {
+	if s == nil {
 		return false
 	}
-	return p.CaptureAutoExtract
+	return s.CaptureAutoExtract
 }
 
-func (p *PostV1CaptureSettingsGetResponse) GetIntakeAddress() *string {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) GetIntakeAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return p.IntakeAddress
+	return s.IntakeAddress
 }
 
-func (p *PostV1CaptureSettingsGetResponse) GetOcrConfigured() bool {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) GetOcrConfigured() bool {
+	if s == nil {
 		return false
 	}
-	return p.OcrConfigured
+	return s.OcrConfigured
 }
 
-func (p *PostV1CaptureSettingsGetResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1CaptureSettingsGetResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsGetCaptureResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsGetResponse) SetIntakeEnabled(intakeEnabled bool) {
-	p.IntakeEnabled = intakeEnabled
-	p.require(postV1CaptureSettingsGetResponseFieldIntakeEnabled)
+func (s *SettingsGetCaptureResponse) SetIntakeEnabled(intakeEnabled bool) {
+	s.IntakeEnabled = intakeEnabled
+	s.require(settingsGetCaptureResponseFieldIntakeEnabled)
 }
 
 // SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsGetResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
-	p.CaptureAutoExtract = captureAutoExtract
-	p.require(postV1CaptureSettingsGetResponseFieldCaptureAutoExtract)
+func (s *SettingsGetCaptureResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	s.CaptureAutoExtract = captureAutoExtract
+	s.require(settingsGetCaptureResponseFieldCaptureAutoExtract)
 }
 
 // SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsGetResponse) SetIntakeAddress(intakeAddress *string) {
-	p.IntakeAddress = intakeAddress
-	p.require(postV1CaptureSettingsGetResponseFieldIntakeAddress)
+func (s *SettingsGetCaptureResponse) SetIntakeAddress(intakeAddress *string) {
+	s.IntakeAddress = intakeAddress
+	s.require(settingsGetCaptureResponseFieldIntakeAddress)
 }
 
 // SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsGetResponse) SetOcrConfigured(ocrConfigured bool) {
-	p.OcrConfigured = ocrConfigured
-	p.require(postV1CaptureSettingsGetResponseFieldOcrConfigured)
+func (s *SettingsGetCaptureResponse) SetOcrConfigured(ocrConfigured bool) {
+	s.OcrConfigured = ocrConfigured
+	s.require(settingsGetCaptureResponseFieldOcrConfigured)
 }
 
-func (p *PostV1CaptureSettingsGetResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureSettingsGetResponse
+func (s *SettingsGetCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsGetCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureSettingsGetResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SettingsGetCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureSettingsGetResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureSettingsGetResponse
+func (s *SettingsGetCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsGetCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureSettingsGetResponse) String() string {
-	if p == nil {
+func (s *SettingsGetCaptureResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
-	postV1CaptureSettingsRegenerateIntakeResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
-	postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeAddress      = big.NewInt(1 << 2)
-	postV1CaptureSettingsRegenerateIntakeResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+	settingsRegenerateIntakeCaptureResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	settingsRegenerateIntakeCaptureResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	settingsRegenerateIntakeCaptureResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	settingsRegenerateIntakeCaptureResponseFieldOcrConfigured      = big.NewInt(1 << 3)
 )
 
-type PostV1CaptureSettingsRegenerateIntakeResponse struct {
+type SettingsRegenerateIntakeCaptureResponse struct {
 	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
 	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
 	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
@@ -7900,126 +8049,126 @@ type PostV1CaptureSettingsRegenerateIntakeResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetIntakeEnabled() bool {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) GetIntakeEnabled() bool {
+	if s == nil {
 		return false
 	}
-	return p.IntakeEnabled
+	return s.IntakeEnabled
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetCaptureAutoExtract() bool {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) GetCaptureAutoExtract() bool {
+	if s == nil {
 		return false
 	}
-	return p.CaptureAutoExtract
+	return s.CaptureAutoExtract
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetIntakeAddress() *string {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) GetIntakeAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return p.IntakeAddress
+	return s.IntakeAddress
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetOcrConfigured() bool {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) GetOcrConfigured() bool {
+	if s == nil {
 		return false
 	}
-	return p.OcrConfigured
+	return s.OcrConfigured
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsRegenerateIntakeCaptureResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetIntakeEnabled(intakeEnabled bool) {
-	p.IntakeEnabled = intakeEnabled
-	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeEnabled)
+func (s *SettingsRegenerateIntakeCaptureResponse) SetIntakeEnabled(intakeEnabled bool) {
+	s.IntakeEnabled = intakeEnabled
+	s.require(settingsRegenerateIntakeCaptureResponseFieldIntakeEnabled)
 }
 
 // SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
-	p.CaptureAutoExtract = captureAutoExtract
-	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldCaptureAutoExtract)
+func (s *SettingsRegenerateIntakeCaptureResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	s.CaptureAutoExtract = captureAutoExtract
+	s.require(settingsRegenerateIntakeCaptureResponseFieldCaptureAutoExtract)
 }
 
 // SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetIntakeAddress(intakeAddress *string) {
-	p.IntakeAddress = intakeAddress
-	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeAddress)
+func (s *SettingsRegenerateIntakeCaptureResponse) SetIntakeAddress(intakeAddress *string) {
+	s.IntakeAddress = intakeAddress
+	s.require(settingsRegenerateIntakeCaptureResponseFieldIntakeAddress)
 }
 
 // SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetOcrConfigured(ocrConfigured bool) {
-	p.OcrConfigured = ocrConfigured
-	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldOcrConfigured)
+func (s *SettingsRegenerateIntakeCaptureResponse) SetOcrConfigured(ocrConfigured bool) {
+	s.OcrConfigured = ocrConfigured
+	s.require(settingsRegenerateIntakeCaptureResponseFieldOcrConfigured)
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureSettingsRegenerateIntakeResponse
+func (s *SettingsRegenerateIntakeCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsRegenerateIntakeCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureSettingsRegenerateIntakeResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SettingsRegenerateIntakeCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureSettingsRegenerateIntakeResponse
+func (s *SettingsRegenerateIntakeCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsRegenerateIntakeCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureSettingsRegenerateIntakeResponse) String() string {
-	if p == nil {
+func (s *SettingsRegenerateIntakeCaptureResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
-	postV1CaptureSettingsUpdateResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
-	postV1CaptureSettingsUpdateResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
-	postV1CaptureSettingsUpdateResponseFieldIntakeAddress      = big.NewInt(1 << 2)
-	postV1CaptureSettingsUpdateResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+	settingsUpdateCaptureResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	settingsUpdateCaptureResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	settingsUpdateCaptureResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	settingsUpdateCaptureResponseFieldOcrConfigured      = big.NewInt(1 << 3)
 )
 
-type PostV1CaptureSettingsUpdateResponse struct {
+type SettingsUpdateCaptureResponse struct {
 	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
 	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
 	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
@@ -8032,114 +8181,114 @@ type PostV1CaptureSettingsUpdateResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) GetIntakeEnabled() bool {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) GetIntakeEnabled() bool {
+	if s == nil {
 		return false
 	}
-	return p.IntakeEnabled
+	return s.IntakeEnabled
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) GetCaptureAutoExtract() bool {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) GetCaptureAutoExtract() bool {
+	if s == nil {
 		return false
 	}
-	return p.CaptureAutoExtract
+	return s.CaptureAutoExtract
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) GetIntakeAddress() *string {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) GetIntakeAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return p.IntakeAddress
+	return s.IntakeAddress
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) GetOcrConfigured() bool {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) GetOcrConfigured() bool {
+	if s == nil {
 		return false
 	}
-	return p.OcrConfigured
+	return s.OcrConfigured
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
 		return nil
 	}
-	return p.extraProperties
+	return s.extraProperties
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
+func (s *SettingsUpdateCaptureResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	p.explicitFields.Or(p.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateResponse) SetIntakeEnabled(intakeEnabled bool) {
-	p.IntakeEnabled = intakeEnabled
-	p.require(postV1CaptureSettingsUpdateResponseFieldIntakeEnabled)
+func (s *SettingsUpdateCaptureResponse) SetIntakeEnabled(intakeEnabled bool) {
+	s.IntakeEnabled = intakeEnabled
+	s.require(settingsUpdateCaptureResponseFieldIntakeEnabled)
 }
 
 // SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
-	p.CaptureAutoExtract = captureAutoExtract
-	p.require(postV1CaptureSettingsUpdateResponseFieldCaptureAutoExtract)
+func (s *SettingsUpdateCaptureResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	s.CaptureAutoExtract = captureAutoExtract
+	s.require(settingsUpdateCaptureResponseFieldCaptureAutoExtract)
 }
 
 // SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateResponse) SetIntakeAddress(intakeAddress *string) {
-	p.IntakeAddress = intakeAddress
-	p.require(postV1CaptureSettingsUpdateResponseFieldIntakeAddress)
+func (s *SettingsUpdateCaptureResponse) SetIntakeAddress(intakeAddress *string) {
+	s.IntakeAddress = intakeAddress
+	s.require(settingsUpdateCaptureResponseFieldIntakeAddress)
 }
 
 // SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CaptureSettingsUpdateResponse) SetOcrConfigured(ocrConfigured bool) {
-	p.OcrConfigured = ocrConfigured
-	p.require(postV1CaptureSettingsUpdateResponseFieldOcrConfigured)
+func (s *SettingsUpdateCaptureResponse) SetOcrConfigured(ocrConfigured bool) {
+	s.OcrConfigured = ocrConfigured
+	s.require(settingsUpdateCaptureResponseFieldOcrConfigured)
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1CaptureSettingsUpdateResponse
+func (s *SettingsUpdateCaptureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateCaptureResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1CaptureSettingsUpdateResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	*s = SettingsUpdateCaptureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
 		return err
 	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) MarshalJSON() ([]byte, error) {
-	type embed PostV1CaptureSettingsUpdateResponse
+func (s *SettingsUpdateCaptureResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateCaptureResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*p),
+		embed: embed(*s),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1CaptureSettingsUpdateResponse) String() string {
-	if p == nil {
+func (s *SettingsUpdateCaptureResponse) String() string {
+	if s == nil {
 		return "<nil>"
 	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(p); err == nil {
+	if value, err := internal.StringifyJSON(s); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", p)
+	return fmt.Sprintf("%#v", s)
 }

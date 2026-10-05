@@ -34,12 +34,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-func (c *Client) PostV1ProjectsCreate(
+func (c *Client) Create(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsCreateRequest,
+	request *nordlet.CreateProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsCreate(
+) (*nordlet.CreateProjectsResponse, error) {
+	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
 		opts...,
@@ -50,12 +50,12 @@ func (c *Client) PostV1ProjectsCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsUpdate(
+func (c *Client) Update(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsUpdateRequest,
+	request *nordlet.UpdateProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsUpdate(
+) (*nordlet.UpdateProjectsResponse, error) {
+	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
 		opts...,
@@ -66,12 +66,12 @@ func (c *Client) PostV1ProjectsUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsGet(
+func (c *Client) Get(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsGetRequest,
+	request *nordlet.GetProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsGetResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsGet(
+) (*nordlet.GetProjectsResponse, error) {
+	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
 		opts...,
@@ -82,12 +82,12 @@ func (c *Client) PostV1ProjectsGet(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsList(
+func (c *Client) List(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsListRequest,
+	request *nordlet.ListProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsList(
+) (*nordlet.ListProjectsResponse, error) {
+	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
 		opts...,
@@ -98,12 +98,12 @@ func (c *Client) PostV1ProjectsList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsTimeEntriesCreate(
+func (c *Client) TimeEntriesCreate(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsTimeEntriesCreateRequest,
+	request *nordlet.TimeEntriesCreateProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsTimeEntriesCreateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsTimeEntriesCreate(
+) (*nordlet.TimeEntriesCreateProjectsResponse, error) {
+	response, err := c.WithRawResponse.TimeEntriesCreate(
 		ctx,
 		request,
 		opts...,
@@ -114,12 +114,12 @@ func (c *Client) PostV1ProjectsTimeEntriesCreate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsTimeEntriesUpdate(
+func (c *Client) TimeEntriesUpdate(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsTimeEntriesUpdateRequest,
+	request *nordlet.TimeEntriesUpdateProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsTimeEntriesUpdateResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsTimeEntriesUpdate(
+) (*nordlet.TimeEntriesUpdateProjectsResponse, error) {
+	response, err := c.WithRawResponse.TimeEntriesUpdate(
 		ctx,
 		request,
 		opts...,
@@ -130,12 +130,12 @@ func (c *Client) PostV1ProjectsTimeEntriesUpdate(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsTimeEntriesDelete(
+func (c *Client) TimeEntriesDelete(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsTimeEntriesDeleteRequest,
+	request *nordlet.TimeEntriesDeleteProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsTimeEntriesDeleteResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsTimeEntriesDelete(
+) (*nordlet.TimeEntriesDeleteProjectsResponse, error) {
+	response, err := c.WithRawResponse.TimeEntriesDelete(
 		ctx,
 		request,
 		opts...,
@@ -146,12 +146,12 @@ func (c *Client) PostV1ProjectsTimeEntriesDelete(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsTimeEntriesList(
+func (c *Client) TimeEntriesList(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsTimeEntriesListRequest,
+	request *nordlet.TimeEntriesListProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsTimeEntriesListResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsTimeEntriesList(
+) (*nordlet.TimeEntriesListProjectsResponse, error) {
+	response, err := c.WithRawResponse.TimeEntriesList(
 		ctx,
 		request,
 		opts...,
@@ -162,12 +162,12 @@ func (c *Client) PostV1ProjectsTimeEntriesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsTimeEntriesBill(
+func (c *Client) TimeEntriesBill(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsTimeEntriesBillRequest,
+	request *nordlet.TimeEntriesBillProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsTimeEntriesBillResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsTimeEntriesBill(
+) (*nordlet.TimeEntriesBillProjectsResponse, error) {
+	response, err := c.WithRawResponse.TimeEntriesBill(
 		ctx,
 		request,
 		opts...,
@@ -178,12 +178,12 @@ func (c *Client) PostV1ProjectsTimeEntriesBill(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1ProjectsReport(
+func (c *Client) Report(
 	ctx context.Context,
-	request *nordlet.PostV1ProjectsReportRequest,
+	request *nordlet.ReportProjectsRequest,
 	opts ...option.RequestOption,
-) (*nordlet.PostV1ProjectsReportResponse, error) {
-	response, err := c.WithRawResponse.PostV1ProjectsReport(
+) (*nordlet.ReportProjectsResponse, error) {
+	response, err := c.WithRawResponse.Report(
 		ctx,
 		request,
 		opts...,
